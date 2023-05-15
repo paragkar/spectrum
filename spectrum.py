@@ -23,9 +23,9 @@ price = df["Master_Price_Sheet"]
 # x_axis_val = st.selectbox('Select X-Axis Value', options = price.columns)
 # y_axis_val = st.selectbox('Select Y-Axis Value', options = price.columns)
 
-Type = st.sidebar.selectbox('Select Price Type', options = ["FP","DP"])
+Type = st.selectbox('Select Price Type', options = ["FP","DP"])
 
-Band = st.sidebar.selectbox('Select a Band', sorted(list(set(price["Band"]))))
+Band = st.selectbox('Select a Band', sorted(list(set(price["Band"]))))
 
 price = price[(price["Band"]==Band) & (price["Year"] != 2018)]
 
