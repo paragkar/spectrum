@@ -58,11 +58,11 @@ colcodes=colcodes.set_index("Description")
 Feature = st.sidebar.selectbox('Select a Feature', options = ["Map","Price"])
 
 if Feature == "Price":
-	Type = st.sidebar.selectbox('Select Price Type', options = ["FP","DP"])
-	Band = st.sidebar.selectbox('Select a Band', sorted(list(set(price["Band"]))))
 	price = df["Master_Price_Sheet"]
+	Band = st.sidebar.selectbox('Select a Band', sorted(list(set(price["Band"]))))
 	price = price[(price["Band"]==Band) & (price["Year"] != 2018)]
 	price["Year"] = sorted([str(x) for x in price["Year"].values])
+	Type = st.sidebar.selectbox('Select Price Type', options = ["FP","DP"])
 
 	data = [go.Heatmap(
 			z = round(price[Type],1),
