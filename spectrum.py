@@ -18,10 +18,10 @@ df = pd.read_excel('spectrum_map.xlsx', sheet_name=sheet)
 price = df["Master_Price_Sheet"]
 
 
-st.sidebar.title('Navigation')
+# st.sidebar.title('Navigation')
 
-# x_axis_val = st.sidebar.selectbox('Select X-Axis Value', options = price.columns)
-# y_axis_val = st.sidebar.selectbox('Select Y-Axis Value', options = price.columns)
+# x_axis_val = st.selectbox('Select X-Axis Value', options = price.columns)
+# y_axis_val = st.selectbox('Select Y-Axis Value', options = price.columns)
 
 Type = st.sidebar.selectbox('Select Price Type', options = ["FP","DP"])
 
