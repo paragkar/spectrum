@@ -66,6 +66,7 @@ if Feature == "Price":
 	price = price[(price["Band"]==Band) & (price["Year"] != 2018)]
 	price["Year"] = sorted([str(x) for x in price["Year"].values])
 	Type = st.sidebar.selectbox('Select Price Type', options = ["FP","DP"])
+	tickangle=0
 
 	data = [go.Heatmap(
 			z = round(price[Type],1),
@@ -91,6 +92,7 @@ if Feature == "Map":
 	operators =operators[Band]
 	sf[sf.columns] = sf[sf.columns].replace(operators)
 	colorscalestep = stepcolscale(operators, colcodes)
+	tickangle = -90
 	
 	data = [go.Heatmap(
               z = sf.values,
@@ -132,7 +134,7 @@ fig.update_layout(uniformtext_minsize=8,
                   xaxis = dict(
                   side = 'top',
                   tickmode = 'linear',
-                  tickangle=0,)
+                  tickangle=tickangle,)
 	               # tick0 =703,ß
                   # dtick = dtick[Band]),
                   # showlegend=True
