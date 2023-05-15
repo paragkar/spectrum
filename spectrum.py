@@ -5,7 +5,6 @@ import plotly.graph_objects as go
 import numpy as np
 from plotly.subplots import make_subplots
 import plotly
-plotly.offline.init_notebook_mode()
 import pandas as pd
 import plotly.figure_factory as ff
 
