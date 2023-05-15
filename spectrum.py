@@ -15,10 +15,7 @@ st.set_page_config(layout="wide")
 from datetime import date 
 today = date.today()
 
-
-xl = pd.ExcelFile('spectrum_map.xlsx')
-sheet = xl.sheet_names
-df = pd.read_excel('spectrum_map.xlsx', sheet_name=sheet)
+df = pd.read_excel('spectrum_map.xlsx')
 
 price = df["Master_Price_Sheet"]
 
