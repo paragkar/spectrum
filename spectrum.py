@@ -11,7 +11,9 @@ import streamlit as st
 
 st.set_page_config(layout="wide")
 
-df = pd.read_excel('spectrum_map.xlsx')
+xl = pd.ExcelFile('spectrum_map.xlsx')
+sheet = xl.sheet_names
+df = pd.read_excel('spectrum_map.xlsx', sheet_name=sheet)
 
 price = df["Master_Price_Sheet"]
 
