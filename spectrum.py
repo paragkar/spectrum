@@ -84,7 +84,7 @@ if Feature == "Price":
 	       ]
 
 if Feature == "Map":
-	Band = st.sidebar.selectbox('Select a Band', Bands)
+	Band = st.sidebar.selectbox('Select a Band', Bands[1:])
 	freqtab = str(Band)+"MHz"
 	sf = df[freqtab]
 	sf = sf.set_index("LSA")
