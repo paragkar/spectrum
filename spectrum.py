@@ -1,5 +1,4 @@
 
-import os
 import plotly.express as px
 import plotly.graph_objects as go
 import numpy as np
@@ -11,9 +10,6 @@ import plotly.figure_factory as ff
 import streamlit as st
 
 st.set_page_config(layout="wide")
-
-from datetime import date 
-today = date.today()
 
 df = pd.read_excel('spectrum_map.xlsx')
 
