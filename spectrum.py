@@ -158,6 +158,8 @@ colcodes=colcodes.set_index("Description")
 
 price = df["Master_Price_Sheet"]
 
+price.rename(columns = {'FP" : "Auction Price", "DP": "Reserve Price"}, inplace = True)
+
 price = price[price["Band"] != 600]
 
 Bands = sorted(list(set(price["Band"])))
@@ -200,7 +202,7 @@ if Feature == "Price":
 	Band = st.sidebar.selectbox('Select a Band', options = Bands)
 	price = price[(price["Band"]==Band) & (price["Year"] != 2018)]
 	price["Year"] = sorted([str(x) for x in price["Year"].values])
-	Type = st.sidebar.selectbox('Select Price Type', options = ["FP","DP"])
+	Type = st.sidebar.selectbox('Select Price Type', options = ["Auction Price","Reserve Price"])
 	tickangle=0
 
 	data2 = [go.Heatmap(
@@ -231,7 +233,7 @@ fig.update_layout(uniformtext_minsize=10,
 		  template='simple_white',
 		  paper_bgcolor=None,
 		  height=600, width=1200,
-		  title="<b>"+"Spectrum "+Feature+" for "+str(Band)+" MHz Band"+"<b>",
+		  title="<b>"+"Spectrum "+[Type if Feature=="Price"]+" for "+str(Band)+" MHz Band"+"<b>",
 		  margin=dict(t=80, b=50, l=50, r=50, pad=0),
 		  title_x=0.35, title_y=0.99,
 		  title_font=dict(size=20),
