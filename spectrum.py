@@ -89,9 +89,9 @@ if Feature == "Map":
 	freqtab = str(Band)+"MHz"
 	sf = df[freqtab]
 	sf = sf.set_index("LSA")
-	operators =operators[Band]
-	sf[sf.columns] = sf[sf.columns].replace(operators)
-	colorscalestep = stepcolscale(operators, colcodes)
+	operator_mapping =operators[Band]
+	sf[sf.columns] = sf[sf.columns].replace(operator_mapping)
+	colorscalestep = stepcolscale(operator_mapping, colcodes)
 	tickangle = -90
 	
 	data = [go.Heatmap(
@@ -104,9 +104,9 @@ if Feature == "Map":
 #               text = hovertext1,
               colorscale=colorscalestep,
               colorbar=dict(
-              tickvals = list(operators.values()),
+              tickvals = list(operator_mapping.values()),
               # tickvals = tickval,
-              ticktext = list(operators.keys()),
+              ticktext = list(operator_mapping.keys()),
               dtick=1,
               tickmode="array"),
                 	    ),
