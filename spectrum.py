@@ -527,8 +527,8 @@ if Feature == "FreqMap":
 	        sf.replace(op, operators[op], inplace = True)
 	      else:
 	        sf.replace(op,np.nan, inplace = True)
-	 operators = {operator:operators[operator]}
-	 colorscale = hovercolscale(operators, colcodes)
+	operators = {operator:operators[operator]}
+	colorscale = hovercolscale(operators, colcodes)
 		
 		
 		
