@@ -94,11 +94,11 @@ if Feature == "Map":
 	operators_mapping =operators[Band]
 	st.write(operators_mapping)
 	sf[sf.columns] = sf[sf.columns].replace(operators_mapping)
-	colorscalestep = stepcolscale(operators_mapping, colcodes)
-	st.empty()
-	st.write(colcodes)
-	st.write(sf)
-	st.write(colorscalestep)
+# 	colorscalestep = stepcolscale(operators_mapping, colcodes)
+# 	st.empty()
+# 	st.write(colcodes)
+# 	st.write(sf)
+# 	st.write(colorscalestep)
 	tickangle = -90
 
 	data1 = [go.Heatmap(
@@ -109,7 +109,7 @@ if Feature == "Map":
 	      ygap = 1,
 #               hoverinfo ='text',
 #               text = hovertext1,
-	      colorscale=colorscalestep,
+	      colorscale=stepcolscale(operators_mapping, colcodes),
 	      colorbar=dict(
 	      tickvals = list(operators_mapping.values()),
 	      # tickvals = tickval,
