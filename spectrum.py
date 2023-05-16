@@ -305,7 +305,7 @@ st.set_page_config(layout="wide")
 
 #Selecting a Freq Band
 
-Band = st.sidebar.selectbox('Select a Band', options = Bands)
+Band = st.sidebar.selectbox('Select a Band', options = list(ExpTab.keys()))
 
 
 #setting up excel file tabs for reading data
