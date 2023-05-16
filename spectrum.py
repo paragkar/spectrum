@@ -169,6 +169,7 @@ Feature = st.sidebar.selectbox('Select a Feature', options = ["Price","Map"])
 
 
 if Feature == "Map":
+	subtitle =""
 	Band = st.sidebar.selectbox('Select a Band', options = Bands)
 	freqtab = str(Band)+"MHz"
 	sf = df[freqtab]
@@ -203,6 +204,7 @@ if Feature == "Price":
 	price = price[(price["Band"]==Band) & (price["Year"] != 2018)]
 	price["Year"] = sorted([str(x) for x in price["Year"].values])
 	Type = st.sidebar.selectbox('Select Price Type', options = ["Auction Price","Reserve Price"])
+	subtitle = Type
 	tickangle=0
 
 	data2 = [go.Heatmap(
@@ -221,8 +223,7 @@ if Feature == "Price":
 		]
 	fig = go.Figure(data=data2)
 
-	
-subtitle = lambda:f"{Type} if Feature=="Price" else ""
+
 
 #updating figure layouts
 fig.update_layout(uniformtext_minsize=10, 
