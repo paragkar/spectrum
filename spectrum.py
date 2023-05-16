@@ -94,6 +94,7 @@ with placeholder.container():
 		sf = df[freqtab]
 		sf = sf.set_index("LSA")
 		operator_mapping =operators[Band]
+		print(operator_mapping)
 		sf[sf.columns] = sf[sf.columns].replace(operator_mapping)
 		colorscalestep = stepcolscale(operator_mapping, colcodes)
 		tickangle = -90
