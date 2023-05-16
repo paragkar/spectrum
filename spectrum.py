@@ -51,7 +51,8 @@ layout = go.Layout(uniformtext_minsize=8,
                   xaxis = dict(
                   side = 'top',
                   tickmode = 'linear',
-                  tickangle=tickangle,)
+#                   tickangle=tickangle,
+		  )
 	               # tick0 =703,ß
                   # dtick = dtick[Band]),
                   # showlegend=True
