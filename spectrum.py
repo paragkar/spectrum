@@ -77,6 +77,10 @@ def hovercolscale(operators, colcodes):
         colorscale.append([scale[i],colors[i]])
     return colorscale
 
+
+colcodes = df["ColorCodes"]
+colcodes=colcodes.set_index("Description")
+
 colorscale = hovercolscale(operators, colcodes) # for hoverbox
 
 
@@ -84,9 +88,6 @@ colorscale = hovercolscale(operators, colcodes) # for hoverbox
 xl = pd.ExcelFile('spectrum_map.xlsx')
 sheet = xl.sheet_names
 df = pd.read_excel('spectrum_map.xlsx', sheet_name=sheet)
-
-colcodes = df["ColorCodes"]
-colcodes=colcodes.set_index("Description")
 
 
 # st.sidebar.title('Navigation')
