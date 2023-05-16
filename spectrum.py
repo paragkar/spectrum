@@ -9,7 +9,7 @@ import plotly.figure_factory as ff
 
 import streamlit as st
 
-st.set_page_config(layout="wide")
+# st.set_page_config(layout="wide")
 
 operators = {700: {'Vacant':0,'Railways':1,'Govt':2,'RJIO':3,'BSNL':4},
              800: {'Vacant':0,'RCOM':1,'Govt':2,'RJIO':3,'Bharti':4, 'MTS':5, 'BSNL':6},
@@ -34,29 +34,16 @@ xgap = {700:1,
         3500:1, 
         26000:1}
 
+dtick = {700:1, 
+         800:0.25, 
+         900:0.4, 
+         1800:1, 
+         2100:1, 
+         2300:1, 
+         2500:2, 
+         3500:5, 
+         26000:50}
 
-layout = go.Layout(uniformtext_minsize=8, 
-                  uniformtext_mode='hide', 
-                  xaxis_title=None, 
-                  yaxis_title=None, 
-                  yaxis_autorange='reversed',
-                  font=dict(size=8),
-                  template='simple_white',
-                  paper_bgcolor=None,
-                  height=550, width=1000,
-                  # title="<b>"+title_fig1[Band]+"<b>",
-                  margin=dict(t=80, b=50, l=50, r=50, pad=0),
-                  title_x=0.51, title_y=0.99,
-                  title_font=dict(size=14),
-                  xaxis = dict(
-                  side = 'top',
-                  tickmode = 'linear',
-#                   tickangle=tickangle,
-		  )
-	               # tick0 =703,ß
-                  # dtick = dtick[Band]),
-                  # showlegend=True
-		  )
 
 #preparing color scale for heatmap which chnages in steps (discrete)
 def stepcolscale(operators, colcodes):
@@ -97,7 +84,6 @@ Bands = sorted(list(set(price["Band"])))
 
 Feature = st.sidebar.selectbox('Select a Feature', options = ["Map","Price"])
 
-output = st.empty()
 if Feature == "Price":
 	Band = st.sidebar.selectbox('Select a Band', Bands)
 	price = price[(price["Band"]==Band) & (price["Year"] != 2018)]
@@ -120,10 +106,7 @@ if Feature == "Price":
 				),
 
 	       ]
-	fig = go.Figure(data=data, layout =layout)
-	st.write(fig)
 
-output = st.empty()
 if Feature == "Map":
 	Band = st.sidebar.selectbox('Select a Band', Bands)
 	freqtab = str(Band)+"MHz"
@@ -149,40 +132,44 @@ if Feature == "Map":
               ticktext = list(operators.keys()),
               dtick=1,
               tickmode="array"),
-                ),
-
+                	    ),
        		]	
 
-	fig = go.Figure(data=data, layout = layout )
-	st.write(fig)
+	
+	
+	
+fig = go.Figure(data=data)
 
 
-# layout = layout(uniformtext_minsize=8, 
-#                   uniformtext_mode='hide', 
-#                   xaxis_title=None, 
-#                   yaxis_title=None, 
-#                   yaxis_autorange='reversed',
-#                   font=dict(size=8),
-#                   template='simple_white',
-#                   paper_bgcolor=None,
-#                   height=550, width=1000,
-#                   # title="<b>"+title_fig1[Band]+"<b>",
-#                   margin=dict(t=80, b=50, l=50, r=50, pad=0),
-#                   title_x=0.51, title_y=0.99,
-#                   title_font=dict(size=14),
-#                   xaxis = dict(
-#                   side = 'top',
-#                   tickmode = 'linear',
-#                   tickangle=tickangle,)
-# 	               # tick0 =703,ß
-#                   # dtick = dtick[Band]),
-#                   # showlegend=True
-#                 )
+fig.update_layout(uniformtext_minsize=8, 
+                  uniformtext_mode='hide', 
+                  xaxis_title=None, 
+                  yaxis_title=None, 
+                  yaxis_autorange='reversed',
+                  font=dict(size=8),
+                  template='simple_white',
+                  paper_bgcolor=None,
+                  height=550, width=1000,
+                  # title="<b>"+title_fig1[Band]+"<b>",
+                  margin=dict(t=80, b=50, l=50, r=50, pad=0),
+                  title_x=0.51, title_y=0.99,
+                  title_font=dict(size=14),
+                  xaxis = dict(
+                  side = 'top',
+                  tickmode = 'linear',
+                  tickangle=tickangle,)
+                  dtick = dtick[Band]),
+                  # showlegend=True
+                )
 
 
-# fig.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
-# fig.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
+fig.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
+fig.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
 
-# st.write(fig)
+output = st.empty()
+
+st.write(output)
+
+st.write(fig)
 
 
