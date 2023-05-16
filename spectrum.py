@@ -95,6 +95,7 @@ Bands = sorted(list(set(price["Band"])))
 
 Feature = st.sidebar.selectbox('Select a Feature', options = ["Map","Price"])
 
+output = st.empty()
 if Feature == "Price":
 	Band = st.sidebar.selectbox('Select a Band', Bands)
 	price = price[(price["Band"]==Band) & (price["Year"] != 2018)]
@@ -120,6 +121,7 @@ if Feature == "Price":
 	fig = go.Figure(data=data, layout =layout)
 	st.write(fig)
 
+output = st.empty()
 if Feature == "Map":
 	Band = st.sidebar.selectbox('Select a Band', Bands[1:])
 	freqtab = str(Band)+"MHz"
