@@ -59,15 +59,14 @@ def stepcolscale(operators, colcodes):
 
 #preparing color scale for hoverbox
 def hovercolscale(operators, colcodes):
-    scale = [round(x/(len(operators)-1),2) for x in range(len(operators))]
-    colors =[]
-    for k, v  in operators.items():
-        colors.append(colcodes.loc[k,:].values[0])
-
-    colorscale=[]
-    for i in range(len(scale)):
-        colorscale.append([scale[i],colors[i]])
-    return colorscale
+   operator_names = list(operators.keys())
+   operator_codes = list(operators.values())
+   scale = [round(x/(len(operator_names)-1),2) for x in range(len(operator_names))]
+   colorscale =[]
+   for i, op in enumerate(operator_names):
+	if op in colcodes.index:
+		colorscale.append([scale[i],colcodes.loc[op,:][0]])
+   return colorscale
 
 
 #function for calculating expiry year heatmap
@@ -512,17 +511,17 @@ if Feature == "FreqMap":
 	sf = sff.copy()
 	operators = operators[Band]
 	colorscale = hovercolscale(operators, colcodes)
-	operator = st.sidebar.selectbox('Select An Operator', options = ["All"]+sorted(list(operators.keys())))
-	if operator == "All":
-	    sf[sf.columns] = sf[sf.columns].replace(operators) #replacing operators data with respective codes
-	    colorscale = hovercolscale(operators, colcodes)
-	if operator != "All":
-		for op in operators.keys():
-			if op == operator:
-				sf.replace(op, operators[op], inplace = True)
-			else:
-				sf.replace(op,0, inplace = True)
-		colorscale = hovercolscale(operator, colcodes)
+# 	operator = st.sidebar.selectbox('Select An Operator', options = ["All"]+sorted(list(operators.keys())))
+# 	if operator == "All":
+# 	    sf[sf.columns] = sf[sf.columns].replace(operators) #replacing operators data with respective codes
+# 	    colorscale = hovercolscale(operators, colcodes)
+# 	if operator != "All":
+# 		for op in operators.keys():
+# 			if op == operator:
+# 				sf.replace(op, operators[op], inplace = True)
+# 			else:
+# 				sf.replace(op,0, inplace = True)
+# 		colorscale = hovercolscale(operator, colcodes)
 		
 		
 		
