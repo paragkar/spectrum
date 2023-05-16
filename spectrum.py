@@ -383,6 +383,7 @@ soldspectrum = offeredvssold.pivot(index=["LSA"], columns='Year', values="Sold")
 unsoldspectrum = offeredvssold.pivot(index=["LSA"], columns='Year', values="Unsold").fillna("NA")
 
 #processing for auction price
+auctionprice = auctionprice[(auctionprice["Band"] == Band) & (auctionprice["Year"] != 2018)]
 auctionprice = pricemaster.pivot(index=["LSA"], columns='Year', values="Auction Price").fillna("NA")
 auctionprice = auctionprice.loc[:, (auctionprice != 0).any(axis=0)]
 auctionprice = auctionprice.applymap(lambda x: round(x,2))
@@ -393,6 +394,7 @@ auctionprice = adddummycols(auctionprice,auctionfailyears[Band])
 auctionprice = auctionprice.replace(0,"NA")
 
 #processing for reserve price
+reserveprice = reserveprice[(reserveprice["Band"] == Band) & (reserveprice["Year"] != 2018)]
 reserveprice = pricemaster.pivot(index=["LSA"], columns='Year', values="Reserve Price").fillna("NA")
 reserveprice = reserveprice.loc[:, (reserveprice != 0).any(axis=0)]
 reserveprice = reserveprice.applymap(lambda x: round(x,2))
