@@ -370,9 +370,6 @@ pricemaster = df["Master_Price_Sheet"]
 
 pricemaster.rename(columns = {"FP" : "Auction Price", "DP": "Reserve Price"}, inplace = True)
 
-# pricemaster = pricemaster[price["Band"] != 600]
-
-# Bands = sorted(list(set(pricemaster["Band"])))
 
 
 #processing for spectrum offered vs sold & unsold
@@ -494,7 +491,24 @@ for yi, yy in enumerate(sf.index):
                             )
                             )
 
-	
+
+colorscale = hovercolscale(operators, colcodes) # for hoverbox
+
+############################ #processing for hovercolors for data1 & data2 starts
+
+hoverlabel_bgcolor = [[x[1] for x in colorscale if x[0] == round(value/(len(colorscale) - 1),2)] 
+                      for row in data1[0].z for value in row]
+
+lsthovercol =[]
+for x in hoverlabel_bgcolor:
+    lsthovercol.append(x[0])
+
+hoverlabel_bgcolor=lsthovercol
+
+hoverlabel_bgcolor = list(np.array(hoverlabel_bgcolor).reshape(22,int(len(hoverlabel_bgcolor)/22)))
+
+########################### processing for hovercolors for data1 & data2 ends
+
 #menu for selecting features 
 Feature = st.sidebar.selectbox('Select a Feature', options = ["Price","Map"])
 
@@ -510,8 +524,10 @@ if Feature == "Map":
 	      ygap = 1,
               hoverinfo ='text',
               text = hovertext1,
-	      colorscale=hovercolscale(operators, colcodes),
+	      colorscale=colorscale,
 	      colorbar=dict(
+	      hoverlabel=dict(bgcolor=hoverlabel_bgcolor, 
+	      font=dict(size=10)
 	      tickvals = list(operators.values()),
 	      # tickvals = tickval,
 	      ticktext = list(operators.keys()),
