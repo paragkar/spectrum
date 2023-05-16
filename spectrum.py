@@ -91,7 +91,7 @@ colcodes=colcodes.set_index("Description")
 
 price = df["Master_Price_Sheet"]
 
-df = df[df["Band"] != 600]
+price = price[price["Band"] != 600]
 
 Bands = sorted(list(set(price["Band"])))
 
