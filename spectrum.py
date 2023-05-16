@@ -496,16 +496,20 @@ colorscale = hovercolscale(operators, colcodes) # for hoverbox
 
 ############################ #processing for hovercolors for data1 & data2 starts
 
-hoverlabel_bgcolor = [[x[1] for x in colorscale if x[0] == round(value/(len(colorscale) - 1),2)] 
-                      for row in data1[0].z for value in row]
+def hovercolor(colorscale, data):
 
-lsthovercol =[]
-for x in hoverlabel_bgcolor:
-    lsthovercol.append(x[0])
+	hoverlabel_bgcolor = [[x[1] for x in colorscale if x[0] == round(value/(len(colorscale) - 1),2)] 
+			      for row in data[0].z for value in row]
 
-hoverlabel_bgcolor=lsthovercol
+	lsthovercol =[]
+	for x in hoverlabel_bgcolor:
+	    lsthovercol.append(x[0])
 
-hoverlabel_bgcolor = list(np.array(hoverlabel_bgcolor).reshape(22,int(len(hoverlabel_bgcolor)/22)))
+	hoverlabel_bgcolor=lsthovercol
+
+	hoverlabel_bgcolor = list(np.array(hoverlabel_bgcolor).reshape(22,int(len(hoverlabel_bgcolor)/22)))
+	
+	return hoverlabel_bgcolor
 
 ########################### processing for hovercolors for data1 & data2 ends
 
@@ -529,12 +533,12 @@ if Feature == "Map":
 	      tickvals = list(operators.values()),
 	      ticktext = list(operators.keys()),
 	      dtick=1, tickmode="array"),
-	      hoverlabel=dict(bgcolor=hoverlabel_bgcolor, 
-	      font=dict(size=10)),
 			    ),
 		]
 
 	fig = go.Figure(data=data1)
+	hoverlabel_bgcolor = hovercolor(colorscale, data1)
+	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor, font=dict(size=10)))
 
 
 if Feature == "Price":
