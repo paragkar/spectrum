@@ -402,30 +402,30 @@ pricemaster.rename(columns = {"FP" : "Auction Price", "DP": "Reserve Price"}, in
 
 #processing for histocical information****************
 
-lst=[]
-for col in ef.columns:
-    for i, (efval,excepfval) in enumerate(zip(ef[col].values, excepf[col].values)):
-        for j, pf1val in enumerate(pf1.values):
-            if excepfval == 0:
-                error = abs(efval-pf1val[6]) #orignal
-                # error = efval-pf1val[6] #for testing
-            else:
-                error = 0
+# lst=[]
+# for col in ef.columns:
+#     for i, (efval,excepfval) in enumerate(zip(ef[col].values, excepf[col].values)):
+#         for j, pf1val in enumerate(pf1.values):
+#             if excepfval == 0:
+#                 error = abs(efval-pf1val[6]) #orignal
+#                 # error = efval-pf1val[6] #for testing
+#             else:
+#                 error = 0
            
-            if (ef.index[i] == pf1val[0]) and error <= errors[Band]:
-                # lst.append([ef.index[i],col-1,pf1val[1],pf1val[2], pf1val[3], pf1val[4], error]) 
-                lst.append([ef.index[i],col-xaxisadj[Band],pf1val[1],pf1val[2], pf1val[3], pf1val[4], error]) 
+#             if (ef.index[i] == pf1val[0]) and error <= errors[Band]:
+#                 # lst.append([ef.index[i],col-1,pf1val[1],pf1val[2], pf1val[3], pf1val[4], error]) 
+#                 lst.append([ef.index[i],col-xaxisadj[Band],pf1val[1],pf1val[2], pf1val[3], pf1val[4], error]) 
         
-df_final = pd.DataFrame(lst)
+# df_final = pd.DataFrame(lst)
 
-df_final.columns = ["LSA", "StartFreq", "TP", "RP", "AP", "Year", "Error"]
+# df_final.columns = ["LSA", "StartFreq", "TP", "RP", "AP", "Year", "Error"]
 
-df_final["Year"] = df_final["Year"].astype(int)
+# df_final["Year"] = df_final["Year"].astype(int)
 
-tp = df_final.pivot_table(index=["LSA"], columns='StartFreq', values="TP", aggfunc='first').fillna("NA")
-rp = df_final.pivot_table(index=["LSA"], columns='StartFreq', values="RP", aggfunc='first').fillna("NA")
-ap = df_final.pivot_table(index=["LSA"], columns='StartFreq', values="AP", aggfunc='first').fillna("NA")
-ayear = df_final.pivot_table(index=["LSA"], columns='StartFreq', values="Year", aggfunc='first').fillna("NA")
+# tp = df_final.pivot_table(index=["LSA"], columns='StartFreq', values="TP", aggfunc='first').fillna("NA")
+# rp = df_final.pivot_table(index=["LSA"], columns='StartFreq', values="RP", aggfunc='first').fillna("NA")
+# ap = df_final.pivot_table(index=["LSA"], columns='StartFreq', values="AP", aggfunc='first').fillna("NA")
+# ayear = df_final.pivot_table(index=["LSA"], columns='StartFreq', values="Year", aggfunc='first').fillna("NA")
 
 
 
@@ -434,34 +434,35 @@ ayear = df_final.pivot_table(index=["LSA"], columns='StartFreq', values="Year", 
 
 #processing for hovertext for freq map
 
-def hovertext1(sf,ExpTab,ef,ayear,ap,rp,pf,ChannelSize,xaxisadj):  
+# def hovertext1(sf,ExpTab,ef,ayear,ap,rp,pf,ChannelSize,xaxisadj): 
+def hovertext1(sf,ChannelSize,xaxisadj):  
 	hovertext = []
 	for yi, yy in enumerate(sf.index):
 		hovertext.append([])
 		for xi, xx in enumerate(sf.columns):
-			if ExpTab[Band]==1:
-			    expiry = round(ef.values[yi][xi],2)
-			else:
-			    expiry = "NA"
-			try:
-			    auction_year = round(ayear.loc[yy,round(xx-xaxisadj[Band],3)])
-			except:
-			    auction_year ="NA"
+# 			if ExpTab[Band]==1:
+# 			    expiry = round(ef.values[yi][xi],2)
+# 			else:
+# 			    expiry = "NA"
+# 			try:
+# 			    auction_year = round(ayear.loc[yy,round(xx-xaxisadj[Band],3)])
+# 			except:
+# 			    auction_year ="NA"
 
-			try:
-			    auction_price = round(ap.loc[yy,round(xx-xaxisadj[Band],3)],2)
-			except:
-			    auction_price ="NA"
+# 			try:
+# 			    auction_price = round(ap.loc[yy,round(xx-xaxisadj[Band],3)],2)
+# 			except:
+# 			    auction_price ="NA"
 
-			try:
-			    reserve_price = round(rp.loc[yy,round(xx-xaxisadj[Band],3)],2)
-			except:
-			    reserve_price ="NA"
+# 			try:
+# 			    reserve_price = round(rp.loc[yy,round(xx-xaxisadj[Band],3)],2)
+# 			except:
+# 			    reserve_price ="NA"
 
-			if round(pf.values[yi][0],1)!=0:
-			    latest_rp = round(pf.values[yi][0],2)
-			else:
-			    latest_rp ="NA"
+# 			if round(pf.values[yi][0],1)!=0:
+# 			    latest_rp = round(pf.values[yi][0],2)
+# 			else:
+# 			    latest_rp ="NA"
 
 			operator = [k for k, v in operators.items() if v == sf.values[yi][xi]]
 			operatorold = of.values[yi][xi]
@@ -469,9 +470,7 @@ def hovertext1(sf,ExpTab,ef,ayear,ap,rp,pf,ChannelSize,xaxisadj):
 			hovertext[-1].append(
 					    'Start/End Freq : {}/{} MHz (Ch)\
 					    <br />SP New/Old: {} / {} ({})\
-					    <br />BW/Expiry: {} MHz / {} Years\
-					    <br />RP/AP - Rs {} / {} Cr/MHz ({})\
-					    <br />Latest RP - Rs {} Cr/MHz'
+					    <br />Bandwidth: {} MHz'
 
 				     .format(
 					    round(xx-xaxisadj[Band],2), 
@@ -480,11 +479,6 @@ def hovertext1(sf,ExpTab,ef,ayear,ap,rp,pf,ChannelSize,xaxisadj):
 					    operatorold,
 					    state_dict.get(yy), 
 					    round(bandwidth[yi],1),
-					    expiry,
-					    reserve_price,
-					    auction_price,
-					    auction_year,
-					    latest_rp,
 					    )
 					    )
 	return hovertext
@@ -524,13 +518,12 @@ if Feature == "FreqMap":
 	      z = sf.values,
 	      y = sf.index,
 	      x = sf.columns,
-	      customdata = sff.values,
+	      customdata1 = sff.values,
+	      endfreq = 
 	      xgap = xgap[Band],
 	      ygap = 1,
-#               hoverinfo ='text',
-#               text = hovertext1,
-	      hovertemplate= 'Start Freq: %{x}, <b>End Freq: %{x+ChannelSize[Band]\
-				<br> %{customdata}<extra></extra>',
+              hoverinfo ='text',
+              text = hovertext1,
 	      colorscale=colorscale,
 	      colorbar=dict(
 	      tickvals = list(operators.values()),
