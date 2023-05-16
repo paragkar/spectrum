@@ -370,8 +370,6 @@ pricemaster = df["Master_Price_Sheet"]
 
 pricemaster.rename(columns = {"FP" : "Auction Price", "DP": "Reserve Price"}, inplace = True)
 
-
-
 #processing for spectrum offered vs sold & unsold
 
 # offeredvssold = df[spectrumofferedvssold]
@@ -517,7 +515,8 @@ def hovercolor(colorscale, sf):
 Feature = st.sidebar.selectbox('Select a Feature', options = ["PriceMap","FreqMap", "ExpiryMap" ])
 
 if Feature == "FreqMap":
-	hovertext1 = hovertext1(sf,ExpTab,ef,ayear,ap,rp,pf,ChannelSize,xaxisadj) 
+	operator = st.sidebar.selectbox('Select An Operator', options = sorted(list(operators.keys())))
+# 	hovertext1 = hovertext1(sf,ExpTab,ef,ayear,ap,rp,pf,ChannelSize,xaxisadj) 
 	subtitle ="Frequency Map"
 	tickangle = -90
 	
@@ -566,7 +565,8 @@ if Feature == "PriceMap":
 	fig = go.Figure(data=data2)
 	
 if Feature == "ExpiryMap":
-	hovertext1 = hovertext1(sf,ExpTab,ef,ayear,ap,rp,pf,ChannelSize,xaxisadj) 
+# 	operator = st.sidebar.selectbox('Select An Operator', options = sorted(list(operators.keys())))
+# 	hovertext1 = hovertext1(sf,ExpTab,ef,ayear,ap,rp,pf,ChannelSize,xaxisadj) 
 	subtitle ="Expiry Map"
 	tickangle = -90
 	
