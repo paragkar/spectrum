@@ -429,6 +429,11 @@ rp = df_final.pivot_table(index=["LSA"], columns='StartFreq', values="RP", aggfu
 ap = df_final.pivot_table(index=["LSA"], columns='StartFreq', values="AP", aggfunc='first').fillna("NA")
 ayear = df_final.pivot_table(index=["LSA"], columns='StartFreq', values="Year", aggfunc='first').fillna("NA")
 
+st.write(tp)
+st.write(rp)
+st.write(ap)
+st.wrtite(ayear)
+
 
 
 #processing historical information ends************************
