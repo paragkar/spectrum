@@ -93,8 +93,8 @@ if Feature == "Map":
 	sf = sf.set_index("LSA")
 	operators_mapping =operators[Band]
 	sf[sf.columns] = sf[sf.columns].replace(operators_mapping)
-	st.write(sf)
 	colorscalestep = stepcolscale(operators_mapping, colcodes)
+	st.write(sf)
 	st.write(colorscalestep)
 	tickangle = -90
 
