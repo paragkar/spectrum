@@ -418,6 +418,8 @@ for col in ef.columns:
         
 df_final = pd.DataFrame(lst)
 
+st.write(df_final)
+
 df_final.columns = ["LSA", "StartFreq", "TP", "RP", "AP", "Year", "Error"]
 
 df_final["Year"] = df_final["Year"].astype(int)
@@ -427,7 +429,6 @@ rp = df_final.pivot_table(index=["LSA"], columns='StartFreq', values="RP", aggfu
 ap = df_final.pivot_table(index=["LSA"], columns='StartFreq', values="AP", aggfunc='first').fillna("NA")
 ayear = df_final.pivot_table(index=["LSA"], columns='StartFreq', values="Year", aggfunc='first').fillna("NA")
 
-st.write(ayear)
 
 
 #processing historical information ends************************
