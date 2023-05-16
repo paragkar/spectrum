@@ -429,14 +429,7 @@ rp = df_final.pivot_table(index=["LSA"], columns='StartFreq', values="RP", aggfu
 ap = df_final.pivot_table(index=["LSA"], columns='StartFreq', values="AP", aggfunc='first').fillna("NA")
 ayear = df_final.pivot_table(index=["LSA"], columns='StartFreq', values="Year", aggfunc='first').fillna("NA")
 
-st.write(tp)
-st.write(rp)
-st.write(ap)
-st.write(ayear)
-st.write(df_final)
 st.write(sf)
-st.write(dff)
-st.write(ef)
 
 
 
@@ -477,7 +470,7 @@ for yi, yy in enumerate(sf.index):
             
         operator = [k for k, v in operators.items() if v == sf.values[yi][xi]]
         operatorold = of.values[yi][xi]
-        bandwidth = [list(val).count(operators.get(operator[0]))*ChannelSize[Band] for val in sf.values]
+#         bandwidth = [list(val).count(operators.get(operator[0]))*ChannelSize[Band] for val in sf.values]
         hovertext1[-1].append(
                             'Start/End Freq : {}/{} MHz (Ch)\
                             <br />SP New/Old: {} / {} ({})\
