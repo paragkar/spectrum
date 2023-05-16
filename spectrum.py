@@ -169,7 +169,7 @@ Feature = st.sidebar.selectbox('Select a Feature', options = ["Price","Map"])
 
 
 if Feature == "Map":
-	subtitle =""
+	subtitle ="Map"
 	Band = st.sidebar.selectbox('Select a Band', options = Bands)
 	freqtab = str(Band)+"MHz"
 	sf = df[freqtab]
