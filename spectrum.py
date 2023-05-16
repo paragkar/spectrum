@@ -512,14 +512,15 @@ if Feature == "FreqMap":
 	sf = sff.copy()
 	operators = operators[Band]
 	operator = st.sidebar.selectbox('Select An Operator', options = ["All"]+sorted(list(operators.keys())))
-	if operator == "All":	
-		sf[sf.columns] = sf[sf.columns].replace(operators) #replacing operators data with respective codes
+	if operator == "All":
+	    sf[sf.columns] = sf[sf.columns].replace(operators) #replacing operators data with respective codes
 	if operator != "All":
 		for op in operators.keys():
-			if op ==operator:
+			if op == operator:
 				sf.replace(op, operators[op], inplace = True)
-		    	else:
+			else:
 				sf.replace(op,0, inplace = True)
+		
 		
 		
 # 	hovertext1 = hovertext1(sf,ChannelSize,xaxisadj)
