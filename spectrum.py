@@ -94,6 +94,7 @@ if Feature == "Map":
 	operators_mapping =operators[Band]
 	sf[sf.columns] = sf[sf.columns].replace(operators_mapping)
 	colorscalestep = stepcolscale(operators_mapping, colcodes)
+	print(colcodes)
 	st.write(sf)
 	st.write(colorscalestep)
 	tickangle = -90
