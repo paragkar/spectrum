@@ -432,8 +432,6 @@ rp = df_final.pivot_table(index=["LSA"], columns='StartFreq', values="RP", aggfu
 ap = df_final.pivot_table(index=["LSA"], columns='StartFreq', values="AP", aggfunc='first').fillna("NA")
 ayear = df_final.pivot_table(index=["LSA"], columns='StartFreq', values="Year", aggfunc='first').fillna("NA")
 
-st.write(sf)
-
 
 
 #processing historical information ends************************
@@ -534,8 +532,8 @@ if Feature == "Price":
 
 	data2 = [go.Heatmap(
 			z = round(pricemaster[Type],1),
-			y = price["LSA"],
-			x = price["Year"],
+			y = pricemaster["LSA"],
+			x = pricemaster["Year"],
 			xgap = 1,
 			ygap = 1,
 			hoverinfo ='text',
