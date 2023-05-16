@@ -158,7 +158,7 @@ colcodes=colcodes.set_index("Description")
 
 price = df["Master_Price_Sheet"]
 
-price.rename(columns = {'FP" : "Auction Price", "DP": "Reserve Price"}, inplace = True)
+price.rename(columns = {"FP" : "Auction Price", "DP": "Reserve Price"}, inplace = True)
 
 price = price[price["Band"] != 600]
 
