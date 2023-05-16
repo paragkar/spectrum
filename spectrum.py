@@ -115,7 +115,7 @@ Feature = st.sidebar.selectbox('Select a Feature', options = ["Price","Map"])
 # 	fig = go.Figure(data=data)
 
 
-elif Feature == "Price":
+if Feature == "Price":
 	Band = st.sidebar.selectbox('Select a Band', options = Bands)
 	price = price[(price["Band"]==Band) & (price["Year"] != 2018)]
 	price["Year"] = sorted([str(x) for x in price["Year"].values])
