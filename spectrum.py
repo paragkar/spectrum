@@ -83,7 +83,6 @@ df = pd.read_excel('spectrum_map.xlsx', sheet_name=sheet)
 colcodes = df["ColorCodes"]
 colcodes=colcodes.set_index("Description")
 
-colorscale = hovercolscale(operators, colcodes) # for hoverbox
 
 
 # st.sidebar.title('Navigation')
@@ -121,7 +120,7 @@ if Feature == "Map":
 	      ygap = 1,
 #               hoverinfo ='text',
 #               text = hovertext1,
-	      colorscale=colorscale,
+	      colorscale=hovercolscale(operators_mapping, colcodes),
 	      colorbar=dict(
 	      tickvals = list(operators_mapping.values()),
 	      # tickvals = tickval,
