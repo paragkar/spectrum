@@ -24,6 +24,16 @@ operators = {700: {'Vacant':0,'Railways':1,'Govt':2,'RJIO':3,'BSNL':4},
              26000: {'Vacant':0,'Bharti':1,'RJIO':2,'BSNL':3, 'MTNL':4,'VI':5,'Adani':6}
             }
 
+xgap = {700:1, 
+        800:1, 
+        900:0.5, 
+        1800:0, 
+        2100:1, 
+        2300:1, 
+        2500:1, 
+        3500:1, 
+        26000:1}
+
 #preparing color scale for heatmap which chnages in steps (discrete)
 def stepcolscale(operators, colcodes):
     scale = [round(x/(len(operators)),2) for x in range(len(operators)+1)]
@@ -99,7 +109,7 @@ if Feature == "Map":
               z = sf.values,
               y = sf.index,
               x = sf.columns,
-              xgap = 1,
+              xgap = xgap[Band],
               ygap = 1,
 #               hoverinfo ='text',
 #               text = hovertext1,
