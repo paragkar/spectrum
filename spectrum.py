@@ -114,7 +114,7 @@ if Feature == "Map":
 
        		]	
 
-		fig = go.Figure(data=data )
+	fig = go.Figure(data=data )
 
 
 fig.update_layout(uniformtext_minsize=8, 
