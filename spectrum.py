@@ -82,12 +82,11 @@ price = price[price["Band"] != 600]
 
 Bands = sorted(list(set(price["Band"])))
 
-Band = st.sidebar.selectbox('Select a Band', options = Bands)
-
 Feature = st.sidebar.selectbox('Select a Feature', options = ["Price","Map"])
 
 
 if Feature == "Map":
+	Band = st.sidebar.selectbox('Select a Band', options = Bands)
 	freqtab = str(Band)+"MHz"
 	sf = df[freqtab]
 	sf = sf.set_index("LSA")
@@ -118,13 +117,14 @@ if Feature == "Map":
 
 
 if Feature == "Price":
+	Band = st.sidebar.selectbox('Select a Band', options = Bands)
 	price = price[(price["Band"]==Band) & (price["Year"] != 2018)]
 	price["Year"] = sorted([str(x) for x in price["Year"].values])
-# 	Type = st.sidebar.selectbox('Select Price Type', options = ["FP","DP"])
+	Type = st.sidebar.selectbox('Select Price Type', options = ["FP","DP"])
 	tickangle=0
 
 	data2 = [go.Heatmap(
-			z = round(price["DP"],1),
+			z = round(price[Type],1),
 			y = price["LSA"],
 			x = price["Year"],
 			xgap = 1,
