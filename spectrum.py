@@ -83,6 +83,7 @@ if Feature == "Price":
 				),
 
 	       ]
+	fig = go.Figure(data=data )
 
 if Feature == "Map":
 	Band = st.sidebar.selectbox('Select a Band', Bands[1:])
@@ -111,11 +112,9 @@ if Feature == "Map":
               tickmode="array"),
                 ),
 
-       		]
-	
-	
+       		]	
 
-fig = go.Figure(data=data )
+		fig = go.Figure(data=data )
 
 
 fig.update_layout(uniformtext_minsize=8, 
