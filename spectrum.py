@@ -84,6 +84,7 @@ Bands = sorted(list(set(price["Band"])))
 
 Feature = st.sidebar.selectbox('Select a Feature', options = ["Map","Price"])
 
+st.empty()
 if Feature == "Map":
 	Band = st.sidebar.selectbox('Select a Band', options = Bands)
 	freqtab = str(Band)+"MHz"
@@ -115,33 +116,6 @@ if Feature == "Map":
 	fig = go.Figure(data=data)
 
 
-	fig.update_layout(uniformtext_minsize=8, 
-			  uniformtext_mode='hide', 
-			  xaxis_title=None, 
-			  yaxis_title=None, 
-			  yaxis_autorange='reversed',
-			  font=dict(size=8),
-			  template='simple_white',
-			  paper_bgcolor=None,
-			  height=550, width=1000,
-			  # title="<b>"+title_fig1[Band]+"<b>",
-			  margin=dict(t=80, b=50, l=50, r=50, pad=0),
-			  title_x=0.51, title_y=0.99,
-			  title_font=dict(size=14),
-			  xaxis = dict(
-			  side = 'top',
-			  tickmode = 'linear',
-			  tickangle=tickangle,
-			  dtick = dtick[Band]),
-			  # showlegend=True
-			)
-
-
-	fig.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
-	fig.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
-
-	st.write(fig)
-
 if Feature == "Price":
 	Band = st.sidebar.selectbox('Select a Band', options = Bands)
 	price = price[(price["Band"]==Band) & (price["Year"] != 2018)]
@@ -169,32 +143,32 @@ if Feature == "Price":
 	fig = go.Figure(data=data)
 
 
-	fig.update_layout(uniformtext_minsize=8, 
-			  uniformtext_mode='hide', 
-			  xaxis_title=None, 
-			  yaxis_title=None, 
-			  yaxis_autorange='reversed',
-			  font=dict(size=8),
-			  template='simple_white',
-			  paper_bgcolor=None,
-			  height=550, width=1000,
-			  # title="<b>"+title_fig1[Band]+"<b>",
-			  margin=dict(t=80, b=50, l=50, r=50, pad=0),
-			  title_x=0.51, title_y=0.99,
-			  title_font=dict(size=14),
-			  xaxis = dict(
-			  side = 'top',
-			  tickmode = 'linear',
-			  tickangle=tickangle,
-			  dtick = dtick[Band]),
-			  # showlegend=True
-			)
+fig.update_layout(uniformtext_minsize=8, 
+		  uniformtext_mode='hide', 
+		  xaxis_title=None, 
+		  yaxis_title=None, 
+		  yaxis_autorange='reversed',
+		  font=dict(size=8),
+		  template='simple_white',
+		  paper_bgcolor=None,
+		  height=550, width=1000,
+		  # title="<b>"+title_fig1[Band]+"<b>",
+		  margin=dict(t=80, b=50, l=50, r=50, pad=0),
+		  title_x=0.51, title_y=0.99,
+		  title_font=dict(size=14),
+		  xaxis = dict(
+		  side = 'top',
+		  tickmode = 'linear',
+		  tickangle=tickangle,
+		  dtick = dtick[Band]),
+		  # showlegend=True
+		)
 
 
-	fig.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
-	fig.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
+fig.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
+fig.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
 
-	st.write(fig)
+st.write(fig)
 
 
 
