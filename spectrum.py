@@ -120,11 +120,11 @@ if Feature == "Map":
 if Feature == "Price":
 	price = price[(price["Band"]==Band) & (price["Year"] != 2018)]
 	price["Year"] = sorted([str(x) for x in price["Year"].values])
-	Type = st.sidebar.selectbox('Select Price Type', options = ["FP","DP"])
+# 	Type = st.sidebar.selectbox('Select Price Type', options = ["FP","DP"])
 	tickangle=0
 
 	data2 = [go.Heatmap(
-			z = round(price[Type],1),
+			z = round(price["DP"],1),
 			y = price["LSA"],
 			x = price["Year"],
 			xgap = 1,
