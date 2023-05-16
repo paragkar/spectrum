@@ -85,7 +85,7 @@ Bands = sorted(list(set(price["Band"])))
 Feature = st.sidebar.selectbox('Select a Feature', options = ["Map","Price"])
 
 if Feature == "Map":
-	Band = st.sidebar.selectbox('Select a Band', Bands)
+	Band = st.sidebar.selectbox('Select a Band', options = Bands)
 	freqtab = str(Band)+"MHz"
 	sf = df[freqtab]
 	sf = sf.set_index("LSA")
@@ -113,7 +113,7 @@ if Feature == "Map":
        		]	
 
 if Feature == "Price":
-	Band = st.sidebar.selectbox('Select a Band', Bands)
+	Band = st.sidebar.selectbox('Select a Band', options = Bands)
 	price = price[(price["Band"]==Band) & (price["Year"] != 2018)]
 	price["Year"] = sorted([str(x) for x in price["Year"].values])
 	Type = st.sidebar.selectbox('Select Price Type', options = ["FP","DP"])
