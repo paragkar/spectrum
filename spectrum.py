@@ -530,7 +530,7 @@ if Feature == "Map":
 	      ticktext = list(operators.keys()),
 	      dtick=1, tickmode="array"),
 	      hoverlabel=dict(bgcolor=hoverlabel_bgcolor, 
-	      font=dict(size=10),
+	      font=dict(size=10)),
 			    ),
 		]
 
