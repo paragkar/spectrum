@@ -383,7 +383,7 @@ soldspectrum = offeredvssold.pivot(index=["LSA"], columns='Year', values="Sold")
 unsoldspectrum = offeredvssold.pivot(index=["LSA"], columns='Year', values="Unsold").fillna("NA")
 
 #processing for auction price
-auctionprice = pricemaster.pivot(index=["LSA"], columns='Year', values="AuctionPrice").fillna("NA")
+auctionprice = pricemaster.pivot(index=["LSA"], columns='Year', values="Auction Price").fillna("NA")
 auctionprice = auctionprice.loc[:, (auctionprice != 0).any(axis=0)]
 auctionprice = auctionprice.applymap(lambda x: round(x,2))
 
@@ -393,7 +393,7 @@ auctionprice = adddummycols(auctionprice,auctionfailyears[Band])
 auctionprice = auctionprice.replace(0,"NA")
 
 #processing for reserve price
-reserveprice = pricemaster.pivot(index=["LSA"], columns='Year', values="ReservePrice").fillna("NA")
+reserveprice = pricemaster.pivot(index=["LSA"], columns='Year', values="Reserve Price").fillna("NA")
 reserveprice = reserveprice.loc[:, (reserveprice != 0).any(axis=0)]
 reserveprice = reserveprice.applymap(lambda x: round(x,2))
 
@@ -417,8 +417,6 @@ for col in ef.columns:
                 lst.append([ef.index[i],col-xaxisadj[Band],pf1val[1],pf1val[2], pf1val[3], pf1val[4], error]) 
         
 df_final = pd.DataFrame(lst)
-
-st.write(df_final)
 
 df_final.columns = ["LSA", "StartFreq", "TP", "RP", "AP", "Year", "Error"]
 
