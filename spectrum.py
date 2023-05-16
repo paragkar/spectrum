@@ -436,7 +436,7 @@ ayear = df_final.pivot_table(index=["LSA"], columns='StartFreq', values="Year", 
 
 #processing for hovertext for freq map
 
-def hovertext1(sf,ExpTab,ef,ayear,ap,rp,pf,ChannelSize,xaxisadj)   
+def hovertext1(sf,ExpTab,ef,ayear,ap,rp,pf,ChannelSize,xaxisadj):  
 	hovertext = []
 	for yi, yy in enumerate(sf.index):
 	    hovertext.append([])
