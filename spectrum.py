@@ -524,9 +524,9 @@ if Feature == "FreqMap":
 	if operator != "All":
 	   for op in operators.keys():
 	      if op == operator:
-		 sf.replace(op, operators[op], inplace = True)
+	        sf.replace(op, operators[op], inplace = True)
 	      else:
-	         sf.replace(op,np.nan, inplace = True)
+	        sf.replace(op,np.nan, inplace = True)
 	 operators = {operator:operators[operator]}
 	 colorscale = hovercolscale(operators, colcodes)
 		
