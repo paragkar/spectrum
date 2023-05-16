@@ -47,7 +47,6 @@ dtick = {700:1,
 
 #preparing color scale for heatmap which chnages in steps (discrete)
 def stepcolscale(operators, colcodes):
-    st.empty()
     scale = [round(x/(len(operators)),2) for x in range(len(operators)+1)]
     colors =[]
     for k, v  in operators.items():
@@ -64,6 +63,7 @@ def stepcolscale(operators, colcodes):
         lst.append((line[0],line[1])),
         lst.append((line[2],line[1])),
     lst = lst[:-2]
+    st.empty()
     return lst
 
 
