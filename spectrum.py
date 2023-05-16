@@ -82,7 +82,7 @@ price = price[price["Band"] != 600]
 
 Bands = sorted(list(set(price["Band"])))
 
-Feature = st.sidebar.selectbox('Select a Feature', options = ["Map","Price"])
+Feature = st.sidebar.selectbox('Select a Feature', options = ["Price","Map"])
 
 if Feature == "Map":
 	Band = st.sidebar.selectbox('Select a Band', options = Bands)
