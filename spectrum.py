@@ -514,11 +514,11 @@ def hovercolor(colorscale, sf):
 ########################### processing for hovercolors for data1 & data2 ends
 
 #menu for selecting features 
-Feature = st.sidebar.selectbox('Select a Feature', options = ["Price","Map"])
+Feature = st.sidebar.selectbox('Select a Feature', options = ["PriceMap","FreqMap", "ExpiryMap" ])
 
-if Feature == "Map":
+if Feature == "FreqMap":
 	hovertext1 = hovertext1(sf,ExpTab,ef,ayear,ap,rp,pf,ChannelSize,xaxisadj) 
-	subtitle ="Map"
+	subtitle ="Frequency Map"
 	tickangle = -90
 	
 	data1 = [go.Heatmap(
@@ -542,12 +542,12 @@ if Feature == "Map":
 # 	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=10, color='black')))
 
 
-if Feature == "Price":
+if Feature == "PriceMap":
 	pricemaster = pricemaster[(pricemaster["Band"]==Band) & (pricemaster["Year"] != 2018)]
 	pricemaster["Year"] = sorted([str(x) for x in pricemaster["Year"].values])
 	Type = st.sidebar.selectbox('Select Price Type', options = ["Auction Price","Reserve Price"])
 	subtitle = Type
-	tickangle=0
+	tickangle=-90
 
 	data2 = [go.Heatmap(
 			z = round(pricemaster[Type],1),
@@ -564,7 +564,29 @@ if Feature == "Price":
 				),
 		]
 	fig = go.Figure(data=data2)
+	
+if Feature == "ExpiryMap":
+# 	hovertext1 = hovertext1(sf,ExpTab,ef,ayear,ap,rp,pf,ChannelSize,xaxisadj) 
+	subtitle ="Expiry Map"
+	tickangle = -90
+	
+	data3 = [go.Heatmap(
+	      z = ef.values,
+	      y = ef.index,
+	      x = ef.columns,
+	      xgap = xgap[Band],
+	      ygap = 1,
+              hoverinfo ='text',
+#               text = hovertext1,
+	      colorscale=colorscale,
+	      colorbar=dict(
+	      tickvals = list(operators.values()),
+	      ticktext = list(operators.keys()),
+	      dtick=1, tickmode="array"),
+			    ),
+		]
 
+	fig = go.Figure(data=data3)
 
 
 #updating figure layouts
