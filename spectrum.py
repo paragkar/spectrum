@@ -91,6 +91,8 @@ colcodes=colcodes.set_index("Description")
 
 price = df["Master_Price_Sheet"]
 
+df = df[df["Band"] != 600]
+
 Bands = sorted(list(set(price["Band"])))
 
 Feature = st.sidebar.selectbox('Select a Feature', options = ["Map","Price"])
@@ -123,7 +125,7 @@ if Feature == "Price":
 
 output = st.empty()
 if Feature == "Map":
-	Band = st.sidebar.selectbox('Select a Band', Bands[1:])
+	Band = st.sidebar.selectbox('Select a Band', Bands)
 	freqtab = str(Band)+"MHz"
 	sf = df[freqtab]
 	sf = sf.set_index("LSA")
