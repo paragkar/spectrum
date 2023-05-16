@@ -529,7 +529,8 @@ if Feature == "FreqMap":
 	      ygap = 1,
 #               hoverinfo ='text',
 #               text = hovertext1,
-	      hovertemplate= 'Start Freq: %{z}, <br> %{customdata}',
+	      hovertemplate= 'Start Freq: %{x}, <b>End Freq: %{x+ChannelSize[Band]\
+				<br> %{customdata}<extra></extra>',
 	      colorscale=colorscale,
 	      colorbar=dict(
 	      tickvals = list(operators.values()),
