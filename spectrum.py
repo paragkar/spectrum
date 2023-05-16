@@ -524,10 +524,12 @@ if Feature == "FreqMap":
 	      z = sf.values,
 	      y = sf.index,
 	      x = sf.columns,
+	      customdata = sff,
 	      xgap = xgap[Band],
 	      ygap = 1,
 #               hoverinfo ='text',
 #               text = hovertext1,
+	      hovertemplate= 'Start Freq: %{z}<br> %{customdata}'
 	      colorscale=colorscale,
 	      colorbar=dict(
 	      tickvals = list(operators.values()),
