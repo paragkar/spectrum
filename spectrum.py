@@ -509,7 +509,7 @@ def hovercolor(colorscale, sf):
 Feature = st.sidebar.selectbox('Select a Feature', options = ["PriceMap","FreqMap", "ExpiryMap" ])
 
 if Feature == "FreqMap":
-	operator = st.sidebar.selectbox('Select An Operator', options = sorted(list(operators.keys())))
+	operator = st.sidebar.selectbox('Select An Operator', options = ["All"]+sorted(list(operators.keys())))
 # 	hovertext1 = hovertext1(sf,ChannelSize,xaxisadj)
 	subtitle ="Frequency Map"
 	tickangle = -90
