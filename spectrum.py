@@ -141,7 +141,6 @@ if Feature == "Map":
 	fig.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
 
 	st.write(fig)
-	return
 
 if Feature == "Price":
 	Band = st.sidebar.selectbox('Select a Band', options = Bands)
@@ -196,6 +195,6 @@ if Feature == "Price":
 	fig.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
 
 	st.write(fig)
-	return
+
 
 
