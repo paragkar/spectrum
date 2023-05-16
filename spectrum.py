@@ -95,6 +95,7 @@ if Feature == "Map":
 	sf[sf.columns] = sf[sf.columns].replace(operators)
 	st.write(sf)
 	colorscalestep = stepcolscale(operators, colcodes)
+	st.write(colorscalestep)
 	tickangle = -90
 
 	data1 = [go.Heatmap(
