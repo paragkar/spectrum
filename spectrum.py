@@ -63,7 +63,8 @@ def stepcolscale(operators, colcodes):
         lst.append((line[0],line[1])),
         lst.append((line[2],line[1])),
     lst = lst[:-2]
-    return lst
+    if lst != []:
+    	return lst
 
 
 xl = pd.ExcelFile('spectrum_map.xlsx')
