@@ -484,7 +484,7 @@ def hovertext1(sf,ChannelSize,xaxisadj):
 	return hovertext
 
 
-colorscale = hovercolscale(operators, colcodes) # for hoverbox
+# colorscale = hovercolscale(operators, colcodes) # for hoverbox
 
 ############################ #processing for hovercolors for data1 & data2 starts
 
@@ -511,6 +511,7 @@ Feature = st.sidebar.selectbox('Select a Feature', options = ["PriceMap","FreqMa
 if Feature == "FreqMap":
 	sf = sff.copy()
 	operators = operators[Band]
+	colorscale = hovercolscale(operators, colcodes) # for hoverbox
 	operator = st.sidebar.selectbox('Select An Operator', options = ["All"]+sorted(list(operators.keys())))
 	if operator == "All":
 	    sf[sf.columns] = sf[sf.columns].replace(operators) #replacing operators data with respective codes
