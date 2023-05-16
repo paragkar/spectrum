@@ -157,7 +157,7 @@ fig.update_layout(uniformtext_minsize=8,
                   xaxis = dict(
                   side = 'top',
                   tickmode = 'linear',
-                  tickangle=tickangle,)
+                  tickangle=tickangle,
                   dtick = dtick[Band]),
                   # showlegend=True
                 )
