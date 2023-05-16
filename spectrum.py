@@ -510,7 +510,7 @@ Feature = st.sidebar.selectbox('Select a Feature', options = ["PriceMap","FreqMa
 
 if Feature == "FreqMap":
 	operator = st.sidebar.selectbox('Select An Operator', options = sorted(list(operators.keys())))
-	hovertext1 = hovertext1(sf,ChannelSize,xaxisadj)
+# 	hovertext1 = hovertext1(sf,ChannelSize,xaxisadj)
 	subtitle ="Frequency Map"
 	tickangle = -90
 	
@@ -520,8 +520,8 @@ if Feature == "FreqMap":
 	      x = sf.columns,
 	      xgap = xgap[Band],
 	      ygap = 1,
-              hoverinfo ='text',
-              text = hovertext1,
+#               hoverinfo ='text',
+#               text = hovertext1,
 	      colorscale=colorscale,
 	      colorbar=dict(
 	      tickvals = list(operators.values()),
