@@ -95,6 +95,7 @@ if Feature == "Map":
 	st.write(operators_mapping)
 	sf[sf.columns] = sf[sf.columns].replace(operators_mapping)
 	colorscalestep = stepcolscale(operators_mapping, colcodes)
+	st.empty()
 	st.write(colcodes)
 	st.write(sf)
 	st.write(colorscalestep)
