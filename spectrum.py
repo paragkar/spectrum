@@ -537,8 +537,9 @@ if Feature == "Map":
 		]
 
 	fig = go.Figure(data=data1)
-# 	hoverlabel_bgcolor = hovercolor(colorscale, data1)
-# 	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor, font=dict(size=10)))
+	hoverlabel_bgcolor = hovercolor(colorscale, data1)
+	st.write(hoverlabel_bgcolor)
+	#fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor, font=dict(size=10)))
 
 
 if Feature == "Price":
