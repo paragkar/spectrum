@@ -434,6 +434,9 @@ st.write(rp)
 st.write(ap)
 st.write(ayear)
 st.write(df_final)
+st.write(sf)
+st.write(dff)
+st.write(ef)
 
 
 
@@ -458,25 +461,16 @@ for yi, yy in enumerate(sf.index):
             auction_year ="NA"
             
         try:
-            # if BandType[Band] == "TDD":
-            #     auction_price = round(ap.loc[yy,round(xx-xaxisadj[Band],3)]/2,2) #converting price to TDD equivalent
-            # else:
             auction_price = round(ap.loc[yy,round(xx-xaxisadj[Band],3)],2)
         except:
             auction_price ="NA"
             
         try:
-            # if BandType[Band] == "TDD":
-            #     reserve_price = round(rp.loc[yy,round(xx-xaxisadj[Band],3)]/2,2) #converting price to TDD equivalent
-            # else:
             reserve_price = round(rp.loc[yy,round(xx-xaxisadj[Band],3)],2)
         except:
             reserve_price ="NA"
             
         if round(pf.values[yi][0],1)!=0:
-            # if BandType[Band] == "TDD":
-            #     latest_rp = round(pf.values[yi][0]/2,2)
-            # else:
             latest_rp = round(pf.values[yi][0],2)
         else:
             latest_rp ="NA"
