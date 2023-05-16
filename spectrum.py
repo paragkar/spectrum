@@ -348,9 +348,9 @@ pf = pf.set_index("LSA")
 operators = operators[Band]
 sf[sf.columns] = sf[sf.columns].replace(operators) #replacing operators data with respective codes
 
-eff = forexpyearheatmap(ef) # for expiry year heatmap
+# eff = forexpyearheatmap(ef) # for expiry year heatmap
 
-bwf = BWExpiring(sff,ef) # for hover text for fig3
+# bwf = BWExpiring(sff,ef) # for hover text for fig3
 
 # st.sidebar.title('Navigation')
 
@@ -374,33 +374,33 @@ pricemaster.rename(columns = {"FP" : "Auction Price", "DP": "Reserve Price"}, in
 
 #processing for spectrum offered vs sold & unsold
 
-offeredvssold = df[spectrumofferedvssold]
-offeredvssold = offeredvssold[(offeredvssold["Band"] == Band) & (offeredvssold["Year"] != 2018)]
-offeredvssold = offeredvssold.drop(columns =["Band"]).reset_index(drop=True)
+# offeredvssold = df[spectrumofferedvssold]
+# offeredvssold = offeredvssold[(offeredvssold["Band"] == Band) & (offeredvssold["Year"] != 2018)]
+# offeredvssold = offeredvssold.drop(columns =["Band"]).reset_index(drop=True)
 
-offeredspectrum = offeredvssold.pivot(index=["LSA"], columns='Year', values="Offered").fillna("NA")
-soldspectrum = offeredvssold.pivot(index=["LSA"], columns='Year', values="Sold").fillna("NA")
-unsoldspectrum = offeredvssold.pivot(index=["LSA"], columns='Year', values="Unsold").fillna("NA")
+# offeredspectrum = offeredvssold.pivot(index=["LSA"], columns='Year', values="Offered").fillna("NA")
+# soldspectrum = offeredvssold.pivot(index=["LSA"], columns='Year', values="Sold").fillna("NA")
+# unsoldspectrum = offeredvssold.pivot(index=["LSA"], columns='Year', values="Unsold").fillna("NA")
 
 #processing for auction price
-auctionprice = pricemaster[(pricemaster["Band"] == Band) & (pricemaster["Year"] != 2018)]
-auctionprice = auctionprice.pivot(index=["LSA"], columns='Year', values="Auction Price").fillna("NA")
-auctionprice = auctionprice.loc[:, (auctionprice != 0).any(axis=0)]
-auctionprice = auctionprice.applymap(lambda x: round(x,2))
+# auctionprice = pricemaster[(pricemaster["Band"] == Band) & (pricemaster["Year"] != 2018)]
+# auctionprice = auctionprice.pivot(index=["LSA"], columns='Year', values="Auction Price").fillna("NA")
+# auctionprice = auctionprice.loc[:, (auctionprice != 0).any(axis=0)]
+# auctionprice = auctionprice.applymap(lambda x: round(x,2))
 
 
-auctionprice = coltostr(auctionprice) #convert columns data type to string
-auctionprice = adddummycols(auctionprice,auctionfailyears[Band])
-auctionprice = auctionprice.replace(0,"NA")
+# auctionprice = coltostr(auctionprice) #convert columns data type to string
+# auctionprice = adddummycols(auctionprice,auctionfailyears[Band])
+# auctionprice = auctionprice.replace(0,"NA")
 
 #processing for reserve price
-reserveprice = pricemaster[(pricemaster["Band"] == Band) & (pricemaster["Year"] != 2018)]
-reserveprice = reserveprice.pivot(index=["LSA"], columns='Year', values="Reserve Price").fillna("NA")
-reserveprice = reserveprice.loc[:, (reserveprice != 0).any(axis=0)]
-reserveprice = reserveprice.applymap(lambda x: round(x,2))
+# reserveprice = pricemaster[(pricemaster["Band"] == Band) & (pricemaster["Year"] != 2018)]
+# reserveprice = reserveprice.pivot(index=["LSA"], columns='Year', values="Reserve Price").fillna("NA")
+# reserveprice = reserveprice.loc[:, (reserveprice != 0).any(axis=0)]
+# reserveprice = reserveprice.applymap(lambda x: round(x,2))
 
-reserveprice = coltostr(reserveprice) #convert columns data type to string
-reserveprice = reserveprice.replace(0,"NA")
+# reserveprice = coltostr(reserveprice) #convert columns data type to string
+# reserveprice = reserveprice.replace(0,"NA")
 
 #processing for histocical information****************
 
