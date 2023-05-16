@@ -59,14 +59,18 @@ def stepcolscale(operators, colcodes):
 
 #preparing color scale for hoverbox
 def hovercolscale(operators, colcodes):
-   operator_names = list(operators.keys())
-   operator_codes = list(operators.values())
-   scale = [round(x/(len(operator_names)-1),2) for x in range(len(operator_names))]
-   colorscale =[]
-   for i, op in enumerate(operator_names):
-     if op in colcodes.index:
-       colorscale.append([scale[i],colcodes.loc[op,:][0]])
-   return colorscale
+    operator_names = list(operators.keys())
+    operator_codes = list(operators.values())
+    scale = [round(x/(len(operator_names)-1),2) for x in range(len(operator_names))]
+    lst =[]
+    for i, op in enumerate(operator_names):
+      if op in colcodes.index:
+        lst.append([scale[i],colcodes.loc[op,:][0]])
+    colorscale=[]
+    for item in lst:
+       colorscale.append(item)
+		
+    return colorscale
 
 
 #function for calculating expiry year heatmap
