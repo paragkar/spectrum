@@ -527,7 +527,7 @@ if Feature == "Map":
 	      colorscale=colorscale,
 	      colorbar=dict(
 	      hoverlabel=dict(bgcolor=hoverlabel_bgcolor, 
-	      font=dict(size=10)
+	      font=dict(size=10),
 	      tickvals = list(operators.values()),
 	      # tickvals = tickval,
 	      ticktext = list(operators.keys()),
