@@ -82,6 +82,8 @@ price = price[price["Band"] != 600]
 
 Bands = sorted(list(set(price["Band"])))
 
+st.write(Bands)
+
 Feature = st.sidebar.selectbox('Select a Feature', options = ["Price","Map"])
 
 
