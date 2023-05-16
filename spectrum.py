@@ -566,25 +566,22 @@ if Feature == "PriceMap":
 	fig = go.Figure(data=data2)
 	
 if Feature == "ExpiryMap":
-# 	hovertext1 = hovertext1(sf,ExpTab,ef,ayear,ap,rp,pf,ChannelSize,xaxisadj) 
+	hovertext1 = hovertext1(sf,ExpTab,ef,ayear,ap,rp,pf,ChannelSize,xaxisadj) 
 	subtitle ="Expiry Map"
 	tickangle = -90
 	
 	data3 = [go.Heatmap(
-	      z = ef.values,
-	      y = ef.index,
-	      x = ef.columns,
-	      xgap = xgap[Band],
-	      ygap = 1,
+              z = ef.values,
+              y = ef.index,
+              x = ef.columns,
+              xgap = xgap[Band],
+              ygap = 1,
               hoverinfo ='text',
-#               text = hovertext1,
-	      colorscale=colorscale,
-	      colorbar=dict(
-	      tickvals = list(operators.values()),
-	      ticktext = list(operators.keys()),
-	      dtick=1, tickmode="array"),
-			    ),
-		]
+              text = hovertext1,
+              colorscale ='Hot',
+              reversescale=True,
+                )
+       		  ]
 
 	fig = go.Figure(data=data3)
 
