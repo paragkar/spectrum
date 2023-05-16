@@ -35,7 +35,7 @@ xgap = {700:1,
         26000:1}
 
 
-Layout = [uniformtext_minsize=8, 
+layout = go.Layout(uniformtext_minsize=8, 
                   uniformtext_mode='hide', 
                   xaxis_title=None, 
                   yaxis_title=None, 
@@ -55,7 +55,7 @@ Layout = [uniformtext_minsize=8,
 	               # tick0 =703,ß
                   # dtick = dtick[Band]),
                   # showlegend=True
-	 ]
+		  )
 
 #preparing color scale for heatmap which chnages in steps (discrete)
 def stepcolscale(operators, colcodes):
@@ -116,7 +116,7 @@ if Feature == "Price":
 				),
 
 	       ]
-	fig = go.Figure(data=data, Layout =Layout)
+	fig = go.Figure(data=data, layout =layout)
 	st.write(fig)
 
 if Feature == "Map":
