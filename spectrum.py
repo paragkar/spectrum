@@ -526,7 +526,7 @@ if Feature == "FreqMap":
 	      x = sf.columns,
 	      xgap = xgap[Band],
 	      ygap = 1,
-              hoverinfo ='text',
+#               hoverinfo ='text',
 #               text = hovertext1,
 	      colorscale=colorscale,
 	      colorbar=dict(
