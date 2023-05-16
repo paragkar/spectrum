@@ -226,12 +226,12 @@ if Feature == "Price":
 
 
 #updating figure layouts
-fig.update_layout(uniformtext_minsize=10, 
+fig.update_layout(uniformtext_minsize=12, 
 		  uniformtext_mode='hide', 
 		  xaxis_title=None, 
 		  yaxis_title=None, 
 		  yaxis_autorange='reversed',
-		  font=dict(size=10),
+		  font=dict(size=12),
 		  template='simple_white',
 		  paper_bgcolor=None,
 		  height=600, width=1200,
