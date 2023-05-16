@@ -63,7 +63,7 @@ Feature = st.sidebar.selectbox('Select a Feature', options = ["Map","Price"])
 
 if Feature == "Price":
 	Band = st.sidebar.selectbox('Select a Band', Bands)
-	price = price[(price["Band"]==Band) & (price["Year"] != 2018)]
+	price = price[(price["Band"]==Band) & (price["Year"] != 2018) & (price[Band] !=600)]
 	price["Year"] = sorted([str(x) for x in price["Year"].values])
 	Type = st.sidebar.selectbox('Select Price Type', options = ["FP","DP"])
 	tickangle=0
