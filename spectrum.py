@@ -98,7 +98,7 @@ with placeholder.container():
 		colorscalestep = stepcolscale(operator_mapping, colcodes)
 		tickangle = -90
 
-		data = [go.Heatmap(
+		data1 = [go.Heatmap(
 		      z = sf.values,
 		      y = sf.index,
 		      x = sf.columns,
@@ -116,7 +116,7 @@ with placeholder.container():
 				    ),
 			]
 
-		fig = go.Figure(data=data)
+		fig = go.Figure(data=data1)
 
 
 	if Feature == "Price":
@@ -126,7 +126,7 @@ with placeholder.container():
 		Type = st.sidebar.selectbox('Select Price Type', options = ["FP","DP"])
 		tickangle=0
 
-		data = [go.Heatmap(
+		data2 = [go.Heatmap(
 				z = round(price[Type],1),
 				y = price["LSA"],
 				x = price["Year"],
@@ -143,7 +143,7 @@ with placeholder.container():
 		       ]	
 
 
-		fig = go.Figure(data=data)
+		fig = go.Figure(data=data2)
 	
 	
 
