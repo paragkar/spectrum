@@ -524,7 +524,7 @@ if Feature == "FreqMap":
 	      z = sf.values,
 	      y = sf.index,
 	      x = sf.columns,
-	      customdata = sff,
+	      customdata = sff.values,
 	      xgap = xgap[Band],
 	      ygap = 1,
 #               hoverinfo ='text',
