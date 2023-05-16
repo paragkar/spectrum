@@ -9,6 +9,32 @@ import plotly.figure_factory as ff
 import streamlit as st
 
 
+state_dict = {
+    'AP': 'Andhra Pradesh',
+    'AS': 'Assam',
+    'BH': 'Bihar',
+    'DL': 'Delhi',
+    'GU': 'Gujarat',
+    'HA': 'Haryana',
+    'HP': 'Himachal Pradesh',
+    'JK': 'Jammu & Kashmir',
+    'KA': 'Karnataka',
+    'KE': 'Kerala',
+    'KO': 'Kolkata',
+    'MP': 'Madhya Pradesh',
+    'MA': 'Maharashtra',
+    'MU': 'Mumbai',
+    'NE': 'Northeast',
+    'OR': 'Odisha',
+    'PU': 'Punjab',
+    'RA': 'Rajasthan',
+    'TN': 'Tamil Nadu',
+    'UPE': 'Uttar Pradesh (East)',
+    'UPW': 'Uttar Pradesh (West)',
+    'WB': 'West Bengal'
+}
+
+
 #define all functions here to be used in this program
 
 #preparing color scale for heatmap which chnages in steps (discrete)
@@ -98,7 +124,6 @@ def BWExpiring(sff,ef):
 #funtion to process pricing datframe for tooltip for dataframe 4
 
 def processdff(dff):
-    dff = pd.read_excel('2022_05_13_Spectrum_All_PK_JS_SUC_Updated.xlsx', sheet_name="Spectrum_All")
     dff = dff.replace(0,np.nan).fillna(0)
     dff = dff.applymap(lambda x: round(x,2) if type(x)!=str else x)
     dff = dff[(dff["Band"]==Band) & (dff["Cat"]=="L") & (dff["OperatorOld"] != "Free") & (dff["Year"] >= 2010)]
@@ -265,6 +290,15 @@ auctionsucessyears = {700:[2022], #these are years where at least in one circle 
         3500:[2022], 
         26000:[2022]}
 
+errors= {700:0.25, 
+            800:1, 
+            900:1, 
+            1800:1, 
+            2100:1.5,
+            2300:1.25,
+            2500:1,
+            3500:0.1,
+            26000:0.5}
 
 
 st.set_page_config(layout="wide")
@@ -281,11 +315,15 @@ freqtabori = str(Band)+"MHzOriginal"
 pricetab = str(Band)+"MHzPrice"
 exptab = str(Band)+"MHzExpCorrected"
 expexceptab = str(Band)+"MHzExpException"
+spectrumall = "Spectrum_All"
+spectrumofferedvssold = "Spectrum_Offered_vs_Sold"
 
 #loading data from excel file
 xl = pd.ExcelFile('spectrum_map.xlsx')
 sheet = xl.sheet_names
 df = pd.read_excel('spectrum_map.xlsx', sheet_name=sheet)
+
+#processing colorcode excel data tab
 colcodes = df["ColorCodes"]
 colcodes=colcodes.set_index("Description")
 
@@ -307,9 +345,23 @@ sf = sf.set_index("LSA")
 of = of.set_index("LSA")
 pf = pf.set_index("LSA")
 
+eff = forexpyearheatmap(ef) # for expiry year heatmap
+
+bwf = BWExpiring(sff,ef) # for hover text for fig3
+
 # st.sidebar.title('Navigation')
 
-#processing pricing data 
+#processing "Spectrum_all" excel tab data
+
+dff = df[spectrumall] #contains information of LSA wise mapping oldoperators with new operators
+dff = processdff(dff)
+
+dff = coltostr(dff)
+
+dff = adddummycols(dff,auctionfailyears[Band])
+dff = dff.applymap(lambda x: "NA  " if x=="" else x) # space with NA is delibelitratly added as it gets removed with ","
+
+#processing pricemaster excel tab data
 
 pricemaster = df["Master_Price_Sheet"]
 
@@ -319,6 +371,64 @@ pricemaster = pricemaster[price["Band"] != 600]
 
 Bands = sorted(list(set(pricemaster["Band"])))
 
+
+#processing for spectrum offered vs sold & unsold
+
+offeredvssold = df[spectrumofferedvssold]
+offeredvssold = offeredvssold[(offeredvssold["Band"] == Band) & (offeredvssold["Year"] != 2018)]
+offeredvssold = offeredvssold.drop(columns =["Band"]).reset_index(drop=True)
+
+offeredspectrum = offeredvssold.pivot(index=["LSA"], columns='Year', values="Offered").fillna("NA")
+soldspectrum = offeredvssold.pivot(index=["LSA"], columns='Year', values="Sold").fillna("NA")
+unsoldspectrum = offeredvssold.pivot(index=["LSA"], columns='Year', values="Unsold").fillna("NA")
+
+#processing for auction price
+auctionprice = pricemaster.pivot(index=["LSA"], columns='Year', values="AuctionPrice").fillna("NA")
+auctionprice = auctionprice.loc[:, (auctionprice != 0).any(axis=0)]
+auctionprice = auctionprice.applymap(lambda x: round(x,2))
+
+
+auctionprice = coltostr(auctionprice) #convert columns data type to string
+auctionprice = adddummycols(auctionprice,auctionfailyears[Band])
+auctionprice = auctionprice.replace(0,"NA")
+
+#processing for reserve price
+reserveprice = pricemaster.pivot(index=["LSA"], columns='Year', values="ReservePrice").fillna("NA")
+reserveprice = reserveprice.loc[:, (reserveprice != 0).any(axis=0)]
+reserveprice = reserveprice.applymap(lambda x: round(x,2))
+
+reserveprice = coltostr(reserveprice) #convert columns data type to string
+reserveprice = reserveprice.replace(0,"NA")
+
+#processing for histocical information****************
+
+lst=[]
+for col in ef.columns:
+    for i, (efval,excepfval) in enumerate(zip(ef[col].values, excepf[col].values)):
+        for j, pf1val in enumerate(pf1.values):
+            if excepfval == 0:
+                error = abs(efval-pf1val[6]) #orignal
+                # error = efval-pf1val[6] #for testing
+            else:
+                error = 0
+           
+            if (ef.index[i] == pf1val[0]) and error <= errors[Band]:
+                # lst.append([ef.index[i],col-1,pf1val[1],pf1val[2], pf1val[3], pf1val[4], error]) 
+                lst.append([ef.index[i],col-xaxisadj[Band],pf1val[1],pf1val[2], pf1val[3], pf1val[4], error]) 
+        
+df_final = pd.DataFrame(lst)
+
+df_final.columns = ["LSA", "StartFreq", "TP", "RP", "AP", "Year", "Error"]
+
+df_final["Year"] = df_final["Year"].astype(int)
+
+tp = df_final.pivot_table(index=["LSA"], columns='StartFreq', values="TP", aggfunc='first').fillna("NA")
+rp = df_final.pivot_table(index=["LSA"], columns='StartFreq', values="RP", aggfunc='first').fillna("NA")
+ap = df_final.pivot_table(index=["LSA"], columns='StartFreq', values="AP", aggfunc='first').fillna("NA")
+ayear = df_final.pivot_table(index=["LSA"], columns='StartFreq', values="Year", aggfunc='first').fillna("NA")
+
+
+#processing historical information ends************************
 
 
 #processing for hovertext for freq map
@@ -403,8 +513,8 @@ if Feature == "Map":
 	      x = sf.columns,
 	      xgap = xgap[Band],
 	      ygap = 1,
-#               hoverinfo ='text',
-#               text = hovertext1,
+              hoverinfo ='text',
+              text = hovertext1,
 	      colorscale=hovercolscale(operators_mapping, colcodes),
 	      colorbar=dict(
 	      tickvals = list(operators_mapping.values()),
