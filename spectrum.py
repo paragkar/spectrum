@@ -82,70 +82,66 @@ price = price[price["Band"] != 600]
 
 Bands = sorted(list(set(price["Band"])))
 
+Band = st.sidebar.selectbox('Select a Band', options = Bands)
+
 Feature = st.sidebar.selectbox('Select a Feature', options = ["Price","Map"])
 
-placeholder = st.empty()
 
-with placeholder.container():
+if Feature == "Map":
+	freqtab = str(Band)+"MHz"
+	sf = df[freqtab]
+	sf = sf.set_index("LSA")
+	operators =operators[Band]
+	sf[sf.columns] = sf[sf.columns].replace(operators)
+	colorscalestep = stepcolscale(operators, colcodes)
+	tickangle = -90
 
-	if Feature == "Map":
-		Band = st.sidebar.selectbox('Select a Band', options = Bands)
-		freqtab = str(Band)+"MHz"
-		sf = df[freqtab]
-		sf = sf.set_index("LSA")
-		operator_mapping =operators[Band]
-		st.write(operator_mapping)
-		sf[sf.columns] = sf[sf.columns].replace(operator_mapping)
-		colorscalestep = stepcolscale(operator_mapping, colcodes)
-		tickangle = -90
+	data1 = [go.Heatmap(
+	      z = sf.values,
+	      y = sf.index,
+	      x = sf.columns,
+	      xgap = xgap[Band],
+	      ygap = 1,
+#               hoverinfo ='text',
+#               text = hovertext1,
+	      colorscale=colorscalestep,
+	      colorbar=dict(
+	      tickvals = list(operators.values()),
+	      # tickvals = tickval,
+	      ticktext = list(operators.keys()),
+	      dtick=1,
+	      tickmode="array"),
+			    ),
+		]
 
-		data1 = [go.Heatmap(
-		      z = sf.values,
-		      y = sf.index,
-		      x = sf.columns,
-		      xgap = xgap[Band],
-		      ygap = 1,
-	#               hoverinfo ='text',
-	#               text = hovertext1,
-		      colorscale=colorscalestep,
-		      colorbar=dict(
-		      tickvals = list(operator_mapping.values()),
-		      # tickvals = tickval,
-		      ticktext = list(operator_mapping.keys()),
-		      dtick=1,
-		      tickmode="array"),
-				    ),
-			]
-
-		fig = go.Figure(data=data1)
+	fig = go.Figure(data=data1)
 
 
-	if Feature == "Price":
-		Band = st.sidebar.selectbox('Select a Band', options = Bands)
-		price = price[(price["Band"]==Band) & (price["Year"] != 2018)]
-		price["Year"] = sorted([str(x) for x in price["Year"].values])
-		Type = st.sidebar.selectbox('Select Price Type', options = ["FP","DP"])
-		tickangle=0
+if Feature == "Price":
+	price = price[(price["Band"]==Band) & (price["Year"] != 2018)]
+	price["Year"] = sorted([str(x) for x in price["Year"].values])
+	Type = st.sidebar.selectbox('Select Price Type', options = ["FP","DP"])
+	tickangle=0
 
-		data2 = [go.Heatmap(
-				z = round(price[Type],1),
-				y = price["LSA"],
-				x = price["Year"],
-				xgap = 1,
-				ygap = 1,
-				hoverinfo ='text',
-				# text = hovertext1,
-				colorscale='Hot',
-					texttemplate="%{z}", 
-					textfont={"size":8},
-					reversescale=True,
-					),
+	data2 = [go.Heatmap(
+			z = round(price[Type],1),
+			y = price["LSA"],
+			x = price["Year"],
+			xgap = 1,
+			ygap = 1,
+			hoverinfo ='text',
+			# text = hovertext1,
+			colorscale='Hot',
+				texttemplate="%{z}", 
+				textfont={"size":8},
+				reversescale=True,
+				),
 
-		       ]	
+	       ]	
 
 
-		fig = go.Figure(data=data2)
-	
+	fig = go.Figure(data=data2)
+
 	
 
 fig.update_layout(uniformtext_minsize=8, 
