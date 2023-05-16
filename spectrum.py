@@ -492,7 +492,7 @@ for yi, yy in enumerate(sf.index):
                             )
 
 
-colorscale = hovercolscale(operators, colcodes) # for hoverbox
+# colorscale = hovercolscale(operators, colcodes) # for hoverbox
 
 ############################ #processing for hovercolors for data1 & data2 starts
 
