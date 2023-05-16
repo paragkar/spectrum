@@ -63,7 +63,7 @@ Feature = st.sidebar.selectbox('Select a Feature', options = ["Map","Price"])
 
 if Feature == "Price":
 	Band = st.sidebar.selectbox('Select a Band', Bands)
-	price = price[(price["Band"]==Band) & (price["Year"] != 2018) & (price[Band] !=600)]
+	price = price[(price["Band"]==Band) & (price["Year"] != 2018)]
 	price["Year"] = sorted([str(x) for x in price["Year"].values])
 	Type = st.sidebar.selectbox('Select Price Type', options = ["FP","DP"])
 	tickangle=0
@@ -143,6 +143,6 @@ fig.update_layout(uniformtext_minsize=8,
 fig.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
 fig.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
 
-fig
+st.write(fig)
 
 
