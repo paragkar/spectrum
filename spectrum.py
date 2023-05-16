@@ -65,6 +65,21 @@ def stepcolscale(operators, colcodes):
     lst = lst[:-2]
     return lst
 
+#preparing color scale for hoverbox
+def hovercolscale(operators, colcodes):
+    scale = [round(x/(len(operators)-1),2) for x in range(len(operators))]
+    colors =[]
+    for k, v  in operators.items():
+        colors.append(colcodes.loc[k,:].values[0])
+
+    colorscale=[]
+    for i in range(len(scale)):
+        colorscale.append([scale[i],colors[i]])
+    return colorscale
+
+colorscale = hovercolscale(operators, colcodes) # for hoverbox
+
+
 
 xl = pd.ExcelFile('spectrum_map.xlsx')
 sheet = xl.sheet_names
@@ -109,7 +124,7 @@ if Feature == "Map":
 	      ygap = 1,
 #               hoverinfo ='text',
 #               text = hovertext1,
-	      colorscale=stepcolscale(operators_mapping, colcodes),
+	      colorscale=colorscale,
 	      colorbar=dict(
 	      tickvals = list(operators_mapping.values()),
 	      # tickvals = tickval,
