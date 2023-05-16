@@ -64,8 +64,8 @@ def hovercolscale(operators, colcodes):
    scale = [round(x/(len(operator_names)-1),2) for x in range(len(operator_names))]
    colorscale =[]
    for i, op in enumerate(operator_names):
-	if op in colcodes.index:
-		colorscale.append([scale[i],colcodes.loc[op,:][0]])
+     if op in colcodes.index:
+       colorscale.append([scale[i],colcodes.loc[op,:][0]])
    return colorscale
 
 
