@@ -367,9 +367,9 @@ pricemaster = df["Master_Price_Sheet"]
 
 pricemaster.rename(columns = {"FP" : "Auction Price", "DP": "Reserve Price"}, inplace = True)
 
-pricemaster = pricemaster[price["Band"] != 600]
+# pricemaster = pricemaster[price["Band"] != 600]
 
-Bands = sorted(list(set(pricemaster["Band"])))
+# Bands = sorted(list(set(pricemaster["Band"])))
 
 
 #processing for spectrum offered vs sold & unsold
