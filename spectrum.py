@@ -35,7 +35,7 @@ xgap = {700:1,
         26000:1}
 
 
-layout = [uniformtext_minsize=8, 
+Layout = [uniformtext_minsize=8, 
                   uniformtext_mode='hide', 
                   xaxis_title=None, 
                   yaxis_title=None, 
@@ -116,7 +116,7 @@ if Feature == "Price":
 				),
 
 	       ]
-	fig = go.Figure(data=data, layout =layout)
+	fig = go.Figure(data=data, Layout =Layout)
 	st.write(fig)
 
 if Feature == "Map":
