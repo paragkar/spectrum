@@ -82,7 +82,6 @@ price = price[price["Band"] != 600]
 
 Bands = sorted(list(set(price["Band"])))
 
-st.write(Bands)
 
 Feature = st.sidebar.selectbox('Select a Feature', options = ["Price","Map"])
 
@@ -94,6 +93,7 @@ if Feature == "Map":
 	sf = sf.set_index("LSA")
 	operators =operators[Band]
 	sf[sf.columns] = sf[sf.columns].replace(operators)
+	st.write(sf)
 	colorscalestep = stepcolscale(operators, colcodes)
 	tickangle = -90
 
