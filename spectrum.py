@@ -11,6 +11,18 @@ import streamlit as st
 
 st.set_page_config(layout="wide")
 
+
+title_map = {700:"FDD Uplink - 703-748 MHz; Viz - Parag Kar; Source - DOT",
+         800:"FDD Uplink : 824-844 MHz; Viz - Parag Kar; Source - DOT", 
+         900:"FDD Uplink : 890-915 MHz; Viz - Parag Kar; Source - DOT", 
+         1800:"FDD Uplink : 1710-1785 MHz; Viz - Parag Kar; Source - DOT", 
+         2100:"FDD Uplink : 1919-1979 MHz; Viz - Parag Kar; Source - DOT",
+         2300:"TDD Uplink/Downlink : 2300-2400 MHz; Viz - Parag Kar; Source - DOT",
+         2500:"TDD Uplink/Downlink : 2500-2690 MHz; Viz - Parag Kar; Source - DOT",
+         3500:"TDD Uplink/Downlink : 3300-3670 MHz; Viz - Parag Kar; Source - DOT",
+         26000:"TDD Uplink/Downlink : 24250-27500 MHz; Viz - Parag Kar; Source - DOT"}
+
+
 operators = {700: {'Vacant':0,'Railways':1,'Govt':2,'RJIO':3,'BSNL':4},
              800: {'Vacant':0,'RCOM':1,'Govt':2,'RJIO':3,'Bharti':4, 'MTS':5, 'BSNL':6},
              900:{'Vacant':0,'RCOM':1,'Govt':2,'Railways':3,'Bharti':4, 'AircelU':5, 
@@ -235,7 +247,7 @@ fig.update_layout(uniformtext_minsize=12,
 		  template='simple_white',
 		  paper_bgcolor=None,
 		  height=600, width=1200,
-		  title="<b>"+"Spectrum "+subtitle+" for "+str(Band)+" MHz Band"+"<b>",
+		  title="<b>"+"Spectrum "+subtitle+" for "+str(Band)+" MHz Band "+title_map[Band]+"<b>",
 		  margin=dict(t=80, b=50, l=50, r=50, pad=0),
 		  title_x=0.30, title_y=0.99,
 		  title_font=dict(size=22),
