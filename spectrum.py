@@ -237,7 +237,7 @@ fig.update_layout(uniformtext_minsize=12,
 		  height=600, width=1200,
 		  title="<b>"+"Spectrum "+subtitle+" for "+str(Band)+" MHz Band"+"<b>",
 		  margin=dict(t=80, b=50, l=50, r=50, pad=0),
-		  title_x=0.35, title_y=0.99,
+		  title_x=0.30, title_y=0.99,
 		  title_font=dict(size=22),
 		  xaxis = dict(
 		  side = 'top',
