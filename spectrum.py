@@ -63,7 +63,6 @@ def stepcolscale(operators, colcodes):
         lst.append((line[0],line[1])),
         lst.append((line[2],line[1])),
     lst = lst[:-2]
-    st.empty()
     return lst
 
 
@@ -93,6 +92,7 @@ if Feature == "Map":
 	sf = df[freqtab]
 	sf = sf.set_index("LSA")
 	operators_mapping =operators[Band]
+	st.write(operators_mapping)
 	sf[sf.columns] = sf[sf.columns].replace(operators_mapping)
 	colorscalestep = stepcolscale(operators_mapping, colcodes)
 	st.write(colcodes)
