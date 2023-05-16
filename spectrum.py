@@ -345,8 +345,8 @@ sf = sf.set_index("LSA")
 of = of.set_index("LSA")
 pf = pf.set_index("LSA")
 
-operators = operators[Band]
-sf[sf.columns] = sf[sf.columns].replace(operators) #replacing operators data with respective codes
+# operators = operators[Band]
+# sf[sf.columns] = sf[sf.columns].replace(operators) #replacing operators data with respective codes
 
 # eff = forexpyearheatmap(ef) # for expiry year heatmap
 
@@ -509,7 +509,19 @@ def hovercolor(colorscale, sf):
 Feature = st.sidebar.selectbox('Select a Feature', options = ["PriceMap","FreqMap", "ExpiryMap" ])
 
 if Feature == "FreqMap":
+	sf = sff.copy()
+	operators = operators[Band]
 	operator = st.sidebar.selectbox('Select An Operator', options = ["All"]+sorted(list(operators.keys())))
+	if operator == "All":	
+		sf[sf.columns] = sf[sf.columns].replace(operators) #replacing operators data with respective codes
+	if operator != "All":
+		for op in operators.keys():
+		    if op ==operator:
+			sf.replace(op, operators[op], inplace = True)
+		    else:
+			sf.replace(op,0, inplace = True)
+		
+		
 # 	hovertext1 = hovertext1(sf,ChannelSize,xaxisadj)
 	subtitle ="Frequency Map"
 	tickangle = -90
