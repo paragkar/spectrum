@@ -527,7 +527,7 @@ if Feature == "FreqMap":
 	      xgap = xgap[Band],
 	      ygap = 1,
               hoverinfo ='text',
-              text = hovertext1,
+#               text = hovertext1,
 	      colorscale=colorscale,
 	      colorbar=dict(
 	      tickvals = list(operators.values()),
@@ -577,7 +577,7 @@ if Feature == "ExpiryMap":
               xgap = xgap[Band],
               ygap = 1,
               hoverinfo ='text',
-              text = hovertext1,
+#               text = hovertext1,
               colorscale ='Hot',
               reversescale=True,
                 )
