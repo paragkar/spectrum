@@ -436,63 +436,65 @@ ayear = df_final.pivot_table(index=["LSA"], columns='StartFreq', values="Year", 
 
 #processing for hovertext for freq map
 
-hovertext1 = []
-for yi, yy in enumerate(sf.index):
-    hovertext1.append([])
-    for xi, xx in enumerate(sf.columns):
-        if ExpTab[Band]==1:
-            expiry = round(ef.values[yi][xi],2)
-        else:
-            expiry = "NA"
-            
-        
-        try:
-            auction_year = round(ayear.loc[yy,round(xx-xaxisadj[Band],3)])
-        except:
-            auction_year ="NA"
-            
-        try:
-            auction_price = round(ap.loc[yy,round(xx-xaxisadj[Band],3)],2)
-        except:
-            auction_price ="NA"
-            
-        try:
-            reserve_price = round(rp.loc[yy,round(xx-xaxisadj[Band],3)],2)
-        except:
-            reserve_price ="NA"
-            
-        if round(pf.values[yi][0],1)!=0:
-            latest_rp = round(pf.values[yi][0],2)
-        else:
-            latest_rp ="NA"
-            
-        operator = [k for k, v in operators.items() if v == sf.values[yi][xi]]
-        operatorold = of.values[yi][xi]
-        bandwidth = [list(val).count(operators.get(operator[0]))*ChannelSize[Band] for val in sf.values]
-        hovertext1[-1].append(
-                            'Start/End Freq : {}/{} MHz (Ch)\
-                            <br />SP New/Old: {} / {} ({})\
-                            <br />BW/Expiry: {} MHz / {} Years\
-                            <br />RP/AP - Rs {} / {} Cr/MHz ({})\
-                            <br />Latest RP - Rs {} Cr/MHz'
-            
-                     .format(
-                            round(xx-xaxisadj[Band],2), 
-                            round(xx+ChannelSize[Band]-xaxisadj[Band],2),
-                            operator[0],
-                            operatorold,
-                            state_dict.get(yy), 
-                            round(bandwidth[yi],1),
-                            expiry,
-                            reserve_price,
-                            auction_price,
-                            auction_year,
-                            latest_rp,
-                            )
-                            )
+def hovertext1(sf,ExpTab,ef,ayear,ap,rp,pf,ChannelSize,xaxisadj)   
+	hovertext = []
+	for yi, yy in enumerate(sf.index):
+	    hovertext.append([])
+	    for xi, xx in enumerate(sf.columns):
+		if ExpTab[Band]==1:
+		    expiry = round(ef.values[yi][xi],2)
+		else:
+		    expiry = "NA"
 
 
-# colorscale = hovercolscale(operators, colcodes) # for hoverbox
+		try:
+		    auction_year = round(ayear.loc[yy,round(xx-xaxisadj[Band],3)])
+		except:
+		    auction_year ="NA"
+
+		try:
+		    auction_price = round(ap.loc[yy,round(xx-xaxisadj[Band],3)],2)
+		except:
+		    auction_price ="NA"
+
+		try:
+		    reserve_price = round(rp.loc[yy,round(xx-xaxisadj[Band],3)],2)
+		except:
+		    reserve_price ="NA"
+
+		if round(pf.values[yi][0],1)!=0:
+		    latest_rp = round(pf.values[yi][0],2)
+		else:
+		    latest_rp ="NA"
+
+		operator = [k for k, v in operators.items() if v == sf.values[yi][xi]]
+		operatorold = of.values[yi][xi]
+		bandwidth = [list(val).count(operators.get(operator[0]))*ChannelSize[Band] for val in sf.values]
+		hovertext[-1].append(
+				    'Start/End Freq : {}/{} MHz (Ch)\
+				    <br />SP New/Old: {} / {} ({})\
+				    <br />BW/Expiry: {} MHz / {} Years\
+				    <br />RP/AP - Rs {} / {} Cr/MHz ({})\
+				    <br />Latest RP - Rs {} Cr/MHz'
+
+			     .format(
+				    round(xx-xaxisadj[Band],2), 
+				    round(xx+ChannelSize[Band]-xaxisadj[Band],2),
+				    operator[0],
+				    operatorold,
+				    state_dict.get(yy), 
+				    round(bandwidth[yi],1),
+				    expiry,
+				    reserve_price,
+				    auction_price,
+				    auction_year,
+				    latest_rp,
+				    )
+				    )
+	return hovertext
+
+
+colorscale = hovercolscale(operators, colcodes) # for hoverbox
 
 ############################ #processing for hovercolors for data1 & data2 starts
 
@@ -517,6 +519,7 @@ def hovercolor(colorscale, sf):
 Feature = st.sidebar.selectbox('Select a Feature', options = ["Price","Map"])
 
 if Feature == "Map":
+	hovertext1 = hovertext1(sf,ExpTab,ef,ayear,ap,rp,pf,ChannelSize,xaxisadj) 
 	subtitle ="Map"
 	tickangle = -90
 	
