@@ -541,7 +541,7 @@ if Feature == "FreqMap":
 	      ygap = 1,
 #               hoverinfo ='text',
 #               text = hovertext1,
-	      colorscale=colorscale,
+	      colorscale="Hot",
 	      colorbar=dict(
 	      tickvals = list(operators.values()),
 	      ticktext = list(operators.keys()),
