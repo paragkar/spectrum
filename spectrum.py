@@ -24,15 +24,28 @@ operators = {700: {'Vacant':0,'Railways':1,'Govt':2,'RJIO':3,'BSNL':4},
              26000: {'Vacant':0,'Bharti':1,'RJIO':2,'BSNL':3, 'MTNL':4,'VI':5,'Adani':6}
             }
 
-xgap = {700:1, 
-        800:1, 
-        900:0.5, 
-        1800:0, 
-        2100:1, 
-        2300:1, 
-        2500:1, 
-        3500:1, 
-        26000:1}
+#if "1" the expiry tab is present and if "0" then not present
+ExpTab = {700:1, 
+          800:1, 
+          900:1,
+          1800:1,
+          2100:1, 
+          2300:1, 
+          2500:1,
+          3500:1,
+          26000:1}
+
+ChannelSize = {700:2.5, 
+               800:0.625, 
+               900:0.2,
+               1800:0.2,
+               2100:2.5, 
+               2300:2.5, 
+               2500:5,
+               3500:5,
+               26000:25}
+
+# scale of the x axis plots
 
 dtick = {700:1, 
          800:0.25, 
@@ -43,6 +56,60 @@ dtick = {700:1,
          2500:2, 
          3500:5, 
          26000:50}
+
+# vertical line widths
+
+xgap = {700:1, 
+        800:1, 
+        900:0.5, 
+        1800:0, 
+        2100:1, 
+        2300:1, 
+        2500:1, 
+        3500:1, 
+        26000:1}
+
+# adjustment need for tool tip display data for channel frequency
+
+xaxisadj = {700:1, 
+            800:0.25, 
+            900:0, 
+            1800:0, 
+            2100:1,
+            2300:1,
+            2500:2,
+            3500:0,
+            26000:0}
+
+BandType = {700:"FDD", 
+            800:"FDD", 
+            900:"FDD", 
+            1800:"FDD", 
+            2100:"FDD",
+            2300:"TDD",
+            2500:"TDD",
+            3500:"TDD",
+            26000:"TDD"}
+
+auctionfailyears = {700:["2016","2021"], #when all auction prices are zero and there are no takers 
+        800:["2012"], 
+        900:["2013","2016"], 
+        1800:["2013"], 
+        2100:[], 
+        2300:["2022"], 
+        2500:["2021"], 
+        3500:[], 
+        26000:[]}
+
+auctionsucessyears = {700:[2022], #these are years where at least in one circle there was a winner
+        800:[2013, 2015, 2016, 2021, 2022], 
+        900:[2014, 2015, 2021, 2022], 
+        1800:[2012, 2014, 2015, 2016, 2021, 2022], 
+        2100:[2010, 2015, 2016, 2021, 2022], 
+        2300:[2010, 2016, 2021], 
+        2500:[2010, 2016, 2022], 
+        3500:[2022], 
+        26000:[2022]}
 
 
 #preparing color scale for heatmap which chnages in steps (discrete)
@@ -77,6 +144,8 @@ def hovercolscale(operators, colcodes):
         colorscale.append([scale[i],colors[i]])
     return colorscale
 
+
+#loading data 
 xl = pd.ExcelFile('spectrum_map.xlsx')
 sheet = xl.sheet_names
 df = pd.read_excel('spectrum_map.xlsx', sheet_name=sheet)
@@ -84,7 +153,7 @@ colcodes = df["ColorCodes"]
 colcodes=colcodes.set_index("Description")
 
 
-
+#processing data 
 # st.sidebar.title('Navigation')
 
 price = df["Master_Price_Sheet"]
@@ -93,7 +162,7 @@ price = price[price["Band"] != 600]
 
 Bands = sorted(list(set(price["Band"])))
 
-
+#menu for selecting features 
 Feature = st.sidebar.selectbox('Select a Feature', options = ["Price","Map"])
 
 
@@ -147,14 +216,12 @@ if Feature == "Price":
 				textfont={"size":10},
 				reversescale=True,
 				),
-
-	       ]	
-
-
+		]
 	fig = go.Figure(data=data2)
 
 	
 
+#updating figure layouts
 fig.update_layout(uniformtext_minsize=8, 
 		  uniformtext_mode='hide', 
 		  xaxis_title=None, 
