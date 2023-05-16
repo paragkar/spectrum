@@ -1,4 +1,4 @@
-
+#importing liberaries
 import plotly.express as px
 import plotly.graph_objects as go
 import numpy as np
@@ -6,10 +6,152 @@ from plotly.subplots import make_subplots
 import plotly
 import pandas as pd
 import plotly.figure_factory as ff
-
 import streamlit as st
 
-st.set_page_config(layout="wide")
+
+#define all functions here to be used in this program
+
+#preparing color scale for heatmap which chnages in steps (discrete)
+def stepcolscale(operators, colcodes):
+    scale = [round(x/(len(operators)),2) for x in range(len(operators)+1)]
+    colors =[]
+    for k, v  in operators.items():
+        colors.append(colcodes.loc[k,:].values[0])
+
+    col= pd.concat([pd.DataFrame(scale),pd.DataFrame(colors)], axis=1)
+
+    col.columns =["colscale", "colors"]
+    col["colscaleshift"] = col.iloc[:,0].shift(-1)
+    # col = col.fillna(1)
+    lst=[]
+
+    for line in col.values:
+        lst.append((line[0],line[1])),
+        lst.append((line[2],line[1])),
+    lst = lst[:-2]
+    return lst
+
+#preparing color scale for hoverbox
+def hovercolscale(operators, colcodes):
+    scale = [round(x/(len(operators)-1),2) for x in range(len(operators))]
+    colors =[]
+    for k, v  in operators.items():
+        colors.append(colcodes.loc[k,:].values[0])
+
+    colorscale=[]
+    for i in range(len(scale)):
+        colorscale.append([scale[i],colors[i]])
+    return colorscale
+
+
+#function for calculating expiry year heatmap
+
+def forexpyearheatmap(df1):
+
+    lst1 =[]
+
+    for i, line1 in enumerate(df1.values):
+        explst = list(set(line1))
+        l1 = [[df1.index[i],round(list(line1).count(x)*ChannelSize[Band],2), round(x,2)] for x in explst]
+        lst1.append(l1)
+
+    lst2 =[]
+    for i, val in enumerate(lst1):
+        for item in val:
+            lst2.append(item)
+
+    df = pd.DataFrame(lst2)
+
+    df.columns = ["LSA", "Spectrum", "ExpYrs"]
+
+    df = df.pivot_table(index='LSA', columns='ExpYrs', values=['Spectrum'], aggfunc='first')
+
+    df.columns = df.columns.droplevel(0)
+
+    df.columns = [str(x) for x in df.columns]
+
+
+    df = df.iloc[:,1:]
+    df = df.fillna(0)
+    
+    return df
+
+#function for calculating quantum of spectrum expiring mapped to LSA and Years
+
+def BWExpiring(sff,ef):
+
+    lst=[]
+
+    for j, index in enumerate(ef.index):
+
+        for i, col in enumerate(ef.columns):
+            l= [index, sff.iloc[j,i],ef.iloc[j,i]]
+            lst.append(l)
+    df = pd.DataFrame(lst)
+    df.columns = ["LSA","Operators", "ExpYear"]
+    df = df.groupby(["ExpYear"])[["LSA","Operators"]].value_counts()*ChannelSize[Band]
+    df = df.reset_index()
+    df.columns =["ExpYear","LSA", "Operators","BW"]
+    
+    return df
+
+#funtion to process pricing datframe for tooltip for dataframe 4
+
+def processdff(dff):
+    dff = pd.read_excel('2022_05_13_Spectrum_All_PK_JS_SUC_Updated.xlsx', sheet_name="Spectrum_All")
+    dff = dff.replace(0,np.nan).fillna(0)
+    dff = dff.applymap(lambda x: round(x,2) if type(x)!=str else x)
+    dff = dff[(dff["Band"]==Band) & (dff["Cat"]=="L") & (dff["OperatorOld"] != "Free") & (dff["Year"] >= 2010)]
+    dff = dff.drop(['OperatorNew', 'Band','Cat'], axis = 1)
+    for col in dff.columns[3:]:
+        dff[col]=dff[col].astype(float)
+    dff = dff.groupby(["OperatorOld", "Year"]).sum()
+    dff = dff.drop(['Batch No',], axis = 1) 
+    if BandType[Band]=="TDD": #doubling the TDD spectrum for aligning with normal convention 
+        dff = (dff*2).round(2)
+    dff = dff.replace(0,"")
+    dff= dff.reset_index().set_index("Year")
+    dff =dff.replace("Voda Idea","VI")
+    dff = dff.replace("Vodafone", "Voda")
+    dff = dff.astype(str)
+    lst =[]
+
+    for index, row in zip(dff.index,dff.values):
+        lst.append([index]+[row[0]+" "+x+" MHz, " for x in row[1:]])
+    temp = pd.DataFrame(lst)
+    col = dff.reset_index().columns
+    col = list(col)
+    col.pop(1)
+    temp.columns = col
+    temp = temp.replace('[a-zA-Z]+\s+MHz, ',"", regex = True)
+    dff = temp.groupby("Year").sum()
+    dff =dff.T
+    dff = dff.reset_index()
+    dff.columns = ["LSA"]+auctionsucessyears[Band]
+    dff = dff.set_index("LSA")
+    
+    return dff
+
+#convert columns of dataframe into string
+def coltostr(df):
+    
+    lst =[]
+    for col in df.columns:
+        lst.append(str(col))
+    df.columns=lst
+    
+    return df
+
+#add dummy columns for auction failed years
+
+def adddummycols(df,col):
+    df[col]="NA  " # space with NA is delibelitratly added.
+    cols = sorted(df.columns)
+    df =df[cols]
+    return df
+    
+
+#defining all dictionaries here with data linked to a specific band
 
 
 title_map = {700:"(FDD Uplink - 703-748 MHz)",
@@ -124,40 +266,23 @@ auctionsucessyears = {700:[2022], #these are years where at least in one circle 
         26000:[2022]}
 
 
-#preparing color scale for heatmap which chnages in steps (discrete)
-def stepcolscale(operators, colcodes):
-    scale = [round(x/(len(operators)),2) for x in range(len(operators)+1)]
-    colors =[]
-    for k, v  in operators.items():
-        colors.append(colcodes.loc[k,:].values[0])
 
-    col= pd.concat([pd.DataFrame(scale),pd.DataFrame(colors)], axis=1)
+st.set_page_config(layout="wide")
 
-    col.columns =["colscale", "colors"]
-    col["colscaleshift"] = col.iloc[:,0].shift(-1)
-    # col = col.fillna(1)
-    lst=[]
+#Selecting a Freq Band
 
-    for line in col.values:
-        lst.append((line[0],line[1])),
-        lst.append((line[2],line[1])),
-    lst = lst[:-2]
-    return lst
-
-#preparing color scale for hoverbox
-def hovercolscale(operators, colcodes):
-    scale = [round(x/(len(operators)-1),2) for x in range(len(operators))]
-    colors =[]
-    for k, v  in operators.items():
-        colors.append(colcodes.loc[k,:].values[0])
-
-    colorscale=[]
-    for i in range(len(scale)):
-        colorscale.append([scale[i],colors[i]])
-    return colorscale
+Band = st.sidebar.selectbox('Select a Band', options = Bands)
 
 
-#loading data 
+#setting up excel file tabs for reading data
+
+freqtab = str(Band)+"MHz"
+freqtabori = str(Band)+"MHzOriginal"
+pricetab = str(Band)+"MHzPrice"
+exptab = str(Band)+"MHzExpCorrected"
+expexceptab = str(Band)+"MHzExpException"
+
+#loading data from excel file
 xl = pd.ExcelFile('spectrum_map.xlsx')
 sheet = xl.sheet_names
 df = pd.read_excel('spectrum_map.xlsx', sheet_name=sheet)
@@ -165,31 +290,113 @@ colcodes = df["ColorCodes"]
 colcodes=colcodes.set_index("Description")
 
 
-#processing data 
+#processing excel tabs into various dataframes
+sf = df[freqtab]
+of = df[freqtabori]
+sff = sf.copy() #create a copy for further processing, not used now.
+sff = sff.set_index("LSA")
+pf =df[pricetab]
+pf1 = pf.copy()
+pf = pf[pf["Year"]==2022]
+if ExpTab[Band]==1:
+    ef = df[exptab]
+    ef = ef.set_index("LSA")
+    excepf = df[expexceptab]
+    excepf = excepf.set_index("LSA")   
+sf = sf.set_index("LSA")
+of = of.set_index("LSA")
+pf = pf.set_index("LSA")
+
 # st.sidebar.title('Navigation')
 
-price = df["Master_Price_Sheet"]
+#processing pricing data 
 
-price.rename(columns = {"FP" : "Auction Price", "DP": "Reserve Price"}, inplace = True)
+pricemaster = df["Master_Price_Sheet"]
 
-price = price[price["Band"] != 600]
+pricemaster.rename(columns = {"FP" : "Auction Price", "DP": "Reserve Price"}, inplace = True)
 
-Bands = sorted(list(set(price["Band"])))
+pricemaster = pricemaster[price["Band"] != 600]
 
+Bands = sorted(list(set(pricemaster["Band"])))
+
+
+
+#processing for hovertext for freq map
+
+hovertext1 = []
+for yi, yy in enumerate(sf.index):
+    hovertext1.append([])
+    for xi, xx in enumerate(sf.columns):
+        if ExpTab[Band]==1:
+            expiry = round(ef.values[yi][xi],2)
+        else:
+            expiry = "NA"
+            
+        
+        try:
+            auction_year = round(ayear.loc[yy,round(xx-xaxisadj[Band],3)])
+        except:
+            auction_year ="NA"
+            
+        try:
+            # if BandType[Band] == "TDD":
+            #     auction_price = round(ap.loc[yy,round(xx-xaxisadj[Band],3)]/2,2) #converting price to TDD equivalent
+            # else:
+            auction_price = round(ap.loc[yy,round(xx-xaxisadj[Band],3)],2)
+        except:
+            auction_price ="NA"
+            
+        try:
+            # if BandType[Band] == "TDD":
+            #     reserve_price = round(rp.loc[yy,round(xx-xaxisadj[Band],3)]/2,2) #converting price to TDD equivalent
+            # else:
+            reserve_price = round(rp.loc[yy,round(xx-xaxisadj[Band],3)],2)
+        except:
+            reserve_price ="NA"
+            
+        if round(pf.values[yi][0],1)!=0:
+            # if BandType[Band] == "TDD":
+            #     latest_rp = round(pf.values[yi][0]/2,2)
+            # else:
+            latest_rp = round(pf.values[yi][0],2)
+        else:
+            latest_rp ="NA"
+            
+        operator = [k for k, v in operators.items() if v == sf.values[yi][xi]]
+        operatorold = of.values[yi][xi]
+        bandwidth = [list(val).count(operators.get(operator[0]))*ChannelSize[Band] for val in sf.values]
+        hovertext1[-1].append(
+                            'Start/End Freq : {}/{} MHz (Ch)\
+                            <br />SP New/Old: {} / {} ({})\
+                            <br />BW/Expiry: {} MHz / {} Years\
+                            <br />RP/AP - Rs {} / {} Cr/MHz ({})\
+                            <br />Latest RP - Rs {} Cr/MHz'
+            
+                     .format(
+                            round(xx-xaxisadj[Band],2), 
+                            round(xx+ChannelSize[Band]-xaxisadj[Band],2),
+                            operator[0],
+                            operatorold,
+                            state_dict.get(yy), 
+                            round(bandwidth[yi],1),
+                            expiry,
+                            reserve_price,
+                            auction_price,
+                            auction_year,
+                            latest_rp,
+                            )
+                            )
+
+	
 #menu for selecting features 
 Feature = st.sidebar.selectbox('Select a Feature', options = ["Price","Map"])
 
-
 if Feature == "Map":
 	subtitle ="Map"
-	Band = st.sidebar.selectbox('Select a Band', options = Bands)
-	freqtab = str(Band)+"MHz"
-	sf = df[freqtab]
-	sf = sf.set_index("LSA")
 	operators_mapping =operators[Band]
 	sf[sf.columns] = sf[sf.columns].replace(operators_mapping)
 	tickangle = -90
-
+	
 	data1 = [go.Heatmap(
 	      z = sf.values,
 	      y = sf.index,
@@ -212,15 +419,14 @@ if Feature == "Map":
 
 
 if Feature == "Price":
-	Band = st.sidebar.selectbox('Select a Band', options = Bands)
-	price = price[(price["Band"]==Band) & (price["Year"] != 2018)]
-	price["Year"] = sorted([str(x) for x in price["Year"].values])
+	pricemaster = pricemaster[(pricemaster["Band"]==Band) & (pricemaster["Year"] != 2018)]
+	pricemaster["Year"] = sorted([str(x) for x in pricemaster["Year"].values])
 	Type = st.sidebar.selectbox('Select Price Type', options = ["Auction Price","Reserve Price"])
 	subtitle = Type
 	tickangle=0
 
 	data2 = [go.Heatmap(
-			z = round(price[Type],1),
+			z = round(pricemaster[Type],1),
 			y = price["LSA"],
 			x = price["Year"],
 			xgap = 1,
