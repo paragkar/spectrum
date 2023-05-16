@@ -432,7 +432,8 @@ ayear = df_final.pivot_table(index=["LSA"], columns='StartFreq', values="Year", 
 st.write(tp)
 st.write(rp)
 st.write(ap)
-st.wrtite(ayear)
+st.write(ayear)
+st.write(df_final)
 
 
 
