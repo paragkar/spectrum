@@ -494,8 +494,6 @@ for yi, yy in enumerate(sf.index):
 
 colorscale = hovercolscale(operators, colcodes) # for hoverbox
 
-st.write(colorscale)
-
 ############################ #processing for hovercolors for data1 & data2 starts
 
 def hovercolor(colorscale, data):
@@ -539,8 +537,8 @@ if Feature == "Map":
 		]
 
 	fig = go.Figure(data=data1)
-	hoverlabel_bgcolor = hovercolor(colorscale, data1)
-	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor, font=dict(size=10)))
+# 	hoverlabel_bgcolor = hovercolor(colorscale, data1)
+# 	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor, font=dict(size=10)))
 
 
 if Feature == "Price":
