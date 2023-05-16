@@ -496,10 +496,10 @@ colorscale = hovercolscale(operators, colcodes) # for hoverbox
 
 ############################ #processing for hovercolors for data1 & data2 starts
 
-def hovercolor(colorscale, data):
+def hovercolor(colorscale, sf):
 
 	hoverlabel_bgcolor = [[x[1] for x in colorscale if x[0] == round(value/(len(colorscale) - 1),2)] 
-			      for row in data[0].z for value in row]
+			      for row in sf.values for value in row]
 
 	lsthovercol =[]
 	for x in hoverlabel_bgcolor:
@@ -537,8 +537,7 @@ if Feature == "Map":
 		]
 
 	fig = go.Figure(data=data1)
-	hoverlabel_bgcolor = hovercolor(colorscale, data1)
-	fig.add_trace()
+	hoverlabel_bgcolor = hovercolor(colorscale, sf)
 	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=10)))
 
 
