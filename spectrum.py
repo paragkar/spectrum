@@ -9,7 +9,7 @@ import plotly.figure_factory as ff
 
 import streamlit as st
 
-# st.set_page_config(layout="wide")
+st.set_page_config(layout="wide")
 
 operators = {700: {'Vacant':0,'Railways':1,'Govt':2,'RJIO':3,'BSNL':4},
              800: {'Vacant':0,'RCOM':1,'Govt':2,'RJIO':3,'Bharti':4, 'MTS':5, 'BSNL':6},
