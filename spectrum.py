@@ -345,6 +345,9 @@ sf = sf.set_index("LSA")
 of = of.set_index("LSA")
 pf = pf.set_index("LSA")
 
+operators = operators[Band]
+sf[sf.columns] = sf[sf.columns].replace(operators) #replacing operators data with respective codes
+
 eff = forexpyearheatmap(ef) # for expiry year heatmap
 
 bwf = BWExpiring(sff,ef) # for hover text for fig3
@@ -470,7 +473,7 @@ for yi, yy in enumerate(sf.index):
             
         operator = [k for k, v in operators.items() if v == sf.values[yi][xi]]
         operatorold = of.values[yi][xi]
-#         bandwidth = [list(val).count(operators.get(operator[0]))*ChannelSize[Band] for val in sf.values]
+        bandwidth = [list(val).count(operators.get(operator[0]))*ChannelSize[Band] for val in sf.values]
         hovertext1[-1].append(
                             'Start/End Freq : {}/{} MHz (Ch)\
                             <br />SP New/Old: {} / {} ({})\
@@ -499,8 +502,6 @@ Feature = st.sidebar.selectbox('Select a Feature', options = ["Price","Map"])
 
 if Feature == "Map":
 	subtitle ="Map"
-	operators_mapping =operators[Band]
-	sf[sf.columns] = sf[sf.columns].replace(operators_mapping)
 	tickangle = -90
 	
 	data1 = [go.Heatmap(
@@ -511,11 +512,11 @@ if Feature == "Map":
 	      ygap = 1,
               hoverinfo ='text',
               text = hovertext1,
-	      colorscale=hovercolscale(operators_mapping, colcodes),
+	      colorscale=hovercolscale(operators, colcodes),
 	      colorbar=dict(
-	      tickvals = list(operators_mapping.values()),
+	      tickvals = list(operators.values()),
 	      # tickvals = tickval,
-	      ticktext = list(operators_mapping.keys()),
+	      ticktext = list(operators.keys()),
 	      dtick=1,
 	      tickmode="array"),
 			    ),
