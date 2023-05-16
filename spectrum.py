@@ -515,9 +515,9 @@ if Feature == "FreqMap":
 # 	sf = sff.copy()
 	operators = operators[Band]
 	colorscale = hovercolscale(operators, colcodes)
-# 	operator = st.sidebar.selectbox('Select An Operator', options = ["All"]+sorted(list(operators.keys())))
-# 	if operator == "All":
-# 	    sf[sf.columns] = sf[sf.columns].replace(operators) #replacing operators data with respective codes
+	operator = st.sidebar.selectbox('Select An Operator', options = ["All"]+sorted(list(operators.keys())))
+	if operator == "All":
+	    sf[sf.columns] = sf[sf.columns].replace(operators) #replacing operators data with respective codes
 # 	    colorscale = hovercolscale(operators, colcodes)
 # 	if operator != "All":
 # 		for op in operators.keys():
@@ -541,7 +541,7 @@ if Feature == "FreqMap":
 	      ygap = 1,
 #               hoverinfo ='text',
 #               text = hovertext1,
-	      colorscale="Hot",
+	      colorscale=colorscale,
 	      colorbar=dict(
 	      tickvals = list(operators.values()),
 	      ticktext = list(operators.keys()),
