@@ -570,7 +570,9 @@ if Feature == "FreqMap":
 # 	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=10, color='black')))
 							      
 if Feature == "ExpiryMap":
+	sf = sff.copy()
 	operators = operators[Band]
+	hf = sf[sf.columns].replace(operators) # dataframe for hovetemplete
 	selected_operators = st.sidebar.multiselect('Select Operators', options = sorted(list(operators.keys())))
 	if selected_operators==[]:
 		expf = ef
