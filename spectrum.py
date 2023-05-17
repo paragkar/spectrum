@@ -505,11 +505,11 @@ def hovercolor(colorscale, sf):
 	hoverlabel_bgcolor = [[x[1] for x in colorscale if x[0] == round(value/(len(colorscale) - 1),2)] 
 			      for row in sf.values for value in row]
 
-	lsthovercol =[]
-	for x in hoverlabel_bgcolor:
-	    lsthovercol.append(x[0])
+# 	lsthovercol =[]
+# 	for x in hoverlabel_bgcolor:
+# 	    lsthovercol.append(x[0])
 
-	hoverlabel_bgcolor=lsthovercol
+# 	hoverlabel_bgcolor=lsthovercol
 
 	hoverlabel_bgcolor = list(np.array(hoverlabel_bgcolor).reshape(22,int(len(hoverlabel_bgcolor)/22)))
 	
