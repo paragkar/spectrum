@@ -59,7 +59,7 @@ def stepcolscale(operators, colcodes):
     return lst
 
 #preparing color scale for hoverbox
-def hovercolscale(operators, colcodes):
+def colscalefreqmap(operators, colcodes):
 	operators = dict(sorted(operators.items(), key=lambda x:x[1]))
 	operator_names = list(operators.keys())
 	operator_codes = list(operators.values())
@@ -524,7 +524,7 @@ if Feature == "FreqMap":
 	selected_operators = st.sidebar.multiselect('Select Operators', options = sorted(list(operators.keys())))
 	if selected_operators==[]:
 		sf[sf.columns] = sf[sf.columns].replace(operators) 
-		colorscale = hovercolscale(operators, colcodes)
+		colorscale = colscalefreqmap(operators, colcodes)
 		tickvals = list(operators.values())
 		ticktext = list(operators.keys())
 	else:
@@ -535,7 +535,7 @@ if Feature == "FreqMap":
 		for i, op in enumerate(selected_operators):
 			sf.replace(op,i, inplace = True)
 			selected_op_dict.update({op : i})
-		colorscale = hovercolscale(selected_op_dict, colcodes)
+		colorscale = colscalefreqmap(selected_op_dict, colcodes)
 		tickvals = list(selected_op_dict.values())
 		ticktext = list(selected_op_dict.keys())	
 		
@@ -549,8 +549,8 @@ if Feature == "FreqMap":
 	      x = sf.columns,
 	      xgap = xgap[Band],
 	      ygap = 1,
-#               hoverinfo ='text',
-#               text = hovertext1,
+              hoverinfo ='text',
+              text = hovertext1,
 	      colorscale=colorscale,
 # 	      reversescale=True,
 	      colorbar=dict(
