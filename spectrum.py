@@ -553,7 +553,7 @@ if Feature == "FreqMap":
 			if op not in selected_op_list:
 				sf.replace(op, np.nan, inplace = True)
 # 		selected_op_dict = OrderedDict(reversed(list(selected_op_dict.items())))
-		st.write(pd.DataFrame(selected_op_dict))		
+		st.write(selected_op_dict)		
 		colorscale = hovercolscale(selected_op_dict, colcodes)
 		st.write(colorscale)
 		tickvals = list(selected_op_dict.values())
