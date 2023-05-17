@@ -525,6 +525,7 @@ if Feature == "FreqMap":
 	operators = operators[Band]
 	hf = sf[sf.columns].replace(operators) # dataframe for hovetemplete
 	hfcolorscale = colscalefreqmap(operators, colcodes) #colorscale for hoverbox
+	st.write(hfcolorscale)
 	selected_operators = st.sidebar.multiselect('Select Operators', options = sorted(list(operators.keys())))
 	if selected_operators==[]:
 		sf[sf.columns] = sf[sf.columns].replace(operators) 
