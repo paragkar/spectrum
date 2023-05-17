@@ -568,7 +568,7 @@ if Feature == "PriceMap":
 	pricemaster["Year"] = sorted([str(x) for x in pricemaster["Year"].values])
 	Type = st.sidebar.selectbox('Select Price Type', options = ["Auction Price","Reserve Price"])
 	subtitle = Type
-	tickangle=-90
+	tickangle=0
 
 	data2 = [go.Heatmap(
 			z = round(pricemaster[Type],1),
