@@ -574,7 +574,8 @@ if Feature == "FreqMap":
 
 	fig = go.Figure(data=data1)
 	hoverlabel_bgcolor = hovercolor(hfcolorscale, hf)
-	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=10, color='contrast')))
+	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=10, color='white')))
+	fig..hoverlabel.font.color = 'contrast'
 
 							      
 if Feature == "ExpiryMap":
