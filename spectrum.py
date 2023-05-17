@@ -305,7 +305,7 @@ exptab = str(Band)+"MHzExpCorrected"
 expexceptab = str(Band)+"MHzExpException"
 spectrumall = "Spectrum_All"
 spectrumofferedvssold = "Spectrum_Offered_vs_Sold"
-masterall = "MasterAll-TDDValueConventional"
+masterall = "MasterAll-TDDValueConventional" #all auction related information 
 
 #loading data from excel file
 # xl = pd.ExcelFile('spectrum_map.xlsx')
