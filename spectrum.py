@@ -521,6 +521,7 @@ Feature = st.sidebar.selectbox('Select a Feature', options = ["PriceMap","FreqMa
 if Feature == "FreqMap":
 	sf = sff.copy()
 	operators = operators[Band]
+	hf = sf[sf.columns].replace(operators) # dataframe for hovetemplete
 	selected_operators = st.sidebar.multiselect('Select Operators', options = sorted(list(operators.keys())))
 	if selected_operators==[]:
 		sf[sf.columns] = sf[sf.columns].replace(operators) 
@@ -539,7 +540,7 @@ if Feature == "FreqMap":
 		tickvals = list(selected_op_dict.values())
 		ticktext = list(selected_op_dict.keys())	
 		
-# 	hovertext1 = hovertext1(sf,ChannelSize,xaxisadj)
+	hovertext1 = hovertext1(hf,ChannelSize,xaxisadj)
 	subtitle ="Frequency Map"
 	tickangle = -90
 	
@@ -563,7 +564,7 @@ if Feature == "FreqMap":
 		]
 
 	fig = go.Figure(data=data1)
-# 	hoverlabel_bgcolor = hovercolor(colorscale, sf)
+	hoverlabel_bgcolor = hovercolor(colorscale, sf)
 # 	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=10, color='black')))
 
 
