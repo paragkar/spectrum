@@ -571,9 +571,7 @@ if Feature == "ExpiryMap":
 	operators = operators[Band]
 	selected_operators = st.sidebar.multiselect('Select Operators', options = sorted(list(operators.keys())))
 	if selected_operators==[]:
-		sf[sf.columns] = sf[sf.columns].replace(operators)
-		for op in operators.keys():
-			sf.replace(op,1,inplace = True)
+		expf = ef
 	else:
 		for op in operators.keys():
 			if op not in selected_operators:
@@ -581,16 +579,16 @@ if Feature == "ExpiryMap":
 			else:
 				sf.replace(op,1,inplace = True)
 				
-	ef = pd.DataFrame(sf.values*ef.values, columns=ef.columns, index=ef.index)
+	expf = pd.DataFrame(sf.values*ef.values, columns=ef.columns, index=ef.index)
 
 # 	hovertext1 = hovertext1(sf,ExpTab,ef,ayear,ap,rp,pf,ChannelSize,xaxisadj) 
 	subtitle ="Expiry Map"
 	tickangle = -90
 	
 	data2 = [go.Heatmap(
-              z = ef.values,
-              y = ef.index,
-              x = ef.columns,
+              z = expf.values,
+              y = expf.index,
+              x = expf.columns,
               xgap = xgap[Band],
               ygap = 1,
               hoverinfo ='text',
