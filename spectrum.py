@@ -516,7 +516,7 @@ def hovercolor(colorscale, sf):
 ########################### processing for hovercolors for data1 & data2 ends
 
 #menu for selecting features 
-Feature = st.sidebar.selectbox('Select a Feature', options = [""FreqMap", "ExpiryMap", "PriceMap"])
+Feature = st.sidebar.selectbox('Select a Feature', options = ["FreqMap", "ExpiryMap", "PriceMap"])
 
 if Feature == "FreqMap":
 	sf = sff.copy()
