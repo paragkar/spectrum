@@ -596,7 +596,7 @@ if Feature == "ExpiryMap":
               xgap = xgap[Band],
               ygap = 1,
               hoverinfo ='text',
-              text = hovertext1,
+              text = hovertext,
               colorscale ='Hot',
               reversescale=True,
                 )
