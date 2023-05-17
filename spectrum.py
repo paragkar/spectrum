@@ -579,7 +579,7 @@ if Feature == "ExpiryMap":
 			else:
 				sf.replace(op,1,inplace = True)
 				
-	expf = pd.DataFrame(sf.values*ef.values, columns=ef.columns, index=ef.index)
+		expf = pd.DataFrame(sf.values*ef.values, columns=ef.columns, index=ef.index)
 
 # 	hovertext1 = hovertext1(sf,ExpTab,ef,ayear,ap,rp,pf,ChannelSize,xaxisadj) 
 	subtitle ="Expiry Map"
