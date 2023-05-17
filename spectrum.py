@@ -524,6 +524,7 @@ if Feature == "FreqMap":
 	sf = sff.copy()
 	operators = operators[Band]
 	hf = sf[sf.columns].replace(operators) # dataframe for hovetemplete
+	hfcolorscale = colscalefreqmap(operators, colcodes) #colorscale for hoverbox
 	selected_operators = st.sidebar.multiselect('Select Operators', options = sorted(list(operators.keys())))
 	if selected_operators==[]:
 		sf[sf.columns] = sf[sf.columns].replace(operators) 
@@ -566,7 +567,7 @@ if Feature == "FreqMap":
 		]
 
 	fig = go.Figure(data=data1)
-	hoverlabel_bgcolor = hovercolor(colorscale, sf)
+	hoverlabel_bgcolor = hovercolor(hfcolorscale, hf)
 	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=10, color='black')))
 							      
 if Feature == "ExpiryMap":
