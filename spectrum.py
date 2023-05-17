@@ -60,6 +60,7 @@ def stepcolscale(operators, colcodes):
 
 #preparing color scale for hoverbox
 def hovercolscale(operators, colcodes):
+	operators = dict(sorted(operators.items(), key=lambda x:x[1]))
 	operator_names = list(operators.keys())
 	operator_codes = list(operators.values())
 	scale = [round(x/(len(operators)),2) for x in range(len(operator_names)+1)]
