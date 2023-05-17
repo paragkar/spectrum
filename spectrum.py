@@ -521,7 +521,7 @@ if Feature == "FreqMap":
 	operators = operators[Band]
 	selected_operators = st.sidebar.multiselect('Select Operators', options = sorted(list(operators.keys())))
 	if selected_operators==[]:
-		selected_operators=operators
+		selected_operators=list(operators.keys())
 # 	if operator == "All":
 # 		sf[sf.columns] = sf[sf.columns].replace(operators) #replacing operators data with respective codes
 # 		colorscale = hovercolscale(operators, colcodes)
@@ -566,8 +566,8 @@ if Feature == "FreqMap":
 	      colorbar=dict(
 # 	      tickcolor ="black",
 # 	      tickwidth =1,
-	      tickvals = list(selected_operators.values()),
-	      ticktext = list(selected_operators.keys()),
+	      tickvals = list(selected_op_dict.values()),
+	      ticktext = list(selected_op_dict.keys()),
 	      dtick=1, tickmode="array"),
 			    ),
 		]
