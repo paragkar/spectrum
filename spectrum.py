@@ -568,7 +568,7 @@ if Feature == "FreqMap":
 # 	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=10, color='black')))
 							      
 if Feature == "ExpiryMap":
-  	operators = operators[Band]
+	operators = operators[Band]
 	operator = st.sidebar.selectbox('Select An Operator', options = sorted(list(operators.keys())))
 # 	hovertext1 = hovertext1(sf,ExpTab,ef,ayear,ap,rp,pf,ChannelSize,xaxisadj) 
 	subtitle ="Expiry Map"
