@@ -569,7 +569,7 @@ if Feature == "FreqMap":
 							      
 if Feature == "ExpiryMap":
 	operators = operators[Band]
-	selected_operators = st.sidebar.selectbox('Select An Operator', options = sorted(list(operators.keys())))
+	selected_operators = st.sidebar.multiselect('Select Operators', options = sorted(list(operators.keys())))
 	if selected_operators==[]:
 		sf[sf.columns] = sf[sf.columns].replace(operators)
 		for op in operators.keys():
