@@ -500,16 +500,22 @@ def hovertext(sf,ExpTab,ChannelSize,xaxisadj):
 
 ############################ #processing for hovercolors for data1 & data2 starts
 
+#preparing color scale for hoverbox
+def hovercolscale(operators, colcodes):
+    scale = [round(x/(len(operators)-1),2) for x in range(len(operators))]
+    colors =[]
+    for k, v  in operators.items():
+        colors.append(colcodes.loc[k,:].values[0])
+
+    colorscale=[]
+    for i in range(len(scale)):
+        colorscale.append([scale[i],colors[i]])
+    return colorscale
+
 def hovercolor(colorscale, sf):
 
 	hoverlabel_bgcolor = [[x[1] for x in colorscale if x[0] == round(value/(len(colorscale) - 1),2)] 
 			      for row in sf.values for value in row]
-
-	lsthovercol =[]
-	for x in hoverlabel_bgcolor:
-	    lsthovercol.append(x[0])
-
-	hoverlabel_bgcolor=lsthovercol
 
 	hoverlabel_bgcolor = list(np.array(hoverlabel_bgcolor).reshape(22,int(len(hoverlabel_bgcolor)/22)))
 	
@@ -523,9 +529,8 @@ Feature = st.sidebar.selectbox('Select a Feature', options = ["FreqMap", "Expiry
 if Feature == "FreqMap":
 	sf = sff.copy()
 	operators = operators[Band]
-	hf = sf[sf.columns].replace(operators) # dataframe for hovetemplete
-	hfcolorscale = colscalefreqmap(operators, colcodes) #colorscale for hoverbox
-	st.write(hfcolorscale)
+	hf = sf[sf.columns].replace(operators) # dataframe for hoverbox color
+	hfcolorscale=hovercolscale(operators, colcodes)  #colorscale for hoverbox
 	selected_operators = st.sidebar.multiselect('Select Operators', options = sorted(list(operators.keys())))
 	if selected_operators==[]:
 		sf[sf.columns] = sf[sf.columns].replace(operators) 
