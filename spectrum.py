@@ -574,13 +574,14 @@ if Feature == "FreqMap":
 
 	fig = go.Figure(data=data1)
 	hoverlabel_bgcolor = hovercolor(hfcolorscale, hf)
-# 	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=10, color='white')))
-	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12)))
+	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=10, color='white')))
+
 							      
 if Feature == "ExpiryMap":
 	sf = sff.copy()
 	operators = operators[Band]
-	hf = sf[sf.columns].replace(operators) # dataframe for hovetemplete
+	hf = sf[sf.columns].replace(operators) # dataframe for hoverbox color
+	hfcolorscale=hovercolscale(operators, colcodes)  #colorscale for hoverbox
 	selected_operators = st.sidebar.multiselect('Select Operators', options = sorted(list(operators.keys())))
 	if selected_operators==[]:
 		expf = ef
@@ -610,6 +611,8 @@ if Feature == "ExpiryMap":
                 )
        		  ]
 	fig = go.Figure(data=data2)
+	hoverlabel_bgcolor = hovercolor(hfcolorscale, hf)
+	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=10, color='white')))
 
 
 if Feature == "PriceMap":
