@@ -621,7 +621,7 @@ fig.update_layout(uniformtext_minsize=12,
 		  title_x=0.18, title_y=0.99,
 		  title_font=dict(size=22),
 		  yaxis=dict(
-        	  tickmode='array')
+        	  tickmode='array'),
 # #         	  tickvals=y_tickvals,
 # # 		  ticktext=states,
 # # 		  tickangle=0,
