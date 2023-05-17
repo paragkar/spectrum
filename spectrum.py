@@ -528,43 +528,16 @@ if Feature == "FreqMap":
 		tickvals = list(operators.values())
 		ticktext = list(operators.keys())
 	else:
-		
-# 	if operator == "All":
-# 		sf[sf.columns] = sf[sf.columns].replace(operators) #replacing operators data with respective codes
-# 		colorscale = hovercolscale(operators, colcodes)
-# 	if operator != "All":
-# 		for op in operators.keys():
-# 			if op == operator:
-# 				sf.replace(op, operators[op], inplace = True)
-# 				operators = {operator:operators[operator]}
-# 				if op == 'Vacant':
-# 					colorscale =[[0, '#fbbcec'], [1, '#fbbcec']]
-# 				else:
-# 					colorscale = hovercolscale(operators, colcodes)
-# 			else:
-# 				sf.replace(op,np.nan, inplace = True)
 		selected_op_dict ={}
-# 		selected_op_list =[]
 		for op in operators.keys():
 			if op not in selected_operators:
 				sf.replace(op, np.nan, inplace = True)
 		for i, op in enumerate(selected_operators):
 			sf.replace(op,i, inplace = True)
 			selected_op_dict.update({op : i})
-# 			selected_op_dict[op] = operators[op]
-# 			selected_op_list.append(op)
-# 		for op in operators.keys():
-# 			if op not in selected_op_list:
-# 				sf.replace(op, np.nan, inplace = True)
-# 		selected_op_dict = OrderedDict(reversed(list(selected_op_dict.items())))
-		st.write(selected_op_dict)		
 		colorscale = hovercolscale(selected_op_dict, colcodes)
-		st.write(pd.DataFrame(colorscale))
 		tickvals = list(selected_op_dict.values())
-		ticktext = list(selected_op_dict.keys())
-	
-
-		
+		ticktext = list(selected_op_dict.keys())	
 		
 # 	hovertext1 = hovertext1(sf,ChannelSize,xaxisadj)
 	subtitle ="Frequency Map"
