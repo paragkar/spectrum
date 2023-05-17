@@ -566,8 +566,8 @@ if Feature == "FreqMap":
 		]
 
 	fig = go.Figure(data=data1)
-# 	hoverlabel_bgcolor = hovercolor(colorscale, sf)
-	fig.update_traces(hoverlabel=dict(bgcolor=colorscale,font=dict(size=10, color='black')))
+	hoverlabel_bgcolor = hovercolor(colorscale, sf)
+	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=10, color='black')))
 							      
 if Feature == "ExpiryMap":
 	sf = sff.copy()
