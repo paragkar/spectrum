@@ -522,6 +522,7 @@ if Feature == "FreqMap":
 	selected_operators = st.sidebar.multiselect('Select Operators', options = sorted(list(operators.keys())))
 	if selected_operators==[]:
 		selected_operators=list(operators.keys())
+		colorscale = hovercolscale(selected_op_dict, colcodes)
 	else:
 		
 # 	if operator == "All":
@@ -548,7 +549,7 @@ if Feature == "FreqMap":
 			if op not in selected_op_list:
 				sf.replace(op, np.nan, inplace = True)
 				
-	colorscale = hovercolscale(selected_op_dict, colcodes)
+		colorscale = hovercolscale(selected_op_dict, colcodes)
 	
 
 		
