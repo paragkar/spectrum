@@ -550,8 +550,8 @@ if Feature == "FreqMap":
 #               text = hovertext1,
 	      colorscale=colorscale,
 	      colorbar=dict(
-	      tickcolor ="black",
-	      tickwidth =1,
+# 	      tickcolor ="black",
+# 	      tickwidth =1,
 	      tickvals = list(operators.values()),
 	      ticktext = list(operators.keys()),
 	      dtick=1, tickmode="array"),
