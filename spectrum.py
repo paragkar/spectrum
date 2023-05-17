@@ -308,7 +308,7 @@ spectrumofferedvssold = "Spectrum_Offered_vs_Sold"
 
 #loading data from excel file
 # xl = pd.ExcelFile('spectrum_map.xlsx')
-xl = pd.ExcelFile('file')
+xl = pd.ExcelFile(file)
 sheet = xl.sheet_names
 # df = pd.read_excel('spectrum_map.xlsx', sheet_name=sheet)
 df = pd.read_excel(file, sheet_name=sheet)
