@@ -527,11 +527,10 @@ if Feature == "FreqMap":
 	   for op in operators.keys():
 	      if op == operator:
 	        sf.replace(op, operators[op], inplace = True)
+		operators = {operator:operators[operator]}
+		colorscale = hovercolscale(operators, colcodes)
 	      else:
-	        sf.replace(op,np.nan, inplace = True)
-	operators = {operator:operators[operator]}
-	colorscale = hovercolscale(operators, colcodes)
-		
+	        sf.replace(op,np.nan, inplace = True)		
 		
 		
 # 	hovertext1 = hovertext1(sf,ChannelSize,xaxisadj)
