@@ -517,7 +517,7 @@ def hovercolor(colorscale, sf):
 Feature = st.sidebar.selectbox('Select a Feature', options = ["PriceMap","FreqMap", "ExpiryMap" ])
 
 if Feature == "FreqMap":
-# 	sf = sff.copy()
+	sf = sff.copy()
 	operators = operators[Band]
 	operator = st.sidebar.selectbox('Select An Operator', options = ["All"]+sorted(list(operators.keys())))
 	if operator == "All":
