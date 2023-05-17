@@ -305,6 +305,7 @@ exptab = str(Band)+"MHzExpCorrected"
 expexceptab = str(Band)+"MHzExpException"
 spectrumall = "Spectrum_All"
 spectrumofferedvssold = "Spectrum_Offered_vs_Sold"
+masterall = "MasterAll-TDDValueConventional"
 
 #loading data from excel file
 # xl = pd.ExcelFile('spectrum_map.xlsx')
@@ -334,6 +335,8 @@ if ExpTab[Band]==1:
 sf = sf.set_index("LSA")
 of = of.set_index("LSA")
 pf = pf.set_index("LSA")
+
+masterdf = df[masterall]
 
 # operators = operators[Band]
 # sf[sf.columns] = sf[sf.columns].replace(operators) #replacing operators data with respective codes
