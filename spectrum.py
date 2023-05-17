@@ -519,21 +519,33 @@ Feature = st.sidebar.selectbox('Select a Feature', options = ["PriceMap","FreqMa
 if Feature == "FreqMap":
 	sf = sff.copy()
 	operators = operators[Band]
-	operator = st.sidebar.multiselect('Select Operators', options = ["All"]+sorted(list(operators.keys())))
-	if operator == "All":
-		sf[sf.columns] = sf[sf.columns].replace(operators) #replacing operators data with respective codes
-		colorscale = hovercolscale(operators, colcodes)
-	if operator != "All":
-		for op in operators.keys():
-			if op == operator:
-				sf.replace(op, operators[op], inplace = True)
-				operators = {operator:operators[operator]}
-				if op == 'Vacant':
-					colorscale =[[0, '#fbbcec'], [1, '#fbbcec']]
-				else:
-					colorscale = hovercolscale(operators, colcodes)
-			else:
-				sf.replace(op,np.nan, inplace = True)		
+	selected_operators = st.sidebar.multiselect('Select Operators', options = sorted(list(operators.keys())))
+# 	if operator == "All":
+# 		sf[sf.columns] = sf[sf.columns].replace(operators) #replacing operators data with respective codes
+# 		colorscale = hovercolscale(operators, colcodes)
+# 	if operator != "All":
+# 		for op in operators.keys():
+# 			if op == operator:
+# 				sf.replace(op, operators[op], inplace = True)
+# 				operators = {operator:operators[operator]}
+# 				if op == 'Vacant':
+# 					colorscale =[[0, '#fbbcec'], [1, '#fbbcec']]
+# 				else:
+# 					colorscale = hovercolscale(operators, colcodes)
+# 			else:
+# 				sf.replace(op,np.nan, inplace = True)
+	selected_op_dict ={}
+	selected_op_list =[]
+	for op in selected_operators:
+		sf.replace(op, operators[op], inplace = True)
+		selected_op_dict[op] = operators[op]
+		selected_op_list.append(op)
+	for op in operators.key():
+		if op not in selected_op_list:
+			sf.replace(op, np.nan, inplace = True)
+	colorscale = hovercolscale(selected_op_dict, colcodes)
+	
+
 		
 		
 # 	hovertext1 = hovertext1(sf,ChannelSize,xaxisadj)
