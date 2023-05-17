@@ -296,6 +296,7 @@ Band = st.sidebar.selectbox('Select a Band', options = list(ExpTab.keys()))
 
 file = "https://paragkar.com/wp-content/uploads/2023/05/spectrum_map.xlsx"
 
+
 #setting up excel file tabs for reading data
 
 freqtab = str(Band)+"MHz"
