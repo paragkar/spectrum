@@ -59,25 +59,25 @@ def stepcolscale(operators, colcodes):
 
 #preparing color scale for hoverbox
 def hovercolscale(operators, colcodes):
-   operator_names = list(operators.keys())
-   operator_codes = list(operators.values())
-   scale = [round(x/(len(operators)),2) for x in range(len(operator_names)+1)]
-   colorscale =[]
-   for i, op in enumerate(operator_names):
-      if op in colcodes.index:
-	colorscale.append([scale[i],colcodes.loc[op,:][0]])
-   colorscale.append([1, np.nan])
-   col= pd.DataFrame(colorscale)
+	operator_names = list(operators.keys())
+	operator_codes = list(operators.values())
+	scale = [round(x/(len(operators)),2) for x in range(len(operator_names)+1)]
+	colorscale =[]
+	for i, op in enumerate(operator_names):
+		if op in colcodes.index:
+			colorscale.append([scale[i],colcodes.loc[op,:][0]])
+		colorscale.append([1, np.nan])
+	   	col= pd.DataFrame(colorscale)
 
-   col.columns =["colscale", "colors"]
-   col["colscaleshift"] = col.iloc[:,0].shift(-1)
-   col = col.iloc[:-1,:]
-   lst=[]
+		col.columns =["colscale", "colors"]
+		col["colscaleshift"] = col.iloc[:,0].shift(-1)
+		col = col.iloc[:-1,:]
+	lst=[]
 
-   for line in col.values:
-   	lst.append((line[0],line[1]))
-    	lst.append((line[2],line[1]))
-Return lst
+	for line in col.values:
+		lst.append((line[0],line[1]))
+		lst.append((line[2],line[1]))
+	Return lst
 
 #function for calculating expiry year heatmap
 
