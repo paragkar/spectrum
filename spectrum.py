@@ -555,7 +555,7 @@ if Feature == "FreqMap":
 # 		selected_op_dict = OrderedDict(reversed(list(selected_op_dict.items())))
 		st.write(selected_op_dict)		
 		colorscale = hovercolscale(selected_op_dict, colcodes)
-		st.write(colorscale)
+		st.write(pd.DataFrame(colorscale))
 		tickvals = list(selected_op_dict.values())
 		ticktext = list(selected_op_dict.keys())
 	
