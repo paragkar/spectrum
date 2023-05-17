@@ -540,7 +540,7 @@ if Feature == "FreqMap":
 		sf.replace(op, operators[op], inplace = True)
 		selected_op_dict[op] = operators[op]
 		selected_op_list.append(op)
-	for op in operators.key():
+	for op in operators.keys():
 		if op not in selected_op_list:
 			sf.replace(op, np.nan, inplace = True)
 	colorscale = hovercolscale(selected_op_dict, colcodes)
