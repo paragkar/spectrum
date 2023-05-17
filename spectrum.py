@@ -551,7 +551,7 @@ if Feature == "FreqMap":
 	      colorscale=colorscale,
 	      colorbar=dict(
 	      tickcolor ="black",
-	      tickwidth =1,
+	      tickwidth =2,
 	      tickvals = list(operators.values()),
 	      ticktext = list(operators.keys()),
 	      dtick=1, tickmode="array"),
