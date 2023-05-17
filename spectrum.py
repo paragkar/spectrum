@@ -569,7 +569,20 @@ if Feature == "FreqMap":
 							      
 if Feature == "ExpiryMap":
 	operators = operators[Band]
-	operator = st.sidebar.selectbox('Select An Operator', options = sorted(list(operators.keys())))
+	selected_operators = st.sidebar.selectbox('Select An Operator', options = sorted(list(operators.keys())))
+	if selected_operators==[]:
+		sf[sf.columns] = sf[sf.columns].replace(operators)
+		for op in operators.keys():
+			sf.replace(op,1,inplace = True)
+	else:
+		for op in operators.keys():
+			if op not in selected_operators:
+				sf.replace(op,0, inplace = True)
+			else:
+				sf.replace(op,1,inplace = True)
+				
+	ef = pd.DataFrame(sf.values*ef.values, columns=ef.columns, index=ef.index)
+
 # 	hovertext1 = hovertext1(sf,ExpTab,ef,ayear,ap,rp,pf,ChannelSize,xaxisadj) 
 	subtitle ="Expiry Map"
 	tickangle = -90
