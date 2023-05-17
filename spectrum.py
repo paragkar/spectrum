@@ -516,7 +516,7 @@ def hovercolor(colorscale, sf):
 ########################### processing for hovercolors for data1 & data2 ends
 
 #menu for selecting features 
-Feature = st.sidebar.selectbox('Select a Feature', options = ["PriceMap","FreqMap", "ExpiryMap" ])
+Feature = st.sidebar.selectbox('Select a Feature', options = [""FreqMap", "ExpiryMap", "PriceMap"])
 
 if Feature == "FreqMap":
 	sf = sff.copy()
@@ -566,6 +566,27 @@ if Feature == "FreqMap":
 	fig = go.Figure(data=data1)
 # 	hoverlabel_bgcolor = hovercolor(colorscale, sf)
 # 	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=10, color='black')))
+							      
+if Feature == "ExpiryMap":
+  	operators = operators[Band]
+	operator = st.sidebar.selectbox('Select An Operator', options = sorted(list(operators.keys())))
+# 	hovertext1 = hovertext1(sf,ExpTab,ef,ayear,ap,rp,pf,ChannelSize,xaxisadj) 
+	subtitle ="Expiry Map"
+	tickangle = -90
+	
+	data2 = [go.Heatmap(
+              z = ef.values,
+              y = ef.index,
+              x = ef.columns,
+              xgap = xgap[Band],
+              ygap = 1,
+              hoverinfo ='text',
+#               text = hovertext1,
+              colorscale ='Hot',
+              reversescale=True,
+                )
+       		  ]
+	fig = go.Figure(data=data2)
 
 
 if Feature == "PriceMap":
@@ -575,7 +596,7 @@ if Feature == "PriceMap":
 	subtitle = Type
 	tickangle=0
 
-	data2 = [go.Heatmap(
+	data3 = [go.Heatmap(
 			z = round(pricemaster[Type],1),
 			y = pricemaster["LSA"],
 			x = pricemaster["Year"],
@@ -589,29 +610,8 @@ if Feature == "PriceMap":
 				reversescale=True,
 				),
 		]
-	fig = go.Figure(data=data2)
-	
-if Feature == "ExpiryMap":
-# 	operator = st.sidebar.selectbox('Select An Operator', options = sorted(list(operators.keys())))
-# 	hovertext1 = hovertext1(sf,ExpTab,ef,ayear,ap,rp,pf,ChannelSize,xaxisadj) 
-	subtitle ="Expiry Map"
-	tickangle = -90
-	
-	data3 = [go.Heatmap(
-              z = ef.values,
-              y = ef.index,
-              x = ef.columns,
-              xgap = xgap[Band],
-              ygap = 1,
-              hoverinfo ='text',
-#               text = hovertext1,
-              colorscale ='Hot',
-              reversescale=True,
-                )
-       		  ]
-
 	fig = go.Figure(data=data3)
-
+	
 
 #updating figure layouts
 fig.update_layout(uniformtext_minsize=12, 
