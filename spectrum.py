@@ -620,8 +620,8 @@ fig.update_layout(uniformtext_minsize=12,
 		  margin=dict(t=80, b=50, l=50, r=50, pad=0),
 		  title_x=0.18, title_y=0.99,
 		  title_font=dict(size=22),
-# 		  yaxis=dict(
-#         	  tickmode='array',
+		  yaxis=dict(
+        	  tickmode='array')
 # #         	  tickvals=y_tickvals,
 # # 		  ticktext=states,
 # # 		  tickangle=0,
