@@ -575,6 +575,7 @@ if Feature == "FreqMap":
 #               hoverinfo ='text',
 #               text = hovertext1,
 	      colorscale=colorscale,
+	      reversescale=True,
 	      colorbar=dict(
 # 	      tickcolor ="black",
 # 	      tickwidth =1,
