@@ -445,15 +445,15 @@ pricemaster.rename(columns = {"FP" : "Auction Price", "DP": "Reserve Price"}, in
 #processing for hovertext for freq map
 
 # def hovertext1(sf,ExpTab,ef,ayear,ap,rp,pf,ChannelSize,xaxisadj): 
-def hovertext1(sf,ChannelSize,xaxisadj):  
+def hovertext(sf,ExpTab,ChannelSize,xaxisadj):  
 	hovertext = []
 	for yi, yy in enumerate(sf.index):
 		hovertext.append([])
 		for xi, xx in enumerate(sf.columns):
-# 			if ExpTab[Band]==1:
-# 			    expiry = round(ef.values[yi][xi],2)
-# 			else:
-# 			    expiry = "NA"
+			if ExpTab[Band]==1:
+			    expiry = round(ef.values[yi][xi],2)
+			else:
+			    expiry = "NA"
 # 			try:
 # 			    auction_year = round(ayear.loc[yy,round(xx-xaxisadj[Band],3)])
 # 			except:
@@ -480,7 +480,7 @@ def hovertext1(sf,ChannelSize,xaxisadj):
 			hovertext[-1].append(
 					    'Start/End Freq : {}/{} MHz (Ch)\
 					    <br />SP New/Old: {} / {} ({})\
-					    <br />Bandwidth: {} MHz'
+					    <br />TotalBW/ChExpiry: {} MHz / {} Years'
 
 				     .format(
 					    round(xx-xaxisadj[Band],2), 
@@ -489,6 +489,8 @@ def hovertext1(sf,ChannelSize,xaxisadj):
 					    operatorold,
 					    state_dict.get(yy), 
 					    round(bandwidth[yi],1),
+					    expiry,
+					     
 					    )
 					    )
 	return hovertext
@@ -540,7 +542,7 @@ if Feature == "FreqMap":
 		tickvals = list(selected_op_dict.values())
 		ticktext = list(selected_op_dict.keys())	
 		
-	hovertext1 = hovertext1(hf,ChannelSize,xaxisadj)
+	hovertext = hovertext(hf,ExpTab,ChannelSize,xaxisadj)
 	subtitle ="Frequency Map"
 	tickangle = -90
 	
@@ -551,7 +553,7 @@ if Feature == "FreqMap":
 	      xgap = xgap[Band],
 	      ygap = 1,
               hoverinfo ='text',
-              text = hovertext1,
+              text = hovertext,
 	      colorscale=colorscale,
 # 	      reversescale=True,
 	      colorbar=dict(
@@ -581,7 +583,7 @@ if Feature == "ExpiryMap":
 				
 		expf = pd.DataFrame(sf.values*ef.values, columns=ef.columns, index=ef.index)
 
-# 	hovertext1 = hovertext1(sf,ExpTab,ef,ayear,ap,rp,pf,ChannelSize,xaxisadj) 
+	hovertext = hovertext(hf,ExpTab,ChannelSize,xaxisadj)
 	subtitle ="Expiry Map"
 	tickangle = -90
 	
@@ -592,7 +594,7 @@ if Feature == "ExpiryMap":
               xgap = xgap[Band],
               ygap = 1,
               hoverinfo ='text',
-#               text = hovertext1,
+              text = hovertext1,
               colorscale ='Hot',
               reversescale=True,
                 )
