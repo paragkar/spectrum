@@ -76,7 +76,7 @@ def hovercolscale(operators, colcodes):
 	for line in col.values:
 		lst.append((line[0],line[1]))
 		lst.append((line[2],line[1]))
-	Return lst
+	return lst
 
 #function for calculating expiry year heatmap
 
