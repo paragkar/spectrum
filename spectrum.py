@@ -2,6 +2,7 @@
 import plotly.express as px
 import plotly.graph_objects as go
 import numpy as np
+from collections import OrderedDict
 from plotly.subplots import make_subplots
 import plotly
 import pandas as pd
@@ -550,6 +551,7 @@ if Feature == "FreqMap":
 		for op in operators.keys():
 			if op not in selected_op_list:
 				sf.replace(op, np.nan, inplace = True)
+		selected_op_dict = OrderedDict(reversed(list(selected_op_dict.items())))
 		st.write(selected_op_dict)		
 		colorscale = hovercolscale(selected_op_dict, colcodes)
 		st.write(colorscale)
