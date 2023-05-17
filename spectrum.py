@@ -35,29 +35,6 @@ state_dict = {
     'WB': 'West Bengal'
 }
 
-
-#define all functions here to be used in this program
-
-#preparing color scale for heatmap which chnages in steps (discrete)
-def stepcolscale(operators, colcodes):
-    scale = [round(x/(len(operators)),2) for x in range(len(operators)+1)]
-    colors =[]
-    for k, v  in operators.items():
-        colors.append(colcodes.loc[k,:].values[0])
-
-    col= pd.concat([pd.DataFrame(scale),pd.DataFrame(colors)], axis=1)
-
-    col.columns =["colscale", "colors"]
-    col["colscaleshift"] = col.iloc[:,0].shift(-1)
-    # col = col.fillna(1)
-    lst=[]
-
-    for line in col.values:
-        lst.append((line[0],line[1])),
-        lst.append((line[2],line[1])),
-    lst = lst[:-2]
-    return lst
-
 #preparing color scale for hoverbox
 def colscalefreqmap(operators, colcodes):
 	operators = dict(sorted(operators.items(), key=lambda x:x[1]))
@@ -317,6 +294,7 @@ st.set_page_config(layout="wide")
 
 Band = st.sidebar.selectbox('Select a Band', options = list(ExpTab.keys()))
 
+file = "https://paragkar.com/wp-content/uploads/2023/05/spectrum_map.xlsx"
 
 #setting up excel file tabs for reading data
 
@@ -329,9 +307,11 @@ spectrumall = "Spectrum_All"
 spectrumofferedvssold = "Spectrum_Offered_vs_Sold"
 
 #loading data from excel file
-xl = pd.ExcelFile('spectrum_map.xlsx')
+# xl = pd.ExcelFile('spectrum_map.xlsx')
+xl = pd.ExcelFile('file')
 sheet = xl.sheet_names
-df = pd.read_excel('spectrum_map.xlsx', sheet_name=sheet)
+# df = pd.read_excel('spectrum_map.xlsx', sheet_name=sheet)
+df = pd.read_excel(file, sheet_name=sheet)
 
 #processing colorcode excel data tab
 colcodes = df["ColorCodes"]
