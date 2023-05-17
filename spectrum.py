@@ -519,7 +519,7 @@ Feature = st.sidebar.selectbox('Select a Feature', options = ["PriceMap","FreqMa
 if Feature == "FreqMap":
 	sf = sff.copy()
 	operators = operators[Band]
-	operator = st.sidebar.selectbox('Select An Operator', options = ["All"]+sorted(list(operators.keys())))
+	operator = st.sidebar.multiselect('Select Operators', options = ["All"]+sorted(list(operators.keys())))
 	if operator == "All":
 		sf[sf.columns] = sf[sf.columns].replace(operators) #replacing operators data with respective codes
 		colorscale = hovercolscale(operators, colcodes)
