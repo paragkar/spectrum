@@ -550,8 +550,9 @@ if Feature == "FreqMap":
 		for op in operators.keys():
 			if op not in selected_op_list:
 				sf.replace(op, np.nan, inplace = True)
-				
+		st.write(selected_op_dict)		
 		colorscale = hovercolscale(selected_op_dict, colcodes)
+		st.write(colorscale)
 		tickvals = list(selected_op_dict.values())
 		ticktext = list(selected_op_dict.keys())
 	
