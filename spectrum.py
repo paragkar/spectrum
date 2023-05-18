@@ -533,7 +533,7 @@ if Feature == "FreqMap":
 		tickvals = list(selected_op_dict.values())
 		ticktext = list(selected_op_dict.keys())	
 		
-	hovertext = hovertext(hf,ExpTab,ChannelSize,xaxisadj)
+# 	hovertext = hovertext(hf,ExpTab,ChannelSize,xaxisadj)
 	subtitle ="Frequency Map"
 	tickangle = -90
 	
