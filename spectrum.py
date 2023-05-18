@@ -432,7 +432,52 @@ pricemaster.rename(columns = {"FP" : "Auction Price", "DP": "Reserve Price"}, in
 #processing for hovertext for freq map
 
 # def hovertext1(sf,ExpTab,ef,ayear,ap,rp,pf,ChannelSize,xaxisadj): 
-def hovertext(sf,sff,ef,bandf,ExpTab,ChannelSize,xaxisadj):  
+def hovertext1(sf,sff,bandf,ExpTab,ChannelSize,xaxisadj):  
+	hovertext = []
+	for yi, yy in enumerate(sf.index):
+		hovertext.append([])
+		for xi, xx in enumerate(sf.columns):
+# 			try:
+# 			    auction_year = round(ayear.loc[yy,round(xx-xaxisadj[Band],3)])
+# 			except:
+# 			    auction_year ="NA"
+
+# 			try:
+# 			    auction_price = round(ap.loc[yy,round(xx-xaxisadj[Band],3)],2)
+# 			except:
+# 			    auction_price ="NA"
+
+# 			try:
+# 			    reserve_price = round(rp.loc[yy,round(xx-xaxisadj[Band],3)],2)
+# 			except:
+# 			    reserve_price ="NA"
+
+# 			if round(pf.values[yi][0],1)!=0:
+# 			    latest_rp = round(pf.values[yi][0],2)
+# 			else:
+# 			    latest_rp ="NA"
+
+			operatornew = sff.values[yi][xi]
+			bandwidth = bandf.values[yi][xi]
+			hovertext[-1].append(
+					    'StartFreq: {} MHz\
+					     <br>Channel Size : {} MHz\
+					     <br>Circle : {} MHz\
+				             <br>Operator: {} \
+					     <br>Total Bandwidth : {} MHz'
+
+				     .format(
+					    round(xx-xaxisadj[Band],2),
+					    ChannelSize[Band],
+					    state_dict.get(yy),
+					    operatornew,
+					    bandwidth,
+					    )
+					    )
+	return hovertext
+
+
+def hovertext2(sf,sff,ef,bandf,ExpTab,ChannelSize,xaxisadj):  
 	hovertext = []
 	for yi, yy in enumerate(sf.index):
 		hovertext.append([])
@@ -462,18 +507,18 @@ def hovertext(sf,sff,ef,bandf,ExpTab,ChannelSize,xaxisadj):
 # 			    latest_rp ="NA"
 
 			operatornew = sff.values[yi][xi]
-			bandwidth = bandf.values[yi][xi]
 			hovertext[-1].append(
-					    'StartFreq / Channel Size : {} / {} MHz\
-					    <br>Circle / Operator: {} / {}\
-					    <br>Bandwidth / Expiry : {} MHz / {} Years'
+					    'StartFreq: {} MHz\
+					     <br>Channel Size : {} MHz\
+					     <br>Circle : {} MHz\
+				             <br>Operator: {} \
+					     <br>Channel Expiry : {} Years'
 
 				     .format(
 					    round(xx-xaxisadj[Band],2),
 					    ChannelSize[Band],
 					    state_dict.get(yy),
 					    operatornew,
-					    bandwidth,
 					    expiry,
 					    )
 					    )
@@ -533,7 +578,7 @@ if Feature == "FreqMap":
 		tickvals = list(selected_op_dict.values())
 		ticktext = list(selected_op_dict.keys())	
 		
-	hovertext = hovertext(hf,sff,ef,bandf, ExpTab,ChannelSize,xaxisadj)
+	hovertext = hovertext1(hf,sff,bandf, ExpTab,ChannelSize,xaxisadj)
 	subtitle ="Frequency Map"
 	tickangle = -90
 	
@@ -578,7 +623,7 @@ if Feature == "ExpiryMap":
 				
 		expf = pd.DataFrame(sf.values*ef.values, columns=ef.columns, index=ef.index)
 
-	hovertext = hovertext(hf,sff,ef,bandf, ExpTab,ChannelSize,xaxisadj)
+	hovertext = hovertext2(hf,sff,ef,bandf, ExpTab,ChannelSize,xaxisadj)
 	subtitle ="Expiry Map"
 	tickangle = -90
 	
