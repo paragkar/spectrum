@@ -578,7 +578,7 @@ if Feature == "ExpiryMap":
 				
 		expf = pd.DataFrame(sf.values*ef.values, columns=ef.columns, index=ef.index)
 
-	hovertext = hovertext(hf,ef,bandf,ExpTab,ChannelSize,xaxisadj)
+	hovertext = hovertext(hf,sff,ef,bandf, ExpTab,ChannelSize,xaxisadj)
 	subtitle ="Expiry Map"
 	tickangle = -90
 	
