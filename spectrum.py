@@ -464,7 +464,7 @@ def hovertext1(sf,sff,bandf,ExpTab,ChannelSize,xaxisadj):
 					     <br>Channel Size : {} MHz\
 					     <br>Circle : {}\
 				             <br>Operator: {}\
-					     <br>Total Bandwidth : {} MHz'
+					     <br>Total BW: {} MHz'
 
 				     .format(
 					    round(xx-xaxisadj[Band],2),
@@ -512,7 +512,7 @@ def hovertext2(sf,sff,ef,bandf,ExpTab,ChannelSize,xaxisadj):
 					     <br>Channel Size : {} MHz\
 					     <br>Circle : {}\
 				             <br>Operator: {}\
-					     <br>Channel Expiry : {} Years'
+					     <br>Channel Expiry: {} Years'
 
 				     .format(
 					    round(xx-xaxisadj[Band],2),
