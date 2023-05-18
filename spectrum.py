@@ -475,7 +475,7 @@ def hovertext(sf,ExpTab,ChannelSize,xaxisadj):
 					    operator[0],
 					    operatorold,
 					    state_dict.get(yy), 
-					    bandwidth,
+					    round(bandwidth,2),
 					    expiry,
 					     
 					    )
