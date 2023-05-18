@@ -53,8 +53,8 @@ def colscalefreqmap(operators, colcodes):
 	col = col.iloc[:-1,:]
 	colorscale=[]
 	for line in col.values:
-		lst.append((line[0],line[1]))
-		lst.append((line[2],line[1]))
+		colorscale.append((line[0],line[1]))
+		colorscale.append((line[2],line[1]))
 	
 	return colorscale
 
