@@ -432,15 +432,15 @@ pricemaster.rename(columns = {"FP" : "Auction Price", "DP": "Reserve Price"}, in
 #processing for hovertext for freq map
 
 # def hovertext1(sf,ExpTab,ef,ayear,ap,rp,pf,ChannelSize,xaxisadj): 
-def hovertext(sf,ExpTab,ChannelSize,xaxisadj):  
+def hovertext(sf,ef,bandf,ExpTab,ChannelSize,xaxisadj):  
 	hovertext = []
 	for yi, yy in enumerate(sf.index):
 		hovertext.append([])
 		for xi, xx in enumerate(sf.columns):
-			if ExpTab[Band]==1:
-			    expiry = round(ef.values[yi][xi],2)
+			if ExpTab[Band]==1: #1 means that the expiry table in the excel sheet has been set and working 
+				expiry = round(ef.values[yi][xi],2)
 			else:
-			    expiry = "NA"
+				expiry = "NA"
 # 			try:
 # 			    auction_year = round(ayear.loc[yy,round(xx-xaxisadj[Band],3)])
 # 			except:
@@ -461,25 +461,20 @@ def hovertext(sf,ExpTab,ChannelSize,xaxisadj):
 # 			else:
 # 			    latest_rp ="NA"
 
-# 			operator = [k for k, v in operators.items() if v == sf.values[yi][xi]]
-			operatornew = sff.values[yi][xi]
-			operatorold = of.values[yi][xi]
+			operatornew = sf.values[yi][xi]
 			bandwidth = bandf.values[yi][xi]
-# 			bandwidth = [list(val).count(operators.get(operator[0]))*ChannelSize[Band] for val in sf.values]
 			hovertext[-1].append(
-					    'Start/End Freq : {}/{} MHz (Ch)\
-					    <br />SP New/Old: {} / {} ({})\
-					    <br />TotalBW/ChExpiry: {} MHz / {} Years'
+					    'StartFreq / Channel Size : {} / {} MHz\
+					    <br>Circle / Operator: {} / {}\
+					    <br>Bandwidth / Expiry : {} MHz / {} Years'
 
 				     .format(
-					    round(xx-xaxisadj[Band],2), 
-					    round(xx+ChannelSize[Band]-xaxisadj[Band],2),
+					    round(xx-xaxisadj[Band],2),
+					    ChannelSize[Band],
+					    state_dict.get(yy),
 					    operatornew,
-					    operatorold,
-					    state_dict.get(yy), 
 					    bandwidth,
 					    expiry,
-					     
 					    )
 					    )
 	return hovertext
@@ -519,7 +514,7 @@ Feature = st.sidebar.selectbox('Select a Feature', options = ["FreqMap", "Expiry
 if Feature == "FreqMap":
 	sf = sff.copy()
 	operators = operators[Band]
-	hf = sf[sf.columns].replace(operators) # dataframe for hoverbox color
+	hf = sf[sf.columns].replace(operators) # dataframe for hovertext
 	selected_operators = st.sidebar.multiselect('Select Operators', options = sorted(list(operators.keys())))
 	if selected_operators==[]:
 		sf[sf.columns] = sf[sf.columns].replace(operators) 
@@ -538,7 +533,7 @@ if Feature == "FreqMap":
 		tickvals = list(selected_op_dict.values())
 		ticktext = list(selected_op_dict.keys())	
 		
-	hovertext = hovertext(hf,ExpTab,ChannelSize,xaxisadj)
+	hovertext = hovertext(hf,ef,bandf, ExpTab,ChannelSize,xaxisadj)
 	subtitle ="Frequency Map"
 	tickangle = -90
 	
@@ -570,7 +565,7 @@ if Feature == "FreqMap":
 if Feature == "ExpiryMap":
 	sf = sff.copy()
 	operators = operators[Band]
-	hf = sf[sf.columns].replace(operators) # dataframe for hoverbox color
+	hf = sf[sf.columns].replace(operators) # dataframe for hovertext
 	selected_operators = st.sidebar.multiselect('Select Operators', options = sorted(list(operators.keys())))
 	if selected_operators==[]:
 		expf = ef
@@ -583,7 +578,7 @@ if Feature == "ExpiryMap":
 				
 		expf = pd.DataFrame(sf.values*ef.values, columns=ef.columns, index=ef.index)
 
-	hovertext = hovertext(hf,ExpTab,ChannelSize,xaxisadj)
+	hovertext = hovertext(hf,ef,bandf,ExpTab,ChannelSize,xaxisadj)
 	subtitle ="Expiry Map"
 	tickangle = -90
 	
