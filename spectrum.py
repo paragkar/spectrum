@@ -159,7 +159,8 @@ def coltofloat(df):
     
     lst =[]
     for col in df.columns:
-        df[col] = df[col].astype(float)
+        lst.append(float(col))
+    df.columns=lst
     
     return df
 
