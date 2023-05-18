@@ -432,7 +432,7 @@ pricemaster.rename(columns = {"FP" : "Auction Price", "DP": "Reserve Price"}, in
 #processing for hovertext for freq map
 
 # def hovertext1(sf,ExpTab,ef,ayear,ap,rp,pf,ChannelSize,xaxisadj): 
-def hovertext(sf,ef,bandf,ExpTab,ChannelSize,xaxisadj):  
+def hovertext(sf,sff,ef,bandf,ExpTab,ChannelSize,xaxisadj):  
 	hovertext = []
 	for yi, yy in enumerate(sf.index):
 		hovertext.append([])
@@ -461,7 +461,7 @@ def hovertext(sf,ef,bandf,ExpTab,ChannelSize,xaxisadj):
 # 			else:
 # 			    latest_rp ="NA"
 
-			operatornew = sf.values[yi][xi]
+			operatornew = sff.values[yi][xi]
 			bandwidth = bandf.values[yi][xi]
 			hovertext[-1].append(
 					    'StartFreq / Channel Size : {} / {} MHz\
@@ -533,7 +533,7 @@ if Feature == "FreqMap":
 		tickvals = list(selected_op_dict.values())
 		ticktext = list(selected_op_dict.keys())	
 		
-	hovertext = hovertext(hf,ef,bandf, ExpTab,ChannelSize,xaxisadj)
+	hovertext = hovertext(hf,sff,ef,bandf, ExpTab,ChannelSize,xaxisadj)
 	subtitle ="Frequency Map"
 	tickangle = -90
 	
