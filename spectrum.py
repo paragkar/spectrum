@@ -462,8 +462,8 @@ def hovertext1(sf,sff,bandf,ExpTab,ChannelSize,xaxisadj):
 			hovertext[-1].append(
 					    'StartFreq: {} MHz\
 					     <br>Channel Size : {} MHz\
-					     <br>Circle : {} MHz\
-				             <br>Operator: {} \
+					     <br>Circle : {}\
+				             <br>Operator: {}\
 					     <br>Total Bandwidth : {} MHz'
 
 				     .format(
@@ -510,8 +510,8 @@ def hovertext2(sf,sff,ef,bandf,ExpTab,ChannelSize,xaxisadj):
 			hovertext[-1].append(
 					    'StartFreq: {} MHz\
 					     <br>Channel Size : {} MHz\
-					     <br>Circle : {} MHz\
-				             <br>Operator: {} \
+					     <br>Circle : {}\
+				             <br>Operator: {}\
 					     <br>Channel Expiry : {} Years'
 
 				     .format(
