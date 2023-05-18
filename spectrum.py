@@ -154,6 +154,15 @@ def coltostr(df):
     
     return df
 
+#convert columns of dataframe into float
+def coltofloat(df):
+    
+    lst =[]
+    for col in df.columns:
+        df[col] = df[col].astype(float)
+    
+    return df
+
 #add dummy columns for auction failed years
 
 def adddummycols(df,col):
@@ -324,6 +333,7 @@ colcodes=colcodes.set_index("Description")
 #processing excel tabs into various dataframes
 sf = df[freqtab]
 bandf = df[bandwidthtab]
+bandf = coltofloat(bandf)
 of = df[freqtabori]
 sff = sf.copy() #create a copy for further processing, not used now.
 sff = sff.set_index("LSA")
