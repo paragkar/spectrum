@@ -460,7 +460,8 @@ def hovertext(sf,ExpTab,ChannelSize,xaxisadj):
 # 			else:
 # 			    latest_rp ="NA"
 
-			operator = [k for k, v in operators.items() if v == sf.values[yi][xi]]
+# 			operator = [k for k, v in operators.items() if v == sf.values[yi][xi]]
+			operator = sff.values[yi][xi]
 			operatorold = of.values[yi][xi]
 			bandwidth = bandf.values[yi][xi]
 # 			bandwidth = [list(val).count(operators.get(operator[0]))*ChannelSize[Band] for val in sf.values]
