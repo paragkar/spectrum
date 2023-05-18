@@ -518,7 +518,7 @@ if Feature == "FreqMap":
 	sf = sff.copy()
 	operators = operators[Band]
 	hf = sf[sf.columns].replace(operators) # dataframe for hoverbox color
-	hfcolorscale=hovercolscale(operators, colcodes)  #colorscale for hoverbox
+# 	hfcolorscale=hovercolscale(operators, colcodes)  #colorscale for hoverbox
 	selected_operators = st.sidebar.multiselect('Select Operators', options = sorted(list(operators.keys())))
 	if selected_operators==[]:
 		sf[sf.columns] = sf[sf.columns].replace(operators) 
@@ -569,7 +569,7 @@ if Feature == "ExpiryMap":
 	sf = sff.copy()
 	operators = operators[Band]
 	hf = sf[sf.columns].replace(operators) # dataframe for hoverbox color
-	hfcolorscale=hovercolscale(operators, colcodes)  #colorscale for hoverbox
+# 	hfcolorscale=hovercolscale(operators, colcodes)  #colorscale for hoverbox
 	selected_operators = st.sidebar.multiselect('Select Operators', options = sorted(list(operators.keys())))
 	if selected_operators==[]:
 		expf = ef
