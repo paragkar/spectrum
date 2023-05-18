@@ -543,8 +543,8 @@ if Feature == "FreqMap":
 	      x = sf.columns,
 	      xgap = xgap[Band],
 	      ygap = 1,
-              hoverinfo ='text',
-              text = hovertext,
+#               hoverinfo ='text',
+#               text = hovertext,
 	      colorscale=colorscale,
 # 	      reversescale=True,
 	      colorbar=dict(
