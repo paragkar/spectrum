@@ -300,6 +300,7 @@ file = "https://paragkar.com/wp-content/uploads/2023/05/spectrum_map.xlsx"
 #setting up excel file tabs for reading data
 
 freqtab = str(Band)+"MHz"
+bandwidthtab = str(Band)+"MHzBW"
 freqtabori = str(Band)+"MHzOriginal"
 pricetab = str(Band)+"MHzPrice"
 exptab = str(Band)+"MHzExpCorrected"
@@ -322,6 +323,7 @@ colcodes=colcodes.set_index("Description")
 
 #processing excel tabs into various dataframes
 sf = df[freqtab]
+bandf = df[bandwidthtab]
 of = df[freqtabori]
 sff = sf.copy() #create a copy for further processing, not used now.
 sff = sff.set_index("LSA")
@@ -460,7 +462,8 @@ def hovertext(sf,ExpTab,ChannelSize,xaxisadj):
 
 			operator = [k for k, v in operators.items() if v == sf.values[yi][xi]]
 			operatorold = of.values[yi][xi]
-			bandwidth = [list(val).count(operators.get(operator[0]))*ChannelSize[Band] for val in sf.values]
+			bandwidth = bandf.values[yi][xi]
+# 			bandwidth = [list(val).count(operators.get(operator[0]))*ChannelSize[Band] for val in sf.values]
 			hovertext[-1].append(
 					    'Start/End Freq : {}/{} MHz (Ch)\
 					    <br />SP New/Old: {} / {} ({})\
