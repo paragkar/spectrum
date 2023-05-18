@@ -461,7 +461,7 @@ def hovertext(sf,ExpTab,ChannelSize,xaxisadj):
 # 			    latest_rp ="NA"
 
 # 			operator = [k for k, v in operators.items() if v == sf.values[yi][xi]]
-			operator = sff.values[yi][xi]
+			operatornew = sff.values[yi][xi]
 			operatorold = of.values[yi][xi]
 			bandwidth = bandf.values[yi][xi]
 # 			bandwidth = [list(val).count(operators.get(operator[0]))*ChannelSize[Band] for val in sf.values]
@@ -473,7 +473,7 @@ def hovertext(sf,ExpTab,ChannelSize,xaxisadj):
 				     .format(
 					    round(xx-xaxisadj[Band],2), 
 					    round(xx+ChannelSize[Band]-xaxisadj[Band],2),
-					    operator[0],
+					    operatornew,
 					    operatorold,
 					    state_dict.get(yy), 
 					    bandwidth,
