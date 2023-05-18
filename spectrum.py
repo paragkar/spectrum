@@ -561,8 +561,8 @@ if Feature == "FreqMap":
 		]
 
 	fig = go.Figure(data=data1)
-# 	hoverlabel_bgcolor = hovercolor(hfcolorscale, hf)
-# 	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
+	hoverlabel_bgcolor = hovercolor(hfcolorscale, hf)
+	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 
 							      
 if Feature == "ExpiryMap":
@@ -599,8 +599,8 @@ if Feature == "ExpiryMap":
                 )
        		  ]
 	fig = go.Figure(data=data2)
-# 	hoverlabel_bgcolor = hovercolor(hfcolorscale, hf)
-# 	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
+	hoverlabel_bgcolor = hovercolor(hfcolorscale, hf)
+	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 
 
 if Feature == "PriceMap":
