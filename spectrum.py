@@ -460,7 +460,7 @@ def hovertext(sf,ExpTab,ChannelSize,xaxisadj):
 
 			operator = [k for k, v in operators.items() if v == sf.values[yi][xi]]
 			operatorold = of.values[yi][xi]
-			bandwidth = [list(val).count(operators.get(operator[0]))*ChannelSize[Band] for val in sf.values]
+# 			bandwidth = [list(val).count(operators.get(operator[0]))*ChannelSize[Band] for val in sf.values]
 			hovertext[-1].append(
 					    'Start/End Freq : {}/{} MHz (Ch)\
 					    <br />SP New/Old: {} / {} ({})\
@@ -472,7 +472,7 @@ def hovertext(sf,ExpTab,ChannelSize,xaxisadj):
 					    operator[0],
 					    operatorold,
 					    state_dict.get(yy), 
-					    round(bandwidth[yi],1),
+# 					    round(bandwidth[yi],1),
 					    expiry,
 					     
 					    )
@@ -533,7 +533,7 @@ if Feature == "FreqMap":
 		tickvals = list(selected_op_dict.values())
 		ticktext = list(selected_op_dict.keys())	
 		
-# 	hovertext = hovertext(hf,ExpTab,ChannelSize,xaxisadj)
+	hovertext = hovertext(hf,ExpTab,ChannelSize,xaxisadj)
 	subtitle ="Frequency Map"
 	tickangle = -90
 	
@@ -543,8 +543,8 @@ if Feature == "FreqMap":
 	      x = sf.columns,
 	      xgap = xgap[Band],
 	      ygap = 1,
-#               hoverinfo ='text',
-#               text = hovertext,
+              hoverinfo ='text',
+              text = hovertext,
 	      colorscale=colorscale,
 # 	      reversescale=True,
 	      colorbar=dict(
