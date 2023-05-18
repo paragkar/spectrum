@@ -35,7 +35,7 @@ state_dict = {
     'WB': 'West Bengal'
 }
 
-#preparing color scale for hoverbox
+#preparing color scale for freqmap
 def colscalefreqmap(operators, colcodes):
 	operators = dict(sorted(operators.items(), key=lambda x:x[1]))
 	operator_names = list(operators.keys())
@@ -51,11 +51,12 @@ def colscalefreqmap(operators, colcodes):
 	col.columns =["colscale", "colors"]
 	col["colscaleshift"] = col.iloc[:,0].shift(-1)
 	col = col.iloc[:-1,:]
-	lst=[]
+	colorscale=[]
 	for line in col.values:
 		lst.append((line[0],line[1]))
 		lst.append((line[2],line[1]))
-	return lst
+	
+	return colorscale
 
 #function for calculating expiry year heatmap
 
@@ -489,7 +490,7 @@ def hovertext(sf,ExpTab,ChannelSize,xaxisadj):
 ############################ #processing for hovercolors for data1 & data2 starts
 
 #preparing color scale for hoverbox
-def hovercolscale(operators, colcodes):
+def hcolscale(operators, colcodes):
     scale = [round(x/(len(operators)-1),2) for x in range(len(operators))]
     colors =[]
     for k, v  in operators.items():
@@ -500,7 +501,8 @@ def hovercolscale(operators, colcodes):
         colorscale.append([scale[i],colors[i]])
     return colorscale
 
-def hovercolor(colorscale, sf):
+#shaping the matrix of hovercolscale
+def hcolmatrixshaping(colorscale, sf):
 
 	hoverlabel_bgcolor = [[x[1] for x in colorscale if x[0] == round(value/(len(colorscale) - 1),2)] 
 			      for row in sf.values for value in row]
@@ -518,7 +520,6 @@ if Feature == "FreqMap":
 	sf = sff.copy()
 	operators = operators[Band]
 	hf = sf[sf.columns].replace(operators) # dataframe for hoverbox color
-# 	hfcolorscale=hovercolscale(operators, colcodes)  #colorscale for hoverbox
 	selected_operators = st.sidebar.multiselect('Select Operators', options = sorted(list(operators.keys())))
 	if selected_operators==[]:
 		sf[sf.columns] = sf[sf.columns].replace(operators) 
@@ -561,7 +562,8 @@ if Feature == "FreqMap":
 		]
 
 	fig = go.Figure(data=data1)
-	hoverlabel_bgcolor = hovercolor(hfcolorscale, hf)
+	hcolscale=hcolscale(operators, colcodes)  #colorscale for hoverbox
+	hoverlabel_bgcolor = hcolmatrixshaping(hcolscale, hf) #shaping the hfcolorscale
 	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 
 							      
@@ -569,7 +571,6 @@ if Feature == "ExpiryMap":
 	sf = sff.copy()
 	operators = operators[Band]
 	hf = sf[sf.columns].replace(operators) # dataframe for hoverbox color
-# 	hfcolorscale=hovercolscale(operators, colcodes)  #colorscale for hoverbox
 	selected_operators = st.sidebar.multiselect('Select Operators', options = sorted(list(operators.keys())))
 	if selected_operators==[]:
 		expf = ef
@@ -599,7 +600,8 @@ if Feature == "ExpiryMap":
                 )
        		  ]
 	fig = go.Figure(data=data2)
-	hoverlabel_bgcolor = hovercolor(hfcolorscale, hf)
+	hcolscale=hcolscale(operators, colcodes)  #colorscale for hoverbox
+	hoverlabel_bgcolor = hcolmatrixshaping(hcolscale, hf) #shaping the hfcolorscale
 	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 
 
