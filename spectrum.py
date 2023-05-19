@@ -379,33 +379,27 @@ reserveprice = reserveprice.applymap(lambda x: round(x,2))
 reserveprice = coltostr(reserveprice) #convert columns data type to string
 reserveprice = reserveprice.replace(0,"NA")
 
-#processing for histocical information****************
-
-# lst=[]
-# for col in ef.columns:
-#     for i, (efval,excepfval) in enumerate(zip(ef[col].values, excepf[col].values)):
-#         for j, pf1val in enumerate(pf1.values):
-#             if excepfval == 0:
-#                 error = abs(efval-pf1val[6]) #orignal
-#                 # error = efval-pf1val[6] #for testing
-#             else:
-#                 error = 0
-           
-#             if (ef.index[i] == pf1val[0]) and error <= errors[Band]:
-#                 # lst.append([ef.index[i],col-1,pf1val[1],pf1val[2], pf1val[3], pf1val[4], error]) 
-#                 lst.append([ef.index[i],col-xaxisadj[Band],pf1val[1],pf1val[2], pf1val[3], pf1val[4], error]) 
-        
-# df_final = pd.DataFrame(lst)
-
-# df_final.columns = ["LSA", "StartFreq", "TP", "RP", "AP", "Year", "Error"]
-
-# df_final["Year"] = df_final["Year"].astype(int)
-
-# tp = df_final.pivot_table(index=["LSA"], columns='StartFreq', values="TP", aggfunc='first').fillna("NA")
-# rp = df_final.pivot_table(index=["LSA"], columns='StartFreq', values="RP", aggfunc='first').fillna("NA")
-# ap = df_final.pivot_table(index=["LSA"], columns='StartFreq', values="AP", aggfunc='first').fillna("NA")
-# ayear = df_final.pivot_table(index=["LSA"], columns='StartFreq', values="Year", aggfunc='first').fillna("NA")
-#processing historical information ends************************
+#function to calculate the year in which the spectrum was acquired
+def auctioncalyear(ef, efval, pf1, excepfval):
+	lst=[]
+	for col in ef.columns:
+		for i, (efval,excepfval) in enumerate(zip(ef[col].values, excepf[col].values)):
+			for j, pf1val in enumerate(pf1.values):
+				if excepfval == 0:
+					error = abs(efval-pf1val[6]) #orignal
+				else:
+					error = 0
+				if (ef.index[i] == pf1val[0]) and error <= errors[Band]:
+				lst.append([ef.index[i],col-xaxisadj[Band],pf1val[1],pf1val[2], pf1val[3], pf1val[4], error]) 
+				
+	df_final = pd.DataFrame(lst)
+	df_final.columns = ["LSA", "StartFreq", "TP", "RP", "AP", "Year", "Error"]
+	df_final["Year"] = df_final["Year"].astype(int)
+	ayear = df_final.pivot_table(index=["LSA"], columns='StartFreq', values="Year", aggfunc='first').fillna("NA")
+# 	tp = df_final.pivot_table(index=["LSA"], columns='StartFreq', values="TP", aggfunc='first').fillna("NA")
+# 	rp = df_final.pivot_table(index=["LSA"], columns='StartFreq', values="RP", aggfunc='first').fillna("NA")
+# 	ap = df_final.pivot_table(index=["LSA"], columns='StartFreq', values="AP", aggfunc='first').fillna("NA")
+	return ayear
 
 
 #processing for hovertext for freq map
