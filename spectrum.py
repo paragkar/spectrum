@@ -656,8 +656,7 @@ if Feature == "AuctionMap":
 	
 
 	
-fig = go.Figure()
-fig.add_trace(fig.data)
+fig = go.Figure(data=data)
 fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 
 #updating figure layouts
