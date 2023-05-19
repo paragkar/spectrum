@@ -215,7 +215,7 @@ sheet = xl.sheet_names
 df = pd.read_excel(file, sheet_name=sheet)
 
 #choose a dimension
-Dimension = st.sidebar.selectbox('Select a Dimension', options = ["Frequency", "Auction Year"])
+Dimension = st.sidebar.selectbox('Select a Dimension', options = ["Frequency", "Calendar Year"])
 
 if Dimension == "Frequency":
 	#Selecting a Freq Band
