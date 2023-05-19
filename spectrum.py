@@ -591,7 +591,7 @@ if Feature == "FreqMap":
 		]
 
 # 	fig = go.Figure(data=data1)
-# 	hcolscale=hcolscaledata1data2(operators, colcodes)  #colorscale for hoverbox
+	hcolscale=hcolscaledata1data2(operators, colcodes)  #colorscale for hoverbox
 	hoverlabel_bgcolor = hcolmatrixdata1data2(hcolscale, hf) #shaping the hfcolorscale
 # 	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 
@@ -629,7 +629,7 @@ if Feature == "ExpiryMap":
                 )
        		  ]
 # 	fig = go.Figure(data=data2)
-# 	hcolscale=hcolscaledata1data2(operators, colcodes)  #colorscale for hoverbox
+	hcolscale=hcolscaledata1data2(operators, colcodes)  #colorscale for hoverbox
 	hoverlabel_bgcolor = hcolmatrixdata1data2(hcolscale, hf) #shaping the hfcolorscale
 # 	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 
