@@ -586,7 +586,7 @@ if Feature == "FreqMap":
 		tickvals = list(selected_op_dict.values())
 		ticktext = list(selected_op_dict.keys())	
 		
-	hovertext = hovertext1(hf,sff,bandf, bandexpf, ExpTab,ChannelSize,xaxisadj)
+	hovertext = hovertext1(hf,sff,bandf, ExpTab,ChannelSize,xaxisadj)
 	subtitle ="Frequency Map"
 	tickangle = -90
 	
@@ -631,7 +631,7 @@ if Feature == "ExpiryMap":
 				
 		expf = pd.DataFrame(sf.values*ef.values, columns=ef.columns, index=ef.index)
 
-	hovertext = hovertext2(hf,sff,ef,bandf, ExpTab,ChannelSize,xaxisadj)
+	hovertext = hovertext2(hf,sff,ef,bandf, bandexpf, ExpTab,ChannelSize,xaxisadj)
 	subtitle ="Expiry Map"
 	tickangle = -90
 	
