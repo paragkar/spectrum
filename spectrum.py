@@ -580,7 +580,7 @@ if Feature == "FreqMap":
 	hovertext = hovertext1(hf,sff,bandf, ExpTab,ChannelSize,xaxisadj)
 	subtitle ="Frequency Map"
 	tickangle = -90
-	dtick = dtickfreq[Band]
+	dtickval = dtickfreq[Band]
 	
 	data = [go.Heatmap(
 	      z = sf.values,
@@ -624,7 +624,7 @@ if Feature == "ExpiryMap":
 	hovertext = hovertext2(hf,sff,ef,bandf, bandexpf, ExpTab,ChannelSize,xaxisadj)
 	subtitle ="Expiry Map"
 	tickangle = -90
-	dtick = dtickfreq[Band]
+	dtickval = dtickfreq[Band]
 	
 	data = [go.Heatmap(
               z = expf.values,
@@ -650,7 +650,7 @@ if Feature == "AuctionMap":
 	typedf = type_dict[Type].copy()
 	subtitle = Type
 	tickangle=0
-	dtick = dtickauction[Band]
+	dtickval = dtickauction[Band]
 	hovertext = hovertext3(dff,reserveprice,auctionprice,offeredspectrum,soldspectrum,unsoldspectrum)
 	data = [go.Heatmap(
 		z = typedf.values,
@@ -697,7 +697,7 @@ fig.update_layout(uniformtext_minsize=12,
 		  side = 'top',
 		  tickmode = 'linear',
 		  tickangle=tickangle,
-		  dtick = dtick,
+		  dtick = dtickval,
 		  # showlegend=True
 		)
 
