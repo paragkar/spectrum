@@ -220,6 +220,8 @@ if Dimension == "Calendar Year":
 	spectrumofferedvssold = "Spectrum_Offered_vs_Sold"
 	masterdf = df[masterall]
 	offeredvssold = df[spectrumofferedvssold]
+	calendaryearlist = sorted(list(set(masterdf["Auction Year"].values)))
+	st.write(calendaryearlist)
 
 if Dimension == "Frequency":
 	#Selecting a Freq Band
