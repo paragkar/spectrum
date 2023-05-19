@@ -660,7 +660,6 @@ if Feature == "AuctionMap":
 		]
 	fig = go.Figure(data=data3)
 	hoverlabel_bgcolor3 = hovermatrixdata3(dff,reserveprice,auctionprice)
-	fig.add_trace(fig)
 	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor3,font=dict(size=12, color='white')))
 	
 
