@@ -520,7 +520,7 @@ def hovertext2(sf,sff,ef,bandf,bandexpf,ExpTab,ChannelSize,xaxisadj):
 					     <br>Channel Size : {} MHz\
 					     <br>Circle : {}\
 				             <br>Operator: {}\
-					     <br>Expiring BW: {} of Total {} MHz\
+					     <br>Expiring BW: {} of {} MHz\
 					     <br>Expiring In: {} Years'
 
 				     .format(
