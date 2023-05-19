@@ -584,10 +584,6 @@ if Feature == "FreqMap":
 	operators = operators[Band]
 	hf = sf[sf.columns].replace(operators) # dataframe for hovertext
 	operatorslist = sorted(list(operators.keys()))
-	operatorstoremove = ["Govt", "Vacant"]
-	for op in operatorstoremove:
-		if op in operatorslist:
-			operatorslist.remove(op)
 	selected_operators = st.sidebar.multiselect('Select Operators', options = operatorslist)
 	if selected_operators==[]:
 		sf[sf.columns] = sf[sf.columns].replace(operators) 
@@ -640,7 +636,12 @@ if Feature == "ExpiryMap":
 		sf = sff.copy()
 		operators = operators[Band]
 		hf = sf[sf.columns].replace(operators) # dataframe for hovertext
-		selected_operators = st.sidebar.multiselect('Select Operators', options = sorted(list(operators.keys())))
+		operatorslist = sorted(list(operators.keys()))
+		operatorstoremove = ["Govt", "Vacant"]
+		for op in operatorstoremove:
+			if op in operatorslist:
+				operatorslist.remove(op)
+		selected_operators = st.sidebar.multiselect('Select Operators', options = operatorslist)
 		if selected_operators==[]:
 			expf = ef
 		else:
