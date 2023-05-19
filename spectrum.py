@@ -302,6 +302,7 @@ file = "https://paragkar.com/wp-content/uploads/2023/05/spectrum_map.xlsx"
 
 freqtab = str(Band)+"MHz"
 bandwidthtab = str(Band)+"MHzBW"
+bandwithexptab = str(Band)+"MHzExpBW"
 freqtabori = str(Band)+"MHzOriginal"
 pricetab = str(Band)+"MHzPrice"
 exptab = str(Band)+"MHzExpCorrected"
@@ -325,6 +326,7 @@ colcodes=colcodes.set_index("Description")
 #processing excel tabs into various dataframes
 sf = df[freqtab]
 bandf = df[bandwidthtab]
+bandexpf = df[bandwidthtab]
 of = df[freqtabori]
 sff = sf.copy() #create a copy for further processing, not used now.
 sff = sff.set_index("LSA")
@@ -477,6 +479,9 @@ def hovertext1(sf,sff,bandf,ExpTab,ChannelSize,xaxisadj):
 	return hovertext
 
 
+
+#processing for hovertext for expiry map
+
 def hovertext2(sf,sff,ef,bandf,ExpTab,ChannelSize,xaxisadj):  
 	hovertext = []
 	for yi, yy in enumerate(sf.index):
@@ -507,12 +512,14 @@ def hovertext2(sf,sff,ef,bandf,ExpTab,ChannelSize,xaxisadj):
 # 			    latest_rp ="NA"
 
 			operatornew = sff.values[yi][xi]
+			bandwidthexpiring = bandexpf[yi][xi]
 			hovertext[-1].append(
 					    'StartFreq: {} MHz\
 					     <br>Channel Size : {} MHz\
 					     <br>Circle : {}\
 				             <br>Operator: {}\
-					     <br>Channel Expiry: {} Years'
+					     <br>Channel Expiry: {} Years\
+					     <br>Bandwidth Expiring: {} MHz'
 
 				     .format(
 					    round(xx-xaxisadj[Band],2),
@@ -520,6 +527,7 @@ def hovertext2(sf,sff,ef,bandf,ExpTab,ChannelSize,xaxisadj):
 					    state_dict.get(yy),
 					    operatornew,
 					    expiry,
+					    bandwidthexpiring,
 					    )
 					    )
 	return hovertext
