@@ -698,6 +698,11 @@ if Feature == "ExpiryMap":
 		
 		hoverlabel_bgcolor = "#002855" #subdued black
 
+type_dict ={"Auction Price": auctionprice,
+	    "Reserve Price": reserveprice, 
+	    "Quantum Offered": offeredspectrum, 
+	    "Quantum Sold": soldspectrum, 
+	    "Quantum Unsold": unsoldspectrum}
 
 if Feature == "AuctionMap":
 	pricemaster = pricemaster[(pricemaster["Band"]==Band) & (pricemaster["Year"] != 2018)]
