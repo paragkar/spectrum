@@ -341,7 +341,8 @@ if ExpTab[Band]==1:
 sf = sf.set_index("LSA")
 of = of.set_index("LSA")
 pf = pf.set_index("LSA")
-
+bandf = bandf.set_index("LSA")
+bandexpf = bandexpf.set_index("LSA")
 masterdf = df[masterall]
 
 # operators = operators[Band]
