@@ -428,7 +428,7 @@ def hovertext1(sf,sff,bandf,ExpTab,ChannelSize,xaxisadj):
 	return hovertext
 
 #processing for hovertext for expiry map freq wise
-def hovertext21(sf,sff,ef,bandf,bandexpf,ExpTab,ChannelSize,xaxisadj):  
+def hovertext21(sf,sff,ef,bandf,bandexpf,ExpTab,ChannelSize,xaxisadj,ayear):  
 	hovertext = []
 	for yi, yy in enumerate(sf.index):
 		hovertext.append([])
@@ -437,6 +437,10 @@ def hovertext21(sf,sff,ef,bandf,bandexpf,ExpTab,ChannelSize,xaxisadj):
 				expiry = round(ef.values[yi][xi],2)
 			else:
 				expiry = "NA"
+			try:
+			    auction_year = round(ayear.loc[yy,round(xx-xaxisadj[Band],3)])
+			except:
+			    auction_year ="NA"
 			operatornew = sff.values[yi][xi]
 			bandwidthexpiring = bandexpf.values[yi][xi]
 			bandwidth = bandf.values[yi][xi]
@@ -446,7 +450,8 @@ def hovertext21(sf,sff,ef,bandf,bandexpf,ExpTab,ChannelSize,xaxisadj):
 					     <br>Circle : {}\
 				             <br>Operator: {}\
 					     <br>Expiring BW: {} of {} MHz\
-					     <br>Expiring In: {} Years'
+					     <br>Expiring In: {} Years\
+					     <br>Acquired In: {}'
 
 				     .format(
 					    round(xx-xaxisadj[Band],2),
@@ -456,6 +461,7 @@ def hovertext21(sf,sff,ef,bandf,bandexpf,ExpTab,ChannelSize,xaxisadj):
 					    bandwidthexpiring,
 					    bandwidth,
 					    expiry,
+					    auction_year,
 					    )
 					    )
 	return hovertext
@@ -647,7 +653,7 @@ if Feature == "ExpiryMap":
 
 			expf = pd.DataFrame(sf.values*ef.values, columns=ef.columns, index=ef.index)
 
-		hovertext = hovertext21(hf,sff,ef,bandf, bandexpf, ExpTab,ChannelSize,xaxisadj)
+		hovertext = hovertext21(hf,sff,ef,bandf, bandexpf, ExpTab,ChannelSize,xaxisadj,ayear)
 		subtitle ="Expiry Map "+SubFeature
 		tickangle = -90
 		dtickval = dtickfreq[Band]
