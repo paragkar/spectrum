@@ -213,7 +213,7 @@ sheet = xl.sheet_names
 df = pd.read_excel(file, sheet_name=sheet)
 
 #choose a dimension
-Dimension = st.sidebar.selectbox('Select a Dimension', options = ["Frequency", "Calendar Year"])
+Dimension = st.sidebar.selectbox('Select a Dimension', options = ["Frequency Band", "Calendar Year"])
 
 if Dimension == "Calendar Year":
 	masterall = "MasterAll-TDDValueConventional" #all auction related information
@@ -223,7 +223,7 @@ if Dimension == "Calendar Year":
 	calendaryearlist = sorted(list(set(masterdf["Auction Year"].values)))
 	Year = st.sidebar.selectbox('Select a Year', options = calendaryearlist)
 
-if Dimension == "Frequency":
+if Dimension == "Frequency Band":
 	#Selecting a Freq Band
 	Band = st.sidebar.selectbox('Select a Band', options = list(ExpTab.keys()))
 	Feature = st.sidebar.selectbox('Select a Feature', options = ["FreqMap", "ExpiryMap", "AuctionMap"])
@@ -490,7 +490,7 @@ def hovermatrixauction(dff,reserveprice, auctionprice):
 #**********Main Program Starts here***************
 
 #Feature ="Frequency Map" linked to Dimension = "Frequency"
-if  (Dimension == "Frequency") and (Feature == "FreqMap"):
+if  (Dimension == "Frequency Band") and (Feature == "FreqMap"):
 	sf = sff.copy()
 	operators = operators[Band]
 	hf = sf[sf.columns].replace(operators) # dataframe for hovertext
@@ -604,17 +604,17 @@ if  (Dimension == "Frequency") and (Feature == "ExpiryMap"):
 			)]
 		hoverlabel_bgcolor = "#002855" #subdued black
 
-#This dict has been defined for the Feature = Auction Map
-type_dict ={"Auction Price": auctionprice,
-	    "Reserve Price": reserveprice, 
-	    "Quantum Offered": offeredspectrum, 
-	    "Quantum Sold": soldspectrum, 
-	    "Quantum Unsold": unsoldspectrum}
 
 #Feature ="Auction Map" linked to Dimension = "Frequency"
-if  (Dimension == "Frequency") and (Feature == "AuctionMap"):
+if  (Dimension == "Frequency Band") and (Feature == "AuctionMap"):
 	pricemaster = pricemaster[(pricemaster["Band"]==Band) & (pricemaster["Year"] != 2018)]
 	pricemaster["Year"] = sorted([str(x) for x in pricemaster["Year"].values])
+	#This dict has been defined for the Feature = Auction Map
+	type_dict ={"Auction Price": auctionprice,
+		    "Reserve Price": reserveprice, 
+		    "Quantum Offered": offeredspectrum, 
+		    "Quantum Sold": soldspectrum, 
+		    "Quantum Unsold": unsoldspectrum}
 	Type = st.sidebar.selectbox('Select Price Type', options = ["Auction Price","Reserve Price","Quantum Offered", "Quantum Sold", "Quantum Unsold"])
 	typedf = type_dict[Type].copy()
 	subtitle = Type
