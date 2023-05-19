@@ -212,15 +212,25 @@ ChannelSize = {700:2.5,
 
 # scale of the x axis plots
 
-dtick = {700:1, 
+dtickfreq = {700:1, 
          800:0.25, 
          900:0.4, 
          1800:1, 
          2100:1, 
          2300:1, 
-         2500:1, 
+         2500:2, 
          3500:5, 
          26000:50}
+
+dtickauction = {700:1, 
+         800:1, 
+         900:1, 
+         1800:1, 
+         2100:1, 
+         2300:1, 
+         2500:1, 
+         3500:1, 
+         26000:1}
 
 # vertical line widths
 
@@ -571,6 +581,7 @@ if Feature == "FreqMap":
 	hovertext = hovertext1(hf,sff,bandf, ExpTab,ChannelSize,xaxisadj)
 	subtitle ="Frequency Map"
 	tickangle = -90
+	dtick = dtickfreq[Band]
 	
 	data = [go.Heatmap(
 	      z = sf.values,
@@ -614,6 +625,7 @@ if Feature == "ExpiryMap":
 	hovertext = hovertext2(hf,sff,ef,bandf, bandexpf, ExpTab,ChannelSize,xaxisadj)
 	subtitle ="Expiry Map"
 	tickangle = -90
+	dtick = dtickfreq[Band]
 	
 	data = [go.Heatmap(
               z = expf.values,
@@ -638,7 +650,8 @@ if Feature == "AuctionMap":
 	Type = st.sidebar.selectbox('Select Price Type', options = ["Auction Price","Reserve Price","Spectrum Offered", "Spectrum Sold", "Spectrum Unsold"])
 	typedf = type_dict[Type].copy()
 	subtitle = Type
-	tickangle=0 
+	tickangle=0
+	dtick = dtickauction[Band]
 	hovertext = hovertext3(dff,reserveprice,auctionprice,offeredspectrum,soldspectrum,unsoldspectrum)
 	data = [go.Heatmap(
 		z = typedf.values,
@@ -685,7 +698,7 @@ fig.update_layout(uniformtext_minsize=12,
 		  side = 'top',
 		  tickmode = 'linear',
 		  tickangle=tickangle,
-		  dtick = dtick[Band]),
+		  dtick = dtick,
 		  # showlegend=True
 		)
 
