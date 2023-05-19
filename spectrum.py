@@ -689,16 +689,11 @@ fig.update_layout(uniformtext_minsize=12,
 		  title_font=dict(size=22),
 		  yaxis=dict(
         	  tickmode='array'),
-# #         	  tickvals=y_tickvals,
-# # 		  ticktext=states,
-# # 		  tickangle=0,
-#        		  tickfont=dict(size=10),
 		  xaxis = dict(
 		  side = 'top',
 		  tickmode = 'linear',
 		  tickangle=tickangle,
-		  dtick = dtickval,
-		  # showlegend=True
+		  dtick = dtickval),
 		)
 
 
