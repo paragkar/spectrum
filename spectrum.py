@@ -587,7 +587,7 @@ if Feature == "FreqMap":
 	operatorstoremove = ["Govt", "Vacant"]
 	for op in operatorstoremove:
 		if op in operatorslist:
-			operatorslist = operatorslist.remove(op)
+			operatorslist.remove(op)
 	selected_operators = st.sidebar.multiselect('Select Operators', options = operatorslist)
 	if selected_operators==[]:
 		sf[sf.columns] = sf[sf.columns].replace(operators) 
