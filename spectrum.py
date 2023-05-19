@@ -9,7 +9,6 @@ import pandas as pd
 import plotly.figure_factory as ff
 import streamlit as st
 
-
 state_dict = {
     'AP': 'Andhra Pradesh',
     'AS': 'Assam',
