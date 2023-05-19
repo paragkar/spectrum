@@ -215,6 +215,12 @@ df = pd.read_excel(file, sheet_name=sheet)
 #choose a dimension
 Dimension = st.sidebar.selectbox('Select a Dimension', options = ["Frequency", "Calendar Year"])
 
+if Dimension == "Calendar Year":
+	masterall = "MasterAll-TDDValueConventional" #all auction related information
+	spectrumofferedvssold = "Spectrum_Offered_vs_Sold"
+	masterdf = df[masterall]
+	offeredvssold = df[spectrumofferedvssold]
+
 if Dimension == "Frequency":
 	#Selecting a Freq Band
 	Band = st.sidebar.selectbox('Select a Band', options = list(ExpTab.keys()))
