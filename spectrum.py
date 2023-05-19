@@ -681,7 +681,7 @@ if Feature == "ExpiryMap":
 		  xgap = 1,
 		  ygap = 1,
 		  hoverinfo ='text',
-		  text = hovertext2,
+		  text = hovertext,
 		  colorscale = 'Hot',
 		    texttemplate="%{z}", 
 		    textfont={"size":8},
