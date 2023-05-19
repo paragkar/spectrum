@@ -514,10 +514,10 @@ def hcolscalefreqexp(operators, colcodes):
 
 #shaping colorscale for driving the color of hoverbox of freq and exp maps
 def hcolmatrixfreqexp(colorscale, sf):
-	hoverlabel_bgcolor = [[x[1] for x in colorscale if x[0] == round(value/(len(colorscale) - 1),2)] 
+	hlabel_bgcolor = [[x[1] for x in colorscale if x[0] == round(value/(len(colorscale) - 1),2)] 
 			      for row in sf.values for value in row]
-	hoverlabel_bgcolor = list(np.array(hoverlabel_bgcolor).reshape(22,int(len(hoverlabel_bgcolor)/22)))
-	return hoverlabel_bgcolor
+	hlabel_bgcolor = list(np.array(hlabel_bgcolor).reshape(22,int(len(hlabel_bgcolor)/22)))
+	return hlabel_bgcolor
 
 #preparing and shaping the colors for hoverbox for auction map
 def hovermatrixauction(dff,reserveprice, auctionprice): 
@@ -656,7 +656,8 @@ if Feature == "AuctionMap":
 	
 
 	
-fig = go.Figure(data=data)
+fig = go.Figure()
+fig.add_trace(fig.data)
 fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 
 #updating figure layouts
