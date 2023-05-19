@@ -104,7 +104,6 @@ def processdff(dff):
     dff = dff.reset_index()
     dff.columns = ["LSA"]+auctionsucessyears[Band]
     dff = dff.set_index("LSA")
-    
     return dff
 
 #convert columns of dataframe into string
@@ -121,7 +120,6 @@ def adddummycols(df,col):
     cols = sorted(df.columns)
     df =df[cols]
     return df
-
 
 #function to calculate the year in which the spectrum was acquired
 def auctioncalyear(ef,excepf,pf1):
@@ -263,7 +261,6 @@ if Dimension == "Frequency":
 	masterdf = df[masterall]
 
 	eff = forexpyearheatmap(ef) # for expiry year heatmap year wise
-
 	bwf = BWExpiring(sff,ef) # hover text for expiry year heatmap year wise
 
 	# st.sidebar.title('Navigation')
@@ -309,26 +306,6 @@ if Dimension == "Frequency":
 	
 	#mapping the year of auction with channels in the freq maps
 	ayear = auctioncalyear(ef,excepf,pf1)
-
-# #function to calculate the year in which the spectrum was acquired
-# def auctioncalyear(ef,excepf,pf1):
-# 	lst=[]
-# 	for col in ef.columns:
-# 		for i, (efval,excepfval) in enumerate(zip(ef[col].values, excepf[col].values)):
-# 			for j, pf1val in enumerate(pf1.values):
-# 				if excepfval == 0:
-# 					error = abs(efval-pf1val[6]) #orignal
-# 				else:
-# 					error = 0
-# 				if (ef.index[i] == pf1val[0]) and error <= errors[Band]:
-# 					lst.append([ef.index[i],col-xaxisadj[Band],pf1val[1],pf1val[2], pf1val[3], pf1val[4], error]) 
-				
-# 	df_final = pd.DataFrame(lst)
-# 	df_final.columns = ["LSA", "StartFreq", "TP", "RP", "AP", "Year", "Error"]
-# 	df_final["Year"] = df_final["Year"].astype(int)
-# 	ayear = df_final.pivot_table(index=["LSA"], columns='StartFreq', values="Year", aggfunc='first').fillna("NA")
-# 	return ayear
-
 
 #processing for hovertext for freq map
 def hovertext1(sf,sff,bandf,ExpTab,ChannelSize,xaxisadj):  
@@ -394,7 +371,6 @@ def hovertext21(sf,sff,ef,bandf,bandexpf,ExpTab,ChannelSize,xaxisadj,ayear):
 					    )
 					    )
 	return hovertext
-
 
 #processing for hovertext for expiry map year wise
 
@@ -503,9 +479,9 @@ def hovermatrixauction(dff,reserveprice, auctionprice):
 			colormatrix = list(colormatrix.values)
 	return colormatrix
 
-
 #**********Main Program Starts here***************
 
+#Feature ="Frequency Map" linked to Dimension = "Frequency"
 if  (Dimension == "Frequency") and (Feature == "FreqMap"):
 	sf = sff.copy()
 	operators = operators[Band]
@@ -552,10 +528,10 @@ if  (Dimension == "Frequency") and (Feature == "FreqMap"):
 	      dtick=1, tickmode="array"),
 			    ),
 		]
-
 	hcolscale=hcolscalefreqexp(operators, colcodes)  #colorscale for hoverbox
 	hoverlabel_bgcolor = hcolmatrixfreqexp(hcolscale, hf) #shaping the hfcolorscale
-							      
+
+#Feature ="Expiry Map" linked to Dimension = "Frequency"
 if  (Dimension == "Frequency") and (Feature == "ExpiryMap"):
 	SubFeature = st.sidebar.selectbox('Select a Sub Feature', options = ["Freq Wise", "Year Wise"])
 	if SubFeature == "Freq Wise":
@@ -596,7 +572,6 @@ if  (Dimension == "Frequency") and (Feature == "ExpiryMap"):
 		      reversescale=True,
 			)
 			  ]
-
 		hcolscale=hcolscalefreqexp(operators, colcodes)  #colorscale for hoverbox
 		hoverlabel_bgcolor = hcolmatrixfreqexp(hcolscale, hf) #shaping the hfcolorscale
 		
@@ -619,15 +594,16 @@ if  (Dimension == "Frequency") and (Feature == "ExpiryMap"):
 		    textfont={"size":8},
 		    reversescale=True,
 			)]
-		
 		hoverlabel_bgcolor = "#002855" #subdued black
 
+#This dict has been defined for the Feature = Auction Map
 type_dict ={"Auction Price": auctionprice,
 	    "Reserve Price": reserveprice, 
 	    "Quantum Offered": offeredspectrum, 
 	    "Quantum Sold": soldspectrum, 
 	    "Quantum Unsold": unsoldspectrum}
 
+#Feature ="Auction Map" linked to Dimension = "Frequency"
 if  (Dimension == "Frequency") and (Feature == "AuctionMap"):
 	pricemaster = pricemaster[(pricemaster["Band"]==Band) & (pricemaster["Year"] != 2018)]
 	pricemaster["Year"] = sorted([str(x) for x in pricemaster["Year"].values])
@@ -654,7 +630,7 @@ if  (Dimension == "Frequency") and (Feature == "AuctionMap"):
 	hoverlabel_bgcolor = hovermatrixauction(dff,reserveprice,auctionprice)
 	
 
-	
+#Plotting the final Heatmap	
 fig = go.Figure(data=data)
 fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 
