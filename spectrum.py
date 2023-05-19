@@ -583,7 +583,7 @@ if Feature == "FreqMap":
 	sf = sff.copy()
 	operators = operators[Band]
 	hf = sf[sf.columns].replace(operators) # dataframe for hovertext
-	selected_operators = st.sidebar.multiselect('Select Operators', sorted(list(operators.keys())))
+	selected_operators = st.sidebar.multiselect('Select Operators', options = sorted(list(operators.keys())))
 	if selected_operators==[]:
 		sf[sf.columns] = sf[sf.columns].replace(operators) 
 		colorscale = colscalefreqmap(operators, colcodes)
