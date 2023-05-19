@@ -390,7 +390,7 @@ def auctioncalyear(ef, efval, pf1, excepfval):
 				else:
 					error = 0
 				if (ef.index[i] == pf1val[0]) and error <= errors[Band]:
-				lst.append([ef.index[i],col-xaxisadj[Band],pf1val[1],pf1val[2], pf1val[3], pf1val[4], error]) 
+					lst.append([ef.index[i],col-xaxisadj[Band],pf1val[1],pf1val[2], pf1val[3], pf1val[4], error]) 
 				
 	df_final = pd.DataFrame(lst)
 	df_final.columns = ["LSA", "StartFreq", "TP", "RP", "AP", "Year", "Error"]
