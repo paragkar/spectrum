@@ -221,7 +221,7 @@ if Dimension == "Calendar Year":
 	masterdf = df[masterall]
 	offeredvssold = df[spectrumofferedvssold]
 	calendaryearlist = sorted(list(set(masterdf["Auction Year"].values)))
-	st.write(calendaryearlist)
+	Year = st.sidebar.selectbox('Select a Year', options = calendaryearlist)
 
 if Dimension == "Frequency":
 	#Selecting a Freq Band
