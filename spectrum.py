@@ -147,13 +147,11 @@ def processdff(dff):
 
 #convert columns of dataframe into string
 def coltostr(df):
-    
 	lst =[]
 	cols = sorted(df.columns)
 	for col in cols:
-	lst.append(str(col))
-	df.columns=lst
-
+		lst.append(str(col))
+		df.columns=lst
 	return df
 
 #add dummy columns for auction failed years
