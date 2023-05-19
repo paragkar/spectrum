@@ -639,7 +639,7 @@ if Feature == "FreqMap":
 							      
 if Feature == "ExpiryMap":
 	SubFeature = st.sidebar.selectbox('Select a Sub Feature', options = ["Freq Wise", "Year Wise"])
-	if SubFeature = "Freq Wise":
+	if SubFeature == "Freq Wise":
 		sf = sff.copy()
 		operators = operators[Band]
 		hf = sf[sf.columns].replace(operators) # dataframe for hovertext
@@ -676,7 +676,7 @@ if Feature == "ExpiryMap":
 		hcolscale=hcolscalefreqexp(operators, colcodes)  #colorscale for hoverbox
 		hoverlabel_bgcolor = hcolmatrixfreqexp(hcolscale, hf) #shaping the hfcolorscale
 		
-	if SubFeature = "Year Wise":
+	if SubFeature == "Year Wise":
 		hovertext = hovertext22(bwf,eff)
 		subtitle ="Expiry Map "+SubFeature
 		tickangle = 0
