@@ -284,14 +284,6 @@ errors= {700:0.25,
             3500:0.1,
             26000:0.5}
 
-
-type_dict ={"Auction Price": auctionprice,
-	    "Reserve Price": reserveprice, 
-	    "Quantum Offered": offeredspectrum, 
-	    "Quantum Sold": soldspectrum, 
-	    "Quantum Unsold": unsoldspectrum}
-
-
 st.set_page_config(layout="wide")
 
 #Selecting a Freq Band
