@@ -475,32 +475,32 @@ def hovertext2(sf,sff,ef,bandf,bandexpf,ExpTab,ChannelSize,xaxisadj):
 def hovertext3(dff,reserveprice,auctionprice,offeredspectrum,soldspectrum,unsoldspectrum):  
 	hovertext=[]
 	for yi, yy in enumerate(dff.index):
-	    hovertext.append([])
-	    for xi, xx in enumerate(dff.columns):
-		winners = dff.values[yi][xi][:-2] #removing comma in the end
-		resprice = reserveprice.values[yi][xi]
-		aucprice = auctionprice.values[yi][xi]
-		offmhz = offeredspectrum.values[yi][xi]
-		soldmhz = soldspectrum.values[yi][xi]
-		unsoldmhz = unsoldspectrum.values[yi][xi]
+		hovertext.append([])
+		for xi, xx in enumerate(dff.columns):
+			winners = dff.values[yi][xi][:-2] #removing comma in the end
+			resprice = reserveprice.values[yi][xi]
+			aucprice = auctionprice.values[yi][xi]
+			offmhz = offeredspectrum.values[yi][xi]
+			soldmhz = soldspectrum.values[yi][xi]
+			unsoldmhz = unsoldspectrum.values[yi][xi]
 
-		hovertext[-1].append(
-				    '{} , {}\
-				     <br / >RP/AP: Rs {} / {} Cr/MHz\
-				     <br / >Offered/Sold/Unsold: {} / {} / {} MHz\
-				     <br>Winners: {}'
+			hovertext[-1].append(
+					    '{} , {}\
+					     <br / >RP/AP: Rs {} / {} Cr/MHz\
+					     <br / >Offered/Sold/Unsold: {} / {} / {} MHz\
+					     <br>Winners: {}'
 
-			     .format( 
-				    state_dict.get(yy),
-				    xx,
-				    resprice,
-				    aucprice,
-				    round(offmhz,2),
-				    round(soldmhz,2),
-				    round(unsoldmhz,2),
-				    winners,
-				    )
-				    )
+				     .format( 
+					    state_dict.get(yy),
+					    xx,
+					    resprice,
+					    aucprice,
+					    round(offmhz,2),
+					    round(soldmhz,2),
+					    round(unsoldmhz,2),
+					    winners,
+					    )
+					    )
 	return hovertext
 
 
