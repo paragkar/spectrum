@@ -326,7 +326,7 @@ colcodes=colcodes.set_index("Description")
 #processing excel tabs into various dataframes
 sf = df[freqtab]
 bandf = df[bandwidthtab]
-bandexpf = df[bandwidthtab]
+bandexpf = df[bandwithexptab]
 of = df[freqtabori]
 sff = sf.copy() #create a copy for further processing, not used now.
 sff = sff.set_index("LSA")
