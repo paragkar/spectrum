@@ -507,7 +507,6 @@ def hcolscaledata1data2(operators, colcodes):
     colors =[]
     for k, v  in operators.items():
         colors.append(colcodes.loc[k,:].values[0])
-
     colorscale=[]
     for i in range(len(scale)):
         colorscale.append([scale[i],colors[i]])
@@ -515,12 +514,9 @@ def hcolscaledata1data2(operators, colcodes):
 
 #shaping colorscale for driving the color of hoverbox of data1 & data2
 def hcolmatrixdata1data2(colorscale, sf):
-
 	hoverlabel_bgcolor = [[x[1] for x in colorscale if x[0] == round(value/(len(colorscale) - 1),2)] 
 			      for row in sf.values for value in row]
-
 	hoverlabel_bgcolor = list(np.array(hoverlabel_bgcolor).reshape(22,int(len(hoverlabel_bgcolor)/22)))
-	
 	return hoverlabel_bgcolor
 
 #preparing and shaping the colors for hoverbox for data3
@@ -645,22 +641,22 @@ if Feature == "AuctionMap":
 	tickangle=0 
 	hovertext = hovertext3(dff,reserveprice,auctionprice,offeredspectrum,soldspectrum,unsoldspectrum)
 	data3 = [go.Heatmap(
-			z = round(pricemaster[Type],1),
-			y = pricemaster["LSA"],
-			x = pricemaster["Year"],
-			xgap = 1,
-			ygap = 1,
-			hoverinfo ='text',
-			text = hovertext,
-			colorscale='Hot',
-				texttemplate="%{z}", 
-				textfont={"size":10},
-				reversescale=True,
-				),
+		z = round(pricemaster[Type],1),
+		y = pricemaster["LSA"],
+		x = pricemaster["Year"],
+		xgap = 1,
+		ygap = 1,
+		hoverinfo ='text',
+		text = hovertext,
+		colorscale='Hot',
+			texttemplate="%{z}", 
+			textfont={"size":10},
+			reversescale=True,
+			),
 		]
 	fig = go.Figure(data=data3)
-	hoverlabel_bgcolor3 = hovermatrixdata3(dff,reserveprice,auctionprice)
-	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor3,font=dict(size=12, color='white')))
+# 	hoverlabel_bgcolor3 = hovermatrixdata3(dff,reserveprice,auctionprice)
+# 	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor3,font=dict(size=12, color='white')))
 	
 
 #updating figure layouts
