@@ -630,18 +630,19 @@ if Feature == "ExpiryMap":
 	hcolscale=hcolscalefreqexp(operators, colcodes)  #colorscale for hoverbox
 	hoverlabel_bgcolor = hcolmatrixfreqexp(hcolscale, hf) #shaping the hfcolorscale
 
-
+type_dict ={"Auction Price": "auctionprice", "Reserve Price": "reserveprice", "Spectrum Offered": "offeredspectrum", "Spectrum Sold": "soldspectrum", "Spectrum Unsold": "unsoldspectrum"}
 if Feature == "AuctionMap":
 	pricemaster = pricemaster[(pricemaster["Band"]==Band) & (pricemaster["Year"] != 2018)]
 	pricemaster["Year"] = sorted([str(x) for x in pricemaster["Year"].values])
-	Type = st.sidebar.selectbox('Select Price Type', options = ["Auction Price","Reserve Price"])
+	Type = st.sidebar.selectbox('Select Price Type', options = ["Auction Price","Reserve Price","Spectrum Offered", "Spectrum Sold", "Spectrum Unsold])
+	typedf = type_dict[Type]
 	subtitle = Type
 	tickangle=0 
 	hovertext = hovertext3(dff,reserveprice,auctionprice,offeredspectrum,soldspectrum,unsoldspectrum)
 	data = [go.Heatmap(
-		z = round(pricemaster[Type],1),
-		y = pricemaster["LSA"],
-		x = pricemaster["Year"],
+		z = typedf.values,
+		y = typedf.index,
+		x = typedf.columns,
 		xgap = 1,
 		ygap = 1,
 		hoverinfo ='text',
