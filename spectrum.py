@@ -628,8 +628,8 @@ if Feature == "AuctionMap":
 	pricemaster["Year"] = sorted([str(x) for x in pricemaster["Year"].values])
 	Type = st.sidebar.selectbox('Select Price Type', options = ["Auction Price","Reserve Price"])
 	subtitle = Type
-	tickangle=0
-	hovertext = hovertext3(dff,reserveprice,auctionprice,offeredspectrum,soldspectrum,unsoldspectrum): 
+	tickangle=0 
+	hovertext = hovertext3(dff,reserveprice,auctionprice,offeredspectrum,soldspectrum,unsoldspectrum)
 	data3 = [go.Heatmap(
 			z = round(pricemaster[Type],1),
 			y = pricemaster["LSA"],
