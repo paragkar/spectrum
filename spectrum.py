@@ -121,6 +121,26 @@ def adddummycols(df,col):
     cols = sorted(df.columns)
     df =df[cols]
     return df
+
+
+#function to calculate the year in which the spectrum was acquired
+def auctioncalyear(ef,excepf,pf1):
+	lst=[]
+	for col in ef.columns:
+		for i, (efval,excepfval) in enumerate(zip(ef[col].values, excepf[col].values)):
+			for j, pf1val in enumerate(pf1.values):
+				if excepfval == 0:
+					error = abs(efval-pf1val[6]) #orignal
+				else:
+					error = 0
+				if (ef.index[i] == pf1val[0]) and error <= errors[Band]:
+					lst.append([ef.index[i],col-xaxisadj[Band],pf1val[1],pf1val[2], pf1val[3], pf1val[4], error]) 
+				
+	df_final = pd.DataFrame(lst)
+	df_final.columns = ["LSA", "StartFreq", "TP", "RP", "AP", "Year", "Error"]
+	df_final["Year"] = df_final["Year"].astype(int)
+	ayear = df_final.pivot_table(index=["LSA"], columns='StartFreq', values="Year", aggfunc='first').fillna("NA")
+	return ayear
     
 #defining all dictionaries here with data linked to a specific band
 title_map = {700:"(FDD Up/Down - 703-748 / 758-803 MHz)",
@@ -290,24 +310,24 @@ if Dimension == "Frequency":
 	#mapping the year of auction with channels in the freq maps
 	ayear = auctioncalyear(ef,excepf,pf1)
 
-#function to calculate the year in which the spectrum was acquired
-def auctioncalyear(ef,excepf,pf1):
-	lst=[]
-	for col in ef.columns:
-		for i, (efval,excepfval) in enumerate(zip(ef[col].values, excepf[col].values)):
-			for j, pf1val in enumerate(pf1.values):
-				if excepfval == 0:
-					error = abs(efval-pf1val[6]) #orignal
-				else:
-					error = 0
-				if (ef.index[i] == pf1val[0]) and error <= errors[Band]:
-					lst.append([ef.index[i],col-xaxisadj[Band],pf1val[1],pf1val[2], pf1val[3], pf1val[4], error]) 
+# #function to calculate the year in which the spectrum was acquired
+# def auctioncalyear(ef,excepf,pf1):
+# 	lst=[]
+# 	for col in ef.columns:
+# 		for i, (efval,excepfval) in enumerate(zip(ef[col].values, excepf[col].values)):
+# 			for j, pf1val in enumerate(pf1.values):
+# 				if excepfval == 0:
+# 					error = abs(efval-pf1val[6]) #orignal
+# 				else:
+# 					error = 0
+# 				if (ef.index[i] == pf1val[0]) and error <= errors[Band]:
+# 					lst.append([ef.index[i],col-xaxisadj[Band],pf1val[1],pf1val[2], pf1val[3], pf1val[4], error]) 
 				
-	df_final = pd.DataFrame(lst)
-	df_final.columns = ["LSA", "StartFreq", "TP", "RP", "AP", "Year", "Error"]
-	df_final["Year"] = df_final["Year"].astype(int)
-	ayear = df_final.pivot_table(index=["LSA"], columns='StartFreq', values="Year", aggfunc='first').fillna("NA")
-	return ayear
+# 	df_final = pd.DataFrame(lst)
+# 	df_final.columns = ["LSA", "StartFreq", "TP", "RP", "AP", "Year", "Error"]
+# 	df_final["Year"] = df_final["Year"].astype(int)
+# 	ayear = df_final.pivot_table(index=["LSA"], columns='StartFreq', values="Year", aggfunc='first').fillna("NA")
+# 	return ayear
 
 
 #processing for hovertext for freq map
