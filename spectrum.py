@@ -527,23 +527,23 @@ def hcolmatrixdata1data2(colorscale, sf):
 def hovermatrixdata3(dff,reserveprice, auctionprice): 
     lst =[]
 	for yi, yy in enumerate(dff.index):
-	reserveprice = reserveprice.replace("NA\s*", np.nan, regex = True)
-	auctionprice = auctionprice.replace("NA\s*", np.nan, regex = True)
-	delta = auctionprice-reserveprice
-	delta = delta.replace(np.nan, "NA")
-	for xi, xx in enumerate(dff.columns):
-	    delval = delta.values[yi][xi]
-	    if delval =="NA":
-		ccode = '#000000' #auction failed 
-	    elif delval == 0:
-		ccode = '#00FF00' #auction price = reserve price
-	    else:
-		ccode = '#FF0000' #auction price > reserve price
-	    lst.append([yy,xx,ccode])
-	    temp = pd.DataFrame(lst)
-	    temp.columns = ["LSA", "Year", "Color"]
-	    colormatrix = temp.pivot(index='LSA', columns='Year', values="Color")
-	    colormatrix = list(colormatrix.values)
+		reserveprice = reserveprice.replace("NA\s*", np.nan, regex = True)
+		auctionprice = auctionprice.replace("NA\s*", np.nan, regex = True)
+		delta = auctionprice-reserveprice
+		delta = delta.replace(np.nan, "NA")
+		for xi, xx in enumerate(dff.columns):
+		    delval = delta.values[yi][xi]
+		    if delval =="NA":
+			ccode = '#000000' #auction failed 
+		    elif delval == 0:
+			ccode = '#00FF00' #auction price = reserve price
+		    else:
+			ccode = '#FF0000' #auction price > reserve price
+		    lst.append([yy,xx,ccode])
+		    temp = pd.DataFrame(lst)
+		    temp.columns = ["LSA", "Year", "Color"]
+		    colormatrix = temp.pivot(index='LSA', columns='Year', values="Color")
+		    colormatrix = list(colormatrix.values)
 	return colormatrix
 
 #menu for selecting features 
