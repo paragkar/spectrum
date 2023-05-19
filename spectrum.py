@@ -640,7 +640,7 @@ if Feature == "AuctionMap":
 	subtitle = Type
 	tickangle=0 
 	hovertext = hovertext3(dff,reserveprice,auctionprice,offeredspectrum,soldspectrum,unsoldspectrum)
-	data3 = [go.Heatmap(
+	data = [go.Heatmap(
 		z = round(pricemaster[Type],1),
 		y = pricemaster["LSA"],
 		x = pricemaster["Year"],
