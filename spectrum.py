@@ -361,8 +361,11 @@ offeredvssold = df[spectrumofferedvssold]
 offeredvssold = offeredvssold[(offeredvssold["Band"] == Band) & (offeredvssold["Year"] != 2018)]
 offeredvssold = offeredvssold.drop(columns =["Band"]).reset_index(drop=True)
 offeredspectrum = offeredvssold.pivot(index=["LSA"], columns='Year', values="Offered").fillna("NA")
+offeredspectrum = coltostr(offeredspectrum) #convert columns data type to string
 soldspectrum = offeredvssold.pivot(index=["LSA"], columns='Year', values="Sold").fillna("NA")
+soldspectrum = coltostr(soldspectrum) #convert columns data type to string
 unsoldspectrum = offeredvssold.pivot(index=["LSA"], columns='Year', values="Unsold").fillna("NA")
+unsoldspectrum = coltostr(unsoldspectrum) #convert columns data type to string
 
 #processing & restructuring dataframe auction price for hovertext of data3
 auctionprice = pricemaster[(pricemaster["Band"] == Band) & (pricemaster["Year"] != 2018)]
