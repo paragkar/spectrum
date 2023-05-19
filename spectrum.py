@@ -87,7 +87,7 @@ def processdff(dff):
         dff = (dff*2).round(2)
     dff = dff.replace(0,"")
     dff= dff.reset_index().set_index("Year")
-    dff =dff.replace("Voda Idea","VodaIdea")
+    dff =dff.replace("Voda Idea","VI")
     dff = dff.replace("Vodafone", "Voda")
     dff = dff.astype(str)
     lst =[]
