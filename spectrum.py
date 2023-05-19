@@ -150,7 +150,7 @@ def coltostr(df):
 	lst =[]
 	for col in df.columns:
 		lst.append(str(col))
-		df.columns=lst
+	df.columns=lst
 	return df
 
 #add dummy columns for auction failed years
