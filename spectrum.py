@@ -525,7 +525,7 @@ def hcolmatrixdata1data2(colorscale, sf):
 
 #preparing and shaping the colors for hoverbox for data3
 def hovermatrixdata3(dff,reserveprice, auctionprice): 
-    lst =[]
+	lst =[]
 	for yi, yy in enumerate(dff.index):
 		reserveprice = reserveprice.replace("NA\s*", np.nan, regex = True)
 		auctionprice = auctionprice.replace("NA\s*", np.nan, regex = True)
