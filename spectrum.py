@@ -380,7 +380,7 @@ reserveprice = coltostr(reserveprice) #convert columns data type to string
 reserveprice = reserveprice.replace(0,"NA")
 
 #function to calculate the year in which the spectrum was acquired
-def auctioncalyear(ef,excef,pf1):
+def auctioncalyear(ef,excepf,pf1):
 	lst=[]
 	for col in ef.columns:
 		for i, (efval,excepfval) in enumerate(zip(ef[col].values, excepf[col].values)):
@@ -427,7 +427,7 @@ def hovertext1(sf,sff,bandf,ExpTab,ChannelSize,xaxisadj):
 					    )
 	return hovertext
 
-ayear = auctioncalyear(ef,excef,pf1)
+ayear = auctioncalyear(ef,excepf,pf1)
 
 #processing for hovertext for expiry map freq wise
 def hovertext21(sf,sff,ef,bandf,bandexpf,ExpTab,ChannelSize,xaxisadj,ayear):
