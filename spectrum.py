@@ -540,7 +540,7 @@ if  (Dimension == "Frequency Band") and (Feature == "FreqMap"):
 	hoverlabel_bgcolor = hcolmatrixfreqexp(hcolscale, hf) #shaping the hfcolorscale
 
 #Feature ="Expiry Map" linked to Dimension = "Frequency"
-if  (Dimension == "Frequency") and (Feature == "ExpiryMap"):
+if  (Dimension == "Frequency Band") and (Feature == "ExpiryMap"):
 	SubFeature = st.sidebar.selectbox('Select a Sub Feature', options = ["Freq Wise", "Year Wise"])
 	if SubFeature == "Freq Wise":
 		sf = sff.copy()
