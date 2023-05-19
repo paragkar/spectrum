@@ -565,7 +565,7 @@ def hcolmatrixshaping(colorscale, sf):
 ########################### processing for hovercolors for data1 & data2 ends
 
 #menu for selecting features 
-Feature = st.sidebar.selectbox('Select a Feature', options = ["FreqMap", "ExpiryMap", "PriceMap"])
+Feature = st.sidebar.selectbox('Select a Feature', options = ["FreqMap", "ExpiryMap", "AuctionMap"])
 
 if Feature == "FreqMap":
 	sf = sff.copy()
@@ -656,7 +656,7 @@ if Feature == "ExpiryMap":
 	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 
 
-if Feature == "PriceMap":
+if Feature == "AuctionMap":
 	pricemaster = pricemaster[(pricemaster["Band"]==Band) & (pricemaster["Year"] != 2018)]
 	pricemaster["Year"] = sorted([str(x) for x in pricemaster["Year"].values])
 	Type = st.sidebar.selectbox('Select Price Type', options = ["Auction Price","Reserve Price"])
