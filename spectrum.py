@@ -483,22 +483,22 @@ def hovertext22(bwf,eff):
 			else:
 				opwiseexpMHz = ', '.join(str(e) for e in opwiseexpMHz) #converting a list into string
 
-		TotalBW = list(bwff[(bwff["ExpYear"]==xx) & (bwff.index ==yy)]["BW"].values)
-		if TotalBW==[]:
-			TotalBW="NA"
-		else:
-			TotalBW = round(sum([float(x) for x in TotalBW]),2)
+			TotalBW = list(bwff[(bwff["ExpYear"]==xx) & (bwff.index ==yy)]["BW"].values)
+			if TotalBW==[]:
+				TotalBW="NA"
+			else:
+				TotalBW = round(sum([float(x) for x in TotalBW]),2)
 
-		hovertext[-1].append(
-				    '{} : Expiry in {} Years\
-				    <br />Break Up : {}'
+			hovertext[-1].append(
+					    '{} : Expiry in {} Years\
+					    <br />Break Up : {}'
 
-			     .format(
-				    state_dict.get(yy),
-				    round(xx,2), 
-				    opwiseexpMHz,
-				    )
-				    )
+				     .format(
+					    state_dict.get(yy),
+					    round(xx,2), 
+					    opwiseexpMHz,
+					    )
+					    )
 	return hovertext
 	
 
