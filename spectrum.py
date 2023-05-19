@@ -9,30 +9,11 @@ import pandas as pd
 import plotly.figure_factory as ff
 import streamlit as st
 
-state_dict = {
-    'AP': 'Andhra Pradesh',
-    'AS': 'Assam',
-    'BH': 'Bihar',
-    'DL': 'Delhi',
-    'GU': 'Gujarat',
-    'HA': 'Haryana',
-    'HP': 'Himachal Pradesh',
-    'JK': 'Jammu & Kashmir',
-    'KA': 'Karnataka',
-    'KE': 'Kerala',
-    'KO': 'Kolkata',
-    'MP': 'Madhya Pradesh',
-    'MA': 'Maharashtra',
-    'MU': 'Mumbai',
-    'NE': 'Northeast',
-    'OR': 'Odisha',
-    'PU': 'Punjab',
-    'RA': 'Rajasthan',
-    'TN': 'Tamil Nadu',
-    'UPE': 'Uttar Pradesh (East)',
-    'UPW': 'Uttar Pradesh (West)',
-    'WB': 'West Bengal'
-}
+state_dict = {'AP': 'Andhra Pradesh', 'AS': 'Assam', 'BH': 'Bihar', 'DL': 'Delhi', 'GU': 'Gujarat',
+    'HA': 'Haryana','HP': 'Himachal Pradesh','JK': 'Jammu & Kashmir','KA': 'Karnataka',
+    'KE': 'Kerala','KO': 'Kolkata','MP': 'Madhya Pradesh','MA': 'Maharashtra','MU': 'Mumbai',
+    'NE': 'Northeast','OR': 'Odisha','PU': 'Punjab','RA': 'Rajasthan','TN': 'Tamil Nadu',
+    'UPE': 'Uttar Pradesh (East)','UPW': 'Uttar Pradesh (West)','WB': 'West Bengal' }
 
 #preparing color scale for freqmap
 def colscalefreqmap(operators, colcodes):
@@ -46,7 +27,6 @@ def colscalefreqmap(operators, colcodes):
 			colorscale.append([scale[i],colcodes.loc[op,:][0]])
 	colorscale.append([1, np.nan])
 	col= pd.DataFrame(colorscale)
-
 	col.columns =["colscale", "colors"]
 	col["colscaleshift"] = col.iloc[:,0].shift(-1)
 	col = col.iloc[:-1,:]
@@ -58,7 +38,6 @@ def colscalefreqmap(operators, colcodes):
 	return colorscale
 
 #function for calculating expiry year heatmap for yearwise
-
 def forexpyearheatmap(ef):
 	lst1 =[]
 	for i, line1 in enumerate(ef.values):
@@ -80,12 +59,10 @@ def forexpyearheatmap(ef):
 	return df
 
 #function for calculating quantum of spectrum expiring mapped to LSA and Years for expiry map yearwise
-
 def BWExpiring(sff,ef):
 	
 	lst=[]
 	for j, index in enumerate(ef.index):
-
 		for i, col in enumerate(ef.columns):
 			l= [index, sff.iloc[j,i],ef.iloc[j,i]]
 			lst.append(l)	
@@ -94,11 +71,9 @@ def BWExpiring(sff,ef):
 	df = df.groupby(["ExpYear"])[["LSA","Operators"]].value_counts()*ChannelSize[Band]
 	df = df.reset_index()
 	df.columns =["ExpYear","LSA", "Operators","BW"]
-	
 	return df
 
 #funtion to process pricing datframe for hovertext for auction map
-
 def processdff(dff):
     dff = dff.replace(0,np.nan).fillna(0)
     dff = dff.applymap(lambda x: round(x,2) if type(x)!=str else x)
@@ -116,7 +91,6 @@ def processdff(dff):
     dff = dff.replace("Vodafone", "Voda")
     dff = dff.astype(str)
     lst =[]
-
     for index, row in zip(dff.index,dff.values):
         lst.append([index]+[row[0]+" "+x+" MHz, " for x in row[1:]])
     temp = pd.DataFrame(lst)
@@ -142,18 +116,14 @@ def coltostr(df):
 	return df
 
 #add dummy columns for auction failed years
-
 def adddummycols(df,col):
     df[col]="NA  " # space with NA is delibelitratly added.
     cols = sorted(df.columns)
     df =df[cols]
     return df
     
-
 #defining all dictionaries here with data linked to a specific band
-
-
-title_map = {700:"(FDD Up/Down - 703-748 / 753-803 MHz)",
+title_map = {700:"(FDD Up/Down - 703-748 / 758-803 MHz)",
          800:"(FDD Up/Down : 824-844 / 869-889 MHz)", 
          900:"(FDD Up/Down : 890-915 / 935-960 MHz)", 
          1800:"(FDD Up/Down : 1710-1785 / 1805-1880 MHz)", 
@@ -162,7 +132,6 @@ title_map = {700:"(FDD Up/Down - 703-748 / 753-803 MHz)",
          2500:"(TDD Up/Down : 2500-2690 MHz)",
          3500:"(TDD Up/Down : 3300-3670 MHz)",
          26000:"(TDD Up/Down : 24250-27500 MHz)"}
-
 
 operators = {700: {'Vacant':0,'Railways':1,'Govt':2,'RJIO':3,'BSNL':4},
              800: {'Vacant':0,'RCOM':1,'Govt':2,'RJIO':3,'Bharti':4, 'MTS':5, 'BSNL':6},
@@ -178,93 +147,32 @@ operators = {700: {'Vacant':0,'Railways':1,'Govt':2,'RJIO':3,'BSNL':4},
             }
 
 #if "1" the expiry tab is present and if "0" then not present
-ExpTab = {700:1, 
-          800:1, 
-          900:1,
-          1800:1,
-          2100:1, 
-          2300:1, 
-          2500:1,
-          3500:1,
-          26000:1}
+ExpTab = {700:1, 800:1, 900:1, 1800:1, 2100:1, 2300:1, 2500:1, 3500:1, 26000:1}
 
-ChannelSize = {700:2.5, 
-               800:0.625, 
-               900:0.2,
-               1800:0.2,
-               2100:2.5, 
-               2300:2.5, 
-               2500:5,
-               3500:5,
-               26000:25}
+#Setting the channel sizes for respective frequency maps
+ChannelSize = {700:2.5, 800:0.625, 900:0.2, 1800:0.2, 2100:2.5, 2300:2.5, 2500:5, 3500:5, 26000:25}
 
 # scale of the x axis plots
+dtickfreq = {700:1, 800:0.25, 900:0.4, 1800:1, 2100:1, 2300:1, 2500:2, 3500:5, 26000:50}
 
-dtickfreq = {700:1, 
-         800:0.25, 
-         900:0.4, 
-         1800:1, 
-         2100:1, 
-         2300:1, 
-         2500:2, 
-         3500:5, 
-         26000:50}
-
-dtickauction = {700:1, 
-         800:1, 
-         900:1, 
-         1800:1, 
-         2100:1, 
-         2300:1, 
-         2500:1, 
-         3500:1, 
-         26000:1}
+# used to control the number of ticks on xaxis for chosen feature = AuctionMap
+dtickauction = {700:1, 800:1, 900:1, 1800:1, 2100:1, 2300:1, 2500:1, 3500:1, 26000:1}
 
 # vertical line widths
-
-xgap = {700:1, 
-        800:1, 
-        900:0.5, 
-        1800:0, 
-        2100:1, 
-        2300:1, 
-        2500:1, 
-        3500:1, 
-        26000:1}
+xgap = {700:1, 800:1, 900:0.5, 1800:0, 2100:1, 2300:1, 2500:1, 3500:1, 26000:1}
 
 # adjustment need for tool tip display data for channel frequency
+xaxisadj = {700:1, 800:0.25, 900:0, 1800:0, 2100:1, 2300:1, 2500:2, 3500:0, 26000:0}
 
-xaxisadj = {700:1, 
-            800:0.25, 
-            900:0, 
-            1800:0, 
-            2100:1,
-            2300:1,
-            2500:2,
-            3500:0,
-            26000:0}
+#describing the type of band TDD/FDD
+BandType = {700:"FDD", 800:"FDD", 900:"FDD", 1800:"FDD", 2100:"FDD", 2300:"TDD", 2500:"TDD", 3500:"TDD", 26000:"TDD"}
 
-BandType = {700:"FDD", 
-            800:"FDD", 
-            900:"FDD", 
-            1800:"FDD", 
-            2100:"FDD",
-            2300:"TDD",
-            2500:"TDD",
-            3500:"TDD",
-            26000:"TDD"}
+#auctionfailyears when all auction prices are zero and there are no takers 
+auctionfailyears = {700:["2016","2021"], 800:["2012"], 900:["2013","2016"], 1800:["2013"], 
+        2100:[], 2300:["2022"], 2500:["2021"], 3500:[], 26000:[]}
 
-auctionfailyears = {700:["2016","2021"], #when all auction prices are zero and there are no takers 
-        800:["2012"], 
-        900:["2013","2016"], 
-        1800:["2013"], 
-        2100:[], 
-        2300:["2022"], 
-        2500:["2021"], 
-        3500:[], 
-        26000:[]}
-
-auctionsucessyears = {700:[2022], #these are years where at least in one circle there was a winner
+#auction sucess years are years where at least in one circle there was a winner
+auctionsucessyears = {700:[2022], 
         800:[2013, 2015, 2016, 2021, 2022], 
         900:[2014, 2015, 2021, 2022], 
         1800:[2012, 2014, 2015, 2016, 2021, 2022], 
@@ -274,112 +182,113 @@ auctionsucessyears = {700:[2022], #these are years where at least in one circle 
         3500:[2022], 
         26000:[2022]}
 
-errors= {700:0.25, 
-            800:1, 
-            900:1, 
-            1800:1, 
-            2100:1.5,
-            2300:1.25,
-            2500:1,
-            3500:0.1,
-            26000:0.5}
+#Error is added to auction closing date so that freq assignment dates fall within the window.
+#This helps to identify which expiry year is linked to which operators
+errors= {700:0.25, 800:1, 900:1, 1800:1, 2100:1.5, 2300:1.25, 2500:1, 3500:0.1, 26000:0.5}
 
 st.set_page_config(layout="wide")
 
-#Selecting a Freq Band
-Band = st.sidebar.selectbox('Select a Band', options = list(ExpTab.keys()))
-
 file = "https://paragkar.com/wp-content/uploads/2023/05/spectrum_map.xlsx"
-
-#setting up excel file tabs for reading data
-freqtab = str(Band)+"MHz"
-bandwidthtab = str(Band)+"MHzBW"
-bandwithexptab = str(Band)+"MHzExpBW"
-freqexpbwcalsheet = str(Band)+"MHzExpBWCalSheet"
-freqtabori = str(Band)+"MHzOriginal"
-pricetab = str(Band)+"MHzPrice"
-exptab = str(Band)+"MHzExpCorrected"
-expexceptab = str(Band)+"MHzExpException"
-spectrumall = "Spectrum_All"
-spectrumofferedvssold = "Spectrum_Offered_vs_Sold"
-masterall = "MasterAll-TDDValueConventional" #all auction related information 
-
 #loading data from excel file
 xl = pd.ExcelFile(file)
 sheet = xl.sheet_names
 df = pd.read_excel(file, sheet_name=sheet)
 
-#processing colorcode excel data tab
-colcodes = df["ColorCodes"]
-colcodes=colcodes.set_index("Description")
+#choose a dimension
+Dimension = st.sidebar.selectbox('Select a Dimension', options = ["Frequency", "Auction Year"])
 
-#processing excel tabs into various dataframes
-sf = df[freqtab]
-bandf = df[bandwidthtab]
-bandexpf = df[bandwithexptab]
-bandexpcalsheetf = df[freqexpbwcalsheet]
-of = df[freqtabori]
-sff = sf.copy() #create a copy for further processing, not used now.
-sff = sff.set_index("LSA")
-pf =df[pricetab]
-pf1 = pf.copy()
-pf = pf[pf["Year"]==2022]
-if ExpTab[Band]==1:
-    ef = df[exptab]
-    ef = ef.set_index("LSA")
-    excepf = df[expexceptab]
-    excepf = excepf.set_index("LSA")   
-sf = sf.set_index("LSA")
-of = of.set_index("LSA")
-pf = pf.set_index("LSA")
-bandf = bandf.set_index("LSA")
-bandexpf = bandexpf.set_index("LSA")
-masterdf = df[masterall]
+if Dimension == "Frequency":
+	#Selecting a Freq Band
+	Band = st.sidebar.selectbox('Select a Band', options = list(ExpTab.keys()))
+	Feature = st.sidebar.selectbox('Select a Feature', options = ["FreqMap", "ExpiryMap", "AuctionMap"])
+	
+	#setting up excel file tabs for reading data
+	freqtab = str(Band)+"MHz"
+	bandwidthtab = str(Band)+"MHzBW"
+	bandwithexptab = str(Band)+"MHzExpBW"
+	freqexpbwcalsheet = str(Band)+"MHzExpBWCalSheet"
+	freqtabori = str(Band)+"MHzOriginal"
+	pricetab = str(Band)+"MHzPrice"
+	exptab = str(Band)+"MHzExpCorrected"
+	expexceptab = str(Band)+"MHzExpException"
+	spectrumall = "Spectrum_All"
+	spectrumofferedvssold = "Spectrum_Offered_vs_Sold"
+	masterall = "MasterAll-TDDValueConventional" #all auction related information 
+	
+	#processing colorcode excel data tab
+	colcodes = df["ColorCodes"]
+	colcodes=colcodes.set_index("Description")
 
-eff = forexpyearheatmap(ef) # for expiry year heatmap year wise
+	#processing excel tabs into various dataframes
+	sf = df[freqtab]
+	bandf = df[bandwidthtab]
+	bandexpf = df[bandwithexptab]
+	bandexpcalsheetf = df[freqexpbwcalsheet]
+	of = df[freqtabori]
+	sff = sf.copy() #create a copy for further processing, not used now.
+	sff = sff.set_index("LSA")
+	pf =df[pricetab]
+	pf1 = pf.copy()
+	pf = pf[pf["Year"]==2022]
+	if ExpTab[Band]==1:
+	    ef = df[exptab]
+	    ef = ef.set_index("LSA")
+	    excepf = df[expexceptab]
+	    excepf = excepf.set_index("LSA")   
+	sf = sf.set_index("LSA")
+	of = of.set_index("LSA")
+	pf = pf.set_index("LSA")
+	bandf = bandf.set_index("LSA")
+	bandexpf = bandexpf.set_index("LSA")
+	masterdf = df[masterall]
 
-bwf = BWExpiring(sff,ef) # hover text for expiry year heatmap year wise
+	eff = forexpyearheatmap(ef) # for expiry year heatmap year wise
 
-# st.sidebar.title('Navigation')
+	bwf = BWExpiring(sff,ef) # hover text for expiry year heatmap year wise
 
-#processing "Spectrum_all" excel tab data
-dff = df[spectrumall] #contains information of LSA wise mapping oldoperators with new operators
-dff = processdff(dff)
-dff = coltostr(dff)
-dff = adddummycols(dff,auctionfailyears[Band])
-dff = dff.applymap(lambda x: "NA  " if x=="" else x) # space with NA is delibelitratly added as it gets removed with ","
+	# st.sidebar.title('Navigation')
 
-#processing pricemaster excel tab data
-pricemaster = df["Master_Price_Sheet"]
-pricemaster.rename(columns = {"FP" : "Auction Price", "DP": "Reserve Price"}, inplace = True)
+	#processing "Spectrum_all" excel tab data
+	dff = df[spectrumall] #contains information of LSA wise mapping oldoperators with new operators
+	dff = processdff(dff)
+	dff = coltostr(dff)
+	dff = adddummycols(dff,auctionfailyears[Band])
+	dff = dff.applymap(lambda x: "NA  " if x=="" else x) # space with NA is delibelitratly added as it gets removed with ","
 
-#processing & restructuring dataframe spectrum offered vs sold & unsold for hovertext of data3
-offeredvssold = df[spectrumofferedvssold]
-offeredvssold = offeredvssold[(offeredvssold["Band"] == Band) & (offeredvssold["Year"] != 2018)]
-offeredvssold = offeredvssold.drop(columns =["Band"]).reset_index(drop=True)
-offeredspectrum = offeredvssold.pivot(index=["LSA"], columns='Year', values="Offered").fillna("NA")
-offeredspectrum = coltostr(offeredspectrum) #convert columns data type to string
-soldspectrum = offeredvssold.pivot(index=["LSA"], columns='Year', values="Sold").fillna("NA")
-soldspectrum = coltostr(soldspectrum) #convert columns data type to string
-unsoldspectrum = offeredvssold.pivot(index=["LSA"], columns='Year', values="Unsold").fillna("NA")
-unsoldspectrum = coltostr(unsoldspectrum) #convert columns data type to string
+	#processing pricemaster excel tab data
+	pricemaster = df["Master_Price_Sheet"]
+	pricemaster.rename(columns = {"FP" : "Auction Price", "DP": "Reserve Price"}, inplace = True)
 
-#processing & restructuring dataframe auction price for hovertext of data3
-auctionprice = pricemaster[(pricemaster["Band"] == Band) & (pricemaster["Year"] != 2018)]
-auctionprice = auctionprice.pivot(index=["LSA"], columns='Year', values="Auction Price").fillna("NA")
-auctionprice = auctionprice.loc[:, (auctionprice != 0).any(axis=0)]
-auctionprice = auctionprice.applymap(lambda x: round(x,2))
-auctionprice = coltostr(auctionprice) #convert columns data type to string
-auctionprice = adddummycols(auctionprice,auctionfailyears[Band])
-auctionprice = auctionprice.replace(0,"NA")
+	#processing & restructuring dataframe spectrum offered vs sold & unsold for hovertext of data3
+	offeredvssold = df[spectrumofferedvssold]
+	offeredvssold = offeredvssold[(offeredvssold["Band"] == Band) & (offeredvssold["Year"] != 2018)]
+	offeredvssold = offeredvssold.drop(columns =["Band"]).reset_index(drop=True)
+	offeredspectrum = offeredvssold.pivot(index=["LSA"], columns='Year', values="Offered").fillna("NA")
+	offeredspectrum = coltostr(offeredspectrum) #convert columns data type to string
+	soldspectrum = offeredvssold.pivot(index=["LSA"], columns='Year', values="Sold").fillna("NA")
+	soldspectrum = coltostr(soldspectrum) #convert columns data type to string
+	unsoldspectrum = offeredvssold.pivot(index=["LSA"], columns='Year', values="Unsold").fillna("NA")
+	unsoldspectrum = coltostr(unsoldspectrum) #convert columns data type to string
 
-#processing & restructuring dataframe reserve price for hovertext of data3
-reserveprice = pricemaster[(pricemaster["Band"] == Band) & (pricemaster["Year"] != 2018)]
-reserveprice = reserveprice.pivot(index=["LSA"], columns='Year', values="Reserve Price").fillna("NA")
-reserveprice = reserveprice.loc[:, (reserveprice != 0).any(axis=0)]
-reserveprice = reserveprice.applymap(lambda x: round(x,2))
-reserveprice = coltostr(reserveprice) #convert columns data type to string
-reserveprice = reserveprice.replace(0,"NA")
+	#processing & restructuring dataframe auction price for hovertext of data3
+	auctionprice = pricemaster[(pricemaster["Band"] == Band) & (pricemaster["Year"] != 2018)]
+	auctionprice = auctionprice.pivot(index=["LSA"], columns='Year', values="Auction Price").fillna("NA")
+	auctionprice = auctionprice.loc[:, (auctionprice != 0).any(axis=0)]
+	auctionprice = auctionprice.applymap(lambda x: round(x,2))
+	auctionprice = coltostr(auctionprice) #convert columns data type to string
+	auctionprice = adddummycols(auctionprice,auctionfailyears[Band])
+	auctionprice = auctionprice.replace(0,"NA")
+
+	#processing & restructuring dataframe reserve price for hovertext of data3
+	reserveprice = pricemaster[(pricemaster["Band"] == Band) & (pricemaster["Year"] != 2018)]
+	reserveprice = reserveprice.pivot(index=["LSA"], columns='Year', values="Reserve Price").fillna("NA")
+	reserveprice = reserveprice.loc[:, (reserveprice != 0).any(axis=0)]
+	reserveprice = reserveprice.applymap(lambda x: round(x,2))
+	reserveprice = coltostr(reserveprice) #convert columns data type to string
+	reserveprice = reserveprice.replace(0,"NA")
+	
+	#mapping the year of auction with channels in the freq maps
+	ayear = auctioncalyear(ef,excepf,pf1)
 
 #function to calculate the year in which the spectrum was acquired
 def auctioncalyear(ef,excepf,pf1):
@@ -398,9 +307,6 @@ def auctioncalyear(ef,excepf,pf1):
 	df_final.columns = ["LSA", "StartFreq", "TP", "RP", "AP", "Year", "Error"]
 	df_final["Year"] = df_final["Year"].astype(int)
 	ayear = df_final.pivot_table(index=["LSA"], columns='StartFreq', values="Year", aggfunc='first').fillna("NA")
-# 	tp = df_final.pivot_table(index=["LSA"], columns='StartFreq', values="TP", aggfunc='first').fillna("NA")
-# 	rp = df_final.pivot_table(index=["LSA"], columns='StartFreq', values="RP", aggfunc='first').fillna("NA")
-# 	ap = df_final.pivot_table(index=["LSA"], columns='StartFreq', values="AP", aggfunc='first').fillna("NA")
 	return ayear
 
 
@@ -429,7 +335,6 @@ def hovertext1(sf,sff,bandf,ExpTab,ChannelSize,xaxisadj):
 					    )
 	return hovertext
 
-ayear = auctioncalyear(ef,excepf,pf1)
 
 #processing for hovertext for expiry map freq wise
 def hovertext21(sf,sff,ef,bandf,bandexpf,ExpTab,ChannelSize,xaxisadj,ayear):
@@ -505,7 +410,6 @@ def hovertext22(bwf,eff):
 					    )
 	return hovertext
 	
-
 #processing for hovertext for Auction Map
 def hovertext3(dff,reserveprice,auctionprice,offeredspectrum,soldspectrum,unsoldspectrum):  
 	hovertext=[]
@@ -537,7 +441,6 @@ def hovertext3(dff,reserveprice,auctionprice,offeredspectrum,soldspectrum,unsold
 					    )
 					    )
 	return hovertext
-
 
 #preparing color scale for hoverbox for freq and exp maps
 def hcolscalefreqexp(operators, colcodes):
@@ -580,10 +483,10 @@ def hovermatrixauction(dff,reserveprice, auctionprice):
 			colormatrix = list(colormatrix.values)
 	return colormatrix
 
-#menu for selecting features 
-Feature = st.sidebar.selectbox('Select a Feature', options = ["FreqMap", "ExpiryMap", "AuctionMap"])
 
-if Feature == "FreqMap":
+#**********Main Program Starts here***************
+
+if  (Dimension == "Frequency") and (Feature == "FreqMap"):
 	sf = sff.copy()
 	operators = operators[Band]
 	hf = sf[sf.columns].replace(operators) # dataframe for hovertext
@@ -632,9 +535,8 @@ if Feature == "FreqMap":
 
 	hcolscale=hcolscalefreqexp(operators, colcodes)  #colorscale for hoverbox
 	hoverlabel_bgcolor = hcolmatrixfreqexp(hcolscale, hf) #shaping the hfcolorscale
-
 							      
-if Feature == "ExpiryMap":
+if  (Dimension == "Frequency") and (Feature == "ExpiryMap"):
 	SubFeature = st.sidebar.selectbox('Select a Sub Feature', options = ["Freq Wise", "Year Wise"])
 	if SubFeature == "Freq Wise":
 		sf = sff.copy()
@@ -706,7 +608,7 @@ type_dict ={"Auction Price": auctionprice,
 	    "Quantum Sold": soldspectrum, 
 	    "Quantum Unsold": unsoldspectrum}
 
-if Feature == "AuctionMap":
+if  (Dimension == "Frequency") and (Feature == "AuctionMap"):
 	pricemaster = pricemaster[(pricemaster["Band"]==Band) & (pricemaster["Year"] != 2018)]
 	pricemaster["Year"] = sorted([str(x) for x in pricemaster["Year"].values])
 	Type = st.sidebar.selectbox('Select Price Type', options = ["Auction Price","Reserve Price","Quantum Offered", "Quantum Sold", "Quantum Unsold"])
