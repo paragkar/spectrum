@@ -292,14 +292,11 @@ errors= {700:0.25,
 st.set_page_config(layout="wide")
 
 #Selecting a Freq Band
-
 Band = st.sidebar.selectbox('Select a Band', options = list(ExpTab.keys()))
 
 file = "https://paragkar.com/wp-content/uploads/2023/05/spectrum_map.xlsx"
 
-
 #setting up excel file tabs for reading data
-
 freqtab = str(Band)+"MHz"
 bandwidthtab = str(Band)+"MHzBW"
 bandwithexptab = str(Band)+"MHzExpBW"
@@ -312,16 +309,13 @@ spectrumofferedvssold = "Spectrum_Offered_vs_Sold"
 masterall = "MasterAll-TDDValueConventional" #all auction related information 
 
 #loading data from excel file
-# xl = pd.ExcelFile('spectrum_map.xlsx')
 xl = pd.ExcelFile(file)
 sheet = xl.sheet_names
-# df = pd.read_excel('spectrum_map.xlsx', sheet_name=sheet)
 df = pd.read_excel(file, sheet_name=sheet)
 
 #processing colorcode excel data tab
 colcodes = df["ColorCodes"]
 colcodes=colcodes.set_index("Description")
-
 
 #processing excel tabs into various dataframes
 sf = df[freqtab]
@@ -345,9 +339,6 @@ bandf = bandf.set_index("LSA")
 bandexpf = bandexpf.set_index("LSA")
 masterdf = df[masterall]
 
-# operators = operators[Band]
-# sf[sf.columns] = sf[sf.columns].replace(operators) #replacing operators data with respective codes
-
 # eff = forexpyearheatmap(ef) # for expiry year heatmap
 
 # bwf = BWExpiring(sff,ef) # for hover text for fig3
@@ -355,50 +346,40 @@ masterdf = df[masterall]
 # st.sidebar.title('Navigation')
 
 #processing "Spectrum_all" excel tab data
-
 dff = df[spectrumall] #contains information of LSA wise mapping oldoperators with new operators
 dff = processdff(dff)
-
 dff = coltostr(dff)
-
 dff = adddummycols(dff,auctionfailyears[Band])
 dff = dff.applymap(lambda x: "NA  " if x=="" else x) # space with NA is delibelitratly added as it gets removed with ","
 
 #processing pricemaster excel tab data
-
 pricemaster = df["Master_Price_Sheet"]
-
 pricemaster.rename(columns = {"FP" : "Auction Price", "DP": "Reserve Price"}, inplace = True)
 
 #processing for spectrum offered vs sold & unsold
-
-# offeredvssold = df[spectrumofferedvssold]
-# offeredvssold = offeredvssold[(offeredvssold["Band"] == Band) & (offeredvssold["Year"] != 2018)]
-# offeredvssold = offeredvssold.drop(columns =["Band"]).reset_index(drop=True)
-
-# offeredspectrum = offeredvssold.pivot(index=["LSA"], columns='Year', values="Offered").fillna("NA")
-# soldspectrum = offeredvssold.pivot(index=["LSA"], columns='Year', values="Sold").fillna("NA")
-# unsoldspectrum = offeredvssold.pivot(index=["LSA"], columns='Year', values="Unsold").fillna("NA")
+offeredvssold = df[spectrumofferedvssold]
+offeredvssold = offeredvssold[(offeredvssold["Band"] == Band) & (offeredvssold["Year"] != 2018)]
+offeredvssold = offeredvssold.drop(columns =["Band"]).reset_index(drop=True)
+offeredspectrum = offeredvssold.pivot(index=["LSA"], columns='Year', values="Offered").fillna("NA")
+soldspectrum = offeredvssold.pivot(index=["LSA"], columns='Year', values="Sold").fillna("NA")
+unsoldspectrum = offeredvssold.pivot(index=["LSA"], columns='Year', values="Unsold").fillna("NA")
 
 #processing for auction price
-# auctionprice = pricemaster[(pricemaster["Band"] == Band) & (pricemaster["Year"] != 2018)]
-# auctionprice = auctionprice.pivot(index=["LSA"], columns='Year', values="Auction Price").fillna("NA")
-# auctionprice = auctionprice.loc[:, (auctionprice != 0).any(axis=0)]
-# auctionprice = auctionprice.applymap(lambda x: round(x,2))
-
-
-# auctionprice = coltostr(auctionprice) #convert columns data type to string
-# auctionprice = adddummycols(auctionprice,auctionfailyears[Band])
-# auctionprice = auctionprice.replace(0,"NA")
+auctionprice = pricemaster[(pricemaster["Band"] == Band) & (pricemaster["Year"] != 2018)]
+auctionprice = auctionprice.pivot(index=["LSA"], columns='Year', values="Auction Price").fillna("NA")
+auctionprice = auctionprice.loc[:, (auctionprice != 0).any(axis=0)]
+auctionprice = auctionprice.applymap(lambda x: round(x,2))
+auctionprice = coltostr(auctionprice) #convert columns data type to string
+auctionprice = adddummycols(auctionprice,auctionfailyears[Band])
+auctionprice = auctionprice.replace(0,"NA")
 
 #processing for reserve price
-# reserveprice = pricemaster[(pricemaster["Band"] == Band) & (pricemaster["Year"] != 2018)]
-# reserveprice = reserveprice.pivot(index=["LSA"], columns='Year', values="Reserve Price").fillna("NA")
-# reserveprice = reserveprice.loc[:, (reserveprice != 0).any(axis=0)]
-# reserveprice = reserveprice.applymap(lambda x: round(x,2))
-
-# reserveprice = coltostr(reserveprice) #convert columns data type to string
-# reserveprice = reserveprice.replace(0,"NA")
+reserveprice = pricemaster[(pricemaster["Band"] == Band) & (pricemaster["Year"] != 2018)]
+reserveprice = reserveprice.pivot(index=["LSA"], columns='Year', values="Reserve Price").fillna("NA")
+reserveprice = reserveprice.loc[:, (reserveprice != 0).any(axis=0)]
+reserveprice = reserveprice.applymap(lambda x: round(x,2))
+reserveprice = coltostr(reserveprice) #convert columns data type to string
+reserveprice = reserveprice.replace(0,"NA")
 
 #processing for histocical information****************
 
@@ -433,33 +414,11 @@ pricemaster.rename(columns = {"FP" : "Auction Price", "DP": "Reserve Price"}, in
 
 
 #processing for hovertext for freq map
-
-# def hovertext1(sf,ExpTab,ef,ayear,ap,rp,pf,ChannelSize,xaxisadj): 
 def hovertext1(sf,sff,bandf,ExpTab,ChannelSize,xaxisadj):  
 	hovertext = []
 	for yi, yy in enumerate(sf.index):
 		hovertext.append([])
 		for xi, xx in enumerate(sf.columns):
-# 			try:
-# 			    auction_year = round(ayear.loc[yy,round(xx-xaxisadj[Band],3)])
-# 			except:
-# 			    auction_year ="NA"
-
-# 			try:
-# 			    auction_price = round(ap.loc[yy,round(xx-xaxisadj[Band],3)],2)
-# 			except:
-# 			    auction_price ="NA"
-
-# 			try:
-# 			    reserve_price = round(rp.loc[yy,round(xx-xaxisadj[Band],3)],2)
-# 			except:
-# 			    reserve_price ="NA"
-
-# 			if round(pf.values[yi][0],1)!=0:
-# 			    latest_rp = round(pf.values[yi][0],2)
-# 			else:
-# 			    latest_rp ="NA"
-
 			operatornew = sff.values[yi][xi]
 			bandwidth = bandf.values[yi][xi]
 			hovertext[-1].append(
@@ -479,10 +438,7 @@ def hovertext1(sf,sff,bandf,ExpTab,ChannelSize,xaxisadj):
 					    )
 	return hovertext
 
-
-
 #processing for hovertext for expiry map
-
 def hovertext2(sf,sff,ef,bandf,bandexpf,ExpTab,ChannelSize,xaxisadj):  
 	hovertext = []
 	for yi, yy in enumerate(sf.index):
@@ -492,26 +448,6 @@ def hovertext2(sf,sff,ef,bandf,bandexpf,ExpTab,ChannelSize,xaxisadj):
 				expiry = round(ef.values[yi][xi],2)
 			else:
 				expiry = "NA"
-# 			try:
-# 			    auction_year = round(ayear.loc[yy,round(xx-xaxisadj[Band],3)])
-# 			except:
-# 			    auction_year ="NA"
-
-# 			try:
-# 			    auction_price = round(ap.loc[yy,round(xx-xaxisadj[Band],3)],2)
-# 			except:
-# 			    auction_price ="NA"
-
-# 			try:
-# 			    reserve_price = round(rp.loc[yy,round(xx-xaxisadj[Band],3)],2)
-# 			except:
-# 			    reserve_price ="NA"
-
-# 			if round(pf.values[yi][0],1)!=0:
-# 			    latest_rp = round(pf.values[yi][0],2)
-# 			else:
-# 			    latest_rp ="NA"
-
 			operatornew = sff.values[yi][xi]
 			bandwidthexpiring = bandexpf.values[yi][xi]
 			bandwidth = bandf.values[yi][xi]
@@ -535,12 +471,44 @@ def hovertext2(sf,sff,ef,bandf,bandexpf,ExpTab,ChannelSize,xaxisadj):
 					    )
 	return hovertext
 
+#processing for hovertext for Auction map
+def hovertext3(dff,reserveprice,auctionprice,offeredspectrum,soldspectrum,unsoldspectrum):  
+	hovertext=[]
+	for yi, yy in enumerate(dff.index):
+	    hovertext.append([])
+	    for xi, xx in enumerate(dff.columns):
+		winners = dff.values[yi][xi][:-2] #removing comma in the end
+		resprice = reserveprice.values[yi][xi]
+		aucprice = auctionprice.values[yi][xi]
+		offmhz = offeredspectrum.values[yi][xi]
+		soldmhz = soldspectrum.values[yi][xi]
+		unsoldmhz = unsoldspectrum.values[yi][xi]
+
+		hovertext[-1].append(
+				    '{} , {}\
+				     <br / >RP/AP: Rs {} / {} Cr/MHz\
+				     <br / >Offered/Sold/Unsold: {} / {} / {} MHz\
+				     <br>Winners: {}'
+
+			     .format( 
+				    state_dict.get(yy),
+				    xx,
+				    resprice,
+				    aucprice,
+				    round(offmhz,2),
+				    round(soldmhz,2),
+				    round(unsoldmhz,2),
+				    winners,
+				    )
+				    )
+	return hovertext
+
 
 # colorscale = hovercolscale(operators, colcodes) # for hoverbox
 
-############################ #processing for hovercolors for data1 & data2 starts
+#processing for hovercolors for data1 & data2 starts
 
-#preparing color scale for hoverbox
+#preparing color scale for hoverbox for data1 & data2
 def hcolscale(operators, colcodes):
     scale = [round(x/(len(operators)-1),2) for x in range(len(operators))]
     colors =[]
@@ -552,7 +520,7 @@ def hcolscale(operators, colcodes):
         colorscale.append([scale[i],colors[i]])
     return colorscale
 
-#shaping the matrix of hovercolscale
+#shaping the matrix of hovercolscale for data1 & data2
 def hcolmatrixshaping(colorscale, sf):
 
 	hoverlabel_bgcolor = [[x[1] for x in colorscale if x[0] == round(value/(len(colorscale) - 1),2)] 
@@ -562,7 +530,7 @@ def hcolmatrixshaping(colorscale, sf):
 	
 	return hoverlabel_bgcolor
 
-########################### processing for hovercolors for data1 & data2 ends
+
 
 #menu for selecting features 
 Feature = st.sidebar.selectbox('Select a Feature', options = ["FreqMap", "ExpiryMap", "AuctionMap"])
@@ -655,14 +623,13 @@ if Feature == "ExpiryMap":
 	hoverlabel_bgcolor = hcolmatrixshaping(hcolscale, hf) #shaping the hfcolorscale
 	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 
-
 if Feature == "AuctionMap":
 	pricemaster = pricemaster[(pricemaster["Band"]==Band) & (pricemaster["Year"] != 2018)]
 	pricemaster["Year"] = sorted([str(x) for x in pricemaster["Year"].values])
 	Type = st.sidebar.selectbox('Select Price Type', options = ["Auction Price","Reserve Price"])
 	subtitle = Type
 	tickangle=0
-
+	hovertext = hovertext3(dff,reserveprice,auctionprice,offeredspectrum,soldspectrum,unsoldspectrum): 
 	data3 = [go.Heatmap(
 			z = round(pricemaster[Type],1),
 			y = pricemaster["LSA"],
@@ -670,7 +637,7 @@ if Feature == "AuctionMap":
 			xgap = 1,
 			ygap = 1,
 			hoverinfo ='text',
-			# text = hovertext1,
+			text = hovertext,
 			colorscale='Hot',
 				texttemplate="%{z}", 
 				textfont={"size":10},
