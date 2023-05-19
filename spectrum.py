@@ -596,8 +596,8 @@ if Feature == "FreqMap":
 
 	fig = go.Figure(data=data1)
 	hcolscale=hcolscaledata1data2(operators, colcodes)  #colorscale for hoverbox
-	hoverlabel_bgcolor = hcolmatrixdata1data2(hcolscale, hf) #shaping the hfcolorscale
-	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
+	hoverlabel_bgcolor1 = hcolmatrixdata1data2(hcolscale, hf) #shaping the hfcolorscale
+	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor1,font=dict(size=12, color='white')))
 
 							      
 if Feature == "ExpiryMap":
@@ -634,8 +634,8 @@ if Feature == "ExpiryMap":
        		  ]
 	fig = go.Figure(data=data2)
 	hcolscale=hcolscaledata1data2(operators, colcodes)  #colorscale for hoverbox
-	hoverlabel_bgcolor = hcolmatrixdata1data2(hcolscale, hf) #shaping the hfcolorscale
-	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
+	hoverlabel_bgcolor2 = hcolmatrixdata1data2(hcolscale, hf) #shaping the hfcolorscale
+	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor2,font=dict(size=12, color='white')))
 
 if Feature == "AuctionMap":
 	pricemaster = pricemaster[(pricemaster["Band"]==Band) & (pricemaster["Year"] != 2018)]
@@ -659,8 +659,8 @@ if Feature == "AuctionMap":
 				),
 		]
 	fig = go.Figure(data=data3)
-	hoverlabel_bgcolor = hovermatrixdata3(dff,reserveprice,auctionprice)
-	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
+	hoverlabel_bgcolor3 = hovermatrixdata3(dff,reserveprice,auctionprice)
+	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor3,font=dict(size=12, color='white')))
 	
 
 #updating figure layouts
