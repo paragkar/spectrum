@@ -514,7 +514,7 @@ def hovertext2(sf,sff,ef,bandf,bandexpf,ExpTab,ChannelSize,xaxisadj):
 
 			operatornew = sff.values[yi][xi]
 			bandwidthexpiring = bandexpf.values[yi][xi]
-		        bandwidth = bandf.values[yi][xi]
+			bandwidth = bandf.values[yi][xi]
 			hovertext[-1].append(
 					    'StartFreq: {} MHz\
 					     <br>Channel Size : {} MHz\
