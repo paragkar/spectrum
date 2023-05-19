@@ -646,7 +646,7 @@ type_dict ={"Auction Price": auctionprice, "Reserve Price": reserveprice, "Spect
 if Feature == "AuctionMap":
 	pricemaster = pricemaster[(pricemaster["Band"]==Band) & (pricemaster["Year"] != 2018)]
 	pricemaster["Year"] = sorted([str(x) for x in pricemaster["Year"].values])
-	Type = st.sidebar.selectbox('Select Price Type', options = ["Auction Price","Reserve Price","Spectrum Offered", "Spectrum Sold", "Spectrum Unsold"])
+	Type = st.sidebar.selectbox('Select Price Type', options = ["Auction Price","Reserve Price","Quantum Offered", "Quantum Sold", "Quantum Unsold"])
 	typedf = type_dict[Type].copy()
 	subtitle = Type
 	tickangle=0
