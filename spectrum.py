@@ -642,7 +642,7 @@ if Feature == "ExpiryMap":
 	hcolscale=hcolscalefreqexp(operators, colcodes)  #colorscale for hoverbox
 	hoverlabel_bgcolor = hcolmatrixfreqexp(hcolscale, hf) #shaping the hfcolorscale
 
-type_dict ={"Auction Price": auctionprice, "Reserve Price": reserveprice, "Spectrum Offered": offeredspectrum, "Spectrum Sold": soldspectrum, "Spectrum Unsold": unsoldspectrum}
+type_dict ={"Auction Price": auctionprice, "Reserve Price": reserveprice, "Quantum Offered": offeredspectrum, "Quantum Sold": soldspectrum, "Quantum Unsold": unsoldspectrum}
 if Feature == "AuctionMap":
 	pricemaster = pricemaster[(pricemaster["Band"]==Band) & (pricemaster["Year"] != 2018)]
 	pricemaster["Year"] = sorted([str(x) for x in pricemaster["Year"].values])
