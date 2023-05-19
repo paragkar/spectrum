@@ -734,6 +734,11 @@ if Feature == "AuctionMap":
 fig = go.Figure(data=data)
 fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 
+if BandType[Band] == "FDD":
+	title_x =0.09
+else:
+	title_x = 0.3
+
 #updating figure layouts
 fig.update_layout(uniformtext_minsize=12, 
 		  uniformtext_mode='hide', 
@@ -746,7 +751,7 @@ fig.update_layout(uniformtext_minsize=12,
 		  height=600, width=1200,
 		  title="<b>"+"Spectrum "+subtitle+" for "+str(Band)+" MHz Band "+title_map[Band]+"<b>",
 		  margin=dict(t=80, b=50, l=50, r=50, pad=0),
-		  title_x=0.1, title_y=0.99,
+		  title_x=title_x, title_y=0.99,
 		  title_font=dict(size=22),
 		  yaxis=dict(
         	  tickmode='array'),
