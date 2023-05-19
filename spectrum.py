@@ -637,7 +637,7 @@ if Feature == "ExpiryMap":
 		operators = operators[Band]
 		hf = sf[sf.columns].replace(operators) # dataframe for hovertext
 		operatorslist = sorted(list(operators.keys()))
-		operatorstoremove = ["Govt", "Vacant"]
+		operatorstoremove = ["Govt", "Vacant", "Railways"]
 		for op in operatorstoremove:
 			if op in operatorslist:
 				operatorslist.remove(op)
