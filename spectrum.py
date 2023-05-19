@@ -482,7 +482,7 @@ def hovertext1(sf,sff,bandf,ExpTab,ChannelSize,xaxisadj):
 
 #processing for hovertext for expiry map
 
-def hovertext2(sf,sff,ef,bandf,ExpTab,ChannelSize,xaxisadj):  
+def hovertext2(sf,sff,ef,bandf,bandexpf,ExpTab,ChannelSize,xaxisadj):  
 	hovertext = []
 	for yi, yy in enumerate(sf.index):
 		hovertext.append([])
@@ -586,7 +586,7 @@ if Feature == "FreqMap":
 		tickvals = list(selected_op_dict.values())
 		ticktext = list(selected_op_dict.keys())	
 		
-	hovertext = hovertext1(hf,sff,bandf, ExpTab,ChannelSize,xaxisadj)
+	hovertext = hovertext1(hf,sff,bandf, bandexpf, ExpTab,ChannelSize,xaxisadj)
 	subtitle ="Frequency Map"
 	tickangle = -90
 	
