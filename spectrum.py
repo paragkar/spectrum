@@ -356,7 +356,7 @@ dff = dff.applymap(lambda x: "NA  " if x=="" else x) # space with NA is delibeli
 pricemaster = df["Master_Price_Sheet"]
 pricemaster.rename(columns = {"FP" : "Auction Price", "DP": "Reserve Price"}, inplace = True)
 
-#processing for spectrum offered vs sold & unsold
+#processing & restructuring dataframe spectrum offered vs sold & unsold for hovertext of data3
 offeredvssold = df[spectrumofferedvssold]
 offeredvssold = offeredvssold[(offeredvssold["Band"] == Band) & (offeredvssold["Year"] != 2018)]
 offeredvssold = offeredvssold.drop(columns =["Band"]).reset_index(drop=True)
@@ -364,7 +364,7 @@ offeredspectrum = offeredvssold.pivot(index=["LSA"], columns='Year', values="Off
 soldspectrum = offeredvssold.pivot(index=["LSA"], columns='Year', values="Sold").fillna("NA")
 unsoldspectrum = offeredvssold.pivot(index=["LSA"], columns='Year', values="Unsold").fillna("NA")
 
-#processing for auction price
+#processing & restructuring dataframe auction price for hovertext of data3
 auctionprice = pricemaster[(pricemaster["Band"] == Band) & (pricemaster["Year"] != 2018)]
 auctionprice = auctionprice.pivot(index=["LSA"], columns='Year', values="Auction Price").fillna("NA")
 auctionprice = auctionprice.loc[:, (auctionprice != 0).any(axis=0)]
@@ -373,7 +373,7 @@ auctionprice = coltostr(auctionprice) #convert columns data type to string
 auctionprice = adddummycols(auctionprice,auctionfailyears[Band])
 auctionprice = auctionprice.replace(0,"NA")
 
-#processing for reserve price
+#processing & restructuring dataframe reserve price for hovertext of data3
 reserveprice = pricemaster[(pricemaster["Band"] == Band) & (pricemaster["Year"] != 2018)]
 reserveprice = reserveprice.pivot(index=["LSA"], columns='Year', values="Reserve Price").fillna("NA")
 reserveprice = reserveprice.loc[:, (reserveprice != 0).any(axis=0)]
@@ -407,9 +407,6 @@ reserveprice = reserveprice.replace(0,"NA")
 # rp = df_final.pivot_table(index=["LSA"], columns='StartFreq', values="RP", aggfunc='first').fillna("NA")
 # ap = df_final.pivot_table(index=["LSA"], columns='StartFreq', values="AP", aggfunc='first').fillna("NA")
 # ayear = df_final.pivot_table(index=["LSA"], columns='StartFreq', values="Year", aggfunc='first').fillna("NA")
-
-
-
 #processing historical information ends************************
 
 
@@ -471,7 +468,7 @@ def hovertext2(sf,sff,ef,bandf,bandexpf,ExpTab,ChannelSize,xaxisadj):
 					    )
 	return hovertext
 
-#processing for hovertext for Auction map
+#processing for hovertext for Auction Map
 def hovertext3(dff,reserveprice,auctionprice,offeredspectrum,soldspectrum,unsoldspectrum):  
 	hovertext=[]
 	for yi, yy in enumerate(dff.index):
@@ -504,12 +501,8 @@ def hovertext3(dff,reserveprice,auctionprice,offeredspectrum,soldspectrum,unsold
 	return hovertext
 
 
-# colorscale = hovercolscale(operators, colcodes) # for hoverbox
-
-#processing for hovercolors for data1 & data2 starts
-
 #preparing color scale for hoverbox for data1 & data2
-def hcolscale(operators, colcodes):
+def hcolscaledata1data2(operators, colcodes):
     scale = [round(x/(len(operators)-1),2) for x in range(len(operators))]
     colors =[]
     for k, v  in operators.items():
@@ -520,8 +513,8 @@ def hcolscale(operators, colcodes):
         colorscale.append([scale[i],colors[i]])
     return colorscale
 
-#shaping the matrix of hovercolscale for data1 & data2
-def hcolmatrixshaping(colorscale, sf):
+#shaping colorscale for driving the color of hoverbox of data1 & data2
+def hcolmatrixdata1data2(colorscale, sf):
 
 	hoverlabel_bgcolor = [[x[1] for x in colorscale if x[0] == round(value/(len(colorscale) - 1),2)] 
 			      for row in sf.values for value in row]
@@ -530,7 +523,28 @@ def hcolmatrixshaping(colorscale, sf):
 	
 	return hoverlabel_bgcolor
 
-
+#preparing and shaping the colors for hoverbox for data3
+def hovermatrixdata3(dff,reserveprice, auctionprice): 
+    lst =[]
+	for yi, yy in enumerate(dff.index):
+	reserveprice = reserveprice.replace("NA\s*", np.nan, regex = True)
+	auctionprice = auctionprice.replace("NA\s*", np.nan, regex = True)
+	delta = auctionprice-reserveprice
+	delta = delta.replace(np.nan, "NA")
+	for xi, xx in enumerate(dff.columns):
+	    delval = delta.values[yi][xi]
+	    if delval =="NA":
+		ccode = '#000000' #auction failed 
+	    elif delval == 0:
+		ccode = '#00FF00' #auction price = reserve price
+	    else:
+		ccode = '#FF0000' #auction price > reserve price
+	    lst.append([yy,xx,ccode])
+	    temp = pd.DataFrame(lst)
+	    temp.columns = ["LSA", "Year", "Color"]
+	    colormatrix = temp.pivot(index='LSA', columns='Year', values="Color")
+	    colormatrix = list(colormatrix.values)
+	return colormatrix
 
 #menu for selecting features 
 Feature = st.sidebar.selectbox('Select a Feature', options = ["FreqMap", "ExpiryMap", "AuctionMap"])
@@ -581,8 +595,8 @@ if Feature == "FreqMap":
 		]
 
 	fig = go.Figure(data=data1)
-	hcolscale=hcolscale(operators, colcodes)  #colorscale for hoverbox
-	hoverlabel_bgcolor = hcolmatrixshaping(hcolscale, hf) #shaping the hfcolorscale
+	hcolscale=hcolscaledata1data2(operators, colcodes)  #colorscale for hoverbox
+	hoverlabel_bgcolor = hcolmatrixdata1data2(hcolscale, hf) #shaping the hfcolorscale
 	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 
 							      
@@ -619,8 +633,8 @@ if Feature == "ExpiryMap":
                 )
        		  ]
 	fig = go.Figure(data=data2)
-	hcolscale=hcolscale(operators, colcodes)  #colorscale for hoverbox
-	hoverlabel_bgcolor = hcolmatrixshaping(hcolscale, hf) #shaping the hfcolorscale
+	hcolscale=hcolscaledata1data2(operators, colcodes)  #colorscale for hoverbox
+	hoverlabel_bgcolor = hcolmatrixdata1data2(hcolscale, hf) #shaping the hfcolorscale
 	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 
 if Feature == "AuctionMap":
@@ -645,6 +659,8 @@ if Feature == "AuctionMap":
 				),
 		]
 	fig = go.Figure(data=data3)
+	hoverlabel_bgcolor = hovermatrixdata3(dff,reserveprice,auctionprice)
+	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 	
 
 #updating figure layouts
