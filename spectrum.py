@@ -82,22 +82,20 @@ def forexpyearheatmap(ef):
 #function for calculating quantum of spectrum expiring mapped to LSA and Years for expiry map yearwise
 
 def BWExpiring(sff,ef):
-
+	
 	lst=[]
-
 	for j, index in enumerate(ef.index):
 
 		for i, col in enumerate(ef.columns):
 			l= [index, sff.iloc[j,i],ef.iloc[j,i]]
-			lst.append(l)
-			
+			lst.append(l)	
 	df = pd.DataFrame(lst)
 	df.columns = ["LSA","Operators", "ExpYear"]
 	df = df.groupby(["ExpYear"])[["LSA","Operators"]].value_counts()*ChannelSize[Band]
 	df = df.reset_index()
 	df.columns =["ExpYear","LSA", "Operators","BW"]
 	
-    	return df
+	return df
 
 #funtion to process pricing datframe for hovertext for auction map
 
