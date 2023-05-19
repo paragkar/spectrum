@@ -57,58 +57,48 @@ def colscalefreqmap(operators, colcodes):
 	
 	return colorscale
 
-#function for calculating expiry year heatmap
+#function for calculating expiry year heatmap for yearwise
 
-def forexpyearheatmap(df1):
+def forexpyearheatmap(ef):
+	lst1 =[]
+	for i, line1 in enumerate(ef.values):
+		explst = list(set(line1))
+		l1 = [[ef.index[i],round(list(line1).count(x)*ChannelSize[Band],2), round(x,2)] for x in explst]
+		lst1.append(l1)
 
-    lst1 =[]
+	lst2 =[]
+	for i, val in enumerate(lst1):
+		for item in val:
+			lst2.append(item)
+	df = pd.DataFrame(lst2)
+	df.columns = ["LSA", "Spectrum", "ExpYrs"]
+	df = df.pivot_table(index='LSA', columns='ExpYrs', values=['Spectrum'], aggfunc='first')
+	df.columns = df.columns.droplevel(0)
+	df.columns = [str(x) for x in df.columns]
+	df = df.iloc[:,1:]
+	df = df.fillna(0)
+	return df
 
-    for i, line1 in enumerate(df1.values):
-        explst = list(set(line1))
-        l1 = [[df1.index[i],round(list(line1).count(x)*ChannelSize[Band],2), round(x,2)] for x in explst]
-        lst1.append(l1)
-
-    lst2 =[]
-    for i, val in enumerate(lst1):
-        for item in val:
-            lst2.append(item)
-
-    df = pd.DataFrame(lst2)
-
-    df.columns = ["LSA", "Spectrum", "ExpYrs"]
-
-    df = df.pivot_table(index='LSA', columns='ExpYrs', values=['Spectrum'], aggfunc='first')
-
-    df.columns = df.columns.droplevel(0)
-
-    df.columns = [str(x) for x in df.columns]
-
-
-    df = df.iloc[:,1:]
-    df = df.fillna(0)
-    
-    return df
-
-#function for calculating quantum of spectrum expiring mapped to LSA and Years
+#function for calculating quantum of spectrum expiring mapped to LSA and Years for expiry map yearwise
 
 def BWExpiring(sff,ef):
 
-    lst=[]
+	lst=[]
 
-    for j, index in enumerate(ef.index):
+	for j, index in enumerate(ef.index):
 
-        for i, col in enumerate(ef.columns):
-            l= [index, sff.iloc[j,i],ef.iloc[j,i]]
-            lst.append(l)
-    df = pd.DataFrame(lst)
-    df.columns = ["LSA","Operators", "ExpYear"]
-    df = df.groupby(["ExpYear"])[["LSA","Operators"]].value_counts()*ChannelSize[Band]
-    df = df.reset_index()
-    df.columns =["ExpYear","LSA", "Operators","BW"]
-    
-    return df
+	for i, col in enumerate(ef.columns):
+	    l= [index, sff.iloc[j,i],ef.iloc[j,i]]
+	    lst.append(l)
+	df = pd.DataFrame(lst)
+	df.columns = ["LSA","Operators", "ExpYear"]
+	df = df.groupby(["ExpYear"])[["LSA","Operators"]].value_counts()*ChannelSize[Band]
+	df = df.reset_index()
+	df.columns =["ExpYear","LSA", "Operators","BW"]
+	
+    	return df
 
-#funtion to process pricing datframe for tooltip for dataframe 4
+#funtion to process pricing datframe for hovertext for auction map
 
 def processdff(dff):
     dff = dff.replace(0,np.nan).fillna(0)
@@ -296,6 +286,13 @@ errors= {700:0.25,
             26000:0.5}
 
 
+type_dict ={"Auction Price": auctionprice,
+	    "Reserve Price": reserveprice, 
+	    "Quantum Offered": offeredspectrum, 
+	    "Quantum Sold": soldspectrum, 
+	    "Quantum Unsold": unsoldspectrum}
+
+
 st.set_page_config(layout="wide")
 
 #Selecting a Freq Band
@@ -346,9 +343,9 @@ bandf = bandf.set_index("LSA")
 bandexpf = bandexpf.set_index("LSA")
 masterdf = df[masterall]
 
-# eff = forexpyearheatmap(ef) # for expiry year heatmap
+eff = forexpyearheatmap(ef) # for expiry year heatmap year wise
 
-# bwf = BWExpiring(sff,ef) # for hover text for fig3
+bwf = BWExpiring(sff,ef) # hover text for expiry year heatmap year wise
 
 # st.sidebar.title('Navigation')
 
@@ -445,8 +442,8 @@ def hovertext1(sf,sff,bandf,ExpTab,ChannelSize,xaxisadj):
 					    )
 	return hovertext
 
-#processing for hovertext for expiry map
-def hovertext2(sf,sff,ef,bandf,bandexpf,ExpTab,ChannelSize,xaxisadj):  
+#processing for hovertext for expiry map freq wise
+def hovertext21(sf,sff,ef,bandf,bandexpf,ExpTab,ChannelSize,xaxisadj):  
 	hovertext = []
 	for yi, yy in enumerate(sf.index):
 		hovertext.append([])
@@ -477,6 +474,42 @@ def hovertext2(sf,sff,ef,bandf,bandexpf,ExpTab,ChannelSize,xaxisadj):
 					    )
 					    )
 	return hovertext
+
+
+#processing for hovertext for expiry map year wise
+
+def hovertext22(bwf,eff): 
+	bwf["Op&BW"] = bwf["Operators"]+" - "+round(bwf["BW"],2).astype(str)+" MHz"
+	bwff = bwf.set_index("LSA").drop(['Operators'], axis=1)
+	xaxisyears = sorted(list(set(bwff["ExpYear"])))[1:]
+	hovertext = []
+	for yi, yy in enumerate(eff.index):
+		hovertext.append([])
+		for xi, xx in enumerate(xaxisyears):
+			opwiseexpMHz = list(bwff[(bwff["ExpYear"]==xx) & (bwff.index ==yy)]["Op&BW"].values)
+			if opwiseexpMHz==[]:
+				opwiseexpMHz="NA"
+			else:
+				opwiseexpMHz = ', '.join(str(e) for e in opwiseexpMHz) #converting a list into string
+
+		TotalBW = list(bwff[(bwff["ExpYear"]==xx) & (bwff.index ==yy)]["BW"].values)
+		if TotalBW==[]:
+			TotalBW="NA"
+		else:
+			TotalBW = round(sum([float(x) for x in TotalBW]),2)
+
+		hovertext[-1].append(
+				    '{} : Expiry in {} Years\
+				    <br />Break Up : {}'
+
+			     .format(
+				    state_dict.get(yy),
+				    round(xx,2), 
+				    opwiseexpMHz,
+				    )
+				    )
+	return hovertext
+	
 
 #processing for hovertext for Auction Map
 def hovertext3(dff,reserveprice,auctionprice,offeredspectrum,soldspectrum,unsoldspectrum):  
@@ -606,43 +639,67 @@ if Feature == "FreqMap":
 
 							      
 if Feature == "ExpiryMap":
-	sf = sff.copy()
-	operators = operators[Band]
-	hf = sf[sf.columns].replace(operators) # dataframe for hovertext
-	selected_operators = st.sidebar.multiselect('Select Operators', options = sorted(list(operators.keys())))
-	if selected_operators==[]:
-		expf = ef
-	else:
-		for op in operators.keys():
-			if op not in selected_operators:
-				sf.replace(op,0, inplace = True)
-			else:
-				sf.replace(op,1,inplace = True)
-				
-		expf = pd.DataFrame(sf.values*ef.values, columns=ef.columns, index=ef.index)
+	SubFeature = st.sidebar.selectbox('Select a Sub Feature', options = ["Freq Wise", "Year Wise"])
+	if SubFeature = "Freq Wise":
+		sf = sff.copy()
+		operators = operators[Band]
+		hf = sf[sf.columns].replace(operators) # dataframe for hovertext
+		selected_operators = st.sidebar.multiselect('Select Operators', options = sorted(list(operators.keys())))
+		if selected_operators==[]:
+			expf = ef
+		else:
+			for op in operators.keys():
+				if op not in selected_operators:
+					sf.replace(op,0, inplace = True)
+				else:
+					sf.replace(op,1,inplace = True)
 
-	hovertext = hovertext2(hf,sff,ef,bandf, bandexpf, ExpTab,ChannelSize,xaxisadj)
-	subtitle ="Expiry Map"
-	tickangle = -90
-	dtickval = dtickfreq[Band]
-	
-	data = [go.Heatmap(
-              z = expf.values,
-              y = expf.index,
-              x = expf.columns,
-              xgap = xgap[Band],
-              ygap = 1,
-              hoverinfo ='text',
-              text = hovertext,
-              colorscale ='Hot',
-              reversescale=True,
-                )
-       		  ]
+			expf = pd.DataFrame(sf.values*ef.values, columns=ef.columns, index=ef.index)
 
-	hcolscale=hcolscalefreqexp(operators, colcodes)  #colorscale for hoverbox
-	hoverlabel_bgcolor = hcolmatrixfreqexp(hcolscale, hf) #shaping the hfcolorscale
+		hovertext = hovertext21(hf,sff,ef,bandf, bandexpf, ExpTab,ChannelSize,xaxisadj)
+		subtitle ="Expiry Map "+SubFeature
+		tickangle = -90
+		dtickval = dtickfreq[Band]
 
-type_dict ={"Auction Price": auctionprice, "Reserve Price": reserveprice, "Quantum Offered": offeredspectrum, "Quantum Sold": soldspectrum, "Quantum Unsold": unsoldspectrum}
+		data = [go.Heatmap(
+		      z = expf.values,
+		      y = expf.index,
+		      x = expf.columns,
+		      xgap = xgap[Band],
+		      ygap = 1,
+		      hoverinfo ='text',
+		      text = hovertext,
+		      colorscale ='Hot',
+		      reversescale=True,
+			)
+			  ]
+
+		hcolscale=hcolscalefreqexp(operators, colcodes)  #colorscale for hoverbox
+		hoverlabel_bgcolor = hcolmatrixfreqexp(hcolscale, hf) #shaping the hfcolorscale
+		
+	if SubFeature = "Year Wise":
+		hovertext = hovertext22(bwf,eff)
+		subtitle ="Expiry Map "+SubFeature
+		tickangle = 0
+		dtickval = dtickauction[Band]
+
+		data = [go.Heatmap(
+		  z = eff.values,
+		  y = eff.index,
+		  x = eff.columns,
+		  xgap = 1,
+		  ygap = 1,
+		  hoverinfo ='text',
+		  text = hovertext2,
+		  colorscale = 'Hot',
+		    texttemplate="%{z}", 
+		    textfont={"size":8},
+		    reversescale=True,
+			)]
+		
+		hoverlabel_bgcolor = "#002855" #subdued black
+
+
 if Feature == "AuctionMap":
 	pricemaster = pricemaster[(pricemaster["Band"]==Band) & (pricemaster["Year"] != 2018)]
 	pricemaster["Year"] = sorted([str(x) for x in pricemaster["Year"].values])
