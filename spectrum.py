@@ -643,8 +643,8 @@ if Dimension == "Frequency Band":
 		hovertext = hovertext3(dff,reserveprice,auctionprice,offeredspectrum,soldspectrum,unsoldspectrum)
 		
 		#plotting summary on top of the heatmap
-		summarydf = typedf.reset_index()
-		summarydf = summarydf.replace("NA",np.nan)
+		summarydf = typedf.replace("NA",np.nan)
+		summarydf = summarydf.replace("NA ", np.nan)
 		summarydf = summarydf.sum()
 		summarydf.columns = ["Years", "Total"]
 		st.write(summarydf)
