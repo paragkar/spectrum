@@ -242,7 +242,7 @@ if Dimension == "Calendar Year":
 # 		  text = hovertext,
 		  colorscale = 'Hot',
 		    texttemplate="%{z}", 
-		    textfont={"size":8},
+		    textfont={"size":10},
 		    reversescale=True,
 			)]
 	
