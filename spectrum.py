@@ -605,9 +605,15 @@ if Dimension == "Frequency Band":
 			summarydf = eff.sum().sort_index(ascending = True).reset_index()
 			summarydf.columns = ["ExpYears", "TotalMHz"]
 			summarydf["ExpYears"]= summarydf["ExpYears"].astype(float)
+			summarydf.columns = [str(x) for x in summarydf.columns]
 		
 # 			st.bar_chart(summarydf, x = "ExpYears", y ="TotalMHz", width=1090, height=150, use_container_width =False)
+			
 	
+			figsum = go.Figure()
+			figsum.add_trace(go.Bar(x = summarydf["TotalMHz"), y = summarydf["ExpYears"], width = 1100, height =200)
+			st.write(figsum)
+			
 			
 			data = [go.Heatmap(
 			  z = eff.values,
