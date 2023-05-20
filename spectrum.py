@@ -642,19 +642,17 @@ if Dimension == "Frequency Band":
 		dtickval = dtickauction[Band]
 		hovertext = hovertext3(dff,reserveprice,auctionprice,offeredspectrum,soldspectrum,unsoldspectrum)
 		
-		#plotting summary on top of the heatmap
+		#plotting summary bar chart on top of the heatmap
 		summarydf = typedf.replace('[a-zA-Z]+\s*',np.nan, regex=True)
 		summarydf = summarydf.sum().reset_index()
-		summarydf.columns = ["Years", "Total"]
+		summarydf.columns = ["Years", "India Total"]
 		
 		bar = alt.Chart(summarydf).mark_bar().encode(
-        	y = alt.Y('Total:Q', axis=alt.Axis(labels=False)),
+        	y = alt.Y('India Total:Q', axis=alt.Axis(labels=False)),
         	x = alt.X('Years:O', axis=alt.Axis(labels=False)),
 		color = alt.Color("Years:N", legend=alt.Legend(title=None, orient="right")))
-		
 		text = bar.mark_text(dx=0, dy=-5, color = 'white' # Nudges text to right so it doesn't appear on top of the bar
 	    		).encode(text='Total:Q')
-		
 		chart = (bar + text).properties(width=1180, height =150, title = "")
 		st.altair_chart(chart, use_container_width=False)
 		
