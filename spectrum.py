@@ -229,11 +229,12 @@ if Dimension == "Calendar Year":
 	feature_list = ["Reserve Price",  "Auction Price", "Spectrum Offered", "Spectrum Sold", "Spectrum Unsold", "Block Size", "Total EMD"]
 	Feature = st.sidebar.selectbox('Select a Feature', options = feature_list)
 	z = df1[feature_dict[Feature]]
+	x = sorted(list(set(df1["Band"].values)))
 	
 	
 	data = [go.Heatmap(
 		  z = z,
-		  x = df1["Band"],
+		  x = x,
 		  y = df1["Circle"],
 		  xgap = 1,
 		  ygap = 1,
