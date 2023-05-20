@@ -8,6 +8,7 @@ import plotly
 import pandas as pd
 import plotly.figure_factory as ff
 import streamlit as st
+import matplotlib.pyplot as plt
 
 #Setting Page layout
 st.set_page_config(layout="wide")
@@ -587,13 +588,16 @@ if Dimension == "Frequency Band":
 			dtickval = dtickauction[Band]
 			
 			summarydf = eff.sum().sort_index(ascending = True).reset_index()
-			
 			summarydf.columns = ["ExpYears", "TotalMHz"]
-			
 			summarydf["ExpYears"]= summarydf["ExpYears"].astype(float)
+			barchart = st.bar_chart(summarydf, x = "ExpYears", y ="TotalMHz", width=1100, height=200, use_container_width =False)
+			axes = barchart.pyplot.gca()
+			axes.set_xticklabels([])
+			axes.set_yticklabels([])
+			# Display the modified chart
+			st.pyplot(axes.figure)
 			
-			st.bar_chart(summarydf, x = "ExpYears", y ="TotalMHz", width=1100, height=200, use_container_width =False)
-			
+	
 			data = [go.Heatmap(
 			  z = eff.values,
 			  y = eff.index,
