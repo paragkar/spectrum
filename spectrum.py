@@ -663,12 +663,13 @@ if  (Dimension == "Frequency Band") and (Feature == "AuctionMap"):
 
 #Plotting the final Heatmap	
 fig = go.Figure(data=data)
-fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 
-if BandType[Band] == "FDD":
-	title_x =0.09
-else:
-	title_x = 0.15
+if Dimension = "Frequency Band":
+	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
+	if BandType[Band] == "FDD":
+		title_x =0.09
+	else:
+		title_x = 0.15
 
 #updating figure layouts
 fig.update_layout(uniformtext_minsize=12, 
