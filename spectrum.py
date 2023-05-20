@@ -667,8 +667,10 @@ fig = go.Figure(data=data)
 if Dimension == "Frequency Band":
 	if Feature == "AuctionMap":
 		unit = units_dict[Type]
-	if Feature == "FreqMap":
+	if (Feature == "FreqMap") and (SubFeature == "Freq Wise"):
 		unit = "Ch Size - "+str(ChannelSize[Band])+" MHz"
+	if (Feature == "FreqMap") and (SubFeature == "Year Wise"):
+		unit = "No of Years"
 	if Feature == "ExpiryMap":
 		unit = "Ch Size - "+str(ChannelSize[Band])+" MHz"
 		
