@@ -328,7 +328,7 @@ def hovertext22(bwf,eff):
 	return hovertext
 	
 #processing for hovertext for Auction Map
-# @st.cache_resource
+@st.cache_resource
 def hovertext3(dff,reserveprice,auctionprice,offeredspectrum,soldspectrum,unsoldspectrum):  
 	hovertext=[]
 	for yi, yy in enumerate(dff.index):
@@ -336,6 +336,7 @@ def hovertext3(dff,reserveprice,auctionprice,offeredspectrum,soldspectrum,unsold
 		for xi, xx in enumerate(dff.columns):
 			winners = dff.values[yi][xi][:-2] #removing comma in the end
 			resprice = reserveprice.values[yi][xi]
+			st.write(reserveprice)
 			aucprice = auctionprice.values[yi][xi]
 			offmhz = offeredspectrum.values[yi][xi]
 			soldmhz = soldspectrum.values[yi][xi]
