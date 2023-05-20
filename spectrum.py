@@ -613,8 +613,8 @@ if Dimension == "Frequency Band":
 			figsum = px.bar(summarydf, y = "TotalMHz", x = "ExpYears", width = 1100, height =200).update_traces(width = 0.5)
 # 			# Set the visibility ON
 # 			figsum.update_yaxes(title='y', visible=True, showticklabels=False)
-			# Set the visibility OFF
-			figsum.update_yaxes(title='y', visible=False, showticklabels=False)
+# 			# Set the visibility OFF
+# 			figsum.update_yaxes(title='y', visible=False, showticklabels=False)
 			figsum.update_xaxes(categoryorder='array', categoryarray= sorted(list(summarydf["ExpYears"])))
 			
 			figsum.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
