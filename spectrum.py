@@ -666,10 +666,13 @@ fig = go.Figure(data=data)
 
 if Dimension == "Frequency Band":
 	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
+	title = "<b>"+"Spectrum "+subtitle+" for "+str(Band)+" MHz Band "+title_map[Band]+"<b>"
 	if BandType[Band] == "FDD":
 		title_x =0.09
 	else:
 		title_x = 0.15
+else:
+	title = ""
 
 #updating figure layouts
 fig.update_layout(uniformtext_minsize=12, 
@@ -681,7 +684,7 @@ fig.update_layout(uniformtext_minsize=12,
 		  template='simple_white',
 		  paper_bgcolor=None,
 		  height=600, width=1200,
-		  title="<b>"+"Spectrum "+subtitle+" for "+str(Band)+" MHz Band "+title_map[Band]+"<b>",
+		  title=title,
 		  margin=dict(t=80, b=50, l=50, r=50, pad=0),
 		  title_x=title_x, title_y=0.99,
 		  title_font=dict(size=22),
