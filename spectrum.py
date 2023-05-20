@@ -96,6 +96,7 @@ errors= {700:0.25, 800:1, 900:1, 1800:1, 2100:1.5, 2300:1.25, 2500:1, 3500:0.1, 
 
 #defining various functions 
 #preparing color scale for freqmap
+@st.cache
 def colscalefreqmap(operators, colcodes):
 	operators = dict(sorted(operators.items(), key=lambda x:x[1]))
 	operator_names = list(operators.keys())
@@ -118,6 +119,7 @@ def colscalefreqmap(operators, colcodes):
 	return colorscale
 
 #function for calculating expiry year heatmap for yearwise
+@st.cache
 def forexpyearheatmap(ef):
 	lst1 =[]
 	for i, line1 in enumerate(ef.values):
@@ -139,6 +141,7 @@ def forexpyearheatmap(ef):
 	return df
 
 #function for calculating quantum of spectrum expiring mapped to LSA and Years for expiry map yearwise
+@st.cache
 def BWExpiring(sff,ef):
 	
 	lst=[]
@@ -154,6 +157,7 @@ def BWExpiring(sff,ef):
 	return df
 
 #funtion to process pricing datframe for hovertext for auction map
+@st.cache
 def processdff(dff):
     dff = dff.replace(0,np.nan).fillna(0)
     dff = dff.applymap(lambda x: round(x,2) if type(x)!=str else x)
@@ -187,6 +191,7 @@ def processdff(dff):
     return dff
 
 #convert columns of dataframe into string
+@st.cache
 def coltostr(df):
 	lst =[]
 	for col in df.columns:
@@ -195,6 +200,7 @@ def coltostr(df):
 	return df
 
 #add dummy columns for auction failed years
+@st.cache
 def adddummycols(df,col):
     df[col]="NA  " # space with NA is delibelitratly added.
     cols = sorted(df.columns)
@@ -202,6 +208,7 @@ def adddummycols(df,col):
     return df
 
 #function to calculate the year in which the spectrum was acquired
+@st.cache
 def auctioncalyear(ef,excepf,pf1):
 	lst=[]
 	for col in ef.columns:
@@ -221,6 +228,7 @@ def auctioncalyear(ef,excepf,pf1):
 	return ayear
   
 #processing for hovertext for freq map
+@st.cache
 def hovertext1(sf,sff,bandf,ExpTab,ChannelSize,xaxisadj):  
 	hovertext = []
 	for yi, yy in enumerate(sf.index):
@@ -246,6 +254,7 @@ def hovertext1(sf,sff,bandf,ExpTab,ChannelSize,xaxisadj):
 	return hovertext
 
 #processing for hovertext for expiry map freq wise
+@st.cache
 def hovertext21(sf,sff,ef,bandf,bandexpf,ExpTab,ChannelSize,xaxisadj,ayear):
 	hovertext = []
 	for yi, yy in enumerate(sf.index):
@@ -285,6 +294,7 @@ def hovertext21(sf,sff,ef,bandf,bandexpf,ExpTab,ChannelSize,xaxisadj,ayear):
 	return hovertext
 
 #processing for hovertext for expiry map year wise
+@st.cache
 def hovertext22(bwf,eff): 
 	bwf["Op&BW"] = bwf["Operators"]+" - "+round(bwf["BW"],2).astype(str)+" MHz"
 	bwff = bwf.set_index("LSA").drop(['Operators'], axis=1)
@@ -318,6 +328,7 @@ def hovertext22(bwf,eff):
 	return hovertext
 	
 #processing for hovertext for Auction Map
+@st.cache
 def hovertext3(dff,reserveprice,auctionprice,offeredspectrum,soldspectrum,unsoldspectrum):  
 	hovertext=[]
 	for yi, yy in enumerate(dff.index):
@@ -350,6 +361,7 @@ def hovertext3(dff,reserveprice,auctionprice,offeredspectrum,soldspectrum,unsold
 	return hovertext
 
 #preparing color scale for hoverbox for freq and exp maps
+@st.cache
 def hcolscalefreqexp(operators, colcodes):
     scale = [round(x/(len(operators)-1),2) for x in range(len(operators))]
     colors =[]
@@ -361,6 +373,7 @@ def hcolscalefreqexp(operators, colcodes):
     return colorscale
 
 #shaping colorscale for driving the color of hoverbox of freq and exp maps
+@st.cache
 def hcolmatrixfreqexp(colorscale, sf):
 	hlabel_bgcolor = [[x[1] for x in colorscale if x[0] == round(value/(len(colorscale) - 1),2)] 
 			      for row in sf.values for value in row]
@@ -368,6 +381,7 @@ def hcolmatrixfreqexp(colorscale, sf):
 	return hlabel_bgcolor
 
 #preparing and shaping the colors for hoverbox for auction map
+@st.cache
 def hovermatrixauction(dff,reserveprice, auctionprice): 
 	lst =[]
 	for yi, yy in enumerate(dff.index):
