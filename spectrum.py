@@ -602,10 +602,11 @@ if Dimension == "Frequency Band":
 			tickangle = 0
 			dtickval = dtickauction[Band]
 			
+			
+			#plotting summary on top of the heatmap
 			summarydf = eff.sum().sort_index(ascending = True).reset_index()
 			summarydf.columns = ["ExpYears", "TotalMHz"]
 			summarydf["ExpYears"]= summarydf["ExpYears"].astype(float)
-			
 			st.bar_chart(summarydf, x = "ExpYears", y ="TotalMHz", width=1090, height=150, use_container_width =False)	
 			
 			data = [go.Heatmap(
@@ -636,11 +637,17 @@ if Dimension == "Frequency Band":
 			    "Quantum Unsold": unsoldspectrum}
 		Type = st.sidebar.selectbox('Select Price Type', options = ["Auction Price","Reserve Price","Quantum Offered", "Quantum Sold", "Quantum Unsold"])
 		typedf = type_dict[Type].copy()
-# 		st.write(typedf.sum())
 		subtitle = Type
 		tickangle=0
 		dtickval = dtickauction[Band]
 		hovertext = hovertext3(dff,reserveprice,auctionprice,offeredspectrum,soldspectrum,unsoldspectrum)
+		
+		#plotting summary on top of the heatmap
+		summarydf = typedf.sum().sort_index(ascending = True).reset_index()
+		summarydf.columns = ["Years", "Total"]
+# 		summarydf["ExpYears"]= summarydf["ExpYears"].astype(float)
+		st.bar_chart(summarydf, x = "Years", y ="Total", width=1090, height=150, use_container_width =False)
+		
 		data = [go.Heatmap(
 			z = typedf.values,
 			y = typedf.index,
