@@ -652,7 +652,7 @@ if Dimension == "Frequency Band":
         	x = alt.X('Years:O', axis=alt.Axis(labels=False)),
 		color = alt.Color("Years:N", legend=alt.Legend(title=None, orient="right")))
 		
-		text = bars.mark_text(
+		text = bar.mark_text(
 		align='left',
 		baseline='middle',
 		dx=3  # Nudges text to right so it doesn't appear on top of the bar
