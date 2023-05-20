@@ -616,6 +616,7 @@ if Dimension == "Frequency Band":
 			    "Quantum Unsold": unsoldspectrum}
 		Type = st.sidebar.selectbox('Select Price Type', options = ["Auction Price","Reserve Price","Quantum Offered", "Quantum Sold", "Quantum Unsold"])
 		typedf = type_dict[Type].copy()
+		st.write(typedf)
 		subtitle = Type
 		tickangle=0
 		dtickval = dtickauction[Band]
