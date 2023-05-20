@@ -605,13 +605,15 @@ if Dimension == "Frequency Band":
 			summarydf = eff.sum().sort_index(ascending = True).reset_index()
 			summarydf.columns = ["ExpYears", "TotalMHz"]
 			summarydf["ExpYears"]= summarydf["ExpYears"].astype(float)
-			summarydf.columns = [str(x) for x in summarydf.columns]
+			
+# 			layout = {xaxis: { type: 'category' }
 			
 # 			st.bar_chart(summarydf, x = "ExpYears", y ="TotalMHz", width=1090, height=150, use_container_width =False)	
 	
 			figsum = px.bar(summarydf, y = "TotalMHz", x = "ExpYears", width = 1100, height =200)
-# 			st.plotly_chart(figsum, use_container_width=False)
-			st.write(figsum)
+			figsum.update_xaxes(categoryorder='array', categoryarray= sorted(list(summarydf["ExpYears"])))
+			st.plotly_chart(figsum, use_container_width=False)
+# 			st.write(figsum)
 			
 			data = [go.Heatmap(
 			  z = eff.values,
