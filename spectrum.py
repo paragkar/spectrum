@@ -611,7 +611,7 @@ if Dimension == "Frequency Band":
 			
 	
 			figsum = go.Figure()
-			figsum.add_trace(go.Bar(x = summarydf["TotalMHz"), y = summarydf["ExpYears"], width = 1100, height =200)
+			figsum.add_trace(go.Bar(x = summarydf["TotalMHz"], y = summarydf["ExpYears"], width = 1100, height =200)
 			st.write(figsum)
 			
 			
