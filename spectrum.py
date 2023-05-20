@@ -653,8 +653,8 @@ if Dimension == "Frequency Band":
         	y='Total:Q',
         	x='Years:O',
 		color = "Years:N")
-		bar_chart.width = 1100
-		bar_chart.height = 150
+		bar_chart.width = 1150
+		bar_chart.height = 200
 		st.altair_chart(bar_chart, use_container_width=False)
  		
 		data = [go.Heatmap(
