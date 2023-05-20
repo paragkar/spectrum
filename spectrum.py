@@ -674,6 +674,8 @@ if Dimension == "Frequency Band":
 else:
 	title = ""
 	title_x =0.09
+	tickangle =0
+	dtickval =1
 
 #updating figure layouts
 fig.update_layout(uniformtext_minsize=12, 
