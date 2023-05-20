@@ -694,7 +694,7 @@ if Dimension == "Frequency Band":
 	title = "<b>"+"Spectrum "+subtitle+" for "+str(Band)+" MHz "+title_map[Band]+" ("+unit+")"+"<b>"
 
 if Dimension == "Calendar Year":
-	title = "<b>"+str(YearDim)+" - Band Wise Trend of "+Feature+" ("+units_dict[Feature]+")"+"<b>"
+	title = "<b>"+str(Year)+" - Band Wise Trend of "+Feature+" ("+units_dict[Feature]+")"+"<b>"
 	title_x =0.28
 	tickangle =0
 	dtickval =1
