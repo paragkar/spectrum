@@ -652,7 +652,7 @@ if Dimension == "Frequency Band":
         	x = alt.X('Years:O', axis=alt.Axis(labels=False)),
 		color = alt.Color("Years:N", legend=alt.Legend(title=None, orient="right")))
 		
-		text = bar.mark_text(dx=15, dy=3, color = 'white' # Nudges text to right so it doesn't appear on top of the bar
+		text = bar.mark_text(dx=3, dy=15, color = 'white' # Nudges text to right so it doesn't appear on top of the bar
 	    		).encode(text='Total:Q')
 		
 		chart = (bar + text).properties(width=1180, height =150, title = "")
