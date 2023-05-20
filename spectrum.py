@@ -652,15 +652,13 @@ if Dimension == "Frequency Band":
         	x = alt.X('Years:O', axis=alt.Axis(labels=False)),
 		color = alt.Color("Years:N", legend=alt.Legend(title=None, orient="right")))
 		
-		text = bar.mark_text(
-		align='center',
-		baseline='middle',
-		dx = 4  # Nudges text to right so it doesn't appear on top of the bar
-	    		).encode(
-		text='Total:Q')
+		text = bar.mark_text( align='center',baseline='middle', dx = 6 # Nudges text to right so it doesn't appear on top of the bar
+	    		).encode(text='Total:Q')
+		
 		chart = (bar + text).properties(width=1180, height =150, title = "")
-	
 		st.altair_chart(chart, use_container_width=False)
+		
+		#setting the data of the heatmap 
  		
 		data = [go.Heatmap(
 			z = typedf.values,
