@@ -215,37 +215,6 @@ df = pd.read_excel(file, sheet_name=sheet)
 #choose a dimension
 Dimension = st.sidebar.selectbox('Select a Dimension', options = ["Frequency Band", "Calendar Year"])
 
-if Dimension == "Calendar Year":
-	masterall = "MasterAll-TDDValueConventional" #all auction related information
-	spectrumofferedvssold = "Spectrum_Offered_vs_Sold"
-	masterdimdf = df[masterall]
-	offeredvssolddimdf = df[spectrumofferedvssold]
-	calendaryearlist = sorted(list(set(masterdimdf["Auction Year"].values)))
-	YearDim = st.sidebar.selectbox('Select a Year', options = calendaryearlist)
-	dfdim1 = masterdimdf[masterdimdf["Auction Year"]==YearDim]
-	dfdim2 = offeredvssolddimdf[offeredvssolddimdf["Year"]==YearDim]
-	feature_dict ={"Spectrum Offered" : "Offered", "Spectrum Sold": "Sold", "Spectrum Unsold" : "Unsold", "Reserve Price" : "RP/MHz" ,  
-		       "Auction Price": "Auction Price/MHz", "Block Size": "Block Size", "Total EMD" : "Total EMD"} 
-	feature_list = ["Reserve Price",  "Auction Price", "Spectrum Offered", "Spectrum Sold", "Spectrum Unsold", "Block Size", "Total EMD"]
-	Feature = st.sidebar.selectbox('Select a Feature', options = feature_list)
-	z = dfdim1[feature_dict[Feature]].round(2)
-	x = dfdim1["Band"].astype(str)
-	y = dfdim1["Circle"]
-	
-	data = [go.Heatmap(
-		  z = z,
-		  x = x,
-		  y = y,
-		  xgap = 1,
-		  ygap = 1,
-		  hoverinfo ='text',
-# 		  text = hovertext,
-		  colorscale = 'Hot',
-		    texttemplate="%{z}", 
-		    textfont={"size":10},
-		    reversescale=True,
-			)]
-
 if Dimension == "Frequency Band":
 	#Selecting a Freq Band
 	Band = st.sidebar.selectbox('Select a Band', options = list(ExpTab.keys()))
@@ -509,6 +478,38 @@ def hovermatrixauction(dff,reserveprice, auctionprice):
 			colormatrix = temp.pivot(index='LSA', columns='Year', values="Color")
 			colormatrix = list(colormatrix.values)
 	return colormatrix
+
+
+if Dimension == "Calendar Year":
+	masterall = "MasterAll-TDDValueConventional" #all auction related information
+	spectrumofferedvssold = "Spectrum_Offered_vs_Sold"
+	masterdimdf = df[masterall]
+	offeredvssolddimdf = df[spectrumofferedvssold]
+	calendaryearlist = sorted(list(set(masterdimdf["Auction Year"].values)))
+	YearDim = st.sidebar.selectbox('Select a Year', options = calendaryearlist)
+	dfdim1 = masterdimdf[masterdimdf["Auction Year"]==YearDim]
+	dfdim2 = offeredvssolddimdf[offeredvssolddimdf["Year"]==YearDim]
+	feature_dict ={"Spectrum Offered" : "Offered", "Spectrum Sold": "Sold", "Spectrum Unsold" : "Unsold", "Reserve Price" : "RP/MHz" ,  
+		       "Auction Price": "Auction Price/MHz", "Block Size": "Block Size", "Total EMD" : "Total EMD"} 
+	feature_list = ["Reserve Price",  "Auction Price", "Spectrum Offered", "Spectrum Sold", "Spectrum Unsold", "Block Size", "Total EMD"]
+	Feature = st.sidebar.selectbox('Select a Feature', options = feature_list)
+	z = dfdim1[feature_dict[Feature]].round(2)
+	x = dfdim1["Band"].astype(str)
+	y = dfdim1["Circle"]
+	
+	data = [go.Heatmap(
+		  z = z,
+		  x = x,
+		  y = y,
+		  xgap = 1,
+		  ygap = 1,
+		  hoverinfo ='text',
+# 		  text = hovertext,
+		  colorscale = 'Hot',
+		    texttemplate="%{z}", 
+		    textfont={"size":10},
+		    reversescale=True,
+			)]
 
 #**********Main Program Starts here***************
 
