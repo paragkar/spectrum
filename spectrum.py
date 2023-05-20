@@ -142,14 +142,14 @@ def auctioncalyear(ef,excepf,pf1):
     
 #defining all dictionaries here with data linked to a specific band
 title_map = {700:"(FDD Up/Down - 703-748 / 758-803 MHz)",
-         800:"(FDD Up/Down : 824-844 / 869-889 MHz)", 
-         900:"(FDD Up/Down : 890-915 / 935-960 MHz)", 
-         1800:"(FDD Up/Down : 1710-1785 / 1805-1880 MHz)", 
-         2100:"(FDD Up/Down : 1919-1979 / 2109- 2169 MHz)",
-         2300:"(TDD Up/Down : 2300-2400 MHz)",
-         2500:"(TDD Up/Down : 2500-2690 MHz)",
-         3500:"(TDD Up/Down : 3300-3670 MHz)",
-         26000:"(TDD Up/Down : 24250-27500 MHz)"}
+         800:"(FDD UP/DN : 824-844 / 869-889 MHz)", 
+         900:"(FDD UP/DN : 890-915 / 935-960 MHz)", 
+         1800:"(FDD UP/DN : 1710-1785 / 1805-1880 MHz)", 
+         2100:"(FDD UP/DN : 1919-1979 / 2109- 2169 MHz)",
+         2300:"(TDD UP/DN : 2300-2400 MHz)",
+         2500:"(TDD UP/DN : 2500-2690 MHz)",
+         3500:"(TDD UP/DN : 3300-3670 MHz)",
+         26000:"(TDD UP/DN : 24250-27500 MHz)"}
 
 operators = {700: {'Vacant':0,'Railways':1,'Govt':2,'RJIO':3,'BSNL':4},
              800: {'Vacant':0,'RCOM':1,'Govt':2,'RJIO':3,'Bharti':4, 'MTS':5, 'BSNL':6},
@@ -675,7 +675,7 @@ if Dimension == "Frequency Band":
 	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 	title = "<b>"+"Spectrum "+subtitle+" for "+str(Band)+" MHz Band "+title_map[Band]+" ("+unit+")"+"<b>"
 	if BandType[Band] == "FDD":
-		title_x =0
+		title_x =0.03
 	if BandType[Band] == "TDD":
 		title_x = 0.10
 
