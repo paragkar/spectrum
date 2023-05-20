@@ -658,7 +658,7 @@ if Dimension == "Frequency Band":
 		dx=3  # Nudges text to right so it doesn't appear on top of the bar
 	    		).encode(
 		text='Total:Q')
-		chart = (bar + test).properties(width=1180, height =150, title = "")
+		chart = (bar + text).properties(width=1180, height =150, title = "")
 	
 		st.altair_chart(chart, use_container_width=False)
  		
