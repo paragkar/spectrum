@@ -650,7 +650,7 @@ if Dimension == "Frequency Band":
 # 		st.bar_chart(summarydf, x = "Years", y ="Total", width=1090, height=150, use_container_width =False)
 
 		bar_chart = alt.Chart(summarydf).mark_bar().encode(
-        	y='Total ($):Q',
+        	y='Total (Rs):Q',
         	x='Years:O',)
 		st.altair_chart(bar_chart, use_container_width=True)
  		
