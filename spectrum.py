@@ -228,7 +228,7 @@ if Dimension == "Calendar Year":
 		       "Auction Price": "Auction Price/MHz", "Block Size": "Block Size", "Total EMD" : "Total EMD"} 
 	feature_list = ["Reserve Price",  "Auction Price", "Spectrum Offered", "Spectrum Sold", "Spectrum Unsold", "Block Size", "Total EMD"]
 	Feature = st.sidebar.selectbox('Select a Feature', options = feature_list)
-	z = df1[feature_dict[Feature]]
+	z = Round(df1[feature_dict[Feature]],2)
 	x = df1["Band"].astype(str)
 	
 	
