@@ -586,8 +586,11 @@ if Dimension == "Frequency Band":
 			tickangle = 0
 			dtickval = dtickauction[Band]
 			
-			st.write(eff.sum()) #debug 
-
+			summary = eff.sum()) 
+			
+			fig_sum_yw = px.bar(eff, x=eff.columns, y=summary)
+			fig_sum_yw.show()
+			
 			data = [go.Heatmap(
 			  z = eff.values,
 			  y = eff.index,
