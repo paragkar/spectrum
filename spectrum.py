@@ -592,7 +592,7 @@ if Dimension == "Frequency Band":
 			
 			summarydf["ExpYears"]= summarydf["ExpYears"].astype(float)
 			
-			st.bar_chart(summarydf, x = "ExpYears", y ="TotalMHz", width=1200, height=200, use_container_width =False)
+			st.bar_chart(summarydf, x = "ExpYears", y ="TotalMHz", width=1100, height=200, use_container_width =False)
 			
 			data = [go.Heatmap(
 			  z = eff.values,
