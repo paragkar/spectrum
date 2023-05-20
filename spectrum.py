@@ -350,7 +350,7 @@ def hovertext3(dff,reserveprice,auctionprice,offeredspectrum,soldspectrum,unsold
 				     .format( 
 					    state_dict.get(yy),
 					    xx,
-					    resprice,
+# 					    resprice,
 					    aucprice,
 					    round(offmhz,2),
 					    round(soldmhz,2),
