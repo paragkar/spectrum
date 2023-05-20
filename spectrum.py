@@ -647,13 +647,20 @@ if Dimension == "Frequency Band":
 		summarydf = summarydf.sum().reset_index()
 		summarydf.columns = ["Years", "Total"]
 		
-# 		st.bar_chart(summarydf, x = "Years", y ="Total", width=1090, height=150, use_container_width =False)
-
-		bar_chart = alt.Chart(summarydf).mark_bar().encode(
+		bar = alt.Chart(summarydf).mark_bar().encode(
         	y = alt.Y('Total:Q', axis=alt.Axis(labels=False)),
         	x = alt.X('Years:O', axis=alt.Axis(labels=False)),
-		color = alt.Color("Years:N", legend=alt.Legend(title=None, orient="right"))).properties(width=1180, height =150, title = "")
-		st.altair_chart(bar_chart, use_container_width=False)
+		color = alt.Color("Years:N", legend=alt.Legend(title=None, orient="right")))
+		
+		text = bars.mark_text(
+		align='left',
+		baseline='middle',
+		dx=3  # Nudges text to right so it doesn't appear on top of the bar
+	    		).encode(
+		text='Total:Q')
+		chart = (bar + test).properties(width=1180, height =150, title = "")
+	
+		st.altair_chart(chart, use_container_width=False)
  		
 		data = [go.Heatmap(
 			z = typedf.values,
