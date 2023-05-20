@@ -673,6 +673,7 @@ if Dimension == "Frequency Band":
 		title_x = 0.15
 else:
 	title = ""
+	title_x =0.09
 
 #updating figure layouts
 fig.update_layout(uniformtext_minsize=12, 
