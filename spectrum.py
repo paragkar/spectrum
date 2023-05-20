@@ -622,7 +622,7 @@ if  (Dimension == "Frequency Band") and (Feature == "ExpiryMap"):
 		  text = hovertext,
 		  colorscale = 'Hot',
 		    texttemplate="%{z}", 
-		    textfont={"size":8},
+		    textfont={"size":10},
 		    reversescale=True,
 			)]
 		hoverlabel_bgcolor = "#002855" #subdued black
