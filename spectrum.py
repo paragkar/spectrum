@@ -643,7 +643,7 @@ if Dimension == "Frequency Band":
 		hovertext = hovertext3(dff,reserveprice,auctionprice,offeredspectrum,soldspectrum,unsoldspectrum)
 		
 		#plotting summary on top of the heatmap
-		summarydf = typedf.sum().sort_index(ascending = True).reset_index()
+		summarydf = typedf.sum().reset_index()
 		summarydf.columns = ["Years", "Total"]
 # 		summarydf["ExpYears"]= summarydf["ExpYears"].astype(float)
 		st.bar_chart(summarydf, x = "Years", y ="Total", width=1090, height=150, use_container_width =False)
