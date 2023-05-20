@@ -645,7 +645,7 @@ if Dimension == "Frequency Band":
 		#plotting summary on top of the heatmap
 		summarydf = typedf.reset_index()
 		summarydf = summarydf.replace("NA",np.nan)
-		summarydf = summarydf.sum().
+		summarydf = summarydf.sum()
 		summarydf.columns = ["Years", "Total"]
 		st.bar_chart(summarydf, x = "Years", y ="Total", width=1090, height=150, use_container_width =False)
 		
