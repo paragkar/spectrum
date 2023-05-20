@@ -672,7 +672,7 @@ if Dimension == "Frequency Band":
 	else:
 		title_x = 0.15
 else:
-	title = "Band Wise Trend of "+Feature+" For the Year "+YearDim
+	title = "Band Wise Trend of "+Feature+" For the Year "+str(YearDim)
 	title_x =0.09
 	tickangle =0
 	dtickval =1
