@@ -221,14 +221,14 @@ if Dimension == "Calendar Year":
 	masterdf = df[masterall]
 	offeredvssold = df[spectrumofferedvssold]
 	calendaryearlist = sorted(list(set(masterdf["Auction Year"].values)))
-	Year = st.sidebar.selectbox('Select a Year', options = calendaryearlist)
-	df1 = masterdf[masterdf["Auction Year"]==Year]
-	df2 = offeredvssold[offeredvssold["Year"]==Year]
+	YearDim = st.sidebar.selectbox('Select a Year', options = calendaryearlist)
+	df1 = masterdf[masterdf["Auction Year"]==YearDim]
+	df2 = offeredvssold[offeredvssold["Year"]==YearDim]
 	feature_dict ={"Spectrum Offered" : "Offered", "Spectrum Sold": "Sold", "Spectrum Unsold" : "Unsold", "Reserve Price" : "RP/MHz" ,  
 		       "Auction Price": "Auction Price/MHz", "Block Size": "Block Size", "Total EMD" : "Total EMD"} 
 	feature_list = ["Reserve Price",  "Auction Price", "Spectrum Offered", "Spectrum Sold", "Spectrum Unsold", "Block Size", "Total EMD"]
-	FeatureDim = st.sidebar.selectbox('Select a Feature', options = feature_list)
-	z = df1[feature_dict[FeatureDim]]
+	Feature = st.sidebar.selectbox('Select a Feature', options = feature_list)
+	z = df1[feature_dict[Feature]]
 	x = df1["Band"].astype(str)
 	
 	
@@ -245,7 +245,6 @@ if Dimension == "Calendar Year":
 		    textfont={"size":10},
 		    reversescale=True,
 			)]
-	
 
 if Dimension == "Frequency Band":
 	#Selecting a Freq Band
