@@ -588,8 +588,10 @@ if Dimension == "Frequency Band":
 			
 			summarydf = eff.sum()
 			
-			fig_sum_yw = px.bar(summarydf, y=eff.columns, x=eff.index)
-			fig_sum_yw.show()
+			st.write(summarydf)
+			
+# 			fig_sum_yw = px.bar(summarydf, y=eff.columns, x=eff.index)
+# 			fig_sum_yw.show()
 			
 			data = [go.Heatmap(
 			  z = eff.values,
