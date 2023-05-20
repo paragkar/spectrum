@@ -586,9 +586,9 @@ if Dimension == "Frequency Band":
 			tickangle = 0
 			dtickval = dtickauction[Band]
 			
-			summarydf = eff.sum()
+			summarydf = eff.sum().sort_index(ascending = True)
 			
-			st.bar_chart(summarydf, width=1200, height=200, use_container_width =False)
+			st.bar_chart(summarydf, x = summarydf.index, y = summarydf.values, width=1100, height=200, use_container_width =False)
 			
 			data = [go.Heatmap(
 			  z = eff.values,
