@@ -585,6 +585,8 @@ if Dimension == "Frequency Band":
 			subtitle ="Expiry Map "+SubFeature
 			tickangle = 0
 			dtickval = dtickauction[Band]
+			
+			st.write(eff) #debug 
 
 			data = [go.Heatmap(
 			  z = eff.values,
