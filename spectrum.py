@@ -673,7 +673,7 @@ if Dimension == "Frequency Band":
 		title_x = 0.15
 
 if Dimension == "Calendar Year":
-	title = "<b>"+str(YearDim)+" - Band Wise Trend of "+Feature+units_dict(Feature)+"<b>"
+	title = "<b>"+str(YearDim)+" - Band Wise Trend of "+Feature+units_dict[Feature]+"<b>"
 	title_x =0.3
 	tickangle =0
 	dtickval =1
