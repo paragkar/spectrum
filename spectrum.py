@@ -588,7 +588,7 @@ if Dimension == "Frequency Band":
 			
 			summarydf = eff.sum().sort_index(ascending = True)
 			
-			st.bar_chart(summarydf, x = summarydf.index, y = summarydf.values, width=1100, height=200, use_container_width =False)
+			st.bar_chart(summarydf, x = summarydf.index(), y = summarydf.values, width=1100, height=200, use_container_width =False)
 			
 			data = [go.Heatmap(
 			  z = eff.values,
