@@ -612,7 +612,7 @@ if Dimension == "Frequency Band":
 	
 			figsum = go.Figure()
 			figsum.add_trace(go.Bar(x = summarydf["TotalMHz"], y = summarydf["ExpYears"], width = 1100, height =200)
-			st.write(figsum)
+			st.plotly_chart(figsum, use_container_width=False)
 			
 			
 			data = [go.Heatmap(
