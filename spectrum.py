@@ -653,7 +653,8 @@ if Dimension == "Frequency Band":
         	y='Total:Q',
         	x='Years:O',
 		color = "Years:N")
-		st.altair_chart(bar_chart, use_container_width=1000)
+		bar_chart.width = 1100
+		st.altair_chart(bar_chart, use_container_width=False)
  		
 		data = [go.Heatmap(
 			z = typedf.values,
