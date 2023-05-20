@@ -220,10 +220,10 @@ if Dimension == "Calendar Year":
 	spectrumofferedvssold = "Spectrum_Offered_vs_Sold"
 	masterdimdf = df[masterall]
 	offeredvssolddimdf = df[spectrumofferedvssold]
-	calendaryearlist = sorted(list(set(masterdf["Auction Year"].values)))
+	calendaryearlist = sorted(list(set(masterdimdf["Auction Year"].values)))
 	YearDim = st.sidebar.selectbox('Select a Year', options = calendaryearlist)
-	dfdim1 = masterdimdf[masterdf["Auction Year"]==YearDim]
-	dfdim2 = offeredvssolddimdf[offeredvssold["Year"]==YearDim]
+	dfdim1 = masterdimdf[masterdimdf["Auction Year"]==YearDim]
+	dfdim2 = offeredvssolddimdf[offeredvssolddimdf["Year"]==YearDim]
 	feature_dict ={"Spectrum Offered" : "Offered", "Spectrum Sold": "Sold", "Spectrum Unsold" : "Unsold", "Reserve Price" : "RP/MHz" ,  
 		       "Auction Price": "Auction Price/MHz", "Block Size": "Block Size", "Total EMD" : "Total EMD"} 
 	feature_list = ["Reserve Price",  "Auction Price", "Spectrum Offered", "Spectrum Sold", "Spectrum Unsold", "Block Size", "Total EMD"]
