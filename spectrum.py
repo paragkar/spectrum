@@ -229,7 +229,7 @@ if Dimension == "Calendar Year":
 	feature_list = ["Reserve Price",  "Auction Price", "Spectrum Offered", "Spectrum Sold", "Spectrum Unsold", "Block Size", "Total EMD"]
 	Feature = st.sidebar.selectbox('Select a Feature', options = feature_list)
 	z = df1[feature_dict[Feature]].values
-	st.write(z)
+	st.write(df1)
 	
 	
 	data = [go.Heatmap(
