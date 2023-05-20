@@ -336,6 +336,7 @@ def hovertext3(dff,reserveprice,auctionprice,offeredspectrum,soldspectrum,unsold
 		for xi, xx in enumerate(dff.columns):
 			winners = dff.values[yi][xi][:-2] #removing comma in the end
 # 			resprice = reserveprice.values[yi][xi]
+			resprice =0 
 			aucprice = auctionprice.values[yi][xi]
 			offmhz = offeredspectrum.values[yi][xi]
 			soldmhz = soldspectrum.values[yi][xi]
@@ -343,14 +344,14 @@ def hovertext3(dff,reserveprice,auctionprice,offeredspectrum,soldspectrum,unsold
 
 			hovertext[-1].append(
 					    '{} , {}\
-					     <br / >RP/AP: Rs {} / {} Cr/MHz\
+					     <br / >RP/AP: Rs {}/ {} Cr/MHz\
 					     <br / >Offered/Sold/Unsold: {} / {} / {} MHz\
 					     <br>Winners: {}'
 
 				     .format( 
 					    state_dict.get(yy),
 					    xx,
-# 					    resprice,
+					    resprice,
 					    aucprice,
 					    round(offmhz,2),
 					    round(soldmhz,2),
