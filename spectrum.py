@@ -646,9 +646,7 @@ if Dimension == "Frequency Band":
 		summarydf = typedf.replace('[a-zA-Z]+\s*',np.nan, regex=True)
 		summarydf = summarydf.sum().reset_index()
 		summarydf.columns = ["Years", "Total"]
-# 		st.bar_chart(summarydf, x = "Years", y ="Total", width=1090, height=150, use_container_width =False)
-		fig = px.bar(summarydf, x='Years', y='Total', width=1090, height =150)
-		st.write(fig)
+		st.bar_chart(summarydf, x = "Years", y ="Total", width=1090, height=150, use_container_width =False)
 		
 		data = [go.Heatmap(
 			z = typedf.values,
