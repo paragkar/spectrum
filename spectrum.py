@@ -650,11 +650,9 @@ if Dimension == "Frequency Band":
 # 		st.bar_chart(summarydf, x = "Years", y ="Total", width=1090, height=150, use_container_width =False)
 
 		bar_chart = alt.Chart(summarydf).mark_bar().encode(
-        	alt.Y('Total:Q'),
-        	alt.X('Years:O'),
+        	alt.Y('Total:Q').axis(labels=False),
+        	alt.X('Years:O').axis(lables=False),
 		color = alt.Color("Years:N", legend=alt.Legend(title=None, orient="right"))).properties(width=1150, height =200, title = "Summary")
-# 		bar_chart.width = 1150
-# 		bar_chart.height = 200
 		st.altair_chart(bar_chart, use_container_width=False)
  		
 		data = [go.Heatmap(
