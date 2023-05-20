@@ -228,14 +228,13 @@ if Dimension == "Calendar Year":
 		       "Auction Price": "Auction Price/MHz", "Block Size": "Block Size", "Total EMD" : "Total EMD"} 
 	feature_list = ["Reserve Price",  "Auction Price", "Spectrum Offered", "Spectrum Sold", "Spectrum Unsold", "Block Size", "Total EMD"]
 	Feature = st.sidebar.selectbox('Select a Feature', options = feature_list)
-	z = df1[feature_dict[Feature]].values
-	st.write(df1["Band"])
+	z = df1[feature_dict[Feature]]
 	
 	
 	data = [go.Heatmap(
 		  z = z,
-		  y = df1[Band].values,
-		  x = df1[Circle].values,
+		  y = df1["Band"],
+		  x = df1["Circle"],
 		  xgap = 1,
 		  ygap = 1,
 		  hoverinfo ='text',
