@@ -675,7 +675,7 @@ if Dimension == "Frequency Band":
 	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 	title = "<b>"+"Spectrum "+subtitle+" for "+str(Band)+" MHz Band "+title_map[Band]+" ("+unit+")"+"<b>"
 	if BandType[Band] == "FDD":
-		title_x =0.03
+		title_x =0.04
 	if BandType[Band] == "TDD":
 		title_x = 0.10
 
