@@ -594,7 +594,7 @@ if Dimension == "Frequency Band":
 		
 # 			st.bar_chart(summarydf, x = "ExpYears", y ="TotalMHz", width=1090, height=200, use_container_width =False)
 			
-			summarybar = px.bar(summarydf, x="ExpYears", y="TotalMHz", height=300, width=1100)
+			summarybar = px.bar(summarydf, x=str("ExpYears"), y="TotalMHz", height=300, width=1100)
 
 			st.plotly_chart(summarybar)
 			
