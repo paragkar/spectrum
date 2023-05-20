@@ -659,8 +659,11 @@ if  (Dimension == "Frequency Band") and (Feature == "AuctionMap"):
 			),
 		]
 	hoverlabel_bgcolor = hovermatrixauction(dff,reserveprice,auctionprice)
+
 	
-units_dict = {"Reserve Price" : "Rs Cr/MHz", "Auction Price" : "Rs Cr/MHz", "Quantum Offered": "MHz", "Quantum Sold" : "MHz", "Quantum Unsold" : "MHz"}
+units_dict = {"Reserve Price" : "Rs Cr/MHz", "Auction Price" : "Rs Cr/MHz", "Quantum Offered": "MHz", 
+	      "Quantum Sold" : "MHz", "Quantum Unsold" : "MHz"}
+
 #Plotting the final Heatmap	
 fig = go.Figure(data=data)
 
@@ -673,13 +676,12 @@ if Dimension == "Frequency Band":
 		unit = "No of Years"
 	if Feature == "FreqMap":
 		unit = "Ch Size - "+str(ChannelSize[Band])+" MHz"
-		
-	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
-	title = "<b>"+"Spectrum "+subtitle+" for "+str(Band)+" MHz "+title_map[Band]+" ("+unit+")"+"<b>"
 	if BandType[Band] == "FDD":
 		title_x =0.09
 	if BandType[Band] == "TDD":
 		title_x = 0.10
+	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
+	title = "<b>"+"Spectrum "+subtitle+" for "+str(Band)+" MHz "+title_map[Band]+" ("+unit+")"+"<b>"
 
 if Dimension == "Calendar Year":
 	title = "<b>"+str(YearDim)+" - Band Wise Trend of "+Feature+" ("+units_dict[Feature]+")"+"<b>"
@@ -709,7 +711,6 @@ fig.update_layout(uniformtext_minsize=12,
 		  tickangle=tickangle,
 		  dtick = dtickval),
 		)
-
 
 fig.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
 fig.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
