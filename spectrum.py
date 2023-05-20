@@ -651,8 +651,9 @@ if Dimension == "Frequency Band":
 
 		bar_chart = alt.Chart(summarydf).mark_bar().encode(
         	y='Total:Q',
-        	x='Years:O',)
-		st.altair_chart(bar_chart, width = 1100, height = 200, use_container_width=False)
+        	x='Years:O',
+		color = "Years:N")
+		st.altair_chart(bar_chart, use_container_width=1000)
  		
 		data = [go.Heatmap(
 			z = typedf.values,
