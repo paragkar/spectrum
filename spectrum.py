@@ -222,20 +222,20 @@ if Dimension == "Calendar Year":
 	offeredvssold = df[spectrumofferedvssold]
 	calendaryearlist = sorted(list(set(masterdf["Auction Year"].values)))
 	YearDim = st.sidebar.selectbox('Select a Year', options = calendaryearlist)
-	df1 = masterdf[masterdf["Auction Year"]==YearDim]
-	df2 = offeredvssold[offeredvssold["Year"]==YearDim]
+	dfdim1 = masterdf[masterdf["Auction Year"]==YearDim]
+	dfdim2 = offeredvssold[offeredvssold["Year"]==YearDim]
 	feature_dict ={"Spectrum Offered" : "Offered", "Spectrum Sold": "Sold", "Spectrum Unsold" : "Unsold", "Reserve Price" : "RP/MHz" ,  
 		       "Auction Price": "Auction Price/MHz", "Block Size": "Block Size", "Total EMD" : "Total EMD"} 
 	feature_list = ["Reserve Price",  "Auction Price", "Spectrum Offered", "Spectrum Sold", "Spectrum Unsold", "Block Size", "Total EMD"]
 	Feature = st.sidebar.selectbox('Select a Feature', options = feature_list)
-	z = df1[feature_dict[Feature]].round(2)
-	x = df1["Band"].astype(str)
-	
+	z = dfdim1[feature_dict[Feature]].round(2)
+	x = dfdim1["Band"].astype(str)
+	y = dfdim1["Circle"]
 	
 	data = [go.Heatmap(
 		  z = z,
 		  x = x,
-		  y = df1["Circle"],
+		  y = y,
 		  xgap = 1,
 		  ygap = 1,
 		  hoverinfo ='text',
