@@ -753,7 +753,7 @@ fig.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', 
 fig.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
 
 st.write(fig)
-st.bar_chart(summarydf, x = "ExpYears", y ="TotalMHz", width=1090, height=200, use_container_width =False)
+
 
 
 
