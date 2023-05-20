@@ -649,13 +649,12 @@ if Dimension == "Frequency Band":
 		
 # 		st.bar_chart(summarydf, x = "Years", y ="Total", width=1090, height=150, use_container_width =False)
 
-		bar_chart = alt.Chart(summarydf).mark_bar().encode(
+		bar_chart = alt.Chart(summarydf, title = "Summary Across Circles for all Years").mark_bar().encode(
         	y='Total:Q',
         	x='Years:O',
 		color = "Years:N")
 		bar_chart.width = 1100
 		bar_chart.height = 150
-		bar_chart.Axis(labels=False)
 		st.altair_chart(bar_chart, use_container_width=False)
  		
 		data = [go.Heatmap(
