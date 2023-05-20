@@ -666,15 +666,15 @@ fig = go.Figure(data=data)
 
 if Dimension == "Frequency Band":
 	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
-	title = "<b>"+"Spectrum "+subtitle+" for "+str(Band)+" MHz Band "+title_map[Band]+" "+units_dict[Type]+"<b>"
+	title = "<b>"+"Spectrum "+subtitle+" for "+str(Band)+" MHz Band "+title_map[Band]+" ("+units_dict[Type]+")"+"<b>"
 	if BandType[Band] == "FDD":
 		title_x =0.09
 	else:
 		title_x = 0.15
 
 if Dimension == "Calendar Year":
-	title = "<b>"+str(YearDim)+" - Band Wise Trend of "+Feature+units_dict[Feature]+"<b>"
-	title_x =0.3
+	title = "<b>"+str(YearDim)+" - Band Wise Trend of "+Feature+" ("+units_dict[Feature]+")"+"<b>"
+	title_x =0.28
 	tickangle =0
 	dtickval =1
 
