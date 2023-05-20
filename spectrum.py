@@ -157,7 +157,7 @@ def BWExpiring(sff,ef):
 	return df
 
 #funtion to process pricing datframe for hovertext for auction map
-@st.cache_resource
+# @st.cache_resource
 def processdff(dff):
     dff = dff.replace(0,np.nan).fillna(0)
     dff = dff.applymap(lambda x: round(x,2) if type(x)!=str else x)
@@ -330,8 +330,6 @@ def hovertext22(bwf,eff):
 #processing for hovertext for Auction Map
 @st.cache_resource
 def hovertext3(dff,reserveprice,auctionprice,offeredspectrum,soldspectrum,unsoldspectrum):  
-	dff.replace("NA",np.nan, inplace =True)
-	dff = dff.dropna(axis=1, how="all")
 	hovertext=[]
 	for yi, yy in enumerate(dff.index):
 		hovertext.append([])
