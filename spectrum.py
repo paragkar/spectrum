@@ -92,7 +92,7 @@ auctionsucessyears = {700:[2022],
 #This helps to identify which expiry year is linked to which operators
 errors= {700:0.25, 800:1, 900:1, 1800:1, 2100:1.5, 2300:1.25, 2500:1, 3500:0.1, 26000:0.5}
 
-#defining functions 
+#defining various functions 
 #preparing color scale for freqmap
 def colscalefreqmap(operators, colcodes):
 	operators = dict(sorted(operators.items(), key=lambda x:x[1]))
@@ -388,13 +388,13 @@ def hovermatrixauction(dff,reserveprice, auctionprice):
 			colormatrix = list(colormatrix.values)
 	return colormatrix
 
-#**********Main Program Starts here***************
+#**********  Main Program Starts here ***************
 
-#choose a dimension
+#Choose a dimension
 Dimension = st.sidebar.selectbox('Select a Dimension', options = ["Frequency Band", "Calendar Year"])
 
 if Dimension == "Frequency Band":
-	#selecting frequency bands
+	#selecting a frequency band
 	Band = st.sidebar.selectbox('Select a Band', options = list(ExpTab.keys()))
 	
 	#setting up excel file tabs for reading data
@@ -604,8 +604,8 @@ if Dimension == "Frequency Band":
 
 	#Feature ="Auction Map" linked to Dimension = "Frequency"
 	if  Feature == "AuctionMap":
-		pricemaster = pricemaster[(pricemaster["Band"]==Band) & (pricemaster["Year"] != 2018)]
-		pricemaster["Year"] = sorted([str(x) for x in pricemaster["Year"].values])
+# 		pricemaster = pricemaster[(pricemaster["Band"]==Band) & (pricemaster["Year"] != 2018)]
+# 		pricemaster["Year"] = sorted([str(x) for x in pricemaster["Year"].values])
 		#This dict has been defined for the Feature = Auction Map
 		type_dict ={"Auction Price": auctionprice,
 			    "Reserve Price": reserveprice, 
