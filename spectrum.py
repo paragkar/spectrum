@@ -233,8 +233,8 @@ if Dimension == "Calendar Year":
 	
 	data = [go.Heatmap(
 		  z = z,
-		  y = df1["Band"],
-		  x = df1["Circle"],
+		  x = df1["Band"],
+		  y = df1["Circle"],
 		  xgap = 1,
 		  ygap = 1,
 		  hoverinfo ='text',
