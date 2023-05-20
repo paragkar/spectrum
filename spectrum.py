@@ -611,6 +611,10 @@ if Dimension == "Frequency Band":
 # 			st.bar_chart(summarydf, x = "ExpYears", y ="TotalMHz", width=1090, height=150, use_container_width =False)	
 	
 			figsum = px.bar(summarydf, y = "TotalMHz", x = "ExpYears", width = 1100, height =200).update_traces(width = 0.5)
+# 			# Set the visibility ON
+# 			figsum.update_yaxes(title='y', visible=True, showticklabels=False)
+			# Set the visibility OFF
+			figsum.update_yaxes(title='y', visible=False, showticklabels=False)
 			figsum.update_xaxes(categoryorder='array', categoryarray= sorted(list(summarydf["ExpYears"])))
 			st.plotly_chart(figsum, use_container_width=False)
 # 			st.write(figsum)
