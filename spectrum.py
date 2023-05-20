@@ -608,7 +608,7 @@ if Dimension == "Frequency Band":
 		
 # 			st.bar_chart(summarydf, x = "ExpYears", y ="TotalMHz", width=1090, height=200, use_container_width =False)
 			
-			figsum = px.imshow(summarydf, width=1090, height=200)
+			figsum = px.imshow(summarydf,x = "ExpYears", y ="TotalMHz", width=1090, height=200,)
 			
 			st.write(figsum)
 
