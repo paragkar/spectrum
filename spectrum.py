@@ -649,7 +649,7 @@ if Dimension == "Frequency Band":
 		
 # 		st.bar_chart(summarydf, x = "Years", y ="Total", width=1090, height=150, use_container_width =False)
 
-		bar_chart = alt.Chart(summarydf, title = "Summary Across Circles for all Years").mark_bar().encode(
+		bar_chart = alt.Chart(summarydf).mark_bar().encode(
         	y='Total:Q',
         	x='Years:O',
 		color = "Years:N")
