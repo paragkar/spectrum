@@ -616,7 +616,7 @@ if Dimension == "Frequency Band":
 # 			figsum.update_yaxes(title='y', visible=True, showticklabels=False)
 # 			# Set the visibility OFF
 # 			figsum.update_yaxes(title='y', visible=False, showticklabels=False)
-			figsum.update_xaxes(categoryorder='array', categoryarray= sorted(list(summarydf["ExpYears"])))
+# 			figsum.update_xaxes(categoryorder='array', categoryarray= sorted(list(summarydf["ExpYears"])))
 			
 			figsum.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
 			figsum.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
