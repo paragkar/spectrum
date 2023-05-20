@@ -651,7 +651,7 @@ if Dimension == "Frequency Band":
 
 		bar_chart = alt.Chart(summarydf).mark_bar().encode(
         	alt.Y('Total:Q'),
-        	alt.X('Years:O'),
+        	alt.X('Years:O').axis(labels=False),
 		color = "Years:N")
 		bar_chart.width = 1150
 		bar_chart.height = 200
