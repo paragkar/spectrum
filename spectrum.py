@@ -586,7 +586,7 @@ if Dimension == "Frequency Band":
 			tickangle = 0
 			dtickval = dtickauction[Band]
 			
-			st.write(eff) #debug 
+			st.write(eff.sum()) #debug 
 
 			data = [go.Heatmap(
 			  z = eff.values,
@@ -616,7 +616,7 @@ if Dimension == "Frequency Band":
 			    "Quantum Unsold": unsoldspectrum}
 		Type = st.sidebar.selectbox('Select Price Type', options = ["Auction Price","Reserve Price","Quantum Offered", "Quantum Sold", "Quantum Unsold"])
 		typedf = type_dict[Type].copy()
-		st.write(typedf)
+		st.write(typedf.sum())
 		subtitle = Type
 		tickangle=0
 		dtickval = dtickauction[Band]
