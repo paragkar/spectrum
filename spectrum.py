@@ -335,6 +335,7 @@ def hovertext3(dff,reserveprice,auctionprice,offeredspectrum,soldspectrum,unsold
 		hovertext.append([])
 		for xi, xx in enumerate(dff.columns):
 			winners = dff.values[yi][xi][:-2] #removing comma in the end
+			st.write("yi",yi," xi",xi)
 			resprice = reserveprice.loc[yi, xi]
 			st.write(reserveprice)
 			aucprice = auctionprice.values[yi][xi]
