@@ -660,20 +660,21 @@ if  (Dimension == "Frequency Band") and (Feature == "AuctionMap"):
 		]
 	hoverlabel_bgcolor = hovermatrixauction(dff,reserveprice,auctionprice)
 	
-
+units_dict = {"Reserve Price" : "Rs Cr/MHz", "Auction Price" : "Rs Cr/MHz", "Quantum Offered": "MHz", "Quantum Sold" : "MHz", "Quantum Unsold" : "MHz"}
 #Plotting the final Heatmap	
 fig = go.Figure(data=data)
 
 if Dimension == "Frequency Band":
 	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
-	title = "<b>"+"Spectrum "+subtitle+" for "+str(Band)+" MHz Band "+title_map[Band]+"<b>"
+	title = "<b>"+"Spectrum "+subtitle+" for "+str(Band)+" MHz Band "+title_map[Band]+" "+units_dict[Type]+"<b>"
 	if BandType[Band] == "FDD":
 		title_x =0.09
 	else:
 		title_x = 0.15
-else:
-	title = "Band Wise Trend of "+Feature+" For the Year "+str(YearDim)
-	title_x =0.09
+
+if Dimension == "Calendar Year"
+	title = "<b>"+str(YearDim)+" - Band Wise Trend of "+Feature+units_dict(Feature)+"<b>"
+	title_x =0.3
 	tickangle =0
 	dtickval =1
 
