@@ -606,7 +606,7 @@ if Dimension == "Frequency Band":
 			summarydf.columns = ["ExpYears", "TotalMHz"]
 			summarydf["ExpYears"]= summarydf["ExpYears"].astype(float)
 		
-			st.bar_chart(summarydf, x = "ExpYears", y ="TotalMHz", width=1090, height=150, use_container_width =False)
+# 			st.bar_chart(summarydf, x = "ExpYears", y ="TotalMHz", width=1090, height=150, use_container_width =False)
 	
 			
 			data = [go.Heatmap(
@@ -747,6 +747,7 @@ fig.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', 
 fig.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
 
 st.write(fig)
+st.bar_chart(summarydf, x = "ExpYears", y ="TotalMHz", width=1090, height=150, use_container_width =False)
 
 
 
