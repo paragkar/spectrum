@@ -330,6 +330,7 @@ def hovertext22(bwf,eff):
 #processing for hovertext for Auction Map
 @st.cache_resource
 def hovertext3(dff,reserveprice,auctionprice,offeredspectrum,soldspectrum,unsoldspectrum):  
+	dff = dff.dropna(axis=1, how="all")
 	hovertext=[]
 	for yi, yy in enumerate(dff.index):
 		hovertext.append([])
