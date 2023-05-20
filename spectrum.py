@@ -665,8 +665,15 @@ units_dict = {"Reserve Price" : "Rs Cr/MHz", "Auction Price" : "Rs Cr/MHz", "Qua
 fig = go.Figure(data=data)
 
 if Dimension == "Frequency Band":
+	if Feature == "AuctionMap":
+		unit = units_dict[Type]
+	if Feature == "FreqMap":
+		unit = ""
+	if Feature == "ExpiryMap":
+		unit = ""
+		
 	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
-	title = "<b>"+"Spectrum "+subtitle+" for "+str(Band)+" MHz Band "+title_map[Band]+" ("+units_dict[Type]+")"+"<b>"
+	title = "<b>"+"Spectrum "+subtitle+" for "+str(Band)+" MHz Band "+title_map[Band]+" ("+unit+")"+"<b>"
 	if BandType[Band] == "FDD":
 		title_x =0.09
 	else:
