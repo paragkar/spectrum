@@ -620,7 +620,7 @@ if Dimension == "Frequency Band":
 			
 # 			figsum.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
 # 			figsum.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
-			st.plotly_chart(figsum, use_container_width=False)
+# 			st.plotly_chart(figsum, use_container_width=False)
 # 			st.write(figsum)
 			
 			data = [go.Heatmap(
