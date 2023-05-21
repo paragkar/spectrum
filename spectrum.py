@@ -404,6 +404,22 @@ def hovermatrixauction(dff,reserveprice, auctionprice):
 			colormatrix = list(colormatrix.values)
 	return colormatrix
 
+#function for preparing the summary chart 
+
+
+def summarychart(summarydf, xcolumn, ycolumn):
+	bar = alt.Chart(summarydf).mark_bar().encode(
+	y = alt.Y('ycolumn'+':Q', axis=alt.Axis(labels=False)),
+	x = alt.X('xcolumn'+':O', axis=alt.Axis(labels=False)),
+	color = alt.Color("xcolumn"+":N", legend=alt.Legend(title=None, orient="right")))
+	
+	text = bar.mark_text(dx=0, dy=-5, color = 'white').encode(text='ycolumn'+':Q')
+	
+	chart = (bar + text).properties(width=1170, height =200, title = "Pan India Total of the Chart Below")
+	chart = chart.configure_title(fontSize = 20, font ='Arial', anchor = 'middle', color ='black')
+	return chart
+
+
 #**********  Main Program Starts here ***************
 
 #Choose a dimension
@@ -647,16 +663,18 @@ if Dimension == "Frequency Band":
 		summarydf = summarydf.sum().reset_index()
 		summarydf.columns = ["Years", "India Total"]
 		
-		bar = alt.Chart(summarydf).mark_bar().encode(
-        	y = alt.Y('India Total:Q', axis=alt.Axis(labels=False)),
-        	x = alt.X('Years:O', axis=alt.Axis(labels=False)),
-		color = alt.Color("Years:N", legend=alt.Legend(title=None, orient="right")))
+# 		bar = alt.Chart(summarydf).mark_bar().encode(
+#         	y = alt.Y('India Total:Q', axis=alt.Axis(labels=False)),
+#         	x = alt.X('Years:O', axis=alt.Axis(labels=False)),
+# 		color = alt.Color("Years:N", legend=alt.Legend(title=None, orient="right")))
 		
-		text = bar.mark_text(dx=0, dy=-5, color = 'white' # Nudges text to right so it doesn't appear on top of the bar
-	    		).encode(text='India Total:Q')
+# 		text = bar.mark_text(dx=0, dy=-5, color = 'white' # Nudges text to right so it doesn't appear on top of the bar
+# 	    		).encode(text='India Total:Q')
 		
-		chart = (bar + text).properties(width=1170, height =200, title = "Pan India Total of the Chart Below")
-		chart = chart.configure_title(fontSize = 20, font ='Arial', anchor = 'middle', color ='black')
+# 		chart = (bar + text).properties(width=1170, height =200, title = "Pan India Total of the Chart Below")
+# 		chart = chart.configure_title(fontSize = 20, font ='Arial', anchor = 'middle', color ='black')
+		
+		chart = summarychart(summarydf, "Years", "India Total")
 		st.altair_chart(chart, use_container_width=False)
 		
 		#setting the data of the heatmap 
