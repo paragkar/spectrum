@@ -617,6 +617,7 @@ if Dimension == "Frequency Band":
 			subtitle ="Expiry Map "+SubFeature
 			tickangle = 0
 			dtickval = dtickauction[Band]
+			st.write(bandexpcalsheetf) #debug
 			
 			#preparing the dataframe of the summary bar chart on top of the heatmap
 			summarydf = eff.sum().reset_index()
