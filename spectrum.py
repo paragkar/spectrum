@@ -709,7 +709,7 @@ if Dimension == "Calendar Year":
 		summarydf = df1.groupby(["Band"])[feature_dict[Feature]].sum()
 	if Feature in ["Quantum Offered", "Quantum Sold", "Quantum Unsold"]:
 		if Year == 2010:
-			df2 = df2[df2["Band"]!=2500]
+			df2 = df2[df2["Band"]!=2500] #exception - om spectrummap tab "spectrumofferedvssold 2500 MHz is included as dummy hovertext in freq map
 		z = df2[feature_dict[Feature]].round(2)
 		x = df2["Band"].sort_values(ascending = True).astype(str)
 		y = df2["LSA"]
