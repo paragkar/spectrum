@@ -716,7 +716,7 @@ if Dimension == "Calendar Year":
 	if Feature in ["Quantum Offered", "Quantum Sold", "Quantum Unsold"]:
 		if Year == 2010:
 			df2 = df2[df2["Band"]!=2500] #exception - in tab "offeredvssold", 2500 MHz is dummy for hovertext in freq map
-		df2_temp1 = df2[[feature_dict[Feature]], "Band"]]
+		df2_temp1 = df2[[feature_dict[Feature], "Band"]]
 		df2_temp1 = df2_temp1.reset_index()
 		df2_temp1 = df2_temp1.pivot(index="LSA", columns='Band', values=feature_dict[Feature])
 		df2_temp1.columns = [str(x) for x in sorted(df2_temp1.columns)]
