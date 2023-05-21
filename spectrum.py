@@ -733,7 +733,7 @@ if Dimension == "Frequency Band":
 	if (Feature == "ExpiryMap") and (SubFeature == "Freq Wise"):
 		unit = "Ch Size - "+str(ChannelSize[Band])+" MHz"
 	if (Feature == "ExpiryMap") and (SubFeature == "Year Wise"):
-		unit = "No of Years"
+		unit = "MHz in Years"
 	if Feature == "FreqMap":
 		unit = "Ch Size - "+str(ChannelSize[Band])+" MHz"
 	if BandType[Band] == "FDD":
