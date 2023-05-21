@@ -713,7 +713,6 @@ if Dimension == "Calendar Year":
 		x = df1_temp1.columns
 		y = df1_temp1.index
 		summarydf = df1_temp1.sum()
-		st.write(summarydf)
 	if Feature in ["Quantum Offered", "Quantum Sold", "Quantum Unsold"]:
 		if Year == 2010:
 			df2 = df2[df2["Band"]!=2500] #exception - in tab "offeredvssold", 2500 MHz is dummy for hovertext in freq map
@@ -754,6 +753,7 @@ if Dimension == "Calendar Year":
 		summarydf = summarydf.round(1)
 		summarydf = summarydf.reset_index()
 		summarydf.columns = ["Band", Feature]
+		summarydf = summarydf.sort_values("Band")
 
 		#plotting the summary chart 
 		chart = summarychart(summarydf, 'Band', Feature)
