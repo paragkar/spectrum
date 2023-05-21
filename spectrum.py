@@ -752,12 +752,12 @@ if Dimension == "Calendar Year":
 			df2 = df2[df2["Band"]!=2500] #exception - in tab "offeredvssold", 2500 MHz is dummy for hovertext in freq map
 		df2 = df2.reset_index()
 		df2_temp2 = df2.set_index(["Band", "LSA"])
-		df2_temp2["Percent Unsold"] = np.divide(df2_temp2["Unsold"],df2_temp2["Offered"],out=np.full_like(df2_temp2["Unsold"], np.nan), where=df2_temp2["Offered"] != 0)
+		df2_temp2["Percent Unsold"] = np.divide(df2_temp2["Unsold"],df2_temp2["Offered"],out=np.full_like(df2_temp2["Unsold"], np.nan), where=df2_temp2["Offered"] != 0)*100
 		df2_temp2 = df2_temp2.reset_index()
 		df2_temp2 = df2_temp2[["Band", "LSA", "Percent Unsold"]]
 		df2_temp2 = df2_temp2.pivot(index="LSA", columns = "Band", values ="Percent Unsold")
 		df2_temp2.columns = [str(x) for x in sorted(df2_temp2.columns)]
-		z = df2_temp2.values.round(2)
+		z = df2_temp2.values.round(1)
 		x = df2_temp2.columns
 		y = df2_temp2.index
 		
