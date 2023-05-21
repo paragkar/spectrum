@@ -700,7 +700,7 @@ if Dimension == "Calendar Year":
 	df2 = offeredvssolddf[offeredvssolddf["Year"]==Year]
 	feature_dict ={"Quantum Offered" : "Offered", "Quantum Sold": "Sold", "Quantum Unsold" : "Unsold", "Reserve Price" : "RP/MHz" ,  
 		       "Auction Price": "Auction Price/MHz", "Total EMD" : "Total EMD"} 
-	feature_list = ["Reserve Price",  "Auction Price", "Quantum Offered", "Quantum Sold", "Quantum Unsold", "Total EMD", "Total Outflow"]
+	feature_list = ["Reserve Price",  "Auction Price", "Quantum Offered", "Quantum Sold", "Quantum Unsold", "Total EMD", "Total Outflow", "Auction/Reserve"]
 	Feature = st.sidebar.selectbox('Select a Feature', options = feature_list)
 	if Feature in ["Reserve Price", "Auction Price", "Total EMD"]:
 		z = df1[feature_dict[Feature]].round(2)
@@ -709,20 +709,29 @@ if Dimension == "Calendar Year":
 		summarydf = df1.groupby(["Band"])[feature_dict[Feature]].sum()
 	if Feature in ["Quantum Offered", "Quantum Sold", "Quantum Unsold"]:
 		if Year == 2010:
-			df2 = df2[df2["Band"]!=2500] #exception - om spectrummap tab "spectrumofferedvssold 2500 MHz is included as dummy hovertext in freq map
+			df2 = df2[df2["Band"]!=2500] #exception - in tab "offeredvssold", 2500 MHz is dummy for hovertext in freq map
 		z = df2[feature_dict[Feature]].round(2)
 		x = df2["Band"].sort_values(ascending = True).astype(str)
 		y = df2["LSA"]
 		summarydf = df2.groupby(["Band"])[feature_dict[Feature]].sum()
-	if Feature in ["Total Outflow"]:
-		df1_temp = df1.set_index(["Band","Circle"])
-		df3 = df1_temp[feature_dict["Auction Price"]]*df1_temp["Total Sold (MHz)"]
+	if Feature == "Total Outflow":
+		df1_temp1 = df1.set_index(["Band","Circle"])
+		df3 = df1_temp1[feature_dict["Auction Price"]]*df1_temp1["Total Sold (MHz)"]
 		df3 = df3.reset_index()
 		df3.columns = ["Band", "Circle", "Total Outflow"]
 		z = df3["Total Outflow"]
 		x = df3["Band"].sort_values(ascending = True).astype(str)
 		y = df3["Circle"]
 		summarydf = df3.groupby(["Band"])[Feature].sum()
+	if Feature == "Auction/Reserve":
+		df1_temp2 = df1.set_index(["Band","Circle"])
+		df1_temp2["Auction/Reserve"] = np.where(df1[feature_dict["Auction Price"]]/df1[feature_dict["Reserve Price"]], np.nan)
+		df4 = df1_temp2.reset_index()
+		df4.columns = ["Band", "Circle", "Auction/Reserve"]
+		z = df4["Auction/Reserve"]
+		x = df4["Band"].sort_values(ascending = True).astype(str)
+		y = df4["Circle"]
+		summarydf = df4.groupby(["Band"])[Feature].sum()
 		
 
 	#preparing the dataframe of the summary bar chart on top of the heatmap
@@ -750,7 +759,8 @@ if Dimension == "Calendar Year":
 	
 
 units_dict = {"Reserve Price" : "Rs Cr/MHz", "Auction Price" : "Rs Cr/MHz", "Quantum Offered": "MHz", 
-	      "Quantum Sold" : "MHz", "Quantum Unsold" : "MHz", "Total EMD" : "Rs Cr", "Total Outflow" : "Rs Cr"}
+	      "Quantum Sold" : "MHz", "Quantum Unsold" : "MHz", "Total EMD" : "Rs Cr", "Total Outflow" : "Rs Cr",
+	     "Auction/Reserve" : "Ratio"}
 
 #Plotting the final Heatmap	
 fig = go.Figure(data=data)
