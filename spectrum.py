@@ -247,7 +247,7 @@ def hovertext1(sf,sff,ef,bandf,ExpTab,ChannelSize,xaxisadj):
 					     <br>Circle : {}\
 				             <br>Operator: {}\
 					     <br>Total BW: {} MHz\
-					     <br>Expiring In: {} Years'
+					     <br>ChExp In: {} Years'
 
 				     .format(
 					    round(xx-xaxisadj[Band],2),
