@@ -747,7 +747,7 @@ if Dimension == "Calendar Year":
 		z = df1_temp3.values.round(2)
 		x = df1_temp3.columns
 		y = df1_temp3.index
-	if Feature = "Percent Unsold":
+	if Feature == "Percent Unsold":
 		if Year == 2010:
 			df2 = df2[df2["Band"]!=2500] #exception - in tab "offeredvssold", 2500 MHz is dummy for hovertext in freq map
 		df2 = df2.reset_index()
