@@ -415,7 +415,7 @@ def summarychart(summarydf, xcolumn, ycolumn):
 	
 	text = bar.mark_text(size = 10, dx=0, dy=-7, color = 'white').encode(text=ycolumn+':Q')
 	
-	chart = (bar + text).properties(width=1100, height =200, title = "Pan India Total of the Chart Below")
+	chart = (bar + text).properties(width=1100, height =200, title = "Pan India Total for the Chart Below")
 	chart = chart.configure_title(fontSize = 20, font ='Arial', anchor = 'middle', color ='black')
 	return chart
 
@@ -646,8 +646,6 @@ if Dimension == "Frequency Band":
 
 	#Feature ="Auction Map" linked to Dimension = "Frequency"
 	if  Feature == "AuctionMap":
-# 		pricemaster = pricemaster[(pricemaster["Band"]==Band) & (pricemaster["Year"] != 2018)]
-# 		pricemaster["Year"] = sorted([str(x) for x in pricemaster["Year"].values])
 		#This dict has been defined for the Feature = Auction Map
 		type_dict ={"Auction Price": auctionprice,
 			    "Reserve Price": reserveprice, 
