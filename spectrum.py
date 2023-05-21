@@ -761,7 +761,7 @@ if Dimension == "Calendar Year":
 		x = df2_temp2.columns
 		y = df2_temp2.index
 		
-	if Feature not in  ["Auction/Reserve", "Percent Unsold"):
+	if Feature not in  ["Auction/Reserve", "Percent Unsold"]:
 		#preparing the dataframe of the summary bar chart on top of the heatmap
 		summarydf = summarydf.round(1)
 		summarydf = summarydf.reset_index()
