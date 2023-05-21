@@ -717,7 +717,10 @@ if Dimension == "Calendar Year":
 		df3 = df1_temp[feature_dict["Auction Price"]]*df1_temp["Total Sold (MHz)"]
 		df3 = df3.reset_index()
 		df3.columns = ["Band", "Circle", "Total Outflow"]
-		st.write(df3)
+		z = df3["Total Outflow"]
+		x = df3["Band"]
+		y = df3["Circle"]
+		summarydf = df3.groupby(["Band"])[Feature].sum()
 		
 
 	#preparing the dataframe of the summary bar chart on top of the heatmap
