@@ -653,7 +653,7 @@ if Dimension == "Frequency Band":
 		color = alt.Color("Years:N", legend=alt.Legend(title=None, orient="right")))
 		text = bar.mark_text(dx=0, dy=-5, color = 'white' # Nudges text to right so it doesn't appear on top of the bar
 	    		).encode(text='India Total:Q')
-		chart = (bar + text).properties(width=1180, height =150, title = "")
+		chart = (bar + text).properties(width=1170, height =150, title = "")
 		st.altair_chart(chart, use_container_width=False)
 		
 		#setting the data of the heatmap 
@@ -724,7 +724,7 @@ if Dimension == "Frequency Band":
 	if Feature == "FreqMap":
 		unit = "Ch Size - "+str(ChannelSize[Band])+" MHz"
 	if BandType[Band] == "FDD":
-		title_x =0.09
+		title_x =0.15
 	if BandType[Band] == "TDD":
 		title_x = 0.10
 	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
