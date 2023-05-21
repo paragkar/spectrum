@@ -713,8 +713,8 @@ if Dimension == "Calendar Year":
 		y = df2["LSA"]
 		summarydf = df2.groupby(["Band"])[feature_dict[Feature]].sum()
 	if Feature in ["Total Outflow"]:
-		df1_temp = df1.set_index(["Band", "Circle"])
-		df3 = df1_temp[feature_dict["Auction Price"]]*df1["Total Sold (MHz)"]
+		df1_temp = df1.set_index(["Band","Circle"])
+		df3 = df1_temp[feature_dict["Auction Price"]]*df1_temp["Total Sold (MHz)"]
 		st.write(df3)
 		
 
