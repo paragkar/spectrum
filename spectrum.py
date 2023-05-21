@@ -654,7 +654,7 @@ if Dimension == "Frequency Band":
 		text = bar.mark_text(dx=0, dy=-5, color = 'white' # Nudges text to right so it doesn't appear on top of the bar
 	    		).encode(text='India Total:Q')
 		chart = (bar + text).properties(width=1170, height =150, title = "")
-		st.altair_chart(chart, use_container_width=False)
+		st.altair_chart(chart, use_container_width=True)
 		
 		#setting the data of the heatmap 
  		
