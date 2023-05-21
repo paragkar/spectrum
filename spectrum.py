@@ -31,15 +31,15 @@ state_dict = {'AP': 'Andhra Pradesh', 'AS': 'Assam', 'BH': 'Bihar', 'DL': 'Delhi
     'UPE': 'Uttar Pradesh (East)','UPW': 'Uttar Pradesh (West)','WB': 'West Bengal' }
 
 #defining all dictionaries here with data linked to a specific band
-title_map = {700:"(FDD Up/Down - 703-748 / 758-803 MHz)",
-         800:"(FDD UP/DN : 824-844 / 869-889 MHz)", 
-         900:"(FDD UP/DN : 890-915 / 935-960 MHz)", 
-         1800:"(FDD UP/DN : 1710-1785 / 1805-1880 MHz)", 
-         2100:"(FDD UP/DN : 1919-1979 / 2109- 2169 MHz)",
-         2300:"(TDD UP/DN : 2300-2400 MHz)",
-         2500:"(TDD UP/DN : 2500-2690 MHz)",
-         3500:"(TDD UP/DN : 3300-3670 MHz)",
-         26000:"(TDD UP/DN : 24250-27500 MHz)"}
+title_map = {700:"(FDD Uplink - 703-748 MHz)",
+         800:"(FDD Uplink - 824-844 MHz)", 
+         900:"(FDD Uplink - 890-915 MHz)", 
+         1800:"(FDD UPlink - 1710-1785 MHz)", 
+         2100:"(FDD Uplink - 1919-1979 MHz)",
+         2300:"(TDD UP/DN link - 2300-2400 MHz)",
+         2500:"(TDD UP/DN link - 2500-2690 MHz)",
+         3500:"(TDD UP/DN link - 3300-3670 MHz)",
+         26000:"(TDD UP/DN link - 24250-27500 MHz)"}
 
 operators = {700: {'Vacant':0,'Railways':1,'Govt':2,'RJIO':3,'BSNL':4},
              800: {'Vacant':0,'RCOM':1,'Govt':2,'RJIO':3,'Bharti':4, 'MTS':5, 'BSNL':6},
