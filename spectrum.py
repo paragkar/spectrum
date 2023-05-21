@@ -774,7 +774,7 @@ if Dimension == "Frequency Band":
 	if Feature == "FreqMap":
 		unit = "Ch Size - "+str(ChannelSize[Band])+" MHz"
 	if BandType[Band] == "FDD":
-		title_x =0.15
+		title_x =0.12
 	if BandType[Band] == "TDD":
 		title_x = 0.08
 	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
