@@ -706,6 +706,11 @@ if Dimension == "Calendar Year":
 	x = df1["Band"].astype(str)
 	y = df1["Circle"]
 	
+	st.write(df1)
+	#preparing summarydf
+	
+# 	summarydf = df1.groupby([
+	
 	data = [go.Heatmap(
 		  z = z,
 		  x = x,
