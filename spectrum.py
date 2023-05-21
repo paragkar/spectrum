@@ -709,7 +709,7 @@ if Dimension == "Calendar Year":
 		df1_temp1 = df1_temp1.reset_index()
 		df1_temp1 = df1_temp1.pivot(index="Circle", columns='Band', values=feature_dict[Feature])
 		df1_temp1.columns = [str(x) for x in sorted(df1_temp1.columns)]
-		z = df1_temp1.values
+		z = df1_temp1.values.round(1)
 		x = df1_temp1.columns
 		y = df1_temp1.index
 		summarydf = df1_temp1.sum()
