@@ -706,10 +706,15 @@ if Dimension == "Calendar Year":
 	x = df1["Band"].astype(str)
 	y = df1["Circle"]
 	
-	#preparing summarydf
+	#preparing the dataframe of the summary bar chart on top of the heatmap
 	
 	summarydf = df1.groupby(["Band"])[feature_dict[Feature]].sum()
-	st.write(summarydf)
+	summarydf = summarydf.reset_index()
+	summarydf.columns = ["Band", Feature]
+	
+	#plotting the summary chart 
+	chart = summarychart(summarydf, 'Band', Feature)
+	st.altair_chart(chart, use_container_width=False)
 	
 	data = [go.Heatmap(
 		  z = z,
