@@ -753,6 +753,7 @@ if Dimension == "Calendar Year":
 		summarydf = summarydf.round(1)
 		summarydf = summarydf.reset_index()
 		summarydf.columns = ["Band", Feature]
+		summarydf["Band"] = summarydf["Band"].astype(int)
 		summarydf = summarydf.sort_values("Band")
 
 		#plotting the summary chart 
