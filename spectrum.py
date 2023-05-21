@@ -729,7 +729,7 @@ if Dimension == "Calendar Year":
 		df1_temp2 = df1.set_index(["Band","Circle"])
 		df1_temp2["Total Outflow"] = df1_temp2[feature_dict["Auction Price"]]*df1_temp2["Total Sold (MHz)"]
 		df1_temp2 = df1_temp2.reset_index()
-		df1_temp2.columns = ["Band", "Circle", "Total Outflow"]
+		df1_temp2 = df1_temp2[["Band", "Circle", "Total Outflow"]]
 		df1_temp2 = df1_temp2.pivot(index="Circle", columns='Band', values="Total Outflow")
 		df1_temp2.columns = [str(x) for x in sorted(df1_temp2.columns)]
 		z = df1_temp2.values.round(1)
@@ -741,7 +741,7 @@ if Dimension == "Calendar Year":
 		df1_temp3 = df1.set_index(["Band","Circle"])
 		df1_temp3["Auction/Reserve"] = np.divide(df1_temp3["Auction Price/MHz"],df1_temp3["RP/MHz"],out=np.full_like(df1_temp3["Auction Price/MHz"], np.nan), where=df1_temp3["RP/MHz"] != 0)
 		df1_temp3 = df1_temp3.reset_index()
-		df1_temp3.columns = ["Band", "Circle", "Auction/Reserve"]
+		df1_temp3 = df1_temp3[["Band", "Circle", "Auction/Reserve"]]
 		df1_temp3 = df1_temp3.pivot(index="Circle", columns='Band', values="Auction/Reserve")
 		df1_temp3.columns = [str(x) for x in sorted(df1_temp3.columns)]
 		z = df1_temp3.values.round(2)
