@@ -34,7 +34,7 @@ state_dict = {'AP': 'Andhra Pradesh', 'AS': 'Assam', 'BH': 'Bihar', 'DL': 'Delhi
 title_map = {700:"(FDD Uplink - 703-748 MHz)",
          800:"(FDD Uplink - 824-844 MHz)", 
          900:"(FDD Uplink - 890-915 MHz)", 
-         1800:"(FDD UPlink - 1710-1785 MHz)", 
+         1800:"(FDD Uplink - 1710-1785 MHz)", 
          2100:"(FDD Uplink - 1919-1979 MHz)",
          2300:"(TDD UP/DN link - 2300-2400 MHz)",
          2500:"(TDD UP/DN link - 2500-2690 MHz)",
