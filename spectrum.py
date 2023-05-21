@@ -702,10 +702,16 @@ if Dimension == "Calendar Year":
 		       "Auction Price": "Auction Price/MHz", "Total EMD" : "Total EMD"} 
 	feature_list = ["Reserve Price",  "Auction Price", "Spectrum Offered", "Spectrum Sold", "Spectrum Unsold", "Total EMD"]
 	Feature = st.sidebar.selectbox('Select a Feature', options = feature_list)
-	z = df1[feature_dict[Feature]].round(2)
-	x = df1["Band"].sort_values(ascending = True).astype(str)
-	y = df1["Circle"]
-	
+	if Feature in ["Reserve Price", "Auction Price", "Total EMD"]:
+		z = df1[feature_dict[Feature]].round(2)
+		x = df1["Band"].sort_values(ascending = True).astype(str)
+		y = df1["Circle"]
+	if Feature in ["Spectrum Offered", "Spectrum Sold", "Spectrum Unsold"]:
+		z = df2[feature_dict[Feature]].round(2)
+		x = df2["Band"].sort_values(ascending = True).astype(str)
+		y = df2["LSA"]
+		
+
 	#preparing the dataframe of the summary bar chart on top of the heatmap
 	
 	summarydf = df1.groupby(["Band"])[feature_dict[Feature]].sum()
