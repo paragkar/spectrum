@@ -656,7 +656,7 @@ if Dimension == "Frequency Band":
 	    		).encode(text='India Total:Q')
 		
 		chart = (bar + text).properties(width=1170, height =150, title = "Summary")
-		chart = chart.configure_title(labelOrient='bottom',labelPadding = 3).configure_facet(spacing=5)
+		chart = chart.configure_title(fontSize = 12, font ='Courier', anchor = 'start', color ='grey')
 		st.altair_chart(chart, use_container_width=False)
 		
 		#setting the data of the heatmap 
