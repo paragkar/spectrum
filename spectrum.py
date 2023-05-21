@@ -415,7 +415,7 @@ def summarychart(summarydf, xcolumn, ycolumn):
 	
 	text = bar.mark_text(dx=0, dy=-5, color = 'white').encode(text=ycolumn+':Q')
 	
-	chart = (bar + text).properties(width=1090, height =200, title = "Pan India Total of the Chart Below")
+	chart = (bar + text).properties(width=1100, height =200, title = "Pan India Total of the Chart Below")
 	chart = chart.configure_title(fontSize = 20, font ='Arial', anchor = 'middle', color ='black')
 	return chart
 
