@@ -715,6 +715,8 @@ if Dimension == "Calendar Year":
 	if Feature in ["Total Outflow"]:
 		df1_temp = df1.set_index(["Band","Circle"])
 		df3 = df1_temp[feature_dict["Auction Price"]]*df1_temp["Total Sold (MHz)"]
+		df3.columns = ["Total Outflow"]
+		df3 = df3.reset_index()
 		st.write(df3)
 		
 
