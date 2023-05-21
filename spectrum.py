@@ -708,6 +708,8 @@ if Dimension == "Calendar Year":
 		y = df1["Circle"]
 		summarydf = df1.groupby(["Band"])[feature_dict[Feature]].sum()
 	if Feature in ["Quantum Offered", "Quantum Sold", "Quantum Unsold"]:
+		if Year == 2010:
+			df2 = df2[~df2["Band"]==2500]
 		z = df2[feature_dict[Feature]].round(2)
 		x = df2["Band"].sort_values(ascending = True).astype(str)
 		y = df2["LSA"]
