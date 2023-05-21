@@ -700,7 +700,7 @@ if Dimension == "Calendar Year":
 	df2 = offeredvssolddf[offeredvssolddf["Year"]==Year]
 	feature_dict ={"Quantum Offered" : "Offered", "Quantum Sold": "Sold", "Quantum Unsold" : "Unsold", "Reserve Price" : "RP/MHz" ,  
 		       "Auction Price": "Auction Price/MHz", "Total EMD" : "Total EMD"} 
-	feature_list = ["Reserve Price",  "Auction Price", "Quantum Offered", "Quantum Sold", "Quantum Unsold", "Total EMD"]
+	feature_list = ["Reserve Price",  "Auction Price", "Quantum Offered", "Quantum Sold", "Quantum Unsold", "Total EMD", "Total Outflow"]
 	Feature = st.sidebar.selectbox('Select a Feature', options = feature_list)
 	if Feature in ["Reserve Price", "Auction Price", "Total EMD"]:
 		z = df1[feature_dict[Feature]].round(2)
@@ -712,6 +712,9 @@ if Dimension == "Calendar Year":
 		x = df2["Band"].sort_values(ascending = True).astype(str)
 		y = df2["LSA"]
 		summarydf = df2.groupby(["Band"])[feature_dict[Feature]].sum()
+	if Feature in ["Total Outflow"]:
+		df3 = df1[feature_dict["Auction Price"]]*df1["Total Sold (MHz)"]
+		st.write(df3)
 		
 
 	#preparing the dataframe of the summary bar chart on top of the heatmap
