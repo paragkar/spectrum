@@ -697,9 +697,9 @@ if Dimension == "Calendar Year":
 	calendaryearlist = sorted(list(set(masterdf["Auction Year"].values)))
 	Year = st.sidebar.selectbox('Select a Year', options = calendaryearlist)
 	df1 = masterdf[masterdf["Auction Year"]==Year]
-	df1 = df1.sort_values("Band", ascending = True)
+	df1 = df1.sort_values(["Band", "Circle"], ascending = [True, False])
 	df2 = offeredvssolddf[offeredvssolddf["Year"]==Year]
-	df2 = df2.sort_values("Band", ascending = True)
+	df2 = df2.sort_values(["Band","Circle"], ascending = [True, False])
 	feature_dict ={"Quantum Offered" : "Offered", "Quantum Sold": "Sold", "Quantum Unsold" : "Unsold", "Reserve Price" : "RP/MHz" ,  
 		       "Auction Price": "Auction Price/MHz", "Total EMD" : "Total EMD"} 
 	feature_list = ["Reserve Price",  "Auction Price", "Quantum Offered", "Quantum Sold", "Quantum Unsold", "Total EMD", "Total Outflow", "Auction/Reserve"]
@@ -721,7 +721,7 @@ if Dimension == "Calendar Year":
 		df3 = df1_temp1[feature_dict["Auction Price"]]*df1_temp1["Total Sold (MHz)"]
 		df3 = df3.reset_index()
 		df3.columns = ["Band", "Circle", "Total Outflow"]
-		df3 = df3.sort_values("Band", ascending = True)
+		df3 = df3.sort_values(["Band","Circle"], ascending = [True, False])
 		z = df3["Total Outflow"]
 		x = df3["Band"].astype(str)
 		y = df3["Circle"]
@@ -731,7 +731,7 @@ if Dimension == "Calendar Year":
 		df1_temp2["Auction/Reserve"] = np.divide(df1_temp2["Auction Price/MHz"],df1_temp2["RP/MHz"],out=np.full_like(df1_temp2["Auction Price/MHz"], np.nan), where=df1_temp2["RP/MHz"] != 0)
 		df4 = df1_temp2["Auction/Reserve"].reset_index()
 		df4.columns = ["Band", "Circle", "Auction/Reserve"]
-		df4 = df4.sort_values("Band")
+		df4 = df4.sort_values(["Band","Circle"], ascending = [True, False])
 		z = df4["Auction/Reserve"].round(1)
 		x = df4["Band"].astype(str)
 		y = df4["Circle"]
