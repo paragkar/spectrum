@@ -718,7 +718,7 @@ if Dimension == "Calendar Year":
 		df3 = df3.reset_index()
 		df3.columns = ["Band", "Circle", "Total Outflow"]
 		z = df3["Total Outflow"]
-		x = df3["Band"]
+		x = df3["Band"].sort_values(ascending = True).astype(str)
 		y = df3["Circle"]
 		summarydf = df3.groupby(["Band"])[Feature].sum()
 		
