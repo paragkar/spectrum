@@ -728,10 +728,9 @@ if Dimension == "Calendar Year":
 		df4 = np.divide(df1_temp2["Auction Price/MHz"],df1_temp2["RP/MHz"],out=np.full_like(df1_temp2["Auction Price/MHz"], np.nan), where=df1_temp2["RP/MHz"] != 0)
 		df4 = df4.reset_index()
 		df4.columns = ["Band", "Circle", "Auction/Reserve"]
-		z = df4["Auction/Reserve"]
+		z = df4["Auction/Reserve"].round(1)
 		x = df4["Band"].sort_values(ascending = True).astype(str)
 		y = df4["Circle"]
-		summarydf = df4.groupby(["Band"])[Feature].sum()
 		
 
 	#preparing the dataframe of the summary bar chart on top of the heatmap
@@ -739,9 +738,10 @@ if Dimension == "Calendar Year":
 	summarydf = summarydf.reset_index()
 	summarydf.columns = ["Band", Feature]
 	
-	#plotting the summary chart 
-	chart = summarychart(summarydf, 'Band', Feature)
-	st.altair_chart(chart, use_container_width=False)
+	if Feature != "Auction/Reserve":
+		#plotting the summary chart 
+		chart = summarychart(summarydf, 'Band', Feature)
+		st.altair_chart(chart, use_container_width=False)
 	
 	data = [go.Heatmap(
 		  z = z,
