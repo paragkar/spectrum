@@ -709,6 +709,7 @@ if Dimension == "Calendar Year":
 	#preparing the dataframe of the summary bar chart on top of the heatmap
 	
 	summarydf = df1.groupby(["Band"])[feature_dict[Feature]].sum()
+	summarydf = summarydf.round(1)
 	summarydf = summarydf.reset_index()
 	summarydf.columns = ["Band", Feature]
 	
