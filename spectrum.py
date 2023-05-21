@@ -732,13 +732,12 @@ if Dimension == "Calendar Year":
 		x = df4["Band"].sort_values(ascending = True).astype(str)
 		y = df4["Circle"]
 		
-
-	#preparing the dataframe of the summary bar chart on top of the heatmap
-	summarydf = summarydf.round(1)
-	summarydf = summarydf.reset_index()
-	summarydf.columns = ["Band", Feature]
-	
 	if Feature != "Auction/Reserve":
+		#preparing the dataframe of the summary bar chart on top of the heatmap
+		summarydf = summarydf.round(1)
+		summarydf = summarydf.reset_index()
+		summarydf.columns = ["Band", Feature]
+
 		#plotting the summary chart 
 		chart = summarychart(summarydf, 'Band', Feature)
 		st.altair_chart(chart, use_container_width=False)
