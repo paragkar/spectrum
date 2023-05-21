@@ -706,14 +706,14 @@ if Dimension == "Calendar Year":
 	Feature = st.sidebar.selectbox('Select a Feature', options = feature_list)
 	if Feature in ["Reserve Price", "Auction Price", "Total EMD"]:
 		z = df1[feature_dict[Feature]].round(2)
-		x = df1["Band"].sort_values().astype(str)
+		x = df1["Band"].astype(str)
 		y = df1.index
 		summarydf = df1.groupby(["Band"])[feature_dict[Feature]].sum()
 	if Feature in ["Quantum Offered", "Quantum Sold", "Quantum Unsold"]:
 		if Year == 2010:
 			df2 = df2[df2["Band"]!=2500] #exception - in tab "offeredvssold", 2500 MHz is dummy for hovertext in freq map
 		z = df2[feature_dict[Feature]].round(2)
-		x = df2["Band"].sort_values().astype(str)
+		x = df2["Band"].astype(str)
 		y = df2.index
 		summarydf = df2.groupby(["Band"])[feature_dict[Feature]].sum()
 	if Feature == "Total Outflow":
@@ -723,7 +723,7 @@ if Dimension == "Calendar Year":
 		df3.columns = ["Band", "Circle", "Total Outflow"]
 		df3 = df3.set_index("Circle").sort_index()
 		z = df3["Total Outflow"]
-		x = df3["Band"].sort_values().astype(str)
+		x = df3["Band"].astype(str)
 		y = df3.index
 		summarydf = df3.groupby(["Band"])[Feature].sum()
 	if Feature == "Auction/Reserve":
@@ -733,7 +733,7 @@ if Dimension == "Calendar Year":
 		df4.columns = ["Band", "Circle", "Auction/Reserve"]
 		df4 = df4.set_index("Circle").sort_index()
 		z = df4["Auction/Reserve"].round(1)
-		x = df4["Band"].sort_values().astype(str)
+		x = df4["Band"].astype(str)
 		y = df4.index
 		
 	if Feature != "Auction/Reserve":
