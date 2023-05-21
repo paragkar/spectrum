@@ -618,17 +618,11 @@ if Dimension == "Frequency Band":
 			tickangle = 0
 			dtickval = dtickauction[Band]
 			
-			
-			#plotting summary on top of the heatmap
-# 			summarydf = eff.sum().sort_index(ascending = True).reset_index()
-# 			summarydf.columns = ["ExpYears", "TotalMHz"]
-# 			summarydf = eff.replace('[a-zA-Z]+\s*',np.nan, regex=True)
+			#preparing the dataframe of the summary bar chart on top of the heatmap
 			summarydf = eff.sum().reset_index()
 			summarydf.columns = ["ExpYears", "TotalMHz"]
 			summarydf["ExpYears"]= summarydf["ExpYears"].astype(float)
 			summarydf["ExpYears"] = summarydf["ExpYears"].sort_values(ascending = True)
-# 			summarydf["ExpYears"]= summarydf["ExpYears"].astype(float)
-# 			st.bar_chart(summarydf, x = "ExpYears", y ="TotalMHz", width=1090, height=200, use_container_width =False)
 
 			#plotting the summary chart 
 			chart = summarychart(summarydf, 'ExpYears', 'TotalMHz')
