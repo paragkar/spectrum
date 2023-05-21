@@ -706,15 +706,15 @@ if Dimension == "Calendar Year":
 		z = df1[feature_dict[Feature]].round(2)
 		x = df1["Band"].sort_values(ascending = True).astype(str)
 		y = df1["Circle"]
+		summarydf = df1.groupby(["Band"])[feature_dict[Feature]].sum()
 	if Feature in ["Spectrum Offered", "Spectrum Sold", "Spectrum Unsold"]:
 		z = df2[feature_dict[Feature]].round(2)
 		x = df2["Band"].sort_values(ascending = True).astype(str)
 		y = df2["LSA"]
+		summarydf = df2.groupby(["Band"])[feature_dict[Feature]].sum()
 		
 
 	#preparing the dataframe of the summary bar chart on top of the heatmap
-	
-	summarydf = df1.groupby(["Band"])[feature_dict[Feature]].sum()
 	summarydf = summarydf.round(1)
 	summarydf = summarydf.reset_index()
 	summarydf.columns = ["Band", Feature]
