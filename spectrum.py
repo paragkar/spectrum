@@ -727,6 +727,7 @@ if Dimension == "Calendar Year":
 		df1_temp2 = df1.set_index(["Band","Circle"])
 		df1_temp2 = np.divide(df1["Auction Price/MHz"],df1["RP/MHz"],out=np.full_like(df1["Auction Price/MHz"], np.nan), where=df1["RP/MHz"] != 0)
 		df4 = df1_temp2.reset_index()
+		st.write(df4)
 		df4.columns = ["Band", "Circle", "Auction/Reserve"]
 		z = df4["Auction/Reserve"]
 		x = df4["Band"].sort_values(ascending = True).astype(str)
