@@ -725,10 +725,8 @@ if Dimension == "Calendar Year":
 		summarydf = df3.groupby(["Band"])[Feature].sum()
 	if Feature == "Auction/Reserve":
 		df1_temp2 = df1.set_index(["Band","Circle"])
-		df1_temp2 = np.divide(df1["Auction Price/MHz"],df1["RP/MHz"],out=np.full_like(df1["Auction Price/MHz"], np.nan), where=df1["RP/MHz"] != 0)
-		df4 = df1_temp2.reset_index()
-
-		st.write(df1_temp2)
+		df4 = np.divide(df1_temp2["Auction Price/MHz"],df1_temp2["RP/MHz"],out=np.full_like(df1_temp2["Auction Price/MHz"], np.nan), where=df1_temp2["RP/MHz"] != 0)
+		df4 = df4.reset_index()
 		df4.columns = ["Band", "Circle", "Auction/Reserve"]
 		z = df4["Auction/Reserve"]
 		x = df4["Band"].sort_values(ascending = True).astype(str)
