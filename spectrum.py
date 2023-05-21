@@ -656,7 +656,7 @@ if Dimension == "Frequency Band":
 	    		).encode(text='India Total:Q')
 		
 		chart = (bar + text).properties(width=1170, height =150, title = "Pan India Yearly Total of the Chart Below")
-		chart = chart.configure_title(fontSize = 24, font ='Arial', anchor = 'middle', color ='black')
+		chart = chart.configure_title(fontSize = 20, font ='Arial', anchor = 'middle', color ='black')
 		st.altair_chart(chart, use_container_width=False)
 		
 		#setting the data of the heatmap 
