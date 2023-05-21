@@ -652,12 +652,11 @@ if Dimension == "Frequency Band":
         	x = alt.X('Years:O', axis=alt.Axis(labels=False)),
 		color = alt.Color("Years:N", legend=alt.Legend(title=None, orient="right")))
 		
-		bar = bar.configure_header(labelOrient='bottom',labelPadding = 3).configure_facet(spacing=5)
-		
 		text = bar.mark_text(dx=0, dy=-5, color = 'white' # Nudges text to right so it doesn't appear on top of the bar
 	    		).encode(text='India Total:Q')
 		
-		chart = (bar + text).properties(width=1170, height =150, title = "")
+		chart = (bar + text).properties(width=1170, height =150, title = "Summary")
+		chart = chart.configure_title(labelOrient='bottom',labelPadding = 3).configure_facet(spacing=5)
 		st.altair_chart(chart, use_container_width=False)
 		
 		#setting the data of the heatmap 
