@@ -732,7 +732,7 @@ if Dimension == "Calendar Year":
 		df1_temp2 = df1_temp2[["Band", "Circle", "Total Outflow"]]
 		df1_temp2 = df1_temp2.pivot(index="Circle", columns='Band', values="Total Outflow")
 		df1_temp2.columns = [str(x) for x in sorted(df1_temp2.columns)]
-		z = df1_temp2.values.round(1)
+		z = df1_temp2.values.round(0)
 		x = df1_temp2.columns
 		y = df1_temp2.index
 		summarydf = df1_temp2.sum()
