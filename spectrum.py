@@ -229,11 +229,16 @@ def auctioncalyear(ef,excepf,pf1):
   
 #processing for hovertext for freq map
 @st.cache_resource
-def hovertext1(sf,sff,bandf,ExpTab,ChannelSize,xaxisadj):  
+def hovertext1(sf,sff,ef,bandf,ExpTab,ChannelSize,xaxisadj):  
 	hovertext = []
 	for yi, yy in enumerate(sf.index):
 		hovertext.append([])
 		for xi, xx in enumerate(sf.columns):
+			if ExpTab[Band]==1: #1 means that the expiry table in the excel sheet has been set and working 
+				expiry = round(ef.values[yi][xi],2)
+			else:
+				expiry = "NA"
+				
 			operatornew = sff.values[yi][xi]
 			bandwidth = bandf.values[yi][xi]
 			hovertext[-1].append(
@@ -241,7 +246,8 @@ def hovertext1(sf,sff,bandf,ExpTab,ChannelSize,xaxisadj):
 					     <br>Channel Size : {} MHz\
 					     <br>Circle : {}\
 				             <br>Operator: {}\
-					     <br>Total BW: {} MHz'
+					     <br>Total BW: {} MHz\
+					     <br>Expiring In: {} Years'
 
 				     .format(
 					    round(xx-xaxisadj[Band],2),
@@ -249,6 +255,7 @@ def hovertext1(sf,sff,bandf,ExpTab,ChannelSize,xaxisadj):
 					    state_dict.get(yy),
 					    operatornew,
 					    bandwidth,
+					    expiry
 					    )
 					    )
 	return hovertext
@@ -542,7 +549,7 @@ if Dimension == "Frequency Band":
 			tickvals = list(selected_op_dict.values())
 			ticktext = list(selected_op_dict.keys())	
 
-		hovertext = hovertext1(hf,sff,bandf, ExpTab,ChannelSize,xaxisadj)
+		hovertext = hovertext1(hf,sff,ef, bandf, ExpTab,ChannelSize,xaxisadj)
 		subtitle ="Frequency Map"
 		tickangle = -90
 		dtickval = dtickfreq[Band]
