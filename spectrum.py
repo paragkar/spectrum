@@ -708,7 +708,7 @@ if Dimension == "Calendar Year":
 	
 	#preparing summarydf
 	
-	summarydf = df1.groupby(["Band"])[Feature].sum()
+	summarydf = df1.groupby(["Band"])[feature_dict[Feature]].sum()
 	st.write(summarydf)
 	
 	data = [go.Heatmap(
