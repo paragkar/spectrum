@@ -706,7 +706,6 @@ if Dimension == "Calendar Year":
 	Feature = st.sidebar.selectbox('Select a Feature', options = feature_list)
 	if Feature in ["Reserve Price", "Auction Price", "Total EMD"]:
 		df1_temp1 = df1[[feature_dict[Feature], "Band"]]
-		st.write(df1_temp1)
 		df1_temp1 = df1_temp1.reset_index()
 		df1_temp1 = df1_temp1.pivot(index="Circle", columns='Band', values=feature_dict[Feature])
 		df1_temp1.columns = [str(x) for x in sorted(df1_temp1.columns)]
@@ -714,6 +713,7 @@ if Dimension == "Calendar Year":
 		x = df1_temp1.columns
 		y = df1_temp1.index
 		summarydf = df1_temp1.sum()
+		st.write(summarydf)
 	if Feature in ["Quantum Offered", "Quantum Sold", "Quantum Unsold"]:
 		if Year == 2010:
 			df2 = df2[df2["Band"]!=2500] #exception - in tab "offeredvssold", 2500 MHz is dummy for hovertext in freq map
