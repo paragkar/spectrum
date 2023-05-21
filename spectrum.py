@@ -650,8 +650,9 @@ if Dimension == "Frequency Band":
 		bar = alt.Chart(summarydf).mark_bar().encode(
         	y = alt.Y('India Total:Q', axis=alt.Axis(labels=False)),
         	x = alt.X('Years:O', axis=alt.Axis(labels=False)),
-		color = alt.Color("Years:N", legend=alt.Legend(title=None, orient="right"))).configure_header(labelOrient='bottom',
-                    labelPadding = 3).configure_facet(spacing=5)
+		color = alt.Color("Years:N", legend=alt.Legend(title=None, orient="right")))
+		
+		bar = bar.configure_header(labelOrient='bottom',labelPadding = 3).configure_facet(spacing=5)
 		
 		text = bar.mark_text(dx=0, dy=-5, color = 'white' # Nudges text to right so it doesn't appear on top of the bar
 	    		).encode(text='India Total:Q')
