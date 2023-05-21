@@ -617,10 +617,7 @@ if Dimension == "Frequency Band":
 			subtitle ="Expiry Map "+SubFeature
 			tickangle = 0
 			dtickval = dtickauction[Band]
-			for sp in operators.keys(): #debug
-				df_temp = [np.where(bandexpcalsheetf[col].str.contains(sp), bandexpcalsheetf[col], np.nan) for col in bandexpcalsheetf.columns] #debug
-			st.write(df_temp) #debug
-			
+		
 			#preparing the dataframe of the summary bar chart on top of the heatmap
 			summarydf = eff.sum().reset_index()
 			summarydf.columns = ["ExpYears", "TotalMHz"]
