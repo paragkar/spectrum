@@ -625,6 +625,7 @@ if Dimension == "Frequency Band":
 # 			summarydf = eff.replace('[a-zA-Z]+\s*',np.nan, regex=True)
 			summarydf = eff.sum().reset_index()
 			summarydf.columns = ["ExpYears", "TotalMHz"]
+			summarydf["ExpYears"]= summarydf["ExpYears"].astype(float)
 			summarydf["ExpYears"] = summarydf["ExpYears"].sort_values(ascending = True)
 # 			summarydf["ExpYears"]= summarydf["ExpYears"].astype(float)
 # 			st.bar_chart(summarydf, x = "ExpYears", y ="TotalMHz", width=1090, height=200, use_container_width =False)
