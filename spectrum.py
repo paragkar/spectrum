@@ -618,7 +618,7 @@ if Dimension == "Frequency Band":
 			tickangle = 0
 			dtickval = dtickauction[Band]
 			for sp in operators.keys(): #debug
-				df_temp = np.where(bandexpcalsheetf.str.contains(sp), bandexpcalsheetf, np.nan) #debug
+				df_temp = [np.where(bandexpcalsheetf[col].str.contains(sp), bandexpcalsheetf[col], np.nan) for col in df_temp.columns] #debug
 			st.write(df_temp) #debug
 			
 			#preparing the dataframe of the summary bar chart on top of the heatmap
