@@ -659,7 +659,7 @@ if Dimension == "Frequency Band":
 			    "Quantum Offered": offeredspectrum, 
 			    "Quantum Sold": soldspectrum, 
 			    "Quantum Unsold": unsoldspectrum}
-		Type = st.sidebar.selectbox('Select Price Type', options = ["Auction Price","Reserve Price","Quantum Offered", "Quantum Sold", "Quantum Unsold"])
+		Type = st.sidebar.selectbox('Select a Sub Feature', options = ["Auction Price","Reserve Price","Quantum Offered", "Quantum Sold", "Quantum Unsold"])
 		typedf = type_dict[Type].copy()
 		subtitle = Type
 		tickangle=0
