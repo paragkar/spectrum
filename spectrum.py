@@ -699,7 +699,7 @@ if Dimension == "Calendar Year":
 	df1 = masterdf[masterdf["Auction Year"]==Year]
 	df1 = df1.sort_values(["Band", "Circle"], ascending = [True, False])
 	df2 = offeredvssolddf[offeredvssolddf["Year"]==Year]
-	df2 = df2.sort_values(["Band","Circle"], ascending = [True, False])
+	df2 = df2.sort_values(["Band","LSA"], ascending = [True, False])
 	feature_dict ={"Quantum Offered" : "Offered", "Quantum Sold": "Sold", "Quantum Unsold" : "Unsold", "Reserve Price" : "RP/MHz" ,  
 		       "Auction Price": "Auction Price/MHz", "Total EMD" : "Total EMD"} 
 	feature_list = ["Reserve Price",  "Auction Price", "Quantum Offered", "Quantum Sold", "Quantum Unsold", "Total EMD", "Total Outflow", "Auction/Reserve"]
