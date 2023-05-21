@@ -720,7 +720,7 @@ if Dimension == "Calendar Year":
 		df2_temp1 = df2_temp1.reset_index()
 		df2_temp1 = df2_temp1.pivot(index="LSA", columns='Band', values=feature_dict[Feature])
 		df2_temp1.columns = [str(x) for x in sorted(df2_temp1.columns)]
-		z = df2_temp1.values
+		z = df2_temp1.values.round(2)
 		x = df2_temp1.columns
 		y = df2_temp1.index
 		summarydf = df2_temp1.sum()
@@ -732,7 +732,7 @@ if Dimension == "Calendar Year":
 		df1_temp2.columns = ["Band", "Circle", "Total Outflow"]
 		df1_temp2 = df1_temp2.pivot(index="Circle", columns='Band', values="Total Outflow")
 		df1_temp2.columns = [str(x) for x in sorted(df1_temp2.columns)]
-		z = df1_temp2.values
+		z = df1_temp2.values.round(1)
 		x = df1_temp2.columns
 		y = df1_temp2.index
 		summarydf = df1_temp2.sum()
@@ -744,7 +744,7 @@ if Dimension == "Calendar Year":
 		df1_temp3.columns = ["Band", "Circle", "Auction/Reserve"]
 		df1_temp3 = df1_temp3.pivot(index="Circle", columns='Band', values="Auction/Reserve")
 		df1_temp3.columns = [str(x) for x in sorted(df1_temp3.columns)]
-		z = df1_temp3.values
+		z = df1_temp3.values.round(2)
 		x = df1_temp3.columns
 		y = df1_temp3.index
 		
