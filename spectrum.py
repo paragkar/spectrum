@@ -790,7 +790,7 @@ if Dimension == "Calendar Year":
 
 units_dict = {"Reserve Price" : "Rs Cr/MHz", "Auction Price" : "Rs Cr/MHz", "Quantum Offered": "MHz", 
 	      "Quantum Sold" : "MHz", "Quantum Unsold" : "MHz", "Total EMD" : "Rs Cr", "Total Outflow" : "Rs Cr",
-	     "Auction/Reserve" : "Ratio"}
+	     "Auction/Reserve" : "Ratio", "Percent Unsold" : "% Unsold Spectrum"}
 
 #Plotting the final Heatmap	
 fig = go.Figure(data=data)
