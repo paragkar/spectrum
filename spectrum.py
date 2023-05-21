@@ -699,8 +699,8 @@ if Dimension == "Calendar Year":
 	df1 = masterdf[masterdf["Auction Year"]==Year]
 	df2 = offeredvssolddf[offeredvssolddf["Year"]==Year]
 	feature_dict ={"Spectrum Offered" : "Offered", "Spectrum Sold": "Sold", "Spectrum Unsold" : "Unsold", "Reserve Price" : "RP/MHz" ,  
-		       "Auction Price": "Auction Price/MHz", "Block Size": "Block Size", "Total EMD" : "Total EMD"} 
-	feature_list = ["Reserve Price",  "Auction Price", "Spectrum Offered", "Spectrum Sold", "Spectrum Unsold", "Block Size", "Total EMD"]
+		       "Auction Price": "Auction Price/MHz", "Total EMD" : "Total EMD"} 
+	feature_list = ["Reserve Price",  "Auction Price", "Spectrum Offered", "Spectrum Sold", "Spectrum Unsold", "Total EMD"]
 	Feature = st.sidebar.selectbox('Select a Feature', options = feature_list)
 	z = df1[feature_dict[Feature]].round(2)
 	x = df1["Band"].astype(str)
