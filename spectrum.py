@@ -697,9 +697,11 @@ if Dimension == "Calendar Year":
 	calendaryearlist = sorted(list(set(masterdf["Auction Year"].values)))
 	Year = st.sidebar.selectbox('Select a Year', options = calendaryearlist)
 	df1 = masterdf[masterdf["Auction Year"]==Year]
-	df1 = df1.sort_values(["Band", "Circle"], ascending = [True, True])
+	df1 = df1.set_index("Circle").sort_index()
+	df1 = df1.sort_values("Band", ascending = True)
 	df2 = offeredvssolddf[offeredvssolddf["Year"]==Year]
-	df2 = df2.sort_values(["Band","LSA"], ascending = [True, True])
+	df2 = df2.set_index("LSA").sort_index()
+	df2 = df2.sort_values("Band", ascending = True)
 	feature_dict ={"Quantum Offered" : "Offered", "Quantum Sold": "Sold", "Quantum Unsold" : "Unsold", "Reserve Price" : "RP/MHz" ,  
 		       "Auction Price": "Auction Price/MHz", "Total EMD" : "Total EMD"} 
 	feature_list = ["Reserve Price",  "Auction Price", "Quantum Offered", "Quantum Sold", "Quantum Unsold", "Total EMD", "Total Outflow", "Auction/Reserve"]
@@ -707,34 +709,36 @@ if Dimension == "Calendar Year":
 	if Feature in ["Reserve Price", "Auction Price", "Total EMD"]:
 		z = df1[feature_dict[Feature]].round(2)
 		x = df1["Band"].astype(str)
-		y = df1["Circle"]
+		y = df1.index
 		summarydf = df1.groupby(["Band"])[feature_dict[Feature]].sum()
 	if Feature in ["Quantum Offered", "Quantum Sold", "Quantum Unsold"]:
 		if Year == 2010:
 			df2 = df2[df2["Band"]!=2500] #exception - in tab "offeredvssold", 2500 MHz is dummy for hovertext in freq map
 		z = df2[feature_dict[Feature]].round(2)
 		x = df2["Band"].astype(str)
-		y = df2["LSA"]
+		y = df2.index
 		summarydf = df2.groupby(["Band"])[feature_dict[Feature]].sum()
 	if Feature == "Total Outflow":
 		df1_temp1 = df1.set_index(["Band","Circle"])
 		df3 = df1_temp1[feature_dict["Auction Price"]]*df1_temp1["Total Sold (MHz)"]
 		df3 = df3.reset_index()
 		df3.columns = ["Band", "Circle", "Total Outflow"]
-		df3 = df3.sort_values(["Band","Circle"], ascending = [True, True])
+		df3 = df3.set_index("Circle").sort_index()
+		df3 = df3.sort_values("Band", ascending = True)
 		z = df3["Total Outflow"]
 		x = df3["Band"].astype(str)
-		y = df3["Circle"]
+		y = df3.index
 		summarydf = df3.groupby(["Band"])[Feature].sum()
 	if Feature == "Auction/Reserve":
 		df1_temp2 = df1.set_index(["Band","Circle"])
 		df1_temp2["Auction/Reserve"] = np.divide(df1_temp2["Auction Price/MHz"],df1_temp2["RP/MHz"],out=np.full_like(df1_temp2["Auction Price/MHz"], np.nan), where=df1_temp2["RP/MHz"] != 0)
 		df4 = df1_temp2["Auction/Reserve"].reset_index()
 		df4.columns = ["Band", "Circle", "Auction/Reserve"]
-		df4 = df4.sort_values(["Band","Circle"], ascending = [True, True])
+		df4 = df4.set_index("Circle")
+		df4 = df4.sort_values("Band", ascending = True)
 		z = df4["Auction/Reserve"].round(1)
 		x = df4["Band"].astype(str)
-		y = df4["Circle"]
+		y = df4.index
 		
 	if Feature != "Auction/Reserve":
 		#preparing the dataframe of the summary bar chart on top of the heatmap
