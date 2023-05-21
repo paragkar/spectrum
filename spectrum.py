@@ -706,6 +706,7 @@ if Dimension == "Calendar Year":
 	Feature = st.sidebar.selectbox('Select a Feature', options = feature_list)
 	if Feature in ["Reserve Price", "Auction Price", "Total EMD"]:
 		df1_temp1 = df1[[feature_dict[Feature], "Band"]]
+		st.write(df1_temp1)
 		df1_temp1 = df1_temp1.reset_index()
 		df1_temp1 = df1_temp1.pivot(index="Circle", columns='Band', values=feature_dict[Feature])
 		df1_temp1.columns = [str(x) for x in sorted(df1_temp1.columns)]
