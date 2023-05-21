@@ -697,21 +697,23 @@ if Dimension == "Calendar Year":
 	calendaryearlist = sorted(list(set(masterdf["Auction Year"].values)))
 	Year = st.sidebar.selectbox('Select a Year', options = calendaryearlist)
 	df1 = masterdf[masterdf["Auction Year"]==Year]
+	df1 = df1.sort_values("Band", ascending = True)
 	df2 = offeredvssolddf[offeredvssolddf["Year"]==Year]
+	df2 = df2.sort_values("Band", ascending = True)
 	feature_dict ={"Quantum Offered" : "Offered", "Quantum Sold": "Sold", "Quantum Unsold" : "Unsold", "Reserve Price" : "RP/MHz" ,  
 		       "Auction Price": "Auction Price/MHz", "Total EMD" : "Total EMD"} 
 	feature_list = ["Reserve Price",  "Auction Price", "Quantum Offered", "Quantum Sold", "Quantum Unsold", "Total EMD", "Total Outflow", "Auction/Reserve"]
 	Feature = st.sidebar.selectbox('Select a Feature', options = feature_list)
 	if Feature in ["Reserve Price", "Auction Price", "Total EMD"]:
 		z = df1[feature_dict[Feature]].round(2)
-		x = df1["Band"].sort_values(ascending = True).astype(str)
+		x = df1["Band"].astype(str)
 		y = df1["Circle"]
 		summarydf = df1.groupby(["Band"])[feature_dict[Feature]].sum()
 	if Feature in ["Quantum Offered", "Quantum Sold", "Quantum Unsold"]:
 		if Year == 2010:
 			df2 = df2[df2["Band"]!=2500] #exception - in tab "offeredvssold", 2500 MHz is dummy for hovertext in freq map
 		z = df2[feature_dict[Feature]].round(2)
-		x = df2["Band"].sort_values(ascending = True).astype(str)
+		x = df2["Band"].astype(str)
 		y = df2["LSA"]
 		summarydf = df2.groupby(["Band"])[feature_dict[Feature]].sum()
 	if Feature == "Total Outflow":
@@ -719,8 +721,9 @@ if Dimension == "Calendar Year":
 		df3 = df1_temp1[feature_dict["Auction Price"]]*df1_temp1["Total Sold (MHz)"]
 		df3 = df3.reset_index()
 		df3.columns = ["Band", "Circle", "Total Outflow"]
+		df3 = df3.sort_values("Band", ascending = True)
 		z = df3["Total Outflow"]
-		x = df3["Band"].sort_values(ascending = True).astype(str)
+		x = df3["Band"].astype(str)
 		y = df3["Circle"]
 		summarydf = df3.groupby(["Band"])[Feature].sum()
 	if Feature == "Auction/Reserve":
@@ -728,8 +731,9 @@ if Dimension == "Calendar Year":
 		df1_temp2["Auction/Reserve"] = np.divide(df1_temp2["Auction Price/MHz"],df1_temp2["RP/MHz"],out=np.full_like(df1_temp2["Auction Price/MHz"], np.nan), where=df1_temp2["RP/MHz"] != 0)
 		df4 = df1_temp2["Auction/Reserve"].reset_index()
 		df4.columns = ["Band", "Circle", "Auction/Reserve"]
+		df4 = df4.sort_values("Band")
 		z = df4["Auction/Reserve"].round(1)
-		x = df4["Band"].sort_values(ascending = True).astype(str)
+		x = df4["Band"].astype(str)
 		y = df4["Circle"]
 		
 	if Feature != "Auction/Reserve":
