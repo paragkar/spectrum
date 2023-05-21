@@ -698,16 +698,16 @@ if Dimension == "Calendar Year":
 	Year = st.sidebar.selectbox('Select a Year', options = calendaryearlist)
 	df1 = masterdf[masterdf["Auction Year"]==Year]
 	df2 = offeredvssolddf[offeredvssolddf["Year"]==Year]
-	feature_dict ={"Spectrum Offered" : "Offered", "Spectrum Sold": "Sold", "Spectrum Unsold" : "Unsold", "Reserve Price" : "RP/MHz" ,  
+	feature_dict ={"Quantum Offered" : "Offered", "Quantum Sold": "Sold", "Quantum Unsold" : "Unsold", "Reserve Price" : "RP/MHz" ,  
 		       "Auction Price": "Auction Price/MHz", "Total EMD" : "Total EMD"} 
-	feature_list = ["Reserve Price",  "Auction Price", "Spectrum Offered", "Spectrum Sold", "Spectrum Unsold", "Total EMD"]
+	feature_list = ["Reserve Price",  "Auction Price", "Quantum Offered", "Quantum Sold", "Quantum Unsold", "Total EMD"]
 	Feature = st.sidebar.selectbox('Select a Feature', options = feature_list)
 	if Feature in ["Reserve Price", "Auction Price", "Total EMD"]:
 		z = df1[feature_dict[Feature]].round(2)
 		x = df1["Band"].sort_values(ascending = True).astype(str)
 		y = df1["Circle"]
 		summarydf = df1.groupby(["Band"])[feature_dict[Feature]].sum()
-	if Feature in ["Spectrum Offered", "Spectrum Sold", "Spectrum Unsold"]:
+	if Feature in ["Quantum Offered", "Quantum Sold", "Quantum Unsold"]:
 		z = df2[feature_dict[Feature]].round(2)
 		x = df2["Band"].sort_values(ascending = True).astype(str)
 		y = df2["LSA"]
