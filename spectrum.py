@@ -702,7 +702,7 @@ if Dimension == "Calendar Year":
 	df2 = df2.set_index("LSA")
 	feature_dict ={"Quantum Offered" : "Offered", "Quantum Sold": "Sold", "Quantum Unsold" : "Unsold", "Reserve Price" : "RP/MHz" ,  
 		       "Auction Price": "Auction Price/MHz", "Total EMD" : "Total EMD"} 
-	feature_list = ["Reserve Price",  "Auction Price", "Quantum Offered", "Quantum Sold", "Quantum Unsold", "Total EMD", "Total Outflow", "Auction/Reserve"]
+	feature_list = ["Reserve Price",  "Auction Price", "Quantum Offered", "Quantum Sold", "Quantum Unsold", "Percent Unsold", "Total EMD", "Total Outflow", "Auction/Reserve"]
 	Feature = st.sidebar.selectbox('Select a Feature', options = feature_list)
 	if Feature in ["Reserve Price", "Auction Price", "Total EMD"]:
 		df1_temp1 = df1[[feature_dict[Feature], "Band"]]
@@ -747,8 +747,21 @@ if Dimension == "Calendar Year":
 		z = df1_temp3.values.round(2)
 		x = df1_temp3.columns
 		y = df1_temp3.index
+	if Feature = "Percent Unsold":
+		if Year == 2010:
+			df2 = df2[df2["Band"]!=2500] #exception - in tab "offeredvssold", 2500 MHz is dummy for hovertext in freq map
+		df2 = df2.reset_index()
+		df2_temp2 = df2.set_index(["Band", "LSA"])
+		df2_temp2["Percent Unsold"] = np.divide(df2_temp2["Unsold"],df2_temp2["Offered"],out=np.full_like(df2_temp2["Unsold"], np.nan), where=df2_temp2["Offered"] != 0)
+		df2_temp2 = df2_temp2.reset_index()
+		df2_temp2 = df2_temp2[["Band", "LSA", "Percent Unsold"]]
+		df2_temp2 = df2_temp2.pivot(index="LSA", columns = "Band", values ="Percent Unsold")
+		df2_temp2.columns = [str(x) for x in sorted(df2_temp2.columns)]
+		z = df2_temp2.values.round(2)
+		x = df2_temp2.columns
+		y = df2_temp2.index
 		
-	if Feature != "Auction/Reserve":
+	if Feature not in  ["Auction/Reserve", "Percent Unsold"):
 		#preparing the dataframe of the summary bar chart on top of the heatmap
 		summarydf = summarydf.round(1)
 		summarydf = summarydf.reset_index()
