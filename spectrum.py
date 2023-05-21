@@ -658,27 +658,16 @@ if Dimension == "Frequency Band":
 		dtickval = dtickauction[Band]
 		hovertext = hovertext3(dff,reserveprice,auctionprice,offeredspectrum,soldspectrum,unsoldspectrum)
 		
-		#plotting summary bar chart on top of the heatmap
+		#preparing the dataframe of the summary bar chart on top of the heatmap
 		summarydf = typedf.replace('[a-zA-Z]+\s*',np.nan, regex=True)
 		summarydf = summarydf.sum().reset_index()
 		summarydf.columns = ["Years", "India Total"]
 		
-# 		bar = alt.Chart(summarydf).mark_bar().encode(
-#         	y = alt.Y('India Total:Q', axis=alt.Axis(labels=False)),
-#         	x = alt.X('Years:O', axis=alt.Axis(labels=False)),
-# 		color = alt.Color("Years:N", legend=alt.Legend(title=None, orient="right")))
-		
-# 		text = bar.mark_text(dx=0, dy=-5, color = 'white' # Nudges text to right so it doesn't appear on top of the bar
-# 	    		).encode(text='India Total:Q')
-		
-# 		chart = (bar + text).properties(width=1170, height =200, title = "Pan India Total of the Chart Below")
-# 		chart = chart.configure_title(fontSize = 20, font ='Arial', anchor = 'middle', color ='black')
-		
+		#plotting the summary chart 
 		chart = summarychart(summarydf, 'Years', 'India Total')
 		st.altair_chart(chart, use_container_width=False)
 		
 		#setting the data of the heatmap 
- 		
 		data = [go.Heatmap(
 			z = typedf.values,
 			y = typedf.index,
@@ -745,7 +734,7 @@ if Dimension == "Frequency Band":
 	if Feature == "FreqMap":
 		unit = "Ch Size - "+str(ChannelSize[Band])+" MHz"
 	if BandType[Band] == "FDD":
-		title_x =0.10
+		title_x =0.12
 	if BandType[Band] == "TDD":
 		title_x = 0.08
 	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
