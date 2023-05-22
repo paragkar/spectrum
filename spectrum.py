@@ -850,14 +850,14 @@ if Dimension == "Frequency Band":
 
 if Dimension == "Calendar Year":
 	if Feature =="Total Outflow":
-		if selected_operator==[]:
-			selected_operator = ["All"]
+		if selected_operator=="":
+			selected_operator = "All"
 		else:
 			selected_operator = selected_operator
 	else:
 		selected_operator = ["NA"]
 	title = "Band Wise Yearly Trend of the Year "+str(Year)
-	subtitle = Feature+" ("+units_dict[Feature]+"); "+ "(Selected Operator -"+', '.join(selected_operator)+")"
+	subtitle = Feature+" ("+units_dict[Feature]+"); "+ "(Selected Operator - "+ selected_operator+" )"
 	title_x =0.25
 	tickangle =0
 	dtickval =1
