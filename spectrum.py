@@ -243,7 +243,7 @@ def auctioncalyear(ef,excepf,pf1):
   
 #processing for hovertext for freq map
 @st.cache_resource
-def hovertext1(sf,sff,ef,bandf,ExpTab,ChannelSize,xaxisadj):  
+def hovertext1(sf,sff,ef,of,ayear,bandf,ExpTab,ChannelSize,xaxisadj):  
 	hovertext = []
 	for yi, yy in enumerate(sf.index):
 		hovertext.append([])
@@ -284,7 +284,7 @@ def hovertext1(sf,sff,ef,bandf,ExpTab,ChannelSize,xaxisadj):
 
 #processing for hovertext for expiry map freq wise
 @st.cache_resource
-def hovertext21(sf,sff,ef,bandf,bandexpf,ExpTab,ChannelSize,xaxisadj,ayear):
+def hovertext21(sf,sff,ef,of,bandf,bandexpf,ExpTab,ChannelSize,xaxisadj,ayear):
 	hovertext = []
 	for yi, yy in enumerate(sf.index):
 		hovertext.append([])
@@ -573,7 +573,7 @@ if Dimension == "Frequency Band":
 			tickvals = list(selected_op_dict.values())
 			ticktext = list(selected_op_dict.keys())	
 
-		hovertext = hovertext1(hf,sff,ef, bandf, ExpTab,ChannelSize,xaxisadj)
+		hovertext = hovertext1(hf,sff,ef, of, ayear, bandf, ExpTab,ChannelSize,xaxisadj)
 		subtitle ="Frequency Map"
 		tickangle = -90
 		dtickval = dtickfreq[Band]
@@ -623,7 +623,7 @@ if Dimension == "Frequency Band":
 
 				expf = pd.DataFrame(sf.values*ef.values, columns=ef.columns, index=ef.index)
 
-			hovertext = hovertext21(hf,sff,ef,bandf, bandexpf, ExpTab,ChannelSize,xaxisadj,ayear)
+			hovertext = hovertext21(hf,sff,ef, of, bandf, bandexpf, ExpTab,ChannelSize,xaxisadj,ayear)
 			subtitle ="Expiry Map "+SubFeature
 			tickangle = -90
 			dtickval = dtickfreq[Band]
