@@ -862,7 +862,8 @@ fig.update_layout(uniformtext_minsize=12,
 fig.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
 fig.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
 
-st.write(fig)
+with st.container():	
+	st.write(fig)
 
 
 
