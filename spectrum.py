@@ -830,7 +830,7 @@ if Dimension == "Frequency Band":
 	if BandType[Band] == "TDD":
 		title_x = 0.08
 	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
-	title = Spectrum "+subtitle+" for "+str(Band)+" MHz "+title_map[Band]+" ("+unit+")
+	title = "Spectrum "+subtitle+" for "+str(Band)+" MHz "+title_map[Band]+" ("+unit+")"
 
 if Dimension == "Calendar Year":
 	title = str(Year)+" - Band Wise Trend of "+Feature+" ("+units_dict[Feature]+")"
