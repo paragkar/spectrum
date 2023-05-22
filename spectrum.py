@@ -753,7 +753,7 @@ if Dimension == "Calendar Year":
 				df2_temp1 = df2_temp1.reset_index()
 				df2_temp1 = df2_temp1.pivot(index="LSA", columns='Band', values=feature_dict[Feature])
 			else:
-				df2_temp1 = df2[selected_operator, "Band"]]
+				df2_temp1 = df2[[selected_operator, "Band"]]
 				df2_temp1 = df2_temp1.reset_index()
 				df2_temp1 = df2_temp1.pivot(index="LSA", columns='Band', values=selected_operator)
 		else:
