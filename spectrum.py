@@ -864,7 +864,7 @@ fig.update_layout(uniformtext_minsize=12,
 fig.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
 fig.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
 
-style = "<style>h2 {text-align: left;}</style>"
+style = "<style>h3 {text-align: left;}</style>"
 with st.container():
 	#plotting the main chart
 	st.markdown(style, unsafe_allow_html=True)
