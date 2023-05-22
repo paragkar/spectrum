@@ -847,7 +847,9 @@ if Dimension == "Calendar Year":
 			df2_temp1 = df2_temp1[columnstoextract]
 			operators_dim_cy_new = [x[:-1] for x in operators_dim_cy_new]
 			df2_temp1.columns = ["Circle", "Band"]+ operators_dim_cy_new
+			df2_temp1 = df2_temp1.groupby(["Circle"]).sum()
 			st.write(df2_temp1)
+						       		       
 			df2_temp1 = pd.melt(df2_temp1, id_vars=['Circle'], value_vars=operators_dim_cy_new)
 			df2_temp1.columns = ["Circle" , "Operators", "Total Outflow"]
 			df2_temp1["Operators"] = df2_temp1["Operators"].replace("1","", regex = True)
