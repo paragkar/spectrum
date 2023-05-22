@@ -735,6 +735,7 @@ if Dimension == "Calendar Year":
 	Feature = st.sidebar.selectbox('Select a Feature', feature_list)
 	if Feature in ["Reserve Price", "Auction Price", "Total EMD", "Quantum Offered", "Quantum Sold", "Quantum Unsold" ]:
 		df1 = df1.reset_index()
+		df1_temp1 = df1.copy()
 # 		df1_temp1 = df1.set_index(["Band","Circle"])
 		if Feature == "Quantum Sold":
 			operatorslist = operators_dim_cy[Year]
