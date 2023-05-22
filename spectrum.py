@@ -837,6 +837,7 @@ if Dimension == "Calendar Year":
 					temp2= df2_temp1[df2_temp1["Band"]==band]
 					temp1 = pd.concat([temp2,temp1], axis =0)
 				df2_temp1 = temp1
+				st.write(df2_temp1)
 			operators_dim_cy_new=[]
 			for op in operators_dim_cy[Year]:
 				df2_temp1[op+"1"] = df2_temp1["Auction Price/MHz"]*df2_temp1[op]
@@ -853,7 +854,6 @@ if Dimension == "Calendar Year":
 # 			summarydf = df2_temp1.sum(axis=1)
 # 			summarydf = summarydf.reset_index()
 # 			summarydf.columns = ["Operators", SubFeature] 
-			st.write(df2_temp1)
 			#preparing the summary chart 
 			chart = summarychart(summarydf, 'Operators', SubFeature)
 			flag = False
