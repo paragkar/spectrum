@@ -819,16 +819,22 @@ fig = go.Figure(data=data)
 if Dimension == "Frequency Band":
 	if Feature == "AuctionMap":
 		unit = units_dict[Type]
-		selectedoperators = []
+		selectedoperators = ["NA"]
 	if (Feature == "ExpiryMap") and (SubFeature == "Freq Wise"):
 		unit = "Ch Size - "+str(ChannelSize[Band])+" MHz"
-		selected_operators = selected_operators
+		if selected_operators == []:
+			selected_operators = ["All"]
+		else:
+			selected_operators = selected_operators
 	if (Feature == "ExpiryMap") and (SubFeature == "Year Wise"):
 		unit = "MHz in Years"
-		selected_operators =[]
+		selected_operators =["NA"]
 	if Feature == "FreqMap":
 		unit = "Ch Size - "+str(ChannelSize[Band])+" MHz"
-		selected_operators = selected_operators
+		if selected_operators == []:
+			selected_operators = ["All"]
+		else:
+			selected_operators = selected_operators
 	if BandType[Band] == "FDD":
 		title_x =0.12
 	if BandType[Band] == "TDD":
