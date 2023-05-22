@@ -866,7 +866,7 @@ fig.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black'
 
 with st.container():
 	#plotting the main chart
-	st.text(title)
+	st.title(title)
 	st.write(fig)
 	#plotting the summary chart
 	if flag ==True:
