@@ -843,7 +843,7 @@ if Dimension == "Calendar Year":
 			for op in operators_dim_cy[Year]:
 				df2_temp1[op+"1"] = df2_temp1["Auction Price/MHz"]*df2_temp1[op]
 				operators_dim_cy_new.append(op+"1")
-			columnstoextract = ["Circle", "Band"]+sorted(operators_dim_cy_new)
+			columnstoextract = ["Circle", "Band"]+sorted(operators_dim_cy_new, reverse = True)
 			df2_temp1 = df2_temp1[columnstoextract]
 			operators_dim_cy_new = [x[:-1] for x in operators_dim_cy_new]
 			df2_temp1.columns = ["Circle", "Band"]+ operators_dim_cy_new
