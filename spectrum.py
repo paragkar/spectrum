@@ -856,7 +856,7 @@ if Dimension == "Calendar Year":
 			st.write(df2_temp1)
 			#preparing the summary chart 
 			chart = summarychart(summarydf, 'Operators', SubFeature)
-			flag = True
+			flag = False
 	
 	data = [go.Heatmap(
 		  z = z,
