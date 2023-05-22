@@ -734,17 +734,17 @@ if Dimension == "Calendar Year":
 	feature_list = ["Reserve Price",  "Auction Price", "Quantum Offered", "Quantum Sold", "Quantum Unsold", "Percent Unsold", "Percent Sold", "Total EMD", "Total Outflow", "Auction/Reserve"]
 	Feature = st.sidebar.selectbox('Select a Feature', feature_list)
 	if Feature in ["Reserve Price", "Auction Price", "Total EMD", "Quantum Offered", "Quantum Sold", "Quantum Unsold" ]:
-		df1_temp1 = df1[[feature_dict[Feature], "Band"]]
-		df1_temp1 = df1_temp1.reset_index()
+		df1 = df1.reset_index()
+		df1_temp1 = df1.set_index(["Band","Circle"])
 		if Feature == "Quantum Sold":
 			operatorslist = operators_dim_cy[Year]
 			selected_operators = st.sidebar.multiselect('Select an Operator', operatorslist)
-			if selected_operators == []:
+			if selected_operators = []:
 				df1_temp1 = df1_temp1.pivot(index="Circle", columns='Band', values=feature_dict[Feature])
 			else:
 				df1_temp1["OperatorTotal"] = df1_temp1[selected_operators].sum(axis=1)
-				df1_temp1 = df1_temp1.pivot(index="Circle", columns='Band', values='OperatorTotal')
-		else:	
+				df1_temp1 = df1_temp1.pivot(index="Circle", columns='Band', values='OperatorTotal')	
+		else:
 			df1_temp1 = df1_temp1.pivot(index="Circle", columns='Band', values=feature_dict[Feature])
 		df1_temp1.columns = [str(x) for x in sorted(df1_temp1.columns)]
 		z = df1_temp1.values.round(1)
