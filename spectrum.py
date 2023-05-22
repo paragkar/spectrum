@@ -867,7 +867,7 @@ fig.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black'
 # style = "<style>h2 {text-align: center;}</style>"
 with st.container():
 	#plotting the main chart
-	st.header(title)
+	st.markdown(title)
 # 	st.markdown(style, unsafe_allow_html=True)
 	st.write(fig)
 	#plotting the summary chart
