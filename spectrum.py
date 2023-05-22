@@ -851,6 +851,7 @@ if Dimension == "Calendar Year":
 			y = df2_temp1.index
 			
 			summarydf = df2_temp1.sum()
+			st.write(summarydf)
 			
 			#preparing the summary chart 
 			chart = summarychart(summarydf, 'Operators', SubFeature)
