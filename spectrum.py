@@ -727,13 +727,13 @@ if Dimension == "Calendar Year":
 	Year = st.sidebar.selectbox('Select a Year',calendaryearlist,7) #Default Index the latest Calendar Year
 	df1 = masterdf[masterdf["Auction Year"]==Year]
 	df1 = df1.set_index("Circle")
-	df2 = offeredvssolddf[offeredvssolddf["Year"]==Year]
-	df2 = df2.set_index("LSA")
-	feature_dict ={"Quantum Offered" : "Offered", "Quantum Sold": "Sold", "Quantum Unsold" : "Unsold", "Reserve Price" : "RP/MHz" ,  
+# 	df2 = offeredvssolddf[offeredvssolddf["Year"]==Year]
+# 	df2 = df2.set_index("LSA")
+	feature_dict ={"Quantum Offered" : "Sale (MHz)", "Quantum Sold": "Total Sold (MHz)", "Quantum Unsold" : "Total Unsold (MHz)", "Reserve Price" : "RP/MHz" ,  
 		       "Auction Price": "Auction Price/MHz", "Total EMD" : "Total EMD"} 
 	feature_list = ["Reserve Price",  "Auction Price", "Quantum Offered", "Quantum Sold", "Quantum Unsold", "Percent Unsold", "Percent Sold", "Total EMD", "Total Outflow", "Auction/Reserve"]
 	Feature = st.sidebar.selectbox('Select a Feature', feature_list)
-	if Feature in ["Reserve Price", "Auction Price", "Total EMD"]:
+	if Feature in ["Reserve Price", "Auction Price", "Total EMD", "Quantum Offered", "Quantum Sold", "Quantum Unsold" ]:
 		df1_temp1 = df1[[feature_dict[Feature], "Band"]]
 		df1_temp1 = df1_temp1.reset_index()
 		df1_temp1 = df1_temp1.pivot(index="Circle", columns='Band', values=feature_dict[Feature])
@@ -742,17 +742,6 @@ if Dimension == "Calendar Year":
 		x = df1_temp1.columns
 		y = df1_temp1.index
 		summarydf = df1_temp1.sum()
-	if Feature in ["Quantum Offered", "Quantum Sold", "Quantum Unsold"]:
-		if Year == 2010:
-			df2 = df2[df2["Band"]!=2500] #exception - in tab "offeredvssold", 2500 MHz is dummy for hovertext in freq map
-		df2_temp1 = df2[[feature_dict[Feature], "Band"]]
-		df2_temp1 = df2_temp1.reset_index()
-		df2_temp1 = df2_temp1.pivot(index="LSA", columns='Band', values=feature_dict[Feature])
-		df2_temp1.columns = [str(x) for x in sorted(df2_temp1.columns)]
-		z = df2_temp1.values.round(2)
-		x = df2_temp1.columns
-		y = df2_temp1.index
-		summarydf = df2_temp1.sum()
 	if Feature == "Total Outflow":
 		df1 = df1.reset_index()
 		df1_temp2 = df1.set_index(["Band","Circle"])
@@ -782,32 +771,27 @@ if Dimension == "Calendar Year":
 		x = df1_temp3.columns
 		y = df1_temp3.index
 	if Feature == "Percent Unsold":
-		if Year == 2010:
-			df2 = df2[df2["Band"]!=2500] #exception - in tab "offeredvssold", 2500 MHz is dummy for hovertext in freq map
-		df2 = df2.reset_index()
-		df2_temp2 = df2.set_index(["Band", "LSA"])
-		df2_temp2["Percent Unsold"] = np.divide(df2_temp2["Unsold"],df2_temp2["Offered"],out=np.full_like(df2_temp2["Unsold"], np.nan), where=df2_temp2["Offered"] != 0)*100
-		df2_temp2 = df2_temp2.reset_index()
-		df2_temp2 = df2_temp2[["Band", "LSA", "Percent Unsold"]]
-		df2_temp2 = df2_temp2.pivot(index="LSA", columns = "Band", values ="Percent Unsold")
-		df2_temp2.columns = [str(x) for x in sorted(df2_temp2.columns)]
-		z = df2_temp2.values.round(1)
-		x = df2_temp2.columns
-		y = df2_temp2.index
-		
+		df1 = df1.reset_index()
+		df1_temp4 = df1.set_index(["Band", "Circle"])
+		df1_temp4["Percent Unsold"] = np.divide(df1_temp4["Total Unsold (MHz)"],df1_temp4["Sale (MHz)"],out=np.full_like(df1_temp4["Total Unsold (MHz)"], np.nan), where=df1_temp4["Sale (MHz)"] != 0)*100
+		df1_temp4 = df1_temp4.reset_index()
+		df1_temp4 = df1_temp4[["Band", "Circle", "Percent Unsold"]]
+		df1_temp4 = df1_temp4.pivot(index="Circle", columns = "Band", values ="Percent Unsold")
+		df1_temp4.columns = [str(x) for x in sorted(df1_temp4.columns)]
+		z = df1_temp4.values.round(1)
+		x = df1_temp4.columns
+		y = df1_temp4.index
 	if Feature == "Percent Sold":
-		if Year == 2010:
-			df2 = df2[df2["Band"]!=2500] #exception - in tab "offeredvssold", 2500 MHz is dummy for hovertext in freq map
-		df2 = df2.reset_index()
-		df2_temp3 = df2.set_index(["Band", "LSA"])
-		df2_temp3["Percent Sold"] = np.divide(df2_temp3["Sold"],df2_temp3["Offered"],out=np.full_like(df2_temp3["Sold"], np.nan), where=df2_temp3["Offered"] != 0)*100
-		df2_temp3 = df2_temp3.reset_index()
-		df2_temp3 = df2_temp3[["Band", "LSA", "Percent Sold"]]
-		df2_temp3 = df2_temp3.pivot(index="LSA", columns = "Band", values ="Percent Sold")
-		df2_temp3.columns = [str(x) for x in sorted(df2_temp3.columns)]
-		z = df2_temp3.values.round(1)
-		x = df2_temp3.columns
-		y = df2_temp3.index
+		df1 = df1.reset_index()
+		df1_temp5 = df1.set_index(["Band", "Circle"])
+		df1_temp5["Percent Sold"] = np.divide(df1_temp5["Total Sold (MHz)"],df1_temp5["Sale (MHz)"],out=np.full_like(df1_temp5["Total Sold (MHz)"], np.nan), where=df1_temp5["Sale (MHz)"] != 0)*100
+		df1_temp5 = df1_temp5.reset_index()
+		df1_temp5 = df1_temp5[["Band", "Circle", "Percent Sold"]]
+		df1_temp5 = df1_temp5.pivot(index="Circle", columns = "Band", values ="Percent Sold")
+		df1_temp5.columns = [str(x) for x in sorted(df1_temp5.columns)]
+		z = df1_temp5.values.round(1)
+		x = df1_temp5.columns
+		y = df1_temp5.index
 		
 	if Feature not in  ["Auction/Reserve", "Percent Unsold", "Percent Sold"]:
 		#preparing the dataframe of the summary bar chart on top of the heatmap
