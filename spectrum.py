@@ -845,7 +845,7 @@ if Dimension == "Calendar Year":
 			df2_temp1 = pd.melt(df2_temp1, id_vars=['Circle'], value_vars=operators_dim_cy_new)
 			df2_temp1.columns = ["Circle" , "Operators", "Total Outflow"]
 			df2_temp1["Operators"] = df2_temp1["Operators"].replace("1","", regex = True)
-			df2_temp1 = df1_temp1.pivot(index="Circle", columns="Operators", values="Total Outflow")
+			df2_temp1 = df2_temp1.pivot(index="Circle", columns="Operators", values="Total Outflow")
 			
 			z = df2_temp1.values.round(1)
 			x = df2_temp1.columns
