@@ -819,7 +819,7 @@ fig = go.Figure(data=data)
 if Dimension == "Frequency Band":
 	if Feature == "AuctionMap":
 		unit = units_dict[Type]
-		selectedoperators = ["NA"]
+		selected_operators = ["NA"]
 	if (Feature == "ExpiryMap") and (SubFeature == "Freq Wise"):
 		unit = "Ch Size - "+str(ChannelSize[Band])+" MHz"
 		if selected_operators == []:
