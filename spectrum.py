@@ -850,7 +850,6 @@ if Dimension == "Calendar Year":
 			df2_temp1.drop("Band", inplace = True, axis =1)
 			df2_temp1 = df2_temp1.groupby(["Circle"]).sum().round(0)
 			df2_temp1 = df2_temp1.reindex(sorted(df2_temp1.columns), axis=1)
-			st.write(df2_temp1)
 			z = df2_temp1.values
 			x = df2_temp1.columns
 			y = df2_temp1.index
