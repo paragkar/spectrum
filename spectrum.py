@@ -863,7 +863,7 @@ with st.container():
 	#plotting the main chart 
 	st.write(fig)
 	#plotting the summary chart 
-	st.altair_chart(chart, use_container_width=False)
+	st.altair_chart(chart, use_container_width=True)
 
 
 
