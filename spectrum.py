@@ -736,6 +736,7 @@ if Dimension == "Calendar Year":
 		df1_temp2 = df1.set_index(["Band","Circle"])
 		operatorslist = sorted(df1_temp2.columns[12:-1]) #debug
 		selected_operator = st.sidebar.selectbox('Select an Operator', operatorslist) #debug
+		st.write(selected_operator) #debug
 		if selected_operator ==""
 			df1_temp2["Total Outflow"] = df1_temp2[feature_dict["Auction Price"]]*df1_temp2["Total Sold (MHz)"]
 		else:
