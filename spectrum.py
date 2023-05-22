@@ -836,7 +836,7 @@ if Dimension == "Calendar Year":
 				for band in selectedbands:
 					temp2= df2_temp1[df2_temp1["Band"]==band]
 					temp1 = pd.concat([temp2,temp1], axis =0)
-				df1_temp1 = temp1
+				df2_temp1 = temp1
 			operators_dim_cy_new=[]
 			for op in operators_dim_cy[Year]:
 				df2_temp1[op+"1"] = df2_temp1["Auction Price/MHz"]*df2_temp1[op]
