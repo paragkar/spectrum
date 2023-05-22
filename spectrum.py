@@ -843,6 +843,8 @@ if Dimension == "Calendar Year":
 			for op in operators_dim_cy[Year]:
 				df2_temp1[op+"1"] = df2_temp1["Auction Price/MHz"]*df2_temp1[op]
 				operators_dim_cy_new.append(op+"1")
+			columnstoextract = ["Circle", "Band"]+operators_dim_cy_new
+			df2_temp1 = df2_temp1[columnstoextract]
 			st.write(df2_temp1)
 			df2_temp1 = pd.melt(df2_temp1, id_vars=['Circle'], value_vars=operators_dim_cy_new)
 			df2_temp1.columns = ["Circle" , "Operators", "Total Outflow"]
