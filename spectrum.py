@@ -436,7 +436,7 @@ Dimension = st.sidebar.selectbox('Select a Dimension', options = ["Frequency Ban
 
 if Dimension == "Frequency Band":
 	#selecting a frequency band
-	Band = st.sidebar.selectbox('Select a Band', options = list(ExpTab.keys()))
+	Band = st.sidebar.selectbox('Select a Band', list(ExpTab.keys()), 3) #default index 1800 MHz Band
 	
 	#setting up excel file tabs for reading data
 	freqtab = str(Band)+"MHz"
@@ -525,7 +525,7 @@ if Dimension == "Frequency Band":
 	#mapping the year of auction with channels in the freq maps
 	ayear = auctioncalyear(ef,excepf,pf1)
 
-	Feature = st.sidebar.selectbox('Select a Feature', options = ["FreqMap", "ExpiryMap", "AuctionMap"])
+	Feature = st.sidebar.selectbox('Select a Feature', ["FreqMap", "ExpiryMap", "AuctionMap"], 0) #Default Index first
 
 	#Processing For Dimension = "Frequency Band" & Feature 
 	if  Feature == "FreqMap":
@@ -533,7 +533,7 @@ if Dimension == "Frequency Band":
 		operators = operators[Band]
 		hf = sf[sf.columns].replace(operators) # dataframe for hovertext
 		operatorslist = sorted(list(operators.keys()))
-		selected_operators = st.sidebar.multiselect('Select Operators', options = operatorslist)
+		selected_operators = st.sidebar.multiselect('Select Operators', operatorslist)
 		if selected_operators==[]:
 			sf[sf.columns] = sf[sf.columns].replace(operators) 
 			colorscale = colscalefreqmap(operators, colcodes)
@@ -579,7 +579,7 @@ if Dimension == "Frequency Band":
 
 	#Feature ="Expiry Map" linked to Dimension = "Frequency"
 	if  Feature == "ExpiryMap":
-		SubFeature = st.sidebar.selectbox('Select a Sub Feature', options = ["Freq Wise", "Year Wise"])
+		SubFeature = st.sidebar.selectbox('Select a Sub Feature', ["Freq Wise", "Year Wise"])
 		if SubFeature == "Freq Wise":
 			sf = sff.copy()
 			operators = operators[Band]
@@ -589,7 +589,7 @@ if Dimension == "Frequency Band":
 			for op in operatorstoremove:
 				if op in operatorslist:
 					operatorslist.remove(op)
-			selected_operators = st.sidebar.multiselect('Select Operators', options = operatorslist)
+			selected_operators = st.sidebar.multiselect('Select Operators', operatorslist)
 			if selected_operators==[]:
 				expf = ef
 			else:
@@ -661,7 +661,7 @@ if Dimension == "Frequency Band":
 			    "Quantum Offered": offeredspectrum, 
 			    "Quantum Sold": soldspectrum, 
 			    "Quantum Unsold": unsoldspectrum}
-		Type = st.sidebar.selectbox('Select a Sub Feature', options = ["Auction Price","Reserve Price","Quantum Offered", "Quantum Sold", "Quantum Unsold"])
+		Type = st.sidebar.selectbox('Select a Sub Feature', ["Auction Price","Reserve Price","Quantum Offered", "Quantum Sold", "Quantum Unsold"])
 		typedf = type_dict[Type].copy()
 		subtitle = Type
 		tickangle=0
@@ -702,7 +702,7 @@ if Dimension == "Calendar Year":
 	masterdf = df[masterall]
 	offeredvssolddf = df[spectrumofferedvssold]
 	calendaryearlist = sorted(list(set(masterdf["Auction Year"].values)))
-	Year = st.sidebar.selectbox('Select a Year',calendaryearlist,6) #Default Index the latest Calendar Year
+	Year = st.sidebar.selectbox('Select a Year',calendaryearlist,7) #Default Index the latest Calendar Year
 	df1 = masterdf[masterdf["Auction Year"]==Year]
 	df1 = df1.set_index("Circle")
 	df2 = offeredvssolddf[offeredvssolddf["Year"]==Year]
@@ -710,7 +710,7 @@ if Dimension == "Calendar Year":
 	feature_dict ={"Quantum Offered" : "Offered", "Quantum Sold": "Sold", "Quantum Unsold" : "Unsold", "Reserve Price" : "RP/MHz" ,  
 		       "Auction Price": "Auction Price/MHz", "Total EMD" : "Total EMD"} 
 	feature_list = ["Reserve Price",  "Auction Price", "Quantum Offered", "Quantum Sold", "Quantum Unsold", "Percent Unsold", "Percent Sold", "Total EMD", "Total Outflow", "Auction/Reserve"]
-	Feature = st.sidebar.selectbox('Select a Feature', options = feature_list)
+	Feature = st.sidebar.selectbox('Select a Feature', feature_list)
 	if Feature in ["Reserve Price", "Auction Price", "Total EMD"]:
 		df1_temp1 = df1[[feature_dict[Feature], "Band"]]
 		df1_temp1 = df1_temp1.reset_index()
