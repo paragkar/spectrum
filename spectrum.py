@@ -739,7 +739,7 @@ if Dimension == "Calendar Year":
 		if selected_operators== []:
 			df1_temp2["Total Outflow"] = df1_temp2[feature_dict["Auction Price"]]*df1_temp2["Total Sold (MHz)"]
 		else:
-		df1_temp2["Total Outflow"] = df1_temp2[feature_dict["Auction Price"]]*df1_temp2[selected_operators].sum(axis=1)
+			df1_temp2["Total Outflow"] = df1_temp2[feature_dict["Auction Price"]]*df1_temp2[selected_operators].sum(axis=1)
 		df1_temp2 = df1_temp2.reset_index()
 		df1_temp2 = df1_temp2[["Band", "Circle", "Total Outflow"]]
 		df1_temp2 = df1_temp2.pivot(index="Circle", columns='Band', values="Total Outflow")
