@@ -831,7 +831,7 @@ if Dimension == "Calendar Year":
 		subfeature_list = ["Total Outflow", "Total Purchase"]
 		SubFeature = st.sidebar.selectbox('Select a Feature', subfeature_list)
 		if SubFeature == "Total Outflow":
-			df2_temp1 = df2_temp1[df2_temp1[Band] in selectedbands]
+			df2_temp1 = df2_temp1[df2_temp1["Band"] in selectedbands]
 			operators_dim_cy_new=[]
 			for op in operators_dim_cy[Year]:
 				df2_temp1[op+"1"] = df2_temp1["Auction Price/MHz"]*df2_temp1[op]
