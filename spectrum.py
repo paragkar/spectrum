@@ -736,10 +736,10 @@ if Dimension == "Calendar Year":
 		df1_temp2 = df1.set_index(["Band","Circle"])
 		operatorslist = sorted(list(df1_temp2.columns[12:-1]))
 		selected_operators = st.sidebar.multiselect('Select Operators', operatorslist)
-		if selected_operators== []
-			df1_temp2["Total Outflow"] = df1_temp2[feature_dict["Auction Price"]]*df1_temp2["Total Sold (MHz)"]
-		else:
-			df1_temp2["Total Outflow"] = df1_temp2[feature_dict["Auction Price"]]*df1_temp2[selected_operators].sum(axis=1)
+# 		if selected_operators== []
+# 			df1_temp2["Total Outflow"] = df1_temp2[feature_dict["Auction Price"]]*df1_temp2["Total Sold (MHz)"]
+# 		else:
+		df1_temp2["Total Outflow"] = df1_temp2[feature_dict["Auction Price"]]*df1_temp2[selected_operators].sum(axis=1)
 		df1_temp2 = df1_temp2.reset_index()
 		df1_temp2 = df1_temp2[["Band", "Circle", "Total Outflow"]]
 		df1_temp2 = df1_temp2.pivot(index="Circle", columns='Band', values="Total Outflow")
