@@ -734,13 +734,12 @@ if Dimension == "Calendar Year":
 	if Feature == "Total Outflow":
 		df1 = df1.reset_index()
 		df1_temp2 = df1.set_index(["Band","Circle"])
-		operatorslist = sorted(df1_temp2.columns[12:-1]) #debug
-		selected_operator = st.sidebar.selectbox('Select an Operator', operatorslist) #debug
-		st.write(selected_operator) #debug
-# 		if selected_operator == ""
-# 			df1_temp2["Total Outflow"] = df1_temp2[feature_dict["Auction Price"]]*df1_temp2["Total Sold (MHz)"]
-# 		else:
-		df1_temp2["Total Outflow"] = df1_temp2[feature_dict["Auction Price"]]*df1_temp2[selected_operator]
+		operatorslist = sorted(df1_temp2.columns[12:-1])
+		selected_operators = st.sidebar.multiselect('Select an Operator', operatorslist)
+		if selected_operators == []
+			df1_temp2["Total Outflow"] = df1_temp2[feature_dict["Auction Price"]]*df1_temp2["Total Sold (MHz)"]
+		else:
+			df1_temp2["Total Outflow"] = df1_temp2[feature_dict["Auction Price"]]*df1_temp2[selected_operators].sum(axis=1)
 		df1_temp2 = df1_temp2.reset_index()
 		df1_temp2 = df1_temp2[["Band", "Circle", "Total Outflow"]]
 		df1_temp2 = df1_temp2.pivot(index="Circle", columns='Band', values="Total Outflow")
@@ -852,13 +851,13 @@ if Dimension == "Frequency Band":
 if Dimension == "Calendar Year":
 	if Feature =="Total Outflow":
 		if selected_operator=="":
-			selected_operator = "All"
+			selected_operators = ["All"]
 		else:
-			selected_operator = selected_operator
+			selected_operators = selected_operators
 	else:
-		selected_operator = ["NA"]
+		selected_operators = ["NA"]
 	title = "Band Wise Yearly Trend of the Year "+str(Year)
-	subtitle = Feature+" ("+units_dict[Feature]+"); "+ "(Selected Operator - "+ selected_operator+" )"
+	subtitle = Feature+" ("+units_dict[Feature]+"); "+ "(Selected Operators -" + ', '.join(selected_operators)+")"
 	title_x =0.25
 	tickangle =0
 	dtickval =1
