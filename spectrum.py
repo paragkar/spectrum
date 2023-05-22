@@ -737,10 +737,10 @@ if Dimension == "Calendar Year":
 		operatorslist = sorted(df1_temp2.columns[12:-1]) #debug
 		selected_operator = st.sidebar.selectbox('Select an Operator', operatorslist) #debug
 		st.write(selected_operator) #debug
-		if selected_operator ==""
-			df1_temp2["Total Outflow"] = df1_temp2[feature_dict["Auction Price"]]*df1_temp2["Total Sold (MHz)"]
-		else:
-			df1_temp2["Total Outflow"] = df1_temp2[feature_dict["Auction Price"]]*df1_temp2[selected_operator]
+# 		if selected_operator == ""
+# 			df1_temp2["Total Outflow"] = df1_temp2[feature_dict["Auction Price"]]*df1_temp2["Total Sold (MHz)"]
+# 		else:
+		df1_temp2["Total Outflow"] = df1_temp2[feature_dict["Auction Price"]]*df1_temp2[selected_operator]
 		df1_temp2 = df1_temp2.reset_index()
 		df1_temp2 = df1_temp2[["Band", "Circle", "Total Outflow"]]
 		df1_temp2 = df1_temp2.pivot(index="Circle", columns='Band', values="Total Outflow")
