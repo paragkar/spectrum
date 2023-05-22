@@ -848,24 +848,20 @@ if Dimension == "Calendar Year":
 			operators_dim_cy_new = [x[:-1] for x in operators_dim_cy_new]
 			df2_temp1.columns = ["Circle", "Band"]+ operators_dim_cy_new
 			df2_temp1.drop("Band", inplace = True, axis =1)
-			df2_temp1 = df2_temp1.groupby(["Circle"]).sum()
-			st.write(df2_temp1)
+			df2_temp1 = df2_temp1.groupby(["Circle"]).sum().round(1)
+			df2_temp1 = df2_temp1.set_index("Circle")
 						       		       
-			df2_temp1 = pd.melt(df2_temp1, id_vars=['Circle'], value_vars=operators_dim_cy_new)
-			df2_temp1.columns = ["Circle" , "Operators", "Total Outflow"]
-			df2_temp1["Operators"] = df2_temp1["Operators"].replace("1","", regex = True)
-# 			df2_temp1 = df2_temp1.pivot_table(index="Circle", columns="Operators", values="Total Outflow")
+			z = df2_temp1.values
+			x = df2_temp1.columns
+			y = df2_temp1.index
 			
-			z = df2_temp1["Total Outflow"]
-			x = df2_temp1["Operators"]
-			y = df2_temp1["Circle"]
-			
-# 			summarydf = df2_temp1.sum(axis=1)
-# 			summarydf = summarydf.reset_index()
+			summarydf = df2_temp1.sum(axis=1)
+			summarydf = summarydf.reset_index()
+			st.write(summarydf)
 # 			summarydf.columns = ["Operators", SubFeature] 
 			#preparing the summary chart 
-			chart = summarychart(summarydf, 'Operators', SubFeature)
-			flag = False
+# 			chart = summarychart(summarydf, 'Operators', SubFeature)
+# 			flag = False
 	
 	data = [go.Heatmap(
 		  z = z,
