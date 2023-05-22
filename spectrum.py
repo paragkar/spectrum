@@ -930,7 +930,7 @@ if (Dimension == "Calendar Year") and (Feature == "Operator Wise"):
 		selectedbands = ["NA"]
 		
 	title = "Operator Wise Yearly Trend for the Year "+str(Year)
-	subtitle = SubFeature" + "(Selected Bands -" + ', '.join(selectedbands)+")"
+	subtitle = SubFeature + "(Selected Bands -" + ', '.join(selectedbands)+")"
 	title_x =0.25
 	tickangle =0
 	dtickval =1
