@@ -739,7 +739,7 @@ if Dimension == "Calendar Year":
 		if Feature == "Quantum Sold":
 			operatorslist = operators_dim_cy[Year]
 			selected_operators = st.sidebar.multiselect('Select an Operator', operatorslist)
-			if selected_operators = []:
+			if selected_operators == []:
 				df1_temp1 = df1_temp1.pivot(index="Circle", columns='Band', values=feature_dict[Feature])
 			else:
 				df1_temp1["OperatorTotal"] = df1_temp1[selected_operators].sum(axis=1)
