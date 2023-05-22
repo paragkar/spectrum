@@ -252,8 +252,13 @@ def hovertext1(sf,sff,ef,bandf,ExpTab,ChannelSize,xaxisadj):
 				expiry = round(ef.values[yi][xi],2)
 			else:
 				expiry = "NA"
+			try:
+			    auction_year = round(ayear.loc[yy,round(xx-xaxisadj[Band],3)])
+			except:
+			    auction_year ="NA"
 				
 			operatornew = sff.values[yi][xi]
+			operatorold = of.values[yi][xi]
 			bandwidth = bandf.values[yi][xi]
 			hovertext[-1].append(
 					    'StartFreq: {} MHz\
@@ -261,7 +266,8 @@ def hovertext1(sf,sff,ef,bandf,ExpTab,ChannelSize,xaxisadj):
 					     <br>Circle : {}\
 				             <br>Operator: {}\
 					     <br>Total BW: {} MHz\
-					     <br>ChExp In: {} Years'
+					     <br>ChExp In: {} Years\
+					     <br>Acquired In: {} by {}'
 
 				     .format(
 					    round(xx-xaxisadj[Band],2),
@@ -269,7 +275,9 @@ def hovertext1(sf,sff,ef,bandf,ExpTab,ChannelSize,xaxisadj):
 					    state_dict.get(yy),
 					    operatornew,
 					    bandwidth,
-					    expiry
+					    expiry,
+					    auction_year,
+					    operatorold,
 					    )
 					    )
 	return hovertext
