@@ -828,7 +828,6 @@ if Dimension == "Calendar Year":
 		df1 = df1.reset_index()
 		df2_temp1 = df1.copy()
 		selectedbands = st.sidebar.multiselect('Select Bands',band_dim_cy[Year])
-		st.write(selectedbands)
 		subfeature_list = ["Total Outflow", "Total Purchase"]
 		SubFeature = st.sidebar.selectbox('Select a Feature', subfeature_list)
 		if SubFeature == "Total Outflow":
@@ -845,7 +844,7 @@ if Dimension == "Calendar Year":
 			df2_temp1 = pd.melt(df2_temp1, id_vars=['Circle'], value_vars=operators_dim_cy_new)
 			df2_temp1.columns = ["Circle" , "Operators", "Total Outflow"]
 			df2_temp1["Operators"] = df2_temp1["Operators"].replace("1","", regex = True)
-			df2_temp1 = df2_temp1.pivot(index="Circle", columns="Operators", values="Total Outflow")
+			df2_temp1 = df2_temp1.pivot_table(index="Circle", columns="Operators", values="Total Outflow")
 			
 			z = df2_temp1.values.round(1)
 			x = df2_temp1.columns
