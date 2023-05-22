@@ -865,10 +865,10 @@ fig.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', 
 fig.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
 
 style = "<style>h2 {text-align: center;}</style>"
-# st.markdown(style, unsafe_allow_html=True)
 with st.container():
 	#plotting the main chart
-	st.markdown(style, title)
+	st.header(title)
+	st.markdown(style, unsafe_allow_html=True)
 	st.write(fig)
 	#plotting the summary chart
 	if flag ==True:
