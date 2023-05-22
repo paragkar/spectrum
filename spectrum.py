@@ -848,9 +848,7 @@ if Dimension == "Calendar Year":
 			operators_dim_cy_new = [x[:-1] for x in operators_dim_cy_new]
 			df2_temp1.columns = ["Circle", "Band"]+ operators_dim_cy_new
 			df2_temp1.drop("Band", inplace = True, axis =1)
-			df2_temp1 = df2_temp1.groupby(["Circle"]).sum().round(1)
-# 			df2_temp1 = df2_temp1.set_index("Circle")
-			st.write(df2_temp1)			       		       
+			df2_temp1 = df2_temp1.groupby(["Circle"]).sum().round(1)		       		       
 			z = df2_temp1.values
 			x = df2_temp1.columns
 			y = df2_temp1.index
@@ -935,7 +933,7 @@ if (Dimension == "Calendar Year") and (Feature == "Operator Wise"):
 			selectedbands = selectedbands
 	else:
 		selectedbands = ["NA"]
-		
+	selectedbands = [str(x) for x in selectedbands]	
 	title = "Operator Wise Yearly Trend for the Year "+str(Year)
 	subtitle = SubFeature + "(Selected Bands -" + ', '.join(selectedbands)+")"
 	title_x =0.25
