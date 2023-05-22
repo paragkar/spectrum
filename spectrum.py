@@ -862,7 +862,7 @@ if Dimension == "Calendar Year":
 			selected_operators = selected_operators
 	else:
 		selected_operators = ["NA"]
-	title = "Band Wise Yearly Trend of the Year "+str(Year)
+	title = "Band Wise Yearly Trend for the Year "+str(Year)
 	subtitle = Feature+" ("+units_dict[Feature]+"); "+ "(Selected Operators -" + ', '.join(selected_operators)+")"
 	title_x =0.25
 	tickangle =0
