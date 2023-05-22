@@ -828,6 +828,7 @@ if Dimension == "Calendar Year":
 		df1 = df1.reset_index()
 		df2_temp1 = df1.copy()
 		selectedbands = st.sidebar.multiselect('Select Bands',band_dim_cy[Year])
+		st.write(selectedbands)
 		subfeature_list = ["Total Outflow", "Total Purchase"]
 		SubFeature = st.sidebar.selectbox('Select a Feature', subfeature_list)
 		if SubFeature == "Total Outflow":
