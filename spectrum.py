@@ -830,10 +830,12 @@ if Dimension == "Frequency Band":
 	if BandType[Band] == "TDD":
 		title_x = 0.08
 	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
-	title = "Spectrum "+subtitle+" for "+str(Band)+" MHz "+title_map[Band]+" ("+unit+")"
+	title = "Spectrum "+subtitle+" for "+str(Band)+" MHz "
+	subtitle = title_map[Band]+" ("+unit+")"
 
 if Dimension == "Calendar Year":
-	title = str(Year)+" - Band Wise Trend of "+Feature+" ("+units_dict[Feature]+")"
+	title = "Band Wise Yearly Trend of the Year"+str(Year)
+	subtitle = Feature+" ("+units_dict[Feature]+")"
 	title_x =0.25
 	tickangle =0
 	dtickval =1
@@ -869,6 +871,7 @@ with st.container():
 	#plotting the main chart
 	st.markdown(style, unsafe_allow_html=True)
 	st.header(title)
+	st.markdown(subtitle)
 	st.write(fig)
 	#plotting the summary chart
 	if flag ==True:
