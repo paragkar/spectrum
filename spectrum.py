@@ -13,6 +13,8 @@ import altair as alt
 
 #Setting Page layout
 # st.set_page_config(layout="wide")
+#set summary chart flag
+flag = False # It will toggle to True when we what summary chart to show
 
 #Loading File
 
@@ -633,6 +635,7 @@ if Dimension == "Frequency Band":
 
 			#preparing the summary chart 
 			chart = summarychart(summarydf, "ExpYears", "TotalMHz")
+			flag = True #for ploting the summary chart
 
 			data = [go.Heatmap(
 			  z = eff.values,
@@ -672,6 +675,7 @@ if Dimension == "Frequency Band":
 		
 		#preparing the summary chart 
 		chart = summarychart(summarydf, "Years", "India Total")
+		flag = True
 		
 		#setting the data of the heatmap 
 		data = [go.Heatmap(
@@ -788,6 +792,7 @@ if Dimension == "Calendar Year":
 		
 		#preparing the summary chart 
 		chart = summarychart(summarydf, 'Band', Feature)
+		flag = True
 	
 	data = [go.Heatmap(
 		  z = z,
@@ -842,7 +847,7 @@ fig.update_layout(uniformtext_minsize=12,
 		  font=dict(size=12),
 		  template='simple_white',
 		  paper_bgcolor=None,
-# 		  height=575, width=1200,
+		  height=575, width=1200,
 		  title=title,
 		  margin=dict(t=80, b=50, l=50, r=50, pad=0),
 		  title_x=title_x, title_y=0.99,
@@ -862,8 +867,9 @@ fig.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black'
 with st.container():
 	#plotting the main chart 
 	st.write(fig)
-	#plotting the summary chart 
-	st.altair_chart(chart, use_container_width=False)
+	#plotting the summary chart
+	if flag ==True:
+		st.altair_chart(chart, use_container_width=False)
 
 
 
