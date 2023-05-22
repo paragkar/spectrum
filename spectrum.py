@@ -856,10 +856,10 @@ if Dimension == "Calendar Year":
 			summarydf = df2_temp1.sum(axis=0)
 			summarydf = summarydf.reset_index()
 			st.write(summarydf)
-# 			summarydf.columns = ["Operators", SubFeature] 
+			summarydf.columns = ["Operators", SubFeature] 
 			#preparing the summary chart 
-# 			chart = summarychart(summarydf, 'Operators', SubFeature)
-# 			flag = False
+			chart = summarychart(summarydf, 'Operators', SubFeature)
+			flag = True
 	
 	data = [go.Heatmap(
 		  z = z,
