@@ -848,7 +848,7 @@ fig.update_layout(uniformtext_minsize=12,
 		  template='simple_white',
 		  paper_bgcolor=None,
 		  height=575, width=1200,
-		  title=title,
+# 		  title=title,
 		  margin=dict(t=80, b=50, l=50, r=50, pad=0),
 		  title_x=title_x, title_y=0.99,
 		  title_font=dict(size=22),
@@ -865,7 +865,8 @@ fig.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', 
 fig.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
 
 with st.container():
-	#plotting the main chart 
+	#plotting the main chart
+	st.text(title)
 	st.write(fig)
 	#plotting the summary chart
 	if flag ==True:
