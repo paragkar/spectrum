@@ -631,10 +631,9 @@ if Dimension == "Frequency Band":
 			summarydf["ExpYears"]= summarydf["ExpYears"].astype(float)
 			summarydf["ExpYears"] = summarydf["ExpYears"].sort_values(ascending = True)
 
-			#plotting the summary chart 
-			chart = summarychart(summarydf, 'ExpYears', 'TotalMHz')
-			st.altair_chart(chart, use_container_width=False)
-			
+			#preparing the summary chart 
+			chart = summarychart(summarydf, "ExpYears", "TotalMHz")
+
 			data = [go.Heatmap(
 			  z = eff.values,
 			  y = eff.index,
@@ -671,9 +670,8 @@ if Dimension == "Frequency Band":
 		summarydf = summarydf.sum().reset_index()
 		summarydf.columns = ["Years", "India Total"]
 		
-		#plotting the summary chart 
-		chart = summarychart(summarydf, 'Years', 'India Total')
-		st.altair_chart(chart, use_container_width=False)
+		#preparing the summary chart 
+		chart = summarychart(summarydf, "Years", "India Total")
 		
 		#setting the data of the heatmap 
 		data = [go.Heatmap(
@@ -787,10 +785,9 @@ if Dimension == "Calendar Year":
 		summarydf.columns = ["Band", Feature]
 		summarydf["Band"] = summarydf["Band"].astype(int)
 		summarydf = summarydf.sort_values("Band")
-
-		#plotting the summary chart 
+		
+		#preparing the summary chart 
 		chart = summarychart(summarydf, 'Band', Feature)
-		st.altair_chart(chart, use_container_width=False)
 	
 	data = [go.Heatmap(
 		  z = z,
@@ -862,7 +859,10 @@ fig.update_layout(uniformtext_minsize=12,
 fig.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
 fig.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
 
-with st.container():	
+with st.container():
+	#plotting the summary chart 
+	st.altair_chart(chart, use_container_width=True)
+	#plotting the main chart 
 	st.write(fig)
 
 
