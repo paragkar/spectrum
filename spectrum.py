@@ -830,7 +830,7 @@ if Dimension == "Calendar Year":
 		selectedbands = st.sidebar.multiselect('Select Bands',band_dim_cy[Year])
 		subfeature_list = ["Total Outflow", "Total Purchase"]
 		SubFeature = st.sidebar.selectbox('Select a Feature', subfeature_list)
-		if SubFeature = "Total Outflow":
+		if SubFeature == "Total Outflow":
 			df2_temp1 = df2_temp1[df2_temp1[Band] in selectedbands]
 			operators_dim_cy_new=[]
 			for op in operators_dim_cy[Year]:
