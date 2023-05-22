@@ -290,6 +290,7 @@ def hovertext21(sf,sff,ef,bandf,bandexpf,ExpTab,ChannelSize,xaxisadj,ayear):
 			except:
 			    auction_year ="NA"
 			operatornew = sff.values[yi][xi]
+			operatorold = of.values[yi][xi]
 			bandwidthexpiring = bandexpf.values[yi][xi]
 			bandwidth = bandf.values[yi][xi]
 			hovertext[-1].append(
@@ -299,7 +300,7 @@ def hovertext21(sf,sff,ef,bandf,bandexpf,ExpTab,ChannelSize,xaxisadj,ayear):
 				             <br>Operator: {}\
 					     <br>Expiring BW: {} of {} MHz\
 					     <br>Expiring In: {} Years\
-					     <br>Acquired In: {}'
+					     <br>Acquired In: {} by {}'
 
 				     .format(
 					    round(xx-xaxisadj[Band],2),
@@ -310,6 +311,7 @@ def hovertext21(sf,sff,ef,bandf,bandexpf,ExpTab,ChannelSize,xaxisadj,ayear):
 					    bandwidth,
 					    expiry,
 					    auction_year,
+					    operatorold,
 					    )
 					    )
 	return hovertext
