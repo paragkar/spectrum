@@ -736,7 +736,15 @@ if Dimension == "Calendar Year":
 	if Feature in ["Reserve Price", "Auction Price", "Total EMD", "Quantum Offered", "Quantum Sold", "Quantum Unsold" ]:
 		df1_temp1 = df1[[feature_dict[Feature], "Band"]]
 		df1_temp1 = df1_temp1.reset_index()
-		df1_temp1 = df1_temp1.pivot(index="Circle", columns='Band', values=feature_dict[Feature])
+		if Feature == "Quantum Sold":
+			operatorslist = operators_dim_cy[Year]
+			selected_operator = st.sidebar.selectbox('Select an Operator', operatorslist)
+			if selected_operator == "":
+				df1_temp1 = df1_temp1.pivot(index="Circle", columns='Band', values=feature_dict[Feature])
+			else:
+				df1_temp1 = df1_temp1.pivot(index="Circle", columns='Band', values=selected_operator)
+		else:	
+			df1_temp1 = df1_temp1.pivot(index="Circle", columns='Band', values=feature_dict[Feature])
 		df1_temp1.columns = [str(x) for x in sorted(df1_temp1.columns)]
 		z = df1_temp1.values.round(1)
 		x = df1_temp1.columns
@@ -862,6 +870,12 @@ if Dimension == "Calendar Year":
 			selected_operators = selected_operators
 	else:
 		selected_operators = ["NA"]
+	if Feature =="Quantum Sold":
+		if selected_operator=="":
+			selected_operators = ["All"]
+		else:
+			selected_operators = [selected_operator]
+			
 	title = "Band Wise Yearly Trend for the Year "+str(Year)
 	subtitle = Feature+" ("+units_dict[Feature]+"); "+ "(Selected Operators -" + ', '.join(selected_operators)+")"
 	title_x =0.25
