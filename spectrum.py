@@ -58,7 +58,7 @@ operators = {700: {'Vacant':0,'Railways':1,'Govt':2,'RJIO':3,'BSNL':4},
             }
 
 #operators dict for dimension - calendar years
-operators_dim_cy = {2010 : ["Bharti", "QCOM", "Augere", "Vodafone", "Idea", "RJIO", "RCOM", "Stel", "Tata", "Aircel", "Tikona"],
+operators_dim_cy = {2010 : ["Bharti", "QCOM", "Augere", "Vodafone", "Idea", "RJIO", "RCOM", "STel", "Tata", "Aircel", "Tikona"],
 		    2012 : ["Bharti", "Vodafone", "Idea", "Telenor", "Videocon"],
 		    2013 : ["MTS"],
 		    2014 : ["Bharti", "Vodafone", "Idea", "RJIO", "RCOM", "Aircel", "Telenor"],
