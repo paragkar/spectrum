@@ -860,10 +860,10 @@ fig.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', 
 fig.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
 
 with st.container():
-	#plotting the summary chart 
-# 	st.altair_chart(chart, use_container_width=False)
 	#plotting the main chart 
 	st.write(fig)
+	#plotting the summary chart 
+	st.altair_chart(chart, use_container_width=False)
 
 
 
