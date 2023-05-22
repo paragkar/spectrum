@@ -66,6 +66,16 @@ operators_dim_cy = {2010 : ["Bharti", "QCOM", "Augere", "Vodafone", "Idea", "RJI
 		    2016 : ["Bharti", "Vodafone", "Idea", "RJIO", "RCOM", "Tata", "Aircel"],
 		    2021 : ["Bharti", "RJIO", "VodaIdea"],
 		    2022 : ["Bharti", "RJIO", "VodaIdea", "Adani"] }
+
+#band dicts for dimension calendar year and sub feature operator wise
+band_dim_cy = {2010 : [2100, 2300],
+	       2012 : [800, 1800],
+	       2013 : [800, 900, 1800],
+	       2014 : [900, 1800],
+	       2015 : [800, 900, 1800, 2100],
+	       2016 : [700, 800, 900, 1800, 2100, 2300, 2500],
+	       2021 : [700, 800, 900, 1800, 2100, 2300, 2500],
+	       2022 : [600, 700, 800, 900, 2100, 2300, 2500, 3500, 26000]}
 		    
 
 #if "1" the expiry tab is present and if "0" then not present
@@ -724,96 +734,122 @@ if Dimension == "Calendar Year":
 	masterdf = df[masterall]
 	offeredvssolddf = df[spectrumofferedvssold]
 	calendaryearlist = sorted(list(set(masterdf["Auction Year"].values)))
-	Year = st.sidebar.selectbox('Select a Year',calendaryearlist,7) #Default Index the latest Calendar Year
 	df1 = masterdf[masterdf["Auction Year"]==Year]
 	df1 = df1.set_index("Circle")
-# 	df2 = offeredvssolddf[offeredvssolddf["Year"]==Year]
-# 	df2 = df2.set_index("LSA")
-	feature_dict ={"Quantum Offered" : "Sale (MHz)", "Quantum Sold": "Total Sold (MHz)", "Quantum Unsold" : "Total Unsold (MHz)", "Reserve Price" : "RP/MHz" ,  
-		       "Auction Price": "Auction Price/MHz", "Total EMD" : "Total EMD"} 
-	feature_list = ["Reserve Price",  "Auction Price", "Quantum Offered", "Quantum Sold", "Quantum Unsold", "Percent Unsold", "Percent Sold", "Total EMD", "Total Outflow", "Auction/Reserve"]
-	Feature = st.sidebar.selectbox('Select a Feature', feature_list)
-	if Feature in ["Reserve Price", "Auction Price", "Total EMD", "Quantum Offered", "Quantum Sold", "Quantum Unsold" ]:
-		df1 = df1.reset_index()
-		df1_temp1 = df1.copy()
-# 		df1_temp1 = df1.set_index(["Band","Circle"])
-		if Feature == "Quantum Sold":
-			operatorslist = operators_dim_cy[Year]
-			selected_operators = st.sidebar.multiselect('Select an Operator', operatorslist)
-			if selected_operators == []:
-				df1_temp1 = df1_temp1.pivot(index="Circle", columns='Band', values=feature_dict[Feature])
+	Year = st.sidebar.selectbox('Select a Year',calendaryearlist,7) #Default Index the latest Calendar Year
+	Feature = st.sidebar.selectbox('Select a Feature',["Band Wise", "Operator Wise"])
+	if Feature == "Band Wise":
+		subfeature_dict ={"Quantum Offered" : "Sale (MHz)", "Quantum Sold": "Total Sold (MHz)", "Quantum Unsold" : "Total Unsold (MHz)", "Reserve Price" : "RP/MHz" ,  
+			       "Auction Price": "Auction Price/MHz", "Total EMD" : "Total EMD"} 
+		subfeature_list = ["Reserve Price",  "Auction Price", "Quantum Offered", "Quantum Sold", "Quantum Unsold", "Percent Unsold", "Percent Sold", "Total EMD", "Total Outflow", "Auction/Reserve"]
+		SubFeature = st.sidebar.selectbox('Select a Feature', subfeature_list)
+		if SubFeature in ["Reserve Price", "Auction Price", "Total EMD", "Quantum Offered", "Quantum Sold", "Quantum Unsold" ]:
+			df1 = df1.reset_index()
+			df1_temp1 = df1.copy()
+			if SubFeature == "Quantum Sold":
+				operatorslist = operators_dim_cy[Year]
+				selected_operators = st.sidebar.multiselect('Select an Operator', operatorslist)
+				if selected_operators == []:
+					df1_temp1 = df1_temp1.pivot(index="Circle", columns='Band', values=subfeature_dict[Feature])
+				else:
+					df1_temp1["OperatorTotal"] = df1_temp1[selected_operators].sum(axis=1)
+					df1_temp1 = df1_temp1.pivot(index="Circle", columns='Band', values='OperatorTotal')	
 			else:
-				df1_temp1["OperatorTotal"] = df1_temp1[selected_operators].sum(axis=1)
-				df1_temp1 = df1_temp1.pivot(index="Circle", columns='Band', values='OperatorTotal')	
-		else:
-			df1_temp1 = df1_temp1.pivot(index="Circle", columns='Band', values=feature_dict[Feature])
-		df1_temp1.columns = [str(x) for x in sorted(df1_temp1.columns)]
-		z = df1_temp1.values.round(1)
-		x = df1_temp1.columns
-		y = df1_temp1.index
-		summarydf = df1_temp1.sum()
-	if Feature == "Total Outflow":
+				df1_temp1 = df1_temp1.pivot(index="Circle", columns='Band', values=feature_dict[Feature])
+			df1_temp1.columns = [str(x) for x in sorted(df1_temp1.columns)]
+			z = df1_temp1.values.round(1)
+			x = df1_temp1.columns
+			y = df1_temp1.index
+			summarydf = df1_temp1.sum()
+		if SubFeature == "Total Outflow":
+			df1 = df1.reset_index()
+			df1_temp2 = df1.set_index(["Band","Circle"])
+			operatorslist = operators_dim_cy[Year]
+			selected_operators = st.sidebar.multiselect('Select Operators', operatorslist)
+			if selected_operators== []:
+				df1_temp2["Total Outflow"] = df1_temp2[subfeature_dict["Auction Price"]]*df1_temp2["Total Sold (MHz)"]
+			else:
+				df1_temp2["Total Outflow"] = df1_temp2[subfeature_dict["Auction Price"]]*df1_temp2[selected_operators].sum(axis=1)
+			df1_temp2 = df1_temp2.reset_index()
+			df1_temp2 = df1_temp2[["Band", "Circle", "Total Outflow"]]
+			df1_temp2 = df1_temp2.pivot(index="Circle", columns='Band', values="Total Outflow")
+			df1_temp2.columns = [str(x) for x in sorted(df1_temp2.columns)]
+			z = df1_temp2.values.round(0)
+			x = df1_temp2.columns
+			y = df1_temp2.index
+			summarydf = df1_temp2.sum()
+		if SubFeature == "Auction/Reserve":
+			df1 = df1.reset_index()
+			df1_temp3 = df1.set_index(["Band","Circle"])
+			df1_temp3["Auction/Reserve"] = np.divide(df1_temp3["Auction Price/MHz"],df1_temp3["RP/MHz"],out=np.full_like(df1_temp3["Auction Price/MHz"], np.nan), where=df1_temp3["RP/MHz"] != 0)
+			df1_temp3 = df1_temp3.reset_index()
+			df1_temp3 = df1_temp3[["Band", "Circle", "Auction/Reserve"]]
+			df1_temp3 = df1_temp3.pivot(index="Circle", columns='Band', values="Auction/Reserve")
+			df1_temp3.columns = [str(x) for x in sorted(df1_temp3.columns)]
+			z = df1_temp3.values.round(2)
+			x = df1_temp3.columns
+			y = df1_temp3.index
+		if SubFeature == "Percent Unsold":
+			df1 = df1.reset_index()
+			df1_temp4 = df1.set_index(["Band", "Circle"])
+			df1_temp4["Percent Unsold"] = np.divide(df1_temp4["Total Unsold (MHz)"],df1_temp4["Sale (MHz)"],out=np.full_like(df1_temp4["Total Unsold (MHz)"], np.nan), where=df1_temp4["Sale (MHz)"] != 0)*100
+			df1_temp4 = df1_temp4.reset_index()
+			df1_temp4 = df1_temp4[["Band", "Circle", "Percent Unsold"]]
+			df1_temp4 = df1_temp4.pivot(index="Circle", columns = "Band", values ="Percent Unsold")
+			df1_temp4.columns = [str(x) for x in sorted(df1_temp4.columns)]
+			z = df1_temp4.values.round(1)
+			x = df1_temp4.columns
+			y = df1_temp4.index
+		if SubFeature == "Percent Sold":
+			df1 = df1.reset_index()
+			df1_temp5 = df1.set_index(["Band", "Circle"])
+			df1_temp5["Percent Sold"] = np.divide(df1_temp5["Total Sold (MHz)"],df1_temp5["Sale (MHz)"],out=np.full_like(df1_temp5["Total Sold (MHz)"], np.nan), where=df1_temp5["Sale (MHz)"] != 0)*100
+			df1_temp5 = df1_temp5.reset_index()
+			df1_temp5 = df1_temp5[["Band", "Circle", "Percent Sold"]]
+			df1_temp5 = df1_temp5.pivot(index="Circle", columns = "Band", values ="Percent Sold")
+			df1_temp5.columns = [str(x) for x in sorted(df1_temp5.columns)]
+			z = df1_temp5.values.round(1)
+			x = df1_temp5.columns
+			y = df1_temp5.index
+
+		if SubFeature not in  ["Auction/Reserve", "Percent Unsold", "Percent Sold"]:
+			#preparing the dataframe of the summary bar chart on top of the heatmap
+			summarydf = summarydf.round(1)
+			summarydf = summarydf.reset_index()
+			summarydf.columns = ["Band", Feature]
+			summarydf["Band"] = summarydf["Band"].astype(int)
+			summarydf = summarydf.sort_values("Band")
+
+			#preparing the summary chart 
+			chart = summarychart(summarydf, 'Band', Feature)
+			flag = True
+	
+	if Feature == "Operator Wise":
 		df1 = df1.reset_index()
-		df1_temp2 = df1.set_index(["Band","Circle"])
-		operatorslist = operators_dim_cy[Year]
-		selected_operators = st.sidebar.multiselect('Select Operators', operatorslist)
-		if selected_operators== []:
-			df1_temp2["Total Outflow"] = df1_temp2[feature_dict["Auction Price"]]*df1_temp2["Total Sold (MHz)"]
-		else:
-			df1_temp2["Total Outflow"] = df1_temp2[feature_dict["Auction Price"]]*df1_temp2[selected_operators].sum(axis=1)
-		df1_temp2 = df1_temp2.reset_index()
-		df1_temp2 = df1_temp2[["Band", "Circle", "Total Outflow"]]
-		df1_temp2 = df1_temp2.pivot(index="Circle", columns='Band', values="Total Outflow")
-		df1_temp2.columns = [str(x) for x in sorted(df1_temp2.columns)]
-		z = df1_temp2.values.round(0)
-		x = df1_temp2.columns
-		y = df1_temp2.index
-		summarydf = df1_temp2.sum()
-	if Feature == "Auction/Reserve":
-		df1 = df1.reset_index()
-		df1_temp3 = df1.set_index(["Band","Circle"])
-		df1_temp3["Auction/Reserve"] = np.divide(df1_temp3["Auction Price/MHz"],df1_temp3["RP/MHz"],out=np.full_like(df1_temp3["Auction Price/MHz"], np.nan), where=df1_temp3["RP/MHz"] != 0)
-		df1_temp3 = df1_temp3.reset_index()
-		df1_temp3 = df1_temp3[["Band", "Circle", "Auction/Reserve"]]
-		df1_temp3 = df1_temp3.pivot(index="Circle", columns='Band', values="Auction/Reserve")
-		df1_temp3.columns = [str(x) for x in sorted(df1_temp3.columns)]
-		z = df1_temp3.values.round(2)
-		x = df1_temp3.columns
-		y = df1_temp3.index
-	if Feature == "Percent Unsold":
-		df1 = df1.reset_index()
-		df1_temp4 = df1.set_index(["Band", "Circle"])
-		df1_temp4["Percent Unsold"] = np.divide(df1_temp4["Total Unsold (MHz)"],df1_temp4["Sale (MHz)"],out=np.full_like(df1_temp4["Total Unsold (MHz)"], np.nan), where=df1_temp4["Sale (MHz)"] != 0)*100
-		df1_temp4 = df1_temp4.reset_index()
-		df1_temp4 = df1_temp4[["Band", "Circle", "Percent Unsold"]]
-		df1_temp4 = df1_temp4.pivot(index="Circle", columns = "Band", values ="Percent Unsold")
-		df1_temp4.columns = [str(x) for x in sorted(df1_temp4.columns)]
-		z = df1_temp4.values.round(1)
-		x = df1_temp4.columns
-		y = df1_temp4.index
-	if Feature == "Percent Sold":
-		df1 = df1.reset_index()
-		df1_temp5 = df1.set_index(["Band", "Circle"])
-		df1_temp5["Percent Sold"] = np.divide(df1_temp5["Total Sold (MHz)"],df1_temp5["Sale (MHz)"],out=np.full_like(df1_temp5["Total Sold (MHz)"], np.nan), where=df1_temp5["Sale (MHz)"] != 0)*100
-		df1_temp5 = df1_temp5.reset_index()
-		df1_temp5 = df1_temp5[["Band", "Circle", "Percent Sold"]]
-		df1_temp5 = df1_temp5.pivot(index="Circle", columns = "Band", values ="Percent Sold")
-		df1_temp5.columns = [str(x) for x in sorted(df1_temp5.columns)]
-		z = df1_temp5.values.round(1)
-		x = df1_temp5.columns
-		y = df1_temp5.index
-		
-	if Feature not in  ["Auction/Reserve", "Percent Unsold", "Percent Sold"]:
-		#preparing the dataframe of the summary bar chart on top of the heatmap
-		summarydf = summarydf.round(1)
-		summarydf = summarydf.reset_index()
-		summarydf.columns = ["Band", Feature]
-		summarydf["Band"] = summarydf["Band"].astype(int)
-		summarydf = summarydf.sort_values("Band")
-		
-		#preparing the summary chart 
-		chart = summarychart(summarydf, 'Band', Feature)
-		flag = True
+		df2_temp1 = df1.copy()
+		selectedbands = st.sidebar.multiselect('Select Bands',band_dim_cy[Year])
+		subfeature_list = ["Total Outflow", "Total Purchase"]
+		SubFeature = st.sidebar.selectbox('Select a Feature', subfeature_list)
+		if SubFeature = "Total Outflow":
+			df2_temp1 = df2_temp1[df2_temp1[Band] in selectedbands]
+			operators_dim_cy_new=[]
+			for op in operators_dim_cy[Year]:
+				df2_temp1[op+"1"] = df2_temp1["Auction Price/MHz"]]*df2_temp1[op]
+				operators_dim_cy_new.append(op+"1")
+			df2_temp1 = pd.melt(df2_temp1, id_vars=['Circle'], value_vars=operators_dim_cy_new)
+			df2_temp1.columns = ["Circle" , "Operators", "Total Outflow"]
+			df2_temp1["Operators"] = df2_temp1["Operators"].replace("1","", regex = True)
+			df2_temp1 = df1_temp1.pivot(index="Circle", columns="Operators", values="Total Outflow")
+			
+			z = df2_temp1.values.round(1)
+			x = df2_temp1.columns
+			y = df2_temp1.index
+			
+			summarydf = df2_temp1.sum()
+			
+			#preparing the summary chart 
+			chart = summarychart(summarydf, 'Operators', SubFeature)
+			flag = True
 	
 	data = [go.Heatmap(
 		  z = z,
@@ -865,7 +901,7 @@ if Dimension == "Frequency Band":
 	subtitle = title_map[Band]+" ("+unit+"); (Selected Operators -"+', '.join(selected_operators)+")"
 
 if Dimension == "Calendar Year":
-	if (Feature =="Total Outflow") or (Feature == "Quantum Sold"):
+	if (SubFeature =="Total Outflow") or (SubFeature == "Quantum Sold"):
 		if selected_operators==[]:
 			selected_operators = ["All"]
 		else:
