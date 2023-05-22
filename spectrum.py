@@ -742,7 +742,7 @@ if Dimension == "Calendar Year":
 		subfeature_dict ={"Quantum Offered" : "Sale (MHz)", "Quantum Sold": "Total Sold (MHz)", "Quantum Unsold" : "Total Unsold (MHz)", "Reserve Price" : "RP/MHz" ,  
 			       "Auction Price": "Auction Price/MHz", "Total EMD" : "Total EMD"} 
 		subfeature_list = ["Reserve Price",  "Auction Price", "Quantum Offered", "Quantum Sold", "Quantum Unsold", "Percent Unsold", "Percent Sold", "Total EMD", "Total Outflow", "Auction/Reserve"]
-		SubFeature = st.sidebar.selectbox('Select a Feature', subfeature_list)
+		SubFeature = st.sidebar.selectbox('Select a SubFeature', subfeature_list)
 		if SubFeature in ["Reserve Price", "Auction Price", "Total EMD", "Quantum Offered", "Quantum Sold", "Quantum Unsold" ]:
 			df1 = df1.reset_index()
 			df1_temp1 = df1.copy()
@@ -750,12 +750,12 @@ if Dimension == "Calendar Year":
 				operatorslist = operators_dim_cy[Year]
 				selected_operators = st.sidebar.multiselect('Select an Operator', operatorslist)
 				if selected_operators == []:
-					df1_temp1 = df1_temp1.pivot(index="Circle", columns='Band', values=subfeature_dict[Feature])
+					df1_temp1 = df1_temp1.pivot(index="Circle", columns='Band', values=subfeature_dict[SubFeature])
 				else:
 					df1_temp1["OperatorTotal"] = df1_temp1[selected_operators].sum(axis=1)
 					df1_temp1 = df1_temp1.pivot(index="Circle", columns='Band', values='OperatorTotal')	
 			else:
-				df1_temp1 = df1_temp1.pivot(index="Circle", columns='Band', values=subfeature_dict[Feature])
+				df1_temp1 = df1_temp1.pivot(index="Circle", columns='Band', values=subfeature_dict[SubFeature])
 			df1_temp1.columns = [str(x) for x in sorted(df1_temp1.columns)]
 			z = df1_temp1.values.round(1)
 			x = df1_temp1.columns
