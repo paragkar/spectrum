@@ -864,11 +864,11 @@ fig.update_layout(uniformtext_minsize=12,
 fig.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
 fig.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
 
-# style = "<style>h2 {text-align: center;}</style>"
+style = "<style>h1 {text-align: left;}</style>"
 with st.container():
 	#plotting the main chart
-	st.markdown(<h1>title<h1>)
-# 	st.markdown(style, unsafe_allow_html=True)
+	st.markdown(title)
+	st.markdown(style, unsafe_allow_html=True)
 	st.write(fig)
 	#plotting the summary chart
 	if flag ==True:
