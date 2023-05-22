@@ -43,6 +43,7 @@ title_map = {700:"(FDD Uplink - 703-748 MHz) ; ",
          3500:"(TDD UP/DN link - 3300-3670 MHz) ; ",
          26000:"(TDD UP/DN link - 24250-27500 MHz) ; "}
 
+#operator dict for dimension - frequency bands and subfeatures - freq and exp maps
 operators = {700: {'Vacant':0,'Railways':1,'Govt':2,'RJIO':3,'BSNL':4},
              800: {'Vacant':0,'RCOM':1,'Govt':2,'RJIO':3,'Bharti':4, 'MTS':5, 'BSNL':6},
              900:{'Vacant':0,'RCOM':1,'Govt':2,'Railways':3,'Bharti':4, 'AircelU':5, 
@@ -55,6 +56,17 @@ operators = {700: {'Vacant':0,'Railways':1,'Govt':2,'RJIO':3,'BSNL':4},
              3500: {'Vacant':0,'Bharti':1,'RJIO':2,'BSNL':3, 'MTNL':4,'VI':5},
              26000: {'Vacant':0,'Bharti':1,'RJIO':2,'BSNL':3, 'MTNL':4,'VI':5,'Adani':6}
             }
+
+#operators dict for dimension - calendar years
+operators_dim_cy = {2010 : ["Bharti", "QCOM", "Augere", "Vodafone", "Idea", "RJIO", "RCOM", "Stel", "Tata", "Aircel", "Tikona"],
+		    2012 : ["Bharti", "Vodafone", "Idea", "Telenor", "Videocon"],
+		    2013 : ["MTS"],
+		    2014 : ["Bharti", "Vodafone", "Idea", "RJIO", "RCOM", "Aircel", "Telenor"],
+		    2015 : ["Bharti", "Vodafone", "Idea", "RJIO", "RCOM", "Tata", "Aircel"],
+		    2016 : ["Bharti", "Vodafone", "Idea", "RJIO", "RCOM", "Tata", "Aircel"],
+		    2021 : ["Bharti", "RJIO", "VodaIdea"],
+		    2022 : ["Bharti", "RJIO", "VodaIdea", "Adani"] }
+		    
 
 #if "1" the expiry tab is present and if "0" then not present
 ExpTab = {700:1, 800:1, 900:1, 1800:1, 2100:1, 2300:1, 2500:1, 3500:1, 26000:1}
@@ -734,7 +746,7 @@ if Dimension == "Calendar Year":
 	if Feature == "Total Outflow":
 		df1 = df1.reset_index()
 		df1_temp2 = df1.set_index(["Band","Circle"])
-		operatorslist = sorted(list(df1_temp2.columns[12:-1]))
+		operatorlist = operators_dim_cy[Year]
 		selected_operators = st.sidebar.multiselect('Select Operators', operatorslist)
 		if selected_operators== []:
 			df1_temp2["Total Outflow"] = df1_temp2[feature_dict["Auction Price"]]*df1_temp2["Total Sold (MHz)"]
