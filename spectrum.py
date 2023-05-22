@@ -829,7 +829,7 @@ if Dimension == "Calendar Year":
 		df2_temp1 = df1.copy()
 		selectedbands = st.sidebar.multiselect('Select Bands',band_dim_cy[Year])
 		subfeature_list = ["Total Outflow", "Total Purchase"]
-		SubFeature = st.sidebar.selectbox('Select a Feature', subfeature_list)
+		SubFeature = st.sidebar.selectbox('Select a SubFeature', subfeature_list)
 		if SubFeature == "Total Outflow":
 			if selectedbands != []:
 				temp1=pd.DataFrame()
@@ -905,8 +905,8 @@ if Dimension == "Frequency Band":
 	title = "Spectrum "+subtitle+" for "+str(Band)+" MHz Band"
 	subtitle = title_map[Band]+" ("+unit+"); (Selected Operators -"+', '.join(selected_operators)+")"
 
-if Dimension == "Calendar Year":
-	if (SubFeature =="Total Outflow") or (SubFeature == "Quantum Sold"):
+if (Dimension == "Calendar Year") and (Feature == "Band Wise"):
+	if (SubFeature =="Total Outflow"):
 		if selected_operators==[]:
 			selected_operators = ["All"]
 		else:
@@ -919,6 +919,22 @@ if Dimension == "Calendar Year":
 	title_x =0.25
 	tickangle =0
 	dtickval =1
+	
+if (Dimension == "Calendar Year") and (Feature == "Operator Wise"):
+	if (SubFeature =="Total Outflow") or (SubFeature == "Quantum Sold"):
+		if selectedbands==[]:
+			selectedbands = ["All"]
+		else:
+			selectedbands = selectedbands
+	else:
+		selectedbands = ["NA"]
+		
+	title = "Operator Wise Yearly Trend for the Year "+str(Year)
+	subtitle = SubFeature" + "(Selected Bands -" + ', '.join(selectedbands)+")"
+	title_x =0.25
+	tickangle =0
+	dtickval =1
+	
 
 #updating figure layouts
 fig.update_layout(uniformtext_minsize=12, 
