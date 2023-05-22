@@ -850,7 +850,7 @@ if Dimension == "Frequency Band":
 
 if Dimension == "Calendar Year":
 	if Feature =="Total Outflow":
-		if selected_operator==[]:
+		if selected_operators==[]:
 			selected_operators = ["All"]
 		else:
 			selected_operators = selected_operators
