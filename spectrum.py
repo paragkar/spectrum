@@ -702,7 +702,7 @@ if Dimension == "Calendar Year":
 	masterdf = df[masterall]
 	offeredvssolddf = df[spectrumofferedvssold]
 	calendaryearlist = sorted(list(set(masterdf["Auction Year"].values)))
-	Year = st.sidebar.selectbox('Select a Year', options = calendaryearlist,7) #Display the latest Calendar Year with info
+	Year = st.sidebar.selectbox('Select a Year', options = calendaryearlist,default_index=7) #Default Index the latest Calendar Year
 	df1 = masterdf[masterdf["Auction Year"]==Year]
 	df1 = df1.set_index("Circle")
 	df2 = offeredvssolddf[offeredvssolddf["Year"]==Year]
