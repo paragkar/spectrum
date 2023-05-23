@@ -407,7 +407,7 @@ def hovertext3(dff,reserveprice,auctionprice,offeredspectrum,soldspectrum,unsold
 
 #processing for hovertext for Calendar Year; Band Wise; Reserve Price
 @st.cache_resource
-["Reserve Price", "Auction Price", "Total EMD", "Quantum Offered", "Quantum Sold", "Quantum Unsold" ]:
+
 #debug
 def hovertextcal1(df1):
 	df1 = df1[["Circle", "Band", subfeature_dict["Auction Price"], subfeature_dict["Reserve Price"]]]
