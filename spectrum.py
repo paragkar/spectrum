@@ -426,11 +426,11 @@ def hovertext_and_colmatrix(df1):
 			unsold = qtyunsold.values[yi][xi]
 			delta = aucprice - resprice
 			if delta =="NA":
-				ccode = '#000000' #auction failed 
+				ccode = '#000000' #auction failed (black)
 			elif delta == 0:
-				ccode = '#00FF00' #auction price = reserve price
+				ccode = '#008000' #auction price = reserve price (green)
 			else:
-				ccode = '#FF0000' #auction price > reserve price
+				ccode = '#FF0000' #auction price > reserve price (red)
 			lst.append([yy,xx,ccode])
 			temp = pd.DataFrame(lst)
 			temp.columns = ["Circle", "Year", "Color"]
@@ -491,11 +491,11 @@ def hovermatrixauction(dff,reserveprice, auctionprice):
 		for xi, xx in enumerate(dff.columns):
 			delval = delta.values[yi][xi]
 			if delval =="NA":
-				ccode = '#000000' #auction failed 
+				ccode = '#000000' #auction failed #black
 			elif delval == 0:
-				ccode = '#00FF00' #auction price = reserve price
+				ccode = '#008000' #auction price = reserve price #green
 			else:
-				ccode = '#FF0000' #auction price > reserve price
+				ccode = '#FF0000' #auction price > reserve price #red
 			lst.append([yy,xx,ccode])
 			temp = pd.DataFrame(lst)
 			temp.columns = ["LSA", "Year", "Color"]
