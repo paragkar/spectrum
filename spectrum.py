@@ -701,15 +701,15 @@ if Dimension == "Frequency Band":
 			    "Percent Sold": percentsold,
 			    "Quantum Unsold": unsoldspectrum,
 			    "Percent Unsold": percentunsold}
-		Type = st.sidebar.selectbox('Select a Sub Feature', ["Auction Price","Reserve Price","Quantum Offered", "Quantum Sold", "Percent Sold", "Quantum Unsold", "Percent Unsold"])
-		typedf = type_dict[Type].copy()
+		SubFeature = st.sidebar.selectbox('Select a Sub Feature', ["Auction Price","Reserve Price","Quantum Offered", "Quantum Sold", "Percent Sold", "Quantum Unsold", "Percent Unsold"])
+		typedf = type_dict[SubFeature].copy()
 		parttitle = "Yearly Trend of "+Type
 		tickangle=0
 		dtickval = dtickauction[Band]
 		hovertext = hovertext3(dff,reserveprice,auctionprice,offeredspectrum,soldspectrum,unsoldspectrum)
 		
 		#preparing the dataframe of the summary bar chart on top of the heatmap
-		if Feature not in ["Percent Sold", "Percent Unsold"]:
+		if SubFeature not in ["Percent Sold", "Percent Unsold"]:
 			summarydf = typedf.replace('[a-zA-Z]+\s*',np.nan, regex=True)
 			summarydf = summarydf.sum().reset_index()
 			summarydf.columns = ["Years", "India Total"]
