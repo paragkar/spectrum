@@ -421,7 +421,7 @@ def hovertextcal1(df1):
 			aucprice = auctionprice.values[yi][xi]
 			hovertext[-1].append(
 					    'Circle: {}\
-					     <br>Band:{} MHz\
+					     <br>Band: {} MHz\
 					     <br>Reserve Price: {} Rs Cr/MHz\
 					     <br>Auction Price: {} Rs Cr/MHz'
 
