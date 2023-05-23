@@ -1020,7 +1020,7 @@ if Dimension == "Calendar Year":
 		    textfont={"size":10},
 		    reversescale=True,
 			)]	
-	
+	hoverlabel_bgcolor = colormatrix
 
 units_dict = {"Reserve Price" : "Rs Cr/MHz", "Auction Price" : "Rs Cr/MHz", "Quantum Offered": "MHz", 
 	      "Quantum Sold" : "MHz", "Quantum Unsold" : "MHz", "Total EMD" : "Rs Cr", "Total Outflow" : "Rs Cr",
