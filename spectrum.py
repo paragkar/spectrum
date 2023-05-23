@@ -663,7 +663,7 @@ if Dimension == "Frequency Band":
 			summarydf.columns = ["Operators", "India Total"]
 			
 			#preparing the summary chart 
-			chart = summarychart(summarydf, "Operators", "Total")
+			chart = summarychart(summarydf, "Operators", "India Total")
 			flag = True
 	
 
