@@ -431,9 +431,9 @@ def hovertextcal1(df1):
 					     <br>Band: {} MHz\
 					     <br>Reserve Price: {} Rs Cr/MHz\
 					     <br>Auction Price: {} Rs Cr/MHz\
-					     <br>Qty Offered: {} MHz\
-					     <br>Qty Sold: {} MHz\
-					     <br>Qty Unsold: {} MHz'
+					     <br>Offered: {} MHz\
+					     <br>Sold: {} MHz\
+					     <br>Unsold: {} MHz'
 
 				     .format( 
 					    state_dict.get(yy),
