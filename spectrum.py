@@ -405,11 +405,9 @@ def hovertext3(dff,reserveprice,auctionprice,offeredspectrum,soldspectrum,unsold
 					    )
 	return hovertext
 
-#processing for hovertext for Calendar Year; Band Wise; Reserve Price
+#processing for hovertext and colormatrix for Calendar Year; Band Wise; Reserve Price etc
 @st.cache_resource
-
-#debug
-def hovertextcal1(df1):
+def hovertext_and_colmatrix(df1):
 	auctionprice =  df1.pivot(index="Circle", columns='Band', values=subfeature_dict["Auction Price"])
 	reserveprice =  df1.pivot(index="Circle", columns='Band', values=subfeature_dict["Reserve Price"])
 	qtyoffered = df1.pivot(index="Circle", columns='Band', values=subfeature_dict["Quantum Offered"])
@@ -417,6 +415,7 @@ def hovertextcal1(df1):
 	qtyunsold = df1.pivot(index="Circle", columns='Band', values=subfeature_dict["Quantum Unsold"])
 	
 	hovertext=[]
+	lst = []
 	for yi, yy in enumerate(reserveprice.index):
 		hovertext.append([])
 		for xi, xx in enumerate(reserveprice.columns):
@@ -425,6 +424,18 @@ def hovertextcal1(df1):
 			offered = qtyoffered.values[yi][xi]
 			sold = qtysold.values[yi][xi]
 			unsold = qtyunsold.values[yi][xi]
+			delta = aucprice - resprice
+			if delta =="NA":
+				ccode = '#000000' #auction failed 
+			elif delta == 0:
+				ccode = '#00FF00' #auction price = reserve price
+			else:
+				ccode = '#FF0000' #auction price > reserve price
+			lst.append([yy,xx,ccode])
+			temp = pd.DataFrame(lst)
+			temp.columns = ["Circle", "Year", "Color"]
+			colormatrix = temp.pivot(index='Circle', columns='Year', values="Color")
+			colormatrix = list(colormatrix.values)
 			
 			hovertext[-1].append(
 					    'Circle: {}\
@@ -445,7 +456,7 @@ def hovertextcal1(df1):
 					    round(unsold,2),
 					    )
 					    )
-	return hovertext
+	return hovertext, colormatrix
 
 
 #preparing color scale for hoverbox for freq and exp maps
@@ -849,7 +860,7 @@ if Dimension == "Calendar Year":
 		if SubFeature in ["Reserve Price", "Auction Price", "Total EMD", "Quantum Offered", "Quantum Sold", "Quantum Unsold" ]:
 			df1 = df1.reset_index()
 			df1_temp1 = df1.copy()
-			hovertext = hovertextcal1(df1)
+			hovertext,colormatrix = hovertext_and_colmatrix(df1)
 			if SubFeature == "Quantum Sold":
 				operatorslist = operators_dim_cy[Year]
 				selected_operators = st.sidebar.multiselect('Select an Operator', operatorslist)
