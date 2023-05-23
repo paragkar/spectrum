@@ -425,14 +425,14 @@ def hovertext_and_colmatrix(df1):
 			sold = qtysold.values[yi][xi]
 			unsold = qtyunsold.values[yi][xi]
 			delta = aucprice - resprice
-			if delta == np.nan :
-				ccode = '#FFFFFF' #No Auction (white)
 			if delta < 0 :
 				ccode = '#000000' #auction failed (black)
 			if delta == 0:
 				ccode = '#008000' #auction price = reserve price (green)
 			if delta > 0:
 				ccode = '#FF0000' #auction price > reserve price (red)
+			else:
+				ccode = '#FFFFFF' #No Auction (white)
 			lst.append([yy,xx,ccode])
 			temp = pd.DataFrame(lst)
 			temp.columns = ["Circle", "Year", "Color"]
