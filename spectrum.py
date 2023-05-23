@@ -1062,14 +1062,16 @@ if Dimension == "Frequency Band":
 			selected_operators = selected_operators
 			
 		subtitle = title_map[Band]+unit+"; Selected Operators - "+', '.join(selected_operators)
+		
+		fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 			
 	if (Feature == "FreqMap") and (SubFeature == "Operator Wise"):
 		unit = "MHz"
 		subtitle = "Unit - "+unit+"; "+"India Total - Sum of all LSAs"
 	
-	if (Feature != "FreqMap") and (SubFeature != "Operator Wise"):
+# 	if (Feature != "FreqMap") and (SubFeature != "Operator Wise"):
 		
-		fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
+# 		fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 	
 	
 	title = parttitle+" for "+str(Band)+" MHz Band"
