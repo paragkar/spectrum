@@ -861,6 +861,33 @@ if Dimension == "Calendar Year":
 			#preparing the summary chart 
 			chart = summarychart(summarydf, 'Operators', SubFeature)
 			flag = True
+		
+		if SubFeature == "Total Purchase":
+			if selectedbands != []:
+				df2_temp2 = df1.copy()
+				temp1=pd.DataFrame()
+				for band in selectedbands:
+					temp2= df2_temp2[df2_temp2["Band"]==band]
+					temp1 = pd.concat([temp2,temp1], axis =0)
+				df2_temp2 = temp1
+			else:
+				df2_temp2 = df1.copy()
+			columnstoextract = ["Circle", "Band"]+operators_dim_cy[Year]
+			df2_temp2 = df2_temp2[columnstoextract]
+			df2_temp2.drop("Band", inplace = True, axis =1)
+			df2_temp2 = df2_temp2.groupby(["Circle"]).sum().round(2)
+			df2_temp2 = df2_temp2.reindex(sorted(df2_temp2.columns), axis=1)
+			z = df2_temp2.values
+			x = df2_temp2.columns
+			y = df2_temp2.index
+			
+			summarydf = df2_temp2.sum(axis=0)
+			summarydf = summarydf.reset_index()
+			summarydf.columns = ["Operators", SubFeature] 
+			summarydf = summarydf.sort_values("Operators", ascending = False)
+			#preparing the summary chart 
+			chart = summarychart(summarydf, 'Operators', SubFeature)
+			flag = True
 	
 	data = [go.Heatmap(
 		  z = z,
@@ -879,7 +906,7 @@ if Dimension == "Calendar Year":
 
 units_dict = {"Reserve Price" : "Rs Cr/MHz", "Auction Price" : "Rs Cr/MHz", "Quantum Offered": "MHz", 
 	      "Quantum Sold" : "MHz", "Quantum Unsold" : "MHz", "Total EMD" : "Rs Cr", "Total Outflow" : "Rs Cr",
-	     "Auction/Reserve" : "Ratio", "Percent Unsold" : "% of Total Spectrum", "Percent Sold" : "% of Total Spectrum"}
+	     "Auction/Reserve" : "Ratio", "Percent Unsold" : "% of Total Spectrum", "Percent Sold" : "% of Total Spectrum", "Total Purchase" : "Rs Cr"}
 
 #Plotting the final Heatmap	
 fig = go.Figure(data=data)
@@ -950,7 +977,22 @@ if (Dimension == "Calendar Year") and (Feature == "Operator Wise"):
 	else:
 		selectedbands = ["NA"]
 	selectedbands = [str(x) for x in selectedbands]	
-	title = "Operator Wise Auction Summary for the Year "+str(Year)
+	title = "Operator Wise Outflow Summary for the Year "+str(Year)
+	subtitle = SubFeature + "; Unit -"+units_dict[SubFeature]+"; Selected Bands -" + ', '.join(selectedbands) + "; India Summary - Sum of all LSAs"
+	title_x =0.25
+	tickangle =0
+	dtickval =1
+	
+if (Dimension == "Calendar Year") and (Feature == "Operator Wise"):
+	if (SubFeature =="Total Purchase"):
+		if selectedbands==[]:
+			selectedbands = ["All"]
+		else:
+			selectedbands = selectedbands
+	else:
+		selectedbands = ["NA"]
+	selectedbands = [str(x) for x in selectedbands]	
+	title = "Operator Wise Purchase Summary for the Year "+str(Year)
 	subtitle = SubFeature + "; Unit -"+units_dict[SubFeature]+"; Selected Bands -" + ', '.join(selectedbands) + "; India Summary - Sum of all LSAs"
 	title_x =0.25
 	tickangle =0
