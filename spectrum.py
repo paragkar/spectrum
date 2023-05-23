@@ -1042,6 +1042,7 @@ if Dimension == "Frequency Band":
 		subtitle = "Unit - "+unit+"; Selected Operators - "+', '.join(selected_operators)+ " ; India Total - Sum of all LSAs"
 		
 	if (Feature == "ExpiryMap") and (SubFeature == "Freq Wise"):
+		fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 		unit = "Ch Size - "+str(ChannelSize[Band])+" MHz"
 		if selected_operators == []:
 			selected_operators = ["All"]
