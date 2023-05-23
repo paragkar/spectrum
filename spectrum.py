@@ -464,58 +464,58 @@ def hovertext_and_colmatrix(df1):
 
 #processing for hovertext and colormatrix for Calendar Year, Operator Wise, SubFeatures - "Total Outflow" etc
 @st.cache_resource
-def hovertext_and_colmatrix(df1):
-	auctionprice =  df1.pivot(index="Circle", columns='Band', values=subfeature_dict["Auction Price"])
-	reserveprice =  df1.pivot(index="Circle", columns='Band', values=subfeature_dict["Reserve Price"])
-	qtyoffered = df1.pivot(index="Circle", columns='Band', values=subfeature_dict["Quantum Offered"])
-	qtysold = df1.pivot(index="Circle", columns='Band', values=subfeature_dict["Quantum Sold"])
-	qtyunsold = df1.pivot(index="Circle", columns='Band', values=subfeature_dict["Quantum Unsold"])
+# def hovertext_and_colmatrix(df1):
+# 	auctionprice =  df1.pivot(index="Circle", columns='Band', values=subfeature_dict["Auction Price"])
+# 	reserveprice =  df1.pivot(index="Circle", columns='Band', values=subfeature_dict["Reserve Price"])
+# 	qtyoffered = df1.pivot(index="Circle", columns='Band', values=subfeature_dict["Quantum Offered"])
+# 	qtysold = df1.pivot(index="Circle", columns='Band', values=subfeature_dict["Quantum Sold"])
+# 	qtyunsold = df1.pivot(index="Circle", columns='Band', values=subfeature_dict["Quantum Unsold"])
 	
-	hovertext=[]
-	lst = []
-	for yi, yy in enumerate(reserveprice.index):
-		hovertext.append([])
-		for xi, xx in enumerate(reserveprice.columns):
-			resprice = reserveprice.values[yi][xi]
-			aucprice = auctionprice.values[yi][xi]
-			offered = qtyoffered.values[yi][xi]
-			sold = qtysold.values[yi][xi]
-			unsold = qtyunsold.values[yi][xi]
-			delta = round(aucprice - resprice,0)
-			if delta < 0 :
-				ccode = '#000000' #auction failed (black)
-			elif delta == 0:
-				ccode = '#008000' #auction price = reserve price (green)
-			elif delta > 0:
-				ccode = '#FF0000' #auction price > reserve price (red)
-			else:
-				ccode = '#C0C0C0' #No Auction (silver)
-			lst.append([yy,xx,ccode])
-			temp = pd.DataFrame(lst)
-			temp.columns = ["Circle", "Year", "Color"]
-			colormatrix = temp.pivot(index='Circle', columns='Year', values="Color")
-			colormatrix = list(colormatrix.values)
+# 	hovertext=[]
+# 	lst = []
+# 	for yi, yy in enumerate(reserveprice.index):
+# 		hovertext.append([])
+# 		for xi, xx in enumerate(reserveprice.columns):
+# 			resprice = reserveprice.values[yi][xi]
+# 			aucprice = auctionprice.values[yi][xi]
+# 			offered = qtyoffered.values[yi][xi]
+# 			sold = qtysold.values[yi][xi]
+# 			unsold = qtyunsold.values[yi][xi]
+# 			delta = round(aucprice - resprice,0)
+# 			if delta < 0 :
+# 				ccode = '#000000' #auction failed (black)
+# 			elif delta == 0:
+# 				ccode = '#008000' #auction price = reserve price (green)
+# 			elif delta > 0:
+# 				ccode = '#FF0000' #auction price > reserve price (red)
+# 			else:
+# 				ccode = '#C0C0C0' #No Auction (silver)
+# 			lst.append([yy,xx,ccode])
+# 			temp = pd.DataFrame(lst)
+# 			temp.columns = ["Circle", "Year", "Color"]
+# 			colormatrix = temp.pivot(index='Circle', columns='Year', values="Color")
+# 			colormatrix = list(colormatrix.values)
 			
-			hovertext[-1].append(
-					    'Circle: {}\
-					     <br>Band: {} MHz\
-					     <br>Reserve Price: {} Rs Cr/MHz\
-					     <br>Auction Price: {} Rs Cr/MHz\
-					     <br>Offered: {} MHz\
-					     <br>Sold: {} MHz\
-					     <br>Unsold: {} MHz'
+# 			hovertext[-1].append(
+# 					    'Circle: {}\
+# 					     <br>Band: {} MHz\
+# 					     <br>Reserve Price: {} Rs Cr/MHz\
+# 					     <br>Auction Price: {} Rs Cr/MHz\
+# 					     <br>Offered: {} MHz\
+# 					     <br>Sold: {} MHz\
+# 					     <br>Unsold: {} MHz'
 
-				     .format( 
-					    state_dict.get(yy),
-					    xx,
-					    round(resprice,1),
-					    round(aucprice,1),
-					    round(offered,2),
-					    round(sold,2),
-					    round(unsold,2),
-					    )
-					    )
-	return hovertext, colormatrix
+# 				     .format( 
+# 					    state_dict.get(yy),
+# 					    xx,
+# 					    round(resprice,1),
+# 					    round(aucprice,1),
+# 					    round(offered,2),
+# 					    round(sold,2),
+# 					    round(unsold,2),
+# 					    )
+# 					    )
+# 	return hovertext, colormatrix
 
 
 #preparing color scale for hoverbox for freq and exp maps
@@ -1010,7 +1010,6 @@ if Dimension == "Calendar Year":
 		
 		if SubFeature == "Total Outflow":
 			if selectedbands != []:
-				temp1=pd.DataFrame()
 				for band in selectedbands:
 					temp2= df2_temp1[df2_temp1["Band"]==band]
 					temp1 = pd.concat([temp2,temp1], axis =0)
