@@ -408,38 +408,31 @@ def hovertext3(dff,reserveprice,auctionprice,offeredspectrum,soldspectrum,unsold
 #processing for hovertext for Calendar Year; Band Wise; Reserve Price
 @st.cache_resource
 
+#debug
+def hovertextcal1(df1):
+	df1 = df1[["Band", subfeature_dict["Auction Price"], subfeature_dict["Reserve Price"]]]
+	auctionprice =  df1.pivot(index="Circle", columns='Band', values=subfeature_dict["Auction Price"])
+	reserveprice =  df1.pivot(index="Circle", columns='Band', values=subfeature_dict["Reserve Price"])
+	hovertext=[]
+	for yi, yy in enumerate(reserveprice.index):
+		hovertext.append([])
+		for xi, xx in enumerate(reserveprice.columns):
+			resprice = reserveprice.values[yi][xi]
+			aucprice = auctionprice.values[yi][xi]
+			hovertext[-1].append(
+					    'Circle : {}\
+					     <br>Band :{} MHz\
+					     <br>Reserve Price: {} Rs Cr/MHz\
+					     <br>Auction Price: {} Rs Cr/MHz'
 
-# #debug
-# def hovertextcal1(dff,auctionprice,offeredspectrum,soldspectrum,unsoldspectrum):  
-# 	hovertext=[]
-# 	for yi, yy in enumerate(dff.index):
-# 		hovertext.append([])
-# 		for xi, xx in enumerate(dff.columns):
-# 			winners = dff.values[yi][xi][:-2] #removing comma in the end
-# 			resprice = reserveprice.values[yi][xi]
-# 			aucprice = auctionprice.values[yi][xi]
-# 			offmhz = offeredspectrum.values[yi][xi]
-# 			soldmhz = soldspectrum.values[yi][xi]
-# 			unsoldmhz = unsoldspectrum.values[yi][xi]
-
-# 			hovertext[-1].append(
-# 					    '{} , {}\
-# 					     <br / >RP/AP: Rs {}/ {} Cr/MHz\
-# 					     <br / >Offered/Sold/Unsold: {} / {} / {} MHz\
-# 					     <br>Winners: {}'
-
-# 				     .format( 
-# 					    state_dict.get(yy),
-# 					    xx,
-# 					    resprice,
-# 					    aucprice,
-# 					    round(offmhz,2),
-# 					    round(soldmhz,2),
-# 					    round(unsoldmhz,2),
-# 					    winners,
-# 					    )
-# 					    )
-# 	return hovertext
+				     .format( 
+					    state_dict.get(yy),
+					    xx,
+					    resprice,
+					    aucprice,
+					    )
+					    )
+	return hovertext
 
 
 #preparing color scale for hoverbox for freq and exp maps
@@ -987,6 +980,9 @@ if Dimension == "Calendar Year":
 			chart = summarychart(summarydf, 'Operators', SubFeature)
 			flag = True
 	
+	if SubFeature == "Reserve Price":
+		hovertext = hovertextcal1(df1)
+		
 	data = [go.Heatmap(
 		  z = z,
 		  x = x,
@@ -994,7 +990,7 @@ if Dimension == "Calendar Year":
 		  xgap = 1,
 		  ygap = 1,
 		  hoverinfo ='text',
-# 		  text = hovertext,
+		  text = hovertext,
 		  hovertemplate = 'LSA: %{y}<extra></extra>',
 		  colorscale = 'Hot',
 		    texttemplate="%{z}", 
