@@ -1003,8 +1003,7 @@ if Dimension == "Frequency Band":
 			
 	if (Feature == "FreqMap") and (SubFeature == "Operator Wise"):
 		unit = "MHz"
-		selected_operators =["NA"]	
-		subtitle = "Unit - "+unit+"; Selected Operators - "+', '.join(selected_operators)+" ; TotalMHz - Sum of all LSAs"
+		subtitle = "Unit - "+unit+"; "+"TotalMHz - Sum of all LSAs"
 	
 	if (Feature != "FreqMap") and (SubFeature != "Operator Wise"):
 		fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
