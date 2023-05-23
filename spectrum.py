@@ -931,7 +931,7 @@ if (Dimension == "Calendar Year") and (Feature == "Band Wise"):
 		selected_operators = ["NA"]
 		
 	title = "Band Wise Yearly Trend for the Year "+str(Year)
-	subtitle = SubFeature+" ("+units_dict[SubFeature]+"); "+ "(Selected Operators -" + ', '.join(selected_operators)+")"
+	subtitle = SubFeature+"; Unit -"+units_dict[SubFeature]+"; "+ "Selected Operators -" + ', '.join(selected_operators)+ " Band Wise Summary - Sum of all LSAs"
 	title_x =0.25
 	tickangle =0
 	dtickval =1
