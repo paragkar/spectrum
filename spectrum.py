@@ -888,29 +888,38 @@ if Dimension == "Frequency Band":
 	if Feature == "AuctionMap":
 		unit = units_dict[Type]
 		selected_operators = ["NA"]
+		
+		subtitle = unit+"; Selected Operators - "+', '.join(selected_operators)
 	if (Feature == "ExpiryMap") and (SubFeature == "Freq Wise"):
 		unit = "Ch Size - "+str(ChannelSize[Band])+" MHz"
 		if selected_operators == []:
 			selected_operators = ["All"]
 		else:
 			selected_operators = selected_operators
+			
+		subtitle = title_map[Band]+unit+"; Selected Operators - "+', '.join(selected_operators)
+	
 	if (Feature == "ExpiryMap") and (SubFeature == "Year Wise"):
 		unit = "MHz in Years"
 		selected_operators =["NA"]
+		subtitle = title_map[Band]+unit+"; Selected Operators - "+', '.join(selected_operators)
+		
 	if Feature == "FreqMap":
 		unit = "Ch Size - "+str(ChannelSize[Band])+" MHz"
 		if selected_operators == []:
 			selected_operators = ["All"]
 		else:
 			selected_operators = selected_operators
-	if BandType[Band] == "FDD":
-		title_x =0.12
-	if BandType[Band] == "TDD":
-		title_x = 0.08
+			
+		subtitle = title_map[Band]+unit+"; Selected Operators - "+', '.join(selected_operators)
+# 	if BandType[Band] == "FDD":
+# 		title_x =0.12
+# 	if BandType[Band] == "TDD":
+# 		title_x = 0.08
 		
 	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
+	
 	title = parttitle+" for "+str(Band)+" MHz Band"
-	subtitle = title_map[Band]+unit+"; Selected Operators - "+', '.join(selected_operators)
 
 if (Dimension == "Calendar Year") and (Feature == "Band Wise"):
 	if (SubFeature =="Total Outflow"):
