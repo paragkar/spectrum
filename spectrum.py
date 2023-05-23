@@ -945,7 +945,7 @@ if Dimension == "Calendar Year":
 		hoverlabel_bgcolor = colormatrix #colormatrix processed from fuction "hovertext_and_colmatrix" for same above
 	
 	if Feature == "Operator Wise": #for the dimension "Calendar Year"
-		hovertext = "Work in Progress" #debug
+		hovertext = (Work in Progress, Work in Progress) #debug
 		df1 = df1.reset_index()
 		df2_temp1 = df1.copy()
 		selectedbands = st.sidebar.multiselect('Select Bands',band_dim_cy[Year])
