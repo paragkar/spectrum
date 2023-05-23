@@ -584,7 +584,7 @@ if Dimension == "Frequency Band":
 			ticktext = list(selected_op_dict.keys())	
 
 		hovertext = hovertext1(hf,sff,ef, of, ayear, bandf, ExpTab,ChannelSize,xaxisadj)
-		parttitle ="Frequency Map"
+		parttitle ="Spectrum Frequency Map"
 		tickangle = -90
 		dtickval = dtickfreq[Band]
 
@@ -634,7 +634,7 @@ if Dimension == "Frequency Band":
 				expf = pd.DataFrame(sf.values*ef.values, columns=ef.columns, index=ef.index)
 
 			hovertext = hovertext21(hf,sff,ef, of, bandf, bandexpf, ExpTab,ChannelSize,xaxisadj,ayear)
-			parttitle ="Expiry Map "+SubFeature
+			parttitle ="Spectrum Expiry Map "+SubFeature
 			tickangle = -90
 			dtickval = dtickfreq[Band]
 
@@ -655,7 +655,7 @@ if Dimension == "Frequency Band":
 
 		if SubFeature == "Year Wise":
 			hovertext = hovertext22(bwf,eff)
-			subtitle ="Expiry Map "+SubFeature
+			subtitle ="Spectrum Expiry Map "+SubFeature
 			tickangle = 0
 			dtickval = dtickauction[Band]
 		
@@ -909,7 +909,7 @@ if Dimension == "Frequency Band":
 		title_x = 0.08
 		
 	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
-	title = "Spectrum "+parttitle+" for "+str(Band)+" MHz Band"
+	title = parttitle+" for "+str(Band)+" MHz Band"
 	subtitle = title_map[Band]+unit+"; Selected Operators - "+', '.join(selected_operators)
 
 if (Dimension == "Calendar Year") and (Feature == "Band Wise"):
