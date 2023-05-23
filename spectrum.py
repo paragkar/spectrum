@@ -900,7 +900,7 @@ if Dimension == "Frequency Band":
 		subtitle = title_map[Band]+unit+"; Selected Operators - "+', '.join(selected_operators)
 	
 	if (Feature == "ExpiryMap") and (SubFeature == "Year Wise"):
-		unit = "MHz in Years"
+		unit = "MHz"
 		selected_operators =["NA"]
 		subtitle = "Unit - "+unit+"; Selected Operators - "+', '.join(selected_operators)+" ; TotalMHz - Sum of all LSAs"
 		
