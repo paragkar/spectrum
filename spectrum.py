@@ -889,7 +889,7 @@ if Dimension == "Frequency Band":
 		unit = units_dict[Type]
 		selected_operators = ["NA"]
 		
-		subtitle = unit+"; Selected Operators - "+', '.join(selected_operators)
+		subtitle = "Unit - "+unit+"; Selected Operators - "+', '.join(selected_operators)
 	if (Feature == "ExpiryMap") and (SubFeature == "Freq Wise"):
 		unit = "Ch Size - "+str(ChannelSize[Band])+" MHz"
 		if selected_operators == []:
