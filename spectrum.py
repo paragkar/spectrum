@@ -119,6 +119,9 @@ auctionsucessyears = {700:[2022],
 #This helps to identify which expiry year is linked to which operators
 errors= {700:0.25, 800:1, 900:1, 1800:1, 2100:1.5, 2300:1.25, 2500:1, 3500:0.1, 26000:0.5}
 
+LSAlist = ['AP','AS', 'BH', 'DL', 'GU', 'HA', 'HP', 'JK', 'KA', 'KE', 'KO', 'MA', 'MP',
+       	   'MU', 'NE', 'OR', 'PU', 'RA', 'TN', 'UPE', 'UPW', 'WB']
+
 #defining various functions 
 #preparing color scale for freqmap
 @st.cache_resource
@@ -518,6 +521,7 @@ if Dimension == "Frequency Band":
 
 	#processing "Spectrum_all" excel tab data
 	dff = df[spectrumall] #contains information of LSA wise mapping oldoperators with new operators
+	dffcopy = dff.copy() #make a copy for "Operator Wise" subfeature under the feature "FreqMap"
 	dff = processdff(dff)
 	dff = coltostr(dff)
 	dff = adddummycols(dff,auctionfailyears[Band])
@@ -572,53 +576,83 @@ if Dimension == "Frequency Band":
 
 	#Processing For Dimension = "Frequency Band" & Feature 
 	if  Feature == "FreqMap":
-		sf = sff.copy()
-		operators = operators[Band]
-		hf = sf[sf.columns].replace(operators) # dataframe for hovertext
-		operatorslist = sorted(list(operators.keys()))
-		selected_operators = st.sidebar.multiselect('Select Operators', operatorslist)
-		if selected_operators==[]:
-			sf[sf.columns] = sf[sf.columns].replace(operators) 
-			colorscale = colscalefreqmap(operators, colcodes)
-			tickvals = list(operators.values())
-			ticktext = list(operators.keys())
-		else:
-			selected_op_dict ={}
-			for op in operators.keys():
-				if op not in selected_operators:
-					sf.replace(op, np.nan, inplace = True)
-			for i, op in enumerate(selected_operators):
-				sf.replace(op,i, inplace = True)
-				selected_op_dict.update({op : i})
-			colorscale = colscalefreqmap(selected_op_dict, colcodes)
-			tickvals = list(selected_op_dict.values())
-			ticktext = list(selected_op_dict.keys())	
+		SubFeature = st.sidebar.selectbox('Select a Sub Feature', ["Freq Wise", "Operator Wise"])
+		if SubFeature == "Freq Wise":
+			sf = sff.copy()
+			operators = operators[Band]
+			hf = sf[sf.columns].replace(operators) # dataframe for hovertext
+			operatorslist = sorted(list(operators.keys()))
+			selected_operators = st.sidebar.multiselect('Select Operators', operatorslist)
+			if selected_operators==[]:
+				sf[sf.columns] = sf[sf.columns].replace(operators) 
+				colorscale = colscalefreqmap(operators, colcodes)
+				tickvals = list(operators.values())
+				ticktext = list(operators.keys())
+			else:
+				selected_op_dict ={}
+				for op in operators.keys():
+					if op not in selected_operators:
+						sf.replace(op, np.nan, inplace = True)
+				for i, op in enumerate(selected_operators):
+					sf.replace(op,i, inplace = True)
+					selected_op_dict.update({op : i})
+				colorscale = colscalefreqmap(selected_op_dict, colcodes)
+				tickvals = list(selected_op_dict.values())
+				ticktext = list(selected_op_dict.keys())	
 
-		hovertext = hovertext1(hf,sff,ef, of, ayear, bandf, ExpTab,ChannelSize,xaxisadj)
-		parttitle ="Spectrum Frequency Map"
-		tickangle = -90
-		dtickval = dtickfreq[Band]
+			hovertext = hovertext1(hf,sff,ef, of, ayear, bandf, ExpTab,ChannelSize,xaxisadj)
+			parttitle ="Spectrum Frequency Map"
+			tickangle = -90
+			dtickval = dtickfreq[Band]
+			
+			data = [go.Heatmap(
+			      z = sf.values,
+			      y = sf.index,
+			      x = sf.columns,
+			      xgap = xgap[Band],
+			      ygap = 1,
+			      hoverinfo ='text',
+			      text = hovertext,
+			      colorscale=colorscale,
+		# 	      reversescale=True,
+			      colorbar=dict(
+		# 	      tickcolor ="black",
+		# 	      tickwidth =1,
+			      tickvals = tickvals,
+			      ticktext = ticktext,
+			      dtick=1, tickmode="array"),
+					    ),
+				]
+			
+			hcolscale=hcolscalefreqexp(operators, colcodes)  #colorscale for hoverbox
+			hoverlabel_bgcolor = hcolmatrixfreqexp(hcolscale, hf) #shaping the hfcolorscale
+			
+		if SubFeature == "Operator Wise":
+			dfff = dffcopy[(dffcopy["Band"]==Band) & (dffcopy["OperatorNew"] != "Free")].groupby(["OperatorNew","Year","Batch No", "Cat"])[LSAlist].sum()
+			dfff = dfff.reset_index().drop(columns = ["Year", "Batch No", "Cat"], axis =1).groupby("OperatorNew").sum().T
+			
+			parttitle ="Spectrum Frequency Map"
+			tickangle = 0
+			dtickval = dtickfreq[Band]
 
-		data = [go.Heatmap(
-		      z = sf.values,
-		      y = sf.index,
-		      x = sf.columns,
-		      xgap = xgap[Band],
-		      ygap = 1,
-		      hoverinfo ='text',
-		      text = hovertext,
-		      colorscale=colorscale,
-	# 	      reversescale=True,
-		      colorbar=dict(
-	# 	      tickcolor ="black",
-	# 	      tickwidth =1,
-		      tickvals = tickvals,
-		      ticktext = ticktext,
-		      dtick=1, tickmode="array"),
-				    ),
-			]
-		hcolscale=hcolscalefreqexp(operators, colcodes)  #colorscale for hoverbox
-		hoverlabel_bgcolor = hcolmatrixfreqexp(hcolscale, hf) #shaping the hfcolorscale
+			data = [go.Heatmap(
+			      z = dfff.values,
+			      y = dfff.index,
+			      x = dfff.columns,
+			      xgap = xgap[Band],
+			      ygap = 1,
+			      hoverinfo ='text',
+# 			      text = hovertext,
+			      colorscale="Hot",
+		# 	      reversescale=True,
+			      colorbar=dict(
+		# 	      tickcolor ="black",
+		# 	      tickwidth =1,
+# 			      tickvals = tickvals,
+# 			      ticktext = ticktext,
+			      dtick=1, tickmode="array"),
+					    ),
+				]
 
 	#Feature ="Expiry Map" linked to Dimension = "Frequency"
 	if  Feature == "ExpiryMap":
