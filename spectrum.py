@@ -535,13 +535,15 @@ if Dimension == "Frequency Band":
 	offeredspectrum = coltostr(offeredspectrum) #convert columns data type to string
 	soldspectrum = offeredvssold.pivot(index=["LSA"], columns='Year', values="Sold").fillna("NA")
 	soldspectrum = coltostr(soldspectrum) #convert columns data type to string
-	percentsold = offeredvssold.pivot(index=["LSA"], columns='Year', values="%Sold").fillna("NA")
+	percentsold = offeredvssold.pivot(index=["LSA"], columns='Year', values="%Sold")
+	percentsold = percentsold.replace("NA", np.nan)
 	percentsold = percentsold*100 #for rationalising the percentage number
 	percentsold = percentsold.applymap(lambda x: round(float(x),1))
 	percentsold = coltostr(percentsold) #convert columns data type to string
 	unsoldspectrum = offeredvssold.pivot(index=["LSA"], columns='Year', values="Unsold").fillna("NA")
 	unsoldspectrum = coltostr(unsoldspectrum) #convert columns data type to string
-	percentunsold = offeredvssold.pivot(index=["LSA"], columns='Year', values="%Unsold").fillna("NA")
+	percentunsold = offeredvssold.pivot(index=["LSA"], columns='Year', values="%Unsold")
+	percentunsold = percentunsold.replace("NA", np.nan)
 	percentunsold = percentunsold*100 #for rationalising the percentage number
 	percentunsold = percentunsold.applymap(lambda x: round(float(x),1))
 	percentunsold = coltostr(percentunsold) #convert columns data type to string
