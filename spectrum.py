@@ -902,7 +902,7 @@ if Dimension == "Frequency Band":
 	if (Feature == "ExpiryMap") and (SubFeature == "Year Wise"):
 		unit = "MHz in Years"
 		selected_operators =["NA"]
-		subtitle = title_map[Band]+unit+"; Selected Operators - "+', '.join(selected_operators)
+		subtitle = "Unit - "+unit+"; Selected Operators - "+', '.join(selected_operators)+" ; TotalMHz - Sum of all LSAs"
 		
 	if Feature == "FreqMap":
 		unit = "Ch Size - "+str(ChannelSize[Band])+" MHz"
