@@ -849,7 +849,7 @@ if Dimension == "Calendar Year":
 		if SubFeature in ["Reserve Price", "Auction Price", "Total EMD", "Quantum Offered", "Quantum Sold", "Quantum Unsold" ]:
 			df1 = df1.reset_index()
 			df1_temp1 = df1.copy()
-			st.write(df1) #debug
+			hovertext = hovertextcal1(df1)
 			if SubFeature == "Quantum Sold":
 				operatorslist = operators_dim_cy[Year]
 				selected_operators = st.sidebar.multiselect('Select an Operator', operatorslist)
@@ -993,8 +993,7 @@ if Dimension == "Calendar Year":
 			chart = summarychart(summarydf, 'Operators', SubFeature)
 			flag = True
 	
-	if SubFeature == "Reserve Price":
-		hovertext = hovertextcal1(df1)
+
 		
 	data = [go.Heatmap(
 		  z = z,
