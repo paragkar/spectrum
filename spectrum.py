@@ -628,6 +628,9 @@ if Dimension == "Frequency Band":
 			hoverlabel_bgcolor = hcolmatrixfreqexp(hcolscale, hf) #shaping the hfcolorscale
 			
 		if SubFeature == "Operator Wise":
+			operators = operators[Band]
+# 			tickvals = list(operators.values())
+			ticktext = list(operators.keys())
 			dfff = dffcopy[(dffcopy["Band"]==Band) & (dffcopy["OperatorNew"] != "Free")].groupby(["OperatorNew","Year","Batch No", "Cat"])[LSAlist].sum()
 			dfff = dfff.reset_index().drop(columns = ["Year", "Batch No", "Cat"], axis =1).groupby("OperatorNew").sum().T
 			
@@ -651,7 +654,7 @@ if Dimension == "Frequency Band":
 			# 	      tickcolor ="black",
 			# 	      tickwidth =1,
 # 				      tickvals = tickvals,
-# 				      ticktext = ticktext,
+				      ticktext = ticktext,
 			     dtick=1, tickmode="array"))
 				]
 
