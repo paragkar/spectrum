@@ -411,6 +411,7 @@ def hovertext3(dff,reserveprice,auctionprice,offeredspectrum,soldspectrum,unsold
 #debug
 def hovertextcal1(df1):
 	df1 = df1[["Band", subfeature_dict["Auction Price"], subfeature_dict["Reserve Price"]]]
+	df1 = df1.reset_index()
 	auctionprice =  df1.pivot(index="Circle", columns='Band', values=subfeature_dict["Auction Price"])
 	reserveprice =  df1.pivot(index="Circle", columns='Band', values=subfeature_dict["Reserve Price"])
 	hovertext=[]
