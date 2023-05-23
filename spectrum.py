@@ -986,7 +986,7 @@ if Dimension == "Frequency Band":
 		else:
 			selected_operators = selected_operators
 			
-		subtitle = "Unit - "+unit+"; Selected Operators - "+', '.join(selected_operators)+" ; TotalMHz - Sum of all LSAs"
+		subtitle = title_map[Band]+unit+"; Selected Operators - "+', '.join(selected_operators)
 			
 	if (Feature == "FreqMap") and (SubFeature == "Operator Wise"):
 		unit = "MHz"
