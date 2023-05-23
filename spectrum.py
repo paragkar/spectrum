@@ -703,7 +703,7 @@ if Dimension == "Frequency Band":
 			    "Percent Unsold": percentunsold}
 		SubFeature = st.sidebar.selectbox('Select a Sub Feature', ["Auction Price","Reserve Price","Quantum Offered", "Quantum Sold", "Percent Sold", "Quantum Unsold", "Percent Unsold"])
 		typedf = type_dict[SubFeature].copy()
-		parttitle = "Yearly Trend of "+Type
+		parttitle = "Yearly Trend of "+SubFeature
 		tickangle=0
 		dtickval = dtickauction[Band]
 		hovertext = hovertext3(dff,reserveprice,auctionprice,offeredspectrum,soldspectrum,unsoldspectrum)
