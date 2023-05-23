@@ -533,9 +533,13 @@ if Dimension == "Frequency Band":
 	offeredspectrum = offeredvssold.pivot(index=["LSA"], columns='Year', values="Offered").fillna("NA")
 	offeredspectrum = coltostr(offeredspectrum) #convert columns data type to string
 	soldspectrum = offeredvssold.pivot(index=["LSA"], columns='Year', values="Sold").fillna("NA")
+	percentsold = offeredvssold.pivot(index=["LSA"], columns='Year', values="%Sold").fillna("NA")
 	soldspectrum = coltostr(soldspectrum) #convert columns data type to string
+	percentsold = coltostr(percentsold) #convert columns data type to string
 	unsoldspectrum = offeredvssold.pivot(index=["LSA"], columns='Year', values="Unsold").fillna("NA")
+	percentunsold = offeredvssold.pivot(index=["LSA"], columns='Year', values="%Unsold").fillna("NA")
 	unsoldspectrum = coltostr(unsoldspectrum) #convert columns data type to string
+	percentunsold = coltostr(percentunsold) #convert columns data type to string
 
 	#processing & restructuring dataframe auction price for hovertext of data3
 	auctionprice = pricemaster[(pricemaster["Band"] == Band) & (pricemaster["Year"] != 2018)]
@@ -691,9 +695,11 @@ if Dimension == "Frequency Band":
 		type_dict ={"Auction Price": auctionprice,
 			    "Reserve Price": reserveprice, 
 			    "Quantum Offered": offeredspectrum, 
-			    "Quantum Sold": soldspectrum, 
-			    "Quantum Unsold": unsoldspectrum}
-		Type = st.sidebar.selectbox('Select a Sub Feature', ["Auction Price","Reserve Price","Quantum Offered", "Quantum Sold", "Quantum Unsold"])
+			    "Quantum Sold": soldspectrum,
+			    "Percent Sold": percentsold,
+			    "Quantum Unsold": unsoldspectrum,
+			    "Percent Unsold": percentunsold}
+		Type = st.sidebar.selectbox('Select a Sub Feature', ["Auction Price","Reserve Price","Quantum Offered", "Quantum Sold", "Percent Sold", "Quantum Unsold", "Percent Unsold"])
 		typedf = type_dict[Type].copy()
 		parttitle = "Yearly Trend of "+Type
 		tickangle=0
@@ -707,7 +713,10 @@ if Dimension == "Frequency Band":
 		
 		#preparing the summary chart 
 		chart = summarychart(summarydf, "Years", "India Total")
-		flag = True
+		if Feature in ["Percent Sold", "Percent Unsold"]:
+			flag = False
+		else:
+			flag = True
 		
 		#setting the data of the heatmap 
 		data = [go.Heatmap(
