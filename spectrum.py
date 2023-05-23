@@ -655,7 +655,7 @@ if Dimension == "Frequency Band":
 
 		if SubFeature == "Year Wise":
 			hovertext = hovertext22(bwf,eff)
-			partitle ="Spectrum Expiry Map "+SubFeature
+			parttitle ="Spectrum Expiry Map "+SubFeature
 			tickangle = 0
 			dtickval = dtickauction[Band]
 		
