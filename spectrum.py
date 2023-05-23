@@ -638,7 +638,7 @@ if Dimension == "Frequency Band":
 			if BandType[Band]=="TDD": #doubling the TDD spectrum for aligning with normal convention 
         			dfff = (dfff*2).round(2)
 			
-			parttitle ="Operator Wise Summary"
+			parttitle ="Operator Wise Summary of Liberalized Spectrum"
 			tickangle = 0
 			dtickval = dtickfreq[Band]
 
