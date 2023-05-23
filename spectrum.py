@@ -631,7 +631,7 @@ if Dimension == "Frequency Band":
 # 			operators = operators[Band]
 # 			tickvals = list(operators.values())
 			ticktext = list(operators.keys())
-			dfff = dffcopy[(dffcopy["Band"]==Band) & (dffcopy["OperatorNew"] != "Free") &  & (dffcopy["Cat"] == "L")]
+			dfff = dffcopy[(dffcopy["Band"]==Band) & (dffcopy["OperatorNew"] != "Free") & (dffcopy["Cat"] == "L")]
 			dfff = dfff.groupby(["OperatorNew","Year","Batch No", "Cat"])[LSAlist].sum()
 			dfff = dfff.reset_index().drop(columns = ["Year", "Batch No", "Cat"], axis =1).groupby("OperatorNew").sum().T
 			
