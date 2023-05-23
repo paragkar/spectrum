@@ -921,7 +921,7 @@ fig = go.Figure(data=data)
 
 if Dimension == "Frequency Band":
 	if Feature == "AuctionMap":
-		unit = units_dict[Type]
+		unit = units_dict[SubFeature]
 		selected_operators = ["NA"]
 		
 		subtitle = "Unit - "+unit+"; Selected Operators - "+', '.join(selected_operators)+ " ; India Total - Sum of all LSAs"
