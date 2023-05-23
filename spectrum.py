@@ -741,7 +741,7 @@ if Dimension == "Calendar Year":
 	if Feature == "Band Wise":
 		subfeature_dict ={"Quantum Offered" : "Sale (MHz)", "Quantum Sold": "Total Sold (MHz)", "Quantum Unsold" : "Total Unsold (MHz)", "Reserve Price" : "RP/MHz" ,  
 			       "Auction Price": "Auction Price/MHz", "Total EMD" : "Total EMD"} 
-		subfeature_list = ["Reserve Price",  "Auction Price", "Quantum Offered", "Quantum Sold", "Quantum Unsold", "Percent Unsold", "Percent Sold", "Total EMD", "Total Outflow", "Auction/Reserve"]
+		subfeature_list = ["Reserve Price", "Auction Price", "Auction/Reserve", "Quantum Offered", "Quantum Sold","Percent Sold", "Quantum Unsold", "Percent Unsold", "Total EMD", "Total Outflow"]
 		SubFeature = st.sidebar.selectbox('Select a SubFeature', subfeature_list)
 		if SubFeature in ["Reserve Price", "Auction Price", "Total EMD", "Quantum Offered", "Quantum Sold", "Quantum Unsold" ]:
 			df1 = df1.reset_index()
