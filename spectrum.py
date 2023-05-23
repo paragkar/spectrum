@@ -534,16 +534,16 @@ if Dimension == "Frequency Band":
 	offeredspectrum = offeredvssold.pivot(index=["LSA"], columns='Year', values="Offered").fillna("NA")
 	offeredspectrum = coltostr(offeredspectrum) #convert columns data type to string
 	soldspectrum = offeredvssold.pivot(index=["LSA"], columns='Year', values="Sold").fillna("NA")
+	soldspectrum = coltostr(soldspectrum) #convert columns data type to string
 	percentsold = offeredvssold.pivot(index=["LSA"], columns='Year', values="%Sold").fillna("NA")
 	percentsold = percentsold*100 #for rationalising the percentage number
-	percentsold = percentsold.applymap(lambda x: round(x,1))
-	soldspectrum = coltostr(soldspectrum) #convert columns data type to string
+	percentsold = percentsold.applymap(lambda x: round(float(x),1))
 	percentsold = coltostr(percentsold) #convert columns data type to string
 	unsoldspectrum = offeredvssold.pivot(index=["LSA"], columns='Year', values="Unsold").fillna("NA")
+	unsoldspectrum = coltostr(unsoldspectrum) #convert columns data type to string
 	percentunsold = offeredvssold.pivot(index=["LSA"], columns='Year', values="%Unsold").fillna("NA")
 	percentunsold = percentunsold*100 #for rationalising the percentage number
-	percentunsold = percentunsold.applymap(lambda x: round(x,1))
-	unsoldspectrum = coltostr(unsoldspectrum) #convert columns data type to string
+	percentunsold = percentunsold.applymap(lambda x: round(float(x),1))
 	percentunsold = coltostr(percentunsold) #convert columns data type to string
 
 	#processing & restructuring dataframe auction price for hovertext of data3
