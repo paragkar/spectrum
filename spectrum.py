@@ -534,10 +534,12 @@ if Dimension == "Frequency Band":
 	offeredspectrum = coltostr(offeredspectrum) #convert columns data type to string
 	soldspectrum = offeredvssold.pivot(index=["LSA"], columns='Year', values="Sold").fillna("NA")
 	percentsold = offeredvssold.pivot(index=["LSA"], columns='Year', values="%Sold").fillna("NA")
+	percentsold = percentsold*100 #for rationalising the percentage number
 	soldspectrum = coltostr(soldspectrum) #convert columns data type to string
 	percentsold = coltostr(percentsold) #convert columns data type to string
 	unsoldspectrum = offeredvssold.pivot(index=["LSA"], columns='Year', values="Unsold").fillna("NA")
 	percentunsold = offeredvssold.pivot(index=["LSA"], columns='Year', values="%Unsold").fillna("NA")
+	percentunsold = percentunsold*100 #for rationalising the percentage number
 	unsoldspectrum = coltostr(unsoldspectrum) #convert columns data type to string
 	percentunsold = coltostr(percentunsold) #convert columns data type to string
 
@@ -707,15 +709,12 @@ if Dimension == "Frequency Band":
 		hovertext = hovertext3(dff,reserveprice,auctionprice,offeredspectrum,soldspectrum,unsoldspectrum)
 		
 		#preparing the dataframe of the summary bar chart on top of the heatmap
-		summarydf = typedf.replace('[a-zA-Z]+\s*',np.nan, regex=True)
-		summarydf = summarydf.sum().reset_index()
-		summarydf.columns = ["Years", "India Total"]
-		
+		if Feature not in ["Percent Sold", "Percent Unsold"]:
+			summarydf = typedf.replace('[a-zA-Z]+\s*',np.nan, regex=True)
+			summarydf = summarydf.sum().reset_index()
+			summarydf.columns = ["Years", "India Total"]
 		#preparing the summary chart 
-		chart = summarychart(summarydf, "Years", "India Total")
-		if Feature in ["Percent Sold", "Percent Unsold"]:
-			flag = False
-		else:
+			chart = summarychart(summarydf, "Years", "India Total")
 			flag = True
 		
 		#setting the data of the heatmap 
