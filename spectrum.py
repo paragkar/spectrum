@@ -1036,6 +1036,7 @@ fig = go.Figure(data=data)
 
 if Dimension == "Frequency Band":
 	if Feature == "AuctionMap":
+		fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 		unit = units_dict[SubFeature]
 		selected_operators = ["NA"]
 		
@@ -1057,6 +1058,7 @@ if Dimension == "Frequency Band":
 		subtitle = "Unit - "+unit+"; Selected Operators - "+', '.join(selected_operators)+" ; TotalMHz - Sum of all LSAs"
 		
 	if (Feature == "FreqMap") and (SubFeature == "Freq Wise"):
+		fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 		unit = "Ch Size - "+str(ChannelSize[Band])+" MHz"
 		if selected_operators == []:
 			selected_operators = ["All"]
@@ -1064,8 +1066,6 @@ if Dimension == "Frequency Band":
 			selected_operators = selected_operators
 			
 		subtitle = title_map[Band]+unit+"; Selected Operators - "+', '.join(selected_operators)
-		
-		fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 			
 	if (Feature == "FreqMap") and (SubFeature == "Operator Wise"):
 		unit = "MHz"
