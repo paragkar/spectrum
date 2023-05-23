@@ -425,7 +425,7 @@ def hovertext_and_colmatrix(df1):
 			sold = qtysold.values[yi][xi]
 			unsold = qtyunsold.values[yi][xi]
 			delta = aucprice - resprice
-			if delta =="NA":
+			if delta < 0 :
 				ccode = '#000000' #auction failed (black)
 			elif delta == 0:
 				ccode = '#008000' #auction price = reserve price (green)
