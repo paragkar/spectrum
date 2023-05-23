@@ -631,7 +631,8 @@ if Dimension == "Frequency Band":
 # 			operators = operators[Band]
 # 			tickvals = list(operators.values())
 			ticktext = list(operators.keys())
-			dfff = dffcopy[(dffcopy["Band"]==Band) & (dffcopy["OperatorNew"] != "Free")].groupby(["OperatorNew","Year","Batch No", "Cat"])[LSAlist].sum()
+			dfff = dffcopy[(dffcopy["Band"]==Band) & (dffcopy["OperatorNew"] != "Free") &  & (dffcopy["Cat"] == "L")]\
+				.groupby(["OperatorNew","Year","Batch No", "Cat"])[LSAlist].sum()
 			dfff = dfff.reset_index().drop(columns = ["Year", "Batch No", "Cat"], axis =1).groupby("OperatorNew").sum().T
 			
 			if BandType[Band]=="TDD": #doubling the TDD spectrum for aligning with normal convention 
