@@ -964,6 +964,7 @@ if Dimension == "Frequency Band":
 		selected_operators = ["NA"]
 		
 		subtitle = "Unit - "+unit+"; Selected Operators - "+', '.join(selected_operators)+ " ; India Total - Sum of all LSAs"
+		
 	if (Feature == "ExpiryMap") and (SubFeature == "Freq Wise"):
 		unit = "Ch Size - "+str(ChannelSize[Band])+" MHz"
 		if selected_operators == []:
@@ -989,13 +990,9 @@ if Dimension == "Frequency Band":
 		unit = "MHz"
 		selected_operators =["NA"]	
 		subtitle = "Unit - "+unit+"; Selected Operators - "+', '.join(selected_operators)+" ; TotalMHz - Sum of all LSAs"
-		
-# 	if BandType[Band] == "FDD":
-# 		title_x =0.12
-# 	if BandType[Band] == "TDD":
-# 		title_x = 0.08
-		
-	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
+	
+	if (Feature != "FreqMap") and (SubFeature != "Operator Wise"):
+		fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 	
 	title = parttitle+" for "+str(Band)+" MHz Band"
 
