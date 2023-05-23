@@ -695,7 +695,7 @@ if Dimension == "Frequency Band":
 			    "Quantum Unsold": unsoldspectrum}
 		Type = st.sidebar.selectbox('Select a Sub Feature', ["Auction Price","Reserve Price","Quantum Offered", "Quantum Sold", "Quantum Unsold"])
 		typedf = type_dict[Type].copy()
-		parttitle = Type
+		parttitle = "Yearly Trend of "+Type
 		tickangle=0
 		dtickval = dtickauction[Band]
 		hovertext = hovertext3(dff,reserveprice,auctionprice,offeredspectrum,soldspectrum,unsoldspectrum)
