@@ -255,7 +255,7 @@ def auctioncalyear(ef,excepf,pf1):
 	ayear = df_final.pivot_table(index=["LSA"], columns='StartFreq', values="Year", aggfunc='first').fillna("NA")
 	return ayear
   
-#processing for hovertext for freq map
+#processing for hovertext for freq map, band wise
 @st.cache_resource
 def hovertext1(sf,sff,ef,of,ayear,bandf,ExpTab,ChannelSize,xaxisadj):  
 	hovertext = []
@@ -296,7 +296,7 @@ def hovertext1(sf,sff,ef,of,ayear,bandf,ExpTab,ChannelSize,xaxisadj):
 					    )
 	return hovertext
 
-#processing for hovertext for expiry map freq wise
+#processing for hovertext for expiry map, freq wise
 @st.cache_resource
 def hovertext21(sf,sff,ef,of,bandf,bandexpf,ExpTab,ChannelSize,xaxisadj,ayear):
 	hovertext = []
@@ -338,7 +338,7 @@ def hovertext21(sf,sff,ef,of,bandf,bandexpf,ExpTab,ChannelSize,xaxisadj,ayear):
 					    )
 	return hovertext
 
-#processing for hovertext for expiry map year wise
+#processing for hovertext for expiry map, year wise
 @st.cache_resource
 def hovertext22(bwf,eff): 
 	bwf["Op&BW"] = bwf["Operators"]+" - "+round(bwf["BW"],2).astype(str)+" MHz"
@@ -405,7 +405,7 @@ def hovertext3(dff,reserveprice,auctionprice,offeredspectrum,soldspectrum,unsold
 					    )
 	return hovertext
 
-#processing for hovertext and colormatrix for Calendar Year; Band Wise; Reserve Price etc
+#processing for hovertext and colormatrix for Calendar Year, Band Wise, SubFeatures Reserve Price etc
 @st.cache_resource
 def hovertext_and_colmatrix(df1):
 	auctionprice =  df1.pivot(index="Circle", columns='Band', values=subfeature_dict["Auction Price"])
@@ -860,7 +860,6 @@ if Dimension == "Calendar Year":
 		if SubFeature in ["Reserve Price", "Auction Price", "Total EMD", "Quantum Offered", "Quantum Sold", "Quantum Unsold" ]:
 			df1 = df1.reset_index()
 			df1_temp1 = df1.copy()
-			hovertext,colormatrix = hovertext_and_colmatrix(df1)
 			if SubFeature == "Quantum Sold":
 				operatorslist = operators_dim_cy[Year]
 				selected_operators = st.sidebar.multiselect('Select an Operator', operatorslist)
@@ -926,7 +925,8 @@ if Dimension == "Calendar Year":
 			z = df1_temp5.values.round(1)
 			x = df1_temp5.columns
 			y = df1_temp5.index
-
+			
+		#excluding summarydf as it is not needed for these SubFeatures
 		if SubFeature not in  ["Auction/Reserve", "Percent Unsold", "Percent Sold"]:
 			#preparing the dataframe of the summary bar chart on top of the heatmap
 			summarydf = summarydf.round(1)
@@ -938,6 +938,9 @@ if Dimension == "Calendar Year":
 			#preparing the summary chart 
 			chart = summarychart(summarydf, 'Band', "Total")
 			flag = True
+			
+	hovertext,colormatrix = hovertext_and_colmatrix(df1) #processing hovertext and colormatrix for bandwise in cal year dim
+	hoverlabel_bgcolor = colormatrix #colormatrix processed from fuction "hovertext_and_colmatrix" for same above
 	
 	if Feature == "Operator Wise":
 		df1 = df1.reset_index()
@@ -1005,7 +1008,6 @@ if Dimension == "Calendar Year":
 			flag = True
 	
 
-		
 	data = [go.Heatmap(
 		  z = z,
 		  x = x,
@@ -1020,7 +1022,7 @@ if Dimension == "Calendar Year":
 		    textfont={"size":10},
 		    reversescale=True,
 			)]	
-	hoverlabel_bgcolor = colormatrix
+
 
 units_dict = {"Reserve Price" : "Rs Cr/MHz", "Auction Price" : "Rs Cr/MHz", "Quantum Offered": "MHz", 
 	      "Quantum Sold" : "MHz", "Quantum Unsold" : "MHz", "Total EMD" : "Rs Cr", "Total Outflow" : "Rs Cr",
@@ -1064,6 +1066,7 @@ if Dimension == "Frequency Band":
 		subtitle = "Unit - "+unit+"; "+"India Total - Sum of all LSAs"
 	
 	if (Feature != "FreqMap") and (SubFeature != "Operator Wise"):
+		
 		fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 	
 	
@@ -1085,7 +1088,6 @@ if (Dimension == "Calendar Year") and (Feature == "Band Wise"):
 	else:
 		partsubtitle = ""
 	subtitle = SubFeature+"; Unit -"+units_dict[SubFeature]+"; "+ "Selected Operators -" + ', '.join(selected_operators)+ partsubtitle
-	
 	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 	
 	title_x =0.25
