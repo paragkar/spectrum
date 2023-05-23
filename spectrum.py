@@ -1075,7 +1075,7 @@ if Dimension == "Frequency Band":
 	title = parttitle+" for "+str(Band)+" MHz Band"
 
 if (Dimension == "Calendar Year") and (Feature == "Band Wise"):
-	if (SubFeature =="Total Outflow"):
+	if (SubFeature =="Total Outflow") or (SubFeature == "Quantum Sold":
 		if selected_operators==[]:
 			selected_operators = ["All"]
 		else:
