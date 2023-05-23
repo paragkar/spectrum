@@ -406,6 +406,7 @@ def hovertext3(dff,reserveprice,auctionprice,offeredspectrum,soldspectrum,unsold
 	return hovertext
 
 #processing for hovertext and colormatrix for Calendar Year, Band Wise, SubFeatures Reserve Price etc
+@st.cache_resource
 def hovertext_and_colmatrix(df1):
 	auctionprice =  df1.pivot(index="Circle", columns='Band', values=subfeature_dict["Auction Price"])
 	reserveprice =  df1.pivot(index="Circle", columns='Band', values=subfeature_dict["Reserve Price"])
@@ -940,8 +941,8 @@ if Dimension == "Calendar Year":
 			chart = summarychart(summarydf, 'Band', "Total")
 			flag = True
 			
-	hovertext,colormatrix = hovertext_and_colmatrix(df1) #processing hovertext and colormatrix for bandwise in cal year dim
-	hoverlabel_bgcolor = colormatrix #colormatrix processed from fuction "hovertext_and_colmatrix" for same above
+		hovertext,colormatrix = hovertext_and_colmatrix(df1) #processing hovertext and colormatrix for bandwise in cal year dim
+		hoverlabel_bgcolor = colormatrix #colormatrix processed from fuction "hovertext_and_colmatrix" for same above
 	
 	if Feature == "Operator Wise":
 		df1 = df1.reset_index()
