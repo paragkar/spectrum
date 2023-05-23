@@ -1085,6 +1085,9 @@ if (Dimension == "Calendar Year") and (Feature == "Band Wise"):
 	else:
 		partsubtitle = ""
 	subtitle = SubFeature+"; Unit -"+units_dict[SubFeature]+"; "+ "Selected Operators -" + ', '.join(selected_operators)+ partsubtitle
+	
+	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
+	
 	title_x =0.25
 	tickangle =0
 	dtickval =1
