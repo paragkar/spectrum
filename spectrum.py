@@ -428,8 +428,8 @@ def hovertextcal1(df1):
 				     .format( 
 					    state_dict.get(yy),
 					    xx,
-					    resprice,
-					    aucprice,
+					    round(resprice,1),
+					    round(aucprice,1),
 					    )
 					    )
 	return hovertext
