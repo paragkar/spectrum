@@ -646,7 +646,13 @@ if Dimension == "Frequency Band":
 			       colorscale = 'Hot',
 			    texttemplate="%{z}", 
 			    textfont={"size":10},
-			    reversescale=True)
+			    reversescale=True,
+			    colorbar=dict(
+			# 	      tickcolor ="black",
+			# 	      tickwidth =1,
+# 				      tickvals = tickvals,
+# 				      ticktext = ticktext,
+			     dtick=1, tickmode="array"))
 				]
 
 	#Feature ="Expiry Map" linked to Dimension = "Frequency"
