@@ -635,7 +635,7 @@ if Dimension == "Frequency Band":
 			dfff = dfff.reset_index().drop(columns = ["Year", "Batch No", "Cat"], axis =1).groupby("OperatorNew").sum().T
 			
 			if BandType[Band]=="TDD": #doubling the TDD spectrum for aligning with normal convention 
-        			dfff = (dff*2).round(2)
+        			dfff = (dfff*2).round(2)
 			
 			parttitle ="Operator Wise Summary"
 			tickangle = 0
