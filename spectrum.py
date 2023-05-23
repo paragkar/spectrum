@@ -909,7 +909,7 @@ if Dimension == "Frequency Band":
 		title_x = 0.08
 	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 	title = "Spectrum "+subtitle+" for "+str(Band)+" MHz Band"
-	subtitle = title_map[Band]+" ("+unit+"); (Selected Operators -"+', '.join(selected_operators)+")"
+	subtitle = title_map[Band]+unit+"; "+Selected Operators - "+', '.join(selected_operators)
 
 if (Dimension == "Calendar Year") and (Feature == "Band Wise"):
 	if (SubFeature =="Total Outflow"):
