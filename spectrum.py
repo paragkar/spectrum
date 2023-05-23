@@ -34,14 +34,14 @@ state_dict = {'AP': 'Andhra Pradesh', 'AS': 'Assam', 'BH': 'Bihar', 'DL': 'Delhi
 
 #defining all dictionaries here with data linked to a specific band
 title_map = {700:"FDD: Uplink - 703-748 MHz(shown); Downlink - 758-803(notshown); ",
-         800:"FDD: Uplink - 824-844 MHz(shown); Downlink - 869-889 MHz(not shown); ", 
-         900:"FDD: Uplink - 890-915 MHz(shown); Downlink - 935-960 MHz(not shown); ", 
-         1800:"FDD: Uplink - 1710-1785 MHz(shown); Downlink - 1805-1880 MHz(notshown); ", 
-         2100:"FDD: Uplink - 1919-1979 MHz(shown); Downlink - 2109-2169 MHz(notshown); ",
-         2300:"TDD: Up & Downlinks - 2300-2400 MHz(shown); ",
-         2500:"TDD: Up & Downlinks - 2500-2690 MHz(shown); ",
-         3500:"TDD: Up & Downlinks - 3300-3670 MHz(shown); ",
-         26000:"TDD Up & Downlinks - 24250-27500 MHz(shown); "}
+         800:"Uplink - 824-844 MHz(shown); Downlink - 869-889 MHz(not shown); ", 
+         900:"Uplink - 890-915 MHz(shown); Downlink - 935-960 MHz(not shown); ", 
+         1800:"Uplink - 1710-1785 MHz(shown); Downlink - 1805-1880 MHz(notshown); ", 
+         2100:"Uplink - 1919-1979 MHz(shown); Downlink - 2109-2169 MHz(notshown); ",
+         2300:"Up & Downlinks - 2300-2400 MHz(shown); ",
+         2500:"Up & Downlinks - 2500-2690 MHz(shown); ",
+         3500:"Up & Downlinks - 3300-3670 MHz(shown); ",
+         26000:"Up & Downlinks - 24250-27500 MHz(shown); "}
 
 #operator dict for dimension - frequency bands and subfeatures - freq and exp maps
 operators = {700: {'Vacant':0,'Railways':1,'Govt':2,'RJIO':3,'BSNL':4},
