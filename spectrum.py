@@ -957,7 +957,7 @@ if Dimension == "Calendar Year":
 		  ygap = 1,
 		  hoverinfo ='text',
 # 		  text = hovertext,
-		  hovertemplate = 'LSA: %{state_dict(y)}<extra></extra>',
+		  hovertemplate = 'LSA: %{y}<extra></extra>',
 		  colorscale = 'Hot',
 		    texttemplate="%{z}", 
 		    textfont={"size":10},
