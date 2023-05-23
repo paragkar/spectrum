@@ -405,6 +405,43 @@ def hovertext3(dff,reserveprice,auctionprice,offeredspectrum,soldspectrum,unsold
 					    )
 	return hovertext
 
+#processing for hovertext for Calendar Year; Band Wise; Reserve Price
+@st.cache_resource
+
+
+# #debug
+# def hovertextcal1(dff,auctionprice,offeredspectrum,soldspectrum,unsoldspectrum):  
+# 	hovertext=[]
+# 	for yi, yy in enumerate(dff.index):
+# 		hovertext.append([])
+# 		for xi, xx in enumerate(dff.columns):
+# 			winners = dff.values[yi][xi][:-2] #removing comma in the end
+# 			resprice = reserveprice.values[yi][xi]
+# 			aucprice = auctionprice.values[yi][xi]
+# 			offmhz = offeredspectrum.values[yi][xi]
+# 			soldmhz = soldspectrum.values[yi][xi]
+# 			unsoldmhz = unsoldspectrum.values[yi][xi]
+
+# 			hovertext[-1].append(
+# 					    '{} , {}\
+# 					     <br / >RP/AP: Rs {}/ {} Cr/MHz\
+# 					     <br / >Offered/Sold/Unsold: {} / {} / {} MHz\
+# 					     <br>Winners: {}'
+
+# 				     .format( 
+# 					    state_dict.get(yy),
+# 					    xx,
+# 					    resprice,
+# 					    aucprice,
+# 					    round(offmhz,2),
+# 					    round(soldmhz,2),
+# 					    round(unsoldmhz,2),
+# 					    winners,
+# 					    )
+# 					    )
+# 	return hovertext
+
+
 #preparing color scale for hoverbox for freq and exp maps
 @st.cache_resource
 def hcolscalefreqexp(operators, colcodes):
@@ -806,6 +843,7 @@ if Dimension == "Calendar Year":
 		if SubFeature in ["Reserve Price", "Auction Price", "Total EMD", "Quantum Offered", "Quantum Sold", "Quantum Unsold" ]:
 			df1 = df1.reset_index()
 			df1_temp1 = df1.copy()
+			st.write(df1) #debug
 			if SubFeature == "Quantum Sold":
 				operatorslist = operators_dim_cy[Year]
 				selected_operators = st.sidebar.multiselect('Select an Operator', operatorslist)
