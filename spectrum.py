@@ -631,7 +631,7 @@ if Dimension == "Frequency Band":
 			dfff = dffcopy[(dffcopy["Band"]==Band) & (dffcopy["OperatorNew"] != "Free")].groupby(["OperatorNew","Year","Batch No", "Cat"])[LSAlist].sum()
 			dfff = dfff.reset_index().drop(columns = ["Year", "Batch No", "Cat"], axis =1).groupby("OperatorNew").sum().T
 			
-			parttitle =""
+			parttitle ="Operator Wise Summary"
 			tickangle = 0
 			dtickval = dtickfreq[Band]
 
