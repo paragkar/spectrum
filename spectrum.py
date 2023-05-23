@@ -427,9 +427,9 @@ def hovertext_and_colmatrix(df1):
 			delta = round(aucprice - resprice,0)
 			if delta < 0 :
 				ccode = '#000000' #auction failed (black)
-			if delta == 0:
+			elif delta == 0:
 				ccode = '#008000' #auction price = reserve price (green)
-			if delta > 0:
+			elif delta > 0:
 				ccode = '#FF0000' #auction price > reserve price (red)
 			else:
 				ccode = '#C0C0C0' #No Auction (silver)
