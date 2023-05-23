@@ -407,29 +407,43 @@ def hovertext3(dff,reserveprice,auctionprice,offeredspectrum,soldspectrum,unsold
 
 #processing for hovertext for Calendar Year; Band Wise; Reserve Price
 @st.cache_resource
-
+["Reserve Price", "Auction Price", "Total EMD", "Quantum Offered", "Quantum Sold", "Quantum Unsold" ]:
 #debug
 def hovertextcal1(df1):
 	df1 = df1[["Circle", "Band", subfeature_dict["Auction Price"], subfeature_dict["Reserve Price"]]]
 	auctionprice =  df1.pivot(index="Circle", columns='Band', values=subfeature_dict["Auction Price"])
 	reserveprice =  df1.pivot(index="Circle", columns='Band', values=subfeature_dict["Reserve Price"])
+	qtyoffered = df1.pivot(index="Circle", columns='Band', values=subfeature_dict["Quantum Offered"])
+	qtysold = df1.pivot(index="Circle", columns='Band', values=subfeature_dict["Quantum Sold"])
+	qtyunsold = df1.pivot(index="Circle", columns='Band', values=subfeature_dict["Quantum Unsold"])
+	
 	hovertext=[]
 	for yi, yy in enumerate(reserveprice.index):
 		hovertext.append([])
 		for xi, xx in enumerate(reserveprice.columns):
 			resprice = reserveprice.values[yi][xi]
 			aucprice = auctionprice.values[yi][xi]
+			offered = qtyoffered.values[yi][xi]
+			sold = qtysold.values[yi][xi]
+			unsold = qtyunsold.values[yi][xi]
+			
 			hovertext[-1].append(
 					    'Circle: {}\
 					     <br>Band: {} MHz\
 					     <br>Reserve Price: {} Rs Cr/MHz\
-					     <br>Auction Price: {} Rs Cr/MHz'
+					     <br>Auction Price: {} Rs Cr/MHz\
+					     <br>Qty Offered: {} MHz\
+					     <br>Qty Sold: {} MHz\
+					     <br>Qty Unsold: {} MHz'
 
 				     .format( 
 					    state_dict.get(yy),
 					    xx,
 					    round(resprice,1),
 					    round(aucprice,1),
+					    round(offered,2),
+					    round(sold,2),
+					    round(unsold,2),
 					    )
 					    )
 	return hovertext
