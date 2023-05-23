@@ -655,6 +655,17 @@ if Dimension == "Frequency Band":
 			    textfont={"size":10},
 			    reversescale=True,)
 				]
+			
+			#preparing the summary chart below the heatmap
+			
+			summarydf = dfff.sum()
+			summarydf = summarydf.reset_Index()
+			summarydf.columns = ["Operators", "India Total"]
+			
+			#preparing the summary chart 
+			chart = summarychart(summarydf, "Operators", "Total")
+			flag = True
+	
 
 	#Feature ="Expiry Map" linked to Dimension = "Frequency"
 	if  Feature == "ExpiryMap":
