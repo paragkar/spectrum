@@ -432,7 +432,7 @@ def hovertext_and_colmatrix(df1):
 			if delta > 0:
 				ccode = '#FF0000' #auction price > reserve price (red)
 			else:
-				ccode = '#FFFFFF' #No Auction (white)
+				ccode = '#C0C0C0' #No Auction (silver)
 			lst.append([yy,xx,ccode])
 			temp = pd.DataFrame(lst)
 			temp.columns = ["Circle", "Year", "Color"]
