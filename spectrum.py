@@ -640,7 +640,7 @@ if Dimension == "Frequency Band":
 			
 			parttitle ="Operator Wise Summary of Liberalized Spectrum"
 			tickangle = 0
-			dtickval = dtickfreq[Band]
+			dtickval = 1
 
 			data = [go.Heatmap(
 			      z = dfff.values,
