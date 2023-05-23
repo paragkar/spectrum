@@ -646,20 +646,14 @@ if Dimension == "Frequency Band":
 			      z = dfff.values,
 			      y = dfff.index,
 			      x = dfff.columns,
-			      xgap = xgap[Band],
+			      xgap = 1,
 			      ygap = 1,
 			      hoverinfo ='text',
 # 			      text = hovertext,
 			       colorscale = 'Hot',
 			    texttemplate="%{z}", 
 			    textfont={"size":10},
-			    reversescale=True,
-			    colorbar=dict(
-			# 	      tickcolor ="black",
-			# 	      tickwidth =1,
-# 				      tickvals = tickvals,
-# 				      ticktext = ticktext,
-			     dtick=1, tickmode="array"))
+			    reversescale=True,)
 				]
 
 	#Feature ="Expiry Map" linked to Dimension = "Frequency"
