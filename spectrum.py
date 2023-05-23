@@ -424,8 +424,7 @@ def hovertext_and_colmatrix(df1):
 			offered = qtyoffered.values[yi][xi]
 			sold = qtysold.values[yi][xi]
 			unsold = qtyunsold.values[yi][xi]
-			delta = aucprice - resprice
-			st.write(delta)
+			delta = round(aucprice - resprice,0)
 			if delta < 0 :
 				ccode = '#000000' #auction failed (black)
 			if delta == 0:
