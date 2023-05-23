@@ -659,7 +659,7 @@ if Dimension == "Frequency Band":
 			#preparing the summary chart below the heatmap
 			
 			summarydf = dfff.sum()
-			summarydf = summarydf.reset_Index()
+			summarydf = pd.DataFrame(dfff.sum(axis=0)).reset_index()
 			summarydf.columns = ["Operators", "India Total"]
 			
 			#preparing the summary chart 
