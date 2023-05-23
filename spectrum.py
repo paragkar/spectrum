@@ -931,7 +931,12 @@ if (Dimension == "Calendar Year") and (Feature == "Band Wise"):
 		selected_operators = ["NA"]
 		
 	title = "Band Wise Yearly Trend for the Year "+str(Year)
-	subtitle = SubFeature+"; Unit -"+units_dict[SubFeature]+"; "+ "Selected Operators -" + ', '.join(selected_operators)+ "; Summary - Sum of all LSAs"
+	
+	if SubFeature in ["Reserve Price", "Auction Price", "Quantum Offered", "Quantum Sold", "Quantum Unsold", "Total EMD", "Total Outflow"]:
+		partsubtitle = "; Summary - Sum of all LSAs"
+	else:
+		partsubtitle = ""
+	subtitle = SubFeature+"; Unit -"+units_dict[SubFeature]+"; "+ "Selected Operators -" + ', '.join(selected_operators)+ partsubtitle
 	title_x =0.25
 	tickangle =0
 	dtickval =1
