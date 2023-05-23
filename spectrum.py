@@ -631,7 +631,7 @@ if Dimension == "Frequency Band":
 			dfff = dffcopy[(dffcopy["Band"]==Band) & (dffcopy["OperatorNew"] != "Free")].groupby(["OperatorNew","Year","Batch No", "Cat"])[LSAlist].sum()
 			dfff = dfff.reset_index().drop(columns = ["Year", "Batch No", "Cat"], axis =1).groupby("OperatorNew").sum().T
 			
-			parttitle ="Spectrum Frequency Map"
+			parttitle =""
 			tickangle = 0
 			dtickval = dtickfreq[Band]
 
@@ -978,14 +978,18 @@ if Dimension == "Frequency Band":
 		selected_operators =["NA"]
 		subtitle = "Unit - "+unit+"; Selected Operators - "+', '.join(selected_operators)+" ; TotalMHz - Sum of all LSAs"
 		
-	if Feature == "FreqMap":
+	if (Feature == "FreqMap") and (SubFeature == "Freq Wise"):
 		unit = "Ch Size - "+str(ChannelSize[Band])+" MHz"
 		if selected_operators == []:
 			selected_operators = ["All"]
 		else:
 			selected_operators = selected_operators
 			
-		subtitle = title_map[Band]+unit+"; Selected Operators - "+', '.join(selected_operators)
+	if (Feature == "FreqMap") and (SubFeature == "Operator Wise"):
+		unit = "MHz"
+		selected_operators =["NA"]	
+		subtitle = "Unit - "+unit+"; Selected Operators - "+', '.join(selected_operators)+" ; TotalMHz - Sum of all LSAs"
+		
 # 	if BandType[Band] == "FDD":
 # 		title_x =0.12
 # 	if BandType[Band] == "TDD":
