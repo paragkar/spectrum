@@ -535,11 +535,13 @@ if Dimension == "Frequency Band":
 	soldspectrum = offeredvssold.pivot(index=["LSA"], columns='Year', values="Sold").fillna("NA")
 	percentsold = offeredvssold.pivot(index=["LSA"], columns='Year', values="%Sold").fillna("NA")
 	percentsold = percentsold*100 #for rationalising the percentage number
+	percentsold = percentsold.round(1)
 	soldspectrum = coltostr(soldspectrum) #convert columns data type to string
 	percentsold = coltostr(percentsold) #convert columns data type to string
 	unsoldspectrum = offeredvssold.pivot(index=["LSA"], columns='Year', values="Unsold").fillna("NA")
 	percentunsold = offeredvssold.pivot(index=["LSA"], columns='Year', values="%Unsold").fillna("NA")
 	percentunsold = percentunsold*100 #for rationalising the percentage number
+	percentunsold = percentunsold.round(1)
 	unsoldspectrum = coltostr(unsoldspectrum) #convert columns data type to string
 	percentunsold = coltostr(percentunsold) #convert columns data type to string
 
