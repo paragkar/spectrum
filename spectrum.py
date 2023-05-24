@@ -648,10 +648,10 @@ def summarychart(summarydf, xcolumn, ycolumn):
 #**********  Main Program Starts here ***************
 
 #Choose a dimension
-Dimension = st.sidebar.selectbox('Select a Dimension', ["Frequency Band", "Calendar Year"],0)
+Dimension = st.sidebar.selectbox('Select a Dimension', ["Spectrum Band", "Calendar Year"],0)
 
-if Dimension == "Frequency Band":
-	#selecting a frequency band
+if Dimension == "Spectrum Band":
+	#selecting a Spectrum band
 	Band = st.sidebar.selectbox('Select a Band', list(ExpTab.keys()), 3) #default index 1800 MHz Band
 	
 	#setting up excel file tabs for reading data
@@ -865,7 +865,7 @@ if Dimension == "Frequency Band":
 			flag = True
 	
 
-	#Feature ="Expiry Map" linked to Dimension = "Frequency"
+	#Feature ="Expiry Map" linked to Dimension = "Spectrum Band"
 	if  Feature == "ExpiryMap":
 		SubFeature = st.sidebar.selectbox('Select a Sub Feature', ["Freq Wise", "Year Wise"],0)
 		if SubFeature == "Freq Wise":
@@ -942,7 +942,7 @@ if Dimension == "Frequency Band":
 				)]
 
 
-	#Feature ="Auction Map" linked to Dimension = "Frequency"
+	#Feature ="Auction Map" linked to Dimension = "Spectrum Band"
 	if  Feature == "AuctionMap":
 		#This dict has been defined for the Feature = Auction Map
 		type_dict ={"Auction Price": auctionprice,
@@ -1185,7 +1185,7 @@ units_dict = {"Reserve Price" : "Rs Cr/MHz", "Auction Price" : "Rs Cr/MHz", "Qua
 #Plotting the final Heatmap	
 fig = go.Figure(data=data)
 
-if Dimension == "Frequency Band":
+if Dimension == "Spectrum Band":
 	if Feature == "AuctionMap":
 		fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 		unit = units_dict[SubFeature]
