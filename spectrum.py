@@ -1193,20 +1193,20 @@ if (Dimension == "Calendar Year") and (Feature == "Operator Wise"):
 	tickangle =0
 	dtickval =1
 	
-if (Dimension == "Calendar Year") and (Feature == "Operator Wise"):
-	if (SubFeature =="Total Purchase"):
-		if selectedbands==[]:
-			selectedbands = ["All"]
-		else:
-			selectedbands = selectedbands
-	else:
-		selectedbands = ["NA"]
-	selectedbands = [str(x) for x in selectedbands]	
-	title = "Operator Wise Purchase Summary for the Year "+str(Year)
-	subtitle = SubFeature + "; Unit -"+units_dict[SubFeature]+"; Selected Bands -" + ', '.join(selectedbands) + "; India Summary - Sum of all LSAs"
-	title_x =0.25
-	tickangle =0
-	dtickval =1
+# if (Dimension == "Calendar Year") and (Feature == "Operator Wise"):
+# 	if (SubFeature =="Total Purchase"):
+# 		if selectedbands==[]:
+# 			selectedbands = ["All"]
+# 		else:
+# 			selectedbands = selectedbands
+# 	else:
+# 		selectedbands = ["NA"]
+# 	selectedbands = [str(x) for x in selectedbands]	
+# 	title = "Operator Wise Purchase Summary for the Year "+str(Year)
+# 	subtitle = SubFeature + "; Unit -"+units_dict[SubFeature]+"; Selected Bands -" + ', '.join(selectedbands) + "; India Summary - Sum of all LSAs"
+# 	title_x =0.25
+# 	tickangle =0
+# 	dtickval =1
 	
 
 #updating figure layouts
