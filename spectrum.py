@@ -825,6 +825,7 @@ if Dimension == "Frequency Band":
 				dfff = temp.copy()
 			st.write(dfff)
 			cat_dict = {'Liberalized' : 'L', 'UnLiberalized' : 'U'}
+			st.write(len(set(dfff["Cat"])))
 			if len(set(dfff["Cat"])) == 2:
 				selected_category = st.sidebar.multiselect('Select a Category', ['Liberalized', 'UnLiberalized'])
 				if (len(selected_category) == 0) or (len(selected_category) == 2):
