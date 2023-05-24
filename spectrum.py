@@ -754,18 +754,17 @@ if Dimension == "Frequency Band":
 		if SubFeature == "Operator Wise":
 			dfff = dffcopy[(dffcopy["Band"]==Band)]
 			operatorlist = sorted(list(set(dfff["OperatorNew"])))
-			st.write(operatorlist)
 			selectedoperators = st.sidebar.multiselect('Select Operators',operatorlist)
 			if len(selectedoperators) >0:
 				temp = pd.DataFrame()
 				for op in selectedoperators:
 					temp = pd.concat([dfff[dfff["OperatorNew"]==op],temp], axis =0)
 				dfff = temp.copy()
-		
+			st.write(dfff)
 			selectedcategory = st.sidebar.multiselect('Select a Category', ['Liberalized', 'UnLiberalized'])
 			cat_dict = {'Liberalized' : 'L', 'UnLiberalized' : 'U'}
 			if (len(selectedcategory) == 0) or (len(selectedcategory) == 2):
-				dfff = dfff.copy
+				pass
 			else:
 				dfff = dfff[(dfff["Cat"] == cat_dict[selectedcategory[0]])]
 				
