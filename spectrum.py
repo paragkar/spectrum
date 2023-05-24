@@ -1178,7 +1178,7 @@ if (Dimension == "Calendar Year") and (Feature == "Band Wise"):
 	dtickval =1
 	
 if (Dimension == "Calendar Year") and (Feature == "Operator Wise"):
-	if (SubFeature =="Total Outflow") or (SubFeature == "Quantum Sold"):
+	if (SubFeature =="Total Outflow") or (SubFeature == "Total Purchase"):
 		if selectedbands==[]:
 			selectedbands = ["All"]
 		else:
