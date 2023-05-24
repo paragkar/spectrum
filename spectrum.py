@@ -1150,7 +1150,7 @@ if Dimension == "Frequency Band":
 		subtitle = title_map[Band]+unit+"; Selected Operators - "+', '.join(selected_operators)
 			
 	if (Feature == "FreqMap") and (SubFeature == "Operator Wise"):
-		if (len(selectedcategory) == 0) or len(selectedcategory) == 2):
+		if (len(selectedcategory) == 0) or (len(selectedcategory) == 2):
 			selectedcategory = "All"
 		else:
 			selectedcategory = selectedcategory
