@@ -823,6 +823,7 @@ if Dimension == "Frequency Band":
 				for op in selected_operators:
 					temp = pd.concat([dfff[dfff["OperatorNew"]==op],temp], axis =0)
 				dfff = temp.copy()
+			st,write(dfff) #debug
 			selected_category = st.sidebar.multiselect('Select a Category', ['Liberalized', 'UnLiberalized'])
 			cat_dict = {'Liberalized' : 'L', 'UnLiberalized' : 'U'}
 			if (len(selected_category) == 0) or (len(selected_category) == 2):
