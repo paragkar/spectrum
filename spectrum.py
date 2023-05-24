@@ -440,11 +440,11 @@ def hovertext_and_colmatrix4(dfff, selected_operators, operatorlist):
 			share = dfffshare.values[yi][xi]
 			
 			if share >= 0.4 :
-				ccode = '#FF0000' #% spectrum share more than 40% (red)
+				ccode = '#008000' #% spectrum share more than 40% (green)
 			elif (share < 0.4) & (share >= 0.2):
-				ccode = '#008000' #auction price = reserve price (green)
+				ccode = '#808080' # spectrum share between 40 to 20% (grey)
 			else:
-				ccode = '#C0C0C0' # No share (silver)
+				ccode = '#FF0000' # spectrum share less than 20% (red)
 			lst.append([yy,xx,ccode])
 			temp = pd.DataFrame(lst)
 			temp.columns = ["Circle", "Operator", "Color"]
