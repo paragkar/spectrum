@@ -752,20 +752,22 @@ if Dimension == "Frequency Band":
 			hoverlabel_bgcolor = hcolmatrixfreqexp(hcolscale, hf) #shaping the hfcolorscale
 			
 		if SubFeature == "Operator Wise":
-			selectedoperators = st.sidebar.multiselect('Select Operators',operators[Band])
+			dfff = dffcopy[(dffcopy["Band"]==Band)]
+			operatorlist = sorted(list(set(dfff["OperatorNew"])))
+			selectedoperators = st.sidebar.multiselect('Select Operators',operatorlist)
 			if len(selectedoperators) >0:
 				temp = pd.DataFrame()
 				for op in selectedoperators:
-					temp = pd.concat([dffcopy[dffcopy["OperatorNew"]==op],temp], axis =0)
-				dffcopy = temp.copy()
+					temp = pd.concat([dfff[dfff["OperatorNew"]==op],temp], axis =0)
+				dfff = temp.copy()
 		
 				
 			selectedcategory = st.sidebar.multiselect('Select a Category', ['Liberalized', 'UnLiberalized'])
 			cat_dict = {'Liberalized' : 'L', 'UnLiberalized' : 'U'}
 			if (len(selectedcategory) == 0) or (len(selectedcategory) == 2):
-				dfff = dffcopy[(dffcopy["Band"]==Band)]
+				dfff = dfff.copy
 			else:
-				dfff = dffcopy[(dffcopy["Band"]==Band) & (dffcopy["Cat"] == cat_dict[selectedcategory[0]])]
+				dfff = dfff[(dfff["Cat"] == cat_dict[selectedcategory[0]])]
 				
 			dfff = dfff.groupby(["OperatorNew","Year","Batch No", "Cat"])[LSAlist].sum()
 			dfff = dfff.reset_index().drop(columns = ["Year", "Batch No", "Cat"], axis =1).groupby("OperatorNew").sum().T
