@@ -405,6 +405,58 @@ def hovertext3(dff,reserveprice,auctionprice,offeredspectrum,soldspectrum,unsold
 					    )
 	return hovertext
 
+
+			
+*************************
+
+#processing for hovertext and colormatrix for Frequency Band, Features- Freq Map, SubFeature - Operator Wise 
+@st.cache_resource
+def hovertext_and_colmatrix4(dfff, selected_operators):
+	lst =[]
+	for op in selected_operators
+		dfff[op+"1"] = dfff[op]/dfff.sum(axis=0)
+		lst.append(op+"1")
+	
+	dfffshare = dfff[lst]
+	lst = [x[:-1] for x in lst] #stripping the last digit "1" added to create % share operator column
+	dffshare.columns = lst
+	
+	hovertext=[]
+	lst = []
+	for yi, yy in enumerate(dffshare.index):
+		hovertext.append([])
+		for xi, xx in enumerate(dffshare.columns):
+			share = dffshare.values[yi][xi]
+			
+			if share >= 0.4 :
+				ccode = '#FF0000' #% spectrum share more than 40% (red)
+			elif delta < 0.4:
+				ccode = '#008000' #auction price = reserve price (green)
+			else:
+				ccode = '#C0C0C0' # No share (silver)
+			lst.append([yy,xx,ccode])
+			temp = pd.DataFrame(lst)
+			temp.columns = ["Circle", "Operator", "Color"]
+			colormatrix = temp.pivot(index='Circle', columns='Operator', values="Color")
+			colormatrix = list(colormatrix.values)
+			
+			hovertext[-1].append(
+					    'Circle: {}\
+					     <br>Operator: {}\
+					     <br>%Share: {} %'
+
+				     .format( 
+					    state_dict.get(yy),
+					    xx,
+					    round(share,2)*100,
+					    )
+					    )
+	return hovertext, colormatrix
+
+
+
+*************************
+
 #processing for hovertext and colormatrix for Calendar Year, Band Wise, SubFeatures Reserve Price etc
 @st.cache_resource
 def hovertext_and_colmatrix1(df1):
@@ -776,6 +828,9 @@ if Dimension == "Frequency Band":
 			parttitle ="Operator Wise Summary of Spectrum"
 			tickangle = 0
 			dtickval = 1
+			
+			hovertext,colormatrix = hovertext_and_colmatrix4(dfff, selected_operators) #processing hovertext and colormatrix for operatorwise in freqband dim
+			hoverlabel_bgcolor = colormatrix #colormatrix processed from fuction "hovertext_and_colmatrix" for same above
 
 			data = [go.Heatmap(
 			      z = dfff.values,
@@ -784,7 +839,7 @@ if Dimension == "Frequency Band":
 			      xgap = 1,
 			      ygap = 1,
 			      hoverinfo ='text',
-# 			      text = hovertext,
+			      text = hovertext,
 			       colorscale = 'Hot',
 			    texttemplate="%{z}", 
 			    textfont={"size":10},
@@ -1155,6 +1210,7 @@ if Dimension == "Frequency Band":
 		subtitle = title_map[Band]+unit+"; Selected Operators - "+', '.join(selected_operators)
 			
 	if (Feature == "FreqMap") and (SubFeature == "Operator Wise"):
+		fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 		if (len(selected_category) == 0) or (len(selected_category) == 2):
 			selected_category = "All"
 		else:
@@ -1167,10 +1223,6 @@ if Dimension == "Frequency Band":
 		
 		unit = "MHz"
 		subtitle = "Unit - "+unit+"; "+"India Total - Sum of all LSAs "+"; Selected Operators - "+', '.join(selected_operators)+ "; Category - "+ selected_category
-	
-# 	if (Feature != "FreqMap") and (SubFeature != "Operator Wise"):
-		
-# 		fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 	
 	
 	title = parttitle+" for "+str(Band)+" MHz Band"
