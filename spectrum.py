@@ -462,22 +462,28 @@ def hovertext_and_colmatrix1(df1):
 
 #processing for hovertext and colormatrix for Calendar Year, Operator Wise, SubFeatures - Total Outflow, Total Purchase
 @st.cache_resource
-def hovertext_and_colmatrix2(df1, selectedbands, SubFeature):
+def hovertext_and_colmatrix2(df1, selectedbands, SubFeature, df_subfeature):
+	if SubFeature == "Total Ouflow":
+		df_outflow = df_subfeature
+	if SubFeature == "Total Purchase":
+		df_purchase = df_subfeature
+		
 	temp2 = pd.DataFrame()
 	if selectedbands != []:
 		for band in selectedbands:
 			temp2= df11[df1["Band"]==band]
 			temp1 = pd.concat([temp2,temp1], axis =0)
 		df1  = temp1
-
-	if SubFeature == "Total Outflow": #Then  process the dataframe for total purchase
+		
+	if SubFeature == "Total Outflow": #then process for total purchase
 		columnstoextract = ["Circle", "Band"]+operators_dim_cy[Year]
 		df2_temp2 = df1[columnstoextract]
 		df2_temp2.drop("Band", inplace = True, axis =1)
 		df2_temp2 = df2_temp2.groupby(["Circle"]).sum().round(2)
 		df2_temp2 = df2_temp2.reindex(sorted(df2_temp2.columns), axis=1)
+		df_purchase = df2_temp2
 	
-	if SubFeature == "Total Purchase": #Then process the dataframe for total outflow
+	if SubFeature == "Total Purchase" #then process for total outflow
 		operators_dim_cy_new=[]
 		for op in operators_dim_cy[Year]:
 			df2_temp1[op+"1"] = df1["Auction Price/MHz"]*df1[op]
@@ -489,14 +495,15 @@ def hovertext_and_colmatrix2(df1, selectedbands, SubFeature):
 		df2_temp1.drop("Band", inplace = True, axis =1)
 		df2_temp1 = df2_temp1.groupby(["Circle"]).sum().round(0)
 		df2_temp1 = df2_temp1.reindex(sorted(df2_temp1.columns), axis=1)
+		df_outflow = df2_temp1
 	
 	hovertext=[]
 	lst = []
-	for yi, yy in enumerate(df2_temp1.index): #dataframe of total outflow (any one of them can be used)
+	for yi, yy in enumerate(df_subfeature.index): #dataframe of total outflow (any one of them can be used)
 		hovertext.append([])
-		for xi, xx in enumerate(df2_temp1.columns): #dataframe of total outflow (any one of them can be used)
-			outflow = df2_temp1.values[yi][xi]
-			purchase = df2_temp2.values[yi][xi]
+		for xi, xx in enumerate(df_subfeature.columns): #dataframe of total outflow (any one of them can be used)
+			outflow = df_outflow.values[yi][xi]
+			purchase = df_purchase.values[yi][xi]
 			if outflow > 0 :
 				ccode = '#008000' # Purchased (green)
 			else:
@@ -1047,7 +1054,7 @@ if Dimension == "Calendar Year":
 			chart = summarychart(summarydf, 'Operators', SubFeature)
 			flag = True
 			
-			hovertext,colormatrix = hovertext_and_colmatrix2(df1, selectedbands, SubFeature) #processing hovertext and colormatrix for operator wise in cal year dim
+			hovertext,colormatrix = hovertext_and_colmatrix2(df1, selectedbands, SubFeature, df_subfeature) #processing hovertext and colormatrix for operator wise in cal year dim
 			hoverlabel_bgcolor = colormatrix #colormatrix processed from fuction "hovertext_and_colmatrix" for same above
 		
 		if SubFeature == "Total Purchase":
@@ -1077,7 +1084,7 @@ if Dimension == "Calendar Year":
 			chart = summarychart(summarydf, 'Operators', SubFeature)
 			flag = True
 			
-			hovertext,colormatrix = hovertext_and_colmatrix2(df1, selectedbands, SubFeature) #processing hovertext and colormatrix for operator wise in cal year dim
+			hovertext,colormatrix = hovertext_and_colmatrix2(df1, selectedbands, SubFeature, df_subfeature) #processing hovertext and colormatrix for operator wise in cal year dim
 			hoverlabel_bgcolor = colormatrix #colormatrix processed from fuction "hovertext_and_colmatrix" for same above
 	
 
