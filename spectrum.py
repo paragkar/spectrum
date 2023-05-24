@@ -1077,7 +1077,7 @@ if Dimension == "Calendar Year":
 			chart = summarychart(summarydf, 'Operators', SubFeature)
 			flag = True
 			
-			hovertext,colormatrix = hovertext_and_colmatrix2(df1, selectedbands, SubFeature)) #processing hovertext and colormatrix for operator wise in cal year dim
+			hovertext,colormatrix = hovertext_and_colmatrix2(df1, selectedbands, SubFeature) #processing hovertext and colormatrix for operator wise in cal year dim
 			hoverlabel_bgcolor = colormatrix #colormatrix processed from fuction "hovertext_and_colmatrix" for same above
 	
 
