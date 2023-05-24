@@ -454,7 +454,7 @@ def hovertext_and_colmatrix4(dfff, selected_operators, operatorlist):
 			hovertext[-1].append(
 					    'Circle: {}\
 					     <br>Operator: {}\
-					     <br>%Share: {} %'
+					     <br>Market Share: {} %'
 
 				     .format( 
 					    state_dict.get(yy),
@@ -818,6 +818,7 @@ if Dimension == "Frequency Band":
 			dfff = dffcopy[(dffcopy["Band"]==Band)]
 			operatorlist = sorted(list(set(dfff["OperatorNew"])))
 			selected_operators = st.sidebar.multiselect('Select Operators',operatorlist)
+			selected_operators = sorted(selected_operators)
 			if len(selected_operators) >0:
 				temp = pd.DataFrame()
 				for op in selected_operators:
