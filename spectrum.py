@@ -463,7 +463,7 @@ def hovertext_and_colmatrix1(df1):
 #processing for hovertext and colormatrix for Calendar Year, Operator Wise, SubFeatures - Total Outflow, Total Purchase
 @st.cache_resource
 def hovertext_and_colmatrix2(df1, selectedbands, SubFeature, df_subfeature):	
-	temp2 = pd.DataFrame()
+	temp1 = pd.DataFrame()
 	if selectedbands != []:
 		for band in selectedbands:
 			temp2= df1[df1["Band"]==band]
