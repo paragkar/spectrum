@@ -405,10 +405,6 @@ def hovertext3(dff,reserveprice,auctionprice,offeredspectrum,soldspectrum,unsold
 					    )
 	return hovertext
 
-
-			
-#*************************
-
 #processing for hovertext and colormatrix for Frequency Band, Features- Freq Map, SubFeature - Operator Wise 
 @st.cache_resource
 def hovertext_and_colmatrix4(dfff, selected_operators, operatorlist):
@@ -464,9 +460,6 @@ def hovertext_and_colmatrix4(dfff, selected_operators, operatorlist):
 					    )
 	return hovertext, colormatrix
 
-
-
-#*************************
 
 #processing for hovertext and colormatrix for Calendar Year, Band Wise, SubFeatures Reserve Price etc
 @st.cache_resource
@@ -1207,7 +1200,7 @@ if Dimension == "Frequency Band":
 		else:
 			selected_operators = selected_operators
 			
-		subtitle = title_map[Band]+unit+"; Selected Operators - "+', '.join(selected_operators)
+		subtitle = title_map[Band]+unit+"; Selected Operators - "+', '.join(selected_operators)+"; ToolTip Color = Operator"
 	
 	if (Feature == "ExpiryMap") and (SubFeature == "Year Wise"):
 		unit = "MHz"
