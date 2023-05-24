@@ -44,7 +44,7 @@ title_map = {700:"FDD: Uplink - 703-748 MHz(shown); Downlink - 758-803(notshown)
          3500:"Up & Downlinks - 3300-3670 MHz(shown); ",
          26000:"Up & Downlinks - 24250-27500 MHz(shown); "}
 
-#operator dict for dimension - frequency bands and subfeatures - freq and exp maps
+#operator dict for dimension - spectrum bands and subfeatures - freq and exp maps
 operators = {700: {'Vacant':0,'Railways':1,'Govt':2,'RJIO':3,'BSNL':4},
              800: {'Vacant':0,'RCOM':1,'Govt':2,'RJIO':3,'Bharti':4, 'MTS':5, 'BSNL':6},
              900:{'Vacant':0,'RCOM':1,'Govt':2,'Railways':3,'Bharti':4, 'AircelU':5, 
@@ -405,7 +405,7 @@ def hovertext3(dff,reserveprice,auctionprice,offeredspectrum,soldspectrum,unsold
 					    )
 	return hovertext
 
-#processing for hovertext and colormatrix for Frequency Band, Features- Freq Map, SubFeature - Operator Wise 
+#processing for hovertext and colormatrix for Spectrum Band, Features- Freq Map, SubFeature - Operator Wise 
 @st.cache_resource
 def hovertext_and_colmatrix4(dfff, selected_operators, operatorlist):
 	dfffcopy =dfff.copy()
