@@ -441,7 +441,7 @@ def hovertext_and_colmatrix4(dfff, selected_operators, operatorlist):
 			
 			if share >= 0.4 :
 				ccode = '#FF0000' #% spectrum share more than 40% (red)
-			elif share < 0.4:
+			elif (share < 0.4) & (share >= 0.2):
 				ccode = '#008000' #auction price = reserve price (green)
 			else:
 				ccode = '#C0C0C0' # No share (silver)
