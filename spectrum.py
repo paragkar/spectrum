@@ -192,11 +192,11 @@ def processdff(dff):
 	dff = dff[(dff["Band"]==Band) & (dff["Cat"]=="L") & (dff["OperatorOld"] != "Free") & (dff["Year"] >= 2010)]
 	dff = dff.drop(['OperatorNew', 'Band','Cat'], axis = 1)
 	for col in dff.columns[3:]:
-	dff[col]=dff[col].astype(float)
+		dff[col]=dff[col].astype(float)
 	dff = dff.groupby(["OperatorOld", "Year"]).sum()
 	dff = dff.drop(['Batch No',], axis = 1) 
 	if BandType[Band]=="TDD": #doubling the TDD spectrum for aligning with normal convention 
-	dff = (dff*2).round(2)
+		dff = (dff*2).round(2)
 	dff = dff.replace(0,"")
 	dff= dff.reset_index().set_index("Year")
 	dff =dff.replace("Voda Idea","VI")
@@ -204,7 +204,7 @@ def processdff(dff):
 	dff = dff.astype(str)
 	lst =[]
 	for index, row in zip(dff.index,dff.values):
-	lst.append([index]+[row[0]+" "+x+" MHz, " for x in row[1:]])
+		lst.append([index]+[row[0]+" "+x+" MHz, " for x in row[1:]])
 	temp = pd.DataFrame(lst)
 	col = dff.reset_index().columns
 	col = list(col)
