@@ -592,7 +592,7 @@ def summarychart(summarydf, xcolumn, ycolumn):
 #**********  Main Program Starts here ***************
 
 #Choose a dimension
-Dimension = st.sidebar.selectbox('Select a Dimension', options = ["Frequency Band", "Calendar Year"])
+Dimension = st.sidebar.selectbox('Select a Dimension', ["Frequency Band", "Calendar Year"],0)
 
 if Dimension == "Frequency Band":
 	#selecting a frequency band
@@ -700,7 +700,7 @@ if Dimension == "Frequency Band":
 
 	#Processing For Dimension = "Frequency Band" & Feature 
 	if  Feature == "FreqMap":
-		SubFeature = st.sidebar.selectbox('Select a Sub Feature', ["Freq Wise", "Operator Wise"])
+		SubFeature = st.sidebar.selectbox('Select a Sub Feature', ["Freq Wise", "Operator Wise"],0)
 		if SubFeature == "Freq Wise":
 			sf = sff.copy()
 			operators = operators[Band]
@@ -804,7 +804,7 @@ if Dimension == "Frequency Band":
 
 	#Feature ="Expiry Map" linked to Dimension = "Frequency"
 	if  Feature == "ExpiryMap":
-		SubFeature = st.sidebar.selectbox('Select a Sub Feature', ["Freq Wise", "Year Wise"])
+		SubFeature = st.sidebar.selectbox('Select a Sub Feature', ["Freq Wise", "Year Wise"],0)
 		if SubFeature == "Freq Wise":
 			sf = sff.copy()
 			operators = operators[Band]
@@ -1029,7 +1029,7 @@ if Dimension == "Calendar Year":
 		df2_temp1 = df1.copy()
 		selectedbands = st.sidebar.multiselect('Select Bands',band_dim_cy[Year])
 		subfeature_list = ["Total Outflow", "Total Purchase"]
-		SubFeature = st.sidebar.selectbox('Select a SubFeature', subfeature_list)
+		SubFeature = st.sidebar.selectbox('Select a SubFeature', subfeature_list,0)
 		
 		if SubFeature == "Total Outflow":
 			temp1 = pd.DataFrame()
@@ -1160,8 +1160,13 @@ if Dimension == "Frequency Band":
 		else:
 			selectedcategory = selectedcategory[0]
 		
+		if selected_operators == []:
+			selected_operators = ["All"]
+		else:
+			selected_operators = selected_operators
+		
 		unit = "MHz"
-		subtitle = "Unit - "+unit+"; "+"India Total - Sum of all LSAs ;" + "Category - "+ selectedcategory
+		subtitle = "Unit - "+unit+"; "+"India Total - Sum of all LSAs "+"; Selected Operators - "+', '.join(selected_operators)+ "; Category - "+ selectedcategory
 	
 # 	if (Feature != "FreqMap") and (SubFeature != "Operator Wise"):
 		
