@@ -214,7 +214,6 @@ def processdff(dff):
 	dff = temp.groupby("Year").sum()
 	dff =dff.T
 	dff = dff.reset_index()
-	st.write(dff)
 	dff.columns = ["LSA"]+auctionsucessyears[Band]
 	dff = dff.set_index("LSA")
 	return dff
