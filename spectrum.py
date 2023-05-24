@@ -924,6 +924,8 @@ if Dimension == "Frequency Band":
 			#preparing the summary chart 
 			chart = summarychart(summarydf, "ExpYears", "TotalMHz")
 			flag = True #for ploting the summary chart
+			
+			hoverlabel_bgcolor = "#000000" #subdued black
 
 			data = [go.Heatmap(
 			  z = eff.values,
@@ -938,7 +940,6 @@ if Dimension == "Frequency Band":
 			    textfont={"size":10},
 			    reversescale=True,
 				)]
-			hoverlabel_bgcolor = "#002855" #subdued black
 
 
 	#Feature ="Auction Map" linked to Dimension = "Frequency"
@@ -1203,7 +1204,7 @@ if Dimension == "Frequency Band":
 		subtitle = title_map[Band]+unit+"; Selected Operators - "+', '.join(selected_operators)+"; [ToolTip Color = Operator]"
 	
 	if (Feature == "ExpiryMap") and (SubFeature == "Year Wise"):
-		fig.update_traces(hoverlabel=dict(bgcolor="#000000",font=dict(size=12, color='white'))) #hoverbox color is black
+		fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white'))) #hoverbox color is black
 		unit = "MHz"
 		selected_operators =["NA"]
 		subtitle = "Unit - "+unit+"; Selected Operators - "+', '.join(selected_operators)+" ; Summary Below - Sum of all LSAs"
