@@ -1190,7 +1190,7 @@ if Dimension == "Frequency Band":
 		unit = units_dict[SubFeature]
 		selected_operators = ["NA"]
 		
-		subtitle = "Unit - "+unit+"; Selected Operators - "+', '.join(selected_operators)+ " ; India Total - Sum of all LSAs"
+		subtitle = "Unit - "+unit+"; Selected Operators - "+', '.join(selected_operators)+ " ; Summary Below - Sum of all LSAs"
 		
 	if (Feature == "ExpiryMap") and (SubFeature == "Freq Wise"):
 		fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
@@ -1205,7 +1205,7 @@ if Dimension == "Frequency Band":
 	if (Feature == "ExpiryMap") and (SubFeature == "Year Wise"):
 		unit = "MHz"
 		selected_operators =["NA"]
-		subtitle = "Unit - "+unit+"; Selected Operators - "+', '.join(selected_operators)+" ; TotalMHz - Sum of all LSAs"
+		subtitle = "Unit - "+unit+"; Selected Operators - "+', '.join(selected_operators)+" ; Summary Below - Sum of all LSAs"
 		
 	if (Feature == "FreqMap") and (SubFeature == "Freq Wise"):
 		fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
@@ -1247,7 +1247,7 @@ if (Dimension == "Calendar Year") and (Feature == "Band Wise"):
 	title = "Band Wise Auction Summary for the Year "+str(Year)
 	
 	if SubFeature in ["Reserve Price", "Auction Price", "Quantum Offered", "Quantum Sold", "Quantum Unsold", "Total EMD", "Total Outflow"]:
-		partsubtitle = "; Summary - Sum of all LSAs"
+		partsubtitle = "; Summary Below - Sum of all LSAs"
 	else:
 		partsubtitle = ""
 	subtitle = SubFeature+"; Unit -"+units_dict[SubFeature]+"; "+ "Selected Operators -" + ', '.join(selected_operators)+ partsubtitle
@@ -1267,26 +1267,11 @@ if (Dimension == "Calendar Year") and (Feature == "Operator Wise"):
 		selectedbands = ["NA"]
 	selectedbands = [str(x) for x in selectedbands]	
 	title = "Operator Wise Outflow Summary for the Year "+str(Year)
-	subtitle = SubFeature + "; Unit -"+units_dict[SubFeature]+"; Selected Bands -" + ', '.join(selectedbands) + "; India Summary - Sum of all LSAs"
+	subtitle = SubFeature + "; Unit -"+units_dict[SubFeature]+"; Selected Bands -" + ', '.join(selectedbands) + "; Summary Below - Sum of all LSAs"
 	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 	title_x =0.25
 	tickangle =0
 	dtickval =1
-	
-# if (Dimension == "Calendar Year") and (Feature == "Operator Wise"):
-# 	if (SubFeature =="Total Purchase"):
-# 		if selectedbands==[]:
-# 			selectedbands = ["All"]
-# 		else:
-# 			selectedbands = selectedbands
-# 	else:
-# 		selectedbands = ["NA"]
-# 	selectedbands = [str(x) for x in selectedbands]	
-# 	title = "Operator Wise Purchase Summary for the Year "+str(Year)
-# 	subtitle = SubFeature + "; Unit -"+units_dict[SubFeature]+"; Selected Bands -" + ', '.join(selectedbands) + "; India Summary - Sum of all LSAs"
-# 	title_x =0.25
-# 	tickangle =0
-# 	dtickval =1
 	
 
 #updating figure layouts
