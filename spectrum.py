@@ -755,12 +755,12 @@ if Dimension == "Frequency Band":
 # 			operators = operators[Band]
 # 			tickvals = list(operators.values())
 			ticktext = list(operators.keys())
-			category = st.sidebar.multiselect('Select a Category', ['Liberalized', 'UnLiberalized'])
+			selectedcategory = st.sidebar.multiselect('Select a Category', ['Liberalized', 'UnLiberalized'])
 			cat_dict = {'Liberalized' : 'L', 'UnLiberalized' : 'U'}
-			if (len(category) == 0) or (len(category) == 2):
+			if (len(selectedcategory) == 0) or (len(selectedcategory) == 2):
 				dfff = dffcopy[(dffcopy["Band"]==Band)]
 			else:
-				dfff = dffcopy[(dffcopy["Band"]==Band) & (dffcopy["Cat"] == cat_dict[category[0]])]
+				dfff = dffcopy[(dffcopy["Band"]==Band) & (dffcopy["Cat"] == cat_dict[selectedcategory[0]])]
 				
 			dfff = dfff.groupby(["OperatorNew","Year","Batch No", "Cat"])[LSAlist].sum()
 			dfff = dfff.reset_index().drop(columns = ["Year", "Batch No", "Cat"], axis =1).groupby("OperatorNew").sum().T
@@ -1150,8 +1150,13 @@ if Dimension == "Frequency Band":
 		subtitle = title_map[Band]+unit+"; Selected Operators - "+', '.join(selected_operators)
 			
 	if (Feature == "FreqMap") and (SubFeature == "Operator Wise"):
+		if len(selectedcategory) == 0) or len(selectedcategory) == 2):
+			selectedcategory = "All"
+		else:
+			selectedcategory = selectedcategory
+		
 		unit = "MHz"
-		subtitle = "Unit - "+unit+"; "+"India Total - Sum of all LSAs"
+		subtitle = "Unit - "+unit+"; "+"India Total - Sum of all LSAs"; "Category - "+ selectedcategory
 	
 # 	if (Feature != "FreqMap") and (SubFeature != "Operator Wise"):
 		
