@@ -411,8 +411,16 @@ def hovertext3(dff,reserveprice,auctionprice,offeredspectrum,soldspectrum,unsold
 
 #processing for hovertext and colormatrix for Frequency Band, Features- Freq Map, SubFeature - Operator Wise 
 @st.cache_resource
-def hovertext_and_colmatrix4(dfff, selected_operators):
+def hovertext_and_colmatrix4(dfff, selected_operators, operatorlist):
+	if len(selected_operators) ==0:
+		selected_operators =operatorlist
+	else:
+		pass
+		
 	lst =[]
+	
+	st.write(dfff)
+	
 	dfffshare = pd.DataFrame()
 	for op in selected_operators:
 		dfff[op+"1"] = dfff[op]/dfff.sum(axis=0)
