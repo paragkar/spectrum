@@ -757,7 +757,7 @@ if Dimension == "Frequency Band":
 				temp = pd.DataFrame()
 				for op in selectedoperators:
 					temp = pd.concat([dffcopy[dffcopy["OperatorNew"]==op],temp], axis =0)
-				dfff = temp
+				dffcopy = temp.copy()
 		
 				
 			selectedcategory = st.sidebar.multiselect('Select a Category', ['Liberalized', 'UnLiberalized'])
