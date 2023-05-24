@@ -416,10 +416,13 @@ def hovertext_and_colmatrix4(dfff, selected_operators, operatorlist):
 		selected_operators =operatorlist
 	else:
 		pass
-		
-	lst =[]
+	
+	dfff["Total"] = dfff.sum(axis=0)
 	
 	st.write(dfff)
+		
+	lst =[]
+
 	
 	dfffshare = pd.DataFrame()
 	for op in selected_operators:
@@ -429,8 +432,6 @@ def hovertext_and_colmatrix4(dfff, selected_operators, operatorlist):
 	dfffshare = dfff[lst].copy()
 	lst = [x[:-1] for x in lst] #stripping the last digit "1" added to create % share operator column
 	dfffshare.columns = lst
-	
-	st.write(dfffshare)
 	
 	hovertext=[]
 	lst = []
