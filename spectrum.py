@@ -831,7 +831,7 @@ if Dimension == "Frequency Band":
 				else:
 					dfff = dfff[(dfff["Cat"] == cat_dict[selected_category[0]])]
 			else:
-				selected_category=0
+				selected_category=[]
 				
 			dfff = dfff.groupby(["OperatorNew","Year","Batch No", "Cat"])[LSAlist].sum()
 			dfff = dfff.reset_index().drop(columns = ["Year", "Batch No", "Cat"], axis =1).groupby("OperatorNew").sum().T
