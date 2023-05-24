@@ -407,7 +407,7 @@ def hovertext3(dff,reserveprice,auctionprice,offeredspectrum,soldspectrum,unsold
 
 #processing for hovertext and colormatrix for Calendar Year, Band Wise, SubFeatures Reserve Price etc
 @st.cache_resource
-def hovertext_and_colmatrix(df1):
+def hovertext_and_colmatrix1(df1):
 	auctionprice =  df1.pivot(index="Circle", columns='Band', values=subfeature_dict["Auction Price"])
 	reserveprice =  df1.pivot(index="Circle", columns='Band', values=subfeature_dict["Reserve Price"])
 	qtyoffered = df1.pivot(index="Circle", columns='Band', values=subfeature_dict["Quantum Offered"])
@@ -459,6 +459,68 @@ def hovertext_and_colmatrix(df1):
 					    )
 					    )
 	return hovertext, colormatrix
+
+#processing for hovertext and colormatrix for Calendar Year, Operator Wise, SubFeatures - Total Outflow, Total Purchase
+@st.cache_resource
+def hovertext_and_colmatrix2(df1, selectedbands, SubFeature):
+	temp2 = pd.DataFrame()
+	if selectedbands != []:
+		for band in selectedbands:
+			temp2= df11[df1["Band"]==band]
+			temp1 = pd.concat([temp2,temp1], axis =0)
+		df1  = temp1
+
+	if SubFeature == "Total Outflow": #Then  process the dataframe for total purchase
+		columnstoextract = ["Circle", "Band"]+operators_dim_cy[Year]
+		df2_temp2 = df1[columnstoextract]
+		df2_temp2.drop("Band", inplace = True, axis =1)
+		df2_temp2 = df2_temp2.groupby(["Circle"]).sum().round(2)
+		df2_temp2 = df2_temp2.reindex(sorted(df2_temp2.columns), axis=1)
+	
+	if SubFeature == "Total Purchase": #Then process the dataframe for total outflow
+		operators_dim_cy_new=[]
+		for op in operators_dim_cy[Year]:
+			df2_temp1[op+"1"] = df1["Auction Price/MHz"]*df1[op]
+			operators_dim_cy_new.append(op+"1")
+		columnstoextract = ["Circle", "Band"]+operators_dim_cy_new
+		df2_temp1 = df2_temp1[columnstoextract]
+		operators_dim_cy_new = [x[:-1] for x in operators_dim_cy_new] # removing the last letter "1" from operator name
+		df2_temp1.columns = ["Circle", "Band"]+ operators_dim_cy_new
+		df2_temp1.drop("Band", inplace = True, axis =1)
+		df2_temp1 = df2_temp1.groupby(["Circle"]).sum().round(0)
+		df2_temp1 = df2_temp1.reindex(sorted(df2_temp1.columns), axis=1)
+	
+	hovertext=[]
+	lst = []
+	for yi, yy in enumerate(df2_temp1.index): #dataframe of total outflow (any one of them can be used)
+		hovertext.append([])
+		for xi, xx in enumerate(df2_temp1.columns): #dataframe of total outflow (any one of them can be used)
+			outflow = df2_temp1.values[yi][xi]
+			purchase = df2_temp2.values[yi][xi]
+			if outflow > 0 :
+				ccode = '#008000' # Purchased (green)
+			else:
+				ccode = '#C0C0C0' #No Purchase (silver)
+			lst.append([yy,xx,ccode])
+			temp = pd.DataFrame(lst)
+			temp.columns = ["Circle", "Operator", "Color"]
+			colormatrix = temp.pivot(index='Circle', columns='Operator', values="Color")
+			colormatrix = list(colormatrix.values)
+			
+			hovertext[-1].append(
+					    'Circle: {}\
+					     <br>Operator: {}\
+					     <br>Outflow: {} Rs Cr\
+					     <br>Purchase: {} MHz'
+
+				     .format( 
+					    state_dict.get(yy),
+					    xx,
+					    round(outflow,0),
+					    round(purchase,2),
+					    )
+					    )
+	return hovertext, colormatrix				
 
 
 #preparing color scale for hoverbox for freq and exp maps
@@ -941,9 +1003,10 @@ if Dimension == "Calendar Year":
 			chart = summarychart(summarydf, 'Band', "Total")
 			flag = True
 			
-		hovertext,colormatrix = hovertext_and_colmatrix(df1) #processing hovertext and colormatrix for bandwise in cal year dim
+		hovertext,colormatrix = hovertext_and_colmatrix1(df1) #processing hovertext and colormatrix for bandwise in cal year dim
 		hoverlabel_bgcolor = colormatrix #colormatrix processed from fuction "hovertext_and_colmatrix" for same above
-	
+
+
 	if Feature == "Operator Wise": #for the dimension "Calendar Year"
 		df1 = df1.reset_index()
 		df2_temp1 = df1.copy()
@@ -952,6 +1015,7 @@ if Dimension == "Calendar Year":
 		SubFeature = st.sidebar.selectbox('Select a SubFeature', subfeature_list)
 		
 		if SubFeature == "Total Outflow":
+			temp2 = pd.DataFrame()
 			if selectedbands != []:
 				for band in selectedbands:
 					temp2= df2_temp1[df2_temp1["Band"]==band]
@@ -965,11 +1029,12 @@ if Dimension == "Calendar Year":
 				operators_dim_cy_new.append(op+"1")
 			columnstoextract = ["Circle", "Band"]+operators_dim_cy_new
 			df2_temp1 = df2_temp1[columnstoextract]
-			operators_dim_cy_new = [x[:-1] for x in operators_dim_cy_new]
+			operators_dim_cy_new = [x[:-1] for x in operators_dim_cy_new] # removing the last letter "1" from operator name
 			df2_temp1.columns = ["Circle", "Band"]+ operators_dim_cy_new
 			df2_temp1.drop("Band", inplace = True, axis =1)
 			df2_temp1 = df2_temp1.groupby(["Circle"]).sum().round(0)
 			df2_temp1 = df2_temp1.reindex(sorted(df2_temp1.columns), axis=1)
+			
 			z = df2_temp1.values
 			x = df2_temp1.columns
 			y = df2_temp1.index
@@ -981,6 +1046,9 @@ if Dimension == "Calendar Year":
 			#preparing the summary chart 
 			chart = summarychart(summarydf, 'Operators', SubFeature)
 			flag = True
+			
+			hovertext,colormatrix = hovertext_and_colmatrix2(df1) #processing hovertext and colormatrix for operator wise in cal year dim
+			hoverlabel_bgcolor = colormatrix #colormatrix processed from fuction "hovertext_and_colmatrix" for same above
 		
 		if SubFeature == "Total Purchase":
 			if selectedbands != []:
@@ -1008,6 +1076,9 @@ if Dimension == "Calendar Year":
 			#preparing the summary chart 
 			chart = summarychart(summarydf, 'Operators', SubFeature)
 			flag = True
+			
+			hovertext,colormatrix = hovertext_and_colmatrix2(df1) #processing hovertext and colormatrix for operator wise in cal year dim
+			hoverlabel_bgcolor = colormatrix #colormatrix processed from fuction "hovertext_and_colmatrix" for same above
 	
 
 	data = [go.Heatmap(
@@ -1110,6 +1181,7 @@ if (Dimension == "Calendar Year") and (Feature == "Operator Wise"):
 	selectedbands = [str(x) for x in selectedbands]	
 	title = "Operator Wise Outflow Summary for the Year "+str(Year)
 	subtitle = SubFeature + "; Unit -"+units_dict[SubFeature]+"; Selected Bands -" + ', '.join(selectedbands) + "; India Summary - Sum of all LSAs"
+	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 	title_x =0.25
 	tickangle =0
 	dtickval =1
