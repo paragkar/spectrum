@@ -754,6 +754,7 @@ if Dimension == "Frequency Band":
 		if SubFeature == "Operator Wise":
 			dfff = dffcopy[(dffcopy["Band"]==Band)]
 			operatorlist = sorted(list(set(dfff["OperatorNew"])))
+			st.write(operatorlist)
 			selectedoperators = st.sidebar.multiselect('Select Operators',operatorlist)
 			if len(selectedoperators) >0:
 				temp = pd.DataFrame()
@@ -768,7 +769,6 @@ if Dimension == "Frequency Band":
 			else:
 				dfff = dfff[(dfff["Cat"] == cat_dict[selectedcategory[0]])]
 				
-			st.write(dfff) #debug
 				
 			dfff = dfff.groupby(["OperatorNew","Year","Batch No", "Cat"])[LSAlist].sum()
 			dfff = dfff.reset_index().drop(columns = ["Year", "Batch No", "Cat"], axis =1).groupby("OperatorNew").sum().T
