@@ -413,15 +413,16 @@ def hovertext3(dff,reserveprice,auctionprice,offeredspectrum,soldspectrum,unsold
 @st.cache_resource
 def hovertext_and_colmatrix4(dfff, selected_operators):
 	lst =[]
+	dfffshare = pd.DataFrame()
 	for op in selected_operators:
 		dfff[op+"1"] = dfff[op]/dfff.sum(axis=0)
 		lst.append(op+"1")
 	
-	dfffshare = dfff[lst]
+	dfffshare = dfff[lst].copy()
 	lst = [x[:-1] for x in lst] #stripping the last digit "1" added to create % share operator column
 	dfffshare.columns = lst
 	
-	st.write(dfffshare) #debug
+	st.write(dfffshare)
 	
 	hovertext=[]
 	lst = []
