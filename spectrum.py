@@ -761,13 +761,14 @@ if Dimension == "Frequency Band":
 					temp = pd.concat([dfff[dfff["OperatorNew"]==op],temp], axis =0)
 				dfff = temp.copy()
 		
-				
 			selectedcategory = st.sidebar.multiselect('Select a Category', ['Liberalized', 'UnLiberalized'])
 			cat_dict = {'Liberalized' : 'L', 'UnLiberalized' : 'U'}
 			if (len(selectedcategory) == 0) or (len(selectedcategory) == 2):
 				dfff = dfff.copy
 			else:
 				dfff = dfff[(dfff["Cat"] == cat_dict[selectedcategory[0]])]
+				
+			st.write(dfff) #debug
 				
 			dfff = dfff.groupby(["OperatorNew","Year","Batch No", "Cat"])[LSAlist].sum()
 			dfff = dfff.reset_index().drop(columns = ["Year", "Batch No", "Cat"], axis =1).groupby("OperatorNew").sum().T
