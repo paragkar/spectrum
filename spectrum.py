@@ -1200,7 +1200,7 @@ if Dimension == "Frequency Band":
 		else:
 			selected_operators = selected_operators
 			
-		subtitle = title_map[Band]+unit+"; Selected Operators - "+', '.join(selected_operators)+"; ToolTip Color = Operator"
+		subtitle = title_map[Band]+unit+"; Selected Operators - "+', '.join(selected_operators)+"\n ToolTip Color = Operator"
 	
 	if (Feature == "ExpiryMap") and (SubFeature == "Year Wise"):
 		unit = "MHz"
