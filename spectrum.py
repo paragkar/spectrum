@@ -485,10 +485,10 @@ def hovertext_and_colmatrix2(df1, selectedbands, SubFeature, df_subfeature):
 	else:
 		operators_dim_cy_new=[]
 		for op in operators_dim_cy[Year]:
-			df2_temp1[op+"1"] = df1["Auction Price/MHz"]*df1[op]
+			df1[op+"1"] = df1["Auction Price/MHz"]*df1[op]
 			operators_dim_cy_new.append(op+"1")
 		columnstoextract = ["Circle", "Band"]+operators_dim_cy_new
-		df2_temp1 = df2_temp1[columnstoextract]
+		df2_temp1 = df1[columnstoextract]
 		operators_dim_cy_new = [x[:-1] for x in operators_dim_cy_new] # removing the last letter "1" from operator name
 		df2_temp1.columns = ["Circle", "Band"]+ operators_dim_cy_new
 		df2_temp1.drop("Band", inplace = True, axis =1)
