@@ -1153,7 +1153,7 @@ if Dimension == "Frequency Band":
 		if (len(selectedcategory) == 0) or (len(selectedcategory) == 2):
 			selectedcategory = "All"
 		else:
-			selectedcategory = selectedcategory
+			selectedcategory = selectedcategory[0]
 		
 		unit = "MHz"
 		subtitle = "Unit - "+unit+"; "+"India Total - Sum of all LSAs"; "Category - "+ selectedcategory
