@@ -412,7 +412,7 @@ def hovertext3(dff,reserveprice,auctionprice,offeredspectrum,soldspectrum,unsold
 #processing for hovertext and colormatrix for Frequency Band, Features- Freq Map, SubFeature - Operator Wise 
 @st.cache_resource
 def hovertext_and_colmatrix4(dfff, selected_operators, operatorlist):
-	dfffcopy =dfff.copy
+	dfffcopy =dfff.copy()
 	if len(selected_operators) ==0:
 		selected_operators =operatorlist
 	else:
