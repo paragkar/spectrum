@@ -754,18 +754,18 @@ if Dimension == "Frequency Band":
 		if SubFeature == "Operator Wise":
 			dfff = dffcopy[(dffcopy["Band"]==Band)]
 			operatorlist = sorted(list(set(dfff["OperatorNew"])))
-			selectedoperators = st.sidebar.multiselect('Select Operators',operatorlist)
-			if len(selectedoperators) >0:
+			selected_operators = st.sidebar.multiselect('Select Operators',operatorlist)
+			if len(selected_operators) >0:
 				temp = pd.DataFrame()
-				for op in selectedoperators:
+				for op in selected_operators:
 					temp = pd.concat([dfff[dfff["OperatorNew"]==op],temp], axis =0)
 				dfff = temp.copy()
-			selectedcategory = st.sidebar.multiselect('Select a Category', ['Liberalized', 'UnLiberalized'])
+			selected_category = st.sidebar.multiselect('Select a Category', ['Liberalized', 'UnLiberalized'])
 			cat_dict = {'Liberalized' : 'L', 'UnLiberalized' : 'U'}
-			if (len(selectedcategory) == 0) or (len(selectedcategory) == 2):
+			if (len(selected_category) == 0) or (len(selected_category) == 2):
 				pass
 			else:
-				dfff = dfff[(dfff["Cat"] == cat_dict[selectedcategory[0]])]
+				dfff = dfff[(dfff["Cat"] == cat_dict[selected_category[0]])]
 				
 			dfff = dfff.groupby(["OperatorNew","Year","Batch No", "Cat"])[LSAlist].sum()
 			dfff = dfff.reset_index().drop(columns = ["Year", "Batch No", "Cat"], axis =1).groupby("OperatorNew").sum().T
@@ -1155,10 +1155,10 @@ if Dimension == "Frequency Band":
 		subtitle = title_map[Band]+unit+"; Selected Operators - "+', '.join(selected_operators)
 			
 	if (Feature == "FreqMap") and (SubFeature == "Operator Wise"):
-		if (len(selectedcategory) == 0) or (len(selectedcategory) == 2):
-			selectedcategory = "All"
+		if (len(selected_category) == 0) or (len(selected_category) == 2):
+			selected_category = "All"
 		else:
-			selectedcategory = selectedcategory[0]
+			selected_category = selected_category[0]
 		
 		if selected_operators == []:
 			selected_operators = ["All"]
@@ -1166,7 +1166,7 @@ if Dimension == "Frequency Band":
 			selected_operators = selected_operators
 		
 		unit = "MHz"
-		subtitle = "Unit - "+unit+"; "+"India Total - Sum of all LSAs "+"; Selected Operators - "+', '.join(selected_operators)+ "; Category - "+ selectedcategory
+		subtitle = "Unit - "+unit+"; "+"India Total - Sum of all LSAs "+"; Selected Operators - "+', '.join(selected_operators)+ "; Category - "+ selected_category
 	
 # 	if (Feature != "FreqMap") and (SubFeature != "Operator Wise"):
 		
