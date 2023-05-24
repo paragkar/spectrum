@@ -466,7 +466,7 @@ def hovertext_and_colmatrix2(df1, selectedbands, SubFeature, df_subfeature):
 	temp2 = pd.DataFrame()
 	if selectedbands != []:
 		for band in selectedbands:
-			temp2= df11[df1["Band"]==band]
+			temp2= df1[df1["Band"]==band]
 			temp1 = pd.concat([temp2,temp1], axis =0)
 		df1  = temp1
 	
