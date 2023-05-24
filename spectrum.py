@@ -1156,7 +1156,7 @@ if Dimension == "Frequency Band":
 			selectedcategory = selectedcategory[0]
 		
 		unit = "MHz"
-		subtitle = "Unit - "+unit+"; "+"India Total - Sum of all LSAs"; "Category - "+ selectedcategory
+		subtitle = "Unit - "+unit+"; "+"India Total - Sum of all LSAs ;" + "Category - "+ selectedcategory
 	
 # 	if (Feature != "FreqMap") and (SubFeature != "Operator Wise"):
 		
