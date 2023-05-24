@@ -187,36 +187,37 @@ def BWExpiring(sff,ef):
 #funtion to process pricing datframe for hovertext for auction map
 # @st.cache_resource
 def processdff(dff):
-    dff = dff.replace(0,np.nan).fillna(0)
-    dff = dff.applymap(lambda x: round(x,2) if type(x)!=str else x)
-    dff = dff[(dff["Band"]==Band) & (dff["Cat"]=="L") & (dff["OperatorOld"] != "Free") & (dff["Year"] >= 2010)]
-    dff = dff.drop(['OperatorNew', 'Band','Cat'], axis = 1)
-    for col in dff.columns[3:]:
-        dff[col]=dff[col].astype(float)
-    dff = dff.groupby(["OperatorOld", "Year"]).sum()
-    dff = dff.drop(['Batch No',], axis = 1) 
-    if BandType[Band]=="TDD": #doubling the TDD spectrum for aligning with normal convention 
-        dff = (dff*2).round(2)
-    dff = dff.replace(0,"")
-    dff= dff.reset_index().set_index("Year")
-    dff =dff.replace("Voda Idea","VI")
-    dff = dff.replace("Vodafone", "Voda")
-    dff = dff.astype(str)
-    lst =[]
-    for index, row in zip(dff.index,dff.values):
-        lst.append([index]+[row[0]+" "+x+" MHz, " for x in row[1:]])
-    temp = pd.DataFrame(lst)
-    col = dff.reset_index().columns
-    col = list(col)
-    col.pop(1)
-    temp.columns = col
-    temp = temp.replace('[a-zA-Z]+\s+MHz, ',"", regex = True)
-    dff = temp.groupby("Year").sum()
-    dff =dff.T
-    dff = dff.reset_index()
-    dff.columns = ["LSA"]+auctionsucessyears[Band]
-    dff = dff.set_index("LSA")
-    return dff
+	dff = dff.replace(0,np.nan).fillna(0)
+	dff = dff.applymap(lambda x: round(x,2) if type(x)!=str else x)
+	dff = dff[(dff["Band"]==Band) & (dff["Cat"]=="L") & (dff["OperatorOld"] != "Free") & (dff["Year"] >= 2010)]
+	dff = dff.drop(['OperatorNew', 'Band','Cat'], axis = 1)
+	for col in dff.columns[3:]:
+	dff[col]=dff[col].astype(float)
+	dff = dff.groupby(["OperatorOld", "Year"]).sum()
+	dff = dff.drop(['Batch No',], axis = 1) 
+	if BandType[Band]=="TDD": #doubling the TDD spectrum for aligning with normal convention 
+	dff = (dff*2).round(2)
+	dff = dff.replace(0,"")
+	dff= dff.reset_index().set_index("Year")
+	dff =dff.replace("Voda Idea","VI")
+	dff = dff.replace("Vodafone", "Voda")
+	dff = dff.astype(str)
+	lst =[]
+	for index, row in zip(dff.index,dff.values):
+	lst.append([index]+[row[0]+" "+x+" MHz, " for x in row[1:]])
+	temp = pd.DataFrame(lst)
+	col = dff.reset_index().columns
+	col = list(col)
+	col.pop(1)
+	temp.columns = col
+	temp = temp.replace('[a-zA-Z]+\s+MHz, ',"", regex = True)
+	dff = temp.groupby("Year").sum()
+	dff =dff.T
+	dff = dff.reset_index()
+	st.write(dff)
+	dff.columns = ["LSA"]+auctionsucessyears[Band]
+	dff = dff.set_index("LSA")
+	return dff
 
 #convert columns of dataframe into string
 @st.cache_resource
