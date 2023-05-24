@@ -1022,7 +1022,7 @@ if Dimension == "Calendar Year":
 		SubFeature = st.sidebar.selectbox('Select a SubFeature', subfeature_list)
 		
 		if SubFeature == "Total Outflow":
-			temp2 = pd.DataFrame()
+			temp1 = pd.DataFrame()
 			if selectedbands != []:
 				for band in selectedbands:
 					temp2= df2_temp1[df2_temp1["Band"]==band]
