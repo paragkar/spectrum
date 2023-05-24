@@ -412,21 +412,22 @@ def hovertext3(dff,reserveprice,auctionprice,offeredspectrum,soldspectrum,unsold
 #processing for hovertext and colormatrix for Frequency Band, Features- Freq Map, SubFeature - Operator Wise 
 @st.cache_resource
 def hovertext_and_colmatrix4(dfff, selected_operators, operatorlist):
+	dfffcopy =dfff.copy
 	if len(selected_operators) ==0:
 		selected_operators =operatorlist
 	else:
 		pass
 	
-	dfff["Total"] = dfff.sum(axis=1)
+	dfffcopy["Total"] = dfffcopy.sum(axis=1)
 		
 	lst =[]
 
 	dfffshare = pd.DataFrame()
 	for op in selected_operators:
-		dfff[op+"1"] = dfff[op]/dfff["Total"]
+		dfffcopy[op+"1"] = dfffcopy[op]/dfffcopy["Total"]
 		lst.append(op+"1")
 	
-	dfffshare = dfff[lst]
+	dfffshare = dfffcopy[lst]
 	for col in dfffshare.columns:
 		dfffshare.rename(columns = {col:col[:-1]}, inplace = True) #stripping the last digit "1"
 
