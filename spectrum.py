@@ -752,14 +752,13 @@ if Dimension == "Frequency Band":
 			hoverlabel_bgcolor = hcolmatrixfreqexp(hcolscale, hf) #shaping the hfcolorscale
 			
 		if SubFeature == "Operator Wise":
-			selectedoperators = st.sidebar.multiselect('Select a Category',operators[Band])
+			selectedoperators = st.sidebar.multiselect('Select Operators',operators[Band])
 			if len(selectedoperators) >0:
 				temp = pd.DataFrame()
 				for op in selectedoperators:
 					temp = pd.concat([dffcopy[dffcopy["OperatorNew"]==op],temp], axis =0)
 				dfff = temp
-			else:
-				pass
+		
 				
 			selectedcategory = st.sidebar.multiselect('Select a Category', ['Liberalized', 'UnLiberalized'])
 			cat_dict = {'Liberalized' : 'L', 'UnLiberalized' : 'U'}
