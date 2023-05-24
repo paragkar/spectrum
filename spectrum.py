@@ -428,9 +428,8 @@ def hovertext_and_colmatrix4(dfff, selected_operators, operatorlist):
 	
 	dfffshare = dfff[lst]
 	
-	lst = [x[:-1] for x in lst] #stripping the last digit "1" added to create % share operator column
-	st.write(lst)
-	dfffshare.columns = lst
+	dfffshare = [dfffshare.rename(columns = {x:x[:-1]}, inplace = True) for x in lst] #stripping the last digit "1" added to create % share operator column
+
 	
 	hovertext=[]
 	lst = []
