@@ -417,6 +417,9 @@ def hovertext_and_colmatrix4(dfff, selected_operators, operatorlist):
 	else:
 		pass
 	
+	for col in dfff.columns:
+		dfff[col] = dfff[col].astype(float)
+	
 	dfff["Total"] = dfff.sum(axis=0)
 	
 	st.write(dfff)
