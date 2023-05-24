@@ -758,7 +758,7 @@ if Dimension == "Frequency Band":
 			category = st.sidebar.multiselect('Select a Category', ['Liberalized', 'UnLiberalized'])
 			cat_dict = {'Liberalized' : 'L', 'UnLiberalized' : 'U'}
 			if (len(category) == 0) or (len(category) == 2):
-				dfff = dffcopy[(dffcopy["Band"]==Band))]
+				dfff = dffcopy[(dffcopy["Band"]==Band)]
 			else:
 				dfff = dffcopy[(dffcopy["Band"]==Band) & (dffcopy["Cat"] == cat_dict[category])]
 				
