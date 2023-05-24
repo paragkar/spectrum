@@ -459,7 +459,7 @@ def hovertext_and_colmatrix4(dfff, selected_operators, operatorlist):
 				     .format( 
 					    state_dict.get(yy),
 					    xx,
-					    round(share,2)*100,
+					    round(share*100,2),
 					    )
 					    )
 	return hovertext, colormatrix
