@@ -413,7 +413,7 @@ def hovertext3(dff,reserveprice,auctionprice,offeredspectrum,soldspectrum,unsold
 @st.cache_resource
 def hovertext_and_colmatrix4(dfff, selected_operators):
 	lst =[]
-	for op in selected_operators
+	for op in selected_operators:
 		dfff[op+"1"] = dfff[op]/dfff.sum(axis=0)
 		lst.append(op+"1")
 	
