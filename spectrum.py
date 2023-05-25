@@ -1049,8 +1049,8 @@ if Dimension == "Calendar Year":
 	Year = st.sidebar.selectbox('Select a Year',calendaryearlist,7) #Default Index the latest Calendar Year
 	df1 = masterdf[masterdf["Auction Year"]==Year]
 	df1 = df1.set_index("Circle")
-	Feature = st.sidebar.selectbox('Select a Feature',["Band Wise", "Operator Wise"])
-	if Feature == "Band Wise":
+	Feature = st.sidebar.selectbox('Select a Feature',["Band Metric", "Operator Metric"])
+	if Feature == "Band Metric":
 		subfeature_dict ={"Quantum Offered" : "Sale (MHz)", "Quantum Sold": "Total Sold (MHz)", "Quantum Unsold" : "Total Unsold (MHz)", "Reserve Price" : "RP/MHz" ,  
 			       "Auction Price": "Auction Price/MHz", "Total EMD" : "Total EMD"} 
 		subfeature_list = ["Reserve Price", "Auction Price", "Auction/Reserve", "Quantum Offered", "Quantum Sold","Percent Sold", "Quantum Unsold", "Percent Unsold", "Total EMD", "Total Outflow"]
@@ -1141,7 +1141,7 @@ if Dimension == "Calendar Year":
 		hoverlabel_bgcolor = colormatrix #colormatrix processed from fuction "hovertext_and_colmatrix" for same above
 
 
-	if Feature == "Operator Wise": #for the dimension "Calendar Year"
+	if Feature == "Operator Metric": #for the dimension "Calendar Year"
 		df1 = df1.reset_index()
 		df2_temp1 = df1.copy()
 		selectedbands = st.sidebar.multiselect('Select Bands',band_dim_cy[Year])
@@ -1293,7 +1293,7 @@ if Dimension == "Spectrum Band":
 	
 	title = parttitle+" for "+str(Band)+" MHz Band"
 
-if (Dimension == "Calendar Year") and (Feature == "Band Wise"):
+if (Dimension == "Calendar Year") and (Feature == "Band Metric"):
 	if (SubFeature =="Total Outflow") or (SubFeature == "Quantum Sold"):
 		if selected_operators==[]:
 			selected_operators = ["All"]
@@ -1315,7 +1315,7 @@ if (Dimension == "Calendar Year") and (Feature == "Band Wise"):
 	tickangle =0
 	dtickval =1
 	
-if (Dimension == "Calendar Year") and (Feature == "Operator Wise"):
+if (Dimension == "Calendar Year") and (Feature == "Operator Metric"):
 	if (SubFeature =="Total Outflow") or (SubFeature == "Total Purchase"):
 		if selectedbands==[]:
 			selectedbands = ["All"]
