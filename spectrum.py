@@ -186,7 +186,7 @@ def BWExpiring(sff,eff):
 	df = pd.DataFrame(lst)
 	df.columns = ["LSA","ExpYear", "Operators", "BW"]
 # 	df = df.groupby(["ExpYear"])[["LSA","Operators"]].value_counts()*ChannelSize[Band]
-	df = df.groupby(["ExpYear","LSA","Operators"]).value_counts()*ChannelSize[Band]
+	df = df.groupby(["ExpYear", "LSA", "Operators"]).sum()
 	st.write(df)
 	df = df.reset_index()
 	df.columns =["ExpYear","LSA", "Operators","BW"]
