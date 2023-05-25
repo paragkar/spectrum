@@ -907,6 +907,8 @@ if Dimension == "Spectrum Band":
 			
 			if BandType[Band]=="TDD": #doubling the TDD spectrum for aligning with normal convention 
         			dfff = (dfff*2).round(2)
+				
+			st.write(dfff) #debug
 			
 			dfffcopy =dfff.copy()
 
