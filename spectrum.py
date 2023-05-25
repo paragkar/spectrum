@@ -356,6 +356,7 @@ def hovertext22(bwf,eff):
 		hovertext.append([])
 		for xi, xx in enumerate(eff.columns):
 			opwiseexpMHz = [list(bwff[(bwff["ExpYear"]==xx) & (bwff.index ==yy)]["Op&BW"].values)]
+			st.write(opwiseexpMHz)
 			if opwiseexpMHz==[]:
 				opwiseexpMHz="NA"
 			else:
