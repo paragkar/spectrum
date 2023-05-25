@@ -911,27 +911,24 @@ if Dimension == "Spectrum Band":
 			hoverlabel_bgcolor = hcolmatrixfreqexp(hcolscale, hf) #shaping the hfcolorscale
 
 		if SubFeature == "Year Wise":
-			st.write(eff)
-			efff = pd.DataFrame()
 			bandexpcalsheetf = bandexpcalsheetf.set_index("LSA") #Loading Dataframe from BandExpCalSheet
 			operatorslist = ["All"]+sorted(list(operators[Band].keys()))
 			selected_operator = st.sidebar.selectbox('Select an Operator', operatorslist)
 			if selected_operator[0] == "All":
-				efff = eff.copy()
+				pass
 			else:
 				regexfilt = '^(?!.*'+selected_operator+').*' #to replace na.npn with text embedded with names of other than the selected operator
-				efff = bandexpcalsheetf.replace(regexfilt, np.nan, regex = True).replace(selected_operator,"", regex = True).replace("U","", regex= True)
+				temp = bandexpcalsheetf.replace(regexfilt, np.nan, regex = True).replace(selected_operator,"", regex = True).replace("U","", regex= True)
+				eff = forexpyearheatmap(temp)
 			
 			hovertext = hovertext22(bwf,eff)
 			parttitle ="Spectrum Expiry Map "+SubFeature
 			tickangle = 0
 			dtickval = dtickauction[Band]
-			
-# 			for col in efff.columns:
-# 				efff[col] = efff[col].astype(float)
+		
 		
 			#preparing the dataframe of the summary bar chart on top of the heatmap
-			summarydf = efff.sum().reset_index()
+			summarydf = eff.sum().reset_index()
 			summarydf.columns = ["ExpYears", "TotalMHz"]
 			summarydf["ExpYears"]= summarydf["ExpYears"].astype(float)
 			summarydf["ExpYears"] = summarydf["ExpYears"].sort_values(ascending = True)
@@ -943,9 +940,9 @@ if Dimension == "Spectrum Band":
 			hoverlabel_bgcolor = "#000000" #subdued black
 
 			data = [go.Heatmap(
-			  z = efff.values,
-			  y = efff.index,
-			  x = efff.columns,
+			  z = eff.values,
+			  y = eff.index,
+			  x = eff.columns,
 			  xgap = 1,
 			  ygap = 1,
 			  hoverinfo ='text',
