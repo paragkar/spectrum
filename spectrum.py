@@ -779,10 +779,10 @@ if Dimension == "Spectrum Band":
 	#mapping the year of auction with channels in the freq maps
 	ayear = auctioncalyear(ef,excepf,pf1)
 
-	Feature = st.sidebar.selectbox('Select a Feature', ["SpectrumMap", "ExpiryMap", "AuctionMap"], 0) #Default Index first
+	Feature = st.sidebar.selectbox('Select a Feature', ["Spectrum Map", "Expiry Map", "Auction Map"], 0) #Default Index first
 
 	#Processing For Dimension = "Frequency Band" & Feature 
-	if  Feature == "SpectrumMap":
+	if  Feature == "Spectrum Map":
 		SubFeature = st.sidebar.selectbox('Select a Sub Feature', ["Freq Wise", "Operator Wise"],0)
 		if SubFeature == "Freq Wise":
 			sf = sff.copy()
@@ -1239,14 +1239,14 @@ units_dict = {"Reserve Price" : "Rs Cr/MHz", "Auction Price" : "Rs Cr/MHz", "Qua
 fig = go.Figure(data=data)
 
 if Dimension == "Spectrum Band":
-	if Feature == "AuctionMap":
+	if Feature == "Auction Map":
 		fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 		unit = units_dict[SubFeature]
 		selected_operators = ["NA"]
 		
 		subtitle = "Unit - "+unit+"; Selected Operators - "+', '.join(selected_operators)+ " ; Summary Below - Sum of all LSAs"
 		
-	if (Feature == "ExpiryMap") and (SubFeature == "Freq Wise"):
+	if (Feature == "Expiry Map") and (SubFeature == "Freq Wise"):
 		fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 		unit = "Ch Size - "+str(ChannelSize[Band])+" MHz"
 		if selected_operators == []:
@@ -1256,7 +1256,7 @@ if Dimension == "Spectrum Band":
 			
 		subtitle = title_map[Band]+unit+"; Selected Operators - "+', '.join(selected_operators)+"; [ToolTip Color = Operator]"
 	
-	if (Feature == "ExpiryMap") and (SubFeature == "Year Wise"):
+	if (Feature == "Expiry Map") and (SubFeature == "Year Wise"):
 		fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white'))) #hoverbox color is black
 		unit = "MHz"
 		if selected_operator == "":
@@ -1265,7 +1265,7 @@ if Dimension == "Spectrum Band":
 			selected_operator = selected_operator
 		subtitle = "Unit - "+unit+"; Selected Operators - "+selected_operator+ "; Summary Below - Sum of all LSAs"
 		
-	if (Feature == "SpectrumMap") and (SubFeature == "Freq Wise"):
+	if (Feature == "Spectrum Map") and (SubFeature == "Freq Wise"):
 		fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 		unit = "Ch Size - "+str(ChannelSize[Band])+" MHz"
 		if selected_operators == []:
@@ -1275,7 +1275,7 @@ if Dimension == "Spectrum Band":
 			
 		subtitle = title_map[Band]+unit+"; Selected Operators - "+', '.join(selected_operators)
 			
-	if (Feature == "SpectrumMap") and (SubFeature == "Operator Wise"):
+	if (Feature == "Spectrum Map") and (SubFeature == "Operator Wise"):
 		fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 		if (len(selected_category) == 0) or (len(selected_category) == 2):
 			selected_category = "All"
