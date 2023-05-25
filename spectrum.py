@@ -338,7 +338,7 @@ def hovertext21(sf,sff,ef,of,bandf,bandexpf,ExpTab,ChannelSize,xaxisadj,ayear):
 					    )
 	return hovertext
 
-#processing for hovertext for expiry map, year wise
+#processing for hovertext for expiry map, year wise operator selection "All"
 @st.cache_resource
 def hovertext22(bwf,eff): 
 	bwf["Op&BW"] = bwf["Operators"]+" - "+round(bwf["BW"],2).astype(str)+" MHz"
@@ -368,6 +368,26 @@ def hovertext22(bwf,eff):
 					    state_dict.get(yy),
 					    round(xx,2), 
 					    opwiseexpMHz,
+					    )
+					    )
+	return hovertext
+
+
+#processing for hovertext for expiry map, year wise along with operator menue
+@st.cache_resource
+def hovertext23(eff): 
+	hovertext = []
+	for yi, yy in enumerate(eff.index):
+		hovertext.append([])
+		for xi, xx in enumerate(eff.columns):
+
+			hovertext[-1].append(
+					    'Circle: {}\
+					    <br />Expiring In: {} Years'
+
+				     .format(
+					    state_dict.get(yy),
+					    round(xx,2), 
 					    )
 					    )
 	return hovertext
@@ -915,15 +935,15 @@ if Dimension == "Spectrum Band":
 			operatorslist = ["All"]+sorted(list(operators[Band].keys()))
 			selected_operator = st.sidebar.selectbox('Select an Operator', operatorslist)
 			if selected_operator == "All":
-				pass
+				hovertext = hovertext22(bwf,eff) #hovertext for "All"
 			else:
 				regexfilt = '^(?!.*'+selected_operator+').*' #to replace na.npn with text embedded with names of other than the selected operator
 				temp = bandexpcalsheetf.replace(regexfilt, np.nan, regex = True).replace(selected_operator,"", regex = True).replace("U","", regex= True)
 				for col in temp.columns:
 					temp[col] = temp[col].astype(float)
 				eff = forexpyearheatmap(temp)
+				hovertext = hovertext23(eff) #hovertext with operator selections
 			
-			hovertext = hovertext22(bwf,eff)
 			parttitle ="Spectrum Expiry Map "+SubFeature
 			tickangle = 0
 			dtickval = dtickauction[Band]
