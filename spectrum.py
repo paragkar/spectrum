@@ -183,6 +183,7 @@ def BWExpiring(sff,eff):
 			l= [index, sff.iloc[j,i],eff.iloc[j,i]]
 			lst.append(l)	
 	df = pd.DataFrame(lst)
+	st.write(df) #debug
 	df.columns = ["LSA","Operators", "ExpYear"]
 	df = df.groupby(["ExpYear"])[["LSA","Operators"]].value_counts()*ChannelSize[Band]
 	df = df.reset_index()
@@ -941,7 +942,6 @@ if Dimension == "Spectrum Band":
 			selected_operator = st.sidebar.selectbox('Select an Operator', operatorslist)
 			if selected_operator == "All":
 				eff = forexpyearheatmap(ef,selected_operator)
-				st.write(eff)
 				bwf = BWExpiring(sff,eff)
 				st.write(bwf)
 				hovertext = hovertext22(bwf,eff) #hovertext for "All"
