@@ -916,6 +916,7 @@ if Dimension == "Spectrum Band":
 			selected_operator = st.sidebar.selectbox('Select an Operator', operatorslist)
 			if selected_operator[0] == "All":
 				efff = eff.copy()
+				st.write(efff)
 			else:
 				regexfilt = '^(?!.*'+selected_operator+').*' #to replace na.npn with text embedded with names of other than the selected operator
 				efff = bandexpcalsheetf.replace(regexfilt, np.nan, regex = True).replace(selected_operator,"", regex = True).replace("U","", regex= True)
