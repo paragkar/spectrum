@@ -779,7 +779,7 @@ if Dimension == "Spectrum Band":
 	#mapping the year of auction with channels in the freq maps
 	ayear = auctioncalyear(ef,excepf,pf1)
 
-	Feature = st.sidebar.selectbox('Select a Feature', ["FreqMap", "ExpiryMap", "AuctionMap"], 0) #Default Index first
+	Feature = st.sidebar.selectbox('Select a Feature', ["SpectrumMap", "ExpiryMap", "AuctionMap"], 0) #Default Index first
 
 	#Processing For Dimension = "Frequency Band" & Feature 
 	if  Feature == "FreqMap":
@@ -1265,7 +1265,7 @@ if Dimension == "Spectrum Band":
 			selected_operator = selected_operator
 		subtitle = "Unit - "+unit+"; Selected Operators - "+selected_operator+ "; Summary Below - Sum of all LSAs"
 		
-	if (Feature == "FreqMap") and (SubFeature == "Freq Wise"):
+	if (Feature == "SpectrumMap") and (SubFeature == "Freq Wise"):
 		fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 		unit = "Ch Size - "+str(ChannelSize[Band])+" MHz"
 		if selected_operators == []:
@@ -1275,7 +1275,7 @@ if Dimension == "Spectrum Band":
 			
 		subtitle = title_map[Band]+unit+"; Selected Operators - "+', '.join(selected_operators)
 			
-	if (Feature == "FreqMap") and (SubFeature == "Operator Wise"):
+	if (Feature == "SpectrumMap") and (SubFeature == "Operator Wise"):
 		fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 		if (len(selected_category) == 0) or (len(selected_category) == 2):
 			selected_category = "All"
