@@ -864,6 +864,20 @@ if Dimension == "Spectrum Band":
 			tickangle = 0
 			dtickval = 1
 			
+			data = [go.Heatmap(
+			      z = dfff.values,
+			      y = dfff.index,
+			      x = dfffe.columns,
+			      xgap = 1,
+			      ygap = 1,
+			      hoverinfo ='text',
+			      text = hovertext,
+			       colorscale = 'Hot',
+			    texttemplate="%{z}", 
+			    textfont={"size":10},
+			    reversescale=True,)
+				]
+			
 			
 		if SubFeature == "Operator %Share":
 			dfff = dffcopy[(dffcopy["Band"]==Band)]
