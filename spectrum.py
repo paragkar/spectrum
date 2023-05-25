@@ -717,7 +717,7 @@ if Dimension == "Spectrum Band":
 	bandexpf = bandexpf.set_index("LSA")
 	masterdf = df[masterall]
 
-	eff = forexpyearheatmap(ef) # for expiry year heatmap year wise
+# 	eff = forexpyearheatmap(ef) # for expiry year heatmap year wise
 	
 	bwf = BWExpiring(sff,ef) # hover text for expiry year heatmap year wise
 	
@@ -937,6 +937,7 @@ if Dimension == "Spectrum Band":
 			bandexpcalsheetf = bandexpcalsheetf.set_index("LSA") #Loading Dataframe from BandExpCalSheet
 			operatorslist = ["All"]+sorted(list(operators[Band].keys()))
 			selected_operator = st.sidebar.selectbox('Select an Operator', operatorslist)
+			eff = forexpyearheatmap(ef) # for expiry year heatmap year wise
 			if selected_operator == "All":
 				hovertext = hovertext22(bwf,eff) #hovertext for "All"
 			else:
