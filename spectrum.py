@@ -161,8 +161,8 @@ def forexpyearheatmap(eff):
 			lst2.append(item)
 	df = pd.DataFrame(lst2)
 	df.columns = ["LSA", "Spectrum", "ExpYrs"]
+	df = df.groupby([ExpYrs]).sum()
 	st.write(df)
-	df = df.pivot_table(index='LSA', columns='ExpYrs', values=['Spectrum'], aggfunc='first')
 	df.columns = df.columns.droplevel(0)
 	df.columns = [str(x) for x in df.columns]
 	df = df.iloc[:,1:]
