@@ -782,7 +782,7 @@ if Dimension == "Spectrum Band":
 	Feature = st.sidebar.selectbox('Select a Feature', ["SpectrumMap", "ExpiryMap", "AuctionMap"], 0) #Default Index first
 
 	#Processing For Dimension = "Frequency Band" & Feature 
-	if  Feature == "FreqMap":
+	if  Feature == "SpectrumMap":
 		SubFeature = st.sidebar.selectbox('Select a Sub Feature', ["Freq Wise", "Operator Wise"],0)
 		if SubFeature == "Freq Wise":
 			sf = sff.copy()
