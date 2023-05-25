@@ -783,8 +783,8 @@ if Dimension == "Spectrum Band":
 
 	#Processing For Dimension = "Frequency Band" & Feature 
 	if  Feature == "Spectrum Map":
-		SubFeature = st.sidebar.selectbox('Select a Sub Feature', ["Freq Wise", "Operator Wise"],0)
-		if SubFeature == "Freq Wise":
+		SubFeature = st.sidebar.selectbox('Select a Sub Feature', ["Freq Layout", "Operator Holdings"],0)
+		if SubFeature == "Freq Layout":
 			sf = sff.copy()
 			operators = operators[Band]
 			hf = sf[sf.columns].replace(operators) # dataframe for hovertext
@@ -808,7 +808,7 @@ if Dimension == "Spectrum Band":
 				ticktext = list(selected_op_dict.keys())	
 
 			hovertext = hovertext1(hf,sff,ef, of, ayear, bandf, ExpTab,ChannelSize,xaxisadj)
-			parttitle ="Spectrum Frequency Map"
+			parttitle ="Spectrum Frequency Layout"
 			tickangle = -90
 			dtickval = dtickfreq[Band]
 			
@@ -834,7 +834,7 @@ if Dimension == "Spectrum Band":
 			hcolscale=hcolscalefreqexp(operators, colcodes)  #colorscale for hoverbox
 			hoverlabel_bgcolor = hcolmatrixfreqexp(hcolscale, hf) #shaping the hfcolorscale
 			
-		if SubFeature == "Operator Wise":
+		if SubFeature == "Operator holdings":
 			dfff = dffcopy[(dffcopy["Band"]==Band)]
 			operatorlist = sorted(list(set(dfff["OperatorNew"])))
 			selected_operators = st.sidebar.multiselect('Select Operators',operatorlist)
@@ -860,7 +860,7 @@ if Dimension == "Spectrum Band":
 			if BandType[Band]=="TDD": #doubling the TDD spectrum for aligning with normal convention 
         			dfff = (dfff*2).round(2)
 			
-			parttitle ="Operator Wise Summary for"
+			parttitle ="Operator Holdings for"
 			tickangle = 0
 			dtickval = 1
 			
@@ -894,8 +894,8 @@ if Dimension == "Spectrum Band":
 
 	#Feature ="Expiry Map" linked to Dimension = "Spectrum Band"
 	if  Feature == "Expiry Map":
-		SubFeature = st.sidebar.selectbox('Select a Sub Feature', ["Freq Wise", "Year Wise"],0)
-		if SubFeature == "Freq Wise":
+		SubFeature = st.sidebar.selectbox('Select a Sub Feature', ["Freq Layout", "Yearly Trends"],0)
+		if SubFeature == "Freq Layout":
 			sf = sff.copy()
 			operators = operators[Band]
 			hf = sf[sf.columns].replace(operators) # dataframe for hovertext
@@ -917,7 +917,7 @@ if Dimension == "Spectrum Band":
 				expf = pd.DataFrame(sf.values*ef.values, columns=ef.columns, index=ef.index)
 
 			hovertext = hovertext21(hf,sff,ef, of, bandf, bandexpf, ExpTab,ChannelSize,xaxisadj,ayear)
-			parttitle ="Spectrum Expiry Map "+SubFeature
+			parttitle ="Spectrum Expiry Layout "+SubFeature
 			tickangle = -90
 			dtickval = dtickfreq[Band]
 
@@ -936,7 +936,7 @@ if Dimension == "Spectrum Band":
 			hcolscale=hcolscalefreqexp(operators, colcodes)  #colorscale for hoverbox
 			hoverlabel_bgcolor = hcolmatrixfreqexp(hcolscale, hf) #shaping the hfcolorscale
 
-		if SubFeature == "Year Wise":
+		if SubFeature == "Yearly Trends":
 			bandexpcalsheetf = bandexpcalsheetf.set_index("LSA") #Loading Dataframe from BandExpCalSheet
 			operatorslist = ["All"]+sorted(list(operators[Band].keys()))
 			selected_operator = st.sidebar.selectbox('Select an Operator', operatorslist)
@@ -963,7 +963,7 @@ if Dimension == "Spectrum Band":
 				eff = forexpyearheatmap(temp,selected_operator)
 				hovertext = hovertext23(eff) #hovertext with operator selections
 			
-			parttitle ="Spectrum Expiry Map "+SubFeature
+			parttitle ="Spectrum Expiry Layout "+SubFeature
 			tickangle = 0
 			dtickval = dtickauction[Band]
 		
@@ -1246,7 +1246,7 @@ if Dimension == "Spectrum Band":
 		
 		subtitle = "Unit - "+unit+"; Selected Operators - "+', '.join(selected_operators)+ " ; Summary Below - Sum of all LSAs"
 		
-	if (Feature == "Expiry Map") and (SubFeature == "Freq Wise"):
+	if (Feature == "Expiry Map") and (SubFeature == "Freq Layout"):
 		fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 		unit = "Ch Size - "+str(ChannelSize[Band])+" MHz"
 		if selected_operators == []:
@@ -1256,7 +1256,7 @@ if Dimension == "Spectrum Band":
 			
 		subtitle = title_map[Band]+unit+"; Selected Operators - "+', '.join(selected_operators)
 	
-	if (Feature == "Expiry Map") and (SubFeature == "Year Wise"):
+	if (Feature == "Expiry Map") and (SubFeature == "Yearly Trends"):
 		fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white'))) #hoverbox color is black
 		unit = "MHz"
 		if selected_operator == "":
@@ -1265,7 +1265,7 @@ if Dimension == "Spectrum Band":
 			selected_operator = selected_operator
 		subtitle = "Unit - "+unit+"; Selected Operators - "+selected_operator+ "; Summary Below - Sum of all LSAs"
 		
-	if (Feature == "Spectrum Map") and (SubFeature == "Freq Wise"):
+	if (Feature == "Spectrum Map") and (SubFeature == "Freq Layout"):
 		fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 		unit = "Ch Size - "+str(ChannelSize[Band])+" MHz"
 		if selected_operators == []:
@@ -1275,7 +1275,7 @@ if Dimension == "Spectrum Band":
 			
 		subtitle = title_map[Band]+unit+"; Selected Operators - "+', '.join(selected_operators)
 			
-	if (Feature == "Spectrum Map") and (SubFeature == "Operator Wise"):
+	if (Feature == "Spectrum Map") and (SubFeature == "Operator Holdings"):
 		fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 		if (len(selected_category) == 0) or (len(selected_category) == 2):
 			selected_category = "All"
