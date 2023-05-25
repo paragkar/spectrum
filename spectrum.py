@@ -867,7 +867,7 @@ if Dimension == "Spectrum Band":
 			data = [go.Heatmap(
 			      z = dfff.values,
 			      y = dfff.index,
-			      x = dfffe.columns,
+			      x = dfff.columns,
 			      xgap = 1,
 			      ygap = 1,
 			      hoverinfo ='text',
