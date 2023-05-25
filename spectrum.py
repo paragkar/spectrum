@@ -950,10 +950,9 @@ if Dimension == "Spectrum Band":
 					temp = bandexpcalsheetf.replace(regexfilt, np.nan, regex = True)
 					temp = temp.replace(selected_operator,'', regex = True)
 				else:
-					regexfilt = ^[0-9.]+[RU]$  #to replace na.npn with text ending RU with names with the selected operator
+					regexfilt = '^[0-9.]+[RU]$'  #to replace na.npn with text ending RU with names with the selected operator
 					st.write(regexfilt)
 					temp = bandexpcalsheetf.replace(regexfilt, np.nan, regex = True)
-					st.write(temp)
 					regexfilt = '^(?!.*'+selected_operator+').*' #to replace na.npn with text embedded with names of other than the selected operator
 					temp = bandexpcalsheetf.replace(regexfilt, np.nan, regex = True)
 					temp = temp.replace(selected_operator,'', regex = True)
