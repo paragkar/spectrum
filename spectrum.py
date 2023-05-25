@@ -187,8 +187,8 @@ def BWExpiring(sff,ef):
 	df = df.groupby(["ExpYear"])[["LSA","Operators"]].value_counts()*ChannelSize[Band]
 	df = df.reset_index()
 	df.columns =["ExpYear","LSA", "Operators","BW"]
-    	
 	st.write(df)
+	
     	return df
 
 #funtion to process pricing datframe for hovertext for auction map
