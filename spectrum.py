@@ -161,7 +161,7 @@ def forexpyearheatmap(eff):
 			lst2.append(item)
 	df = pd.DataFrame(lst2)
 	df.columns = ["LSA", "Spectrum", "ExpYrs"]
-	df = df.groupby([ExpYrs]).sum()
+	df = df.groupby('ExpYrs').sum()
 	st.write(df)
 	df.columns = df.columns.droplevel(0)
 	df.columns = [str(x) for x in df.columns]
