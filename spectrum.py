@@ -698,8 +698,6 @@ if Dimension == "Spectrum Band":
 	
 	bwf = BWExpiring(sff,ef) # hover text for expiry year heatmap year wise
 	
-	st.write(eff)
-	
 	# st.sidebar.title('Navigation')
 
 	#processing "Spectrum_all" excel tab data
@@ -913,6 +911,7 @@ if Dimension == "Spectrum Band":
 			hoverlabel_bgcolor = hcolmatrixfreqexp(hcolscale, hf) #shaping the hfcolorscale
 
 		if SubFeature == "Year Wise":
+			st.write(eff)
 			efff = pd.DataFrame()
 			bandexpcalsheetf = bandexpcalsheetf.set_index("LSA") #Loading Dataframe from BandExpCalSheet
 			operatorslist = ["All"]+sorted(list(operators[Band].keys()))
