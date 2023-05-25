@@ -939,13 +939,12 @@ if Dimension == "Spectrum Band":
 			else:
 # 				regexfilt = '^(?!.*'+selected_operator+').*' #to replace na.npn with text embedded with names of other than the selected operator
 				temp = bandexpcalsheetf.replace('^(?!.*BhartiU).*', np.nan, regex = True)
-				st.write(temp)
 # 				temp = temp.replace(selected_operator,'', regex = True)
 				temp = temp.replace('BhartiU','', regex = True)
-				st.write(temp)
 				for col in temp.columns:
 					temp[col] = temp[col].astype(float)
 				eff = forexpyearheatmap(temp)
+				st.write(eff)
 				hovertext = hovertext23(eff) #hovertext with operator selections
 			
 			parttitle ="Spectrum Expiry Map "+SubFeature
