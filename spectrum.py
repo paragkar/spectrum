@@ -912,13 +912,14 @@ if Dimension == "Spectrum Band":
 		if SubFeature == "Year Wise":
 			efff = pd.DataFrame()
 			bandexpcalsheetf = bandexpcalsheetf.set_index("LSA") #Loading Dataframe from BandExpCalSheet
-			operatorslist = sorted(list(operators[Band].keys()))
+			operatorslist = ["All"]+sorted(list(operators[Band].keys()))
 			selected_operator = st.sidebar.selectbox('Select an Operator', operatorslist)
-			if selected_operator !="":
-				regexfilt = '^(?!.*'+selected_operator+').*' #to replace na.npn with text embedded with names of other than the selected operator
-				efff = bandexpcalsheetf.replace(regexfilt, np.nan, regex = True).replace(selected_operator,"", regex = True)
-			else:
+			if selected_operator[0] == "All":
 				efff = eff.copy()
+			else:
+				regexfilt = '^(?!.*'+selected_operator+').*' #to replace na.npn with text embedded with names of other than the selected operator
+				efff = bandexpcalsheetf.replace(regexfilt, np.nan, regex = True).replace(selected_operator,"", regex = True).replace("U","", regex= True)
+			
 			hovertext = hovertext22(bwf,eff)
 			parttitle ="Spectrum Expiry Map "+SubFeature
 			tickangle = 0
