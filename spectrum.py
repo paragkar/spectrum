@@ -460,6 +460,7 @@ def hovertext_and_colmatrix4(dfff, selected_operators, operatorlist):
 		hovertext.append([])
 		for xi, xx in enumerate(dfffshare.columns):
 			share = dfffshare.values[yi][xi]
+			holdings = difff.values[yi][xi]
 			
 			if share >= 0.4 :
 				ccode = '#008000' #% spectrum share more than 40% (green)
@@ -476,11 +477,13 @@ def hovertext_and_colmatrix4(dfff, selected_operators, operatorlist):
 			hovertext[-1].append(
 					    'Circle: {}\
 					     <br>Operator: {}\
+					     <br>Holdings: {}\
 					     <br>Market Share: {} %'
 
 				     .format( 
 					    state_dict.get(yy),
 					    xx,
+					    round(holdings,2),
 					    round(share*100,2),
 					    )
 					    )
