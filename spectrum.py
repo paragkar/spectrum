@@ -696,7 +696,8 @@ if Dimension == "Spectrum Band":
 
 	eff = forexpyearheatmap(ef) # for expiry year heatmap year wise
 	
-	#st.write(eff) #debug
+	st.write(eff) #debug
+	
 	bwf = BWExpiring(sff,ef) # hover text for expiry year heatmap year wise
 	
 	
@@ -919,7 +920,6 @@ if Dimension == "Spectrum Band":
 			selected_operator = st.sidebar.selectbox('Select an Operator', operatorslist)
 			if selected_operator[0] == "All":
 				efff = eff.copy()
-				st.write(ef)
 			else:
 				regexfilt = '^(?!.*'+selected_operator+').*' #to replace na.npn with text embedded with names of other than the selected operator
 				efff = bandexpcalsheetf.replace(regexfilt, np.nan, regex = True).replace(selected_operator,"", regex = True).replace("U","", regex= True)
