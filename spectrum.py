@@ -783,8 +783,8 @@ if Dimension == "Spectrum Band":
 
 	#Processing For Dimension = "Frequency Band" & Feature 
 	if  Feature == "Spectrum Map":
-		SubFeature = st.sidebar.selectbox('Select a Sub Feature', ["Freq Layout", "Operator Holdings"],0)
-		if SubFeature == "Freq Layout":
+		SubFeature = st.sidebar.selectbox('Select a Sub Feature', ["Frequency Layout", "Operator Holdings"],0)
+		if SubFeature == "Frequency Layout":
 			sf = sff.copy()
 			operators = operators[Band]
 			hf = sf[sf.columns].replace(operators) # dataframe for hovertext
@@ -834,7 +834,7 @@ if Dimension == "Spectrum Band":
 			hcolscale=hcolscalefreqexp(operators, colcodes)  #colorscale for hoverbox
 			hoverlabel_bgcolor = hcolmatrixfreqexp(hcolscale, hf) #shaping the hfcolorscale
 			
-		if SubFeature == "Operator holdings":
+		if SubFeature == "Operator Holdings":
 			dfff = dffcopy[(dffcopy["Band"]==Band)]
 			operatorlist = sorted(list(set(dfff["OperatorNew"])))
 			selected_operators = st.sidebar.multiselect('Select Operators',operatorlist)
@@ -894,8 +894,8 @@ if Dimension == "Spectrum Band":
 
 	#Feature ="Expiry Map" linked to Dimension = "Spectrum Band"
 	if  Feature == "Expiry Map":
-		SubFeature = st.sidebar.selectbox('Select a Sub Feature', ["Freq Layout", "Yearly Trends"],0)
-		if SubFeature == "Freq Layout":
+		SubFeature = st.sidebar.selectbox('Select a Sub Feature', ["Frequency Layout", "Yearly Trends"],0)
+		if SubFeature == "Frequency Layout":
 			sf = sff.copy()
 			operators = operators[Band]
 			hf = sf[sf.columns].replace(operators) # dataframe for hovertext
@@ -1246,7 +1246,7 @@ if Dimension == "Spectrum Band":
 		
 		subtitle = "Unit - "+unit+"; Selected Operators - "+', '.join(selected_operators)+ " ; Summary Below - Sum of all LSAs"
 		
-	if (Feature == "Expiry Map") and (SubFeature == "Freq Layout"):
+	if (Feature == "Expiry Map") and (SubFeature == "Frequency Layout"):
 		fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 		unit = "Ch Size - "+str(ChannelSize[Band])+" MHz"
 		if selected_operators == []:
@@ -1265,7 +1265,7 @@ if Dimension == "Spectrum Band":
 			selected_operator = selected_operator
 		subtitle = "Unit - "+unit+"; Selected Operators - "+selected_operator+ "; Summary Below - Sum of all LSAs"
 		
-	if (Feature == "Spectrum Map") and (SubFeature == "Freq Layout"):
+	if (Feature == "Spectrum Map") and (SubFeature == "Frequency Layout"):
 		fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 		unit = "Ch Size - "+str(ChannelSize[Band])+" MHz"
 		if selected_operators == []:
