@@ -166,8 +166,10 @@ def forexpyearheatmap(eff, selected_operator):
 	df = df.pivot(index ='LSA', columns ='ExpYrs', values ='Spectrum') 
 	df = df.iloc[:,1:]
 	df.columns = [str(x) for x in df.columns]
-	if selected_operator=="All":
+	if selected_operator == "All":
 		df = df.iloc[:,1:]
+	else:
+		pass
 	df = df.fillna(0)
 	return df
 
@@ -937,8 +939,8 @@ if Dimension == "Spectrum Band":
 			bandexpcalsheetf = bandexpcalsheetf.set_index("LSA") #Loading Dataframe from BandExpCalSheet
 			operatorslist = ["All"]+sorted(list(operators[Band].keys()))
 			selected_operator = st.sidebar.selectbox('Select an Operator', operatorslist)
-			eff = forexpyearheatmap(ef,selected_operator) # for expiry year heatmap year wise
 			if selected_operator == "All":
+				eff = forexpyearheatmap(ef,selected_operator)
 				hovertext = hovertext22(bwf,eff) #hovertext for "All"
 			else:
 				regexfilt = '^(?!.*'+selected_operator+').*' #to replace na.npn with text embedded with names of other than the selected operator
