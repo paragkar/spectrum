@@ -355,13 +355,15 @@ def hovertext22(bwf,eff):
 	for yi, yy in enumerate(eff.index):
 		hovertext.append([])
 		for xi, xx in enumerate(xaxisyears):
-			opwiseexpMHz = [list(bwff[(bwff["ExpYear"]==xx) & (bwff.index ==yy)]["Op&BW"].values)]
+			opwiseexpMHz = list(bwff[(bwff["ExpYear"]==xx) & (bwff.index ==yy)]["Op&BW"].values)
+			st.write(opwiseexpMHz)
 			if opwiseexpMHz==[]:
 				opwiseexpMHz="NA"
 			else:
 				opwiseexpMHz = ', '.join(str(e) for e in opwiseexpMHz) #converting a list into string
 
 			TotalBW = list(bwff[(bwff["ExpYear"]==xx) & (bwff.index ==yy)]["BW"].values)
+			
 			if TotalBW==[]:
 				TotalBW="NA"
 			else:
