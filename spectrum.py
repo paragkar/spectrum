@@ -783,7 +783,7 @@ if Dimension == "Spectrum Band":
 
 	#Processing For Dimension = "Frequency Band" & Feature 
 	if  Feature == "Spectrum Map":
-		SubFeature = st.sidebar.selectbox('Select a Sub Feature', ["Frequency Layout", "Operator Holdings"],0)
+		SubFeature = st.sidebar.selectbox('Select a Sub Feature', ["Frequency Layout", "Operator Holdings", "Operator %Share"],0)
 		if SubFeature == "Frequency Layout":
 			sf = sff.copy()
 			operators = operators[Band]
@@ -864,13 +864,59 @@ if Dimension == "Spectrum Band":
 			tickangle = 0
 			dtickval = 1
 			
+			
+		if SubFeature == "Operator %Share":
+			dfff = dffcopy[(dffcopy["Band"]==Band)]
+			operatorlist = sorted(list(set(dfff["OperatorNew"])))
+			selected_operators = st.sidebar.multiselect('Select Operators',operatorlist)
+			selected_operators = sorted(selected_operators)
+			if len(selected_operators) >0:
+				temp = pd.DataFrame()
+				for op in selected_operators:
+					temp = pd.concat([dfff[dfff["OperatorNew"]==op],temp], axis =0)
+				dfff = temp.copy()
+			cat_dict = {'Liberalized' : 'L', 'UnLiberalized' : 'U'}
+			if len(set(dfff["Cat"])) == 2:
+				selected_category = st.sidebar.multiselect('Select a Category', ['Liberalized', 'UnLiberalized'])
+				if (len(selected_category) == 0) or (len(selected_category) == 2):
+					pass
+				else:
+					dfff = dfff[(dfff["Cat"] == cat_dict[selected_category[0]])]
+			else:
+				selected_category=[]
+				
+			dfff = dfff.groupby(["OperatorNew","Year","Batch No", "Cat"])[LSAlist].sum()
+			dfff = dfff.reset_index().drop(columns = ["Year", "Batch No", "Cat"], axis =1).groupby("OperatorNew").sum().T
+			
+			if BandType[Band]=="TDD": #doubling the TDD spectrum for aligning with normal convention 
+        			dfff = (dfff*2).round(2)
+			
+			dfffcopy =dfff.copy()
+
+			dfffcopy["Total"] = dfffcopy.sum(axis=1)
+
+			lst =[]
+
+			dfffshare = pd.DataFrame()
+			for op in selected_operators:
+				dfffcopy[op+"1"] = dfffcopy[op]/dfffcopy["Total"]
+				lst.append(op+"1")
+
+			dfffshare = dfffcopy[lst]
+			for col in dfffshare.columns:
+				dfffshare.rename(columns = {col:col[:-1]}, inplace = True) #stripping the last digit "1"
+			
+			parttitle ="Operator's Spectrum Market Share for"
+			tickangle = 0
+			dtickval = 1
+			
 			hovertext,colormatrix = hovertext_and_colmatrix4(dfff, selected_operators, operatorlist) #processing hovertext and colormatrix for operatorwise in freqband dim
 			hoverlabel_bgcolor = colormatrix #colormatrix processed from fuction "hovertext_and_colmatrix" for same above
 
 			data = [go.Heatmap(
-			      z = dfff.values,
-			      y = dfff.index,
-			      x = dfff.columns,
+			      z = dfffshare.values,
+			      y = dfffshare.index,
+			      x = dfffshare.columns,
 			      xgap = 1,
 			      ygap = 1,
 			      hoverinfo ='text',
@@ -881,16 +927,6 @@ if Dimension == "Spectrum Band":
 			    reversescale=True,)
 				]
 			
-			#preparing the summary chart below the heatmap
-			
-			summarydf = dfff.sum()
-			summarydf = pd.DataFrame(dfff.sum(axis=0)).reset_index()
-			summarydf.columns = ["Operators", "India Total"]
-			
-			#preparing the summary chart 
-			chart = summarychart(summarydf, "Operators", "India Total")
-			flag = True
-	
 
 	#Feature ="Expiry Map" linked to Dimension = "Spectrum Band"
 	if  Feature == "Expiry Map":
@@ -1289,6 +1325,25 @@ if Dimension == "Spectrum Band":
 		
 		unit = "MHz"
 		subtitle = "Unit - "+unit+"; "+"India Total - Sum of all LSAs "+"; Selected Operators - "+', '.join(selected_operators)+ "; Category - "+ selected_category
+	
+	
+	title = parttitle+" for "+str(Band)+" MHz Band"
+	
+	
+	if (Feature == "Spectrum Map") and (SubFeature == "Operator %Share"):
+		fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
+		if (len(selected_category) == 0) or (len(selected_category) == 2):
+			selected_category = "All"
+		else:
+			selected_category = selected_category[0]
+		
+		if selected_operators == []:
+			selected_operators = ["All"]
+		else:
+			selected_operators = selected_operators
+		
+		unit = '% of Total'
+		subtitle = "Unit - "+unit+ " ; Selected Operators - "+', '.join(selected_operators)+ "; Category - "+ selected_category
 	
 	
 	title = parttitle+" for "+str(Band)+" MHz Band"
