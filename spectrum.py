@@ -148,9 +148,9 @@ def colscalefreqmap(operators, colcodes):
 
 #function for calculating expiry year heatmap for yearwise
 @st.cache_resource
-def forexpyearheatmap(eff, selected_operator):
+def forexpyearheatmap(ef, selected_operator):
 	lst1 =[]
-	for i, line1 in enumerate(eff.values):
+	for i, line1 in enumerate(ef.values):
 		explst = list(set(line1))
 		l1 = [[ef.index[i],round(list(line1).count(x)*ChannelSize[Band],2), round(x,2)] for x in explst]
 		lst1.append(l1)
