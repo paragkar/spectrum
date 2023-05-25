@@ -148,7 +148,7 @@ def colscalefreqmap(operators, colcodes):
 
 #function for calculating expiry year heatmap for yearwise
 @st.cache_resource
-def forexpyearheatmap(eff):
+def forexpyearheatmap(eff, selected_operator):
 	lst1 =[]
 	for i, line1 in enumerate(eff.values):
 		explst = list(set(line1))
@@ -166,7 +166,8 @@ def forexpyearheatmap(eff):
 	df = df.pivot(index ='LSA', columns ='ExpYrs', values ='Spectrum') 
 	df = df.iloc[:,1:]
 	df.columns = [str(x) for x in df.columns]
-	df = df.iloc[:,1:]
+	if selected_operator=="All":
+		df = df.iloc[:,1:]
 	df = df.fillna(0)
 	return df
 
@@ -944,8 +945,7 @@ if Dimension == "Spectrum Band":
 				temp = temp.replace(selected_operator,'', regex = True)
 				for col in temp.columns:
 					temp[col] = temp[col].astype(float)
-				eff = forexpyearheatmap(temp)
-				st.write(eff)
+				eff = forexpyearheatmap(temp,selected_operator)
 				hovertext = hovertext23(eff) #hovertext with operator selections
 			
 			parttitle ="Spectrum Expiry Map "+SubFeature
