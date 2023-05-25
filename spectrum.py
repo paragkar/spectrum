@@ -908,11 +908,12 @@ if Dimension == "Spectrum Band":
 			if BandType[Band]=="TDD": #doubling the TDD spectrum for aligning with normal convention 
         			dfff = (dfff*2).round(2)
 				
-			st.write(dfff) #debug
 			
 			dfffcopy =dfff.copy()
 
 			dfffcopy["Total"] = dfffcopy.sum(axis=1)
+			
+			st.write(dfffcopy) #debug
 
 			lst =[]
 
