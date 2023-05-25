@@ -176,8 +176,8 @@ def forexpyearheatmap(ef, selected_operator):
 #function for calculating quantum of spectrum expiring mapped to LSA and Years for expiry map yearwise
 @st.cache_resource
 def BWExpiring(sff,eff):
-	st.write(eff)
 	lst=[]
+	st.write(sff)
 	for j, index in enumerate(eff.index):
 		for i, col in enumerate(eff.columns):
 			l= [index, sff.iloc[j,i],eff.iloc[j,i]]
