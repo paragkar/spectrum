@@ -148,9 +148,9 @@ def colscalefreqmap(operators, colcodes):
 
 #function for calculating expiry year heatmap for yearwise
 @st.cache_resource
-def forexpyearheatmap(ef):
+def forexpyearheatmap(eff):
 	lst1 =[]
-	for i, line1 in enumerate(ef.values):
+	for i, line1 in enumerate(eff.values):
 		explst = list(set(line1))
 		l1 = [[ef.index[i],round(list(line1).count(x)*ChannelSize[Band],2), round(x,2)] for x in explst]
 		lst1.append(l1)
@@ -161,6 +161,7 @@ def forexpyearheatmap(ef):
 			lst2.append(item)
 	df = pd.DataFrame(lst2)
 	df.columns = ["LSA", "Spectrum", "ExpYrs"]
+	st.write(df)
 	df = df.pivot_table(index='LSA', columns='ExpYrs', values=['Spectrum'], aggfunc='first')
 	df.columns = df.columns.droplevel(0)
 	df.columns = [str(x) for x in df.columns]
