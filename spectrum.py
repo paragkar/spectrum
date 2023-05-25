@@ -908,11 +908,8 @@ if Dimension == "Spectrum Band":
 			if BandType[Band]=="TDD": #doubling the TDD spectrum for aligning with normal convention 
         			dfff = (dfff*2).round(2)
 				
-			
 			dfffcopy =dfff.copy()
-
 			dfffcopy["Total"] = dfffcopy.sum(axis=1)
-			
 			
 			if len(selected_operators) ==0:
 				selected_operators =operatorlist
@@ -928,9 +925,8 @@ if Dimension == "Spectrum Band":
 			dfffshare = dfffcopy[lst]
 			for col in dfffshare.columns:
 				dfffshare.rename(columns = {col:col[:-1]}, inplace = True) #stripping the last digit "1"
-				
-				
-			st.write(dfffshare) #debug
+			
+			dfffshare = round(dfffshare*100,2)
 			
 			parttitle ="Operator's Spectrum Market Share for"
 			tickangle = 0
