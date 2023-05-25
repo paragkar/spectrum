@@ -957,8 +957,8 @@ if Dimension == "Spectrum Band":
 					temp = bandexpcalsheetf.replace(regexfilt, np.nan, regex = True)
 					temp = temp.replace(selected_operator,'', regex = True)
 				
-				for col in temp.columns:
-					temp[col] = temp[col].astype(float)
+# 				for col in temp.columns:
+# 					temp[col] = temp[col].astype(float)
 				eff = forexpyearheatmap(temp,selected_operator)
 				hovertext = hovertext23(eff) #hovertext with operator selections
 			
