@@ -1259,11 +1259,11 @@ if Dimension == "Spectrum Band":
 	if (Feature == "ExpiryMap") and (SubFeature == "Year Wise"):
 		fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white'))) #hoverbox color is black
 		unit = "MHz"
-		if selected_operators == []:
-			selected_operators = ["All"]
+		if selected_operator == "":
+			selected_operator = "All"
 		else:
-			selected_operators = selected_operators
-		subtitle = "Unit - "+unit+"; Selected Operators - "+', '.join(selected_operators)+" ; Summary Below - Sum of all LSAs"
+			selected_operator = selected_operator
+		subtitle = "Unit - "+unit+"; Selected Operators - "+selected_operator+ "; Summary Below - Sum of all LSAs"
 		
 	if (Feature == "FreqMap") and (SubFeature == "Freq Wise"):
 		fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
