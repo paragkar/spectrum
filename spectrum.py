@@ -913,7 +913,6 @@ if Dimension == "Spectrum Band":
 
 			dfffcopy["Total"] = dfffcopy.sum(axis=1)
 			
-			st.write(dfffcopy) #debug
 
 			lst =[]
 
@@ -925,6 +924,9 @@ if Dimension == "Spectrum Band":
 			dfffshare = dfffcopy[lst]
 			for col in dfffshare.columns:
 				dfffshare.rename(columns = {col:col[:-1]}, inplace = True) #stripping the last digit "1"
+				
+				
+			st.write(dfffshare) #debug
 			
 			parttitle ="Operator's Spectrum Market Share for"
 			tickangle = 0
