@@ -693,6 +693,8 @@ if Dimension == "Spectrum Band":
 	bandf = bandf.set_index("LSA")
 	bandexpf = bandexpf.set_index("LSA")
 	masterdf = df[masterall]
+	
+	st.write(ef) #debug
 
 	eff = forexpyearheatmap(ef) # for expiry year heatmap year wise
 	bwf = BWExpiring(sff,ef) # hover text for expiry year heatmap year wise
