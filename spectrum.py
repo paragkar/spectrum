@@ -187,7 +187,6 @@ def BWExpiring(sff,eff):
 	df.columns = ["LSA","ExpYear", "Operators", "BW"]
 # 	df = df.groupby(["ExpYear"])[["LSA","Operators"]].value_counts()*ChannelSize[Band]
 	df = df.groupby(["ExpYear", "LSA", "Operators"]).sum()
-	st.write(df)
 	df = df.reset_index()
 	df.columns =["ExpYear","LSA", "Operators","BW"]
 	return df
@@ -349,6 +348,7 @@ def hovertext21(sf,sff,ef,of,bandf,bandexpf,ExpTab,ChannelSize,xaxisadj,ayear):
 #processing for hovertext for expiry map, year wise operator selection "All"
 @st.cache_resource
 def hovertext22(bwf,eff): 
+	st.write(bwf)
 	bwf["Op&BW"] = bwf["Operators"]+" - "+round(bwf["BW"],2).astype(str)+" MHz"
 	bwff = bwf.set_index("LSA").drop(['Operators'], axis=1)
 	xaxisyears = sorted(list(set(bwff["ExpYear"])))[1:]
