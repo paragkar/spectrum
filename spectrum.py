@@ -943,8 +943,6 @@ if Dimension == "Spectrum Band":
 			flag = True #for ploting the summary chart
 			
 			hoverlabel_bgcolor = "#000000" #subdued black
-			
-			st.write(efff)
 
 			data = [go.Heatmap(
 			  z = efff.values,
