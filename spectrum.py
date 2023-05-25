@@ -700,6 +700,7 @@ if Dimension == "Spectrum Band":
 	
 	bwf = BWExpiring(sff,ef) # hover text for expiry year heatmap year wise
 	
+	st.write(bwf)
 	
 	# st.sidebar.title('Navigation')
 
