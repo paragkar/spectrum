@@ -460,7 +460,7 @@ def hovertext_and_colmatrix4(dfff, selected_operators, operatorlist):
 		hovertext.append([])
 		for xi, xx in enumerate(dfffshare.columns):
 			share = dfffshare.values[yi][xi]
-			holdings = difff.values[yi][xi]
+			holdings = dfff.values[yi][xi]
 			
 			if share >= 0.4 :
 				ccode = '#008000' #% spectrum share more than 40% (green)
