@@ -387,7 +387,7 @@ def hovertext23(eff):
 
 				     .format(
 					    state_dict.get(yy),
-					    round(xx,2), 
+					    xx, 
 					    )
 					    )
 	return hovertext
