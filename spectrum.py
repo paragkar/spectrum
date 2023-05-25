@@ -952,13 +952,15 @@ if Dimension == "Spectrum Band":
 				else:
 					regexfilt = '[0-9.]+'+selected_operator+'[RU]' #to replace na.npn with text ending RU with names with the selected operator
 					temp = bandexpcalsheetf.replace(regexfilt, np.nan, regex = True)
-					st.write(temp)
+	
 					regexfilt = '^(?!.*'+selected_operator+').*' #to replace na.npn with text embedded with names of other than the selected operator
 					temp = bandexpcalsheetf.replace(regexfilt, np.nan, regex = True)
 					temp = temp.replace(selected_operator,'', regex = True)
+					st.write(temp)
+					
 				
-# 				for col in temp.columns:
-# 					temp[col] = temp[col].astype(float)
+				for col in temp.columns:
+					temp[col] = temp[col].astype(float)
 				eff = forexpyearheatmap(temp,selected_operator)
 				hovertext = hovertext23(eff) #hovertext with operator selections
 			
