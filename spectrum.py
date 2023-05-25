@@ -910,7 +910,7 @@ if Dimension == "Spectrum Band":
 			hoverlabel_bgcolor = hcolmatrixfreqexp(hcolscale, hf) #shaping the hfcolorscale
 
 		if SubFeature == "Year Wise":
-			efff = pd.Dataframe()
+			efff = pd.DataFrame()
 			bandexpcalsheetf = bandexpcalsheetf.set_index("LSA") #Loading Dataframe from BandExpCalSheet
 			operatorslist = sorted(list(operators))
 			selected_operator = st.sidebar.selectbox('Select an Operator', operatorslist)
