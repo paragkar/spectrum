@@ -939,7 +939,7 @@ if Dimension == "Spectrum Band":
 			else:
 				regexfilt = '^(?!.*'+selected_operator+').*' #to replace na.npn with text embedded with names of other than the selected operator
 				temp = bandexpcalsheetf.replace(regexfilt, np.nan, regex = True)
-				st.write(temp)
+				st.write(bandexpcalsheetf)
 				temp = temp.replace(selected_operator,"", regex = True)
 				for col in temp.columns:
 					temp[col] = temp[col].astype(float)
