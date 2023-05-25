@@ -189,7 +189,7 @@ def BWExpiring(sff,ef):
 	df.columns =["ExpYear","LSA", "Operators","BW"]
     	
 	st.write(df)
-    return df
+    	return df
 
 #funtion to process pricing datframe for hovertext for auction map
 # @st.cache_resource
