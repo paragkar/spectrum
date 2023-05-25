@@ -925,8 +925,8 @@ if Dimension == "Spectrum Band":
 			tickangle = 0
 			dtickval = dtickauction[Band]
 			
-			for col in efff.columns:
-				efff[col] = efff[col].astype(float)
+# 			for col in efff.columns:
+# 				efff[col] = efff[col].astype(float)
 		
 			#preparing the dataframe of the summary bar chart on top of the heatmap
 			summarydf = efff.sum().reset_index()
