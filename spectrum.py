@@ -164,7 +164,6 @@ def forexpyearheatmap(ef, selected_operator):
 	df = df.groupby(['LSA','ExpYrs']).sum()
 	df = df.reset_index()
 	df = df.pivot(index ='LSA', columns ='ExpYrs', values ='Spectrum') 
-	df = df.iloc[:,1:]
 	df.columns = [str(x) for x in df.columns]
 	if selected_operator == "All":
 		df = df.iloc[:,1:]
@@ -349,7 +348,7 @@ def hovertext21(sf,sff,ef,of,bandf,bandexpf,ExpTab,ChannelSize,xaxisadj,ayear):
 def hovertext22(bwf,eff): 
 	bwf["Op&BW"] = bwf["Operators"]+" - "+round(bwf["BW"],2).astype(str)+" MHz"
 	bwff = bwf.set_index("LSA").drop(['Operators'], axis=1)
-	xaxisyears = sorted(list(set(bwff["ExpYear"])))[2:]
+	xaxisyears = sorted(list(set(bwff["ExpYear"])))[1:]
 	hovertext = []
 	for yi, yy in enumerate(eff.index):
 		hovertext.append([])
@@ -949,7 +948,7 @@ if Dimension == "Spectrum Band":
 				regexfilt = '^(?!.*'+selected_operator+').*' #to replace na.npn with text embedded with names of other than the selected operator
 				temp = bandexpcalsheetf.replace(regexfilt, np.nan, regex = True)
 				temp = temp.replace(selected_operator,'', regex = True)
-				st.write(temp)
+				st.write(temp) #debug
 				for col in temp.columns:
 					temp[col] = temp[col].astype(float)
 				eff = forexpyearheatmap(temp,selected_operator)
