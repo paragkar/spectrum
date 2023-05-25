@@ -941,7 +941,9 @@ if Dimension == "Spectrum Band":
 			selected_operator = st.sidebar.selectbox('Select an Operator', operatorslist)
 			if selected_operator == "All":
 				eff = forexpyearheatmap(ef,selected_operator)
+				st.write(eff)
 				bwf = BWExpiring(sff,eff)
+				st.write(bwf)
 				hovertext = hovertext22(bwf,eff) #hovertext for "All"
 			else:
 				regexfilt = '^(?!.*'+selected_operator+').*' #to replace na.npn with text embedded with names of other than the selected operator
