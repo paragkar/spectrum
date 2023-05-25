@@ -177,13 +177,15 @@ def forexpyearheatmap(ef, selected_operator):
 @st.cache_resource
 def BWExpiring(sff,eff):
 	lst=[]
-	st.write(sff)
+	sff.columns = [round(col,1) for col in sff.columns]
+		
 	for j, index in enumerate(eff.index):
 		for i, col in enumerate(eff.columns):
-			l= [index, sff.iloc[j,i],eff.iloc[j,i]]
+			l= [index, col, sff.iloc[j,i],eff.iloc[j,i]]
 			lst.append(l)	
 	df = pd.DataFrame(lst)
-	df.columns = ["LSA","Operators", "ExpYear"]
+	df.columns = ["LSA","ExpYear", "Operators", "BW"]
+	st.write(df)
 	df = df.groupby(["ExpYear"])[["LSA","Operators"]].value_counts()*ChannelSize[Band]
 	df = df.reset_index()
 	df.columns =["ExpYear","LSA", "Operators","BW"]
