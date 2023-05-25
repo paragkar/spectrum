@@ -913,7 +913,6 @@ if Dimension == "Spectrum Band":
 			efff = pd.DataFrame()
 			bandexpcalsheetf = bandexpcalsheetf.set_index("LSA") #Loading Dataframe from BandExpCalSheet
 			operatorslist = sorted(list(operators[Band].keys()))
-			st.write(operatorslist)
 			selected_operator = st.sidebar.selectbox('Select an Operator', operatorslist)
 			if selected_operator !="":
 				regexfilt = '^(?!.*'+selected_operator+').*' #to replace na.npn with text embedded with names of other than the selected operator
@@ -924,6 +923,9 @@ if Dimension == "Spectrum Band":
 			parttitle ="Spectrum Expiry Map "+SubFeature
 			tickangle = 0
 			dtickval = dtickauction[Band]
+			
+			for col in efff.columns:
+				efff[col] = efff[col].astype(float)
 		
 			#preparing the dataframe of the summary bar chart on top of the heatmap
 			summarydf = efff.sum().reset_index()
