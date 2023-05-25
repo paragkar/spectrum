@@ -913,9 +913,10 @@ if Dimension == "Spectrum Band":
 
 			dfffcopy["Total"] = dfffcopy.sum(axis=1)
 			
+			
+			st.write(selected_operators)
 
 			lst =[]
-
 			dfffshare = pd.DataFrame()
 			for op in selected_operators:
 				dfffcopy[op+"1"] = dfffcopy[op]/dfffcopy["Total"]
