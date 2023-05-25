@@ -348,6 +348,7 @@ def hovertext21(sf,sff,ef,of,bandf,bandexpf,ExpTab,ChannelSize,xaxisadj,ayear):
 #processing for hovertext for expiry map, year wise operator selection "All"
 @st.cache_resource
 def hovertext22(bwf,eff): 
+	st.write(bwf)
 	bwf["Op&BW"] = bwf["Operators"]+" - "+round(bwf["BW"],2).astype(str)+" MHz"
 	bwff = bwf.set_index("LSA").drop(['Operators'], axis=1)
 	bwff = bwff.replace(0,np.nan).dropna(axis=0)
@@ -356,7 +357,7 @@ def hovertext22(bwf,eff):
 		hovertext.append([])
 		for xi, xx in enumerate(eff.columns):
 			opwiseexpMHz = [list(bwff[(bwff["ExpYear"]==xx) & (bwff.index ==yy)]["Op&BW"].values)]
-			st.write(opwiseexpMHz)
+# 			st.write(opwiseexpMHz)
 			if opwiseexpMHz==[]:
 				opwiseexpMHz="NA"
 			else:
