@@ -893,7 +893,7 @@ if Dimension == "Spectrum Band":
 	
 
 	#Feature ="Expiry Map" linked to Dimension = "Spectrum Band"
-	if  Feature == "ExpiryMap":
+	if  Feature == "Expiry Map":
 		SubFeature = st.sidebar.selectbox('Select a Sub Feature', ["Freq Wise", "Year Wise"],0)
 		if SubFeature == "Freq Wise":
 			sf = sff.copy()
@@ -996,7 +996,7 @@ if Dimension == "Spectrum Band":
 
 
 	#Feature ="Auction Map" linked to Dimension = "Spectrum Band"
-	if  Feature == "AuctionMap":
+	if  Feature == "Auction Map":
 		#This dict has been defined for the Feature = Auction Map
 		type_dict ={"Auction Price": auctionprice,
 			    "Reserve Price": reserveprice, 
