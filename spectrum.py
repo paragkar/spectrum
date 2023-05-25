@@ -351,11 +351,10 @@ def hovertext22(bwf,eff):
 	bwf["Op&BW"] = bwf["Operators"]+" - "+round(bwf["BW"],2).astype(str)+" MHz"
 	bwff = bwf.set_index("LSA").drop(['Operators'], axis=1)
 	temp = bwff.replace(0,np.nan).dropna(axis=0)
-	xaxisyears = sorted(list(set(bwff["ExpYear"])))
 	hovertext = []
 	for yi, yy in enumerate(eff.index):
 		hovertext.append([])
-		for xi, xx in enumerate(xaxisyears):
+		for xi, xx in enumerate(eff.columns):
 			opwiseexpMHz = [list(bwff[(bwff["ExpYear"]==xx) & (bwff.index ==yy)]["Op&BW"].values)]
 			if opwiseexpMHz==[]:
 				opwiseexpMHz="NA"
