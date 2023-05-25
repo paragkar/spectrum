@@ -942,6 +942,7 @@ if Dimension == "Spectrum Band":
 				st.write(temp)
 # 				temp = temp.replace(selected_operator,'', regex = True)
 				temp = temp.replace('BhartiU','', regex = True)
+				st.write(temp)
 				for col in temp.columns:
 					temp[col] = temp[col].astype(float)
 				eff = forexpyearheatmap(temp)
