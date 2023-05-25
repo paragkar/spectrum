@@ -147,7 +147,7 @@ def colscalefreqmap(operators, colcodes):
 	return colorscale
 
 #function for calculating expiry year heatmap for yearwise
-@st.cache_resource
+# @st.cache_resource
 def forexpyearheatmap(ef):
 	lst1 =[]
 	for i, line1 in enumerate(ef.values):
@@ -693,8 +693,6 @@ if Dimension == "Spectrum Band":
 	bandf = bandf.set_index("LSA")
 	bandexpf = bandexpf.set_index("LSA")
 	masterdf = df[masterall]
-	
-	st.write(ef) #debug
 
 	eff = forexpyearheatmap(ef) # for expiry year heatmap year wise
 	bwf = BWExpiring(sff,ef) # hover text for expiry year heatmap year wise
