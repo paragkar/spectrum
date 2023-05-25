@@ -952,7 +952,7 @@ if Dimension == "Spectrum Band":
 				else:
 					selected_operator = selected_operator+"U" #for taking care of U in attached in the last of the operator
 					st.write(selected_operator)
-					regexfilt = '[\d.]+'selected_operator #to replace na.npn with text embedded with names with the selected operator
+					regexfilt = '[\d.]+'+selected_operator #to replace na.npn with text embedded with names with the selected operator
 					temp = bandexpcalsheetf.replace(regexfilt, np.nan, regex = True)
 					st.write(temp)
 # 					selected_operator = selected_operator+"R" #for taking care of R attached in the last of the operator
