@@ -913,6 +913,7 @@ if Dimension == "Spectrum Band":
 			efff = pd.DataFrame()
 			bandexpcalsheetf = bandexpcalsheetf.set_index("LSA") #Loading Dataframe from BandExpCalSheet
 			operatorslist = sorted(list(operators.keys()))
+			st.write(operatorslist)
 			selected_operator = st.sidebar.selectbox('Select an Operator', operatorslist)
 			if selected_operator !="":
 				regexfilt = '^(?!.*'+selected_operator+').*' #to replace na.npn with text embedded with names of other than the selected operator
