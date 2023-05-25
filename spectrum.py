@@ -477,7 +477,7 @@ def hovertext_and_colmatrix4(dfff, selected_operators, operatorlist):
 			hovertext[-1].append(
 					    'Circle: {}\
 					     <br>Operator: {}\
-					     <br>Holdings: {}\
+					     <br>Holdings: {} MHz\
 					     <br>Market Share: {} %'
 
 				     .format( 
