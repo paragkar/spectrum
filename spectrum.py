@@ -1254,7 +1254,7 @@ if Dimension == "Spectrum Band":
 		else:
 			selected_operators = selected_operators
 			
-		subtitle = title_map[Band]+unit+"; Selected Operators - "+', '.join(selected_operators)+"; [ToolTip Color = Operator]"
+		subtitle = title_map[Band]+unit+"; Selected Operators - "+', '.join(selected_operators)
 	
 	if (Feature == "Expiry Map") and (SubFeature == "Year Wise"):
 		fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white'))) #hoverbox color is black
