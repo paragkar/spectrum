@@ -175,21 +175,21 @@ def forexpyearheatmap(ef, selected_operator):
 
 #function for calculating quantum of spectrum expiring mapped to LSA and Years for expiry map yearwise
 @st.cache_resource
-def BWExpiring(sff,eff):
+def BWExpiring(sff,ef):
 	lst=[]
-	sff.columns = [round(col,1) for col in sff.columns]
-		
-	for j, index in enumerate(eff.index):
-		for i, col in enumerate(eff.columns):
-			l= [index, col, sff.iloc[j,i],eff.iloc[j,i]]
-			lst.append(l)	
+	for j, index in enumerate(ef.index):
+
+		for i, col in enumerate(ef.columns):
+		    l= [index, sff.iloc[j,i],ef.iloc[j,i]]
+		    lst.append(l)
 	df = pd.DataFrame(lst)
-	df.columns = ["LSA","ExpYear", "Operators", "TotalBW"]
-	df = df.groupby(["LSA", "ExpYear", "Operators"])[["Operators"]].count()*ChannelSize[Band]
+	df.columns = ["LSA","Operators", "ExpYear"]
+	df = df.groupby(["ExpYear"])[["LSA","Operators"]].value_counts()*ChannelSize[Band]
+	df = df.reset_index()
+	df.columns =["ExpYear","LSA", "Operators","BW"]
+    	
 	st.write(df)
-# 	df = df.reset_index()
-	df.columns =["ExpYear","LSA", "Operators","TotalBW"]
-	return df
+    return df
 
 #funtion to process pricing datframe for hovertext for auction map
 # @st.cache_resource
@@ -945,7 +945,7 @@ if Dimension == "Spectrum Band":
 			selected_operator = st.sidebar.selectbox('Select an Operator', operatorslist)
 			if selected_operator == "All":
 				eff = forexpyearheatmap(ef,selected_operator)
-				bwf = BWExpiring(sff,eff)
+				bwf = BWExpiring(sff,ef)
 				hovertext = hovertext22(bwf,eff) #hovertext for "All"
 			else:
 				regexfilt = '^(?!.*'+selected_operator+').*' #to replace na.npn with text embedded with names of other than the selected operator
