@@ -864,6 +864,9 @@ if Dimension == "Spectrum Band":
 			tickangle = 0
 			dtickval = 1
 			
+			hovertext,colormatrix = hovertext_and_colmatrix4(dfff, selected_operators, operatorlist) #processing hovertext and colormatrix for operatorwise in freqband dim
+			hoverlabel_bgcolor = colormatrix #colormatrix processed from fuction "hovertext_and_colmatrix" for same above
+			
 			data = [go.Heatmap(
 			      z = dfff.values,
 			      y = dfff.index,
