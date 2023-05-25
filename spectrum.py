@@ -928,7 +928,7 @@ if Dimension == "Spectrum Band":
 			
 			dfffshare = round(dfffshare*100,2)
 			
-			parttitle ="Operator's Spectrum Market Share for"
+			parttitle ="Operator's Spectrum Market Share"
 			tickangle = 0
 			dtickval = 1
 			
