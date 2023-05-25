@@ -949,6 +949,7 @@ if Dimension == "Spectrum Band":
 				regexfilt = '^(?!.*'+selected_operator+').*' #to replace na.npn with text embedded with names of other than the selected operator
 				temp = bandexpcalsheetf.replace(regexfilt, np.nan, regex = True)
 				temp = temp.replace(selected_operator,'', regex = True)
+				st.write(temp)
 				for col in temp.columns:
 					temp[col] = temp[col].astype(float)
 				eff = forexpyearheatmap(temp,selected_operator)
