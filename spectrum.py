@@ -945,10 +945,22 @@ if Dimension == "Spectrum Band":
 				bwf = BWExpiring(sff,ef)
 				hovertext = hovertext22(bwf,eff) #hovertext for "All"
 			else:
-				regexfilt = '^(?!.*'+selected_operator+').*' #to replace na.npn with text embedded with names of other than the selected operator
-				temp = bandexpcalsheetf.replace(regexfilt, np.nan, regex = True)
-				temp = temp.replace(selected_operator,'', regex = True)
-				st.write(temp) #debug
+				if selected_operator[-1] in ["R", "U"]: #Last letter of the operator ending with R or U
+					regexfilt = '^(?!.*'+selected_operator+').*' #to replace na.npn with text embedded with names of other than the selected operator
+					temp = bandexpcalsheetf.replace(regexfilt, np.nan, regex = True)
+					temp = temp.replace(selected_operator,'', regex = True)
+				else:
+					selected_operator = selected_operator+"U" #for taking care of U in attached in the last of the operator
+					regexfilt = '(?!.*'+selected_operator+').*' #to replace na.npn with text embedded with names with the selected operator
+					temp = bandexpcalsheetf.replace(regexfilt, np.nan, regex = True)
+					selected_operator = selected_operator+"R" #for taking care of R attached in the last of the operator
+					regexfilt = '(?!.*'+selected_operator+').*' #to replace na.npn with text embedded with names with the selected operator
+					temp = bandexpcalsheetf.replace(regexfilt, np.nan, regex = True)
+					
+					regexfilt = '^(?!.*'+selected_operator+').*' #to replace na.npn with text embedded with names of other than the selected operator
+					temp = bandexpcalsheetf.replace(regexfilt, np.nan, regex = True)
+					temp = temp.replace(selected_operator,'', regex = True)
+				
 				for col in temp.columns:
 					temp[col] = temp[col].astype(float)
 				eff = forexpyearheatmap(temp,selected_operator)
