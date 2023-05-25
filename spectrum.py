@@ -350,7 +350,7 @@ def hovertext22(bwf,eff):
 	bwf["Op&BW"] = bwf["Operators"]+" - "+round(bwf["BW"],2).astype(str)+" MHz"
 	bwff = bwf.set_index("LSA").drop(['Operators'], axis=1)
 	st.write(bwff)
-	xaxisyears = sorted(list(set(bwff["ExpYear"])))[1:]
+	xaxisyears = sorted(list(set(bwff["ExpYear"])))
 	hovertext = []
 	for yi, yy in enumerate(eff.index):
 		hovertext.append([])
