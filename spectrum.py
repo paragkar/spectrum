@@ -175,12 +175,12 @@ def forexpyearheatmap(eff, selected_operator):
 
 #function for calculating quantum of spectrum expiring mapped to LSA and Years for expiry map yearwise
 @st.cache_resource
-def BWExpiring(sff,ef):
+def BWExpiring(sff,eff):
 	
 	lst=[]
-	for j, index in enumerate(ef.index):
-		for i, col in enumerate(ef.columns):
-			l= [index, sff.iloc[j,i],ef.iloc[j,i]]
+	for j, index in enumerate(eff.index):
+		for i, col in enumerate(eff.columns):
+			l= [index, sff.iloc[j,i],eff.iloc[j,i]]
 			lst.append(l)	
 	df = pd.DataFrame(lst)
 	df.columns = ["LSA","Operators", "ExpYear"]
@@ -721,7 +721,7 @@ if Dimension == "Spectrum Band":
 
 # 	eff = forexpyearheatmap(ef) # for expiry year heatmap year wise
 	
-	bwf = BWExpiring(sff,ef) # hover text for expiry year heatmap year wise
+# 	bwf = BWExpiring(sff,ef) # hover text for expiry year heatmap year wise
 	
 	# st.sidebar.title('Navigation')
 
@@ -941,6 +941,7 @@ if Dimension == "Spectrum Band":
 			selected_operator = st.sidebar.selectbox('Select an Operator', operatorslist)
 			if selected_operator == "All":
 				eff = forexpyearheatmap(ef,selected_operator)
+				bwf = BWExpiring(sff,eff)
 				hovertext = hovertext22(bwf,eff) #hovertext for "All"
 			else:
 				regexfilt = '^(?!.*'+selected_operator+').*' #to replace na.npn with text embedded with names of other than the selected operator
