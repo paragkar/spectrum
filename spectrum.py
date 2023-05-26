@@ -303,7 +303,7 @@ def htext_specmap_freq_layout(sf):
 
 #processing for hovertext for expiry map, freq wise
 @st.cache_resource
-def hovertext21(sf,sff,ef,of,bandf,bandexpf,exptab_dict,channelsize_dict,xaxisadj_dict,ayear):
+def htext_expmap_freq_layout(sf):
 	hovertext = []
 	for yi, yy in enumerate(sf.index):
 		hovertext.append([])
@@ -977,7 +977,7 @@ if Dimension == "Spectrum Band":
 
 				expf = pd.DataFrame(sf.values*ef.values, columns=ef.columns, index=ef.index)
 
-			hovertext = hovertext21(hf,sff,ef, of, bandf, bandexpf, exptab_dict,channelsize_dict,xaxisadj_dict,ayear)
+			hovertext = htext_expmap_freq_layout(hf)
 			parttitle ="Spectrum Expiry Layout "+SubFeature
 			tickangle = -90
 			dtickval = xdtickfreq_dict[Band]
