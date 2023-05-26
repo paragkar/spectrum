@@ -1352,6 +1352,8 @@ if selected_dimension == "Telecom Data":
 
 	df5gbts["Date"] = df5gbts["Date"].dt.date
 
+	df5gbts.drop(columns = "S.No", inplace = True)
+
 	st.write(df5gbts)
 
 
