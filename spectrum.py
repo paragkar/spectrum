@@ -695,7 +695,7 @@ def summarychart(summarydf, xcolumn, ycolumn):
 #**********  Main Program Starts here ***************
 
 with st.sidebar:
-	selected_dimension = option_menue(
+	selected_dimension = option_menu(
 		menue_title = "Main Menu",
 		options = ["Spectrum Band", "Auction Year"]
 		)
