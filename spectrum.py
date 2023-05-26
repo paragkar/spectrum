@@ -838,7 +838,6 @@ if Dimension == "Spectrum Band":
 			hoverlabel_bgcolor = transform_colscale_for_spec_exp_maps(hcolscale, hf) #shaping the hfcolorscale
 			
 		if SubFeature == "Operator Holdings":
-			selected_operators=[]
 			dfff = dffcopy[(dffcopy["Band"]==Band)]
 			operatorlist = sorted(list(set(dfff["OperatorNew"])))
 			selected_operators = st.sidebar.multiselect('Select Operators',operatorlist)
@@ -887,7 +886,6 @@ if Dimension == "Spectrum Band":
 			
 			
 		if SubFeature == "Operator %Share":
-			selected_operators=[]
 			dfff = dffcopy[(dffcopy["Band"]==Band)]
 			operatorlist = sorted(list(set(dfff["OperatorNew"])))
 			selected_operators = st.sidebar.multiselect('Select Operators',operatorlist)
@@ -919,13 +917,13 @@ if Dimension == "Spectrum Band":
 			selected_operators = list(dfffcopy.columns[:-1]) #new selected operators after category level filtering 
 			
 			if len(selected_operators) ==0:
-				selected_operators =operatorlist
+				operator_numbers =operatorlist
 			else:
 				pass
 
 			lst =[]
 			dfffshare = pd.DataFrame()
-			for op in selected_operators:
+			for op in operator_numbers:
 				dfffcopy[op+"1"] = dfffcopy[op]/dfffcopy["Total"]
 				lst.append(op+"1")
 
