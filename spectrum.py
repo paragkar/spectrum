@@ -12,6 +12,18 @@ import matplotlib.pyplot as plt
 import altair as alt
 
 
+#hide streamlit style
+
+hide_st_style = '''
+				<style>
+				#MainMenu {visibility : hidden;}
+				footer {visibility : hidder;}
+				header {visibility :hidden;}
+				<style>
+				'''
+st.martkdown(hide_st_style, unsafe_allow_html =True)
+
+
 #Setting Page layout
 st.set_page_config(layout="wide")
 #set summary chart flag
