@@ -1348,8 +1348,11 @@ if selected_dimension == "Telecom Data":
 	sheett = xlt.sheet_names
 	dft = pd.read_excel(excel_content, sheet_name=sheett)
 
-	st.write(dft["5GBTS"])
+	df5gbts = dft["5GBTS"]
 
+	df5gbts["Date"] = df5gbts["Date"].dt.date
+
+	st.write(df5gbts)
 
 
 
