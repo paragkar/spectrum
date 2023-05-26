@@ -1356,10 +1356,12 @@ if selected_dimension == "Telecom Data":
 
 	df5gbtsf = pd.pivot(df5gbts, values ="Total", index = "StateCode", columns = "Date")
 
-	df5gbtsf = df5gbtsf.sort_values("2023-05-25").head(20)
+	st.write(df5gbtsf)
+
+	# df5gbtsf = df5gbtsf.sort_values("2023-05-25").head(20)
 
 	#setting the data of the heatmap 
-	
+
 	data = [go.Heatmap(
 		z = df5gbtsf.values,
 		y = df5gbtsf.index,
