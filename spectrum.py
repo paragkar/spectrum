@@ -1379,6 +1379,7 @@ if selected_dimension == "Telecom Data":
 
 	tickangle=0
 	dtickval=1
+	title = "5G BTS Roll Out Trends"
 
 
 units_dict = {"Reserve Price" : "Rs Cr/MHz", "Auction Price" : "Rs Cr/MHz", "Quantum Offered": "MHz", 
