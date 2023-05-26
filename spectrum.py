@@ -817,7 +817,7 @@ if selected_dimension == "Spectrum Band":
 			operators = newoperators_dict[Band]
 			hf = sf[sf.columns].replace(operators) # dataframe for hovertext
 			operatorslist = sorted(list(operators.keys()))
-			selected_operators = st.sidebar.multiselect('Select Operators', operatorslist)
+			selected_operators = st.sidebar.multiselect('Filter by Operators', operatorslist)
 			if selected_operators==[]:
 				sf[sf.columns] = sf[sf.columns].replace(operators) 
 				colorscale = colscalefreqlayout(operators, colcodes)
@@ -866,7 +866,7 @@ if selected_dimension == "Spectrum Band":
 			selected_operators=[]
 			dfff = dffcopy[(dffcopy["Band"]==Band)]
 			operatorlist = sorted(list(set(dfff["OperatorNew"])))
-			selected_operators = st.sidebar.multiselect('Select Operators',operatorlist)
+			selected_operators = st.sidebar.multiselect('Filter by Operators',operatorlist)
 			selected_operators = sorted(selected_operators)
 			if len(selected_operators) >0:
 				temp = pd.DataFrame()
@@ -915,7 +915,7 @@ if selected_dimension == "Spectrum Band":
 			selected_operators=[]
 			dfff = dffcopy[(dffcopy["Band"]==Band)]
 			operatorlist = sorted(list(set(dfff["OperatorNew"])))
-			selected_operators = st.sidebar.multiselect('Select Operators',operatorlist)
+			selected_operators = st.sidebar.multiselect('Filter by Operators',operatorlist)
 			selected_operators = sorted(selected_operators)
 			if len(selected_operators) >0:
 				temp = pd.DataFrame()
@@ -992,7 +992,7 @@ if selected_dimension == "Spectrum Band":
 			for op in operatorstoremove:
 				if op in operatorslist:
 					operatorslist.remove(op)
-			selected_operators = st.sidebar.multiselect('Select Operators', operatorslist)
+			selected_operators = st.sidebar.multiselect('Filter by Operators', operatorslist)
 			if selected_operators==[]:
 				expf = ef
 			else:
@@ -1165,7 +1165,7 @@ if selected_dimension == "Auction Year":
 			df1 = df1.reset_index()
 			df1_temp2 = df1.set_index(["Band","Circle"])
 			operatorslist = oldoperators_dict[Year]
-			selected_operators = st.sidebar.multiselect('Select Operators', operatorslist)
+			selected_operators = st.sidebar.multiselect('Filter by Operators', operatorslist)
 			if selected_operators== []:
 				df1_temp2["Total Outflow"] = df1_temp2[subfeature_dict["Auction Price"]]*df1_temp2["Total Sold (MHz)"]
 			else:
