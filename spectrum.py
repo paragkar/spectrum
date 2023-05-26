@@ -242,7 +242,7 @@ def adddummycols(df,col):
 
 #function to calculate the year in which the spectrum was acquired
 @st.cache_resource
-def auctioncalyear(ef,excepf,pf1):
+def cal_year_spectrum_acquired(ef,excepf,pf1):
 	lst=[]
 	for col in ef.columns:
 		for i, (efval,excepfval) in enumerate(zip(ef[col].values, excepf[col].values)):
@@ -780,7 +780,7 @@ if Dimension == "Spectrum Band":
 	reserveprice = reserveprice.replace(0,"NA")
 
 	#mapping the year of auction with channels in the freq maps
-	ayear = auctioncalyear(ef,excepf,pf1)
+	ayear = cal_year_spectrum_acquired(ef,excepf,pf1)
 
 	Feature = st.sidebar.selectbox('Select a Feature', ["Spectrum Map", "Expiry Map", "Auction Map"], 0) #Default Index first
 
