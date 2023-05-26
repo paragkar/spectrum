@@ -95,18 +95,18 @@ xdtickauction_dict = {700:1, 800:1, 900:1, 1800:1, 2100:1, 2300:1, 2500:1, 3500:
 #xgap_dict sets the vertical line widths of the heatmaps
 xgap_dict = {700:1, 800:1, 900:0.5, 1800:0, 2100:1, 2300:1, 2500:1, 3500:1, 26000:1}
 
-#xaxisadj_dict adjustment need for tool tip display data for channel frequency
-xaxisadj_dict = {700:1, 800:0.25, 900:0, 1800:0, 2100:1, 2300:1, 2500:2, 3500:0, 26000:0}
+# adjustment need for tool tip display data for channel frequency
+xaxisadj = {700:1, 800:0.25, 900:0, 1800:0, 2100:1, 2300:1, 2500:2, 3500:0, 26000:0}
 
-#bandtype dict defines the type of band - FDD or TDD
-bandtype_dict = {700:"FDD", 800:"FDD", 900:"FDD", 1800:"FDD", 2100:"FDD", 2300:"TDD", 2500:"TDD", 3500:"TDD", 26000:"TDD"}
+#describing the type of band TDD/FDD
+BandType = {700:"FDD", 800:"FDD", 900:"FDD", 1800:"FDD", 2100:"FDD", 2300:"TDD", 2500:"TDD", 3500:"TDD", 26000:"TDD"}
 
 #auctionfailyears when all auction prices are zero and there are no takers 
-auctionfailyears_dict = {700:["2016","2021"], 800:["2012"], 900:["2013","2016"], 1800:["2013"], 
+auctionfailyears = {700:["2016","2021"], 800:["2012"], 900:["2013","2016"], 1800:["2013"], 
         2100:[], 2300:["2022"], 2500:["2021"], 3500:[], 26000:[]}
 
-#auctionsucessyears are years where at least in one circle there was a winner
-auctionsucessyears_dict = {700:[2022], 
+#auction sucess years are years where at least in one circle there was a winner
+auctionsucessyears = {700:[2022], 
         800:[2013, 2015, 2016, 2021, 2022], 
         900:[2014, 2015, 2021, 2022], 
         1800:[2012, 2014, 2015, 2016, 2021, 2022], 
@@ -118,9 +118,9 @@ auctionsucessyears_dict = {700:[2022],
 
 #Error is added to auction closing date so that freq assignment dates fall within the window.
 #This helps to identify which expiry year is linked to which operators
-errors_dict= {700:0.25, 800:1, 900:1, 1800:1, 2100:1.5, 2300:1.25, 2500:1, 3500:0.1, 26000:0.5}
+errors= {700:0.25, 800:1, 900:1, 1800:1, 2100:1.5, 2300:1.25, 2500:1, 3500:0.1, 26000:0.5}
 
-list_of_circles= ['AP','AS', 'BH', 'DL', 'GU', 'HA', 'HP', 'JK', 'KA', 'KE', 'KO', 'MA', 'MP',
+LSAlist = ['AP','AS', 'BH', 'DL', 'GU', 'HA', 'HP', 'JK', 'KA', 'KE', 'KO', 'MA', 'MP',
        	   'MU', 'NE', 'OR', 'PU', 'RA', 'TN', 'UPE', 'UPW', 'WB']
 
 #defining various functions 
@@ -201,7 +201,7 @@ def processdff(dff):
 		dff[col]=dff[col].astype(float)
 	dff = dff.groupby(["OperatorOld", "Year"]).sum()
 	dff = dff.drop(['Batch No',], axis = 1) 
-	if bandtype_dict[Band]=="TDD": #doubling the TDD spectrum for aligning with normal convention 
+	if BandType[Band]=="TDD": #doubling the TDD spectrum for aligning with normal convention 
 		dff = (dff*2).round(2)
 	dff = dff.replace(0,"")
 	dff= dff.reset_index().set_index("Year")
@@ -220,7 +220,7 @@ def processdff(dff):
 	dff = temp.groupby("Year").sum()
 	dff =dff.T
 	dff = dff.reset_index()
-	dff.columns = ["LSA"]+auctionsucessyears_dict[Band]
+	dff.columns = ["LSA"]+auctionsucessyears[Band]
 	dff = dff.set_index("LSA")
 	return dff
 
@@ -252,8 +252,8 @@ def auctioncalyear(ef,excepf,pf1):
 					error = abs(efval-pf1val[6]) #orignal
 				else:
 					error = 0
-				if (ef.index[i] == pf1val[0]) and error <= errors_dict[Band]:
-					lst.append([ef.index[i],col-xaxisadj_dict[Band],pf1val[1],pf1val[2], pf1val[3], pf1val[4], error]) 
+				if (ef.index[i] == pf1val[0]) and error <= errors[Band]:
+					lst.append([ef.index[i],col-xaxisadj[Band],pf1val[1],pf1val[2], pf1val[3], pf1val[4], error]) 
 				
 	df_final = pd.DataFrame(lst)
 	df_final.columns = ["LSA", "StartFreq", "TP", "RP", "AP", "Year", "Error"]
@@ -263,7 +263,7 @@ def auctioncalyear(ef,excepf,pf1):
   
 #processing for hovertext for freq map, band wise
 @st.cache_resource
-def hovertext1(sf,sff,ef,of,ayear,bandf,exptabflag_dict,channelsize_dict,xaxisadj_dict):  
+def hovertext1(sf,sff,ef,of,ayear,bandf,exptabflag_dict,channelsize_dict,xaxisadj):  
 	hovertext = []
 	for yi, yy in enumerate(sf.index):
 		hovertext.append([])
@@ -273,7 +273,7 @@ def hovertext1(sf,sff,ef,of,ayear,bandf,exptabflag_dict,channelsize_dict,xaxisad
 			else:
 				expiry = "NA"
 			try:
-			    auction_year = round(ayear.loc[yy,round(xx-xaxisadj_dict[Band],3)])
+			    auction_year = round(ayear.loc[yy,round(xx-xaxisadj[Band],3)])
 			except:
 			    auction_year ="NA"
 				
@@ -290,7 +290,7 @@ def hovertext1(sf,sff,ef,of,ayear,bandf,exptabflag_dict,channelsize_dict,xaxisad
 					     <br>Acquired In: {} by {}'
 
 				     .format(
-					    round(xx-xaxisadj_dict[Band],2),
+					    round(xx-xaxisadj[Band],2),
 					    channelsize_dict[Band],
 					    state_dict.get(yy),
 					    operatornew,
@@ -304,7 +304,7 @@ def hovertext1(sf,sff,ef,of,ayear,bandf,exptabflag_dict,channelsize_dict,xaxisad
 
 #processing for hovertext for expiry map, freq wise
 @st.cache_resource
-def hovertext21(sf,sff,ef,of,bandf,bandexpf,exptabflag_dict,channelsize_dict,xaxisadj_dict,ayear):
+def hovertext21(sf,sff,ef,of,bandf,bandexpf,exptabflag_dict,channelsize_dict,xaxisadj,ayear):
 	hovertext = []
 	for yi, yy in enumerate(sf.index):
 		hovertext.append([])
@@ -314,7 +314,7 @@ def hovertext21(sf,sff,ef,of,bandf,bandexpf,exptabflag_dict,channelsize_dict,xax
 			else:
 				expiry = "NA"
 			try:
-			    auction_year = round(ayear.loc[yy,round(xx-xaxisadj_dict[Band],3)])
+			    auction_year = round(ayear.loc[yy,round(xx-xaxisadj[Band],3)])
 			except:
 			    auction_year ="NA"
 			operatornew = sff.values[yi][xi]
@@ -331,7 +331,7 @@ def hovertext21(sf,sff,ef,of,bandf,bandexpf,exptabflag_dict,channelsize_dict,xax
 					     <br>Acquired In: {} by {}'
 
 				     .format(
-					    round(xx-xaxisadj_dict[Band],2),
+					    round(xx-xaxisadj[Band],2),
 					    channelsize_dict[Band],
 					    state_dict.get(yy),
 					    operatornew,
@@ -735,7 +735,7 @@ if Dimension == "Spectrum Band":
 	dffcopy = dff.copy() #make a copy for "Operator Wise" subfeature under the feature "FreqMap"
 	dff = processdff(dff)
 	dff = coltostr(dff)
-	dff = adddummycols(dff,auctionfailyears_dict[Band])
+	dff = adddummycols(dff,auctionfailyears[Band])
 	dff = dff.applymap(lambda x: "NA  " if x=="" else x) # space with NA is delibelitratly added as it gets removed with ","
 
 	#processing pricemaster excel tab data
@@ -769,7 +769,7 @@ if Dimension == "Spectrum Band":
 	auctionprice = auctionprice.loc[:, (auctionprice != 0).any(axis=0)]
 	auctionprice = auctionprice.applymap(lambda x: round(x,2))
 	auctionprice = coltostr(auctionprice) #convert columns data type to string
-	auctionprice = adddummycols(auctionprice,auctionfailyears_dict[Band])
+	auctionprice = adddummycols(auctionprice,auctionfailyears[Band])
 	auctionprice = auctionprice.replace(0,"NA")
 
 	#processing & restructuring dataframe reserve price for hovertext of data3
@@ -811,7 +811,7 @@ if Dimension == "Spectrum Band":
 				tickvals = list(selected_op_dict.values())
 				ticktext = list(selected_op_dict.keys())	
 
-			hovertext = hovertext1(hf,sff,ef, of, ayear, bandf, exptabflag_dict,channelsize_dict,xaxisadj_dict)
+			hovertext = hovertext1(hf,sff,ef, of, ayear, bandf, exptabflag_dict,channelsize_dict,xaxisadj)
 			parttitle ="Spectrum Frequency Layout"
 			tickangle = -90
 			dtickval = xdtickfreq_dict[Band]
@@ -858,10 +858,10 @@ if Dimension == "Spectrum Band":
 			else:
 				selected_category=[]
 				
-			dfff = dfff.groupby(["OperatorNew","Year","Batch No", "Cat"])[list_of_circles].sum()
+			dfff = dfff.groupby(["OperatorNew","Year","Batch No", "Cat"])[LSAlist].sum()
 			dfff = dfff.reset_index().drop(columns = ["Year", "Batch No", "Cat"], axis =1).groupby("OperatorNew").sum().T
 			
-			if bandtype_dict[Band]=="TDD": #doubling the TDD spectrum for aligning with normal convention 
+			if BandType[Band]=="TDD": #doubling the TDD spectrum for aligning with normal convention 
         			dfff = (dfff*2).round(2)
 			
 			parttitle ="Operator Holdings for"
@@ -906,10 +906,10 @@ if Dimension == "Spectrum Band":
 			else:
 				selected_category=[]
 				
-			dfff = dfff.groupby(["OperatorNew","Year","Batch No", "Cat"])[list_of_circles].sum()
+			dfff = dfff.groupby(["OperatorNew","Year","Batch No", "Cat"])[LSAlist].sum()
 			dfff = dfff.reset_index().drop(columns = ["Year", "Batch No", "Cat"], axis =1).groupby("OperatorNew").sum().T
 			
-			if bandtype_dict[Band]=="TDD": #doubling the TDD spectrum for aligning with normal convention 
+			if BandType[Band]=="TDD": #doubling the TDD spectrum for aligning with normal convention 
         			dfff = (dfff*2).round(2)
 				
 			dfffcopy =dfff.copy()
@@ -978,7 +978,7 @@ if Dimension == "Spectrum Band":
 
 				expf = pd.DataFrame(sf.values*ef.values, columns=ef.columns, index=ef.index)
 
-			hovertext = hovertext21(hf,sff,ef, of, bandf, bandexpf, exptabflag_dict,channelsize_dict,xaxisadj_dict,ayear)
+			hovertext = hovertext21(hf,sff,ef, of, bandf, bandexpf, exptabflag_dict,channelsize_dict,xaxisadj,ayear)
 			parttitle ="Spectrum Expiry Layout "+SubFeature
 			tickangle = -90
 			dtickval = xdtickfreq_dict[Band]
