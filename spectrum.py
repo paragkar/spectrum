@@ -80,7 +80,7 @@ bands_auctioned_dict = {2010 : [2100, 2300],
 		    
 
 #if "1" the expiry tab is present and if "0" then not present
-ExpTab = {700:1, 800:1, 900:1, 1800:1, 2100:1, 2300:1, 2500:1, 3500:1, 26000:1}
+exptab_dict = {700:1, 800:1, 900:1, 1800:1, 2100:1, 2300:1, 2500:1, 3500:1, 26000:1}
 
 #Setting the channel sizes for respective frequency maps
 ChannelSize = {700:2.5, 800:0.625, 900:0.2, 1800:0.2, 2100:2.5, 2300:2.5, 2500:5, 3500:5, 26000:25}
@@ -262,12 +262,12 @@ def auctioncalyear(ef,excepf,pf1):
   
 #processing for hovertext for freq map, band wise
 @st.cache_resource
-def hovertext1(sf,sff,ef,of,ayear,bandf,ExpTab,ChannelSize,xaxisadj):  
+def hovertext1(sf,sff,ef,of,ayear,bandf,exptab_dict,ChannelSize,xaxisadj):  
 	hovertext = []
 	for yi, yy in enumerate(sf.index):
 		hovertext.append([])
 		for xi, xx in enumerate(sf.columns):
-			if ExpTab[Band]==1: #1 means that the expiry table in the excel sheet has been set and working 
+			if exptab_dict[Band]==1: #1 means that the expiry table in the excel sheet has been set and working 
 				expiry = round(ef.values[yi][xi],2)
 			else:
 				expiry = "NA"
@@ -303,12 +303,12 @@ def hovertext1(sf,sff,ef,of,ayear,bandf,ExpTab,ChannelSize,xaxisadj):
 
 #processing for hovertext for expiry map, freq wise
 @st.cache_resource
-def hovertext21(sf,sff,ef,of,bandf,bandexpf,ExpTab,ChannelSize,xaxisadj,ayear):
+def hovertext21(sf,sff,ef,of,bandf,bandexpf,exptab_dict,ChannelSize,xaxisadj,ayear):
 	hovertext = []
 	for yi, yy in enumerate(sf.index):
 		hovertext.append([])
 		for xi, xx in enumerate(sf.columns):
-			if ExpTab[Band]==1: #1 means that the expiry table in the excel sheet has been set and working 
+			if exptab_dict[Band]==1: #1 means that the expiry table in the excel sheet has been set and working 
 				expiry = round(ef.values[yi][xi],2)
 			else:
 				expiry = "NA"
@@ -681,7 +681,7 @@ Dimension = st.sidebar.selectbox('Select a Dimension', ["Spectrum Band", "Auctio
 
 if Dimension == "Spectrum Band":
 	#selecting a Spectrum band
-	Band = st.sidebar.selectbox('Select a Band', list(ExpTab.keys()), 3) #default index 1800 MHz Band
+	Band = st.sidebar.selectbox('Select a Band', list(exptab_dict.keys()), 3) #default index 1800 MHz Band
 	
 	#setting up excel file tabs for reading data
 	freqtab = str(Band)+"MHz"
@@ -711,7 +711,7 @@ if Dimension == "Spectrum Band":
 	pf =df[pricetab]
 	pf1 = pf.copy()
 	pf = pf[pf["Year"]==2022]
-	if ExpTab[Band]==1:
+	if exptab_dict[Band]==1:
 	    ef = df[exptab]
 	    ef = ef.set_index("LSA")
 	    excepf = df[expexceptab]
@@ -810,7 +810,7 @@ if Dimension == "Spectrum Band":
 				tickvals = list(selected_op_dict.values())
 				ticktext = list(selected_op_dict.keys())	
 
-			hovertext = hovertext1(hf,sff,ef, of, ayear, bandf, ExpTab,ChannelSize,xaxisadj)
+			hovertext = hovertext1(hf,sff,ef, of, ayear, bandf, exptab_dict,ChannelSize,xaxisadj)
 			parttitle ="Spectrum Frequency Layout"
 			tickangle = -90
 			dtickval = dtickfreq[Band]
@@ -977,7 +977,7 @@ if Dimension == "Spectrum Band":
 
 				expf = pd.DataFrame(sf.values*ef.values, columns=ef.columns, index=ef.index)
 
-			hovertext = hovertext21(hf,sff,ef, of, bandf, bandexpf, ExpTab,ChannelSize,xaxisadj,ayear)
+			hovertext = hovertext21(hf,sff,ef, of, bandf, bandexpf, exptab_dict,ChannelSize,xaxisadj,ayear)
 			parttitle ="Spectrum Expiry Layout "+SubFeature
 			tickangle = -90
 			dtickval = dtickfreq[Band]
