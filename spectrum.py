@@ -628,7 +628,7 @@ def colscale_hbox_spectrum_expiry_maps(operators, colcodes):
 
 #shaping colorscale for driving the color of hoverbox of freq and exp maps
 @st.cache_resource
-def transform_colscale_to_hlabel_bgcolor(colorscale, sf):
+def transform_colscale_for_spec_exp_maps(colorscale, sf):
 	hlabel_bgcolor = [[x[1] for x in colorscale if x[0] == round(value/(len(colorscale) - 1),2)] 
 			      for row in sf.values for value in row]
 	hlabel_bgcolor = list(np.array(hlabel_bgcolor).reshape(22,int(len(hlabel_bgcolor)/22)))
@@ -636,7 +636,7 @@ def transform_colscale_to_hlabel_bgcolor(colorscale, sf):
 
 #preparing and shaping the colors for hoverbox for auction map
 @st.cache_resource
-def hovermatrixauction(dff,reserveprice, auctionprice): 
+def transform_colscale_for_hbox_auction_map(dff,reserveprice, auctionprice): 
 	lst =[]
 	for yi, yy in enumerate(dff.index):
 		reserveprice = reserveprice.replace("NA\s*", np.nan, regex = True)
@@ -835,7 +835,7 @@ if Dimension == "Spectrum Band":
 				]
 			
 			hcolscale=colscale_hbox_spectrum_expiry_maps(operators, colcodes)  #colorscale for hoverbox
-			hoverlabel_bgcolor = transform_colscale_to_hlabel_bgcolor(hcolscale, hf) #shaping the hfcolorscale
+			hoverlabel_bgcolor = transform_colscale_for_spec_exp_maps(hcolscale, hf) #shaping the hfcolorscale
 			
 		if SubFeature == "Operator Holdings":
 			dfff = dffcopy[(dffcopy["Band"]==Band)]
@@ -995,7 +995,7 @@ if Dimension == "Spectrum Band":
 				)
 				  ]
 			hcolscale=colscale_hbox_spectrum_expiry_maps(operators, colcodes)  #colorscale for hoverbox
-			hoverlabel_bgcolor = transform_colscale_to_hlabel_bgcolor(hcolscale, hf) #shaping the hfcolorscale
+			hoverlabel_bgcolor = transform_colscale_for_spec_exp_maps(hcolscale, hf) #shaping the hfcolorscale
 
 		if SubFeature == "Yearly Trends":
 			bandexpcalsheetf = bandexpcalsheetf.set_index("LSA") #Loading Dataframe from BandExpCalSheet
@@ -1097,7 +1097,7 @@ if Dimension == "Spectrum Band":
 				reversescale=True,
 				),
 			]
-		hoverlabel_bgcolor = hovermatrixauction(dff,reserveprice,auctionprice)
+		hoverlabel_bgcolor = transform_colscale_for_hbox_auction_map(dff,reserveprice,auctionprice)
 
 #Processing For Dimension = "Auction Year"
 if Dimension == "Auction Year":
