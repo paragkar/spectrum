@@ -400,7 +400,7 @@ def htext_expmap_yearly_trends_with_op_select(eff):
 	
 #processing for hovertext for Auction Map
 @st.cache_resource
-def hovertext3(dff,reserveprice,auctionprice,offeredspectrum,soldspectrum,unsoldspectrum):  
+def htext_auctionmap():  
 	hovertext=[]
 	for yi, yy in enumerate(dff.index):
 		hovertext.append([])
@@ -1071,7 +1071,7 @@ if Dimension == "Spectrum Band":
 		parttitle = "Yearly Trend of "+SubFeature
 		tickangle=0
 		dtickval = dtickauction_dict[Band]
-		hovertext = hovertext3(dff,reserveprice,auctionprice,offeredspectrum,soldspectrum,unsoldspectrum)
+		hovertext = htext_auctionmap()
 		
 		#preparing the dataframe of the summary bar chart on top of the heatmap
 		if SubFeature not in ["Percent Sold", "Percent Unsold"]:
