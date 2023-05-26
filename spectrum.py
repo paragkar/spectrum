@@ -708,8 +708,8 @@ def summarychart(summarydf, xcolumn, ycolumn):
 with st.sidebar:
 	selected_dimension = option_menu(
 		menu_title = "Select a Menu",
-		options = ["Spectrum Bands", "Auction Years"],
-		icons = ["1-circle-fill", "2-circle-fill"],
+		options = ["Spectrum Bands", "Auction Years", "Telecom Data"],
+		icons = ["1-circle-fill", "2-circle-fill", "3-circle-fill"],
 		menu_icon = "arrow-down-circle-fill",
 		default_index =0,
 		)
@@ -1332,6 +1332,24 @@ if selected_dimension == "Auction Years":
 		    textfont={"size":10},
 		    reversescale=True,
 			)]	
+
+
+if selected_dimension == "Telecom Data":
+
+
+	with open("telecomdata_protected.xlsx", 'rb') as f:
+		excel = msoffcrypto.OfficeFile(f)
+		excel.load_key(password)
+		excel.decrypt(excel_content)
+
+	#loading data from excel file, the last letter stands for telecom
+	xlt = pd.ExcelFile(excel_content)
+	sheett = xl.sheet_names
+	dft = pd.read_excel(excel_content, sheet_name=sheet)
+
+	st.write(dft["5GBTS"])
+
+
 
 
 units_dict = {"Reserve Price" : "Rs Cr/MHz", "Auction Price" : "Rs Cr/MHz", "Quantum Offered": "MHz", 
