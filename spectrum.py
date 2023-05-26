@@ -789,7 +789,7 @@ if Dimension == "Spectrum Band":
 		SubFeature = st.sidebar.selectbox('Select a Sub Feature', ["Frequency Layout", "Operator Holdings", "Operator %Share"],0)
 		if SubFeature == "Frequency Layout":
 			sf = sff.copy()
-			operators = newoperators_dicts[Band]
+			operators = newoperators_dict[Band]
 			hf = sf[sf.columns].replace(operators) # dataframe for hovertext
 			operatorslist = sorted(list(operators.keys()))
 			selected_operators = st.sidebar.multiselect('Select Operators', operatorslist)
@@ -958,7 +958,7 @@ if Dimension == "Spectrum Band":
 		SubFeature = st.sidebar.selectbox('Select a Sub Feature', ["Frequency Layout", "Yearly Trends"],0)
 		if SubFeature == "Frequency Layout":
 			sf = sff.copy()
-			operators = newoperators_dicts[Band]
+			operators = newoperators_dict[Band]
 			hf = sf[sf.columns].replace(operators) # dataframe for hovertext
 			operatorslist = sorted(list(operators.keys()))
 			operatorstoremove = ["Govt", "Vacant", "Railways"]
@@ -999,7 +999,7 @@ if Dimension == "Spectrum Band":
 
 		if SubFeature == "Yearly Trends":
 			bandexpcalsheetf = bandexpcalsheetf.set_index("LSA") #Loading Dataframe from BandExpCalSheet
-			operatorslist = ["All"]+sorted(list(newoperators_dicts[Band].keys()))
+			operatorslist = ["All"]+sorted(list(newoperators_dict[Band].keys()))
 			selected_operator = st.sidebar.selectbox('Select an Operator', operatorslist)
 			if selected_operator == "All":
 				eff = forexpyearheatmap(ef,selected_operator)
