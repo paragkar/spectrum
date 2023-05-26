@@ -699,7 +699,7 @@ with st.sidebar:
 		menu_title = "Select a Menu",
 		options = ["Spectrum Bands", "Auction Years"],
 		icons = ["1-circle-fill", "2-circle-fill"],
-		menu_icon = "cast",
+		menu_icon = "arrow-down-circle-fill",
 		default_index =0,
 		)
 
