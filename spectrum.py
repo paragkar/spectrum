@@ -700,6 +700,7 @@ with st.sidebar:
 		options = ["Spectrum Band", "Auction Year"],
 		icons = ["1-circle-fill", "2-circle-fill"],
 		default_index =0,
+		orientation = "horizontal",
 		)
 
 
