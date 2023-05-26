@@ -694,10 +694,11 @@ def summarychart(summarydf, xcolumn, ycolumn):
 
 #**********  Main Program Starts here ***************
 
-#Choose a dimension
-Dimension = st.sidebar.selectbox('Select a Dimension', ["Spectrum Band", "Auction Year"],0)
 
-if Dimension == "Spectrum Band":
+#Choose a dimension
+selected_dimension = st.sidebar.selectbox('Select a Dimension', ["Spectrum Band", "Auction Year"],0)
+
+if selected_dimension == "Spectrum Band":
 	#selecting a Spectrum band
 	Band = st.sidebar.selectbox('Select a Band', list(exptab_dict.keys()), 3) #default index 1800 MHz Band
 	
@@ -1120,7 +1121,7 @@ if Dimension == "Spectrum Band":
 		hoverlabel_bgcolor = transform_colscale_for_hbox_auction_map(dff,reserveprice,auctionprice)
 
 #Processing For Dimension = "Auction Year"
-if Dimension == "Auction Year":
+if selected_dimension == "Auction Year":
 	#loading files
 	masterall = "MasterAll-TDDValueConventional" #all auction related information
 	spectrumofferedvssold = "Spectrum_Offered_vs_Sold"
@@ -1319,7 +1320,7 @@ units_dict = {"Reserve Price" : "Rs Cr/MHz", "Auction Price" : "Rs Cr/MHz", "Qua
 #Plotting the final Heatmap	
 fig = go.Figure(data=data)
 
-if Dimension == "Spectrum Band":
+if selected_dimension == "Spectrum Band":
 	if Feature == "Auction Map":
 		fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 		unit = units_dict[SubFeature]
@@ -1393,7 +1394,7 @@ if Dimension == "Spectrum Band":
 	
 	title = parttitle+" for "+str(Band)+" MHz Band"
 
-if (Dimension == "Auction Year") and (Feature == "Band Metric"):
+if (selected_dimension == "Auction Year") and (Feature == "Band Metric"):
 	if (SubFeature =="Total Outflow") or (SubFeature == "Quantum Sold"):
 		if selected_operators==[]:
 			selected_operators = ["All"]
@@ -1415,7 +1416,7 @@ if (Dimension == "Auction Year") and (Feature == "Band Metric"):
 	tickangle =0
 	dtickval =1
 	
-if (Dimension == "Auction Year") and (Feature == "Operator Metric"):
+if (selected_dimension == "Auction Year") and (Feature == "Operator Metric"):
 	if (SubFeature =="Total Outflow") or (SubFeature == "Total Purchase"):
 		if selectedbands==[]:
 			selectedbands = ["All"]
