@@ -69,8 +69,8 @@ oldoperators_dict = {2010 : ["Bharti", "QCOM", "Augere", "Vodafone", "Idea", "RJ
 		    2021 : ["Bharti", "RJIO", "VodaIdea"],
 		    2022 : ["Bharti", "RJIO", "VodaIdea", "Adani"] }
 
-#band dicts for dimension calendar year and sub feature operator wise
-band_dim_cy = {2010 : [2100, 2300],
+#spectrum band dict for bands offered for auction in the specific calander year
+bands_for_auction_dict = {2010 : [2100, 2300],
 	       2012 : [800, 1800],
 	       2013 : [800, 900, 1800],
 	       2014 : [900, 1800],
@@ -1206,7 +1206,7 @@ if Dimension == "Auction Year":
 	if Feature == "Operator Metric": #for the dimension "Calendar Year"
 		df1 = df1.reset_index()
 		df2_temp1 = df1.copy()
-		selectedbands = st.sidebar.multiselect('Select Bands',band_dim_cy[Year])
+		selectedbands = st.sidebar.multiselect('Select Bands',bands_for_auction_dict[Year])
 		subfeature_list = ["Total Outflow", "Total Purchase"]
 		SubFeature = st.sidebar.selectbox('Select a SubFeature', subfeature_list,0)
 		
