@@ -4,6 +4,7 @@ import plotly.graph_objects as go
 import numpy as np
 from collections import OrderedDict
 from plotly.subplots import make_subplots
+from streamlit_option_menu import option_menu
 import plotly
 import pandas as pd
 import plotly.figure_factory as ff
