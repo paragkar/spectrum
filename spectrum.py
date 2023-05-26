@@ -1356,7 +1356,7 @@ if selected_dimension == "Telecom Data":
 
 	df5gbtsf = pd.pivot(df5gbts, values ="Total", index = "StateCode", columns = "Date")
 
-	st.write(df5gbtsf)
+	st.write(df5gbtsf.columns)
 
 	# df5gbtsf = df5gbtsf.sort_values("2023-05-25").head(20)
 
@@ -1377,6 +1377,7 @@ if selected_dimension == "Telecom Data":
 			),
 		]
 
+	tickangle=0
 
 
 units_dict = {"Reserve Price" : "Rs Cr/MHz", "Auction Price" : "Rs Cr/MHz", "Quantum Offered": "MHz", 
