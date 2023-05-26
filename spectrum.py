@@ -45,7 +45,7 @@ title_map = {700:"FDD: Uplink - 703-748 MHz(shown); Downlink - 758-803(notshown)
          26000:"Up & Downlinks - 24250-27500 MHz(shown); "}
 
 #operator dict for dimension - spectrum bands and subfeatures - freq and exp maps
-operators = {700: {'Vacant':0,'Railways':1,'Govt':2,'RJIO':3,'BSNL':4},
+newoperators_dict = {700: {'Vacant':0,'Railways':1,'Govt':2,'RJIO':3,'BSNL':4},
              800: {'Vacant':0,'RCOM':1,'Govt':2,'RJIO':3,'Bharti':4, 'MTS':5, 'BSNL':6},
              900:{'Vacant':0,'RCOM':1,'Govt':2,'Railways':3,'Bharti':4, 'AircelU':5, 
                   'BSNLU':6,'MTNLU':7,'BhartiU':8,'VI':9,'VIU':10},
@@ -789,7 +789,7 @@ if Dimension == "Spectrum Band":
 		SubFeature = st.sidebar.selectbox('Select a Sub Feature', ["Frequency Layout", "Operator Holdings", "Operator %Share"],0)
 		if SubFeature == "Frequency Layout":
 			sf = sff.copy()
-			operators = operators[Band]
+			operators = newoperators_dicts[Band]
 			hf = sf[sf.columns].replace(operators) # dataframe for hovertext
 			operatorslist = sorted(list(operators.keys()))
 			selected_operators = st.sidebar.multiselect('Select Operators', operatorslist)
@@ -958,7 +958,7 @@ if Dimension == "Spectrum Band":
 		SubFeature = st.sidebar.selectbox('Select a Sub Feature', ["Frequency Layout", "Yearly Trends"],0)
 		if SubFeature == "Frequency Layout":
 			sf = sff.copy()
-			operators = operators[Band]
+			operators = newoperators_dicts[Band]
 			hf = sf[sf.columns].replace(operators) # dataframe for hovertext
 			operatorslist = sorted(list(operators.keys()))
 			operatorstoremove = ["Govt", "Vacant", "Railways"]
@@ -999,7 +999,7 @@ if Dimension == "Spectrum Band":
 
 		if SubFeature == "Yearly Trends":
 			bandexpcalsheetf = bandexpcalsheetf.set_index("LSA") #Loading Dataframe from BandExpCalSheet
-			operatorslist = ["All"]+sorted(list(operators[Band].keys()))
+			operatorslist = ["All"]+sorted(list(newoperators_dicts[Band].keys()))
 			selected_operator = st.sidebar.selectbox('Select an Operator', operatorslist)
 			if selected_operator == "All":
 				eff = forexpyearheatmap(ef,selected_operator)
