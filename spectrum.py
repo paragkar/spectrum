@@ -12,6 +12,9 @@ import streamlit as st
 import matplotlib.pyplot as plt
 import altair as alt
 
+import io
+import msoffcrypto
+
 
 
 #Setting Page layout
@@ -33,18 +36,25 @@ hide_st_style = '''
 st.markdown(hide_st_style, unsafe_allow_html =True)
 
 
-# st.write("DB username:", st.secrets["db_username"])
-# st.write("DB password:", st.secrets["db_password"])
+password = st.secrets["db_password"]
 
 
 
 #Loading File
 
-file = "https://paragkar.com/wp-content/uploads/2023/05/spectrum_map.xlsx"
+file = "https://paragkar.com/wp-content/uploads/2023/05/spectrum_map_protected.xlsx"
+
+excel_content = io.BytesIO()
+with open(file, 'rb') as f:
+    msoffcryptoobj = msoffcrypto.OfficeFile(f)
+    msoffcryptoobj.load_key(password=password)
+    excel_content = io.BytesIO()
+    msoffcryptoobj.decrypt(excel_content)
+
 #loading data from excel file
-xl = pd.ExcelFile(file)
+xl = pd.ExcelFile(excel_content)
 sheet = xl.sheet_names
-df = pd.read_excel(file, sheet_name=sheet)
+df = pd.read_excel(excel_content, sheet_name=sheet)
 
   
 #Defining Dictionaries	
