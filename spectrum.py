@@ -433,7 +433,7 @@ def htext_auctionmap():
 
 #processing for hovertext and colormatrix for Spectrum Band, Features- Freq Map, SubFeature - Operator Wise 
 @st.cache_resource
-def hovertext_and_colmatrix4(dfff, selected_operators, operatorlist):
+def htext_colmatrix_spec_map_op_hold_share(dfff, selected_operators, operatorlist):
 	dfffcopy =dfff.copy()
 	if len(selected_operators) ==0:
 		selected_operators =operatorlist
@@ -492,7 +492,7 @@ def hovertext_and_colmatrix4(dfff, selected_operators, operatorlist):
 
 #processing for hovertext and colormatrix for Calendar Year, Band Wise, SubFeatures Reserve Price etc
 @st.cache_resource
-def hovertext_and_colmatrix1(df1):
+def htext_colmatrix_auction_year_band_metric(df1):
 	auctionprice =  df1.pivot(index="Circle", columns='Band', values=subfeature_dict["Auction Price"])
 	reserveprice =  df1.pivot(index="Circle", columns='Band', values=subfeature_dict["Reserve Price"])
 	qtyoffered = df1.pivot(index="Circle", columns='Band', values=subfeature_dict["Quantum Offered"])
@@ -867,7 +867,7 @@ if Dimension == "Spectrum Band":
 			tickangle = 0
 			dtickval = 1
 			
-			hovertext,colormatrix = hovertext_and_colmatrix4(dfff, selected_operators, operatorlist) #processing hovertext and colormatrix for operatorwise in freqband dim
+			hovertext,colormatrix = htext_colmatrix_spec_map_op_hold_share(dfff, selected_operators, operatorlist) #processing hovertext and colormatrix for operatorwise in freqband dim
 			hoverlabel_bgcolor = colormatrix #colormatrix processed from fuction "hovertext_and_colmatrix" for same above
 			
 			data = [go.Heatmap(
@@ -935,7 +935,7 @@ if Dimension == "Spectrum Band":
 			tickangle = 0
 			dtickval = 1
 			
-			hovertext,colormatrix = hovertext_and_colmatrix4(dfff, selected_operators, operatorlist) #processing hovertext and colormatrix for operatorwise in freqband dim
+			hovertext,colormatrix = htext_colmatrix_spec_map_op_hold_share(dfff, selected_operators, operatorlist) #processing hovertext and colormatrix for operatorwise in freqband dim
 			hoverlabel_bgcolor = colormatrix #colormatrix processed from fuction "hovertext_and_colmatrix" for same above
 
 			data = [go.Heatmap(
@@ -1198,7 +1198,7 @@ if Dimension == "Auction Year":
 			chart = summarychart(summarydf, 'Band', "Total")
 			flag = True
 			
-		hovertext,colormatrix = hovertext_and_colmatrix1(df1) #processing hovertext and colormatrix for bandwise in cal year dim
+		hovertext,colormatrix = htext_colmatrix_auction_year_band_metric(df1) #processing hovertext and colormatrix for bandwise in cal year dim
 		hoverlabel_bgcolor = colormatrix #colormatrix processed from fuction "hovertext_and_colmatrix" for same above
 
 
