@@ -33,8 +33,8 @@ hide_st_style = '''
 st.markdown(hide_st_style, unsafe_allow_html =True)
 
 
-st.write("DB username:", st.secrets["db_username"])
-st.write("DB password:", st.secrets["db_password"])
+# st.write("DB username:", st.secrets["db_username"])
+# st.write("DB password:", st.secrets["db_password"])
 
 
 
