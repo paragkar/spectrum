@@ -117,9 +117,9 @@ auctionsucessyears_dict = {700:[2022],
 
 #Error is added to auction closing date so that freq assignment dates fall within the window.
 #This helps to identify which expiry year is linked to which operators
-errors= {700:0.25, 800:1, 900:1, 1800:1, 2100:1.5, 2300:1.25, 2500:1, 3500:0.1, 26000:0.5}
+errors_dict= {700:0.25, 800:1, 900:1, 1800:1, 2100:1.5, 2300:1.25, 2500:1, 3500:0.1, 26000:0.5}
 
-LSAlist = ['AP','AS', 'BH', 'DL', 'GU', 'HA', 'HP', 'JK', 'KA', 'KE', 'KO', 'MA', 'MP',
+list_of_circles_codes = ['AP','AS', 'BH', 'DL', 'GU', 'HA', 'HP', 'JK', 'KA', 'KE', 'KO', 'MA', 'MP',
        	   'MU', 'NE', 'OR', 'PU', 'RA', 'TN', 'UPE', 'UPW', 'WB']
 
 #defining various functions 
@@ -251,7 +251,7 @@ def auctioncalyear(ef,excepf,pf1):
 					error = abs(efval-pf1val[6]) #orignal
 				else:
 					error = 0
-				if (ef.index[i] == pf1val[0]) and error <= errors[Band]:
+				if (ef.index[i] == pf1val[0]) and error <= errors_dict[Band]:
 					lst.append([ef.index[i],col-xaxisadj_dict[Band],pf1val[1],pf1val[2], pf1val[3], pf1val[4], error]) 
 				
 	df_final = pd.DataFrame(lst)
@@ -857,7 +857,7 @@ if Dimension == "Spectrum Band":
 			else:
 				selected_category=[]
 				
-			dfff = dfff.groupby(["OperatorNew","Year","Batch No", "Cat"])[LSAlist].sum()
+			dfff = dfff.groupby(["OperatorNew","Year","Batch No", "Cat"])[list_of_circles_codes].sum()
 			dfff = dfff.reset_index().drop(columns = ["Year", "Batch No", "Cat"], axis =1).groupby("OperatorNew").sum().T
 			
 			if bandtype_dict[Band]=="TDD": #doubling the TDD spectrum for aligning with normal convention 
@@ -905,7 +905,7 @@ if Dimension == "Spectrum Band":
 			else:
 				selected_category=[]
 				
-			dfff = dfff.groupby(["OperatorNew","Year","Batch No", "Cat"])[LSAlist].sum()
+			dfff = dfff.groupby(["OperatorNew","Year","Batch No", "Cat"])[list_of_circles_codes].sum()
 			dfff = dfff.reset_index().drop(columns = ["Year", "Batch No", "Cat"], axis =1).groupby("OperatorNew").sum().T
 			
 			if bandtype_dict[Band]=="TDD": #doubling the TDD spectrum for aligning with normal convention 
