@@ -919,7 +919,7 @@ if Dimension == "Spectrum Band":
 			if len(selected_operators) ==0:
 				operator_numbers =operatorlist
 			else:
-				pass
+				operator_numbers = selected_operators
 
 			lst =[]
 			dfffshare = pd.DataFrame()
