@@ -22,7 +22,7 @@ hide_st_style = '''
 				header {visibility :hidden;}
 				<style>
 				'''
-st.martkdown(hide_st_style, unsafe_allow_html =True)
+st.markdown(hide_st_style, unsafe_allow_html =True)
 
 
 #Setting Page layout
