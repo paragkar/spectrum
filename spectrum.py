@@ -14,9 +14,8 @@ import altair as alt
 
 #Setting Page layout
 st.set_page_config(layout="wide")
-
-#set summary chart flag- will toggle to True when we want summary chart to show
-flag = False #default value
+#set summary chart flag
+flag = False # It will toggle to True when we what summary chart to show
 
 #Loading File
 
@@ -27,15 +26,15 @@ sheet = xl.sheet_names
 df = pd.read_excel(file, sheet_name=sheet)
 
   
-#Setting Up Constants 
+#Defining Dictionaries	
 state_dict = {'AP': 'Andhra Pradesh', 'AS': 'Assam', 'BH': 'Bihar', 'DL': 'Delhi', 'GU': 'Gujarat',
     'HA': 'Haryana','HP': 'Himachal Pradesh','JK': 'Jammu & Kashmir','KA': 'Karnataka',
     'KE': 'Kerala','KO': 'Kolkata','MP': 'Madhya Pradesh','MA': 'Maharashtra','MU': 'Mumbai',
     'NE': 'Northeast','OR': 'Odisha','PU': 'Punjab','RA': 'Rajasthan','TN': 'Tamil Nadu',
     'UPE': 'Uttar Pradesh (East)','UPW': 'Uttar Pradesh (West)','WB': 'West Bengal' }
 
-#Setting the subtitle for the spectrum and expiry layout maps
-subtitle_map_dict = {700:"FDD: Uplink - 703-748 MHz(shown); Downlink - 758-803(notshown); ",
+#defining all dictionaries here with data linked to a specific band
+title_map = {700:"FDD: Uplink - 703-748 MHz(shown); Downlink - 758-803(notshown); ",
          800:"Uplink - 824-844 MHz(shown); Downlink - 869-889 MHz(not shown); ", 
          900:"Uplink - 890-915 MHz(shown); Downlink - 935-960 MHz(not shown); ", 
          1800:"Uplink - 1710-1785 MHz(shown); Downlink - 1805-1880 MHz(notshown); ", 
@@ -45,8 +44,8 @@ subtitle_map_dict = {700:"FDD: Uplink - 703-748 MHz(shown); Downlink - 758-803(n
          3500:"Up & Downlinks - 3300-3670 MHz(shown); ",
          26000:"Up & Downlinks - 24250-27500 MHz(shown); "}
 
-#Setting the existing operators mapped to a specific band
-newoperators_dict = {700: {'Vacant':0,'Railways':1,'Govt':2,'RJIO':3,'BSNL':4},
+#operator dict for dimension - spectrum bands and subfeatures - freq and exp maps
+operators = {700: {'Vacant':0,'Railways':1,'Govt':2,'RJIO':3,'BSNL':4},
              800: {'Vacant':0,'RCOM':1,'Govt':2,'RJIO':3,'Bharti':4, 'MTS':5, 'BSNL':6},
              900:{'Vacant':0,'RCOM':1,'Govt':2,'Railways':3,'Bharti':4, 'AircelU':5, 
                   'BSNLU':6,'MTNLU':7,'BhartiU':8,'VI':9,'VIU':10},
@@ -60,7 +59,7 @@ newoperators_dict = {700: {'Vacant':0,'Railways':1,'Govt':2,'RJIO':3,'BSNL':4},
             }
 
 #operators dict for dimension - calendar years
-oldoperators_dict = {2010 : ["Bharti", "QCOM", "Augere", "Vodafone", "Idea", "RJIO", "RCOM", "STel", "Tata", "Aircel", "Tikona"],
+operators_dim_cy = {2010 : ["Bharti", "QCOM", "Augere", "Vodafone", "Idea", "RJIO", "RCOM", "STel", "Tata", "Aircel", "Tikona"],
 		    2012 : ["Bharti", "Vodafone", "Idea", "Telenor", "Videocon"],
 		    2013 : ["MTS"],
 		    2014 : ["Bharti", "Vodafone", "Idea", "RJIO", "RCOM", "Aircel", "Telenor"],
@@ -69,8 +68,8 @@ oldoperators_dict = {2010 : ["Bharti", "QCOM", "Augere", "Vodafone", "Idea", "RJ
 		    2021 : ["Bharti", "RJIO", "VodaIdea"],
 		    2022 : ["Bharti", "RJIO", "VodaIdea", "Adani"] }
 
-#spectrum band dict for bands offered for auction in the specific calander year
-bands_for_auction_dict = {2010 : [2100, 2300],
+#band dicts for dimension calendar year and sub feature operator wise
+band_dim_cy = {2010 : [2100, 2300],
 	       2012 : [800, 1800],
 	       2013 : [800, 900, 1800],
 	       2014 : [900, 1800],
@@ -126,10 +125,10 @@ LSAlist = ['AP','AS', 'BH', 'DL', 'GU', 'HA', 'HP', 'JK', 'KA', 'KE', 'KO', 'MA'
 #defining various functions 
 #preparing color scale for freqmap
 @st.cache_resource
-def colscalefreqmap(newoperators_dict, colcodes):
-	operators = dict(sorted(newoperators_dict.items(), key=lambda x:x[1]))
-	operator_names = list(newoperators_dict.keys())
-	operator_codes = list(newoperators_dict.values())
+def colscalefreqmap(operators, colcodes):
+	operators = dict(sorted(operators.items(), key=lambda x:x[1]))
+	operator_names = list(operators.keys())
+	operator_codes = list(operators.values())
 	scale = [round(x/(len(operators)),2) for x in range(len(operator_names)+1)]
 	colorscale =[]
 	for i, op in enumerate(operator_names):
@@ -559,7 +558,7 @@ def hovertext_and_colmatrix2(df1, selectedbands, SubFeature, df_subfeature):
 	if SubFeature == "Total Purchase": #then process for total purchase
 		df_purchase = df_subfeature
 	else: 
-		columnstoextract = ["Circle", "Band"]+oldoperators_dict[Year]
+		columnstoextract = ["Circle", "Band"]+operators_dim_cy[Year]
 		df2_temp2 = df1[columnstoextract]
 		df2_temp2.drop("Band", inplace = True, axis =1)
 		df2_temp2 = df2_temp2.groupby(["Circle"]).sum().round(2)
@@ -569,14 +568,14 @@ def hovertext_and_colmatrix2(df1, selectedbands, SubFeature, df_subfeature):
 	if SubFeature == "Total Ouflow": #then process for total outflow
 		df_outflow = df_subfeature
 	else:
-		oldoperators_dict_new=[]
-		for op in oldoperators_dict[Year]:
+		operators_dim_cy_new=[]
+		for op in operators_dim_cy[Year]:
 			df1[op+"1"] = df1["Auction Price/MHz"]*df1[op]
-			oldoperators_dict_new.append(op+"1")
-		columnstoextract = ["Circle", "Band"]+oldoperators_dict_new
+			operators_dim_cy_new.append(op+"1")
+		columnstoextract = ["Circle", "Band"]+operators_dim_cy_new
 		df2_temp1 = df1[columnstoextract]
-		oldoperators_dict_new = [x[:-1] for x in oldoperators_dict_new] # removing the last letter "1" from operator name
-		df2_temp1.columns = ["Circle", "Band"]+ oldoperators_dict_new
+		operators_dim_cy_new = [x[:-1] for x in operators_dim_cy_new] # removing the last letter "1" from operator name
+		df2_temp1.columns = ["Circle", "Band"]+ operators_dim_cy_new
 		df2_temp1.drop("Band", inplace = True, axis =1)
 		df2_temp1 = df2_temp1.groupby(["Circle"]).sum().round(0)
 		df2_temp1 = df2_temp1.reindex(sorted(df2_temp1.columns), axis=1)
@@ -617,10 +616,10 @@ def hovertext_and_colmatrix2(df1, selectedbands, SubFeature, df_subfeature):
 
 #preparing color scale for hoverbox for freq and exp maps
 @st.cache_resource
-def hcolscalefreqexp(newoperators_dict, colcodes):
-    scale = [round(x/(len(newoperators_dict)-1),2) for x in range(len(newoperators_dict))]
+def hcolscalefreqexp(operators, colcodes):
+    scale = [round(x/(len(operators)-1),2) for x in range(len(operators))]
     colors =[]
-    for k, v  in newoperators_dict.items():
+    for k, v  in operators.items():
         colors.append(colcodes.loc[k,:].values[0])
     colorscale=[]
     for i in range(len(scale)):
@@ -790,18 +789,18 @@ if Dimension == "Spectrum Band":
 		SubFeature = st.sidebar.selectbox('Select a Sub Feature', ["Frequency Layout", "Operator Holdings", "Operator %Share"],0)
 		if SubFeature == "Frequency Layout":
 			sf = sff.copy()
-			operators = newoperators_dict[Band]
+			operators = operators[Band]
 			hf = sf[sf.columns].replace(operators) # dataframe for hovertext
-			operatorslist = sorted(list(newoperators_dict.keys()))
+			operatorslist = sorted(list(operators.keys()))
 			selected_operators = st.sidebar.multiselect('Select Operators', operatorslist)
 			if selected_operators==[]:
 				sf[sf.columns] = sf[sf.columns].replace(operators) 
 				colorscale = colscalefreqmap(operators, colcodes)
-				tickvals = list(newoperators_dict.values())
-				ticktext = list(newoperators_dict.keys())
+				tickvals = list(operators.values())
+				ticktext = list(operators.keys())
 			else:
 				selected_op_dict ={}
-				for op in newoperators_dict.keys():
+				for op in operators.keys():
 					if op not in selected_operators:
 						sf.replace(op, np.nan, inplace = True)
 				for i, op in enumerate(selected_operators):
@@ -959,9 +958,9 @@ if Dimension == "Spectrum Band":
 		SubFeature = st.sidebar.selectbox('Select a Sub Feature', ["Frequency Layout", "Yearly Trends"],0)
 		if SubFeature == "Frequency Layout":
 			sf = sff.copy()
-			operators = newoperators_dict[Band]
+			operators = operators[Band]
 			hf = sf[sf.columns].replace(operators) # dataframe for hovertext
-			operatorslist = sorted(list(newoperators_dict.keys()))
+			operatorslist = sorted(list(operators.keys()))
 			operatorstoremove = ["Govt", "Vacant", "Railways"]
 			for op in operatorstoremove:
 				if op in operatorslist:
@@ -970,7 +969,7 @@ if Dimension == "Spectrum Band":
 			if selected_operators==[]:
 				expf = ef
 			else:
-				for op in newoperators_dict.keys():
+				for op in operators.keys():
 					if op not in selected_operators:
 						sf.replace(op,0, inplace = True)
 					else:
@@ -1000,7 +999,7 @@ if Dimension == "Spectrum Band":
 
 		if SubFeature == "Yearly Trends":
 			bandexpcalsheetf = bandexpcalsheetf.set_index("LSA") #Loading Dataframe from BandExpCalSheet
-			operatorslist = ["All"]+sorted(list(newoperators_dict[Band].keys()))
+			operatorslist = ["All"]+sorted(list(operators[Band].keys()))
 			selected_operator = st.sidebar.selectbox('Select an Operator', operatorslist)
 			if selected_operator == "All":
 				eff = forexpyearheatmap(ef,selected_operator)
@@ -1121,7 +1120,7 @@ if Dimension == "Auction Year":
 			df1 = df1.reset_index()
 			df1_temp1 = df1.copy()
 			if SubFeature == "Quantum Sold":
-				operatorslist = oldoperators_dict[Year]
+				operatorslist = operators_dim_cy[Year]
 				selected_operators = st.sidebar.multiselect('Select an Operator', operatorslist)
 				if selected_operators == []:
 					df1_temp1 = df1_temp1.pivot(index="Circle", columns='Band', values=subfeature_dict[SubFeature])
@@ -1138,7 +1137,7 @@ if Dimension == "Auction Year":
 		if SubFeature == "Total Outflow":
 			df1 = df1.reset_index()
 			df1_temp2 = df1.set_index(["Band","Circle"])
-			operatorslist = oldoperators_dict[Year]
+			operatorslist = operators_dim_cy[Year]
 			selected_operators = st.sidebar.multiselect('Select Operators', operatorslist)
 			if selected_operators== []:
 				df1_temp2["Total Outflow"] = df1_temp2[subfeature_dict["Auction Price"]]*df1_temp2["Total Sold (MHz)"]
@@ -1206,7 +1205,7 @@ if Dimension == "Auction Year":
 	if Feature == "Operator Metric": #for the dimension "Calendar Year"
 		df1 = df1.reset_index()
 		df2_temp1 = df1.copy()
-		selectedbands = st.sidebar.multiselect('Select Bands',bands_for_auction_dict[Year])
+		selectedbands = st.sidebar.multiselect('Select Bands',band_dim_cy[Year])
 		subfeature_list = ["Total Outflow", "Total Purchase"]
 		SubFeature = st.sidebar.selectbox('Select a SubFeature', subfeature_list,0)
 		
@@ -1219,14 +1218,14 @@ if Dimension == "Auction Year":
 				df2_temp1 = temp1
 			else:
 				df2_temp1 = df1.copy()
-			oldoperators_dict_new=[]
-			for op in oldoperators_dict[Year]:
+			operators_dim_cy_new=[]
+			for op in operators_dim_cy[Year]:
 				df2_temp1[op+"1"] = df2_temp1["Auction Price/MHz"]*df2_temp1[op]
-				oldoperators_dict_new.append(op+"1")
-			columnstoextract = ["Circle", "Band"]+oldoperators_dict_new
+				operators_dim_cy_new.append(op+"1")
+			columnstoextract = ["Circle", "Band"]+operators_dim_cy_new
 			df2_temp1 = df2_temp1[columnstoextract]
-			oldoperators_dict_new = [x[:-1] for x in oldoperators_dict_new] # removing the last letter "1" from operator name
-			df2_temp1.columns = ["Circle", "Band"]+ oldoperators_dict_new
+			operators_dim_cy_new = [x[:-1] for x in operators_dim_cy_new] # removing the last letter "1" from operator name
+			df2_temp1.columns = ["Circle", "Band"]+ operators_dim_cy_new
 			df2_temp1.drop("Band", inplace = True, axis =1)
 			df2_temp1 = df2_temp1.groupby(["Circle"]).sum().round(0)
 			df2_temp1 = df2_temp1.reindex(sorted(df2_temp1.columns), axis=1)
@@ -1256,7 +1255,7 @@ if Dimension == "Auction Year":
 				df2_temp2 = temp1
 			else:
 				df2_temp2 = df1.copy()
-			columnstoextract = ["Circle", "Band"]+oldoperators_dict[Year]
+			columnstoextract = ["Circle", "Band"]+operators_dim_cy[Year]
 			df2_temp2 = df2_temp2[columnstoextract]
 			df2_temp2.drop("Band", inplace = True, axis =1)
 			df2_temp2 = df2_temp2.groupby(["Circle"]).sum().round(2)
@@ -1316,7 +1315,7 @@ if Dimension == "Spectrum Band":
 		else:
 			selected_operators = selected_operators
 			
-		subtitle = subtitle_map_dict[Band]+unit+"; Selected Operators - "+', '.join(selected_operators)
+		subtitle = title_map[Band]+unit+"; Selected Operators - "+', '.join(selected_operators)
 	
 	if (Feature == "Expiry Map") and (SubFeature == "Yearly Trends"):
 		fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white'))) #hoverbox color is black
@@ -1335,7 +1334,7 @@ if Dimension == "Spectrum Band":
 		else:
 			selected_operators = selected_operators
 			
-		subtitle = subtitle_map_dict[Band]+unit+"; Selected Operators - "+', '.join(selected_operators)
+		subtitle = title_map[Band]+unit+"; Selected Operators - "+', '.join(selected_operators)
 			
 	if (Feature == "Spectrum Map") and (SubFeature == "Operator Holdings"):
 		fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
