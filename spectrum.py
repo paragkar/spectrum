@@ -191,7 +191,7 @@ def bw_exp_cal_yearly_trends(sff,ef):
 
 #funtion to process pricing datframe for hovertext for auction map
 # @st.cache_resource
-def processdff(dff):
+def cal_bw_mapped_to_operators_auctionmap(dff):
 	dff = dff.replace(0,np.nan).fillna(0)
 	dff = dff.applymap(lambda x: round(x,2) if type(x)!=str else x)
 	dff = dff[(dff["Band"]==Band) & (dff["Cat"]=="L") & (dff["OperatorOld"] != "Free") & (dff["Year"] >= 2010)]
@@ -732,7 +732,7 @@ if Dimension == "Spectrum Band":
 	#processing "Spectrum_all" excel tab data
 	dff = df[spectrumall] #contains information of LSA wise mapping oldoperators with new operators
 	dffcopy = dff.copy() #make a copy for "Operator Wise" subfeature under the feature "FreqMap"
-	dff = processdff(dff)
+	dff = cal_bw_mapped_to_operators_auctionmap(dff)
 	dff = coltostr(dff)
 	dff = adddummycols(dff,auctionfailyears_dict[Band])
 	dff = dff.applymap(lambda x: "NA  " if x=="" else x) # space with NA is delibelitratly added as it gets removed with ","
