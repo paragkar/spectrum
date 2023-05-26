@@ -547,7 +547,7 @@ def htext_colmatrix_auction_year_band_metric(df1):
 
 #processing for hovertext and colormatrix for Calendar Year, Operator Wise, SubFeatures - Total Outflow, Total Purchase
 @st.cache_resource
-def hovertext_and_colmatrix2(df1, selectedbands, SubFeature, df_subfeature):	
+def htext_colmatrix_auction_year_operator_metric(df1, selectedbands, SubFeature, df_subfeature):	
 	temp1 = pd.DataFrame()
 	if selectedbands != []:
 		for band in selectedbands:
@@ -1242,7 +1242,7 @@ if Dimension == "Auction Year":
 			chart = summarychart(summarydf, 'Operators', SubFeature)
 			flag = True
 			
-			hovertext,colormatrix = hovertext_and_colmatrix2(df1, selectedbands, SubFeature, df2_temp1) #processing hovertext and colormatrix for operator wise in cal year dim
+			hovertext,colormatrix = htext_colmatrix_auction_year_operator_metric(df1, selectedbands, SubFeature, df2_temp1) #processing hovertext and colormatrix for operator wise in cal year dim
 			hoverlabel_bgcolor = colormatrix #colormatrix processed from fuction "hovertext_and_colmatrix" for same above
 		
 		if SubFeature == "Total Purchase":
@@ -1272,7 +1272,7 @@ if Dimension == "Auction Year":
 			chart = summarychart(summarydf, 'Operators', SubFeature)
 			flag = True
 			
-			hovertext,colormatrix = hovertext_and_colmatrix2(df1, selectedbands, SubFeature, df2_temp2) #processing hovertext and colormatrix for operator wise in cal year dim
+			hovertext,colormatrix = htext_colmatrix_auction_year_operator_metric(df1, selectedbands, SubFeature, df2_temp2) #processing hovertext and colormatrix for operator wise in cal year dim
 			hoverlabel_bgcolor = colormatrix #colormatrix processed from fuction "hovertext_and_colmatrix" for same above
 	
 
