@@ -698,7 +698,7 @@ with st.sidebar:
 	selected_dimension = option_menu(
 		menu_title = None,
 		options = ["Spectrum Band", "Auction Year"],
-		icons = ["house", "book"],
+		icons = ["1-circle-fill", "2-circle-fill"],
 		default_index =0,
 		)
 
