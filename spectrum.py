@@ -174,7 +174,7 @@ def exp_year_cal_yearly_trends(ef, selected_operator):
 
 #function for calculating quantum of spectrum expiring mapped to LSA and Years for expiry map yearwise
 @st.cache_resource
-def BWExpiring(sff,ef):
+def bw_exp_cal_yearly_trends(sff,ef):
 	lst=[]
 	for j, index in enumerate(ef.index):
 		for i, col in enumerate(ef.columns):
@@ -725,7 +725,7 @@ if Dimension == "Spectrum Band":
 
 # 	eff = exp_year_cal_yearly_trends(ef) # for expiry year heatmap year wise
 	
-# 	bwf = BWExpiring(sff,ef) # hover text for expiry year heatmap year wise
+# 	bwf = bw_exp_cal_yearly_trends(sff,ef) # hover text for expiry year heatmap year wise
 	
 	# st.sidebar.title('Navigation')
 
@@ -1003,7 +1003,7 @@ if Dimension == "Spectrum Band":
 			selected_operator = st.sidebar.selectbox('Select an Operator', operatorslist)
 			if selected_operator == "All":
 				eff = exp_year_cal_yearly_trends(ef,selected_operator)
-				bwf = BWExpiring(sff,ef)
+				bwf = bw_exp_cal_yearly_trends(sff,ef)
 				hovertext = hovertext22(bwf,eff) #hovertext for "All"
 			else:
 				if selected_operator[-1] in ["R", "U"]: #Last letter of the operator ending with R or U
