@@ -835,7 +835,7 @@ if Dimension == "Spectrum Band":
 					    ),
 				]
 			
-			hcolscale=hcolscalefreqexp(operators_dict, colcodes)  #colorscale for hoverbox
+			hcolscale=hcolscalefreqexp(newoperators_dict, colcodes)  #colorscale for hoverbox
 			hoverlabel_bgcolor = hcolmatrixfreqexp(hcolscale, hf) #shaping the hfcolorscale
 			
 		if SubFeature == "Operator Holdings":
@@ -995,7 +995,7 @@ if Dimension == "Spectrum Band":
 			      reversescale=True,
 				)
 				  ]
-			hcolscale=hcolscalefreqexp(operators_dict, colcodes)  #colorscale for hoverbox
+			hcolscale=hcolscalefreqexp(newoperators_dict, colcodes)  #colorscale for hoverbox
 			hoverlabel_bgcolor = hcolmatrixfreqexp(hcolscale, hf) #shaping the hfcolorscale
 
 		if SubFeature == "Yearly Trends":
