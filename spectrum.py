@@ -36,19 +36,16 @@ hide_st_style = '''
 st.markdown(hide_st_style, unsafe_allow_html =True)
 
 
+
+
 password = st.secrets["db_password"]
 
-
-#Loading File
-
-file = "https://paragkar.com/wp-content/uploads/2023/05/spectrum_map_protected.xlsx"
-
 excel_content = io.BytesIO()
-with open(file, 'rb') as f:
-    msoffcryptoobj = msoffcrypto.OfficeFile(f)
-    msoffcryptoobj.load_key(password=password)
-    excel_content = io.BytesIO()
-    msoffcryptoobj.decrypt(excel_content)
+
+with open("spectrum_map_protected", 'rb') as f:
+	excel = msoffcrypto.OfficeFile(f)
+	excel.load_key(password)
+	excel.decrypt(excel_content)
 
 #loading data from excel file
 xl = pd.ExcelFile(excel_content)
