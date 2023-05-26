@@ -127,10 +127,10 @@ list_of_circles= ['AP','AS', 'BH', 'DL', 'GU', 'HA', 'HP', 'JK', 'KA', 'KE', 'KO
 #preparing color scale for freqmap
 @st.cache_resource
 def colscalefreqmap(newoperators_dict, colcodes):
-	operators = dict(sorted(newoperators_dict.items(), key=lambda x:x[1]))
+	operators_dict = dict(sorted(newoperators_dict.items(), key=lambda x:x[1]))
 	operator_names = list(newoperators_dict.keys())
 	operator_codes = list(newoperators_dict.values())
-	scale = [round(x/(len(operators)),2) for x in range(len(operator_names)+1)]
+	scale = [round(x/(len(operators_dict)),2) for x in range(len(operator_names)+1)]
 	colorscale =[]
 	for i, op in enumerate(operator_names):
 		if op in colcodes.index:
@@ -790,13 +790,13 @@ if Dimension == "Spectrum Band":
 		SubFeature = st.sidebar.selectbox('Select a Sub Feature', ["Frequency Layout", "Operator Holdings", "Operator %Share"],0)
 		if SubFeature == "Frequency Layout":
 			sf = sff.copy()
-			operators = newoperators_dict[Band]
-			hf = sf[sf.columns].replace(operators) # dataframe for hovertext
+			operators_dict = newoperators_dict[Band]
+			hf = sf[sf.columns].replace(operators_dict) # dataframe for hovertext
 			operatorslist = sorted(list(newoperators_dict.keys()))
 			selected_operators = st.sidebar.multiselect('Select Operators', operatorslist)
 			if selected_operators==[]:
-				sf[sf.columns] = sf[sf.columns].replace(operators) 
-				colorscale = colscalefreqmap(operators, colcodes)
+				sf[sf.columns] = sf[sf.columns].replace(operators_dict) 
+				colorscale = colscalefreqmap(operators_dict, colcodes)
 				tickvals = list(newoperators_dict.values())
 				ticktext = list(newoperators_dict.keys())
 			else:
@@ -835,7 +835,7 @@ if Dimension == "Spectrum Band":
 					    ),
 				]
 			
-			hcolscale=hcolscalefreqexp(operators, colcodes)  #colorscale for hoverbox
+			hcolscale=hcolscalefreqexp(operators_dict, colcodes)  #colorscale for hoverbox
 			hoverlabel_bgcolor = hcolmatrixfreqexp(hcolscale, hf) #shaping the hfcolorscale
 			
 		if SubFeature == "Operator Holdings":
@@ -959,9 +959,9 @@ if Dimension == "Spectrum Band":
 		SubFeature = st.sidebar.selectbox('Select a Sub Feature', ["Frequency Layout", "Yearly Trends"],0)
 		if SubFeature == "Frequency Layout":
 			sf = sff.copy()
-			operators = newoperators_dict[Band]
-			hf = sf[sf.columns].replace(operators) # dataframe for hovertext
-			operatorslist = sorted(list(newoperators_dict.keys()))
+			operators_dict = newoperators_dict[Band]
+			hf = sf[sf.columns].replace(operators_dict) # dataframe for hovertext
+			operatorslist = sorted(list(operators_dict.keys()))
 			operatorstoremove = ["Govt", "Vacant", "Railways"]
 			for op in operatorstoremove:
 				if op in operatorslist:
@@ -995,7 +995,7 @@ if Dimension == "Spectrum Band":
 			      reversescale=True,
 				)
 				  ]
-			hcolscale=hcolscalefreqexp(operators, colcodes)  #colorscale for hoverbox
+			hcolscale=hcolscalefreqexp(operators_dict, colcodes)  #colorscale for hoverbox
 			hoverlabel_bgcolor = hcolmatrixfreqexp(hcolscale, hf) #shaping the hfcolorscale
 
 		if SubFeature == "Yearly Trends":
