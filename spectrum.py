@@ -694,14 +694,21 @@ def summarychart(summarydf, xcolumn, ycolumn):
 
 #**********  Main Program Starts here ***************
 
-with st.sidebar:
-	selected_dimension = option_menu(
-		menu_title = None,
-		options = ["Spectrum Band", "Auction Year"],
-		icons = ["1-circle-fill", "2-circle-fill"],
-		default_index =0,
-		orientation = "horizontal",
-		)
+# with st.sidebar:
+# 	selected_dimension = option_menu(
+# 		menu_title = None,
+# 		options = ["Spectrum Band", "Auction Year"],
+# 		icons = ["1-circle-fill", "2-circle-fill"],
+# 		default_index =0,
+# 		)
+
+selected_dimension = option_menu(
+	menu_title = None,
+	options = ["Spectrum Band", "Auction Year"],
+	icons = ["1-circle-fill", "2-circle-fill"],
+	default_index =0,
+	orientation = "horizontal",
+	)
 
 
 # #Choose a dimension
