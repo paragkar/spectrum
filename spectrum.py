@@ -616,7 +616,7 @@ def htext_colmatrix_auction_year_operator_metric(df1, selectedbands, SubFeature,
 
 #preparing color scale for hoverbox for freq and exp maps
 @st.cache_resource
-def hcolscalefreqexp(operators, colcodes):
+def colscale_hbox_spectrum_expiry_maps(operators, colcodes):
     scale = [round(x/(len(operators)-1),2) for x in range(len(operators))]
     colors =[]
     for k, v  in operators.items():
@@ -834,7 +834,7 @@ if Dimension == "Spectrum Band":
 					    ),
 				]
 			
-			hcolscale=hcolscalefreqexp(operators, colcodes)  #colorscale for hoverbox
+			hcolscale=colscale_hbox_spectrum_expiry_maps(operators, colcodes)  #colorscale for hoverbox
 			hoverlabel_bgcolor = hcolmatrixfreqexp(hcolscale, hf) #shaping the hfcolorscale
 			
 		if SubFeature == "Operator Holdings":
@@ -994,7 +994,7 @@ if Dimension == "Spectrum Band":
 			      reversescale=True,
 				)
 				  ]
-			hcolscale=hcolscalefreqexp(operators, colcodes)  #colorscale for hoverbox
+			hcolscale=colscale_hbox_spectrum_expiry_maps(operators, colcodes)  #colorscale for hoverbox
 			hoverlabel_bgcolor = hcolmatrixfreqexp(hcolscale, hf) #shaping the hfcolorscale
 
 		if SubFeature == "Yearly Trends":
