@@ -697,7 +697,7 @@ def summarychart(summarydf, xcolumn, ycolumn):
 with st.sidebar:
 	selected_dimension = option_menu(
 		menu_title = None,
-		options = ["Spectrum Band", "Auction Year"],
+		options = ["Spectrum Bands", "Auction Years"],
 		icons = ["1-circle-fill", "2-circle-fill"],
 		default_index =0,
 		)
@@ -708,7 +708,7 @@ with st.sidebar:
 # #Choose a dimension
 # selected_dimension = st.sidebar.selectbox('Select a Dimension', ["Spectrum Band", "Auction Year"],0)
 
-if selected_dimension == "Spectrum Band":
+if selected_dimension == "Spectrum Bands":
 	#selecting a Spectrum band
 	Band = st.sidebar.selectbox('Select a Band', list(exptab_dict.keys()), 3) #default index 1800 MHz Band
 	
@@ -1131,7 +1131,7 @@ if selected_dimension == "Spectrum Band":
 		hoverlabel_bgcolor = transform_colscale_for_hbox_auction_map(dff,reserveprice,auctionprice)
 
 #Processing For Dimension = "Auction Year"
-if selected_dimension == "Auction Year":
+if selected_dimension == "Auction Years":
 	#loading files
 	masterall = "MasterAll-TDDValueConventional" #all auction related information
 	spectrumofferedvssold = "Spectrum_Offered_vs_Sold"
@@ -1330,7 +1330,7 @@ units_dict = {"Reserve Price" : "Rs Cr/MHz", "Auction Price" : "Rs Cr/MHz", "Qua
 #Plotting the final Heatmap	
 fig = go.Figure(data=data)
 
-if selected_dimension == "Spectrum Band":
+if selected_dimension == "Spectrum Bands":
 	if Feature == "Auction Map":
 		fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 		unit = units_dict[SubFeature]
@@ -1404,7 +1404,7 @@ if selected_dimension == "Spectrum Band":
 	
 	title = parttitle+" for "+str(Band)+" MHz Band"
 
-if (selected_dimension == "Auction Year") and (Feature == "Band Metric"):
+if (selected_dimension == "Auction Years") and (Feature == "Band Metric"):
 	if (SubFeature =="Total Outflow") or (SubFeature == "Quantum Sold"):
 		if selected_operators==[]:
 			selected_operators = ["All"]
@@ -1426,7 +1426,7 @@ if (selected_dimension == "Auction Year") and (Feature == "Band Metric"):
 	tickangle =0
 	dtickval =1
 	
-if (selected_dimension == "Auction Year") and (Feature == "Operator Metric"):
+if (selected_dimension == "Auction Years") and (Feature == "Operator Metric"):
 	if (SubFeature =="Total Outflow") or (SubFeature == "Total Purchase"):
 		if selectedbands==[]:
 			selectedbands = ["All"]
