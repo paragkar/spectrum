@@ -4,4 +4,4 @@ streamlit
 openpyxl
 matplotlib
 streamlit_option_menu
-msoffcrypto
+msoffcrypto-tool 5.0.1
