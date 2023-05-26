@@ -696,7 +696,7 @@ def summarychart(summarydf, xcolumn, ycolumn):
 
 with st.sidebar:
 	selected_dimension = option_menu(
-		menu_title = None,
+		menu_title = Select a Menu,
 		options = ["Spectrum Bands", "Auction Years"],
 		icons = ["1-circle-fill", "2-circle-fill"],
 		default_index =0,
