@@ -1356,9 +1356,11 @@ if selected_dimension == "Telecom Data":
 
 	df5gbtsf = pd.pivot(df5gbts, values ="Total", index = "StateCode", columns = "Date")
 
+	df5gbtsf.columns = [str(x) for x in f5gbtsf.columns ]
 
 
-	# df5gbtsf = df5gbtsf.sort_values(["2023-05-25"], ascending = False)
+
+	df5gbtsf = df5gbtsf.sort_values(["2023-05-25"], ascending = False).head(20)
 
 	#setting the data of the heatmap 
 
@@ -1378,7 +1380,7 @@ if selected_dimension == "Telecom Data":
 		]
 
 	tickangle=0
-	dtickval=30
+	dtickval=1
 	title = "5G BTS Roll Out Trends"
 	subtitle = ""
 
