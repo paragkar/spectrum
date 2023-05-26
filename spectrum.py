@@ -148,7 +148,7 @@ def colscalefreqlayout(operators, colcodes):
 
 #function for calculating expiry year heatmap for yearwise
 @st.cache_resource
-def forexpyearheatmap(ef, selected_operator):
+def exp_year_cal_yearly_trends(ef, selected_operator):
 	lst1 =[]
 	for i, line1 in enumerate(ef.values):
 		explst = list(set(line1))
@@ -723,7 +723,7 @@ if Dimension == "Spectrum Band":
 	bandexpf = bandexpf.set_index("LSA")
 	masterdf = df[masterall]
 
-# 	eff = forexpyearheatmap(ef) # for expiry year heatmap year wise
+# 	eff = exp_year_cal_yearly_trends(ef) # for expiry year heatmap year wise
 	
 # 	bwf = BWExpiring(sff,ef) # hover text for expiry year heatmap year wise
 	
@@ -1002,7 +1002,7 @@ if Dimension == "Spectrum Band":
 			operatorslist = ["All"]+sorted(list(newoperators_dict[Band].keys()))
 			selected_operator = st.sidebar.selectbox('Select an Operator', operatorslist)
 			if selected_operator == "All":
-				eff = forexpyearheatmap(ef,selected_operator)
+				eff = exp_year_cal_yearly_trends(ef,selected_operator)
 				bwf = BWExpiring(sff,ef)
 				hovertext = hovertext22(bwf,eff) #hovertext for "All"
 			else:
@@ -1021,7 +1021,7 @@ if Dimension == "Spectrum Band":
 				
 				for col in temp.columns:
 					temp[col] = temp[col].astype(float)
-				eff = forexpyearheatmap(temp,selected_operator)
+				eff = exp_year_cal_yearly_trends(temp,selected_operator)
 				hovertext = hovertext23(eff) #hovertext with operator selections
 			
 			parttitle ="Spectrum Expiry Layout "+SubFeature
