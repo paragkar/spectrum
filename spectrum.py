@@ -914,7 +914,7 @@ if Dimension == "Spectrum Band":
 			dfffcopy =dfff.copy()
 			dfffcopy["Total"] = dfffcopy.sum(axis=1)
 
-			st.write(dfffcopy) #debug
+			selected_operators = list(dfffcopy.columns[:-1]) #new selected operators after category level filtering 
 			
 			if len(selected_operators) ==0:
 				selected_operators =operatorlist
