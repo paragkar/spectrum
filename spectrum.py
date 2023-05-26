@@ -1336,53 +1336,55 @@ if selected_dimension == "Auction Years":
 
 if selected_dimension == "Telecom Data":
 
-	excel_content = io.BytesIO()
+	st.write("Work in Progress")
 
-	with open("telecomdata_protected.xlsx", 'rb') as f:
-		excel = msoffcrypto.OfficeFile(f)
-		excel.load_key(password)
-		excel.decrypt(excel_content)
+	# excel_content = io.BytesIO()
 
-	#loading data from excel file, the last letter stands for telecom
-	xlt = pd.ExcelFile(excel_content)
-	sheett = xlt.sheet_names
-	dft = pd.read_excel(excel_content, sheet_name=sheett)
+	# with open("telecomdata_protected.xlsx", 'rb') as f:
+	# 	excel = msoffcrypto.OfficeFile(f)
+	# 	excel.load_key(password)
+	# 	excel.decrypt(excel_content)
 
-	df5gbts = dft["5GBTS"]
+	# #loading data from excel file, the last letter stands for telecom
+	# xlt = pd.ExcelFile(excel_content)
+	# sheett = xlt.sheet_names
+	# dft = pd.read_excel(excel_content, sheet_name=sheett)
 
-	df5gbts["Date"] = df5gbts["Date"].dt.date
+	# df5gbts = dft["5GBTS"]
 
-	df5gbts.drop(columns = "S.No", inplace = True)
+	# df5gbts["Date"] = df5gbts["Date"].dt.date
 
-	df5gbtsf = pd.pivot(df5gbts, values ="Total", index = "StateCode", columns = "Date")
+	# df5gbts.drop(columns = "S.No", inplace = True)
 
-	df5gbtsf.columns = [str(x) for x in df5gbtsf.columns ]
+	# df5gbtsf = pd.pivot(df5gbts, values ="Total", index = "StateCode", columns = "Date")
+
+	# df5gbtsf.columns = [str(x) for x in df5gbtsf.columns ]
 
 
 
-	df5gbtsf = df5gbtsf.sort_values(["2023-05-25"], ascending = False).head(20)
+	# df5gbtsf = df5gbtsf.sort_values(["2023-05-25"], ascending = False).head(20)
 
-	#setting the data of the heatmap 
+	# #setting the data of the heatmap 
 
-	data = [go.Heatmap(
-		z = df5gbtsf.values,
-		y = df5gbtsf.index,
-		x = df5gbtsf.columns,
-		xgap = 1,
-		ygap = 1,
-		hoverinfo ='text',
-		# text = hovertext,
-		colorscale='Hot',
-			texttemplate="%{z}", 
-			textfont={"size":10},
-			reversescale=True,
-			),
-		]
+	# data = [go.Heatmap(
+	# 	z = df5gbtsf.values,
+	# 	y = df5gbtsf.index,
+	# 	x = df5gbtsf.columns,
+	# 	xgap = 1,
+	# 	ygap = 1,
+	# 	hoverinfo ='text',
+	# 	# text = hovertext,
+	# 	colorscale='Hot',
+	# 		texttemplate="%{z}", 
+	# 		textfont={"size":10},
+	# 		reversescale=True,
+	# 		),
+	# 	]
 
-	tickangle=0
-	dtickval=3
-	title = "5G BTS Roll Out Trends"
-	subtitle = ""
+	# tickangle=0
+	# dtickval=3
+	# title = "5G BTS Roll Out Trends"
+	# subtitle = ""
 
 
 units_dict = {"Reserve Price" : "Rs Cr/MHz", "Auction Price" : "Rs Cr/MHz", "Quantum Offered": "MHz", 
