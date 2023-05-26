@@ -345,7 +345,7 @@ def htext_expmap_freq_layout(sf):
 
 #processing for hovertext for expiry map, year wise operator selection "All"
 @st.cache_resource
-def htext_expmap_yearly_trends(bwf,eff): 
+def htext_expmap_yearly_trends_with_all_select(bwf,eff): 
 	bwf["Op&BW"] = bwf["Operators"]+" - "+round(bwf["BW"],2).astype(str)+" MHz"
 	bwff = bwf.set_index("LSA").drop(['Operators'], axis=1)
 	xaxisyears = sorted(list(set(bwff["ExpYear"])))[1:]
@@ -381,7 +381,7 @@ def htext_expmap_yearly_trends(bwf,eff):
 
 #processing for hovertext for expiry map, year wise along with operator menue
 @st.cache_resource
-def hovertext23(eff): 
+def htext_expmap_yearly_trends_with_op_select(eff): 
 	hovertext = []
 	for yi, yy in enumerate(eff.index):
 		hovertext.append([])
@@ -1004,7 +1004,7 @@ if Dimension == "Spectrum Band":
 			if selected_operator == "All":
 				eff = exp_year_cal_yearly_trends(ef,selected_operator)
 				bwf = bw_exp_cal_yearly_trends(sff,ef)
-				hovertext = htext_expmap_yearly_trends(bwf,eff) #hovertext for "All"
+				hovertext = htext_expmap_yearly_trends_with_all_select(bwf,eff) #hovertext for "All"
 			else:
 				if selected_operator[-1] in ["R", "U"]: #Last letter of the operator ending with R or U
 					regexfilt = '^(?!.*'+selected_operator+').*' #to replace na.npn with text embedded with names of other than the selected operator
@@ -1022,7 +1022,7 @@ if Dimension == "Spectrum Band":
 				for col in temp.columns:
 					temp[col] = temp[col].astype(float)
 				eff = exp_year_cal_yearly_trends(temp,selected_operator)
-				hovertext = hovertext23(eff) #hovertext with operator selections
+				hovertext = htext_expmap_yearly_trends_with_op_select(eff) #hovertext with operator selections
 			
 			parttitle ="Spectrum Expiry Layout "+SubFeature
 			tickangle = 0
