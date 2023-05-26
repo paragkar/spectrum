@@ -1364,7 +1364,7 @@ if Dimension == "Spectrum Band":
 		else:
 			selected_category = selected_category[0]
 		
-		if selected_operators == []:
+		if len(selected_operators) == 0: #debug
 			selected_operators = ["All"]
 		else:
 			selected_operators = selected_operators
