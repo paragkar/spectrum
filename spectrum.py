@@ -1336,6 +1336,7 @@ if selected_dimension == "Auction Years":
 
 if selected_dimension == "Telecom Data":
 
+	excel_content = io.BytesIO()
 
 	with open("telecomdata_protected.xlsx", 'rb') as f:
 		excel = msoffcrypto.OfficeFile(f)
