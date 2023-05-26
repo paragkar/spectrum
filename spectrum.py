@@ -1358,7 +1358,7 @@ if selected_dimension == "Telecom Data":
 
 
 
-	df5gbtsf = df5gbtsf.sort_values(["2023-05-25"], ascending = False)
+	# df5gbtsf = df5gbtsf.sort_values(["2023-05-25"], ascending = False)
 
 	#setting the data of the heatmap 
 
