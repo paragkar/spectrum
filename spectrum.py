@@ -83,8 +83,8 @@ bands_for_auction_dict = {2010 : [2100, 2300],
 #exptab is used as flag to make exptab for spectrum in excel file operational (1: yes, 0, No)
 exptabflag_dict = {700:1, 800:1, 900:1, 1800:1, 2100:1, 2300:1, 2500:1, 3500:1, 26000:1}
 
-#Setting the channel sizes for respective frequency maps
-ChannelSize = {700:2.5, 800:0.625, 900:0.2, 1800:0.2, 2100:2.5, 2300:2.5, 2500:5, 3500:5, 26000:25}
+#channelsize dict sets the channel sizes for the respective frequency maps
+channelsize_dict = {700:2.5, 800:0.625, 900:0.2, 1800:0.2, 2100:2.5, 2300:2.5, 2500:5, 3500:5, 26000:25}
 
 # scale of the x axis plots
 dtickfreq = {700:1, 800:0.25, 900:0.4, 1800:1, 2100:1, 2300:1, 2500:2, 3500:5, 26000:50}
@@ -153,7 +153,7 @@ def forexpyearheatmap(ef, selected_operator):
 	lst1 =[]
 	for i, line1 in enumerate(ef.values):
 		explst = list(set(line1))
-		l1 = [[ef.index[i],round(list(line1).count(x)*ChannelSize[Band],2), round(x,2)] for x in explst]
+		l1 = [[ef.index[i],round(list(line1).count(x)*channelsize_dict[Band],2), round(x,2)] for x in explst]
 		lst1.append(l1)
 
 	lst2 =[]
@@ -184,7 +184,7 @@ def BWExpiring(sff,ef):
 			
 	df = pd.DataFrame(lst)
 	df.columns = ["LSA","Operators", "ExpYear"]
-	df = df.groupby(["ExpYear"])[["LSA","Operators"]].value_counts()*ChannelSize[Band]
+	df = df.groupby(["ExpYear"])[["LSA","Operators"]].value_counts()*channelsize_dict[Band]
 	df = df.reset_index()
 	df.columns =["ExpYear","LSA", "Operators","BW"]
 	
@@ -263,7 +263,7 @@ def auctioncalyear(ef,excepf,pf1):
   
 #processing for hovertext for freq map, band wise
 @st.cache_resource
-def hovertext1(sf,sff,ef,of,ayear,bandf,exptabflag_dict,ChannelSize,xaxisadj):  
+def hovertext1(sf,sff,ef,of,ayear,bandf,exptabflag_dict,channelsize_dict,xaxisadj):  
 	hovertext = []
 	for yi, yy in enumerate(sf.index):
 		hovertext.append([])
@@ -291,7 +291,7 @@ def hovertext1(sf,sff,ef,of,ayear,bandf,exptabflag_dict,ChannelSize,xaxisadj):
 
 				     .format(
 					    round(xx-xaxisadj[Band],2),
-					    ChannelSize[Band],
+					    channelsize_dict[Band],
 					    state_dict.get(yy),
 					    operatornew,
 					    bandwidth,
@@ -304,7 +304,7 @@ def hovertext1(sf,sff,ef,of,ayear,bandf,exptabflag_dict,ChannelSize,xaxisadj):
 
 #processing for hovertext for expiry map, freq wise
 @st.cache_resource
-def hovertext21(sf,sff,ef,of,bandf,bandexpf,exptabflag_dict,ChannelSize,xaxisadj,ayear):
+def hovertext21(sf,sff,ef,of,bandf,bandexpf,exptabflag_dict,channelsize_dict,xaxisadj,ayear):
 	hovertext = []
 	for yi, yy in enumerate(sf.index):
 		hovertext.append([])
@@ -332,7 +332,7 @@ def hovertext21(sf,sff,ef,of,bandf,bandexpf,exptabflag_dict,ChannelSize,xaxisadj
 
 				     .format(
 					    round(xx-xaxisadj[Band],2),
-					    ChannelSize[Band],
+					    channelsize_dict[Band],
 					    state_dict.get(yy),
 					    operatornew,
 					    bandwidthexpiring,
@@ -811,7 +811,7 @@ if Dimension == "Spectrum Band":
 				tickvals = list(selected_op_dict.values())
 				ticktext = list(selected_op_dict.keys())	
 
-			hovertext = hovertext1(hf,sff,ef, of, ayear, bandf, exptabflag_dict,ChannelSize,xaxisadj)
+			hovertext = hovertext1(hf,sff,ef, of, ayear, bandf, exptabflag_dict,channelsize_dict,xaxisadj)
 			parttitle ="Spectrum Frequency Layout"
 			tickangle = -90
 			dtickval = dtickfreq[Band]
@@ -978,7 +978,7 @@ if Dimension == "Spectrum Band":
 
 				expf = pd.DataFrame(sf.values*ef.values, columns=ef.columns, index=ef.index)
 
-			hovertext = hovertext21(hf,sff,ef, of, bandf, bandexpf, exptabflag_dict,ChannelSize,xaxisadj,ayear)
+			hovertext = hovertext21(hf,sff,ef, of, bandf, bandexpf, exptabflag_dict,channelsize_dict,xaxisadj,ayear)
 			parttitle ="Spectrum Expiry Layout "+SubFeature
 			tickangle = -90
 			dtickval = dtickfreq[Band]
@@ -1310,7 +1310,7 @@ if Dimension == "Spectrum Band":
 		
 	if (Feature == "Expiry Map") and (SubFeature == "Frequency Layout"):
 		fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
-		unit = "Ch Size - "+str(ChannelSize[Band])+" MHz"
+		unit = "Ch Size - "+str(channelsize_dict[Band])+" MHz"
 		if selected_operators == []:
 			selected_operators = ["All"]
 		else:
@@ -1329,7 +1329,7 @@ if Dimension == "Spectrum Band":
 		
 	if (Feature == "Spectrum Map") and (SubFeature == "Frequency Layout"):
 		fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
-		unit = "Ch Size - "+str(ChannelSize[Band])+" MHz"
+		unit = "Ch Size - "+str(channelsize_dict[Band])+" MHz"
 		if selected_operators == []:
 			selected_operators = ["All"]
 		else:
