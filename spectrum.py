@@ -59,7 +59,7 @@ newoperators_dict = {700: {'Vacant':0,'Railways':1,'Govt':2,'RJIO':3,'BSNL':4},
             }
 
 #operators dict for dimension - calendar years
-operators_dim_cy = {2010 : ["Bharti", "QCOM", "Augere", "Vodafone", "Idea", "RJIO", "RCOM", "STel", "Tata", "Aircel", "Tikona"],
+oldoperators_dict = {2010 : ["Bharti", "QCOM", "Augere", "Vodafone", "Idea", "RJIO", "RCOM", "STel", "Tata", "Aircel", "Tikona"],
 		    2012 : ["Bharti", "Vodafone", "Idea", "Telenor", "Videocon"],
 		    2013 : ["MTS"],
 		    2014 : ["Bharti", "Vodafone", "Idea", "RJIO", "RCOM", "Aircel", "Telenor"],
@@ -558,7 +558,7 @@ def hovertext_and_colmatrix2(df1, selectedbands, SubFeature, df_subfeature):
 	if SubFeature == "Total Purchase": #then process for total purchase
 		df_purchase = df_subfeature
 	else: 
-		columnstoextract = ["Circle", "Band"]+operators_dim_cy[Year]
+		columnstoextract = ["Circle", "Band"]+oldoperators_dict[Year]
 		df2_temp2 = df1[columnstoextract]
 		df2_temp2.drop("Band", inplace = True, axis =1)
 		df2_temp2 = df2_temp2.groupby(["Circle"]).sum().round(2)
@@ -569,7 +569,7 @@ def hovertext_and_colmatrix2(df1, selectedbands, SubFeature, df_subfeature):
 		df_outflow = df_subfeature
 	else:
 		operators_dim_cy_new=[]
-		for op in operators_dim_cy[Year]:
+		for op in oldoperators_dict[Year]:
 			df1[op+"1"] = df1["Auction Price/MHz"]*df1[op]
 			operators_dim_cy_new.append(op+"1")
 		columnstoextract = ["Circle", "Band"]+operators_dim_cy_new
@@ -1120,7 +1120,7 @@ if Dimension == "Auction Year":
 			df1 = df1.reset_index()
 			df1_temp1 = df1.copy()
 			if SubFeature == "Quantum Sold":
-				operatorslist = operators_dim_cy[Year]
+				operatorslist = oldoperators_dict[Year]
 				selected_operators = st.sidebar.multiselect('Select an Operator', operatorslist)
 				if selected_operators == []:
 					df1_temp1 = df1_temp1.pivot(index="Circle", columns='Band', values=subfeature_dict[SubFeature])
@@ -1137,7 +1137,7 @@ if Dimension == "Auction Year":
 		if SubFeature == "Total Outflow":
 			df1 = df1.reset_index()
 			df1_temp2 = df1.set_index(["Band","Circle"])
-			operatorslist = operators_dim_cy[Year]
+			operatorslist = oldoperators_dict[Year]
 			selected_operators = st.sidebar.multiselect('Select Operators', operatorslist)
 			if selected_operators== []:
 				df1_temp2["Total Outflow"] = df1_temp2[subfeature_dict["Auction Price"]]*df1_temp2["Total Sold (MHz)"]
@@ -1219,7 +1219,7 @@ if Dimension == "Auction Year":
 			else:
 				df2_temp1 = df1.copy()
 			operators_dim_cy_new=[]
-			for op in operators_dim_cy[Year]:
+			for op in oldoperators_dict[Year]:
 				df2_temp1[op+"1"] = df2_temp1["Auction Price/MHz"]*df2_temp1[op]
 				operators_dim_cy_new.append(op+"1")
 			columnstoextract = ["Circle", "Band"]+operators_dim_cy_new
@@ -1255,7 +1255,7 @@ if Dimension == "Auction Year":
 				df2_temp2 = temp1
 			else:
 				df2_temp2 = df1.copy()
-			columnstoextract = ["Circle", "Band"]+operators_dim_cy[Year]
+			columnstoextract = ["Circle", "Band"]+oldoperators_dict[Year]
 			df2_temp2 = df2_temp2[columnstoextract]
 			df2_temp2.drop("Band", inplace = True, axis =1)
 			df2_temp2 = df2_temp2.groupby(["Circle"]).sum().round(2)
