@@ -694,9 +694,15 @@ def summarychart(summarydf, xcolumn, ycolumn):
 
 #**********  Main Program Starts here ***************
 
+with st.sidebar:
+	selected_dimension = option_menue(
+		menue_title = "Main Menu",
+		options = ["Spectrum Band", "Auction Year"]
+		)
 
-#Choose a dimension
-selected_dimension = st.sidebar.selectbox('Select a Dimension', ["Spectrum Band", "Auction Year"],0)
+
+# #Choose a dimension
+# selected_dimension = st.sidebar.selectbox('Select a Dimension', ["Spectrum Band", "Auction Year"],0)
 
 if selected_dimension == "Spectrum Band":
 	#selecting a Spectrum band
