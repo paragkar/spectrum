@@ -1356,7 +1356,7 @@ if selected_dimension == "Telecom Data":
 
 	df5gbtsf = pd.pivot(df5gbts, values ="Total", index = "StateCode", columns = "Date")
 
-	df5gbtsf.columns = [str(x) for x in f5gbtsf.columns ]
+	df5gbtsf.columns = [str(x) for x in df5gbtsf.columns ]
 
 
 
