@@ -86,16 +86,16 @@ exptab_dict = {700:1, 800:1, 900:1, 1800:1, 2100:1, 2300:1, 2500:1, 3500:1, 2600
 channelsize_dict = {700:2.5, 800:0.625, 900:0.2, 1800:0.2, 2100:2.5, 2300:2.5, 2500:5, 3500:5, 26000:25}
 
 # scale of the x axis plots
-dtickfreq = {700:1, 800:0.25, 900:0.4, 1800:1, 2100:1, 2300:1, 2500:2, 3500:5, 26000:50}
+xdtickfreq_dict = {700:1, 800:0.25, 900:0.4, 1800:1, 2100:1, 2300:1, 2500:2, 3500:5, 26000:50}
 
 # used to control the number of ticks on xaxis for chosen feature = AuctionMap
-dtickauction = {700:1, 800:1, 900:1, 1800:1, 2100:1, 2300:1, 2500:1, 3500:1, 26000:1}
+dtickauction_dict = {700:1, 800:1, 900:1, 1800:1, 2100:1, 2300:1, 2500:1, 3500:1, 26000:1}
 
 # vertical line widths
-xgap = {700:1, 800:1, 900:0.5, 1800:0, 2100:1, 2300:1, 2500:1, 3500:1, 26000:1}
+xgap_dict = {700:1, 800:1, 900:0.5, 1800:0, 2100:1, 2300:1, 2500:1, 3500:1, 26000:1}
 
 # adjustment need for tool tip display data for channel frequency
-xaxisadj = {700:1, 800:0.25, 900:0, 1800:0, 2100:1, 2300:1, 2500:2, 3500:0, 26000:0}
+xaxisadj_dict = {700:1, 800:0.25, 900:0, 1800:0, 2100:1, 2300:1, 2500:2, 3500:0, 26000:0}
 
 #describing the type of band TDD/FDD
 BandType = {700:"FDD", 800:"FDD", 900:"FDD", 1800:"FDD", 2100:"FDD", 2300:"TDD", 2500:"TDD", 3500:"TDD", 26000:"TDD"}
@@ -252,7 +252,7 @@ def auctioncalyear(ef,excepf,pf1):
 				else:
 					error = 0
 				if (ef.index[i] == pf1val[0]) and error <= errors[Band]:
-					lst.append([ef.index[i],col-xaxisadj[Band],pf1val[1],pf1val[2], pf1val[3], pf1val[4], error]) 
+					lst.append([ef.index[i],col-xaxisadj_dict[Band],pf1val[1],pf1val[2], pf1val[3], pf1val[4], error]) 
 				
 	df_final = pd.DataFrame(lst)
 	df_final.columns = ["LSA", "StartFreq", "TP", "RP", "AP", "Year", "Error"]
@@ -262,7 +262,7 @@ def auctioncalyear(ef,excepf,pf1):
   
 #processing for hovertext for freq map, band wise
 @st.cache_resource
-def hovertext1(sf,sff,ef,of,ayear,bandf,exptab_dict,channelsize_dict,xaxisadj):  
+def hovertext1(sf,sff,ef,of,ayear,bandf,exptab_dict,channelsize_dict,xaxisadj_dict):  
 	hovertext = []
 	for yi, yy in enumerate(sf.index):
 		hovertext.append([])
@@ -272,7 +272,7 @@ def hovertext1(sf,sff,ef,of,ayear,bandf,exptab_dict,channelsize_dict,xaxisadj):
 			else:
 				expiry = "NA"
 			try:
-			    auction_year = round(ayear.loc[yy,round(xx-xaxisadj[Band],3)])
+			    auction_year = round(ayear.loc[yy,round(xx-xaxisadj_dict[Band],3)])
 			except:
 			    auction_year ="NA"
 				
@@ -289,7 +289,7 @@ def hovertext1(sf,sff,ef,of,ayear,bandf,exptab_dict,channelsize_dict,xaxisadj):
 					     <br>Acquired In: {} by {}'
 
 				     .format(
-					    round(xx-xaxisadj[Band],2),
+					    round(xx-xaxisadj_dict[Band],2),
 					    channelsize_dict[Band],
 					    state_dict.get(yy),
 					    operatornew,
@@ -303,7 +303,7 @@ def hovertext1(sf,sff,ef,of,ayear,bandf,exptab_dict,channelsize_dict,xaxisadj):
 
 #processing for hovertext for expiry map, freq wise
 @st.cache_resource
-def hovertext21(sf,sff,ef,of,bandf,bandexpf,exptab_dict,channelsize_dict,xaxisadj,ayear):
+def hovertext21(sf,sff,ef,of,bandf,bandexpf,exptab_dict,channelsize_dict,xaxisadj_dict,ayear):
 	hovertext = []
 	for yi, yy in enumerate(sf.index):
 		hovertext.append([])
@@ -313,7 +313,7 @@ def hovertext21(sf,sff,ef,of,bandf,bandexpf,exptab_dict,channelsize_dict,xaxisad
 			else:
 				expiry = "NA"
 			try:
-			    auction_year = round(ayear.loc[yy,round(xx-xaxisadj[Band],3)])
+			    auction_year = round(ayear.loc[yy,round(xx-xaxisadj_dict[Band],3)])
 			except:
 			    auction_year ="NA"
 			operatornew = sff.values[yi][xi]
@@ -330,7 +330,7 @@ def hovertext21(sf,sff,ef,of,bandf,bandexpf,exptab_dict,channelsize_dict,xaxisad
 					     <br>Acquired In: {} by {}'
 
 				     .format(
-					    round(xx-xaxisadj[Band],2),
+					    round(xx-xaxisadj_dict[Band],2),
 					    channelsize_dict[Band],
 					    state_dict.get(yy),
 					    operatornew,
@@ -810,16 +810,16 @@ if Dimension == "Spectrum Band":
 				tickvals = list(selected_op_dict.values())
 				ticktext = list(selected_op_dict.keys())	
 
-			hovertext = hovertext1(hf,sff,ef, of, ayear, bandf, exptab_dict,channelsize_dict,xaxisadj)
+			hovertext = hovertext1(hf,sff,ef, of, ayear, bandf, exptab_dict,channelsize_dict,xaxisadj_dict)
 			parttitle ="Spectrum Frequency Layout"
 			tickangle = -90
-			dtickval = dtickfreq[Band]
+			dtickval = xdtickfreq_dict[Band]
 			
 			data = [go.Heatmap(
 			      z = sf.values,
 			      y = sf.index,
 			      x = sf.columns,
-			      xgap = xgap[Band],
+			      xgap = xgap_dict[Band],
 			      ygap = 1,
 			      hoverinfo ='text',
 			      text = hovertext,
@@ -977,16 +977,16 @@ if Dimension == "Spectrum Band":
 
 				expf = pd.DataFrame(sf.values*ef.values, columns=ef.columns, index=ef.index)
 
-			hovertext = hovertext21(hf,sff,ef, of, bandf, bandexpf, exptab_dict,channelsize_dict,xaxisadj,ayear)
+			hovertext = hovertext21(hf,sff,ef, of, bandf, bandexpf, exptab_dict,channelsize_dict,xaxisadj_dict,ayear)
 			parttitle ="Spectrum Expiry Layout "+SubFeature
 			tickangle = -90
-			dtickval = dtickfreq[Band]
+			dtickval = xdtickfreq_dict[Band]
 
 			data = [go.Heatmap(
 			      z = expf.values,
 			      y = expf.index,
 			      x = expf.columns,
-			      xgap = xgap[Band],
+			      xgap = xgap_dict[Band],
 			      ygap = 1,
 			      hoverinfo ='text',
 			      text = hovertext,
@@ -1026,7 +1026,7 @@ if Dimension == "Spectrum Band":
 			
 			parttitle ="Spectrum Expiry Layout "+SubFeature
 			tickangle = 0
-			dtickval = dtickauction[Band]
+			dtickval = dtickauction_dict[Band]
 		
 		
 			#preparing the dataframe of the summary bar chart on top of the heatmap
@@ -1070,7 +1070,7 @@ if Dimension == "Spectrum Band":
 		typedf = type_dict[SubFeature].copy()
 		parttitle = "Yearly Trend of "+SubFeature
 		tickangle=0
-		dtickval = dtickauction[Band]
+		dtickval = dtickauction_dict[Band]
 		hovertext = hovertext3(dff,reserveprice,auctionprice,offeredspectrum,soldspectrum,unsoldspectrum)
 		
 		#preparing the dataframe of the summary bar chart on top of the heatmap
