@@ -34,7 +34,7 @@ state_dict = {'AP': 'Andhra Pradesh', 'AS': 'Assam', 'BH': 'Bihar', 'DL': 'Delhi
     'UPE': 'Uttar Pradesh (East)','UPW': 'Uttar Pradesh (West)','WB': 'West Bengal' }
 
 #defining all dictionaries here with data linked to a specific band
-title_map = {700:"FDD: Uplink - 703-748 MHz(shown); Downlink - 758-803(notshown); ",
+title_map_dict = {700:"FDD: Uplink - 703-748 MHz(shown); Downlink - 758-803(notshown); ",
          800:"Uplink - 824-844 MHz(shown); Downlink - 869-889 MHz(not shown); ", 
          900:"Uplink - 890-915 MHz(shown); Downlink - 935-960 MHz(not shown); ", 
          1800:"Uplink - 1710-1785 MHz(shown); Downlink - 1805-1880 MHz(notshown); ", 
@@ -1315,7 +1315,7 @@ if Dimension == "Spectrum Band":
 		else:
 			selected_operators = selected_operators
 			
-		subtitle = title_map[Band]+unit+"; Selected Operators - "+', '.join(selected_operators)
+		subtitle = title_map_dict[Band]+unit+"; Selected Operators - "+', '.join(selected_operators)
 	
 	if (Feature == "Expiry Map") and (SubFeature == "Yearly Trends"):
 		fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white'))) #hoverbox color is black
@@ -1334,7 +1334,7 @@ if Dimension == "Spectrum Band":
 		else:
 			selected_operators = selected_operators
 			
-		subtitle = title_map[Band]+unit+"; Selected Operators - "+', '.join(selected_operators)
+		subtitle = title_map_dict[Band]+unit+"; Selected Operators - "+', '.join(selected_operators)
 			
 	if (Feature == "Spectrum Map") and (SubFeature == "Operator Holdings"):
 		fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
