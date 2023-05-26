@@ -98,14 +98,14 @@ xgap_dict = {700:1, 800:1, 900:0.5, 1800:0, 2100:1, 2300:1, 2500:1, 3500:1, 2600
 xaxisadj_dict = {700:1, 800:0.25, 900:0, 1800:0, 2100:1, 2300:1, 2500:2, 3500:0, 26000:0}
 
 #describing the type of band TDD/FDD
-BandType = {700:"FDD", 800:"FDD", 900:"FDD", 1800:"FDD", 2100:"FDD", 2300:"TDD", 2500:"TDD", 3500:"TDD", 26000:"TDD"}
+bandtype_dict = {700:"FDD", 800:"FDD", 900:"FDD", 1800:"FDD", 2100:"FDD", 2300:"TDD", 2500:"TDD", 3500:"TDD", 26000:"TDD"}
 
 #auctionfailyears when all auction prices are zero and there are no takers 
-auctionfailyears = {700:["2016","2021"], 800:["2012"], 900:["2013","2016"], 1800:["2013"], 
+auctionfailyears_dict = {700:["2016","2021"], 800:["2012"], 900:["2013","2016"], 1800:["2013"], 
         2100:[], 2300:["2022"], 2500:["2021"], 3500:[], 26000:[]}
 
 #auction sucess years are years where at least in one circle there was a winner
-auctionsucessyears = {700:[2022], 
+auctionsucessyears_dict = {700:[2022], 
         800:[2013, 2015, 2016, 2021, 2022], 
         900:[2014, 2015, 2021, 2022], 
         1800:[2012, 2014, 2015, 2016, 2021, 2022], 
@@ -200,7 +200,7 @@ def processdff(dff):
 		dff[col]=dff[col].astype(float)
 	dff = dff.groupby(["OperatorOld", "Year"]).sum()
 	dff = dff.drop(['Batch No',], axis = 1) 
-	if BandType[Band]=="TDD": #doubling the TDD spectrum for aligning with normal convention 
+	if bandtype_dict[Band]=="TDD": #doubling the TDD spectrum for aligning with normal convention 
 		dff = (dff*2).round(2)
 	dff = dff.replace(0,"")
 	dff= dff.reset_index().set_index("Year")
@@ -219,7 +219,7 @@ def processdff(dff):
 	dff = temp.groupby("Year").sum()
 	dff =dff.T
 	dff = dff.reset_index()
-	dff.columns = ["LSA"]+auctionsucessyears[Band]
+	dff.columns = ["LSA"]+auctionsucessyears_dict[Band]
 	dff = dff.set_index("LSA")
 	return dff
 
@@ -734,7 +734,7 @@ if Dimension == "Spectrum Band":
 	dffcopy = dff.copy() #make a copy for "Operator Wise" subfeature under the feature "FreqMap"
 	dff = processdff(dff)
 	dff = coltostr(dff)
-	dff = adddummycols(dff,auctionfailyears[Band])
+	dff = adddummycols(dff,auctionfailyears_dict[Band])
 	dff = dff.applymap(lambda x: "NA  " if x=="" else x) # space with NA is delibelitratly added as it gets removed with ","
 
 	#processing pricemaster excel tab data
@@ -768,7 +768,7 @@ if Dimension == "Spectrum Band":
 	auctionprice = auctionprice.loc[:, (auctionprice != 0).any(axis=0)]
 	auctionprice = auctionprice.applymap(lambda x: round(x,2))
 	auctionprice = coltostr(auctionprice) #convert columns data type to string
-	auctionprice = adddummycols(auctionprice,auctionfailyears[Band])
+	auctionprice = adddummycols(auctionprice,auctionfailyears_dict[Band])
 	auctionprice = auctionprice.replace(0,"NA")
 
 	#processing & restructuring dataframe reserve price for hovertext of data3
@@ -860,7 +860,7 @@ if Dimension == "Spectrum Band":
 			dfff = dfff.groupby(["OperatorNew","Year","Batch No", "Cat"])[LSAlist].sum()
 			dfff = dfff.reset_index().drop(columns = ["Year", "Batch No", "Cat"], axis =1).groupby("OperatorNew").sum().T
 			
-			if BandType[Band]=="TDD": #doubling the TDD spectrum for aligning with normal convention 
+			if bandtype_dict[Band]=="TDD": #doubling the TDD spectrum for aligning with normal convention 
         			dfff = (dfff*2).round(2)
 			
 			parttitle ="Operator Holdings for"
@@ -908,7 +908,7 @@ if Dimension == "Spectrum Band":
 			dfff = dfff.groupby(["OperatorNew","Year","Batch No", "Cat"])[LSAlist].sum()
 			dfff = dfff.reset_index().drop(columns = ["Year", "Batch No", "Cat"], axis =1).groupby("OperatorNew").sum().T
 			
-			if BandType[Band]=="TDD": #doubling the TDD spectrum for aligning with normal convention 
+			if bandtype_dict[Band]=="TDD": #doubling the TDD spectrum for aligning with normal convention 
         			dfff = (dfff*2).round(2)
 				
 			dfffcopy =dfff.copy()
