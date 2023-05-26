@@ -919,9 +919,11 @@ if Dimension == "Spectrum Band":
 			selected_operators = list(dfffcopy.columns[:-1]) #new selected operators after category level filtering 
 			
 			if len(selected_operators) ==0:
+
 				selected_operators =operatorlist
+
 			else:
-				operator_numbers = selected_operators
+				pass
 
 			lst =[]
 			dfffshare = pd.DataFrame()
@@ -955,6 +957,8 @@ if Dimension == "Spectrum Band":
 			    textfont={"size":10},
 			    reversescale=True,)
 				]
+
+			st.write(selected_operators) #debug
 			
 
 	#Feature ="Expiry Map" linked to Dimension = "Spectrum Band"
