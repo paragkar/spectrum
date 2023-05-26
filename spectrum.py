@@ -677,7 +677,7 @@ def summarychart(summarydf, xcolumn, ycolumn):
 #**********  Main Program Starts here ***************
 
 #Choose a dimension
-Dimension = st.sidebar.selectbox('Select a Dimension', ["Spectrum Band", "Calendar Year"],0)
+Dimension = st.sidebar.selectbox('Select a Dimension', ["Spectrum Band", "Auction Year"],0)
 
 if Dimension == "Spectrum Band":
 	#selecting a Spectrum band
@@ -1099,8 +1099,8 @@ if Dimension == "Spectrum Band":
 			]
 		hoverlabel_bgcolor = hovermatrixauction(dff,reserveprice,auctionprice)
 
-#Processing For Dimension = "Calendar Year"
-if Dimension == "Calendar Year":
+#Processing For Dimension = "Auction Year"
+if Dimension == "Auction Year":
 	#loading files
 	masterall = "MasterAll-TDDValueConventional" #all auction related information
 	spectrumofferedvssold = "Spectrum_Offered_vs_Sold"
@@ -1373,7 +1373,7 @@ if Dimension == "Spectrum Band":
 	
 	title = parttitle+" for "+str(Band)+" MHz Band"
 
-if (Dimension == "Calendar Year") and (Feature == "Band Metric"):
+if (Dimension == "Auction Year") and (Feature == "Band Metric"):
 	if (SubFeature =="Total Outflow") or (SubFeature == "Quantum Sold"):
 		if selected_operators==[]:
 			selected_operators = ["All"]
@@ -1395,7 +1395,7 @@ if (Dimension == "Calendar Year") and (Feature == "Band Metric"):
 	tickangle =0
 	dtickval =1
 	
-if (Dimension == "Calendar Year") and (Feature == "Operator Metric"):
+if (Dimension == "Auction Year") and (Feature == "Operator Metric"):
 	if (SubFeature =="Total Outflow") or (SubFeature == "Total Purchase"):
 		if selectedbands==[]:
 			selectedbands = ["All"]
