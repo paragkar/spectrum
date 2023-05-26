@@ -1345,7 +1345,7 @@ if selected_dimension == "Telecom Data":
 
 	#loading data from excel file, the last letter stands for telecom
 	xlt = pd.ExcelFile(excel_content)
-	sheett = xl.sheet_names
+	sheett = xlt.sheet_names
 	dft = pd.read_excel(excel_content, sheet_name=sheet)
 
 	st.write(dft["5GBTS"])
