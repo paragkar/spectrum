@@ -125,7 +125,7 @@ list_of_circles_codes = ['AP','AS', 'BH', 'DL', 'GU', 'HA', 'HP', 'JK', 'KA', 'K
 #defining various functions 
 #preparing color scale for freqmap
 @st.cache_resource
-def colscalefreqmap(operators, colcodes):
+def colscalefreqlayout(operators, colcodes):
 	operators = dict(sorted(operators.items(), key=lambda x:x[1]))
 	operator_names = list(operators.keys())
 	operator_codes = list(operators.values())
@@ -795,7 +795,7 @@ if Dimension == "Spectrum Band":
 			selected_operators = st.sidebar.multiselect('Select Operators', operatorslist)
 			if selected_operators==[]:
 				sf[sf.columns] = sf[sf.columns].replace(operators) 
-				colorscale = colscalefreqmap(operators, colcodes)
+				colorscale = colscalefreqlayout(operators, colcodes)
 				tickvals = list(operators.values())
 				ticktext = list(operators.keys())
 			else:
@@ -806,7 +806,7 @@ if Dimension == "Spectrum Band":
 				for i, op in enumerate(selected_operators):
 					sf.replace(op,i, inplace = True)
 					selected_op_dict.update({op : i})
-				colorscale = colscalefreqmap(selected_op_dict, colcodes)
+				colorscale = colscalefreqlayout(selected_op_dict, colcodes)
 				tickvals = list(selected_op_dict.values())
 				ticktext = list(selected_op_dict.keys())	
 
