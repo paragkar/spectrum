@@ -27,15 +27,15 @@ sheet = xl.sheet_names
 df = pd.read_excel(file, sheet_name=sheet)
 
   
-#Defining Dictionaries	
+#Setting Up Constants 
 state_dict = {'AP': 'Andhra Pradesh', 'AS': 'Assam', 'BH': 'Bihar', 'DL': 'Delhi', 'GU': 'Gujarat',
     'HA': 'Haryana','HP': 'Himachal Pradesh','JK': 'Jammu & Kashmir','KA': 'Karnataka',
     'KE': 'Kerala','KO': 'Kolkata','MP': 'Madhya Pradesh','MA': 'Maharashtra','MU': 'Mumbai',
     'NE': 'Northeast','OR': 'Odisha','PU': 'Punjab','RA': 'Rajasthan','TN': 'Tamil Nadu',
     'UPE': 'Uttar Pradesh (East)','UPW': 'Uttar Pradesh (West)','WB': 'West Bengal' }
 
-#defining all dictionaries here with data linked to a specific band
-title_map_dict = {700:"FDD: Uplink - 703-748 MHz(shown); Downlink - 758-803(notshown); ",
+#Setting the subtitle for the spectrum and expiry layout maps
+subtitle_map_dict = {700:"FDD: Uplink - 703-748 MHz(shown); Downlink - 758-803(notshown); ",
          800:"Uplink - 824-844 MHz(shown); Downlink - 869-889 MHz(not shown); ", 
          900:"Uplink - 890-915 MHz(shown); Downlink - 935-960 MHz(not shown); ", 
          1800:"Uplink - 1710-1785 MHz(shown); Downlink - 1805-1880 MHz(notshown); ", 
@@ -45,7 +45,7 @@ title_map_dict = {700:"FDD: Uplink - 703-748 MHz(shown); Downlink - 758-803(nots
          3500:"Up & Downlinks - 3300-3670 MHz(shown); ",
          26000:"Up & Downlinks - 24250-27500 MHz(shown); "}
 
-#operator dict for dimension - spectrum bands and subfeatures - freq and exp maps
+#Setting the existing operators mapped to a specific band
 operators = {700: {'Vacant':0,'Railways':1,'Govt':2,'RJIO':3,'BSNL':4},
              800: {'Vacant':0,'RCOM':1,'Govt':2,'RJIO':3,'Bharti':4, 'MTS':5, 'BSNL':6},
              900:{'Vacant':0,'RCOM':1,'Govt':2,'Railways':3,'Bharti':4, 'AircelU':5, 
@@ -1316,7 +1316,7 @@ if Dimension == "Spectrum Band":
 		else:
 			selected_operators = selected_operators
 			
-		subtitle = title_map_dict[Band]+unit+"; Selected Operators - "+', '.join(selected_operators)
+		subtitle = subtitle_map_dict[Band]+unit+"; Selected Operators - "+', '.join(selected_operators)
 	
 	if (Feature == "Expiry Map") and (SubFeature == "Yearly Trends"):
 		fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white'))) #hoverbox color is black
@@ -1335,7 +1335,7 @@ if Dimension == "Spectrum Band":
 		else:
 			selected_operators = selected_operators
 			
-		subtitle = title_map_dict[Band]+unit+"; Selected Operators - "+', '.join(selected_operators)
+		subtitle = subtitle_map_dict[Band]+unit+"; Selected Operators - "+', '.join(selected_operators)
 			
 	if (Feature == "Spectrum Map") and (SubFeature == "Operator Holdings"):
 		fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
