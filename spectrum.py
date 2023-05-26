@@ -39,7 +39,6 @@ st.markdown(hide_st_style, unsafe_allow_html =True)
 password = st.secrets["db_password"]
 
 
-
 #Loading File
 
 file = "https://paragkar.com/wp-content/uploads/2023/05/spectrum_map_protected.xlsx"
