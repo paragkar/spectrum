@@ -13,7 +13,7 @@ import altair as alt
 
 
 #Setting Page layout
-st.set_page_config(layout="wide")
+st.set_page_config(layout="centered")
 #set summary chart flag
 flag = False # It will toggle to True when we what summary chart to show
 
