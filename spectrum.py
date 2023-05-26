@@ -1380,7 +1380,7 @@ if selected_dimension == "Telecom Data":
 		]
 
 	tickangle=0
-	dtickval=30
+	dtickval=3
 	title = "5G BTS Roll Out Trends"
 	subtitle = ""
 
