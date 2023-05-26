@@ -913,6 +913,8 @@ if Dimension == "Spectrum Band":
 				
 			dfffcopy =dfff.copy()
 			dfffcopy["Total"] = dfffcopy.sum(axis=1)
+
+			st.write(dfffcopy) #debug
 			
 			if len(selected_operators) ==0:
 				selected_operators =operatorlist
