@@ -13,6 +13,14 @@ import matplotlib.pyplot as plt
 import altair as alt
 
 
+
+#Setting Page layout
+st.set_page_config(layout="wide")
+#set summary chart flag
+flag = False # It will toggle to True when we what summary chart to show
+
+
+
 #hide streamlit style
 
 hide_st_style = '''
@@ -24,11 +32,6 @@ hide_st_style = '''
 				'''
 st.markdown(hide_st_style, unsafe_allow_html =True)
 
-
-#Setting Page layout
-st.set_page_config(layout="wide")
-#set summary chart flag
-flag = False # It will toggle to True when we what summary chart to show
 
 #Loading File
 
