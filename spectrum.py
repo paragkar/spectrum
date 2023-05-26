@@ -262,7 +262,7 @@ def cal_year_spectrum_acquired(ef,excepf,pf1):
   
 #processing for hovertext for freq map, band wise
 @st.cache_resource
-def htext_specmap_freq_layout(sf,sff,ef,of,ayear,bandf,exptab_dict,channelsize_dict,xaxisadj_dict):  
+def htext_specmap_freq_layout(sf):  
 	hovertext = []
 	for yi, yy in enumerate(sf.index):
 		hovertext.append([])
@@ -810,7 +810,7 @@ if Dimension == "Spectrum Band":
 				tickvals = list(selected_op_dict.values())
 				ticktext = list(selected_op_dict.keys())	
 
-			hovertext = htext_specmap_freq_layout(hf,sff,ef, of, ayear, bandf, exptab_dict,channelsize_dict,xaxisadj_dict)
+			hovertext = htext_specmap_freq_layout(hf)
 			parttitle ="Spectrum Frequency Layout"
 			tickangle = -90
 			dtickval = xdtickfreq_dict[Band]
