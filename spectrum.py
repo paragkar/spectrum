@@ -42,7 +42,7 @@ password = st.secrets["db_password"]
 
 excel_content = io.BytesIO()
 
-with open("spectrum_map_protected", 'rb') as f:
+with open("spectrum_map_protected.xlsx", 'rb') as f:
 	excel = msoffcrypto.OfficeFile(f)
 	excel.load_key(password)
 	excel.decrypt(excel_content)
