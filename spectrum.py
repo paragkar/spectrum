@@ -86,14 +86,14 @@ exptabflag_dict = {700:1, 800:1, 900:1, 1800:1, 2100:1, 2300:1, 2500:1, 3500:1, 
 #channelsize dict sets the channel sizes for the respective frequency maps
 channelsize_dict = {700:2.5, 800:0.625, 900:0.2, 1800:0.2, 2100:2.5, 2300:2.5, 2500:5, 3500:5, 26000:25}
 
-# scale of the x axis plots
-dtickfreq = {700:1, 800:0.25, 900:0.4, 1800:1, 2100:1, 2300:1, 2500:2, 3500:5, 26000:50}
+#xdtickfreq_dict_dict sets the scale of the x axis plots
+xdtickfreq_dict = {700:1, 800:0.25, 900:0.4, 1800:1, 2100:1, 2300:1, 2500:2, 3500:5, 26000:50}
 
-# used to control the number of ticks on xaxis for chosen feature = AuctionMap
-dtickauction = {700:1, 800:1, 900:1, 1800:1, 2100:1, 2300:1, 2500:1, 3500:1, 26000:1}
+#xdtickauction_dict sets the number of ticks on xaxis for chosen feature = AuctionMap
+xdtickauction_dict = {700:1, 800:1, 900:1, 1800:1, 2100:1, 2300:1, 2500:1, 3500:1, 26000:1}
 
-# vertical line widths
-xgap = {700:1, 800:1, 900:0.5, 1800:0, 2100:1, 2300:1, 2500:1, 3500:1, 26000:1}
+#xgap_dict sets the vertical line widths of the heatmaps
+xgap_dict = {700:1, 800:1, 900:0.5, 1800:0, 2100:1, 2300:1, 2500:1, 3500:1, 26000:1}
 
 # adjustment need for tool tip display data for channel frequency
 xaxisadj = {700:1, 800:0.25, 900:0, 1800:0, 2100:1, 2300:1, 2500:2, 3500:0, 26000:0}
@@ -814,13 +814,13 @@ if Dimension == "Spectrum Band":
 			hovertext = hovertext1(hf,sff,ef, of, ayear, bandf, exptabflag_dict,channelsize_dict,xaxisadj)
 			parttitle ="Spectrum Frequency Layout"
 			tickangle = -90
-			dtickval = dtickfreq[Band]
+			dtickval = xdtickfreq_dict[Band]
 			
 			data = [go.Heatmap(
 			      z = sf.values,
 			      y = sf.index,
 			      x = sf.columns,
-			      xgap = xgap[Band],
+			      xgap = xgap_dict[Band],
 			      ygap = 1,
 			      hoverinfo ='text',
 			      text = hovertext,
@@ -981,13 +981,13 @@ if Dimension == "Spectrum Band":
 			hovertext = hovertext21(hf,sff,ef, of, bandf, bandexpf, exptabflag_dict,channelsize_dict,xaxisadj,ayear)
 			parttitle ="Spectrum Expiry Layout "+SubFeature
 			tickangle = -90
-			dtickval = dtickfreq[Band]
+			dtickval = xdtickfreq_dict[Band]
 
 			data = [go.Heatmap(
 			      z = expf.values,
 			      y = expf.index,
 			      x = expf.columns,
-			      xgap = xgap[Band],
+			      xgap = xgap_dict[Band],
 			      ygap = 1,
 			      hoverinfo ='text',
 			      text = hovertext,
@@ -1027,7 +1027,7 @@ if Dimension == "Spectrum Band":
 			
 			parttitle ="Spectrum Expiry Layout "+SubFeature
 			tickangle = 0
-			dtickval = dtickauction[Band]
+			dtickval = xdtickauction_dict[Band]
 		
 		
 			#preparing the dataframe of the summary bar chart on top of the heatmap
@@ -1071,7 +1071,7 @@ if Dimension == "Spectrum Band":
 		typedf = type_dict[SubFeature].copy()
 		parttitle = "Yearly Trend of "+SubFeature
 		tickangle=0
-		dtickval = dtickauction[Band]
+		dtickval = xdtickauction_dict[Band]
 		hovertext = hovertext3(dff,reserveprice,auctionprice,offeredspectrum,soldspectrum,unsoldspectrum)
 		
 		#preparing the dataframe of the summary bar chart on top of the heatmap
