@@ -434,18 +434,20 @@ def htext_auctionmap():
 #processing for hovertext and colormatrix for Spectrum Band, Features- Freq Map, SubFeature - Operator Wise 
 @st.cache_resource
 def htext_colmatrix_spec_map_op_hold_share(dfff, selected_operators, operatorlist):
-	dfffcopy =dfff.copy()
-	if len(selected_operators) ==0:
-		selected_operators =operatorlist
+
+	if len(selected_operators)==0:
+		operators_to_process = operatorlist
 	else:
-		pass
+		operators_to_process = selected_operators
+
+	dfffcopy =dfff.copy()
 	
 	dfffcopy["Total"] = dfffcopy.sum(axis=1)
 		
 	lst =[]
 
 	dfffshare = pd.DataFrame()
-	for op in selected_operators:
+	for op in operators_to_process:
 		dfffcopy[op+"1"] = dfffcopy[op]/dfffcopy["Total"]
 		lst.append(op+"1")
 	
@@ -916,18 +918,12 @@ if Dimension == "Spectrum Band":
 			dfffcopy =dfff.copy()
 			dfffcopy["Total"] = dfffcopy.sum(axis=1)
 
-			selected_operators = list(dfffcopy.columns[:-1]) #new selected operators after category level filtering 
+			operators_to_process = list(dfffcopy.columns[:-1]) #new selected operators after category level filtering 
 			
-			if len(selected_operators) ==0:
-
-				selected_operators =operatorlist
-
-			else:
-				pass
 
 			lst =[]
 			dfffshare = pd.DataFrame()
-			for op in selected_operators:
+			for op in operators_to_process:
 				dfffcopy[op+"1"] = dfffcopy[op]/dfffcopy["Total"]
 				lst.append(op+"1")
 
@@ -958,7 +954,7 @@ if Dimension == "Spectrum Band":
 			    reversescale=True,)
 				]
 
-			st.write(selected_operators) #debug
+
 			
 
 	#Feature ="Expiry Map" linked to Dimension = "Spectrum Band"
