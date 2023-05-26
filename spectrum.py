@@ -838,6 +838,7 @@ if Dimension == "Spectrum Band":
 			hoverlabel_bgcolor = transform_colscale_for_spec_exp_maps(hcolscale, hf) #shaping the hfcolorscale
 			
 		if SubFeature == "Operator Holdings":
+			selected_operators=[]
 			dfff = dffcopy[(dffcopy["Band"]==Band)]
 			operatorlist = sorted(list(set(dfff["OperatorNew"])))
 			selected_operators = st.sidebar.multiselect('Select Operators',operatorlist)
@@ -863,7 +864,7 @@ if Dimension == "Spectrum Band":
 			if bandtype_dict[Band]=="TDD": #doubling the TDD spectrum for aligning with normal convention 
         			dfff = (dfff*2).round(2)
 			
-			parttitle ="Operator Holdings for"
+			parttitle ="Operator Holdings"
 			tickangle = 0
 			dtickval = 1
 			
@@ -886,6 +887,7 @@ if Dimension == "Spectrum Band":
 			
 			
 		if SubFeature == "Operator %Share":
+			selected_operators=[]
 			dfff = dffcopy[(dffcopy["Band"]==Band)]
 			operatorlist = sorted(list(set(dfff["OperatorNew"])))
 			selected_operators = st.sidebar.multiselect('Select Operators',operatorlist)
