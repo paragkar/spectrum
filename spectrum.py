@@ -36,8 +36,6 @@ hide_st_style = '''
 st.markdown(hide_st_style, unsafe_allow_html =True)
 
 
-
-
 password = st.secrets["db_password"]
 
 excel_content = io.BytesIO()
@@ -1393,7 +1391,7 @@ if selected_dimension == "Telecom Data":
 
 		xdtickangle= -45
 		xdtickval=1
-		title = "Indian 5G Base Station Roll Out Trends"
+		title = "Indian 5G Base Station Roll Out Trends of Top 20 States/UT"
 		subtitle = "Cumulative BTS growth; Unit - Thousands; Sorted by the Recent Date"
 
 
@@ -1499,7 +1497,6 @@ if (selected_dimension == "Auction Years") and (Feature == "Band Metric"):
 	subtitle = SubFeature+"; Unit -"+units_dict[SubFeature]+"; "+ "Selected Operators -" + ', '.join(selected_operators)+ partsubtitle
 	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 	
-	title_x =0.25
 	xdtickangle =0
 	xdtickval =1
 	
@@ -1515,7 +1512,6 @@ if (selected_dimension == "Auction Years") and (Feature == "Operator Metric"):
 	title = "Operator Wise Outflow Summary for the Year "+str(Year)
 	subtitle = SubFeature + "; Unit -"+units_dict[SubFeature]+"; Selected Bands -" + ', '.join(selectedbands) + "; Summary Below - Sum of all LSAs"
 	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
-	title_x =0.25
 	xdtickangle =0
 	xdtickval =1
 	
@@ -1530,10 +1526,7 @@ fig.update_layout(uniformtext_minsize=12,
 		  template='simple_white',
 		  paper_bgcolor=None,
 		  height=575, width=1200,
-# 		  title=title,
 		  margin=dict(t=80, b=50, l=50, r=50, pad=0),
-# 		  title_x=title_x, title_y=0.99,
-# 		  title_font=dict(size=22),
 		  yaxis=dict(
         	  tickmode='array'),
 		  xaxis = dict(
@@ -1544,7 +1537,7 @@ fig.update_layout(uniformtext_minsize=12,
 		)
 
 
-#Only when the user selects the dimensions as "Telecom Data" then execute this 
+#When dimensions as "Telecom Data" then convert x axis into category
 if selected_dimension == "Telecom Data":
 	fig.update_layout(xaxis_type='category')
 else:
