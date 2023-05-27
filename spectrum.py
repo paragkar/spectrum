@@ -1357,10 +1357,6 @@ def htext_telecomdata_5gbts(df5gbtsf):
 
 	df5gbtsincf.columns = df5gbtsf.columns[1:]
 
-	df5gbtsincf = pd.DataFrame(np.nan, index = list(df5gbtsf.index), columns = list(df5gbtsf.columns[0]))
-
-	st.write(df5gbtsincf)
-
 	lastcolumn = df5gbtsincf.columns[-1]
 	df5gbtsincf = df5gbtsincf.sort_values(lastcolumn, ascending = False) #sort by the last column
 
@@ -1371,19 +1367,28 @@ def htext_telecomdata_5gbts(df5gbtsf):
 		for xi,xx in enumerate(df5gbtsf.columns):
 
 			btscum = df5gbtsf.values[yi][xi]
-			# btsinc = df5gbtsincf.values[yi][xi]
 			btspercent = df5gbtsfPercent.values[yi][xi]
+
+			try:
+
+				btsinc = df5gbtsincf.values[yi][xi+1]
+
+			except:
+
+				pass
 
 			hovertext[-1].append(
 					    'State: {}\
 					    <br>Date: {}\
 					    <br>BTS Cumulative: {} Nos\
+					    <br>BTS Increments: {} Nos\
 					    <br>BTS Cumulative: {} % of Total'
 
 				     .format( 
 					    yy,
 					    xx,
 					    btscum,
+					    btsinc
 					    btspercent,
 					    )
 					    )
