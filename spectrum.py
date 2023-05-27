@@ -1597,6 +1597,8 @@ if selected_dimension == "Telecom Data":
 
 		dftelesubsprocess = dftelesubsprocess.reset_index()
 
+		st.write(dftelesubsprocess)
+
 		# dftelesubsprocess = pd.pivot(dftelesubsprocess, index=["Operator"], columns = "Date", values = "Subs")
 
 		# st.write(dftelesubsprocess)
