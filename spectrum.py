@@ -1570,6 +1570,8 @@ if selected_dimension == "Telecom Data":
 
 		dftelesubs["Date"] = dftelesubs["Date"].dt.date
 
+		dftelesubs = dftelesubs.replace(',','', regex=True)
+
 		st.write(dftelesubs)
 
 
