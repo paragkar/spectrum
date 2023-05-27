@@ -1580,7 +1580,7 @@ if selected_dimension == "Telecom Data":
 
 			dftelesubsprocess = dftelesubs.copy()
 
-		else:
+		if len(selected_category) == 1:
 
 			dftelesubsprocess = dftelesubs[dftelesubs["Category"]==selected_category]
 
