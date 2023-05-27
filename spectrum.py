@@ -1380,9 +1380,9 @@ def htext_telecomdata_5gbts(df5gbtsf):
 			hovertext[-1].append(
 					    'State: {}\
 					    <br>Date: {}\
-					    <br>BTS Cumulative: {} Nos\
-					    <br>BTS Increments: {} Nos\
-					    <br>BTS Cumulative: {} % of Total'
+					    <br>BTS Cum: {} K Nos\
+					    <br>BTS Inc: {} K Nos\
+					    <br>BTS Cum: {} % of Total'
 
 				     .format( 
 					    yy,
