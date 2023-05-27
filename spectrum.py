@@ -1411,7 +1411,7 @@ if selected_dimension == "Telecom Data":
 	dfT = pd.read_excel(excel_content, sheet_name=sheetT)
 
 
-	Feature = st.sidebar.selectbox('Select a Feature', ["5G BTS Trends"])
+	Feature = st.sidebar.selectbox('Select a Feature', ["5G BTS Trends", "Telecom Subs Trends"])
 
 	if Feature== "5G BTS Trends":
 
@@ -1561,6 +1561,20 @@ if selected_dimension == "Telecom Data":
 			xdtickval=1
 			title = "Indian 5G Base Stations Roll Out Trends"
 			subtitle = "Incremental BTS growth; Top 20 States/UT; Unit - Thousands; Sorted by the Recent Date"
+
+
+
+	if Feature== "Telecom Subs Trends":
+
+		dftelesubs = dfT["TelecomSubs"] #load 5G BTS deployment data from excel file
+
+		dftelesubs["Date"] = dftelesubs["Date"].dt.date
+
+		st.write(dftelesubs)
+
+
+
+
 
 #This section deals with titles and subtitles and hoverlabel color
 
