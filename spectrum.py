@@ -1354,7 +1354,12 @@ def htext_telecomdata_5gbts(df5gbtsf):
 	df5gbtsincf = pd.DataFrame(lst)
 
 	df5gbtsincf.index = df5gbtsf.index 
+
 	df5gbtsincf.columns = df5gbtsf.columns[1:]
+
+	df5gbtsincf = pd.DataFrame(np.nan, df5gbtsf.index, columns = df5gbtsf.columns[0])
+
+	st.write(df5gbtsincf)
 
 	lastcolumn = df5gbtsincf.columns[-1]
 	df5gbtsincf = df5gbtsincf.sort_values(lastcolumn, ascending = False) #sort by the last column
