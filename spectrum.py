@@ -1374,7 +1374,7 @@ def htext_telecomdata_5gbts(df5gbtsf):
 			try:
 				btsinc = df5gbtsincf.loc[yy,xx]
 			except:
-				pass
+				btsinc = np.nan
 
 
 			hovertext[-1].append(
