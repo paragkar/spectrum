@@ -1375,9 +1375,9 @@ if selected_dimension == "Telecom Data":
 		df5gbtsf = df5gbtsf.iloc[:,-16:] #select on last 16 dates 
 
 
-		SubFeature = st.sidebar.selectbox('Select a SubFeature', ["Cumulative Total", "Percent of Total"])
+		SubFeature = st.sidebar.selectbox('Select a SubFeature', ["Cumulative Values", "Percent of Total", "Incremental Values"])
 
-		if SubFeature == "Cumulative Total":
+		if SubFeature == "Cumulative Values":
 
 			#setting the data of the heatmap 
 
@@ -1398,10 +1398,10 @@ if selected_dimension == "Telecom Data":
 
 			summarydf = df5gbtsf.sum(axis=0)
 			summarydf = summarydf.reset_index()
-			summarydf.columns = ["Dates", Feature] 
+			summarydf.columns = ["Dates", SubFeature] 
 			summarydf = summarydf.sort_values("Dates", ascending = False)
 			#preparing the summary chart 
-			chart = summarychart(summarydf, 'Dates', Feature)
+			chart = summarychart(summarydf, 'Dates', SubFeature)
 			flag = True
 
 
@@ -1439,6 +1439,51 @@ if selected_dimension == "Telecom Data":
 			title = "Indian 5G Base Stations Percentage Roll Out Trends"
 			subtitle = "Cumulative BTS growth; Top 20 States/UT; Unit - % of Total; Sorted by the Recent Date"
 			flag = False #No summary chart to plot
+
+
+		if SubFeature == "Incremental Values":
+
+			lst =[]
+			for row in df5gbtsf.values:
+
+				increments = np.diff(row)
+				lst.append(increments)
+
+			df5gbtsincf = pd.DataFrame(lst)
+
+			df5gbtsincf.index = df5gbtsf.index 
+			df5gbtsincf.columns = df5gbtsf.columns[1:]
+
+			#setting the data of the heatmap 
+
+			data = [go.Heatmap(
+				z = df5gbtsincf.values,
+				y = df5gbtsincf.index,
+				x = df5gbtsincf.columns,
+				xgap = 1,
+				ygap = 1,
+				hoverinfo ='text',
+				# text = hovertext,
+				colorscale='Hot',
+					texttemplate="%{z}", 
+					textfont={"size":10},
+					reversescale=True,
+					),
+				]
+
+			summarydf = df5gbtsincf.sum(axis=0)
+			summarydf = summarydf.reset_index()
+			summarydf.columns = ["Dates", SubFeature] 
+			summarydf = summarydf.sort_values("Dates", ascending = False)
+			#preparing the summary chart 
+			chart = summarychart(summarydf, 'Dates', SubFeature)
+			flag = True
+
+
+			xdtickangle= -45
+			xdtickval=1
+			title = "Indian 5G Base Stations Roll Out Trends"
+			subtitle = "Incremental BTS growth; Top 20 States/UT; Unit - Thousands; Sorted by the Recent Date"
 
 #This section deals with titles and subtitles and hoverlabel color
 
