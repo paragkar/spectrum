@@ -711,9 +711,9 @@ def htext_telecomdata_5gbts(df5gbts):
 	df5gbtsincf = df5gbtsincf.sort_values(lastcolumn, ascending = False) #sort by the last column
 
 	hovertext=[]
-	for yi, yy in enumerate(df5gbts.index):
+	for yi, yy in enumerate(df5gbtsf.index):
 		hovertext.append([])
-		for xi, xx in enumerate(df5gbts.columns):
+		for xi, xx in enumerate(df5gbtsf.columns):
 
 			5gbtscum = df5gbtsf.values[yi][xi]
 			5gbtsinc = df5gbtsincf.values[yi][xi]
@@ -1390,7 +1390,7 @@ if selected_dimension == "Auction Years":
 
 #processing for hovertext for Telecom Data and 5G BTS Trends
 @st.cache_resource
-def htext_telecomdata_5gbts(df5gbts): 
+def htext_telecomdata_5gbts(df5gbtsf): 
 
 	summarydf = df5gbtsf.sum(axis=0)
 	df5gbtsfPercent = round((df5gbtsf/summarydf)*100,2)
@@ -1410,11 +1410,11 @@ def htext_telecomdata_5gbts(df5gbts):
 	df5gbtsincf = df5gbtsincf.sort_values(lastcolumn, ascending = False) #sort by the last column
 
 	hovertext=[]
-	for yi, yy in enumerate(df5gbts.index):
+	for yi, yy in enumerate(df5gbtsf.index):
 		hovertext.append([])
-		for xi, xx in enumerate(df5gbts.columns):
+		for xi, xx in enumerate(df5gbtsf.columns):
 
-			5gbtscum = df5gbtsincf.values[yi][xi]
+			5gbtscum = df5gbtsf.values[yi][xi]
 			5gbtsinc = df5gbtsincf.values[yi][xi]
 			5gbtspercent = df5gbtsfPercent.values[yi][xi]
 			date = datetime.strptime(xx, '%d/%m/%y')
@@ -1487,7 +1487,7 @@ if selected_dimension == "Telecom Data":
 		if SubFeature == "Cumulative Values":
 
 
-			hovertext = htext_telecomdata_5gbts(df5gbts)
+			hovertext = htext_telecomdata_5gbts(df5gbtsf)
 
 			#setting the data of the heatmap 
 
