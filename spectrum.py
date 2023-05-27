@@ -852,8 +852,8 @@ if selected_dimension == "Spectrum Bands":
 
 			hovertext = htext_specmap_freq_layout(hf)
 			parttitle ="Spectrum Frequency Layout"
-			tickangle = -90
-			dtickval = xdtickfreq_dict[Band]
+			xdtickangle = -90
+			xdtickval = xdtickfreq_dict[Band]
 			
 			data = [go.Heatmap(
 			      z = sf.values,
@@ -905,8 +905,8 @@ if selected_dimension == "Spectrum Bands":
         			dfff = (dfff*2).round(2)
 			
 			parttitle ="Operator Holdings"
-			tickangle = 0
-			dtickval = 1
+			xdtickangle = 0
+			xdtickval = 1
 			
 			hovertext,colormatrix = htext_colmatrix_spec_map_op_hold_share(dfff, selected_operators, operatorlist) #processing hovertext and colormatrix for operatorwise in freqband dim
 			hoverlabel_bgcolor = colormatrix #colormatrix processed from fuction "hovertext_and_colmatrix" for same above
@@ -972,8 +972,8 @@ if selected_dimension == "Spectrum Bands":
 			dfffshare = round(dfffshare*100,2)
 			
 			parttitle ="Operator's Spectrum Market Share"
-			tickangle = 0
-			dtickval = 1
+			xdtickangle = 0
+			xdtickval = 1
 			
 			hovertext,colormatrix = htext_colmatrix_spec_map_op_hold_share(dfff, selected_operators, operatorlist) #processing hovertext and colormatrix for operatorwise in freqband dim
 			hoverlabel_bgcolor = colormatrix #colormatrix processed from fuction "hovertext_and_colmatrix" for same above
@@ -1021,8 +1021,8 @@ if selected_dimension == "Spectrum Bands":
 
 			hovertext = htext_expmap_freq_layout(hf)
 			parttitle ="Spectrum Expiry Layout "+SubFeature
-			tickangle = -90
-			dtickval = xdtickfreq_dict[Band]
+			xdtickangle = -90
+			xdtickval = xdtickfreq_dict[Band]
 
 			data = [go.Heatmap(
 			      z = expf.values,
@@ -1067,8 +1067,8 @@ if selected_dimension == "Spectrum Bands":
 				hovertext = htext_expmap_yearly_trends_with_op_select(eff) #hovertext with operator selections
 			
 			parttitle ="Spectrum Expiry Layout "+SubFeature
-			tickangle = 0
-			dtickval = dtickauction_dict[Band]
+			xdtickangle = 0
+			xdtickval = dtickauction_dict[Band]
 		
 		
 			#preparing the dataframe of the summary bar chart on top of the heatmap
@@ -1111,8 +1111,8 @@ if selected_dimension == "Spectrum Bands":
 		SubFeature = st.sidebar.selectbox('Select a Sub Feature', ["Auction Price","Reserve Price","Quantum Offered", "Quantum Sold", "Percent Sold", "Quantum Unsold", "Percent Unsold"])
 		typedf = type_dict[SubFeature].copy()
 		parttitle = "Yearly Trend of "+SubFeature
-		tickangle=0
-		dtickval = dtickauction_dict[Band]
+		xdtickangle=0
+		xdtickval = dtickauction_dict[Band]
 		hovertext = htext_auctionmap()
 		
 		#preparing the dataframe of the summary bar chart on top of the heatmap
@@ -1391,10 +1391,8 @@ if selected_dimension == "Telecom Data":
 				),
 			]
 
-		tickangle= -45
-		# xtickmode = "array"
-		# x_labels = df5gbtsf.columns
-		dtickval=1
+		xdtickangle= -45
+		xdtickval=1
 		title = "Indian 5G Base Station Roll Out Trends"
 		subtitle = "Cumulative BTS growth; Unit - Thousands; Sorted by the Recent Date"
 
@@ -1502,8 +1500,8 @@ if (selected_dimension == "Auction Years") and (Feature == "Band Metric"):
 	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 	
 	title_x =0.25
-	tickangle =0
-	dtickval =1
+	xdtickangle =0
+	xdtickval =1
 	
 if (selected_dimension == "Auction Years") and (Feature == "Operator Metric"):
 	if (SubFeature =="Total Outflow") or (SubFeature == "Total Purchase"):
@@ -1518,8 +1516,8 @@ if (selected_dimension == "Auction Years") and (Feature == "Operator Metric"):
 	subtitle = SubFeature + "; Unit -"+units_dict[SubFeature]+"; Selected Bands -" + ', '.join(selectedbands) + "; Summary Below - Sum of all LSAs"
 	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 	title_x =0.25
-	tickangle =0
-	dtickval =1
+	xdtickangle =0
+	xdtickval =1
 	
 
 #updating figure layouts
@@ -1541,9 +1539,8 @@ fig.update_layout(uniformtext_minsize=12,
 		  xaxis = dict(
 		  side = 'top',
 		  tickmode = 'linear',
-		  # ticktext=x_labels, #debug this is new line
-		  tickangle=tickangle,
-		  dtick = dtickval), 
+		  tickangle=xdtickangle,
+		  dtick = xdtickval), 
 		)
 
 
