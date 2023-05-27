@@ -1589,6 +1589,8 @@ if selected_dimension == "Telecom Data":
 
 		dftelesubsprocess = dftelesubsprocess.melt(id_vars =["Date", "Circle"], value_vars = list(dftelesubsprocess.columns[2:]))
 
+		dftelesubsprocess.columns = ["Date", "Circle", "Operator", "Subs"]
+
 		st.write(dftelesubsprocess)
 
 
