@@ -1375,7 +1375,7 @@ if selected_dimension == "Telecom Data":
 
 		st.write(df5gbtsf)
 
-		setting the data of the heatmap 
+		#setting the data of the heatmap 
 
 		# data = [go.Heatmap(
 		# 	z = df5gbtsf.values,
