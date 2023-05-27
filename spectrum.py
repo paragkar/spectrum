@@ -1357,7 +1357,7 @@ def htext_telecomdata_5gbts(df5gbtsf):
 
 	df5gbtsincf.columns = df5gbtsf.columns[1:]
 
-	df5gbtsincf = pd.DataFrame(np.nan, df5gbtsf.index, columns = df5gbtsf.columns[0])
+	df5gbtsincf = pd.DataFrame(np.nan, list(df5gbtsf.index,) columns = list(df5gbtsf.columns[0])
 
 	st.write(df5gbtsincf)
 
