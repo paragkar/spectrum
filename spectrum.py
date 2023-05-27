@@ -1678,7 +1678,7 @@ if (selected_dimension == "Auction Years") and (Feature == "Operator Metric"):
 	xdtickval =1
 
 
-if selected_dimension = "Telecom Data":
+if selected_dimension == "Telecom Data":
 
 	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 
