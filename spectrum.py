@@ -1574,7 +1574,21 @@ if selected_dimension == "Telecom Data":
 
 		dftelesubs.drop(columns = ["Year","Months"], axis =1, inplace = True)
 
-		st.write(dftelesubs)
+		selected_category = st.sidebar.multiselect('Select Categories', ["Wireless", "Wireline"])
+
+		if len(selected_category) == 0 or len(selected_category) == 2:
+
+			dftelesubsprocess = dftelesubs.copy()
+
+		else:
+
+			dftelesubsprocess = dftelesubs[dftelesubs["Category"]==selected_category]
+
+		dftelesubsprocess.drop(columns = ["Category"], axis =1, inplace = True)
+
+		dftelesubsprocess = dftelesubsprocess.set_index(["Date","Circle"])
+
+		st.write(dftelesubsprocess)
 
 
 
