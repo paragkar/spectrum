@@ -426,7 +426,6 @@ def htext_expmap_yearly_trends_with_op_select(eff):
 #processing for hovertext for Auction Map
 @st.cache_resource
 def htext_auctionmap(dff): 
-	st.write(dff)
 	hovertext=[]
 	for yi, yy in enumerate(dff.index):
 		hovertext.append([])
