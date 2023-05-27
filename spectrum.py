@@ -1536,7 +1536,7 @@ if selected_dimension == "Telecom Data":
 				xgap = 1,
 				ygap = 1,
 				hoverinfo ='text',
-				text = hovertext,
+				# text = hovertext,
 				colorscale='Hot',
 					texttemplate="%{z}", 
 					textfont={"size":10},
