@@ -1582,7 +1582,7 @@ if selected_dimension == "Telecom Data":
 
 		if len(selected_category) == 1:
 
-			dftelesubsprocess = dftelesubs[dftelesubs["Category"]==selected_category]
+			dftelesubsprocess = dftelesubsprocess[dftelesubsprocess["Category"]==selected_category]
 
 		dftelesubsprocess.drop(columns = ["Category"], axis =1, inplace = True)
 
