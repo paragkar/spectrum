@@ -687,56 +687,6 @@ def transform_colscale_for_hbox_auction_map(dff,reserveprice, auctionprice):
 			colormatrix = list(colormatrix.values)
 	return colormatrix
 
-#********************
-
-#processing for hovertext for Telecom Data and 5G BTS Trends
-@st.cache_resource
-def htext_telecomdata_5gbts(df5gbtsf): 
-
-	summarydf = df5gbtsf.sum(axis=0)
-	df5gbtsfPercent = round((df5gbtsf/summarydf)*100,2)
-
-	lst =[]
-	for row in df5gbtsf.values:
-
-		increments = np.diff(row)
-		lst.append(increments)
-
-	df5gbtsincf = pd.DataFrame(lst)
-
-	df5gbtsincf.index = df5gbtsf.index 
-	df5gbtsincf.columns = df5gbtsf.columns[1:]
-
-	lastcolumn = df5gbtsincf.columns[-1]
-	df5gbtsincf = df5gbtsincf.sort_values(lastcolumn, ascending = False) #sort by the last column
-
-	hovertext=[]
-	for yi, yy in enumerate(df5gbtsf.index):
-		hovertext.append([])
-		for xi, xx in enumerate(df5gbtsf.columns):
-
-			# 5gbtscum = df5gbtsf.values[yi][xi]
-			5gbtsinc = df5gbtsincf.values[yi][xi]
-			5gbtspercent = df5gbtsfPercent.values[yi][xi]
-			date = datetime.strptime(xx, '%d/%m/%y')
-
-			hovertext[-1].append(
-					    'State: {}\
-					    <br>Date: {}\
-					    <br/BTS Cumulative:{} Nos\
-					    <br/BTS Increments: {} Nos\
-					    <br>BTS Cumulative: {} % of Total'
-
-				     .format( 
-					    yy,
-					    date,
-					    5gbtscum,
-					    5gbtsinc,
-					    5gbtspercent,
-					    )
-					    )
-	return hovertext
-#*********************
 
 #function for preparing the summary chart 
 
@@ -1383,6 +1333,61 @@ if selected_dimension == "Auction Years":
 		    textfont={"size":10},
 		    reversescale=True,
 			)]	
+
+
+
+#********************
+
+#processing for hovertext for Telecom Data and 5G BTS Trends
+@st.cache_resource
+def htext_telecomdata_5gbts(df5gbtsf): 
+
+	summarydf = df5gbtsf.sum(axis=0)
+	df5gbtsfPercent = round((df5gbtsf/summarydf)*100,2)
+
+	lst =[]
+	for row in df5gbtsf.values:
+
+		increments = np.diff(row)
+		lst.append(increments)
+
+	df5gbtsincf = pd.DataFrame(lst)
+
+	df5gbtsincf.index = df5gbtsf.index 
+	df5gbtsincf.columns = df5gbtsf.columns[1:]
+
+	lastcolumn = df5gbtsincf.columns[-1]
+	df5gbtsincf = df5gbtsincf.sort_values(lastcolumn, ascending = False) #sort by the last column
+
+	hovertext=[]
+	for yi, yy in enumerate(df5gbtsf.index):
+		hovertext.append([])
+		for xi, xx in enumerate(df5gbtsf.columns):
+
+			5gbtscum = df5gbtsf.values[yi][xi]
+			5gbtsinc = df5gbtsincf.values[yi][xi]
+			5gbtspercent = df5gbtsfPercent.values[yi][xi]
+			date = datetime.strptime(xx, '%d/%m/%y')
+
+			hovertext[-1].append(
+					    'State: {}\
+					    <br>Date: {}\
+					    <br/BTS Cumulative:{} Nos\
+					    <br/BTS Increments: {} Nos\
+					    <br>BTS Cumulative: {} % of Total'
+
+				     .format( 
+					    yy,
+					    date,
+					    5gbtscum,
+					    5gbtsinc,
+					    5gbtspercent,
+					    )
+					    )
+	return hovertext
+#*********************
+
+
 
 
 
