@@ -640,7 +640,67 @@ def htext_colmatrix_auction_year_operator_metric(df1, selectedbands, SubFeature,
 					    round(purchase,2),
 					    )
 					    )
-	return hovertext, colormatrix				
+	return hovertext, colormatrix
+
+
+#********************
+
+#processing for hovertext for Telecom Data and 5G BTS Trends
+@st.cache_resource
+def htext_telecomdata_5gbts(df5gbtsf): 
+
+	summarydf = df5gbtsf.sum(axis=0)
+	df5gbtsfPercent = round((df5gbtsf/summarydf)*100,2)
+
+	lst =[]
+	for row in df5gbtsf.values:
+
+		increments = np.diff(row)
+		lst.append(increments)
+
+	df5gbtsincf = pd.DataFrame(lst)
+
+	df5gbtsincf.index = df5gbtsf.index 
+
+	df5gbtsincf.columns = df5gbtsf.columns[1:]
+
+	lastcolumn = df5gbtsincf.columns[-1]
+	df5gbtsincf = df5gbtsincf.sort_values(lastcolumn, ascending = False) #sort by the last column
+
+	hovertext=[]
+
+	for yi,yy in enumerate(df5gbtsf.index):
+		hovertext.append([])
+		for xi,xx in enumerate(df5gbtsf.columns):
+
+			# btscum = df5gbtsf.values[yi][xi]
+			# btspercent = df5gbtsfPercent.values[yi][xi]
+			btscum = df5gbtsf.loc[yy,xx]
+			btspercent = df5gbtsfPercent.loc[yy,xx]
+
+			try:
+				btsinc = df5gbtsincf.loc[yy,xx]
+			except:
+				btsinc = np.nan
+
+
+			hovertext[-1].append(
+					    'State: {}\
+					    <br>Date: {}\
+					    <br>BTS Cum: {} K Nos\
+					    <br>BTS Inc: {} K Nos\
+					    <br>BTS Cum: {} % of Total'
+
+				     .format( 
+					    yy,
+					    xx,
+					    btscum,
+					    round(btsinc,2),
+					    btspercent,
+					    )
+					    )
+	return hovertext
+#*********************		
 
 
 #preparing color scale for hoverbox for freq and exp maps
@@ -1333,69 +1393,6 @@ if selected_dimension == "Auction Years":
 		    textfont={"size":10},
 		    reversescale=True,
 			)]	
-
-
-
-#********************
-
-#processing for hovertext for Telecom Data and 5G BTS Trends
-@st.cache_resource
-def htext_telecomdata_5gbts(df5gbtsf): 
-
-	summarydf = df5gbtsf.sum(axis=0)
-	df5gbtsfPercent = round((df5gbtsf/summarydf)*100,2)
-
-	lst =[]
-	for row in df5gbtsf.values:
-
-		increments = np.diff(row)
-		lst.append(increments)
-
-	df5gbtsincf = pd.DataFrame(lst)
-
-	df5gbtsincf.index = df5gbtsf.index 
-
-	df5gbtsincf.columns = df5gbtsf.columns[1:]
-
-	lastcolumn = df5gbtsincf.columns[-1]
-	df5gbtsincf = df5gbtsincf.sort_values(lastcolumn, ascending = False) #sort by the last column
-
-	hovertext=[]
-
-	for yi,yy in enumerate(df5gbtsf.index):
-		hovertext.append([])
-		for xi,xx in enumerate(df5gbtsf.columns):
-
-			# btscum = df5gbtsf.values[yi][xi]
-			# btspercent = df5gbtsfPercent.values[yi][xi]
-			btscum = df5gbtsf.loc[yy,xx]
-			btspercent = df5gbtsfPercent.loc[yy,xx]
-
-			try:
-				btsinc = df5gbtsincf.loc[yy,xx]
-			except:
-				btsinc = np.nan
-
-
-			hovertext[-1].append(
-					    'State: {}\
-					    <br>Date: {}\
-					    <br>BTS Cum: {} K Nos\
-					    <br>BTS Inc: {} K Nos\
-					    <br>BTS Cum: {} % of Total'
-
-				     .format( 
-					    yy,
-					    xx,
-					    btscum,
-					    round(btsinc,2),
-					    btspercent,
-					    )
-					    )
-	return hovertext
-#*********************
-
-
 
 
 
