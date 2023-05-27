@@ -1370,17 +1370,20 @@ def htext_telecomdata_5gbts(df5gbtsf):
 			# btspercent = df5gbtsfPercent.values[yi][xi]
 			btscum = df5gbtsf.loc[yy,xx]
 			btspercent = df5gbtsfPercent.loc[yy,xx]
+			btsinc = df5gbtsincf.loc[yy,xx]
 
 			hovertext[-1].append(
 					    'State: {}\
 					    <br>Date: {}\
 					    <br>BTS Cum: {} K Nos\
+					    <br>BTS Inc: {} K Nos\
 					    <br>BTS Cum: {} % of Total'
 
 				     .format( 
 					    yy,
 					    xx,
 					    btscum,
+					    btsinc,
 					    btspercent,
 					    )
 					    )
