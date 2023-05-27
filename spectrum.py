@@ -1591,7 +1591,7 @@ if selected_dimension == "Telecom Data":
 
 		dftelesubsprocess.columns = ["Date", "Circle", "Operator", "Subs"]
 
-		dftelesubsprocess = dftelesubsprocess.groupby(["Operator"]).sum()
+		dftelesubsprocess = dftelesubsprocess.groupby(["Date","Circle","Operator"]).sum()
 
 		st.write(dftelesubsprocess)
 
