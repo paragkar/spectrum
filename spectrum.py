@@ -1595,6 +1595,8 @@ if selected_dimension == "Telecom Data":
 
 		dftelesubsprocess.drop(columns = ["Circle"], axis =1, inplace = True)
 
+		dftelesubsprocess = pd.pivot(dftelesubsprocess, index="Operator", column = "Date", values = "Subs")
+
 		st.write(dftelesubsprocess)
 
 
