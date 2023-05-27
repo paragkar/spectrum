@@ -1377,25 +1377,25 @@ if selected_dimension == "Telecom Data":
 
 		#setting the data of the heatmap 
 
-		# data = [go.Heatmap(
-		# 	z = df5gbtsf.values,
-		# 	y = df5gbtsf.index,
-		# 	x = df5gbtsf.columns,
-		# 	xgap = 1,
-		# 	ygap = 1,
-		# 	hoverinfo ='text',
-		# 	# text = hovertext,
-		# 	colorscale='Hot',
-		# 		texttemplate="%{z}", 
-		# 		textfont={"size":10},
-		# 		reversescale=True,
-		# 		),
-		# 	]
+		data = [go.Heatmap(
+			z = df5gbtsf.values,
+			y = df5gbtsf.index,
+			x = df5gbtsf.columns,
+			xgap = 1,
+			ygap = 1,
+			hoverinfo ='text',
+			# text = hovertext,
+			colorscale='Hot',
+				texttemplate="%{z}", 
+				textfont={"size":10},
+				reversescale=True,
+				),
+			]
 
-		# tickangle=0
-		# dtickval=3
-		# title = "5G BTS Roll Out Trends"
-		# subtitle = ""
+		tickangle= -45
+		dtickval=1
+		title = "Indian 5G Base Station Roll Out Trends"
+		subtitle = "Cumulative BTS growth; Unit - Thousands; Sorted by the Recent Date"
 
 
 
