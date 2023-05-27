@@ -11,6 +11,7 @@ import plotly.figure_factory as ff
 import streamlit as st
 import matplotlib.pyplot as plt
 import altair as alt
+from datetime import datetime
 
 import io
 import msoffcrypto
@@ -456,6 +457,7 @@ def htext_auctionmap(dff):
 					    )
 	return hovertext
 
+
 #processing for hovertext and colormatrix for Spectrum Band, Features- Freq Map, SubFeature - Operator Wise 
 @st.cache_resource
 def htext_colmatrix_spec_map_op_hold_share(dfff, selected_operators, operatorlist):
@@ -684,6 +686,57 @@ def transform_colscale_for_hbox_auction_map(dff,reserveprice, auctionprice):
 			colormatrix = temp.pivot(index='LSA', columns='Year', values="Color")
 			colormatrix = list(colormatrix.values)
 	return colormatrix
+
+*********************
+
+#processing for hovertext for Telecom Data and 5G BTS Trends
+@st.cache_resource
+def htext_telecomdata_5gbts(df5gbts): 
+
+	summarydf = df5gbtsf.sum(axis=0)
+	df5gbtsfPercent = round((df5gbtsf/summarydf)*100,2)
+
+	lst =[]
+	for row in df5gbtsf.values:
+
+		increments = np.diff(row)
+		lst.append(increments)
+
+	df5gbtsincf = pd.DataFrame(lst)
+
+	df5gbtsincf.index = df5gbtsf.index 
+	df5gbtsincf.columns = df5gbtsf.columns[1:]
+
+	lastcolumn = df5gbtsincf.columns[-1]
+	df5gbtsincf = df5gbtsincf.sort_values(lastcolumn, ascending = False) #sort by the last column
+
+	hovertext=[]
+	for yi, yy in enumerate(df5gbts.index):
+		hovertext.append([])
+		for xi, xx in enumerate(df5gbts.columns):
+
+			5gbtscum = df5gbtsincf.values[yi][xi]
+			5gbtsinc = df5gbtsincf.values[yi][xi]
+			5gbtspercent = df5gbtsfPercent.values[yi][xi]
+			date = datetime.strptime(xx, '%d/%m/%y')
+
+			hovertext[-1].append(
+					    'State: {}\
+					    <br>Date: {}\
+					    <br/BTS Cumulative:{} Nos\
+					    <br/BTS Increments: {} Nos\
+					    <br>BTS Cumulative: {} % of Total'
+
+				     .format( 
+					    yy,
+					    date,
+					    5gbtscum,
+					    5gbtsinc,
+					    5gbtspercent,
+					    )
+					    )
+	return hovertext
+#*********************
 
 #function for preparing the summary chart 
 
@@ -1332,6 +1385,60 @@ if selected_dimension == "Auction Years":
 			)]	
 
 
+#*********************
+
+
+#processing for hovertext for Telecom Data and 5G BTS Trends
+@st.cache_resource
+def htext_telecomdata_5gbts(df5gbts): 
+
+	summarydf = df5gbtsf.sum(axis=0)
+	df5gbtsfPercent = round((df5gbtsf/summarydf)*100,2)
+
+	st =[]
+	for row in df5gbtsf.values:
+
+		increments = np.diff(row)
+		lst.append(increments)
+
+	df5gbtsincf = pd.DataFrame(lst)
+
+	df5gbtsincf.index = df5gbtsf.index 
+	df5gbtsincf.columns = df5gbtsf.columns[1:]
+
+	lastcolumn = df5gbtsincf.columns[-1]
+	df5gbtsincf = df5gbtsincf.sort_values(lastcolumn, ascending = False) #sort by the last column
+
+	hovertext=[]
+	for yi, yy in enumerate(df5gbts.index):
+		hovertext.append([])
+		for xi, xx in enumerate(df5gbts.columns):
+
+			5gbtscum = df5gbtsincf.values[yi][xi]
+			5gbtsinc = df5gbtsincf.values[yi][xi]
+			5gbtspercent = df5gbtsfPercent.values[yi][xi]
+			date = datetime.strptime(xx, '%d/%m/%y')
+
+			hovertext[-1].append(
+					    'State: {}\
+					    <br>Date: {}\
+					    <br/BTS Cumulative:{} Nos\
+					    <br/BTS increments: {} Nos\
+					    <br>BTS Cumulative: {} % of Total'
+
+				     .format( 
+					    yy,
+					    date,
+					    5gbtscum,
+					    5gbtsinc,
+					    5gbtspercent,
+					    )
+					    )
+	return hovertext
+
+
+#*********************
+
 #This is section is to visulize important data related to the telecom industry (may not be directed related to spectrum)
 
 if selected_dimension == "Telecom Data":
@@ -1379,6 +1486,9 @@ if selected_dimension == "Telecom Data":
 
 		if SubFeature == "Cumulative Values":
 
+
+			hovertext = htext_telecomdata_5gbts(df5gbts)
+
 			#setting the data of the heatmap 
 
 			data = [go.Heatmap(
@@ -1388,7 +1498,7 @@ if selected_dimension == "Telecom Data":
 				xgap = 1,
 				ygap = 1,
 				hoverinfo ='text',
-				# text = hovertext,
+				text = hovertext,
 				colorscale='Hot',
 					texttemplate="%{z}", 
 					textfont={"size":10},
@@ -1404,13 +1514,15 @@ if selected_dimension == "Telecom Data":
 			chart = summarychart(summarydf, 'Dates', SubFeature)
 			flag = True
 
-
 			xdtickangle= -45
 			xdtickval=1
 			title = "Indian 5G Base Stations Roll Out Trends"
 			subtitle = "Cumulative BTS growth; Top 20 States/UT; Unit - Thousands; Sorted by the Recent Date"
 
 		if SubFeature == "Percent of Total":
+
+
+			hovertext = htext_telecomdata_5gbts(df5gbts)
 
 			summarydf = df5gbtsf.sum(axis=0)
 
@@ -1426,7 +1538,7 @@ if selected_dimension == "Telecom Data":
 				xgap = 1,
 				ygap = 1,
 				hoverinfo ='text',
-				# text = hovertext,
+				text = hovertext,
 				colorscale='Hot',
 					texttemplate="%{z}", 
 					textfont={"size":10},
@@ -1460,6 +1572,9 @@ if selected_dimension == "Telecom Data":
 
 			df5gbtsincf = df5gbtsincf.sort_values(lastcolumn, ascending = False) #sort by the last column
 
+
+			hovertext = htext_telecomdata_5gbts(df5gbts)
+
 			#setting the data of the heatmap 
 
 			data = [go.Heatmap(
@@ -1469,7 +1584,7 @@ if selected_dimension == "Telecom Data":
 				xgap = 1,
 				ygap = 1,
 				hoverinfo ='text',
-				# text = hovertext,
+				text = hovertext,
 				colorscale='Hot',
 					texttemplate="%{z}", 
 					textfont={"size":10},
