@@ -1350,9 +1350,9 @@ if selected_dimension == "Telecom Data":
 	dfT = pd.read_excel(excel_content, sheet_name=sheetT)
 
 
-	SubFeature = st.sidebar.selectbox('Select a Feature', ["5G BTS Trends"])
+	Feature = st.sidebar.selectbox('Select a Feature', ["5G BTS Trends"])
 
-	if SubFeature== "5G BTS Trends":
+	if Feature== "5G BTS Trends":
 
 		df5gbts = dfT["5GBTS"] #load 5G BTS deployment data from excel file
 
@@ -1393,10 +1393,10 @@ if selected_dimension == "Telecom Data":
 
 		summarydf = df5gbtsf.sum(axis=0)
 		summarydf = summarydf.reset_index()
-		summarydf.columns = ["Dates", SubFeature] 
+		summarydf.columns = ["Dates", Feature] 
 		summarydf = summarydf.sort_values("Dates", ascending = False)
 		#preparing the summary chart 
-		chart = summarychart(summarydf, 'Dates', SubFeature)
+		chart = summarychart(summarydf, 'Dates', Feature)
 		flag = True
 
 
