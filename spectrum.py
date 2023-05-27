@@ -1464,6 +1464,7 @@ if selected_dimension == "Telecom Data":
 			chart = summarychart(summarydf, 'Dates', SubFeature)
 			flag = True
 
+			hoverlabel_bgcolor = "#000000" #subdued black
 			xdtickangle= -45
 			xdtickval=1
 			title = "Indian 5G Base Stations Roll Out Trends"
@@ -1496,6 +1497,7 @@ if selected_dimension == "Telecom Data":
 					),
 				]
 
+			hoverlabel_bgcolor = "#000000" #subdued black
 			xdtickangle= -45
 			xdtickval=1
 			title = "Indian 5G Base Stations Percentage Roll Out Trends"
@@ -1555,7 +1557,6 @@ if selected_dimension == "Telecom Data":
 			xdtickval=1
 			title = "Indian 5G Base Stations Roll Out Trends"
 			subtitle = "Incremental BTS growth; Top 20 States/UT; Unit - Thousands; Sorted by the Recent Date"
-			fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 
 #This section deals with titles and subtitles and hoverlabel color
 
@@ -1677,6 +1678,9 @@ if (selected_dimension == "Auction Years") and (Feature == "Operator Metric"):
 	xdtickval =1
 
 
+if selected_dimension = "Telecom Data":
+
+	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 
 
 #updating figure layouts
