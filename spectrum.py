@@ -1354,6 +1354,7 @@ if selected_dimension == "Telecom Data":
 
 	if Feature== "5G BTS Trends":
 
+
 		df5gbts = dfT["5GBTS"] #load 5G BTS deployment data from excel file
 
 		df5gbts["Date"] = df5gbts["Date"].dt.date
@@ -1374,31 +1375,70 @@ if selected_dimension == "Telecom Data":
 		df5gbtsf = df5gbtsf.iloc[:,-16:] #select on last 16 dates 
 
 
-		#setting the data of the heatmap 
+		SubFeature = st.sidebar.selectbox('Select a SubFeature', ["Cumulative Total", "Percent of Total"])
 
-		data = [go.Heatmap(
-			z = df5gbtsf.values,
-			y = df5gbtsf.index,
-			x = df5gbtsf.columns,
-			xgap = 1,
-			ygap = 1,
-			hoverinfo ='text',
-			# text = hovertext,
-			colorscale='Hot',
-				texttemplate="%{z}", 
-				textfont={"size":10},
-				reversescale=True,
-				),
-			]
+		if SubFeature == "Cumulative Total":
 
-		summarydf = df5gbtsf.sum(axis=0)
-		summarydf = summarydf.reset_index()
-		summarydf.columns = ["Dates", Feature] 
-		summarydf = summarydf.sort_values("Dates", ascending = False)
-		#preparing the summary chart 
-		chart = summarychart(summarydf, 'Dates', Feature)
-		flag = True
+			#setting the data of the heatmap 
 
+			data = [go.Heatmap(
+				z = df5gbtsf.values,
+				y = df5gbtsf.index,
+				x = df5gbtsf.columns,
+				xgap = 1,
+				ygap = 1,
+				hoverinfo ='text',
+				# text = hovertext,
+				colorscale='Hot',
+					texttemplate="%{z}", 
+					textfont={"size":10},
+					reversescale=True,
+					),
+				]
+
+			summarydf = df5gbtsf.sum(axis=0)
+			summarydf = summarydf.reset_index()
+			summarydf.columns = ["Dates", Feature] 
+			summarydf = summarydf.sort_values("Dates", ascending = False)
+			#preparing the summary chart 
+			chart = summarychart(summarydf, 'Dates', Feature)
+			flag = True
+
+
+			xdtickangle= -45
+			xdtickval=1
+			title = "Indian 5G Base Stations Roll Out Trends"
+			subtitle = "Cumulative BTS growth; Top 20 States/UT; Unit - Thousands; Sorted by the Recent Date"
+
+		if SubFeature == "Percent of Total":
+
+			summarydf = df5gbtsf.sum(axis=0)
+
+			df5gbtsfPercent = Round((df5gbtsf/summarydf)*100,2)
+
+
+			#setting the data of the heatmap 
+
+			data = [go.Heatmap(
+				z = df5gbtsfPercent.values,
+				y = df5gbtsfPercent.index,
+				x = df5gbtsfPercent.columns,
+				xgap = 1,
+				ygap = 1,
+				hoverinfo ='text',
+				# text = hovertext,
+				colorscale='Hot',
+					texttemplate="%{z}", 
+					textfont={"size":10},
+					reversescale=True,
+					),
+				]
+
+			xdtickangle= -45
+			xdtickval=1
+			title = "Indian 5G Base Stations Percentage Roll Out Trends"
+			subtitle = "Cumulative BTS growth; Top 20 States/UT; Unit - % of Total; Sorted by the Recent Date"
+			flag = False #No summary chart to plot
 
 #This section deals with titles and subtitles and hoverlabel color
 
@@ -1520,12 +1560,6 @@ if (selected_dimension == "Auction Years") and (Feature == "Operator Metric"):
 	xdtickval =1
 
 
-
-if (selected_dimension == "Telecom Data") and (Feature == "5G BTS Trends"):
-	xdtickangle= -45
-	xdtickval=1
-	title = "Indian 5G Base Stations Roll Out Trends"
-	subtitle = "Cumulative BTS growth; Top 20 States/UT; Unit - Thousands; Sorted by the Recent Date"
 
 
 #updating figure layouts
