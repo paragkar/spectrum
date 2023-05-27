@@ -1391,11 +1391,13 @@ if selected_dimension == "Telecom Data":
 				),
 			]
 
-		xdtickangle= -45
-		xdtickval=1
-		title = "Indian 5G Base Station Roll Out Trends of Top 20 States/UT"
-		subtitle = "Cumulative BTS growth; Unit - Thousands; Sorted by the Recent Date"
-
+		summarydf = df5gbtsf.sum(axis=0)
+		summarydf = summarydf.reset_index()
+		summarydf.columns = ["Dates", SubFeature] 
+		summarydf = summarydf.sort_values("Dates", ascending = False)
+		#preparing the summary chart 
+		chart = summarychart(summarydf, 'Dates', SubFeature)
+		flag = True
 
 
 #This section deals with titles and subtitles and hoverlabel color
@@ -1516,7 +1518,15 @@ if (selected_dimension == "Auction Years") and (Feature == "Operator Metric"):
 	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 	xdtickangle =0
 	xdtickval =1
-	
+
+
+
+if (selected_dimension == "Telecom Data") and (Feature == "5G BTS Trends"):
+	xdtickangle= -45
+	xdtickval=1
+	title = "Indian 5G Base Station Roll Out Trends of Top 20 States/UT"
+	subtitle = "Cumulative BTS growth; Unit - Thousands; Sorted by the Recent Date"
+
 
 #updating figure layouts
 fig.update_layout(uniformtext_minsize=12, 
@@ -1544,6 +1554,8 @@ if selected_dimension == "Telecom Data":
 	fig.update_layout(xaxis_type='category')
 else:
 	pass
+
+
 
 fig.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
 fig.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
