@@ -1547,6 +1547,8 @@ fig.update_layout(uniformtext_minsize=12,
 		  dtick = xdtickval), #debug added "x" as a precceding letter
 		)
 
+fig.update_layout(xaxis_type='category') #debug this is new line added 
+
 fig.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
 fig.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
 
