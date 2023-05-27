@@ -1364,9 +1364,10 @@ def htext_telecomdata_5gbts(df5gbtsf):
 	for yi,yy in enumerate(df5gbtsf.index):
 		hovertext.append([])
 		for xi,xx in enumerate(df5gbtsf.columns):
-			5gbtscum = df5gbtsf.values[yi][xi]
-			5gbtsinc = df5gbtsincf.values[yi][xi]
-			5gbtspercent = df5gbtsfPercent.values[yi][xi]
+
+			btscum = df5gbtsf.values[yi][xi]
+			btsinc = df5gbtsincf.values[yi][xi]
+			btspercent = df5gbtsfPercent.values[yi][xi]
 			date = datetime.strptime(xx,'%d/%m/%y')
 
 			hovertext[-1].append(
@@ -1379,9 +1380,9 @@ def htext_telecomdata_5gbts(df5gbtsf):
 				     .format( 
 					    yy,
 					    date,
-					    5gbtscum,
-					    5gbtsinc,
-					    5gbtspercent,
+					    btscum,
+					    btsinc,
+					    btspercent,
 					    )
 					    )
 	return hovertext
