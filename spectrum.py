@@ -643,8 +643,6 @@ def htext_colmatrix_auction_year_operator_metric(df1, selectedbands, SubFeature,
 	return hovertext, colormatrix
 
 
-#********************
-
 #processing for hovertext for Telecom Data and 5G BTS Trends
 @st.cache_resource
 def htext_telecomdata_5gbts(df5gbtsf): 
@@ -700,7 +698,6 @@ def htext_telecomdata_5gbts(df5gbtsf):
 					    )
 					    )
 	return hovertext
-#*********************		
 
 
 #preparing color scale for hoverbox for freq and exp maps
