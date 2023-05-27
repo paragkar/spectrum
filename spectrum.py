@@ -1371,6 +1371,8 @@ if selected_dimension == "Telecom Data":
 
 		df5gbtsf = round(df5gbtsf/1000,2) #convert the BTS data in thousands (K)
 
+		df5gbtsf = df5gbtsf.iloc[:,-16:] #select on last 16 dates 
+
 
 		#setting the data of the heatmap 
 
