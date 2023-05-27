@@ -1334,58 +1334,70 @@ if selected_dimension == "Auction Years":
 			)]	
 
 
+#This is section is to visulize important data related to the telecom industry (may not be directed related to spectrum)
+
 if selected_dimension == "Telecom Data":
 
-	st.write("Work in Progress")
 
-	# excel_content = io.BytesIO()
+	excel_content = io.BytesIO()
 
-	# with open("telecomdata_protected.xlsx", 'rb') as f:
-	# 	excel = msoffcrypto.OfficeFile(f)
-	# 	excel.load_key(password)
-	# 	excel.decrypt(excel_content)
+	with open("telecomdata_protected.xlsx", 'rb') as f:
+		excel = msoffcrypto.OfficeFile(f)
+		excel.load_key(password)
+		excel.decrypt(excel_content)
 
-	# #loading data from excel file, the last letter stands for telecom
-	# xlt = pd.ExcelFile(excel_content)
-	# sheett = xlt.sheet_names
-	# dft = pd.read_excel(excel_content, sheet_name=sheett)
-
-	# df5gbts = dft["5GBTS"]
-
-	# df5gbts["Date"] = df5gbts["Date"].dt.date
-
-	# df5gbts.drop(columns = "S.No", inplace = True)
-
-	# df5gbtsf = pd.pivot(df5gbts, values ="Total", index = "StateCode", columns = "Date")
-
-	# df5gbtsf.columns = [str(x) for x in df5gbtsf.columns ]
+	#loading data from excel file, the last letter "T" stands for telecom
+	xlT = pd.ExcelFile(excel_content)
+	sheetT = xlT.sheet_names
+	dfT = pd.read_excel(excel_content, sheet_name=sheetT)
 
 
+	SubFeature = st.sidebar.selectbox('Select a Feature', ["5G BTS Trends"])
 
-	# df5gbtsf = df5gbtsf.sort_values(["2023-05-25"], ascending = False).head(20)
+	if SubFeature== "5G BTS Trends":
 
-	# #setting the data of the heatmap 
+		df5gbts = dft["5GBTS"] #load 5G BTS deployment data from excel file
 
-	# data = [go.Heatmap(
-	# 	z = df5gbtsf.values,
-	# 	y = df5gbtsf.index,
-	# 	x = df5gbtsf.columns,
-	# 	xgap = 1,
-	# 	ygap = 1,
-	# 	hoverinfo ='text',
-	# 	# text = hovertext,
-	# 	colorscale='Hot',
-	# 		texttemplate="%{z}", 
-	# 		textfont={"size":10},
-	# 		reversescale=True,
-	# 		),
-	# 	]
+		df5gbts["Date"] = df5gbts["Date"].dt.date
 
-	# tickangle=0
-	# dtickval=3
-	# title = "5G BTS Roll Out Trends"
-	# subtitle = ""
+		df5gbts.drop(columns = "S.No", inplace = True)
 
+		df5gbtsf = pd.pivot(df5gbts, values ="Total", index = "StateCode", columns = "Date")
+
+		df5gbtsf.columns = [str(x) for x in df5gbtsf.columns ] #convet the dates into string 
+
+		lastcolumn = df5gbtsf.columns[-1]
+
+
+		df5gbtsf = df5gbtsf.sort_values(lastcolumn, ascending = False).head(20) #sort by the last column
+
+		st.write(df5gbtsf)
+
+		#setting the data of the heatmap 
+
+		# data = [go.Heatmap(
+		# 	z = df5gbtsf.values,
+		# 	y = df5gbtsf.index,
+		# 	x = df5gbtsf.columns,
+		# 	xgap = 1,
+		# 	ygap = 1,
+		# 	hoverinfo ='text',
+		# 	# text = hovertext,
+		# 	colorscale='Hot',
+		# 		texttemplate="%{z}", 
+		# 		textfont={"size":10},
+		# 		reversescale=True,
+		# 		),
+		# 	]
+
+		# tickangle=0
+		# dtickval=3
+		# title = "5G BTS Roll Out Trends"
+		# subtitle = ""
+
+
+
+#This section deals with titles and subtitles and hoverlabel color
 
 units_dict = {"Reserve Price" : "Rs Cr/MHz", "Auction Price" : "Rs Cr/MHz", "Quantum Offered": "MHz", 
 	      "Quantum Sold" : "MHz", "Quantum Unsold" : "MHz", "Total EMD" : "Rs Cr", "Total Outflow" : "Rs Cr",
