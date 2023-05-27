@@ -1373,7 +1373,6 @@ if selected_dimension == "Telecom Data":
 
 		df5gbtsf = round(df5gbtsf/1000,2) #convert the BTS data in thousands (K)
 
-		st.write(df5gbtsf)
 
 		#setting the data of the heatmap 
 
@@ -1393,8 +1392,8 @@ if selected_dimension == "Telecom Data":
 			]
 
 		tickangle= -45
-		xtickmode = "array"
-		x_labels = df5gbtsf.columns
+		# xtickmode = "array"
+		# x_labels = df5gbtsf.columns
 		xdtickval=1
 		title = "Indian 5G Base Station Roll Out Trends"
 		subtitle = "Cumulative BTS growth; Unit - Thousands; Sorted by the Recent Date"
