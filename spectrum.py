@@ -1588,6 +1588,8 @@ if selected_dimension == "Telecom Data":
 
 		dftelesubsprocess = dftelesubsprocess.set_index(["Date","Circle"])
 
+		dftelesubsprocess = pd.melt(dftelesubsprocess)
+
 		st.write(dftelesubsprocess)
 
 
