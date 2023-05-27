@@ -1547,8 +1547,11 @@ fig.update_layout(uniformtext_minsize=12,
 		)
 
 
-
-fig.update_layout(xaxis_type='category') #debug this is new line added 
+#Only when the user selects the dimensions as "Telecom Data" then execute this 
+if selected_dimension == "Telecom Data":
+	fig.update_layout(xaxis_type='category')
+else:
+	pass
 
 fig.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
 fig.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
