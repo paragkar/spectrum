@@ -1524,8 +1524,8 @@ if (selected_dimension == "Auction Years") and (Feature == "Operator Metric"):
 if (selected_dimension == "Telecom Data") and (Feature == "5G BTS Trends"):
 	xdtickangle= -45
 	xdtickval=1
-	title = "Indian 5G Base Station Roll Out Trends of Top 20 States/UT"
-	subtitle = "Cumulative BTS growth; Unit - Thousands; Sorted by the Recent Date"
+	title = "Indian 5G Base Station Roll Out Trends"
+	subtitle = "Cumulative BTS growth; Top 20 States/UT; Unit - Thousands; Sorted by the Recent Date"
 
 
 #updating figure layouts
