@@ -693,6 +693,8 @@ def transform_colscale_for_hbox_auction_map(dff,reserveprice, auctionprice):
 @st.cache_resource
 def htext_telecomdata_5gbts(df5gbtsf): 
 
+	st.write(df5gbtsf)
+
 	summarydf = df5gbtsf.sum(axis=0)
 	df5gbtsfPercent = round((df5gbtsf/summarydf)*100,2)
 
