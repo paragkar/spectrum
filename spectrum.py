@@ -1366,8 +1366,10 @@ def htext_telecomdata_5gbts(df5gbtsf):
 		hovertext.append([])
 		for xi,xx in enumerate(df5gbtsf.columns):
 
-			btscum = df5gbtsf.values[yi][xi]
-			btspercent = df5gbtsfPercent.values[yi][xi]
+			# btscum = df5gbtsf.values[yi][xi]
+			# btspercent = df5gbtsfPercent.values[yi][xi]
+			btscum = df5gbtsf.loc[yy,xx]
+			btspercent = df5gbtsfPercent.loc[yy,xx]
 
 			hovertext[-1].append(
 					    'State: {}\
