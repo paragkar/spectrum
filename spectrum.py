@@ -1368,7 +1368,7 @@ def htext_telecomdata_5gbts(df5gbtsf):
 			btscum = df5gbtsf.values[yi][xi]
 			btsinc = df5gbtsincf.values[yi][xi]
 			btspercent = df5gbtsfPercent.values[yi][xi]
-			date = datetime.strptime(xx,'%d/%m/%y')
+			date = datetime.strptime(xx,'%y/%m/%d')
 
 			hovertext[-1].append(
 					    'State: {}\
