@@ -1364,7 +1364,7 @@ if selected_dimension == "Telecom Data":
 
 		df5gbtsf = pd.pivot(df5gbts, values ="Total", index = "StateCode", columns = "Date")
 
-		df5gbtsf.columns = [str(x) for x in df5gbtsf.columns ] #convet the dates into string 
+		# df5gbtsf.columns = [str(x) for x in df5gbtsf.columns ] #convet the dates into string 
 
 		lastcolumn = df5gbtsf.columns[-1]
 
@@ -1394,7 +1394,7 @@ if selected_dimension == "Telecom Data":
 
 		tickangle= -45
 		xtickmode = "array"
-		xdtickval=0.5
+		xdtickval=1
 		title = "Indian 5G Base Station Roll Out Trends"
 		subtitle = "Cumulative BTS growth; Unit - Thousands; Sorted by the Recent Date"
 
