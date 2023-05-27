@@ -1374,14 +1374,12 @@ def htext_telecomdata_5gbts(df5gbtsf):
 					    'State: {}\
 					    <br>Date: {}\
 					    <br/BTS Cumulative:{} Nos\
-					    # <br/BTS Increments: {} Nos\
 					    <br>BTS Cumulative: {} % of Total'
 
 				     .format( 
 					    yy,
 					    date,
 					    btscum,
-					    # btsinc,
 					    btspercent,
 					    )
 					    )
