@@ -693,8 +693,6 @@ def transform_colscale_for_hbox_auction_map(dff,reserveprice, auctionprice):
 @st.cache_resource
 def htext_telecomdata_5gbts(df5gbtsf): 
 
-	st.write(df5gbtsf)
-
 	summarydf = df5gbtsf.sum(axis=0)
 	df5gbtsfPercent = round((df5gbtsf/summarydf)*100,2)
 
@@ -1522,7 +1520,7 @@ if selected_dimension == "Telecom Data":
 			df5gbtsincf = df5gbtsincf.sort_values(lastcolumn, ascending = False) #sort by the last column
 
 
-			hovertext = htext_telecomdata_5gbts(df5gbts)
+			hovertext = htext_telecomdata_5gbts(df5gbtsf)
 
 			#setting the data of the heatmap 
 
