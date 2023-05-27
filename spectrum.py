@@ -1366,7 +1366,7 @@ def htext_telecomdata_5gbts(df5gbtsf):
 		for xi,xx in enumerate(df5gbtsf.columns):
 
 			btscum = df5gbtsf.values[yi][xi]
-			btsinc = df5gbtsincf.values[yi][xi+1]
+			# btsinc = df5gbtsincf.values[yi][xi]
 			btspercent = df5gbtsfPercent.values[yi][xi]
 			date = datetime.strptime(xx,'%Y-%m-%d')
 
