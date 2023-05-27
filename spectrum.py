@@ -1572,7 +1572,7 @@ if selected_dimension == "Telecom Data":
 
 		dftelesubs = dftelesubs.replace(',','', regex=True)
 
-		dftelesubs.remove(columns = ["Year","Months"], inplace = True)
+		dftelesubs.drop(columns = ["Year","Months"], axis =1, inplace = True)
 
 		st.write(dftelesubs)
 
