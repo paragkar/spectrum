@@ -1359,13 +1359,11 @@ def htext_telecomdata_5gbts(df5gbtsf):
 	lastcolumn = df5gbtsincf.columns[-1]
 	df5gbtsincf = df5gbtsincf.sort_values(lastcolumn, ascending = False) #sort by the last column
 
-	st.write(df5gbtsincf)
-
 	hovertext=[]
 
-	# for yi, yy in enumerate(df5gbtsf.index):
-	# 	hovertext.append([])
-	# 	for xi, xx in enumerate(df5gbtsf.columns):
+	for yi,yy in enumerate(df5gbtsf.index):
+		hovertext.append([])
+		for xi,xx in enumerate(df5gbtsf.columns):
 
 	# 		5gbtscum = df5gbtsf.values[yi][xi]
 	# 		5gbtsinc = df5gbtsincf.values[yi][xi]
