@@ -1371,9 +1371,11 @@ if selected_dimension == "Telecom Data":
 
 		df5gbtsf = df5gbtsf.sort_values(lastcolumn, ascending = False).head(20) #sort by the last column
 
+		df5gbtsf = round(df5gbtsf/1000,2) #convert the BTS data in thousands (K)
+
 		st.write(df5gbtsf)
 
-		#setting the data of the heatmap 
+		setting the data of the heatmap 
 
 		# data = [go.Heatmap(
 		# 	z = df5gbtsf.values,
