@@ -1393,7 +1393,8 @@ if selected_dimension == "Telecom Data":
 			]
 
 		tickangle= -45
-		dtickval=1
+		xtickmode = "array"
+		xdtickval=1
 		title = "Indian 5G Base Station Roll Out Trends"
 		subtitle = "Cumulative BTS growth; Unit - Thousands; Sorted by the Recent Date"
 
@@ -1539,9 +1540,9 @@ fig.update_layout(uniformtext_minsize=12,
         	  tickmode='array'),
 		  xaxis = dict(
 		  side = 'top',
-		  tickmode = 'linear',
+		  tickmode = xtickmode, #debug; removed "linear" and replaced it with xtickmode
 		  tickangle=tickangle,
-		  dtick = dtickval),
+		  dtick = xdtickval), #debug added "x" as a precceding letter
 		)
 
 fig.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
