@@ -1414,7 +1414,7 @@ if selected_dimension == "Telecom Data":
 
 			summarydf = df5gbtsf.sum(axis=0)
 
-			df5gbtsfPercent = Round((df5gbtsf/summarydf)*100,2)
+			df5gbtsfPercent = round((df5gbtsf/summarydf)*100,2)
 
 
 			#setting the data of the heatmap 
