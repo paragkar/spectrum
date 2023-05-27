@@ -1593,6 +1593,8 @@ if selected_dimension == "Telecom Data":
 
 		dftelesubsprocess = dftelesubsprocess.groupby(["Date","Operator"]).sum()
 
+		dftelesubsprocess.drop(columns = ["Circle"], axis =1, inplace = True)
+
 		st.write(dftelesubsprocess)
 
 
