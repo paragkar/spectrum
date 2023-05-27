@@ -1356,7 +1356,7 @@ if selected_dimension == "Telecom Data":
 
 	if SubFeature== "5G BTS Trends":
 
-		df5gbts = dft["5GBTS"] #load 5G BTS deployment data from excel file
+		df5gbts = dfT["5GBTS"] #load 5G BTS deployment data from excel file
 
 		df5gbts["Date"] = df5gbts["Date"].dt.date
 
