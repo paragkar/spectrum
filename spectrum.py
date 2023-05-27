@@ -1454,6 +1454,12 @@ if selected_dimension == "Telecom Data":
 			df5gbtsincf.index = df5gbtsf.index 
 			df5gbtsincf.columns = df5gbtsf.columns[1:]
 
+
+			lastcolumn = df5gbtsincf.columns[-1]
+
+
+			df5gbtsincf = df5gbtsincf.sort_values(lastcolumn, ascending = False) #sort by the last column
+
 			#setting the data of the heatmap 
 
 			data = [go.Heatmap(
