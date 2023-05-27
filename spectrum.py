@@ -1550,11 +1550,12 @@ if selected_dimension == "Telecom Data":
 			chart = summarychart(summarydf, 'Dates', SubFeature)
 			flag = True
 
-
+			hoverlabel_bgcolor = "#000000" #subdued black
 			xdtickangle= -45
 			xdtickval=1
 			title = "Indian 5G Base Stations Roll Out Trends"
 			subtitle = "Incremental BTS growth; Top 20 States/UT; Unit - Thousands; Sorted by the Recent Date"
+			fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 
 #This section deals with titles and subtitles and hoverlabel color
 
