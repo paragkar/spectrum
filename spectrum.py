@@ -687,7 +687,7 @@ def transform_colscale_for_hbox_auction_map(dff,reserveprice, auctionprice):
 			colormatrix = list(colormatrix.values)
 	return colormatrix
 
-*********************
+*#********************
 
 #processing for hovertext for Telecom Data and 5G BTS Trends
 @st.cache_resource
