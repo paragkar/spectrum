@@ -1586,9 +1586,7 @@ if selected_dimension == "Telecom Data":
 
 		dftelesubsprocess.drop(columns = ["Category"], axis =1, inplace = True)
 
-		dftelesubsprocess = dftelesubsprocess.set_index(["Date","Circle"])
-
-		dftelesubsprocess = pd.melt(dftelesubsprocess)
+		# dftelesubsprocess = pd.melt(dftelesubsprocess)
 
 		st.write(dftelesubsprocess)
 
