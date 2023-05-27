@@ -1381,7 +1381,7 @@ def htext_telecomdata_5gbts(df5gbtsf):
 					    yy,
 					    date,
 					    btscum,
-					    btsinc,
+					    # btsinc,
 					    btspercent,
 					    )
 					    )
