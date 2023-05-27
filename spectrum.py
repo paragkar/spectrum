@@ -1394,7 +1394,7 @@ if selected_dimension == "Telecom Data":
 		tickangle= -45
 		# xtickmode = "array"
 		# x_labels = df5gbtsf.columns
-		xdtickval=1
+		dtickval=1
 		title = "Indian 5G Base Station Roll Out Trends"
 		subtitle = "Cumulative BTS growth; Unit - Thousands; Sorted by the Recent Date"
 
@@ -1540,11 +1540,13 @@ fig.update_layout(uniformtext_minsize=12,
         	  tickmode='array'),
 		  xaxis = dict(
 		  side = 'top',
-		  tickmode = xtickmode, #debug; removed "linear" and replaced it with xtickmode
-		  ticktext=x_labels, #debug this is new line
+		  tickmode = linear,
+		  # ticktext=x_labels, #debug this is new line
 		  tickangle=tickangle,
-		  dtick = xdtickval), #debug added "x" as a precceding letter
+		  dtick = dtickval), 
 		)
+
+
 
 fig.update_layout(xaxis_type='category') #debug this is new line added 
 
