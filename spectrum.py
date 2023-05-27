@@ -1394,7 +1394,7 @@ if selected_dimension == "Telecom Data":
 
 		tickangle= -45
 		xtickmode = "array"
-		xdtickval=1
+		xdtickval=0.5
 		title = "Indian 5G Base Station Roll Out Trends"
 		subtitle = "Cumulative BTS growth; Unit - Thousands; Sorted by the Recent Date"
 
