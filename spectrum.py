@@ -1632,14 +1632,14 @@ if selected_dimension == "Telecom Data":
 			return last_date
 
 
-		date_range_list = [last_date_of_month(start_date+relativedelta(months=x)) for x in range(months)]
+		date_range_list = [start_date+relativedelta(months=x) for x in range(months)]
 
 
 
 		st.write(dftotal.loc[:,date_range_list])
 
 
-		st.write(dftotal)
+		# st.write(dftotal)
 
 		# dftotal = dftotal.sort_values(slider_range[0].strftime("%Y-%m-%d"), ascending = False) #filter the data on the first column selected by slider
 
