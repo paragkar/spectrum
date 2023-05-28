@@ -1827,9 +1827,6 @@ if (selected_dimension == "Telecom Data") and (Feature == "Telecom Subs Trends")
 	else:
 		selected_category = selected_category
 
-	if len(date_range_list) >= 20:
-		fig.update_xaxes(title=None)
-
 	# hoverlabel_bgcolor = "#000000" #subdued black
 	xdtickangle= -45
 	xdtickval=1
@@ -1858,12 +1855,18 @@ fig.update_layout(uniformtext_minsize=12,
 		)
 
 
+
+#Here are only some last minute changes in the plot
+
 #When dimensions as "Telecom Data" then convert x axis into category
 if selected_dimension == "Telecom Data":
 	fig.update_layout(xaxis_type='category')
 else:
 	pass
 
+if (selected_dimension == "Telecom Data") and (Feature == "Telecom Subs Trends"):
+	if len(date_range_list) >= 20:
+		fig.update_xaxes(title=None)
 
 
 fig.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
