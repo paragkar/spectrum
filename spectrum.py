@@ -1827,6 +1827,9 @@ if (selected_dimension == "Telecom Data") and (Feature == "Telecom Subs Trends")
 	else:
 		selected_category = selected_category
 
+	if len(date_range_list) >= 20:
+		fig.update_xaxes(title=None)
+
 	# hoverlabel_bgcolor = "#000000" #subdued black
 	xdtickangle= -45
 	xdtickval=1
