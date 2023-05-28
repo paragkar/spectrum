@@ -1731,7 +1731,7 @@ if selected_dimension == "Business Data":
 			subtitle = "Incremental Values; Selected Category -" +",".join(selected_category)+ "; Unit - Millions; Sorted by the Recent Date"
 
 			if len(date_range_list) >= 30:
-				texttemplate = "%{""}"
+				texttemplate = "%{''}"
 			else:
 				texttemplate = "%{z}",
 
