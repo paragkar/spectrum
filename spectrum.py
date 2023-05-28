@@ -1593,12 +1593,15 @@ if selected_dimension == "Business Data":
 		if len(selected_category) == 0 or len(selected_category) == 2:
 
 			dftelesubsprocess = dftelesubs.copy()
+			selected_category ="All"
 
 		if len(selected_category) == 1:
 
 			dftelesubsprocess = dftelesubs[dftelesubs["Category"]==selected_category[0]]
+			selected_category = selected_category
 
 		dftelesubsprocess.drop(columns = ["Category"], axis =1, inplace = True)
+
 
 		#processsing the dataframe for total subs
 
@@ -1622,71 +1625,125 @@ if selected_dimension == "Business Data":
 
 		dftotal = pd.pivot(dftotal, index="Operator", columns = "Date", values = "Subs")
 
-		# dftotal.columns = [str(x) for x in dftotal.columns]
+		SubFeature = st.sidebar.selectbox('Select a SubFeature', ["Cumulative Values", "Incremental Values"])
 
-		# slider_range = st.slider("Double ended slider", min_value = dftotal.columns[0], 
-			# max_value = dftotal.columns[-1], value =(dftotal.columns[-20],dftotal.columns[-2]))
+		if SubFeature=="Cumulative Values":
 
-		listofallcolumns = list(dftotal.columns)
-
-
-		with st.sidebar:
-
-			start_date, end_date = st.select_slider("Select a Range of Dates", 
-				options = listofallcolumns, value =(dftotal.columns[-123],dftotal.columns[-1]))
-
-		
-		#function to extract a list of dates from the list using start and end date from the slider
-
-		def get_selected_date_list(listofallcolumns, start_date, end_date):
-		    # Find the index of the first selected date
-		    index1 = listofallcolumns.index(start_date)
-
-		    # Find the index of the second selected date
-		    index2 = listofallcolumns.index(end_date)
-
-		    # Return a new list containing the dates from index1 to index2 (inclusive)
-		    return listofallcolumns[index1:index2+1]
+			listofallcolumns = list(dftotal.columns)
 
 
-		date_range_list = get_selected_date_list(listofallcolumns, start_date, end_date)
+			with st.sidebar:
+
+				start_date, end_date = st.select_slider("Select a Range of Dates", 
+					options = listofallcolumns, value =(dftotal.columns[-123],dftotal.columns[-1]))
+
+			
+			#function to extract a list of dates from the list using start and end date from the slider
+
+			def get_selected_date_list(listofallcolumns, start_date, end_date):
+			    # Find the index of the first selected date
+			    index1 = listofallcolumns.index(start_date)
+
+			    # Find the index of the second selected date
+			    index2 = listofallcolumns.index(end_date)
+
+			    # Return a new list containing the dates from index1 to index2 (inclusive)
+			    return listofallcolumns[index1:index2+1]
 
 
-		dftotalfilt = dftotal[date_range_list] #filter the dataframe with the selected dates
+			date_range_list = get_selected_date_list(listofallcolumns, start_date, end_date)
 
 
-		dftotalfilt = dftotalfilt.sort_values(end_date, ascending = False) #filter the data on the first column selected by slider
+			dftotalfilt = dftotal[date_range_list] #filter the dataframe with the selected dates
 
 
-		dftotalfilt = round(dftotalfilt.loc[~(dftotalfilt ==0).all(axis=1)]/1000000,2) # delete all rows with value zero and convert into millions
+			dftotalfilt = dftotalfilt.sort_values(end_date, ascending = False) #filter the data on the first column selected by slider
 
 
-		#setting the data of the heatmap 
+			dftotalfilt = round(dftotalfilt.loc[~(dftotalfilt ==0).all(axis=1)]/1000000,2) # delete all rows with value zero and convert into millions
 
-		data = [go.Heatmap(
-			z = dftotalfilt.values,
-			y = dftotalfilt.index,
-			x = dftotalfilt.columns,
-			xgap = 1,
-			ygap = 1,
-			hoverinfo ='text',
-			# text = hovertext,
-			colorscale='Hot',
-				# texttemplate="%{z}", 
-				# textfont={"size":10},
-				reversescale=True,
-				),
-			]
+			subtitle = "Cumulative Subs Trends; Selected Category -" +selected_category[0]+ "; Unit - Millions; Sorted by the Recent Date"
 
-		# dftotalfilt = (dftotalfilt/1000).round(1)
-		# summarydf = dftotalfilt.sum(axis=0)
-		# summarydf = summarydf.reset_index()
-		# summarydf.columns = ["Dates", Feature] 
-		# summarydf = summarydf.sort_values("Dates", ascending = False)
-		# #preparing the summary chart 
-		# chart = summarychart(summarydf/1000, 'Dates', Feature)
-		# flag = True
+			#setting the data of the heatmap 
 
+			data = [go.Heatmap(
+				z = dftotalfilt.values,
+				y = dftotalfilt.index,
+				x = dftotalfilt.columns,
+				xgap = 1,
+				ygap = 1,
+				hoverinfo ='text',
+				# text = hovertext,
+				colorscale='Hot',
+					# texttemplate="%{z}", 
+					# textfont={"size":10},
+					reversescale=True,
+					),
+				]
+
+			# dftotalfilt = (dftotalfilt/1000).round(1)
+			# summarydf = dftotalfilt.sum(axis=0)
+			# summarydf = summarydf.reset_index()
+			# summarydf.columns = ["Dates", Feature] 
+			# summarydf = summarydf.sort_values("Dates", ascending = False)
+			# #preparing the summary chart 
+			# chart = summarychart(summarydf/1000, 'Dates', Feature)
+			# flag = True
+
+		if SubFeature=="Incremental Values":
+
+			lst =[]
+			for row in dftotal.values:
+
+				increments = np.diff(row)
+				lst.append(increments)
+
+			dftotalinc = pd.DataFrame(lst)
+
+			dftotalinc.index = dftotal.index 
+			dftotalinc.columns = dftotal.columns[1:]
+
+
+			lastcolumn = dftotalinc.columns[-1]
+
+
+			dftotalinc = dftotalinc.sort_values(lastcolumn, ascending = False) #sort by the last column
+
+			subtitle = "Incremental Subs Trends; Selected Category -" +selected_category[0]+ "; Unit - Millions; Sorted by the Recent Date"
+
+
+			# hovertext = htext_telecomdata_5gbts(df5gbtsf)
+
+			#setting the data of the heatmap 
+
+			data = [go.Heatmap(
+				z = dftotalinc.values,
+				y = dftotalinc.index,
+				x = dftotalinc.columns,
+				xgap = 1,
+				ygap = 1,
+				hoverinfo ='text',
+				# text = hovertext,
+				colorscale='Hot',
+					texttemplate="%{z}", 
+					textfont={"size":10},
+					reversescale=True,
+					),
+				]
+
+			# summarydf = df5gbtsincf.sum(axis=0)
+			# summarydf = summarydf.reset_index()
+			# summarydf.columns = ["Dates", SubFeature] 
+			# summarydf = summarydf.sort_values("Dates", ascending = False)
+			# #preparing the summary chart 
+			# chart = summarychart(summarydf, 'Dates', SubFeature)
+			# flag = True
+
+			# hoverlabel_bgcolor = "#000000" #subdued black
+			# xdtickangle= -45
+			# xdtickval=1
+			# title = "Indian 5G Base Stations Roll Out Trends"
+			# subtitle = "Incremental BTS growth; Top 20 States/UT; Unit - Thousands; Sorted by the Recent Date"
 
 
 
@@ -1818,21 +1875,15 @@ if (selected_dimension == "Business Data") and (Feature == "5G BTS Trends"):
 	xdtickangle= -45
 	xdtickval=1
 	title = "Indian 5G Base Stations Roll Out Trends"
-	subtitle = "Incremental BTS growth; Top 20 States/UT; Unit - Thousands; Sorted by the Recent Date"
+
 
 if (selected_dimension == "Business Data") and (Feature == "Subscribers Trends"):
-
-	if (len(selected_category)==0) or (len(selected_category)==2):
-		selected_category ="All"
-
-	else:
-		selected_category = selected_category
 
 	# hoverlabel_bgcolor = "#000000" #subdued black
 	xdtickangle= -45
 	xdtickval=1
 	title = "Indian Telecom Subscribers Trends"
-	subtitle = "Selected Category -" +selected_category[0]+ "; Unit - Millions; Sorted by the Recent Date"
+	
 
 
 #updating figure layouts
