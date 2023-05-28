@@ -1632,7 +1632,7 @@ if selected_dimension == "Telecom Data":
 		dftotalfilt = dftotal[date_range_list]
 
 
-		dftotalfilt = dftotalfilt.sort_values(date_range_list[0], ascending = False) #filter the data on the first column selected by slider
+		dftotalfilt = dftotalfilt.sort_values(date_range_list[-1], ascending = False) #filter the data on the first column selected by slider
 
 
 		st.write(dftotalfilt)
