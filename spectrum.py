@@ -1626,7 +1626,7 @@ if selected_dimension == "Telecom Data":
 
 
 
-		date_range_list = [start_date+relativedelta(months=x) for x in range(months)]
+		date_range_list = [start_date+relativedelta(months=x) for x in range(months+1)]
 
 
 
