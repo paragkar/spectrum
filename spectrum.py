@@ -1571,13 +1571,13 @@ if selected_dimension == "Telecom Data":
 	if Feature== "Telecom Subs Trends":
 
 		@st.cache(allow_output_mutation=True)
-		def loadata():
+		def loadata(dfT):
 
 			dftelesubs = dfT["TelecomSubs"] #load 5G BTS deployment data from excel file
 
 			return dftelesubs
 
-		dftelesubs = loaddata()
+		dftelesubs = loaddata(dfT)
 
 		dftelesubs = dftelesubs[dftelesubs["Date"]>=datetime(2013,1,31)] #filter the datframe for all dates more than the year 2013
 
