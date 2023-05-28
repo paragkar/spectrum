@@ -1623,6 +1623,8 @@ if selected_dimension == "Business Data":
 
 		dftotal.columns = ["Date", "Circle", "Operator", "Subs"]
 
+		st.write(dftotal) #debug
+
 		dftotal = dftotal.groupby(["Date","Operator","Circle"]).sum()
 
 		dftotal = dftotal.reset_index()
