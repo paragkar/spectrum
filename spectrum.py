@@ -1691,7 +1691,7 @@ if selected_dimension == "Business Data":
 			if len(selected_circles) == 0:
 				selected_circles = ["All"]
 
-			subtitle = "Cumulative Values; Selected Category -" +",".join(selected_category)+ "; "+ ",".join(selected_circles)+"; Unit - Millions; Sorted by the Recent Date"
+			subtitle = "Cumulative Values; Selected Category -" +",".join(selected_category)+ "; Selected Circles - "+ ",".join(selected_circles)+"; Unit - Millions; Sorted by the Recent Date"
 
 
 			if len(date_range_list) >=30:
