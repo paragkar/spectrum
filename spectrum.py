@@ -1732,9 +1732,9 @@ if selected_dimension == "Business Data":
 			#setting the data of the heatmap 
 
 			data = [go.Heatmap(
-				z = dftotalinc.values,
-				y = dftotalinc.index,
-				x = dftotalinc.columns,
+				z = dftotalincfilt.values,
+				y = dftotalincfilt.index,
+				x = dftotalincfilt.columns,
 				xgap = 1,
 				ygap = 1,
 				hoverinfo ='text',
