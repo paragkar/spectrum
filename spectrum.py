@@ -1615,6 +1615,8 @@ if selected_dimension == "Telecom Data":
 		slider_range = st.slider("Double ended slider", min_value = dftotal.columns[0], 
 			max_value = dftotal.columns[-1], value =(dftotal.columns[-20],dftotal.columns[-1]))
 
+		st.write(slider_range)
+
 		st.write(dftotal)
 
 
