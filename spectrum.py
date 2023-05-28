@@ -1626,7 +1626,7 @@ if selected_dimension == "Telecom Data":
 		    date_range_list.append(current_date)
 		    current_date += relativedelta(months=1)
 
-		dftotal = dftotal[min_date]
+		dftotal = dftotal[min_date.strftime("%Y-%m-%d")]
 
 		st.write(dftotal)
 
