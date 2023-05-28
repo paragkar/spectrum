@@ -1644,7 +1644,7 @@ if selected_dimension == "Telecom Data":
 	
 		# st.write(dftotal.columns)
 
-		st.write(dftotal.loc[:,slider_range[0].datetime.date])
+		st.write(dftotal.loc[:,max_date])
 
 
 		st.write(dftotal)
