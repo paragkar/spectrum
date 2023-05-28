@@ -1568,7 +1568,7 @@ if selected_dimension == "Telecom Data":
 
 		dftelesubs = dfT["TelecomSubs"] #load 5G BTS deployment data from excel file
 
-		dftelesubs = dftelesubs[dftelesubs["Date"]>=datetime(2013,1,31)]
+		dftelesubs = dftelesubs[dftelesubs["Date"]>=datetime(2013,1,31)] #filter the datframe for all dates more than the year 2013
 
 		dftelesubs["Date"] = dftelesubs["Date"].dt.date
 
@@ -1610,7 +1610,7 @@ if selected_dimension == "Telecom Data":
 
 		dftotal = pd.pivot(dftotal, index="Operator", columns = "Date", values = "Subs")
 
-		dftotal = dftotal.sort_values(dftotal.columns[-1], ascending = False)
+		dftotal = dftotal.sort_values(dftotal.columns[0], ascending = False) #filter the data on the first column
 
 		st.write(dftotal)
 
