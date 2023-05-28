@@ -1633,7 +1633,7 @@ if selected_dimension == "Telecom Data":
 		with st.sidebar:
 
 			start_date, end_date = st.select_slider("Select a Range of Dates", 
-				options = listofallcolumns, value =(dftotal.columns[-100],dftotal.columns[-1]))
+				options = listofallcolumns, value =(dftotal.columns[-150],dftotal.columns[-1]))
 
 		
 		#function to extract a list of dates from the list using start and end date from the slider
