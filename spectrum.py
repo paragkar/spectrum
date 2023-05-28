@@ -1635,8 +1635,11 @@ if selected_dimension == "Telecom Data":
 		date_range_list = [start_date+relativedelta(months=x) for x in range(months)]
 
 
+		st.write(date_range_list)
 
-		st.write(dftotal.loc[:,date_range_list])
+
+
+		# st.write(dftotal.loc[:,date_range_list])
 
 
 		# st.write(dftotal)
