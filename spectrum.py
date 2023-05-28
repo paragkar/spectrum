@@ -1630,7 +1630,6 @@ if selected_dimension == "Telecom Data":
 
 		dftotal = dftotal[dftotal.columns[date_range_list]
 
-		st.write(dftotal)
 
 
 		# dftotal = dftotal.sort_values(slider_range[0].strftime("%Y-%m-%d"), ascending = False) #filter the data on the first column selected by slider
