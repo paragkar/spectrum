@@ -1605,7 +1605,7 @@ if selected_dimension == "Business Data":
 		if len(selected_category) == 0 or len(selected_category) == 2:
 
 			dftelesubsprocess = dftelesubs.copy()
-			selected_category ="All"
+			selected_category =["All"]
 
 		if len(selected_category) == 1:
 
