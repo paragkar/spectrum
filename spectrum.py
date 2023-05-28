@@ -13,6 +13,8 @@ import matplotlib.pyplot as plt
 import altair as alt
 from datetime import datetime
 
+from dateutil.relativedelta import relativedelta
+
 import io
 import msoffcrypto
 
@@ -1614,7 +1616,20 @@ if selected_dimension == "Telecom Data":
 			max_value = dftotal.columns[-1], value =(dftotal.columns[-20],dftotal.columns[-1]))
 
 
-		dftotal.columns = [slider_range[0] : slider_range[1]]
+		min_date = slider_range[0]
+		max_date = slider_range[1]
+
+		all_dates = []
+		current_date = min_date
+
+		while current_date <= max_date:
+		    all_dates.append(current_date)
+		    current_date += relativedelta(months=1)
+
+		st.write(all_dates)
+
+
+
 
 		st.write(dftotal)
 
