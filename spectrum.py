@@ -1574,7 +1574,7 @@ if selected_dimension == "Telecom Data":
 
 		dftelesubs["Date"] = dftelesubs["Date"].dt.date
 
-		dftelesubs.columns = [str(x) for x in df.columns]
+		dftelesubs.columns = [str(x) for x in dftelesubs.columns]
 
 		dftelesubs = dftelesubs.replace(',','', regex=True)
 
