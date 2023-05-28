@@ -5,4 +5,3 @@ openpyxl
 matplotlib
 streamlit_option_menu
 msoffcrypto-tool
-calendar
