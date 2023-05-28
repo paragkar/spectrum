@@ -1619,29 +1619,20 @@ if selected_dimension == "Telecom Data":
 		# slider_range = st.slider("Double ended slider", min_value = dftotal.columns[0], 
 			# max_value = dftotal.columns[-1], value =(dftotal.columns[-20],dftotal.columns[-2]))
 
-		start, end = st.select_slider("Select a Range of Dates", options = dftotal.columns, value =(dftotal.columns[-20],dftotal.columns[-2]))
+		start_date, end_date = st.select_slider("Select a Range of Dates", options = dftotal.columns, value =(dftotal.columns[-20],dftotal.columns[-2]))
 
 
 
 
-		# st.write(min_date,max_date)
+		date_range_list = []
+		current_date = start_date
 
-		# date_range_list = []
-		# current_date = min_date
-
-		# while current_date <= max_date:
-		#     date_range_list.append(current_date)
-		#     current_date += relativedelta(months=1)
+		while current_date <= end_date:
+		    date_range_list.append(current_date)
+		    current_date += relativedelta(months=1)
 
 
-		# date_range_list = [str(x) for x in date_range_list] 
-
-
-		# st.write(date_range_list)
-	
-		# st.write(dftotal.columns)
-
-		st.write(dftotal.loc[:,end])
+		st.write(dftotal.loc[:,date_range_list])
 
 
 		st.write(dftotal)
