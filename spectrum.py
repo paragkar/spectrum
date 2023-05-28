@@ -1649,6 +1649,9 @@ if selected_dimension == "Telecom Data":
 		dftotalfilt = dftotalfilt.sort_values(end_date, ascending = False) #filter the data on the first column selected by slider
 
 
+		dftotalfilt = dftotalfilt.loc[~(dftotalfilt ==0).all(axis=1)]# delete all rows with value zero
+
+
 		st.write(dftotalfilt)
 
 
