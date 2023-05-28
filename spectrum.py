@@ -1620,22 +1620,27 @@ if selected_dimension == "Telecom Data":
 		# slider_range = st.slider("Double ended slider", min_value = dftotal.columns[0], 
 			# max_value = dftotal.columns[-1], value =(dftotal.columns[-20],dftotal.columns[-2]))
 
-		start_date, end_date = st.select_slider("Select a Range of Dates", options = list(dftotal.columns), value =(dftotal.columns[0],dftotal.columns[-1]))
+		listofallcolumns = list(dftotal.columns)
 
-		months = (end_date.year - start_date.year) * 12 + (end_date.month - start_date.month)
+		start_date, end_date = st.select_slider("Select a Range of Dates", options = listofallcolumns, value =(dftotal.columns[0],dftotal.columns[-1]))
 
-		def	lastdayofmonth(inputdate):
+		
 
-			last_day = calendar.monthrange(inputdate.year, inputdate.month)[1]
-			last_date = datetime.datetime.date(inputdate.year, inputdate.month, last_day)
+		def get_selected_date_list(listofallcolumns, start_date, end_date):
+		    # Find the index of the first selected date
+		    index1 = dates.index(start_date)
 
-			return last_date
+		    # Find the index of the second selected date
+		    index2 = dates.index(end_date)
+
+		    # Return a new list containing the dates from index1 to index2 (inclusive)
+		    return dates[index1:index2+1]
 
 
+		date_range_list = get_selected_date_list(listofallcolumns, start_date, end_date)
 
-		date_range_list = [start_date+relativedelta(months=x) for x in range(months+1)]
 
-		date_range_list = [lastdayofmonth(x) for x in date_range_list]
+		
 
 
 		dftotalfilt = dftotal[date_range_list]
