@@ -1650,7 +1650,36 @@ if selected_dimension == "Telecom Data":
 		dftotalfilt = round(dftotalfilt.loc[~(dftotalfilt ==0).all(axis=1)]/1000000,2) # delete all rows with value zero and convert into millions
 
 
-		st.write(dftotalfilt)
+		#setting the data of the heatmap 
+
+			data = [go.Heatmap(
+				z = dftotalfilt.values,
+				y = dftotalfilt.index,
+				x = dftotalfilt.columns,
+				xgap = 1,
+				ygap = 1,
+				hoverinfo ='text',
+				# text = hovertext,
+				colorscale='Hot',
+					texttemplate="%{z}", 
+					textfont={"size":10},
+					reversescale=True,
+					),
+				]
+
+			# summarydf = df5gbtsincf.sum(axis=0)
+			# summarydf = summarydf.reset_index()
+			# summarydf.columns = ["Dates", SubFeature] 
+			# summarydf = summarydf.sort_values("Dates", ascending = False)
+			# #preparing the summary chart 
+			# chart = summarychart(summarydf, 'Dates', SubFeature)
+			# flag = True
+
+			# hoverlabel_bgcolor = "#000000" #subdued black
+			xdtickangle= -45
+			xdtickval=1
+			title = "Indian Telecom Subscribers Trends"
+			subtitle = "Selected Category -" +selected_category+ "; Unit - Millions; Sorted by the Recent Date"
 
 
 
