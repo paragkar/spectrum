@@ -647,9 +647,9 @@ def htext_colmatrix_auction_year_operator_metric(df1, selectedbands, SubFeature,
 	return hovertext, colormatrix
 
 
-#processing for hovertext for Telecom Data and 5G BTS Trends
+#processing for hovertext for Business Data and 5G BTS Trends
 @st.cache_resource
-def htext_telecomdata_5gbts(df5gbtsf): 
+def htext_businessdata_5gbts(df5gbtsf): 
 
 	summarydf = df5gbtsf.sum(axis=0)
 	df5gbtsfPercent = round((df5gbtsf/summarydf)*100,2)
@@ -702,6 +702,71 @@ def htext_telecomdata_5gbts(df5gbtsf):
 					    )
 					    )
 	return hovertext
+
+
+
+
+	#---------New Code Added-----------
+
+
+#processing for hovertext for Business Data and 5G BTS Trends
+# @st.cache_resource
+# def htext_businessdata_5gbts(df5gbtsf): 
+
+# 	summarydf = df5gbtsf.sum(axis=0)
+# 	df5gbtsfPercent = round((df5gbtsf/summarydf)*100,2)
+
+# 	lst =[]
+# 	for row in df5gbtsf.values:
+
+# 		increments = np.diff(row)
+# 		lst.append(increments)
+
+# 	df5gbtsincf = pd.DataFrame(lst)
+
+# 	df5gbtsincf.index = df5gbtsf.index 
+
+# 	df5gbtsincf.columns = df5gbtsf.columns[1:]
+
+# 	lastcolumn = df5gbtsincf.columns[-1]
+# 	df5gbtsincf = df5gbtsincf.sort_values(lastcolumn, ascending = False) #sort by the last column
+
+# 	hovertext=[]
+
+# 	for yi,yy in enumerate(df5gbtsf.index):
+# 		hovertext.append([])
+# 		for xi,xx in enumerate(df5gbtsf.columns):
+
+# 			# btscum = df5gbtsf.values[yi][xi]
+# 			# btspercent = df5gbtsfPercent.values[yi][xi]
+# 			btscum = df5gbtsf.loc[yy,xx]
+# 			btspercent = df5gbtsfPercent.loc[yy,xx]
+
+# 			try:
+# 				btsinc = df5gbtsincf.loc[yy,xx]
+# 			except:
+# 				btsinc = np.nan
+
+
+# 			hovertext[-1].append(
+# 					    'State: {}\
+# 					    <br>Date: {}\
+# 					    <br>BTS Cum: {} K Nos\
+# 					    <br>BTS Inc: {} K Nos\
+# 					    <br>BTS Cum: {} % of Total'
+
+# 				     .format( 
+# 					    yy,
+# 					    xx,
+# 					    btscum,
+# 					    round(btsinc,2),
+# 					    btspercent,
+# 					    )
+# 					    )
+	# return hovertext
+
+
+	#--- New Code Ends---------
 
 
 #preparing color scale for hoverbox for freq and exp maps
@@ -1445,7 +1510,7 @@ if selected_dimension == "Business Data":
 		if SubFeature == "Cumulative Values":
 
 
-			hovertext = htext_telecomdata_5gbts(df5gbtsf)
+			hovertext = htext_businessdata_5gbts(df5gbtsf)
 
 			#setting the data of the heatmap 
 
@@ -1481,7 +1546,7 @@ if selected_dimension == "Business Data":
 		if SubFeature == "Percent of Total":
 
 
-			hovertext = htext_telecomdata_5gbts(df5gbtsf)
+			hovertext = htext_businessdata_5gbts(df5gbtsf)
 
 			summarydf = df5gbtsf.sum(axis=0)
 
@@ -1533,7 +1598,7 @@ if selected_dimension == "Business Data":
 			df5gbtsincf = df5gbtsincf.sort_values(lastcolumn, ascending = False) #sort by the last column
 
 
-			hovertext = htext_telecomdata_5gbts(df5gbtsf)
+			hovertext = htext_businessdata_5gbts(df5gbtsf)
 
 			#setting the data of the heatmap 
 
@@ -1767,7 +1832,7 @@ if selected_dimension == "Business Data":
 
 			subtitle = "Incremental Values; Selected Category -" +",".join(selected_category)+ "; Selected Circles - "+ ",".join(selected_circles)+"; Unit - Millions; Sorted by the Recent Date"
 
-			# hovertext = htext_telecomdata_5gbts(df5gbtsf)
+			# hovertext = htext_businessdata_5gbts(df5gbtsf)
 
 			if len(date_range_list) >=30:
 				texttemplate =""
