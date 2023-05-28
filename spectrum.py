@@ -1660,6 +1660,9 @@ if selected_dimension == "Business Data":
 
 			dftotalfilt = round(dftotalfilt.loc[~(dftotalfilt ==0).all(axis=1)]/1000000,2) # delete all rows with value zero and convert into millions
 
+			if len(selected_category) ==0:
+			selected_category = ["All"]
+
 			subtitle = "Cumulative Subs Trends; Selected Category -" +",".join(selected_category)+ "; Unit - Millions; Sorted by the Recent Date"
 
 			#setting the data of the heatmap 
@@ -1721,6 +1724,9 @@ if selected_dimension == "Business Data":
 
 
 			dftotalincfilt = round(dftotalincfilt.loc[~(dftotalincfilt ==0).all(axis=1)]/1000000,2) # delete all rows with value zero and convert into millions
+
+			if len(selected_category) ==0:
+				selected_category = ["All"]
 
 			subtitle = "Incremental Subs Trends; Selected Category -" +",".join(selected_category)+ "; Unit - Millions; Sorted by the Recent Date"
 
