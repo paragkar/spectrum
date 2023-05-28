@@ -1675,7 +1675,7 @@ if selected_dimension == "Business Data":
 				ygap = 1,
 				hoverinfo ='text',
 				# text = hovertext,
-				colorscale='reds',
+				colorscale='Hot',
 					# texttemplate="%{z}", 
 					# textfont={"size":10},
 					# reversescale=True,
@@ -1732,6 +1732,11 @@ if selected_dimension == "Business Data":
 
 			# hovertext = htext_telecomdata_5gbts(df5gbtsf)
 
+			if len(date_range_list) >=30:
+				texttemplate =""
+			else:
+				texttemplate = "%{z}"
+
 			#setting the data of the heatmap 
 
 			data = [go.Heatmap(
@@ -1743,7 +1748,7 @@ if selected_dimension == "Business Data":
 				hoverinfo ='text',
 				# text = hovertext,
 				colorscale='Hot',
-					texttemplate="%{z}", 
+					texttemplate=texttemplate, 
 					textfont={"size":10},
 					reversescale=True,
 					),
