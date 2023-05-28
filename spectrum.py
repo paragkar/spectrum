@@ -1415,7 +1415,7 @@ if selected_dimension == "Business Data":
 	dfT = pd.read_excel(excel_content, sheet_name=sheetT)
 
 
-	Feature = st.sidebar.selectbox('Select a Feature', ["5G BTS Trends", "Subscribers Trends"])
+	Feature = st.sidebar.selectbox('Select a Feature', ["5G BTS Trends", "TotalSubs Trends"])
 
 	if Feature== "5G BTS Trends":
 
@@ -1567,7 +1567,7 @@ if selected_dimension == "Business Data":
 			subtitle = "Incremental BTS growth; Top 20 States/UT; Unit - Thousands; Sorted by the Recent Date"
 
 
-	if Feature== "Subscribers Trends":
+	if Feature== "TotalSubs Trends":
 
 		@st.cache_resource
 		def loaddata():
@@ -1906,12 +1906,12 @@ if (selected_dimension == "Business Data") and (Feature == "5G BTS Trends"):
 	title = "Indian 5G Base Stations Roll Out Trends"
 
 
-if (selected_dimension == "Business Data") and (Feature == "Subscribers Trends"):
+if (selected_dimension == "Business Data") and (Feature == "TotalSubs Trends"):
 
 	# hoverlabel_bgcolor = "#000000" #subdued black
 	xdtickangle= -45
 	xdtickval=1
-	title = "Indian Telecom Subscribers Trends"
+	title = "Indian Telecom Total Subscribers Trends"
 	
 
 
@@ -1946,7 +1946,7 @@ else:
 	pass
 
 #removes tic labels if the date_range_list greater than a value
-if (selected_dimension == "Business Data") and (Feature == "Subscribers Trends"):
+if (selected_dimension == "Business Data") and (Feature == "TotalSubs Trends"):
 	# fig.data[0].update(zmin=110, zmax=450) #setting the max and min value of the colorscale
 	if len(date_range_list) >= 30:
 		fig.update_xaxes(
