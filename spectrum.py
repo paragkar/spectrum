@@ -1593,9 +1593,9 @@ if selected_dimension == "Telecom Data":
 
 		dftelesubsprocess = dftelesubsprocess.groupby(["Date","Operator","Circle"]).sum()
 
-		dftelesubsprocess.drop(columns = ["Circle"], axis =1, inplace = True)
-
 		dftelesubsprocess = dftelesubsprocess.reset_index()
+
+		dftelesubsprocess.drop(columns = ["Circle"], axis =1, inplace = True)
 
 		dftelesubsprocess = dftelesubsprocess.groupby(["Date","Operator"]).sum()
 
