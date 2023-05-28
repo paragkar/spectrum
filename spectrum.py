@@ -1933,7 +1933,7 @@ else:
 
 #removes tic labels if the date_range_list greater than a value
 if (selected_dimension == "Business Data") and (Feature == "Subscribers Trends"):
-	if len(date_range_list) >= 36:
+	if len(date_range_list) >= 30:
 		fig.update_xaxes(
 		    tickmode='array',
 		    ticktext=[''] * len(date_range_list),
