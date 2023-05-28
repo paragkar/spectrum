@@ -1623,9 +1623,30 @@ if selected_dimension == "Business Data":
 
 		dftotal.columns = ["Date", "Circle", "Operator", "Subs"]
 
-		list_of_circles_codes = list(state_dict.keys())
 
-		st.write(list_of_circles_codes)
+		#------New Code Added-------
+
+		list_of_circles = list(state_dict.values())
+
+		selected_circles = st.sidebar.multiselect('Select Categories', list_of_circles) #drop down to select circles
+
+
+		selected_circle_codes = [k for k, v in state_dict.items() if v in selected_circles]
+
+		if len(selected_circles) > 0:
+
+			temp = pd.DataFrame()
+			for circle_code in selected_circle_codes:
+
+				temp = pd.concat(temp, dftotal[dftotal["Circle"]==circle_code], axis =0)
+
+			dftotal = temp
+
+		else:
+			pass
+
+		#-----New Code Ends ------
+
 
 		dftotal = dftotal.groupby(["Date","Operator","Circle"]).sum()
 
