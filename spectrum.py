@@ -1730,7 +1730,10 @@ if selected_dimension == "Business Data":
 
 			subtitle = "Incremental Values; Selected Category -" +",".join(selected_category)+ "; Unit - Millions; Sorted by the Recent Date"
 
-
+			if date_range_list >= 30:
+				texttemplate = ""
+			else:
+				texttemplate = "%{z}",
 
 			# hovertext = htext_telecomdata_5gbts(df5gbtsf)
 
@@ -1744,8 +1747,8 @@ if selected_dimension == "Business Data":
 				ygap = 1,
 				hoverinfo ='text',
 				# text = hovertext,
-				colorscale='YlOrBr',
-					texttemplate="%{z}", 
+				colorscale='Red',
+					texttemplate=texttemplate, 
 					textfont={"size":10},
 					reversescale=True,
 					),
