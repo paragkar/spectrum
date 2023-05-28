@@ -1647,7 +1647,7 @@ if selected_dimension == "Telecom Data":
 		dftotalfilt = dftotalfilt.sort_values(end_date, ascending = False) #filter the data on the first column selected by slider
 
 
-		dftotalfilt = dftotalfilt.loc[~(dftotalfilt ==0).all(axis=1)]/1000000 # delete all rows with value zero and convert into millions
+		dftotalfilt = round(dftotalfilt.loc[~(dftotalfilt ==0).all(axis=1)]/1000000,2) # delete all rows with value zero and convert into millions
 
 
 		st.write(dftotalfilt)
