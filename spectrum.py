@@ -1569,7 +1569,7 @@ if selected_dimension == "Telecom Data":
 
 	if Feature== "Subscribers Trends":
 
-		@st.cache(allow_output_mutation=True)
+		@st.cache_resource(allow_output_mutation=True)
 		def loaddata():
 
 			df = dfT["TelecomSubs"] #load 5G BTS deployment data from excel file
