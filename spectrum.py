@@ -713,23 +713,23 @@ def htext_businessdata_5gbts(df5gbtsf):
 @st.cache_resource
 def htext_businessdata_telesubscum(dftotalfilt): 
 
-		summarydf = dftotalfilt.sum(axis=0)
-		dftotalfiltPercent = round((df/summarydf)*100,2)
+	summarydf = dftotalfilt.sum(axis=0)
+	dftotalfiltPercent = round((df/summarydf)*100,2)
 
-		lst =[]
-		for row in dftotalfilt.values:
+	lst =[]
+	for row in dftotalfilt.values:
 
-			increments = np.diff(row)
-			lst.append(increments)
+		increments = np.diff(row)
+		lst.append(increments)
 
-		dftotalfiltInc = pd.DataFrame(lst)
+	dftotalfiltInc = pd.DataFrame(lst)
 
-		dftotalfiltInc.index = dftotalfilt.index 
+	dftotalfiltInc.index = dftotalfilt.index 
 
-		dftotalfiltInc.columns = dftotalfilt.columns[1:]
+	dftotalfiltInc.columns = dftotalfilt.columns[1:]
 
-		lastcolumn = dftotalfiltInc.columns[-1]
-		dftotalfiltInc = dftotalfiltInc.sort_values(lastcolumn, ascending = False) #sort by the last column
+	lastcolumn = dftotalfiltInc.columns[-1]
+	dftotalfiltInc = dftotalfiltInc.sort_values(lastcolumn, ascending = False) #sort by the last column
 
 	hovertext=[]
 
@@ -774,7 +774,6 @@ def htext_businessdata_telesubscum(dftotalfilt):
 #processing for hovertext for Business Data and Subscribers Trends Cumulatitive
 @st.cache_resource
 def htext_businessdata_telesubsinc(dftotalfiltinc): 
-
 	hovertext=[]
 
 	for yi,yy in enumerate(dftotalfiltinc.index):
