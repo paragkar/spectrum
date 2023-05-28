@@ -1593,7 +1593,7 @@ if selected_dimension == "Telecom Data":
 
 		dftelesubsprocess.drop(columns = ["Category"], axis =1, inplace = True)
 
-		#processsing for total subs
+		#processsing the dataframe for total subs
 
 		dftotal = dftelesubsprocess.copy()
 
@@ -1625,6 +1625,7 @@ if selected_dimension == "Telecom Data":
 		start_date, end_date = st.select_slider("Select a Range of Dates", options = listofallcolumns, value =(dftotal.columns[-20],dftotal.columns[-1]))
 
 		
+		#function to extract a list of dates from the list using start and end date from the slider
 
 		def get_selected_date_list(listofallcolumns, start_date, end_date):
 		    # Find the index of the first selected date
@@ -1640,20 +1641,16 @@ if selected_dimension == "Telecom Data":
 		date_range_list = get_selected_date_list(listofallcolumns, start_date, end_date)
 
 
-		
-
-
-		dftotalfilt = dftotal[date_range_list]
+		dftotalfilt = dftotal[date_range_list] #filter the dataframe with the selected dates
 
 
 		dftotalfilt = dftotalfilt.sort_values(end_date, ascending = False) #filter the data on the first column selected by slider
 
 
-		dftotalfilt = dftotalfilt.loc[~(dftotalfilt ==0).all(axis=1)]# delete all rows with value zero
+		dftotalfilt = dftotalfilt.loc[~(dftotalfilt ==0).all(axis=1)]/1000000 # delete all rows with value zero and convert into millions
 
 
 		st.write(dftotalfilt)
-
 
 
 
