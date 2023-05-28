@@ -1815,6 +1815,8 @@ if selected_dimension == "Business Data":
 					),
 				]
 
+
+			hoverlabel_bgcolor = "#000000" #subdued black
 			# dftotalfilt = (dftotalfilt/1000).round(1)
 			# summarydf = dftotalfilt.sum(axis=0)
 			# summarydf = summarydf.reset_index()
@@ -1899,7 +1901,7 @@ if selected_dimension == "Business Data":
 			# chart = summarychart(summarydf, 'Dates', SubFeature)
 			# flag = True
 
-			# hoverlabel_bgcolor = "#000000" #subdued black
+			hoverlabel_bgcolor = "#000000" #subdued black
 			# xdtickangle= -45
 			# xdtickval=1
 			# title = "Indian 5G Base Stations Roll Out Trends"
@@ -2031,7 +2033,6 @@ if (selected_dimension == "Auction Years") and (Feature == "Operator Metric"):
 if (selected_dimension == "Business Data") and (Feature == "5GBTS Trends"):
 
 	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
-	hoverlabel_bgcolor = "#000000" #subdued black
 	xdtickangle= -45
 	xdtickval=1
 	title = "Indian 5G Base Stations Roll Out Trends"
@@ -2039,7 +2040,7 @@ if (selected_dimension == "Business Data") and (Feature == "5GBTS Trends"):
 
 if (selected_dimension == "Business Data") and (Feature == "Subscriber Trends"):
 
-	# hoverlabel_bgcolor = "#000000" #subdued black
+	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 	xdtickangle= -45
 	xdtickval=1
 	title = "Indian Telecom Subscribers Trends"
