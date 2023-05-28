@@ -1623,7 +1623,7 @@ if selected_dimension == "Business Data":
 
 		dftotal.columns = ["Date", "Circle", "Operator", "Subs"]
 
-		st.write(dftotal) #debug
+		st.write(state_dict.keys()) #debug
 
 		dftotal = dftotal.groupby(["Date","Operator","Circle"]).sum()
 
@@ -1851,7 +1851,7 @@ if selected_dimension == "Spectrum Bands":
 		else:
 			selected_category = selected_category[0]
 		
-		if len(selected_operators) == 0: #debug
+		if len(selected_operators) == 0: 
 			selected_operators = ["All"]
 		else:
 			selected_operators = selected_operators
