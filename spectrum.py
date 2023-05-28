@@ -1709,7 +1709,7 @@ if selected_dimension == "Business Data":
 			with st.sidebar:
 
 				start_date, end_date = st.select_slider("Select a Range of Dates", 
-					options = listofallcolumns, value =(dftotalinc.columns[-40],dftotalinc.columns[-1]))
+					options = listofallcolumns, value =(dftotalinc.columns[-36],dftotalinc.columns[-1]))
 
 
 			date_range_list = get_selected_date_list(listofallcolumns, start_date, end_date)
@@ -1933,7 +1933,7 @@ else:
 
 #removes tic labels if the date_range_list greater than a value
 if (selected_dimension == "Business Data") and (Feature == "Subscribers Trends"):
-	if len(date_range_list) >= 30:
+	if len(date_range_list) >= 36:
 		fig.update_xaxes(
 		    tickmode='array',
 		    ticktext=[''] * len(date_range_list),
