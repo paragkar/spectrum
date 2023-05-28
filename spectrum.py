@@ -1665,6 +1665,12 @@ if selected_dimension == "Business Data":
 
 			subtitle = "Cumulative Values; Selected Category -" +",".join(selected_category)+ "; Unit - Millions; Sorted by the Recent Date"
 
+
+			if len(date_range_list) >=30:
+				texttemplate =""
+			else:
+				texttemplate = "%{z}"
+
 			#setting the data of the heatmap 
 
 			data = [go.Heatmap(
@@ -1676,9 +1682,9 @@ if selected_dimension == "Business Data":
 				hoverinfo ='text',
 				# text = hovertext,
 				colorscale='Hot',
-					# texttemplate="%{z}", 
-					# textfont={"size":10},
-					# reversescale=True,
+					texttemplate="texttemplate", 
+					textfont={"size":10},
+					reversescale=True,
 					),
 				]
 
