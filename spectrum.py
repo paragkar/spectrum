@@ -1625,6 +1625,8 @@ if selected_dimension == "Telecom Data":
 		min_date = slider_range[0]
 		max_date = slider_range[1]
 
+
+
 		# st.write(min_date,max_date)
 
 		# date_range_list = []
@@ -1642,7 +1644,7 @@ if selected_dimension == "Telecom Data":
 	
 		# st.write(dftotal.columns)
 
-		st.write(dftotal.loc[:,min_date])
+		st.write(dftotal.loc[:,slider_range[0]])
 
 
 		st.write(dftotal)
