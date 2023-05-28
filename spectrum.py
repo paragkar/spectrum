@@ -1762,7 +1762,10 @@ if selected_dimension == "Business Data":
 			if len(selected_category) ==0:
 				selected_category = ["All"]
 
-			subtitle = "Incremental Values; Selected Category -" +",".join(selected_category)+ "; Unit - Millions; Sorted by the Recent Date"
+			if len(selected_circles) == 0:
+				selected_circles = ["All"]
+
+			subtitle = "Incremental Values; Selected Category -" +",".join(selected_category)+ "; Selected Circles - "+ ",".join(selected_circles)+"; Unit - Millions; Sorted by the Recent Date"
 
 			# hovertext = htext_telecomdata_5gbts(df5gbtsf)
 
