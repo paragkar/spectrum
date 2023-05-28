@@ -1741,7 +1741,7 @@ if selected_dimension == "Business Data":
 				# text = hovertext,
 				colorscale='Rainbow',
 					texttemplate="%{z}", 
-					textfont={"size":12},
+					textfont={"size":10},
 					reversescale=True,
 					),
 				]
