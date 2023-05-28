@@ -747,14 +747,14 @@ def htext_businessdata_telesubscum(dftotalfilt):
 
 
 			hovertext[-1].append(
-					    'State: {}\
+					    'Operator: {}\
 					    <br>Date: {}\
 					    <br>Subs Cum: {} Millions\
 					    <br>Subs Inc: {} Millions\
 					    <br>Subs Cum: {} % of Total'
 
 				     .format( 
-					    state_dict.get(yy),
+					    yy,
 					    xx,
 					    subcum,
 					    round(subinc,2),
@@ -784,12 +784,12 @@ def htext_businessdata_telesubsinc(dftotalfiltinc):
 
 
 			hovertext[-1].append(
-					    'State: {}\
+					    'Operator: {}\
 					    <br>Date: {}\
 					    <br>Subs Inc: {} Millions'
 
 				     .format( 
-					    state_dict.get(yy),
+					    yy,
 					    xx,
 					    round(subinc,2),
 					    )
