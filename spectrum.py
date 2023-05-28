@@ -1638,7 +1638,7 @@ if selected_dimension == "Business Data":
 			temp = pd.DataFrame()
 			for circle_code in selected_circle_codes:
 
-				temp = pd.concat(temp, dftotal[dftotal["Circle"]==circle_code], axis =0)
+				temp = pd.concat([temp, dftotal[dftotal["Circle"]==circle_code]], axis =0)
 
 			dftotal = temp
 
