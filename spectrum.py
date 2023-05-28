@@ -1567,17 +1567,16 @@ if selected_dimension == "Telecom Data":
 			subtitle = "Incremental BTS growth; Top 20 States/UT; Unit - Thousands; Sorted by the Recent Date"
 
 
-
 	if Feature== "Telecom Subs Trends":
 
 		@st.cache(allow_output_mutation=True)
-		def loadata(dfT):
+		def loadata():
 
-			dftelesubs = dfT["TelecomSubs"] #load 5G BTS deployment data from excel file
+			df = dfT["TelecomSubs"] #load 5G BTS deployment data from excel file
 
-			return dftelesubs
+			return df
 
-		dftelesubs = loaddata(dfT)
+		dftelesubs = loaddata()
 
 		dftelesubs = dftelesubs[dftelesubs["Date"]>=datetime(2013,1,31)] #filter the datframe for all dates more than the year 2013
 
