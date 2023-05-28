@@ -1810,7 +1810,7 @@ if (selected_dimension == "Telecom Data") and (Feature == "5G BTS Trends"):
 
 if (selected_dimension == "Telecom Data") and (Feature == "Telecom Subs Trends"):
 
-	if (len(selected_category)=0) or (len(selected_category)=2):
+	if (len(selected_category)==0) or (len(selected_category)==2):
 		selected_category ="All"
 
 	else:
