@@ -1730,11 +1730,6 @@ if selected_dimension == "Business Data":
 
 			subtitle = "Incremental Values; Selected Category -" +",".join(selected_category)+ "; Unit - Millions; Sorted by the Recent Date"
 
-			if len(date_range_list) >= 30:
-				texttemplate = "%{''}"
-			else:
-				texttemplate = "%{z}",
-
 			# hovertext = htext_telecomdata_5gbts(df5gbtsf)
 
 			#setting the data of the heatmap 
@@ -1748,7 +1743,7 @@ if selected_dimension == "Business Data":
 				hoverinfo ='text',
 				# text = hovertext,
 				colorscale='Red',
-					texttemplate=texttemplate, 
+					texttemplate="%{z}", 
 					textfont={"size":10},
 					reversescale=True,
 					),
