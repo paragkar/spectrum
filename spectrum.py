@@ -1628,7 +1628,7 @@ if selected_dimension == "Business Data":
 
 		list_of_circles = list(state_dict.values())
 
-		selected_circles = st.sidebar.multiselect('Select Categories', list_of_circles) #drop down to select circles
+		selected_circles = st.sidebar.multiselect('Select Circles', list_of_circles) #drop down to select circles
 
 
 		selected_circle_codes = [k for k, v in state_dict.items() if v in selected_circles]
