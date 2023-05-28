@@ -709,61 +709,93 @@ def htext_businessdata_5gbts(df5gbtsf):
 	#---------New Code Added-----------
 
 
-#processing for hovertext for Business Data and 5G BTS Trends
-# @st.cache_resource
-# def htext_businessdata_5gbts(df5gbtsf): 
+#processing for hovertext for Business Data and Subscribers Trends Cumulatitive
+@st.cache_resource
+def htext_businessdata_telesubscum(dftotalfilt): 
 
-# 	summarydf = df5gbtsf.sum(axis=0)
-# 	df5gbtsfPercent = round((df5gbtsf/summarydf)*100,2)
+		summarydf = dftotalfilt.sum(axis=0)
+		dftotalfiltPercent = round((df/summarydf)*100,2)
 
-# 	lst =[]
-# 	for row in df5gbtsf.values:
+		lst =[]
+		for row in dftotalfilt.values:
 
-# 		increments = np.diff(row)
-# 		lst.append(increments)
+			increments = np.diff(row)
+			lst.append(increments)
 
-# 	df5gbtsincf = pd.DataFrame(lst)
+		dftotalfiltInc = pd.DataFrame(lst)
 
-# 	df5gbtsincf.index = df5gbtsf.index 
+		dftotalfiltInc.index = dftotalfilt.index 
 
-# 	df5gbtsincf.columns = df5gbtsf.columns[1:]
+		dftotalfiltInc.columns = dftotalfilt.columns[1:]
 
-# 	lastcolumn = df5gbtsincf.columns[-1]
-# 	df5gbtsincf = df5gbtsincf.sort_values(lastcolumn, ascending = False) #sort by the last column
+		lastcolumn = dftotalfiltInc.columns[-1]
+		dftotalfiltInc = dftotalfiltInc.sort_values(lastcolumn, ascending = False) #sort by the last column
 
-# 	hovertext=[]
+	hovertext=[]
 
-# 	for yi,yy in enumerate(df5gbtsf.index):
-# 		hovertext.append([])
-# 		for xi,xx in enumerate(df5gbtsf.columns):
+	for yi,yy in enumerate(dftotalfilt.index):
+		hovertext.append([])
+		for xi,xx in enumerate(dftotalfilt.columns):
 
-# 			# btscum = df5gbtsf.values[yi][xi]
-# 			# btspercent = df5gbtsfPercent.values[yi][xi]
-# 			btscum = df5gbtsf.loc[yy,xx]
-# 			btspercent = df5gbtsfPercent.loc[yy,xx]
+			subcum = dftotalfilt.loc[yy,xx]
+			subpercent = dftotalfiltPercent.loc[yy,xx]
 
-# 			try:
-# 				btsinc = df5gbtsincf.loc[yy,xx]
-# 			except:
-# 				btsinc = np.nan
+			try:
+				subinc = dftotalfiltInc.loc[yy,xx]
+			except:
+				subinc = np.nan
 
 
-# 			hovertext[-1].append(
-# 					    'State: {}\
-# 					    <br>Date: {}\
-# 					    <br>BTS Cum: {} K Nos\
-# 					    <br>BTS Inc: {} K Nos\
-# 					    <br>BTS Cum: {} % of Total'
+			hovertext[-1].append(
+					    'State: {}\
+					    <br>Date: {}\
+					    <br>Subs Cum: {} Millions\
+					    <br>Subs Inc: {} Millions\
+					    <br>Subs Cum: {} % of Total'
 
-# 				     .format( 
-# 					    yy,
-# 					    xx,
-# 					    btscum,
-# 					    round(btsinc,2),
-# 					    btspercent,
-# 					    )
-# 					    )
-	# return hovertext
+				     .format( 
+					    state_dict.get(yy),
+					    xx,
+					    subcum,
+					    round(subinc,2),
+					    subpercent,
+					    )
+					    )
+	return hovertext
+
+
+	#--- New Code Ends---------
+
+
+
+	#---------New Code Added-----------
+
+
+#processing for hovertext for Business Data and Subscribers Trends Cumulatitive
+@st.cache_resource
+def htext_businessdata_telesubsinc(dftotalfiltinc): 
+
+	hovertext=[]
+
+	for yi,yy in enumerate(dftotalfiltinc.index):
+		hovertext.append([])
+		for xi,xx in enumerate(dftotalfiltinc.columns):
+
+			subinc = dftotalfiltinc.loc[yy,xx]
+
+
+			hovertext[-1].append(
+					    'State: {}\
+					    <br>Date: {}\
+					    <br>Subs Inc: {} Millions'
+
+				     .format( 
+					    state_dict.get(yy),
+					    xx,
+					    round(subinc,2),
+					    )
+					    )
+	return hovertext
 
 
 	#--- New Code Ends---------
@@ -1764,6 +1796,9 @@ if selected_dimension == "Business Data":
 			else:
 				texttemplate = "%{z}"
 
+
+			hovertext = htext_businessdata_telesubscum(dftotalfilt)
+
 			#setting the data of the heatmap 
 
 			data = [go.Heatmap(
@@ -1773,7 +1808,7 @@ if selected_dimension == "Business Data":
 				xgap = 1,
 				ygap = 1,
 				hoverinfo ='text',
-				# text = hovertext,
+				text = hovertext,
 				colorscale='reds',
 					texttemplate=texttemplate, 
 					textfont={"size":10},
@@ -1832,12 +1867,13 @@ if selected_dimension == "Business Data":
 
 			subtitle = "Incremental Values; Selected Category -" +",".join(selected_category)+ "; Selected Circles - "+ ",".join(selected_circles)+"; Unit - Millions; Sorted by the Recent Date"
 
-			# hovertext = htext_businessdata_5gbts(df5gbtsf)
-
 			if len(date_range_list) >=30:
 				texttemplate =""
 			else:
 				texttemplate = "%{z}"
+
+
+			hovertext = htext_businessdata_telesubsinc(dftotalincfilt)
 
 			#setting the data of the heatmap 
 
@@ -1848,7 +1884,7 @@ if selected_dimension == "Business Data":
 				xgap = 1,
 				ygap = 1,
 				hoverinfo ='text',
-				# text = hovertext,
+				text = hovertext,
 				colorscale='reds',
 					texttemplate=texttemplate, 
 					textfont={"size":10},
