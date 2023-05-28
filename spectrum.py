@@ -1576,6 +1576,18 @@ if selected_dimension == "Business Data":
 
 			return df
 
+		#function to extract a list of dates from the list using start and end date from the slider
+		def get_selected_date_list(listofallcolumns, start_date, end_date):
+			    # Find the index of the first selected date
+			    index1 = listofallcolumns.index(start_date)
+
+			    # Find the index of the second selected date
+			    index2 = listofallcolumns.index(end_date)
+
+			    # Return a new list containing the dates from index1 to index2 (inclusive)
+			    return listofallcolumns[index1:index2+1]
+
+
 		dftelesubs = loaddata()
 
 		dftelesubs = dftelesubs[dftelesubs["Date"]>=datetime(2013,1,31)] #filter the datframe for all dates more than the year 2013
@@ -1637,19 +1649,6 @@ if selected_dimension == "Business Data":
 				start_date, end_date = st.select_slider("Select a Range of Dates", 
 					options = listofallcolumns, value =(dftotal.columns[-123],dftotal.columns[-1]))
 
-			
-			#function to extract a list of dates from the list using start and end date from the slider
-
-			def get_selected_date_list(listofallcolumns, start_date, end_date):
-			    # Find the index of the first selected date
-			    index1 = listofallcolumns.index(start_date)
-
-			    # Find the index of the second selected date
-			    index2 = listofallcolumns.index(end_date)
-
-			    # Return a new list containing the dates from index1 to index2 (inclusive)
-			    return listofallcolumns[index1:index2+1]
-
 
 			date_range_list = get_selected_date_list(listofallcolumns, start_date, end_date)
 
@@ -1692,6 +1691,7 @@ if selected_dimension == "Business Data":
 
 		if SubFeature=="Incremental Values":
 
+
 			lst =[]
 			for row in dftotal.values:
 
@@ -1703,13 +1703,28 @@ if selected_dimension == "Business Data":
 			dftotalinc.index = dftotal.index 
 			dftotalinc.columns = dftotal.columns[1:]
 
+			listofallcolumns = list(dftotalinc.columns)
 
-			lastcolumn = dftotalinc.columns[-1]
+
+			with st.sidebar:
+
+				start_date, end_date = st.select_slider("Select a Range of Dates", 
+					options = listofallcolumns, value =(dftotalinc.columns[-100],dftotalinc.columns[-1]))
 
 
-			dftotalinc = dftotalinc.sort_values(lastcolumn, ascending = False) #sort by the last column
+			date_range_list = get_selected_date_list(listofallcolumns, start_date, end_date)
+
+
+			dftotalincfilt = dftotalinc[date_range_list] #filter the dataframe with the selected dates
+
+
+			dftotalincfilt = dftotalincfilt.sort_values(end_date, ascending = False) #filter the data on the first column selected by slider
+
+
+			dftotalincfilt = round(dftotalincfilt.loc[~(dftotalincfilt ==0).all(axis=1)]/1000000,2) # delete all rows with value zero and convert into millions
 
 			subtitle = "Incremental Subs Trends; Selected Category -" +selected_category[0]+ "; Unit - Millions; Sorted by the Recent Date"
+
 
 
 			# hovertext = htext_telecomdata_5gbts(df5gbtsf)
@@ -1917,7 +1932,7 @@ else:
 	pass
 
 #removes tic labels if the date_range_list greater than a value
-if (selected_dimension == "Business Data") and (SubFeature == "Cumulative Values"):
+if (selected_dimension == "Business Data") and (SubFeature == "Subscribers Trends"):
 	if len(date_range_list) >= 30:
 		fig.update_xaxes(
 		    tickmode='array',
