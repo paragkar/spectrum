@@ -1626,7 +1626,9 @@ if selected_dimension == "Telecom Data":
 		st.write(months)
 
 
-		# date_range_list = [start_date+relativedelta(months=1) for x in range(months)]
+		date_range_list = [start_date+relativedelta(months=x) for x in range(months)]
+
+		st.write(date_range_list)
 
 		# date_range_list = []
 		# current_date = start_date
