@@ -1678,7 +1678,7 @@ if selected_dimension == "Telecom Data":
 				),
 			]
 
-		dftotalfilt = round(dftotalfilt/1000,1)
+		dftotalfilt = (dftotalfilt/1000,1).round(1)
 		summarydf = dftotalfilt.sum(axis=0)
 		summarydf = summarydf.reset_index()
 		summarydf.columns = ["Dates", Feature] 
