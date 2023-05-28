@@ -1605,12 +1605,11 @@ if selected_dimension == "Business Data":
 		if len(selected_category) == 0 or len(selected_category) == 2:
 
 			dftelesubsprocess = dftelesubs.copy()
-			selected_category =["All"]
 
 		if len(selected_category) == 1:
 
 			dftelesubsprocess = dftelesubs[dftelesubs["Category"]==selected_category[0]]
-			selected_category = selected_category
+			
 
 		dftelesubsprocess.drop(columns = ["Category"], axis =1, inplace = True)
 
