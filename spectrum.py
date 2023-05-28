@@ -714,7 +714,7 @@ def htext_businessdata_5gbts(df5gbtsf):
 def htext_businessdata_telesubscum(dftotalfilt): 
 
 	summarydf = dftotalfilt.sum(axis=0)
-	dftotalfiltPercent = round((df/summarydf)*100,2)
+	dftotalfiltPercent = round((dftotalfilt/summarydf)*100,2)
 
 	lst =[]
 	for row in dftotalfilt.values:
