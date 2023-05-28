@@ -1623,15 +1623,18 @@ if selected_dimension == "Telecom Data":
 
 		st.write(min_date,max_date)
 
-		# date_range_list = []
-		# current_date = min_date
+		date_range_list = []
+		current_date = min_date
 
-		# while current_date <= max_date:
-		#     date_range_list.append(current_date)
-		#     current_date += relativedelta(months=1)
+		while current_date <= max_date:
+		    date_range_list.append(current_date)
+		    current_date += relativedelta(months=1)
 
 
-		# dftotal = dftotal.loc[:,date_range_list]
+		date_range_list = [str(x) for x in date_range_list]   
+
+
+		dftotal = dftotal.loc[:,date_range_list]
 
 
 		st.write(dftotal)
