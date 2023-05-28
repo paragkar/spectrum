@@ -1415,9 +1415,9 @@ if selected_dimension == "Business Data":
 	dfT = pd.read_excel(excel_content, sheet_name=sheetT)
 
 
-	Feature = st.sidebar.selectbox('Select a Feature', ["5G BTS Trends", "TotalSubs Trends"])
+	Feature = st.sidebar.selectbox('Select a Feature', ["5GBTS Trends", "TotalSubs Trends"])
 
-	if Feature== "5G BTS Trends":
+	if Feature== "5GBTS Trends":
 
 
 		df5gbts = dfT["5GBTS"] #load 5G BTS deployment data from excel file
@@ -1897,7 +1897,7 @@ if (selected_dimension == "Auction Years") and (Feature == "Operator Metric"):
 	xdtickval =1
 
 
-if (selected_dimension == "Business Data") and (Feature == "5G BTS Trends"):
+if (selected_dimension == "Business Data") and (Feature == "5GBTS Trends"):
 
 	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 	hoverlabel_bgcolor = "#000000" #subdued black
