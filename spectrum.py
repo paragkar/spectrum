@@ -1678,13 +1678,13 @@ if selected_dimension == "Telecom Data":
 				),
 			]
 
-		# summarydf = df5gbtsincf.sum(axis=0)
-		# summarydf = summarydf.reset_index()
-		# summarydf.columns = ["Dates", SubFeature] 
-		# summarydf = summarydf.sort_values("Dates", ascending = False)
-		# #preparing the summary chart 
-		# chart = summarychart(summarydf, 'Dates', SubFeature)
-		# flag = True
+		summarydf = dftotalfilt.sum(axis=0)
+		summarydf = summarydf.reset_index()
+		summarydf.columns = ["Dates", SubFeature] 
+		summarydf = summarydf.sort_values("Dates", ascending = False)
+		#preparing the summary chart 
+		chart = summarychart(summarydf, 'Dates', SubFeature)
+		flag = True
 
 
 
