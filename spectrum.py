@@ -22,7 +22,7 @@ import msoffcrypto
 
 
 #Setting Page layout
-st.set_page_config(layout="wide", initial_sidebar_state="collapsed")
+st.set_page_config(layout="wide")
 
 #set summary chart flag
 flag = False # It will toggle to True when we what summary chart to show
