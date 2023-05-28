@@ -1678,10 +1678,10 @@ if selected_dimension == "Telecom Data":
 				),
 			]
 
-		summarydf = dftotalfilt.sum(axis=0)
+		summarydf = dftotalfilt.sum(axis=0)/1000
 		summarydf = summarydf.reset_index()
 		summarydf.columns = ["Dates", Feature] 
-		summarydf = round(summarydf.sort_values("Dates", ascending = False)/1000,1)
+		summarydf = summarydf.sort_values("Dates", ascending = False)
 		#preparing the summary chart 
 		chart = summarychart(summarydf/1000, 'Dates', Feature)
 		flag = True
