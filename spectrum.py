@@ -1819,7 +1819,7 @@ if (selected_dimension == "Telecom Data") and (Feature == "5G BTS Trends"):
 	title = "Indian 5G Base Stations Roll Out Trends"
 	subtitle = "Incremental BTS growth; Top 20 States/UT; Unit - Thousands; Sorted by the Recent Date"
 
-if (selected_dimension == "Telecom Data") and (Feature == "Telecom Subs Trends"):
+if (selected_dimension == "Telecom Data") and (Feature == "Subscribers Trends"):
 
 	if (len(selected_category)==0) or (len(selected_category)==2):
 		selected_category ="All"
