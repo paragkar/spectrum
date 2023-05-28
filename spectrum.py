@@ -1675,11 +1675,6 @@ if selected_dimension == "Telecom Data":
 		# chart = summarychart(summarydf, 'Dates', SubFeature)
 		# flag = True
 
-		# hoverlabel_bgcolor = "#000000" #subdued black
-		xdtickangle= -45
-		xdtickval=1
-		title = "Indian Telecom Subscribers Trends"
-		subtitle = "Selected Category -" +selected_category+ "; Unit - Millions; Sorted by the Recent Date"
 
 
 
@@ -1804,9 +1799,28 @@ if (selected_dimension == "Auction Years") and (Feature == "Operator Metric"):
 	xdtickval =1
 
 
-if selected_dimension == "Telecom Data":
+if (selected_dimension == "Telecom Data") and (Feature == "5G BTS Trends"):
 
 	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
+	hoverlabel_bgcolor = "#000000" #subdued black
+	xdtickangle= -45
+	xdtickval=1
+	title = "Indian 5G Base Stations Roll Out Trends"
+	subtitle = "Incremental BTS growth; Top 20 States/UT; Unit - Thousands; Sorted by the Recent Date"
+
+if (selected_dimension == "Telecom Data") and (Feature == "Telecom Subs Trends"):
+
+	if (len(selected_category)=0) or (len(selected_category)=2):
+		selected_category ="All"
+
+	else:
+		selected_category = selected_category
+
+	# hoverlabel_bgcolor = "#000000" #subdued black
+	xdtickangle= -45
+	xdtickval=1
+	title = "Indian Telecom Subscribers Trends"
+	subtitle = "Selected Category -" +selected_category+ "; Unit - Millions; Sorted by the Recent Date"
 
 
 #updating figure layouts
