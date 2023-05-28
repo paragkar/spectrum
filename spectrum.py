@@ -1614,6 +1614,8 @@ if selected_dimension == "Telecom Data":
 
 		dftotal = pd.pivot(dftotal, index="Operator", columns = "Date", values = "Subs")
 
+		dftotal.columns = [str(x) for x in dftotal.columns]
+
 		slider_range = st.slider("Double ended slider", min_value = dftotal.columns[0], 
 			max_value = dftotal.columns[-1], value =(dftotal.columns[-20],dftotal.columns[-1]))
 
@@ -1633,7 +1635,6 @@ if selected_dimension == "Telecom Data":
 
 		date_range_list = [str(x) for x in date_range_list] 
 
-		dftotal.columns = list([str(x) for x in dftotal.columns])
 
 		st.write(date_range_list)
 	
