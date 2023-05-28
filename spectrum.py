@@ -1678,14 +1678,14 @@ if selected_dimension == "Telecom Data":
 				),
 			]
 
-		dftotalfilt = (dftotalfilt/1000).round(1)
-		summarydf = dftotalfilt.sum(axis=0)
-		summarydf = summarydf.reset_index()
-		summarydf.columns = ["Dates", Feature] 
-		summarydf = summarydf.sort_values("Dates", ascending = False)
-		#preparing the summary chart 
-		chart = summarychart(summarydf/1000, 'Dates', Feature)
-		flag = True
+		# dftotalfilt = (dftotalfilt/1000).round(1)
+		# summarydf = dftotalfilt.sum(axis=0)
+		# summarydf = summarydf.reset_index()
+		# summarydf.columns = ["Dates", Feature] 
+		# summarydf = summarydf.sort_values("Dates", ascending = False)
+		# #preparing the summary chart 
+		# chart = summarychart(summarydf/1000, 'Dates', Feature)
+		# flag = True
 
 
 
