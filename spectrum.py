@@ -1570,6 +1570,8 @@ if selected_dimension == "Telecom Data":
 
 		dftelesubs["Date"] = dftelesubs["Date"].dt.date
 
+		dftelesubs = dftelesubs[dftelesubs["Date"]>="2013-01-31"]
+
 		dftelesubs = dftelesubs.replace(',','', regex=True)
 
 		dftelesubs.drop(columns = ["Year","Months"], axis =1, inplace = True)
@@ -1586,27 +1588,31 @@ if selected_dimension == "Telecom Data":
 
 		dftelesubsprocess.drop(columns = ["Category"], axis =1, inplace = True)
 
+		#processsing for total subs
 
-		dftelesubsprocess = dftelesubsprocess.melt(id_vars =["Date", "Circle"], value_vars = list(dftelesubsprocess.columns[2:]))
-
-		dftelesubsprocess.columns = ["Date", "Circle", "Operator", "Subs"]
-
-		dftelesubsprocess = dftelesubsprocess.groupby(["Date","Operator","Circle"]).sum()
-
-		dftelesubsprocess = dftelesubsprocess.reset_index()
-
-		dftelesubsprocess.drop(columns = ["Circle"], axis =1, inplace = True)
-
-		dftelesubsprocess = dftelesubsprocess.groupby(["Date","Operator"]).sum()
-
-		dftelesubsprocess = dftelesubsprocess.reset_index()
+		dftotal = dftelesubsprocess.copy()
 
 
-		dftelesubsprocess = pd.pivot(dftelesubsprocess, index="Operator", columns = "Date", values = "Subs")
+		dftotal = dftotal.melt(id_vars =["Date", "Circle"], value_vars = list(dftotal.columns[2:]))
 
-		dftelesubsprocess = dftelesubsprocess.sort_values(dftelesubsprocess.columns[-1], ascending = False)
+		dftotal.columns = ["Date", "Circle", "Operator", "Subs"]
 
-		st.write(dftelesubsprocess)
+		dftotal = dftotal.groupby(["Date","Operator","Circle"]).sum()
+
+		dftotal = dftotal.reset_index()
+
+		dftotal.drop(columns = ["Circle"], axis =1, inplace = True)
+
+		dftotal = dftotal.groupby(["Date","Operator"]).sum()
+
+		dftotal = dftotal.reset_index()
+
+
+		dftotal = pd.pivot(dftotal, index="Operator", columns = "Date", values = "Subs")
+
+		dftotal = dftotal.sort_values(dftotal.columns[-1], ascending = False)
+
+		st.write(dftotal)
 
 
 
