@@ -1626,8 +1626,7 @@ if selected_dimension == "Telecom Data":
 		    all_dates.append(current_date)
 		    current_date += relativedelta(months=1)
 
-		st.write(all_dates)
-
+		dftotal.columns = all_dates
 
 
 
