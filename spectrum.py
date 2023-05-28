@@ -1947,7 +1947,7 @@ else:
 
 #removes tic labels if the date_range_list greater than a value
 if (selected_dimension == "Business Data") and (Feature == "Subscribers Trends"):
-	fig.data[0].update(zmin=0.1, zmax=0.5) #setting the max and min value of the colorscale
+	fig.data[0].update(zmin=100, zmax=500) #setting the max and min value of the colorscale
 	if len(date_range_list) >= 30:
 		fig.update_xaxes(
 		    tickmode='array',
