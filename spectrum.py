@@ -1625,14 +1625,14 @@ if selected_dimension == "Telecom Data":
 		months = (end_date.year - start_date.year) * 12 + (end_date.month - start_date.month)
 
 
-		def last_date_of_month(inputdate):
-			last_day = calendar.monthrange(inputdate.year, inputdate.month)[1]
-			last_date = datetime.date(inputdate.year, inputdate.month, last_day)
+		# def last_date_of_month(inputdate):
+		# 	last_day = calendar.monthrange(inputdate.year, inputdate.month)[1]
+		# 	last_date = datetime.date(inputdate.year, inputdate.month, last_day)
 
-			return last_date
+		# 	return last_date
 
 
-		date_range_list = [start_date+relativedelta(months=x) for x in range(months)]
+		date_range_list = [start_date+relativedelta(months=x) for x in range(months+1)]
 
 
 		st.write(date_range_list)
