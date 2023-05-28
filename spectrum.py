@@ -1942,7 +1942,7 @@ if (selected_dimension == "Business Data") and (Feature == "Subscriber Trends"):
 	# hoverlabel_bgcolor = "#000000" #subdued black
 	xdtickangle= -45
 	xdtickval=1
-	title = "Indian Telecom Total Subscribers Trends"
+	title = "Indian Telecom Subscribers Trends"
 	
 
 
