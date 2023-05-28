@@ -1572,7 +1572,7 @@ if selected_dimension == "Telecom Data":
 
 		dftelesubs = dftelesubs[dftelesubs["Date"]>=datetime(2013,1,31)] #filter the datframe for all dates more than the year 2013
 
-		dftelesubs["Date"] = dftelesubs["Date"].dt.date
+		# dftelesubs["Date"] = dftelesubs["Date"].dt.date
 
 		dftelesubs = dftelesubs.replace(',','', regex=True)
 
@@ -1626,11 +1626,11 @@ if selected_dimension == "Telecom Data":
 		    date_range_list.append(current_date)
 		    current_date += relativedelta(months=1)
 
-		dftotal = dftotal.loc[:,min_date.strftime("%Y-%m-%d")]
+
+		dftotal = dftotal.loc[:,date_range_list]
+
 
 		st.write(dftotal)
-
-		# dftotal = dftotal[list(date_range_list)]
 
 		# dftotal = dftotal.sort_values(slider_range[0].strftime("%Y-%m-%d"), ascending = False) #filter the data on the first column selected by slider
 
