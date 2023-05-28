@@ -1868,8 +1868,8 @@ if (selected_dimension == "Telecom Data") and (Feature == "Telecom Subs Trends")
 	if len(date_range_list) >= 20:
 		fig.update_xaxes(
 		    tickmode='array',
-		    ticktext=[''] * len(x),
-		    tickvals=list(range(len(x)))
+		    ticktext=[''] * len(date_range_list),
+		    tickvals=list(range(len(date_range_list)))
 		)
 
 
