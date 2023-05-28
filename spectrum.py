@@ -770,7 +770,7 @@ def summarychart(summarydf, xcolumn, ycolumn):
 with st.sidebar:
 	selected_dimension = option_menu(
 		menu_title = "Select a Menu",
-		options = ["Spectrum Bands", "Auction Years", "Telecom Data"],
+		options = ["Spectrum Bands", "Auction Years", "Business Data"],
 		icons = ["1-circle-fill", "2-circle-fill", "3-circle-fill"],
 		menu_icon = "arrow-down-circle-fill",
 		default_index =0,
@@ -1399,7 +1399,7 @@ if selected_dimension == "Auction Years":
 
 #This is section is to visulize important data related to the telecom industry (may not be directed related to spectrum)
 
-if selected_dimension == "Telecom Data":
+if selected_dimension == "Business Data":
 
 
 	excel_content = io.BytesIO()
@@ -1811,7 +1811,7 @@ if (selected_dimension == "Auction Years") and (Feature == "Operator Metric"):
 	xdtickval =1
 
 
-if (selected_dimension == "Telecom Data") and (Feature == "5G BTS Trends"):
+if (selected_dimension == "Business Data") and (Feature == "5G BTS Trends"):
 
 	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 	hoverlabel_bgcolor = "#000000" #subdued black
@@ -1820,7 +1820,7 @@ if (selected_dimension == "Telecom Data") and (Feature == "5G BTS Trends"):
 	title = "Indian 5G Base Stations Roll Out Trends"
 	subtitle = "Incremental BTS growth; Top 20 States/UT; Unit - Thousands; Sorted by the Recent Date"
 
-if (selected_dimension == "Telecom Data") and (Feature == "Subscribers Trends"):
+if (selected_dimension == "Business Data") and (Feature == "Subscribers Trends"):
 
 	if (len(selected_category)==0) or (len(selected_category)==2):
 		selected_category ="All"
@@ -1860,13 +1860,13 @@ fig.update_layout(uniformtext_minsize=12,
 #Here are only some last minute changes in the plot
 
 #When dimensions as "Telecom Data" then convert x axis into category
-if selected_dimension == "Telecom Data":
+if selected_dimension == "Business Data":
 	fig.update_layout(xaxis_type='category')
 else:
 	pass
 
 #removes tic labels if the date_range_list greater than a value
-if (selected_dimension == "Telecom Data") and (Feature == "Subscribers Trends"):
+if (selected_dimension == "Business Data") and (Feature == "Subscribers Trends"):
 	if len(date_range_list) >= 30:
 		fig.update_xaxes(
 		    tickmode='array',
