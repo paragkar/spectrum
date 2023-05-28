@@ -1683,7 +1683,7 @@ if selected_dimension == "Telecom Data":
 		summarydf.columns = ["Dates", Feature] 
 		summarydf = summarydf.sort_values("Dates", ascending = False)
 		#preparing the summary chart 
-		chart = summarychart(summarydf, 'Dates', Feature)
+		chart = summarychart(round(summarydf/1000,1), 'Dates', Feature)
 		flag = True
 
 
