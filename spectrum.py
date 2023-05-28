@@ -1572,7 +1572,7 @@ if selected_dimension == "Telecom Data":
 
 		dftelesubs = dftelesubs[dftelesubs["Date"]>=datetime(2013,1,31)] #filter the datframe for all dates more than the year 2013
 
-		# dftelesubs["Date"] = dftelesubs["Date"].dt.date
+		dftelesubs["Date"] = dftelesubs["Date"].dt.date
 
 		dftelesubs = dftelesubs.replace(',','', regex=True)
 
