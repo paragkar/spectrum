@@ -1622,7 +1622,7 @@ if selected_dimension == "Telecom Data":
 
 		listofallcolumns = list(dftotal.columns)
 
-		start_date, end_date = st.select_slider("Select a Range of Dates", options = listofallcolumns, value =(dftotal.columns[0],dftotal.columns[-1]))
+		start_date, end_date = st.select_slider("Select a Range of Dates", options = listofallcolumns, value =(dftotal.columns[-20],dftotal.columns[-1]))
 
 		
 
