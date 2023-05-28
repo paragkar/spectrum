@@ -1820,7 +1820,7 @@ if (selected_dimension == "Telecom Data") and (Feature == "Telecom Subs Trends")
 	xdtickangle= -45
 	xdtickval=1
 	title = "Indian Telecom Subscribers Trends"
-	subtitle = "Selected Category -" +selected_category+ "; Unit - Millions; Sorted by the Recent Date"
+	subtitle = "Selected Category -" +selected_category[0]+ "; Unit - Millions; Sorted by the Recent Date"
 
 
 #updating figure layouts
