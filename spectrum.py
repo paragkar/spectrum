@@ -1615,10 +1615,12 @@ if selected_dimension == "Telecom Data":
 
 		st.write(dftotal.columns[-1])
 
+		st.write(slider_range)
+
 
 		dftotal = dftotal.sort_values(slider_range[0], ascending = False) #filter the data on the first column selected by slider
 
-		st.write(slider_range)
+
 
 		st.write(dftotal)
 
