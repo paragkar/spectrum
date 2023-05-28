@@ -1722,7 +1722,7 @@ if selected_dimension == "Business Data":
 
 			dftotalincfilt = round(dftotalincfilt.loc[~(dftotalincfilt ==0).all(axis=1)]/1000000,2) # delete all rows with value zero and convert into millions
 
-			subtitle = "Incremental Subs Trends; Selected Category -" +selected_category[0]+ "; Unit - Millions; Sorted by the Recent Date"
+			subtitle = "Incremental Subs Trends; Selected Category -" +selected_category+ "; Unit - Millions; Sorted by the Recent Date"
 
 
 
