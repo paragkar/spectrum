@@ -1568,9 +1568,9 @@ if selected_dimension == "Telecom Data":
 
 		dftelesubs = dfT["TelecomSubs"] #load 5G BTS deployment data from excel file
 
-		dftelesubs["Date"] = dftelesubs["Date"].dt.date
-
 		dftelesubs = dftelesubs[dftelesubs["Date"]>=datetime(2013,1,31)]
+
+		dftelesubs["Date"] = dftelesubs["Date"].dt.date
 
 		dftelesubs = dftelesubs.replace(',','', regex=True)
 
