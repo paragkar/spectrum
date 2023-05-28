@@ -1629,17 +1629,13 @@ if selected_dimension == "Telecom Data":
 		date_range_list = [start_date+relativedelta(months=x) for x in range(months+1)]
 
 
+		dftotalfilt = dftotal[date_range_list]
 
 
-		st.write(dftotal[date_range_list])
+		dftotalfilt = dftotalfilt.sort_values(date_range_list[0].strftime("%Y-%m-%d"), ascending = False) #filter the data on the first column selected by slider
 
 
-
-		# dftotal = dftotal.sort_values(slider_range[0].strftime("%Y-%m-%d"), ascending = False) #filter the data on the first column selected by slider
-
-
-
-		# st.write(dftotal)
+		st.write(dftotalfilt)
 
 
 
