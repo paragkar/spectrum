@@ -1614,7 +1614,7 @@ if selected_dimension == "Telecom Data":
 			max_value = dftotal.columns[-1], value =(dftotal.columns[-20],dftotal.columns[-1]))
 
 
-		dftotal = dftotal.sort_values(slider_range[0].dt.date(), ascending = False) #filter the data on the first column selected by slider
+		dftotal = dftotal.sort_values(slider_range[0].date(), ascending = False) #filter the data on the first column selected by slider
 
 		st.write(slider_range)
 
