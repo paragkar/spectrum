@@ -1440,8 +1440,7 @@ if selected_dimension == "Telecom Data":
 		df5gbtsf = df5gbtsf.iloc[:,-16:] #select on last 16 dates 
 
 
-		with st.sidebar:
-			SubFeature = st.sidebar.selectbox('Select a SubFeature', ["Cumulative Values", "Percent of Total", "Incremental Values"])
+		SubFeature = st.sidebar.selectbox('Select a SubFeature', ["Cumulative Values", "Percent of Total", "Incremental Values"])
 
 		if SubFeature == "Cumulative Values":
 
@@ -1624,7 +1623,11 @@ if selected_dimension == "Telecom Data":
 
 		listofallcolumns = list(dftotal.columns)
 
-		start_date, end_date = st.select_slider("Select a Range of Dates", options = listofallcolumns, value =(dftotal.columns[-20],dftotal.columns[-1]))
+
+		with st.sidebar:
+
+			start_date, end_date = st.select_slider("Select a Range of Dates", 
+				options = listofallcolumns, value =(dftotal.columns[-20],dftotal.columns[-1]))
 
 		
 		#function to extract a list of dates from the list using start and end date from the slider
