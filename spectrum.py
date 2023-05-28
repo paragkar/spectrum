@@ -1627,7 +1627,7 @@ if selected_dimension == "Telecom Data":
 		def	lastdayofmonth(inputdate):
 
 			last_day = calendar.monthrange(inputdate.year, inputdate.month)[1]
-			last_date = datetime.date(inputdate.year, inputdate.month, last_day)
+			last_date = datetime.datetime.date(inputdate.year, inputdate.month, last_day)
 
 			return last_date
 
