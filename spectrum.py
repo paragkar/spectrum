@@ -1709,7 +1709,7 @@ if selected_dimension == "Business Data":
 			with st.sidebar:
 
 				start_date, end_date = st.select_slider("Select a Range of Dates", 
-					options = listofallcolumns, value =(dftotalinc.columns[-100],dftotalinc.columns[-1]))
+					options = listofallcolumns, value =(dftotalinc.columns[-40],dftotalinc.columns[-1]))
 
 
 			date_range_list = get_selected_date_list(listofallcolumns, start_date, end_date)
