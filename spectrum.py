@@ -1682,7 +1682,7 @@ if selected_dimension == "Business Data":
 				hoverinfo ='text',
 				# text = hovertext,
 				colorscale='Hot',
-					texttemplate="texttemplate", 
+					texttemplate=texttemplate, 
 					textfont={"size":10},
 					reversescale=True,
 					),
