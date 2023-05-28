@@ -1633,11 +1633,11 @@ if selected_dimension == "Telecom Data":
 
 		date_range_list = [str(x) for x in date_range_list] 
 
-		dftotal.columns = [str(x) for x in dftotal.columns]
+		dftotal.columns = list([str(x) for x in dftotal.columns])
 
 		st.write(date_range_list)
-		st.write(list(dftotal.columns))
-
+	
+		st.write(dftotal.columns)
 
 		# dftotal = dftotal.loc[:,date_range_list]
 
