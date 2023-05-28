@@ -1415,7 +1415,7 @@ if selected_dimension == "Telecom Data":
 	dfT = pd.read_excel(excel_content, sheet_name=sheetT)
 
 
-	Feature = st.sidebar.selectbox('Select a Feature', ["5G BTS Trends", "Telecom Subs Trends"])
+	Feature = st.sidebar.selectbox('Select a Feature', ["5G BTS Trends", "Subscribers Trends"])
 
 	if Feature== "5G BTS Trends":
 
@@ -1567,7 +1567,7 @@ if selected_dimension == "Telecom Data":
 			subtitle = "Incremental BTS growth; Top 20 States/UT; Unit - Thousands; Sorted by the Recent Date"
 
 
-	if Feature== "Telecom Subs Trends":
+	if Feature== "Subscribers Trends":
 
 		@st.cache(allow_output_mutation=True)
 		def loaddata():
@@ -1680,10 +1680,10 @@ if selected_dimension == "Telecom Data":
 
 		summarydf = dftotalfilt.sum(axis=0)
 		summarydf = summarydf.reset_index()
-		summarydf.columns = ["Dates", SubFeature] 
+		summarydf.columns = ["Dates", Feature] 
 		summarydf = summarydf.sort_values("Dates", ascending = False)
 		#preparing the summary chart 
-		chart = summarychart(summarydf, 'Dates', SubFeature)
+		chart = summarychart(summarydf, 'Dates', Feature)
 		flag = True
 
 
