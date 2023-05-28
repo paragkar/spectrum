@@ -1739,7 +1739,7 @@ if selected_dimension == "Business Data":
 				ygap = 1,
 				hoverinfo ='text',
 				# text = hovertext,
-				colorscale='Rainbow',
+				colorscale='Hot',
 					texttemplate="%{z}", 
 					textfont={"size":10},
 					reversescale=True,
