@@ -1570,7 +1570,7 @@ if selected_dimension == "Telecom Data":
 
 		dftelesubs["Date"] = dftelesubs["Date"].dt.date
 
-		dftelesubs = dftelesubs[dftelesubs["Date"]>=datetime.date(2013,1,31)]
+		dftelesubs = dftelesubs[dftelesubs["Date"]>=datetime(2013,1,31)]
 
 		dftelesubs = dftelesubs.replace(',','', regex=True)
 
