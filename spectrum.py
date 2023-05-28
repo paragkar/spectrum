@@ -1628,7 +1628,7 @@ if selected_dimension == "Telecom Data":
 
 		# date_range_list = [x.strptime('%Y-%m-%d') for x in date_range_list]
 
-		dftotal = dftotal[date_range_list]
+		dftotal = dftotal[[date_range_list]
 
 		st.write(dftotal)
 
