@@ -1864,8 +1864,9 @@ if selected_dimension == "Telecom Data":
 else:
 	pass
 
+#removes tic labels if the date_range_list greater than a value
 if (selected_dimension == "Telecom Data") and (Feature == "Telecom Subs Trends"):
-	if len(date_range_list) >= 20:
+	if len(date_range_list) >= 30:
 		fig.update_xaxes(
 		    tickmode='array',
 		    ticktext=[''] * len(date_range_list),
