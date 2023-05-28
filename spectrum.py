@@ -12,7 +12,7 @@ import streamlit as st
 import matplotlib.pyplot as plt
 import altair as alt
 from datetime import datetime
-import calender
+import calendar
 
 from dateutil.relativedelta import relativedelta
 
