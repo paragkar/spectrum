@@ -1663,7 +1663,7 @@ if selected_dimension == "Business Data":
 			if len(selected_category) ==0:
 				selected_category = ["All"]
 
-			subtitle = "Cumulative Subs Trends; Selected Category -" +",".join(selected_category)+ "; Unit - Millions; Sorted by the Recent Date"
+			subtitle = "Cumulative Values; Selected Category -" +",".join(selected_category)+ "; Unit - Millions; Sorted by the Recent Date"
 
 			#setting the data of the heatmap 
 
@@ -1728,7 +1728,7 @@ if selected_dimension == "Business Data":
 			if len(selected_category) ==0:
 				selected_category = ["All"]
 
-			subtitle = "Incremental Subs Trends; Selected Category -" +",".join(selected_category)+ "; Unit - Millions; Sorted by the Recent Date"
+			subtitle = "Incremental Values; Selected Category -" +",".join(selected_category)+ "; Unit - Millions; Sorted by the Recent Date"
 
 
 
