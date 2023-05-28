@@ -1440,7 +1440,8 @@ if selected_dimension == "Telecom Data":
 		df5gbtsf = df5gbtsf.iloc[:,-16:] #select on last 16 dates 
 
 
-		SubFeature = st.sidebar.selectbox('Select a SubFeature', ["Cumulative Values", "Percent of Total", "Incremental Values"])
+		with st.sidebar:
+			SubFeature = st.sidebar.selectbox('Select a SubFeature', ["Cumulative Values", "Percent of Total", "Incremental Values"])
 
 		if SubFeature == "Cumulative Values":
 
