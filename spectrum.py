@@ -1628,13 +1628,13 @@ if selected_dimension == "Telecom Data":
 
 		def get_selected_date_list(listofallcolumns, start_date, end_date):
 		    # Find the index of the first selected date
-		    index1 = dates.index(start_date)
+		    index1 = listofallcolumns.index(start_date)
 
 		    # Find the index of the second selected date
-		    index2 = dates.index(end_date)
+		    index2 = listofallcolumns.index(end_date)
 
 		    # Return a new list containing the dates from index1 to index2 (inclusive)
-		    return dates[index1:index2+1]
+		    return listofallcolumns[index1:index2+1]
 
 
 		date_range_list = get_selected_date_list(listofallcolumns, start_date, end_date)
