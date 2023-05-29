@@ -2087,14 +2087,16 @@ if authentication_status: #if authentication sucessful then app is rendered
 
 			summarydf= round(summarydf/1000000,1) # converting the numbers to million
 			summarydf = summarydf.reset_index()
-			summarydf.columns = ["Circle", "Total Subs"] 
+			summarydf.columns = ["Circle", "Total Subs"]
+
+			st.write(summarydf)
 			# summarydf = summarydf.sort_values("Dates", ascending = False)
 
 			#----- New Code ---------
 
 			datasummary = [go.Heatmap(
 					z = summarydf["Total Subs"],
-					y = "Pan India",
+					y = summarydf.index,
 					x = summarydf["Circle"],
 					xgap = 1,
 					ygap = 1,
