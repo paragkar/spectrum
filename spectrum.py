@@ -2089,7 +2089,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 			summarydf = summarydf.reset_index()
 			summarydf.columns = ["Circle", "Total Subs"]
 
-			st.write(summarydf.T)
+			summarydf = summarydf.set_index("Circle").T
 			# summarydf = summarydf.sort_values("Dates", ascending = False)
 
 			#----- New Code ---------
