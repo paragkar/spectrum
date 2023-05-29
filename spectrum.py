@@ -1511,7 +1511,7 @@ if selected_dimension == "Business Data":
 	dfT = pd.read_excel(excel_content, sheet_name=sheetT)
 
 
-	Feature = st.sidebar.selectbox('Select a Feature', ["5GBTS Trends", "Subscriber Trends", "Subscriber MarketShare"])
+	Feature = st.sidebar.selectbox('Select a Feature', ["5GBTS Trends", "Subscriber Trends", "Subscriber MShare"])
 
 	if Feature== "5GBTS Trends":
 
@@ -1909,7 +1909,7 @@ if selected_dimension == "Business Data":
 
 	#-------- New Code ---------
 
-	if Feature== "Subscriber MarketShare":
+	if Feature== "Subscriber MShare":
 
 		@st.cache_resource
 		def loaddata():
