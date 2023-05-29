@@ -1977,6 +1977,8 @@ if selected_dimension == "Business Data":
 
 		dftotal= dftotal.loc[~(dftotal == 0).all(axis=1)]
 
+		dftotal["Total"] = dftotal.sum(axis=0)
+
 		st.write(dftotal)
 
 
