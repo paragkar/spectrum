@@ -2271,7 +2271,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 	fig.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
 	fig.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
 
-	col1, col2 = st.columns(6,1) #create collumns of uneven width
+	col1, col2 = st.columns([6,1]) #create collumns of uneven width
 
 	style = "<style>h3 {text-align: left;}</style>"
 	with st.container():
