@@ -2004,6 +2004,13 @@ if selected_dimension == "Business Data":
 				]
 
 
+		summarydf = summarydf.reset_index()
+		summarydf.columns = ["Circle", "Total Subs"] 
+		# summarydf = summarydf.sort_values("Dates", ascending = False)
+		#preparing the summary chart 
+		chart = summarychart(summarydf, 'Circle', "Total Subs")
+		flag = True
+
 		hoverlabel_bgcolor = "#000000" #subdued black
 		xdtickangle= 0
 		xdtickval=1
