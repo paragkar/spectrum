@@ -1999,7 +1999,7 @@ if selected_dimension == "Business Data":
 				colorscale='reds',
 					texttemplate="%{z}", 
 					textfont={"size":10},
-					reversescale=True,
+					# reversescale=True,
 					),
 				]
 
