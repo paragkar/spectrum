@@ -807,6 +807,8 @@ def htext_businessdata_telesubsinc(dftotalfiltinc):
 @st.cache_resource
 def htext_businessdata_telesubsms(dftotal,dftotalpercentms): 
 
+	hovertext=[]
+
 	for yi,yy in enumerate(dftotal.index):
 		hovertext.append([])
 		for xi,xx in enumerate(dftotal.columns):
