@@ -2190,7 +2190,7 @@ if (selected_dimension == "Business Data") and (Feature == "Subscriber MShare"):
 	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 	xdtickangle= 0
 	xdtickval=1
-	title = "Telecom Operator's Latest Subs Market Share"
+	title = "Indian Telecom Operator's Latest Subs Market Share"
 	
 
 
