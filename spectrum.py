@@ -2297,6 +2297,11 @@ if authentication_status: #if authentication sucessful then app is rendered
 		if flag ==True:
 			st.altair_chart(chart, use_container_width=False)
 
+	expander = st.beta_expander("About This Chart", expanded = True)
+
+	with expander:
+		st.info("     ")
+
 
 
 
