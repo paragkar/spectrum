@@ -1975,6 +1975,8 @@ if selected_dimension == "Business Data":
 
 		dftotal = pd.pivot(dftotal, values = 'Subs', index='Operator' , columns = 'Circle')
 
+		dftotal= dftotal[(dftotal != 0).all(axis=1)]
+
 		st.write(dftotal)
 
 
