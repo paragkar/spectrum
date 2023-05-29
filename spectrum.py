@@ -1848,10 +1848,13 @@ if authentication_status: #if authentication sucessful then app is rendered
 				listofallcolumns = list(dftotal.columns)
 
 
-				with st.sidebar:
+				# with st.sidebar:
 
-					start_date, end_date = st.select_slider("Select a Range of Dates", 
-						options = listofallcolumns, value =(dftotal.columns[-24],dftotal.columns[-1]))
+				# 	start_date, end_date = st.select_slider("Select a Range of Dates", 
+				# 		options = listofallcolumns, value =(dftotal.columns[-24],dftotal.columns[-1]))
+
+				start_date, end_date = st.select_slider("Select a Range of Dates", 
+					options = listofallcolumns, value =(dftotal.columns[-24],dftotal.columns[-1]))
 
 
 				date_range_list = get_selected_date_list(listofallcolumns, start_date, end_date)
@@ -1927,9 +1930,13 @@ if authentication_status: #if authentication sucessful then app is rendered
 				listofallcolumns = list(dftotalinc.columns)
 
 
-				with st.sidebar:
+				# with st.sidebar:
 
-					start_date, end_date = st.select_slider("Select a Range of Dates", 
+				# 	start_date, end_date = st.select_slider("Select a Range of Dates", 
+				# 		options = listofallcolumns, value =(dftotalinc.columns[-24],dftotalinc.columns[-1]))
+
+
+				start_date, end_date = st.select_slider("Select a Range of Dates", 
 						options = listofallcolumns, value =(dftotalinc.columns[-24],dftotalinc.columns[-1]))
 
 
@@ -2297,7 +2304,8 @@ if authentication_status: #if authentication sucessful then app is rendered
 		if flag ==True:
 			st.altair_chart(chart, use_container_width=True)
 
-	#------ New Code ------
+	#------ New Code ------#
+	#Currently Blank but will be used to add notes regarding every chart
 
 	expander = st.beta_expander("About This Chart", expanded = True)
 
