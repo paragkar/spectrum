@@ -706,7 +706,7 @@ def htext_businessdata_5gbts(df5gbtsf):
 
 
 
-	#---------New Code Added-----------
+#---------New Code Added-----------
 
 
 #processing for hovertext for Business Data and Subscribers Trends Cumulatitive
@@ -764,11 +764,11 @@ def htext_businessdata_telesubscum(dftotalfilt):
 	return hovertext
 
 
-	#--- New Code Ends---------
+#--- New Code Ends---------
 
 
 
-	#---------New Code Added-----------
+#---------New Code Added-----------
 
 
 #processing for hovertext for Business Data and Subscribers Trends Cumulatitive
@@ -792,6 +792,41 @@ def htext_businessdata_telesubsinc(dftotalfiltinc):
 					    yy,
 					    xx,
 					    round(subinc,2),
+					    )
+					    )
+	return hovertext
+
+
+#--- New Code Ends---------
+
+
+#---------New Code Added-----------
+
+
+#processing for hovertext for Business Data and Subscribers Market Share
+@st.cache_resource
+def htext_businessdata_telesubsms(): 
+
+
+	for yi,yy in enumerate(dftotal.index):
+		hovertext.append([])
+		for xi,xx in enumerate(dftotal.columns):
+
+			subtotal = dftotal.loc[yy,xx]
+			subpercentms = dftotalpercentms.loc[yy,xx]
+
+
+			hovertext[-1].append(
+					    'Operator: {}\
+					    <br>Circle: {}\
+					    <br>Subs Total: {} Millions\
+					    <br>Subs Share: {} % of Total'
+
+				     .format( 
+					    yy,
+					    xx,
+					    subtotal,
+					    subpercentms,
 					    )
 					    )
 	return hovertext
@@ -1976,6 +2011,9 @@ if selected_dimension == "Business Data":
 		dftotalpercentms = round((dftotal/summarydf)*100,2)
 
 
+		hovertext = htext_businessdata_telesubsms()
+
+
 		data = [go.Heatmap(
 				z = dftotalpercentms.values,
 				y = dftotalpercentms.index,
@@ -1983,7 +2021,7 @@ if selected_dimension == "Business Data":
 				xgap = 1,
 				ygap = 1,
 				hoverinfo ='text',
-				# text = hovertext,
+				text = hovertext,
 				colorscale='reds',
 					texttemplate="%{z}", 
 					textfont={"size":10},
@@ -2148,7 +2186,7 @@ if (selected_dimension == "Business Data") and (Feature == "Subscriber Trends"):
 
 if (selected_dimension == "Business Data") and (Feature == "Subscriber MShare"):
 
-	# fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
+	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 	xdtickangle= 0
 	xdtickval=1
 	title = "Telecom Operator's Latest Subs Market Share"
