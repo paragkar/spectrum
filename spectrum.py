@@ -805,8 +805,7 @@ def htext_businessdata_telesubsinc(dftotalfiltinc):
 
 #processing for hovertext for Business Data and Subscribers Market Share
 @st.cache_resource
-def htext_businessdata_telesubsms(): 
-
+def htext_businessdata_telesubsms(dftotal,dftotalpercentms): 
 
 	for yi,yy in enumerate(dftotal.index):
 		hovertext.append([])
@@ -2011,7 +2010,7 @@ if selected_dimension == "Business Data":
 		dftotalpercentms = round((dftotal/summarydf)*100,2)
 
 
-		hovertext = htext_businessdata_telesubsms()
+		hovertext = htext_businessdata_telesubsms(dftotal,dftotalpercentms)
 
 
 		data = [go.Heatmap(
