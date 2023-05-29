@@ -2004,7 +2004,7 @@ if selected_dimension == "Business Data":
 			selected_category = ["All"]
 
 		hoverlabel_bgcolor = "#000000" #subdued black
-		subtitle = "Unit - % of Total; Total in Millions ;"+ ",".join(selected_category)+ " ;Source - TRAI"
+		subtitle = "Unit - % of Total; Total in Millions ; Selected Category -"+ ",".join(selected_category)+ " ;Source - TRAI"
 
 	#------- New Code Ends-----------------
 
