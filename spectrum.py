@@ -2007,7 +2007,7 @@ if selected_dimension == "Business Data":
 		hoverlabel_bgcolor = "#000000" #subdued black
 		xdtickangle= 0
 		xdtickval=1
-		title = "Telecom Subscribers Latest MarketShare SnapShot"
+		title = "Telecom Operator's Latest Subscriber Market Share SnapShot"
 		subtitle = "Unit - % of Total;"
 
 	#------- New Code Ends-----------------
