@@ -2096,7 +2096,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 			#----- New Code ---------
 
 			datasummary = [go.Heatmap(
-					z = summarydf,values,
+					z = summarydf.values,
 					y = summarydf.columns,
 					x = summarydf.index,
 					xgap = 1,
