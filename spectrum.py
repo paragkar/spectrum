@@ -1970,9 +1970,11 @@ if selected_dimension == "Business Data":
 
 		dftotal.drop(columns = ["Date"], axis =1, inplace = True)
 
-		dftotal = pd.pivot(dftotal, values = 'Subs', index='Operator' , columns = 'Circle')
-
 		st.write(dftotal)
+
+		# dftotal = pd.pivot(dftotal, values = 'Subs', index='Operator' , columns = 'Circle')
+
+		# st.write(dftotal)
 
 
 	#------- New Code Ends-----------------
