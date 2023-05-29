@@ -1,0 +1,12 @@
+credentials:
+  usernames:
+    guest:
+      name: guest
+      password: $2b$12$c2dQ6QgwGMrMdB0xEuiDiuqOM58JGF8zLXI8HvAsFa.eATPgm0N4y
+    rbriggs:
+      name: special
+      password: $2b$12$0a7S468ulx3R4Tdo9sqco.sBlqw3lWiFpHPbvmGwxfb432TMx68wW
+cookie:
+  expiry_days: 30
+  key: indian_telecom_charts
+  name: abcdef

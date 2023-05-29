@@ -23,22 +23,34 @@ import pickle
 from pathlib import Path
 import streamlit_authenticator as stauth
 
+import yaml
+from yaml.loader import SafeLoader
+
 
 
 #--------User Authentication-------
 
-names = ["guest", "special"]
 
-usernames = ["guest", "special"]
-
-file_path = "hashed_pw.pkl"
-
-with open(file_path, "rb") as file:
-	hashed_passwords = pickle.load(file)
+with open('config.yaml') as file:
+    config = yaml.load(file, Loader=SafeLoader)
 
 
-authenticator = stauth.Authenticate(names, usernames, hashed_passwords,
-	"indian_telecom_charts", "abcdef", cookie_expiry_days =30)
+# names = ["guest", "special"]
+
+# usernames = ["guest", "special"]
+
+# file_path = "hashed_pw.pkl"
+
+# with open(file_path, "rb") as file:
+# 	hashed_passwords = pickle.load(file)
+
+
+authenticator = stauth.Authenticate(
+	config['credentials'], 
+	config['cookie']['name'],
+	config['cookie']['key'],
+	config['cookie']['expiry_days']
+	)
 
 
 name, authentication_status, username = authenticator.login("Login", "main")
@@ -51,7 +63,10 @@ if authentication_status == None:
 
 #if authentication is successful then the main app renders 
 
+
 if authentication_status:
+
+#---------Fuctions and Dictionaries and Page Configurations-------------
 
 	#Setting Page layout
 	st.set_page_config(layout="wide")
@@ -931,6 +946,8 @@ if authentication_status:
 
 	authenticator.logout("Logout", "sidebar") #logging out authentication
 	st.sidebar.title(f"Welcome {name}") 
+
+
 
 	with st.sidebar:
 		selected_dimension = option_menu(
