@@ -2096,9 +2096,9 @@ if authentication_status: #if authentication sucessful then app is rendered
 			#----- New Code ---------
 
 			datasummary = [go.Heatmap(
-					z = summarydf["Total Subs"],
-					y = summarydf.index,
-					x = summarydf["Circle"],
+					z = summarydf,values,
+					y = summarydf.columns,
+					x = summarydf.index,
 					xgap = 1,
 					ygap = 1,
 					hoverinfo ='text',
