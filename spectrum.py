@@ -1972,11 +1972,10 @@ if selected_dimension == "Business Data":
 
 		dftotal = dftotal.groupby(["Circle", "Operator"])["Subs"].sum()
 
+
+		dftotal = pd.pivot(dftotal, values = 'Subs', index='Operator' , columns = 'Circle')
+
 		st.write(dftotal)
-
-		# dftotal = pd.pivot(dftotal, values = 'Subs', index='Operator' , columns = 'Circle')
-
-		# st.write(dftotal)
 
 
 	#------- New Code Ends-----------------
