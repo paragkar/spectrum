@@ -2279,9 +2279,9 @@ if authentication_status: #if authentication sucessful then app is rendered
 		st.markdown(style, unsafe_allow_html=True)
 		st.header(title)
 		st.markdown(subtitle)
-		for i in range(10):
-			st.progress(10*i)#debug
-			time.sleep(2)
+		for i in range(5):
+			st.spinner(20*i)#debug
+			time.sleep(1)
 		st.plotly_chart(fig, use_container_width=True)
 		#plotting the summary chart
 
