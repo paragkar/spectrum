@@ -1511,7 +1511,7 @@ if selected_dimension == "Business Data":
 	dfT = pd.read_excel(excel_content, sheet_name=sheetT)
 
 
-	Feature = st.sidebar.selectbox('Select a Feature', ["5GBTS Trends", "Subscriber Trends"])
+	Feature = st.sidebar.selectbox('Select a Feature', ["5GBTS Trends", "Subscriber Trends", "Subscriber MarketShare"])
 
 	if Feature== "5GBTS Trends":
 
@@ -1907,6 +1907,75 @@ if selected_dimension == "Business Data":
 			# title = "Indian 5G Base Stations Roll Out Trends"
 			# subtitle = "Incremental BTS growth; Top 20 States/UT; Unit - Thousands; Sorted by the Recent Date"
 
+	#-------- New Code ---------
+
+	if Feature== "Subscriber MarketShare":
+
+		@st.cache_resource
+		def loaddata():
+
+			df = dfT["TelecomSubs"] #load 5G BTS deployment data from excel file
+
+			return df
+
+		#function to extract a list of dates from the list using start and end date from the slider
+		def get_selected_date_list(listofallcolumns, start_date, end_date):
+			    # Find the index of the first selected date
+			    index1 = listofallcolumns.index(start_date)
+
+			    # Find the index of the second selected date
+			    index2 = listofallcolumns.index(end_date)
+
+			    # Return a new list containing the dates from index1 to index2 (inclusive)
+			    return listofallcolumns[index1:index2+1]
+
+
+		dftelesubs = loaddata()
+
+		dftelesubs = dftelesubs[dftelesubs["Date"]>=datetime(2013,1,31)] #filter the datframe for all dates more than the year 2013
+
+		dftelesubs["Date"] = dftelesubs["Date"].dt.date
+
+		dftelesubs.columns = [str(x) for x in dftelesubs.columns]
+
+		dftelesubs = dftelesubs.replace(',','', regex=True)
+
+		dftelesubs.drop(columns = ["Year","Months"], axis =1, inplace = True)
+
+		selected_category = st.sidebar.multiselect('Select Categories', ["Wireless", "Wireline"])
+
+		if len(selected_category) == 0 or len(selected_category) == 2:
+
+			dftelesubsprocess = dftelesubs.copy()
+
+		if len(selected_category) == 1:
+
+			dftelesubsprocess = dftelesubs[dftelesubs["Category"]==selected_category[0]]
+			
+
+		dftelesubsprocess.drop(columns = ["Category"], axis =1, inplace = True)
+
+
+		#processsing the dataframe for total subs
+
+		dftotal = dftelesubsprocess.copy()
+
+
+		dftotal = dftotal.melt(id_vars =["Date", "Circle"], value_vars = list(dftotal.columns[2:]))
+
+		dftotal.columns = ["Date", "Circle", "Operator", "Subs"]
+
+
+		dftotal = dftotal[dftotal["Date"]==sorted(list(set(dftotal["Date"].values)))[0]] # filtering the dataframe on the latest date
+
+		dftotal.drop(columns = ["Date"], axis =1, inplace = True)
+
+		dftotal = pd.pivot(dftotal, values = 'Subs', index='Operator' , columns = 'Circle')
+
+		st.write(dftotal)
+
+
+	#------- New Code Ends-----------------
 
 
 
