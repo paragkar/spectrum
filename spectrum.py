@@ -2278,7 +2278,8 @@ if authentication_status: #if authentication sucessful then app is rendered
 		st.markdown(style, unsafe_allow_html=True)
 		st.header(title)
 		st.markdown(subtitle)
-		st.plotly_chart(fig, use_container_width=True)
+		with st.spinner:
+			st.plotly_chart(fig, use_container_width=True)
 		#plotting the summary chart
 
 		col1,col2,col3 = st.columns([0.2,14,1.1]) #create collumns of uneven width
