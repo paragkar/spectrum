@@ -2328,7 +2328,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 		st.plotly_chart(fig, use_container_width=True)
 		#plotting the summary chart
 		if flag ==True:
-			figsummary.update_layout(height=100)
+			figsummary.update_layout(height=50)
 			st.plotly_chart(figsummary, use_container_width=True)
 			# st.altair_chart(chart, use_container_width=True)
 
