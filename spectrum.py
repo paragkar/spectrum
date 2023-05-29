@@ -1966,7 +1966,7 @@ if selected_dimension == "Business Data":
 		dftotal.columns = ["Date", "Circle", "Operator", "Subs"]
 
 
-		dftotal = dftotal[dftotal["Date"]==sorted(list(set(dftotal["Date"].values)))[0]] # filtering the dataframe on the latest date
+		dftotal = dftotal[dftotal["Date"]==sorted(list(set(dftotal["Date"].values)))[-1]] # filtering the dataframe on the latest date
 
 		dftotal.drop(columns = ["Date"], axis =1, inplace = True)
 
