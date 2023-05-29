@@ -2089,31 +2089,10 @@ if authentication_status: #if authentication sucessful then app is rendered
 			summarydf = summarydf.reset_index()
 			summarydf.columns = ["Circle", "Total Subs"]
 
-			summarydf = summarydf.set_index("Circle").T
-			st.write(summarydf)
 			# summarydf = summarydf.sort_values("Dates", ascending = False)
 
-			#----- New Code ---------
-
-			datasummary = [go.Heatmap(
-					z = summarydf.values,
-					x = summarydf.columns,
-					y = summarydf.index,
-					xgap = 1,
-					ygap = 1,
-					hoverinfo ='text',
-					# text = hovertext,
-					colorscale='Hot',
-						texttemplate="%{z}", 
-						textfont={"size":10},
-						reversescale=True,
-						),
-					]
-
-			#-------New Code Ends---------
 			#preparing the summary chart 
-			# chart = summarychart(summarydf, 'Circle', "Total Subs")
-			figsummary = go.Figure(data = datasummary)
+			chart = summarychart(summarydf, 'Circle', "Total Subs")
 			flag = True
 
 
@@ -2328,9 +2307,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 		st.plotly_chart(fig, use_container_width=True)
 		#plotting the summary chart
 		if flag ==True:
-			figsummary.update_layout(height=50)
-			st.plotly_chart(figsummary, use_container_width=True)
-			# st.altair_chart(chart, use_container_width=True)
+			st.altair_chart(chart, use_container_width=True)
 
 	#------ New Code ------#
 	#Currently Blank but will be used to add notes regarding every chart
