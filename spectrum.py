@@ -2292,11 +2292,10 @@ if authentication_status: #if authentication sucessful then app is rendered
 		st.markdown(style, unsafe_allow_html=True)
 		st.header(title)
 		st.markdown(subtitle)
+		st.plotly_chart(fig, use_container_width=True)
 		#plotting the summary chart
 		if flag ==True:
 			st.altair_chart(chart, use_container_width=True)
-
-	st.plotly_chart(fig, use_container_width=True)
 
 	#------ New Code ------
 
