@@ -2263,7 +2263,6 @@ if authentication_status: #if authentication sucessful then app is rendered
 			  dtick = xdtickval), 
 			)
 
-	st.plotly_chart(fig, use_container_width=True)
 
 	#Here are only some last minute changes in the plot
 
@@ -2293,11 +2292,11 @@ if authentication_status: #if authentication sucessful then app is rendered
 		st.markdown(style, unsafe_allow_html=True)
 		st.header(title)
 		st.markdown(subtitle)
-		st.write(fig)
 		#plotting the summary chart
 		if flag ==True:
 			st.altair_chart(chart, use_container_width=True)
 
+	st.plotly_chart(fig, use_container_width=True)
 
 	#------ New Code ------
 
