@@ -2307,7 +2307,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 	#------ New Code ------#
 	#Currently Blank but will be used to add notes regarding every chart
 
-	expander = st.beta_expander("About This Chart", expanded = True)
+	expander = st.beta_expander("About This Chart", expanded = False)
 
 	with expander:
 		st.info("     ")
