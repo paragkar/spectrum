@@ -29,7 +29,7 @@ from yaml.loader import SafeLoader
 
 
 #Setting Page layout
-# st.set_page_config(layout="wide")
+st.set_page_config(layout="wide")
 
 #--------User Authentication-------
 
@@ -935,8 +935,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 		
 		text = bar.mark_text(size = 12, dx=0, dy=-7, color = 'white').encode(text=ycolumn+':Q')
 		
-		# chart = (bar + text).properties(width=1120, height =150)
-		chart = (bar + text).properties(height =150)
+		chart = (bar + text).properties(width=1120, height =150)
 		chart = chart.configure_title(fontSize = 20, font ='Arial', anchor = 'middle', color ='black')
 		return chart
 
@@ -2253,7 +2252,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 			  template='simple_white',
 			  paper_bgcolor=None,
 			  height=575, 
-			  # width=1200,
+			  width=1200,
 			  margin=dict(t=80, b=50, l=50, r=50, pad=0),
 			  yaxis=dict(
 	        	  tickmode='array'),
@@ -2294,15 +2293,15 @@ if authentication_status: #if authentication sucessful then app is rendered
 		st.markdown(style, unsafe_allow_html=True)
 		st.header(title)
 		st.markdown(subtitle)
-		st.write(fig, expanded= True)
+		st.write(fig)
 		#plotting the summary chart
 		if flag ==True:
-			st.altair_chart(chart, use_container_width=True)
+			st.altair_chart(chart, use_container_width=False)
 
 
 	#------ New Code ------
 
-	expander = st.beta_expander("About This Chart", expanded = True)
+	expander = st.beta_expander("About This Chart", expanded = False)
 
 	with expander:
 		st.info("     ")
