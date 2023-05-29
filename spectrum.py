@@ -2106,7 +2106,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 					colorscale='Hot',
 						texttemplate="%{z}", 
 						textfont={"size":10},
-						# reversescale=True,
+						reversescale=True,
 						),
 					]
 
