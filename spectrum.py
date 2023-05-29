@@ -2281,7 +2281,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 		st.plotly_chart(fig, use_container_width=True)
 		#plotting the summary chart
 
-		col1,col2,col3 = st.columns([1,14,1]) #create collumns of uneven width
+		col1,col2,col3 = st.columns([0.5,14,1]) #create collumns of uneven width
 		if flag ==True:
 			# st.altair_chart(chart, use_container_width=True)
 			col2.altair_chart(chart, use_container_width=True)
