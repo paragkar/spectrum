@@ -2271,7 +2271,6 @@ if authentication_status: #if authentication sucessful then app is rendered
 	fig.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
 	fig.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
 
-	col1, col2 = st.columns([6,1]) #create collumns of uneven width
 
 	style = "<style>h3 {text-align: left;}</style>"
 	with st.container():
@@ -2281,6 +2280,8 @@ if authentication_status: #if authentication sucessful then app is rendered
 		st.markdown(subtitle)
 		st.plotly_chart(fig, use_container_width=True)
 		#plotting the summary chart
+
+		col1, col2 = st.columns([6,1]) #create collumns of uneven width
 		if flag ==True:
 			# st.altair_chart(chart, use_container_width=True)
 			col1.altair_chart(chart, use_container_width=True)
