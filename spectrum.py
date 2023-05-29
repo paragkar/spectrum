@@ -2103,7 +2103,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 					ygap = 1,
 					hoverinfo ='text',
 					# text = hovertext,
-					colorscale='reds',
+					colorscale='rainbow',
 						texttemplate="%{z}", 
 						textfont={"size":10},
 						# reversescale=True,
