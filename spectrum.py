@@ -2003,7 +2003,7 @@ if selected_dimension == "Business Data":
 					),
 				]
 
-
+		summarydf= round(summarydf/1000000,1) # converting the numbers to million
 		summarydf = summarydf.reset_index()
 		summarydf.columns = ["Circle", "Total Subs"] 
 		# summarydf = summarydf.sort_values("Dates", ascending = False)
@@ -2015,7 +2015,7 @@ if selected_dimension == "Business Data":
 		xdtickangle= 0
 		xdtickval=1
 		title = "Telecom Operator's Latest Subscriber Market Share SnapShot"
-		subtitle = "Unit - % of Total; Source - TRAI"
+		subtitle = "Unit - % of Total in Millions; Source - TRAI"
 
 	#------- New Code Ends-----------------
 
