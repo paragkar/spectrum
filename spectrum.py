@@ -28,6 +28,9 @@ from yaml.loader import SafeLoader
 
 
 
+#Setting Page layout
+st.set_page_config(layout="wide")
+
 #--------User Authentication-------
 
 
@@ -61,15 +64,10 @@ if authentication_status == False:
 if authentication_status == None:
 	st.warning("Please enter your username and password")
 
-#if authentication is successful then the main app renders 
 
-
-if authentication_status:
+if authentication_status: #if authentication sucessful then app is rendered
 
 #---------Fuctions and Dictionaries and Page Configurations-------------
-
-	#Setting Page layout
-	st.set_page_config(layout="wide")
 
 	#set summary chart flag
 	flag = False # It will toggle to True when we what summary chart to show
