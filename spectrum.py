@@ -2004,6 +2004,12 @@ if selected_dimension == "Business Data":
 				]
 
 
+		hoverlabel_bgcolor = "#000000" #subdued black
+			xdtickangle= 0
+			xdtickval=1
+			title = "Indian Telecom Subscribers %MarketShare SnapShot"
+			subtitle = "Incremental BTS growth; Top 20 States/UT; Unit - Thousands; Sorted by the Recent Date"
+
 	#------- New Code Ends-----------------
 
 
