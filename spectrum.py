@@ -1987,9 +1987,21 @@ if selected_dimension == "Business Data":
 
 		dftotalpercentms = round((dftotal/summarydf)*100,2)
 
-		st.write(dftotalpercentms)
 
-
+		data = [go.Heatmap(
+				z = dftotalpercentms.values,
+				y = dftotalpercentms.index,
+				x = dftotalpercentms.columns,
+				xgap = 1,
+				ygap = 1,
+				hoverinfo ='text',
+				# text = hovertext,
+				colorscale='reds',
+					texttemplate="%{z}", 
+					textfont={"size":10},
+					reversescale=True,
+					),
+				]
 
 
 	#------- New Code Ends-----------------
