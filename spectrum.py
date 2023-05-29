@@ -1970,7 +1970,7 @@ if selected_dimension == "Business Data":
 
 		dftotal.drop(columns = ["Date"], axis =1, inplace = True)
 
-		dftotal = dftotal.groupby(["Circle", "Operator"])["Sub"].sum()
+		dftotal = dftotal.groupby(["Circle", "Operator"])["Subs"].sum()
 
 		st.write(dftotal)
 
