@@ -2263,6 +2263,13 @@ if authentication_status: #if authentication sucessful then app is rendered
 			  dtick = xdtickval), 
 			)
 
+#---- New Code -------#
+	fig.coloraxis.colorbar = dict(
+		    x = 0,      # Horizontal position (0 to 1)
+		    xanchor = 'left',  # Anchor point for x position
+		    y = -0.2,   # Vertical position (negative value to place it below the chart)
+		    yanchor = 'bottom'  # Anchor point for y position
+		)
 
 	#Here are only some last minute changes in the plot
 
