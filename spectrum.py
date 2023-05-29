@@ -1979,6 +1979,8 @@ if selected_dimension == "Business Data":
 
 		dftotal["Total"] = dftotal.sum(axis=1)
 
+		dftotal = dftotal.sort_values("Total", ascending = False)
+
 		st.write(dftotal)
 
 
