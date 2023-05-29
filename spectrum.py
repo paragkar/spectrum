@@ -912,8 +912,8 @@ if authentication_status: #if authentication sucessful then app is rendered
 		bar = alt.Chart(summarydf).mark_bar().encode(
 		y = alt.Y(ycolumn+':Q', axis=alt.Axis(labels=False)),
 		x = alt.X(xcolumn+':O', axis=alt.Axis(labels=False)),
-		# color = alt.Color(xcolumn+':N', legend=None)) #old code 
-		color = alt.Color(xcolumn+':N')) #new code
+		color = alt.Color(xcolumn+':N', legend=None))
+	
 		
 		text = bar.mark_text(size = 12, dx=0, dy=-7, color = 'white').encode(text=ycolumn+':Q')
 		
