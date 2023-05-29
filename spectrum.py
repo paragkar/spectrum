@@ -929,7 +929,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 
 	def summarychart(summarydf, xcolumn, ycolumn):
 		bar = alt.Chart(summarydf).mark_bar().encode(
-		y = alt.Y(ycolumn+':Q', axis=alt.Axis(labels=False)),
+		y = alt.Y(ycolumn+':Q', axis=alt.Axis(labels=True)),
 		x = alt.X(xcolumn+':O', axis=alt.Axis(labels=False)),
 		color = alt.Color(xcolumn+':N', legend=None))
 		
