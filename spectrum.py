@@ -2295,9 +2295,6 @@ if authentication_status: #if authentication sucessful then app is rendered
 	fig.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
 	fig.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
 
-	figsummary.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
-	figsummary.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
-
 	style = "<style>h3 {text-align: left;}</style>"
 	with st.container():
 		#plotting the main chart
