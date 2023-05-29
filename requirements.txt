@@ -5,3 +5,4 @@ openpyxl
 matplotlib
 streamlit_option_menu
 msoffcrypto-tool
+streamlit_authenticator
