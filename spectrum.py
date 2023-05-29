@@ -826,7 +826,7 @@ def htext_businessdata_telesubsms(dftotal,dftotalpercentms):
 				     .format( 
 					    yy,
 					    xx,
-					    subtotal,
+					    round(subtotal/1000000,1),
 					    subpercentms,
 					    )
 					    )
