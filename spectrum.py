@@ -2295,7 +2295,8 @@ if authentication_status: #if authentication sucessful then app is rendered
 		st.write(fig)
 		#plotting the summary chart
 		if flag ==True:
-			st.altair_chart(chart, use_container_width=False)
+			with.st.container()
+				st.altair_chart(chart, use_container_width=False)
 
 
 
