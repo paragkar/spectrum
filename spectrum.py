@@ -1985,7 +1985,7 @@ if selected_dimension == "Business Data":
 
 		summarydf = dftotal.sum(axis=0)
 
-		dftotalpercentms = dftotal/summarydf
+		dftotalpercentms = round((dftotal/summarydf)*100,2)
 
 		st.write(dftotalpercentms)
 
