@@ -1893,19 +1893,7 @@ if selected_dimension == "Business Data":
 					),
 				]
 
-			# summarydf = df5gbtsincf.sum(axis=0)
-			# summarydf = summarydf.reset_index()
-			# summarydf.columns = ["Dates", SubFeature] 
-			# summarydf = summarydf.sort_values("Dates", ascending = False)
-			# #preparing the summary chart 
-			# chart = summarychart(summarydf, 'Dates', SubFeature)
-			# flag = True
-
 			hoverlabel_bgcolor = "#000000" #subdued black
-			# xdtickangle= -45
-			# xdtickval=1
-			# title = "Indian 5G Base Stations Roll Out Trends"
-			# subtitle = "Incremental BTS growth; Top 20 States/UT; Unit - Thousands; Sorted by the Recent Date"
 
 	#-------- New Code ---------
 
@@ -2011,11 +1999,12 @@ if selected_dimension == "Business Data":
 		chart = summarychart(summarydf, 'Circle', "Total Subs")
 		flag = True
 
+
+		if len(selected_category) ==0:
+			selected_category = ["All"]
+
 		hoverlabel_bgcolor = "#000000" #subdued black
-		xdtickangle= 0
-		xdtickval=1
-		title = "Telecom Operator's Latest Subs Market Share"
-		subtitle = "Unit - % of Total; Total in Millions; Source - TRAI"
+		subtitle = "Unit - % of Total; Total in Millions ;"+ ",".join(selected_category)+ " ;Source - TRAI"
 
 	#------- New Code Ends-----------------
 
@@ -2155,6 +2144,14 @@ if (selected_dimension == "Business Data") and (Feature == "Subscriber Trends"):
 	xdtickangle= -45
 	xdtickval=1
 	title = "Indian Telecom Subscribers Trends"
+
+
+if (selected_dimension == "Business Data") and (Feature == "Subscriber MShare"):
+
+	# fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
+	xdtickangle= 0
+	xdtickval=1
+	title = "Telecom Operator's Latest Subs Market Share"
 	
 
 
