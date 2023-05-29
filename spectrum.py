@@ -1983,7 +1983,9 @@ if selected_dimension == "Business Data":
 
 		dftotal.drop(columns = ["Total"], axis =1, inplace = True)
 
-		st.write(dftotal)
+		summarydf = dftotal.sum(axis=0)
+
+		st.write(summarydf)
 
 
 	#------- New Code Ends-----------------
