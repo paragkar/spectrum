@@ -748,10 +748,6 @@ if authentication_status: #if authentication sucessful then app is rendered
 
 
 
-
-	#---------New Code Added-----------
-
-
 	#processing for hovertext for Business Data and Subscribers Trends Cumulatitive
 	@st.cache_resource
 	def htext_businessdata_telesubscum(dftotalfilt): 
@@ -807,12 +803,6 @@ if authentication_status: #if authentication sucessful then app is rendered
 		return hovertext
 
 
-	#--- New Code Ends---------
-
-
-
-	#---------New Code Added-----------
-
 
 	#processing for hovertext for Business Data and Subscribers Trends Cumulatitive
 	@st.cache_resource
@@ -838,12 +828,6 @@ if authentication_status: #if authentication sucessful then app is rendered
 						    )
 						    )
 		return hovertext
-
-
-	#--- New Code Ends---------
-
-
-	#---------New Code Added-----------
 
 
 	#processing for hovertext for Business Data and Subscribers Market Share
@@ -874,9 +858,6 @@ if authentication_status: #if authentication sucessful then app is rendered
 						    )
 						    )
 		return hovertext
-
-
-		#--- New Code Ends---------
 
 
 	#preparing color scale for hoverbox for freq and exp maps
@@ -1804,8 +1785,6 @@ if authentication_status: #if authentication sucessful then app is rendered
 			dftotal.columns = ["Date", "Circle", "Operator", "Subs"]
 
 
-			#------New Code Added-------
-
 			list_of_circles = list(state_dict.values())
 
 			selected_circles = st.sidebar.multiselect('Select Circles', list_of_circles) #drop down to select circles
@@ -1824,8 +1803,6 @@ if authentication_status: #if authentication sucessful then app is rendered
 
 			else:
 				pass
-
-			#-----New Code Ends ------
 
 
 			dftotal = dftotal.groupby(["Date","Operator","Circle"]).sum()
@@ -1986,7 +1963,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 
 				hoverlabel_bgcolor = "#000000" #subdued black
 
-		#-------- New Code ---------
+
 
 		if Feature== "Subscriber MShare":
 
@@ -2101,8 +2078,6 @@ if authentication_status: #if authentication sucessful then app is rendered
 
 			hoverlabel_bgcolor = "#000000" #subdued black
 			subtitle = "Unit - % of Total; Total in Millions ; Selected Category -"+ ",".join(selected_category)+ " ;Source - TRAI"
-
-		#------- New Code Ends-----------------
 
 
 
