@@ -2015,7 +2015,7 @@ if selected_dimension == "Business Data":
 		xdtickangle= 0
 		xdtickval=1
 		title = "Telecom Operator's Latest Subs Market Share"
-		subtitle = "Unit - % of Total in Millions; Source - TRAI"
+		subtitle = "Unit - % of Total; Total in Millions; Source - TRAI"
 
 	#------- New Code Ends-----------------
 
