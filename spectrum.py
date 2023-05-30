@@ -1129,14 +1129,14 @@ if authentication_status: #if authentication sucessful then app is rendered
 				#processing for summarydf to be listed on the left hand side as a summary
 				#-----New Lines -------
 
-				summarydf = count_items_in_dataframe(sf)
+				# summarydf = count_items_in_dataframe(sf)
 
-				st.write(summarydf)
+				# st.write(summarydf)
 
-				# for col in summarydf:
-				# 	summarydf.rename(columns = {col : selected_operators[int(col)]}, inplace = True)
+				# # for col in summarydf:
+				# # 	summarydf.rename(columns = {col : selected_operators[int(col)]}, inplace = True)
 
-				# summarydf.index = sf.index
+				# # summarydf.index = sf.index
 
 
 				#-----New Lines -------
