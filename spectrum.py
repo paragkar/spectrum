@@ -1131,7 +1131,9 @@ if authentication_status: #if authentication sucessful then app is rendered
 					if not check_all_none_or_nan(row):
 						counts.append(count_items(row))
 
-				del counts["NaN"]
+				for i in range(counts):
+					del counts[i]["NaN"]
+
 
 				st.write(counts)
 
