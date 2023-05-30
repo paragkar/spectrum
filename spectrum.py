@@ -2341,7 +2341,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 		if not summarydf.empty:
 			col2.markdown("Summary")
 			col1.plotly_chart(fig, use_container_width=True)
-			col2.table(summarydf)
+			col2.table(summarydf.round(1))
 		else:
 			st.plotly_chart(fig, use_container_width=True)
 		#plotting the summary chart
