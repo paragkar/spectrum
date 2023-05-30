@@ -226,8 +226,8 @@ if authentication_status: #if authentication sucessful then app is rendered
 	def count_items_in_dataframe(df):
 	    counts = {}
 
-	    for col in df.columns:
-	        for item in df[col]:
+	    for i in range(df.columns):
+	        for item in df.iloc[:,i]:
 	            if isinstance(item, (int, float)) and not np.isnan(item):
 	                if item != 0:
 	                    item_key = str(item)  # Convert float item to string
@@ -235,7 +235,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 	                    item_key = "0"
 	                if item_key not in counts:
 	                    counts[item_key] = [0] * len(df.columns)
-	                counts[item_key][col] += 1
+	                counts[item_key][i] += 1
 
 	    df_counts = pd.DataFrame.from_dict(counts, orient='index', columns=df.columns)
 	    return df_counts
