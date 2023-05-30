@@ -1130,12 +1130,12 @@ if authentication_status: #if authentication sucessful then app is rendered
 
 				#processing for data for data tab
 
-				sf = sf.replace("NA", np.nan)
+				sf = sf.fillna(100)
 
 				sf = sf.astype('int64')
 
-				# for col in sf.columns:
-				# 	sf[col]=sf[col].astype('int64')
+				sf = sf.replace(100, np.nan)
+
 
 				chartdata_df = count_items_in_dataframe(sf)*channelsize_dict[Band]
 
