@@ -1121,7 +1121,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 
 				st.write(sf) #debug
 
-				st.write(counts)
+				st.write(count_items(counts)
 	
 
 				# summarydf = pd.DataFrame(counts)*channelsize_dict[Band]
