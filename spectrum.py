@@ -1134,8 +1134,6 @@ if authentication_status: #if authentication sucessful then app is rendered
 
 				summarydf.index = sf.index
 
-				st.write(summarydf)
-
 				def get_key_from_value(dictionary, value):
 				    reverse_dict = {v: k for k, v in dictionary.items()}
 				    return reverse_dict.get(value)
@@ -1148,7 +1146,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 				# 	summarydf.rename(columns = {col : cols_to_replace[int(col)]}, inplace = True)
 
 
-				# st.write(summarydf)
+				st.write(summarydf)
 
 
 				#-----New Lines -------
