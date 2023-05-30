@@ -1134,19 +1134,20 @@ if authentication_status: #if authentication sucessful then app is rendered
 
 				summarydf.index = sf.index
 
-				st.write(operators)
+				def get_key_from_value(dictionary, value):
+				    reverse_dict = {v: k for k, v in dictionary.items()}
+				    return reverse_dict.get(value)
+
+				if selected_operators ==[]:
+
+					for col in summarydf:
+						operatorname = get_key_from_value(operators,col)
+						summarydf.rename(columns = {col : operatorname}, inplace = True)
+				else:
+					summarydf.rename(columns = {col : cols_to_replace[int(col)]}, inplace = True)
+
 
 				st.write(summarydf)
-
-				# if selected_operators ==[]:
-				# 	cols_to_replace = operators
-				# else:
-				# # 	cols_to_replace = selected_operators
-
-				# for col in summarydf:
-				# 	summarydf.rename(columns = {col : cols_to_replace[int(col)]}, inplace = True)
-
-				# st.write(summarydf)
 
 
 				#-----New Lines -------
