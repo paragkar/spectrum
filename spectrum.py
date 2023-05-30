@@ -1121,6 +1121,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 				#check of all items in the list are none of np.nan
 
 				def check_all_none_or_nan(lst):
+    			
     				return all(item is None or np.isnan(item) for item in lst)
 
 
