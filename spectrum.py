@@ -1132,6 +1132,8 @@ if authentication_status: #if authentication sucessful then app is rendered
 
 				summarydf = count_items_in_dataframe(sf)
 
+				summarydf.index = sf.index
+
 				st.write(summarydf)
 
 
