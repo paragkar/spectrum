@@ -1154,6 +1154,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 				chartdata_df.sort_values("Total", ascending=False, inplace = True)
 
 				chartdata_df = chartdata_df.T
+				st.write(chartdata_df)
 
 				chart_data_flag = True #Plot only if this is true 
 
