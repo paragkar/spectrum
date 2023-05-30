@@ -1130,22 +1130,22 @@ if authentication_status: #if authentication sucessful then app is rendered
 				#processing for summarydf to be listed on the left hand side as a summary
 				#-----New Lines -------
 
-				summarydf = count_items_in_dataframe(sf)*channelsize_dict[Band]
+				chartdata_df = count_items_in_dataframe(sf)*channelsize_dict[Band]
 
-				summarydf.index = sf.index
+				chartdata_df.index = sf.index
 
 				def get_key_from_value(dictionary, value):
 				    reverse_dict = {v: k for k, v in dictionary.items()}
 				    return reverse_dict.get(value)
 
 				if selected_operators ==[]:
-					for col in summarydf.columns:
+					for col in chartdata_df.columns:
 						operatorname = get_key_from_value(operators,int(col))
-						summarydf.rename(columns = {col : operatorname}, inplace = True)
+						chartdata_df.rename(columns = {col : operatorname}, inplace = True)
 				else:
-					for col in summarydf.columns:
+					for col in chartdata_df.columns:
 						operatorname = get_key_from_value(selected_op_dict,int(float(col)))
-						summarydf.rename(columns = {col : operatorname}, inplace = True)
+						chartdata_df.rename(columns = {col : operatorname}, inplace = True)
 
 
 				#-----New Lines -------
@@ -2346,7 +2346,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 		st.markdown(subtitle)
 		tab1, tab2 = st.tabs(["📈 Chart", "🗃 Data"]) #for listing the summary chart for freq layout
 		tab1.plotly_chart(fig, use_container_width=True)
-		tab2.table(summarydf)
+		tab2.table(chartdata_df.round(2))
 
 		#plotting the summary chart
 
