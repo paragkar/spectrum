@@ -1144,8 +1144,9 @@ if authentication_status: #if authentication sucessful then app is rendered
 						summarydf.rename(columns = {col : operatorname}, inplace = True)
 				else:
 					st.write(selected_op_dict)
-					# for col in summarydf.columns:
-					# 	operatorname = get_key_from_value(selected_op_dict,int(col)
+					for col in summarydf.columns:
+						operatorname = get_key_from_value(selected_op_dict,int(float(col)))
+						st.write(operatorname)
 					# 	summarydf.rename(columns = {col : operatorname}, inplace = True)
 					
 
