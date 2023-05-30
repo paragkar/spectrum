@@ -1015,10 +1015,6 @@ if authentication_status: #if authentication sucessful then app is rendered
 		bandf = bandf.set_index("LSA")
 		bandexpf = bandexpf.set_index("LSA")
 		masterdf = df[masterall]
-
-	# 	eff = exp_year_cal_yearly_trends(ef) # for expiry year heatmap year wise
-		
-	# 	bwf = bw_exp_cal_yearly_trends(sff,ef) # hover text for expiry year heatmap year wise
 		
 		# st.sidebar.title('Navigation')
 
@@ -1107,6 +1103,8 @@ if authentication_status: #if authentication sucessful then app is rendered
 				parttitle ="Spectrum Frequency Layout"
 				xdtickangle = -90
 				xdtickval = xdtickfreq_dict[Band]
+
+				st.write(sf) #debug
 				
 				data = [go.Heatmap(
 				      z = sf.values,
