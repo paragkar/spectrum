@@ -223,12 +223,12 @@ if authentication_status: #if authentication sucessful then app is rendered
 	#function to count number of items in a list and outputs the result as dictionary      	   
 	def count_items(lst):
 		counts = {}
-			for item in lst:
-			    if item in counts:
-			        counts[item] += 1
-			    else:
-			        counts[item] = 1
-			return counts
+		for item in lst:
+		    if item in counts:
+		        counts[item] += 1
+		    else:
+		        counts[item] = 1
+		return counts
 
 
 	#defining various functions 
