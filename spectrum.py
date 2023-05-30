@@ -1144,7 +1144,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 						summarydf.rename(columns = {col : operatorname}, inplace = True)
 				else:
 					st.write(selected_operators)
-					for i in range(summarydf.columns):
+					for i col, in enumerate(summarydf.columns):
 						summarydf.rename(columns = {col : selected_operators[i]}, inplace = True)
 
 				st.write(summarydf)
