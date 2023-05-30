@@ -1146,7 +1146,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 					st.write(selected_op_dict)
 					
 
-				# st.write(summarydf)
+				st.write(summarydf)
 
 
 				#-----New Lines -------
