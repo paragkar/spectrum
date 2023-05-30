@@ -2346,7 +2346,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 		st.markdown(subtitle)
 		tab1, tab2 = st.tabs(["📈 Chart", "🗃 Data"]) #for listing the summary chart for freq layout
 		tab1.plotly_chart(fig, use_container_width=True)
-		tab2.table(chartdata_df)
+		tab2.table(chartdata_df, use_container_width=True)
 
 		#plotting the summary chart
 
