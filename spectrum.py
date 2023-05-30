@@ -1147,7 +1147,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 						operatorname = get_key_from_value(selected_op_dict,int(float(col)))
 						chartdata_df.rename(columns = {col : operatorname}, inplace = True)
 
-				chartdata_df["Total"] = chartdata_df.sum(axis=1)
+				chartdata_df["Total"] = chartdata_df.T.sum(axis=0)
 
 
 
