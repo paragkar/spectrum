@@ -1130,7 +1130,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 				#processing for summarydf to be listed on the left hand side as a summary
 				#-----New Lines -------
 
-				summarydf = count_items_in_dataframe(sf)
+				summarydf = count_items_in_dataframe(sf)*channelsize_dict[Band]
 
 				summarydf.index = sf.index
 
