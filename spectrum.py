@@ -1122,9 +1122,9 @@ if authentication_status: #if authentication sucessful then app is rendered
 				xdtickval = xdtickfreq_dict[Band]
 
 
-				#-----New Lines -------
 
-				st.write(selected_operators)
+				#processing for summarydf to be listed on the left hand side as a summary
+				#-----New Lines -------
 
 				counts =[]
 
@@ -1136,10 +1136,12 @@ if authentication_status: #if authentication sucessful then app is rendered
 				for col in summarydf:
 					summarydf.rename(columns = {col : selected_operators[int(col)]}, inplace = True)
 
-				st.write(summarydf)
-
+				if len(summarydf)>0:
+					flagsummary = True
 
 				#-----New Lines -------
+
+
 				
 				data = [go.Heatmap(
 				      z = sf.values,
@@ -2333,7 +2335,12 @@ if authentication_status: #if authentication sucessful then app is rendered
 		st.markdown(style, unsafe_allow_html=True)
 		st.header(title)
 		st.markdown(subtitle)
-		st.plotly_chart(fig, use_container_width=True)
+		col1,col2 = st.columns([14,1]) #for listing the summary chart for freq layout
+		if flagsummary = True
+			col1.plotly_chart(fig, use_container_width=True)
+			col2.write(summarydf)
+		else:
+			st.plotly_chart(fig, use_container_width=True)
 		#plotting the summary chart
 
 		col1,col2,col3 = st.columns([0.2,14,1.1]) #create collumns of uneven width
