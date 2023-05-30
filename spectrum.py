@@ -1132,6 +1132,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 
 				chartdata_df = count_items_in_dataframe(sf)*channelsize_dict[Band]
 
+				st.write(sf)
 				st.write(chartdata_df)
 				st.write(selected_op_dict)
 
