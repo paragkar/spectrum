@@ -1138,6 +1138,8 @@ if authentication_status: #if authentication sucessful then app is rendered
 
 				summarydf.index = sf.index
 
+				summarydf = summarydf.round(1)
+
 
 				#-----New Lines -------
 
