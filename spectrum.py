@@ -1134,7 +1134,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 
 				summarydf.index = sf.index
 
-				st.write(operatorslist)
+				st.write(operators)
 
 
 				# for col in summarydf:
