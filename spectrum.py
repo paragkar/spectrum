@@ -1136,10 +1136,12 @@ if authentication_status: #if authentication sucessful then app is rendered
 
 				st.write(operators)
 
+				st.write(summarydf)
+
 				# if selected_operators ==[]:
 				# 	cols_to_replace = operators
 				# else:
-				# 	cols_to_replace = selected_operators
+				# # 	cols_to_replace = selected_operators
 
 				# for col in summarydf:
 				# 	summarydf.rename(columns = {col : cols_to_replace[int(col)]}, inplace = True)
