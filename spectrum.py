@@ -2337,11 +2337,10 @@ if authentication_status: #if authentication sucessful then app is rendered
 		st.markdown(style, unsafe_allow_html=True)
 		st.header(title)
 		st.markdown(subtitle)
-		col1,col2 = st.columns([14,1]) #for listing the summary chart for freq layout
+		tab1, tab2 = st.tabs(["📈 Chart", "🗃 Data"]) #for listing the summary chart for freq layout
 		if not summarydf.empty:
-			col2.markdown("Summary")
-			col1.plotly_chart(fig, use_container_width=True)
-			col2.dataframe(summarydf)
+			tab1.plotly_chart(fig, use_container_width=True)
+			tab2.dataframe(summarydf)
 		else:
 			st.plotly_chart(fig, use_container_width=True)
 		#plotting the summary chart
