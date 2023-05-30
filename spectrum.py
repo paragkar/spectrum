@@ -107,7 +107,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 	def loadtelecomdatafile():
 
 		password = st.secrets["db_password"]
-		
+
 		excel_content = io.BytesIO()
 
 		with open("telecomdata_protected.xlsx", 'rb') as f:
@@ -1603,6 +1603,8 @@ if authentication_status: #if authentication sucessful then app is rendered
 
 
 			df5gbts = dfT["5GBTS"] #load 5G BTS deployment data from excel file
+
+			df5gbts["Date"] = df5gbts["Date"].astype("datetime64")
 
 			df5gbts["Date"] = df5gbts["Date"].dt.date
 
