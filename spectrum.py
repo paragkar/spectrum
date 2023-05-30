@@ -1131,7 +1131,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 					if not check_all_none_or_nan(row):
 						counts.append(count_items(row))
 
-				del counts[np.nan]
+				del counts[nan]
 
 				st.write(counts)
 
