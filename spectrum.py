@@ -1132,7 +1132,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 						counts.append(count_items(row))
 
 				for i in range(len(counts)):
-					st.write(counts[i])
+					st.write(counts[i][0])
 					# del counts[i]["nan"]
 
 
