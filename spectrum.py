@@ -1116,6 +1116,9 @@ if authentication_status: #if authentication sucessful then app is rendered
 				xdtickangle = -90
 				xdtickval = xdtickfreq_dict[Band]
 
+
+				#-----New Lines -------
+
 				st.write(sf) #debug
 
 				#check of all items in the list are none of np.nan
@@ -1123,9 +1126,6 @@ if authentication_status: #if authentication sucessful then app is rendered
 				def check_all_none_or_nan(lst):
     			
     				return all(item is None or np.isnan(item) for item in lst)
-
-
-				#-----New Lines -------
 
 				counts =[]
 				for row in sf.values:
