@@ -1151,6 +1151,8 @@ if authentication_status: #if authentication sucessful then app is rendered
 
 				chartdata_df["Total"] = chartdata_df.sum(axis=1)
 
+				chartdata_df.sort_values("Total", ascending=False, inplace = True)
+
 				chartdata_df = chartdata_df.T
 
 
