@@ -15,6 +15,8 @@ from datetime import datetime
 import calendar
 import time
 
+from collections import defaultdict
+
 from dateutil.relativedelta import relativedelta
 
 import io
@@ -222,14 +224,16 @@ if authentication_status: #if authentication sucessful then app is rendered
 
 	#function to count number of items in a list and outputs the result as dictionary      	   
 	def count_items(lst):
-		counts = {}
-		for item in lst:
-		    if (item in counts) and (item != np.nan):
-		        counts[item] += 1
-		    else:
-		    	if item != np.nan:
-		        	counts[item] = 1
-		return counts
+	    counts = defaultdict(int)
+	    
+	    for item in lst:
+	        if item is not None and not isinstance(item, float) and not isinstance(item, str) and not isinstance(item, int):
+	            continue
+	        if isinstance(item, float) and item != item:
+	            continue
+	        counts[item] += 1
+	    
+	    return dict(counts)
 
 
 	#defining various functions 
