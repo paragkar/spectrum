@@ -1131,12 +1131,8 @@ if authentication_status: #if authentication sucessful then app is rendered
 					if not check_all_none_or_nan(row):
 						counts.append(count_items(row))
 
-				for i in range(len(counts)):
-					st.write(counts[i][np.nan])
-					# del counts[i]["nan"]
-
-
-				st.write(counts)
+				st.write(counts[0])
+	
 
 				summarydf = pd.DataFrame(counts)*channelsize_dict[Band]
 
