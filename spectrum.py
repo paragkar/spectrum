@@ -230,7 +230,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 	        for idx, item in enumerate(df[col]):
 	            if isinstance(item, (int, float)) and not pd.isnull(item):
 	                # item_key = str(item)  # Convert float item to string
-	                item_key = int(item) #debug
+	                item_key = int(item) #adding this item solved the problem
 	                if item_key not in counts:
 	                    counts[item_key] = [0] * len(df)
 	                counts[item_key][idx] += 1
