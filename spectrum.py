@@ -229,12 +229,17 @@ if authentication_status: #if authentication sucessful then app is rendered
 	    for col in df.columns:
 	        for item in df[col]:
 	            if isinstance(item, (int, float)) and not np.isnan(item):
-	                if item not in counts:
-	                    counts[item] = [0] * len(df.columns)
-	                counts[item][col] += 1
+	                if item != 0:
+	                    item_key = str(item)  # Convert float item to string
+	                else:
+	                    item_key = "0"
+	                if item_key not in counts:
+	                    counts[item_key] = [0] * len(df.columns)
+	                counts[item_key][col] += 1
 
 	    df_counts = pd.DataFrame.from_dict(counts, orient='index', columns=df.columns)
 	    return df_counts
+
 
 
 
