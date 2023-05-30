@@ -104,7 +104,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 		return df
 
 	@st.cache_resource
-	def telecomdatafile():
+	def loadtelecomdatafile():
 		excel_content = io.BytesIO()
 
 		with open("telecomdata_protected.xlsx", 'rb') as f:
@@ -1589,8 +1589,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 
 	if selected_dimension == "Business Data":
 
-		@st.cache_resource
-		dfT = telecomdatafile()
+		dfT = loadtelecomdatafile()
 		
 		Feature = st.sidebar.selectbox('Select a Feature', ["5GBTS Trends", "Subscriber Trends", "Subscriber MShare"])
 
