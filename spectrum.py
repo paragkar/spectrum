@@ -1352,7 +1352,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 					bwf = bw_exp_cal_yearly_trends(sff,ef)
 					hovertext = htext_expmap_yearly_trends_with_all_select(bwf,eff) #hovertext for "All"
 				else:
-					if (selected_operator[-1] in ["R", "U"]: #Last letter of the operator ending with R or U
+					if selected_operator[-1] in ["R", "U"]: #Last letter of the operator ending with R or U
 						regexfilt = '^(?!.*'+selected_operator+').*' #to replace na.npn with text embedded with names of other than the selected operator
 						temp = bandexpcalsheetf.replace(regexfilt, np.nan, regex = True)
 						temp = temp.replace(selected_operator,'', regex = True)
