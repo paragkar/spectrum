@@ -1142,7 +1142,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 
 				if selected_operators ==[]:
 					for col in summarydf.columns:
-						st.write(col, type(col))
+						st.write(col, dtype(col))
 						# operatorname = get_key_from_value(operators,col)
 						# st.write(col, operatorname)
 				# 		summarydf.rename(columns = {col : operatorname}, inplace = True)
