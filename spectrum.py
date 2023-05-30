@@ -226,7 +226,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 	def count_items_in_dataframe(df):
 	    counts = {}
 
-	    for i in range(df.columns):
+	    for i in range(len(df.columns)):
 	        for item in df.iloc[:,i]:
 	            if isinstance(item, (int, float)) and not np.isnan(item):
 	                if item != 0:
