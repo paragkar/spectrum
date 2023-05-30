@@ -1393,7 +1393,10 @@ if authentication_status: #if authentication sucessful then app is rendered
 
 	#Processing For Dimension = "Auction Year"
 	if selected_dimension == "Auction Years":
-		#loading files
+
+		df = loadspectrumfile()
+
+		#loading data
 		masterall = "MasterAll-TDDValueConventional" #all auction related information
 		spectrumofferedvssold = "Spectrum_Offered_vs_Sold"
 		masterdf = df[masterall]
