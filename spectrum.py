@@ -1127,8 +1127,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 
 
 
-				#processing for summarydf to be listed on the left hand side as a summary
-				#-----New Lines -------
+				#processing for data for data tab
 
 				chartdata_df = count_items_in_dataframe(sf)*channelsize_dict[Band]
 
@@ -1155,10 +1154,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 
 				chartdata_df = chartdata_df.T
 
-
-
-				#-----New Lines -------
-
+				chart_data_flag = True #Plot only if this is true 
 
 				
 				data = [go.Heatmap(
@@ -2353,9 +2349,13 @@ if authentication_status: #if authentication sucessful then app is rendered
 		st.markdown(style, unsafe_allow_html=True)
 		st.header(title)
 		st.markdown(subtitle)
-		tab1, tab2 = st.tabs(["📈 Chart", "🗃 Data"]) #for listing the summary chart for freq layout
-		tab1.plotly_chart(fig, use_container_width=True)
-		tab2.table(chartdata_df)
+
+		if chart_data_flag==True:
+			tab1, tab2 = st.tabs(["📈 Chart", "🗃 Data"]) #for listing the summary chart for freq layout
+			tab1.plotly_chart(fig, use_container_width=True)
+			tab2.table(chartdata_df)
+		else:
+			st.plotly_chart(fig, use_container_width=True)
 
 		#plotting the summary chart
 
