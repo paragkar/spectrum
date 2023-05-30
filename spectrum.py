@@ -1346,12 +1346,13 @@ if authentication_status: #if authentication sucessful then app is rendered
 				bandexpcalsheetf = bandexpcalsheetf.set_index("LSA") #Loading Dataframe from BandExpCalSheet
 				operatorslist = ["All"]+sorted(list(newoperators_dict[Band].keys()))
 				selected_operator = st.sidebar.selectbox('Select an Operator', operatorslist)
+				selected_operator = selected_operator.strip()
 				if selected_operator == "All":
 					eff = exp_year_cal_yearly_trends(ef,selected_operator)
 					bwf = bw_exp_cal_yearly_trends(sff,ef)
 					hovertext = htext_expmap_yearly_trends_with_all_select(bwf,eff) #hovertext for "All"
 				else:
-					if (selected_operator[-1] == "R") or (selected_operator[-1] == "U"): #Last letter of the operator ending with R or U
+					if (selected_operator[-1] in ["R", "U"]: #Last letter of the operator ending with R or U
 						regexfilt = '^(?!.*'+selected_operator+').*' #to replace na.npn with text embedded with names of other than the selected operator
 						temp = bandexpcalsheetf.replace(regexfilt, np.nan, regex = True)
 						temp = temp.replace(selected_operator,'', regex = True)
