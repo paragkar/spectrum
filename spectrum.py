@@ -1146,9 +1146,6 @@ if authentication_status: #if authentication sucessful then app is rendered
 					for col in summarydf.columns:
 						operatorname = get_key_from_value(selected_op_dict,int(float(col)))
 						summarydf.rename(columns = {col : operatorname}, inplace = True)
-					
-
-				st.write(summarydf)
 
 
 				#-----New Lines -------
@@ -2348,11 +2345,9 @@ if authentication_status: #if authentication sucessful then app is rendered
 		st.header(title)
 		st.markdown(subtitle)
 		tab1, tab2 = st.tabs(["📈 Chart", "🗃 Data"]) #for listing the summary chart for freq layout
-		if not summarydf.empty:
-			tab1.plotly_chart(fig, use_container_width=True)
-			tab2.dataframe(summarydf)
-		else:
-			st.plotly_chart(fig, use_container_width=True)
+		tab1.plotly_chart(fig, use_container_width=True)
+		tab2.dataframe(summarydf)
+
 		#plotting the summary chart
 
 		col1,col2,col3 = st.columns([0.2,14,1.1]) #create collumns of uneven width
