@@ -1130,7 +1130,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 
 				#processing for data for data tab
 
-				# sf = sf.replace("NA", np.nan)
+				sf = sf.replace("NA", np.nan)
 
 				sf = sf.astype('int64')
 
