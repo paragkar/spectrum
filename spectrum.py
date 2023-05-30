@@ -1133,6 +1133,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 				chartdata_df = count_items_in_dataframe(sf)*channelsize_dict[Band]
 
 				st.write(chartdata_df)
+				st.write(selected_op_dict)
 
 				chartdata_df.index = sf.index
 
@@ -1140,11 +1141,11 @@ if authentication_status: #if authentication sucessful then app is rendered
 				    reverse_dict = {v: k for k, v in dictionary.items()}
 				    return reverse_dict.get(value)
 
-				if selected_operators ==[]:
+				if len(selected_operators) ==0:
 					for col in chartdata_df.columns:
 						operatorname = get_key_from_value(operators,int(col))
 						chartdata_df.rename(columns = {col : operatorname}, inplace = True)
-				else:
+				if len(selected_operators) > 0:
 					for col in chartdata_df.columns:
 						operatorname = get_key_from_value(selected_op_dict,int(float(col)))
 						chartdata_df.rename(columns = {col : operatorname}, inplace = True)
