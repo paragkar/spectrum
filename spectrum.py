@@ -1125,7 +1125,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 				for row in sf.values:
 					counts.append(count_items(row))
 
-				summarydf = pd.DataFrame(counts)*channelsize_dict[Band].dropna()
+				summarydf = pd.DataFrame(counts)*channelsize_dict[Band].dropna(axis=1)
 
 				st.write(summarydf)
 
