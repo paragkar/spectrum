@@ -219,6 +219,18 @@ if authentication_status: #if authentication sucessful then app is rendered
 	list_of_circles_codes = ['AP','AS', 'BH', 'DL', 'GU', 'HA', 'HP', 'JK', 'KA', 'KE', 'KO', 'MA', 'MP',
 	       	   'MU', 'NE', 'OR', 'PU', 'RA', 'TN', 'UPE', 'UPW', 'WB']
 
+
+	 #function to count number of items in a list and outputs the result as dictionary      	   
+	 def count_items(lst):
+	    counts = {}
+	    for item in lst:
+	        if item in counts:
+	            counts[item] += 1
+	        else:
+	            counts[item] = 1
+    	return counts
+
+
 	#defining various functions 
 	#preparing color scale for freqmap
 	@st.cache_resource
@@ -1105,6 +1117,20 @@ if authentication_status: #if authentication sucessful then app is rendered
 				xdtickval = xdtickfreq_dict[Band]
 
 				st.write(sf) #debug
+
+
+				#-----New Lines -------
+
+				counts =[]
+				for row in sf.values:
+					counts.append(count_items(row))
+
+				summarydf = pd.DataFrame(counts)
+
+				st.write(summarydf)
+
+
+				#-----New Lines -------
 				
 				data = [go.Heatmap(
 				      z = sf.values,
