@@ -104,7 +104,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 		return df
 
 	@st.cache_resource
-	def telecomdatafile()
+	def telecomdatafile():
 		excel_content = io.BytesIO()
 
 		with open("telecomdata_protected.xlsx", 'rb') as f:
