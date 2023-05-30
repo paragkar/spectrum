@@ -1606,7 +1606,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 
 			st.write(df5gbts) # debug
 
-			df5gbts["Date"] = df5gbts["Date"].dt.date
+			# df5gbts["Date"] = df5gbts["Date"].dt.date
 
 			df5gbts.drop(columns = "S.No", inplace = True)
 
