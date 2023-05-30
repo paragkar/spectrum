@@ -1139,8 +1139,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 				    return reverse_dict.get(value)
 
 				if selected_operators ==[]:
-
-					for col in summarydf:
+					for col in summarydf.columns:
 						operatorname = get_key_from_value(operators,col)
 						summarydf.rename(columns = {col : operatorname}, inplace = True)
 				else:
