@@ -238,8 +238,6 @@ if authentication_status: #if authentication sucessful then app is rendered
 	    return df_counts
 
 
-
-
 	#defining various functions 
 	#preparing color scale for freqmap
 	@st.cache_resource
@@ -984,6 +982,9 @@ if authentication_status: #if authentication sucessful then app is rendered
 			)
 
 
+	#set flags for plotting the charts 
+
+	chart_data_flag = False #set this to true only if this chart exists.
 
 	# #Choose a dimension
 	# selected_dimension = st.sidebar.selectbox('Select a Dimension', ["Spectrum Band", "Auction Year"],0)
