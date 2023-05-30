@@ -1125,7 +1125,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 
 				def check_all_none_or_nan(lst):
     			
-    				return all(item is None or np.isnan(item) for item in lst)
+    			return all(item is None or np.isnan(item) for item in lst)
 
 				counts =[]
 				for row in sf.values:
