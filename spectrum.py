@@ -1132,6 +1132,8 @@ if authentication_status: #if authentication sucessful then app is rendered
 
 				chartdata_df = count_items_in_dataframe(sf)*channelsize_dict[Band]
 
+				st.write(chartdata_df)
+
 				chartdata_df.index = sf.index
 
 				def get_key_from_value(dictionary, value):
@@ -1154,7 +1156,6 @@ if authentication_status: #if authentication sucessful then app is rendered
 				chartdata_df.sort_values("Total", ascending=False, inplace = True)
 
 				chartdata_df = chartdata_df.T
-				st.write(chartdata_df)
 
 				chart_data_flag = True #Plot only if this is true 
 
