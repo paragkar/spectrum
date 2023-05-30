@@ -229,7 +229,8 @@ if authentication_status: #if authentication sucessful then app is rendered
 	    for col in df.columns:
 	        for idx, item in enumerate(df[col]):
 	            if isinstance(item, (int, float)) and not pd.isnull(item):
-	                item_key = str(item)  # Convert float item to string
+	                # item_key = str(item)  # Convert float item to string
+	                item_key = int(item) #debug
 	                if item_key not in counts:
 	                    counts[item_key] = [0] * len(df)
 	                counts[item_key][idx] += 1
@@ -1129,12 +1130,6 @@ if authentication_status: #if authentication sucessful then app is rendered
 
 
 				#processing for data for data tab
-
-				sf = sf.fillna(100)
-
-				sf = sf.astype('int64')
-
-				sf = sf.replace(100, np.nan)
 
 
 				chartdata_df = count_items_in_dataframe(sf)*channelsize_dict[Band]
