@@ -224,10 +224,11 @@ if authentication_status: #if authentication sucessful then app is rendered
 	def count_items(lst):
 		counts = {}
 		for item in lst:
-		    if item in counts:
+		    if (item in counts) and (item != np.nan):
 		        counts[item] += 1
 		    else:
-		        counts[item] = 1
+		    	if item != np.nan:
+		        	counts[item] = 1
 		return counts
 
 
