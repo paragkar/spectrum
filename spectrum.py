@@ -2336,7 +2336,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 		st.header(title)
 		st.markdown(subtitle)
 		col1,col2 = st.columns([14,1]) #for listing the summary chart for freq layout
-		if flagsummary = True
+		if flagsummary == True
 			col1.plotly_chart(fig, use_container_width=True)
 			col2.write(summarydf)
 		else:
