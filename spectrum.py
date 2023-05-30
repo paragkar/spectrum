@@ -1126,13 +1126,15 @@ if authentication_status: #if authentication sucessful then app is rendered
 
 				st.write(sf) #debug
 
+				counts =[]
+
 				for row in sf.values:
-					st.write(count_items(row))
+					counts.append(count_items(row))
 	
 
-				# summarydf = pd.DataFrame(counts)*channelsize_dict[Band]
+				summarydf = pd.DataFrame(counts)*channelsize_dict[Band]
 
-				# st.write(summarydf)
+				st.write(summarydf)
 
 
 				#-----New Lines -------
