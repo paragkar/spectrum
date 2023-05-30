@@ -1134,6 +1134,8 @@ if authentication_status: #if authentication sucessful then app is rendered
 
 				summarydf.index = sf.index
 
+				st.write(summarydf)
+
 				def get_key_from_value(dictionary, value):
 				    reverse_dict = {v: k for k, v in dictionary.items()}
 				    return reverse_dict.get(value)
