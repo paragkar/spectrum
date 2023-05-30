@@ -1608,7 +1608,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 
 			# df5gbts["Date"] = df5gbts["Date"].dt.date
 
-			df5gbts.drop(columns = "S.No", inplace = True)
+			# df5gbts.drop(columns = "S.No", inplace = True)
 
 			df5gbtsf = pd.pivot(df5gbts, values ="Total", index = "StateCode", columns = "Date")
 
