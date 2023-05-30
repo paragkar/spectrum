@@ -1134,15 +1134,15 @@ if authentication_status: #if authentication sucessful then app is rendered
 
 				summarydf.index = sf.index
 
-				st.write(operators)
+				if selected_operators =[]:
+					cols_to_replace = operators
+				else:
+					cols_to_replace = selected_operators
 
+				for col in summarydf:
+					summarydf.rename(columns = {col : cols_to_replace[int(col)]}, inplace = True)
 
-				# for col in summarydf:
-				# 	summarydf.rename(columns = {col : selected_operators[int(col)]}, inplace = True)
-
-				# summarydf.index = sf.index
-
-				# st.write(summarydf)
+				st.write(summarydf)
 
 
 				#-----New Lines -------
