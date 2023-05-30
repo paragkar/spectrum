@@ -1357,18 +1357,11 @@ if authentication_status: #if authentication sucessful then app is rendered
 						temp = bandexpcalsheetf.replace(regexfilt, np.nan, regex = True)
 						temp = temp.replace(selected_operator,'', regex = True)
 					else:
-						# regexfilt = '[0-9.]+'+selected_operator+'U'  #to replace na.npn with text ending RU with names with the selected operator
-						# temp = bandexpcalsheetf.replace(regexfilt, np.nan, regex = True)
-						# regexfilt = '^(?!.*'+selected_operator+').*' #to replace na.npn with text embedded with names of other than the selected operator
-						# temp = temp.replace(regexfilt, np.nan, regex = True)
-						# temp = temp.replace(selected_operator,'', regex = True)
-
-						regexfilt = '[0-9.]+'+selected_operator  #to replace na.npn with text ending RU with names with the selected operator
+						regexfilt = '[0-9.]+'+selected_operator+'U'  #to replace na.npn with text ending RU with names with the selected operator
 						temp = bandexpcalsheetf.replace(regexfilt, np.nan, regex = True)
 						regexfilt = '^(?!.*'+selected_operator+').*' #to replace na.npn with text embedded with names of other than the selected operator
 						temp = temp.replace(regexfilt, np.nan, regex = True)
 						temp = temp.replace(selected_operator,'', regex = True)
-
 					
 						
 					
