@@ -1118,14 +1118,20 @@ if authentication_status: #if authentication sucessful then app is rendered
 
 				st.write(sf) #debug
 
+				#check of all items in the list are none of np.nan
+
+				def check_all_none_or_nan(lst):
+    				return all(item is None or np.isnan(item) for item in lst)
+
 
 				#-----New Lines -------
 
 				counts =[]
 				for row in sf.values:
-					counts.append(count_items(row))
+					if not check_all_none_or_nan(row):
+						counts.append(count_items(row))
 
-				summarydf = pd.DataFrame(counts)*channelsize_dict[Band].dropna(axis=1)
+				summarydf = pd.DataFrame(counts)*channelsize_dict[Band]
 
 				st.write(summarydf)
 
