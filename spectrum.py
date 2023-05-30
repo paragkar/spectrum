@@ -1132,13 +1132,15 @@ if authentication_status: #if authentication sucessful then app is rendered
 
 				summarydf = count_items_in_dataframe(sf)
 
-
-				for col in summarydf:
-					summarydf.rename(columns = {col : selected_operators[int(col)]}, inplace = True)
-
-				summarydf.index = sf.index
-
 				st.write(summarydf)
+
+
+				# for col in summarydf:
+				# 	summarydf.rename(columns = {col : selected_operators[int(col)]}, inplace = True)
+
+				# summarydf.index = sf.index
+
+				# st.write(summarydf)
 
 
 				#-----New Lines -------
