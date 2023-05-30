@@ -1604,7 +1604,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 
 			df5gbts = dfT["5GBTS"] #load 5G BTS deployment data from excel file
 
-			st.write(df5gbts) # debug
+			# st.write(df5gbts) # debug
 
 			# df5gbts["Date"] = df5gbts["Date"].dt.date
 
