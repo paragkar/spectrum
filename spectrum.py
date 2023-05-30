@@ -1134,7 +1134,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 				summarydf = pd.DataFrame(counts)*channelsize_dict[Band]
 
 				for col in summarydf:
-					summarydf.rename(col : selected_operators[col], inplace = True)
+					summarydf.rename(columns = {col : selected_operators[col]}, inplace = True)
 
 				st.write(summarydf)
 
