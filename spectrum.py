@@ -84,20 +84,40 @@ if authentication_status: #if authentication sucessful then app is rendered
 					'''
 	st.markdown(hide_st_style, unsafe_allow_html =True)
 
+	@st.cache_resource
+	def loadspectrumfile():
 
-	password = st.secrets["db_password"]
+		password = st.secrets["db_password"]
 
-	excel_content = io.BytesIO()
+		excel_content = io.BytesIO()
 
-	with open("spectrum_map_protected.xlsx", 'rb') as f:
-		excel = msoffcrypto.OfficeFile(f)
-		excel.load_key(password)
-		excel.decrypt(excel_content)
+		with open("spectrum_map_protected.xlsx", 'rb') as f:
+			excel = msoffcrypto.OfficeFile(f)
+			excel.load_key(password)
+			excel.decrypt(excel_content)
 
-	#loading data from excel file
-	xl = pd.ExcelFile(excel_content)
-	sheet = xl.sheet_names
-	df = pd.read_excel(excel_content, sheet_name=sheet)
+		#loading data from excel file
+		xl = pd.ExcelFile(excel_content)
+		sheet = xl.sheet_names
+		df = pd.read_excel(excel_content, sheet_name=sheet)
+
+		return df
+
+	@st.cache_resource
+	def telecomdatafile()
+		excel_content = io.BytesIO()
+
+		with open("telecomdata_protected.xlsx", 'rb') as f:
+			excel = msoffcrypto.OfficeFile(f)
+			excel.load_key(password)
+			excel.decrypt(excel_content)
+
+		#loading data from excel file, the last letter "T" stands for telecom
+		xlT = pd.ExcelFile(excel_content)
+		sheetT = xlT.sheet_names
+		dfT = pd.read_excel(excel_content, sheet_name=sheetT)
+
+		return dfT
 
 	  
 	#Defining Dictionaries	
@@ -961,6 +981,11 @@ if authentication_status: #if authentication sucessful then app is rendered
 		spectrumofferedvssold = "Spectrum_Offered_vs_Sold"
 		masterall = "MasterAll-TDDValueConventional" #all auction related information 
 
+
+		#loading spectrum excel file
+
+		df = loadspectrumfile()
+
 		#processing colorcode excel data tab
 		colcodes = df["ColorCodes"]
 		colcodes=colcodes.set_index("Description")
@@ -1564,20 +1589,9 @@ if authentication_status: #if authentication sucessful then app is rendered
 
 	if selected_dimension == "Business Data":
 
-
-		excel_content = io.BytesIO()
-
-		with open("telecomdata_protected.xlsx", 'rb') as f:
-			excel = msoffcrypto.OfficeFile(f)
-			excel.load_key(password)
-			excel.decrypt(excel_content)
-
-		#loading data from excel file, the last letter "T" stands for telecom
-		xlT = pd.ExcelFile(excel_content)
-		sheetT = xlT.sheet_names
-		dfT = pd.read_excel(excel_content, sheet_name=sheetT)
-
-
+		@st.cache_resource
+		dfT = telecomdatafile()
+		
 		Feature = st.sidebar.selectbox('Select a Feature', ["5GBTS Trends", "Subscriber Trends", "Subscriber MShare"])
 
 		if Feature== "5GBTS Trends":
@@ -2237,7 +2251,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 			  font=dict(size=12),
 			  template='simple_white',
 			  paper_bgcolor=None,
-			  height=575, 
+			  height=600, 
 			  width=1200,
 			  margin=dict(t=80, b=50, l=50, r=50, pad=0),
 			  yaxis=dict(
