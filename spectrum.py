@@ -223,17 +223,18 @@ if authentication_status: #if authentication sucessful then app is rendered
 
 
 	#function to count number of items in a list and outputs the result as dictionary      	   
-	def count_items(lst):
-	    counts = defaultdict(int)
-	    
-	    for item in lst:
-	        if item is not None and not isinstance(item, float) and not isinstance(item, str) and not isinstance(item, int):
-	            continue
-	        if isinstance(item, float) and item != item:
-	            continue
-	        counts[item] += 1
-	    
-	    return dict(counts)
+	def count_items_in_dataframe(df):
+	    counts = {}
+
+	    for col in df.columns:
+	        for item in df[col]:
+	            if isinstance(item, int) and item != 0 and not np.isnan(item):
+	                if item not in counts:
+	                    counts[item] = [0] * len(df.columns)
+	                counts[item][col] += 1
+
+	    df_counts = pd.DataFrame.from_dict(counts, orient='index', columns=df.columns)
+	    return df_counts
 
 
 	#defining various functions 
@@ -1126,19 +1127,12 @@ if authentication_status: #if authentication sucessful then app is rendered
 				#processing for summarydf to be listed on the left hand side as a summary
 				#-----New Lines -------
 
-				counts =[]
-
-				for row in sf.values:
-					counts.append(count_items(row))
-
-				summarydf = pd.DataFrame(counts)*channelsize_dict[Band]
+				summarydf = count_items_in_dataframe(sf)
 
 				for col in summarydf:
 					summarydf.rename(columns = {col : selected_operators[int(col)]}, inplace = True)
 
 				summarydf.index = sf.index
-
-				summarydf = summarydf.round(1)
 
 
 				#-----New Lines -------
