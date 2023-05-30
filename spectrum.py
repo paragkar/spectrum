@@ -226,14 +226,15 @@ if authentication_status: #if authentication sucessful then app is rendered
 	def count_items_in_dataframe(df):
 	    counts = {}
 
-	    for i in range(len(df.columns)):
-	        for item in df.iloc[:,i]:
-	            if isinstance(item, (int, float)) and not np.isnan(item):
-	                if item not in counts:
-	                    counts[item] = [0] * len(df.columns)
-	                counts[item][i] += 1
+	    for col in df.columns:
+	        for idx, item in enumerate(df[col]):
+	            if isinstance(item, (int, float)) and not pd.isnull(item):
+	                item_key = str(item)  # Convert float item to string
+	                if item_key not in counts:
+	                    counts[item_key] = [0] * len(df)
+	                counts[item_key][idx] += 1
 
-	    df_counts = pd.DataFrame.from_dict(counts, orient='index', columns=df.columns)
+	    df_counts = pd.DataFrame.from_dict(counts, orient='columns')
 	    return df_counts
 
 
@@ -1129,14 +1130,15 @@ if authentication_status: #if authentication sucessful then app is rendered
 				#processing for summarydf to be listed on the left hand side as a summary
 				#-----New Lines -------
 
-				# summarydf = count_items_in_dataframe(sf)
+				summarydf = count_items_in_dataframe(sf)
 
-				# st.write(summarydf)
 
-				# # for col in summarydf:
-				# # 	summarydf.rename(columns = {col : selected_operators[int(col)]}, inplace = True)
+				for col in summarydf:
+					summarydf.rename(columns = {col : selected_operators[int(col)]}, inplace = True)
 
-				# # summarydf.index = sf.index
+				summarydf.index = sf.index
+
+				st.write(summarydf)
 
 
 				#-----New Lines -------
