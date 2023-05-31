@@ -2126,9 +2126,9 @@ if authentication_status: #if authentication sucessful then app is rendered
 
 		if Feature == "TelecomLicense Fees":
 
-			dflfsf = dfT["LFSF"]
+			# dflfsf = dfT["LFSF"]
 
-			st.write(dflfsf)
+			st.write(dfT)
 
 		#----------Plotting The Final Chart -----------#
 
