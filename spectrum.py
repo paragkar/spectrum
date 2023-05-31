@@ -2163,8 +2163,10 @@ if authentication_status: #if authentication sucessful then app is rendered
 
 			st.write(dflfsf)
 
-			dflfsf = dflfsf.replace(to_replace=r'–', value="-", regex=True)
+			regex = re.sub(r'[^A-Za-z\-()/\s]', '', string)
+			
 
+			dflfsf = dflfsf.replace(r'[^A-Za-z0-9\-()/\s.]','', regex=True)
 
 
 			st.write(sorted(list(set(dflfsf["LicenseType"]))))
