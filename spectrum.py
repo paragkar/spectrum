@@ -2166,11 +2166,22 @@ if authentication_status: #if authentication sucessful then app is rendered
 
 			dflfsf = dflfsf.replace(r'[^A-Za-z0-9\-()/\s.]','', regex=True)
 
+			dflfsfprocess = dflfsf.copy()
 
 			listoflicensetypes = sorted(list(set(dflfsf["LicenseType"])))
 			listofoperators = sorted(list(set(dflfsf["Operators"])))
 
-			st.write(listofoperators)
+			selected_category = st.sidebar.multiselect('Select Categories', ["LF", "SF"])
+
+			if selected_category==[]:
+
+				dflfsfprocess = dflfsf.copy()
+			else:
+
+				dflfsfprocess = dflfsf[dflfsf["Category"]==selected_category[0]]
+
+			st.write(dflfsfprocess)
+
 
 
 
