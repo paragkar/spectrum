@@ -1651,7 +1651,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 
 		dfT = loadtelecomdatafile()
 		
-		Feature = st.sidebar.selectbox('Select a Feature', ["5GBTS Trends", "Subscriber Trends", "Subscriber MShare"])
+		Feature = st.sidebar.selectbox('Select a Feature', ["5GBTS Trends", "Subscriber Trends", "Subscriber MShare", "TelecomLicense Fees"])
 
 		if Feature== "5GBTS Trends":
 
@@ -2123,6 +2123,19 @@ if authentication_status: #if authentication sucessful then app is rendered
 
 			hovertext = htext_businessdata_telesubsms(dftotal,dftotalpercentms)
 
+
+		if Feature == "TelecomLicense Fees":
+
+			@st.cache_resource
+			def loaddatafees():
+
+				df = dfT["LF_SF"] #load 5G BTS deployment data from excel file
+
+				return df
+
+			st.write(df)
+
+		#----------Plotting The Final Chart -----------#
 
 			data = [go.Heatmap(
 					z = dftotalpercentms.values,
