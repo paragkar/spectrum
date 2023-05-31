@@ -2179,7 +2179,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 
 				dflfsfprocess = dflfsf[dflfsf["Category"]==selected_category[0]]
 
-			dflfsfprocess = dflfsfprocess.groupby(['Category','LicenseType','FY']).sum()
+			dflfsfprocess = dflfsfprocess.groupby(['Category','LicenseType','FY', 'Operators']).sum()
 
 			st.write(dflfsfprocess)
 
