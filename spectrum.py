@@ -2202,7 +2202,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 					]
 
 
-
+			subtitle = ""
 
 
 
