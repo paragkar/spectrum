@@ -2179,6 +2179,8 @@ if authentication_status: #if authentication sucessful then app is rendered
 
 				dflfsfprocess = dflfsf[dflfsf["Category"]==selected_category[0]]
 
+			dflfsfprocess = dflfsfprocess.groupby(['Category']).sum()
+
 			dflfsfbylicense = dflfsfprocess.pivot(index ='LicenseType', columns ='FY', values ='Amount') 
 
 			st.write(dflfsfbylicense)
