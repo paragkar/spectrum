@@ -2126,7 +2126,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 
 		if Feature == "TelecomLicense Fees":
 
-			dflfsf = dfT["LF_SF"]
+			dflfsf = dfT["LFSF"]
 
 			st.write(dflfsf)
 
