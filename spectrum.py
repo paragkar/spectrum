@@ -1675,7 +1675,9 @@ if authentication_status: #if authentication sucessful then app is rendered
 
 			df5gbtsf = round(df5gbtsf/1000,2) #convert the BTS data in thousands (K)
 
-			df5gbtsf = df5gbtsf.iloc[:,-16:] #select on last 16 dates 
+			df5gbtsf = df5gbtsf.iloc[:,-16:] #select on last 16 dates
+
+			print(df5gbtsf) #debug
 
 
 			SubFeature = st.sidebar.selectbox('Select a SubFeature', ["Cumulative Values", "Percent of Total", "Incremental Values"])
