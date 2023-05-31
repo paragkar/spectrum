@@ -1677,7 +1677,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 
 			df5gbtsf = df5gbtsf.iloc[:,-16:] #select on last 16 dates
 
-			df5gbtsf.columns = pd.to_datetime(df5gbtsf.columns) #debug
+			df5gbtsf.columns = pd.to_datetime(df5gbtsf.columns).date() #debug
 
 
 			SubFeature = st.sidebar.selectbox('Select a SubFeature', ["Cumulative Values", "Percent of Total", "Incremental Values"])
