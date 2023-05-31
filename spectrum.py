@@ -2169,7 +2169,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 
 				lst.append(item.rstrip())
 
-			dflsf["LicenseType"] = lst
+			dflfsf["LicenseType"] = lst
 
 
 			st.write(sorted(list(set(dflfsf["LicenseType"]))))
