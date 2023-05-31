@@ -2124,14 +2124,6 @@ if authentication_status: #if authentication sucessful then app is rendered
 			hovertext = htext_businessdata_telesubsms(dftotal,dftotalpercentms)
 
 
-		if Feature == "TelecomLicense Fees":
-
-			dflfsf = dfT["LFSF"]
-
-			st.write(dflfsf)
-
-		#----------Plotting The Final Chart -----------#
-
 			data = [go.Heatmap(
 					z = dftotalpercentms.values,
 					y = dftotalpercentms.index,
@@ -2163,6 +2155,13 @@ if authentication_status: #if authentication sucessful then app is rendered
 
 			hoverlabel_bgcolor = "#000000" #subdued black
 			subtitle = "Unit - % of Total; Total in Millions ; Selected Category -"+ ",".join(selected_category)+ " ;Source - TRAI"
+
+
+		if Feature == "TelecomLicense Fees":
+
+			dflfsf = dfT["LFSF"]
+
+			st.write(dflfsf)
 
 
 
