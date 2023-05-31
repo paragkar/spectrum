@@ -2126,16 +2126,9 @@ if authentication_status: #if authentication sucessful then app is rendered
 
 		if Feature == "TelecomLicense Fees":
 
-			@st.cache_resource
-			def loaddatafees():
+			dflfsf = dfT["LF_SF"]
 
-				df = dfT["LF_SF"] #load 5G BTS deployment data from excel file
-
-				return df
-
-			df = loaddatafees()
-
-			st.write(df)
+			st.write(dflfsf)
 
 		#----------Plotting The Final Chart -----------#
 
