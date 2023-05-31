@@ -1677,6 +1677,8 @@ if authentication_status: #if authentication sucessful then app is rendered
 
 			df5gbtsf = df5gbtsf.iloc[:,-16:] #select on last 16 dates
 
+			#converting the columns into datetime and then date
+
 			df5gbtsf.columns = pd.to_datetime(df5gbtsf.columns) #debug
 			df5gbtsf.columns= [x.date() for x in list(df5gbtsf.columns)]
 
@@ -2168,6 +2170,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 
 			dflfsf = dflfsf.replace(r'[^A-Za-z0-9\-()/\s.]','', regex=True)
 
+
 			dflfsfprocess = dflfsf.copy()
 
 			listoflicensetypes = sorted(list(set(dflfsf["LicenseType"])))
@@ -2191,8 +2194,8 @@ if authentication_status: #if authentication sucessful then app is rendered
 
 			data = [go.Heatmap(
 					z = dflfsfbylicense.values,
-					y = dflfsfbylicense.index,
-					x = dflfsfbylicense.columns,
+					x = dflfsfbylicense.index,
+					y = dflfsfbylicense.columns,
 					xgap = 1,
 					ygap = 1,
 					hoverinfo ='text',
