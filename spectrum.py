@@ -2183,7 +2183,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 
 			dflfsfbylicense = dflfsfprocess.pivot(index ='LicenseType', columns ='FY', values ='Amount') 
 
-			st.write(dflfsfprocess)
+			st.write(dflfsfbylicense)
 
 
 
