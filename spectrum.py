@@ -2183,6 +2183,8 @@ if authentication_status: #if authentication sucessful then app is rendered
 
 			dflfsfbylicense = round(dflfsfprocess.pivot(index ='LicenseType', columns ='FY', values ='Amount').sort_values("2023-2024", ascending = False)/10000000,1)
 
+			dflfsfbylicense = dflfsfbylicense.head(20)
+
 
 			data = [go.Heatmap(
 					z = dflfsfbylicense.values,
@@ -2346,6 +2348,13 @@ if authentication_status: #if authentication sucessful then app is rendered
 		xdtickangle= 0
 		xdtickval=1
 		title = "Indian Telecom Operator's Latest Subs Market Share"
+
+	if (selected_dimension == "Business Data") and (Feature == "TelecomLicense Fees"):
+
+		# fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
+		xdtickangle= 0
+		xdtickval=1
+		title = "Indian Telecom Fees by License Category"
 		
 
 
