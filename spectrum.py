@@ -2181,7 +2181,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 
 			dflfsfprocess = dflfsfprocess.groupby(['Category','LicenseType','FY']).sum().drop(columns=["Operators"], axis =1).reset_index()
 
-			dflfsfbylicense = dflfsfprocess.pivot(index ='LicenseType', columns ='FY', values ='Amount').sort_values("2023-2024", ascending = True)
+			dflfsfbylicense = dflfsfprocess.pivot(index ='LicenseType', columns ='FY', values ='Amount').sort_values("2023-2024", ascending = False)
 
 			st.write(dflfsfbylicense)
 
