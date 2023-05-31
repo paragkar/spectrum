@@ -2133,6 +2133,8 @@ if authentication_status: #if authentication sucessful then app is rendered
 
 				return df
 
+			df = loaddatafees()
+
 			st.write(df)
 
 		#----------Plotting The Final Chart -----------#
