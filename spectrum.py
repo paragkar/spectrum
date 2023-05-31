@@ -2183,7 +2183,21 @@ if authentication_status: #if authentication sucessful then app is rendered
 
 			dflfsfbylicense = round(dflfsfprocess.pivot(index ='LicenseType', columns ='FY', values ='Amount').sort_values("2023-2024", ascending = False)/10000000,1)
 
-			st.write(dflfsfbylicense)
+
+			data = [go.Heatmap(
+					z = dflfsfbylicense.values,
+					y = dflfsfbylicense.index,
+					x = dflfsfbylicense.columns,
+					xgap = 1,
+					ygap = 1,
+					hoverinfo ='text',
+					# text = hovertext,
+					colorscale='reds',
+						texttemplate="%{z}", 
+						textfont={"size":10},
+						# reversescale=True,
+						),
+					]
 
 
 
