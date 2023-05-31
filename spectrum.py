@@ -2181,8 +2181,6 @@ if authentication_status: #if authentication sucessful then app is rendered
 
 			dflfsfprocess = dflfsfprocess.groupby(['Category','LicenseType','FY', 'Operators']).sum()
 
-			st.write(dflfsfprocess)
-
 			# dflfsfbylicense = dflfsfprocess.pivot(index ='LicenseType', columns ='FY', values ='Amount') 
 
 
