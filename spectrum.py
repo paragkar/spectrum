@@ -2162,8 +2162,6 @@ if authentication_status: #if authentication sucessful then app is rendered
 			dflfsf = dfT["LFSF"]
 
 			st.write(dflfsf)
-
-			regex = re.sub(r'[^A-Za-z\-()/\s]', '', string)
 			
 
 			dflfsf = dflfsf.replace(r'[^A-Za-z0-9\-()/\s.]','', regex=True)
