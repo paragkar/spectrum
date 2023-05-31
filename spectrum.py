@@ -2161,7 +2161,6 @@ if authentication_status: #if authentication sucessful then app is rendered
 
 			dflfsf = dfT["LFSF"]
 
-			st.write(dflfsf)
 			
 
 			dflfsf = dflfsf.replace(r'[^A-Za-z0-9\-()/\s.]','', regex=True)
@@ -2173,7 +2172,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 
 			selected_category = st.sidebar.multiselect('Select Categories', ["LF", "SF"])
 
-			if selected_category==[]:
+			if (len(selected_category)==0) or (len(selected_category)==2):
 
 				dflfsfprocess = dflfsf.copy()
 			else:
