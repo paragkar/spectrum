@@ -2163,7 +2163,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 
 			st.write(dflfsf)
 
-			st.write(set(dflfsf["LicenseType"]))
+			st.write(sorted(list(set(dflfsf["LicenseType"]))))
 
 
 
