@@ -2195,7 +2195,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 
 			dflfsfbyoperator = round(dflfsfprocess.pivot(index ='Operators', columns ='FY', values ='Amount').sort_values(selected_fy_for_sort, ascending = False)/10000000,0)
 
-			SubFeature = st.radio('Select an Option', ["Absolute", "Percentage"])
+			SubFeature = st.radio('Click an Option', ["Absolute", "Percentage"])
 
 			summarydf = dflfsfbyoperator.sum(axis =0)
 
