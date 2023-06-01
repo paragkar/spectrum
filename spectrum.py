@@ -2177,14 +2177,14 @@ if authentication_status: #if authentication sucessful then app is rendered
 			    return dictionary
 
 			operator_dict = dataframe_to_dictionary(dfoperatornames)
-
-			st.write(operator_dict)
 			
 
 			dflfsf = dflfsf.replace(r'[^A-Za-z0-9\-()/\s.]','', regex=True)
 
 
 			dflfsfprocess = dflfsf.copy()
+
+			dflfsfprocess = dflfsfprocess.replace(operator_dict)
 
 			listoflicensetypes = sorted(list(set(dflfsf["LicenseType"])))
 
