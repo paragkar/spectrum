@@ -2388,7 +2388,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 	if (selected_dimension == "Business Data") and (Feature == "TelecomLicense Fees"):
 
 		# fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
-		xdtickangle= -45
+		xdtickangle= 0
 		xdtickval=1
 		title = "Indian Telecom License Fees Trend (Top 20 - % of Total)"
 		
