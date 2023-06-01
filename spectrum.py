@@ -2194,8 +2194,8 @@ if authentication_status: #if authentication sucessful then app is rendered
 
 			data = [go.Heatmap(
 					z = dflfsfbylicense.values,
-					x = dflfsfbylicense.index,
-					y = dflfsfbylicense.columns,
+					y = dflfsfbylicense.index,
+					x = dflfsfbylicense.columns,
 					xgap = 1,
 					ygap = 1,
 					hoverinfo ='text',
