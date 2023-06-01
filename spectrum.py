@@ -2470,7 +2470,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 
 
 		if (selected_dimension=="Business Data") and (Feature=="License Fees"):
-			col1val =3.5
+			col1val =3
 		else:
 			col1val = 0.2
 
