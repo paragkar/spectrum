@@ -2397,7 +2397,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 		# fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 		xdtickangle= -45
 		xdtickval=1
-		title = "Indian Telecom License Fees Trend (Top 20 Licensees - % of Total)"
+		title = "Indian Telecom License Fees Trend (Top 20 - % of Total)"
 		
 
 
