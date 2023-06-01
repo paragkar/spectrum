@@ -2168,10 +2168,17 @@ if authentication_status: #if authentication sucessful then app is rendered
 
 			dfoperatornames = dfT["LFSF_Op_Names_Map"]
 
-			operators_dict = dfoperatornames.groupby(['Mapped_Names']).apply(lambda x: x['Original_Names']).to_dict()
+			def dataframe_to_dictionary(df):
+			    dictionary = {}
+			    for index, row in df.iterrows():
+			        key = row[0]
+			        value = row[1]
+			        dictionary[key] = value
+			    return dictionary
 
-			st.write(operators_dict)
+			operator_dict = dataframe_to_dictionary(dfoperatornames)
 
+			st.write(operator_dict)
 			
 
 			dflfsf = dflfsf.replace(r'[^A-Za-z0-9\-()/\s.]','', regex=True)
