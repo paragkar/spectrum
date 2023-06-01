@@ -2218,8 +2218,6 @@ if authentication_status: #if authentication sucessful then app is rendered
 			summarydf = summarydf.reset_index()
 			summarydf.columns = ["FY", "Total Fees"]
 
-			st.write(summarydf)
-
 			# summarydf = summarydf.sort_values("Dates", ascending = False)
 
 			#preparing the summary chart 
@@ -2228,11 +2226,12 @@ if authentication_status: #if authentication sucessful then app is rendered
 
 			dflfsfbyoperator = dflfsfbyoperator.head(20)
 
+			dflfsfbyoperatorpercent = (dflfsfbyoperator/summarydf)*100
 
 			data = [go.Heatmap(
-					z = dflfsfbyoperator.values,
-					y = dflfsfbyoperator.index,
-					x = dflfsfbyoperator.columns,
+					z = dflfsfbyoperatorpercent.values,
+					y = dflfsfbyoperatorpercent.index,
+					x = dflfsfbyoperatorpercent.columns,
 					xgap = 1,
 					ygap = 1,
 					hoverinfo ='text',
