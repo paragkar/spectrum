@@ -2166,6 +2166,10 @@ if authentication_status: #if authentication sucessful then app is rendered
 
 			dflfsf = dfT["LFSF"]
 
+			operatornames = dfT["LFSF_Op_Names_Map"]
+
+			st.write(operatornames)
+
 			
 
 			dflfsf = dflfsf.replace(r'[^A-Za-z0-9\-()/\s.]','', regex=True)
