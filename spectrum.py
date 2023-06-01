@@ -2482,9 +2482,9 @@ if authentication_status: #if authentication sucessful then app is rendered
 	#------ New Code ------#
 	#Currently Blank but will be used to add notes regarding every chart
 
-	expander = st.expander("About This Page", expanded = False)
+		expander = st.expander("About This Page", expanded = False)
 
-	with expander:
+		with expander:
 		st.info("     ")
 
 
