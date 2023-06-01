@@ -2201,7 +2201,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 
 			if SubFeature=="Absolute":
 
-				df = dflfsfbyoperator.copy()
+				df = dflfsfbyoperator.head(20).copy()
 	
 			if SubFeature=="Percentage":
 
