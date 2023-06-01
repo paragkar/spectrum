@@ -2215,7 +2215,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 
 			summarydf = dflfsfbyoperator.sum(axis =0)
 
-			dflfsfbyoperatorpercent = ((dflfsfbyoperator/summarydf).head(20))*100
+			dflfsfbyoperatorpercent = round(((dflfsfbyoperator/summarydf).head(20))*100,2)
 
 			summarydf = summarydf.reset_index()
 			summarydf.columns = ["FY", "Total Fees"]
