@@ -2462,7 +2462,13 @@ if authentication_status: #if authentication sucessful then app is rendered
 
 		#plotting the summary chart
 
-		col1,col2,col3 = st.columns([0.2,14,1.1]) #create collumns of uneven width
+
+		if (selected_dimension=="Business Data") and (Feature=="TelecomLicense Fees"):
+			col1val =1
+		else:
+			col1val = 0.2
+
+		col1,col2,col3 = st.columns([col1val,14,1.1]) #create collumns of uneven width
 		if flag ==True:
 			# st.altair_chart(chart, use_container_width=True)
 			col2.altair_chart(chart, use_container_width=True)
