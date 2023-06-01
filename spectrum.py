@@ -2245,7 +2245,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 					]
 
 
-			subtitle = "Summary Total Units - Rs Cr"
+			subtitle = "Units - (Summary Total - Rs Cr) and (Values - % of Total)"
 
 
 
