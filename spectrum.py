@@ -2174,26 +2174,8 @@ if authentication_status: #if authentication sucessful then app is rendered
 			dflfsfprocess = dflfsf.copy()
 
 			listoflicensetypes = sorted(list(set(dflfsf["LicenseType"])))
-			listofoperators = sorted(list(set(dflfsf["Operators"])))
 
-			selected_operators = st.sidebar.multiselect('Select Operators', listofoperators)
-
-			if (len(selected_operators)==0):
-
-				dflfsfprocess = dflfsf.copy()
-			else:
-
-				temp = pd.DataFrame()
-
-				for operator in selected_operators:
-
-					dflfsfprocess = dflfsf[dflfsf["Operators"]==operator]
-
-					temp = pd.concat([temp, dflfsfprocess], axis =0)
-
-				dflfsfprocess = temp.copy()
-
-			dflfsfprocess = dflfsfprocess.groupby(['Category','Operators','FY']).sum().drop(columns=["LicenseType"], axis =1).reset_index()
+			listofFY = sorted(list(set(dflfsf["FY"])))
 
 
 			selected_category = st.sidebar.multiselect('Select Categories', ["LF", "SF"])
@@ -2207,15 +2189,26 @@ if authentication_status: #if authentication sucessful then app is rendered
 				dflfsfprocess = dflfsf[dflfsf["Category"]==selected_category[0]]
 
 
-			dflfsfprocess = dflfsfprocess.groupby(['Operators','FY']).sum().drop(columns=['Category'], axis =1).reset_index()
+			dflfsfprocess = dflfsfprocess.groupby(['Operators','FY']).sum().drop(columns=['Category', 'LicenseType'], axis =1).reset_index()
 
-			dflfsfbyoperator = round(dflfsfprocess.pivot(index ='Operators', columns ='FY', values ='Amount').sort_values("2023-2024", ascending = False)/10000000,0)
+			selected_fy_for_sort = st.sidebar.selectbox('Select FY for Sorting', listofFY)
 
-			#preparing the summary chart 
+			dflfsfbyoperator = round(dflfsfprocess.pivot(index ='Operators', columns ='FY', values ='Amount').sort_values(selected_fy_for_sort ascending = False)/10000000,0)
+
+			SubFeature = st.sidebar.selectbox('Select a SubFeature', ["Absolute", "Percentage"])
 
 			summarydf = dflfsfbyoperator.sum(axis =0)
 
-			dflfsfbyoperatorpercent = round(((dflfsfbyoperator/summarydf).head(20))*100,2)
+			if SubFeature=="Absolute":
+
+				df = dflfsfbyoperator.copy()
+	
+			if SubFeature=="Percentage":
+
+				df = round(((dflfsfbyoperator/summarydf).head(20))*100,2)
+
+
+			#preparing the summary chart 
 
 			summarydf = summarydf.reset_index()
 			summarydf.columns = ["FY", "Total Fees"]
@@ -2230,9 +2223,9 @@ if authentication_status: #if authentication sucessful then app is rendered
 
 
 			data = [go.Heatmap(
-					z = dflfsfbyoperatorpercent.values,
-					y = dflfsfbyoperatorpercent.index,
-					x = dflfsfbyoperatorpercent.columns,
+					z = df.values,
+					y = df.index,
+					x = df.columns,
 					xgap = 1,
 					ygap = 1,
 					hoverinfo ='text',
