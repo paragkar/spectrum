@@ -2193,6 +2193,8 @@ if authentication_status: #if authentication sucessful then app is rendered
 
 				dflfsfprocess = temp.copy()
 
+			dflfsfprocess = dflfsfprocess.groupby(['Category','Operators','FY']).sum().drop(columns=["LicenseType"], axis =1).reset_index()
+
 
 			selected_category = st.sidebar.multiselect('Select Categories', ["LF", "SF"])
 
@@ -2204,8 +2206,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 				dflfsfprocess = dflfsf[dflfsf["Category"]==selected_category[0]]
 
 
-
-			dflfsfprocess = dflfsfprocess.groupby(['Category','Operators','FY']).sum().drop(columns=["LicenseType"], axis =1).reset_index()
+			dflfsfprocess = dflfsfprocess.groupby(['Operators','FY']).sum().drop(columns=['Category'], axis =1).reset_index()
 
 			dflfsfbyoperator = round(dflfsfprocess.pivot(index ='Operators', columns ='FY', values ='Amount').sort_values("2023-2024", ascending = False)/10000000,0)
 
