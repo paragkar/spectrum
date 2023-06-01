@@ -2211,7 +2211,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 
 			dflfsfbyoperator = round(dflfsfprocess.pivot(index ='Operators', columns ='FY', values ='Amount').sort_values("2023-2024", ascending = False)/10000000,0)
 
-			summarydf = dflfsfbyoperator.sum(axis =1)
+			summarydf = dflfsfbyoperator.sum(axis =0)
 
 			st.write(summarydf)
 
