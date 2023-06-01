@@ -2176,26 +2176,46 @@ if authentication_status: #if authentication sucessful then app is rendered
 			listoflicensetypes = sorted(list(set(dflfsf["LicenseType"])))
 			listofoperators = sorted(list(set(dflfsf["Operators"])))
 
-			selected_category = st.sidebar.multiselect('Select Categories', ["LF", "SF"])
+			selected_operators = st.sidebar.multiselect('Select Categories', listofoperators)
 
-			if (len(selected_category)==0) or (len(selected_category)==2):
+			if (len(selected_operators)==0):
 
 				dflfsfprocess = dflfsf.copy()
 			else:
 
+				temp = pd.DataFrame()
+
+				for operator in selected_operators:
+
+					dflfsfprocess = dflfsf[dflfsf["Operators"]==operator]
+
+					temp = pd.concat([temp, dflfsfprocess], axis =0)
+
+				dflfsfprocess = temp.copy()
+
+
+			selected_category = st.sidebar.multiselect('Select Categories', ["LF", "SF"])
+
+			if (len(selected_category)==0) or (len(selected_category)==2):
+
+				pass
+			else:
+
 				dflfsfprocess = dflfsf[dflfsf["Category"]==selected_category[0]]
 
-			dflfsfprocess = dflfsfprocess.groupby(['Category','LicenseType','FY']).sum().drop(columns=["Operators"], axis =1).reset_index()
 
-			dflfsfbylicense = round(dflfsfprocess.pivot(index ='LicenseType', columns ='FY', values ='Amount').sort_values("2023-2024", ascending = False)/10000000,0)
 
-			dflfsfbylicense = dflfsfbylicense.head(20)
+			dflfsfprocess = dflfsfprocess.groupby(['Category','Operators','FY']).sum().drop(columns=["LicenseType"], axis =1).reset_index()
+
+			dflfsfbyoperator = round(dflfsfprocess.pivot(index ='Operators', columns ='FY', values ='Amount').sort_values("2023-2024", ascending = False)/10000000,0)
+
+			dflfsfbyoperator = dflfsfbyoperator.head(20)
 
 
 			data = [go.Heatmap(
-					z = dflfsfbylicense.values,
-					y = dflfsfbylicense.index,
-					x = dflfsfbylicense.columns,
+					z = dflfsfbyoperator.values,
+					y = dflfsfbyoperator.index,
+					x = dflfsfbyoperator.columns,
 					xgap = 1,
 					ygap = 1,
 					hoverinfo ='text',
@@ -2360,7 +2380,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 		# fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 		xdtickangle= -45
 		xdtickval=1
-		title = "Indian Telecom Fees by License Category"
+		title = "Indian Telecom Fees by Top 20 Operators"
 		
 
 
