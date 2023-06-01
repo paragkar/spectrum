@@ -2211,9 +2211,19 @@ if authentication_status: #if authentication sucessful then app is rendered
 
 			dflfsfbyoperator = round(dflfsfprocess.pivot(index ='Operators', columns ='FY', values ='Amount').sort_values("2023-2024", ascending = False)/10000000,0)
 
+			#preparing the summary chart 
+
 			summarydf = dflfsfbyoperator.sum(axis =0)
 
-			st.write(summarydf)
+			summarydf= round(summarydf/1000000,1) # converting the numbers to million
+			summarydf = summarydf.reset_index()
+			summarydf.columns = ["FY", "Total Fees"]
+
+			# summarydf = summarydf.sort_values("Dates", ascending = False)
+
+			#preparing the summary chart 
+			chart = summarychart(summarydf, 'FY', "Total Fees")
+			flag = True
 
 			dflfsfbyoperator = dflfsfbyoperator.head(20)
 
