@@ -2176,7 +2176,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 			listoflicensetypes = sorted(list(set(dflfsf["LicenseType"])))
 			listofoperators = sorted(list(set(dflfsf["Operators"])))
 
-			selected_operators = st.sidebar.multiselect('Select Categories', listofoperators)
+			selected_operators = st.sidebar.multiselect('Select Operators', listofoperators)
 
 			if (len(selected_operators)==0):
 
