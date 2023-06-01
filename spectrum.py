@@ -1913,7 +1913,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 				# 		options = listofallcolumns, value =(dftotal.columns[-24],dftotal.columns[-1]))
 
 				start_date, end_date = st.select_slider("Select a Range of Dates", 
-					options = listofallcolumns, value =(dftotal.columns[-24],dftotal.columns[-1]))
+					options = listofallcolumns, value =(dftotal.columns[-18],dftotal.columns[-1]))
 
 
 				date_range_list = get_selected_date_list(listofallcolumns, start_date, end_date)
@@ -1936,7 +1936,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 				subtitle = "Cumulative Values; Selected Category -" +",".join(selected_category)+ "; Selected Circles - "+ ",".join(selected_circles)+"; Unit - Millions; Sorted by the Recent Date"
 
 
-				if len(date_range_list) >=30:
+				if len(date_range_list) >=24:
 					texttemplate =""
 				else:
 					texttemplate = "%{z}"
