@@ -2219,10 +2219,12 @@ if authentication_status: #if authentication sucessful then app is rendered
 			summarydf = summarydf.reset_index()
 			summarydf.columns = ["FY", "Total Fees"]
 
+			st.write(summarydf)
+
 			# summarydf = summarydf.sort_values("Dates", ascending = False)
 
 			#preparing the summary chart 
-			chart = summarychart(summarydf, 'FY', "Total Fees")
+			chart = summarychart(summarydf, 'FY', 'Total Fees')
 			flag = True
 
 			dflfsfbyoperator = dflfsfbyoperator.head(20)
