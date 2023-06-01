@@ -2168,7 +2168,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 
 			dfoperatornames = dfT["LFSF_Op_Names_Map"]
 
-			operators_dict = dfoperatornames.groupby(['Mapped_Names']).apply(lambda x: x['Original_Names'].to_dict()
+			operators_dict = dfoperatornames.groupby(['Mapped_Names']).apply(lambda x: x['Original_Names']).to_dict()
 
 			st.write(operators_dict)
 
