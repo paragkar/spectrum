@@ -2485,7 +2485,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 		expander = st.expander("About This Page", expanded = False)
 
 		with expander:
-		st.info("     ")
+			st.info("     ")
 
 
 
