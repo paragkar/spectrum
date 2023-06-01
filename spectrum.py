@@ -2175,7 +2175,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 
 			listoflicensetypes = sorted(list(set(dflfsf["LicenseType"])))
 
-			listofFY = sorted(list(set(dflfsf["FY"])))
+			listofFY = list(set(dflfsf["FY"]))
 
 
 			selected_category = st.sidebar.multiselect('Select Categories', ["LF", "SF"])
