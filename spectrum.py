@@ -1651,7 +1651,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 
 		dfT = loadtelecomdatafile()
 		
-		Feature = st.sidebar.selectbox('Select a Feature', ["5GBTS Trends", "Subscriber Trends", "Subscriber MShare", "TelecomLicense Fees"])
+		Feature = st.sidebar.selectbox('Select a Feature', ["5GBTS Trends", "Subscriber Trends", "Subscriber MShare", "License Fees"])
 
 		if Feature== "5GBTS Trends":
 
@@ -2162,7 +2162,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 			subtitle = "Unit - % of Total; Total in Millions ; Selected Category -"+ ",".join(selected_category)+ " ;Source - TRAI"
 
 
-		if Feature == "TelecomLicense Fees":
+		if Feature == "License Fees":
 
 			dflfsf = dfT["LFSF"]
 
@@ -2385,7 +2385,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 		xdtickval=1
 		title = "Indian Telecom Operator's Latest Subs Market Share"
 
-	if (selected_dimension == "Business Data") and (Feature == "TelecomLicense Fees"):
+	if (selected_dimension == "Business Data") and (Feature == "License Fees"):
 
 		# fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 		xdtickangle= 0
@@ -2456,7 +2456,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 		#plotting the summary chart
 
 
-		if (selected_dimension=="Business Data") and (Feature=="TelecomLicense Fees"):
+		if (selected_dimension=="Business Data") and (Feature=="License Fees"):
 			col1val =3.5
 		else:
 			col1val = 0.2
