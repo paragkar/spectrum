@@ -2215,7 +2215,6 @@ if authentication_status: #if authentication sucessful then app is rendered
 
 			summarydf = dflfsfbyoperator.sum(axis =0)
 
-			summarydf= round(summarydf/1000000,1) # converting the numbers to million
 			summarydf = summarydf.reset_index()
 			summarydf.columns = ["FY", "Total Fees"]
 
