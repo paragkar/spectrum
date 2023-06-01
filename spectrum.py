@@ -2170,7 +2170,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 
 			operators_dict = dfoperatornames.groupby(['Mapped_Names']).apply(lambda x: x['Original_Names'].tolist()).to_dict()
 
-			st.wtite(operators_dict)
+			st.write(operators_dict)
 
 			
 
