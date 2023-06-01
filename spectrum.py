@@ -2215,6 +2215,8 @@ if authentication_status: #if authentication sucessful then app is rendered
 
 			summarydf = dflfsfbyoperator.sum(axis =0)
 
+			dflfsfbyoperatorpercent = (dflfsfbyoperator/summarydf)*100
+
 			summarydf = summarydf.reset_index()
 			summarydf.columns = ["FY", "Total Fees"]
 
@@ -2226,7 +2228,6 @@ if authentication_status: #if authentication sucessful then app is rendered
 
 			dflfsfbyoperator = dflfsfbyoperator.head(20)
 
-			dflfsfbyoperatorpercent = (dflfsfbyoperator/summarydf)*100
 
 			data = [go.Heatmap(
 					z = dflfsfbyoperatorpercent.values,
