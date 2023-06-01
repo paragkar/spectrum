@@ -1900,7 +1900,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 
 			dftotal = pd.pivot(dftotal, index="Operator", columns = "Date", values = "Subs")
 
-			SubFeature = st.sidebar.selectbox('Select a SubFeature', ["Cumulative Values", "Incremental Values"])
+			SubFeature = st.sidebar.radio('Click an Option', ["Cumulative Values", "Incremental Values"])
 
 			if SubFeature=="Cumulative Values":
 
