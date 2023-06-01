@@ -2464,7 +2464,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 
 
 		if (selected_dimension=="Business Data") and (Feature=="TelecomLicense Fees"):
-			col1val =3
+			col1val =4
 		else:
 			col1val = 0.2
 
