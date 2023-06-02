@@ -2192,9 +2192,7 @@ if authentication_status:
 
 			dflfsfbyoperator = dflfsfbyoperator.head(20)
 
-			z_text = [[str(round(cell,1)) for cell in row] for row in df.values]
-
-			st.write(z_text)
+			hovertemplate = 'Value: %{z:.2f}'
 
 
 			data = [go.Heatmap(
@@ -2206,8 +2204,7 @@ if authentication_status:
 					hoverinfo ='text',
 					# text = hovertext,
 					colorscale='reds',
-						texttemplate=z_text, 
-						# texttemplate="%{z}", 
+						texttemplate="%{z}", 
 						textfont={"size":10},
 						# reversescale=True,
 						),
@@ -2216,7 +2213,7 @@ if authentication_status:
 	
 
 	#Plotting the final Heatmap	
-	fig = go.Figure(data=data)
+	fig = go.Figure(data=data,hovertemplate=hovertemplate)
 
 
 	#This section deals with titles and subtitles and hoverlabel color for all the heatmap charts
