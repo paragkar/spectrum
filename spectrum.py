@@ -2203,6 +2203,8 @@ if authentication_status:
 
 					temp = pd.concat([temp, df], axis =0)
 
+					st.write(temp)
+
 				dflfsfprocess = temp.copy()
 
 			else:
