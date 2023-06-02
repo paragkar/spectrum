@@ -2179,9 +2179,9 @@ if authentication_status:
 
 				sorted_df = dflfsfprocess.groupby(["Operators","FY"]).sum()
 
-				sorted_df = sorted_df[sorted_df["FY"]=="2022-2023"]
+				# sorted_df = sorted_df[sorted_df["FY"]=="2022-2023"]
 
-				st.write(sorted_df)
+				st.write(sorted_df.columns)
 
 				# sorted_df = sorted_df[sorted_df["FY"]=="2022-2023"].sort_values(by='Amount', ascending=False)
 
