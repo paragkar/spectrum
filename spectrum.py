@@ -2171,8 +2171,6 @@ if authentication_status:
 
 				column_to_drop = "Operators"
 
-			subfeature_dict = {"Operators" : "Operators", "LicenseType" : "License Types"}
-
 
 			dflfsfprocess = dflfsfprocess.groupby([SubFeature,'FY']).sum().drop(columns=['Category', column_to_drop], axis =1).reset_index()
 
