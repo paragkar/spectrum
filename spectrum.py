@@ -2413,6 +2413,17 @@ if authentication_status:
 		subtitle = "Cumulative BTS growth; Top 20 States/UT; Unit - Thousands; Sorted by the Recent Date"
 
 
+	if (Feature == "5GBTS Trends") and (SubFeature == "Percent of Total"):
+
+		hoverlabel_bgcolor = "#000000" #subdued black
+
+		fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
+		xdtickangle= -45
+		xdtickval=1
+		title = "Indian 5G Base Stations Roll Out Trends"
+		subtitle = "Percent of Total; Top 20 States/UT; Unit - %; Sorted by the Recent Date"
+
+
 	if (Feature == "Subscriber Trends"):
 
 		hoverlabel_bgcolor = "#000000" #subdued black
