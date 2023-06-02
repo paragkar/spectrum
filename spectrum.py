@@ -2478,7 +2478,7 @@ if authentication_status:
 		xdtickangle= 0
 		xdtickval=1
 
-		subtitle = "Selected Category - "+",".join(selected_category)+"; "+SubFeature+"; "+unit+"; Sorted by - "+selected_fy_for_sort+"; Source - DOT"
+		subtitle = "Selected Category - "+",".join(selected_category)+"; "+SubFeature+"; Unit - "+unit+"; Sorted by - "+selected_fy_for_sort+"; Source - DOT"
 		title = "Indian Telecom Regulatory Fees Trend - Top 20 Operators"
 		
 
