@@ -2177,7 +2177,7 @@ if authentication_status:
 
 				#sort operators by the last FY, and might get revised later
 
-				sorted_df = dflfsfprocess[dflfsfprocess["FY"]=="2022-2023"].sort_values(by='Amount', ascending=False).head(30)
+				sorted_df = dflfsfprocess[dflfsfprocess["FY"]=="2022-2023"].sort_values(by='Amount', ascending=False)
 
 				sorted_operators = list(set(sorted_df["Operators"]))
 
