@@ -1384,6 +1384,7 @@ if authentication_status:
 
 		#Feature ="Auction Map" linked to Dimension = "Spectrum Band"
 		if  Feature == "Auction Map":
+
 			#This dict has been defined for the Feature = Auction Map
 			type_dict ={"Auction Price": auctionprice,
 				    "Reserve Price": reserveprice, 
@@ -1392,11 +1393,12 @@ if authentication_status:
 				    "Percent Sold": percentsold,
 				    "Quantum Unsold": unsoldspectrum,
 				    "Percent Unsold": percentunsold}
-			SubFeature = st.sidebar.selectbox('Select a Sub Feature', ["Auction Price","Reserve Price","Quantum Offered", "Quantum Sold", "Percent Sold", "Quantum Unsold", "Percent Unsold"])
+
+			SubFeature = st.sidebar.selectbox('Select a Sub Feature', ["Auction Price","Reserve Price","Quantum Offered", "Quantum Sold", 
+				"Percent Sold", "Quantum Unsold", "Percent Unsold"])
+
 			typedf = type_dict[SubFeature].copy()
-			parttitle = "Yearly Trend of "+SubFeature
-			xdtickangle=0
-			xdtickval = dtickauction_dict[Band]
+
 			hovertext = htext_auctionmap(dff)
 			
 			#preparing the dataframe of the summary bar chart on top of the heatmap
@@ -2356,6 +2358,10 @@ if authentication_status:
 	if Feature == "Auction Map":
 
 		fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
+
+		parttitle = "Yearly Trend of "+SubFeature
+		xdtickangle=0
+		xdtickval = dtickauction_dict[Band]
 		unit = units_dict[SubFeature]
 		selected_operators = ["NA"]
 		
