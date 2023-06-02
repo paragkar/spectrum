@@ -560,9 +560,7 @@ if authentication_status:
 	@st.cache_resource
 	def htext_colmatrix_spec_map_op_hold_share(dfff, selected_operators, selected_category, operatorlist):
 
-		if len(selected_operators)==0 and len(selected_category)==0:
-			operators_to_process = operatorlist
-		if len(selected_operators)==0 and len(selected_category)==1:
+		if len(selected_operators)==0:
 			operators_to_process = operatorlist
 		else:
 			operators_to_process = selected_operators
