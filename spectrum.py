@@ -2180,7 +2180,13 @@ if authentication_status:
 				sorted_df = dflfsfprocess[dflfsfprocess["FY"]=="2022-2023"]
 
 
-				sorted_df = sorted_df[sorted_df["FY"]=="2022-2023"].sort_values(by='Amount', ascending=False)
+				# sorted_df = sorted_df[sorted_df["FY"]=="2022-2023"].sort_values(by='Amount', ascending=False)
+
+				sorted_df = sorted_df[sorted_df["FY"]=="2022-2023"]
+
+				sorted_df = sorted_df.groupby("Amount").reset_index()
+
+				st.write(sorted_df)
 
 
 				sorted_operators = sorted_df.head(100)["Operators"].tolist()
