@@ -2481,7 +2481,7 @@ if authentication_status:
 		expander = st.expander("Click Here - To Learn About the Color Codes", expanded = False)
 
 		with expander:
-			if Feature == "Frequency Layout":
+			if Feature == "Spectrum Map":
 				st.info("Heatmap and Hoverbox's Background Color Maps to the Specific Operator as shown in the Color Bar on the left")
 
 			if Feature == "Expiry Map":
