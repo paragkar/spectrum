@@ -31,24 +31,15 @@ from yaml.loader import SafeLoader
 
 
 
-#Setting Page layout
+#Set page layout here
 st.set_page_config(layout="wide")
 
-#--------User Authentication-------
+#--------User Authentication Starts-------
 
 
 with open('config.yaml') as file:
     config = yaml.load(file, Loader=SafeLoader)
 
-
-# names = ["guest", "special"]
-
-# usernames = ["guest", "special"]
-
-# file_path = "hashed_pw.pkl"
-
-# with open(file_path, "rb") as file:
-# 	hashed_passwords = pickle.load(file)
 
 
 authenticator = stauth.Authenticate(
@@ -68,14 +59,20 @@ if authentication_status == None:
 	st.warning("Please enter your username and password")
 
 
-if authentication_status: #if authentication sucessful then app is rendered
+#--------User Authentication Ends-------
 
-#---------Fuctions and Dictionaries and Page Configurations-------------
+#if authentication sucessful then render the app
 
-	#set summary chart flag
-	flag = False # It will toggle to True when we what summary chart to show
+if authentication_status: 
 
-	#hide streamlit style
+
+#--------Fuctions, Constants, Configurations and Flags-------------
+
+
+	SummaryFlag = False # Code below will toggle to True to show summary chart
+
+
+#--------hide streamlit style and buttons--------------
 
 	hide_st_style = '''
 					<style>
@@ -85,6 +82,9 @@ if authentication_status: #if authentication sucessful then app is rendered
 					<style>
 					'''
 	st.markdown(hide_st_style, unsafe_allow_html =True)
+
+
+#--------Functions for loading File Starts---------------------
 
 	@st.cache_resource
 	def loadspectrumfile():
@@ -124,15 +124,18 @@ if authentication_status: #if authentication sucessful then app is rendered
 
 		return dfT
 
+#--------Fuctions for loading File Ends--------------------
+
+
+#--------Setting up the Constants Starts-------------------
+
 	  
-	#Defining Dictionaries	
 	state_dict = {'AP': 'Andhra Pradesh', 'AS': 'Assam', 'BH': 'Bihar', 'DL': 'Delhi', 'GU': 'Gujarat',
 	    'HA': 'Haryana','HP': 'Himachal Pradesh','JK': 'Jammu & Kashmir','KA': 'Karnataka',
 	    'KE': 'Kerala','KO': 'Kolkata','MP': 'Madhya Pradesh','MA': 'Maharashtra','MU': 'Mumbai',
 	    'NE': 'Northeast','OR': 'Odisha','PU': 'Punjab','RA': 'Rajasthan','TN': 'Tamil Nadu',
 	    'UPE': 'Uttar Pradesh (East)','UPW': 'Uttar Pradesh (West)','WB': 'West Bengal' }
 
-	#defining all dictionaries here with data linked to a specific band
 	subtitle_freqlayout_dict = {700:"FDD: Uplink - 703-748 MHz(shown); Downlink - 758-803(notshown); ",
 	         800:"Uplink - 824-844 MHz(shown); Downlink - 869-889 MHz(not shown); ", 
 	         900:"Uplink - 890-915 MHz(shown); Downlink - 935-960 MHz(not shown); ", 
@@ -143,7 +146,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 	         3500:"Up & Downlinks - 3300-3670 MHz(shown); ",
 	         26000:"Up & Downlinks - 24250-27500 MHz(shown); "}
 
-	#operator dict for dimension - spectrum bands and subfeatures - freq and exp maps
+	#Operators who are the current owners of blocks of spectrum in these bands 
 	newoperators_dict = {700: {'Vacant':0,'Railways':1,'Govt':2,'RJIO':3,'BSNL':4},
 	             800: {'Vacant':0,'RCOM':1,'Govt':2,'RJIO':3,'Bharti':4, 'MTS':5, 'BSNL':6},
 	             900:{'Vacant':0,'RCOM':1,'Govt':2,'Railways':3,'Bharti':4, 'AircelU':5, 
@@ -157,7 +160,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 	             26000: {'Vacant':0,'Bharti':1,'RJIO':2,'BSNL':3, 'MTNL':4,'VI':5,'Adani':6}
 	            }
 
-	#operators dict for dimension - calendar years
+	#Operators who were the original buyer of spectrum
 	oldoperators_dict = {2010 : ["Bharti", "QCOM", "Augere", "Vodafone", "Idea", "RJIO", "RCOM", "STel", "Tata", "Aircel", "Tikona"],
 			    2012 : ["Bharti", "Vodafone", "Idea", "Telenor", "Videocon"],
 			    2013 : ["MTS"],
@@ -167,7 +170,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 			    2021 : ["Bharti", "RJIO", "VodaIdea"],
 			    2022 : ["Bharti", "RJIO", "VodaIdea", "Adani"] }
 
-	#band dicts for dimension calendar year and sub feature operator wise
+	#Spectrum Bands Auctioned in that Calender Year
 	bands_auctioned_dict = {2010 : [2100, 2300],
 		       2012 : [800, 1800],
 		       2013 : [800, 900, 1800],
@@ -178,32 +181,34 @@ if authentication_status: #if authentication sucessful then app is rendered
 		       2022 : [600, 700, 800, 900, 2100, 2300, 2500, 3500, 26000]}
 			    
 
-	#if "1" the expiry tab is present and if "0" then not present
+	#if "1" the expiry tab in spectrum_map file is present and if "0" then not present
 	exptab_dict = {700:1, 800:1, 900:1, 1800:1, 2100:1, 2300:1, 2500:1, 3500:1, 26000:1}
 
 	#Setting the channel sizes for respective frequency maps
 	channelsize_dict = {700:2.5, 800:0.625, 900:0.2, 1800:0.2, 2100:2.5, 2300:2.5, 2500:5, 3500:5, 26000:25}
 
-	# scale of the x axis plots
+	#scaling the granularity of the layout of the x axis in the heatmap plot for the respective bands
 	xdtickfreq_dict = {700:1, 800:0.25, 900:0.4, 1800:1, 2100:1, 2300:1, 2500:2, 3500:5, 26000:50}
 
-	# used to control the number of ticks on xaxis for chosen feature = AuctionMap
+	#used to control the number of ticks on xaxis for chosen feature = AuctionMap
 	dtickauction_dict = {700:1, 800:1, 900:1, 1800:1, 2100:1, 2300:1, 2500:1, 3500:1, 26000:1}
 
-	# vertical line widths
+	# used to set the vertical line widths for the heatmap chart 
 	xgap_dict = {700:1, 800:1, 900:0.5, 1800:0, 2100:1, 2300:1, 2500:1, 3500:1, 26000:1}
 
-	# adjustment need for tool tip display data for channel frequency
+	#Minor adjustment for tool tip display data for channel frequency on heatmap
+	#The reason is that the start freq of the spectrum tab is shifted delpberately by few MHz
+	#This is to align the labels on the xaxis to align properly with the edge of the heatmap
 	xaxisadj_dict = {700:1, 800:0.25, 900:0, 1800:0, 2100:1, 2300:1, 2500:2, 3500:0, 26000:0}
 
-	#describing the type of band TDD/FDD
+	#Setting the constant to describe the type of band TDD/FDD
 	bandtype_dict = {700:"FDD", 800:"FDD", 900:"FDD", 1800:"FDD", 2100:"FDD", 2300:"TDD", 2500:"TDD", 3500:"TDD", 26000:"TDD"}
 
-	#auctionfailyears when all auction prices are zero and there are no takers 
+	#auctionfailyears when the auction prices for all LSAs were zero and there are no takers 
 	auctionfailyears_dict = {700:["2016","2021"], 800:["2012"], 900:["2013","2016"], 1800:["2013"], 
 	        2100:[], 2300:["2022"], 2500:["2021"], 3500:[], 26000:[]}
 
-	#auction sucess years are years where at least in one circle there was a winner
+	#auction sucess years are years where at least in one of the LASs there was a winner
 	auctionsucessyears_dict = {700:[2022], 
 	        800:[2013, 2015, 2016, 2021, 2022], 
 	        900:[2014, 2015, 2021, 2022], 
@@ -214,15 +219,16 @@ if authentication_status: #if authentication sucessful then app is rendered
 	        3500:[2022], 
 	        26000:[2022]}
 
-	#Error is added to auction closing date so that freq assignment dates fall within the window.
-	#This helps to identify which expiry year is linked to which operators
+	#Error dicts defines the window width = difference between the auction closing date and the auction freq assignment dates
+	#This values is used to map expiry year of a particular freq spot to the operator owning that spot
 	errors_dict= {700:0.25, 800:1, 900:1, 1800:1, 2100:1.5, 2300:1.25, 2500:1, 3500:0.1, 26000:0.5}
 
 	list_of_circles_codes = ['AP','AS', 'BH', 'DL', 'GU', 'HA', 'HP', 'JK', 'KA', 'KE', 'KO', 'MA', 'MP',
 	       	   'MU', 'NE', 'OR', 'PU', 'RA', 'TN', 'UPE', 'UPW', 'WB']
 
 
-	#function to count number of items in a list and outputs the result as dictionary      	   
+	#function to count number of items in a list and outputs the result as dictionary
+	#Used to extract data table for Spectrum Layout Dimension when it is filtered by Operators      	   
 	def count_items_in_dataframe(df):
 	    counts = {}
 
@@ -239,8 +245,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 	    return df_counts
 
 
-	#defining various functions 
-	#preparing color scale for freqmap
+	#function used to prepare the color scale for the freqmap
 	@st.cache_resource
 	def colscalefreqlayout(operators, colcodes):
 		operators = dict(sorted(operators.items(), key=lambda x:x[1]))
@@ -263,7 +268,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 		
 		return colorscale
 
-	#function for calculating expiry year heatmap for yearwise
+	#function used for calculating the expiry year heatmap for the subfeature yearly trends
 	@st.cache_resource
 	def exp_year_cal_yearly_trends(ef, selected_operator):
 		lst1 =[]
@@ -289,7 +294,8 @@ if authentication_status: #if authentication sucessful then app is rendered
 		df = df.fillna(0)
 		return df
 
-	#function for calculating quantum of spectrum expiring mapped to LSA and Years for expiry map yearwise
+	#function used for calculating the quantum of spectrum expiring mapped to LSA and Years 
+	#This is for feature expiry map and the subfeature yearly trends 
 	@st.cache_resource
 	def bw_exp_cal_yearly_trends(sff,ef):
 		lst=[]
@@ -306,7 +312,8 @@ if authentication_status: #if authentication sucessful then app is rendered
 		
 		return df
 
-	#funtion to process pricing datframe for hovertext for auction map
+	#funtion used for processing pricing datframe for hovertext for the feature auction map
+	#The feature auction map is under the dimension Spectrum Bands
 	# @st.cache_resource
 	def cal_bw_mapped_to_operators_auctionmap(dff):
 		dff = dff.replace(0,np.nan).fillna(0)
@@ -340,7 +347,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 		dff = dff.set_index("LSA")
 		return dff
 
-	#convert columns of dataframe into string
+	#This general function for converting columns of dataframe into string
 	@st.cache_resource
 	def coltostr(df):
 		lst =[]
@@ -349,7 +356,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 		df.columns=lst
 		return df
 
-	#add dummy columns for auction failed years
+	#This functions adds dummy columns to the dataframe for auction failed years
 	@st.cache_resource
 	def adddummycols(df,col):
 	    df[col]="NA  " # space with NA is delibelitratly added.
@@ -357,7 +364,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 	    df =df[cols]
 	    return df
 
-	#function to calculate the year in which the spectrum was acquired
+	#This function maps the year in which the spectrum was acquired
 	@st.cache_resource
 	def cal_year_spectrum_acquired(ef,excepf,pf1):
 		lst=[]
@@ -377,7 +384,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 		ayear = df_final.pivot_table(index=["LSA"], columns='StartFreq', values="Year", aggfunc='first').fillna("NA")
 		return ayear
 	  
-	#processing for hovertext for freq map, band wise
+	#This fuctions processes the hovertext for the Feature Spectrum Map, and Sub Feature Frequency Layout
 	@st.cache_resource
 	def htext_specmap_freq_layout(sf):  
 		hovertext = []
@@ -418,7 +425,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 						    )
 		return hovertext
 
-	#processing for hovertext for expiry map, freq wise
+	#This function processes the hovertext for Feature expiry map, and SubFeature Freq Layout
 	@st.cache_resource
 	def htext_expmap_freq_layout(sf):
 		hovertext = []
@@ -460,7 +467,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 						    )
 		return hovertext
 
-	#processing for hovertext for expiry map, year wise operator selection "All"
+	#This function is used for processing hovertext for Feature expiry map, and subfeature Yearly Trends with operator selection "All"
 	@st.cache_resource
 	def htext_expmap_yearly_trends_with_all_select(bwf,eff): 
 		bwf["Op&BW"] = bwf["Operators"]+" - "+round(bwf["BW"],2).astype(str)+" MHz"
@@ -496,7 +503,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 		return hovertext
 
 
-	#processing for hovertext for expiry map, year wise along with operator menue
+	#processing for hovertext for Fearure expiry map, and SubFeature Yearly Trends along with operator menue
 	@st.cache_resource
 	def htext_expmap_yearly_trends_with_op_select(eff): 
 		hovertext = []
@@ -515,7 +522,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 						    )
 		return hovertext
 		
-	#processing for hovertext for Auction Map
+	#This if for processing for hovertext for the Feature Auction Map
 	@st.cache_resource
 	def htext_auctionmap(dff): 
 		hovertext=[]
@@ -549,7 +556,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 		return hovertext
 
 
-	#processing for hovertext and colormatrix for Spectrum Band, Features- Freq Map, SubFeature - Operator Wise 
+	#processing for hovertext and colormatrix for Spectrum Band, Features- Spectrum Map, SubFeature - Operator Holdings 
 	@st.cache_resource
 	def htext_colmatrix_spec_map_op_hold_share(dfff, selected_operators, operatorlist):
 
@@ -610,7 +617,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 		return hovertext, colormatrix
 
 
-	#processing for hovertext and colormatrix for Calendar Year, Band Wise, SubFeatures Reserve Price etc
+	#processing for hovertext and colormatrix for Dim - Auction Years, Fearure - Band Metric, SubFeatures Reserve Price etc
 	@st.cache_resource
 	def htext_colmatrix_auction_year_band_metric(df1):
 		auctionprice =  df1.pivot(index="Circle", columns='Band', values=subfeature_dict["Auction Price"])
@@ -665,7 +672,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 						    )
 		return hovertext, colormatrix
 
-	#processing for hovertext and colormatrix for Calendar Year, Operator Wise, SubFeatures - Total Outflow, Total Purchase
+	#processing for hovertext and colormatrix for Auction Year, Operator Metric, SubFeatures - Total Outflow, Total Purchase
 	@st.cache_resource
 	def htext_colmatrix_auction_year_operator_metric(df1, selectedbands, SubFeature, df_subfeature):	
 		temp1 = pd.DataFrame()
@@ -950,8 +957,6 @@ if authentication_status: #if authentication sucessful then app is rendered
 
 
 	#function for preparing the summary chart 
-
-
 	def summarychart(summarydf, xcolumn, ycolumn):
 		bar = alt.Chart(summarydf).mark_bar().encode(
 		y = alt.Y(ycolumn+':Q', axis=alt.Axis(labels=False)),
@@ -1386,7 +1391,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 
 				#preparing the summary chart 
 				chart = summarychart(summarydf, "ExpYears", "TotalMHz")
-				flag = True #for ploting the summary chart
+				SummaryFlag = True #for ploting the summary chart
 				
 				hoverlabel_bgcolor = "#000000" #subdued black
 
@@ -1429,7 +1434,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 				summarydf.columns = ["Years", "India Total"]
 			#preparing the summary chart 
 				chart = summarychart(summarydf, "Years", "India Total")
-				flag = True
+				SummaryFlag = True
 			
 			#setting the data of the heatmap 
 			data = [go.Heatmap(
@@ -1548,7 +1553,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 
 				#preparing the summary chart 
 				chart = summarychart(summarydf, 'Band', "Total")
-				flag = True
+				SummaryFlag = True
 				
 			hovertext,colormatrix = htext_colmatrix_auction_year_band_metric(df1) #processing hovertext and colormatrix for bandwise in cal year dim
 			hoverlabel_bgcolor = colormatrix #colormatrix processed from fuction "hovertext_and_colmatrix" for same above
@@ -1592,7 +1597,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 				summarydf = summarydf.sort_values("Operators", ascending = False)
 				#preparing the summary chart 
 				chart = summarychart(summarydf, 'Operators', SubFeature)
-				flag = True
+				SummaryFlag = True
 				
 				hovertext,colormatrix = htext_colmatrix_auction_year_operator_metric(df1, selectedbands, SubFeature, df2_temp1) #processing hovertext and colormatrix for operator wise in cal year dim
 				hoverlabel_bgcolor = colormatrix #colormatrix processed from fuction "hovertext_and_colmatrix" for same above
@@ -1622,7 +1627,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 				summarydf = summarydf.sort_values("Operators", ascending = False)
 				#preparing the summary chart 
 				chart = summarychart(summarydf, 'Operators', SubFeature)
-				flag = True
+				SummaryFlag = True
 				
 				hovertext,colormatrix = htext_colmatrix_auction_year_operator_metric(df1, selectedbands, SubFeature, df2_temp2) #processing hovertext and colormatrix for operator wise in cal year dim
 				hoverlabel_bgcolor = colormatrix #colormatrix processed from fuction "hovertext_and_colmatrix" for same above
@@ -1713,7 +1718,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 				summarydf = summarydf.sort_values("Dates", ascending = False)
 				#preparing the summary chart 
 				chart = summarychart(summarydf, 'Dates', SubFeature)
-				flag = True
+				SummaryFlag = True
 
 				hoverlabel_bgcolor = "#000000" #subdued black
 				xdtickangle= -45
@@ -1753,7 +1758,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 				xdtickval=1
 				title = "Indian 5G Base Stations Percentage Roll Out Trends"
 				subtitle = "Cumulative BTS growth; Top 20 States/UT; Unit - % of Total; Sorted by the Recent Date"
-				flag = False #No summary chart to plot
+				SummaryFlag = False #No summary chart to plot
 
 
 			if SubFeature == "Incremental Values":
@@ -1801,7 +1806,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 				summarydf = summarydf.sort_values("Dates", ascending = False)
 				#preparing the summary chart 
 				chart = summarychart(summarydf, 'Dates', SubFeature)
-				flag = True
+				SummaryFlag = True
 
 				hoverlabel_bgcolor = "#000000" #subdued black
 				xdtickangle= -45
@@ -1970,7 +1975,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 				# summarydf = summarydf.sort_values("Dates", ascending = False)
 				# #preparing the summary chart 
 				# chart = summarychart(summarydf/1000, 'Dates', Feature)
-				# flag = True
+				# SummaryFlag = True
 
 			if SubFeature=="Incremental Values":
 
@@ -2152,7 +2157,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 
 			#preparing the summary chart 
 			chart = summarychart(summarydf, 'Circle', "Total Subs")
-			flag = True
+			SummaryFlag = True
 
 
 			if len(selected_category) ==0:
@@ -2230,7 +2235,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 
 			#preparing the summary chart 
 			chart = summarychart(summarydf, 'FY', 'Total Fees')
-			flag = True
+			SummaryFlag = True
 
 			dflfsfbyoperator = dflfsfbyoperator.head(20)
 
@@ -2475,7 +2480,7 @@ if authentication_status: #if authentication sucessful then app is rendered
 			col1val = 0.2
 
 		col1,col2,col3 = st.columns([col1val,14,1.1]) #create collumns of uneven width
-		if flag ==True:
+		if SummaryFlag ==True:
 			# st.altair_chart(chart, use_container_width=True)
 			col2.altair_chart(chart, use_container_width=True)
 
