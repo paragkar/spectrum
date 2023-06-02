@@ -1945,8 +1945,6 @@ if authentication_status:
 						),
 					]
 
-
-				hoverlabel_bgcolor = "#000000" #subdued black
 				# dftotalfilt = (dftotalfilt/1000).round(1)
 				# summarydf = dftotalfilt.sum(axis=0)
 				# summarydf = summarydf.reset_index()
@@ -2000,7 +1998,7 @@ if authentication_status:
 				if len(selected_circles) == 0:
 					selected_circles = ["All"]
 
-				subtitle = "Incremental Values; Selected Category -" +",".join(selected_category)+ "; Selected Circles - "+ ",".join(selected_circles)+"; Unit - Millions; Sorted by the Recent Date"
+				# subtitle = "Incremental Values; Selected Category -" +",".join(selected_category)+ "; Selected Circles - "+ ",".join(selected_circles)+"; Unit - Millions; Sorted by the Recent Date"
 
 				if len(date_range_list) >=24:
 					texttemplate =""
@@ -2450,6 +2448,9 @@ if authentication_status:
 		fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 		xdtickangle= -45
 		xdtickval=1
+
+		subtitle = "Cumulative Values; Selected Category -" +",".join(selected_category)+ "; Selected Circles - "+ \
+					",".join(selected_circles)+"; Unit - Millions; Sorted by the Recent Date"
 		title = "Indian Telecom Subscribers Trends"
 
 
