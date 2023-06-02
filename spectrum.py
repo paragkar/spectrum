@@ -560,14 +560,8 @@ if authentication_status:
 	@st.cache_resource
 	def htext_colmatrix_spec_map_op_hold_share(dfff, selected_operators, operatorlist):
 
-		st.write(dfff) #debug
 
 		operators_to_process = list(dfff.columns)
-
-		# if len(selected_operators)==0:
-		# 	operators_to_process = operatorlist
-		# else:
-		# 	operators_to_process = selected_operators
 
 		dfffcopy =dfff.copy()
 		
