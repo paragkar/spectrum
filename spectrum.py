@@ -2204,7 +2204,7 @@ if authentication_status:
 					hoverinfo ='text',
 					# text = hovertext,
 					colorscale='reds',
-						annotation_text=z_text,
+						texttemplate=z_text, 
 						# texttemplate="%{z}", 
 						textfont={"size":10},
 						# reversescale=True,
