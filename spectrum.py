@@ -1120,14 +1120,14 @@ if authentication_status:
 					tickvals = list(selected_op_dict.values())
 					ticktext = list(selected_op_dict.keys())	
 
+				#processing for hovertext
 				hovertext = htext_specmap_freq_layout(hf)
+
 				parttitle ="Spectrum Frequency Layout"
 				xdtickangle = -90
 				xdtickval = xdtickfreq_dict[Band]
 
-
-
-				#processing for data for the data tab for "Frequency Layout"
+				#processing for data for the data tab for the SubFeature "Frequency Layout"
 				chartdata_df = count_items_in_dataframe(sf)*channelsize_dict[Band]
 
 				chartdata_df.index = sf.index
@@ -2254,88 +2254,92 @@ if authentication_status:
 
 
 
-	#This section deals with titles and subtitles and hoverlabel color
+	#This section deals with titles and subtitles and hoverlabel color for all the heatmap charts
 
 	units_dict = {"Reserve Price" : "Rs Cr/MHz", "Auction Price" : "Rs Cr/MHz", "Quantum Offered": "MHz", 
-		      "Quantum Sold" : "MHz", "Quantum Unsold" : "MHz", "Total EMD" : "Rs Cr", "Total Outflow" : "Rs Cr",
-		     "Auction/Reserve" : "Ratio", "Percent Unsold" : "% of Total Spectrum", "Percent Sold" : "% of Total Spectrum", "Total Purchase" : "MHz"}
+		          "Quantum Sold" : "MHz", "Quantum Unsold" : "MHz", "Total EMD" : "Rs Cr", "Total Outflow" : "Rs Cr",
+		          "Auction/Reserve" : "Ratio", "Percent Unsold" : "% of Total Spectrum", "Percent Sold" : "% of Total Spectrum", 
+		          "Total Purchase" : "MHz"}
+
+	
 
 	#Plotting the final Heatmap	
 	fig = go.Figure(data=data)
 
-	if selected_dimension == "Spectrum Bands":
-		if Feature == "Auction Map":
-			fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
-			unit = units_dict[SubFeature]
-			selected_operators = ["NA"]
+	# if selected_dimension == "Spectrum Bands":
+
+	if (Feature == "Spectrum Map") and (SubFeature == "Frequency Layout"):
+		fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
+		unit = "Ch Size - "+str(channelsize_dict[Band])+" MHz"
+		if selected_operators == []:
+			selected_operators = ["All"]
+		else:
+			selected_operators = selected_operators
 			
-			subtitle = "Unit - "+unit+"; Selected Operators - "+', '.join(selected_operators)+ " ; Summary Below - Sum of all LSAs"
+		subtitle = subtitle_freqlayout_dict[Band]+unit+"; Selected Operators - "+', '.join(selected_operators)
+
+
+	if (Feature == "Spectrum Map") and (SubFeature == "Operator Holdings"):
+		fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
+		if (len(selected_category) == 0) or (len(selected_category) == 2):
+			selected_category = "All"
+		else:
+			selected_category = selected_category[0]
+		
+		if selected_operators == []:
+			selected_operators = ["All"]
+		else:
+			selected_operators = selected_operators
+		
+		unit = "MHz"
+		subtitle = "Unit - "+unit+"; "+"India Total - Sum of all LSAs "+"; Selected Operators - "+', '.join(selected_operators)+ ";\
+		Category - "+ selected_category
+
+
+	if (Feature == "Spectrum Map") and (SubFeature == "Operator %Share"):
+		fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
+		if (len(selected_category) == 0) or (len(selected_category) == 2):
+			selected_category = "All"
+		else:
+			selected_category = selected_category[0]
+		
+		if len(selected_operators) == 0: 
+			selected_operators = ["All"]
+		else:
+			selected_operators = selected_operators
+		
+		unit = '% of Total'
+		subtitle = "Unit - "+unit+ " ; Selected Operators - "+', '.join(selected_operators)+ "; Category - "+ selected_category
+	
+
+	if Feature == "Auction Map":
+		fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
+		unit = units_dict[SubFeature]
+		selected_operators = ["NA"]
+		
+		subtitle = "Unit - "+unit+"; Selected Operators - "+', '.join(selected_operators)+ " ; Summary Below - Sum of all LSAs"
+		
+	if (Feature == "Expiry Map") and (SubFeature == "Frequency Layout"):
+		fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
+		unit = "Ch Size - "+str(channelsize_dict[Band])+" MHz"
+		if selected_operators == []:
+			selected_operators = ["All"]
+		else:
+			selected_operators = selected_operators
 			
-		if (Feature == "Expiry Map") and (SubFeature == "Frequency Layout"):
-			fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
-			unit = "Ch Size - "+str(channelsize_dict[Band])+" MHz"
-			if selected_operators == []:
-				selected_operators = ["All"]
-			else:
-				selected_operators = selected_operators
-				
-			subtitle = subtitle_freqlayout_dict[Band]+unit+"; Selected Operators - "+', '.join(selected_operators)
+		subtitle = subtitle_freqlayout_dict[Band]+unit+"; Selected Operators - "+', '.join(selected_operators)
+	
+	if (Feature == "Expiry Map") and (SubFeature == "Yearly Trends"):
+		fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white'))) #hoverbox color is black
+		unit = "MHz"
+		if selected_operator == "":
+			selected_operator = "All"
+		else:
+			selected_operator = selected_operator
+		subtitle = "Unit - "+unit+"; Selected Operators - "+selected_operator+ "; Summary Below - Sum of all LSAs"
 		
-		if (Feature == "Expiry Map") and (SubFeature == "Yearly Trends"):
-			fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white'))) #hoverbox color is black
-			unit = "MHz"
-			if selected_operator == "":
-				selected_operator = "All"
-			else:
-				selected_operator = selected_operator
-			subtitle = "Unit - "+unit+"; Selected Operators - "+selected_operator+ "; Summary Below - Sum of all LSAs"
-			
-		if (Feature == "Spectrum Map") and (SubFeature == "Frequency Layout"):
-			fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
-			unit = "Ch Size - "+str(channelsize_dict[Band])+" MHz"
-			if selected_operators == []:
-				selected_operators = ["All"]
-			else:
-				selected_operators = selected_operators
-				
-			subtitle = subtitle_freqlayout_dict[Band]+unit+"; Selected Operators - "+', '.join(selected_operators)
-				
-		if (Feature == "Spectrum Map") and (SubFeature == "Operator Holdings"):
-			fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
-			if (len(selected_category) == 0) or (len(selected_category) == 2):
-				selected_category = "All"
-			else:
-				selected_category = selected_category[0]
-			
-			if selected_operators == []:
-				selected_operators = ["All"]
-			else:
-				selected_operators = selected_operators
-			
-			unit = "MHz"
-			subtitle = "Unit - "+unit+"; "+"India Total - Sum of all LSAs "+"; Selected Operators - "+', '.join(selected_operators)+ "; Category - "+ selected_category
-		
-		
-		# title = parttitle+" for "+str(Band)+" MHz Band"
-		
-		
-		if (Feature == "Spectrum Map") and (SubFeature == "Operator %Share"):
-			fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
-			if (len(selected_category) == 0) or (len(selected_category) == 2):
-				selected_category = "All"
-			else:
-				selected_category = selected_category[0]
-			
-			if len(selected_operators) == 0: 
-				selected_operators = ["All"]
-			else:
-				selected_operators = selected_operators
-			
-			unit = '% of Total'
-			subtitle = "Unit - "+unit+ " ; Selected Operators - "+', '.join(selected_operators)+ "; Category - "+ selected_category
-		
-		
-		title = parttitle+" for "+str(Band)+" MHz Band"
+	
+	title = parttitle+" for "+str(Band)+" MHz Band"
 
 	if (selected_dimension == "Auction Years") and (Feature == "Band Metric"):
 		if (SubFeature =="Total Outflow") or (SubFeature == "Quantum Sold"):
