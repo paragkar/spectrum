@@ -1208,13 +1208,14 @@ if authentication_status:
 				dfff = dfff.reset_index().drop(columns = ["Year", "Batch No", "Cat"], axis =1).groupby("OperatorNew").sum().T
 				
 				if bandtype_dict[Band]=="TDD": #doubling the TDD spectrum for aligning with normal convention 
-	        			dfff = (dfff*2).round(2)
+	        		dfff = (dfff*2).round(2)
 
-	        	st.write(dfff) #debug
+	        	st.write(dfff)
 				
 				parttitle ="Operator Holdings"
 				xdtickangle = 0
 				xdtickval = 1
+
 				
 				hovertext,colormatrix = htext_colmatrix_spec_map_op_hold_share(dfff, selected_operators, operatorlist) #processing hovertext and colormatrix for operatorwise in freqband dim
 				hoverlabel_bgcolor = colormatrix #colormatrix processed from fuction "hovertext_and_colmatrix" for same above
