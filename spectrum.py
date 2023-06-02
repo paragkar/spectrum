@@ -2171,10 +2171,35 @@ if authentication_status:
 
 				column_to_drop = "Operators"
 
+			#This is for creating a list of 30 important operators 
+
+			if SubFeature == "LicenseType":
+
+				#sort operators by the last FY, and might get revised later
+
+				sorted_df = dflfsfprocess[dflfsfprocess["FY"]=="2022-2023"].sort_values(by='Amount', ascending=False).head(30)
+
+				sorted_operators = sorted_df["Operators"].tolist()
+
+				selected_operators = st.sidebar.multiselect('Select Categories', sorted_operators)
+
 
 			dflfsfprocess = dflfsfprocess.groupby([SubFeature,'FY']).sum().drop(columns=['Category', column_to_drop], axis =1).reset_index()
 
 			selected_fy_for_sort = st.sidebar.selectbox('Select FY for Sorting', listofFY)
+
+
+			#Filter the dataframe with the list of selected operators
+
+
+			temp = pd.DataFrame()
+			for operator in selected_operators:
+
+				df = dflfsfprocess[dflfsfprocess["Operators"]==operator]
+
+				temp = pd.concat([temp, df], axis =0)
+
+			dflfsfprocess = temp.copy()
 
 
 			dflfsfbysubfeature = round(dflfsfprocess.pivot(index =SubFeature, columns ='FY', values ='Amount')
