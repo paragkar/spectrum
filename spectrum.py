@@ -2194,6 +2194,8 @@ if authentication_status:
 
 			z_text = [[str(round(cell,1)) for cell in row] for row in df.values]
 
+			st.write(z_text)
+
 
 			data = [go.Heatmap(
 					z = df.values,
