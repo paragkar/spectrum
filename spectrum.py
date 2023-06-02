@@ -2526,6 +2526,12 @@ if authentication_status:
 		if chosen_metric == "Percentage":
 			unit = "% of Total"
 
+		if len(selected_operators)==0:
+			selected_operators = ["NA"]
+
+		if len(selected_operators) > 0:
+			selected_operators = selected_operators
+
 		hoverlabel_bgcolor = "#000000" #subdued black
 
 		# fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
@@ -2534,7 +2540,8 @@ if authentication_status:
 
 		subfeature_dict = {"Operators" : "Operators", "LicenseType" : "License Types"}
 
-		subtitle = "Selected Category - "+",".join(selected_category)+"; "+chosen_metric+"; Unit - "+unit+"; Sorted by - "+selected_fy_for_sort+"; Source - DOT"
+		subtitle = "Selected Category - "+",".join(selected_category)+"; "+chosen_metric+\
+					"; Unit - "+unit+"; Sorted by - "+selected_fy_for_sort+"; Selected Operators - ",",".join(selected_operators)+"; Source - DOT"
 		title = "Indian Telecom Regulatory Fees Trend - Top 20 "+subfeature_dict[SubFeature]
 		
 
