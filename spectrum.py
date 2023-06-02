@@ -2181,6 +2181,8 @@ if authentication_status:
 
 				sorted_operators = sorted_df["Operators"].tolist()
 
+				st.write(sorted_operators)
+
 				selected_operators = st.sidebar.multiselect('Select Categories', sorted_operators)
 
 				#Filter the dataframe with the list of selected operators
