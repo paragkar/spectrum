@@ -1443,7 +1443,9 @@ if authentication_status:
 		df1 = df1.set_index("Circle")
 
 		Feature = st.sidebar.selectbox('Select a Feature',["Band Metric", "Operator Metric"])
+
 		if Feature == "Band Metric":
+
 			subfeature_dict ={"Quantum Offered" : "Sale (MHz)", "Quantum Sold": "Total Sold (MHz)", "Quantum Unsold" : "Total Unsold (MHz)", 
 			"Reserve Price" : "RP/MHz" , "Auction Price": "Auction Price/MHz", "Total EMD" : "Total EMD"} 
 			subfeature_list = ["Reserve Price", "Auction Price", "Auction/Reserve", "Quantum Offered", 
@@ -1468,6 +1470,7 @@ if authentication_status:
 				x = df1_temp1.columns
 				y = df1_temp1.index
 				summarydf = df1_temp1.sum()
+
 			if SubFeature == "Total Outflow":
 				df1 = df1.reset_index()
 				df1_temp2 = df1.set_index(["Band","Circle"])
@@ -1485,6 +1488,7 @@ if authentication_status:
 				x = df1_temp2.columns
 				y = df1_temp2.index
 				summarydf = df1_temp2.sum()
+
 			if SubFeature == "Auction/Reserve":
 				df1 = df1.reset_index()
 				df1_temp3 = df1.set_index(["Band","Circle"])
@@ -1496,6 +1500,7 @@ if authentication_status:
 				z = df1_temp3.values.round(2)
 				x = df1_temp3.columns
 				y = df1_temp3.index
+
 			if SubFeature == "Percent Unsold":
 				df1 = df1.reset_index()
 				df1_temp4 = df1.set_index(["Band", "Circle"])
@@ -1507,6 +1512,7 @@ if authentication_status:
 				z = df1_temp4.values.round(1)
 				x = df1_temp4.columns
 				y = df1_temp4.index
+
 			if SubFeature == "Percent Sold":
 				df1 = df1.reset_index()
 				df1_temp5 = df1.set_index(["Band", "Circle"])
@@ -1536,10 +1542,12 @@ if authentication_status:
 			hoverlabel_bgcolor = colormatrix #colormatrix processed from fuction "hovertext_and_colmatrix" for same above
 
 
-		if Feature == "Operator Metric": #for the dimension "Calendar Year"
+		if Feature == "Operator Metric": #for the dimension "Auction Years"
 			df1 = df1.reset_index()
 			df2_temp1 = df1.copy()
+
 			selectedbands = st.sidebar.multiselect('Select Bands',bands_auctioned_dict[Year])
+
 			subfeature_list = ["Total Outflow", "Total Purchase"]
 			SubFeature = st.sidebar.selectbox('Select a SubFeature', subfeature_list,0)
 			
@@ -2369,15 +2377,20 @@ if authentication_status:
 
 		title = parttitle+" for the "+str(Band)+" MHz Band"
 
-		
-
 	#---------Dimension = Spectrum Bands Ends -------------------
 
 
 	#---------Dimension = Auction Years Starts ------------------
 
 	if (Feature == "Band Metric"):
+
 		if (SubFeature =="Total Outflow") or (SubFeature == "Quantum Sold"):
+
+			fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
+		
+			xdtickangle =0
+			xdtickval =1
+
 			if selected_operators==[]:
 				selected_operators = ["All"]
 			else:
@@ -2391,13 +2404,16 @@ if authentication_status:
 			partsubtitle = "; Summary Below - Sum of all LSAs"
 		else:
 			partsubtitle = ""
+
 		subtitle = SubFeature+"; Unit -"+units_dict[SubFeature]+"; "+ "Selected Operators -" + ', '.join(selected_operators)+ partsubtitle
-		fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
-		
-		xdtickangle =0
-		xdtickval =1
+	
 		
 	if (Feature == "Operator Metric"):
+
+		fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
+		xdtickangle =0
+		xdtickval =1
+
 		if (SubFeature =="Total Outflow") or (SubFeature == "Total Purchase"):
 			if selectedbands==[]:
 				selectedbands = ["All"]
@@ -2408,9 +2424,6 @@ if authentication_status:
 		selectedbands = [str(x) for x in selectedbands]	
 		title = "Operator Wise Outflow Summary for the Year "+str(Year)
 		subtitle = SubFeature + "; Unit -"+units_dict[SubFeature]+"; Selected Bands -" + ', '.join(selectedbands) + "; Summary Below - Sum of all LSAs"
-		fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
-		xdtickangle =0
-		xdtickval =1
 
 
 	#---------Dimension = Auction Years Ends ------------------
