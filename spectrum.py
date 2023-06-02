@@ -2190,7 +2190,7 @@ if authentication_status:
 				sorted_operators = sorted_df.head(30)["Operators"].tolist() #pick on 30 operators 
 
 
-				selected_operators = st.sidebar.multiselect('Select Operators', sorted_operators)
+				selected_operators = st.sidebar.multiselect('Select Operators', sorted_operators+["BSNL"])
 
 				#Filter the dataframe with the list of selected operators
 
