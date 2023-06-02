@@ -2490,6 +2490,12 @@ if authentication_status:
 				st.info("Heatmap's Color Intensity is directly proportional to length of the expiry period measured in years")
 				st.info("Hoverbox's Background Color maps directly to the Specific Operator shown in the Feature 'Spectrum Map'")
 
+			if (Feature == "Auction Map"):
+				st.info("Heatmap's Color Intensity is directly proportional to its value as shown in the Color Bar on the left")
+				st.info("Hoverbox's Background = Black (for failed/no auction)")
+				st.info("Hoverbox's Background = Green (for Auction Price = Reserve Price)")
+				st.info("Hoverbox's Background = Red (for Auction Price > Reserve Price)")
+
 
 
 
