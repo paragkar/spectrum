@@ -2316,7 +2316,7 @@ if authentication_status:
 			subtitle = "Unit - "+unit+"; "+"India Total - Sum of all LSAs "+"; Selected Operators - "+', '.join(selected_operators)+ "; Category - "+ selected_category
 		
 		
-		title = parttitle+" for "+str(Band)+" MHz Band"
+		# title = parttitle+" for "+str(Band)+" MHz Band"
 		
 		
 		if (Feature == "Spectrum Map") and (SubFeature == "Operator %Share"):
@@ -2492,7 +2492,7 @@ if authentication_status:
 
 			if (Feature == "Auction Map"):
 				st.info("Heatmap's Color Intensity - Directly Proportional to the Value of the Cell")
-				st.info("Hoverbox's Background Color = BLACK (Failed/No auction)")
+				st.info("Hoverbox's Background Color = BLACK (Failed/No Auction)")
 				st.info("Hoverbox's Background Color = GREEN (Auction Price = Reserve Price)")
 				st.info("Hoverbox's Background Color = RED (Auction Price > Reserve Price)")
 
