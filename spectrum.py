@@ -2174,7 +2174,7 @@ if authentication_status:
 			subfeature_dict = {"Operators" : "Operators", "LicenseType" : "License Types"}
 
 
-			dflfsfprocess = dflfsfprocess.groupby([subfeature_dict[SubFeature],'FY']).sum().drop(columns=['Category', column_to_drop], axis =1).reset_index()
+			dflfsfprocess = dflfsfprocess.groupby(SubFeature,'FY']).sum().drop(columns=['Category', column_to_drop], axis =1).reset_index()
 
 			selected_fy_for_sort = st.sidebar.selectbox('Select FY for Sorting', listofFY)
 
@@ -2493,8 +2493,10 @@ if authentication_status:
 		xdtickangle= 0
 		xdtickval=1
 
+		subfeature_dict = {"Operators" : "Operators", "LicenseType" : "License Types"}
+
 		subtitle = "Selected Category - "+",".join(selected_category)+"; "+chosen_metric+"; Unit - "+unit+"; Sorted by - "+selected_fy_for_sort+"; Source - DOT"
-		title = "Indian Telecom Regulatory Fees Trend - Top 20 "+SubFeature
+		title = "Indian Telecom Regulatory Fees Trend - Top 20 "+subfeature_dict[SubFeature]
 		
 
 	#---------Dimension = Business Data Ends ----------------
