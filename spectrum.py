@@ -2476,14 +2476,17 @@ if authentication_status:
 			# st.altair_chart(chart, use_container_width=True)
 			col2.altair_chart(chart, use_container_width=True)
 
-	#------ New Code ------#
-	#Currently Blank but will be used to add notes regarding every chart
+#--------The expander is used to add note for the user on reading the color codes for every chart -------
 
 		expander = st.expander("Click Here - To Learn About the Color Codes", expanded = False)
 
 		with expander:
 			if SubFeature == "Frequency Layout":
 				st.info("Heatmap and Hoverbox's Background Color Maps to the Specific Operator as shown in the Color Bar on the left")
+
+			if SubFeature == "Expiry Map":
+				st.info("Heatmap and Hoverbox's Background Color Maps to the Specific Operator as shown in the Color Bar on the left")
+
 
 
 
