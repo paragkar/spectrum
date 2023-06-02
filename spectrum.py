@@ -2423,7 +2423,9 @@ if authentication_status:
 		else:
 			selectedbands = ["NA"]
 		selectedbands = [str(x) for x in selectedbands]	
-		title = "Operator Wise Outflow Summary for the Year "+str(Year)
+
+		title = "Operator Wise Summary for the Year "+str(Year)
+		
 		subtitle = SubFeature + "; Unit -"+units_dict[SubFeature]+"; Selected Bands -" + ', '.join(selectedbands) + "; Summary Below - Sum of all LSAs"
 
 
