@@ -2252,6 +2252,10 @@ if authentication_status:
 
 			subtitle = "Units - (Summary Total - Rs Cr) and (Values - % of Total)"
 
+	
+
+	#Plotting the final Heatmap	
+	fig = go.Figure(data=data)
 
 
 	#This section deals with titles and subtitles and hoverlabel color for all the heatmap charts
@@ -2261,14 +2265,9 @@ if authentication_status:
 		          "Auction/Reserve" : "Ratio", "Percent Unsold" : "% of Total Spectrum", "Percent Sold" : "% of Total Spectrum", 
 		          "Total Purchase" : "MHz"}
 
-	
 
-	#Plotting the final Heatmap	
-	fig = go.Figure(data=data)
-
-	# if selected_dimension == "Spectrum Bands":
-
-	if (Feature == "Spectrum Map") and (SubFeature == "Frequency Layout"):
+	# if (Feature == "Spectrum Map") and (SubFeature == "Frequency Layout"):
+	if (SubFeature == "Frequency Layout"):
 		fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 		unit = "Ch Size - "+str(channelsize_dict[Band])+" MHz"
 		if selected_operators == []:
@@ -2326,6 +2325,8 @@ if authentication_status:
 		subtitle = "Unit - "+unit+"; Selected Operators - "+', '.join(selected_operators)+ " ; Summary Below - Sum of all LSAs"
 
 		title = parttitle+" for "+str(Band)+" MHz Band"
+
+
 		
 	if (Feature == "Expiry Map") and (SubFeature == "Frequency Layout"):
 		fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
@@ -2338,6 +2339,7 @@ if authentication_status:
 		subtitle = subtitle_freqlayout_dict[Band]+unit+"; Selected Operators - "+', '.join(selected_operators)
 
 		title = parttitle+" for "+str(Band)+" MHz Band"
+
 	
 	if (Feature == "Expiry Map") and (SubFeature == "Yearly Trends"):
 		fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white'))) #hoverbox color is black
@@ -2350,8 +2352,6 @@ if authentication_status:
 
 		title = parttitle+" for "+str(Band)+" MHz Band"
 		
-	
-	# title = parttitle+" for "+str(Band)+" MHz Band"
 
 	if (selected_dimension == "Auction Years") and (Feature == "Band Metric"):
 		if (SubFeature =="Total Outflow") or (SubFeature == "Quantum Sold"):
