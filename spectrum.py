@@ -2498,10 +2498,9 @@ if authentication_status:
 
 			if (Feature == "Band Metric") or (Feature == "Operator Metric"):
 				st.info("Heatmap's Color Intensity - Directly proportional to value on Color Bar on the left")
-				st.info("Hoverbox's Background Color = GREY (No Auction)")
-				st.info("Hoverbox's Background Color = BLACK (Failed Auction)")
-				st.info("Hoverbox's Background Color = GREEN (Auction Price = Reserve Price)")
-				st.info("Hoverbox's Background Color = RED (Auction Price > Reserve Price)")
+				st.info("Hoverbox's Background Color = GREEN (Purchase Made)")
+				st.info("Hoverbox's Background Color = GREY (No Purchase Made)")
+
 
 
 
