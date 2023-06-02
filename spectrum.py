@@ -2492,16 +2492,16 @@ if authentication_status:
 
 			if (Feature == "Auction Map"):
 				st.info("Heatmap's Color Intensity - Directly proportional to value on Color Bar on the left")
-				st.info("Hoverbox's Background Color = Black (Failed/No auction)")
-				st.info("Hoverbox's Background Color = Green (Auction Price = Reserve Price)")
-				st.info("Hoverbox's Background Color = Red (Auction Price > Reserve Price)")
+				st.info("Hoverbox's Background Color = BLACK (Failed/No auction)")
+				st.info("Hoverbox's Background Color = GREEN (Auction Price = Reserve Price)")
+				st.info("Hoverbox's Background Color = RED (Auction Price > Reserve Price)")
 
 			if (Feature == "Band Metric"):
 				st.info("Heatmap's Color Intensity - Directly proportional to value on Color Bar on the left")
-				st.info("Hoverbox's Background Color = Grey (No Auction)")
-				st.info("Hoverbox's Background Color = Black (Failed Auction)")
-				st.info("Hoverbox's Background Color = Green (Auction Price = Reserve Price)")
-				st.info("Hoverbox's Background Color = Red (Auction Price > Reserve Price)")
+				st.info("Hoverbox's Background Color = GREY (No Auction)")
+				st.info("Hoverbox's Background Color = BLACK (Failed Auction)")
+				st.info("Hoverbox's Background Color = GREEN (Auction Price = Reserve Price)")
+				st.info("Hoverbox's Background Color = RED (Auction Price > Reserve Price)")
 
 
 
