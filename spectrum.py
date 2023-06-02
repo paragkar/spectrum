@@ -1192,7 +1192,6 @@ if authentication_status:
 						temp = pd.concat([dfff[dfff["OperatorNew"]==op],temp], axis =0)
 					dfff = temp.copy()
 
-				st.write(dfff) #debug
 
 				cat_dict = {'Liberalized' : 'L', 'UnLiberalized' : 'U'}
 				if len(set(dfff["Cat"])) == 2:
@@ -1203,6 +1202,8 @@ if authentication_status:
 						dfff = dfff[(dfff["Cat"] == cat_dict[selected_category[0]])]
 				else:
 					selected_category=[]
+
+				st.write(dfff) #debug
 					
 				dfff = dfff.groupby(["OperatorNew","Year","Batch No", "Cat"])[list_of_circles_codes].sum()
 				dfff = dfff.reset_index().drop(columns = ["Year", "Batch No", "Cat"], axis =1).groupby("OperatorNew").sum().T
