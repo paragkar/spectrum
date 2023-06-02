@@ -2158,25 +2158,38 @@ if authentication_status:
 
 				dflfsfprocess = dflfsf[dflfsf["Category"]==selected_category[0]]
 
+			subfeature_list = ["Operators", "LicenseType"]
 
-			dflfsfprocess = dflfsfprocess.groupby(['Operators','FY']).sum().drop(columns=['Category', 'LicenseType'], axis =1).reset_index()
+
+			SubFeature = st.sidebar.selectbox('Select a SubFeature', subfeature_list,0)
+
+			if SubFeature == "Operators":
+
+				column_to_drop = "LicenseType"
+
+			if SubFeature == "LicenseType":
+
+				column_to_drop == "Operators"
+
+			dflfsfprocess = dflfsfprocess.groupby([SubFeature,'FY']).sum().drop(columns=['Category', column_to_drop], axis =1).reset_index()
 
 			selected_fy_for_sort = st.sidebar.selectbox('Select FY for Sorting', listofFY)
 
-			dflfsfbyoperator = round(dflfsfprocess.pivot(index ='Operators', columns ='FY', values ='Amount')
+
+			dflfsfbysubfeature = round(dflfsfprocess.pivot(index =SubFeature, columns ='FY', values ='Amount')
 									.sort_values(selected_fy_for_sort, ascending = False)/10000000,0)
 
-			SubFeature = st.sidebar.radio('Click an Option', ["Absolute", "Percentage"])
+			chosen_metric = st.sidebar.radio('Click an Option', ["Absolute", "Percentage"])
 
-			summarydf = dflfsfbyoperator.sum(axis =0)
+			summarydf = dflfsfbysubfeature.sum(axis =0)
 
-			if SubFeature=="Absolute":
+			if chosen_metric=="Absolute":
 
-				df = dflfsfbyoperator.head(20).copy()
+				df = dflfsfbysubfeature.head(20).copy()
 	
-			if SubFeature=="Percentage":
+			if chosen_metric=="Percentage":
 
-				df = round(((dflfsfbyoperator/summarydf).head(20))*100,2)
+				df = round(((dflfsfbysubfeature/summarydf).head(20))*100,2)
 
 
 			#preparing the summary chart 
@@ -2190,7 +2203,7 @@ if authentication_status:
 			chart = summarychart(summarydf, 'FY', 'Total Fees')
 			SummaryFlag = True
 
-			dflfsfbyoperator = dflfsfbyoperator.head(20)
+			dflfsfbysubfeature = dflfsfbysubfeature.head(20)
 
 
 			data = [go.Heatmap(
@@ -2208,9 +2221,6 @@ if authentication_status:
 						),
 					]
 
-
-			# hovertemplate = 'Value: %{z:.2f}'
-			# heatmap_trace = go.Heatmap(data=data, hovertemplate=hovertemplate)
 
 	#Plotting the final Heatmap	
 	fig = go.Figure(data=data)
@@ -2469,9 +2479,9 @@ if authentication_status:
 		else:
 			selected_category = selected_category
 
-		if SubFeature == "Absolute":
+		if chosen_metric == "Absolute":
 			unit = "Rs Cr"
-		if SubFeature == "Percentage":
+		if chosen_metric == "Percentage":
 			unit = "% of Total"
 
 		hoverlabel_bgcolor = "#000000" #subdued black
@@ -2480,8 +2490,8 @@ if authentication_status:
 		xdtickangle= 0
 		xdtickval=1
 
-		subtitle = "Selected Category - "+",".join(selected_category)+"; "+SubFeature+"; Unit - "+unit+"; Sorted by - "+selected_fy_for_sort+"; Source - DOT"
-		title = "Indian Telecom Regulatory Fees Trend - Top 20 Operators"
+		subtitle = "Selected Category - "+",".join(selected_category)+"; "+chosen_metric+"; Unit - "+unit+"; Sorted by - "+selected_fy_for_sort+"; Source - DOT"
+		title = "Indian Telecom Regulatory Fees Trend - Top 20 "+SubFeature
 		
 
 	#---------Dimension = Business Data Ends ----------------
