@@ -563,7 +563,7 @@ if authentication_status:
 		if len(selected_operators)==0 and len(selected_category)==0:
 			operators_to_process = operatorlist
 		if len(selected_operators)==0 and len(selected_category)==1:
-			operators_to_process = selected_operators
+			operators_to_process = operatorlist
 		else:
 			operators_to_process = selected_operators
 
