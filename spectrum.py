@@ -2192,6 +2192,8 @@ if authentication_status:
 
 			dflfsfbyoperator = dflfsfbyoperator.head(20)
 
+			z_text = [[str(round(cell,1)) for cell in row] for row in df.values]
+
 
 			data = [go.Heatmap(
 					z = df.values,
@@ -2202,7 +2204,8 @@ if authentication_status:
 					hoverinfo ='text',
 					# text = hovertext,
 					colorscale='reds',
-						texttemplate="%{z}", 
+						annotation_text=z_text,
+						# texttemplate="%{z}", 
 						textfont={"size":10},
 						# reversescale=True,
 						),
@@ -2546,7 +2549,6 @@ if authentication_status:
 			st.plotly_chart(fig, use_container_width=True)
 
 
-
 		#preparing the container layout for the dimension business data
 		if (selected_dimension=="Business Data") and (Feature=="License Fees"):
 			col1val =3
@@ -2560,8 +2562,6 @@ if authentication_status:
 		if SummaryFlag ==True:
 			# st.altair_chart(chart, use_container_width=True)
 			col2.altair_chart(chart, use_container_width=True)
-
-
 
 
 	#--------The expander is used to add note for the user on reading the color codes for every chart -------
