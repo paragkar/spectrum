@@ -2266,7 +2266,6 @@ if authentication_status:
 		          "Total Purchase" : "MHz"}
 
 
-	# if (Feature == "Spectrum Map") and (SubFeature == "Frequency Layout"):
 	if (SubFeature == "Frequency Layout"):
 		fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 		unit = "Ch Size - "+str(channelsize_dict[Band])+" MHz"
@@ -2280,7 +2279,8 @@ if authentication_status:
 		title = parttitle+" for "+str(Band)+" MHz Band"
 
 
-	if (Feature == "Spectrum Map") and (SubFeature == "Operator Holdings"):
+	# if (Feature == "Spectrum Map") and (SubFeature == "Operator Holdings"):
+	if (SubFeature == "Operator Holdings"):
 		fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 		if (len(selected_category) == 0) or (len(selected_category) == 2):
 			selected_category = "All"
