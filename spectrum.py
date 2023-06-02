@@ -2526,8 +2526,8 @@ if authentication_status:
 		if chosen_metric == "Percentage":
 			unit = "% of Total"
 
-		if len(selected_operators) > 0:
-			selected_operators = selected_operators
+		# if len(selected_operators) > 0:
+		# 	selected_operators = selected_operators
 
 		if (len(selected_operators)==0) or (len(selected_operators)==30):
 			selected_operators = ["NA"]
