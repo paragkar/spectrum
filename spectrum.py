@@ -2486,7 +2486,7 @@ if authentication_status:
 
 			if (Feature == "Expiry Map") and (SubFeature=="Frequency Layout"):
 				st.info("Heatmap's Color Intensity is directly proportional to length of the expiry period measured in years")
-				st.info("Hoverbox's Background Color directly Maps to the Specific Operator of the Spectrum Map")
+				st.info("Hoverbox's Background Color directly Maps to the Specific Operator of the Feature 'Spectrum Map'")
 
 
 
