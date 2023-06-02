@@ -1123,9 +1123,9 @@ if authentication_status:
 				#processing for hovertext
 				hovertext = htext_specmap_freq_layout(hf)
 
-				parttitle ="Spectrum Frequency Layout"
-				xdtickangle = -90
-				xdtickval = xdtickfreq_dict[Band]
+				# parttitle ="Spectrum Frequency Layout"
+				# xdtickangle = -90
+				# xdtickval = xdtickfreq_dict[Band]
 
 				#processing for data for the data tab for the SubFeature "Frequency Layout"
 				chartdata_df = count_items_in_dataframe(sf)*channelsize_dict[Band]
@@ -2266,9 +2266,17 @@ if authentication_status:
 		          "Total Purchase" : "MHz"}
 
 
-	if (SubFeature == "Frequency Layout"):
+	#---------Dimension = Spectrum Bands Starts -------------------
+
+	if (Feature == "Spectrum Map") and (SubFeature == "Frequency Layout"):
+
 		fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
+
+		xdtickangle = -90
+		xdtickval = xdtickfreq_dict[Band]
+
 		unit = "Ch Size - "+str(channelsize_dict[Band])+" MHz"
+
 		if selected_operators == []:
 			selected_operators = ["All"]
 		else:
@@ -2276,11 +2284,13 @@ if authentication_status:
 			
 		subtitle = subtitle_freqlayout_dict[Band]+unit+"; Selected Operators - "+', '.join(selected_operators)
 
-		title = parttitle+" for "+str(Band)+" MHz Band"
+		title = "Spectrum Frequency Layout"+" for "+str(Band)+" MHz Band"
 
 
-	if (SubFeature == "Operator Holdings"):
+	if (Feature == "Spectrum Map") and (SubFeature == "Operator Holdings"):
+
 		fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
+
 		if (len(selected_category) == 0) or (len(selected_category) == 2):
 			selected_category = "All"
 		else:
@@ -2298,8 +2308,10 @@ if authentication_status:
 		title = parttitle+" for "+str(Band)+" MHz Band"
 
 
-	if (SubFeature == "Operator %Share"):
+	if (Feature == "Spectrum Map") and (SubFeature == "Operator %Share"):
+
 		fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
+
 		if (len(selected_category) == 0) or (len(selected_category) == 2):
 			selected_category = "All"
 		else:
@@ -2317,6 +2329,7 @@ if authentication_status:
 	
 
 	if Feature == "Auction Map":
+
 		fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 		unit = units_dict[SubFeature]
 		selected_operators = ["NA"]
@@ -2328,6 +2341,7 @@ if authentication_status:
 
 		
 	if (Feature == "Expiry Map") and (SubFeature == "Frequency Layout"):
+
 		fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 		unit = "Ch Size - "+str(channelsize_dict[Band])+" MHz"
 		if selected_operators == []:
@@ -2341,6 +2355,7 @@ if authentication_status:
 
 	
 	if (Feature == "Expiry Map") and (SubFeature == "Yearly Trends"):
+
 		fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white'))) #hoverbox color is black
 		unit = "MHz"
 		if selected_operator == "":
@@ -2352,7 +2367,12 @@ if authentication_status:
 		title = parttitle+" for "+str(Band)+" MHz Band"
 		
 
-	if (selected_dimension == "Auction Years") and (Feature == "Band Metric"):
+	#---------Dimension = Spectrum Bands Ends -------------------
+
+
+	#---------Dimension = Auction Years Starts ------------------
+
+	if (Feature == "Band Metric"):
 		if (SubFeature =="Total Outflow") or (SubFeature == "Quantum Sold"):
 			if selected_operators==[]:
 				selected_operators = ["All"]
@@ -2373,7 +2393,7 @@ if authentication_status:
 		xdtickangle =0
 		xdtickval =1
 		
-	if (selected_dimension == "Auction Years") and (Feature == "Operator Metric"):
+	if (Feature == "Operator Metric"):
 		if (SubFeature =="Total Outflow") or (SubFeature == "Total Purchase"):
 			if selectedbands==[]:
 				selectedbands = ["All"]
@@ -2389,7 +2409,13 @@ if authentication_status:
 		xdtickval =1
 
 
-	if (selected_dimension == "Business Data") and (Feature == "5GBTS Trends"):
+	#---------Dimension = Auction Years Ends ------------------
+
+
+	#---------Dimension = Business Data Starts ----------------
+
+
+	if (Feature == "5GBTS Trends"):
 
 		fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 		xdtickangle= -45
@@ -2397,7 +2423,7 @@ if authentication_status:
 		title = "Indian 5G Base Stations Roll Out Trends"
 
 
-	if (selected_dimension == "Business Data") and (Feature == "Subscriber Trends"):
+	if (Feature == "Subscriber Trends"):
 
 		fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 		xdtickangle= -45
@@ -2405,14 +2431,14 @@ if authentication_status:
 		title = "Indian Telecom Subscribers Trends"
 
 
-	if (selected_dimension == "Business Data") and (Feature == "Subscriber MShare"):
+	if (Feature == "Subscriber MShare"):
 
 		fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 		xdtickangle= 0
 		xdtickval=1
 		title = "Indian Telecom Operator's Latest Subs Market Share"
 
-	if (selected_dimension == "Business Data") and (Feature == "License Fees"):
+	if (Feature == "License Fees"):
 
 		# fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 		xdtickangle= 0
@@ -2420,6 +2446,7 @@ if authentication_status:
 		title = "Indian Telecom License Fees Trend (Top 20 - % of Total)"
 		
 
+	#---------Dimension = Business Data Ends ----------------
 
 	#updating figure layouts
 	fig.update_layout(uniformtext_minsize=12, 
@@ -2443,15 +2470,16 @@ if authentication_status:
 			)
 
 
-	#Here are only some last minute changes in the plot
+	#Some last minute exceptions and changes in the plot
 
-	#When dimensions as "Telecom Data" then convert x axis into category
+	#converts x axis into category
 	if selected_dimension == "Business Data":
 		fig.update_layout(xaxis_type='category')
 	else:
 		pass
 
 	#removes tic labels if the date_range_list greater than a value
+	#This is done to prevent cluttering of xaxis labels when a large range is selected
 	if (selected_dimension == "Business Data") and (Feature == "Subscriber Trends"):
 		# fig.data[0].update(zmin=110, zmax=450) #setting the max and min value of the colorscale
 		if len(date_range_list) >= 30:
@@ -2462,6 +2490,7 @@ if authentication_status:
 			)
 
 
+	#Drawning a black border around the heatmap chart 
 	fig.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
 	fig.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
 
@@ -2480,20 +2509,26 @@ if authentication_status:
 		else:
 			st.plotly_chart(fig, use_container_width=True)
 
-		#plotting the summary chart
 
 
+		#preparing the container layout for the dimension business data
 		if (selected_dimension=="Business Data") and (Feature=="License Fees"):
 			col1val =3
 		else:
 			col1val = 0.2
+
+
+		#plotting the final summary chart 
 
 		col1,col2,col3 = st.columns([col1val,14,1.1]) #create collumns of uneven width
 		if SummaryFlag ==True:
 			# st.altair_chart(chart, use_container_width=True)
 			col2.altair_chart(chart, use_container_width=True)
 
-#--------The expander is used to add note for the user on reading the color codes for every chart -------
+
+
+
+	#--------The expander is used to add note for the user on reading the color codes for every chart -------
 
 		expander = st.expander("Click Here - To Learn About the Color Codes", expanded = False)
 
