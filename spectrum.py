@@ -2185,7 +2185,7 @@ if authentication_status:
 
 				sorted_operators = sorted_df["Operators"].tolist()
 
-				st.write(sorted_operators[0:30])
+				st.write(set(sorted_operators))
 
 				selected_operators = st.sidebar.multiselect('Select Categories', sorted_operators)
 
