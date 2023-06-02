@@ -2183,9 +2183,9 @@ if authentication_status:
 				sorted_df = sorted_df[sorted_df["FY"]=="2022-2023"].sort_values(by='Amount', ascending=False)
 
 
-				sorted_operators = sorted_df.head(30)["Operators"].tolist()
+				sorted_operators = sorted_df.head(100)["Operators"].tolist()
 
-				st.write(sorted_operators)
+				st.write(set(sorted_operators))
 
 				selected_operators = st.sidebar.multiselect('Select Categories', sorted_operators)
 
