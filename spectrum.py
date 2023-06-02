@@ -2179,7 +2179,7 @@ if authentication_status:
 
 				sorted_df = dflfsfprocess[dflfsfprocess["FY"]=="2022-2023"].sort_values(by='Amount', ascending=False)
 
-				sorted_operators = list(set(sorted_df["Operators"]))
+				sorted_operators = sorted(list(set(sorted_df["Operators"])),reverse=True)
 
 				st.write(sorted_operators)
 
