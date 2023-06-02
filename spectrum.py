@@ -2479,7 +2479,7 @@ if authentication_status:
 	#------ New Code ------#
 	#Currently Blank but will be used to add notes regarding every chart
 
-		expander = st.expander("About This Page", expanded = False)
+		expander = st.expander("How to Read Color Codes", expanded = False)
 
 		with expander:
 			st.info("     ")
