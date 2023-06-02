@@ -2183,23 +2183,25 @@ if authentication_status:
 
 				selected_operators = st.sidebar.multiselect('Select Categories', sorted_operators)
 
+				#Filter the dataframe with the list of selected operators
+
+
+				temp = pd.DataFrame()
+				for operator in selected_operators:
+
+					df = dflfsfprocess[dflfsfprocess["Operators"]==operator]
+
+					temp = pd.concat([temp, df], axis =0)
+
+				dflfsfprocess = temp.copy()
+
+			else:
+				pass
+
 
 			dflfsfprocess = dflfsfprocess.groupby([SubFeature,'FY']).sum().drop(columns=['Category', column_to_drop], axis =1).reset_index()
 
 			selected_fy_for_sort = st.sidebar.selectbox('Select FY for Sorting', listofFY)
-
-
-			#Filter the dataframe with the list of selected operators
-
-
-			temp = pd.DataFrame()
-			for operator in selected_operators:
-
-				df = dflfsfprocess[dflfsfprocess["Operators"]==operator]
-
-				temp = pd.concat([temp, df], axis =0)
-
-			dflfsfprocess = temp.copy()
 
 
 			dflfsfbysubfeature = round(dflfsfprocess.pivot(index =SubFeature, columns ='FY', values ='Amount')
