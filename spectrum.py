@@ -2206,7 +2206,10 @@ if authentication_status:
 
 					temp = pd.concat([temp, df], axis =0)
 
+				dflfsfprocess = temp
+
 			else:
+				
 				pass
 
 
