@@ -2529,7 +2529,14 @@ if authentication_status:
 		# if len(selected_operators) > 0:
 		# 	selected_operators = selected_operators
 
-		if (len(selected_operators)==0) or (len(selected_operators)==30):
+
+		if SubFeature == "LicenseType":
+
+			if (len(selected_operators)==0) or (len(selected_operators)==30):
+				selected_operators = ["NA"]
+			else:
+				pass
+		if SubFeature == "Operators":
 			selected_operators = ["NA"]
 
 
