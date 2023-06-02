@@ -2483,7 +2483,7 @@ if authentication_status:
 
 		with expander:
 			if SubFeature == "Frequency Layout":
-				st.info("Heatmap and Hoverbox Background Colors Maps to the Specific Operator as mentioned in the Color Bar on the left")
+				st.info("Heatmap and Hoverbox's Background Color Maps to the Specific Operator as shown in the Color Bar on the left")
 
 
 
