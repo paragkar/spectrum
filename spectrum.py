@@ -1444,17 +1444,17 @@ if authentication_status:
 		Feature = st.sidebar.selectbox('Select a Feature',["Band Metric", "Operator Metric"])
 
 
-		subfeature_dict ={"Quantum Offered" : "Sale (MHz)", "Quantum Sold": "Total Sold (MHz)", "Quantum Unsold" : "Total Unsold (MHz)", 
-			"Reserve Price" : "RP/MHz" , "Auction Price": "Auction Price/MHz", "Total EMD" : "Total EMD"} 
-		subfeature_list = ["Reserve Price", "Auction Price", "Auction/Reserve", "Quantum Offered", 
-			"Quantum Sold","Percent Sold", "Quantum Unsold", "Percent Unsold", "Total EMD", "Total Outflow"]
+		# subfeature_dict ={"Quantum Offered" : "Sale (MHz)", "Quantum Sold": "Total Sold (MHz)", "Quantum Unsold" : "Total Unsold (MHz)", 
+		# 	"Reserve Price" : "RP/MHz" , "Auction Price": "Auction Price/MHz", "Total EMD" : "Total EMD"} 
+		# subfeature_list = ["Reserve Price", "Auction Price", "Auction/Reserve", "Quantum Offered", 
+		# 	"Quantum Sold","Percent Sold", "Quantum Unsold", "Percent Unsold", "Total EMD", "Total Outflow"]
 
 		if Feature == "Band Metric":
 
-			# subfeature_dict ={"Quantum Offered" : "Sale (MHz)", "Quantum Sold": "Total Sold (MHz)", "Quantum Unsold" : "Total Unsold (MHz)", 
-			# "Reserve Price" : "RP/MHz" , "Auction Price": "Auction Price/MHz", "Total EMD" : "Total EMD"} 
-			# subfeature_list = ["Reserve Price", "Auction Price", "Auction/Reserve", "Quantum Offered", 
-			# "Quantum Sold","Percent Sold", "Quantum Unsold", "Percent Unsold", "Total EMD", "Total Outflow"]
+			subfeature_dict ={"Quantum Offered" : "Sale (MHz)", "Quantum Sold": "Total Sold (MHz)", "Quantum Unsold" : "Total Unsold (MHz)", 
+			"Reserve Price" : "RP/MHz" , "Auction Price": "Auction Price/MHz", "Total EMD" : "Total EMD"} 
+			subfeature_list = ["Reserve Price", "Auction Price", "Auction/Reserve", "Quantum Offered", 
+			"Quantum Sold","Percent Sold", "Quantum Unsold", "Percent Unsold", "Total EMD", "Total Outflow"]
 			
 			SubFeature = st.sidebar.selectbox('Select a SubFeature', subfeature_list)
 
