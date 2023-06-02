@@ -2410,7 +2410,7 @@ if authentication_status:
 		xdtickangle= -45
 		xdtickval=1
 		title = "Indian 5G Base Stations Roll Out Trends"
-		subtitle = "Cumulative BTS growth; Top 20 States/UT; Unit - Thousands; Sorted by the Recent Date"
+		subtitle = "Cumulative BTS growth; Top 20 States/UT; Unit - Thousands; Sorted by the Recent Date; Source - DOT"
 
 
 	if (Feature == "5GBTS Trends") and (SubFeature == "Percent of Total"):
@@ -2421,7 +2421,17 @@ if authentication_status:
 		xdtickangle= -45
 		xdtickval=1
 		title = "Indian 5G Base Stations Roll Out Trends"
-		subtitle = "Percent of Total; Top 20 States/UT; Unit - %; Sorted by the Recent Date"
+		subtitle = "Percent of Total; Top 20 States/UT; Unit - %; Sorted by the Recent Date; Source - DOT"
+
+	if (Feature == "5GBTS Trends") and (SubFeature == "Incremental Values"):
+
+		hoverlabel_bgcolor = "#000000" #subdued black
+
+		fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
+		xdtickangle= -45
+		xdtickval=1
+		title = "Indian 5G Base Stations Roll Out Trends"
+		subtitle = "Incremental Values; Top 20 States/UT; Unit - Thousands; Sorted by the Recent Date; Source - DOT"
 
 
 	if (Feature == "Subscriber Trends"):
