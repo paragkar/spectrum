@@ -2189,7 +2189,6 @@ if authentication_status:
 
 				sorted_operators = sorted_df.head(30)["Operators"].tolist()
 
-				st.write(sorted_operators)
 
 				selected_operators = st.sidebar.multiselect('Select Categories', sorted_operators)
 
@@ -2207,6 +2206,8 @@ if authentication_status:
 
 			else:
 				pass
+
+			st.write(dflfsfprocess)
 
 
 			dflfsfprocess = dflfsfprocess.groupby([SubFeature,'FY']).sum().drop(columns=['Category', column_to_drop], axis =1).reset_index()
