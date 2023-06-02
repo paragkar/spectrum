@@ -2182,7 +2182,7 @@ if authentication_status:
 				sorted_df = sorted_df.groupby(["Operators","FY"]).sum().reset_index().sort_values(by='Amount', ascending=False)
 
 
-				sorted_operators = sorted_df.head(30)["Operators"].tolist() #pick on 30 operators 
+				sorted_operators = sorted_df.head(29)["Operators"].tolist() #pick on 29 operators and add BSNL to list later
 
 				sorted_operators = ["BSNL"]+sorted_operators
 
@@ -2529,7 +2529,7 @@ if authentication_status:
 		# if len(selected_operators) > 0:
 		# 	selected_operators = selected_operators
 
-		if (len(selected_operators)==0) or (len(selected_operators)==31):
+		if (len(selected_operators)==0) or (len(selected_operators)==30):
 			selected_operators = ["NA"]
 
 
@@ -2543,7 +2543,7 @@ if authentication_status:
 
 		subtitle = "Selected Category - "+",".join(selected_category)+"; "+chosen_metric+\
 					"; Unit - "+unit+"; Sorted by - "+selected_fy_for_sort+"; Selected Operators -"+",".join(selected_operators)+"; Source - DOT"
-		title = "Indian Telecom Regulatory Fees Trend - Top 20 "+subfeature_dict[SubFeature]
+		title = "Indian Telecom Regulatory Fees Trend Top N"+subfeature_dict[SubFeature]
 		
 
 	#---------Dimension = Business Data Ends ----------------
