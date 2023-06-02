@@ -992,10 +992,11 @@ if authentication_status:
 
 
 	if selected_dimension == "Spectrum Bands":
+
 		#selecting a Spectrum band
 		Band = st.sidebar.selectbox('Select a Band', list(exptab_dict.keys()), 3) #default index 1800 MHz Band
 		
-		#setting up excel file tabs for reading data
+		#setting up tabs for reading data from excel file - spectrum map
 		freqtab = str(Band)+"MHz"
 		bandwidthtab = str(Band)+"MHzBW"
 		bandwithexptab = str(Band)+"MHzExpBW"
@@ -1008,7 +1009,6 @@ if authentication_status:
 		spectrumofferedvssold = "Spectrum_Offered_vs_Sold"
 		masterall = "MasterAll-TDDValueConventional" #all auction related information 
 
-
 		#loading spectrum excel file
 
 		df = loadspectrumfile()
@@ -1017,7 +1017,7 @@ if authentication_status:
 		colcodes = df["ColorCodes"]
 		colcodes=colcodes.set_index("Description")
 
-		#processing excel tabs into various dataframes
+		#Loading the excel tabs in the file spectrum map into various dataframes
 		sf = df[freqtab]
 		bandf = df[bandwidthtab]
 		bandexpf = df[bandwithexptab]
@@ -1040,21 +1040,20 @@ if authentication_status:
 		bandexpf = bandexpf.set_index("LSA")
 		masterdf = df[masterall]
 		
-		# st.sidebar.title('Navigation')
 
-		#processing "Spectrum_all" excel tab data
+		#processing "Spectrum_all" excel tab data of the file "spectrum map"
 		dff = df[spectrumall] #contains information of LSA wise mapping oldoperators with new operators
-		dffcopy = dff.copy() #make a copy for "Operator Wise" subfeature under the feature "FreqMap"
+		dffcopy = dff.copy() #make a copy for "Operator holdings" subfeature under the feature "Freq Layout"
 		dff = cal_bw_mapped_to_operators_auctionmap(dff)
 		dff = coltostr(dff)
 		dff = adddummycols(dff,auctionfailyears_dict[Band])
 		dff = dff.applymap(lambda x: "NA  " if x=="" else x) # space with NA is delibelitratly added as it gets removed with ","
 
-		#processing pricemaster excel tab data
+		#processing the pricemaster excel tab data in the file "spectrum map"
 		pricemaster = df["Master_Price_Sheet"]
 		pricemaster.rename(columns = {"FP" : "Auction Price", "DP": "Reserve Price"}, inplace = True)
 
-		#processing & restructuring dataframe spectrum offered vs sold & unsold for hovertext of data3
+		#processing & restructuring dataframe spectrum offered vs sold & unsold for hovertext the data of heatmap
 		offeredvssold = df[spectrumofferedvssold]
 		offeredvssold = offeredvssold[(offeredvssold["Band"] == Band) & (offeredvssold["Year"] != 2018)]
 		offeredvssold = offeredvssold.drop(columns =["Band"]).reset_index(drop=True)
@@ -1075,7 +1074,7 @@ if authentication_status:
 		percentunsold = percentunsold.applymap(lambda x: round(float(x),1))
 		percentunsold = coltostr(percentunsold) #convert columns data type to string
 
-		#processing & restructuring dataframe auction price for hovertext of data3
+		#processing & restructuring dataframe auction price for hovertext of the data of heatmap
 		auctionprice = pricemaster[(pricemaster["Band"] == Band) & (pricemaster["Year"] != 2018)]
 		auctionprice = auctionprice.pivot(index=["LSA"], columns='Year', values="Auction Price").fillna("NA")
 		auctionprice = auctionprice.loc[:, (auctionprice != 0).any(axis=0)]
@@ -1084,7 +1083,7 @@ if authentication_status:
 		auctionprice = adddummycols(auctionprice,auctionfailyears_dict[Band])
 		auctionprice = auctionprice.replace(0,"NA")
 
-		#processing & restructuring dataframe reserve price for hovertext of data3
+		#processing & restructuring dataframe reserve price for hovertext of the data of heatmap
 		reserveprice = pricemaster[(pricemaster["Band"] == Band) & (pricemaster["Year"] != 2018)]
 		reserveprice = reserveprice.pivot(index=["LSA"], columns='Year', values="Reserve Price").fillna("NA")
 		reserveprice = reserveprice.loc[:, (reserveprice != 0).any(axis=0)]
@@ -1092,12 +1091,12 @@ if authentication_status:
 		reserveprice = coltostr(reserveprice) #convert columns data type to string
 		reserveprice = reserveprice.replace(0,"NA")
 
-		#mapping the year of auction with channels in the freq maps
+		#mapping the year of auction with channels in the spectrum maps
 		ayear = cal_year_spectrum_acquired(ef,excepf,pf1)
 
 		Feature = st.sidebar.selectbox('Select a Feature', ["Spectrum Map", "Expiry Map", "Auction Map"], 0) #Default Index first
 
-		#Processing For Dimension = "Frequency Band" & Feature 
+		#Processing For Dimension = "Frequency Band" & Features
 		if  Feature == "Spectrum Map":
 			SubFeature = st.sidebar.selectbox('Select a Sub Feature', ["Frequency Layout", "Operator Holdings", "Operator %Share"],0)
 			if SubFeature == "Frequency Layout":
@@ -1130,11 +1129,8 @@ if authentication_status:
 
 
 
-				#processing for data for data tab
-
-
+				#processing for data for the data tab for "Frequency Layout"
 				chartdata_df = count_items_in_dataframe(sf)*channelsize_dict[Band]
-
 
 				chartdata_df.index = sf.index
 
@@ -1159,7 +1155,7 @@ if authentication_status:
 
 				chartdata_df = chartdata_df.T
 
-				chart_data_flag = True #Plot only if this is true 
+				chart_data_flag = True #Plot only if this flag is true 
 
 				
 				data = [go.Heatmap(
@@ -1300,8 +1296,6 @@ if authentication_status:
 					]
 
 
-				
-
 		#Feature ="Expiry Map" linked to Dimension = "Spectrum Band"
 		if  Feature == "Expiry Map":
 			SubFeature = st.sidebar.selectbox('Select a Sub Feature', ["Frequency Layout", "Yearly Trends"],0)
@@ -1367,7 +1361,6 @@ if authentication_status:
 						temp = temp.replace(regexfilt, np.nan, regex = True)
 						temp = temp.replace(selected_operator,'', regex = True)
 					
-						
 					
 					for col in temp.columns:
 						temp[col] = temp[col].astype(float)
@@ -1463,12 +1456,15 @@ if authentication_status:
 		Year = st.sidebar.selectbox('Select a Year',calendaryearlist,7) #Default Index the latest Calendar Year
 		df1 = masterdf[masterdf["Auction Year"]==Year]
 		df1 = df1.set_index("Circle")
+
 		Feature = st.sidebar.selectbox('Select a Feature',["Band Metric", "Operator Metric"])
 		if Feature == "Band Metric":
-			subfeature_dict ={"Quantum Offered" : "Sale (MHz)", "Quantum Sold": "Total Sold (MHz)", "Quantum Unsold" : "Total Unsold (MHz)", "Reserve Price" : "RP/MHz" ,  
-				       "Auction Price": "Auction Price/MHz", "Total EMD" : "Total EMD"} 
-			subfeature_list = ["Reserve Price", "Auction Price", "Auction/Reserve", "Quantum Offered", "Quantum Sold","Percent Sold", "Quantum Unsold", "Percent Unsold", "Total EMD", "Total Outflow"]
+			subfeature_dict ={"Quantum Offered" : "Sale (MHz)", "Quantum Sold": "Total Sold (MHz)", "Quantum Unsold" : "Total Unsold (MHz)", 
+			"Reserve Price" : "RP/MHz" , "Auction Price": "Auction Price/MHz", "Total EMD" : "Total EMD"} 
+			subfeature_list = ["Reserve Price", "Auction Price", "Auction/Reserve", "Quantum Offered", 
+			"Quantum Sold","Percent Sold", "Quantum Unsold", "Percent Unsold", "Total EMD", "Total Outflow"]
 			SubFeature = st.sidebar.selectbox('Select a SubFeature', subfeature_list)
+
 			if SubFeature in ["Reserve Price", "Auction Price", "Total EMD", "Quantum Offered", "Quantum Sold", "Quantum Unsold" ]:
 				df1 = df1.reset_index()
 				df1_temp1 = df1.copy()
@@ -1625,7 +1621,8 @@ if authentication_status:
 				chart = summarychart(summarydf, 'Operators', SubFeature)
 				SummaryFlag = True
 				
-				hovertext,colormatrix = htext_colmatrix_auction_year_operator_metric(df1, selectedbands, SubFeature, df2_temp2) #processing hovertext and colormatrix for operator wise in cal year dim
+				#processing hovertext and colormatrix for operator wise in cal year dim
+				hovertext,colormatrix = htext_colmatrix_auction_year_operator_metric(df1, selectedbands, SubFeature, df2_temp2)
 				hoverlabel_bgcolor = colormatrix #colormatrix processed from fuction "hovertext_and_colmatrix" for same above
 		
 
@@ -1637,7 +1634,6 @@ if authentication_status:
 			  ygap = 1,
 			  hoverinfo ='text',
 			  text = hovertext,
-	# 		  hovertemplate = 'LSA: %{y}<extra></extra>',
 			  colorscale = 'Hot',
 			    texttemplate="%{z}", 
 			    textfont={"size":10},
