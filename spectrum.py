@@ -2487,7 +2487,7 @@ if authentication_status:
 				st.info("Heatmap and Hoverbox's Background Color Maps to the Specific Operator as shown in the Color Bar on the left")
 
 			if (Feature == "Expiry Map") and (SubFeature=="Frequency Layout"):
-				st.info("Heatmap's Color Intensity is directly proportional to length of the expiry period measured in years")
+				st.info("Heatmap's Color Intensity is directly proportional to length of the expiry period in years")
 				st.info("Hoverbox's Background Color maps directly to the Specific Operator shown in the Feature 'Spectrum Map'")
 
 			if (Feature == "Auction Map"):
