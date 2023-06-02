@@ -1214,8 +1214,6 @@ if authentication_status:
 				if bandtype_dict[Band]=="TDD": #doubling the TDD spectrum for aligning with normal convention 
 					dfff = (dfff*2).round(2)
 
-				st.write(dfff) #debug
-
 				parttitle ="Operator Holdings"
 				xdtickangle = 0
 				xdtickval = 1
