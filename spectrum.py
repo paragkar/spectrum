@@ -2209,7 +2209,7 @@ if authentication_status:
 				dflfsfprocess = temp
 
 			else:
-				
+
 				pass
 
 
@@ -2603,8 +2603,10 @@ if authentication_status:
 
 
 		#preparing the container layout for the dimension business data
-		if (selected_dimension=="Business Data") and (Feature=="License Fees"):
+		if (selected_dimension=="Business Data") and (SubFeature=="Operators"):
 			col1val =3
+		if (selected_dimension=="Business Data") and (SubFeature=="LicenseType"):
+			col1val =1
 		else:
 			col1val = 0.2
 
