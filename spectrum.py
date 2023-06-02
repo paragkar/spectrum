@@ -2367,7 +2367,7 @@ if authentication_status:
 		
 		subtitle = "Unit - "+unit+"; Selected Operators - "+', '.join(selected_operators)+ " ; Summary Below - Sum of all LSAs"
 
-		title = parttitle+" for "+str(Band)+" MHz Band"
+		title = parttitle+" for the "+str(Band)+" MHz Band"
 
 		
 
