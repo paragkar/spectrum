@@ -1365,7 +1365,6 @@ if authentication_status:
 				chart = summarychart(summarydf, "ExpYears", "TotalMHz")
 				SummaryFlag = True #for ploting the summary chart
 				
-				hoverlabel_bgcolor = "#000000" #subdued black
 
 				data = [go.Heatmap(
 				  z = eff.values,
@@ -1704,12 +1703,7 @@ if authentication_status:
 				#preparing the summary chart 
 				chart = summarychart(summarydf, 'Dates', SubFeature)
 				SummaryFlag = True
-
-				hoverlabel_bgcolor = "#000000" #subdued black
-				xdtickangle= -45
-				xdtickval=1
-				title = "Indian 5G Base Stations Roll Out Trends"
-				subtitle = "Cumulative BTS growth; Top 20 States/UT; Unit - Thousands; Sorted by the Recent Date"
+				
 
 			if SubFeature == "Percent of Total":
 
@@ -2006,7 +2000,8 @@ if authentication_status:
 				if len(selected_circles) == 0:
 					selected_circles = ["All"]
 
-				subtitle = "Incremental Values; Selected Category -" +",".join(selected_category)+ "; Selected Circles - "+ ",".join(selected_circles)+"; Unit - Millions; Sorted by the Recent Date"
+				subtitle = "Incremental Values; Selected Category -" +",".join(selected_category)+ "; Selected Circles - "+ ","
+							.join(selected_circles)+"; Unit - Millions; Sorted by the Recent Date"
 
 				if len(date_range_list) >=24:
 					texttemplate =""
@@ -2196,7 +2191,8 @@ if authentication_status:
 
 			selected_fy_for_sort = st.sidebar.selectbox('Select FY for Sorting', listofFY)
 
-			dflfsfbyoperator = round(dflfsfprocess.pivot(index ='Operators', columns ='FY', values ='Amount').sort_values(selected_fy_for_sort, ascending = False)/10000000,0)
+			dflfsfbyoperator = round(dflfsfprocess.pivot(index ='Operators', columns ='FY', values ='Amount')
+									.sort_values(selected_fy_for_sort, ascending = False)/10000000,0)
 
 			SubFeature = st.sidebar.radio('Click an Option', ["Absolute", "Percentage"])
 
@@ -2348,6 +2344,8 @@ if authentication_status:
 	
 	if (Feature == "Expiry Map") and (SubFeature == "Yearly Trends"):
 
+		hoverlabel_bgcolor = "#000000" #subdued black
+
 		fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white'))) #hoverbox color is black
 
 		xdtickangle = 0
@@ -2425,8 +2423,9 @@ if authentication_status:
 		selectedbands = [str(x) for x in selectedbands]	
 
 		title = "Operator Wise Summary for the Year "+str(Year)
-		
-		subtitle = SubFeature + "; Unit -"+units_dict[SubFeature]+"; Selected Bands -" + ', '.join(selectedbands) + "; Summary Below - Sum of all LSAs"
+
+		subtitle = SubFeature + "; Unit -"+units_dict[SubFeature]+"; Selected Bands -" 
+					+ ', '.join(selectedbands) + "; Summary Below - Sum of all LSAs"
 
 
 	#---------Dimension = Auction Years Ends ------------------
@@ -2435,15 +2434,20 @@ if authentication_status:
 	#---------Dimension = Business Data Starts ----------------
 
 
-	if (Feature == "5GBTS Trends"):
+	if (Feature == "5GBTS Trends") and (SubFeature == "Cumulative Values"):
+
+		hoverlabel_bgcolor = "#000000" #subdued black
 
 		fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 		xdtickangle= -45
 		xdtickval=1
 		title = "Indian 5G Base Stations Roll Out Trends"
+		subtitle = "Cumulative BTS growth; Top 20 States/UT; Unit - Thousands; Sorted by the Recent Date"
 
 
 	if (Feature == "Subscriber Trends"):
+
+		hoverlabel_bgcolor = "#000000" #subdued black
 
 		fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 		xdtickangle= -45
@@ -2453,12 +2457,16 @@ if authentication_status:
 
 	if (Feature == "Subscriber MShare"):
 
+		hoverlabel_bgcolor = "#000000" #subdued black
+
 		fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 		xdtickangle= 0
 		xdtickval=1
 		title = "Indian Telecom Operator's Latest Subs Market Share"
 
 	if (Feature == "License Fees"):
+
+		hoverlabel_bgcolor = "#000000" #subdued black
 
 		# fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 		xdtickangle= 0
