@@ -2485,7 +2485,8 @@ if authentication_status:
 				st.info("Heatmap and Hoverbox's Background Color Maps to the Specific Operator as shown in the Color Bar on the left")
 
 			if SubFeature == "Expiry Map":
-				st.info("Heatmap and Hoverbox's Background Color Maps to the Specific Operator as shown in the Color Bar on the left")
+				st.info("Heatmap's Color Intensity is directly proportional to length of the expiry period measured in years")
+				st.info("Hoverbox's Background Color directly Maps to the Specific Operator of the Spectrum Map")
 
 
 
