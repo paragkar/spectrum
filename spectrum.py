@@ -2529,7 +2529,7 @@ if authentication_status:
 		# if len(selected_operators) > 0:
 		# 	selected_operators = selected_operators
 
-		if (len(selected_operators)==0) or (len(selected_operators)==30):
+		if (len(selected_operators)==0) or (len(selected_operators)==31):
 			selected_operators = ["NA"]
 
 
