@@ -1123,10 +1123,6 @@ if authentication_status:
 				#processing for hovertext
 				hovertext = htext_specmap_freq_layout(hf)
 
-				# parttitle ="Spectrum Frequency Layout"
-				# xdtickangle = -90
-				# xdtickval = xdtickfreq_dict[Band]
-
 				#processing for data for the data tab for the SubFeature "Frequency Layout"
 				chartdata_df = count_items_in_dataframe(sf)*channelsize_dict[Band]
 
@@ -1208,9 +1204,6 @@ if authentication_status:
 				if bandtype_dict[Band]=="TDD": #doubling the TDD spectrum for aligning with normal convention 
 					dfff = (dfff*2).round(2)
 
-				parttitle ="Operator Holdings"
-				xdtickangle = 0
-				xdtickval = 1
 
 				
 				hovertext,colormatrix = htext_colmatrix_spec_map_op_hold_share(dfff, selected_operators, operatorlist) #processing hovertext and colormatrix for operatorwise in freqband dim
@@ -2291,6 +2284,10 @@ if authentication_status:
 
 		fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 
+		xdtickangle = 0
+		xdtickval = 1
+
+
 		if (len(selected_category) == 0) or (len(selected_category) == 2):
 			selected_category = "All"
 		else:
@@ -2305,7 +2302,7 @@ if authentication_status:
 		subtitle = "Unit - "+unit+"; "+"India Total - Sum of all LSAs "+"; Selected Operators - "+', '.join(selected_operators)+ ";\
 		Category - "+ selected_category
 
-		title = parttitle+" for "+str(Band)+" MHz Band"
+		title = "Operator Holdings"+" for "+str(Band)+" MHz Band"
 
 
 	if (Feature == "Spectrum Map") and (SubFeature == "Operator %Share"):
