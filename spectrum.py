@@ -2000,8 +2000,7 @@ if authentication_status:
 				if len(selected_circles) == 0:
 					selected_circles = ["All"]
 
-				subtitle = "Incremental Values; Selected Category -" +",".join(selected_category)+ "; Selected Circles - "+ ","
-							.join(selected_circles)+"; Unit - Millions; Sorted by the Recent Date"
+				subtitle = "Incremental Values; Selected Category -" +",".join(selected_category)+ "; Selected Circles - "+ ",".join(selected_circles)+"; Unit - Millions; Sorted by the Recent Date"
 
 				if len(date_range_list) >=24:
 					texttemplate =""
