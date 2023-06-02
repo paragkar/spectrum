@@ -1205,7 +1205,6 @@ if authentication_status:
 					dfff = (dfff*2).round(2)
 
 
-				
 				hovertext,colormatrix = htext_colmatrix_spec_map_op_hold_share(dfff, selected_operators, operatorlist) #processing hovertext and colormatrix for operatorwise in freqband dim
 				hoverlabel_bgcolor = colormatrix #colormatrix processed from fuction "hovertext_and_colmatrix" for same above
 				
@@ -1268,10 +1267,6 @@ if authentication_status:
 					dfffshare.rename(columns = {col:col[:-1]}, inplace = True) #stripping the last digit "1"
 				
 				dfffshare = round(dfffshare*100,2)
-				
-				parttitle ="Operator's Spectrum Market Share"
-				xdtickangle = 0
-				xdtickval = 1
 				
 				hovertext,colormatrix = htext_colmatrix_spec_map_op_hold_share(dfff, selected_operators, operatorlist) #processing hovertext and colormatrix for operatorwise in freqband dim
 				hoverlabel_bgcolor = colormatrix #colormatrix processed from fuction "hovertext_and_colmatrix" for same above
@@ -2277,7 +2272,7 @@ if authentication_status:
 			
 		subtitle = subtitle_freqlayout_dict[Band]+unit+"; Selected Operators - "+', '.join(selected_operators)
 
-		title = "Spectrum Frequency Layout"+" for "+str(Band)+" MHz Band"
+		title = "Spectrum Frequency Layout for "+str(Band)+" MHz Band"
 
 
 	if (Feature == "Spectrum Map") and (SubFeature == "Operator Holdings"):
@@ -2302,12 +2297,15 @@ if authentication_status:
 		subtitle = "Unit - "+unit+"; "+"India Total - Sum of all LSAs "+"; Selected Operators - "+', '.join(selected_operators)+ ";\
 		Category - "+ selected_category
 
-		title = "Operator Holdings"+" for "+str(Band)+" MHz Band"
+		title = "Operator Holdings for "+str(Band)+" MHz Band"
 
 
 	if (Feature == "Spectrum Map") and (SubFeature == "Operator %Share"):
 
 		fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
+
+		xdtickangle = 0
+		xdtickval = 1
 
 		if (len(selected_category) == 0) or (len(selected_category) == 2):
 			selected_category = "All"
@@ -2322,7 +2320,7 @@ if authentication_status:
 		unit = '% of Total'
 		subtitle = "Unit - "+unit+ " ; Selected Operators - "+', '.join(selected_operators)+ "; Category - "+ selected_category
 
-		title = parttitle+" for "+str(Band)+" MHz Band"
+		title = "Operator's Spectrum Market Share for "+str(Band)+" MHz Band"
 	
 
 	if Feature == "Auction Map":
