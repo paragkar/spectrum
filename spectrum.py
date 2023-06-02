@@ -1203,13 +1203,14 @@ if authentication_status:
 				else:
 					selected_category=[]
 
-				st.write(dfff) #debug
 					
 				dfff = dfff.groupby(["OperatorNew","Year","Batch No", "Cat"])[list_of_circles_codes].sum()
 				dfff = dfff.reset_index().drop(columns = ["Year", "Batch No", "Cat"], axis =1).groupby("OperatorNew").sum().T
 				
 				if bandtype_dict[Band]=="TDD": #doubling the TDD spectrum for aligning with normal convention 
 	        			dfff = (dfff*2).round(2)
+
+	        	st.write(dfff) #debug
 				
 				parttitle ="Operator Holdings"
 				xdtickangle = 0
