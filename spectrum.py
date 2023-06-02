@@ -2484,14 +2484,14 @@ if authentication_status:
 
 		with expander:
 			if (Feature == "Spectrum Map") and (SubFeature=="Frequency Layout"):
-				st.info("Heatmap and Hoverbox's Background Color Maps to the Specific Operator as shown in the Color Bar on the left")
+				st.info("Heatmap and Hoverbox's Background Color - Maps to the Specific Operator as shown in the Color Bar on the left")
 
 			if (Feature == "Expiry Map") and (SubFeature=="Frequency Layout"):
-				st.info("Heatmap's Color Intensity is directly proportional to length of the expiry period in years")
-				st.info("Hoverbox's Background Color maps directly to the Specific Operator shown in the Feature 'Spectrum Map'")
+				st.info("Heatmap's Color Intensity - Directly proportional to length of the expiry period in years")
+				st.info("Hoverbox's Background Color - Maps directly to the Specific Operator shown in the Feature 'Spectrum Map'")
 
 			if (Feature == "Auction Map"):
-				st.info("Heatmap's Color Intensity is directly proportional to value on Color Bar on the left")
+				st.info("Heatmap's Color Intensity - Directly proportional to value on Color Bar on the left")
 				st.info("Hoverbox's Background Color = Black (for failed/no auction)")
 				st.info("Hoverbox's Background Color = Green (for Auction Price = Reserve Price)")
 				st.info("Hoverbox's Background Color = Red (for Auction Price > Reserve Price)")
