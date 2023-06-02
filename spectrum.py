@@ -2491,7 +2491,7 @@ if authentication_status:
 				st.info("Hoverbox's Background Color maps directly to the Specific Operator shown in the Feature 'Spectrum Map'")
 
 			if (Feature == "Auction Map"):
-				st.info("Heatmap's Color Intensity is directly proportional to its value as shown in the Color Bar on the left")
+				st.info("Heatmap's Color Intensity is directly proportional to value on Color Bar on the left")
 				st.info("Hoverbox's Background Color = Black (for failed/no auction)")
 				st.info("Hoverbox's Background Color = Green (for Auction Price = Reserve Price)")
 				st.info("Hoverbox's Background Color = Red (for Auction Price > Reserve Price)")
