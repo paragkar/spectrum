@@ -2174,7 +2174,7 @@ if authentication_status:
 			subfeature_dict = {"Operators" : "Operators", "LicenseType" : "License Types"}
 
 
-			dflfsfprocess = dflfsfprocess.groupby(SubFeature,'FY']).sum().drop(columns=['Category', column_to_drop], axis =1).reset_index()
+			dflfsfprocess = dflfsfprocess.groupby([SubFeature,'FY']).sum().drop(columns=['Category', column_to_drop], axis =1).reset_index()
 
 			selected_fy_for_sort = st.sidebar.selectbox('Select FY for Sorting', listofFY)
 
