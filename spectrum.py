@@ -2443,7 +2443,7 @@ if authentication_status:
 		xdtickval=1
 
 		subtitle = "Cumulative Values; Selected Category -" +",".join(selected_category)+ "; Selected Circles - "+ \
-					",".join(selected_circles)+"; Unit - Millions; Sorted by the Recent Date"
+					",".join(selected_circles)+"; Unit - Millions; Sorted by the Recent Date; Source - TRAI"
 		title = "Indian Telecom Subscribers Trends"
 
 
@@ -2467,7 +2467,7 @@ if authentication_status:
 		xdtickval=1
 
 		subtitle = "Units - (Summary Total - Rs Cr) and (Values - % of Total)"
-		title = "Indian Telecom License Fees Trend (Top 20 - % of Total)"
+		title = "Indian Telecom License Fees Trend of Top 20 Operators"
 		
 
 	#---------Dimension = Business Data Ends ----------------
