@@ -1191,6 +1191,9 @@ if authentication_status:
 					for op in selected_operators:
 						temp = pd.concat([dfff[dfff["OperatorNew"]==op],temp], axis =0)
 					dfff = temp.copy()
+
+				st.write(dfff) #debug
+
 				cat_dict = {'Liberalized' : 'L', 'UnLiberalized' : 'U'}
 				if len(set(dfff["Cat"])) == 2:
 					selected_category = st.sidebar.multiselect('Select a Category', ['Liberalized', 'UnLiberalized'])
