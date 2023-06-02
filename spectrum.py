@@ -2481,10 +2481,10 @@ if authentication_status:
 		expander = st.expander("Click Here - To Learn About the Color Codes", expanded = False)
 
 		with expander:
-			if SubFeature == "Frequency Layout":
+			if Feature == "Frequency Layout":
 				st.info("Heatmap and Hoverbox's Background Color Maps to the Specific Operator as shown in the Color Bar on the left")
 
-			if SubFeature == "Expiry Map":
+			if Feature == "Expiry Map":
 				st.info("Heatmap's Color Intensity is directly proportional to length of the expiry period measured in years")
 				st.info("Hoverbox's Background Color directly Maps to the Specific Operator of the Spectrum Map")
 
