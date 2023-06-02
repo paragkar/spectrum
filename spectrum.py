@@ -2194,6 +2194,9 @@ if authentication_status:
 
 					selected_operators = sorted_operators
 
+				else:
+					pass
+
 				#Filter the dataframe with the list of selected operators
 
 				temp = pd.DataFrame()
