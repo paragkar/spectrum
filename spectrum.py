@@ -2479,7 +2479,7 @@ if authentication_status:
 	#------ New Code ------#
 	#Currently Blank but will be used to add notes regarding every chart
 
-		expander = st.expander("Click Here - To Learn About Color Codes", expanded = False)
+		expander = st.expander("Click Here - To Learn About the Color Codes", expanded = False)
 
 		with expander:
 			if SubFeature == "Frequency Layout":
