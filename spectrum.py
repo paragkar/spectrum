@@ -2184,7 +2184,7 @@ if authentication_status:
 
 				sorted_df = sorted_df[sorted_df["FY"]=="2022-2023"]
 
-				sorted_df = sorted_df.groupby("Amount").sum().reset_index().sort_values(by='Amount', ascending=False)
+				sorted_df = sorted_df.groupby(["Amount","FY"]).sum().reset_index().sort_values(by='Amount', ascending=False)
 
 				st.write(sorted_df)
 
