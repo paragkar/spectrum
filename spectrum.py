@@ -1353,10 +1353,6 @@ if authentication_status:
 						temp[col] = temp[col].astype(float)
 					eff = exp_year_cal_yearly_trends(temp,selected_operator)
 					hovertext = htext_expmap_yearly_trends_with_op_select(eff) #hovertext with operator selections
-				
-				parttitle ="Spectrum Expiry Layout "+SubFeature
-				xdtickangle = 0
-				xdtickval = dtickauction_dict[Band]
 			
 			
 				#preparing the dataframe of the summary bar chart on top of the heatmap
@@ -2343,6 +2339,10 @@ if authentication_status:
 	if (Feature == "Expiry Map") and (SubFeature == "Yearly Trends"):
 
 		fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white'))) #hoverbox color is black
+
+		xdtickangle = 0
+		xdtickval = dtickauction_dict[Band]
+
 		unit = "MHz"
 		if selected_operator == "":
 			selected_operator = "All"
@@ -2350,7 +2350,7 @@ if authentication_status:
 			selected_operator = selected_operator
 		subtitle = "Unit - "+unit+"; Selected Operators - "+selected_operator+ "; Summary Below - Sum of all LSAs"
 
-		title = parttitle+" for "+str(Band)+" MHz Band"
+		title = "Spectrum Expiry Yearly Trends for the "+str(Band)+" MHz Band"
 
 
 	if Feature == "Auction Map":
