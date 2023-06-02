@@ -2179,18 +2179,20 @@ if authentication_status:
 
 				sorted_df = dflfsfprocess[dflfsfprocess["FY"]=="2022-2023"]
 
-
-				# sorted_df = sorted_df[sorted_df["FY"]=="2022-2023"].sort_values(by='Amount', ascending=False)
-
-				sorted_df = sorted_df[sorted_df["FY"]=="2022-2023"]
-
 				sorted_df = sorted_df.groupby(["Operators","FY"]).sum().reset_index().sort_values(by='Amount', ascending=False)
 
 
 				sorted_operators = sorted_df.head(30)["Operators"].tolist() #pick on 30 operators 
 
+				sorted_operators = ["BSNL"]+sorted_operators
 
-				selected_operators = st.sidebar.multiselect('Select Operators', sorted_operators+["BSNL"])
+				#Filtering the viz by the selected operator
+
+				selected_operators = st.sidebar.multiselect('Select Operators', sorted_operators)
+
+				if len(selected_operators)==0:
+
+					selected_operators = sorted_operators
 
 				#Filter the dataframe with the list of selected operators
 
@@ -2203,12 +2205,8 @@ if authentication_status:
 
 					st.write(temp)
 
-				dflfsfprocess = temp.copy()
-
 			else:
 				pass
-
-			# st.write(dflfsfprocess)
 
 
 			dflfsfprocess = dflfsfprocess.groupby([SubFeature,'FY']).sum().drop(columns=['Category', column_to_drop], axis =1).reset_index()
