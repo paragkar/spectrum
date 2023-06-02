@@ -2169,9 +2169,8 @@ if authentication_status:
 
 			if SubFeature == "LicenseType":
 
-				column_to_drop == "Operators"
+				column_to_drop = "Operators"
 
-			st.write(dflfsfprocess) #debug
 
 			dflfsfprocess = dflfsfprocess.groupby([SubFeature,'FY']).sum().drop(columns=['Category', column_to_drop], axis =1).reset_index()
 
