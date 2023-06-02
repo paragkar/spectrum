@@ -2384,12 +2384,12 @@ if authentication_status:
 
 	if (Feature == "Band Metric"):
 
-		if (SubFeature =="Total Outflow") or (SubFeature == "Quantum Sold"):
-
-			fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
+		fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 		
-			xdtickangle =0
-			xdtickval =1
+		xdtickangle =0
+		xdtickval =1
+
+		if (SubFeature =="Total Outflow") or (SubFeature == "Quantum Sold"):
 
 			if selected_operators==[]:
 				selected_operators = ["All"]
@@ -2411,6 +2411,7 @@ if authentication_status:
 	if (Feature == "Operator Metric"):
 
 		fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
+
 		xdtickangle =0
 		xdtickval =1
 
