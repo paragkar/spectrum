@@ -2461,7 +2461,7 @@ if authentication_status:
 
 	if (Feature == "License Fees"):
 
-		if len(selected_category)=0 or len(selected_category=2):
+		if (len(selected_category)=0) or (len(selected_category)==2):
 			selected_category=["All"]
 		else:
 			selected_category = selected_category
