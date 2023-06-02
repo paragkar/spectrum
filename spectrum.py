@@ -2461,14 +2461,24 @@ if authentication_status:
 
 	if (Feature == "License Fees"):
 
+		if len(selected_category)=0 or len(selected_category=2):
+			selected_category=["All"]
+		else:
+			selected_category = selected_category
+
+		if SubFeature == "Absolute":
+			unit = "Rs Cr"
+		if SubFeature == "Percentage":
+			unit = "% of Total"
+
 		hoverlabel_bgcolor = "#000000" #subdued black
 
 		# fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 		xdtickangle= 0
 		xdtickval=1
 
-		subtitle = "Units - (Summary Total - Rs Cr) and (Values - % of Total)"
-		title = "Indian Telecom Regulatory Fees Trend of Top 20 Operators"
+		subtitle = "Selected Category - "+selected_category+"; "+SubFeature+"; "+unit+"; Sorted by - "+selected_fy_for_sort+"; Source - DOT"
+		title = "Indian Telecom Regulatory Fees Trend - Top 20 Operators"
 		
 
 	#---------Dimension = Business Data Ends ----------------
