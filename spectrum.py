@@ -911,7 +911,7 @@ if authentication_status:
 		return hovertext
 
 
-	#preparing color scale for hoverbox for freq and exp maps
+	#preparing color scale for hoverbox for Spectrum and Expiry maps
 	@st.cache_resource
 	def colscale_hbox_spectrum_expiry_maps(operators, colcodes):
 	    scale = [round(x/(len(operators)-1),2) for x in range(len(operators))]
@@ -923,7 +923,7 @@ if authentication_status:
 	        colorscale.append([scale[i],colors[i]])
 	    return colorscale
 
-	#shaping colorscale for driving the color of hoverbox of freq and exp maps
+	#shaping colorscale for driving the color of hoverbox of Spectrum and Expiry maps
 	@st.cache_resource
 	def transform_colscale_for_spec_exp_maps(colorscale, sf):
 		hlabel_bgcolor = [[x[1] for x in colorscale if x[0] == round(value/(len(colorscale) - 1),2)] 
@@ -977,6 +977,9 @@ if authentication_status:
 	st.sidebar.title(f"Welcome {name}") 
 
 
+	#set flags extracting chart data in the data tab
+
+	chart_data_flag = False #set this to true only if this chart exists.
 
 	with st.sidebar:
 		selected_dimension = option_menu(
@@ -987,13 +990,6 @@ if authentication_status:
 			default_index =0,
 			)
 
-
-	#set flags for plotting the charts 
-
-	chart_data_flag = False #set this to true only if this chart exists.
-
-	# #Choose a dimension
-	# selected_dimension = st.sidebar.selectbox('Select a Dimension', ["Spectrum Band", "Auction Year"],0)
 
 	if selected_dimension == "Spectrum Bands":
 		#selecting a Spectrum band
