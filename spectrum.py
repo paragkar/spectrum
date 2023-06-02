@@ -2179,13 +2179,14 @@ if authentication_status:
 
 				sorted_df = dflfsfprocess[dflfsfprocess["FY"]=="2022-2023"]
 
-				st.write(sorted_df.columns)
 
 				sorted_df = sorted_df[sorted_df["FY"]=="2022-2023"].sort_values(by='Amount', ascending=False)
 
+				st.write(sorted_df)
+
 				sorted_operators = list(set(sorted_df["Operators"]))
 
-				st.write(sorted_operators)
+				# st.write(sorted_operators)
 
 				selected_operators = st.sidebar.multiselect('Select Categories', sorted_operators)
 
