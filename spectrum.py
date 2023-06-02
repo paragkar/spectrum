@@ -1732,11 +1732,11 @@ if authentication_status:
 						),
 					]
 
-				hoverlabel_bgcolor = "#000000" #subdued black
-				xdtickangle= -45
-				xdtickval=1
-				title = "Indian 5G Base Stations Percentage Roll Out Trends"
-				subtitle = "Cumulative BTS growth; Top 20 States/UT; Unit - % of Total; Sorted by the Recent Date"
+				# hoverlabel_bgcolor = "#000000" #subdued black
+				# xdtickangle= -45
+				# xdtickval=1
+				# title = "Indian 5G Base Stations Percentage Roll Out Trends"
+				# subtitle = "Cumulative BTS growth; Top 20 States/UT; Unit - % of Total; Sorted by the Recent Date"
 				SummaryFlag = False #No summary chart to plot
 
 
@@ -1787,11 +1787,11 @@ if authentication_status:
 				chart = summarychart(summarydf, 'Dates', SubFeature)
 				SummaryFlag = True
 
-				hoverlabel_bgcolor = "#000000" #subdued black
-				xdtickangle= -45
-				xdtickval=1
-				title = "Indian 5G Base Stations Roll Out Trends"
-				subtitle = "Incremental BTS growth; Top 20 States/UT; Unit - Thousands; Sorted by the Recent Date"
+				# hoverlabel_bgcolor = "#000000" #subdued black
+				# xdtickangle= -45
+				# xdtickval=1
+				# title = "Indian 5G Base Stations Roll Out Trends"
+				# subtitle = "Incremental BTS growth; Top 20 States/UT; Unit - Thousands; Sorted by the Recent Date"
 
 
 		if Feature== "Subscriber Trends":
@@ -1998,8 +1998,6 @@ if authentication_status:
 				if len(selected_circles) == 0:
 					selected_circles = ["All"]
 
-				# subtitle = "Incremental Values; Selected Category -" +",".join(selected_category)+ "; Selected Circles - "+ ",".join(selected_circles)+"; Unit - Millions; Sorted by the Recent Date"
-
 				if len(date_range_list) >=24:
 					texttemplate =""
 				else:
@@ -2024,8 +2022,6 @@ if authentication_status:
 						reversescale=True,
 						),
 					]
-
-				hoverlabel_bgcolor = "#000000" #subdued black
 
 
 
@@ -2140,8 +2136,8 @@ if authentication_status:
 			if len(selected_category) ==0:
 				selected_category = ["All"]
 
-			hoverlabel_bgcolor = "#000000" #subdued black
-			subtitle = "Unit - % of Total; Total in Millions ; Selected Category -"+ ",".join(selected_category)+ " ;Source - TRAI"
+			# hoverlabel_bgcolor = "#000000" #subdued black
+			# subtitle = "Unit - % of Total; Total in Millions ; Selected Category -"+ ",".join(selected_category)+ " ;Source - TRAI"
 
 
 		if Feature == "License Fees":
@@ -2234,7 +2230,7 @@ if authentication_status:
 					]
 
 
-			subtitle = "Units - (Summary Total - Rs Cr) and (Values - % of Total)"
+			# subtitle = "Units - (Summary Total - Rs Cr) and (Values - % of Total)"
 
 	
 
@@ -2461,6 +2457,8 @@ if authentication_status:
 		fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 		xdtickangle= 0
 		xdtickval=1
+
+		subtitle = "Unit - % of Total; Total in Millions ; Selected Category -"+ ",".join(selected_category)+ " ;Source - TRAI"
 		title = "Indian Telecom Operator's Latest Subs Market Share"
 
 	if (Feature == "License Fees"):
@@ -2470,6 +2468,8 @@ if authentication_status:
 		# fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 		xdtickangle= 0
 		xdtickval=1
+
+		subtitle = "Units - (Summary Total - Rs Cr) and (Values - % of Total)"
 		title = "Indian Telecom License Fees Trend (Top 20 - % of Total)"
 		
 
