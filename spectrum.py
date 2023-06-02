@@ -2238,7 +2238,7 @@ if authentication_status:
 		else:
 			selected_operators = selected_operators
 			
-		subtitle = subtitle_freqlayout_dict[Band]+unit+"; Selected Operators - "+', '.join(selected_operators)
+		subtitle = subtitle_freqlayout_dict[Band]+unit+"; Selected Operators - "+', '.join(selected_operators)+"; Source - DOT"
 
 		title = "Spectrum Frequency Layout for the "+str(Band)+" MHz Band"
 
@@ -2263,7 +2263,7 @@ if authentication_status:
 		
 		unit = "MHz"
 		subtitle = "Unit - "+unit+"; "+"India Total - Sum of all LSAs "+"; Selected Operators - "+', '.join(selected_operators)+ ";\
-		Category - "+ selected_category
+		Category - "+ selected_category+"; Source - DOT"
 
 		title = "Operator Holdings for the "+str(Band)+" MHz Band"
 
@@ -2286,7 +2286,7 @@ if authentication_status:
 			selected_operators = selected_operators
 		
 		unit = '% of Total'
-		subtitle = "Unit - "+unit+ " ; Selected Operators - "+', '.join(selected_operators)+ "; Category - "+ selected_category
+		subtitle = "Unit - "+unit+ " ; Selected Operators - "+', '.join(selected_operators)+ "; Category - "+ selected_category+"; Source - DOT"
 
 		title = "Operator's Spectrum Market Share for the "+str(Band)+" MHz Band"
 
@@ -2306,7 +2306,7 @@ if authentication_status:
 		else:
 			selected_operators = selected_operators
 			
-		subtitle = subtitle_freqlayout_dict[Band]+unit+"; Selected Operators - "+', '.join(selected_operators)
+		subtitle = subtitle_freqlayout_dict[Band]+unit+"; Selected Operators - "+', '.join(selected_operators)+"; Source - DOT"
 
 		title = "Spectrum Expiry Layout for the "+str(Band)+" MHz Band"
 
@@ -2325,7 +2325,7 @@ if authentication_status:
 			selected_operator = "All"
 		else:
 			selected_operator = selected_operator
-		subtitle = "Unit - "+unit+"; Selected Operators - "+selected_operator+ "; Summary Below - Sum of all LSAs"
+		subtitle = "Unit - "+unit+"; Selected Operators - "+selected_operator+ "; Summary Below - Sum of all LSAs"+"; Source - DOT"
 
 		title = "Spectrum Expiry Yearly Trends for the "+str(Band)+" MHz Band"
 
@@ -2340,7 +2340,7 @@ if authentication_status:
 		unit = units_dict[SubFeature]
 		selected_operators = ["NA"]
 		
-		subtitle = "Unit - "+unit+"; Selected Operators - "+', '.join(selected_operators)+ " ; Summary Below - Sum of all LSAs"
+		subtitle = "Unit - "+unit+"; Selected Operators - "+', '.join(selected_operators)+ " ; Summary Below - Sum of all LSAs"+"; Source - DOT"
 
 		title = parttitle+" for the "+str(Band)+" MHz Band"
 
@@ -2372,7 +2372,7 @@ if authentication_status:
 		else:
 			partsubtitle = ""
 
-		subtitle = SubFeature+"; Unit -"+units_dict[SubFeature]+"; "+ "Selected Operators -" + ', '.join(selected_operators)+ partsubtitle
+		subtitle = SubFeature+"; Unit -"+units_dict[SubFeature]+"; "+ "Selected Operators -" + ', '.join(selected_operators)+ partsubtitle+"; Source - DOT"
 	
 		
 	if (Feature == "Operator Metric"):
@@ -2393,7 +2393,8 @@ if authentication_status:
 
 		title = "Operator Wise Summary for the Year "+str(Year)
 
-		subtitle = SubFeature + "; Unit -"+units_dict[SubFeature]+"; Selected Bands -"+ ', '.join(selectedbands) + "; Summary Below - Sum of all LSAs"
+		subtitle = SubFeature + "; Unit -"+units_dict[SubFeature]+"; Selected Bands -"+ ', '.join(selectedbands) + \
+					"; Summary Below - Sum of all LSAs"+"; Source - DOT"
 
 
 	#---------Dimension = Auction Years Ends ------------------
@@ -2467,7 +2468,7 @@ if authentication_status:
 		xdtickval=1
 
 		subtitle = "Units - (Summary Total - Rs Cr) and (Values - % of Total)"
-		title = "Indian Telecom License Fees Trend of Top 20 Operators"
+		title = "Indian Telecom Regulatory Fees Trend of Top 20 Operators"
 		
 
 	#---------Dimension = Business Data Ends ----------------
