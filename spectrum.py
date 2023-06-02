@@ -2177,7 +2177,7 @@ if authentication_status:
 
 				#sort operators by the last FY, and might get revised later
 
-				sorted_df = dflfsfprocess.groupby(["Operators","FY"])
+				sorted_df = dflfsfprocess.groupby(["Operators"]).sum()
 
 				# sorted_df = sorted_df[sorted_df["FY"]=="2022-2023"]
 
