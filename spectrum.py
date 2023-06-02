@@ -2186,8 +2186,6 @@ if authentication_status:
 
 				sorted_df = sorted_df.groupby(["Operators","FY"]).sum().reset_index().sort_values(by='Amount', ascending=False)
 
-				st.write(sorted_df)
-
 
 				sorted_operators = sorted_df.head(100)["Operators"].tolist()
 
