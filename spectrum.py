@@ -1208,7 +1208,7 @@ if authentication_status:
 				dfff = dfff.reset_index().drop(columns = ["Year", "Batch No", "Cat"], axis =1).groupby("OperatorNew").sum().T
 				
 				if bandtype_dict[Band]=="TDD": #doubling the TDD spectrum for aligning with normal convention 
-	        		dfff = (dfff*2).round(2)
+					dfff = (dfff*2).round(2)
 
 				
 				parttitle ="Operator Holdings"
