@@ -558,10 +558,12 @@ if authentication_status:
 
 	#processing for hovertext and colormatrix for Spectrum Band, Features- Spectrum Map, SubFeature - Operator Holdings 
 	@st.cache_resource
-	def htext_colmatrix_spec_map_op_hold_share(dfff, selected_operators, operatorlist):
+	def htext_colmatrix_spec_map_op_hold_share(dfff, selected_operators, selected_category, operatorlist):
 
-		if len(selected_operators)==0:
+		if len(selected_operators)==0 and len(selected_category)==0:
 			operators_to_process = operatorlist
+		if len(selected_operators)==0 and len(selected_category)==1:
+			operators_to_process = selected_operators
 		else:
 			operators_to_process = selected_operators
 
@@ -1217,7 +1219,7 @@ if authentication_status:
 				xdtickval = 1
 
 				
-				hovertext,colormatrix = htext_colmatrix_spec_map_op_hold_share(dfff, selected_operators, operatorlist) #processing hovertext and colormatrix for operatorwise in freqband dim
+				hovertext,colormatrix = htext_colmatrix_spec_map_op_hold_share(dfff, selected_operators, selected_category, operatorlist) #processing hovertext and colormatrix for operatorwise in freqband dim
 				hoverlabel_bgcolor = colormatrix #colormatrix processed from fuction "hovertext_and_colmatrix" for same above
 				
 				data = [go.Heatmap(
