@@ -2171,6 +2171,8 @@ if authentication_status:
 
 				column_to_drop == "Operators"
 
+			st.write(dflfsfprocess) #debug
+
 			dflfsfprocess = dflfsfprocess.groupby([SubFeature,'FY']).sum().drop(columns=['Category', column_to_drop], axis =1).reset_index()
 
 			selected_fy_for_sort = st.sidebar.selectbox('Select FY for Sorting', listofFY)
