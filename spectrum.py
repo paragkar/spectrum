@@ -2187,13 +2187,14 @@ if authentication_status:
 				sorted_df = sorted_df.groupby(["Operators","FY"]).sum().reset_index().sort_values(by='Amount', ascending=False)
 
 
-				sorted_operators = sorted_df.head(30)["Operators"].tolist()
+				sorted_operators = sorted_df.head(30)["Operators"].tolist() #pick on 30 operators 
 
 
 				selected_operators = st.sidebar.multiselect('Select Categories', sorted_operators)
 
 				#Filter the dataframe with the list of selected operators
 
+				st.write(dflfsfprocess)
 
 				temp = pd.DataFrame()
 				for operator in selected_operators:
@@ -2207,7 +2208,7 @@ if authentication_status:
 			else:
 				pass
 
-			st.write(dflfsfprocess)
+			# st.write(dflfsfprocess)
 
 
 			dflfsfprocess = dflfsfprocess.groupby([SubFeature,'FY']).sum().drop(columns=['Category', column_to_drop], axis =1).reset_index()
