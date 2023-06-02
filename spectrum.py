@@ -2192,8 +2192,6 @@ if authentication_status:
 
 			dflfsfbyoperator = dflfsfbyoperator.head(20)
 
-			hovertemplate = 'Value: %{z:.2f}'
-
 
 			data = [go.Heatmap(
 					z = df.values,
@@ -2210,10 +2208,12 @@ if authentication_status:
 						),
 					]
 
-	
+
+			hovertemplate = 'Value: %{z:.2f}'
+			heatmap_trace = go.Heatmap(z=data, hovertemplate=hovertemplate)
 
 	#Plotting the final Heatmap	
-	fig = go.Figure(data=data,hovertemplate=hovertemplate)
+	fig = go.Figure(data=heatmap_trace)
 
 
 	#This section deals with titles and subtitles and hoverlabel color for all the heatmap charts
