@@ -1311,9 +1311,6 @@ if authentication_status:
 					expf = pd.DataFrame(sf.values*ef.values, columns=ef.columns, index=ef.index)
 
 				hovertext = htext_expmap_freq_layout(hf)
-				parttitle ="Spectrum Expiry Layout "+SubFeature
-				xdtickangle = -90
-				xdtickval = xdtickfreq_dict[Band]
 
 				data = [go.Heatmap(
 				      z = expf.values,
@@ -2272,7 +2269,7 @@ if authentication_status:
 			
 		subtitle = subtitle_freqlayout_dict[Band]+unit+"; Selected Operators - "+', '.join(selected_operators)
 
-		title = "Spectrum Frequency Layout for "+str(Band)+" MHz Band"
+		title = "Spectrum Frequency Layout for the "+str(Band)+" MHz Band"
 
 
 	if (Feature == "Spectrum Map") and (SubFeature == "Operator Holdings"):
@@ -2297,7 +2294,7 @@ if authentication_status:
 		subtitle = "Unit - "+unit+"; "+"India Total - Sum of all LSAs "+"; Selected Operators - "+', '.join(selected_operators)+ ";\
 		Category - "+ selected_category
 
-		title = "Operator Holdings for "+str(Band)+" MHz Band"
+		title = "Operator Holdings for the "+str(Band)+" MHz Band"
 
 
 	if (Feature == "Spectrum Map") and (SubFeature == "Operator %Share"):
@@ -2320,24 +2317,18 @@ if authentication_status:
 		unit = '% of Total'
 		subtitle = "Unit - "+unit+ " ; Selected Operators - "+', '.join(selected_operators)+ "; Category - "+ selected_category
 
-		title = "Operator's Spectrum Market Share for "+str(Band)+" MHz Band"
-	
-
-	if Feature == "Auction Map":
-
-		fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
-		unit = units_dict[SubFeature]
-		selected_operators = ["NA"]
-		
-		subtitle = "Unit - "+unit+"; Selected Operators - "+', '.join(selected_operators)+ " ; Summary Below - Sum of all LSAs"
-
-		title = parttitle+" for "+str(Band)+" MHz Band"
+		title = "Operator's Spectrum Market Share for the "+str(Band)+" MHz Band"
 
 
 		
 	if (Feature == "Expiry Map") and (SubFeature == "Frequency Layout"):
 
 		fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
+
+		xdtickangle = -90
+		xdtickval = xdtickfreq_dict[Band]
+
+
 		unit = "Ch Size - "+str(channelsize_dict[Band])+" MHz"
 		if selected_operators == []:
 			selected_operators = ["All"]
@@ -2346,7 +2337,7 @@ if authentication_status:
 			
 		subtitle = subtitle_freqlayout_dict[Band]+unit+"; Selected Operators - "+', '.join(selected_operators)
 
-		title = parttitle+" for "+str(Band)+" MHz Band"
+		title = "Spectrum Expiry Layout for the "+str(Band)+" MHz Band"
 
 	
 	if (Feature == "Expiry Map") and (SubFeature == "Yearly Trends"):
@@ -2360,6 +2351,18 @@ if authentication_status:
 		subtitle = "Unit - "+unit+"; Selected Operators - "+selected_operator+ "; Summary Below - Sum of all LSAs"
 
 		title = parttitle+" for "+str(Band)+" MHz Band"
+
+
+	if Feature == "Auction Map":
+
+		fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
+		unit = units_dict[SubFeature]
+		selected_operators = ["NA"]
+		
+		subtitle = "Unit - "+unit+"; Selected Operators - "+', '.join(selected_operators)+ " ; Summary Below - Sum of all LSAs"
+
+		title = parttitle+" for "+str(Band)+" MHz Band"
+
 		
 
 	#---------Dimension = Spectrum Bands Ends -------------------
