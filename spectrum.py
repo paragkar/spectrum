@@ -2202,18 +2202,18 @@ if authentication_status:
 					hoverinfo ='text',
 					# text = hovertext,
 					colorscale='reds',
-						texttemplate="%{z}", 
+						texttemplate="%{z:.2f}", 
 						textfont={"size":10},
 						# reversescale=True,
 						),
 					]
 
 
-			hovertemplate = 'Value: %{z:.2f}'
-			heatmap_trace = go.Heatmap(z=data, hovertemplate=hovertemplate)
+			# hovertemplate = 'Value: %{z:.2f}'
+			# heatmap_trace = go.Heatmap(data=data, hovertemplate=hovertemplate)
 
 	#Plotting the final Heatmap	
-	fig = go.Figure(data=heatmap_trace)
+	fig = go.Figure(data=data)
 
 
 	#This section deals with titles and subtitles and hoverlabel color for all the heatmap charts
