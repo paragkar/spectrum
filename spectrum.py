@@ -2177,13 +2177,11 @@ if authentication_status:
 
 				#sort operators by the last FY, and might get revised later
 
-				sorted_df = dflfsfprocess.groupby(["Operators"]).sum()
-
-				# sorted_df = sorted_df[sorted_df["FY"]=="2022-2023"]
+				sorted_df = dflfsfprocess[dflfsfprocess["FY"]=="2022-2023"]
 
 				st.write(sorted_df.columns)
 
-				# sorted_df = sorted_df[sorted_df["FY"]=="2022-2023"].sort_values(by='Amount', ascending=False)
+				sorted_df = sorted_df[sorted_df["FY"]=="2022-2023"].sort_values(by='Amount', ascending=False)
 
 				sorted_operators = list(set(sorted_df["Operators"]))
 
