@@ -2279,7 +2279,6 @@ if authentication_status:
 		title = parttitle+" for "+str(Band)+" MHz Band"
 
 
-	# if (Feature == "Spectrum Map") and (SubFeature == "Operator Holdings"):
 	if (SubFeature == "Operator Holdings"):
 		fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 		if (len(selected_category) == 0) or (len(selected_category) == 2):
@@ -2299,7 +2298,7 @@ if authentication_status:
 		title = parttitle+" for "+str(Band)+" MHz Band"
 
 
-	if (Feature == "Spectrum Map") and (SubFeature == "Operator %Share"):
+	if (SubFeature == "Operator %Share"):
 		fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 		if (len(selected_category) == 0) or (len(selected_category) == 2):
 			selected_category = "All"
