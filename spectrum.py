@@ -2194,8 +2194,6 @@ if authentication_status:
 
 				#Filter the dataframe with the list of selected operators
 
-				st.write(dflfsfprocess)
-
 				temp = pd.DataFrame()
 				for operator in selected_operators:
 
