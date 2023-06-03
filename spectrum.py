@@ -1339,7 +1339,7 @@ if authentication_status:
 					bwf = bw_exp_cal_yearly_trends(sff,ef)
 					hovertext = htext_expmap_yearly_trends_with_all_select(bwf,eff) #hovertext for "All"
 				else:
-					regexpattern = '^(?!\d+(?:\.\d+)?(?=.*?\b+'selected_operator'+\b)).*$'
+					regexpattern = '^(?!\d+(?:\.\d+)?(?=.*?\b+"selected_operator"+\b)).*$'
 					temp = bandexpcalsheetf.replace(regexpattern, np.nan, regex = True)
 					temp = temp.replace(selected_operator,'', regex = True)
 	
