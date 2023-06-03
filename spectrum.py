@@ -919,7 +919,7 @@ if authentication_status:
 
 		summarydf = summarydf.set_index("FY").T
 	
-		dfpercent = round(((dflfsfbysubfeature/summarydf)*100,2)
+		dfpercent = round((dflfsfbysubfeature/summarydf)*100,2)
 
 		st.write(dflfsfbysubfeature)
 
