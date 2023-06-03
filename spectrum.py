@@ -917,7 +917,9 @@ if authentication_status:
 
 		dfabsolute = dflfsfbysubfeature.copy()
 
-		summarydf = summarydf.set_index("FY").T
+		summarydf = summarydf.set_index("FY").T.astype('float')
+
+		dflfsfbysubfeature = dflfsfbysubfeature.astype('float')
 	
 		dfpercent = round((dflfsfbysubfeature/summarydf)*100,2)
 
