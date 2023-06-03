@@ -925,15 +925,15 @@ if authentication_status:
 			hovertext.append([])
 			for xi,xx in enumerate(dfabsolute.columns):
 
-				absolute = dfabsolute.iloc[yi,xi]
-				percent = dfpercent.iloc[yi,xi]
+				absolute = dfabsolute.loc[yy,xx]
+				percent = dfpercent.loc[yy,xx]
 
 
 				hovertext[-1].append(
 						    'Yaxis Label: {}\
 						    <br>FY: {}\
 						    <br>Abs Value: {} Rs Cr\
-						    <br>Percent Value: {} % of Total'
+						    <br>Percentage: {} % of Total'
 
 					     .format( 
 						    yy,
