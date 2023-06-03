@@ -1337,18 +1337,20 @@ if authentication_status:
 					bwf = bw_exp_cal_yearly_trends(sff,ef)
 					hovertext = htext_expmap_yearly_trends_with_all_select(bwf,eff) #hovertext for "All"
 				else:
-					if selected_operator[-1] in ["R", "U"]: #Last letter of the operator ending with R or U
-						regexfilt = '^(?!.*'+selected_operator+').*' #to replace na.npn with text embedded with names of other than the selected operator
-						temp = bandexpcalsheetf.replace(regexfilt, np.nan, regex = True)
-						temp = temp.replace(selected_operator,'', regex = True)
-					else:
-						regexfilt1 = '[0-9.]+'+selected_operator+'U'  #to replace na.npn with text ending RU with names with the selected operator
-						temp = bandexpcalsheetf.replace(regexfilt1, np.nan, regex = True)
-						regexfilt2 = '[0-9.]+'+selected_operator+'R'  #to replace na.npn with text ending R with names with the selected operator
-						temp = bandexpcalsheetf.replace(regexfilt2, np.nan, regex = True)
-						regexfilt = '^(?!.*'+selected_operator+').*' #to replace na.npn with text embedded with names of other than the selected operator
-						temp = temp.replace(regexfilt, np.nan, regex = True)
-						temp = temp.replace(selected_operator,'', regex = True)
+					pattern = r"^(?!\d+(?:\.\d+)?(?=.*?\b{}\b)).*$".format(re.escape(selected_operator))
+					temp = bandexpcalsheetf.replace(pattern, np.nan, regex = True)
+					temp = temp.replace(selected_operator,'', regex = True)
+
+					# if selected_operator[-1] in ["R", "U"]: #Last letter of the operator ending with R or U
+					# 	regexfilt = '^(?!.*'+selected_operator+').*' #to replace na.npn with text embedded with names of other than the selected operator
+					# 	temp = bandexpcalsheetf.replace(regexfilt, np.nan, regex = True)
+					# 	temp = temp.replace(selected_operator,'', regex = True)
+					# else:
+					# 	regexfilt = '[0-9.]+'+selected_operator+'U'  #to replace na.npn with text ending RU with names with the selected operator
+					# 	temp = bandexpcalsheetf.replace(regexfilt, np.nan, regex = True)
+					# 	regexfilt = '^(?!.*'+selected_operator+').*' #to replace na.npn with text embedded with names of other than the selected operator
+					# 	temp = temp.replace(regexfilt, np.nan, regex = True)
+					# 	temp = temp.replace(selected_operator,'', regex = True)
 
 						st.write(temp) # debug
 					
