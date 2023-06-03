@@ -1340,9 +1340,11 @@ if authentication_status:
 					hovertext = htext_expmap_yearly_trends_with_all_select(bwf,eff) #hovertext for "All"
 				else:
 					pattern = r"^(?!\d+(?:\.\d+)?(?=.*?\b{}\b)).*$".format(re.escape(selected_operator))
-					mask = bandexpcalsheetf['LSA'].str.contains(pattern)
+					mask = bandexpcalsheetf.str.contains(pattern)
+					st.write(mask)
 					temp = bandexpcalsheetf.copy()
-					temp.loc['LSA', mask] = np.nan
+					temp[mask] = np.nan
+					# temp = bandexpcalsheetf.str.replace(mask, np.nan, regex = True)
 					temp = temp.str.replace(selected_operator, '', regex=True)
 					# temp = bandexpcalsheetf.replace(pattern, np.nan, regex = True)
 					# temp = temp.replace(selected_operator,'', regex = True)
