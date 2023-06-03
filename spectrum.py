@@ -918,10 +918,10 @@ if authentication_status:
 		dfabsolute = dflfsfbysubfeature.head(20).copy()
 
 		summarydf = summarydf.set_index("FY").T
-
-		st.write(summarydf)
 	
 		dfpercent = round(((dflfsfbysubfeature/summarydf).head(20))*100,2)
+
+		st.write(dfpercent)
 
 
 		hovertext=[]
