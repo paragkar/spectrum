@@ -2295,7 +2295,7 @@ if authentication_status:
 
 			dflfsfbysubfeature = dflfsfbysubfeature.head(20)
 
-			hovertext = htext_businessdata_licensefees(dflfsfbysubfeature, summarydf, SubFeature): 
+			hovertext = htext_businessdata_licensefees(dflfsfbysubfeature,summarydf, SubFeature)
 
 			data = [go.Heatmap(
 					z = df.values,
