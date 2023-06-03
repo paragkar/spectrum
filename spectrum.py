@@ -1340,15 +1340,16 @@ if authentication_status:
 					hovertext = htext_expmap_yearly_trends_with_all_select(bwf,eff) #hovertext for "All"
 				else:
 					temp = bandexpcalsheetf.copy()
+
 					for i, row in enumerate(bandexpcalsheetf.values):
 						for j, item in enumerate(row):
 							op = item.split(";")[1]
 
-							if op not in selected_operator:
+							if op != selected_operator:
 								temp.iloc[i,j] = np.nan
 							else:
 								temp.iloc[i,j] = item.split(";")[0]
-					
+
 					st.write(temp)
 
 
