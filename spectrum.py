@@ -913,32 +913,24 @@ if authentication_status:
 #-------------------New Code Starts-----------------------------------
 	#processing for hovertext for Business Data and License Fees
 	@st.cache_resource
-	def htext_businessdata_licensefees(dflfsfbysubfeature, summarydf, SubFeature): 
+	def htext_businessdata_licensefees(dflfsfbysubfeature, summarydf): 
 
-		if SubFeature=="Operators":
-			yaxis_label = "Operator"
-
-		if SubFeature=="LicenseType":
-			yaxis_label = "License Type"
-
-
-		df_abs = dflfsfbysubfeature.head(20).copy()
+		dfabsolute = dflfsfbysubfeature.head(20).copy()
 	
-
-		df_percent = round(((dflfsfbysubfeature/summarydf).head(20))*100,2)
+		dfpercent = round(((dflfsfbysubfeature/summarydf).head(20))*100,2)
 
 		hovertext=[]
 
-		for yi,yy in enumerate(df_abs.index):
+		for yi,yy in enumerate(dfabsolute.index):
 			hovertext.append([])
-			for xi,xx in enumerate(df_abs.columns):
+			for xi,xx in enumerate(dfabsolute.columns):
 
-				absolute = df_abs.iloc[yi,xi]
-				percent = df_percent.iloc[yi,xi]
+				absolute = dfabsolute.iloc[yi,xi]
+				percent = dfpercent.iloc[yi,xi]
 
 
 				hovertext[-1].append(
-						    'yaxis_label: {}\
+						    'Yaxis Label: {}\
 						    <br>FY: {}\
 						    <br>Abs Value: {} Rs Cr\
 						    <br>Percent Value: {} % of Total'
@@ -2295,7 +2287,7 @@ if authentication_status:
 
 			dflfsfbysubfeature = dflfsfbysubfeature.head(20)
 
-			hovertext = htext_businessdata_licensefees(dflfsfbysubfeature,summarydf, SubFeature)
+			hovertext = htext_businessdata_licensefees(dflfsfbysubfeature,summarydf)
 
 			data = [go.Heatmap(
 					z = df.values,
