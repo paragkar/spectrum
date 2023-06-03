@@ -2332,7 +2332,7 @@ if authentication_status:
 
 			dftowersbts = loaddata()
 
-			dftowersbts["Date"] = pd.to_datetime(dftowersbts["Date"]).date()
+			dftowersbts["Date"] = dftowersbts["Date"].date()
 
 			st.write(dftowersbts)
 
