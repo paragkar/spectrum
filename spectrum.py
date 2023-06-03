@@ -1357,8 +1357,6 @@ if authentication_status:
 					# 	regexfilt = '^(?!.*'+selected_operator+').*' #to replace na.npn with text embedded with names of other than the selected operator
 					# 	temp = temp.replace(regexfilt, np.nan, regex = True)
 					# 	temp = temp.replace(selected_operator,'', regex = True)
-
-					st.write(temp) # debug
 					
 					
 					for col in temp.columns:
