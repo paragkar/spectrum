@@ -2621,7 +2621,7 @@ if authentication_status:
 
 		#preparing the container layout for the dimension business data
 		if (selected_dimension=="Business Data") and (SubFeature=="Operators"):
-			col1val =3
+			col1val =4.5
 		if (selected_dimension=="Business Data") and (SubFeature=="LicenseType"):
 			col1val =1
 		else:
