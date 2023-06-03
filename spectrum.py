@@ -1339,11 +1339,18 @@ if authentication_status:
 					bwf = bw_exp_cal_yearly_trends(sff,ef)
 					hovertext = htext_expmap_yearly_trends_with_all_select(bwf,eff) #hovertext for "All"
 				else:
-
+					temp = bandexpcalsheetf.copy()
 					for i, row in enumerate(bandexpcalsheetf.values):
-
 						for j, item in enumerate(row):
-							st.write(item.split(";")[1])
+							op = item.split(";")[1]
+
+							if op not in selected_operator:
+								temp.iloc[i,j] = np.nan
+							else:
+								temp.iloc[i,j] = item.split(";")[0]
+					
+					st.write(temp)
+
 
 					# if selected_operator[-1] in ["R", "U"]: #Last letter of the operator ending with R or U
 					# 	regexfilt = '^(?!.*'+selected_operator+').*' #to replace na.npn with text embedded with names of other than the selected operator
