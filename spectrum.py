@@ -933,8 +933,8 @@ if authentication_status:
 			hovertext.append([])
 			for xi,xx in enumerate(df_abs.columns):
 
-				absolute = df_abs.loc[yy,xx]
-				percent = df_percent.loc[yy,xx]
+				absolute = df_abs.iloc[yi,xi]
+				percent = df_percent.iloc[yi,xi]
 
 
 				hovertext[-1].append(
