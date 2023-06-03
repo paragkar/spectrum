@@ -2332,6 +2332,8 @@ if authentication_status:
 
 			dftowersbts = loaddata()
 
+			dftowersbts["Date"] = dftowersbts["Date"].dt.date()
+
 			st.write(dftowersbts)
 
 	#Plotting the final Heatmap	
