@@ -923,7 +923,7 @@ if authentication_status:
 	
 		dfpercent = round((dflfsfbysubfeature/summarydf)*100,2)
 
-		st.write(dflfsfbysubfeature.div(summarydf))
+		st.write(dflfsfbysubfeature.T.div(summarydf))
 
 
 		hovertext=[]
