@@ -1682,7 +1682,7 @@ if authentication_status:
 
 		dfT = loadtelecomdatafile()
 		
-		Feature = st.sidebar.selectbox('Select a Feature', ["5GBTS Trends", "Subscriber Trends", "Subscriber MShare", "License Fees"])
+		Feature = st.sidebar.selectbox('Select a Feature', ["5GBTS Trends", "Subscriber Trends", "Subscriber MShare", "License Fees", "TowerBTS Trends"])
 
 		if Feature== "5GBTS Trends":
 
@@ -2308,6 +2308,10 @@ if authentication_status:
 						),
 					]
 
+
+		if Feature == "TowerBTS Trends":
+
+			st.write("Do Something")
 
 	#Plotting the final Heatmap	
 	fig = go.Figure(data=data)
