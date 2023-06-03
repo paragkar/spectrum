@@ -913,17 +913,12 @@ if authentication_status:
 #-------------------New Code Starts-----------------------------------
 	#processing for hovertext for Business Data and License Fees
 	@st.cache_resource
-	def htext_businessdata_licensefees(dflfsfbysubfeature, summarydf): 
+	def htext_businessdata_licensefees(dflfsfbysubfeature, summarydf_for_hovertext): 
 
 		dfabsolute = dflfsfbysubfeature.copy()
 
-		summarydf = summarydf.set_index("FY").T.astype('float')
-
-		dflfsfbysubfeature = dflfsfbysubfeature.astype('float')
 	
-		dfpercent = round((dflfsfbysubfeature/summarydf)*100,2)
-
-		st.write(dflfsfbysubfeature.T.div(summarydf))
+		dfpercent = round((dflfsfbysubfeature/summarydf_for_hovertext)*100,2)
 
 
 		hovertext=[]
@@ -2272,6 +2267,8 @@ if authentication_status:
 
 			summarydf = dflfsfbysubfeature.sum(axis =0)
 
+			summarydf_for_hovertext = summarydf.copy()
+
 			if chosen_metric=="Absolute":
 
 				df = dflfsfbysubfeature.head(20).copy()
@@ -2294,7 +2291,7 @@ if authentication_status:
 
 			dflfsfbysubfeature = dflfsfbysubfeature.head(20)
 
-			hovertext = htext_businessdata_licensefees(dflfsfbysubfeature,summarydf)
+			hovertext = htext_businessdata_licensefees(dflfsfbysubfeature,summarydf_for_hovertext)
 
 			data = [go.Heatmap(
 					z = df.values,
