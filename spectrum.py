@@ -1341,7 +1341,7 @@ if authentication_status:
 				else:
 					pattern = r"^(?!\d+(?:\.\d+)?(?=.*?\b{}\b)).*$".format(re.escape(selected_operator))
 					temp = bandexpcalsheetf.copy()
-					temp = bandexpcalsheetf.replace(mask, np.nan, regex = True)
+					temp = bandexpcalsheetf.replace(pattern, np.nan, regex = True)
 					st.write(temp)
 					# temp = temp.replace(selected_operator, '', regex=True)
 					# temp = bandexpcalsheetf.replace(pattern, np.nan, regex = True)
