@@ -910,6 +910,51 @@ if authentication_status:
 						    )
 		return hovertext
 
+#-------------------New Code Starts-----------------------------------
+	#processing for hovertext for Business Data and License Fees
+	@st.cache_resource
+	def htext_businessdata_licensefees(dflfsfbysubfeature, summarydf, SubFeature): 
+
+		if SubFeature=="Operators":
+			yaxis_label = "Operator"
+
+		if SubFeature=="LicenseType":
+			yaxis_label = "License Type"
+
+
+		df_abs = dflfsfbysubfeature.head(20).copy()
+	
+
+		df_percent = round(((dflfsfbysubfeature/summarydf).head(20))*100,2)
+
+		hovertext=[]
+
+		for yi,yy in enumerate(df_abs.index):
+			hovertext.append([])
+			for xi,xx in enumerate(df_abs.columns):
+
+				absolute = df_abs.loc[yy,xx]
+				percent = df_percent.loc[yy,xx]
+
+
+				hovertext[-1].append(
+						    'yaxis_label: {}\
+						    <br>FY: {}\
+						    <br>Abs Value: {} Rs Cr\
+						    <br>Percent Value: {} % of Total'
+
+					     .format( 
+						    yy,
+						    xx,
+						    absolute,
+						    percent,
+						    )
+						    )
+		return hovertext	
+
+
+#------------------New Code Ends--------------------------------
+
 
 	#preparing color scale for hoverbox for Spectrum and Expiry maps
 	@st.cache_resource
@@ -2250,6 +2295,7 @@ if authentication_status:
 
 			dflfsfbysubfeature = dflfsfbysubfeature.head(20)
 
+			hovertext = htext_businessdata_licensefees(dflfsfbysubfeature, summarydf, SubFeature): 
 
 			data = [go.Heatmap(
 					z = df.values,
@@ -2258,7 +2304,7 @@ if authentication_status:
 					xgap = 1,
 					ygap = 1,
 					hoverinfo ='text',
-					# text = hovertext,
+					text = hovertext,
 					colorscale='reds',
 						texttemplate="%{z:.2f}", 
 						textfont={"size":10},
@@ -2545,7 +2591,7 @@ if authentication_status:
 
 		hoverlabel_bgcolor = "#000000" #subdued black
 
-		# fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
+		fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 		xdtickangle= 0
 		xdtickval=1
 
