@@ -916,6 +916,8 @@ if authentication_status:
 	def htext_businessdata_licensefees(dflfsfbysubfeature, summarydf): 
 
 		dfabsolute = dflfsfbysubfeature.head(20).copy()
+
+		st.write(dfabsolute)
 	
 		dfpercent = round(((dflfsfbysubfeature/summarydf).head(20))*100,2)
 
