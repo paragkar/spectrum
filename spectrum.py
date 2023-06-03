@@ -2558,11 +2558,11 @@ if authentication_status:
 		xdtickangle= 0
 		xdtickval=1
 
-		subfeature_dict = {"Operators" : "Operators", "LicenseType" : "License Types"}
+		subfeature_dict2 = {"Operators" : "Operators", "LicenseType" : "License Types"}
 
 		subtitle = "Selected Category - "+",".join(selected_category)+"; "+chosen_metric+\
 					"; Unit - "+unit+"; Sorted by - "+selected_fy_for_sort+"; Selected Operators -"+",".join(selected_operators)+"; Source - DOT"
-		title = "Indian Telecom Regulatory Fees Trend Top N "+subfeature_dict[SubFeature]
+		title = "Indian Telecom Regulatory Fees Trend Top N "+subfeature_dict2[SubFeature]
 		
 
 	#---------Dimension = Business Data Ends ----------------
