@@ -919,7 +919,7 @@ if authentication_status:
 
 		st.write(dfabsolute)
 	
-		dfpercent = round(((dflfsfbysubfeature/summarydf).head(20))*100,2)
+		dfpercent = round(((dflfsfbysubfeature/summarydf.T).head(20))*100,2)
 
 		st.write(summarydf)
 
