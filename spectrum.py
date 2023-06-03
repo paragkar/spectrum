@@ -1340,7 +1340,7 @@ if authentication_status:
 					hovertext = htext_expmap_yearly_trends_with_all_select(bwf,eff) #hovertext for "All"
 				else:
 					pattern = r"^(?!\d+(?:\.\d+)?(?=.*?\b{}\b)).*$".format(re.escape(selected_operator))
-					mask = bandexpcalsheetf.contains(pattern)
+					mask = bandexpcalsheetf.loc[:,:].contains(pattern)
 					st.write(mask)
 					temp = bandexpcalsheetf.copy()
 					temp[mask] = np.nan
