@@ -2311,7 +2311,28 @@ if authentication_status:
 
 		if Feature == "TowerBTS Trends":
 
-			st.write("Do Something")
+			@st.cache_resource
+			def loaddata():
+
+				df = dfT["BTS_Towers"] #load 5G BTS deployment data from excel file
+
+				return df
+
+			# #function to extract a list of dates from the list using start and end date from the slider
+			# def get_selected_date_list(listofallcolumns, start_date, end_date):
+			# 	    # Find the index of the first selected date
+			# 	    index1 = listofallcolumns.index(start_date)
+
+			# 	    # Find the index of the second selected date
+			# 	    index2 = listofallcolumns.index(end_date)
+
+			# 	    # Return a new list containing the dates from index1 to index2 (inclusive)
+			# 	    return listofallcolumns[index1:index2+1]
+
+
+			dftowersbts = loaddata()
+
+			st.write(dftowersbts)
 
 	#Plotting the final Heatmap	
 	fig = go.Figure(data=data)
