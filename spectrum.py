@@ -1352,7 +1352,7 @@ if authentication_status:
 					# 	temp = temp.replace(regexfilt, np.nan, regex = True)
 					# 	temp = temp.replace(selected_operator,'', regex = True)
 
-						st.write(temp) # debug
+					st.write(temp) # debug
 					
 					
 					for col in temp.columns:
