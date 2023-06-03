@@ -2620,9 +2620,9 @@ if authentication_status:
 
 
 		#preparing the container layout for the dimension business data
-		if (selected_dimension=="Business Data") and (SubFeature=="Operators"):
+		if (selected_dimension=="Business Data") and (Feature == "License Fees") and (SubFeature=="Operators"):
 			col1val =4.5
-		if (selected_dimension=="Business Data") and (SubFeature=="LicenseType"):
+		if (selected_dimension=="Business Data") and (Feature == "License Fees") and (SubFeature=="LicenseType"):
 			col1val =1
 		else:
 			col1val = 0.2
