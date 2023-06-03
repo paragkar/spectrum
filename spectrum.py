@@ -1342,8 +1342,8 @@ if authentication_status:
 					pattern = r"^(?!\d+(?:\.\d+)?(?=.*?\b{}\b)).*$".format(re.escape(selected_operator))
 					mask = bandexpcalsheetf['LSA'].str.contains(pattern)
 					temp = bandexpcalsheetf.copy()
-					temp.loc[mask, 'LSA'] = np.nan
-					temp['LSA'] = temp['LSA'].str.replace(selected_operator, '', regex=True)
+					temp.loc['LSA', mask] = np.nan
+					temp = temp.str.replace(selected_operator, '', regex=True)
 					# temp = bandexpcalsheetf.replace(pattern, np.nan, regex = True)
 					# temp = temp.replace(selected_operator,'', regex = True)
 
