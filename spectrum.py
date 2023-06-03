@@ -1341,7 +1341,7 @@ if authentication_status:
 				else:
 
 					for row in bandexpcalsheetf.values:
-						st.write([x.split(";") for x in row])
+						st.write([x.split(";")[1] for x in row])
 
 					# if selected_operator[-1] in ["R", "U"]: #Last letter of the operator ending with R or U
 					# 	regexfilt = '^(?!.*'+selected_operator+').*' #to replace na.npn with text embedded with names of other than the selected operator
