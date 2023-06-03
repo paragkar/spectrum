@@ -921,6 +921,8 @@ if authentication_status:
 	
 		dfpercent = round(((dflfsfbysubfeature/summarydf).head(20))*100,2)
 
+		st.write(dfpercent)
+
 		hovertext=[]
 
 		for yi,yy in enumerate(dfabsolute.index):
