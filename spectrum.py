@@ -1349,23 +1349,6 @@ if authentication_status:
 								temp.iloc[i,j] = np.nan
 							else:
 								temp.iloc[i,j] = item.split(";")[0]
-
-					st.write(temp)
-
-
-					# if selected_operator[-1] in ["R", "U"]: #Last letter of the operator ending with R or U
-					# 	regexfilt = '^(?!.*'+selected_operator+').*' #to replace na.npn with text embedded with names of other than the selected operator
-					# 	temp = bandexpcalsheetf.replace(regexfilt, np.nan, regex = True)
-					# 	temp = temp.replace(selected_operator,'', regex = True)
-					# if selected_operator[-1] not in ["R", "U"]: #Last letter of the operator not ending with R or U
-					# 	regexfilt1 = '[0-9.]+'+selected_operator+'R'  #to replace na.npn with text ending R with names with the selected operator
-					# 	# temp = bandexpcalsheetf.replace(regexfilt1, np.nan, regex = True)
-					# 	regexfilt2 = '[0-9.]+'+selected_operator+'U'  #to replace na.npn with text ending U with names with the selected operator
-					# 	temp = bandexpcalsheetf.replace(regexfilt12, np.nan, regex = True)
-					# 	regexfilt = '^(?!.*'+selected_operator+').*' #to replace na.npn with text embedded with names of other than the selected operator
-					# 	temp = temp.replace(regexfilt, np.nan, regex = True)
-					# 	temp = temp.replace(selected_operator,'', regex = True)
-					
 					
 					for col in temp.columns:
 						temp[col] = temp[col].astype(float)
