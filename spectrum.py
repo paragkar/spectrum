@@ -2314,7 +2314,7 @@ if authentication_status:
 			@st.cache_resource
 			def loaddata():
 
-				df = dfT["BTS_Towers"] #load 5G BTS deployment data from excel file
+				df = dfT["bts_towers"] #load 5G BTS deployment data from excel file
 
 				return df
 
