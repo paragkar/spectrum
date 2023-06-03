@@ -1339,21 +1339,22 @@ if authentication_status:
 					bwf = bw_exp_cal_yearly_trends(sff,ef)
 					hovertext = htext_expmap_yearly_trends_with_all_select(bwf,eff) #hovertext for "All"
 				else:
-					regexpattern = '^(?!\d+(?:\.\d+)?(?=.*?\b+"selected_operator"+\b)).*$'
-					temp = bandexpcalsheetf.replace(regexpattern, np.nan, regex = True)
-					temp = temp.replace(selected_operator,'', regex = True)
-	
-
-					# if selected_operator[-1] in ["R", "U"]: #Last letter of the operator ending with R or U
-					# 	regexfilt = '^(?!.*'+selected_operator+').*' #to replace na.npn with text embedded with names of other than the selected operator
-					# 	temp = bandexpcalsheetf.replace(regexfilt, np.nan, regex = True)
-					# 	temp = temp.replace(selected_operator,'', regex = True)
-					# else:
-					# 	regexfilt = '[0-9.]+'+selected_operator+'U'  #to replace na.npn with text ending RU with names with the selected operator
-					# 	temp = bandexpcalsheetf.replace(regexfilt, np.nan, regex = True)
-					# 	regexfilt = '^(?!.*'+selected_operator+').*' #to replace na.npn with text embedded with names of other than the selected operator
-					# 	temp = temp.replace(regexfilt, np.nan, regex = True)
-					# 	temp = temp.replace(selected_operator,'', regex = True)
+					if selected_operator[-1] in ["R", "U"]: #Last letter of the operator ending with R or U
+						regexfilt = '^(?!.*'+selected_operator+').*' #to replace na.npn with text embedded with names of other than the selected operator
+						temp = bandexpcalsheetf.replace(regexfilt, np.nan, regex = True)
+						temp = temp.replace(selected_operator,'', regex = True)
+					elif:
+						regexfilt = '[0-9.]+'+selected_operator+'U'  #to replace na.npn with text ending RU with names with the selected operator
+						temp = bandexpcalsheetf.replace(regexfilt, np.nan, regex = True)
+						regexfilt = '^(?!.*'+selected_operator+').*' #to replace na.npn with text embedded with names of other than the selected operator
+						temp = temp.replace(regexfilt, np.nan, regex = True)
+						temp = temp.replace(selected_operator,'', regex = True)
+					else:
+						regexfilt = '[0-9.]+'+selected_operator+'R'  #to replace na.npn with text ending RU with names with the selected operator
+						temp = bandexpcalsheetf.replace(regexfilt, np.nan, regex = True)
+						regexfilt = '^(?!.*'+selected_operator+').*' #to replace na.npn with text embedded with names of other than the selected operator
+						temp = temp.replace(regexfilt, np.nan, regex = True)
+						temp = temp.replace(selected_operator,'', regex = True)
 					
 					
 					for col in temp.columns:
