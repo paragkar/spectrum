@@ -915,11 +915,11 @@ if authentication_status:
 	@st.cache_resource
 	def htext_businessdata_licensefees(dflfsfbysubfeature, summarydf): 
 
-		dfabsolute = dflfsfbysubfeature.head(20).copy()
+		dfabsolute = dflfsfbysubfeature.copy()
 
 		summarydf = summarydf.set_index("FY").T
 	
-		dfpercent = round(((dflfsfbysubfeature/summarydf).head(20))*100,2)
+		dfpercent = round(((dflfsfbysubfeature/summarydf)*100,2)
 
 		st.write(dflfsfbysubfeature)
 
