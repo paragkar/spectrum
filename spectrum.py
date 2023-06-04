@@ -1507,7 +1507,7 @@ if authentication_status:
 			dfbid = dfbid.replace("Bid",1)
 
 
-			dfbid = dfbid.set_index("LSA")
+			dfbid = dfbid.set_index("LSA").sort_index()
 
 			listofbidders = sorted(list(set(dfbid["Bidder"])))
 
