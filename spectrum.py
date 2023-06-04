@@ -2311,14 +2311,8 @@ if authentication_status:
 
 		if Feature == "TowerBTS Trends":
 
-			@st.cache_resource
-			def loaddata():
 
-				df = dfT["bts_towers"] #load 5G BTS deployment data from excel file
-
-				return df
-
-			dftowersbts = loaddata()
+			dftowersbts = dfT["bts_towers"] #load 5G BTS deployment data from excel file
 
 			# dftowersbts["Date"] = pd.to_datetime(dftowersbts["Date"])
 
