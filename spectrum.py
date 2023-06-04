@@ -2330,7 +2330,7 @@ if authentication_status:
 			dftowersbts["Ratio"] = dftowersbts["BTS"] / dftowersbts["Towers"]
 
 			trace1 = go.Scatter(x=dftowersbts.index, y=dftowersbts["Ratio"], name="BTSs/Towers", yaxis="y1", 
-								textfont=dict(family="sans serif",size=8,color="LightGreen"),
+								textfont=dict(family="sans serif",size=8,color="DarkBlue"),
 								mode = 'lines+markers+text',text=list(round(dftowersbts["Ratio"],1)),
     							textposition="bottom center", showlegend = False, line = dict(color ='red'))
 			trace2 = go.Scatter(x=dftowersbts.index, y=dftowersbts["BTS"], name="BTS Trends", yaxis="y2", mode = 'lines+markers+text',text=list(round(dftowersbts["BTS"]/100000,1)),
