@@ -2323,7 +2323,7 @@ if authentication_status:
 
 			dftowersbts = dftowersbts.asfreq("m")
 
-			dftowersbts.index = dftowersbts.index.dt.strftime("%Y-%m")
+			dftowersbts.index = dftowersbts.index.strftime("%Y-%m")
 
 
 			dftowersbts = dftowersbts.sort_values("Date", ascending=True)
