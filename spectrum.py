@@ -1505,6 +1505,8 @@ if authentication_status:
 
 			dfbid = dfbid.set_index("LSA")
 
+			st.write(dfbid)
+
 
 #---------------New Auction Bid Data Cide Ends Here----------------------
 
