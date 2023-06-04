@@ -2322,10 +2322,9 @@ if authentication_status:
 
 			dftowersbts["Date"] = pd.to_datetime(dftowersbts["Date"])[0].date()
 
-			dftowersbts = dftowersbts.set_index("Date")
 
 
-			data =[go.Scatter(x=dftowersbts.index, y = dftowersbts["BTS"])]
+			data =[go.Scatter(x=dftowersbts["Date"], y = dftowersbts["BTS"])]
 
 			xdtickangle =0
 
