@@ -1467,6 +1467,42 @@ if authentication_status:
 				]
 			hoverlabel_bgcolor = transform_colscale_for_hbox_auction_map(dff,reserveprice,auctionprice)
 
+
+
+
+#----------------New Auction Bid Data Code Starts Here------------------
+
+
+		if Feature == "AuctionBid Data":
+
+			dfbid = pd.read_excel("auctionbiddata.xlsx")
+
+			@st.cache_resource
+			def loadauctionbiddata():
+
+				# password = st.secrets["db_password"]
+
+				# excel_content = io.BytesIO()
+
+				# with open("spectrum_map_protected.xlsx", 'rb') as f:
+				# 	excel = msoffcrypto.OfficeFile(f)
+				# 	excel.load_key(password)
+				# 	excel.decrypt(excel_content)
+
+				#loading data from excel file
+				xl = pd.ExcelFile("auctionbiddata.xlsx")
+				sheet = xl.sheet_names
+				df = pd.read_excel("auctionbiddata.xlsx", sheet_name=sheet)
+
+				return df
+
+			dfbid = loadauctionbiddata()
+
+			st.write(dfbid)
+
+
+#---------------New Auction Bid Data Cide Ends Here----------------------
+
 	subfeature_dict ={"Quantum Offered" : "Sale (MHz)", "Quantum Sold": "Total Sold (MHz)", "Quantum Unsold" : "Total Unsold (MHz)", 
 	"Reserve Price" : "RP/MHz" , "Auction Price": "Auction Price/MHz", "Total EMD" : "Total EMD"} 
 	subfeature_list = ["Reserve Price", "Auction Price", "Auction/Reserve", "Quantum Offered", 
