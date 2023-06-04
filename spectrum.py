@@ -2318,7 +2318,7 @@ if authentication_status:
 
 			dftowersbts = dftowersbts.set_index("Date")
 
-			dftowersbts = dftowersbts.asfreq("m")
+			# dftowersbts = dftowersbts.asfreq("m")
 			
 			dftowersbts = dftowersbts.sort_values("Date", ascending=True)
 			dftowersbts["Ratio"] = dftowersbts["BTS"] / dftowersbts["Towers"]
