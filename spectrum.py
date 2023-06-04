@@ -2664,7 +2664,7 @@ if authentication_status:
 			        title='Date'
 			    ),
 
-			    height=800,
+			    height=900,
 			    width=1000,
 			)
 
