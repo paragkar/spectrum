@@ -2687,7 +2687,7 @@ if authentication_status:
 			)
 
 		end_date = dt.datetime(2023, 6, 30)  # Use datetime.datetime instead of just datetime
-		fig.update_xaxes(range=[dftowersbts.index[100], end_date])
+		fig.update_xaxes(range=[dftowersbts.index[300], end_date])
 	else:
 
 		fig.update_layout(uniformtext_minsize=12, 
