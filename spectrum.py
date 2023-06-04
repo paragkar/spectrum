@@ -1024,7 +1024,7 @@ if authentication_status:
 	with st.sidebar:
 		selected_dimension = option_menu(
 			menu_title = "Select a Menu",
-			options = ["Spectrum Bands", "Auction Years", "Business Data"],
+			options = ["Spectrum Bands", "Auction Years", "Business Data", "Auction Data"],
 			icons = ["1-circle-fill", "2-circle-fill", "3-circle-fill"],
 			menu_icon = "arrow-down-circle-fill",
 			default_index =0,
@@ -1134,7 +1134,7 @@ if authentication_status:
 		#mapping the year of auction with channels in the spectrum maps
 		ayear = cal_year_spectrum_acquired(ef,excepf,pf1)
 
-		Feature = st.sidebar.selectbox('Select a Feature', ["Spectrum Map", "Expiry Map", "Auction Map", "AuctionBid Map"], 0) #Default Index first
+		Feature = st.sidebar.selectbox('Select a Feature', ["Spectrum Map", "Expiry Map", "Auction Map"], 0) #Default Index first
 
 		#Processing For Dimension = "Frequency Band" & Features
 		if  Feature == "Spectrum Map":
@@ -1473,7 +1473,7 @@ if authentication_status:
 #----------------New Auction Bid Data Code Starts Here------------------
 
 
-		if Feature == "AuctionBid Map":
+		if selected_dimension == "Auction Data":
 
 			@st.cache_resource
 			def loadauctionbiddata():
