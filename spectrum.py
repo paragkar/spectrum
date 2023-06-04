@@ -2685,7 +2685,6 @@ if authentication_status:
 
 		end_date = dt.datetime(2023, 6, 30)  # Use datetime.datetime instead of just datetime
 		fig.update_xaxes(range=[dftowersbts.index[0], end_date], dtick=2)
-		fig.update_layout(template="plotly_dark")
 
 	else:
 
@@ -2730,7 +2729,7 @@ if authentication_status:
 			)
 
 	if Feature=="TowerBTS Trends":
-		pass
+		fig.update_layout(template="plotly_dark")
 	else:
 		#Drawning a black border around the heatmap chart 
 		fig.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
