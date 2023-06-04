@@ -2322,6 +2322,7 @@ if authentication_status:
 
 			dftowersbts["Date"] = pd.to_datetime(dftowersbts["Date"])[0].date()
 
+			st.write(dftowersbts)
 
 			dftowersbts = dftowersbts.set_index("Date")
 			dftowersbts = dftowersbts.asfreq("m")
