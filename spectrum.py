@@ -2732,10 +2732,12 @@ if authentication_status:
 			    tickvals=list(range(len(date_range_list)))
 			)
 
-
-	#Drawning a black border around the heatmap chart 
-	fig.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
-	fig.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
+	if Feature=="TowerBTS Trends":
+		pass
+	else:
+		#Drawning a black border around the heatmap chart 
+		fig.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
+		fig.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
 
 
 	style = "<style>h3 {text-align: left;}</style>"
