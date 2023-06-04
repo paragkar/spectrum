@@ -2334,7 +2334,7 @@ if authentication_status:
 
 			dftowersbts["Date"] = pd.to_datetime(dftowersbts["Date"])[0].date()
 
-			st.write(dftowersbts)
+			st.write(dftowersbts["Towers"]/dftowersbts["BTS"])
 
 	#Plotting the final Heatmap	
 	fig = go.Figure(data=data)
