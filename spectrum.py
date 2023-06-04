@@ -1502,9 +1502,8 @@ if authentication_status:
 			dfbid = dfbid.replace("No Bid", 0)
 			dfbid = dfbid.replace("Bid",1)
 
-			dfbid = dfbid.sort_values(["LSA","ClK_Round"], ascending=[True,True])
 
-			st.write(dfbid)
+			dfbid = dfbid.set_index("LSA")
 
 
 #---------------New Auction Bid Data Cide Ends Here----------------------
