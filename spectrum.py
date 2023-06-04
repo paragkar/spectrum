@@ -1499,6 +1499,9 @@ if authentication_status:
 			dfbid.columns = ["ClK_Round", "Bidder","LSA","PWB_Start_ClkRd", "Rank_PWB_Start_ClkRd", 
 							"Possible_Raise_Bid_ClkRd", "Bid_Decision", "PWB_End_ClkRd", "Rank_PWB_End_ClkRd"]
 
+			dfbid = dfbid.replace("No Bid", 0)
+			dfbid = dfbid.replace("Bid",1)
+
 			st.write(dfbid)
 
 
