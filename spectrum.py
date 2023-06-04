@@ -2317,7 +2317,7 @@ if authentication_status:
 
 			dftowersbts["Date"] = pd.to_datetime(dftowersbts["Date"])
 
-			dftowersbts['Date'] = dftowersbts['Date'].apply(lambda x: x.strftime('%B-%Y')) 
+			# dftowersbts['Date'] = dftowersbts['Date'].apply(lambda x: x.strftime('%B-%Y')) 
 
 			dftowersbts = dftowersbts.set_index("Date")
 
