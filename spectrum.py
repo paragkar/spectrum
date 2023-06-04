@@ -2315,7 +2315,7 @@ if authentication_status:
 
 			dftowersbts = dfT["bts_towers"] #load 5G BTS deployment data from excel file
 
-			dftowersbts["Date"] = pd.to_datetime(dftowersbts["Date"])
+			# dftowersbts["Date"] = pd.to_datetime(dftowersbts["Date"])
 
 			# dftowersbts['Date'] = dftowersbts['Date'].apply(lambda x: x.strftime('%B-%Y')) 
 
