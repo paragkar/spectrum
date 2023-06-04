@@ -1473,7 +1473,7 @@ if authentication_status:
 #----------------New Auction Bid Data Code Starts Here------------------
 
 
-		if Feature == "AuctionBid Data":
+		if Feature == "AuctionBid Map":
 
 			@st.cache_resource
 			def loadauctionbiddata():
