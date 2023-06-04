@@ -1496,7 +1496,10 @@ if authentication_status:
 
 			dfbid = loadauctionbiddata()["2010_3G_BWA"].replace('-', np.nan, regex = True)
 
-			st.write(dfbid.columns)
+			dfbid.columns = ["ClK_Round", "Bidder","LSA","PWB_Start_ClkRd", "Rank_PWB_Start_ClkRd", 
+							"Possible_Raise_Bid_ClkRd", "Bid_Decision", "PWB_End_ClkRd", "Rank_PWB_End_ClkRd"]
+
+			st.write(dfbid)
 
 
 #---------------New Auction Bid Data Cide Ends Here----------------------
