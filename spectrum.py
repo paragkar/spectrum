@@ -2328,32 +2328,32 @@ if authentication_status:
 			trace2 = go.Scatter(x=dftowersbts.index, y=dftowersbts["BTS"], name="BTS Trends", yaxis="y2", showlegend = False)
 			trace3 = go.Scatter(x=dftowersbts.index, y=dftowersbts["Towers"], name="Tower Trends", yaxis="y3", showlegend = False)
 
-			layout = go.Layout(
-			    # title='Multiple Line Charts',
-			    yaxis=dict(
-			        title='Ratio - BTS/Towers',
-			        range=[2.5, 4],  # Set the range for y-axis 1
-			        domain=[0, 0.27]
-			    ),
-			    yaxis2=dict(
-			        title='BTS',
-			        range=[1500000, 3000000],  # Set the range for y-axis 2
-			        domain=[0.35, 0.62]
-			    ),
-			    yaxis3=dict(
-			        title='Towers',
-			        range=[400000, 800000],  # Set the range for y-axis 3
-			        domain=[0.69, 1]
-			    ),
-			    xaxis=dict(
-			        title='Date'
-			    ),
+			# layout = go.Layout(
+			#     # title='Multiple Line Charts',
+			#     yaxis=dict(
+			#         title='Ratio - BTS/Towers',
+			#         range=[2.5, 4],  # Set the range for y-axis 1
+			#         domain=[0, 0.27]
+			#     ),
+			#     yaxis2=dict(
+			#         title='BTS',
+			#         range=[1500000, 3000000],  # Set the range for y-axis 2
+			#         domain=[0.35, 0.62]
+			#     ),
+			#     yaxis3=dict(
+			#         title='Towers',
+			#         range=[400000, 800000],  # Set the range for y-axis 3
+			#         domain=[0.69, 1]
+			#     ),
+			#     xaxis=dict(
+			#         title='Date'
+			#     ),
 
-			    height=800,
-			    width=1000,
-			)
+			#     height=800,
+			#     width=1000,
+			# )
 
-			data = [[trace1, trace2, trace3]]
+			data = [trace1, trace2, trace3]
 
 			# Create the figure and add the traces
 			# fig = go.Figure(data=[trace1, trace2, trace3], layout=layout)
