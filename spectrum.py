@@ -1494,7 +1494,7 @@ if authentication_status:
 
 				return df
 
-			dfbid = loadauctionbiddata()
+			dfbid = loadauctionbiddata()["2010_3G_BWA"]
 
 			st.write(dfbid)
 
