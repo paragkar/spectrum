@@ -2339,7 +2339,7 @@ if authentication_status:
 								textposition="bottom center", showlegend = False, line = dict(color = 'green'))
 			trace3 = go.Scatter(x=dftowersbts.index, y=dftowersbts["Towers"], name="Tower Trends", yaxis="y3", 
 								textfont=dict(family="sans serif",size=8,color="DarkBlue"),
-								mode = 'lines+markers+text',text=list(round(dftowersbts["Towers"]/1000)),
+								mode = 'lines+markers+text',text=list(round(dftowersbts["Towers"]/1000,0)),
 								textposition="bottom center", showlegend = False, line = dict(color = 'blue'))
 			# trace3 = go.Scatter(x=dftowersbts.index, y=dftowersbts["Towers"], name="Tower Trends", yaxis="y3", mode = 'lines+markers',
 			# 					showlegend = False, line = dict(color = 'blue'))
