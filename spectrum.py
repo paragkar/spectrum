@@ -2324,7 +2324,7 @@ if authentication_status:
 
 
 
-			data1 =[go.Scatter(x=dftowersbts["Date"], y = dftowersbts["Towers"])]
+			data1 =[go.Scatter(x=dftowersbts["Date"], y = dftowersbts["Towers"], mode='lines')]
 
 			xdtickangle =0
 
