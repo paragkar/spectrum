@@ -2324,6 +2324,8 @@ if authentication_status:
 			dftowersbts = dftowersbts.sort_values("Date", ascending=True)
 			dftowersbts["Ratio"] = dftowersbts["BTS"] / dftowersbts["Towers"]
 
+			dftowersbts = dftowersbts.tail(300)
+
 			trace1 = go.Scatter(x=dftowersbts.index, y=dftowersbts["Ratio"], name="BTSs/Towers", yaxis="y1", showlegend = False)
 			trace2 = go.Scatter(x=dftowersbts.index, y=dftowersbts["BTS"], name="BTS Trends", yaxis="y2", showlegend = False)
 			trace3 = go.Scatter(x=dftowersbts.index, y=dftowersbts["Towers"], name="Tower Trends", yaxis="y3", showlegend = False)
@@ -2688,7 +2690,7 @@ if authentication_status:
 
 		# end_date = dt.datetime(2023, 6, 30)  # Use datetime.datetime instead of just datetime
 		# fig.update_xaxes(range=[dftowersbts.index[300], end_date])
-		
+
 	else:
 
 		fig.update_layout(uniformtext_minsize=12, 
