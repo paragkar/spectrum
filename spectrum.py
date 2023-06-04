@@ -1475,8 +1475,6 @@ if authentication_status:
 
 		if Feature == "AuctionBid Data":
 
-			dfbid = pd.read_excel("auctionbiddata.xlsx")
-
 			@st.cache_resource
 			def loadauctionbiddata():
 
