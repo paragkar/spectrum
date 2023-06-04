@@ -1025,7 +1025,7 @@ if authentication_status:
 		selected_dimension = option_menu(
 			menu_title = "Select a Menu",
 			options = ["Spectrum Bands", "Auction Years", "Business Data", "Auction Data"],
-			icons = ["1-circle-fill", "2-circle-fill", "3-circle-fill"],
+			icons = ["1-circle-fill", "2-circle-fill", "3-circle-fill", "4-circle-fill"],
 			menu_icon = "arrow-down-circle-fill",
 			default_index =0,
 			)
