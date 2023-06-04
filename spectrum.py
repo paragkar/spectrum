@@ -2322,9 +2322,10 @@ if authentication_status:
 
 			dftowersbts["Date"] = pd.to_datetime(dftowersbts["Date"])[0].date()
 
+			st.write(dftowersbts)
 
 
-			data1 =[go.Scatter(x=dftowersbts["Date"], y = dftowersbts["Towers"], mode='lines')]
+			# data1 =[go.Scatter(x=dftowersbts["Date"], y = dftowersbts["Towers"], mode='lines')]
 
 			xdtickangle =0
 
