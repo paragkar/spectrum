@@ -1134,7 +1134,7 @@ if authentication_status:
 		#mapping the year of auction with channels in the spectrum maps
 		ayear = cal_year_spectrum_acquired(ef,excepf,pf1)
 
-		Feature = st.sidebar.selectbox('Select a Feature', ["Spectrum Map", "Expiry Map", "Auction Map"], 0) #Default Index first
+		Feature = st.sidebar.selectbox('Select a Feature', ["Spectrum Map", "Expiry Map", "Auction Map", "AuctionBid Map"], 0) #Default Index first
 
 		#Processing For Dimension = "Frequency Band" & Features
 		if  Feature == "Spectrum Map":
