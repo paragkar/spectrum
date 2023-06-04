@@ -1502,6 +1502,8 @@ if authentication_status:
 			dfbid = dfbid.replace("No Bid", 0)
 			dfbid = dfbid.replace("Bid",1)
 
+			dfbid = dfbid.sort_values("LSA", ascending=False)
+
 			st.write(dfbid)
 
 
