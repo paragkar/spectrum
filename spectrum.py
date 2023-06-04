@@ -2358,8 +2358,6 @@ if authentication_status:
 			# Create the figure and add the traces
 			# fig = go.Figure(data=[trace1, trace2, trace3], layout=layout)
 
-			end_date = dt.datetime(2023, 6, 30)  # Use datetime.datetime instead of just datetime
-			range=[dftowersbts.index[500], end_date]
 			xdtickangle =0
 			xdtickval = 100
 			title = ""
@@ -2687,6 +2685,9 @@ if authentication_status:
 			    height=800,
 			    width=1000,
 			)
+
+		end_date = dt.datetime(2023, 6, 30)  # Use datetime.datetime instead of just datetime
+		fig.update_xaxes(range=[df.index[100], end_date])
 	else:
 
 		fig.update_layout(uniformtext_minsize=12, 
