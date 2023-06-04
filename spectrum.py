@@ -1507,7 +1507,28 @@ if authentication_status:
 
 		listofbidders = sorted(list(set(dfbid["Bidder"])))
 
-		Bidder = st.sidebar.selectbox("Select a Bidder", listofbidders)
+		selected_bidder = st.sidebar.selectbox("Select a Bidder", listofbidders)
+
+		dfbidop = dfbid[dfbid["Bidder"]==selected_bidder]
+
+		st.write(dfbidop)
+
+
+		# data = [go.Heatmap(
+		# 	  z = z,
+		# 	  x = x,
+		# 	  y = y,
+		# 	  xgap = 1,
+		# 	  ygap = 1,
+		# 	  hoverinfo ='text',
+		# 	  text = hovertext,
+		# 	  colorscale = 'Hot',
+		# 	    texttemplate="%{z}", 
+		# 	    textfont={"size":10},
+		# 	    reversescale=True,
+		# 		)]	
+
+
 
 
 #---------------New Auction Bid Data Cide Ends Here----------------------
