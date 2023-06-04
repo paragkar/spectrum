@@ -2322,10 +2322,9 @@ if authentication_status:
 
 			dftowersbts["Date"] = pd.to_datetime(dftowersbts["Date"])[0].date()
 
-			st.write(dftowersbts)
+			fig1 = go.Figure()
 
-
-			data1 =[go.Bar(x=dftowersbts["Date"], y = dftowersbts["Towers"], mode='lines')]
+			fig1.add_trace(go.Scatter(x=dftowersbts["Date"], y = dftowersbts["Towers"], mode='lines'))
 
 			xdtickangle =0
 
@@ -2334,8 +2333,6 @@ if authentication_status:
 			title = ""
 
 			subtitle = ""
-
-			fig1 = go.Figure(data=data1)
 
 			st.plotly_chart(fig1)
 
