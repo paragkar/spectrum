@@ -1494,48 +1494,52 @@ if authentication_status:
 
 			return df
 
-		dfbid = loadauctionbiddata()["2010_3G"].replace('-', np.nan, regex = True)
+		Feature = st.sidebar.selectbox("Select a Bidder", ["2010_3G_Auctions"])
 
-		dfbid.columns = ["Clk_Round", "Bidder","LSA","PWB_Start_ClkRd", "Rank_PWB_Start_ClkRd", 
-						"Possible_Raise_Bid_ClkRd", "Bid_Decision", "PWB_End_ClkRd", "Rank_PWB_End_ClkRd"]
+			dfbid = loadauctionbiddata()["2010_3G"].replace('-', np.nan, regex = True)
 
-		dfbid = dfbid.replace("No Bid", 0)
-		dfbid = dfbid.replace("Bid",1)
+			dfbid.columns = ["Clk_Round", "Bidder","LSA","PWB_Start_ClkRd", "Rank_PWB_Start_ClkRd", 
+							"Possible_Raise_Bid_ClkRd", "Bid_Decision", "PWB_End_ClkRd", "Rank_PWB_End_ClkRd"]
 
-
-		dfbid = dfbid.set_index("LSA")
-
-		listofbidders = sorted(list(set(dfbid["Bidder"])))
-
-		selected_bidder = st.sidebar.selectbox("Select a Bidder", listofbidders)
-
-		dfbidop = dfbid[dfbid["Bidder"]==selected_bidder]
-
-		st.write(dfbidop)
-
-		z = dfbidop["Bid_Decision"]
-		y = dfbidop.index
-		x = dfbidop["Clk_Round"]
+			dfbid = dfbid.replace("No Bid", 0)
+			dfbid = dfbid.replace("Bid",1)
 
 
-		data = [go.Heatmap(
-			  z = z,
-			  x = x,
-			  y = y,
-			  xgap = 1,
-			  ygap = 1,
-			  hoverinfo ='text',
-			  # text = hovertext,
-			  colorscale = 'Hot',
-			    texttemplate="%{z}", 
-			    textfont={"size":10},
-			    reversescale=True,
-				)]	
+			dfbid = dfbid.set_index("LSA")
+
+			listofbidders = sorted(list(set(dfbid["Bidder"])))
+
+			selected_bidder = st.sidebar.selectbox("Select a Bidder", listofbidders)
+
+			dfbidop = dfbid[dfbid["Bidder"]==selected_bidder]
+
+			st.write(dfbidop)
+
+			z = dfbidop["Bid_Decision"]
+			y = dfbidop.index
+			x = dfbidop["Clk_Round"]
+
+
+			data = [go.Heatmap(
+				  z = z,
+				  x = x,
+				  y = y,
+				  xgap = 1,
+				  ygap = 1,
+				  hoverinfo ='text',
+				  # text = hovertext,
+				  colorscale = 'Hot',
+				    texttemplate="%{z}", 
+				    textfont={"size":10},
+				    reversescale=True,
+					)]	
 
 
 
 
 #---------------New Auction Bid Data Cide Ends Here----------------------
+
+
 
 	subfeature_dict ={"Quantum Offered" : "Sale (MHz)", "Quantum Sold": "Total Sold (MHz)", "Quantum Unsold" : "Total Unsold (MHz)", 
 	"Reserve Price" : "RP/MHz" , "Auction Price": "Auction Price/MHz", "Total EMD" : "Total EMD"} 
@@ -2723,6 +2727,27 @@ if authentication_status:
 		
 
 	#---------Dimension = Business Data Ends ----------------
+
+
+	#---------Dimension = Auction Data Starts----------------
+
+
+	if Feature == "2010_3G_Auctions":
+
+		hoverlabel_bgcolor = "#000000" #subdued black
+
+		# fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
+		xdtickangle= 0
+		xdtickval=1
+
+		subtitle = ""
+		title = ""
+
+
+
+
+
+	#---------Dimension = Auction Data Ends------------------
 
 	#updating figure layouts
 
