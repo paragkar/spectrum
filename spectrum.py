@@ -2324,7 +2324,7 @@ if authentication_status:
 
 			fig1 = go.Figure()
 
-			fig1.add_trace(go.Scatter(x=dftowersbts["Date"], y = dftowersbts["Towers"], mode='lines'))
+			fig1.add_trace(go.Scatter(x=dftowersbts["Date"].values, y = dftowersbts["Towers"], mode='lines'))
 
 			xdtickangle =0
 
