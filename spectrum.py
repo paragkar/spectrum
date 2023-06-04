@@ -2359,7 +2359,7 @@ if authentication_status:
 			# fig = go.Figure(data=[trace1, trace2, trace3], layout=layout)
 
 			end_date = dt.datetime(2023, 6, 30)  # Use datetime.datetime instead of just datetime
-			range=[df.index[0], end_date]
+			range=[dftowersbts.index[0], end_date]
 			xdtickangle =0
 			xdtickval = 100
 			title = ""
