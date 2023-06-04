@@ -1496,6 +1496,8 @@ if authentication_status:
 
 		Feature = st.sidebar.selectbox("Select a Bidder", ["2010_3G_Auctions"])
 
+		if Feature == "2010_3G_Auctions":
+
 			dfbid = loadauctionbiddata()["2010_3G"].replace('-', np.nan, regex = True)
 
 			dfbid.columns = ["Clk_Round", "Bidder","LSA","PWB_Start_ClkRd", "Rank_PWB_Start_ClkRd", 
