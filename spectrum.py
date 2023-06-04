@@ -2315,13 +2315,13 @@ if authentication_status:
 
 			dftowersbts = dfT["bts_towers"] #load 5G BTS deployment data from excel file
 
-			dftowersbts["Date"] = pd.to_datetime(dftowersbts["Date"]).dt.date
+			dftowersbts["Date"] = pd.to_datetime(dftowersbts["Date"]).date()
 
 			dftowersbts = dftowersbts.set_index("Date")
 
 			dftowersbts = dftowersbts.asfreq("m")
 
-			dftowersbts["Date"] = dftowersbts["Date"].date()
+			dftowersbts["Date"] = dftowersbts["Date"]
 
 			dftowersbts = dftowersbts.sort_values("Date", ascending=True)
 			dftowersbts["Ratio"] = dftowersbts["BTS"] / dftowersbts["Towers"]
