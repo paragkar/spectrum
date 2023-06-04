@@ -2328,7 +2328,7 @@ if authentication_status:
 
 			xdtickangle =0
 
-			xdtickval = 1
+			xdtickval = 100
 
 			title = ""
 
