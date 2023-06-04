@@ -2649,7 +2649,6 @@ if authentication_status:
 		xdtickval = 100
 		title = "Indian Telecom Tower and BTS rollout Trends"
 		subtitle = ""
-		fig.update_layout(template="plotly_dark")
 
 		
 
@@ -2686,6 +2685,7 @@ if authentication_status:
 
 		end_date = dt.datetime(2023, 6, 30)  # Use datetime.datetime instead of just datetime
 		fig.update_xaxes(range=[dftowersbts.index[0], end_date], dtick=2)
+		fig.update_layout(template="plotly_dark")
 
 	else:
 
