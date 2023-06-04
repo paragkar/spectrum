@@ -1494,7 +1494,7 @@ if authentication_status:
 
 				return df
 
-			dfbid = loadauctionbiddata()["2010_3G_BWA"]
+			dfbid = loadauctionbiddata()["2010_3G_BWA"].replace('-', np.nan, regex = True)
 
 			st.write(dfbid)
 
