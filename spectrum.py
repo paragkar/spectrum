@@ -1505,7 +1505,9 @@ if authentication_status:
 
 			dfbid = dfbid.set_index("LSA")
 
-			st.write(dfbid)
+			listofbidders = sorted(list(set(dfbid["Bidder"])))
+
+			st.write(listofbidders)
 
 
 #---------------New Auction Bid Data Cide Ends Here----------------------
