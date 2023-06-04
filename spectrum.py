@@ -2317,11 +2317,11 @@ if authentication_status:
 
 			dftowersbts["Date"] = pd.to_datetime(dftowersbts["Date"])
 
+			dftowersbts['Date'] = dftowersbts['Date'].apply(lambda x: x.strftime('%B-%Y')) 
+
 			dftowersbts = dftowersbts.set_index("Date")
 
 			dftowersbts = dftowersbts.asfreq("m")
-
-			dftowersbts['Date'] = dftowersbts['Date'].apply(lambda x: x.strftime('%B-%Y')) 
 
 
 			dftowersbts = dftowersbts.sort_values("Date", ascending=True)
