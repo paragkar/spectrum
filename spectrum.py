@@ -2320,11 +2320,11 @@ if authentication_status:
 
 			dftowersbts = loaddata()
 
-			dftowersbts["Date"] = pd.to_datetime(dftowersbts["Date"])[0].date()
+			# dftowersbts["Date"] = pd.to_datetime(dftowersbts["Date"])[0].date()
 
 			fig1 = go.Figure()
 
-			fig1.add_trace(go.Scatter(x=dftowersbts["Date"].values, y = dftowersbts["Towers"], mode='lines'))
+			fig1.add_trace(go.Scatter(x=dftowersbts["Date"], y = dftowersbts["Towers"], mode='lines'))
 
 			xdtickangle =0
 
