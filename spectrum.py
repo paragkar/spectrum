@@ -2672,7 +2672,7 @@ if authentication_status:
 			    ),
 			    yaxis2=dict(
 			        title='BTS',
-			        range=[150000, 3000000],  # Set the range for y-axis 2
+			        range=[15000, 3000000],  # Set the range for y-axis 2
 			        domain=[0.35, 0.62]
 			    ),
 			    yaxis3=dict(
