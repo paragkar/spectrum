@@ -12,6 +12,7 @@ import streamlit as st
 import matplotlib.pyplot as plt
 import altair as alt
 from datetime import datetime
+import datetime as dt #debug
 import calendar
 import time
 
@@ -2319,7 +2320,7 @@ if authentication_status:
 			dftowersbts = dftowersbts.set_index("Date")
 
 			# dftowersbts = dftowersbts.asfreq("m")
-			
+
 			dftowersbts = dftowersbts.sort_values("Date", ascending=True)
 			dftowersbts["Ratio"] = dftowersbts["BTS"] / dftowersbts["Towers"]
 
