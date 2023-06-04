@@ -2649,6 +2649,7 @@ if authentication_status:
 		xdtickval = 100
 		title = "Indian Telecom Tower and BTS rollout Trends"
 		subtitle = ""
+		fig.update_layout(template="plotly_dark")
 
 		
 
