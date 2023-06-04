@@ -1473,41 +1473,41 @@ if authentication_status:
 #----------------New Auction Bid Data Code Starts Here------------------
 
 
-		if selected_dimension == "Auction Data":
+	if selected_dimension == "Auction Data":
 
-			@st.cache_resource
-			def loadauctionbiddata():
+		@st.cache_resource
+		def loadauctionbiddata():
 
-				# password = st.secrets["db_password"]
+			# password = st.secrets["db_password"]
 
-				# excel_content = io.BytesIO()
+			# excel_content = io.BytesIO()
 
-				# with open("spectrum_map_protected.xlsx", 'rb') as f:
-				# 	excel = msoffcrypto.OfficeFile(f)
-				# 	excel.load_key(password)
-				# 	excel.decrypt(excel_content)
+			# with open("spectrum_map_protected.xlsx", 'rb') as f:
+			# 	excel = msoffcrypto.OfficeFile(f)
+			# 	excel.load_key(password)
+			# 	excel.decrypt(excel_content)
 
-				#loading data from excel file
-				xl = pd.ExcelFile("auctionbiddata.xlsx")
-				sheet = xl.sheet_names
-				df = pd.read_excel("auctionbiddata.xlsx", sheet_name=sheet)
+			#loading data from excel file
+			xl = pd.ExcelFile("auctionbiddata.xlsx")
+			sheet = xl.sheet_names
+			df = pd.read_excel("auctionbiddata.xlsx", sheet_name=sheet)
 
-				return df
+			return df
 
-			dfbid = loadauctionbiddata()["2010_3G"].replace('-', np.nan, regex = True)
+		dfbid = loadauctionbiddata()["2010_3G"].replace('-', np.nan, regex = True)
 
-			dfbid.columns = ["ClK_Round", "Bidder","LSA","PWB_Start_ClkRd", "Rank_PWB_Start_ClkRd", 
-							"Possible_Raise_Bid_ClkRd", "Bid_Decision", "PWB_End_ClkRd", "Rank_PWB_End_ClkRd"]
+		dfbid.columns = ["ClK_Round", "Bidder","LSA","PWB_Start_ClkRd", "Rank_PWB_Start_ClkRd", 
+						"Possible_Raise_Bid_ClkRd", "Bid_Decision", "PWB_End_ClkRd", "Rank_PWB_End_ClkRd"]
 
-			dfbid = dfbid.replace("No Bid", 0)
-			dfbid = dfbid.replace("Bid",1)
+		dfbid = dfbid.replace("No Bid", 0)
+		dfbid = dfbid.replace("Bid",1)
 
 
-			dfbid = dfbid.set_index("LSA")
+		dfbid = dfbid.set_index("LSA")
 
-			listofbidders = sorted(list(set(dfbid["Bidder"])))
+		listofbidders = sorted(list(set(dfbid["Bidder"])))
 
-			st.write(listofbidders)
+		st.write(listofbidders)
 
 
 #---------------New Auction Bid Data Cide Ends Here----------------------
