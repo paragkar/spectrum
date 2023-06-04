@@ -2331,6 +2331,8 @@ if authentication_status:
 
 			xdtickval = 1
 
+			title = ""
+
 
 
 	#Plotting the final Heatmap	
