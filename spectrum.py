@@ -2324,7 +2324,7 @@ if authentication_status:
 			dftowersbts = dftowersbts.sort_values("Date", ascending=True)
 			dftowersbts["Ratio"] = dftowersbts["BTS"] / dftowersbts["Towers"]
 
-			dftowersbts = dftowersbts.tail(300)
+			dftowersbts = dftowersbts.tail(100)
 
 			trace1 = go.Scatter(x=dftowersbts.index, y=dftowersbts["Ratio"], name="BTSs/Towers", yaxis="y1", showlegend = False)
 			trace2 = go.Scatter(x=dftowersbts.index, y=dftowersbts["BTS"], name="BTS Trends", yaxis="y2", showlegend = False)
