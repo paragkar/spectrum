@@ -2643,6 +2643,13 @@ if authentication_status:
 		subtitle = "Selected Category - "+",".join(selected_category)+"; "+chosen_metric+\
 					"; Unit - "+unit+"; Sorted by - "+selected_fy_for_sort+"; Selected Operators -"+",".join(selected_operators)+"; Source - DOT"
 		title = "Indian Telecom Regulatory Fees Trend Top N "+subfeature_dict[SubFeature]
+
+	if (Feature == "TowerBTS Trends"):
+		xdtickangle =0
+		xdtickval = 100
+		title = "Indian Telecom Tower and BTS rollout Trends"
+		subtitle = ""
+
 		
 
 	#---------Dimension = Business Data Ends ----------------
