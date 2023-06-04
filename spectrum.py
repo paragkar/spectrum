@@ -1496,7 +1496,7 @@ if authentication_status:
 
 		dfbid = loadauctionbiddata()["2010_3G"].replace('-', np.nan, regex = True)
 
-		dfbid.columns = ["ClK_Round", "Bidder","LSA","PWB_Start_ClkRd", "Rank_PWB_Start_ClkRd", 
+		dfbid.columns = ["Clk_Round", "Bidder","LSA","PWB_Start_ClkRd", "Rank_PWB_Start_ClkRd", 
 						"Possible_Raise_Bid_ClkRd", "Bid_Decision", "PWB_End_ClkRd", "Rank_PWB_End_ClkRd"]
 
 		dfbid = dfbid.replace("No Bid", 0)
@@ -1513,20 +1513,24 @@ if authentication_status:
 
 		st.write(dfbidop)
 
+		z = dfbidop["Bid_Decision"]
+		y = dfbidop.index
+		x = dfbidop["Clk_Round"]
 
-		# data = [go.Heatmap(
-		# 	  z = z,
-		# 	  x = x,
-		# 	  y = y,
-		# 	  xgap = 1,
-		# 	  ygap = 1,
-		# 	  hoverinfo ='text',
-		# 	  text = hovertext,
-		# 	  colorscale = 'Hot',
-		# 	    texttemplate="%{z}", 
-		# 	    textfont={"size":10},
-		# 	    reversescale=True,
-		# 		)]	
+
+		data = [go.Heatmap(
+			  z = z,
+			  x = x,
+			  y = y,
+			  xgap = 1,
+			  ygap = 1,
+			  hoverinfo ='text',
+			  # text = hovertext,
+			  colorscale = 'Hot',
+			    texttemplate="%{z}", 
+			    textfont={"size":10},
+			    reversescale=True,
+				)]	
 
 
 
