@@ -1515,8 +1515,6 @@ if authentication_status:
 
 			dfbidop = dfbid[dfbid["Bidder"]==selected_bidder]
 
-			st.write(dfbidop)
-
 			z = dfbidop["Bid_Decision"]
 			y = dfbidop.index
 			x = dfbidop["Clk_Round"]
