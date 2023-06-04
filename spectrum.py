@@ -2336,6 +2336,8 @@ if authentication_status:
 
 			fig1 = go.Figure(data=data1)
 
+			st.plotly_chart(fig1)
+
 
 
 	#Plotting the final Heatmap	
