@@ -2329,6 +2329,8 @@ if authentication_status:
 
 			xdtickangle =0
 
+			xdtickval = 1
+
 
 
 	#Plotting the final Heatmap	
