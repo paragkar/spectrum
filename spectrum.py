@@ -2729,7 +2729,7 @@ if authentication_status:
 			)
 
 	if Feature=="TowerBTS Trends":
-		fig.update_layout(template="plotly_dark")
+		pass
 	else:
 		#Drawning a black border around the heatmap chart 
 		fig.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
