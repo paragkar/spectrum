@@ -2324,7 +2324,7 @@ if authentication_status:
 
 
 
-			data =[go.Scatter(x=dftowersbts["Date"].values, y = dftowersbts["BTS"].values)]
+			data1 =[go.Scatter(x=dftowersbts["Date"], y = dftowersbts["BTS"])]
 
 			xdtickangle =0
 
@@ -2333,6 +2333,8 @@ if authentication_status:
 			title = ""
 
 			subtitle = ""
+
+			fig1 = go.Figure(data=data1)
 
 
 
