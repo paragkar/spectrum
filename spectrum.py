@@ -1507,7 +1507,7 @@ if authentication_status:
 
 		listofbidders = sorted(list(set(dfbid["Bidder"])))
 
-		st.write(listofbidders)
+		Bidder = st.sidebar.selectbox("Select a Bidder", listofbidders)
 
 
 #---------------New Auction Bid Data Cide Ends Here----------------------
