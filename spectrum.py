@@ -2319,9 +2319,9 @@ if authentication_status:
 
 			dftowersbts = dftowersbts.set_index("Date")
 
-			dftowersbts['Date'] = dftowersbts['Date'].apply(lambda x: x.strftime('%B-%Y')) 
-
 			dftowersbts = dftowersbts.asfreq("m")
+
+			dftowersbts['Date'] = dftowersbts['Date'].apply(lambda x: x.strftime('%B-%Y')) 
 
 
 			dftowersbts = dftowersbts.sort_values("Date", ascending=True)
