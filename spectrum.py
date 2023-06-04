@@ -2329,9 +2329,9 @@ if authentication_status:
 			dftowersbts = dftowersbts.sort_values("Date", ascending=True)
 			dftowersbts["Ratio"] = dftowersbts["BTS"] / dftowersbts["Towers"]
 
-			trace1 = go.Scatter(x=dftowersbts.index, y=dftowersbts["Ratio"], name="BTSs/Towers", yaxis="y1", showlegend = False, line = dict(color ='red')
-			trace2 = go.Scatter(x=dftowersbts.index, y=dftowersbts["BTS"], name="BTS Trends", yaxis="y2", showlegend = False, line = dict(color = 'green')
-			trace3 = go.Scatter(x=dftowersbts.index, y=dftowersbts["Towers"], name="Tower Trends", yaxis="y3", showlegend = False, line = dict(color = 'blue')
+			trace1 = go.Scatter(x=dftowersbts.index, y=dftowersbts["Ratio"], name="BTSs/Towers", yaxis="y1", showlegend = False, line = dict(color ='red'))
+			trace2 = go.Scatter(x=dftowersbts.index, y=dftowersbts["BTS"], name="BTS Trends", yaxis="y2", showlegend = False, line = dict(color = 'green'))
+			trace3 = go.Scatter(x=dftowersbts.index, y=dftowersbts["Towers"], name="Tower Trends", yaxis="y3", showlegend = False, line = dict(color = 'blue'))
 
 
 			data = [trace1, trace2, trace3]
