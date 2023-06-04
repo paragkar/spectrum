@@ -2333,6 +2333,8 @@ if authentication_status:
 
 			title = ""
 
+			subtitle = ""
+
 
 
 	#Plotting the final Heatmap	
