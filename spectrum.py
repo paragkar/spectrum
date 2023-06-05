@@ -1512,7 +1512,7 @@ if authentication_status:
 			dfbid = dfbid.set_index("LSA").sort_index().reset_index()
 
 
-			dfbidpanindia = dfbid.groupby("LSA").sum()
+			dfbidpanindia = dfbid.groupby(["LSA","Clk_Round"]).sum()
 
 			st.write(dfbidpanindia)
 
