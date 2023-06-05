@@ -1519,7 +1519,7 @@ if authentication_status:
 			start_round = round_range[0]
 			end_round = round_range[1]
 
-			filt  =(dfbid["Clk_Round"] >= start_round) and (dfbid["Clk_Round"] <= end_round)
+			filt  =(dfbid["Clk_Round"] > start_round) and (dfbid["Clk_Round"] <= end_round)
 
 			dfbid = dfbid[filt]
 
