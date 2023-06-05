@@ -1519,8 +1519,8 @@ if authentication_status:
 			data =[]
 
 			for bidder in listofbidders:
-				mask = dfbidpanindia["Bidder"]==bidder,
-				tempdf = dfbidpanindia[mask]
+				mask = dfbid["Bidder"]=="Aircel",
+				tempdf = dfbid[mask]
 				st.write(tempdf)
 				# tempdf = tempdf.groupby(["Clk_Round"]).sum(),
 				# st.write(tempdf["Bid_Decision"])
