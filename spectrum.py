@@ -1518,14 +1518,14 @@ if authentication_status:
 			for i, bidder in enumerate(listofbidders):
 			    dftemp1 = dfbid[dfbid["Bidder"] == bidder]
 			    dftemp2 = dftemp1.drop(columns=["Bidder", "Possible_Raise_Bid_ClkRd", "Rank_PWB_Start_ClkRd", "Rank_PWB_End_ClkRd"], axis=1)
-			    # dfbidpanindia = dftemp2.groupby(["LSA","Clk_Round"]).sum().reset_index()
+			    dfbidpanindia = dftemp2.groupby(["LSA","Bid_Decision"]).sum().reset_index()
 			    trace = go.bar(
 			        name=bidder,
-			        x=dftemp2.index,
+			        x=dfbidpanindia["LSA"],
 			        # y=dftemp2["Clk_Round"],
-			        y=dftemp2["Bid_Decision"],
-			        colorscale = 'Hot',
-			        reversescale=True,
+			        y=dfbidpanindia["Bid_Decision"],
+			        yaxis ="y",
+
 			    				)
 
 			    figauc.add_trace(trace, row=(i // 3) + 1, col=(i % 3) + 1)
@@ -1539,8 +1539,8 @@ if authentication_status:
 
 			st.plotly_chart(figauc, use_container_width=True)
 
-			figauc.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
-			figauc.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
+			# figauc.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
+			# figauc.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
 
 
 			# xdtickangle =0
