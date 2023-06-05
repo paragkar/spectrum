@@ -2850,6 +2850,11 @@ if authentication_status:
 
 	#---------Dimension = Auction Data Starts----------------
 
+	if Feature == "2010-Band2100":
+
+		title = "2010 3G Auctions - Total Bids in Respective Circle"
+
+		subtitle = "Unit - Nos; Source - DoT"
 
 
 	#---------Dimension = Auction Data Ends------------------
