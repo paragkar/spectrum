@@ -1520,7 +1520,9 @@ if authentication_status:
 
 			for bidder in listofbidders:
 				mask = dfbid["Bidder"]==bidder,
-				st.write(mask)
+				dftemp = dfbid[mask]
+				dfbidpanindia = dftemp.groupby(["Clk_Round"]).sum()
+				st.write(dfbidpanindia)
 				# tempdf = dfbid[mask]
 				# st.write(tempdf)
 				# tempdf = tempdf.groupby(["Clk_Round"]).sum(),
