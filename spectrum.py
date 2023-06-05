@@ -2496,7 +2496,10 @@ if authentication_status:
 
 			figtowerbts = go.Figure(data=data)
 
-			figtowerbts.update_layout(
+			end_date = dt.datetime(2023, 6, 30)  # Use datetime.datetime instead of just datetime
+			figtowerbts.update_xaxes(range=[dftowersbts.index[0], end_date], dtick=2)
+
+			igtowerbts.update_layout(
 				    # title='Multiple Line Charts',
 				    yaxis=dict(
 				        title='Ratio - BTS/Towers',
@@ -2521,10 +2524,7 @@ if authentication_status:
 				    width=1000,
 				)
 
-			end_date = dt.datetime(2023, 6, 30)  # Use datetime.datetime instead of just datetime
-			figtowerbts.update_xaxes(range=[dftowersbts.index[0], end_date], dtick=2)
-
-			st.plotly_chart(figtowerbts, use_container_width=True)
+			# st.plotly_chart(figtowerbts, use_container_width=True)
 
 
 			# # Create the figure and add the traces
