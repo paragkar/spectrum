@@ -2855,28 +2855,33 @@ if authentication_status:
 	#---------Dimension = Auction Data Ends------------------
 
 
-	#layout for heatmaps 
+	if selected_dimension in ["Spectrum Bands", "Auction Years", "Business Data"]:
 
-	fig.update_layout(uniformtext_minsize=12, 
-			  uniformtext_mode='hide', 
-			  xaxis_title=None, 
-			  yaxis_title=None, 
-			  yaxis_autorange='reversed',
-			  font=dict(size=12),
-			  template='simple_white',
-			  paper_bgcolor=None,
-			  height=600, 
-			  width=1200,
-			  margin=dict(t=80, b=50, l=50, r=50, pad=0),
-			  yaxis=dict(
-	        	  tickmode='array'),
-			  xaxis = dict(
-			  side = 'top',
-			  tickmode = 'linear',
-			  tickangle=xdtickangle,
-			  dtick = xdtickval), 
-			)
+		#layout for heatmaps 
 
+		fig.update_layout(uniformtext_minsize=12, 
+				  uniformtext_mode='hide', 
+				  xaxis_title=None, 
+				  yaxis_title=None, 
+				  yaxis_autorange='reversed',
+				  font=dict(size=12),
+				  template='simple_white',
+				  paper_bgcolor=None,
+				  height=600, 
+				  width=1200,
+				  margin=dict(t=80, b=50, l=50, r=50, pad=0),
+				  yaxis=dict(
+		        	  tickmode='array'),
+				  xaxis = dict(
+				  side = 'top',
+				  tickmode = 'linear',
+				  tickangle=xdtickangle,
+				  dtick = xdtickval), 
+				)
+
+			#Drawning a black border around the heatmap chart 
+		fig.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
+		fig.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
 
 
 	#Some last minute exceptions and changes in the plot
@@ -2903,8 +2908,8 @@ if authentication_status:
 
 
 	#Drawning a black border around the heatmap chart 
-	fig.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
-	fig.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
+	# fig.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
+	# fig.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
 
 
 
