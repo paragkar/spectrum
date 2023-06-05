@@ -1522,7 +1522,7 @@ if authentication_status:
 					go.Bar(
 						name = bidder,
 						x = tempdf["Bidder"],
-						y = tempdf["Bid_Decision"]
+						y = tempdf["Bid_Decision"],
 						offsetgroup = i,
 						)
 						],
