@@ -1494,7 +1494,7 @@ if authentication_status:
 
 			return df
 
-		Feature = st.sidebar.selectbox("Select a Bidder", ["2010-Band2100"])
+		Feature = st.sidebar.selectbox("Select an Auction", ["2010-Band2100"])
 
 		if Feature == "2010-Band2100":
 
