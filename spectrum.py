@@ -1514,7 +1514,7 @@ if authentication_status:
 
 			figauc = sp.make_subplots(rows=3, cols=3, subplot_titles=listofbidders, shared_yaxes = True)
 
-			round_range = st.slider("Select auction round numbers by dragging the ends of the double silder", value=(0,183))
+			round_range = st.slider("Select Auction Round Numbers using the Silder below", value=(0,183))
 
 			start_round = round_range[0]
 
