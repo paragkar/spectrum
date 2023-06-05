@@ -2840,16 +2840,16 @@ if authentication_status:
 	#---------Dimension = Auction Data Starts----------------
 
 
-	if Feature == "2010-Band2100":
+	# if Feature == "2010-Band2100":
 
-		hoverlabel_bgcolor = "#000000" #subdued black
+	# 	hoverlabel_bgcolor = "#000000" #subdued black
 
-		# fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
-		xdtickangle= 0
-		xdtickval=10
+	# 	# fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
+	# 	xdtickangle= 0
+	# 	xdtickval=10
 
-		subtitle = ""
-		title = ""
+	# 	subtitle = ""
+	# 	title = ""
 
 
 	#---------Dimension = Auction Data Ends------------------
