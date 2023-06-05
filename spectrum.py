@@ -1509,10 +1509,24 @@ if authentication_status:
 
 			dfbid = dfbid.set_index("LSA").sort_index()
 
+
+			listofbidders = sorted(list(set(dfbid["Bidder"])))
+
 			st.write(dfbid)
 
+			data =[]
 
-			# fig = px.bar(dfbid, x='dummy', y='Percentage', color='Count' ,title='My plot')
+			for i, bidder in enumerate(listofbidders):
+				tempdf = dfbid[dfbid["Bidder"]==bidder]
+				tempdata =[
+					go.Bar(
+						name = bidder,
+						x = tempdf["Bidder"],
+						y = tempdf["Bid_Decision"]
+						offsetgroup = i,
+						)
+						],
+				data.append(tempdata)
 
 			# listofbidders = sorted(list(set(dfbid["Bidder"])))
 
