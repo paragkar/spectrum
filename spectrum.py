@@ -1497,6 +1497,9 @@ if authentication_status:
 
 		Feature = st.sidebar.selectbox("Select an Feature", ["2010-Band2100"])
 
+
+		if Feature == "2010-Band2100":
+
 			dfbid = loadauctionbiddata()["2010_3G"].replace('-', np.nan, regex = True)
 
 			dfbid.columns = ["Clk_Round", "Bidder","LSA","PWB_Start_ClkRd", "Rank_PWB_Start_ClkRd", 
@@ -1508,8 +1511,6 @@ if authentication_status:
 			listofbidders = sorted(list(set(dfbid["Bidder"])))
 
 			dfbid = dfbid.set_index("LSA").sort_index(ascending = False)
-
-		if Feature == "2010-Band2100":
 
 			SubFeature = st.sidebar.selectbox("Select an SubFeature", ["BidsCircleWise"])
 
