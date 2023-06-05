@@ -1519,6 +1519,7 @@ if authentication_status:
 			data =[]
 
 			for bidder in listofbidders:
+				st.write(dfbid)
 				mask = dfbid["Bidder"]=="Aircel",
 				tempdf = dfbid[mask]
 				st.write(tempdf)
