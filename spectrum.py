@@ -1522,7 +1522,7 @@ if authentication_status:
 
 			st.write(start_round, end_round, dfbid.columns)
 
-			filt  =(dfbid["Clk_Round"] > start_round) and (dfbid["Clk_Round"] <= end_round)
+			filt  =(dfbid["Clk_Round"] > start_round) & (dfbid["Clk_Round"] <= end_round)
 
 			dfbid = dfbid[filt]
 
