@@ -1509,7 +1509,12 @@ if authentication_status:
 			listofbidders = sorted(list(set(dfbid["Bidder"])))
 
 
-			dfbid = dfbid.set_index("LSA").sort_index()
+			dfbid = dfbid.set_index("LSA").sort_index().reset_index()
+
+
+			dfbidpanindia = dfbid.groupby("LSA").sum()
+
+			st.write(dfbidpanindia)
 
 			for bidder in listofbidders:
 
