@@ -2823,7 +2823,7 @@ if authentication_status:
 		end_date = dt.datetime(2023, 6, 30)  # Use datetime.datetime instead of just datetime
 		fig.update_xaxes(range=[dftowersbts.index[0], end_date], dtick=2)
 
-	if selected_dimension in ["Spectrum Bands", "Auction Years", "Busines Data"]: #layout for heatmaps 
+	else: #layout for heatmaps 
 
 		fig.update_layout(uniformtext_minsize=12, 
 				  uniformtext_mode='hide', 
