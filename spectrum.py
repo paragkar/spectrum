@@ -1519,7 +1519,8 @@ if authentication_status:
 			data =[]
 
 			for i, bidder in enumerate(listofbidders):
-				tempdf = dfbid["Bidder"]==bidder,
+				mask = dfbid["Bidder"]==bidder,
+				temp = dfbid[mask]
 				st.write(tempdf)
 				# tempdf = tempdf.groupby(["Clk_Round"]).sum(),
 				# st.write(tempdf["Bid_Decision"])
