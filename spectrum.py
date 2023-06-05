@@ -1,6 +1,7 @@
 #importing libraries
 import plotly.express as px
 import plotly.graph_objects as go
+import plotly.subplots as sp
 import numpy as np
 from collections import OrderedDict
 from plotly.subplots import make_subplots
@@ -1509,35 +1510,62 @@ if authentication_status:
 			listofbidders = sorted(list(set(dfbid["Bidder"])))
 
 
-			dfbid = dfbid.set_index("LSA").sort_index().reset_index()
+			dfbid = dfbid.set_index("LSA").sort_index()
 
+			figauc = sp.make_subplots(rows=3, cols=3, subplot_titles=listofbidders)
 
-			dfbidpanindia = dfbid.groupby(["Clk_Round"]).sum()
-
-		
-
-			data =[]
 
 			for i, bidder in enumerate(listofbidders):
-				dftemp1 = dfbid[dfbid["Bidder"]==bidder]
-				dftemp2 = dftemp1.drop(columns = ["LSA", "Bidder", "Possible_Raise_Bid_ClkRd","Rank_PWB_Start_ClkRd","Rank_PWB_End_ClkRd"], axis =1)
-				dfbidpanindia = dftemp2.groupby(["Clk_Round"]).sum().reset_index()
-				trace = go.Bar(
-						name = bidder,
-						x = dfbidpanindia["Clk_Round"],
-						y = dfbidpanindia["Bid_Decision"],
-						yaxis = "y"+str(i+1),
-						)
-				data.append(trace)
+			    dftemp1 = dfbid[dfbid["Bidder"] == bidder]
+			    dftemp2 = dftemp1.drop(columns=["Bidder", "Possible_Raise_Bid_ClkRd", "Rank_PWB_Start_ClkRd", "Rank_PWB_End_ClkRd"], axis=1)
+			    # dfbidpanindia = dftemp2.groupby(["LSA","Clk_Round"]).sum().reset_index()
+			    trace = go.Heatmap(
+			        name=bidder,
+			        y = dfbidpanindia["LSA"],
+			        x=dfbidpanindia["Clk_Round"],
+			        z=dfbidpanindia["Bid_Decision"],
+			    				)
+
+			    figauc.add_trace(trace, row=(i // 3) + 1, col=(i % 3) + 1)
+
+			figauc.update_layout(
+			    template="simple_white",
+			    xaxis=dict(title_text="Rounds"),
+			    yaxis=dict(title_text="Circles"),
+								)
+
+			st.plotly_chart(figauc, use_container_width=True)
+
+			figauc.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
+			figauc.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
+
+
+			# xdtickangle =0
+			# xdtickval = 100
+			# title = ""
+			# subtitle = ""
+
+
+
+
+			# dfbidpanindia = dfbid.groupby(["Clk_Round"]).sum()
+
+			# data =[]
+
+			# for i, bidder in enumerate(listofbidders):
+			# 	dftemp1 = dfbid[dfbid["Bidder"]==bidder]
+			# 	dftemp2 = dftemp1.drop(columns = ["LSA", "Bidder", "Possible_Raise_Bid_ClkRd","Rank_PWB_Start_ClkRd","Rank_PWB_End_ClkRd"], axis =1)
+			# 	dfbidpanindia = dftemp2.groupby(["Clk_Round"]).sum().reset_index()
+			# 	trace = go.Bar(
+			# 			name = bidder,
+			# 			x = dfbidpanindia["Clk_Round"],
+			# 			y = dfbidpanindia["Bid_Decision"],
+			# 			yaxis = "y"+str(i+1),
+			# 			)
+			# 	data.append(trace)
 
 
 			# Create the figure and add the traces
-
-			xdtickangle =0
-			xdtickval = 100
-			title = ""
-			subtitle = ""
-
 
 			# data = [go.Heatmap(
 			# 	  z = z,
