@@ -1213,6 +1213,8 @@ if authentication_status:
 				      dtick=1, tickmode="array"),
 						    ),
 					]
+
+				fig = go.Figure(data=data)
 				
 				hcolscale=colscale_hbox_spectrum_expiry_maps(operators, colcodes)  #colorscale for hoverbox
 				hoverlabel_bgcolor = transform_colscale_for_spec_exp_maps(hcolscale, hf) #shaping the hfcolorscale
@@ -1264,7 +1266,8 @@ if authentication_status:
 				    textfont={"size":10},
 				    reversescale=True,)
 					]
-				
+
+				fig = go.Figure(data=data)
 				
 			if SubFeature == "Operator %Share":
 				selected_operators=[]
@@ -1328,6 +1331,7 @@ if authentication_status:
 				    reversescale=True,)
 					]
 
+				fig = go.Figure(data=data)
 
 		#Feature ="Expiry Map" linked to Dimension = "Spectrum Band"
 		if  Feature == "Expiry Map":
@@ -1367,6 +1371,9 @@ if authentication_status:
 				      reversescale=True,
 					)
 					  ]
+
+				fig = go.Figure(data=data)
+
 				hcolscale=colscale_hbox_spectrum_expiry_maps(operators, colcodes)  #colorscale for hoverbox
 				hoverlabel_bgcolor = transform_colscale_for_spec_exp_maps(hcolscale, hf) #shaping the hfcolorscale
 
@@ -1422,6 +1429,7 @@ if authentication_status:
 				    reversescale=True,
 					)]
 
+				fig = go.Figure(data=data)
 
 		#Feature ="Auction Map" linked to Dimension = "Spectrum Band"
 		if  Feature == "Auction Map":
@@ -1466,6 +1474,8 @@ if authentication_status:
 					reversescale=True,
 					),
 				]
+			fig = go.Figure(data=data)
+
 			hoverlabel_bgcolor = transform_colscale_for_hbox_auction_map(dff,reserveprice,auctionprice)
 
 
@@ -1820,8 +1830,9 @@ if authentication_status:
 			    texttemplate="%{z}", 
 			    textfont={"size":10},
 			    reversescale=True,
-				)]	
+				)]
 
+		fig = go.Figure(data=data)
 
 
 	#This is section is to visulize important data related to the telecom industry (may not be directed related to spectrum)
@@ -1879,6 +1890,7 @@ if authentication_status:
 						reversescale=True,
 						),
 					]
+				fig = go.Figure(data=data)
 
 				summarydf = df5gbtsf.sum(axis=0)
 				summarydf = summarydf.reset_index()
@@ -1915,6 +1927,7 @@ if authentication_status:
 						reversescale=True,
 						),
 					]
+				fig = go.Figure(data=data)
 
 				SummaryFlag = False #No summary chart to plot
 
@@ -1957,6 +1970,8 @@ if authentication_status:
 						reversescale=True,
 						),
 					]
+
+				fig = go.Figure(data=data)
 
 				summarydf = df5gbtsincf.sum(axis=0)
 				summarydf = summarydf.reset_index()
@@ -2117,6 +2132,8 @@ if authentication_status:
 						),
 					]
 
+				fig = go.Figure(data=data)
+
 				# dftotalfilt = (dftotalfilt/1000).round(1)
 				# summarydf = dftotalfilt.sum(axis=0)
 				# summarydf = summarydf.reset_index()
@@ -2195,7 +2212,7 @@ if authentication_status:
 						),
 					]
 
-
+				fig = go.Figure(data=data)
 
 		if Feature== "Subscriber MShare":
 
@@ -2293,6 +2310,8 @@ if authentication_status:
 						# reversescale=True,
 						),
 					]
+
+			fig = go.Figure(data=data)
 
 			summarydf= round(summarydf/1000000,1) # converting the numbers to million
 			summarydf = summarydf.reset_index()
@@ -2455,7 +2474,7 @@ if authentication_status:
 						# reversescale=True,
 						),
 					]
-
+			fig = go.Figure(data=data)
 
 		if Feature == "TowerBTS Trends":
 
@@ -2531,7 +2550,7 @@ if authentication_status:
 
 
 	#Plotting the final Heatmap	
-	fig = go.Figure(data=data)
+	# fig = go.Figure(data=data)
 
 
 	#This section deals with titles and subtitles and hoverlabel color for all the heatmap charts
