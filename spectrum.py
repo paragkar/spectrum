@@ -1530,26 +1530,15 @@ if authentication_status:
 						),
 				data.append(trace)
 
-
-			# # Create the figure and add the traces
-
-			# xdtickangle =0
-			# xdtickval = 100
-			# title = ""
-			# subtitle = ""
+			str.write(data)
 
 
-			# st.write(data)
+			# Create the figure and add the traces
 
-			# listofbidders = sorted(list(set(dfbid["Bidder"])))
-
-			# selected_bidder = st.sidebar.selectbox("Select a Bidder", listofbidders)
-
-			# dfbidop = dfbid[dfbid["Bidder"]==selected_bidder]
-
-			# z = dfbidop["Bid_Decision"]
-			# y = dfbidop.index
-			# x = dfbidop["Clk_Round"]
+			xdtickangle =0
+			xdtickval = 100
+			title = ""
+			subtitle = ""
 
 
 			# data = [go.Heatmap(
