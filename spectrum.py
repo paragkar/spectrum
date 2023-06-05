@@ -1513,6 +1513,8 @@ if authentication_status:
 
 			for bidder in listofbidders:
 
+				st.write(bidder)
+
 				dfbid = dfbid[dfbid["Bidder"]==bidder]
 
 				st.write(dfbid)
