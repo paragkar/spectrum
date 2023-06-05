@@ -2524,7 +2524,7 @@ if authentication_status:
 				    width=1000,
 				)
 
-			# st.plotly_chart(figtowerbts, use_container_width=True)
+			st.plotly_chart(figtowerbts, use_container_width=True)
 
 
 			# # Create the figure and add the traces
