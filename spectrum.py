@@ -1518,15 +1518,23 @@ if authentication_status:
 
 			for i, bidder in enumerate(listofbidders):
 				tempdf = dfbid[dfbid["Bidder"]==bidder]
-				tempdata =[
+				trace =
 					go.Scatter(
 						name = bidder,
 						x = tempdf["Clk_Round"],
 						y = tempdf["Bid_Decision"],
-						offsetgroup = i,
-						)
-						],
-				data.append(tempdata)
+						yaxis = "y"+str(i),
+						),
+				data.append(trace)
+
+
+			# Create the figure and add the traces
+
+			xdtickangle =0
+			xdtickval = 100
+			title = ""
+			subtitle = ""
+
 
 			# st.write(data)
 
