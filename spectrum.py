@@ -1494,9 +1494,9 @@ if authentication_status:
 
 			return df
 
-		Feature = st.sidebar.selectbox("Select a Bidder", ["2010_3G_Auctions"])
+		Feature = st.sidebar.selectbox("Select a Bidder", ["2010-Band2100"])
 
-		if Feature == "2010_3G_Auctions":
+		if Feature == "2010-Band2100":
 
 			dfbid = loadauctionbiddata()["2010_3G"].replace('-', np.nan, regex = True)
 
@@ -2419,7 +2419,7 @@ if authentication_status:
 			# 					showlegend = False, line = dict(color = 'blue'))
 
 
-			data = [trace1, trace2, trace3]
+			data = [trace1, trace2, trace3] #Data for line chart stacked on top of each other
 
 			# Create the figure and add the traces
 
@@ -2732,7 +2732,7 @@ if authentication_status:
 	#---------Dimension = Auction Data Starts----------------
 
 
-	if Feature == "2010_3G_Auctions":
+	if Feature == "2010-Band2100":
 
 		hoverlabel_bgcolor = "#000000" #subdued black
 
@@ -2749,9 +2749,11 @@ if authentication_status:
 
 	#---------Dimension = Auction Data Ends------------------
 
-	#updating figure layouts
 
-	if Feature=="TowerBTS Trends":
+
+	#updating different figure layouts for different features
+
+	if Feature=="TowerBTS Trends": #layout for stacked line chart
 
 		fig.update_layout(
 			    # title='Multiple Line Charts',
@@ -2781,7 +2783,7 @@ if authentication_status:
 		end_date = dt.datetime(2023, 6, 30)  # Use datetime.datetime instead of just datetime
 		fig.update_xaxes(range=[dftowersbts.index[0], end_date], dtick=2)
 
-	else:
+	else: #layout for heatmaps 
 
 		fig.update_layout(uniformtext_minsize=12, 
 				  uniformtext_mode='hide', 
@@ -2823,6 +2825,9 @@ if authentication_status:
 			    tickvals=list(range(len(date_range_list)))
 			)
 
+	#encircle the heatmaps with a rectangular box made up of black lines
+	#Except for features which are not heatmaps
+
 	if Feature=="TowerBTS Trends":
 		pass
 	else:
@@ -2831,6 +2836,8 @@ if authentication_status:
 		fig.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
 
 
+
+#Final plotting of various charts on the output page
 	style = "<style>h3 {text-align: left;}</style>"
 	with st.container():
 		#plotting the main chart
