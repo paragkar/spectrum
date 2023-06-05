@@ -1511,32 +1511,34 @@ if authentication_status:
 
 			dfbid = dfbid.set_index("LSA").sort_index()
 
-			dfbid = dfbid[dfbid["Bidder"]=="Aircel"]
+			for bidder in listofbidders:
 
-			st.write(dfbid)
+				dfbid = dfbid[dfbid["Bidder"]==bidder]
+
+				st.write(dfbid)
 
 
 			data =[]
 
-			for i, bidder in enumerate(listofbidders):
-				st.write(bidder)
-				tempdf = dfbid[dfbid["Bidder"]==bidder],
-				st.write(tempdf)
-				trace = go.Scatter(
-						name = bidder,
-						x = tempdf["Clk_Round"],
-						y = tempdf["Bid_Decision"],
-						yaxis = "y"+str(i),
-						),
-				data.append(trace)
+			# for i, bidder in enumerate(listofbidders):
+			# 	st.write(bidder)
+			# 	tempdf = dfbid[dfbid["Bidder"]==bidder],
+			# 	st.write(tempdf)
+			# 	trace = go.Scatter(
+			# 			name = bidder,
+			# 			x = tempdf["Clk_Round"],
+			# 			y = tempdf["Bid_Decision"],
+			# 			yaxis = "y"+str(i),
+			# 			),
+			# 	data.append(trace)
 
 
-			# Create the figure and add the traces
+			# # Create the figure and add the traces
 
-			xdtickangle =0
-			xdtickval = 100
-			title = ""
-			subtitle = ""
+			# xdtickangle =0
+			# xdtickval = 100
+			# title = ""
+			# subtitle = ""
 
 
 			# st.write(data)
