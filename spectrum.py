@@ -1537,7 +1537,15 @@ if authentication_status:
 
 			    				)
 
-			    figauc.add_trace(trace, row=(i // 3) + 1, col=(i % 3) + 1)
+			    row=(i // 3) + 1
+			    col=(i % 3) + 1
+
+			    figauc.add_trace(trace, row=row, col=col)
+
+			    # Remove y-axis labels for integrated subplots
+			    if col != 1:
+			        figauc.update_yaxes(showticklabels=False, row=row, col=col)
+
 
 			figauc.update_layout(
 			    template="seaborn",
