@@ -1528,7 +1528,7 @@ if authentication_status:
 						y = dfbidpanindia["Bid_Decision"],
 						yaxis = "y"+str(i+1),
 						),
-				data.append(go.trace)
+				data.append(trace)
 
 			st.write(data)
 
