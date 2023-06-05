@@ -1534,7 +1534,7 @@ if authentication_status:
 			        # y=dftemp2["Clk_Round"],
 			        y=dfbidpanindia["Bid_Decision"],
 			        yaxis ="y",
-
+			        showlegend=False,
 			    				)
 
 			    row=(i // 3) + 1
