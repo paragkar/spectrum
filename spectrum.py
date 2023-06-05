@@ -2522,19 +2522,8 @@ if authentication_status:
 
 				    height=900,
 				    width=1000,
-				    xdtickangle =0,
-					xdtickval = 100,
 				)
 
-			st.plotly_chart(figtowerbts, use_container_width=True)
-
-
-			# # Create the figure and add the traces
-
-			# xdtickangle =0
-			# xdtickval = 100
-			# title = ""
-			# subtitle = ""
 
 #----------------End of all Dimensions of Fig Data-----------------------------
 
@@ -2857,40 +2846,6 @@ if authentication_status:
 	#---------Dimension = Auction Data Ends------------------
 
 
-
-	#updating different figure layouts for different features
-
-
-	# if (Feature=="TowerBTS Trends"): #layout for stacked line chart
-
-	# 	fig.update_layout(
-	# 		    # title='Multiple Line Charts',
-	# 		    yaxis=dict(
-	# 		        title='Ratio - BTS/Towers',
-	# 		        range=[2.5, 4],  # Set the range for y-axis 1
-	# 		        domain=[0, 0.27]
-	# 		    ),
-	# 		    yaxis2=dict(
-	# 		        title='BTS',
-	# 		        range=[1500000, 3000000],  # Set the range for y-axis 2
-	# 		        domain=[0.35, 0.62]
-	# 		    ),
-	# 		    yaxis3=dict(
-	# 		        title='Towers',
-	# 		        range=[400000, 800000],  # Set the range for y-axis 3
-	# 		        domain=[0.69, 1]
-	# 		    ),
-	# 		    xaxis=dict(
-	# 		        title='Date'
-	# 		    ),
-
-	# 		    height=900,
-	# 		    width=1000,
-	# 		)
-
-	# 	end_date = dt.datetime(2023, 6, 30)  # Use datetime.datetime instead of just datetime
-	# 	fig.update_xaxes(range=[dftowersbts.index[0], end_date], dtick=2)
-
 	#layout for heatmaps 
 
 	fig.update_layout(uniformtext_minsize=12, 
@@ -2958,6 +2913,7 @@ if authentication_status:
 			tab2.table(chartdata_df)
 		else:
 			st.plotly_chart(fig, use_container_width=True) # for heatmaps
+			st.plotly_chart(figtowerbts, use_container_width=True) #for towerdata
 
 
 
