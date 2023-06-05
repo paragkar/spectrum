@@ -1572,7 +1572,7 @@ if authentication_status:
 
 
 			title = "3G Auctions (Year-2010) - Total Number of Bids"
-			subtitle = "Unit - Number; Source - DoT"
+			subtitle = "Unit - Numbers; Source - DoT"
 
 			style = "<style>h3 {text-align: left;}</style>"
 			with st.container():
