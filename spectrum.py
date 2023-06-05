@@ -1551,7 +1551,6 @@ if authentication_status:
 			    template="plotly_white",
 			    xaxis=dict(
 			        title_text="Circles",
-			        tickfont=dict(size=8)  # Set the size of x-axis tick labels to 12
 			    		),
 			    yaxis=dict(title_text="No of Bids"),
 			   	height = 650,
@@ -1559,8 +1558,8 @@ if authentication_status:
 						)
 
 			# Update x-axis tick font for all subplots
-			figauc.update_xaxes(tickfont=dict(size=12))
-			
+			figauc.update_xaxes(tickfont=dict(size=8))
+
 			st.plotly_chart(figauc, use_container_width=True)
 
 			# figauc.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
