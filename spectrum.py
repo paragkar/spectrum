@@ -1509,30 +1509,35 @@ if authentication_status:
 
 			dfbid = dfbid.set_index("LSA").sort_index()
 
-			listofbidders = sorted(list(set(dfbid["Bidder"])))
-
-			selected_bidder = st.sidebar.selectbox("Select a Bidder", listofbidders)
-
-			dfbidop = dfbid[dfbid["Bidder"]==selected_bidder]
-
-			z = dfbidop["Bid_Decision"]
-			y = dfbidop.index
-			x = dfbidop["Clk_Round"]
+			st.write(dfbid)
 
 
-			data = [go.Heatmap(
-				  z = z,
-				  x = x,
-				  y = y,
-				  xgap = 1,
-				  ygap = 1,
-				  hoverinfo ='text',
-				  # text = hovertext,
-				  colorscale = 'Hot',
-				    # texttemplate="%{z}", 
-				    # textfont={"size":10},
-				    reversescale=True,
-					)]	
+			# fig = px.bar(dfbid, x='dummy', y='Percentage', color='Count' ,title='My plot')
+
+			# listofbidders = sorted(list(set(dfbid["Bidder"])))
+
+			# selected_bidder = st.sidebar.selectbox("Select a Bidder", listofbidders)
+
+			# dfbidop = dfbid[dfbid["Bidder"]==selected_bidder]
+
+			# z = dfbidop["Bid_Decision"]
+			# y = dfbidop.index
+			# x = dfbidop["Clk_Round"]
+
+
+			# data = [go.Heatmap(
+			# 	  z = z,
+			# 	  x = x,
+			# 	  y = y,
+			# 	  xgap = 1,
+			# 	  ygap = 1,
+			# 	  hoverinfo ='text',
+			# 	  # text = hovertext,
+			# 	  colorscale = 'Hot',
+			# 	    # texttemplate="%{z}", 
+			# 	    # textfont={"size":10},
+			# 	    reversescale=True,
+			# 		)]	
 
 
 
