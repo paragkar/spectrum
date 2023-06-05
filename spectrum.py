@@ -2850,9 +2850,10 @@ if authentication_status:
 
 		fig.update_layout(
 	    template="simple_white",
-	    xaxis=dict(title_text="Week"),
-	    yaxis=dict(title_text="Count"),
-	    barmode="stack",)
+	    xaxis=dict(title_text="Rounds"),
+	    yaxis=dict(title_text="No of Bids"),
+	    barmode="stack"
+	    				)
 
 	#Some last minute exceptions and changes in the plot
 
