@@ -2889,66 +2889,60 @@ if authentication_status:
 		fig.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
 
 
-	#Some last minute exceptions and changes in the plot
+		#Some last minute exceptions and changes in the plot
 
-	#converts x axis into category
-	if selected_dimension == "Business Data":
-		fig.update_layout(xaxis_type='category')
-	else:
-		pass
-
-	#removes tic labels if the date_range_list greater than a value
-	#This is done to prevent cluttering of xaxis labels when a large range is selected
-	if (selected_dimension == "Business Data") and (Feature == "Subscriber Trends"):
-		# fig.data[0].update(zmin=110, zmax=450) #setting the max and min value of the colorscale
-		if len(date_range_list) >= 30:
-			fig.update_xaxes(
-			    tickmode='array',
-			    ticktext=[''] * len(date_range_list),
-			    tickvals=list(range(len(date_range_list)))
-			)
-
-	#encircle the heatmaps with a rectangular box made up of black lines
-	#Except for features which are not heatmaps
-
-
-	#Drawning a black border around the heatmap chart 
-	# fig.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
-	# fig.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
-
-
-
-#Final plotting of various charts on the output page
-	style = "<style>h3 {text-align: left;}</style>"
-	with st.container():
-		#plotting the main chart
-		st.markdown(style, unsafe_allow_html=True)
-		st.header(title)
-		st.markdown(subtitle)
-
-		if chart_data_flag==True:
-			tab1, tab2 = st.tabs(["📈 Chart", "🗃 Data"]) #for listing the summary chart for freq layout
-			tab1.plotly_chart(fig, use_container_width=True)
-			tab2.table(chartdata_df)
+		#converts x axis into category
+		if selected_dimension == "Business Data":
+			fig.update_layout(xaxis_type='category')
 		else:
-			st.plotly_chart(fig, use_container_width=True) # for heatmaps
+			pass
+
+		#removes tic labels if the date_range_list greater than a value
+		#This is done to prevent cluttering of xaxis labels when a large range is selected
+		if (selected_dimension == "Business Data") and (Feature == "Subscriber Trends"):
+			# fig.data[0].update(zmin=110, zmax=450) #setting the max and min value of the colorscale
+			if len(date_range_list) >= 30:
+				fig.update_xaxes(
+				    tickmode='array',
+				    ticktext=[''] * len(date_range_list),
+				    tickvals=list(range(len(date_range_list)))
+				)
+
+		#encircle the heatmaps with a rectangular box made up of black lines
+		#Except for features which are not heatmaps
 
 
-		#preparing the container layout for the dimension business data
-		if (selected_dimension=="Business Data") and (Feature == "License Fees") and (SubFeature=="Operators"):
-			col1val =4.5
-		if (selected_dimension=="Business Data") and (Feature == "License Fees") and (SubFeature=="LicenseType"):
-			col1val =1
-		else:
-			col1val = 0.2
+		#Final plotting of various charts on the output page
+		style = "<style>h3 {text-align: left;}</style>"
+		with st.container():
+			#plotting the main chart
+			st.markdown(style, unsafe_allow_html=True)
+			st.header(title)
+			st.markdown(subtitle)
+
+			if chart_data_flag==True:
+				tab1, tab2 = st.tabs(["📈 Chart", "🗃 Data"]) #for listing the summary chart for freq layout
+				tab1.plotly_chart(fig, use_container_width=True)
+				tab2.table(chartdata_df)
+			else:
+				st.plotly_chart(fig, use_container_width=True) # for heatmaps
 
 
-		#plotting the final summary chart 
+			#preparing the container layout for the dimension business data
+			if (selected_dimension=="Business Data") and (Feature == "License Fees") and (SubFeature=="Operators"):
+				col1val =4.5
+			if (selected_dimension=="Business Data") and (Feature == "License Fees") and (SubFeature=="LicenseType"):
+				col1val =1
+			else:
+				col1val = 0.2
 
-		col1,col2,col3 = st.columns([col1val,14,1.1]) #create collumns of uneven width
-		if SummaryFlag ==True:
-			# st.altair_chart(chart, use_container_width=True)
-			col2.altair_chart(chart, use_container_width=True)
+
+			#plotting the final summary chart 
+
+			col1,col2,col3 = st.columns([col1val,14,1.1]) #create collumns of uneven width
+			if SummaryFlag ==True:
+				# st.altair_chart(chart, use_container_width=True)
+				col2.altair_chart(chart, use_container_width=True)
 
 
 	#--------The expander is used to add note for the user on reading the color codes for every chart -------
