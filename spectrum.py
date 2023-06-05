@@ -1518,22 +1518,17 @@ if authentication_status:
 
 			data =[]
 
-			for bidder in listofbidders:
+			for i, bidder in enumerate(listofbidders):
 				dftemp = dfbid[dfbid["Bidder"]==bidder]
 				dftemp = dftemp.drop(columns = ["LSA", "Bidder", "Possible_Raise_Bid_ClkRd","Rank_PWB_Start_ClkRd","Rank_PWB_End_ClkRd"], axis =1)
 				dfbidpanindia = dftemp.groupby(["Clk_Round"]).sum()
-				st.write(dfbidpanindia)
-				# tempdf = dfbid[mask]
-				# st.write(tempdf)
-				# tempdf = tempdf.groupby(["Clk_Round"]).sum(),
-				# st.write(tempdf["Bid_Decision"])
-				# trace = go.Scatter(
-				# 		name = bidder,
-				# 		x = tempdf["Clk_Round"],
-				# 		y = tempdf["Bid_Decision"],
-				# 		yaxis = "y"+str(i),
-				# 		),
-				# data.append(trace)
+				trace = go.Scatter(
+						name = bidder,
+						x = dfbidpanindia["Clk_Round"],
+						y = dfbidpanindia["Bid_Decision"],
+						yaxis = "y"+str(i),
+						),
+				data.append(trace)
 
 
 			# # Create the figure and add the traces
