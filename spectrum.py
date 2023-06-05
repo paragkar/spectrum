@@ -1517,7 +1517,7 @@ if authentication_status:
 			data =[]
 
 			for i, bidder in enumerate(listofbidders):
-				tempdf = dfbid[dfbid["Bidder"]==bidder]
+				tempdf = dfbid[dfbid["Bidder"]==bidder],
 				trace =
 					go.Scatter(
 						name = bidder,
