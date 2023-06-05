@@ -2792,7 +2792,6 @@ if authentication_status:
 
 	#updating different figure layouts for different features
 
-)
 
 	if Feature=="TowerBTS Trends": #layout for stacked line chart
 
