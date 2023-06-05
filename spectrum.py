@@ -1540,6 +1540,10 @@ if authentication_status:
 			    row=(i // 3) + 1
 			    col=(i % 3) + 1
 
+
+			    # Set the bidder name as bold using HTML tags
+    			trace.text = [f"<b>{bidder}</b>"] * len(dfbidpanindia["Bid_Decision"])
+
 			    figauc.add_trace(trace, row=row, col=col)
 
 			    # Remove y-axis labels for integrated subplots
