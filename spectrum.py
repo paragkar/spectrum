@@ -2793,7 +2793,7 @@ if authentication_status:
 	#updating different figure layouts for different features
 
 
-	if (selected_dimension=="Business Data") and (Feature=="TowerBTS Trends"): #layout for stacked line chart
+	if (Feature=="TowerBTS Trends"): #layout for stacked line chart
 
 		fig.update_layout(
 			    # title='Multiple Line Charts',
