@@ -1489,25 +1489,13 @@ if authentication_status:
 		@st.cache_resource
 		def loadauctionbiddata():
 
-			# password = st.secrets["db_password"]
-
-			# excel_content = io.BytesIO()
-
-			# with open("spectrum_map_protected.xlsx", 'rb') as f:
-			# 	excel = msoffcrypto.OfficeFile(f)
-			# 	excel.load_key(password)
-			# 	excel.decrypt(excel_content)
-
-			#loading data from excel file
 			xl = pd.ExcelFile("auctionbiddata.xlsx")
 			sheet = xl.sheet_names
 			df = pd.read_excel("auctionbiddata.xlsx", sheet_name=sheet)
 
 			return df
 
-		Feature = st.sidebar.selectbox("Select an Auction", ["2010-Band2100"])
-
-		if Feature == "2010-Band2100":
+		Feature = st.sidebar.selectbox("Select an Feature", ["2010-Band2100"])
 
 			dfbid = loadauctionbiddata()["2010_3G"].replace('-', np.nan, regex = True)
 
@@ -1519,70 +1507,75 @@ if authentication_status:
 
 			listofbidders = sorted(list(set(dfbid["Bidder"])))
 
-
 			dfbid = dfbid.set_index("LSA").sort_index(ascending = False)
 
-			figauc = sp.make_subplots(rows=3, cols=3, subplot_titles=listofbidders, shared_yaxes = True)
+		if Feature == "2010-Band2100":
 
-			round_range = st.slider("Select Auction Round Numbers using the Silder below", value=(0,183))
+			SubFeature = st.sidebar.selectbox("Select an SubFeature", ["BidsCircleWise"])
 
-			start_round = round_range[0]
+			if SubFeature == "BidsCircleWise":
 
-			end_round = round_range[1]
+				figauc = sp.make_subplots(rows=3, cols=3, subplot_titles=listofbidders, shared_yaxes = True)
 
-			filt  =(dfbid["Clk_Round"] > start_round) & (dfbid["Clk_Round"] <= end_round)
+				round_range = st.slider("Select Auction Round Numbers using the Silder below", value=(0,183))
 
-			dfbid = dfbid[filt]
+				start_round = round_range[0]
 
-			for i, bidder in enumerate(listofbidders):
-			    dftemp1 = dfbid[dfbid["Bidder"] == bidder]
-			    dftemp2 = dftemp1.drop(columns=["Bidder", "Possible_Raise_Bid_ClkRd", "Rank_PWB_Start_ClkRd", "Rank_PWB_End_ClkRd"], axis=1)
-			    dfbidpanindia = dftemp2.groupby(["LSA"]).sum().reset_index()
-			    trace = go.Bar(
-			        name=bidder,
-			        x=dfbidpanindia["LSA"],
-			        # y=dftemp2["Clk_Round"],
-			        y=dfbidpanindia["Bid_Decision"],
-			        yaxis ="y",
-			        showlegend=False,
-			    				)
+				end_round = round_range[1]
 
-			    row=(i // 3) + 1
-			    col=(i % 3) + 1
+				filt  =(dfbid["Clk_Round"] > start_round) & (dfbid["Clk_Round"] <= end_round)
 
+				dfbid = dfbid[filt]
 
-			    # Set the bidder name as bold using HTML tags
-			    trace.text = dfbidpanindia["Bid_Decision"]
+				for i, bidder in enumerate(listofbidders):
+				    dftemp1 = dfbid[dfbid["Bidder"] == bidder]
+				    dftemp2 = dftemp1.drop(columns=["Bidder", "Possible_Raise_Bid_ClkRd", "Rank_PWB_Start_ClkRd", "Rank_PWB_End_ClkRd"], axis=1)
+				    dfbidpanindia = dftemp2.groupby(["LSA"]).sum().reset_index()
+				    trace = go.Bar(
+				        name=bidder,
+				        x=dfbidpanindia["LSA"],
+				        # y=dftemp2["Clk_Round"],
+				        y=dfbidpanindia["Bid_Decision"],
+				        yaxis ="y",
+				        showlegend=False,
+				    				)
 
-			    figauc.add_trace(trace, row=row, col=col)
-
-			    # Remove y-axis labels for integrated subplots
-			    if col != 1:
-			        figauc.update_yaxes(showticklabels=False, row=row, col=col)
+				    row=(i // 3) + 1
+				    col=(i % 3) + 1
 
 
-			figauc.update_layout(
-			    template="plotly_white",
-			   	height = 650,)
+				    # Set the bidder name as bold using HTML tags
+				    trace.text = dfbidpanindia["Bid_Decision"]
 
-			# Update x-axis tick font for all subplots
-			figauc.update_xaxes(tickfont=dict(size=8))
+				    figauc.add_trace(trace, row=row, col=col)
 
-			figauc.update_traces(textfont_size=10, textangle=0, textposition="outside", cliponaxis=False)
-
-
-			title = "3G Auctions (Year-2010) - Total Number of Bids in Circles"
-			subtitle = "Unit - Numbers; Source - DoT"
-
-			style = "<style>h3 {text-align: left;}</style>"
-			with st.container():
-				#plotting the main chart
-				st.markdown(style, unsafe_allow_html=True)
-				st.header(title)
-				st.markdown(subtitle)
+				    # Remove y-axis labels for integrated subplots
+				    if col != 1:
+				        figauc.update_yaxes(showticklabels=False, row=row, col=col)
 
 
-			st.plotly_chart(figauc, use_container_width=True)
+				figauc.update_layout(
+				    template="plotly_white",
+				   	height = 650,)
+
+				# Update x-axis tick font for all subplots
+				figauc.update_xaxes(tickfont=dict(size=8))
+
+				figauc.update_traces(textfont_size=10, textangle=0, textposition="outside", cliponaxis=False)
+
+
+				title = "3G Auctions (Year-2010) - Total Number of Bids in Circles"
+				subtitle = "Unit - Numbers; Source - DoT"
+
+				style = "<style>h3 {text-align: left;}</style>"
+				with st.container():
+					#plotting the main chart
+					st.markdown(style, unsafe_allow_html=True)
+					st.header(title)
+					st.markdown(subtitle)
+
+
+				st.plotly_chart(figauc, use_container_width=True)
 
 
 
