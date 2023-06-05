@@ -1570,53 +1570,19 @@ if authentication_status:
 
 			figauc.update_traces(textfont_size=10, textangle=0, textposition="outside", cliponaxis=False)
 
+
+			title = "2010 3G Auctions - Total Number of Bids"
+			subtitle = "Unit - Number; Source - DoT"
+
+			style = "<style>h3 {text-align: left;}</style>"
+			with st.container():
+				#plotting the main chart
+				st.markdown(style, unsafe_allow_html=True)
+				st.header(title)
+				st.markdown(subtitle)
+
+
 			st.plotly_chart(figauc, use_container_width=True)
-
-			# figauc.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
-			# figauc.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
-
-
-			# xdtickangle =0
-			# xdtickval = 100
-			# title = ""
-			# subtitle = ""
-
-
-
-
-			# dfbidpanindia = dfbid.groupby(["Clk_Round"]).sum()
-
-			# data =[]
-
-			# for i, bidder in enumerate(listofbidders):
-			# 	dftemp1 = dfbid[dfbid["Bidder"]==bidder]
-			# 	dftemp2 = dftemp1.drop(columns = ["LSA", "Bidder", "Possible_Raise_Bid_ClkRd","Rank_PWB_Start_ClkRd","Rank_PWB_End_ClkRd"], axis =1)
-			# 	dfbidpanindia = dftemp2.groupby(["Clk_Round"]).sum().reset_index()
-			# 	trace = go.Bar(
-			# 			name = bidder,
-			# 			x = dfbidpanindia["Clk_Round"],
-			# 			y = dfbidpanindia["Bid_Decision"],
-			# 			yaxis = "y"+str(i+1),
-			# 			)
-			# 	data.append(trace)
-
-
-			# Create the figure and add the traces
-
-			# data = [go.Heatmap(
-			# 	  z = z,
-			# 	  x = x,
-			# 	  y = y,
-			# 	  xgap = 1,
-			# 	  ygap = 1,
-			# 	  hoverinfo ='text',
-			# 	  # text = hovertext,
-			# 	  colorscale = 'Hot',
-			# 	    # texttemplate="%{z}", 
-			# 	    # textfont={"size":10},
-			# 	    reversescale=True,
-			# 		)]	
-
 
 
 
@@ -2844,20 +2810,9 @@ if authentication_status:
 		subtitle = ""
 
 		
-
 	#---------Dimension = Business Data Ends ----------------
 
 
-	#---------Dimension = Auction Data Starts----------------
-
-	if Feature == "2010-Band2100":
-
-		title = "2010 3G Auctions - Total Bids in Respective Circle"
-
-		subtitle = "Unit - Nos; Source - DoT"
-
-
-	#---------Dimension = Auction Data Ends------------------
 
 
 	if selected_dimension in ["Spectrum Bands", "Auction Years", "Business Data"]:
