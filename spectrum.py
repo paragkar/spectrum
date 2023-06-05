@@ -1571,7 +1571,7 @@ if authentication_status:
 			figauc.update_traces(textfont_size=10, textangle=0, textposition="outside", cliponaxis=False)
 
 
-			title = "2010 3G Auctions - Total Number of Bids"
+			title = "3G Auctions of 2010 - Total Number of Bids"
 			subtitle = "Unit - Number; Source - DoT"
 
 			style = "<style>h3 {text-align: left;}</style>"
