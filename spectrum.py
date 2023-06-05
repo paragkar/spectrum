@@ -1523,7 +1523,7 @@ if authentication_status:
 			        name=bidder,
 			        x=dftemp2.index,
 			        # y=dftemp2["Clk_Round"],
-			        y=dftemp2["Bid_Decision"].sum(),
+			        y=dftemp2["Bid_Decision"],
 			        colorscale = 'Hot',
 			        reversescale=True,
 			    				)
