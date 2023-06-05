@@ -1514,29 +1514,21 @@ if authentication_status:
 
 			dfbidpanindia = dfbid.groupby(["Clk_Round"]).sum()
 
-			st.write(dfbidpanindia)
+		
 
-			for bidder in listofbidders:
+			data =[]
 
-				st.write(bidder)
-
-				tempdf = dfbid[dfbid["Bidder"]==bidder]
-
+			for i, bidder in enumerate(listofbidders):
+				tempdf = dfbid[dfbid["Bidder"]==bidder],
+				tempdf = tempdf.groupby(["Clk_Round"]).sum(),
 				st.write(tempdf["Bid_Decision"])
-
-
-			# data =[]
-
-			# for i, bidder in enumerate(listofbidders):
-			# 	tempdf = dfbid[dfbid["Bidder"]==bidder],
-			# 	st.write(tempdf["Bid_Decision"])
-			# 	trace = go.Scatter(
-			# 			name = bidder,
-			# 			x = dfbid["Clk_Round"],
-			# 			y = tempdf["Bid_Decision"],
-			# 			yaxis = "y"+str(i),
-			# 			),
-			# 	data.append(trace)
+				trace = go.Scatter(
+						name = bidder,
+						x = tempdf["Clk_Round"],
+						y = tempdf["Bid_Decision"],
+						yaxis = "y"+str(i),
+						),
+				data.append(trace)
 
 
 			# # Create the figure and add the traces
