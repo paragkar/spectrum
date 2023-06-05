@@ -2852,9 +2852,6 @@ if authentication_status:
 		title = ""
 
 
-
-
-
 	#---------Dimension = Auction Data Ends------------------
 
 
@@ -2915,17 +2912,6 @@ if authentication_status:
 			)
 
 
-	if selected_dimension == "Auction Data":
-
-		for i in range(len(listofbidders)):
-			fig.update_traces(yaxis="y" + str(i + 1), selector=dict(type='bar'))
-
-		fig.update_layout(
-	    template="simple_white",
-	    xaxis=dict(title_text="Rounds"),
-	    yaxis=dict(title_text="No of Bids", autorange = 'reversed'),
-	    barmode="stack"
-	    				)
 
 	#Some last minute exceptions and changes in the plot
 
@@ -2949,12 +2935,10 @@ if authentication_status:
 	#encircle the heatmaps with a rectangular box made up of black lines
 	#Except for features which are not heatmaps
 
-	if Feature=="TowerBTS Trends":
-		pass
-	else:
-		#Drawning a black border around the heatmap chart 
-		fig.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
-		fig.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
+
+	#Drawning a black border around the heatmap chart 
+	fig.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
+	fig.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
 
 
 
