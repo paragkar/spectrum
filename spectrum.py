@@ -1532,7 +1532,7 @@ if authentication_status:
 			    template="simple_white",
 			    xaxis=dict(title_text="Rounds"),
 			    yaxis=dict(title_text="Circles"),
-								)
+			  	height = 600,)
 
 			st.plotly_chart(figauc, use_container_width=True)
 
