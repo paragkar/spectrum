@@ -1531,7 +1531,7 @@ if authentication_status:
 			    figauc.add_trace(trace, row=(i // 3) + 1, col=(i % 3) + 1)
 
 			figauc.update_layout(
-			    template="plotly",
+			    template="seaborn",
 			    # xaxis=dict(title_text="Rounds"),
 			    # yaxis=dict(title_text="Circles"),
 			  	height = 800,
