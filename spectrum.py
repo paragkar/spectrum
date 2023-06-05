@@ -1530,7 +1530,7 @@ if authentication_status:
 						),
 				data.append(trace)
 
-			str.write(data)
+			st.write(data)
 
 
 			# Create the figure and add the traces
