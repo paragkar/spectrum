@@ -2519,8 +2519,6 @@ if authentication_status:
 				    xaxis=dict(
 				        title='Date'
 				    ),
-			  		tickangle=0,
-			  		dtick = 100, 
 				    height=900,
 				    width=1000,
 				)
