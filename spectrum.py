@@ -1524,6 +1524,7 @@ if authentication_status:
 			        y=dftemp2.index,
 			        x=dftemp2["Clk_Round"],
 			        z=dftemp2["Bid_Decision"],
+			        reversescale=True,
 			    				)
 
 			    figauc.add_trace(trace, row=(i // 3) + 1, col=(i % 3) + 1)
@@ -1533,7 +1534,7 @@ if authentication_status:
 			    xaxis=dict(title_text="Rounds"),
 			    yaxis=dict(title_text="Circles"),
 			  	height = 600,
-			  	reversescale=True,)
+			)
 
 			st.plotly_chart(figauc, use_container_width=True)
 
