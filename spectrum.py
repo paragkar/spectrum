@@ -2829,7 +2829,7 @@ if authentication_status:
 	if selected_dimension == "Auction Data":
 
 		for i in range(len(listofbidders)):
-    		fig.update_traces(yaxis="y" + str(i + 1), selector=dict(type='bar'))
+			fig.update_traces(yaxis="y" + str(i + 1), selector=dict(type='bar'))
 
 		fig.update_layout(
 	    template="simple_white",
