@@ -1520,6 +1520,7 @@ if authentication_status:
 				tempdf = dfbid[dfbid["Bidder"]==bidder]
 				tempdata =[
 					go.Bar(
+						type = bar,
 						name = bidder,
 						x = tempdf["Clk_Round"],
 						y = tempdf["Bid_Decision"],
