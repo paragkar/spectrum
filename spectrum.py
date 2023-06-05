@@ -2499,7 +2499,7 @@ if authentication_status:
 			end_date = dt.datetime(2023, 6, 30)  # Use datetime.datetime instead of just datetime
 			figtowerbts.update_xaxes(range=[dftowersbts.index[0], end_date], dtick=2)
 
-			igtowerbts.update_layout(
+			figtowerbts.update_layout(
 				    # title='Multiple Line Charts',
 				    yaxis=dict(
 				        title='Ratio - BTS/Towers',
