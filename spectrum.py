@@ -1552,7 +1552,7 @@ if authentication_status:
 			   	height = 650,)
 
 			# Update x-axis tick font for all subplots
-			figauc.update_xaxes(tickfont=dict(size=10))
+			figauc.update_xaxes(tickfont=dict(size=9))
 
 			st.plotly_chart(figauc, use_container_width=True)
 
