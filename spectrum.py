@@ -1526,7 +1526,7 @@ if authentication_status:
 						name = bidder,
 						x = dfbidpanindia["Clk_Round"],
 						y = dfbidpanindia["Bid_Decision"],
-						yaxis = "y" _str(i+1),
+						yaxis = "y"+str(i+1),
 						)
 				data.append(trace)
 
