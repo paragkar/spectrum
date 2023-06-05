@@ -1519,9 +1519,9 @@ if authentication_status:
 			data =[]
 
 			for i, bidder in enumerate(listofbidders):
-				dftemp = dfbid[dfbid["Bidder"]==bidder]
-				dftemp = dftemp.drop(columns = ["LSA", "Bidder", "Possible_Raise_Bid_ClkRd","Rank_PWB_Start_ClkRd","Rank_PWB_End_ClkRd"], axis =1)
-				dfbidpanindia = dftemp.groupby(["Clk_Round"]).sum().reset_index()
+				dftemp1 = dfbid[dfbid["Bidder"]==bidder]
+				dftemp2 = dftemp1.drop(columns = ["LSA", "Bidder", "Possible_Raise_Bid_ClkRd","Rank_PWB_Start_ClkRd","Rank_PWB_End_ClkRd"], axis =1)
+				dfbidpanindia = dftemp2.groupby(["Clk_Round"]).sum().reset_index()
 				trace = go.Scatter(
 						name = bidder,
 						x = dfbidpanindia["Clk_Round"],
