@@ -2792,6 +2792,8 @@ if authentication_status:
 
 	#updating different figure layouts for different features
 
+)
+
 	if Feature=="TowerBTS Trends": #layout for stacked line chart
 
 		fig.update_layout(
@@ -2844,6 +2846,14 @@ if authentication_status:
 				  dtick = xdtickval), 
 				)
 
+
+	if selected_dimension == "Auction Data":
+
+		fig.update_layout(
+	    template="simple_white",
+	    xaxis=dict(title_text="Week"),
+	    yaxis=dict(title_text="Count"),
+	    barmode="stack",)
 
 	#Some last minute exceptions and changes in the plot
 
