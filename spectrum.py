@@ -1512,7 +1512,7 @@ if authentication_status:
 
 			dfbid = dfbid.set_index("LSA").sort_index(ascending = False)
 
-			figauc = sp.make_subplots(rows=3, cols=3, subplot_titles=listofbidders, shared_yaxes = True)
+			figauc = sp.make_subplots(rows=3, cols=3, subplot_titles=listofbidders, shared_yaxes = True,shared_xaxes = True)
 
 			round_range = st.slider("Select Auction Round Numbers using the Silder below", value=(0,183))
 
