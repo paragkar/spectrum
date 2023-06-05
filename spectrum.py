@@ -1518,7 +1518,7 @@ if authentication_status:
 			for i, bidder in enumerate(listofbidders):
 			    dftemp1 = dfbid[dfbid["Bidder"] == bidder]
 			    dftemp2 = dftemp1.drop(columns=["Bidder", "Possible_Raise_Bid_ClkRd", "Rank_PWB_Start_ClkRd", "Rank_PWB_End_ClkRd"], axis=1)
-			    dfbidpanindia = dftemp2.groupby(["LSA","Bid_Decision"]).sum().reset_index()
+			    dfbidpanindia = dftemp2.groupby(["LSA","Clk_Round"]).sum().reset_index()
 			    st.write(dfbidpanindia)
 			    trace = go.Bar(
 			        name=bidder,
