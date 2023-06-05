@@ -1519,7 +1519,7 @@ if authentication_status:
 			data =[]
 
 			for i, bidder in enumerate(listofbidders):
-				tempdf = dfbid[dfbid["Bidder"]==bidder][0],
+				tempdf = dfbid[dfbid["Bidder"]==bidder].copy(),
 				tempdf = tempdf.groupby(["Clk_Round"]).sum(),
 				st.write(tempdf["Bid_Decision"])
 				trace = go.Scatter(
