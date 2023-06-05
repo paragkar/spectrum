@@ -1521,8 +1521,9 @@ if authentication_status:
 			for bidder in listofbidders:
 				st.write(dfbid)
 				mask = dfbid["Bidder"]=="Aircel",
-				tempdf = dfbid[mask]
-				st.write(tempdf)
+				st.write(mask)
+				# tempdf = dfbid[mask]
+				# st.write(tempdf)
 				# tempdf = tempdf.groupby(["Clk_Round"]).sum(),
 				# st.write(tempdf["Bid_Decision"])
 				# trace = go.Scatter(
