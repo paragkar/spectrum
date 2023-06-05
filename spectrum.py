@@ -1517,10 +1517,10 @@ if authentication_status:
 			for i, bidder in enumerate(listofbidders):
 				st.write(bidder)
 				tempdf = dfbid[dfbid["Bidder"]==bidder],
-				# st.write(tempdf)
+				st.write(tempdf)
 				trace = go.Scatter(
 						name = bidder,
-						x = tempdf["Clk_Round"].astype(int),
+						x = tempdf["Clk_Round"],
 						y = tempdf["Bid_Decision"],
 						yaxis = "y"+str(i),
 						),
