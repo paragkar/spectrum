@@ -1521,8 +1521,8 @@ if authentication_status:
 			    # dfbidpanindia = dftemp2.groupby(["LSA","Clk_Round"]).sum().reset_index()
 			    trace = go.Heatmap(
 			        name=bidder,
-			        y=dftemp2.index,
-			        x=dftemp2["Clk_Round"],
+			        x=dftemp2.index,
+			        y=dftemp2["Clk_Round"],
 			        z=dftemp2["Bid_Decision"],
 			        colorscale = 'Hot',
 			        reversescale=True,
