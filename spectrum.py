@@ -1518,8 +1518,7 @@ if authentication_status:
 
 			for i, bidder in enumerate(listofbidders):
 				tempdf = dfbid[dfbid["Bidder"]==bidder],
-				trace =
-					go.Scatter(
+				trace = go.Scatter(
 						name = bidder,
 						x = tempdf["Clk_Round"],
 						y = tempdf["Bid_Decision"],
