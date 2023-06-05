@@ -1519,11 +1519,11 @@ if authentication_status:
 			    dftemp1 = dfbid[dfbid["Bidder"] == bidder]
 			    dftemp2 = dftemp1.drop(columns=["Bidder", "Possible_Raise_Bid_ClkRd", "Rank_PWB_Start_ClkRd", "Rank_PWB_End_ClkRd"], axis=1)
 			    # dfbidpanindia = dftemp2.groupby(["LSA","Clk_Round"]).sum().reset_index()
-			    trace = go.Heatmap(
+			    trace = go.bar(
 			        name=bidder,
 			        x=dftemp2.index,
-			        y=dftemp2["Clk_Round"],
-			        z=dftemp2["Bid_Decision"],
+			        # y=dftemp2["Clk_Round"],
+			        y=dftemp2["Bid_Decision"].sum(),
 			        colorscale = 'Hot',
 			        reversescale=True,
 			    				)
