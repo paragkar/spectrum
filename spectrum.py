@@ -2738,7 +2738,7 @@ if authentication_status:
 
 		# fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 		xdtickangle= 0
-		xdtickval=1
+		xdtickval=10
 
 		subtitle = ""
 		title = ""
