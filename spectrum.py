@@ -1511,9 +1511,9 @@ if authentication_status:
 
 			dfbid = dfbid.set_index("LSA").sort_index()
 
-			dfbid = dfbid[dfbid["Bidder"]=="Reliance"]
+			# dfbid = dfbid[dfbid["Bidder"]=="Reliance"]
 
-			st.write(dfbid)
+			st.write(listofbidders)
 
 			data =[]
 
