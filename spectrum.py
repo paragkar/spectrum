@@ -1524,6 +1524,7 @@ if authentication_status:
 			        y=dftemp2.index,
 			        x=dftemp2["Clk_Round"],
 			        z=dftemp2["Bid_Decision"],
+			        colorscale = 'Hot',
 			        reversescale=True,
 			    				)
 
