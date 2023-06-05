@@ -1519,16 +1519,17 @@ if authentication_status:
 			data =[]
 
 			for i, bidder in enumerate(listofbidders):
-				tempdf = dfbid[dfbid["Bidder"]==bidder].copy(),
-				tempdf = tempdf.groupby(["Clk_Round"]).sum(),
-				st.write(tempdf["Bid_Decision"])
-				trace = go.Scatter(
-						name = bidder,
-						x = tempdf["Clk_Round"],
-						y = tempdf["Bid_Decision"],
-						yaxis = "y"+str(i),
-						),
-				data.append(trace)
+				tempdf = dfbid["Bidder"]==bidder,
+				st.write(tempdf)
+				# tempdf = tempdf.groupby(["Clk_Round"]).sum(),
+				# st.write(tempdf["Bid_Decision"])
+				# trace = go.Scatter(
+				# 		name = bidder,
+				# 		x = tempdf["Clk_Round"],
+				# 		y = tempdf["Bid_Decision"],
+				# 		yaxis = "y"+str(i),
+				# 		),
+				# data.append(trace)
 
 
 			# # Create the figure and add the traces
