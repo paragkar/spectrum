@@ -1515,9 +1515,9 @@ if authentication_status:
 
 				st.write(bidder)
 
-				dfbid = dfbid[dfbid["Bidder"]==bidder]
+				tempdf = dfbid[dfbid["Bidder"]==bidder]
 
-				st.write(dfbid)
+				st.write(tempdf)
 
 
 			data =[]
