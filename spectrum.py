@@ -1549,13 +1549,7 @@ if authentication_status:
 
 			figauc.update_layout(
 			    template="plotly_white",
-			    xaxis=dict(
-			        title_text="Circles",
-			    		),
-			    yaxis=dict(title_text="No of Bids"),
-			   	height = 650,
-	
-						)
+			   	height = 650,)
 
 			# Update x-axis tick font for all subplots
 			figauc.update_xaxes(tickfont=dict(size=8))
