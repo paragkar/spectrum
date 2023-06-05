@@ -2523,6 +2523,8 @@ if authentication_status:
 				    width=1000,
 				)
 
+			# st.plotly_chart(figtowerbts, use_container_width=True) #for towerdata
+
 
 #----------------End of all Dimensions of Fig Data-----------------------------
 
@@ -2830,17 +2832,6 @@ if authentication_status:
 	#---------Dimension = Auction Data Starts----------------
 
 
-	# if Feature == "2010-Band2100":
-
-	# 	hoverlabel_bgcolor = "#000000" #subdued black
-
-	# 	# fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
-	# 	xdtickangle= 0
-	# 	xdtickval=10
-
-	# 	subtitle = ""
-	# 	title = ""
-
 
 	#---------Dimension = Auction Data Ends------------------
 
@@ -2912,8 +2903,6 @@ if authentication_status:
 			tab2.table(chartdata_df)
 		else:
 			st.plotly_chart(fig, use_container_width=True) # for heatmaps
-			st.plotly_chart(figtowerbts, use_container_width=True) #for towerdata
-
 
 
 		#preparing the container layout for the dimension business data
