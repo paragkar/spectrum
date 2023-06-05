@@ -2831,7 +2831,7 @@ if authentication_status:
 		fig.update_layout(
 	    template="simple_white",
 	    xaxis=dict(title_text="Rounds"),
-	    yaxis=dict(title_text="No of Bids"),
+	    yaxis=dict(title_text="No of Bids", autoarrange = 'reversed'),
 	    barmode="stack"
 	    				)
 
