@@ -1531,8 +1531,6 @@ if authentication_status:
 				data.append(trace)
 
 
-			st.write(data)
-
 			# trace1 = go.Scatter(x=dftowersbts.index, y=dftowersbts["Ratio"], name="BTSs/Towers", yaxis="y1", 
 			# 					textfont=dict(family="sans serif",size=8,color="DarkBlue"),
 			# 					mode = 'lines+markers+text',text=list(round(dftowersbts["Ratio"],1)),
