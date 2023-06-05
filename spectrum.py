@@ -1517,7 +1517,10 @@ if authentication_status:
 			round_range = st.slider("Select Auction Rounds", value=(0,183))
 
 			start_round = round_range[0]
+
 			end_round = round_range[1]
+
+			st.write(start_round, end_round)
 
 			filt  =(dfbid["Clk_Round"] > start_round) and (dfbid["Clk_Round"] <= end_round)
 
