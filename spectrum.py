@@ -1520,7 +1520,7 @@ if authentication_status:
 				tempdf = dfbid[dfbid["Bidder"]==bidder],
 				trace = go.Scatter(
 						name = bidder,
-						x = tempdf["Clk_Round"].astype(int),
+						x = tempdf["Clk_Round"],
 						y = tempdf["Bid_Decision"],
 						yaxis = "y"+str(i),
 						),
