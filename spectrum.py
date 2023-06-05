@@ -2522,6 +2522,8 @@ if authentication_status:
 
 				    height=900,
 				    width=1000,
+				    xdtickangle =0,
+					xdtickval = 100,
 				)
 
 			st.plotly_chart(figtowerbts, use_container_width=True)
@@ -2955,7 +2957,8 @@ if authentication_status:
 			tab1.plotly_chart(fig, use_container_width=True)
 			tab2.table(chartdata_df)
 		else:
-			st.plotly_chart(fig, use_container_width=True)
+			st.plotly_chart(fig, use_container_width=True) # for heatmaps
+
 
 
 		#preparing the container layout for the dimension business data
