@@ -1542,7 +1542,7 @@ if authentication_status:
 
 
 			    # Set the bidder name as bold using HTML tags
-			    trace.text = dfbidpanindia["Bid_Decision"]
+			    # trace.text = dfbidpanindia["Bid_Decision"]
 
 			    figauc.add_trace(trace, row=row, col=col)
 
@@ -1557,6 +1557,8 @@ if authentication_status:
 
 			# Update x-axis tick font for all subplots
 			figauc.update_xaxes(tickfont=dict(size=9))
+
+			figauc.update_traces(textfont_size=12, textangle=0, textposition="outside", cliponaxis=False)
 
 			st.plotly_chart(figauc, use_container_width=True)
 
