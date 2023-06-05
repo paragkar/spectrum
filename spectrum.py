@@ -1521,7 +1521,7 @@ if authentication_status:
 				tempdata =[
 					go.Bar(
 						name = bidder,
-						x = tempdf["Bidder"],
+						x = tempdf["Clk_Round"],
 						y = tempdf["Bid_Decision"],
 						offsetgroup = i,
 						)
