@@ -2846,14 +2846,14 @@ if authentication_status:
 				)
 
 
-	if selected_dimension == "Auction Data":
+	# if selected_dimension == "Auction Data":
 
-		fig.update_layout(
-	    template="simple_white",
-	    xaxis=dict(title_text="Rounds"),
-	    yaxis=dict(title_text="No of Bids"),
-	    barmode="stack"
-	    				)
+	# 	fig.update_layout(
+	#     template="simple_white",
+	#     xaxis=dict(title_text="Rounds"),
+	#     yaxis=dict(title_text="No of Bids"),
+	#     barmode="stack"
+	#     				)
 
 	#Some last minute exceptions and changes in the plot
 
