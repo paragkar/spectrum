@@ -1548,11 +1548,16 @@ if authentication_status:
 
 
 			figauc.update_layout(
-			    template="seaborn",
-			    # xaxis=dict(title_text="Rounds"),
-			    # yaxis=dict(title_text="Circles"),
-			  	height = 650,
-			)
+			    template="plotly_white",
+			    xaxis=dict(
+			        title_text="Circles",
+			        tickfont=dict(size=8)  # Set the size of x-axis tick labels to 12
+			    		),
+			    yaxis=dict(title_text="No of Bids"),
+			   	height = 650,
+	
+						)
+
 
 			st.plotly_chart(figauc, use_container_width=True)
 
