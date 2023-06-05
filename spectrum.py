@@ -1526,7 +1526,7 @@ if authentication_status:
 						name = bidder,
 						x = dfbidpanindia["Clk_Round"],
 						y = dfbidpanindia["Bid_Decision"],
-						yaxis = "y",
+						yaxis = "y" _str(i+1),
 						)
 				data.append(trace)
 
@@ -2827,6 +2827,9 @@ if authentication_status:
 
 
 	if selected_dimension == "Auction Data":
+
+		for i in range(len(listofbidders)):
+    		fig.update_traces(yaxis="y" + str(i + 1), selector=dict(type='bar'))
 
 		fig.update_layout(
 	    template="simple_white",
