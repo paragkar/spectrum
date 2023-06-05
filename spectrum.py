@@ -1512,7 +1512,7 @@ if authentication_status:
 
 			listofbidders = sorted(list(set(dfbid["Bidder"])))
 
-			st.write(dfbid)
+			# st.write(dfbid)
 
 			data =[]
 
@@ -1527,6 +1527,8 @@ if authentication_status:
 						)
 						],
 				data.append(tempdata)
+
+			st.write(data)
 
 			# listofbidders = sorted(list(set(dfbid["Bidder"])))
 
