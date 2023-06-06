@@ -1819,8 +1819,8 @@ if authentication_status:
 
 					    trace = go.Heatmap(
 								z=dftemp["RankCount"],
-						        x= dftemp["RankNo"],
-						        y=dftemp["LSA"],
+						        y= dftemp["RankNo"],
+						        x=dftemp["LSA"],
 								xgap = 1,
 								ygap = 1,
 								hoverinfo ='text',
