@@ -1852,7 +1852,7 @@ if authentication_status:
 					# Update x-axis tick font for all subplots
 					figauc.update_xaxes(tickfont=dict(size=8))
 
-					figauc.update_traces(textfont_size=10, textangle=0, textposition="outside", cliponaxis=False)
+					# figauc.update_traces(textfont_size=10, textangle=0, textposition="outside", cliponaxis=False)
 
 
 					title = "3G Auctions (Year-2010) - Total Number of Bids in Circles"
