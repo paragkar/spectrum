@@ -1824,9 +1824,10 @@ if authentication_status:
 								hoverinfo ='text',
 								# text = hovertext,
 								colorscale='Hot',
+								showscale=False,
 									texttemplate="%{z}", 
 									textfont={"size":8},
-									# reversescale=True,
+									reversescale=True,
 									)
 
 					    row=(i // 3) + 1
