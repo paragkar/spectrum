@@ -1790,21 +1790,21 @@ if authentication_status:
 
 					lsas = sorted(list(set(dfbid["LSA"])), reverse=True)
 
+					lst =[]
+
 					for bidder in bidders:
 
 						for lsa in lsas:
 
 							temp = dfbid[(dfbid["Bidder"]==bidder) & (dfbid["LSA"]==lsa)]
 
-							temp["Rank1_Counts"] = temp[temp["Rank_PWB_End_ClkRd"]==1].count()
+							st.write[bidder, temp[temp["Rank_PWB_End_ClkRd"]==1].count()]
 
-							temp["Rank2_Counts"] = temp[temp["Rank_PWB_End_ClkRd"]==2].count()
+							st.write[bidder, temp[temp["Rank_PWB_End_ClkRd"]==2].count()]
 
-							temp["Rank3_Counts"] = temp[temp["Rank_PWB_End_ClkRd"]==3].count()
+							st.write[bidder, temp[temp["Rank_PWB_End_ClkRd"]==3].count()]
 
-							temp["Rank4_Counts"] = temp[temp["Rank_PWB_End_ClkRd"]==4].count()
-
-					st.write(temp)
+							st.write[bidder, temp[temp["Rank_PWB_End_ClkRd"]==4].count()]
 
 
 					# dftemp = dfbid.drop(columns=["Possible_Raise_Bid_ClkRd", "Rank_PWB_Start_ClkRd", "Rank_PWB_End_ClkRd"], axis=1)
