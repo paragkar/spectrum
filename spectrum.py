@@ -1512,7 +1512,7 @@ if authentication_status:
 
 			dfbid = dfbid.set_index("LSA").sort_index(ascending = False)
 
-			SubFeature = st.sidebar.selectbox("Select an SubFeature", ["BidsCircleWise","RanksCircleWise"])
+			SubFeature = st.sidebar.selectbox("Select an SubFeature", ["BidsCircleWise","RanksCircleWise", "PWB_End_ClkRd"])
 
 			if SubFeature == "BidsCircleWise":
 
@@ -1639,10 +1639,75 @@ if authentication_status:
 					st.markdown(subtitle)
 
 
+
+
 				st.plotly_chart(figauc, use_container_width=True)
 
 
-			
+			if SubFeature == "PWB_End_ClkRd":
+
+				figauc = sp.make_subplots(rows=3, cols=3, subplot_titles=listofbidders, shared_yaxes = True)
+
+
+				round_number = st.slider("Select Auction Round Numbers using the Silder below", min_value=0, max_value=183, step=1, value = 183)
+
+				filt  =(dfbid["Clk_Round"] == round_number) 
+
+				dfbid = dfbid[filt]
+
+				st.write(dfbid) #debug
+
+				for i, bidder in enumerate(listofbidders):
+				    dftemp1 = dfbid[dfbid["Bidder"] == bidder]
+				    dftemp2 = dftemp1.drop(columns=["Bidder", "Possible_Raise_Bid_ClkRd", "Rank_PWB_Start_ClkRd","Bid_Decision", "Rank_PWB_End_ClkRd"], axis=1)
+				    dfbidpanindia = dftemp2.groupby(["LSA"]).sum().reset_index()
+				    trace = go.Bar(
+				        name=bidder,
+				        x=dfbidpanindia["LSA"],
+				        # y=dftemp2["Clk_Round"],
+				        y=dfbidpanindia["PWB_End_ClkRd"],
+				        yaxis ="y",
+				        showlegend=False,
+				    				)
+
+				    row=(i // 3) + 1
+				    col=(i % 3) + 1
+
+
+				    # Set the bidder name as bold using HTML tags
+				    trace.text = dfbidpanindia["PWB_End_ClkRd"]
+
+				    figauc.add_trace(trace, row=row, col=col)
+
+				    # Remove y-axis labels for integrated subplots
+				    if col != 1:
+				        figauc.update_yaxes(showticklabels=False, row=row, col=col)
+
+
+				figauc.update_layout(
+				    template="plotly_white",
+				   	height = 650,)
+
+				# Update x-axis tick font for all subplots
+				figauc.update_xaxes(tickfont=dict(size=8))
+
+				figauc.update_traces(textfont_size=10, textangle=0, textposition="outside", cliponaxis=False)
+
+
+				title = "3G Auctions (Year-2010) - PWB Value End of Clock Round No "+str(round_number)
+				subtitle = "Unit - Rs Cr; Source - DoT"
+
+				style = "<style>h3 {text-align: left;}</style>"
+				with st.container():
+					#plotting the main chart
+					st.markdown(style, unsafe_allow_html=True)
+					st.header(title)
+					st.markdown(subtitle)
+
+
+
+
+				st.plotly_chart(figauc, use_container_width=True)
 
 
 
