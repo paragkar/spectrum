@@ -1617,7 +1617,7 @@ if authentication_status:
 					figauc = go.Figure(data=data)
 
 					figauc.update_layout(
-					    template="plotly_white",
+					    template="seaborn",
 					   	height = 650,)
 
 					title = "3G Auctions (Year-2010) - Total Number of Bids in Circles"
