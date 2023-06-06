@@ -1616,10 +1616,17 @@ if authentication_status:
 						]
 					figauc = go.Figure(data=data)
 
+					bidders = sorted(list(set(dftemp["Bidder"])))
+
 					figauc.update_layout(
 					    template="seaborn",
 					    xaxis_side= 'top',
-					   	height = 650,)
+					   	height = 650,
+					   	yaxis=dict(
+				        tickmode='array',
+				        ticktext=bidders,
+				        tickvals=list(range(len(bidders)
+				        	))))
 
 					title = "3G Auctions (Year-2010) - Total Number of Bids in Circles"
 					subtitle = "Unit - Numbers; Source - DoT"
