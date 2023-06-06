@@ -1582,13 +1582,11 @@ if authentication_status:
 
 				figauc = sp.make_subplots(rows=3, cols=3, subplot_titles=listofbidders, shared_yaxes = True)
 
-				round_range = st.slider("Select Auction Round Numbers using the Silder below", value=(0,183))
+				round_number = st.slider("Select Auction Round Numbers using the Silder below", min_value=0, max_value=183, step=1)
 
-				start_round = round_range[0]
 
-				end_round = round_range[1]
 
-				filt  =(dfbid["Clk_Round"] > start_round) & (dfbid["Clk_Round"] <= end_round)
+				filt  =(dfbid["Clk_Round"] == round_number) 
 
 				dfbid = dfbid[filt]
 
