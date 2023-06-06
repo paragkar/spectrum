@@ -1587,69 +1587,71 @@ if authentication_status:
 				slider_ph = st.empty()
 				info_ph = st.empty()
 
-				round_number = slider_ph.slider("Select Auction Round Numbers using the Silder below", min_value=0, max_value=183, step=1, value = initial_value, key ="initial")
+				round_number = slider_ph.slider("Select Auction Round Numbers using the Silder below", min_value=0, max_value=183, step=1,
+												value = initial_value, key ="initial")
 				info_ph.info(round_number)
 
 				if st.button('animate'):
 					for x in range(183 - round_number):
 						time.sleep(0.5)
 
-						round_number = slider_ph.slider("Select Auction Round Numbers using the Silder below", min_value=0, max_value=183, step=1, value = initial_value+1, key ="animated")
+						round_number = slider_ph.slider("Select Auction Round Numbers using the Silder below", min_value=0, max_value=183, step=1, 
+														value = initial_value+1, key ="animated")
 						info_ph.info(round_number)
 
-				filt  =(dfbid["Clk_Round"] == round_number) 
+						filt  =(dfbid["Clk_Round"] == round_number) 
 
-				dfbid = dfbid[filt]
+						dfbid = dfbid[filt]
 
-				for i, bidder in enumerate(listofbidders):
-				    dftemp1 = dfbid[dfbid["Bidder"] == bidder]
-				    dftemp2 = dftemp1.drop(columns=["Bidder", "Possible_Raise_Bid_ClkRd", "Rank_PWB_Start_ClkRd","Bid_Decision"], axis=1)
-				    dfbidpanindia = dftemp2.groupby(["LSA"]).sum().reset_index()
-				    trace = go.Bar(
-				        name=bidder,
-				        x=dfbidpanindia["LSA"],
-				        # y=dftemp2["Clk_Round"],
-				        y=dfbidpanindia["Rank_PWB_End_ClkRd"],
-				        yaxis ="y",
-				        showlegend=False,
-				    				)
+						for i, bidder in enumerate(listofbidders):
+						    dftemp1 = dfbid[dfbid["Bidder"] == bidder]
+						    dftemp2 = dftemp1.drop(columns=["Bidder", "Possible_Raise_Bid_ClkRd", "Rank_PWB_Start_ClkRd","Bid_Decision"], axis=1)
+						    dfbidpanindia = dftemp2.groupby(["LSA"]).sum().reset_index()
+						    trace = go.Bar(
+						        name=bidder,
+						        x=dfbidpanindia["LSA"],
+						        # y=dftemp2["Clk_Round"],
+						        y=dfbidpanindia["Rank_PWB_End_ClkRd"],
+						        yaxis ="y",
+						        showlegend=False,
+						    				)
 
-				    row=(i // 3) + 1
-				    col=(i % 3) + 1
-
-
-				    # Set the bidder name as bold using HTML tags
-				    trace.text = dfbidpanindia["Rank_PWB_End_ClkRd"]
-
-				    figauc.add_trace(trace, row=row, col=col)
-
-				    # Remove y-axis labels for integrated subplots
-				    if col != 1:
-				        figauc.update_yaxes(showticklabels=False, row=row, col=col)
+						    row=(i // 3) + 1
+						    col=(i % 3) + 1
 
 
-				figauc.update_layout(
-				    template="plotly_white",
-				   	height = 650,)
+						    # Set the bidder name as bold using HTML tags
+						    trace.text = dfbidpanindia["Rank_PWB_End_ClkRd"]
 
-				# Update x-axis tick font for all subplots
-				figauc.update_xaxes(tickfont=dict(size=8))
+						    figauc.add_trace(trace, row=row, col=col)
 
-				figauc.update_traces(textfont_size=10, textangle=0, textposition="outside", cliponaxis=False)
-
-
-				title = "3G Auctions (Year-2010) - Bidders at the End of the Clock Round No "+str(round_number)
-				subtitle = "Unit - RankNo; Source - DoT"
-
-				style = "<style>h3 {text-align: left;}</style>"
-				with st.container():
-					#plotting the main chart
-					st.markdown(style, unsafe_allow_html=True)
-					st.header(title)
-					st.markdown(subtitle)
+						    # Remove y-axis labels for integrated subplots
+						    if col != 1:
+						        figauc.update_yaxes(showticklabels=False, row=row, col=col)
 
 
-				st.plotly_chart(figauc, use_container_width=True)
+						figauc.update_layout(
+						    template="plotly_white",
+						   	height = 650,)
+
+						# Update x-axis tick font for all subplots
+						figauc.update_xaxes(tickfont=dict(size=8))
+
+						figauc.update_traces(textfont_size=10, textangle=0, textposition="outside", cliponaxis=False)
+
+
+						title = "3G Auctions (Year-2010) - Bidders at the End of the Clock Round No "+str(round_number)
+						subtitle = "Unit - RankNo; Source - DoT"
+
+						style = "<style>h3 {text-align: left;}</style>"
+						with st.container():
+							#plotting the main chart
+							st.markdown(style, unsafe_allow_html=True)
+							st.header(title)
+							st.markdown(subtitle)
+
+
+						st.plotly_chart(figauc, use_container_width=True)
 
 
 
