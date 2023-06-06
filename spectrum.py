@@ -1585,6 +1585,7 @@ if authentication_status:
 
 				if plottype == "Heatmap":
 
+
 					round_range = st.slider("Select Auction Round Numbers using the Silder below", value=(0,183))
 
 					start_round = round_range[0]
@@ -1595,10 +1596,9 @@ if authentication_status:
 
 					dfbid = dfbid[filt]
 
-				    dftemp = dfbid.drop(columns=["Possible_Raise_Bid_ClkRd", "Rank_PWB_Start_ClkRd", "Rank_PWB_End_ClkRd"], axis=1)
+					dftemp = dfbid.drop(columns=["Possible_Raise_Bid_ClkRd", "Rank_PWB_Start_ClkRd", "Rank_PWB_End_ClkRd"], axis=1)
 
 				    dftemp = dftemp.groupby(["LSA", "Bidder"]).sum().reset_index()
-
 
 					data = [go.Heatmap(
 						z=dftemp["Bid_Decision"],
