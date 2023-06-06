@@ -1850,7 +1850,7 @@ if authentication_status:
 
 					figauc.update_layout(
 						    template="plotly_white",
-						   	height = 650,)
+						   	height = 800,)
 
 					# Update x-axis tick font for all subplots
 					figauc.update_xaxes(tickfont=dict(size=8))
