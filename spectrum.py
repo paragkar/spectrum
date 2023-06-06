@@ -1598,7 +1598,7 @@ if authentication_status:
 
 					dftemp = dfbid.drop(columns=["Possible_Raise_Bid_ClkRd", "Rank_PWB_Start_ClkRd", "Rank_PWB_End_ClkRd"], axis=1)
 
-				    dftemp = dftemp.groupby(["LSA", "Bidder"]).sum().reset_index()
+					dftemp = dftemp.groupby(["LSA", "Bidder"]).sum().reset_index()
 
 					data = [go.Heatmap(
 						z=dftemp["Bid_Decision"],
