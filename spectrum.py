@@ -1786,9 +1786,9 @@ if authentication_status:
 
 					dfbid = dfbid[filt]
 
-					bidders = sorted(list(set(dftemp["Bidder"])), reverse=True)
+					bidders = sorted(list(set(dfbid["Bidder"])), reverse=True)
 
-					lsas = sorted(list(set(dftemp["LSA"])), reverse=True)
+					lsas = sorted(list(set(dfbid["LSA"])), reverse=True)
 
 					for bidder in bidders:
 
