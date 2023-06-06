@@ -1817,20 +1817,19 @@ if authentication_status:
 					for i, bidder in enumerate(listofbidders):
 					    dftemp = dfrank[dfrank["Bidder"] == bidder]
 
-					    trace = [go.Heatmap(
-						z=dftemp["RankCount"],
-				        y= dftemp["RankNo"],
-				        x=dftemp["LSA"],
-						xgap = 1,
-						ygap = 1,
-						hoverinfo ='text',
-						# text = hovertext,
-						colorscale='Hot',
-							texttemplate="%{z}", 
-							textfont={"size":10},
-							# reversescale=True,
-							),
-								]
+					    trace = go.Heatmap(
+								z=dftemp["RankCount"],
+						        y= dftemp["RankNo"],
+						        x=dftemp["LSA"],
+								xgap = 1,
+								ygap = 1,
+								hoverinfo ='text',
+								# text = hovertext,
+								colorscale='Hot',
+									texttemplate="%{z}", 
+									textfont={"size":10},
+									# reversescale=True,
+									),
 
 					    row=(i // 3) + 1
 					    col=(i % 3) + 1
