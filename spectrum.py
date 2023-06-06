@@ -1774,80 +1774,88 @@ if authentication_status:
 					st.plotly_chart(figauc, use_container_width=True)
 
 
-				# if plottype == "HeatmapSubP":
+				if plottype == "HeatmapSubP":
 
-				# 	round_range = st.slider("Select Auction Round Numbers using the Silder below", value=(0,183))
+					round_range = st.slider("Select Auction Round Numbers using the Silder below", value=(0,183))
 
-				# 	start_round = round_range[0]
+					start_round = round_range[0]
 
-				# 	end_round = round_range[1]
+					end_round = round_range[1]
 
-				# 	filt  =(dfbid["Clk_Round"] > start_round) & (dfbid["Clk_Round"] <= end_round)
+					filt  =(dfbid["Clk_Round"] > start_round) & (dfbid["Clk_Round"] <= end_round)
 
-				# 	dfbid = dfbid[filt]
+					dfbid = dfbid[filt]
 
-				# 	bidders = sorted(list(set(dftemp["Bidder"])), reverse=True)
+					bidders = sorted(list(set(dftemp["Bidder"])), reverse=True)
 
-				# 	lsas = sorted(list(set(dftemp["LSA"])), reverse=True)
+					lsas = sorted(list(set(dftemp["LSA"])), reverse=True)
 
-				# 	for bidder in bidders:
+					for bidder in bidders:
 
-				# 		for lsa in lsas:
+						for lsa in lsas:
 
-				# 			temp = dfbid[(dfbid["Bidder"]==bidder) & (dfbid["LSA"]==lsa)]
+							temp = dfbid[(dfbid["Bidder"]==bidder) & (dfbid["LSA"]==lsa)]
 
-				# 			temp["Rank1_Counts"] = temp[temp["Rank_PWB_End_ClkRd"]==1].sum()
+							temp["Rank1_Counts"] = temp[temp["Rank_PWB_End_ClkRd"]==1].sum()
 
+							temp["Rank2_Counts"] = temp[temp["Rank_PWB_End_ClkRd"]==2].sum()
 
-				# 	dftemp = dfbid.drop(columns=["Possible_Raise_Bid_ClkRd", "Rank_PWB_Start_ClkRd", "Rank_PWB_End_ClkRd"], axis=1)
+							temp["Rank3_Counts"] = temp[temp["Rank_PWB_End_ClkRd"]==3].sum()
 
-				# 	dftemp = dftemp.groupby(["LSA", "Bidder"]).sum().reset_index()
+							temp["Rank4_Counts"] = temp[temp["Rank_PWB_End_ClkRd"]==4].sum()
 
-				# 	data = [go.Heatmap(
-				# 		z=dftemp["Bid_Decision"],
-				#         y= dftemp["Bidder"],
-				#         x=dftemp["LSA"],
-				# 		xgap = 1,
-				# 		ygap = 1,
-				# 		hoverinfo ='text',
-				# 		# text = hovertext,
-				# 		colorscale='Hot',
-				# 			texttemplate="%{z}", 
-				# 			textfont={"size":10},
-				# 			reversescale=True,
-				# 			),
-				# 		]
-				# 	figauc = go.Figure(data=data)
-
-				# 	bidders = sorted(list(set(dftemp["Bidder"])), reverse=True)
-
-				# 	figauc.update_layout(
-				# 	    template="seaborn",
-				# 	    xaxis_side= 'top',
-				# 	   	height = 650,
-				# 	   	yaxis=dict(
-				#         tickmode='array',
-				#         ticktext=bidders,
-				#         tickvals=list(range(len(bidders)
-				#         	))))
-
-				# 	title = "3G Auctions (Year-2010) - Total Number of Bids in Circles"
-				# 	subtitle = "Unit - Numbers; Source - DoT"
-
-				# 	style = "<style>h3 {text-align: left;}</style>"
-				# 	with st.container():
-				# 		#plotting the main chart
-				# 		st.markdown(style, unsafe_allow_html=True)
-				# 		st.header(title)
-				# 		st.markdown(subtitle)
+					st.write(temp)
 
 
-				# 	#Drawning a black border around the heatmap chart 
-				# 	figauc.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
-				# 	figauc.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
+					# dftemp = dfbid.drop(columns=["Possible_Raise_Bid_ClkRd", "Rank_PWB_Start_ClkRd", "Rank_PWB_End_ClkRd"], axis=1)
+
+					# dftemp = dftemp.groupby(["LSA", "Bidder"]).sum().reset_index()
+
+					# data = [go.Heatmap(
+					# 	z=dftemp["Bid_Decision"],
+				    #     y= dftemp["Bidder"],
+				    #     x=dftemp["LSA"],
+					# 	xgap = 1,
+					# 	ygap = 1,
+					# 	hoverinfo ='text',
+					# 	# text = hovertext,
+					# 	colorscale='Hot',
+					# 		texttemplate="%{z}", 
+					# 		textfont={"size":10},
+					# 		reversescale=True,
+					# 		),
+					# 	]
+					# figauc = go.Figure(data=data)
+
+					# bidders = sorted(list(set(dftemp["Bidder"])), reverse=True)
+
+					# figauc.update_layout(
+					#     template="seaborn",
+					#     xaxis_side= 'top',
+					#    	height = 650,
+					#    	yaxis=dict(
+				    #     tickmode='array',
+				    #     ticktext=bidders,
+				    #     tickvals=list(range(len(bidders)
+				    #     	))))
+
+					# title = "3G Auctions (Year-2010) - Total Number of Bids in Circles"
+					# subtitle = "Unit - Numbers; Source - DoT"
+
+					# style = "<style>h3 {text-align: left;}</style>"
+					# with st.container():
+					# 	#plotting the main chart
+					# 	st.markdown(style, unsafe_allow_html=True)
+					# 	st.header(title)
+					# 	st.markdown(subtitle)
 
 
-				# 	st.plotly_chart(figauc, use_container_width=True)
+					# #Drawning a black border around the heatmap chart 
+					# figauc.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
+					# figauc.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
+
+
+					# st.plotly_chart(figauc, use_container_width=True)
 
 
 
