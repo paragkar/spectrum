@@ -1673,7 +1673,7 @@ if authentication_status:
 
 
 				    # Set the bidder name as bold using HTML tags
-				    trace.text = dfbidpanindia["PWB_End_ClkRd"]
+				    trace.text = round(dfbidpanindia["PWB_End_ClkRd"],0)
 
 				    figauc.add_trace(trace, row=row, col=col)
 
