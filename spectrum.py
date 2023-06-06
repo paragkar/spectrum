@@ -1516,9 +1516,9 @@ if authentication_status:
 
 			if SubFeature == "BidsCircleWise":
 
-				plottype = st.sidebar.selectbox("Select a Plot Type", ["Subplots","Heatmap"])
+				plottype = st.sidebar.selectbox("Select a Plot Type", ["SubplotsBar","Heatmap"])
 
-				if plottype == "Subplots":
+				if plottype == "SubplotsBar":
 
 					figauc = sp.make_subplots(rows=3, cols=3, subplot_titles=listofbidders, shared_yaxes = True)
 
@@ -1648,9 +1648,9 @@ if authentication_status:
 
 			if SubFeature == "RanksCircleWise":
 
-				plottype = st.sidebar.selectbox("Select a Plot Type", ["Subplots","Heatmap"])
+				plottype = st.sidebar.selectbox("Select a Plot Type", ["SubplotsBar","Heatmap"])
 
-				if plottype == "Subplots":
+				if plottype == "SubplotsBar":
 
 					figauc = sp.make_subplots(rows=3, cols=3, subplot_titles=listofbidders, shared_yaxes = True)
 
