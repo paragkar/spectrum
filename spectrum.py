@@ -1784,9 +1784,7 @@ if authentication_status:
 
 					filt  =(dfbid["Clk_Round"] > start_round) & (dfbid["Clk_Round"] <= end_round)
 
-					dfbid = dfbid[filt]
-
-					st.write(dfbid)
+					dfbid = dfbid[filt].reset_index()
 
 					bidders = sorted(list(set(dfbid["Bidder"])), reverse=True)
 
@@ -1806,7 +1804,7 @@ if authentication_status:
 
 							temp["Rank4_Counts"] = temp[temp["Rank_PWB_End_ClkRd"]==4].sum()
 
-
+					st.write(temp)
 
 
 					# dftemp = dfbid.drop(columns=["Possible_Raise_Bid_ClkRd", "Rank_PWB_Start_ClkRd", "Rank_PWB_End_ClkRd"], axis=1)
