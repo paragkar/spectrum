@@ -1618,7 +1618,7 @@ if authentication_status:
 
 					figauc.update_layout(
 					    template="seaborn",
-					    xaxis_side= 'top'
+					    xaxis_side= 'top',
 					   	height = 650,)
 
 					title = "3G Auctions (Year-2010) - Total Number of Bids in Circles"
