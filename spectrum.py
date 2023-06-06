@@ -1611,7 +1611,7 @@ if authentication_status:
 						colorscale='blues',
 							texttemplate="%{z}", 
 							textfont={"size":10},
-							reversescale=True,
+							# reversescale=True,
 							),
 						]
 					figauc = go.Figure(data=data)
