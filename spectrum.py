@@ -1798,13 +1798,13 @@ if authentication_status:
 
 							temp = dfbid[(dfbid["Bidder"]==bidder) & (dfbid["LSA"]==lsa)]
 
-							st.write([bidder, temp[temp["Rank_PWB_End_ClkRd"]==1].count()])
+							st.write([bidder, temp[temp["Rank_PWB_End_ClkRd"]==1]["Rank_PWB_End_ClkRd"].count()])
 
-							st.write([bidder, temp[temp["Rank_PWB_End_ClkRd"]==2].count()])
+							st.write([bidder, temp[temp["Rank_PWB_End_ClkRd"]==2]["Rank_PWB_End_ClkRd"].count()])
 
-							st.write([bidder, temp[temp["Rank_PWB_End_ClkRd"]==3].count()])
+							st.write([bidder, temp[temp["Rank_PWB_End_ClkRd"]==3]["Rank_PWB_End_ClkRd"].count()])
 
-							st.write([bidder, temp[temp["Rank_PWB_End_ClkRd"]==4].count()])
+							st.write([bidder, temp[temp["Rank_PWB_End_ClkRd"]==4]["Rank_PWB_End_ClkRd"].count()])
 
 
 					# dftemp = dfbid.drop(columns=["Possible_Raise_Bid_ClkRd", "Rank_PWB_Start_ClkRd", "Rank_PWB_End_ClkRd"], axis=1)
