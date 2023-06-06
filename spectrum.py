@@ -1693,7 +1693,7 @@ if authentication_status:
 
 
 				title = "3G Auctions (Year-2010) - PWB Value End of Clock Round No "+str(round_number)
-				subtitle = "Unit - Rs Cr; Provisional Winning Bid - Means the Bidder wants to pay this amount; Source - DoT"
+				subtitle = "Unit - Rs Cr; Provisional Winning Bid (bidder willing to pay this amount in that clk round); Source - DoT"
 
 				style = "<style>h3 {text-align: left;}</style>"
 				with st.container():
