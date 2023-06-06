@@ -1818,7 +1818,7 @@ if authentication_status:
 					    dftemp = dfrank[dfrank["Bidder"] == bidder]
 					    data = [go.Heatmap(
 						z=dftemp["RankCount"],
-				        y= dftemp["Rank"],
+				        y= dftemp["RankNo"],
 				        x=dftemp["LSA"],
 						xgap = 1,
 						ygap = 1,
@@ -1836,7 +1836,7 @@ if authentication_status:
 
 
 					    # Set the bidder name as bold using HTML tags
-					    trace.text = dftemp["BIdder"]
+					    trace.text = dftemp["Bidder"]
 
 					    figauc.add_trace(trace, row=row, col=col)
 
