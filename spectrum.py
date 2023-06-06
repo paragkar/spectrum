@@ -1616,7 +1616,7 @@ if authentication_status:
 						]
 					figauc = go.Figure(data=data)
 
-					bidders = sorted(list(set(dftemp["Bidder"])))
+					bidders = sorted(list(set(dftemp["Bidder"])), reverse=True)
 
 					figauc.update_layout(
 					    template="seaborn",
