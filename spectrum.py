@@ -1648,64 +1648,130 @@ if authentication_status:
 
 			if SubFeature == "RanksCircleWise":
 
-				figauc = sp.make_subplots(rows=3, cols=3, subplot_titles=listofbidders, shared_yaxes = True)
+				plottype = st.sidebar.selectbox("Select a Plot Type", ["Subplots","Heatmap"])
+
+				if plottype == "Subplots":
+
+					figauc = sp.make_subplots(rows=3, cols=3, subplot_titles=listofbidders, shared_yaxes = True)
 
 
-				round_number = st.slider("Select Auction Round Numbers using the Silder below", min_value=0, max_value=183, step=1, value = 183)
+					round_number = st.slider("Select Auction Round Numbers using the Silder below", min_value=0, max_value=183, step=1, value = 183)
 
-				filt  =(dfbid["Clk_Round"] == round_number) 
+					filt  =(dfbid["Clk_Round"] == round_number) 
 
-				dfbid = dfbid[filt]
-
-
-				for i, bidder in enumerate(listofbidders):
-				    dftemp1 = dfbid[dfbid["Bidder"] == bidder]
-				    dftemp2 = dftemp1.drop(columns=["Bidder", "Possible_Raise_Bid_ClkRd", "Rank_PWB_Start_ClkRd","Bid_Decision"], axis=1)
-				    dfbidpanindia = dftemp2.groupby(["LSA"]).sum().reset_index()
-				    trace = go.Bar(
-				        name=bidder,
-				        x=dfbidpanindia["LSA"],
-				        # y=dftemp2["Clk_Round"],
-				        y=dfbidpanindia["Rank_PWB_End_ClkRd"],
-				        yaxis ="y",
-				        showlegend=False,
-				    				)
-
-				    row=(i // 3) + 1
-				    col=(i % 3) + 1
+					dfbid = dfbid[filt]
 
 
-				    # Set the bidder name as bold using HTML tags
-				    trace.text = dfbidpanindia["Rank_PWB_End_ClkRd"]
+					for i, bidder in enumerate(listofbidders):
+					    dftemp1 = dfbid[dfbid["Bidder"] == bidder]
+					    dftemp2 = dftemp1.drop(columns=["Bidder", "Possible_Raise_Bid_ClkRd", "Rank_PWB_Start_ClkRd","Bid_Decision"], axis=1)
+					    dfbidpanindia = dftemp2.groupby(["LSA"]).sum().reset_index()
+					    trace = go.Bar(
+					        name=bidder,
+					        x=dfbidpanindia["LSA"],
+					        # y=dftemp2["Clk_Round"],
+					        y=dfbidpanindia["Rank_PWB_End_ClkRd"],
+					        yaxis ="y",
+					        showlegend=False,
+					    				)
 
-				    figauc.add_trace(trace, row=row, col=col)
-
-				    # Remove y-axis labels for integrated subplots
-				    if col != 1:
-				        figauc.update_yaxes(showticklabels=False, row=row, col=col)
-
-
-				figauc.update_layout(
-				    template="plotly_white",
-				   	height = 650,)
-
-				# Update x-axis tick font for all subplots
-				figauc.update_xaxes(tickfont=dict(size=8))
-
-				figauc.update_traces(textfont_size=10, textangle=0, textposition="outside", cliponaxis=False)
+					    row=(i // 3) + 1
+					    col=(i % 3) + 1
 
 
-				title = "3G Auctions (Year-2010) - Winners's Rank at the End of Clock Round No "+str(round_number)
-				subtitle = "Unit - RankNo; Source - DoT"
+					    # Set the bidder name as bold using HTML tags
+					    trace.text = dfbidpanindia["Rank_PWB_End_ClkRd"]
 
-				style = "<style>h3 {text-align: left;}</style>"
-				with st.container():
-					#plotting the main chart
-					st.markdown(style, unsafe_allow_html=True)
-					st.header(title)
-					st.markdown(subtitle)
+					    figauc.add_trace(trace, row=row, col=col)
 
-				st.plotly_chart(figauc, use_container_width=True)
+					    # Remove y-axis labels for integrated subplots
+					    if col != 1:
+					        figauc.update_yaxes(showticklabels=False, row=row, col=col)
+
+
+					figauc.update_layout(
+					    template="plotly_white",
+					   	height = 650,)
+
+					# Update x-axis tick font for all subplots
+					figauc.update_xaxes(tickfont=dict(size=8))
+
+					figauc.update_traces(textfont_size=10, textangle=0, textposition="outside", cliponaxis=False)
+
+
+					title = "3G Auctions (Year-2010) - Winners's Rank at the End of Clock Round No "+str(round_number)
+					subtitle = "Unit - RankNo; Source - DoT"
+
+					style = "<style>h3 {text-align: left;}</style>"
+					with st.container():
+						#plotting the main chart
+						st.markdown(style, unsafe_allow_html=True)
+						st.header(title)
+						st.markdown(subtitle)
+
+					st.plotly_chart(figauc, use_container_width=True)
+
+				if plottype == "Heatmap":
+
+					round_range = st.slider("Select Auction Round Numbers using the Silder below", value=(0,183))
+
+					start_round = round_range[0]
+
+					end_round = round_range[1]
+
+					filt  =(dfbid["Clk_Round"] > start_round) & (dfbid["Clk_Round"] <= end_round)
+
+					dfbid = dfbid[filt]
+
+					dftemp = dfbid.drop(columns=["Possible_Raise_Bid_ClkRd", "Rank_PWB_Start_ClkRd","Bid_Decision"], axis=1)
+
+					dftemp = dftemp.groupby(["LSA", "Bidder", "Rank_PWB_End_ClkRd"]).sum().reset_index()
+
+					data = [go.Heatmap(
+						z=dftemp["Rank_PWB_End_ClkRd"],
+				        y= dftemp["Bidder"],
+				        x=dftemp["LSA"],
+						xgap = 1,
+						ygap = 1,
+						hoverinfo ='text',
+						# text = hovertext,
+						colorscale='Hot',
+							texttemplate="%{z}", 
+							textfont={"size":10},
+							reversescale=True,
+							),
+						]
+					figauc = go.Figure(data=data)
+
+					bidders = sorted(list(set(dftemp["Bidder"])), reverse=True)
+
+					figauc.update_layout(
+					    template="seaborn",
+					    xaxis_side= 'top',
+					   	height = 650,
+					   	yaxis=dict(
+				        tickmode='array',
+				        ticktext=bidders,
+				        tickvals=list(range(len(bidders)
+				        	))))
+
+					title = "3G Auctions (Year-2010) - Winners's Rank at the End of Clock Round No "+str(round_number)
+					subtitle = "Unit - RankNo; Source - DoT"
+
+					style = "<style>h3 {text-align: left;}</style>"
+					with st.container():
+						#plotting the main chart
+						st.markdown(style, unsafe_allow_html=True)
+						st.header(title)
+						st.markdown(subtitle)
+
+
+					#Drawning a black border around the heatmap chart 
+					figauc.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
+					figauc.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
+
+
+					st.plotly_chart(figauc, use_container_width=True)
 
 
 			if SubFeature == "PWBEndofClkRd":
