@@ -1829,7 +1829,7 @@ if authentication_status:
 									texttemplate="%{z}", 
 									textfont={"size":10},
 									# reversescale=True,
-									),
+									)
 
 					    row=(i // 3) + 1
 					    col=(i % 3) + 1
