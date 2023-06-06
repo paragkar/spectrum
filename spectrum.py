@@ -1584,7 +1584,9 @@ if authentication_status:
 
 				round_number = st.slider("Select Auction Round Numbers using the Silder below", min_value=0, max_value=183, step=1, value =183)
 
-				button = st.button("Click to Sumulate")
+				button = st.button("Click to Simulate")
+
+				st.write(button)
 
 				filt  =(dfbid["Clk_Round"] == round_number) 
 
