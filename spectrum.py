@@ -1798,7 +1798,7 @@ if authentication_status:
 
 							temp = dfbid[(dfbid["Bidder"]==bidder) & (dfbid["LSA"]==lsa)]
 
-							st.write([1, las, bidder, temp[temp["Rank_PWB_End_ClkRd"]==1]["Rank_PWB_End_ClkRd"].count()])
+							st.write([1, lsa, bidder, temp[temp["Rank_PWB_End_ClkRd"]==1]["Rank_PWB_End_ClkRd"].count()])
 
 							st.write([2, lsa, bidder, temp[temp["Rank_PWB_End_ClkRd"]==2]["Rank_PWB_End_ClkRd"].count()])
 
