@@ -1640,6 +1640,9 @@ if authentication_status:
 				st.plotly_chart(figauc, use_container_width=True)
 
 
+			
+
+
 
 
 #---------------New Auction Bid Data Cide Ends Here----------------------
