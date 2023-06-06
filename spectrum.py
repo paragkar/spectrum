@@ -1840,7 +1840,7 @@ if authentication_status:
 					    figauc.add_trace(trace, row=row, col=col)
 
 					    figauc.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
-						figauc.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
+					    figauc.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
 
 
 					    # Remove y-axis labels for integrated subplots
