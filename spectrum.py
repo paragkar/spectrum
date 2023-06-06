@@ -1806,7 +1806,11 @@ if authentication_status:
 
 							lst.append([4, lsa, bidder, temp[temp["Rank_PWB_End_ClkRd"]==4]["Rank_PWB_End_ClkRd"].count()])
 
-					st.write(pd.DataFrame(lst))
+					dfrank = pd.DataFrame(lst)
+
+					dfrank.columns = ["RankNo","LSA","Bidder", "RankCount"]
+
+					st.write(dfrank)
 
 
 					# dftemp = dfbid.drop(columns=["Possible_Raise_Bid_ClkRd", "Rank_PWB_Start_ClkRd", "Rank_PWB_End_ClkRd"], axis=1)
