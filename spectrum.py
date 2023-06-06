@@ -6,6 +6,7 @@ import numpy as np
 from collections import OrderedDict
 from plotly.subplots import make_subplots
 from streamlit_option_menu import option_menu
+import SessionState
 import plotly
 import pandas as pd
 import plotly.figure_factory as ff
@@ -1584,7 +1585,7 @@ if authentication_status:
 
 				round_number = st.slider("Select Auction Round Numbers using the Silder below", min_value=0, max_value=183, step=1, value =183)
 
-
+				button = st.button("Click to Sumulate")
 
 				filt  =(dfbid["Clk_Round"] == round_number) 
 
@@ -1627,7 +1628,7 @@ if authentication_status:
 				figauc.update_traces(textfont_size=10, textangle=0, textposition="outside", cliponaxis=False)
 
 
-				title = "3G Auctions (Year-2010) - Ranks of Bidders at the End of Clock Round"
+				title = "3G Auctions (Year-2010) - Bidders at the End of the Clock Round No "+
 				subtitle = "Unit - RankNo; Source - DoT"
 
 				style = "<style>h3 {text-align: left;}</style>"
