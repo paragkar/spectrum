@@ -1589,7 +1589,6 @@ if authentication_status:
 
 				dfbid = dfbid[filt]
 
-				st.write(dfbid) #debug
 
 				for i, bidder in enumerate(listofbidders):
 				    dftemp1 = dfbid[dfbid["Bidder"] == bidder]
@@ -1655,7 +1654,6 @@ if authentication_status:
 
 				dfbid = dfbid[filt]
 
-				st.write(dfbid) #debug
 
 				for i, bidder in enumerate(listofbidders):
 				    dftemp1 = dfbid[dfbid["Bidder"] == bidder]
