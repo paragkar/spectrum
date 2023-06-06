@@ -1742,7 +1742,7 @@ if authentication_status:
 					bidders = sorted(list(set(dftemp["Bidder"])), reverse=True)
 
 					figauc.update_layout(
-					    template="seaborn",
+					    template="plotly_white",
 					    xaxis_side= 'top',
 					   	height = 650,
 					   	yaxis=dict(
