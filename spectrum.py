@@ -1628,7 +1628,7 @@ if authentication_status:
 				figauc.update_traces(textfont_size=10, textangle=0, textposition="outside", cliponaxis=False)
 
 
-				title = "3G Auctions (Year-2010) - Bidders at the End of the Clock Round No "+
+				title = "3G Auctions (Year-2010) - Bidders at the End of the Clock Round No "+str(round_number)
 				subtitle = "Unit - RankNo; Source - DoT"
 
 				style = "<style>h3 {text-align: left;}</style>"
