@@ -1810,8 +1810,6 @@ if authentication_status:
 
 					dfrank.columns = ["RankNo","LSA","Bidder", "RankCount"]
 
-					st.write(dfrank)
-
 					figauc = sp.make_subplots(rows=3, cols=3, subplot_titles=listofbidders, shared_yaxes = True)
 
 					for i, bidder in enumerate(listofbidders):
