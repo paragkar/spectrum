@@ -1596,7 +1596,7 @@ if authentication_status:
 						time.sleep(0.5)
 
 						round_number = slider_ph.slider("Select Auction Round Numbers using the Silder below", min_value=0, max_value=183, step=1, 
-														value = initial_value+1, key ="animated")
+														value = initial_value+1, key =f"animated_{x}")
 						info_ph.info(round_number)
 
 						filt  =(dfbid["Clk_Round"] == round_number) 
