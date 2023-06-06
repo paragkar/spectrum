@@ -1810,7 +1810,7 @@ if authentication_status:
 
 					dfrank.columns = ["RankNo","LSA","Bidder", "RankCount"]
 
-					figauc = sp.make_subplots(rows=3, cols=3, subplot_titles=listofbidders, shared_yaxes = True)
+					figauc = sp.make_subplots(rows=5, cols=2, subplot_titles=listofbidders, shared_yaxes = True)
 
 					for i, bidder in enumerate(listofbidders):
 					    dftemp = dfrank[dfrank["Bidder"] == bidder]
@@ -1830,8 +1830,8 @@ if authentication_status:
 									reversescale=True,
 									)
 
-					    row=(i // 3) + 1
-					    col=(i % 3) + 1
+					    row=(i // 5) + 1
+					    col=(i % 2) + 1
 
 
 					    # Set the bidder name as bold using HTML tags
