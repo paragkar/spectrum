@@ -1512,7 +1512,7 @@ if authentication_status:
 
 			dfbid = dfbid.set_index("LSA").sort_index(ascending = False)
 
-			SubFeature = st.sidebar.selectbox("Select an SubFeature", ["BidsCircleWise","RanksCircleWise", "PWB_End_ClkRd"])
+			SubFeature = st.sidebar.selectbox("Select an SubFeature", ["BidsCircleWise","RanksCircleWise", "PWBEndOfClkRd"])
 
 			if SubFeature == "BidsCircleWise":
 
@@ -1643,7 +1643,7 @@ if authentication_status:
 				st.plotly_chart(figauc, use_container_width=True)
 
 
-			if SubFeature == "PWB_End_ClkRd":
+			if SubFeature == "PWBEndOfClkRd":
 
 				figauc = sp.make_subplots(rows=3, cols=3, subplot_titles=listofbidders, shared_yaxes = True)
 
