@@ -1796,13 +1796,13 @@ if authentication_status:
 
 							temp = dfbid[(dfbid["Bidder"]==bidder) & (dfbid["LSA"]==lsa)]
 
-							temp["Rank1_Counts"] = temp[temp["Rank_PWB_End_ClkRd"]==1].sum()
+							temp["Rank1_Counts"] = temp[temp["Rank_PWB_End_ClkRd"]==1].count()
 
-							temp["Rank2_Counts"] = temp[temp["Rank_PWB_End_ClkRd"]==2].sum()
+							temp["Rank2_Counts"] = temp[temp["Rank_PWB_End_ClkRd"]==2].count()
 
-							temp["Rank3_Counts"] = temp[temp["Rank_PWB_End_ClkRd"]==3].sum()
+							temp["Rank3_Counts"] = temp[temp["Rank_PWB_End_ClkRd"]==3].count()
 
-							temp["Rank4_Counts"] = temp[temp["Rank_PWB_End_ClkRd"]==4].sum()
+							temp["Rank4_Counts"] = temp[temp["Rank_PWB_End_ClkRd"]==4].count()
 
 					st.write(temp)
 
