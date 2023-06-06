@@ -1590,7 +1590,7 @@ if authentication_status:
 					round_number =0
 					for i in range(183):
 						round_number = round_number+1
-						time.sleep(1)
+						time.sleep(2)
 
 				else:
 					pass
