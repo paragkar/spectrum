@@ -1608,7 +1608,7 @@ if authentication_status:
 						ygap = 1,
 						hoverinfo ='text',
 						# text = hovertext,
-						colorscale='Hot',
+						colorscale='rainbow',
 							texttemplate="%{z}", 
 							textfont={"size":10},
 							reversescale=True,
