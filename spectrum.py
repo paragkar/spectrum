@@ -1713,11 +1713,7 @@ if authentication_status:
 
 				if plottype == "Heatmap":
 
-					round_range = st.slider("Select Auction Round Numbers using the Silder below", value=(0,183))
-
-					start_round = round_range[0]
-
-					end_round = round_range[1]
+					round_number = st.slider("Select Auction Round Numbers using the Silder below", min_value=0, max_value=183, step=1, value = 183)
 
 					filt  =(dfbid["Clk_Round"] > start_round) & (dfbid["Clk_Round"] <= end_round)
 
@@ -1755,7 +1751,7 @@ if authentication_status:
 				        tickvals=list(range(len(bidders)
 				        	))))
 
-					title = "3G Auctions (Year-2010) - Winners's Rank at the End of Clock Round Nos, Start- "+str(start_round)+" End - "+str(end_round)
+					title = "3G Auctions (Year-2010) - Winners's Rank at the End of Clock Round No - "+str(round_number)
 					subtitle = "Unit - RankNo; Source - DoT"
 
 					style = "<style>h3 {text-align: left;}</style>"
