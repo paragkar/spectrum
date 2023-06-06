@@ -1587,7 +1587,7 @@ if authentication_status:
 				slider_ph = st.empty()
 				info_ph = st.empty()
 
-				round_number = slider_ph.slider("Select Auction Round Numbers using the Silder below", min_value=0, max_value=183, initial_value, step=1, key="initial")
+				round_number = slider_ph.slider("Select Auction Round Numbers using the Silder below", min_value=0, max_value=183, step=1, initial_value, key="initial")
 				info_ph.info(round_number)
 
 				if st.button('animate'):
