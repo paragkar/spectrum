@@ -1554,9 +1554,9 @@ if authentication_status:
 				   	height = 650,
 				   	yaxis=dict(
 			        tickmode='array',
-			        ticktext=bidders,
-			        tickvals=list(range(len(bidders)
-			        	))))
+			        # ticktext=bidders,
+			        # tickvals=list(range(len(bidders)
+			        	))
 
 				title = "3G Auctions (Year-2010) - Total Number of Bids in Circles"
 				subtitle = "Unit - Numbers; Source - DoT"
