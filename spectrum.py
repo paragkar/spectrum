@@ -1721,7 +1721,7 @@ if authentication_status:
 
 					dftemp = dfbid.drop(columns=["Possible_Raise_Bid_ClkRd", "Rank_PWB_Start_ClkRd","Bid_Decision"], axis=1)
 
-					dftemp = dftemp.groupby(["LSA", "Bidder", "Rank_PWB_End_ClkRd"]).sum().reset_index()
+					# dftemp = dftemp.groupby(["LSA", "Bidder", "Rank_PWB_End_ClkRd"]).sum().reset_index()
 
 					data = [go.Heatmap(
 						z=dftemp["Rank_PWB_End_ClkRd"],
@@ -1808,6 +1808,7 @@ if authentication_status:
 
 					dfrank = pd.DataFrame(lst)
 
+
 					dfrank.columns = ["RankNo","LSA","Bidder", "RankCount"]
 
 					figauc = sp.make_subplots(rows=3, cols=3, subplot_titles=listofbidders, shared_yaxes = True)
@@ -1838,9 +1839,6 @@ if authentication_status:
 					    trace.text = dftemp["Bidder"]
 
 					    figauc.add_trace(trace, row=row, col=col)
-
-					    # figauc.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
-					    # figauc.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
 
 
 					    # Remove y-axis labels for integrated subplots
