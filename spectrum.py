@@ -1698,6 +1698,8 @@ if authentication_status:
 
 					dfRank = dfRank.pivot(index="Rank_Bidder", columns='LSA', values="RankCount")
 
+					dfRank = dfRank.sort_index()
+
 
 					dfRank = dfRank.replace(0, np.nan).dropna(axis =0, how = "all")
 
