@@ -1531,7 +1531,11 @@ if authentication_status:
 
 				dftemp = dftemp.groupby(["LSA", "Bidder"]).sum().reset_index()
 
-				st.write(dftemp)
+				# st.write(dftemp)
+
+				summarydf = dftemp.groupby(["LSA"]).sum().reset_index()
+
+				st.write(summarydf)
 
 				data = [go.Heatmap(
 					z=dftemp["Bid_Decision"],
