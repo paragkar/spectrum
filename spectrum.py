@@ -1666,6 +1666,8 @@ if authentication_status:
 
 					dfbidsel = dfbid[filt].reset_index()
 
+					st.write(dfbidsel)
+
 					listofbidders = sorted(list(set(dfbidsel["Bidder"])))
 
 					lsas = sorted(list(set(dfbidsel["LSA"])))
