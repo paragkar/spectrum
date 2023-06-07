@@ -1691,8 +1691,9 @@ if authentication_status:
 
 					dfRank = pd.DataFrame(lst)
 
-
 					dfRank.columns = ["RankNo","LSA","Bidder", "RankCount"]
+
+					dfRank["Rank_Bidder"] = str(dfRank["RankNo"])+dfRank["Bidder"]
 
 					st.write(dfRank)
 
