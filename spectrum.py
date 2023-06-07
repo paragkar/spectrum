@@ -1742,7 +1742,7 @@ if authentication_status:
 
 					# Calculate the coordinates for the vertical border
 					x_range = data['x'][::-1]  # Reverse x-axis coordinates
-					st.write(x_range)
+					st.write(x_range[-1])
 					x_start = x_range[-1] - 0.5  # Start from the last x-coordinate - 0.5
 					x_end = x_range[0] - 0.5  # End at the first x-coordinate - 0.5
 					y_start = data['y'][0]  # Use the first y-coordinate
