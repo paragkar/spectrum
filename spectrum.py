@@ -1742,8 +1742,8 @@ if authentication_status:
 
 					# Add a dummy trace for the vertical border
 					dummy_trace = go.Scatter(
-					    x=[dftemp["LSA"][0], dftemp["LSA"][-1]],
-					    y=[dftemp["Bidder"][0], dftemp["Bidder"[-1]]],
+					    x=[dftemp["LSA"][0], dftemp["LSA"][1]],
+					    y=[dftemp["Bidder"][0], dftemp["Bidder"[1]]],
 					    mode='lines',line=dict(color='black', width=1))
 						
 
