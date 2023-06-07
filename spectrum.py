@@ -1723,8 +1723,6 @@ if authentication_status:
 
 					dftemp = dftemp.groupby(["LSA", "Bidder", "Rank_PWB_End_ClkRd"]).sum().reset_index()
 
-					st.write(dftemp) #debug
-
 					data = [go.Heatmap(
 						z=dftemp["Rank_PWB_End_ClkRd"],
 				        y= dftemp["Bidder"],
@@ -1749,8 +1747,6 @@ if authentication_status:
 					   	height = 650,
 					   	yaxis=dict(
 				        tickmode='array',
-				        # ticktext=bidders,
-				        # tickvals=list(range(len(bidders)
 				        	))
 
 					title = "3G Auctions (Year-2010) - Winners's Rank at the End of Clock Round No - "+str(round_number)
