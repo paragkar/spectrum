@@ -1738,7 +1738,17 @@ if authentication_status:
 							# reversescale=True,
 							),
 						]
-					figauc = go.Figure(data=data)
+
+
+					# Add a dummy trace for the vertical border
+					dummy_trace = go.Scatter(
+					    x=[heatmap['x'][0], heatmap['x'][-1]],
+					    y=[heatmap['y'][0], heatmap['y'][-1]],
+					    mode='lines',
+					    line=dict(color='black', width=1)
+											)
+
+					figauc = go.Figure(data=[data, dummy_trace])
 
 					bidders = sorted(list(set(dftemp["Bidder"])), reverse=True)
 
@@ -1762,8 +1772,8 @@ if authentication_status:
 
 
 					#Drawning a black border around the heatmap chart 
-					figauc.update_xaxes(fixedrange=True,showline=True,linewidth=1,linecolor='black', mirror=True)
-					figauc.update_yaxes(fixedrange=True,showline=True, linewidth=1, linecolor='black', mirror=True)
+					figauc.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
+					figauc.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
 
 					figauc.update_layout(
 						    xaxis=dict(showgrid=False),
