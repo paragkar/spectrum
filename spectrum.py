@@ -1837,7 +1837,7 @@ if authentication_status:
 				        	))
 
 					title = "3G Auctions (Year-2010) - PWB Start of Clock Round No - "+str(round_number)
-					subtitle = "Unit - Rs Cr; Source - DoT "+ chartoption
+					subtitle = "Unit - Rs Cr; Source - DoT; "+ chartoption
 
 					style = "<style>h3 {text-align: left;}</style>"
 					with st.container():
@@ -1909,7 +1909,7 @@ if authentication_status:
 				        	))
 
 					title = "3G Auctions (Year-2010) - PWB End of Clock Round No - "+str(round_number)
-					subtitle = "Unit - Rs Cr; Source - DoT "+chartoption
+					subtitle = "Unit - Rs Cr; Source - DoT; "+chartoption
 
 					style = "<style>h3 {text-align: left;}</style>"
 					with st.container():
