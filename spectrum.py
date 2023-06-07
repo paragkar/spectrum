@@ -1697,6 +1697,9 @@ if authentication_status:
 					dfRank["Rank_Bidder"] = dfRank[["Bidder", "RankNo"]].apply(lambda x: "-".join(map(str, x)), axis=1).reset_index()
 
 
+					st.write(dfRank)
+
+
 					dfRank = dfRank.pivot(index="Rank_Bidder", columns='LSA', values="RankCount")
 
 					st.write(dfRank)
