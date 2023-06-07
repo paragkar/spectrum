@@ -1591,9 +1591,9 @@ if authentication_status:
 
 			if SubFeature == "RanksCircleWise":
 
-				plottype = st.sidebar.selectbox("Select a Plot Type", ["Heatmap", "HeatmapSubP"])
+				plottype = st.sidebar.selectbox("Select a Plot Type", ["Specific Round", "Selected Rounds"])
 
-				if plottype == "Heatmap":
+				if plottype == "Specific Round":
 
 					round_number = st.slider("Select Auction Round Numbers using the Silder below", min_value=1, max_value=183, step=1, value = 183)
 
