@@ -1780,6 +1780,8 @@ if authentication_status:
 
 				df2ndrdpwb = df2ndrd.pivot(index="Bidder", columns='LSA', values="PWB_Start_ClkRd").sort_index(ascending=False)
 
+				st.write(df2ndrdpwb)
+
 				if pwbtype == "Start CLK Round":
 
 					round_number = st.slider("Select Auction Round Numbers using the Silder below", min_value=1, max_value=183, step=1, value = 183)
