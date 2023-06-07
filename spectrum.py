@@ -1533,6 +1533,10 @@ if authentication_status:
 
 				summarydf = dftemp.groupby(["LSA"]).sum().reset_index().drop(columns = "Bidder", axis =1)
 
+				summarydf = summarydf.set_index("LSA")
+
+				dftemp = dftemp.set_index("LSA")
+
 				dftemp["Bid_Decision_Perc"] = round((dftemp["Bid_Decision"]/summarydf["Bid_Decision"])*100,1)
 
 				radio_selection = st.sidebar.radio('Click an Option', ["Absolute Values", "Percentage Values"])
@@ -1549,7 +1553,7 @@ if authentication_status:
 				data = [go.Heatmap(
 					z=z,
 			        y= dftemp["Bidder"],
-			        x=dftemp["LSA"],
+			        x=dftemp.index,
 					xgap = 1,
 					ygap = 1,
 					hoverinfo ='text',
