@@ -1751,7 +1751,7 @@ if authentication_status:
 				        tickmode='array',
 				        # ticktext=bidders,
 				        # tickvals=list(range(len(bidders)
-				        	))))
+				        	))
 
 					title = "3G Auctions (Year-2010) - Winners's Rank at the End of Clock Round No - "+str(round_number)
 					subtitle = "Unit - RankNo; Source - DoT"
