@@ -1495,7 +1495,7 @@ if authentication_status:
 
 			return df
 
-		Feature = st.sidebar.selectbox("Select an Feature", ["2010-Band2100"])
+		Feature = st.sidebar.selectbox("Select a Feature", ["2010-Band2100"])
 
 
 		if Feature == "2010-Band2100":
@@ -1512,7 +1512,7 @@ if authentication_status:
 
 			dfbid = dfbid.set_index("LSA").sort_index(ascending = False)
 
-			SubFeature = st.sidebar.selectbox("Select an SubFeature", ["BidsCircleWise","RanksCircleWise", "PWBEndofClkRd"])
+			SubFeature = st.sidebar.selectbox("Select a SubFeature", ["BidsCircleWise","RanksCircleWise", "ProvWinningBid"])
 
 			if SubFeature == "BidsCircleWise":
 
@@ -1772,70 +1772,139 @@ if authentication_status:
 
 
 
-			if SubFeature == "PWBEndofClkRd":
+			if SubFeature == "ProvWinningBid":
+
+				pwbtype = st.sidebar.selectbox("Select a PWB Type", ["Start CLK Round", "End CLK Round"])
 
 
-				round_number = st.slider("Select Auction Round Numbers using the Silder below", min_value=1, max_value=183, step=1, value = 183)
+				if pwbtype == "Start CLK Round":
 
-				dfbidpwb = dfbid.copy()
+					round_number = st.slider("Select Auction Round Numbers using the Silder below", min_value=1, max_value=183, step=1, value = 183)
 
-				filt  =(dfbidpwb["Clk_Round"] == round_number) 
+					dfbidpwb = dfbid.copy()
 
-				dfbidpwb = dfbidpwb[filt]
+					filt  =(dfbidpwb["Clk_Round"] == round_number) 
 
-				dftemp = dfbidpwb.drop(columns=["Rank_PWB_End_ClkRd","PWB_Start_ClkRd","Possible_Raise_Bid_ClkRd", "Rank_PWB_Start_ClkRd","Bid_Decision","Clk_Round"], axis=1).reset_index()
+					dfbidpwb = dfbidpwb[filt]
 
-				dftemp = dftemp.groupby(["LSA", "Bidder", "PWB_End_ClkRd"]).sum().reset_index()
+					dftemp = dfbidpwb.drop(columns=["Rank_PWB_End_ClkRd","Possible_Raise_Bid_ClkRd", "Rank_PWB_Start_ClkRd","Bid_Decision","Clk_Round", "PWB_End_ClkRd"], axis=1).reset_index()
 
-				dftemp = dftemp.pivot(index="Bidder", columns='LSA', values="PWB_End_ClkRd").sort_index(ascending=False)
+					dftemp = dftemp.groupby(["LSA", "Bidder", "PWB_Start_ClkRd"]).sum().reset_index()
 
-				data = [go.Heatmap(
-					z=dftemp.values,
-			        y= dftemp.index,
-			        x=dftemp.columns,
-					xgap = 1,
-					ygap = 1,
-					hoverinfo ='text',
-					# text = hovertext,
-					colorscale='Hot',
-					# showscale=False,
-						texttemplate="%{z}", 
-						textfont={"size":10},
-						reversescale=True,
-						)]
-					
+					dftemp = dftemp.pivot(index="Bidder", columns='LSA', values="PWB_Start_ClkRd").sort_index(ascending=False)
 
-				figauc = go.Figure(data=data)
+					data = [go.Heatmap(
+						z=dftemp.values,
+				        y= dftemp.index,
+				        x=dftemp.columns,
+						xgap = 1,
+						ygap = 1,
+						hoverinfo ='text',
+						# text = hovertext,
+						colorscale='Hot',
+						# showscale=False,
+							texttemplate="%{z}", 
+							textfont={"size":10},
+							reversescale=True,
+							)]
+						
 
-				figauc.update_layout(
-				    template="seaborn",
-				    xaxis_side= 'top',
-				   	height = 650,
-				   	yaxis=dict(
-			        tickmode='array',
-			        	))
+					figauc = go.Figure(data=data)
 
-				title = "3G Auctions (Year-2010) - Bidder's Rank at the End of Clock Round No - "+str(round_number)
-				subtitle = "Unit - RankNo; Higher the Rank More Aggressive is the Bidding; Source - DoT"
+					figauc.update_layout(
+					    template="seaborn",
+					    xaxis_side= 'top',
+					   	height = 650,
+					   	yaxis=dict(
+				        tickmode='array',
+				        	))
 
-				style = "<style>h3 {text-align: left;}</style>"
-				with st.container():
-					#plotting the main chart
-					st.markdown(style, unsafe_allow_html=True)
-					st.header(title)
-					st.markdown(subtitle)
+					title = "3G Auctions (Year-2010) - PWB Start of Clock Round No - "+str(round_number)
+					subtitle = "Unit - Rs Cr; Source - DoT"
+
+					style = "<style>h3 {text-align: left;}</style>"
+					with st.container():
+						#plotting the main chart
+						st.markdown(style, unsafe_allow_html=True)
+						st.header(title)
+						st.markdown(subtitle)
 
 
-				#Drawning a black border around the heatmap chart 
-				figauc.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
-				figauc.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
+					#Drawning a black border around the heatmap chart 
+					figauc.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
+					figauc.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
 
-				figauc.update_layout(
-					    xaxis=dict(showgrid=False),
-					    yaxis=dict(showgrid=False)
-					)
+					figauc.update_layout(
+						    xaxis=dict(showgrid=False),
+						    yaxis=dict(showgrid=False)
+						)
 
-				st.plotly_chart(figauc, use_container_width=True)
+					st.plotly_chart(figauc, use_container_width=True)
+
+				if pwbtype == "End CLK Round":
+
+					round_number = st.slider("Select Auction Round Numbers using the Silder below", min_value=1, max_value=183, step=1, value = 183)
+
+					dfbidpwb = dfbid.copy()
+
+					filt  =(dfbidpwb["Clk_Round"] == round_number) 
+
+					dfbidpwb = dfbidpwb[filt]
+
+					dftemp = dfbidpwb.drop(columns=["Rank_PWB_End_ClkRd","PWB_Start_ClkRd","Possible_Raise_Bid_ClkRd", "Rank_PWB_Start_ClkRd","Bid_Decision","Clk_Round", "PWB_Start_ClkRd"], axis=1).reset_index()
+
+					dftemp = dftemp.groupby(["LSA", "Bidder", "PWB_End_ClkRd"]).sum().reset_index()
+
+					dftemp = dftemp.pivot(index="Bidder", columns='LSA', values="PWB_End_ClkRd").sort_index(ascending=False)
+
+					data = [go.Heatmap(
+						z=dftemp.values,
+				        y= dftemp.index,
+				        x=dftemp.columns,
+						xgap = 1,
+						ygap = 1,
+						hoverinfo ='text',
+						# text = hovertext,
+						colorscale='Hot',
+						# showscale=False,
+							texttemplate="%{z}", 
+							textfont={"size":10},
+							reversescale=True,
+							)]
+						
+
+					figauc = go.Figure(data=data)
+
+					figauc.update_layout(
+					    template="seaborn",
+					    xaxis_side= 'top',
+					   	height = 650,
+					   	yaxis=dict(
+				        tickmode='array',
+				        	))
+
+					title = "3G Auctions (Year-2010) - PWB End of Clock Round No - "+str(round_number)
+					subtitle = "Unit - Rs Cr; Source - DoT"
+
+					style = "<style>h3 {text-align: left;}</style>"
+					with st.container():
+						#plotting the main chart
+						st.markdown(style, unsafe_allow_html=True)
+						st.header(title)
+						st.markdown(subtitle)
+
+
+					#Drawning a black border around the heatmap chart 
+					figauc.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
+					figauc.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
+
+					figauc.update_layout(
+						    xaxis=dict(showgrid=False),
+						    yaxis=dict(showgrid=False)
+						)
+
+					st.plotly_chart(figauc, use_container_width=True)
+
 
 
 
