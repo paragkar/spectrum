@@ -1783,11 +1783,11 @@ if authentication_status:
 
 				dfbidpwb = dfbidpwb[filt]
 
-				st.write(dfbidpwb)
+				dftemp = dfbidpwb.drop(columns=["Rank_PWB_End_ClkRd","PWB_Start_ClkRd","Possible_Raise_Bid_ClkRd", "Rank_PWB_Start_ClkRd","Bid_Decision"], axis=1).reset_index()
 
-				dftemp = dfbidpwb.drop(columns=["PWB_Start_ClkRd","Possible_Raise_Bid_ClkRd", "Rank_PWB_Start_ClkRd","Bid_Decision","PWB_End_ClkRd"], axis=1).reset_index()
+				dftemp = dftemp.groupby(["LSA", "Bidder", "PWB_End_ClkRd"]).sum().reset_index()
 
-				dftemp = dftemp.groupby(["LSA", "Bidder", "Rank_PWB_End_ClkRd"]).sum().reset_index()
+				st.write(dftemp)
 
 				data = [go.Heatmap(
 					z=dftemp["Rank_PWB_End_ClkRd"],
