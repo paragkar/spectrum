@@ -1741,7 +1741,7 @@ if authentication_status:
 				        tickmode='array',
 				        	))
 
-					title = "3G Auctions (Year-2010) - Bidder's Rank at the End of Clock Round No"
+					title = "3G Auctions (Year-2010) - Nos of times a Bidder has been Ranked (1-4) in a Chosen Window of Rounds"
 					subtitle = "Source - DoT Selected Round Nos - Start "+str(start_round)+"; End "+str(end_round)
 
 					style = "<style>h3 {text-align: left;}</style>"
