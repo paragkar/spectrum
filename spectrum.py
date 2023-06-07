@@ -1746,7 +1746,7 @@ if authentication_status:
 							    y=[data['y'][0], data['y'][-1]],
 							    mode='lines',
 							    line=dict(color='black', width=1))
-)
+
 
 					figauc = go.Figure(data=[data, dummy_trace])
 
