@@ -1742,8 +1742,8 @@ if authentication_status:
 
 					# Add a dummy trace for the vertical border
 					dummy_trace = go.Scatter(
-							    x=[data['x'][-2], data['x'][-2]],
-							    y=[data['y'][0], data['y'][-1]],
+							    x=[data['x'][-1], data['x'][-1]],
+							    y=[data['y'][-1], data['y'][-1]],
 							    mode='lines',
 							    line=dict(color='black', width=1))
 
