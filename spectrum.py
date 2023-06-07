@@ -1668,6 +1668,8 @@ if authentication_status:
 
 					dfbidsel = dfbid.copy()
 
+					st.write(dfbidsel)
+
 					filt  =(dfbidsel["Clk_Round"] > start_round) & (dfbidsel["Clk_Round"] <= end_round)
 
 					dfbidsel = dfbidsel[filt].reset_index()
