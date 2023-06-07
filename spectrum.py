@@ -1657,7 +1657,7 @@ if authentication_status:
 					st.plotly_chart(figauc, use_container_width=True)
 
 
-				if plottype == "HeatmapSubP":
+				if plottype == "Selected Rounds":
 
 					round_range = st.slider("Select Auction Round Numbers using the Silder below", value=(0,183))
 
