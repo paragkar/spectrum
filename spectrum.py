@@ -1692,6 +1692,8 @@ if authentication_status:
 
 					dfRank = dfRank.set_index("LSA")
 
+					dfRank = dfRank.replace(0, np.nan).dropna(axis =0)
+
 					dfRank["Rank_Bidder"] = dfRank[["RankNo", "Bidder"]].apply(lambda x: "-".join(map(str, x)), axis=1)
 
 
