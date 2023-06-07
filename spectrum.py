@@ -1522,9 +1522,11 @@ if authentication_status:
 
 				end_round = round_range[1]
 
-				filt  =(dfbid["Clk_Round"] > start_round) & (dfbid["Clk_Round"] <= end_round)
+				dfbidcirclwise = dfbid.copy()
 
-				dfbidcirclwise = dfbid[filt]
+				filt  =(dfbidcirclwise["Clk_Round"] > start_round) & (dfbidcirclwise["Clk_Round"] <= end_round)
+
+				dfbidcirclwise = dfbidcirclwise[filt]
 
 				dftemp = dfbidcirclwise.drop(columns=["Possible_Raise_Bid_ClkRd", "Rank_PWB_Start_ClkRd", "Rank_PWB_End_ClkRd",
 											"PWB_End_ClkRd","Clk_Round", "PWB_Start_ClkRd"], axis=1)
@@ -1597,9 +1599,11 @@ if authentication_status:
 
 					round_number = st.slider("Select Auction Round Numbers using the Silder below", min_value=1, max_value=183, step=1, value = 183)
 
-					filt  =(dfbid["Clk_Round"] == round_number) 
+					dfbidspec = dfbid.copy()
 
-					dfbidspec = dfbid[filt]
+					filt  =(dfbidspec["Clk_Round"] == round_number) 
+
+					dfbidspec = dfbidspec[filt]
 
 					dftemp = dfbidspec.drop(columns=["PWB_Start_ClkRd","Possible_Raise_Bid_ClkRd", "Rank_PWB_Start_ClkRd","Bid_Decision","PWB_End_ClkRd"], axis=1).reset_index()
 
@@ -1662,11 +1666,12 @@ if authentication_status:
 
 					end_round = round_range[1]
 
-					filt  =(dfbid["Clk_Round"] > start_round) & (dfbid["Clk_Round"] <= end_round)
+					dfbidsel = dfbid.copy()
 
-					dfbidsel = dfbid[filt].reset_index()
+					filt  =(dfbidsel["Clk_Round"] > start_round) & (dfbidsel["Clk_Round"] <= end_round)
 
-					st.write(dfbidsel)
+					dfbidsel = dfbidsel[filt].reset_index()
+
 
 					listofbidders = sorted(list(set(dfbidsel["Bidder"])))
 
