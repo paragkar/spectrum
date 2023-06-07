@@ -1695,7 +1695,7 @@ if authentication_status:
 
 					dfRank = dfRank.set_index("LSA")
 
-					dfRank["Rank_Bidder"] = str(dfRank["RankNo"])+dfRank["Bidder"]
+					dfRank["Rank_Bidder"] = dfRank[["RankNo", "Bidder"]].apply("-".join, axis=1)
 
 					st.write(dfRank)
 
