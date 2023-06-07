@@ -1787,12 +1787,12 @@ if authentication_status:
 
 				dftemp = dftemp.groupby(["LSA", "Bidder", "PWB_End_ClkRd"]).sum().reset_index()
 
-				st.write(dftemp)
+				dftemp = dftemp.pivot(index="Bidder", columns='LSA', values="PWB_End_ClkRd").sort_index(ascending=False)
 
 				data = [go.Heatmap(
-					z=dftemp["Rank_PWB_End_ClkRd"],
-			        y= dftemp["Bidder"],
-			        x=dftemp["LSA"],
+					z=dftemp.values,
+			        y= dftemp.index,
+			        x=dftemp.columns,
 					xgap = 1,
 					ygap = 1,
 					hoverinfo ='text',
