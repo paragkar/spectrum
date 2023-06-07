@@ -1776,7 +1776,7 @@ if authentication_status:
 
 				pwbtype = st.sidebar.selectbox("Select a PWB Type", ["Start CLK Round", "End CLK Round"])
 
-				df2ndrd = dfbid[dfbid["Clk_Round"] == 2]
+				df2ndrd = dfbid[dfbid["Clk_Round"] == 2].reset_index()
 
 				df2ndrdpwb = df2ndrd.pivot(index="Bidder", columns='LSA', values="PWB_Start_ClkRd").sort_index(ascending=False)
 
