@@ -1699,7 +1699,7 @@ if authentication_status:
 					dfRank = dfRank.pivot(index="Rank_Bidder", columns='LSA', values="RankCount")
 
 
-					# dfRank = dfRank.replace(0, np.nan).dropna(axis =0)
+					dfRank = dfRank.replace(0, np.nan).dropna(axis =0, how = "all")
 
 					data = [go.Heatmap(
 							z=dfRank.values,
