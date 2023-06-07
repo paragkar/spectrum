@@ -1704,7 +1704,7 @@ if authentication_status:
 					data = [go.Heatmap(
 							z=dfRank["RankCount"].values,
 					        y= dfRank.index,
-					        x=dfRank.columns
+					        x=dfRank.columns,
 							xgap = 1,
 							ygap = 1,
 							hoverinfo ='text',
