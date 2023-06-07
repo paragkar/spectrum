@@ -1693,6 +1693,8 @@ if authentication_status:
 
 					dfRank.columns = ["RankNo","LSA","Bidder", "RankCount"]
 
+					dfRank = dfRank.set_index("LSA")
+
 					dfRank["Rank_Bidder"] = str(dfRank["RankNo"])+dfRank["Bidder"]
 
 					st.write(dfRank)
