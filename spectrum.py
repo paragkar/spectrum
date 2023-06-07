@@ -1701,10 +1701,8 @@ if authentication_status:
 
 					dfRank = dfRank.replace(0, np.nan).dropna(axis =0)
 
-					st.write(dfRank)
-
 					data = [go.Heatmap(
-							z=dfRank["RankCount"],
+							z=dfRank.values,
 					        y= dfRank.index,
 					        x=dfRank.columns,
 							xgap = 1,
