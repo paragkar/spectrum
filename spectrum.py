@@ -1668,7 +1668,7 @@ if authentication_status:
 
 					dfbidsel = dfbid.copy()
 
-					st.write("hello")
+					st.write("") #debug
 
 					filt  =(dfbidsel["Clk_Round"] > start_round) & (dfbidsel["Clk_Round"] <= end_round)
 
