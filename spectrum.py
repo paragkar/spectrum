@@ -1723,7 +1723,7 @@ if authentication_status:
 
 					dftemp = dftemp.groupby(["LSA", "Bidder", "Rank_PWB_End_ClkRd"]).sum().reset_index()
 
-					st.write(dftemp.columns) #debug
+					st.write(dftemp) #debug
 
 					data = [go.Heatmap(
 						z=dftemp["Rank_PWB_End_ClkRd"],
