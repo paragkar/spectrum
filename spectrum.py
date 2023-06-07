@@ -1713,7 +1713,7 @@ if authentication_status:
 
 				if plottype == "Heatmap":
 
-					round_number = st.slider("Select Auction Round Numbers using the Silder below", min_value=0, max_value=183, step=1, value = 183)
+					round_number = st.slider("Select Auction Round Numbers using the Silder below", min_value=1, max_value=183, step=1, value = 183)
 
 					filt  =(dfbid["Clk_Round"] == round_number) 
 
@@ -1721,7 +1721,7 @@ if authentication_status:
 
 					dftemp = dfbid.drop(columns=["PWB_Start_ClkRd","Possible_Raise_Bid_ClkRd", "Rank_PWB_Start_ClkRd","Bid_Decision","PWB_End_ClkRd"], axis=1).reset_index()
 
-					dftemp = dftemp.groupby(["LSA", "Bidder", "Rank_PWB_End_ClkRd"]).sum(axis=1).reset_index()
+					dftemp = dftemp.groupby(["LSA", "Bidder", "Rank_PWB_End_ClkRd"]).sum().reset_index()
 
 					st.write(dftemp.columns) #debug
 
