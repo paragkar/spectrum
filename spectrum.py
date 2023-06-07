@@ -1766,9 +1766,9 @@ if authentication_status:
 						st.markdown(subtitle)
 
 
-					#Drawning a black border around the heatmap chart 
-					# figauc.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
-					# figauc.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
+					Drawning a black border around the heatmap chart 
+					figauc.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
+					figauc.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
 
 					figauc.update_layout(
 						    xaxis=dict(showgrid=False),
