@@ -1530,6 +1530,8 @@ if authentication_status:
 
 				dftemp = dftemp.groupby(["LSA", "Bidder"]).sum().reset_index()
 
+				st.write(dftemp)
+
 				data = [go.Heatmap(
 					z=dftemp["Bid_Decision"],
 			        y= dftemp["Bidder"],
@@ -1546,16 +1548,12 @@ if authentication_status:
 					]
 				figauc = go.Figure(data=data)
 
-				bidders = sorted(list(set(dftemp["Bidder"])), reverse=True)
-
 				figauc.update_layout(
 				    template="seaborn",
 				    xaxis_side= 'top',
 				   	height = 650,
 				   	yaxis=dict(
 			        tickmode='array',
-			        # ticktext=bidders,
-			        # tickvals=list(range(len(bidders)
 			        	))
 
 				title = "3G Auctions (Year-2010) - Total Number of Bids in Circles"
@@ -1568,11 +1566,9 @@ if authentication_status:
 					st.header(title)
 					st.markdown(subtitle)
 
-
 				#Drawning a black border around the heatmap chart 
 				figauc.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
 				figauc.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
-
 
 				st.plotly_chart(figauc, use_container_width=True)
 
