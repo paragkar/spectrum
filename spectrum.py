@@ -1709,6 +1709,9 @@ if authentication_status:
 
 					dfbidsel = dfbidsel.sort_index(ascending = False)
 
+					sortbylsa = st.sidebar.selectbox("Select a Circle to Sort", lsas)
+
+					dfbidsel = dfbidsel.sort_values("sortbylsa", ascending = False)
 
 					dfbidsel = dfbidsel.replace(0, np.nan).dropna(axis =0, how = "all")
 
