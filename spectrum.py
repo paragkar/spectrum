@@ -1774,55 +1774,49 @@ if authentication_status:
 
 			if SubFeature == "PWBEndofClkRd":
 
-				figauc = sp.make_subplots(rows=3, cols=3, subplot_titles=listofbidders, shared_yaxes = True)
 
+				round_number = st.slider("Select Auction Round Numbers using the Silder below", min_value=1, max_value=183, step=1, value = 183)
 
-				round_number = st.slider("Select Auction Round Numbers using the Silder below", min_value=0, max_value=183, step=1, value = 183)
+				dfbidpwb = dfbid.copy()
 
-				filt  =(dfbid["Clk_Round"] == round_number) 
+				filt  =(dfbidpwb["Clk_Round"] == round_number) 
 
-				dfbidpwb = dfbid[filt]
+				dfbidpwb = dfbidpwb[filt]
 
+				st.write(dfbidpwb)
 
-				for i, bidder in enumerate(listofbidders):
-				    dftemp1 = dfbidpwb[dfbidpwb["Bidder"] == bidder]
-				    dftemp2 = dftemp1.drop(columns=["Bidder", "Possible_Raise_Bid_ClkRd", "Rank_PWB_Start_ClkRd","Bid_Decision", "Rank_PWB_End_ClkRd"], axis=1)
-				    dfbidpanindia = dftemp2.groupby(["LSA"]).sum().reset_index()
-				    trace = go.Bar(
-				        name=bidder,
-				        x=dfbidpanindia["LSA"],
-				        # y=dftemp2["Clk_Round"],
-				        y=dfbidpanindia["PWB_End_ClkRd"],
-				        yaxis ="y",
-				        showlegend=False,
-				    				)
+				dftemp = dfbidpwb.drop(columns=["PWB_Start_ClkRd","Possible_Raise_Bid_ClkRd", "Rank_PWB_Start_ClkRd","Bid_Decision","PWB_End_ClkRd"], axis=1).reset_index()
 
-				    row=(i // 3) + 1
-				    col=(i % 3) + 1
+				dftemp = dftemp.groupby(["LSA", "Bidder", "Rank_PWB_End_ClkRd"]).sum().reset_index()
 
+				data = [go.Heatmap(
+					z=dftemp["Rank_PWB_End_ClkRd"],
+			        y= dftemp["Bidder"],
+			        x=dftemp["LSA"],
+					xgap = 1,
+					ygap = 1,
+					hoverinfo ='text',
+					# text = hovertext,
+					colorscale='Hot',
+					# showscale=False,
+						texttemplate="%{z}", 
+						textfont={"size":10},
+						# reversescale=True,
+						)]
+					
 
-				    # Set the bidder name as bold using HTML tags
-				    trace.text = round(dfbidpanindia["PWB_End_ClkRd"],0)
-
-				    figauc.add_trace(trace, row=row, col=col)
-
-				    # Remove y-axis labels for integrated subplots
-				    if col != 1:
-				        figauc.update_yaxes(showticklabels=False, row=row, col=col)
-
+				figauc = go.Figure(data=data)
 
 				figauc.update_layout(
-				    template="plotly_white",
-				   	height = 650,)
+				    template="seaborn",
+				    xaxis_side= 'top',
+				   	height = 650,
+				   	yaxis=dict(
+			        tickmode='array',
+			        	))
 
-				# Update x-axis tick font for all subplots
-				figauc.update_xaxes(tickfont=dict(size=8))
-
-				figauc.update_traces(textfont_size=10, textangle=0, textposition="outside", cliponaxis=False)
-
-
-				title = "3G Auctions (Year-2010) - PWB Value End of Clock Round No "+str(round_number)
-				subtitle = "Unit - Rs Cr; Provisional Winning Bid (bidder willing to pay this amount in that clk round); Source - DoT"
+				title = "3G Auctions (Year-2010) - Bidder's Rank at the End of Clock Round No - "+str(round_number)
+				subtitle = "Unit - RankNo; Higher the Rank More Aggressive is the Bidding; Source - DoT"
 
 				style = "<style>h3 {text-align: left;}</style>"
 				with st.container():
@@ -1831,11 +1825,17 @@ if authentication_status:
 					st.header(title)
 					st.markdown(subtitle)
 
+
+				#Drawning a black border around the heatmap chart 
+				figauc.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
+				figauc.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
+
+				figauc.update_layout(
+					    xaxis=dict(showgrid=False),
+					    yaxis=dict(showgrid=False)
+					)
+
 				st.plotly_chart(figauc, use_container_width=True)
-
-
-
-
 
 
 
