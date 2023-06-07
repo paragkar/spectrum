@@ -1533,7 +1533,7 @@ if authentication_status:
 
 				# st.write(dftemp)
 
-				summarydf = dftemp.groupby(["LSA"]).sum().reset_index()
+				summarydf = dftemp.groupby(["LSA"]).sum().reset_index().drop(columns = "Bidder", axis =1)
 
 				st.write(summarydf)
 
