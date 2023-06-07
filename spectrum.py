@@ -1749,8 +1749,8 @@ if authentication_status:
 					   	height = 650,
 					   	yaxis=dict(
 				        tickmode='array',
-				        ticktext=bidders,
-				        tickvals=list(range(len(bidders)
+				        # ticktext=bidders,
+				        # tickvals=list(range(len(bidders)
 				        	))))
 
 					title = "3G Auctions (Year-2010) - Winners's Rank at the End of Clock Round No - "+str(round_number)
