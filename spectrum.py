@@ -1742,7 +1742,7 @@ if authentication_status:
 					figauc = go.Figure(data=data)
 					figauc.add_trace(go.Scatter(mode="markers", x=dftemp["LSA"], y=dftemp["Bidder"], marker_symbol=[101],
 			                   marker_color="darkgray", 
-			                   marker_line_width=2, marker_size=22, hovertemplate= 'x: %{x}<br>y: %{y}<br>z: %{z}<extra></extra>'))
+			                   marker_line_width=2, marker_size=44, hovertemplate= 'x: %{x}<br>y: %{y}<br>z: %{z}<extra></extra>'))
 
 
 					bidders = sorted(list(set(dftemp["Bidder"])), reverse=True)
