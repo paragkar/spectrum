@@ -1695,7 +1695,7 @@ if authentication_status:
 					dfRank["Rank_Bidder"] = dfRank[["RankNo", "Bidder"]].apply(lambda x: "-".join(map(str, x)), axis=1)
 
 
-				    data = [go.Heatmap(
+					data = [go.Heatmap(
 							z=dftemp["RankCount"],
 					        y= dftemp["Rank_Bidder"],
 					        x=dftemp["LSA"],
@@ -1709,7 +1709,7 @@ if authentication_status:
 								textfont={"size":8},
 								reversescale=True,
 								)
-				    		]
+							]
 
 					figauc = go.Figure(data=data)
 
