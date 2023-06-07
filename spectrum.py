@@ -1695,17 +1695,16 @@ if authentication_status:
 
 					dfRank["Rank_Bidder"] = dfRank[["Bidder", "RankNo"]].apply(lambda x: "-".join(map(str, x)), axis=1)
 
-					# dfRank = dfRank.replace(0, np.nan).dropna(axis =0)
-
 
 					dfRank = dfRank.pivot(index="Rank_Bidder", columns='LSA', values="RankCount")
 
-					st.write(dfRank)
+
+					dfRank = dfRank.replace(0, np.nan).dropna(axis =0)
 
 					data = [go.Heatmap(
-							z=dfRank["RankCount"],
-					        y= dfRank["Rank_Bidder"],
-					        x=dfRank.index,
+							z=dfRank["RankCount"].values,
+					        y= dfRank.index,
+					        x=dfRank.columns
 							xgap = 1,
 							ygap = 1,
 							hoverinfo ='text',
