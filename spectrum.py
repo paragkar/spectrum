@@ -1516,135 +1516,65 @@ if authentication_status:
 
 			if SubFeature == "BidsCircleWise":
 
-				plottype = st.sidebar.selectbox("Select a Plot Type", ["BarSubplots","Heatmap"])
+				round_range = st.slider("Select Auction Round Numbers using the Silder below", value=(0,183))
 
-				if plottype == "BarSubplots":
+				start_round = round_range[0]
 
-					figauc = sp.make_subplots(rows=3, cols=3, subplot_titles=listofbidders, shared_yaxes = True)
+				end_round = round_range[1]
 
-					round_range = st.slider("Select Auction Round Numbers using the Silder below", value=(0,183))
+				filt  =(dfbid["Clk_Round"] > start_round) & (dfbid["Clk_Round"] <= end_round)
 
-					start_round = round_range[0]
+				dfbid = dfbid[filt]
 
-					end_round = round_range[1]
+				dftemp = dfbid.drop(columns=["Possible_Raise_Bid_ClkRd", "Rank_PWB_Start_ClkRd", "Rank_PWB_End_ClkRd"], axis=1)
 
-					filt  =(dfbid["Clk_Round"] > start_round) & (dfbid["Clk_Round"] <= end_round)
+				dftemp = dftemp.groupby(["LSA", "Bidder"]).sum().reset_index()
 
-					dfbid = dfbid[filt]
+				data = [go.Heatmap(
+					z=dftemp["Bid_Decision"],
+			        y= dftemp["Bidder"],
+			        x=dftemp["LSA"],
+					xgap = 1,
+					ygap = 1,
+					hoverinfo ='text',
+					# text = hovertext,
+					colorscale='Hot',
+						texttemplate="%{z}", 
+						textfont={"size":10},
+						reversescale=True,
+						),
+					]
+				figauc = go.Figure(data=data)
 
-					for i, bidder in enumerate(listofbidders):
-					    dftemp1 = dfbid[dfbid["Bidder"] == bidder]
-					    dftemp2 = dftemp1.drop(columns=["Bidder", "Possible_Raise_Bid_ClkRd", "Rank_PWB_Start_ClkRd", "Rank_PWB_End_ClkRd"], axis=1)
-					    dfbidpanindia = dftemp2.groupby(["LSA"]).sum().reset_index()
-					    trace = go.Bar(
-					        name=bidder,
-					        x=dfbidpanindia["LSA"],
-					        # y=dftemp2["Clk_Round"],
-					        y=dfbidpanindia["Bid_Decision"],
-					        yaxis ="y",
-					        showlegend=False,
-					    				)
+				bidders = sorted(list(set(dftemp["Bidder"])), reverse=True)
 
-					    row=(i // 3) + 1
-					    col=(i % 3) + 1
+				figauc.update_layout(
+				    template="seaborn",
+				    xaxis_side= 'top',
+				   	height = 650,
+				   	yaxis=dict(
+			        tickmode='array',
+			        ticktext=bidders,
+			        tickvals=list(range(len(bidders)
+			        	))))
 
+				title = "3G Auctions (Year-2010) - Total Number of Bids in Circles"
+				subtitle = "Unit - Numbers; Source - DoT"
 
-					    # Set the bidder name as bold using HTML tags
-					    trace.text = dfbidpanindia["Bid_Decision"]
-
-					    figauc.add_trace(trace, row=row, col=col)
-
-					    # Remove y-axis labels for integrated subplots
-					    if col != 1:
-					        figauc.update_yaxes(showticklabels=False, row=row, col=col)
-
-
-					figauc.update_layout(
-					    template="plotly_white",
-					   	height = 650,)
-
-					# Update x-axis tick font for all subplots
-					figauc.update_xaxes(tickfont=dict(size=8))
-
-					figauc.update_traces(textfont_size=10, textangle=0, textposition="outside", cliponaxis=False)
-
-
-					title = "3G Auctions (Year-2010) - Total Number of Bids in Circles"
-					subtitle = "Unit - Numbers; Source - DoT"
-
-					style = "<style>h3 {text-align: left;}</style>"
-					with st.container():
-						#plotting the main chart
-						st.markdown(style, unsafe_allow_html=True)
-						st.header(title)
-						st.markdown(subtitle)
+				style = "<style>h3 {text-align: left;}</style>"
+				with st.container():
+					#plotting the main chart
+					st.markdown(style, unsafe_allow_html=True)
+					st.header(title)
+					st.markdown(subtitle)
 
 
-					st.plotly_chart(figauc, use_container_width=True)
+				#Drawning a black border around the heatmap chart 
+				figauc.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
+				figauc.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
 
 
-				if plottype == "Heatmap":
-
-
-					round_range = st.slider("Select Auction Round Numbers using the Silder below", value=(0,183))
-
-					start_round = round_range[0]
-
-					end_round = round_range[1]
-
-					filt  =(dfbid["Clk_Round"] > start_round) & (dfbid["Clk_Round"] <= end_round)
-
-					dfbid = dfbid[filt]
-
-					dftemp = dfbid.drop(columns=["Possible_Raise_Bid_ClkRd", "Rank_PWB_Start_ClkRd", "Rank_PWB_End_ClkRd"], axis=1)
-
-					dftemp = dftemp.groupby(["LSA", "Bidder"]).sum().reset_index()
-
-					data = [go.Heatmap(
-						z=dftemp["Bid_Decision"],
-				        y= dftemp["Bidder"],
-				        x=dftemp["LSA"],
-						xgap = 1,
-						ygap = 1,
-						hoverinfo ='text',
-						# text = hovertext,
-						colorscale='Hot',
-							texttemplate="%{z}", 
-							textfont={"size":10},
-							reversescale=True,
-							),
-						]
-					figauc = go.Figure(data=data)
-
-					bidders = sorted(list(set(dftemp["Bidder"])), reverse=True)
-
-					figauc.update_layout(
-					    template="seaborn",
-					    xaxis_side= 'top',
-					   	height = 650,
-					   	yaxis=dict(
-				        tickmode='array',
-				        ticktext=bidders,
-				        tickvals=list(range(len(bidders)
-				        	))))
-
-					title = "3G Auctions (Year-2010) - Total Number of Bids in Circles"
-					subtitle = "Unit - Numbers; Source - DoT"
-
-					style = "<style>h3 {text-align: left;}</style>"
-					with st.container():
-						#plotting the main chart
-						st.markdown(style, unsafe_allow_html=True)
-						st.header(title)
-						st.markdown(subtitle)
-
-
-					#Drawning a black border around the heatmap chart 
-					figauc.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
-					figauc.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
-
-
-					st.plotly_chart(figauc, use_container_width=True)
+				st.plotly_chart(figauc, use_container_width=True)
 
 			if SubFeature == "RanksCircleWise":
 
