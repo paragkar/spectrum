@@ -1623,9 +1623,6 @@ if authentication_status:
 
 					figauc = go.Figure(data=data)
 
-
-					bidders = sorted(list(set(dftemp["Bidder"])), reverse=True)
-
 					figauc.update_layout(
 					    template="seaborn",
 					    xaxis_side= 'top',
@@ -1697,53 +1694,35 @@ if authentication_status:
 
 					dfRank["Rank_Bidder"] = dfRank[["RankNo", "Bidder"]].apply(lambda x: "-".join(map(str, x)), axis=1)
 
-					st.write(dfRank)
 
-					figauc = sp.make_subplots(rows=3, cols=3, subplot_titles=listofbidders, shared_yaxes = True)
+				    data = [go.Heatmap(
+							z=dftemp["RankCount"],
+					        y= dftemp["Rank_Bidder"],
+					        x=dftemp["LSA"],
+							xgap = 1,
+							ygap = 1,
+							hoverinfo ='text',
+							# text = hovertext,
+							colorscale='Hot',
+							# showscale=False,
+								texttemplate="%{z}", 
+								textfont={"size":8},
+								reversescale=True,
+								)
+				    		]
 
-					for i, bidder in enumerate(listofbidders):
-					    dftemp = dfrank[dfrank["Bidder"] == bidder]
-
-					    trace = go.Heatmap(
-								z=dftemp["RankCount"],
-						        y= dftemp["RankNo"],
-						        x=dftemp["LSA"],
-								xgap = 1,
-								ygap = 1,
-								hoverinfo ='text',
-								# text = hovertext,
-								colorscale='Hot',
-								showscale=False,
-									texttemplate="%{z}", 
-									textfont={"size":8},
-									reversescale=True,
-									)
-
-					    row=(i // 3) + 1
-					    col=(i % 3) + 1
-
-
-					    # Set the bidder name as bold using HTML tags
-					    trace.text = dftemp["Bidder"]
-
-					    figauc.add_trace(trace, row=row, col=col)
-
-
-					    # Remove y-axis labels for integrated subplots
-					    if col != 1:
-					        figauc.update_yaxes(showticklabels=False, row=row, col=col)
-
+					figauc = go.Figure(data=data)
 
 					figauc.update_layout(
-						    template="plotly_white",
-						   	height = 800,)
+					    template="seaborn",
+					    xaxis_side= 'top',
+					   	height = 650,
+					   	yaxis=dict(
+				        tickmode='array',
+				        	))
 
-					# Update x-axis tick font for all subplots
-					figauc.update_xaxes(tickfont=dict(size=8))
-
-
-					title = "3G Auctions (Year-2010) - Total Number of Bids in Circles"
-					subtitle = "Unit - Numbers; Source - DoT"
+					title = "3G Auctions (Year-2010) - Bidder's Rank at the End of Clock Round No - "+str(round_number)
+					subtitle = "Unit - RankNo; Higher the Rank More Aggressive is the Bidding; Source - DoT"
 
 					style = "<style>h3 {text-align: left;}</style>"
 					with st.container():
@@ -1752,6 +1731,14 @@ if authentication_status:
 						st.header(title)
 						st.markdown(subtitle)
 
+					#Drawning a black border around the heatmap chart 
+					figauc.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
+					figauc.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
+
+					figauc.update_layout(
+						    xaxis=dict(showgrid=False),
+						    yaxis=dict(showgrid=False)
+						)
 
 					st.plotly_chart(figauc, use_container_width=True)
 
