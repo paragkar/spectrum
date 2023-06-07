@@ -1786,8 +1786,6 @@ if authentication_status:
 
 				dfrp = dfrp.T
 
-				st.write(dfrp)
-
 				if pwbtype == "Start CLK Round":
 
 					round_number = st.slider("Select Auction Round Numbers using the Silder below", min_value=1, max_value=183, step=1, value = 183)
@@ -1810,9 +1808,7 @@ if authentication_status:
 						pass
 					if chartoption == "ReservePrice X":
 
-						# dftemp = dftemp.div(df2ndrdpwb.to_numpy()).fillna(0)
-						dftemp = dftemp/dfrp
-
+						dftemp = round(dftemp/dfrp,2)
 
 					data = [go.Heatmap(
 						z=dftemp.values,
