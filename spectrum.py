@@ -1810,7 +1810,8 @@ if authentication_status:
 						pass
 					if chartoption == "ReservePrice X":
 
-						dftemp = dftemp.div(df2ndrdpwb.to_numpy()).fillna(0)
+						# dftemp = dftemp.div(df2ndrdpwb.to_numpy()).fillna(0)
+						dftemp = dftemp/dfrp
 
 
 					data = [go.Heatmap(
