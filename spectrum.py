@@ -1698,7 +1698,7 @@ if authentication_status:
 					dfRank = dfRank.replace(0, np.nan).dropna(axis =0)
 
 
-					# st.write(dfRank)
+					st.write(dfRank)
 
 
 					# dfRank = dfRank.pivot(index="Rank_Bidder", columns='LSA', values="RankCount")
