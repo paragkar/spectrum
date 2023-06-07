@@ -1535,10 +1535,19 @@ if authentication_status:
 
 				dftemp["Bid_Decision_Perc"] = round((dftemp["Bid_Decision"]/summarydf["Bid_Decision"])*100,1)
 
-				st.write(dftemp)
+				radio_selection = st.sidebar.radio('Click an Option', ["Absolute Values", "Percentage Values"])
+
+				if radio_selection == "Absolute Values":
+
+					z = dftemp["Bid_Decision"]
+
+				if radio_selection == "Percentage Values":
+
+					z = dftemp["Bid_Decision_Perc"]
+
 
 				data = [go.Heatmap(
-					z=dftemp["Bid_Decision"],
+					z=z,
 			        y= dftemp["Bidder"],
 			        x=dftemp["LSA"],
 					xgap = 1,
@@ -1561,7 +1570,7 @@ if authentication_status:
 			        tickmode='array',
 			        	))
 
-				title = "3G Auctions (Year-2010) - Total Number of Bids in Circles"
+				title = "3G Auctions (Year-2010) - Total Number of Bids in Circles "+"("+radio_selection+")"
 				subtitle = "Unit - Numbers; Source - DoT"
 
 				style = "<style>h3 {text-align: left;}</style>"
