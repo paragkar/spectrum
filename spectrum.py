@@ -1741,19 +1741,21 @@ if authentication_status:
 
 
 					# Calculate the coordinates for the vertical border
-					x_range = data['x'][::-1]  # Reverse x-axis coordinates
-					st.write(x_range[-1])
-					x_start = x_range[-1] - 0.5  # Start from the last x-coordinate - 0.5
-					x_end = x_range[0] - 0.5  # End at the first x-coordinate - 0.5
+					x_range = list(set(data['x']))  # Get unique x-axis values
+					x_start = x_range[-1]  # Start from the last x-coordinate
+					x_end = x_range[0]  # End at the first x-coordinate
 					y_start = data['y'][0]  # Use the first y-coordinate
 					y_end = data['y'][-1]  # Use the last y-coordinate
 
 					# Add a dummy trace for the vertical border
 					dummy_trace = go.Scatter(
-					    x=[x_start, x_end],
-					    y=[y_start, y_end],
+					    x=[x_start, x_end, x_end, x_start, x_start],
+					    y=[y_start, y_start, y_end, y_end, y_start],
 					    mode='lines',
-					    line=dict(color='black', width=1))
+					    line=dict(color='black', width=1),
+					    fill='toself',
+					    fillcolor='rgba(0,0,0,0.1)'
+					)
 
 
 
