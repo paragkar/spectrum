@@ -1761,11 +1761,11 @@ if authentication_status:
 
 				filt  =(dfbid["Clk_Round"] == round_number) 
 
-				dfbid = dfbid[filt]
+				dfbidpwb = dfbid[filt]
 
 
 				for i, bidder in enumerate(listofbidders):
-				    dftemp1 = dfbid[dfbid["Bidder"] == bidder]
+				    dftemp1 = dfbidpwb[dfbidpwb["Bidder"] == bidder]
 				    dftemp2 = dftemp1.drop(columns=["Bidder", "Possible_Raise_Bid_ClkRd", "Rank_PWB_Start_ClkRd","Bid_Decision", "Rank_PWB_End_ClkRd"], axis=1)
 				    dfbidpanindia = dftemp2.groupby(["LSA"]).sum().reset_index()
 				    trace = go.Bar(
