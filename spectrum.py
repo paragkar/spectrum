@@ -1780,7 +1780,7 @@ if authentication_status:
 
 				df2ndrdpwb = df2ndrd.pivot(index="Bidder", columns='LSA', values="PWB_Start_ClkRd").sort_index(ascending=False)
 
-				st.write(df2ndrdpwb)
+				st.write(df2ndrdpwb.mean())
 
 				if pwbtype == "Start CLK Round":
 
