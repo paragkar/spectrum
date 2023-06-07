@@ -1673,7 +1673,7 @@ if authentication_status:
 					dfbidsel = dfbidsel[filt].reset_index()
 
 
-					listofbidders = sorted(list(set(dfbid["Bidder"])))
+					listofbidders = sorted(list(set(dfbidsel["Bidder"])))
 
 					lsas = sorted(list(set(dfbidsel["LSA"])))
 
@@ -1693,27 +1693,27 @@ if authentication_status:
 
 							lst.append([4, lsa, bidder, temp[temp["Rank_PWB_End_ClkRd"]==4]["Rank_PWB_End_ClkRd"].count()])
 
-					dfRank = pd.DataFrame(lst)
+					dfbidsel = pd.DataFrame(lst)
 
-					dfRank.columns = ["RankNo","LSA","Bidder", "RankCount"]
+					dfbidsel.columns = ["RankNo","LSA","Bidder", "RankCount"]
 
-					dfRank = dfRank.set_index("LSA").reset_index()
-
-
-					dfRank["Rank_Bidder"] = dfRank[["RankNo", "Bidder"]].apply(lambda x: "-".join(map(str, x)), axis=1)
+					dfbidsel = dfbidsel.set_index("LSA").reset_index()
 
 
-					dfRank = dfRank.pivot(index="Rank_Bidder", columns='LSA', values="RankCount")
-
-					dfRank = dfRank.sort_index(ascending = False)
+					dfbidsel["Rank_Bidder"] = dfbidsel[["RankNo", "Bidder"]].apply(lambda x: "-".join(map(str, x)), axis=1)
 
 
-					dfRank = dfRank.replace(0, np.nan).dropna(axis =0, how = "all")
+					dfbidsel = dfbidsel.pivot(index="Rank_Bidder", columns='LSA', values="RankCount")
+
+					dfbidsel = dfbidsel.sort_index(ascending = False)
+
+
+					dfbidsel = dfbidsel.replace(0, np.nan).dropna(axis =0, how = "all")
 
 					data = [go.Heatmap(
-							z=dfRank.values,
-					        y= dfRank.index,
-					        x=dfRank.columns,
+							z=dfbidsel.values,
+					        y= dfbidsel.index,
+					        x=dfbidsel.columns,
 							xgap = 1,
 							ygap = 1,
 							hoverinfo ='text',
