@@ -1782,7 +1782,7 @@ if authentication_status:
 
 				dfrp = df2ndrdpwb.mean()
 
-				dfrp.columns = ["ReservePrice"]
+				dfrp.columns = "ReservePrice"
 
 				st.write(dfrp)
 
