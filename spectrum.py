@@ -1776,6 +1776,9 @@ if authentication_status:
 
 				pwbtype = st.sidebar.selectbox("Select a PWB Type", ["Start CLK Round", "End CLK Round"])
 
+				df2ndrd = dfbid[dfbid["Clk_Round"] == 2]
+
+				df2ndrdpwb = df2ndrd.pivot(index="Bidder", columns='LSA', values="PWB_Start_ClkRd").sort_index(ascending=False)
 
 				if pwbtype == "Start CLK Round":
 
@@ -1792,6 +1795,13 @@ if authentication_status:
 					dftemp = dftemp.groupby(["LSA", "Bidder", "PWB_Start_ClkRd"]).sum().reset_index()
 
 					dftemp = dftemp.pivot(index="Bidder", columns='LSA', values="PWB_Start_ClkRd").sort_index(ascending=False)
+
+					chartoption = st.sidebar.radio('Click an Option', ["Absolute Values", "ReservePrice X"])
+
+					if chartoption == "Absolute Values":
+						pass
+					if chartoption == "ReservePrice X":
+						dtemp = dtemp/df2ndrdpwb
 
 					data = [go.Heatmap(
 						z=dftemp.values,
