@@ -1539,13 +1539,13 @@ if authentication_status:
 
 				dftemp["Bid_Decision_Perc"] = round((dftemp["Bid_Decision"]/summarydf["Bid_Decision"])*100,1)
 
-				radio_selection = st.sidebar.radio('Click an Option', ["Absolute Values", "Percentage Values"])
+				radio_selection = st.sidebar.radio('Click an Option', ["Absolute Values", "Percentage of Total"])
 
 				if radio_selection == "Absolute Values":
 
 					z = dftemp["Bid_Decision"]
 
-				if radio_selection == "Percentage Values":
+				if radio_selection == "Percentage of Total":
 
 					z = dftemp["Bid_Decision_Perc"]
 
@@ -1575,7 +1575,7 @@ if authentication_status:
 			        	))
 
 				title = "3G Auctions (Year-2010) - Total Number of Bids in Circles "+"("+radio_selection+")"
-				subtitle = "Unit - Numbers; Source - DoT"
+				subtitle = "Source - DoT"
 
 				style = "<style>h3 {text-align: left;}</style>"
 				with st.container():
