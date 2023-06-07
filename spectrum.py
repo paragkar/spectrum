@@ -1723,7 +1723,7 @@ if authentication_status:
 
 					dftemp = dftemp.groupby(["LSA", "Bidder", "Rank_PWB_End_ClkRd"]).sum().reset_index()
 
-					data = [go.Heatmap(
+					data = go.Heatmap(
 						z=dftemp["Rank_PWB_End_ClkRd"],
 				        y= dftemp["Bidder"],
 				        x=dftemp["LSA"],
@@ -1736,17 +1736,16 @@ if authentication_status:
 							texttemplate="%{z}", 
 							textfont={"size":10},
 							# reversescale=True,
-							),
-						]
+							)
+						
 
 
 					# Add a dummy trace for the vertical border
 					dummy_trace = go.Scatter(
 					    x=[dftemp["LSA"][0], dftemp["LSA"][-1]],
-					    y=[dftemp["Bidder"][0], dftemp["Bidder"[-1]],
-					    mode='lines',
-					    line=dict(color='black', width=1)
-											)
+					    y=[dftemp["Bidder"][0], dftemp["Bidder"[-1]]],
+					    mode='lines',line=dict(color='black', width=1))
+						
 
 					figauc = go.Figure(data=[data, dummy_trace])
 
