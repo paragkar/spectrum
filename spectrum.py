@@ -1676,7 +1676,7 @@ if authentication_status:
 
 						for lsa in lsas:
 
-							temp = dfbid[(dfbid["Bidder"]==bidder) & (dfbid["LSA"]==lsa)]
+							temp = dfbidsel[(dfbidsel["Bidder"]==bidder) & (dfbidsel["LSA"]==lsa)]
 
 							lst.append([1, lsa, bidder, temp[temp["Rank_PWB_End_ClkRd"]==1]["Rank_PWB_End_ClkRd"].count()])
 
