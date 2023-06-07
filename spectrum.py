@@ -1695,7 +1695,7 @@ if authentication_status:
 
 					dfRank = dfRank.set_index("LSA")
 
-					dfRank["Rank_Bidder"] = dfRank[["RankNo", "Bidder"]].apply(lambda x : "-".join(str(x)), axis=1)
+					dfRank["Rank_Bidder"] = dfRank[["RankNo", "Bidder"]].apply(lambda x: "-".join(map(str, x)), axis=1)
 
 					st.write(dfRank)
 
