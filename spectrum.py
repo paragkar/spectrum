@@ -1749,8 +1749,8 @@ if authentication_status:
 				        tickmode='array',
 				        	))
 
-					title = "3G Auctions (Year-2010) - Winners's Rank at the End of Clock Round No - "+str(round_number)
-					subtitle = "Unit - RankNo; Source - DoT"
+					title = "3G Auctions (Year-2010) - Bidder's Rank at the End of Clock Round No - "+str(round_number)
+					subtitle = "Unit - RankNo; Higher the Rank Signifies Aggressive Bidding; Source - DoT"
 
 					style = "<style>h3 {text-align: left;}</style>"
 					with st.container():
