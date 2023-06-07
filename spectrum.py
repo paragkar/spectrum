@@ -1593,9 +1593,9 @@ if authentication_status:
 
 			if SubFeature == "RanksCircleWise":
 
-				plottype = st.sidebar.selectbox("Select a Plot Type", ["Specific Round", "Selected Rounds"])
+				plottype = st.sidebar.selectbox("Select a Plot Type", ["RanksInRound", "AllRanksInRounds"])
 
-				if plottype == "Specific Round":
+				if plottype == "RanksInRound":
 
 					round_number = st.slider("Select Auction Round Numbers using the Silder below", min_value=1, max_value=183, step=1, value = 183)
 
@@ -1658,7 +1658,7 @@ if authentication_status:
 					st.plotly_chart(figauc, use_container_width=True)
 
 
-				if plottype == "Selected Rounds":
+				if plottype == "AllRanksInRounds":
 
 					round_range = st.slider("Select Auction Round Numbers using the Silder below", value=(1,183))
 
