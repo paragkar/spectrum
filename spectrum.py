@@ -1723,7 +1723,7 @@ if authentication_status:
 
 					dftemp = dftemp.groupby(["LSA", "Bidder", "Rank_PWB_End_ClkRd"]).sum().reset_index()
 
-					data = go.Heatmap(
+					data = [go.Heatmap(
 						z=dftemp["Rank_PWB_End_ClkRd"],
 				        y= dftemp["Bidder"],
 				        x=dftemp["LSA"],
@@ -1736,30 +1736,14 @@ if authentication_status:
 							texttemplate="%{z}", 
 							textfont={"size":10},
 							# reversescale=True,
-							)
+							)]
 						
 
+					figauc = go.Figure(data=data)
+					figauc.add_trace(go.Scatter(mode="markers", x=x_patch, y=y_patch, marker_symbol=[101],
+			                   marker_color="darkgray", 
+			                   marker_line_width=2, marker_size=22, hovertemplate= 'x: %{x}<br>y: %{y}<br>z: %{z}<extra></extra>'))
 
-					# Calculate the coordinates for the vertical border
-					x_range = list(set(data['x']))  # Get unique x-axis values
-					x_start = x_range[-1]  # Start from the last x-coordinate
-					x_end = x_range[0]  # End at the first x-coordinate
-					y_start = data['y'][0]  # Use the first y-coordinate
-					y_end = data['y'][-1]  # Use the last y-coordinate
-
-					# Add a dummy trace for the vertical border
-					dummy_trace = go.Scatter(
-					    x=[x_start, x_end, x_end, x_start, x_start],
-					    y=[y_start, y_start, y_end, y_end, y_start],
-					    mode='lines',
-					    line=dict(color='black', width=1),
-					    fill='toself',
-					    fillcolor='rgba(0,0,0,0.1)'
-					)
-
-
-
-					figauc = go.Figure(data=[data, dummy_trace])
 
 					bidders = sorted(list(set(dftemp["Bidder"])), reverse=True)
 
@@ -1783,8 +1767,8 @@ if authentication_status:
 
 
 					#Drawning a black border around the heatmap chart 
-					figauc.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
-					figauc.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
+					# figauc.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
+					# figauc.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
 
 					figauc.update_layout(
 						    xaxis=dict(showgrid=False),
