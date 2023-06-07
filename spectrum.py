@@ -1549,7 +1549,6 @@ if authentication_status:
 
 					z = dftemp["Bid_Decision_Perc"]
 
-
 				data = [go.Heatmap(
 					z=z,
 			        y= dftemp["Bidder"],
@@ -1575,7 +1574,7 @@ if authentication_status:
 			        	))
 
 				title = "3G Auctions (Year-2010) - Total Number of Bids in Circles "+"("+radio_selection+")"
-				subtitle = "Source - DoT"
+				subtitle = "Source - DoT "+"Selected Round Nos - Start-"+start_round+" End- "+end_round
 
 				style = "<style>h3 {text-align: left;}</style>"
 				with st.container():
@@ -1623,9 +1622,6 @@ if authentication_status:
 						
 
 					figauc = go.Figure(data=data)
-					# figauc.add_trace(go.Scatter(mode="markers", x=dftemp["LSA"], y=dftemp["Bidder"], marker_symbol=[101],
-			        #            marker_color="darkgray", 
-			        #            marker_line_width=2, marker_size=44, hovertemplate= 'x: %{x}<br>y: %{y}<br>z: %{z}<extra></extra>'))
 
 
 					bidders = sorted(list(set(dftemp["Bidder"])), reverse=True)
