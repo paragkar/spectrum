@@ -1599,9 +1599,9 @@ if authentication_status:
 
 					filt  =(dfbid["Clk_Round"] == round_number) 
 
-					dfbid = dfbid[filt]
+					dfbidspec = dfbid[filt]
 
-					dftemp = dfbid.drop(columns=["PWB_Start_ClkRd","Possible_Raise_Bid_ClkRd", "Rank_PWB_Start_ClkRd","Bid_Decision","PWB_End_ClkRd"], axis=1).reset_index()
+					dftemp = dfbidspec.drop(columns=["PWB_Start_ClkRd","Possible_Raise_Bid_ClkRd", "Rank_PWB_Start_ClkRd","Bid_Decision","PWB_End_ClkRd"], axis=1).reset_index()
 
 					dftemp = dftemp.groupby(["LSA", "Bidder", "Rank_PWB_End_ClkRd"]).sum().reset_index()
 
@@ -1664,11 +1664,11 @@ if authentication_status:
 
 					filt  =(dfbid["Clk_Round"] > start_round) & (dfbid["Clk_Round"] <= end_round)
 
-					dfbid = dfbid[filt].reset_index()
+					dfbidsel = dfbid[filt].reset_index()
 
-					listofbidders = sorted(list(set(dfbid["Bidder"])))
+					listofbidders = sorted(list(set(dfbidsel["Bidder"])))
 
-					lsas = sorted(list(set(dfbid["LSA"])))
+					lsas = sorted(list(set(dfbidsel["LSA"])))
 
 					lst =[]
 
