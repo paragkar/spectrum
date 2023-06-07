@@ -1874,6 +1874,14 @@ if authentication_status:
 
 					dftemp = dftemp.pivot(index="Bidder", columns='LSA', values="PWB_End_ClkRd").sort_index(ascending=False)
 
+					chartoption = st.sidebar.radio('Click an Option', ["Absolute Values", "ReservePrice X"])
+
+					if chartoption == "Absolute Values":
+						pass
+					if chartoption == "ReservePrice X":
+
+						dftemp = round(dftemp/dfrp,2)
+
 					data = [go.Heatmap(
 						z=dftemp.values,
 				        y= dftemp.index,
