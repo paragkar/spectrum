@@ -1689,10 +1689,12 @@ if authentication_status:
 
 							lst.append([4, lsa, bidder, temp[temp["Rank_PWB_End_ClkRd"]==4]["Rank_PWB_End_ClkRd"].count()])
 
-					dfrank = pd.DataFrame(lst)
+					dfRank = pd.DataFrame(lst)
 
 
-					dfrank.columns = ["RankNo","LSA","Bidder", "RankCount"]
+					dfRank.columns = ["RankNo","LSA","Bidder", "RankCount"]
+
+					st.write(dfRank)
 
 					figauc = sp.make_subplots(rows=3, cols=3, subplot_titles=listofbidders, shared_yaxes = True)
 
