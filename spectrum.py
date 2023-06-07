@@ -1516,7 +1516,7 @@ if authentication_status:
 
 			if SubFeature == "BidsCircleWise":
 
-				round_range = st.slider("Select Auction Round Numbers using the Silder below", value=(0,183))
+				round_range = st.slider("Select Auction Round Numbers using the Silder below", value=(1,183))
 
 				start_round = round_range[0]
 
@@ -1660,15 +1660,13 @@ if authentication_status:
 
 				if plottype == "Selected Rounds":
 
-					round_range = st.slider("Select Auction Round Numbers using the Silder below", value=(0,183))
+					round_range = st.slider("Select Auction Round Numbers using the Silder below", value=(1,183))
 
 					start_round = round_range[0]
 
 					end_round = round_range[1]
 
 					dfbidsel = dfbid.copy()
-
-					st.write(dfbidsel)
 
 					filt  =(dfbidsel["Clk_Round"] > start_round) & (dfbidsel["Clk_Round"] <= end_round)
 
