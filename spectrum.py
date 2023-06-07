@@ -1750,7 +1750,7 @@ if authentication_status:
 				        	))
 
 					title = "3G Auctions (Year-2010) - Bidder's Rank at the End of Clock Round No - "+str(round_number)
-					subtitle = "Unit - RankNo; Higher the Rank Signifies Aggressive Bidding; Source - DoT"
+					subtitle = "Unit - RankNo; Higher the Rank More Aggressive is the Bidding; Source - DoT"
 
 					style = "<style>h3 {text-align: left;}</style>"
 					with st.container():
