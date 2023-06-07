@@ -1533,7 +1533,7 @@ if authentication_status:
 
 				summarydf = dftemp.groupby(["LSA"]).sum().reset_index().drop(columns = "Bidder", axis =1)
 
-				dftemp["Bid_Decision_Perc"] = dftemp["Bid_Decision"]/summarydf["Bid_Decision"]
+				dftemp["Bid_Decision_Perc"] = round((dftemp["Bid_Decision"]/summarydf["Bid_Decision"])*100,1)
 
 				st.write(dftemp)
 
