@@ -1542,7 +1542,7 @@ if authentication_status:
 				dftemp["Bid_Decision_Perc"] = round((dftemp["Bid_Decision"]/summarydf["Bid_Decision"])*100,1)
 
 
-				dftemp = dftemp.sort_index(ascending = False).reset_index()
+				dftemp = dftemp.sort_index(ascending = True).reset_index()
 
 
 				radio_selection = st.sidebar.radio('Click an Option', ["Absolute Values", "Percentage of Total"])
