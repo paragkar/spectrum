@@ -1716,7 +1716,7 @@ if authentication_status:
 					figauc.update_layout(
 					    template="seaborn",
 					    xaxis_side= 'top',
-					   	height = 650,
+					   	height = 800,
 					   	yaxis=dict(
 				        tickmode='array',
 				        	))
