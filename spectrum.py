@@ -1668,9 +1668,9 @@ if authentication_status:
 
 					st.write(dfbidsel)
 
-					listofbidders = sorted(list(set(dfbid["Bidder"])))
+					listofbidders = sorted(list(set(dfbidsel["Bidder"])))
 
-					lsas = sorted(list(set(dfbid["LSA"])))
+					lsas = sorted(list(set(dfbidsel["LSA"])))
 
 					lst =[]
 
