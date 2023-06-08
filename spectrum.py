@@ -953,7 +953,7 @@ if authentication_status:
 #processing hovertext for auction data 
 
 
-	def htext_auctiondata_2010_3G_BidsCircleWise(dfbidcirclwise, dftemp)
+	def htext_auctiondata_2010_3G_BidsCircleWise(dfbidcirclwise, dftemp):
 
 		filt_last_round = (dfbidcirclwise["Clk_Round"] == 183)
 
