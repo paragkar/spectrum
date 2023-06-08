@@ -1020,9 +1020,11 @@ if authentication_status:
 			dict_result[yy]=list_result
 
 		temp = pd.DataFrame(dict_col).T
+
+		st.write(temp) #debug
+
 		temp.columns = dftempheatabs.columns
 
-		st.write(dict_result)
 
 		resultdf = pd.DataFrame(dict_result).T
 
