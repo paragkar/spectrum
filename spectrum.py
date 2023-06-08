@@ -2010,19 +2010,8 @@ if authentication_status:
 
 						df = dftemp.copy()
 
-						min_bids=[]
-						for col in df.columns:
-							min_bid = min([x for x in list(df[col]) if x != np.nan])
-							min_bids.append(min_bid)
-						st.write(min_bids)
-
-						outflow=[]
-
-						for i,row in enumerate(df.values):
-							row = [1 if value >0 else 0 for value in row]
-							outflow.append(row)
-
-						# st.write(outflow)
+						for row in df.values:
+							st.write(row)
 
 					if chartoption == "ReservePrice Multiple":
 
