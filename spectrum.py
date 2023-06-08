@@ -1028,8 +1028,6 @@ if authentication_status:
 
 		colormatrix = temp.pivot(index='Bidder', columns='Circle', values="Color")
 
-		colormatrix = colormatrix.sort_values(selected_lsa, ascending = True)
-
 		st.write(colormatrix) #debug
 		
 		colormatrix = list(colormatrix.values)
