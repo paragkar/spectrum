@@ -992,7 +992,7 @@ if authentication_status:
 
 					     .format( 
 						    yy,
-						    xx,
+						    state_dict[xx],
 						    totalbidsagg,
 						    totalbissperc,
 						    finalrank,
