@@ -953,7 +953,7 @@ if authentication_status:
 #processing hovertext for auction data 
 
 	@st.cache_resource
-	def htext_auctiondata_2010_3G_BidsCircleWise(dfbidcirclwise, dftemp, selected_lsa):
+	def htext_colormatrix_auctiondata_2010_3G_BidsCircleWise(dfbidcirclwise, dftemp, selected_lsa):
 
 		filt_last_round = (dfbidcirclwise["Clk_Round"] == 183)
 
@@ -983,11 +983,29 @@ if authentication_status:
 				except:
 					finalrank = np.nan
 
+				if finalrank in [1,2,3,4]:
+					result = "WON"
+				else:
+					result = "LOST"
+
+				if result == "WON":
+					ccode = '#008000' #(green)
+				if result == "LOST":
+					ccode = '#FF0000' #(red)
+				else:
+					ccode = '#808080' #(grey)
+				lst.append([yy,xx,ccode])
+				temp = pd.DataFrame(lst)
+				temp.columns = ["Bidder", "Circle", "Color"]
+				colormatrix = temp.pivot(index='Bidder', columns='Circle', values="Color")
+				colormatrix = list(colormatrix.values)
+
 				hovertext[-1].append(
 						    'Bidder: {}\
 						    <br>Circle: {}\
 						    <br>Total Bids: {} Nos\
 						    <br>Total Bids: {} % of Total\
+						    <br>Result : {}\
 						    <br>Final Rank: {}'
 
 					     .format( 
@@ -995,10 +1013,11 @@ if authentication_status:
 						    state_dict[xx],
 						    totalbidsagg,
 						    totalbissperc,
+						    result,
 						    finalrank,
 						    )
 						    )
-		return hovertext
+		return hovertext, colormatrix
 
 
 #----------------New Code Ends Here------------------------------
@@ -1621,9 +1640,10 @@ if authentication_status:
 
 				dftempheat = dftempheat.sort_values(selected_lsa[0], ascending = True)
 
-
-				hovertext = htext_auctiondata_2010_3G_BidsCircleWise(dfbidcirclwise, dftemp,selected_lsa[0])
-
+				#processing hovertext and colormatrix
+				hovertext,colormatrix = htext_colormatrix_auctiondata_2010_3G_BidsCircleWise(dfbidcirclwise, dftemp,selected_lsa[0])
+				hoverlabel_bgcolor = colormatrix 
+		
 
 				data = [go.Heatmap(
 					z=dftempheat.values,
@@ -1662,6 +1682,8 @@ if authentication_status:
 				#Drawning a black border around the heatmap chart 
 				figauc.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
 				figauc.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
+
+				figauc.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 
 				st.plotly_chart(figauc, use_container_width=True)
 
