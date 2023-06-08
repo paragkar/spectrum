@@ -2010,21 +2010,14 @@ if authentication_status:
 
 						df = dftemp.copy()
 
-						# Calculate the outflow for each bidder
-						outflow = []
-						for _, row in df.iterrows():
-						    bidder = row['Bidder']
-						    min_bids = []
-						    for column in df.columns[1:]:
-						        if row[column] != 0:
-						            min_bids.append(row[column])
-						    outflow.append(sum(min_bids))
-
-						# Add the outflow column to the DataFrame
-						df['Outflow'] = outflow
-
-						st.write(df)
-
+						min_bids=[]
+					    for col in df.columns:
+					    	min_bids.append(min([value for value in list(df[col]) if value != 0]))
+					    outflow=[]
+					    for i, row in enumerate(df.columns):
+					    	row = [1 for x in row if x >0]
+					    	outflow.append(sum(row * min_bids[i]))
+					    st.write(outflow)
 
 					if chartoption == "ReservePrice Multiple":
 
