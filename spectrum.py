@@ -1828,11 +1828,11 @@ if authentication_status:
 
 					dftemp = dftemp.pivot(index="Bidder", columns='LSA', values="PWB_Start_ClkRd").sort_index(ascending=False)
 
-					chartoption = st.sidebar.radio('Click an Option', ["Absolute Values", "ReservePrice X"])
+					chartoption = st.sidebar.radio('Click an Option', ["Absolute Values", "ReservePrice Multiple"])
 
 					if chartoption == "Absolute Values":
 						pass
-					if chartoption == "ReservePrice X":
+					if chartoption == "ReservePrice Multiple":
 
 						dftemp = round(dftemp/dfrp,2)
 
@@ -1900,11 +1900,11 @@ if authentication_status:
 
 					dftemp = dftemp.pivot(index="Bidder", columns='LSA', values="PWB_End_ClkRd").sort_index(ascending=False)
 
-					chartoption = st.sidebar.radio('Click an Option', ["Absolute Values", "ReservePrice X"])
+					chartoption = st.sidebar.radio('Click an Option', ["Absolute Values", "ReservePrice Multiple"])
 
 					if chartoption == "Absolute Values":
 						pass
-					if chartoption == "ReservePrice X":
+					if chartoption == "ReservePrice Multiple":
 
 						dftemp = round(dftemp/dfrp,2)
 
