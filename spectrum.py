@@ -2019,7 +2019,7 @@ if authentication_status:
 
 						for i,row in enumerate(df.values):
 							row = [1 for x in row if x >0]
-							outflow.append(sum(row * min_bids[i]))
+							outflow.append(row)
 
 						st.write(outflow)
 
