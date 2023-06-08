@@ -1631,7 +1631,7 @@ if authentication_status:
 
 					selected_lsa = [k for k, v in state_dict.items() if v == sortbylsa]
 
-					dftempheat = dftempheat.sort_values(selected_lsa[0], ascending = True)
+					dftempheat = dftempheat.sort_values(selected_lsa[0], ascending = False)
 
 
 					data = [go.Heatmap(
