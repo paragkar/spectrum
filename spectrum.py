@@ -2032,9 +2032,11 @@ if authentication_status:
 						# Apply the function to each cell in the DataFrame
 						matrix = df.applymap(replace_func)
 
-						df_final = matrix.T * mindf.T
+						df_final = matrix * mindf.values
 
 						st.write(df_final)
+
+
 
 
 
