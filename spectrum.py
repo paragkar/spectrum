@@ -1633,7 +1633,7 @@ if authentication_status:
 
 				selected_lsa = [k for k, v in state_dict.items() if v == sortbylsa]
 
-				dftempheat = dftempheat.sort_values(selected_lsa[0], ascending = True)
+				# dftempheat = dftempheat.sort_values(selected_lsa[0], ascending = True)
 
 				#processing hovertext and colormatrix
 				hovertext,colormatrix,resultdf = htext_colormatrix_auctiondata_2010_3G_BidsCircleWise(dfbidcirclwise, dftemp,selected_lsa[0])
@@ -1671,6 +1671,8 @@ if authentication_status:
 				# #processing hovertext and colormatrix
 				# hovertext,colormatrix,resultdf = htext_colormatrix_auctiondata_2010_3G_BidsCircleWise(dfbidcirclwise, dftemp,selected_lsa[0])
 				# hoverlabel_bgcolor = colormatrix
+
+				dftempheat = dftempheat.sort_values(selected_lsa[0], ascending = True)
 
 
 				data = [go.Heatmap(
