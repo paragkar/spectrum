@@ -2012,7 +2012,7 @@ if authentication_status:
 
 						min_bids=[]
 						for col in df.columns:
-							min_bids.append(min([value for value in list(df[col]) if value != 0]))
+							min_bids.append([x for x in list(df[col]) if x !=0])
 
 						st.write(min_bids)
 
@@ -2022,7 +2022,7 @@ if authentication_status:
 							row = [1 if value >0 else 0 for value in row]
 							outflow.append(row)
 
-						st.write(outflow)
+						# st.write(outflow)
 
 					if chartoption == "ReservePrice Multiple":
 
