@@ -2010,13 +2010,21 @@ if authentication_status:
 
 						df = dftemp.copy()
 
-						# Calculate total value of bids (minimum bids across all circles)
-						df['TotalBids'] = df.iloc[:, 1:].min(axis=1)
+						# Calculate the outflow for each bidder
+						outflow = []
+						for _, row in df.iterrows():
+						    bidder = row['Bidder']
+						    min_bids = []
+						    for column in df.columns[1:]:
+						        if row[column] != 0:
+						            min_bids.append(row[column])
+						    outflow.append(sum(min_bids))
 
-						# Calculate outflow (minimum bids in circles where bidder has submitted a non-zero bid)
-						df['Outflow'] = df.apply(lambda row: row.iloc[1:].min() if row['TotalBids'] > 0 else 0, axis=1)
+						# Add the outflow column to the DataFrame
+						df['Outflow'] = outflow
 
 						st.write(df)
+
 
 					if chartoption == "ReservePrice Multiple":
 
