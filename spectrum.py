@@ -2056,7 +2056,7 @@ if authentication_status:
 						col2.plotly_chart(figpanindiabids, use_container_width=True)
 
 					if chartoption =="ReservePrice Multiple":
-						st.plotly_chart(figpanindiabids, use_container_width=True)
+						st.plotly_chart(figauc, use_container_width=True)
 
 
 
@@ -2139,7 +2139,7 @@ if authentication_status:
 						col2.plotly_chart(figpanindiabids, use_container_width=True)
 
 					if chartoption == "ReservePrice Multiple":
-						st.plotly_chart(figpanindiabids, use_container_width=True)
+						st.plotly_chart(figauc, use_container_width=True)
 
 
 #---------------New Auction Bid Data Cide Ends Here----------------------
