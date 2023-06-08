@@ -2058,8 +2058,6 @@ if authentication_status:
 
 					dftemp = dftemp.pivot(index="Bidder", columns='LSA', values="PWB_End_ClkRd").sort_index(ascending=False)
 
-					dftemp1 = dftemp.copy()
-
 					chartoption = st.sidebar.radio('Click an Option', ["Absolute Values", "ReservePrice Multiple"])
 
 					if chartoption == "Absolute Values":
@@ -2069,8 +2067,6 @@ if authentication_status:
 					if chartoption == "ReservePrice Multiple":
 
 						dftemp = round(dftemp/dfrp,1)
-
-						figpanindiabids = plotbiddertotal(dftemp1)
 
 					data = [go.Heatmap(
 						z=dftemp.values,
