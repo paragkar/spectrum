@@ -1653,15 +1653,8 @@ if authentication_status:
 				hovertext,colormatrix,resultdf = htext_colormatrix_auctiondata_2010_3G_BidsCircleWise(dfbidcirclwise, dftemp,selected_lsa[0])
 				hoverlabel_bgcolor = colormatrix
 
-				# st.write(resultdf)
+				combined_data = dftempheat.astype(int).astype(str) +resultdf #for texttemplete
 
-				combined_data = dftempheat.astype(int).astype(str) +resultdf
-
-				# st.write(combined_data)
-
-
-				# hover_template = 'Value: %{z}<br>Additional: %{text}'
-		
 
 				data = [go.Heatmap(
 					z=dftempheat.values,
@@ -1679,6 +1672,8 @@ if authentication_status:
 						),
 					]
 				figauc = go.Figure(data=data)
+
+				figauc.update_traces(text=combined_data, texttemplate="%{text}", textfont_size=10)
 
 				figauc.update_layout(
 				    template="seaborn",
