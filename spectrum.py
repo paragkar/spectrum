@@ -1998,10 +1998,14 @@ if authentication_status:
 					if chartoption == "Absolute Values":
 
 						figpanindiabids = plotbiddertotal(dftemp)
+
+						showscale = False
 				
 					if chartoption == "ReservePrice Multiple":
 
 						dftemp = round(dftemp/dfrp,2)
+
+						showscale = True
 
 					data = [go.Heatmap(
 						z=dftemp.values,
@@ -2012,7 +2016,7 @@ if authentication_status:
 						hoverinfo ='text',
 						# text = hovertext,
 						colorscale='Hot',
-						showscale=False,
+						showscale=showscale,
 							texttemplate="%{z}", 
 							textfont={"size":10},
 							reversescale=True,
@@ -2082,9 +2086,13 @@ if authentication_status:
 
 						figpanindiabids = plotbiddertotal(dftemp)
 
+						showscale =False
+
 					if chartoption == "ReservePrice Multiple":
 
 						dftemp = round(dftemp/dfrp,1)
+
+						showscale =True
 
 					data = [go.Heatmap(
 						z=dftemp.values,
@@ -2095,7 +2103,7 @@ if authentication_status:
 						hoverinfo ='text',
 						# text = hovertext,
 						colorscale='Hot',
-						showscale=False,
+						showscale=showscale,
 							texttemplate="%{z}", 
 							textfont={"size":10},
 							reversescale=True,
