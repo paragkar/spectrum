@@ -1628,11 +1628,11 @@ if authentication_status:
 
 					# #sort by LSA 
 
-					sortbylsa = st.sidebar.selectbox("Select a Circle to Sort", state_dict.values())
+					# sortbylsa = st.sidebar.selectbox("Select a Circle to Sort", state_dict.values())
 
-					selected_lsa = [k for k, v in state_dict.items() if v == sortbylsa]
+					# selected_lsa = [k for k, v in state_dict.items() if v == sortbylsa]
 
-					dftemp = dftemp.sort_values(selected_lsa[0], ascending = True)
+					# dftemp = dftemp.sort_values(selected_lsa[0], ascending = True)
 
 
 					data = [go.Heatmap(
