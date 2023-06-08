@@ -1020,7 +1020,7 @@ if authentication_status:
 		temp = pd.DataFrame(dict_col).T
 		temp.columns = dftempheatabs.columns
 
-		resultdf = pd.DataFrame(dict_result)
+		resultdf = pd.DataFrame(dict_result).T
 
 		resultdf.columns = dftempheatabs.columns
 
