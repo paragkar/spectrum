@@ -998,6 +998,9 @@ if authentication_status:
 				lst.append([yy,xx,ccode])
 				temp = pd.DataFrame(lst)
 				temp.columns = ["Bidder", "Circle", "Color"]
+
+				st.write(temp) #debug
+
 				colormatrix = temp.pivot(index='Bidder', columns='Circle', values="Color")
 				colormatrix = list(colormatrix.values)
 
