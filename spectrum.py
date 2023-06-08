@@ -2040,9 +2040,9 @@ if authentication_status:
 						
 						panindiabids = bidvalue(dftemp).sort_index()
 
-						panindiabids.columns =["PanIndiaBid"]
+						# panindiabids.columns =["PanIndiaBid"]
 
-						st.write(panindiabids)
+						st.write(panindiabids.columns)
 
 					if chartoption == "ReservePrice Multiple":
 
