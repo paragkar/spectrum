@@ -1660,6 +1660,8 @@ if authentication_status:
 
 					hovertext = resultdf.values
 
+					dftempheat = dftemp.pivot(index="Bidder", columns='LSA', values="Bid_Decision")
+
 				# # #sort by LSA 
 
 				# sortbylsa = st.sidebar.selectbox("Select a Circle to Sort", state_dict.values())
@@ -1765,7 +1767,7 @@ if authentication_status:
 						# text = hovertext,
 						colorscale='Hot',
 						# showscale=False,
-							texttemplate="%{text}", 
+							texttemplate="%{z}", 
 							textfont={"size":10},
 							# reversescale=True,
 							)]
