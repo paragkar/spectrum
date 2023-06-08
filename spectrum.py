@@ -2011,7 +2011,7 @@ if authentication_status:
 
 						#function used to calculate the total bid values 
 
-						df bidvalue(df):
+						def bidvalue(df):
 
 							df = dftemp.copy()
 							df = df.replace(np.nan, 0)
