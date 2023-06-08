@@ -1022,9 +1022,9 @@ if authentication_status:
 		temp = pd.DataFrame(dict_col).T
 		temp.columns = dftempheatabs.columns
 
-		resultdf = pd.DataFrame(dict_result).T
+		st.write(dict_result)
 
-		st.write(resultdf) #debug
+		resultdf = pd.DataFrame(dict_result).T
 
 		resultdf.columns = dftempheatabs.columns 
 		
