@@ -2020,6 +2020,9 @@ if authentication_status:
 
 						st.write(min_values)
 
+						st.write(df.replace(r'[1-9.]+',1))
+
+
 
 					if chartoption == "ReservePrice Multiple":
 
