@@ -1645,14 +1645,14 @@ if authentication_status:
 				if radio_selection == "Absolute Values":
 
 					dftempheat = dftemp.pivot(index="Bidder", columns='LSA', values="Bid_Decision")
-					texttemplate = "%{z}",
+					texttemplate = "%{z}"
 
 					# z = dftemp["Bid_Decision"]
 
 				if radio_selection == "Percentage of Total":
 
 					dftempheat = dftemp.pivot(index="Bidder", columns='LSA', values="Bid_Decision_Perc")
-					texttemplate = "%{z}",
+					texttemplate = "%{z}"
 
 					# z = dftemp["Bid_Decision_Perc"]
 
