@@ -1561,8 +1561,8 @@ if authentication_status:
 
 				data = [go.Heatmap(
 					z=z,
-			        y= dftemp.index,
-			        x=dftemp.columns,
+			        y= dftemp["LSA"],
+			        x=dftemp["Bidder"],
 					xgap = 1,
 					ygap = 1,
 					hoverinfo ='text',
