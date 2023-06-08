@@ -2011,7 +2011,7 @@ if authentication_status:
 						df = dftemp.copy()
 
 						for col in df.columns:
-							st.write(col, min([x for x in df[col] if (x >0 or x !=np.nan)]))
+							st.write(col, max([x for x in df[col] if (x >0 or x !=np.nan)]))
 
 					if chartoption == "ReservePrice Multiple":
 
