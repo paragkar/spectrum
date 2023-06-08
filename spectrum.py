@@ -2037,6 +2037,8 @@ if authentication_status:
 					chartoption = st.sidebar.radio('Click an Option', ["Absolute Values", "ReservePrice Multiple"])
 
 					if chartoption == "Absolute Values":
+
+						dftemp = round(dftemp,1)
 						
 						panindiabids = bidvalue(dftemp).sort_index().reset_index()
 
@@ -2048,7 +2050,7 @@ if authentication_status:
 
 					if chartoption == "ReservePrice Multiple":
 
-						dftemp = round(dftemp/dfrp,2)
+						dftemp = round(dftemp/dfrp,1)
 
 					data = [go.Heatmap(
 						z=dftemp.values,
