@@ -912,7 +912,7 @@ if authentication_status:
 						    )
 		return hovertext
 
-#-------------------New Code Starts-----------------------------------
+
 	#processing for hovertext for Business Data and License Fees
 	@st.cache_resource
 	def htext_businessdata_licensefees(dflfsfbysubfeature, summarydf_for_hovertext): 
@@ -949,7 +949,56 @@ if authentication_status:
 		return hovertext	
 
 
-#------------------New Code Ends--------------------------------
+#----------------New Code Starts Here------------------------------
+#processing hovertext for auction data 
+
+
+	def htext_auctiondata_2010_3G_BidsCircleWise(dfbidcirclwise, dftemp)
+
+		filt_last_round = (dfbidcirclwise["Clk_Round"] == 183)
+
+		dfbidcirclwiselastrd = dfbidcirclwise[filt_last_round].drop(columns = ["Clk_Round","PWB_Start_ClkRd","Rank_PWB_Start_ClkRd",
+			"Possible_Raise_Bid_ClkRd","Bid_Decision","PWB_End_ClkRd"], axis =1).reset_index()
+
+		dfbidcirclwiselastrd = dfbidcirclwiselastrd.pivot(index="Bidder", columns='LSA', values="Rank_PWB_End_ClkRd").sort_index(ascending=False)
+
+		dftempheatperc = dftemp.pivot(index="Bidder", columns='LSA', values="Bid_Decision_Perc")
+
+		dftempheatabs = dftemp.pivot(index="Bidder", columns='LSA', values="Bid_Decision")
+
+
+		for yi,yy in enumerate(dftempheatabs.index):
+			hovertext.append([])
+			for xi,xx in enumerate(dftempheatabs.columns):
+
+				totalbidsagg = dftempheatabs.loc[yy,xx]
+				totalbissperc = dftempheatperc.loc[yy,xx]
+
+				try:
+					finalrank = dfbidcirclwise.loc[yy,xx]
+				except:
+					finalrank = np.nan
+
+				hovertext[-1].append(
+						    'Bidder: {}\
+						    <br>Circle: {}\
+						    <br>Total Bids: {} Nos\
+						    <br>Total Bids: {} % of Total\
+						    <br>Final Rank: {}'
+
+					     .format( 
+						    yy,
+						    xx,
+						    totalbidsagg,
+						    totalbissperc,
+						    finalrank,
+						    )
+						    )
+		return hovertext
+
+
+#----------------New Code Ends Here------------------------------
+
 
 
 	#preparing color scale for hoverbox for Spectrum and Expiry maps
@@ -1524,17 +1573,6 @@ if authentication_status:
 
 				dfbidcirclwise = dfbid.copy()
 
-				#filter data for the last round first for deciding the winners
-
-				filt_last_round = (dfbidcirclwise["Clk_Round"] == 183)
-
-				dfbidcirclwiselastrd = dfbidcirclwise[filt_last_round].drop(columns = ["Clk_Round","PWB_Start_ClkRd","Rank_PWB_Start_ClkRd",
-					"Possible_Raise_Bid_ClkRd","Bid_Decision","PWB_End_ClkRd"], axis =1).reset_index()
-
-				dfbidcirclwiselastrd = dfbidcirclwiselastrd.pivot(index="Bidder", columns='LSA', values="Rank_PWB_End_ClkRd").sort_index(ascending=False)
-
-				st.write(dfbidcirclwiselastrd)
-
 
 				#filter data within the block of selected rounds 
 
@@ -1579,6 +1617,10 @@ if authentication_status:
 
 				dftempheat = dftempheat.sort_values(selected_lsa[0], ascending = True)
 
+
+				hovertext = htext_auctiondata_2010_3G_BidsCircleWise(dfbidcirclwise, dftemp)
+
+
 				data = [go.Heatmap(
 					z=dftempheat.values,
 			        x=dftempheat.columns,
@@ -1586,7 +1628,7 @@ if authentication_status:
 					xgap = 1,
 					ygap = 1,
 					hoverinfo ='text',
-					# text = hovertext,
+					text = hovertext,
 					colorscale='Hot',
 						texttemplate="%{z}", 
 						textfont={"size":10},
