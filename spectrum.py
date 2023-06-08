@@ -2009,9 +2009,13 @@ if authentication_status:
 					if chartoption == "Absolute Values":
 
 						df = dftemp.copy()
-
+						lst =[]
 						for col in df.columns:
-							st.write(col,list(df[col]))
+							for value in list(df[col]):
+								if value != np.nan:
+								lst.append(value)
+							st.write(lst)
+
 
 					if chartoption == "ReservePrice Multiple":
 
