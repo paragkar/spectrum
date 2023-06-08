@@ -2020,8 +2020,8 @@ if authentication_status:
 						for i,row in enumerate(df.columns):
 							row = [1 for x in row if x >0]
 							outflow.append(sum(row * min_bids[i]))
-							
-					    st.write(outflow)
+
+						st.write(outflow)
 
 					if chartoption == "ReservePrice Multiple":
 
