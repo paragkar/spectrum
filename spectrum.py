@@ -2049,13 +2049,13 @@ if authentication_status:
 						    yaxis=dict(showgrid=False)
 						)
 
-					if chartoption = "Absolute Values":
+					if chartoption == "Absolute Values":
 						col1,col2 = st.columns([8,1]) #create collumns of uneven width
 						col1.plotly_chart(figauc, use_container_width=True)
 						col2.header("")
 						col2.plotly_chart(figpanindiabids, use_container_width=True)
 
-					if chartoption ="ReservePrice Multiple":
+					if chartoption =="ReservePrice Multiple":
 						st.plotly_chart(figpanindiabids, use_container_width=True)
 
 
@@ -2132,13 +2132,13 @@ if authentication_status:
 						    yaxis=dict(showgrid=False)
 						)
 
-					if chartoption = "Absolute Values":
+					if chartoption == "Absolute Values":
 						col1,col2 = st.columns([8,1]) #create collumns of uneven width
 						col1.plotly_chart(figauc, use_container_width=True)
 						col2.header("")
 						col2.plotly_chart(figpanindiabids, use_container_width=True)
 
-					if chartoption ="ReservePrice Multiple":
+					if chartoption == "ReservePrice Multiple":
 						st.plotly_chart(figpanindiabids, use_container_width=True)
 
 
