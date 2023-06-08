@@ -2042,7 +2042,7 @@ if authentication_status:
 
 						panindiabids.columns =["Bidder","PanIndiaBid"]
 
-						panindiabids = panindiabids.set_index("Bidders")
+						panindiabids = panindiabids.set_index("Bidder")
 
 						st.write(panindiabids)
 
