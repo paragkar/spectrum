@@ -2038,11 +2038,13 @@ if authentication_status:
 
 					if chartoption == "Absolute Values":
 						
-						panindiabids = bidvalue(dftemp).sort_index()
+						panindiabids = bidvalue(dftemp).sort_index().reset_index()
 
-						# panindiabids.columns =["PanIndiaBid"]
+						panindiabids.columns =["Bidder","PanIndiaBid"]
 
-						st.write(panindiabids.columns)
+						panindiabids = panindiabids.set_index("Bidders")
+
+						st.write(panindiabids)
 
 					if chartoption == "ReservePrice Multiple":
 
