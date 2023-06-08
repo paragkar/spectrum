@@ -1593,6 +1593,8 @@ if authentication_status:
 
 		df_final = df_final.sum(axis =1).round(1)
 
+		df_final.columns ="PanIndiaBid"
+
 		return df_final
 
 	if selected_dimension == "Auction Data":
