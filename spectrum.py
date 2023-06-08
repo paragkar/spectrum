@@ -970,7 +970,7 @@ if authentication_status:
 
 		dftempheatabs = dftempheatabs.sort_values(selected_lsa, ascending = True)
 
-		st.write(dftempheatabs) #debug
+		st.write(dfbidcirclwiselastrd) #debug
 
 		hovertext = []
 		dict_col={}
