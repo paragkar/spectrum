@@ -2104,7 +2104,7 @@ if authentication_status:
 						    yaxis=dict(showgrid=False)
 						)
 
-					col1,col2 = st.columns([10,1]) #create collumns of uneven width
+					col1,col2 = st.columns([8,1]) #create collumns of uneven width
 					col1.plotly_chart(figauc, use_container_width=True)
 					col2.header("")
 					col2.plotly_chart(figpanindiabids, use_container_width=True)
