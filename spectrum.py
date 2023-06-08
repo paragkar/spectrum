@@ -1023,12 +1023,10 @@ if authentication_status:
 		resultdf = pd.DataFrame(dict_result).T
 
 		resultdf.columns = dftempheatabs.columns
-
-		st.write(resultdf)
 		
 		colormatrix = list(temp.values)
 
-		return hovertext, colormatrix
+		return hovertext, colormatrix, resultdf
 
 
 #----------------New Code Ends Here------------------------------
@@ -1652,11 +1650,13 @@ if authentication_status:
 				dftempheat = dftempheat.sort_values(selected_lsa[0], ascending = True)
 
 				#processing hovertext and colormatrix
-				hovertext,colormatrix = htext_colormatrix_auctiondata_2010_3G_BidsCircleWise(dfbidcirclwise, dftemp,selected_lsa[0])
-				hoverlabel_bgcolor = colormatrix 
+				hovertext,colormatrix,resultdf = htext_colormatrix_auctiondata_2010_3G_BidsCircleWise(dfbidcirclwise, dftemp,selected_lsa[0])
+				hoverlabel_bgcolor = colormatrix
+
+				st.write(resultdf)
 
 
-				hover_template = 'Value: %{z}<br>Additional: %{text}'
+				# hover_template = 'Value: %{z}<br>Additional: %{text}'
 		
 
 				data = [go.Heatmap(
