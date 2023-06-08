@@ -1658,7 +1658,6 @@ if authentication_status:
 				if radio_selection == "Final Result":
 
 					hovertext = resultdf.values
-					text = "text"
 
 
 				data = [go.Heatmap(
