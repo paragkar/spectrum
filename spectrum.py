@@ -1563,7 +1563,37 @@ if authentication_status:
 
 
 #----------------New Auction Bid Data Code Starts Here------------------
+	#function used to calculate the total bid values 
 
+	def bidvalue(df):
+
+		df = dftemp.copy()
+		df = df.replace(np.nan, 0)
+		min_values=[]
+		for col in df.columns:
+			lst =[]
+			for value in list(df[col]):
+				if value != 0:
+					lst.append(value)
+			min_values.append(min(lst))
+
+		mindf = pd.DataFrame(min_values).T
+		mindf.columns = df.columns
+
+		# Regex pattern to match floating-point numbers
+		pattern = re.compile(r'^[+-]?((?=.*[1-9])\d*\.\d+|0\.\d*[1-9]\d*)$')
+
+		# Function to replace floating-point numbers with 1
+		replace_func = lambda x: 1 if re.match(pattern, str(x)) else x
+
+		# Apply the function to each cell in the DataFrame
+		matrix = df.applymap(replace_func)
+
+		df_final = matrix * mindf.values
+
+		df_final = df_final.sum(axis =1).round(1)
+
+		return df_final
 
 	if selected_dimension == "Auction Data":
 
@@ -2007,40 +2037,10 @@ if authentication_status:
 					chartoption = st.sidebar.radio('Click an Option', ["Absolute Values", "ReservePrice Multiple"])
 
 					if chartoption == "Absolute Values":
+						
+						panindiabids = bidvalue(dftemp)
 
-
-						#function used to calculate the total bid values 
-
-						def bidvalue(df):
-
-							df = dftemp.copy()
-							df = df.replace(np.nan, 0)
-							min_values=[]
-							for col in df.columns:
-								lst =[]
-								for value in list(df[col]):
-									if value != 0:
-										lst.append(value)
-								min_values.append(min(lst))
-
-							mindf = pd.DataFrame(min_values).T
-							mindf.columns = df.columns
-
-							# Regex pattern to match floating-point numbers
-							pattern = re.compile(r'^[+-]?((?=.*[1-9])\d*\.\d+|0\.\d*[1-9]\d*)$')
-
-							# Function to replace floating-point numbers with 1
-							replace_func = lambda x: 1 if re.match(pattern, str(x)) else x
-
-							# Apply the function to each cell in the DataFrame
-							matrix = df.applymap(replace_func)
-
-							df_final = matrix * mindf.values
-
-							df_final = df_final.sum(axis =1).round(1)
-
-							return df_final
-
+						st.write(panindiabids)
 
 					if chartoption == "ReservePrice Multiple":
 
