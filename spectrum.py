@@ -1633,7 +1633,7 @@ if authentication_status:
 
 					dftempheat = dftempheat.replace(0, np.nan)
 
-					dftempheat = dftempheat.sort_values(selected_lsa[0], ascending = True)
+					dftempheat = dftempheat.sort_values(selected_lsa[0], ascending = False)
 
 
 					data = [go.Heatmap(
