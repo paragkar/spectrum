@@ -2011,7 +2011,7 @@ if authentication_status:
 						df = dftemp.copy()
 
 						min_bids=[]
-					    for col in df.columns:
+						for col in df.columns:
 					    	min_bids.append(min([value for value in list(df[col]) if value != 0]))
 					    outflow=[]
 					    for i, row in enumerate(df.columns):
