@@ -1648,15 +1648,11 @@ if authentication_status:
 					texttemplate = "%{z}"
 					text = hovertext
 
-					# z = dftemp["Bid_Decision"]
-
 				if radio_selection == "Percentage of Total":
 
 					dftempheat = dftemp.pivot(index="Bidder", columns='LSA', values="Bid_Decision_Perc")
 					texttemplate = "%{z}"
 					text = hovertext
-
-					# z = dftemp["Bid_Decision_Perc"]
 
 				if radio_selection == "Final Result":
 
@@ -1666,17 +1662,6 @@ if authentication_status:
 
 					dftempheat = dftemp.pivot(index="Bidder", columns='LSA', values="Bid_Decision")
 
-				# # #sort by LSA 
-
-				# sortbylsa = st.sidebar.selectbox("Select a Circle to Sort", state_dict.values())
-
-				# selected_lsa = [k for k, v in state_dict.items() if v == sortbylsa]
-
-				# dftempheat = dftempheat.sort_values(selected_lsa[0], ascending = True)
-
-				# #processing hovertext and colormatrix
-				# hovertext,colormatrix,resultdf = htext_colormatrix_auctiondata_2010_3G_BidsCircleWise(dfbidcirclwise, dftemp,selected_lsa[0])
-				# hoverlabel_bgcolor = colormatrix
 
 				dftempheat = dftempheat.sort_values(selected_lsa[0], ascending = True)
 
@@ -1697,7 +1682,6 @@ if authentication_status:
 					]
 				figauc = go.Figure(data=data)
 
-				# figauc.update_traces(text=combined_data, texttemplate="%{text}", textfont_size=8)
 
 				figauc.update_layout(
 				    template="seaborn",
@@ -1767,8 +1751,8 @@ if authentication_status:
 				        x=dftempheat.columns,
 						xgap = 1,
 						ygap = 1,
-						# hoverinfo ='text',
-						text = hovertext,
+						hoverinfo ='text',
+						# text = hovertext,
 						colorscale='Hot',
 						# showscale=False,
 							texttemplate="%{z}", 
