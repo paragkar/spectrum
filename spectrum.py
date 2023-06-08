@@ -962,6 +962,8 @@ if authentication_status:
 
 		dfbidcirclwiselastrd = dfbidcirclwiselastrd.pivot(index="Bidder", columns='LSA', values="Rank_PWB_End_ClkRd").sort_index(ascending=False)
 
+		st.write(dfbidcirclwiselastrd) #debug
+
 		dftempheatperc = dftemp.pivot(index="Bidder", columns='LSA', values="Bid_Decision_Perc")
 
 		dftempheatperc = dftempheatperc.sort_values(selected_lsa, ascending = True)
@@ -1022,7 +1024,7 @@ if authentication_status:
 
 		resultdf = pd.DataFrame(dict_result).T
 
-		# resultdf.columns = dftempheatabs.columns #debug
+		resultdf.columns = dftempheatabs.columns 
 		
 		colormatrix = list(temp.values)
 
