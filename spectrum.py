@@ -966,7 +966,7 @@ if authentication_status:
 
 		dftempheatabs = dftemp.pivot(index="Bidder", columns='LSA', values="Bid_Decision")
 
-
+		hovertext = []
 		for yi,yy in enumerate(dftempheatabs.index):
 			hovertext.append([])
 			for xi,xx in enumerate(dftempheatabs.columns):
