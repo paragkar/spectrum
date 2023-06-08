@@ -2011,11 +2011,14 @@ if authentication_status:
 						df = dftemp.copy()
 						df = df.replace(np.nan, 0)
 						lst =[]
+						min_values=[]
 						for col in df.columns:
 							for value in list(df[col]):
 								if value != 0:
 									lst.append(value)
-							st.write(lst)
+							min_values.append(min(lst))
+
+						st.write(min_values)
 
 
 					if chartoption == "ReservePrice Multiple":
