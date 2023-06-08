@@ -1022,7 +1022,7 @@ if authentication_status:
 
 		resultdf = pd.DataFrame(dict_result).T
 
-		resultdf.columns = dftempheatabs.columns
+		# resultdf.columns = dftempheatabs.columns #debug
 		
 		colormatrix = list(temp.values)
 
