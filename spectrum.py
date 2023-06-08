@@ -1655,7 +1655,7 @@ if authentication_status:
 
 				# st.write(resultdf)
 
-				combined_data = dftempheat.astype(str) + '<br>' +resultdf
+				combined_data = dftempheat.round(0).astype(str) + '<br> ' +resultdf
 
 				st.write(combined_data)
 
