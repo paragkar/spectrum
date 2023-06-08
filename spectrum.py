@@ -992,7 +992,7 @@ if authentication_status:
 					result = "LOST"
 					ccode = '#FF0000' #(red)
 
-				list_result.append(result)
+				list_result.append('<br>'+result)
 
 				list_col.append(ccode)
 
@@ -1655,7 +1655,7 @@ if authentication_status:
 
 				# st.write(resultdf)
 
-				combined_data = dftempheat.astype(int).astype(str) + r'<br> ' +resultdf
+				combined_data = dftempheat.astype(int).astype(str) +resultdf
 
 				st.write(combined_data)
 
