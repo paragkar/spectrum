@@ -1717,7 +1717,7 @@ if authentication_status:
 
 					dfbidsel = dfbidsel.sort_index(ascending = False)
 
-					sortbylsa = st.sidebar.selectbox("Select a Circle to Sort", state_dict.values)
+					sortbylsa = st.sidebar.selectbox("Select a Circle to Sort", state_dict.values())
 
 					selected_lsa = [k for k, v in state_dict.items() if v == sortbylsa]
 
