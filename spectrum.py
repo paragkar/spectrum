@@ -1626,6 +1626,15 @@ if authentication_status:
 					dftemp = dftemp.set_index("Bidder")
 
 
+					# #sort by LSA 
+
+					sortbylsa = st.sidebar.selectbox("Select a Circle to Sort", state_dict.values())
+
+					selected_lsa = [k for k, v in state_dict.items() if v == sortbylsa]
+
+					dftemp = dftemp.sort_values(selected_lsa[0], ascending = True)
+
+
 					data = [go.Heatmap(
 						z=dftemp["Rank_PWB_End_ClkRd"],
 				        y= dftemp.index,
