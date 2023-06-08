@@ -1557,6 +1557,8 @@ if authentication_status:
 
 					# z = dftemp["Bid_Decision_Perc"]
 
+				st.write(dftempheat)
+
 				# #sort by LSA 
 
 				# sortbylsa = st.sidebar.selectbox("Select a Circle to Sort", state_dict.values())
