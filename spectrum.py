@@ -1658,7 +1658,8 @@ if authentication_status:
 				if radio_selection == "Final Result":
 
 					hovertext = resultdf.values
-
+					dftempheat = dftemp.pivot(index="Bidder", columns='LSA', values="Bid_Decision")
+					dftempheat = dftempheat.sort_values(selected_lsa[0], ascending = True)
 
 				data = [go.Heatmap(
 					z=dftempheat.values,
