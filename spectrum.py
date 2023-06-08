@@ -2011,7 +2011,7 @@ if authentication_status:
 						df = dftemp.copy()
 
 						for col in df.columns:
-							st.write(df[col])
+							st.write(min(df[col])
 
 					if chartoption == "ReservePrice Multiple":
 
