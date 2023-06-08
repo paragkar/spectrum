@@ -2007,7 +2007,7 @@ if authentication_status:
 					chartoption = st.sidebar.radio('Click an Option', ["Absolute Values", "ReservePrice Multiple"])
 
 					if chartoption == "Absolute Values":
-						rowtotal = dftemp.sum(axis=1)
+						rowtotal = dftemp.min(axis=0).sum(axis=1)
 						st.write(rowtotal)
 					if chartoption == "ReservePrice Multiple":
 
