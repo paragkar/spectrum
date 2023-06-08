@@ -953,9 +953,9 @@ if authentication_status:
 #processing hovertext for auction data 
 
 	@st.cache_resource
-	def htext_colormatrix_auctiondata_2010_3G_BidsCircleWise(dfbidcirclwise, dftemp, selected_lsa):
+	def htext_colormatrix_auctiondata_2010_3G_BidsCircleWise(dfbidcirclwise, dftemp, selected_lsa,end_round):
 
-		filt_last_round = (dfbidcirclwise["Clk_Round"] == 183)
+		filt_last_round = (dfbidcirclwise["Clk_Round"] == end_round) #debug
 
 		dfbidcirclwiselastrd = dfbidcirclwise[filt_last_round].drop(columns = ["Clk_Round","PWB_Start_ClkRd","Rank_PWB_Start_ClkRd",
 			"Possible_Raise_Bid_ClkRd","Bid_Decision","PWB_End_ClkRd"], axis =1).reset_index()
@@ -987,7 +987,6 @@ if authentication_status:
 	
 				finalrank = dfbidcirclwiselastrd.loc[yy,xx]
 
-				st.write(finalrank) #debug
 			
 				if finalrank in [1,2,3,4]:
 					result = "WON"
@@ -1706,7 +1705,7 @@ if authentication_status:
 				# dftempheat = dftempheat.sort_values(selected_lsa[0], ascending = True)
 
 				#processing hovertext and colormatrix
-				hovertext,colormatrix,resultdf = htext_colormatrix_auctiondata_2010_3G_BidsCircleWise(dfbidcirclwise, dftemp,selected_lsa[0])
+				hovertext,colormatrix,resultdf = htext_colormatrix_auctiondata_2010_3G_BidsCircleWise(dfbidcirclwise, dftemp,selected_lsa[0],end_round)
 				hoverlabel_bgcolor = colormatrix
 
 
