@@ -2013,7 +2013,8 @@ if authentication_status:
 						min_bids=[]
 						for col in df.columns:
 							min_bids.append(min([value for value in list(df[col]) if value != 0]))
-					    outflow=[]
+
+						outflow=[]
 					    for i, row in enumerate(df.columns):
 							row = [1 for x in row if x >0]
 							outflow.append(sum(row * min_bids[i]))
