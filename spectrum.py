@@ -1565,7 +1565,7 @@ if authentication_status:
 
 				dftempheat = dftempheat.sort_values(selected_lsa[0], ascending = True)
 
-				st.write(dftempheat)
+				# st.write(dftempheat)
 
 				data = [go.Heatmap(
 					z=dftempheat.values,
