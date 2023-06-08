@@ -971,9 +971,10 @@ if authentication_status:
 		dftempheatabs = dftempheatabs.sort_values(selected_lsa, ascending = True)
 
 		hovertext = []
-		lst=[]
+		dict_col={}
 		for yi,yy in enumerate(dftempheatabs.index):
 			hovertext.append([])
+			list_col=[]
 			for xi,xx in enumerate(dftempheatabs.columns):
 
 				totalbidsagg = dftempheatabs.loc[yy,xx]
@@ -993,7 +994,10 @@ if authentication_status:
 					ccode = '#FF0000' #(red)
 				else:
 					ccode = '#808080' #(grey)
-				lst.append([yy,xx,ccode])
+
+				list_col.append(ccode)
+
+				# lst.append([yy,xx,ccode])
 				# temp = pd.DataFrame(lst)
 				# temp.columns = ["Bidder", "Circle", "Color"]
 
@@ -1020,15 +1024,17 @@ if authentication_status:
 						    finalrank,
 						    )
 						    )
+			dict_col[yy]=list_col
 
-		temp = pd.DataFrame(lst)
-		temp.columns = ["Bidder", "Circle", "Color"]
+		temp = pd.DataFrame(dict_col)
+		temp.columns = dftempheatabs.columns
+		# temp.columns = ["Bidder", "Circle", "Color"]
 
-		colormatrix = temp.pivot(index='Bidder', columns='Circle', values="Color")
+		# colormatrix = temp.pivot(index='Bidder', columns='Circle', values="Color")
 
-		st.write(colormatrix) #debug
+		st.write(temp) #debug
 		
-		colormatrix = list(colormatrix.values)
+		colormatrix = list(temp.values)
 
 		return hovertext, colormatrix
 
