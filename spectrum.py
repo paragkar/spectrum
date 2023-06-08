@@ -2052,7 +2052,7 @@ if authentication_status:
 
 						figpanindiabids.update_layout(xaxis=dict(title=''), yaxis=dict(title=''))
 
-						figpanindiabids.update_traces(text=panindiabids['PanIndiaBid'], textposition='inside')
+						figpanindiabids.update_traces(text=panindiabids['PanIndiaBid'], textposition='auto')
 
 						figpanindiabids.update_xaxes(tickvals=[])
 
