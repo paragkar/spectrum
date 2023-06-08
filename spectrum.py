@@ -2013,7 +2013,7 @@ if authentication_status:
 						min_bids=[]
 						for col in df.columns:
 							non_zero_list = [x for x in list(df[col]) if x != 0]
-							min_bids.append([if x!=0 min(non_zero_list)] else 0 for x in list(df[col]))
+							min_bids.append([min(non_zero_list) if x!=0 else 0 for x in list(df[col])])
 
 						st.write(pd.DataFrame(min_bids).T)
 
