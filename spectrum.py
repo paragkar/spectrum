@@ -996,14 +996,14 @@ if authentication_status:
 				else:
 					ccode = '#808080' #(grey)
 				lst.append([yy,xx,ccode])
-				temp = pd.DataFrame(lst)
-				temp.columns = ["Bidder", "Circle", "Color"]
+				# temp = pd.DataFrame(lst)
+				# temp.columns = ["Bidder", "Circle", "Color"]
 
-				colormatrix = temp.pivot(index='Bidder', columns='Circle', values="Color")
+				# colormatrix = temp.pivot(index='Bidder', columns='Circle', values="Color")
 
-				st.write(colormatrix) #debug
-				
-				colormatrix = list(colormatrix.values)
+				# st.write(colormatrix) #debug
+
+				# colormatrix = list(colormatrix.values)
 
 				hovertext[-1].append(
 						    'Bidder: {}\
@@ -1022,6 +1022,16 @@ if authentication_status:
 						    finalrank,
 						    )
 						    )
+		
+		temp = pd.DataFrame(lst)
+		temp.columns = ["Bidder", "Circle", "Color"]
+
+		colormatrix = temp.pivot(index='Bidder', columns='Circle', values="Color")
+
+		st.write(colormatrix) #debug
+		
+		colormatrix = list(colormatrix.values)
+
 		return hovertext, colormatrix
 
 
