@@ -2020,7 +2020,9 @@ if authentication_status:
 
 						st.write(min_values)
 
-						st.write(df.replace(r'[0-9.][0-9.]+',1, regex =True))
+						pattern = r'^[+-]?((?=.*[1-9])\d*\.\d+|0\.\d*[1-9]\d*)$'
+
+						st.write(df.replace(pattern,1, regex =True))
 
 
 
