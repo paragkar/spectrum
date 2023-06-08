@@ -1764,7 +1764,7 @@ if authentication_status:
 						xgap = 1,
 						ygap = 1,
 						hoverinfo ='text',
-						# text = hovertext,
+						text = hovertext,
 						colorscale='Hot',
 						# showscale=False,
 							texttemplate="%{z}", 
