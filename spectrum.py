@@ -2100,6 +2100,8 @@ if authentication_status:
 
 					col1,col2 = st.columns([14,1]) #create collumns of uneven width
 					col1.plotly_chart(figauc, use_container_width=True)
+					col2.header("")
+					col2.markdown("")
 					col2.dataframe(panindiabids.round(1))
 
 
