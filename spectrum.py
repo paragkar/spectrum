@@ -1616,8 +1616,7 @@ if authentication_status:
 
 		fig.update_xaxes(tickvals=[])
 
-		fig.update_layout(xaxis=dict(side='top', title_standoff=0, ticklen=0, title_font=dict(size=14),
-                             title=dict(standoff=10, yanchor='bottom', yshift=-30)))
+		fig.update_layout(xaxis=dict(side='top', title_standoff=0, ticklen=0, title_font=dict(size=14)))
 
 
 		return fig
