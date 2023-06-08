@@ -1645,20 +1645,22 @@ if authentication_status:
 				if radio_selection == "Absolute Values":
 
 					dftempheat = dftemp.pivot(index="Bidder", columns='LSA', values="Bid_Decision")
-					text = str(z)
+					texttemplate = "%{z}",
 
 					# z = dftemp["Bid_Decision"]
 
 				if radio_selection == "Percentage of Total":
 
 					dftempheat = dftemp.pivot(index="Bidder", columns='LSA', values="Bid_Decision_Perc")
-					text = str(z)
+					texttemplate = "%{z}",
 
 					# z = dftemp["Bid_Decision_Perc"]
 
 				if radio_selection == "Final Result":
 
 					hovertext = resultdf.values
+
+					texttemplate="%{text}"
 
 					dftempheat = dftemp.pivot(index="Bidder", columns='LSA', values="Bid_Decision")
 
@@ -1686,7 +1688,7 @@ if authentication_status:
 					hoverinfo ='text',
 					text = hovertext,
 					colorscale='Hot',
-						texttemplate="%{text}", 
+						texttemplate=texttemplate,
 						textfont={"size":10},
 						reversescale=True,
 						),
