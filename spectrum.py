@@ -2018,7 +2018,11 @@ if authentication_status:
 									lst.append(value)
 							min_values.append(min(lst))
 
-						st.write(pd.DataFrame(min_values).T)
+						mindf = pd.DataFrame(min_values).T
+						mindf.columns = df.columns
+						mindf.index = "Bid Values"
+
+						st.write(mindf)
 
 						# Regex pattern to match floating-point numbers
 						pattern = re.compile(r'^[+-]?((?=.*[1-9])\d*\.\d+|0\.\d*[1-9]\d*)$')
