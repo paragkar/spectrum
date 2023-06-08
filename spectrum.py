@@ -1935,7 +1935,9 @@ if authentication_status:
 					chartoption = st.sidebar.radio('Click an Option', ["Absolute Values", "ReservePrice Multiple"])
 
 					if chartoption == "Absolute Values":
-						pass
+						rowtotal = dftemp.sum(axis=1)
+						st.write(rowtotal)
+						
 					if chartoption == "ReservePrice Multiple":
 
 						dftemp = round(dftemp/dfrp,2)
