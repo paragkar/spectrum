@@ -2022,7 +2022,7 @@ if authentication_status:
 
 						pattern = r'^[+-]?((?=.*[1-9])\d*\.\d+|0\.\d*[1-9]\d*)$'
 
-						st.write(df.replace(pattern,1, regex =True))
+						st.write(df.replace(pattern,1))
 
 
 
