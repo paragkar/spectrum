@@ -2020,7 +2020,7 @@ if authentication_status:
 
 						mindf = pd.DataFrame(min_values).T
 						mindf.columns = df.columns
-						mindf.index = "Bid Values"
+			
 
 						st.write(mindf)
 
