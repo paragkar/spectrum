@@ -1627,6 +1627,19 @@ if authentication_status:
 
 				dftemp = dftemp.reset_index()
 
+				# #sort by LSA 
+
+				sortbylsa = st.sidebar.selectbox("Select a Circle to Sort", state_dict.values())
+
+				selected_lsa = [k for k, v in state_dict.items() if v == sortbylsa]
+
+				dftempheat = dftempheat.sort_values(selected_lsa[0], ascending = True)
+
+				#processing hovertext and colormatrix
+				hovertext,colormatrix,resultdf = htext_colormatrix_auctiondata_2010_3G_BidsCircleWise(dfbidcirclwise, dftemp,selected_lsa[0])
+				hoverlabel_bgcolor = colormatrix
+
+
 				radio_selection = st.sidebar.radio('Click an Option', ["Absolute Values", "Percentage of Total", "Final Result"])
 
 				if radio_selection == "Absolute Values":
@@ -1643,23 +1656,22 @@ if authentication_status:
 
 					# z = dftemp["Bid_Decision_Perc"]
 
-				# #sort by LSA 
-
-				sortbylsa = st.sidebar.selectbox("Select a Circle to Sort", state_dict.values())
-
-				selected_lsa = [k for k, v in state_dict.items() if v == sortbylsa]
-
-				dftempheat = dftempheat.sort_values(selected_lsa[0], ascending = True)
-
-				#processing hovertext and colormatrix
-				hovertext,colormatrix,resultdf = htext_colormatrix_auctiondata_2010_3G_BidsCircleWise(dfbidcirclwise, dftemp,selected_lsa[0])
-				hoverlabel_bgcolor = colormatrix
-
 				if radio_selection == "Final Result":
 
 					hovertext = resultdf.values
-					dftempheat = dftemp.pivot(index="Bidder", columns='LSA', values="Bid_Decision")
-					dftempheat = dftempheat.sort_values(selected_lsa[0], ascending = True)
+
+				# # #sort by LSA 
+
+				# sortbylsa = st.sidebar.selectbox("Select a Circle to Sort", state_dict.values())
+
+				# selected_lsa = [k for k, v in state_dict.items() if v == sortbylsa]
+
+				# dftempheat = dftempheat.sort_values(selected_lsa[0], ascending = True)
+
+				# #processing hovertext and colormatrix
+				# hovertext,colormatrix,resultdf = htext_colormatrix_auctiondata_2010_3G_BidsCircleWise(dfbidcirclwise, dftemp,selected_lsa[0])
+				# hoverlabel_bgcolor = colormatrix
+
 
 				data = [go.Heatmap(
 					z=dftempheat.values,
