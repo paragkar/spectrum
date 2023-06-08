@@ -1653,7 +1653,11 @@ if authentication_status:
 				hovertext,colormatrix,resultdf = htext_colormatrix_auctiondata_2010_3G_BidsCircleWise(dfbidcirclwise, dftemp,selected_lsa[0])
 				hoverlabel_bgcolor = colormatrix
 
-				st.write(resultdf)
+				# st.write(resultdf)
+
+				combined_data = dftempheat.astype(str)
+
+				st.write(combined_data)
 
 
 				# hover_template = 'Value: %{z}<br>Additional: %{text}'
