@@ -1528,7 +1528,8 @@ if authentication_status:
 
 				filt_last_round = (dfbidcirclwise["Clk_Round"] == 183)
 
-				dfbidcirclwiselastrd = dfbidcirclwise[filt_last_round]
+				dfbidcirclwiselastrd = dfbidcirclwise[filt_last_round].drop(columns = ["Clk_Round","PWB_Start_ClkRd","Rank_PWB_Start_ClkRd",
+					"Possible_Raise_Bid_ClkRd","Bid_Decision","PWB_End_ClkRd"], axis =1)
 
 				st.write(dfbidcirclwiselastrd)
 
