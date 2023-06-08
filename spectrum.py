@@ -1541,28 +1541,26 @@ if authentication_status:
 
 				dftemp["Bid_Decision_Perc"] = round((dftemp["Bid_Decision"]/summarydf["Bid_Decision"])*100,1)
 
-
 				dftemp = dftemp.reset_index()
-
 
 				radio_selection = st.sidebar.radio('Click an Option', ["Absolute Values", "Percentage of Total"])
 
 				if radio_selection == "Absolute Values":
 
-					# dftemp = dftemp.pivot(index="Bidder", columns='LSA', values="Bid_Decision")
+					dftempheat = dftemp.pivot(index="Bidder", columns='LSA', values="Bid_Decision")
 
-					z = dftemp["Bid_Decision"]
+					# z = dftemp["Bid_Decision"]
 
 				if radio_selection == "Percentage of Total":
 
-					# dftemp = dftemp.pivot(index="Bidder", columns='LSA', values="Bid_Decision_Perc")
+					dftempheat = dftemp.pivot(index="Bidder", columns='LSA', values="Bid_Decision_Perc")
 
-					z = dftemp["Bid_Decision_Perc"]
+					# z = dftemp["Bid_Decision_Perc"]
 
 				data = [go.Heatmap(
-					z=z,
-			        x= dftemp["LSA"],
-			        y=dftemp["Bidder"],
+					z=dftempheat.values,
+			        x=dftempheat.columns,
+			        y=dftempheat.index,
 					xgap = 1,
 					ygap = 1,
 					hoverinfo ='text',
