@@ -1524,6 +1524,17 @@ if authentication_status:
 
 				dfbidcirclwise = dfbid.copy()
 
+				#filter data for the last round first for deciding the winners
+
+				filt_last_round = (dfbidcirclwise["Clk_Round"] == 183)
+
+				dfbidcirclwiselastrd = dfbidcirclwise[filt_last_round]
+
+				st.write(dfbidcirclwiselastrd)
+
+
+				#filter data within the block of selected rounds 
+
 				filt  =(dfbidcirclwise["Clk_Round"] > start_round) & (dfbidcirclwise["Clk_Round"] <= end_round)
 
 				dfbidcirclwise = dfbidcirclwise[filt]
