@@ -2014,6 +2014,7 @@ if authentication_status:
 						for col in df.columns:
 							min_bids.append(min([value for value in list(df[col]) if value != 0]))
 
+						st.write(min_bids)
 
 						outflow=[]
 
