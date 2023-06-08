@@ -1674,6 +1674,8 @@ if authentication_status:
 
 				dfbidcirclwise = dfbidcirclwise[filt]
 
+				st.write(dfbidcirclwise)
+
 				dftemp = dfbidcirclwise.drop(columns=["Possible_Raise_Bid_ClkRd", "Rank_PWB_Start_ClkRd", "Rank_PWB_End_ClkRd",
 											"PWB_End_ClkRd","Clk_Round", "PWB_Start_ClkRd"], axis=1)
 
