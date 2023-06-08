@@ -2010,9 +2010,9 @@ if authentication_status:
 
 						df = dftemp.copy()
 						df = df.replace(np.nan, 0)
-						lst =[]
 						min_values=[]
 						for col in df.columns:
+							lst =[]
 							for value in list(df[col]):
 								if value != 0:
 									lst.append(value)
