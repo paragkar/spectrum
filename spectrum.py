@@ -2007,8 +2007,15 @@ if authentication_status:
 					chartoption = st.sidebar.radio('Click an Option', ["Absolute Values", "ReservePrice Multiple"])
 
 					if chartoption == "Absolute Values":
-						rowtotal = dftemp.min(axis=0).sum(axis=1)
-						st.write(rowtotal)
+
+						# Calculate total value of bids (minimum bids across all circles)
+						df['TotalBids'] = dftemp.iloc[:, 1:].min(axis=1)
+
+						# Calculate outflow (minimum bids in circles where bidder has submitted a non-zero bid)
+						df['Outflow'] = df.apply(lambda row: row.iloc[1:].min() if row['TotalBids'] > 0 else 0, axis=1)
+
+						st.write(df)
+						
 					if chartoption == "ReservePrice Multiple":
 
 						dftemp = round(dftemp/dfrp,2)
