@@ -1623,22 +1623,21 @@ if authentication_status:
 
 					dftemp = dftemp.groupby(["LSA", "Bidder", "Rank_PWB_End_ClkRd"]).sum().reset_index()
 
-					dftemp = dftemp.set_index("Bidder")
+					dftemp = dftemp.pivot(index="Bidder", columns='LSA', values="Rank_PWB_End_ClkRd")
 
+					#sort by LSA 
 
-					# #sort by LSA 
+					sortbylsa = st.sidebar.selectbox("Select a Circle to Sort", state_dict.values())
 
-					# sortbylsa = st.sidebar.selectbox("Select a Circle to Sort", state_dict.values())
+					selected_lsa = [k for k, v in state_dict.items() if v == sortbylsa]
 
-					# selected_lsa = [k for k, v in state_dict.items() if v == sortbylsa]
-
-					# dftemp = dftemp.sort_values(selected_lsa[0], ascending = True)
+					dftemp = dftemp.sort_values(selected_lsa[0], ascending = True)
 
 
 					data = [go.Heatmap(
-						z=dftemp["Rank_PWB_End_ClkRd"],
+						z=dftemp.values,
 				        y= dftemp.index,
-				        x=dftemp["LSA"],
+				        x=dftemp.columns,
 						xgap = 1,
 						ygap = 1,
 						hoverinfo ='text',
