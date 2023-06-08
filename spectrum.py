@@ -2008,36 +2008,38 @@ if authentication_status:
 
 					if chartoption == "Absolute Values":
 
-						df = dftemp.copy()
-						df = df.replace(np.nan, 0)
-						min_values=[]
-						for col in df.columns:
-							lst =[]
-							for value in list(df[col]):
-								if value != 0:
-									lst.append(value)
-							min_values.append(min(lst))
 
-						mindf = pd.DataFrame(min_values).T
-						mindf.columns = df.columns
-			
-						st.write(mindf)
+						#function used to calculate the total bid values 
 
-						# Regex pattern to match floating-point numbers
-						pattern = re.compile(r'^[+-]?((?=.*[1-9])\d*\.\d+|0\.\d*[1-9]\d*)$')
+						df bidvalue(df):
 
-						# Function to replace floating-point numbers with 1
-						replace_func = lambda x: 1 if re.match(pattern, str(x)) else x
+							df = dftemp.copy()
+							df = df.replace(np.nan, 0)
+							min_values=[]
+							for col in df.columns:
+								lst =[]
+								for value in list(df[col]):
+									if value != 0:
+										lst.append(value)
+								min_values.append(min(lst))
 
-						# Apply the function to each cell in the DataFrame
-						matrix = df.applymap(replace_func)
+							mindf = pd.DataFrame(min_values).T
+							mindf.columns = df.columns
 
-						df_final = matrix * mindf.values
+							# Regex pattern to match floating-point numbers
+							pattern = re.compile(r'^[+-]?((?=.*[1-9])\d*\.\d+|0\.\d*[1-9]\d*)$')
 
-						st.write(df_final.sum(axis =1).round(1))
+							# Function to replace floating-point numbers with 1
+							replace_func = lambda x: 1 if re.match(pattern, str(x)) else x
 
+							# Apply the function to each cell in the DataFrame
+							matrix = df.applymap(replace_func)
 
+							df_final = matrix * mindf.values
 
+							df_final = df_final.sum(axis =1).round(1)
+
+							return df_final
 
 
 					if chartoption == "ReservePrice Multiple":
