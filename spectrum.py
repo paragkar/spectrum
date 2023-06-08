@@ -2048,6 +2048,10 @@ if authentication_status:
 
 						figpanindiabids = px.bar(panindiabids, y = 'Bidder', x='PanIndiaBid', orientation ='h', height = 600)
 
+						figpanindiabids.update_layout(xaxis=dict(title=''), yaxis=dict(title=''))
+
+						figpanindiabids.update_traces(text=panindiabids['PanIndiaBid'], textposition='auto')
+
 					if chartoption == "ReservePrice Multiple":
 
 						dftemp = round(dftemp/dfrp,1)
