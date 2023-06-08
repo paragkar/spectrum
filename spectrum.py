@@ -1595,6 +1595,31 @@ if authentication_status:
 
 		return df_final
 
+
+	def plotbiddertotal(dftemp):
+
+		dftemp = round(dftemp,1)
+						
+		panindiabids = bidvalue(dftemp).sort_index().reset_index()
+
+		panindiabids.columns =["Bidder","PanIndiaBid"]
+
+		panindiabids = panindiabids.round(0)
+
+		panindiabids = panindiabids.sort_values("Bidder", ascending=False)
+
+		figpanindiabids = px.bar(panindiabids, y = 'Bidder', x='PanIndiaBid', orientation ='h', height = 625)
+
+		figpanindiabids.update_layout(xaxis=dict(title=''), yaxis=dict(title=''))
+
+		figpanindiabids.update_traces(text=panindiabids['PanIndiaBid'], textposition='auto')
+
+		figpanindiabids.update_xaxes(tickvals=[])
+
+		return figpanindiabids
+
+
+
 	if selected_dimension == "Auction Data":
 
 		@st.cache_resource
@@ -1931,7 +1956,6 @@ if authentication_status:
 					st.plotly_chart(figauc, use_container_width=True)
 
 
-
 			if SubFeature == "ProvWinningBid":
 
 				pwbtype = st.sidebar.selectbox("Select a PWB Type", ["Start CLK Round", "End CLK Round"])
@@ -2038,23 +2062,7 @@ if authentication_status:
 
 					if chartoption == "Absolute Values":
 
-						dftemp = round(dftemp,1)
-						
-						panindiabids = bidvalue(dftemp).sort_index().reset_index()
-
-						panindiabids.columns =["Bidder","PanIndiaBid"]
-
-						panindiabids = panindiabids.round(0)
-
-						panindiabids = panindiabids.sort_values("Bidder", ascending=False)
-
-						figpanindiabids = px.bar(panindiabids, y = 'Bidder', x='PanIndiaBid', orientation ='h', height = 625)
-
-						figpanindiabids.update_layout(xaxis=dict(title=''), yaxis=dict(title=''))
-
-						figpanindiabids.update_traces(text=panindiabids['PanIndiaBid'], textposition='auto')
-
-						figpanindiabids.update_xaxes(tickvals=[])
+						figpanindiabids = plotbiddertotal(dftemp)
 
 					if chartoption == "ReservePrice Multiple":
 
