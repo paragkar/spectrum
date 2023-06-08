@@ -2012,9 +2012,10 @@ if authentication_status:
 
 						min_bids=[]
 						for col in df.columns:
-							min_bid = min([x for x in list(df[col]) if x != 0])
-							min_bids.append(min_bid)
-						st.write(min_bids)
+							st.write(df[col])
+						# 	min_bid = min([x for x in list(df[col]) if x != 0])
+						# 	min_bids.append(min_bid)
+						# st.write(min_bids)
 
 						outflow=[]
 
