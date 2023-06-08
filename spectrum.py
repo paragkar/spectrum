@@ -992,7 +992,7 @@ if authentication_status:
 					result = "LOST"
 					ccode = '#FF0000' #(red)
 
-				list_result.append('\n'result)
+				list_result.append('\n'+result)
 
 				list_col.append(ccode)
 
