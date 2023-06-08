@@ -999,9 +999,10 @@ if authentication_status:
 				temp = pd.DataFrame(lst)
 				temp.columns = ["Bidder", "Circle", "Color"]
 
-				st.write(temp) #debug
-
 				colormatrix = temp.pivot(index='Bidder', columns='Circle', values="Color")
+
+				st.write(colormatrix) #debug
+				
 				colormatrix = list(colormatrix.values)
 
 				hovertext[-1].append(
