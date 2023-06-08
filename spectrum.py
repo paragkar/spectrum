@@ -2009,10 +2009,11 @@ if authentication_status:
 					if chartoption == "Absolute Values":
 
 						df = dftemp.copy()
+						df = df.replace(np.nan, 0)
 						lst =[]
 						for col in df.columns:
 							for value in list(df[col]):
-								if value != "NaN":
+								if value != 0:
 									lst.append(value)
 							st.write(lst)
 
