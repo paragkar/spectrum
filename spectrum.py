@@ -2044,9 +2044,7 @@ if authentication_status:
 
 						panindiabids.columns =["Bidder","PanIndiaBid"]
 
-						panindiabids = panindiabids.set_index("Bidder")
-
-						# st.write(panindiabids)
+						figpanindiabids = px.bar(panindiabids, x = 'Bidder', y='PanIndiaBid', orientation ='h')
 
 					if chartoption == "ReservePrice Multiple":
 
@@ -2102,7 +2100,7 @@ if authentication_status:
 					col1.plotly_chart(figauc, use_container_width=True)
 					col2.header("")
 					col2.markdown("")
-					col2.dataframe(panindiabids.round(1))
+					col2.plotly_chart(figpanindiabids, use_container_width=True)
 
 
 
