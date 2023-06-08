@@ -1631,9 +1631,14 @@ if authentication_status:
 
 					selected_lsa = [k for k, v in state_dict.items() if v == sortbylsa]
 
-					dftempheat = dftempheat.replace(np.nan, "inf")
+					# Custom sorting key function
+					def sort_key(value):
+					    if pd.isnull(value) or value == 0:
+					        return float('inf')  # Assigning a very large value for zeros and np.nan
+					    else:
+					        return value
 
-					dftempheat = dftempheat.sort_values(selected_lsa[0], ascending = False)
+					dftempheat = dftempheat.sort_values(selected_lsa[0], key=sort_key)
 
 
 					data = [go.Heatmap(
