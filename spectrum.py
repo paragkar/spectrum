@@ -979,11 +979,9 @@ if authentication_status:
 				totalbidsagg = dftempheatabs.loc[yy,xx]
 				totalbissperc = dftempheatperc.loc[yy,xx]
 
-				try:
-					finalrank = dfbidcirclwiselastrd.loc[yy,xx]
-				except:
-					finalrank = np.nan
-
+	
+				finalrank = dfbidcirclwiselastrd.loc[yy,xx]
+			
 				if finalrank in [1,2,3,4]:
 					result = "WON"
 				else:
