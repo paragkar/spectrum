@@ -970,7 +970,6 @@ if authentication_status:
 
 		dftempheatabs = dftempheatabs.sort_values(selected_lsa, ascending = True)
 
-		st.write(dftempheatabs) #debug
 
 		hovertext = []
 		dict_col={}
@@ -1023,6 +1022,8 @@ if authentication_status:
 		temp.columns = dftempheatabs.columns
 
 		resultdf = pd.DataFrame(dict_result).T
+
+		st.write(resultdf) #debug
 
 		resultdf.columns = dftempheatabs.columns 
 		
