@@ -1638,7 +1638,7 @@ if authentication_status:
 					    else:
 					        return value
 
-					dftempheat = dftempheat.sort_values(selected_lsa[0], key=sort_key)
+					dftempheat = dftempheat.sort_values(selected_lsa[0], key=lambda x: x.map(sort_key))
 
 
 					data = [go.Heatmap(
