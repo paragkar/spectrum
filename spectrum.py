@@ -953,7 +953,7 @@ if authentication_status:
 #processing hovertext for auction data 
 
 
-	def htext_auctiondata_2010_3G_BidsCircleWise(dfbidcirclwise, dftemp):
+	def htext_auctiondata_2010_3G_BidsCircleWise(dfbidcirclwise, dftemp, selected_lsa):
 
 		filt_last_round = (dfbidcirclwise["Clk_Round"] == 183)
 
@@ -964,7 +964,11 @@ if authentication_status:
 
 		dftempheatperc = dftemp.pivot(index="Bidder", columns='LSA', values="Bid_Decision_Perc")
 
+		dftempheatperc = dftempheatperc.sort_values(selected_lsa, ascending = True)
+
 		dftempheatabs = dftemp.pivot(index="Bidder", columns='LSA', values="Bid_Decision")
+
+		dftempheatabs = dftempheatabs.sort_values(selected_lsa, ascending = True)
 
 		hovertext = []
 		for yi,yy in enumerate(dftempheatabs.index):
@@ -1618,7 +1622,7 @@ if authentication_status:
 				dftempheat = dftempheat.sort_values(selected_lsa[0], ascending = True)
 
 
-				hovertext = htext_auctiondata_2010_3G_BidsCircleWise(dfbidcirclwise, dftemp)
+				hovertext = htext_auctiondata_2010_3G_BidsCircleWise(dfbidcirclwise, dftemp,selected_lsa[0])
 
 
 				data = [go.Heatmap(
