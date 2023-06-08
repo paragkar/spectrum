@@ -1623,7 +1623,7 @@ if authentication_status:
 
 					dftemp = dftemp.groupby(["LSA", "Bidder", "Rank_PWB_End_ClkRd"]).sum().reset_index()
 
-					dftemp = dftemp.pivot(index="Bidder", columns='LSA', values="Rank_PWB_End_ClkRd")
+					dftempheat = dftemp.pivot(index="Bidder", columns='LSA', values="Rank_PWB_End_ClkRd")
 
 					#sort by LSA 
 
@@ -1631,13 +1631,13 @@ if authentication_status:
 
 					selected_lsa = [k for k, v in state_dict.items() if v == sortbylsa]
 
-					dftemp = dftemp.sort_values(selected_lsa[0], ascending = True)
+					dftempheat = dftempheat.sort_values(selected_lsa[0], ascending = True)
 
 
 					data = [go.Heatmap(
-						z=dftemp.values,
-				        y= dftemp.index,
-				        x=dftemp.columns,
+						z=dftempheat.values,
+				        y= dftempheat.index,
+				        x=dftempheat.columns,
 						xgap = 1,
 						ygap = 1,
 						hoverinfo ='text',
