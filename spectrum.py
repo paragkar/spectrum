@@ -2049,12 +2049,17 @@ if authentication_status:
 						    yaxis=dict(showgrid=False)
 						)
 
-					col1,col2 = st.columns([8,1]) #create collumns of uneven width
-					col1.plotly_chart(figauc, use_container_width=True)
-					col2.header("")
-					col2.plotly_chart(figpanindiabids, use_container_width=True)
+					if chartoption = "Absolute Values":
+						col1,col2 = st.columns([8,1]) #create collumns of uneven width
+						col1.plotly_chart(figauc, use_container_width=True)
+						col2.header("")
+						col2.plotly_chart(figpanindiabids, use_container_width=True)
 
-					
+					if chartoption ="ReservePrice Multiple":
+						st.plotly_chart(figpanindiabids, use_container_width=True)
+
+
+
 				if pwbtype == "End CLK Round":
 
 					round_number = st.slider("Select Auction Round Numbers using the Silder below", min_value=1, max_value=183, step=1, value = 183)
@@ -2127,12 +2132,14 @@ if authentication_status:
 						    yaxis=dict(showgrid=False)
 						)
 
-					col1,col2 = st.columns([8,1]) #create collumns of uneven width
-					col1.plotly_chart(figauc, use_container_width=True)
-					col2.header("")
-					col2.plotly_chart(figpanindiabids, use_container_width=True)
+					if chartoption = "Absolute Values":
+						col1,col2 = st.columns([8,1]) #create collumns of uneven width
+						col1.plotly_chart(figauc, use_container_width=True)
+						col2.header("")
+						col2.plotly_chart(figpanindiabids, use_container_width=True)
 
-
+					if chartoption ="ReservePrice Multiple":
+						st.plotly_chart(figpanindiabids, use_container_width=True)
 
 
 #---------------New Auction Bid Data Cide Ends Here----------------------
