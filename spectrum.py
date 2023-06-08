@@ -2098,7 +2098,7 @@ if authentication_status:
 						    yaxis=dict(showgrid=False)
 						)
 
-					col1,col2 = st.columns([col1val,14,1]) #create collumns of uneven width
+					col1,col2 = st.columns([14,1]) #create collumns of uneven width
 					col1.plotly_chart(figauc, use_container_width=True)
 					col2.table(panindiabids, use_container_width=True)
 
