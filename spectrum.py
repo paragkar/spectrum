@@ -1655,7 +1655,7 @@ if authentication_status:
 
 				if radio_selection == "Final Result":
 
-					dftempheat = resultdf.sort_values(selected_lsa[0], ascending = True)
+					dftempheat = resultdf.copy()
 
 
 				data = [go.Heatmap(
