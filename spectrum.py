@@ -1658,8 +1658,6 @@ if authentication_status:
 
 				if radio_selection == "Final Result":
 
-					hovertext = resultdf.values
-
 					texttemplate="%{text}"
 
 					dftempheat = dftemp.pivot(index="Bidder", columns='LSA', values="Bid_Decision")
