@@ -2044,6 +2044,8 @@ if authentication_status:
 
 						panindiabids.columns =["Bidder","PanIndiaBid"]
 
+						panindiabids = panindiabids.round(0)
+
 						panindiabids = panindiabids.sort_values("Bidder", ascending=False)
 
 						figpanindiabids = px.bar(panindiabids, y = 'Bidder', x='PanIndiaBid', orientation ='h', height = 625)
