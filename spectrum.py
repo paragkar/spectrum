@@ -972,9 +972,11 @@ if authentication_status:
 
 		hovertext = []
 		dict_col={}
+		dict_result={}
 		for yi,yy in enumerate(dftempheatabs.index):
 			hovertext.append([])
 			list_col=[]
+			list_result=[]
 			for xi,xx in enumerate(dftempheatabs.columns):
 
 				totalbidsagg = dftempheatabs.loc[yy,xx]
@@ -989,6 +991,8 @@ if authentication_status:
 				else:
 					result = "LOST"
 					ccode = '#FF0000' #(red)
+
+				list_result.append(result)
 
 				list_col.append(ccode)
 
@@ -1009,10 +1013,18 @@ if authentication_status:
 						    finalrank,
 						    )
 						    )
+
 			dict_col[yy]=list_col
+			dict_result[yy]=list_result
 
 		temp = pd.DataFrame(dict_col).T
 		temp.columns = dftempheatabs.columns
+
+		resultdf = pd.DataFrame(dict_result)
+
+		resultdf.columns = dftempheatabs.columns
+
+		st.write(resultdf)
 		
 		colormatrix = list(temp.values)
 
@@ -1642,6 +1654,9 @@ if authentication_status:
 				#processing hovertext and colormatrix
 				hovertext,colormatrix = htext_colormatrix_auctiondata_2010_3G_BidsCircleWise(dfbidcirclwise, dftemp,selected_lsa[0])
 				hoverlabel_bgcolor = colormatrix 
+
+
+				hover_template = 'Value: %{z}<br>Additional: %{text}'
 		
 
 				data = [go.Heatmap(
