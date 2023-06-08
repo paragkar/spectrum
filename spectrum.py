@@ -992,16 +992,6 @@ if authentication_status:
 
 				list_col.append(ccode)
 
-				# lst.append([yy,xx,ccode])
-				# temp = pd.DataFrame(lst)
-				# temp.columns = ["Bidder", "Circle", "Color"]
-
-				# colormatrix = temp.pivot(index='Bidder', columns='Circle', values="Color")
-
-				# st.write(colormatrix) #debug
-
-				# colormatrix = list(colormatrix.values)
-
 				hovertext[-1].append(
 						    'Bidder: {}\
 						    <br>Circle: {}\
@@ -1023,11 +1013,6 @@ if authentication_status:
 
 		temp = pd.DataFrame(dict_col).T
 		temp.columns = dftempheatabs.columns
-		# temp.columns = ["Bidder", "Circle", "Color"]
-
-		# colormatrix = temp.pivot(index='Bidder', columns='Circle', values="Color")
-
-		st.write(temp) #debug
 		
 		colormatrix = list(temp.values)
 
