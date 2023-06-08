@@ -1608,15 +1608,17 @@ if authentication_status:
 
 		panindiabids = panindiabids.sort_values("Bidder", ascending=False)
 
-		figpanindiabids = px.bar(panindiabids, y = 'Bidder', x='PanIndiaBid', orientation ='h', height = 625)
+		fig = px.bar(panindiabids, y = 'Bidder', x='PanIndiaBid', orientation ='h', height = 625)
 
-		figpanindiabids.update_layout(xaxis=dict(title=''), yaxis=dict(title=''))
+		fig.update_layout(xaxis=dict(title=''), yaxis=dict(title=''))
 
-		figpanindiabids.update_traces(text=panindiabids['PanIndiaBid'], textposition='auto')
+		fig.update_traces(text=panindiabids['PanIndiaBid'], textposition='auto')
 
-		figpanindiabids.update_xaxes(tickvals=[])
+		fig.update_xaxes(tickvals=[])
 
-		return figpanindiabids
+		fig.update_layout(xaxis=dict(side='top'))
+
+		return fig
 
 
 
