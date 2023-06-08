@@ -1672,7 +1672,7 @@ if authentication_status:
 					]
 				figauc = go.Figure(data=data)
 
-				figauc.update_traces(text=combined_data, texttemplate="%{text}", textfont_size=8)
+				# figauc.update_traces(text=combined_data, texttemplate="%{text}", textfont_size=8)
 
 				figauc.update_layout(
 				    template="seaborn",
