@@ -986,6 +986,8 @@ if authentication_status:
 
 	
 				finalrank = dfbidcirclwiselastrd.loc[yy,xx]
+
+				st.write(finalrank) #debug
 			
 				if finalrank in [1,2,3,4]:
 					result = "WON"
@@ -1018,8 +1020,6 @@ if authentication_status:
 
 			dict_col[yy]=list_col
 			dict_result[yy]=list_result
-
-		st.write(dict_col)	
 
 		temp = pd.DataFrame(dict_col).T
 
