@@ -1557,6 +1557,14 @@ if authentication_status:
 
 					# z = dftemp["Bid_Decision_Perc"]
 
+				#sort by LSA 
+
+				sortbylsa = st.sidebar.selectbox("Select a Circle to Sort", state_dict.values())
+
+				selected_lsa = [k for k, v in state_dict.items() if v == sortbylsa]
+
+				dftempheat = dftempheat.sort_values(selected_lsa[0], ascending = True)
+
 				data = [go.Heatmap(
 					z=dftempheat.values,
 			        x=dftempheat.columns,
