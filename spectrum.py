@@ -1026,7 +1026,7 @@ if authentication_status:
 						    )
 			dict_col[yy]=list_col
 
-		temp = pd.DataFrame(dict_col)
+		temp = pd.DataFrame(dict_col).T
 		temp.columns = dftempheatabs.columns
 		# temp.columns = ["Bidder", "Circle", "Color"]
 
