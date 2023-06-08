@@ -2066,7 +2066,11 @@ if authentication_status:
 
 					if chartoption == "ReservePrice Multiple":
 
+						dftemp1 = dftemp.copy()
+
 						dftemp = round(dftemp/dfrp,1)
+
+						figpanindiabids = plotbiddertotal(dftemp1)
 
 					data = [go.Heatmap(
 						z=dftemp.values,
