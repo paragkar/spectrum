@@ -1657,7 +1657,7 @@ if authentication_status:
 
 				combined_data = dftempheat.astype(int).astype(str) +resultdf
 
-				st.write(combined_data)
+				# st.write(combined_data)
 
 
 				# hover_template = 'Value: %{z}<br>Additional: %{text}'
@@ -1667,12 +1667,13 @@ if authentication_status:
 					z=dftempheat.values,
 			        x=dftempheat.columns,
 			        y=dftempheat.index,
+			        k=combined_data.values,
 					xgap = 1,
 					ygap = 1,
 					hoverinfo ='text',
 					text = hovertext,
 					colorscale='Hot',
-						texttemplate="%{z}", 
+						texttemplate="%{k}", 
 						textfont={"size":10},
 						reversescale=True,
 						),
