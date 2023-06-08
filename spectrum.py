@@ -2020,10 +2020,13 @@ if authentication_status:
 
 						st.write(min_values)
 
-						pattern = r'^[+-]?((?=.*[1-9])\d*\.\d+|0\.\d*[1-9]\d*)$'
+						# Regex pattern to match floating-point numbers
+						pattern = re.compile(r'^[+-]?((?=.*[1-9])\d*\.\d+|0\.\d*[1-9]\d*)$')
 
-						replace_func = lambda x: 1 if pattern.search(str(x)) else x
+						# Function to replace floating-point numbers with 1
+						replace_func = lambda x: 1 if re.match(pattern, str(x)) else x
 
+						# Apply the function to each cell in the DataFrame
 						st.write(df.applymap(replace_func))
 
 
