@@ -2044,7 +2044,7 @@ if authentication_status:
 
 						panindiabids.columns =["Bidder","PanIndiaBid"]
 
-						figpanindiabids = px.bar(panindiabids, x = 'Bidder', y='PanIndiaBid', orientation ='h')
+						figpanindiabids = px.bar(panindiabids, y = 'Bidder', x='PanIndiaBid', orientation ='h')
 
 					if chartoption == "ReservePrice Multiple":
 
