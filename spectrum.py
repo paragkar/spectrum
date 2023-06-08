@@ -1549,13 +1549,13 @@ if authentication_status:
 
 				if radio_selection == "Absolute Values":
 
-					dftemp = dftemp.pivot(index="Bidder", columns='LSA', values="Bid_Decision").sort_index(ascending = False)
+					dftemp = dftemp.pivot(index="Bidder", columns='LSA', values="Bid_Decision")
 
 					# z = dftemp["Bid_Decision"]
 
 				if radio_selection == "Percentage of Total":
 
-					dftemp = dftemp.pivot(index="Bidder", columns='LSA', values="Bid_Decision_Perc").sort_index(ascending = False)
+					dftemp = dftemp.pivot(index="Bidder", columns='LSA', values="Bid_Decision_Perc")
 
 					# z = dftemp["Bid_Decision_Perc"]
 
