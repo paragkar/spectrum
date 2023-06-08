@@ -971,6 +971,7 @@ if authentication_status:
 		dftempheatabs = dftempheatabs.sort_values(selected_lsa, ascending = True)
 
 		hovertext = []
+		lst=[]
 		for yi,yy in enumerate(dftempheatabs.index):
 			hovertext.append([])
 			for xi,xx in enumerate(dftempheatabs.columns):
