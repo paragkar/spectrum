@@ -2014,7 +2014,7 @@ if authentication_status:
 						for col in df.columns:
 							min_bids.append([x for x in list(df[col]) if x !=0])
 
-						st.write(min_bids)
+						st.write(pd.DataFrame(min_bids))
 
 						outflow=[]
 
