@@ -2034,7 +2034,7 @@ if authentication_status:
 
 						df_final = matrix * mindf.values
 
-						st.write(df_final.sum(axis =1))
+						st.write(df_final.sum(axis =1).round(1))
 
 
 
