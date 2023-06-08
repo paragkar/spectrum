@@ -1632,14 +1632,14 @@ if authentication_status:
 				if radio_selection == "Absolute Values":
 
 					dftempheat = dftemp.pivot(index="Bidder", columns='LSA', values="Bid_Decision")
-					text = z
+					text = "z"
 
 					# z = dftemp["Bid_Decision"]
 
 				if radio_selection == "Percentage of Total":
 
 					dftempheat = dftemp.pivot(index="Bidder", columns='LSA', values="Bid_Decision_Perc")
-					text = z
+					text = "z"
 
 					# z = dftemp["Bid_Decision_Perc"]
 
@@ -1658,7 +1658,7 @@ if authentication_status:
 				if radio_selection == "Final Result":
 
 					hovertext = resultdf.values
-					text = text
+					text = "text"
 
 
 				data = [go.Heatmap(
