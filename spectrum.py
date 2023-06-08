@@ -2046,7 +2046,7 @@ if authentication_status:
 
 						panindiabids = panindiabids.sort_values("Bidder", ascending=False)
 
-						figpanindiabids = px.bar(panindiabids, y = 'Bidder', x='PanIndiaBid', orientation ='h', height = 600)
+						figpanindiabids = px.bar(panindiabids, y = 'Bidder', x='PanIndiaBid', orientation ='h', height = 650)
 
 						figpanindiabids.update_layout(xaxis=dict(title=''), yaxis=dict(title=''))
 
