@@ -2046,7 +2046,7 @@ if authentication_status:
 
 						panindiabids = panindiabids.set_index("Bidder")
 
-						st.write(panindiabids)
+						# st.write(panindiabids)
 
 					if chartoption == "ReservePrice Multiple":
 
@@ -2098,7 +2098,9 @@ if authentication_status:
 						    yaxis=dict(showgrid=False)
 						)
 
-					st.plotly_chart(figauc, use_container_width=True)
+					col1,col2 = st.columns([col1val,14,1]) #create collumns of uneven width
+					col1.plotly_chart(figauc, use_container_width=True)
+					col2.table(panindiabids, use_container_width=True)
 
 
 
