@@ -2034,7 +2034,7 @@ if authentication_status:
 
 						df_final = matrix * mindf
 
-						st.write(df_fina)
+						st.write(df_final)
 
 
 
