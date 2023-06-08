@@ -2012,7 +2012,7 @@ if authentication_status:
 						lst =[]
 						for col in df.columns:
 							for value in list(df[col]):
-								if value != np.nan:
+								if value != "NaN":
 									lst.append(value)
 							st.write(lst)
 
