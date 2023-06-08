@@ -1620,7 +1620,7 @@ if authentication_status:
 
 		fig.update_layout(xaxis_title_standoff=5)
 
-		fig.update_traces(marker=dict(color='#8B0000'))
+		fig.update_traces(marker=dict(color='red'))
 
 
 		return fig
