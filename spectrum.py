@@ -1565,8 +1565,6 @@ if authentication_status:
 
 				dftempheat = dftempheat.sort_values(selected_lsa[0], ascending = True)
 
-				# st.write(dftempheat)
-
 				data = [go.Heatmap(
 					z=dftempheat.values,
 			        x=dftempheat.columns,
@@ -1625,9 +1623,12 @@ if authentication_status:
 
 					dftemp = dftemp.groupby(["LSA", "Bidder", "Rank_PWB_End_ClkRd"]).sum().reset_index()
 
+					dftemp = dftemp.set_index("Bidder")
+
+
 					data = [go.Heatmap(
 						z=dftemp["Rank_PWB_End_ClkRd"],
-				        y= dftemp["Bidder"],
+				        y= dftemp.index,
 				        x=dftemp["LSA"],
 						xgap = 1,
 						ygap = 1,
