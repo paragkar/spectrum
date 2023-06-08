@@ -952,7 +952,7 @@ if authentication_status:
 #----------------New Code Starts Here------------------------------
 #processing hovertext for auction data 
 
-
+	@st.cache_resource
 	def htext_auctiondata_2010_3G_BidsCircleWise(dfbidcirclwise, dftemp, selected_lsa):
 
 		filt_last_round = (dfbidcirclwise["Clk_Round"] == 183)
@@ -979,7 +979,7 @@ if authentication_status:
 				totalbissperc = dftempheatperc.loc[yy,xx]
 
 				try:
-					finalrank = dfbidcirclwise.loc[yy,xx]
+					finalrank = dfbidcirclwiselastrd.loc[yy,xx]
 				except:
 					finalrank = np.nan
 
