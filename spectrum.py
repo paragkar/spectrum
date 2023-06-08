@@ -2040,7 +2040,7 @@ if authentication_status:
 						
 						panindiabids = bidvalue(dftemp)
 
-						st.write(panindiabids)
+						st.write(panindiabids.sort_index(reserve=True))
 
 					if chartoption == "ReservePrice Multiple":
 
