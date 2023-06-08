@@ -985,15 +985,10 @@ if authentication_status:
 			
 				if finalrank in [1,2,3,4]:
 					result = "WON"
+					ccode = '#008000' #(green)
 				else:
 					result = "LOST"
-
-				if result == "WON":
-					ccode = '#008000' #(green)
-				if result == "LOST":
 					ccode = '#FF0000' #(red)
-				else:
-					ccode = '#808080' #(grey)
 
 				list_col.append(ccode)
 
