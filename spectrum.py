@@ -2021,7 +2021,6 @@ if authentication_status:
 						mindf = pd.DataFrame(min_values).T
 						mindf.columns = df.columns
 			
-
 						st.write(mindf)
 
 						# Regex pattern to match floating-point numbers
@@ -2031,7 +2030,11 @@ if authentication_status:
 						replace_func = lambda x: 1 if re.match(pattern, str(x)) else x
 
 						# Apply the function to each cell in the DataFrame
-						st.write(df.applymap(replace_func))
+						matrix = df.applymap(replace_func)
+
+						df_final = matrix * mindf
+
+						st.write(df_fina)
 
 
 
