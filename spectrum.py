@@ -2052,6 +2052,8 @@ if authentication_status:
 
 						figpanindiabids.update_traces(text=panindiabids['PanIndiaBid'], textposition='auto')
 
+						figpanindiabids.update_xaxes(tickvals=[])
+
 					if chartoption == "ReservePrice Multiple":
 
 						dftemp = round(dftemp/dfrp,1)
