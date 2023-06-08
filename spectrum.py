@@ -1627,17 +1627,19 @@ if authentication_status:
 
 				dftemp = dftemp.reset_index()
 
-				radio_selection = st.sidebar.radio('Click an Option', ["Absolute Values", "Percentage of Total"])
+				radio_selection = st.sidebar.radio('Click an Option', ["Absolute Values", "Percentage of Total", "Final Result"])
 
 				if radio_selection == "Absolute Values":
 
 					dftempheat = dftemp.pivot(index="Bidder", columns='LSA', values="Bid_Decision")
+					text = z
 
 					# z = dftemp["Bid_Decision"]
 
 				if radio_selection == "Percentage of Total":
 
 					dftempheat = dftemp.pivot(index="Bidder", columns='LSA', values="Bid_Decision_Perc")
+					text = z
 
 					# z = dftemp["Bid_Decision_Perc"]
 
@@ -1653,9 +1655,10 @@ if authentication_status:
 				hovertext,colormatrix,resultdf = htext_colormatrix_auctiondata_2010_3G_BidsCircleWise(dfbidcirclwise, dftemp,selected_lsa[0])
 				hoverlabel_bgcolor = colormatrix
 
-				# if radio_selection == "Final Result":
+				if radio_selection == "Final Result":
 
-				# 	dftempheat = resultdf.copy()
+					hovertext = resultdf.values
+					text = text
 
 
 				data = [go.Heatmap(
@@ -1665,10 +1668,9 @@ if authentication_status:
 					xgap = 1,
 					ygap = 1,
 					hoverinfo ='text',
-					# text = hovertext,
-					text = resultdf.values,
+					text = hovertext,
 					colorscale='Hot',
-						texttemplate="%{z}", 
+						texttemplate="%{text}", 
 						textfont={"size":10},
 						reversescale=True,
 						),
