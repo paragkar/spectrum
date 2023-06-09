@@ -2298,8 +2298,8 @@ if authentication_status:
 						# text = hovertext,
 						colorscale='Hot',
 						showscale=True,
-							texttemplate="%{z}", 
-							textfont={"size":10},
+							# texttemplate="%{z}", 
+							# textfont={"size":10},
 							reversescale=True,
 							)]
 						
