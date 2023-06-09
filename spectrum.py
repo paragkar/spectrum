@@ -1116,15 +1116,15 @@ if authentication_status:
 #---------------Hovertest for Bidding Activity Total---------------------
 
 	@st.cache_resource
-	def htext_auctiondata_2010_3G_BiddingActivityTotal(dfbid):
+	def htext_auctiondata_2010_3G_BiddingActivity(dfbid, column_name):
 
 		filt = dfbid["Clk_Round"]==1
 
 		dfbidRD1 = dfbid[filt]
 
-		dfbidactivity = dfbid.pivot(index="Bidder", columns='Clk_Round', values="Actual_Activity").sort_index(ascending=True)
+		dfbidactivity = dfbid.pivot(index="Bidder", columns='Clk_Round', values=column_name).sort_index(ascending=True)
 
-		dfbidactivityRd1 = dfbidRD1.pivot(index="Bidder", columns='Clk_Round', values="Actual_Activity").sort_index(ascending=True)
+		dfbidactivityRd1 = dfbidRD1.pivot(index="Bidder", columns='Clk_Round', values=column_name).sort_index(ascending=True)
 
 		dfbidactivityratio = round((dfbidactivity/dfbidactivityRd1.values),2)
 
@@ -2396,7 +2396,7 @@ if authentication_status:
 					dfbidactivityratio = round((dfbidactivity/dfbidactivityRd1.values),2)
 
 
-					hovertext = htext_auctiondata_2010_3G_BiddingActivityTotal(dfbid)
+					hovertext = htext_auctiondata_2010_3G_BiddingActivityTotal(dfbid, "Actual_Activity")
 
 
 					data1 = [go.Heatmap(
