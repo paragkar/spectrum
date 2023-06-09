@@ -1757,7 +1757,7 @@ if authentication_status:
 					ygap = 1,
 					hoverinfo ='text',
 					text = text,
-					colorscale='Hot',
+					colorscale='Picnic', #debug
 						texttemplate=texttemplate,
 						textfont={"size":10},
 						reversescale=True,
