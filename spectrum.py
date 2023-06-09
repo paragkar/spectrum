@@ -1694,7 +1694,7 @@ if authentication_status:
 
 			dfbid = dfbid.set_index("LSA").sort_index(ascending = False)
 
-			SubFeature = st.sidebar.selectbox("Select a SubFeature", ["BidsCircleWise","RanksCircleWise", "ProvWinningBid", "BiddingActivity", "AggregateDemand"])
+			SubFeature = st.sidebar.selectbox("Select a SubFeature", ["BidsCircleWise","RanksCircleWise", "ProvWinningBid", "BiddingActivity", "DemandIntensity"])
 
 			if SubFeature == "BidsCircleWise":
 
@@ -2733,13 +2733,153 @@ if authentication_status:
 				
 					st.plotly_chart(figauc, use_container_width=True)
 
-			if SubFeature == "AggregateDemand":
+			if SubFeature == "DemandIntensity":
 
 				dfbid = loadauctionbiddata()["2010_3G_AD"].replace('-', np.nan, regex = True)
 
-				dfbidaAD = dfbid.pivot(index="LSA", columns='Clock Round', values="Aggregate Demand").sort_index(ascending=True)
+				optiontype = st.sidebar.radio('Click an Option', ["Aggregate Demand", "Excess Demand"])
 
-				st.write(dfbidaAD)
+				if optiontype == "Aggregate Demand":
+
+					dfbidaAD = dfbid.pivot(index="LSA", columns='Clock Round', values="Aggregate Demand").sort_index(ascending=True)
+
+					data = [go.Heatmap(
+								z=dfbidaAD.values,
+						        y= dfbidaAD.index,
+						        x=dfbidaAD.columns,
+								xgap = 0.5,
+								ygap = 1,
+								hoverinfo ='text',
+								# text = hovertext,
+								colorscale='Hot',
+								zmin=0.5, zmax=1,
+								showscale=True,
+									# texttemplate="%{z}", 
+									# textfont={"size":10},
+									reversescale=True,
+									)]
+								
+
+						figauc = go.Figure(data=data)
+
+						figauc.update_layout(uniformtext_minsize=12, 
+						  uniformtext_mode='hide', 
+						  xaxis_title=None, 
+						  yaxis_title=None, 
+						  yaxis_autorange='reversed',
+						  font=dict(size=12),
+						  template='simple_white',
+						  paper_bgcolor=None,
+						  height=600, 
+						  width=1200,
+						  margin=dict(t=80, b=50, l=50, r=50, pad=0),
+						  yaxis=dict(
+				        	  tickmode='array'),
+						  xaxis = dict(
+						  side = 'top',
+						  tickmode = 'linear',
+						  tickangle=0,
+						  dtick = 10), 
+						)
+
+						title = "3G Auctions (Year-2010) - Aggregrated Demand in Various Rounds"
+						subtitle = "Unit - Nos; Source - DoT; Xaxis - Round Numbers"
+
+						style = "<style>h3 {text-align: left;}</style>"
+						with st.container():
+							#plotting the main chart
+							st.markdown(style, unsafe_allow_html=True)
+							st.header(title)
+							st.markdown(subtitle)
+
+
+						#Drawning a black border around the heatmap chart 
+						figauc.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
+						figauc.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
+
+						figauc.update_layout(
+							    xaxis=dict(showgrid=False),
+							    yaxis=dict(showgrid=False)
+							)
+
+						# hoverlabel_bgcolor = "#000000" #subdued black
+
+						# figauc.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
+
+					
+						st.plotly_chart(figauc, use_container_width=True)
+
+
+				if optiontype == "Excess Demand":
+
+					dfbidaED = dfbid.pivot(index="LSA", columns='Clock Round', values="Excess Demand").sort_index(ascending=True)
+
+
+					data = [go.Heatmap(
+								z=dfbidaED.values,
+						        y= dfbidaED.index,
+						        x=dfbidaED.columns,
+								xgap = 0.5,
+								ygap = 1,
+								hoverinfo ='text',
+								# text = hovertext,
+								colorscale='Hot',
+								zmin=0.5, zmax=1,
+								showscale=True,
+									# texttemplate="%{z}", 
+									# textfont={"size":10},
+									reversescale=True,
+									)]
+								
+
+						figauc = go.Figure(data=data)
+
+						figauc.update_layout(uniformtext_minsize=12, 
+						  uniformtext_mode='hide', 
+						  xaxis_title=None, 
+						  yaxis_title=None, 
+						  yaxis_autorange='reversed',
+						  font=dict(size=12),
+						  template='simple_white',
+						  paper_bgcolor=None,
+						  height=600, 
+						  width=1200,
+						  margin=dict(t=80, b=50, l=50, r=50, pad=0),
+						  yaxis=dict(
+				        	  tickmode='array'),
+						  xaxis = dict(
+						  side = 'top',
+						  tickmode = 'linear',
+						  tickangle=0,
+						  dtick = 10), 
+						)
+
+						title = "3G Auctions (Year-2010) - Excess Demand in Various Rounds"
+						subtitle = "Unit - Nos; Source - DoT; Xaxis - Round Numbers"
+
+						style = "<style>h3 {text-align: left;}</style>"
+						with st.container():
+							#plotting the main chart
+							st.markdown(style, unsafe_allow_html=True)
+							st.header(title)
+							st.markdown(subtitle)
+
+
+						#Drawning a black border around the heatmap chart 
+						figauc.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
+						figauc.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
+
+						figauc.update_layout(
+							    xaxis=dict(showgrid=False),
+							    yaxis=dict(showgrid=False)
+							)
+
+						# hoverlabel_bgcolor = "#000000" #subdued black
+
+						# figauc.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
+
+					
+						st.plotly_chart(figauc, use_container_width=True)
 
 
 
