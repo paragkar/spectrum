@@ -1714,6 +1714,8 @@ if authentication_status:
 
 					dftempheat = dftemp.pivot(index="Bidder", columns='LSA', values="Bid_Decision")
 
+					dftempheat = dftempheat.sort_values(selected_lsa[0], ascending = True)
+
 					summarydf = dftempheat.sum(axis=0).reset_index() #debug
 
 					summarydf.columns = ["LSA","TotalBids"]
@@ -1736,6 +1738,8 @@ if authentication_status:
 					dftempheatSum = dftemp.pivot(index="Bidder", columns='LSA', values="Bid_Decision") #for summary chrat below
 
 					dftempheat = dftemp.pivot(index="Bidder", columns='LSA', values="Bid_Decision_Perc") #for heatmap
+
+					dftempheat = dftempheat.sort_values(selected_lsa[0], ascending = True)
 
 					summarydf = dftempheatSum.sum(axis=0).reset_index()
 
@@ -1784,7 +1788,7 @@ if authentication_status:
 					colorscale = "Picnic"
 
 
-				dftempheat = dftempheat.sort_values(selected_lsa[0], ascending = True)
+				# dftempheat = dftempheat.sort_values(selected_lsa[0], ascending = True)
 
 
 				data = [go.Heatmap(
