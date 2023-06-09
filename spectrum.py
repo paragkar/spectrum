@@ -1817,7 +1817,7 @@ if authentication_status:
 
 					z = resultdfheat.values
 
-					dftempheat = dftemp.pivot(index="Bidder", columns='LSA', values="Bid_Decision")
+					# dftempheat = dftemp.pivot(index="Bidder", columns='LSA', values="Bid_Decision")
 
 					subsubtitle = "Provisional Winners are at the end of Round Number - "+str(end_round)
 
@@ -1829,8 +1829,8 @@ if authentication_status:
 
 				data = [go.Heatmap(
 					z=z,
-			        x=dftempheat.columns,
-			        y=dftempheat.index,
+			        x=resultdfheat.columns,
+			        y=resultdfheat.index,
 					xgap = 1,
 					ygap = 1,
 					hoverinfo ='text',
