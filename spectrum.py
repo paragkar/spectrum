@@ -2202,6 +2202,8 @@ if authentication_status:
 
 						showscale =True
 
+					hovertext = htext_colormatrix_auctiondata_2010_3G_ProvWinningBid(dfrp, dftemp, pwbtype, round_number) #debug
+
 					data = [go.Heatmap(
 						z=dftemp.values,
 				        y= dftemp.index,
