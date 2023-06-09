@@ -1718,8 +1718,6 @@ if authentication_status:
 
 					summarydf.columns = ["LSA","TotalBids"]
 
-					summarydf = summarydf.set_index("LSA")
-
 					#preparing the summary chart 
 					chart = summarychart(summarydf, 'LSA', "TotalBids")
 					SummaryFlag = True
