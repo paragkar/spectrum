@@ -2314,15 +2314,15 @@ if authentication_status:
 			        tickmode='array',
 			        	))
 
-				title = "3G Auctions (Year-2010) - PWB End of Clock Round No - "+str(round_number)
-				subtitle = "Unit - Rs Cr; Source - DoT; "+chartoption+" - May be lower for bidders in same circle who did not agree to the higher round price"
+				# title = "3G Auctions (Year-2010) - PWB End of Clock Round No - "+str(round_number)
+				# subtitle = "Unit - Rs Cr; Source - DoT; "+chartoption+" - May be lower for bidders in same circle who did not agree to the higher round price"
 
-				style = "<style>h3 {text-align: left;}</style>"
-				with st.container():
-					#plotting the main chart
-					st.markdown(style, unsafe_allow_html=True)
-					st.header(title)
-					st.markdown(subtitle)
+				# style = "<style>h3 {text-align: left;}</style>"
+				# with st.container():
+				# 	#plotting the main chart
+				# 	st.markdown(style, unsafe_allow_html=True)
+				# 	st.header(title)
+				# 	st.markdown(subtitle)
 
 
 				#Drawning a black border around the heatmap chart 
