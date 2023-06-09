@@ -2292,7 +2292,7 @@ if authentication_status:
 						z=dfbidactivity.values,
 				        y= dfbidactivity.index,
 				        x=dfbidactivity.columns,
-						xgap = 1,
+						xgap = 0.5,
 						ygap = 1,
 						hoverinfo ='text',
 						# text = hovertext,
