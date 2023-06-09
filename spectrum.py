@@ -1807,6 +1807,8 @@ if authentication_status:
 
 					text = resultdf.values
 
+					st.write(resultdf) #debug
+
 					texttemplate="%{text}"
 
 					resultdfheat = resultdf.replace("WON",1)
