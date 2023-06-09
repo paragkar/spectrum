@@ -1093,7 +1093,7 @@ if authentication_status:
 
 
 				hovertext[-1].append(
-						    'Bidder: {}\
+						    'Circle: {}\
 						    <br>Round No: {}\
 						    <br>Aggregate Demand : {} Slots\
 						    <br>Excess Demand : {} Slots'
