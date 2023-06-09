@@ -1140,7 +1140,7 @@ if authentication_status:
 
 
 				hovertext[-1].append(
-						    'Circle: {}\
+						    'Bidder: {}\
 						    <br>Round No: {}\
 						    <br>Points in Play : {} Nos\
 						    <br>Ratio (Actual/Initial) : {}'
