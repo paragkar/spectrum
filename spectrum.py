@@ -1124,7 +1124,7 @@ if authentication_status:
 
 		dfbidactivity = dfbid.pivot(index="Bidder", columns='Clk_Round', values=column_name).sort_index(ascending=True)
 
-		dfbidactivityRd1 = dfbidRD1.pivot(index="Bidder", columns='Clk_Round', values=column_name).sort_index(ascending=True)
+		dfbidactivityRd1 = dfbidRD1.pivot(index="Bidder", columns='Clk_Round', values="Actual_Activity").sort_index(ascending=True)
 
 		dfbidactivityratio = round((dfbidactivity/dfbidactivityRd1.values),2)
 
@@ -2529,6 +2529,9 @@ if authentication_status:
 					dfbidactivityratio = round((dfbidactivity/dfbidactivityRd1.values),2)
 
 
+					hovertext = htext_auctiondata_2010_3G_BiddingActivity(dfbid, "Activity_at_PWB")
+
+
 					data1 = [go.Heatmap(
 							z=dfbidactivity.values,
 					        y= dfbidactivity.index,
@@ -2536,7 +2539,7 @@ if authentication_status:
 							xgap = 0.5,
 							ygap = 1,
 							hoverinfo ='text',
-							# text = hovertext,
+							text = hovertext,
 							colorscale='Hot',
 							showscale=True,
 								# texttemplate="%{z}", 
@@ -2551,7 +2554,7 @@ if authentication_status:
 							xgap = 0.5,
 							ygap = 1,
 							hoverinfo ='text',
-							# text = hovertext,
+							text = hovertext,
 							colorscale='Hot',
 							showscale=True,
 								# texttemplate="%{z}", 
@@ -2633,9 +2636,10 @@ if authentication_status:
 						st.header(title)
 						st.markdown(subtitle)
 
-					# hoverlabel_bgcolor = "#000000" #subdued black
+					hoverlabel_bgcolor = "#000000" #subdued black
 
-					# figauc.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
+					figauc1.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
+					figauc2.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 
 					tab1, tab2 = st.tabs(["Actual", "Ratio (Actual/Initial)"]) #For showning the absolute and Ratio charts in two differet tabs
 					tab1.plotly_chart(figauc1, use_container_width=True)
