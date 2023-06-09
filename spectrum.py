@@ -1720,8 +1720,9 @@ if authentication_status:
 
 					summarydf = summarydf.set_index("LSA")
 
-					st.write(summarydf) #debug
-
+					#preparing the summary chart 
+					chart = summarychart(summarydf, 'LSA', "TotalBids")
+					SummaryFlag = True
 
 					texttemplate = "%{z}"
 					text = hovertext
@@ -1792,6 +1793,12 @@ if authentication_status:
 				figauc.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 
 				st.plotly_chart(figauc, use_container_width=True)
+
+				#plotting the final summary chart 
+				col1,col2,col3 = st.columns([1,14,1.1]) #create collumns of uneven width
+				if SummaryFlag ==True:
+					# st.altair_chart(chart, use_container_width=True)
+					col2.altair_chart(chart, use_container_width=True)
 
 			if SubFeature == "RanksCircleWise":
 
