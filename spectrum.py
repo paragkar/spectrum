@@ -2289,7 +2289,7 @@ if authentication_status:
 
 					dfbidactivityRd1 = dfbidactivityRd1.pivot(index="Bidder", columns='Clk_Round', values="Actual_Activity").sort_index(ascending=True)
 
-					dfbidactivityratio = round((dfbidactivity/dfbidactivityRd1.values)*100,1)
+					dfbidactivityratio = round((dfbidactivity/dfbidactivityRd1.values),2)
 
 
 					data1 = [go.Heatmap(
@@ -2418,7 +2418,7 @@ if authentication_status:
 
 					dfbidactivityRd1 = dfbidactivityRd1.pivot(index="Bidder", columns='Clk_Round', values="Actual_Activity").sort_index(ascending=True)
 
-					dfbidactivityratio = round((dfbidactivity/dfbidactivityRd1.values)*100,1)
+					dfbidactivityratio = round((dfbidactivity/dfbidactivityRd1.values),2)
 
 					st.write(dfbidactivityratio)
 
@@ -2499,7 +2499,7 @@ if authentication_status:
 
 					dfbidactivityRd1 = dfbidactivityRd1.pivot(index="Bidder", columns='Clk_Round', values="Actual_Activity").sort_index(ascending=True)
 
-					dfbidactivityratio = round((dfbidactivity/dfbidactivityRd1.values)*100,1)
+					dfbidactivityratio = round((dfbidactivity/dfbidactivityRd1.values),2)
 
 					st.write(dfbidactivityratio)
 
