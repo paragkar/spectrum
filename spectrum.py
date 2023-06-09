@@ -2277,7 +2277,7 @@ if authentication_status:
 
 				dfbidactivity = dfbid.copy()
 
-				optiontype = st.sidebar.radio('Click an Option', ["Total Activity", "PWB Activity", "NewBids Activity"])
+				optiontype = st.sidebar.radio('Click an Option', ["Total Activity", "PWB Activity", "NewBids Activity", "Activity Requirement"])
 
 				if optiontype == "Total Activity":
 
@@ -2423,6 +2423,76 @@ if authentication_status:
 
 
 					dfbidactivity = dfbidactivity.pivot(index="Bidder", columns='Clk_Round', values="Activity_NewBids").sort_index(ascending=True)
+
+					data = [go.Heatmap(
+							z=dfbidactivity.values,
+					        y= dfbidactivity.index,
+					        x=dfbidactivity.columns,
+							xgap = 0.5,
+							ygap = 1,
+							hoverinfo ='text',
+							# text = hovertext,
+							colorscale='Hot',
+							showscale=True,
+								# texttemplate="%{z}", 
+								# textfont={"size":10},
+								reversescale=True,
+								)]
+							
+
+					figauc = go.Figure(data=data)
+
+					figauc.update_layout(uniformtext_minsize=12, 
+					  uniformtext_mode='hide', 
+					  xaxis_title=None, 
+					  yaxis_title=None, 
+					  yaxis_autorange='reversed',
+					  font=dict(size=12),
+					  template='simple_white',
+					  paper_bgcolor=None,
+					  height=600, 
+					  width=1200,
+					  margin=dict(t=80, b=50, l=50, r=50, pad=0),
+					  yaxis=dict(
+			        	  tickmode='array'),
+					  xaxis = dict(
+					  side = 'top',
+					  tickmode = 'linear',
+					  tickangle=0,
+					  dtick = 10), 
+					)
+
+					# title = "3G Auctions (Year-2010) - PWB End of Clock Round No - "+str(round_number)
+					# subtitle = "Unit - Rs Cr; Source - DoT; "+chartoption+" - May be lower for bidders in same circle who did not agree to the higher round price"
+
+					# style = "<style>h3 {text-align: left;}</style>"
+					# with st.container():
+					# 	#plotting the main chart
+					# 	st.markdown(style, unsafe_allow_html=True)
+					# 	st.header(title)
+					# 	st.markdown(subtitle)
+
+
+					#Drawning a black border around the heatmap chart 
+					figauc.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
+					figauc.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
+
+					figauc.update_layout(
+						    xaxis=dict(showgrid=False),
+						    yaxis=dict(showgrid=False)
+						)
+
+					# hoverlabel_bgcolor = "#000000" #subdued black
+
+					# figauc.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
+
+				
+					st.plotly_chart(figauc, use_container_width=True)
+
+				if optiontype == "Activity Requirement":
+
+
+					dfbidactivity = dfbidactivity.pivot(index="Bidder", columns='Clk_Round', values="Activity_Requirement").sort_index(ascending=True)
 
 					data = [go.Heatmap(
 							z=dfbidactivity.values,
