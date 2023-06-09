@@ -2088,7 +2088,7 @@ if authentication_status:
 						     coloraxis=dict(
 							        colorbar=dict(
 							            thicknessmode="pixels",
-							            thickness=20,
+							            thickness=10,
 							            lenmode="fraction",
 							            len=0.9,
 							            x=0.95,
