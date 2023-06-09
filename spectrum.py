@@ -2291,16 +2291,28 @@ if authentication_status:
 
 					dfbidactivityratio = round((dfbidactivity/dfbidactivityRd1.values)*100,1)
 
-					st.write(dfbidactivityratio)
 
-					tab1, tab2 = st.tabs(["Absolute", "Ratio"]) #For showning the absolute and Ratio charts in two differet tabs
+					data1 = [go.Heatmap(
+						z=dfbidactivity.values,
+				        y= dfbidactivity.index,
+				        x=dfbidactivity.columns,
+						xgap = 0.5,
+						ygap = 1,
+						hoverinfo ='text',
+						# text = hovertext,
+						colorscale='Hot',
+						showscale=True,
+							# texttemplate="%{z}", 
+							# textfont={"size":10},
+							reversescale=True,
+							)]
 
-					if tab1 == "Absolute":
+				
 
-						data = [go.Heatmap(
-							z=dfbidactivity.values,
-					        y= dfbidactivity.index,
-					        x=dfbidactivity.columns,
+					data2 = [go.Heatmap(
+							z=dfbidactivityratio.values,
+					        y= dfbidactivityratio.index,
+					        x=dfbidactivityratio.columns,
 							xgap = 0.5,
 							ygap = 1,
 							hoverinfo ='text',
@@ -2311,28 +2323,12 @@ if authentication_status:
 								# textfont={"size":10},
 								reversescale=True,
 								)]
-
-					if tab2 == "Ratio":
-
-						data = [go.Heatmap(
-								z=dfbidactivityratio.values,
-						        y= dfbidactivityratio.index,
-						        x=dfbidactivityratio.columns,
-								xgap = 0.5,
-								ygap = 1,
-								hoverinfo ='text',
-								# text = hovertext,
-								colorscale='Hot',
-								showscale=True,
-									# texttemplate="%{z}", 
-									# textfont={"size":10},
-									reversescale=True,
-									)]
 								
 
-					figauc = go.Figure(data=data)
+					figauc1 = go.Figure(data=data1)
+					figauc2 = go.Figure(data=data2)
 
-					figauc.update_layout(uniformtext_minsize=12, 
+					figauc1.update_layout(uniformtext_minsize=12, 
 					  uniformtext_mode='hide', 
 					  xaxis_title=None, 
 					  yaxis_title=None, 
@@ -2352,6 +2348,46 @@ if authentication_status:
 					  dtick = 10), 
 					)
 
+
+					#Drawning a black border around the heatmap chart 
+					figauc1.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
+					figauc1.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
+
+					figauc1.update_layout(
+						    xaxis=dict(showgrid=False),
+						    yaxis=dict(showgrid=False)
+						)
+
+					figauc2.update_layout(uniformtext_minsize=12, 
+					  uniformtext_mode='hide', 
+					  xaxis_title=None, 
+					  yaxis_title=None, 
+					  yaxis_autorange='reversed',
+					  font=dict(size=12),
+					  template='simple_white',
+					  paper_bgcolor=None,
+					  height=600, 
+					  width=1200,
+					  margin=dict(t=80, b=50, l=50, r=50, pad=0),
+					  yaxis=dict(
+			        	  tickmode='array'),
+					  xaxis = dict(
+					  side = 'top',
+					  tickmode = 'linear',
+					  tickangle=0,
+					  dtick = 10), 
+					)
+
+
+					#Drawning a black border around the heatmap chart 
+					figauc2.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
+					figauc2.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
+
+					figauc2.update_layout(
+						    xaxis=dict(showgrid=False),
+						    yaxis=dict(showgrid=False)
+						)
+
 					title = "3G Auctions (Year-2010) - Total Points in Play"
 					subtitle = "Unit - Nos; Source - DoT; Xaxis - Round Numbers"
 					style = "<style>h3 {text-align: left;}</style>"
@@ -2362,24 +2398,15 @@ if authentication_status:
 						st.markdown(subtitle)
 
 
-					#Drawning a black border around the heatmap chart 
-					figauc.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
-					figauc.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
-
-					figauc.update_layout(
-						    xaxis=dict(showgrid=False),
-						    yaxis=dict(showgrid=False)
-						)
-
 					# hoverlabel_bgcolor = "#000000" #subdued black
 
 					# figauc.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 
-					tab1.plotly_chart(figauc, use_container_width=True)
-					tab2.plotly_chart(figauc, use_container_width=True)
+					tab1, tab2 = st.tabs(["Absolute", "Ratio"]) #For showning the absolute and Ratio charts in two differet tabs
+					tab1.plotly_chart(figauc1, use_container_width=True)
+					tab2.plotly_chart(figauc2, use_container_width=True)
 
-				
-					# st.plotly_chart(figauc, use_container_width=True)
+
 
 				if optiontype == "Pts in PWB Circles":
 
