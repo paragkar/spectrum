@@ -1758,14 +1758,23 @@ if authentication_status:
 					chart = summarychart(summarydf, 'LSA', "TotalBids")
 					SummaryFlag = True
 
-					texttemplate = "%{z}"
-					text = hovertext
-
-					z = dftempheat.values
-
 					subsubtitle=""
 
-					colorscale = "Hot"
+
+					data = [go.Heatmap(
+						z=dftempheat.values,
+				        x=dftempheat.columns,
+				        y=dftempheat.index,
+						xgap = 1,
+						ygap = 1,
+						hoverinfo ='text',
+						text = hovertext,
+						colorscale="Hot",
+							texttemplate="%{z}",
+							textfont={"size":10},
+							reversescale=True,
+							),
+						]
 
 				if radio_selection == "Percentage of Total":
 
@@ -1783,14 +1792,23 @@ if authentication_status:
 					chart = summarychart(summarydf, 'LSA', "TotalBids")
 					SummaryFlag = True
 
-					z = dftempheat.values
-
-					texttemplate = "%{z}"
-					text = hovertext
-
 					subsubtitle=""
 
-					colorscale ="Hot"
+
+					data = [go.Heatmap(
+						z=dftempheat.values,
+				        x=dftempheat.columns,
+				        y=dftempheat.index,
+						xgap = 1,
+						ygap = 1,
+						hoverinfo ='text',
+						text = hovertext,
+						colorscale="Hot",
+							texttemplate="%{z}",
+							textfont={"size":10},
+							reversescale=True,
+							),
+						]
 
 				if radio_selection == "Provisional Winners":
 
@@ -1805,42 +1823,38 @@ if authentication_status:
 					SummaryFlag = True
 
 
-					text = resultdf.values
-
 					st.write(resultdf) #debug
 
-					texttemplate="%{text}"
 
 					resultdfheat = resultdf.replace("WON",1)
 
 					resultdfheat = resultdfheat.replace("LOST",0)
 
-					z = resultdfheat.values
-
 					# dftempheat = dftemp.pivot(index="Bidder", columns='LSA', values="Bid_Decision")
 
 					subsubtitle = "Provisional Winners are at the end of Round Number - "+str(end_round)
 
-					colorscale = "Picnic"
 
 
 				# dftempheat = dftempheat.sort_values(selected_lsa[0], ascending = True)
 
 
-				data = [go.Heatmap(
-					z=z,
-			        x=resultdfheat.columns,
-			        y=resultdfheat.index,
-					xgap = 1,
-					ygap = 1,
-					hoverinfo ='text',
-					text = text,
-					colorscale=colorscale,
-						texttemplate=texttemplate,
-						textfont={"size":10},
-						reversescale=True,
-						),
-					]
+					data = [go.Heatmap(
+						z=resultdfheat.values,
+				        x=resultdfheat.columns,
+				        y=resultdfheat.index,
+						xgap = 1,
+						ygap = 1,
+						hoverinfo ='text',
+						text = resultdf.values,
+						colorscale="Picnic",
+							texttemplate="%{z}",
+							textfont={"size":10},
+							reversescale=True,
+							),
+						]
+				
+
 				figauc = go.Figure(data=data)
 
 
