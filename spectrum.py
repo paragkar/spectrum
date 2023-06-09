@@ -1771,9 +1771,9 @@ if authentication_status:
 					SummaryFlag = True
 
 
-					texttemplate="%{z}"
-
 					text = resultdf.values
+
+					texttemplate="%{text}"
 
 					resultdfheat = resultdf.replace("WON",1)
 
@@ -1798,7 +1798,7 @@ if authentication_status:
 					xgap = 1,
 					ygap = 1,
 					hoverinfo ='text',
-					text = hovertext,
+					text = text,
 					colorscale=colorscale,
 						texttemplate=texttemplate,
 						textfont={"size":10},
