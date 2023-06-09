@@ -1731,7 +1731,19 @@ if authentication_status:
 
 				if radio_selection == "Percentage of Total":
 
-					dftempheat = dftemp.pivot(index="Bidder", columns='LSA', values="Bid_Decision_Perc")
+					dftempheatSum = dftemp.pivot(index="Bidder", columns='LSA', values="Bid_Decision") #for summary chrat below
+
+					dftempheat = dftemp.pivot(index="Bidder", columns='LSA', values="Bid_Decision_Perc") #for heatmap
+
+					summarydf = dftempheatSum.sum(axis=0).reset_index()
+
+					summarydf.columns = ["LSA","TotalBids"]
+
+					#preparing the summary chart 
+					chart = summarychart(summarydf, 'LSA', "TotalBids")
+					SummaryFlag = True
+
+
 					texttemplate = "%{z}"
 					text = hovertext
 
