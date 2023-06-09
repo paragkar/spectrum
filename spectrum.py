@@ -2283,7 +2283,7 @@ if authentication_status:
 
 				dfbidactivity = dfbidactivity[filt]
 
-				st.write(dfbidactivity)
+				plottype = st.sidebar.selectbox("Select an Option", ["Point Start of Round", "Points Consumed", "Points Carrried Forward"])
 
 
 
