@@ -2503,6 +2503,7 @@ if authentication_status:
 							hoverinfo ='text',
 							# text = hovertext,
 							colorscale='Hot',
+							colorbar=dict(cmin=0, cmax=1),
 							showscale=True,
 								# texttemplate="%{z}", 
 								# textfont={"size":10},
