@@ -2231,14 +2231,18 @@ if authentication_status:
 					figpanindiabids = plotbiddertotal(dftemp)
 
 					showscale = False
+
+					hovertext = htext_colormatrix_auctiondata_2010_3G_BWA_ProvWinningBid(dfrp, dftemp, pwbtype, round_number) #debug
 			
 				if chartoption == "ReservePrice Multiple":
+
+					dftemp1 = dftemp.copy()
 
 					dftemp = round(dftemp/dfrp,1)
 
 					showscale = True
 
-				hovertext = htext_colormatrix_auctiondata_2010_3G_BWA_ProvWinningBid(dfrp, dftemp, pwbtype, round_number) #debug
+					hovertext = htext_colormatrix_auctiondata_2010_3G_BWA_ProvWinningBid(dfrp, dftemp1, pwbtype, round_number) #debug
 
 				data = [go.Heatmap(
 					z=dftemp.values,
