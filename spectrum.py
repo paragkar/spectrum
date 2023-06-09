@@ -1708,7 +1708,7 @@ if authentication_status:
 				hoverlabel_bgcolor = colormatrix
 
 
-				radio_selection = st.sidebar.radio('Click an Option', ["Absolute Values", "Percentage of Total", "Final Result"])
+				radio_selection = st.sidebar.radio('Click an Option', ["Absolute Values", "Percentage of Total", "Provisional Winners"])
 
 				if radio_selection == "Absolute Values":
 
@@ -1722,7 +1722,7 @@ if authentication_status:
 					texttemplate = "%{z}"
 					text = hovertext
 
-				if radio_selection == "Final Result":
+				if radio_selection == "Provisional Winners":
 
 					texttemplate="%{text}"
 
