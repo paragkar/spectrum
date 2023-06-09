@@ -2277,7 +2277,7 @@ if authentication_status:
 
 				dfbidactivity = dfbid.copy()
 
-				optiontype = st.sidebar.radio('Click an Option', ["Total Pts in Play", "Pts in PWB Circles", "Points in New Circles", "Activity Factor"])
+				optiontype = st.sidebar.radio('Click an Option', ["Total Pts in Play", "Pts in PWB Circles", "Pts in New Circles", "Activity Factor"])
 
 				if optiontype == "Total Pts in Play":
 
@@ -2419,7 +2419,7 @@ if authentication_status:
 				
 					st.plotly_chart(figauc, use_container_width=True)
 
-				if optiontype == "Points in New Circles":
+				if optiontype == "Pts in New Circles":
 
 
 					dfbidactivity = dfbidactivity.pivot(index="Bidder", columns='Clk_Round', values="Activity_NewBids").sort_index(ascending=True)
