@@ -1782,6 +1782,10 @@ if authentication_status:
 
 			titlesubpart = "3G Auctions"
 
+			zmin=1 
+
+			zmax=5
+
 		if Feature == "2010-Band2300":
 
 			totalrounds = 117
@@ -1793,6 +1797,10 @@ if authentication_status:
 			demandsheet = "2010_BWA_AD"
 
 			titlesubpart = "BWA Auctions"
+
+			zmin=1
+
+			zmax=3
 
 
 		dfbid = loadauctionbiddata()[mainsheet].replace('-', np.nan, regex = True) #debug
@@ -1882,11 +1890,12 @@ if authentication_status:
 					ygap = 1,
 					hoverinfo ='text',
 					text = hovertext,
+					zmin=zmin, zmax=zmax, #debug
 					colorscale="Hot",
-						texttemplate="%{z}",
-						textfont={"size":10},
-						reversescale=True,
-						),
+					texttemplate="%{z}",
+					textfont={"size":10},
+					reversescale=True,
+					),
 					]
 
 			if radio_selection == "Percentage of Total":
