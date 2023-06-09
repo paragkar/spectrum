@@ -1771,7 +1771,11 @@ if authentication_status:
 
 					text = resultdf.values
 
-					z = resultdf.values
+					resultdfheat = resultdf.replace("WON",1)
+
+					resultdfheat = resultdfheat.replace("LOST",0)
+
+					z = resultdfheat.values
 
 					dftempheat = dftemp.pivot(index="Bidder", columns='LSA', values="Bid_Decision")
 
