@@ -1694,7 +1694,7 @@ if authentication_status:
 
 			dfbid = dfbid.set_index("LSA").sort_index(ascending = False)
 
-			SubFeature = st.sidebar.selectbox("Select a SubFeature", ["BidsCircleWise","RanksCircleWise", "ProvWinningBid"])
+			SubFeature = st.sidebar.selectbox("Select a SubFeature", ["BidsCircleWise","RanksCircleWise", "ProvWinningBid", "BiddingActivity"])
 
 			if SubFeature == "BidsCircleWise":
 
