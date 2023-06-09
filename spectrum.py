@@ -1753,6 +1753,17 @@ if authentication_status:
 
 				if radio_selection == "Provisional Winners":
 
+					dftempheatSum = dftemp.pivot(index="Bidder", columns='LSA', values="Bid_Decision") #for summary chrat below
+
+					summarydf = dftempheatSum.sum(axis=0).reset_index()
+
+					summarydf.columns = ["LSA","TotalBids"]
+
+					#preparing the summary chart 
+					chart = summarychart(summarydf, 'LSA', "TotalBids")
+					SummaryFlag = True
+
+
 					texttemplate="%{text}"
 
 					text = resultdf.values
