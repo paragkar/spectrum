@@ -1978,7 +1978,7 @@ if authentication_status:
 		        	))
 
 			title = titlesubpart+" (Year-2010) - Total Number of Bids in Circles "+"("+radio_selection+")"
-			subtitle = "Source - DoT; Between Round Nos "+str(start_round)+" & "+str(end_round)+ "; Number of Rounds = "+ str(end_round-start_round)+"; "+subsubtitle
+			subtitle = "Source - DoT; Between Round Nos "+str(start_round)+" & "+str(end_round)+ "; Number of Rounds = "+ str(end_round-start_round+1)+"; "+subsubtitle
 
 			style = "<style>h3 {text-align: left;}</style>"
 			with st.container():
@@ -2172,7 +2172,7 @@ if authentication_status:
 			        	))
 
 				title = titlesubpart+" (Year-2010) - Bidder's Aggregrated Ranks (1-4) in a Chosen Window of Rounds"
-				subtitle = "Source - DOT; Between Round Nos "+str(start_round)+" & "+str(end_round)+ "; Number of Rounds = "+ str(end_round-start_round)
+				subtitle = "Source - DOT; Between Round Nos "+str(start_round)+" & "+str(end_round)+ "; Number of Rounds = "+ str(end_round-start_round+1)
 
 				style = "<style>h3 {text-align: left;}</style>"
 				with st.container():
