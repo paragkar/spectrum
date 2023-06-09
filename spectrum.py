@@ -2659,6 +2659,8 @@ if authentication_status:
 
 					dfbidactivityratio = round((dfbidactivity/dfbidactivityRd1.values),2)
 
+					hovertext = htext_auctiondata_2010_3G_BiddingActivity(dfbid, "Activity_NewBids")
+
 
 					data1 = [go.Heatmap(
 							z=dfbidactivity.values,
@@ -2667,7 +2669,7 @@ if authentication_status:
 							xgap = 0.5,
 							ygap = 1,
 							hoverinfo ='text',
-							# text = hovertext,
+							text = hovertext,
 							colorscale='Hot',
 							showscale=True,
 								# texttemplate="%{z}", 
@@ -2682,7 +2684,7 @@ if authentication_status:
 							xgap = 0.5,
 							ygap = 1,
 							hoverinfo ='text',
-							# text = hovertext,
+							text = hovertext,
 							colorscale='Hot',
 							showscale=True,
 								# texttemplate="%{z}", 
@@ -2766,9 +2768,10 @@ if authentication_status:
 						st.markdown(subtitle)
 
 
-					# hoverlabel_bgcolor = "#000000" #subdued black
+					hoverlabel_bgcolor = "#000000" #subdued black
 
-					# figauc.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
+					figauc1.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
+					figauc2.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 
 					tab1, tab2 = st.tabs(["Actual", "Ratio (Actual/Initial)"]) #For showning the absolute and Ratio charts in two differet tabs
 					tab1.plotly_chart(figauc1, use_container_width=True)
