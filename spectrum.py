@@ -2275,21 +2275,20 @@ if authentication_status:
 				dfbid.columns = ["Clk_Round", "Bidder", "Pts_Start_Round", "Activity_Factor", "Activity_Requirement",
 								"Actual_Activity","Activity_at_PWB","Activity_NewBids","Point_Carry_Forward"]
 
-				round_number = st.slider("Select Auction Round Numbers using the Silder below", min_value=1, max_value=183, step=1, value = 183)
+				# round_number = st.slider("Select Auction Round Numbers using the Silder below", min_value=1, max_value=183, step=1, value = 183)
 
 				dfbidactivity = dfbid.copy()
 
-				filt  =(dfbidactivity["Clk_Round"] == round_number) 
+				# filt  =(dfbidactivity["Clk_Round"] == round_number) 
 
-				dfbidactivity = dfbidactivity[filt]
+				# dfbidactivity = dfbidactivity[filt]
+
+				# st.write(dfbidactivity)
+
+
+				dfbidactivity = dfbidactivity.pivot(index="Bidder", columns='Clk_Round', values="Actual_Activity").sort_index(ascending=False)
 
 				st.write(dfbidactivity)
-
-				optiontype = st.sidebar.selectbox("Select an Option", ["Point Start of Round", "Points Consumed", "Points Carrried Forward"])
-
-				if optiontype == "Point Start of Round":
-
-					dftemp = dftemp.groupby(["Bidder", "Clk_Round", "PWB_End_ClkRd"]).sum().reset_index()
 
 
 
