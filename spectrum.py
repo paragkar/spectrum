@@ -1772,9 +1772,9 @@ if authentication_status:
 
 		if Feature == "2010-Band2100":
 
-			totalrounds = 183
+			totalrounds = 117
 
-			dfbid = loadauctionbiddata()["2010_3G"].replace('-', np.nan, regex = True) #debug
+			dfbid = loadauctionbiddata()["2010_BWA"].replace('-', np.nan, regex = True) #debug
 
 			dfbid.columns = ["Clk_Round", "Bidder","LSA","PWB_Start_ClkRd", "Rank_PWB_Start_ClkRd", 
 							"Possible_Raise_Bid_ClkRd", "Bid_Decision", "PWB_End_ClkRd", "Rank_PWB_End_ClkRd"]
