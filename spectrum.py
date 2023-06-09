@@ -1760,7 +1760,7 @@ if authentication_status:
 			        	))
 
 				title = "3G Auctions (Year-2010) - Total Number of Bids in Circles "+"("+radio_selection+")"
-				subtitle = "Source - DoT Selected Round Nos - Between Round Nos "+str(start_round)+" & "+str(end_round)+ " No of Rounds = "+ str(end_round-start_round)
+				subtitle = "Source - DoT; Between Round Nos "+str(start_round)+" & "+str(end_round)+ " No of Rounds = "+ str(end_round-start_round)
 
 				style = "<style>h3 {text-align: left;}</style>"
 				with st.container():
