@@ -1615,7 +1615,7 @@ if authentication_status:
 
 		fig = px.bar(panindiabids, y = 'Bidder', x='PanIndiaBid', orientation ='h', height = 625)
 
-		fig.update_layout(xaxis=dict(title='PanIndia'), yaxis=dict(title=''))
+		fig.update_layout(xaxis=dict(title='TotalPanIndia'), yaxis=dict(title=''))
 
 		fig.update_traces(text=panindiabids['PanIndiaBid'], textposition='auto')
 
