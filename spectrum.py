@@ -2085,16 +2085,8 @@ if authentication_status:
 					figauc.update_layout(
 						    xaxis=dict(showgrid=False),
 						    yaxis=dict(showgrid=False),
-						     coloraxis=dict(
-							        colorbar=dict(
-							            thicknessmode="pixels",
-							            thickness=10,
-							            lenmode="fraction",
-							            len=0.9,
-							            x=0.95,
-							            y=0.5
-							        )
-									))
+						     
+									)
 
 					if chartoption == "Absolute Values":
 						col1,col2 = st.columns([8,1]) #create collumns of uneven width
