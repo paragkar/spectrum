@@ -1694,7 +1694,7 @@ if authentication_status:
 
 			dfbid = dfbid.set_index("LSA").sort_index(ascending = False)
 
-			SubFeature = st.sidebar.selectbox("Select a SubFeature", ["BidsCircleWise","RanksCircleWise", "ProvWinningBid", "BiddingActivity"])
+			SubFeature = st.sidebar.selectbox("Select a SubFeature", ["BidsCircleWise","RanksCircleWise", "ProvWinningBid", "BiddingActivity", "AggregateDemand"])
 
 			if SubFeature == "BidsCircleWise":
 
@@ -2732,6 +2732,12 @@ if authentication_status:
 
 				
 					st.plotly_chart(figauc, use_container_width=True)
+
+			if SubFeature == "AggregateDemand":
+
+				dfbid = loadauctionbiddata()["2010_3G_AD"].replace('-', np.nan, regex = True)
+
+				st.write(dfbid)
 
 
 
