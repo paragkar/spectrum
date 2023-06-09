@@ -2085,7 +2085,7 @@ if authentication_status:
 					figauc.update_layout(
 						    xaxis=dict(showgrid=False),
 						    yaxis=dict(showgrid=False),
-						    coloraxis_colorbar=dict(len=0.5)
+						    coloraxis_colorbar=dict(width=0.1)
 									)
 
 					if chartoption == "Absolute Values":
