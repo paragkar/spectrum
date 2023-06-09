@@ -2277,7 +2277,7 @@ if authentication_status:
 
 				dfbidactivity = dfbid.copy()
 
-				optiontype = st.sidebar.radio('Choose an Option', ["Total Activity", "PWB Activity", "NewBids Activity"])
+				optiontype = st.sidebar.radio('Click an Option', ["Total Activity", "PWB Activity", "NewBids Activity"])
 
 				if optiontype == "Total Activity":
 
