@@ -2290,7 +2290,7 @@ if authentication_status:
 
 					dfbidactivityRd1 = dfbidactivityRd1.pivot(index="Bidder", columns='Clk_Round', values="Actual_Activity").sort_index(ascending=True)
 
-					dfbidactivityprec = round((dfbidactivity/dfbidactivityRd1)*100,1)
+					dfbidactivityprec = round((dfbidactivity/dfbidactivityRd1.values)*100,1)
 
 					st.write(dfbidactivityprec)
 
