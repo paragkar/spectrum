@@ -1772,180 +1772,284 @@ if authentication_status:
 
 		if Feature == "2010-Band2100":
 
+			totalrounds = 183
+
+			mainsheet = "2010_3G"
+
+			activitysheet = "2010_3G_Activity"
+
+			demandsheet = "2010_3G_AD"
+
+		if Feature == "2010-Band2300":
+
 			totalrounds = 117
 
-			dfbid = loadauctionbiddata()["2010_BWA"].replace('-', np.nan, regex = True) #debug
+			mainsheet = "2010_BWA"
 
-			dfbid.columns = ["Clk_Round", "Bidder","LSA","PWB_Start_ClkRd", "Rank_PWB_Start_ClkRd", 
-							"Possible_Raise_Bid_ClkRd", "Bid_Decision", "PWB_End_ClkRd", "Rank_PWB_End_ClkRd"]
+			activitysheet = "2010_BWA_Activity"
 
-			dfbid = dfbid.replace("No Bid", 0)
-			dfbid = dfbid.replace("Bid",1)
-
-			listofbidders = sorted(list(set(dfbid["Bidder"])))
-
-			dfbid = dfbid.set_index("LSA").sort_index(ascending = False)
-
-			SubFeature = st.sidebar.selectbox("Select a SubFeature", ["BidsCircleWise","RanksCircleWise", "ProvWinningBid", "BiddingActivity", "DemandActivity"])
-
-			if SubFeature == "BidsCircleWise":
-
-				round_range = st.slider("Select Auction Round Numbers using the Silder below", value=(1,totalrounds))
-
-				start_round = round_range[0]
-
-				end_round = round_range[1]
-
-				dfbidcirclwise = dfbid.copy()
+			demandsheet = "2010_BWA_AD"
 
 
-				#filter data within the block of selected rounds 
+		dfbid = loadauctionbiddata()[mainsheet].replace('-', np.nan, regex = True) #debug
 
-				filt  =(dfbidcirclwise["Clk_Round"] >= start_round) & (dfbidcirclwise["Clk_Round"] <= end_round)
+		dfbid.columns = ["Clk_Round", "Bidder","LSA","PWB_Start_ClkRd", "Rank_PWB_Start_ClkRd", 
+						"Possible_Raise_Bid_ClkRd", "Bid_Decision", "PWB_End_ClkRd", "Rank_PWB_End_ClkRd"]
 
-				dfbidcirclwise = dfbidcirclwise[filt]
+		dfbid = dfbid.replace("No Bid", 0)
+		dfbid = dfbid.replace("Bid",1)
+
+		listofbidders = sorted(list(set(dfbid["Bidder"])))
+
+		dfbid = dfbid.set_index("LSA").sort_index(ascending = False)
+
+		SubFeature = st.sidebar.selectbox("Select a SubFeature", ["BidsCircleWise","RanksCircleWise", "ProvWinningBid", "BiddingActivity", "DemandActivity"])
+
+		if SubFeature == "BidsCircleWise":
+
+			round_range = st.slider("Select Auction Round Numbers using the Silder below", value=(1,totalrounds))
+
+			start_round = round_range[0]
+
+			end_round = round_range[1]
+
+			dfbidcirclwise = dfbid.copy()
 
 
-				dftemp = dfbidcirclwise.drop(columns=["Possible_Raise_Bid_ClkRd", "Rank_PWB_Start_ClkRd", "Rank_PWB_End_ClkRd",
-											"PWB_End_ClkRd","Clk_Round", "PWB_Start_ClkRd"], axis=1)
+			#filter data within the block of selected rounds 
 
-				dftemp = dftemp.groupby(["LSA", "Bidder"]).sum().reset_index()
+			filt  =(dfbidcirclwise["Clk_Round"] >= start_round) & (dfbidcirclwise["Clk_Round"] <= end_round)
 
-				summarydf = dftemp.groupby(["LSA"]).sum().reset_index().drop(columns = "Bidder", axis =1)
+			dfbidcirclwise = dfbidcirclwise[filt]
 
-				summarydf = summarydf.set_index("LSA")
 
-				dftemp = dftemp.set_index("LSA")
+			dftemp = dfbidcirclwise.drop(columns=["Possible_Raise_Bid_ClkRd", "Rank_PWB_Start_ClkRd", "Rank_PWB_End_ClkRd",
+										"PWB_End_ClkRd","Clk_Round", "PWB_Start_ClkRd"], axis=1)
 
-				dftemp["Bid_Decision_Perc"] = round((dftemp["Bid_Decision"]/summarydf["Bid_Decision"])*100,1)
+			dftemp = dftemp.groupby(["LSA", "Bidder"]).sum().reset_index()
 
-				dftemp = dftemp.reset_index()
+			summarydf = dftemp.groupby(["LSA"]).sum().reset_index().drop(columns = "Bidder", axis =1)
 
-				# #sort by LSA 
+			summarydf = summarydf.set_index("LSA")
+
+			dftemp = dftemp.set_index("LSA")
+
+			dftemp["Bid_Decision_Perc"] = round((dftemp["Bid_Decision"]/summarydf["Bid_Decision"])*100,1)
+
+			dftemp = dftemp.reset_index()
+
+			# #sort by LSA 
+
+			sortbylsa = st.sidebar.selectbox("Select a Circle to Sort", state_dict.values())
+
+			selected_lsa = [k for k, v in state_dict.items() if v == sortbylsa]
+
+			# dftempheat = dftempheat.sort_values(selected_lsa[0], ascending = True)
+
+			#processing hovertext and colormatrix
+			hovertext,colormatrix,resultdf = htext_colormatrix_auctiondata_2010_3G_BidsCircleWise(dfbidcirclwise, dftemp,selected_lsa[0],end_round)
+			hoverlabel_bgcolor = colormatrix
+
+
+			radio_selection = st.sidebar.radio('Click an Option', ["Absolute Values", "Percentage of Total", "Provisional Winners"])
+
+			if radio_selection == "Absolute Values":
+
+				dftempheat = dftemp.pivot(index="Bidder", columns='LSA', values="Bid_Decision")
+
+				dftempheat = dftempheat.sort_values(selected_lsa[0], ascending = True)
+
+				summarydf = dftempheat.sum(axis=0).reset_index() #debug
+
+				summarydf.columns = ["LSA","TotalBids"]
+
+				#preparing the summary chart 
+				chart = summarychart(summarydf, 'LSA', "TotalBids")
+				SummaryFlag = True
+
+				subsubtitle=""
+
+
+				data = [go.Heatmap(
+					z=dftempheat.values,
+			        x=dftempheat.columns,
+			        y=dftempheat.index,
+					xgap = 1,
+					ygap = 1,
+					hoverinfo ='text',
+					text = hovertext,
+					colorscale="Hot",
+						texttemplate="%{z}",
+						textfont={"size":10},
+						reversescale=True,
+						),
+					]
+
+			if radio_selection == "Percentage of Total":
+
+				dftempheatSum = dftemp.pivot(index="Bidder", columns='LSA', values="Bid_Decision") #for summary chrat below
+
+				dftempheat = dftemp.pivot(index="Bidder", columns='LSA', values="Bid_Decision_Perc") #for heatmap
+
+				dftempheat = dftempheat.sort_values(selected_lsa[0], ascending = True)
+
+				summarydf = dftempheatSum.sum(axis=0).reset_index()
+
+				summarydf.columns = ["LSA","TotalBids"]
+
+				#preparing the summary chart 
+				chart = summarychart(summarydf, 'LSA', "TotalBids")
+				SummaryFlag = True
+
+				subsubtitle=""
+
+
+				data = [go.Heatmap(
+					z=dftempheat.values,
+			        x=dftempheat.columns,
+			        y=dftempheat.index,
+					xgap = 1,
+					ygap = 1,
+					hoverinfo ='text',
+					text = hovertext,
+					colorscale="Hot",
+						texttemplate="%{z}",
+						textfont={"size":10},
+						reversescale=True,
+						),
+					]
+
+			if radio_selection == "Provisional Winners":
+
+				dftempheatSum = dftemp.pivot(index="Bidder", columns='LSA', values="Bid_Decision") #for summary chrat below
+
+				summarydf = dftempheatSum.sum(axis=0).reset_index()
+
+				summarydf.columns = ["LSA","TotalBids"]
+
+				#preparing the summary chart 
+				chart = summarychart(summarydf, 'LSA', "TotalBids")
+				SummaryFlag = True
+
+
+				resultdfheat = resultdf.replace("WON",1)
+
+				resultdfheat = resultdfheat.replace("LOST",0)
+
+				# dftempheat = dftemp.pivot(index="Bidder", columns='LSA', values="Bid_Decision")
+
+				subsubtitle = "Provisional Winners are at the end of Round Number - "+str(end_round)
+
+
+
+			# dftempheat = dftempheat.sort_values(selected_lsa[0], ascending = True)
+
+
+				data = [go.Heatmap(
+					z=resultdfheat.values,
+			        x=resultdfheat.columns,
+			        y=resultdfheat.index,
+					xgap = 1,
+					ygap = 1,
+					hoverinfo ='text',
+					text = resultdf.values,
+					colorscale="Picnic",
+						texttemplate="%{text}",
+						textfont={"size":10},
+						reversescale=True,
+						),
+					]
+			
+
+			figauc = go.Figure(data=data)
+
+
+			figauc.update_layout(
+			    template="seaborn",
+			    xaxis_side= 'top',
+			   	height = 650,
+			   	yaxis=dict(
+		        tickmode='array',
+		        showgrid=False,
+		        	))
+
+			title = "3G Auctions (Year-2010) - Total Number of Bids in Circles "+"("+radio_selection+")"
+			subtitle = "Source - DoT; Between Round Nos "+str(start_round)+" & "+str(end_round)+ "; Number of Rounds = "+ str(end_round-start_round)+"; "+subsubtitle
+
+			style = "<style>h3 {text-align: left;}</style>"
+			with st.container():
+				#plotting the main chart
+				st.markdown(style, unsafe_allow_html=True)
+				st.header(title)
+				st.markdown(subtitle)
+
+			#Drawning a black border around the heatmap chart 
+			figauc.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
+			figauc.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
+
+			figauc.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
+
+			st.plotly_chart(figauc, use_container_width=True)
+
+			#plotting the final summary chart 
+			col1,col2,col3 = st.columns([0.2,14,1]) #create collumns of uneven width
+			if SummaryFlag ==True:
+				# st.altair_chart(chart, use_container_width=True)
+				col2.altair_chart(chart, use_container_width=True)
+
+		if SubFeature == "RanksCircleWise":
+
+			plottype = st.sidebar.selectbox("Select a Plot Type", ["RanksInRound", "RanksInRounds"])
+
+			if plottype == "RanksInRound":
+
+				round_number = st.slider("Select Auction Round Numbers using the Silder below", min_value=1, max_value=totalrounds, step=1, value = totalrounds)
+
+				dfbidspec = dfbid.copy()
+
+				filt  =(dfbidspec["Clk_Round"] == round_number) 
+
+				dfbidspec = dfbidspec[filt]
+
+				dftemp = dfbidspec.drop(columns=["PWB_Start_ClkRd","Possible_Raise_Bid_ClkRd", "Rank_PWB_Start_ClkRd","Bid_Decision","PWB_End_ClkRd"], axis=1).reset_index()
+
+				dftemp = dftemp.groupby(["LSA", "Bidder", "Rank_PWB_End_ClkRd"]).sum().reset_index()
+
+				dftempheat = dftemp.pivot(index="Bidder", columns='LSA', values="Rank_PWB_End_ClkRd")
+
+				#sort by LSA 
 
 				sortbylsa = st.sidebar.selectbox("Select a Circle to Sort", state_dict.values())
 
 				selected_lsa = [k for k, v in state_dict.items() if v == sortbylsa]
 
-				# dftempheat = dftempheat.sort_values(selected_lsa[0], ascending = True)
+				# Custom sorting key function
+				def sort_key(value):
+				    if pd.isnull(value) or value == 0:
+				        return float('inf')  # Assigning a very large value for zeros and np.nan
+				    else:
+				        return value
 
-				#processing hovertext and colormatrix
-				hovertext,colormatrix,resultdf = htext_colormatrix_auctiondata_2010_3G_BidsCircleWise(dfbidcirclwise, dftemp,selected_lsa[0],end_round)
-				hoverlabel_bgcolor = colormatrix
-
-
-				radio_selection = st.sidebar.radio('Click an Option', ["Absolute Values", "Percentage of Total", "Provisional Winners"])
-
-				if radio_selection == "Absolute Values":
-
-					dftempheat = dftemp.pivot(index="Bidder", columns='LSA', values="Bid_Decision")
-
-					dftempheat = dftempheat.sort_values(selected_lsa[0], ascending = True)
-
-					summarydf = dftempheat.sum(axis=0).reset_index() #debug
-
-					summarydf.columns = ["LSA","TotalBids"]
-
-					#preparing the summary chart 
-					chart = summarychart(summarydf, 'LSA', "TotalBids")
-					SummaryFlag = True
-
-					subsubtitle=""
+				dftempheat = dftempheat.sort_values(selected_lsa[0], key=lambda x: x.map(sort_key), ascending = False)
 
 
-					data = [go.Heatmap(
-						z=dftempheat.values,
-				        x=dftempheat.columns,
-				        y=dftempheat.index,
-						xgap = 1,
-						ygap = 1,
-						hoverinfo ='text',
-						text = hovertext,
-						colorscale="Hot",
-							texttemplate="%{z}",
-							textfont={"size":10},
-							reversescale=True,
-							),
-						]
-
-				if radio_selection == "Percentage of Total":
-
-					dftempheatSum = dftemp.pivot(index="Bidder", columns='LSA', values="Bid_Decision") #for summary chrat below
-
-					dftempheat = dftemp.pivot(index="Bidder", columns='LSA', values="Bid_Decision_Perc") #for heatmap
-
-					dftempheat = dftempheat.sort_values(selected_lsa[0], ascending = True)
-
-					summarydf = dftempheatSum.sum(axis=0).reset_index()
-
-					summarydf.columns = ["LSA","TotalBids"]
-
-					#preparing the summary chart 
-					chart = summarychart(summarydf, 'LSA', "TotalBids")
-					SummaryFlag = True
-
-					subsubtitle=""
-
-
-					data = [go.Heatmap(
-						z=dftempheat.values,
-				        x=dftempheat.columns,
-				        y=dftempheat.index,
-						xgap = 1,
-						ygap = 1,
-						hoverinfo ='text',
-						text = hovertext,
-						colorscale="Hot",
-							texttemplate="%{z}",
-							textfont={"size":10},
-							reversescale=True,
-							),
-						]
-
-				if radio_selection == "Provisional Winners":
-
-					dftempheatSum = dftemp.pivot(index="Bidder", columns='LSA', values="Bid_Decision") #for summary chrat below
-
-					summarydf = dftempheatSum.sum(axis=0).reset_index()
-
-					summarydf.columns = ["LSA","TotalBids"]
-
-					#preparing the summary chart 
-					chart = summarychart(summarydf, 'LSA', "TotalBids")
-					SummaryFlag = True
-
-
-					resultdfheat = resultdf.replace("WON",1)
-
-					resultdfheat = resultdfheat.replace("LOST",0)
-
-					# dftempheat = dftemp.pivot(index="Bidder", columns='LSA', values="Bid_Decision")
-
-					subsubtitle = "Provisional Winners are at the end of Round Number - "+str(end_round)
-
-
-
-				# dftempheat = dftempheat.sort_values(selected_lsa[0], ascending = True)
-
-
-					data = [go.Heatmap(
-						z=resultdfheat.values,
-				        x=resultdfheat.columns,
-				        y=resultdfheat.index,
-						xgap = 1,
-						ygap = 1,
-						hoverinfo ='text',
-						text = resultdf.values,
-						colorscale="Picnic",
-							texttemplate="%{text}",
-							textfont={"size":10},
-							reversescale=True,
-							),
-						]
-				
+				data = [go.Heatmap(
+					z=dftempheat.values,
+			        y= dftempheat.index,
+			        x=dftempheat.columns,
+					xgap = 1,
+					ygap = 1,
+					hoverinfo ='text',
+					# text = hovertext,
+					colorscale='Hot',
+					# showscale=False,
+						texttemplate="%{z}", 
+						textfont={"size":10},
+						# reversescale=True,
+						)]
+					
 
 				figauc = go.Figure(data=data)
-
 
 				figauc.update_layout(
 				    template="seaborn",
@@ -1953,11 +2057,118 @@ if authentication_status:
 				   	height = 650,
 				   	yaxis=dict(
 			        tickmode='array',
-			        showgrid=False,
 			        	))
 
-				title = "3G Auctions (Year-2010) - Total Number of Bids in Circles "+"("+radio_selection+")"
-				subtitle = "Source - DoT; Between Round Nos "+str(start_round)+" & "+str(end_round)+ "; Number of Rounds = "+ str(end_round-start_round)+"; "+subsubtitle
+				title = "3G Auctions (Year-2010) - Bidder's Rank at the End of Clock Round No - "+str(round_number)
+				subtitle = "Unit - RankNo; Higher the Rank More Aggressive is the Bidding; Sorted by Circle -"+selected_lsa[0]+" ; Source - DoT"
+
+				style = "<style>h3 {text-align: left;}</style>"
+				with st.container():
+					#plotting the main chart
+					st.markdown(style, unsafe_allow_html=True)
+					st.header(title)
+					st.markdown(subtitle)
+
+
+				#Drawning a black border around the heatmap chart 
+				figauc.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
+				figauc.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
+
+				figauc.update_layout(
+					    xaxis=dict(showgrid=False),
+					    yaxis=dict(showgrid=False)
+					)
+
+				st.plotly_chart(figauc, use_container_width=True)
+
+
+			if plottype == "RanksInRounds":
+
+				round_range = st.slider("Select Auction Round Numbers using the Silder below", value=(1,totalrounds))
+
+				start_round = round_range[0]
+
+				end_round = round_range[1]
+
+				dfbidsel = dfbid.copy()
+
+				st.write("") #debug
+
+				filt  =(dfbidsel["Clk_Round"] >= start_round) & (dfbidsel["Clk_Round"] <= end_round)
+
+				dfbidsel = dfbidsel[filt].reset_index()
+
+
+				listofbidders = sorted(list(set(dfbidsel["Bidder"])))
+
+				lsas = sorted(list(set(dfbidsel["LSA"])))
+
+				lst =[]
+
+				for bidder in listofbidders:
+
+					for lsa in lsas:
+
+						temp = dfbidsel[(dfbidsel["Bidder"]==bidder) & (dfbidsel["LSA"]==lsa)]
+
+						lst.append([1, lsa, bidder, temp[temp["Rank_PWB_End_ClkRd"]==1]["Rank_PWB_End_ClkRd"].count()])
+
+						lst.append([2, lsa, bidder, temp[temp["Rank_PWB_End_ClkRd"]==2]["Rank_PWB_End_ClkRd"].count()])
+
+						lst.append([3, lsa, bidder, temp[temp["Rank_PWB_End_ClkRd"]==3]["Rank_PWB_End_ClkRd"].count()])
+
+						lst.append([4, lsa, bidder, temp[temp["Rank_PWB_End_ClkRd"]==4]["Rank_PWB_End_ClkRd"].count()])
+
+				dfbidsel = pd.DataFrame(lst)
+
+				dfbidsel.columns = ["RankNo","LSA","Bidder", "RankCount"]
+
+				dfbidsel = dfbidsel.set_index("LSA").reset_index()
+
+
+				dfbidsel["Rank_Bidder"] = dfbidsel[["RankNo", "Bidder"]].apply(lambda x: "-".join(map(str, x)), axis=1)
+
+
+				dfbidsel = dfbidsel.pivot(index="Rank_Bidder", columns='LSA', values="RankCount")
+
+				dfbidsel = dfbidsel.sort_index(ascending = False)
+
+				sortbylsa = st.sidebar.selectbox("Select a Circle to Sort", state_dict.values())
+
+				selected_lsa = [k for k, v in state_dict.items() if v == sortbylsa]
+
+				dfbidsel = dfbidsel.sort_values(selected_lsa[0], ascending = True)
+
+				dfbidsel = dfbidsel.replace(0, np.nan).dropna(axis =0, how = "all")
+
+				data = [go.Heatmap(
+						z=dfbidsel.values,
+				        y= dfbidsel.index,
+				        x=dfbidsel.columns,
+						xgap = 1,
+						ygap = 1,
+						hoverinfo ='text',
+						# text = hovertext,
+						colorscale='Hot',
+						# showscale=False,
+							texttemplate="%{z}", 
+							textfont={"size":8},
+							reversescale=True,
+							)
+						]
+
+				figauc = go.Figure(data=data)
+
+				figauc.update_layout(
+				    template="seaborn",
+				    xaxis_side= 'top',
+				   	height = 800,
+				   	yaxis=dict(
+			        tickmode='array',
+			        	))
+
+				title = "3G Auctions (Year-2010) - Bidder's Aggregrated Ranks (1-4) in a Chosen Window of Rounds"
+				subtitle = "Source - DOT; Between Round Nos "+str(start_round)+" & "+str(end_round)+ "; Number of Rounds = "+ str(end_round-start_round)
 
 				style = "<style>h3 {text-align: left;}</style>"
 				with st.container():
@@ -1970,438 +2181,377 @@ if authentication_status:
 				figauc.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
 				figauc.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
 
-				figauc.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
+				figauc.update_layout(
+					    xaxis=dict(showgrid=False),
+					    yaxis=dict(showgrid=False)
+					)
 
 				st.plotly_chart(figauc, use_container_width=True)
 
-				#plotting the final summary chart 
-				col1,col2,col3 = st.columns([0.2,14,1]) #create collumns of uneven width
-				if SummaryFlag ==True:
-					# st.altair_chart(chart, use_container_width=True)
-					col2.altair_chart(chart, use_container_width=True)
 
-			if SubFeature == "RanksCircleWise":
+		if SubFeature == "ProvWinningBid":
 
-				plottype = st.sidebar.selectbox("Select a Plot Type", ["RanksInRound", "RanksInRounds"])
+			pwbtype = st.sidebar.selectbox("Select a PWB Type", ["Start CLK Round", "End CLK Round"])
 
-				if plottype == "RanksInRound":
+			df2ndrd = dfbid[dfbid["Clk_Round"] == 2].reset_index() #Identifying the 2nd round gives up the reserve price
 
-					round_number = st.slider("Select Auction Round Numbers using the Silder below", min_value=1, max_value=totalrounds, step=1, value = totalrounds)
+			df2ndrdpwb = df2ndrd.pivot(index="Bidder", columns='LSA', values="PWB_Start_ClkRd").sort_index(ascending=False)
 
-					dfbidspec = dfbid.copy()
+			dfrp = df2ndrdpwb.mean()
 
-					filt  =(dfbidspec["Clk_Round"] == round_number) 
+			dfrp.columns = ["ReservePrice"]
 
-					dfbidspec = dfbidspec[filt]
+			dfrp = dfrp.T
 
-					dftemp = dfbidspec.drop(columns=["PWB_Start_ClkRd","Possible_Raise_Bid_ClkRd", "Rank_PWB_Start_ClkRd","Bid_Decision","PWB_End_ClkRd"], axis=1).reset_index()
+			if pwbtype == "Start CLK Round":
 
-					dftemp = dftemp.groupby(["LSA", "Bidder", "Rank_PWB_End_ClkRd"]).sum().reset_index()
+				round_number = st.slider("Select Auction Round Numbers using the Silder below", min_value=1, max_value=totalrounds, step=1, value = totalrounds)
 
-					dftempheat = dftemp.pivot(index="Bidder", columns='LSA', values="Rank_PWB_End_ClkRd")
+				dfbidpwb = dfbid.copy()
 
-					#sort by LSA 
+				filt  =(dfbidpwb["Clk_Round"] == round_number) 
 
-					sortbylsa = st.sidebar.selectbox("Select a Circle to Sort", state_dict.values())
+				dfbidpwb = dfbidpwb[filt]
 
-					selected_lsa = [k for k, v in state_dict.items() if v == sortbylsa]
+				dftemp = dfbidpwb.drop(columns=["Rank_PWB_End_ClkRd","Possible_Raise_Bid_ClkRd", "Rank_PWB_Start_ClkRd",
+												"Bid_Decision","Clk_Round", "PWB_End_ClkRd"], axis=1).reset_index()
 
-					# Custom sorting key function
-					def sort_key(value):
-					    if pd.isnull(value) or value == 0:
-					        return float('inf')  # Assigning a very large value for zeros and np.nan
-					    else:
-					        return value
+				dftemp = dftemp.groupby(["LSA", "Bidder", "PWB_Start_ClkRd"]).sum().reset_index()
 
-					dftempheat = dftempheat.sort_values(selected_lsa[0], key=lambda x: x.map(sort_key), ascending = False)
+				dftemp = dftemp.pivot(index="Bidder", columns='LSA', values="PWB_Start_ClkRd").sort_index(ascending=False).round(0)
 
+				chartoption = st.sidebar.radio('Click an Option', ["Absolute Values", "ReservePrice Multiple"])
 
-					data = [go.Heatmap(
-						z=dftempheat.values,
-				        y= dftempheat.index,
-				        x=dftempheat.columns,
-						xgap = 1,
-						ygap = 1,
-						hoverinfo ='text',
-						# text = hovertext,
-						colorscale='Hot',
-						# showscale=False,
-							texttemplate="%{z}", 
-							textfont={"size":10},
-							# reversescale=True,
-							)]
-						
+				if chartoption == "Absolute Values":
 
-					figauc = go.Figure(data=data)
+					figpanindiabids = plotbiddertotal(dftemp)
 
-					figauc.update_layout(
-					    template="seaborn",
-					    xaxis_side= 'top',
-					   	height = 650,
-					   	yaxis=dict(
-				        tickmode='array',
-				        	))
+					showscale = False
+			
+				if chartoption == "ReservePrice Multiple":
 
-					title = "3G Auctions (Year-2010) - Bidder's Rank at the End of Clock Round No - "+str(round_number)
-					subtitle = "Unit - RankNo; Higher the Rank More Aggressive is the Bidding; Sorted by Circle -"+selected_lsa[0]+" ; Source - DoT"
+					dftemp = round(dftemp/dfrp,1)
 
-					style = "<style>h3 {text-align: left;}</style>"
-					with st.container():
-						#plotting the main chart
-						st.markdown(style, unsafe_allow_html=True)
-						st.header(title)
-						st.markdown(subtitle)
+					showscale = True
 
+				hovertext = htext_colormatrix_auctiondata_2010_3G_ProvWinningBid(dfrp, dftemp, pwbtype, round_number) #debug
 
-					#Drawning a black border around the heatmap chart 
-					figauc.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
-					figauc.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
+				data = [go.Heatmap(
+					z=dftemp.values,
+			        y= dftemp.index,
+			        x=dftemp.columns,
+					xgap = 1,
+					ygap = 1,
+					hoverinfo ='text',
+					text = hovertext,
+					colorscale='Hot',
+					showscale=showscale,
+						texttemplate="%{z}", 
+						textfont={"size":10},
+						reversescale=True,
+						)]
+					
 
-					figauc.update_layout(
-						    xaxis=dict(showgrid=False),
-						    yaxis=dict(showgrid=False)
-						)
+				figauc = go.Figure(data=data)
 
-					st.plotly_chart(figauc, use_container_width=True)
+				figauc.update_layout(
+				    template="seaborn",
+				    xaxis_side= 'top',
+				   	height = 650,
+				   	yaxis=dict(
+			        tickmode='array',
+			        	))
+
+				title = "3G Auctions (Year-2010) - PWB Start of Clock Round No - "+str(round_number)
+				subtitle = "Unit - Rs Cr; Source - DoT; "+ chartoption+" - May be lower for bidders in same circle who did not agree to the higher round price"
+
+				style = "<style>h3 {text-align: left;}</style>"
+				with st.container():
+					#plotting the main chart
+					st.markdown(style, unsafe_allow_html=True)
+					st.header(title)
+					st.markdown(subtitle)
 
 
-				if plottype == "RanksInRounds":
+				#Drawning a black border around the heatmap chart 
+				figauc.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True, range=[-0.5, len(dftemp.columns) -0.5])
+				figauc.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True, range=[-0.5, len(dftemp.index) -0.5])
 
-					round_range = st.slider("Select Auction Round Numbers using the Silder below", value=(1,totalrounds))
-
-					start_round = round_range[0]
-
-					end_round = round_range[1]
-
-					dfbidsel = dfbid.copy()
-
-					st.write("") #debug
-
-					filt  =(dfbidsel["Clk_Round"] >= start_round) & (dfbidsel["Clk_Round"] <= end_round)
-
-					dfbidsel = dfbidsel[filt].reset_index()
-
-
-					listofbidders = sorted(list(set(dfbidsel["Bidder"])))
-
-					lsas = sorted(list(set(dfbidsel["LSA"])))
-
-					lst =[]
-
-					for bidder in listofbidders:
-
-						for lsa in lsas:
-
-							temp = dfbidsel[(dfbidsel["Bidder"]==bidder) & (dfbidsel["LSA"]==lsa)]
-
-							lst.append([1, lsa, bidder, temp[temp["Rank_PWB_End_ClkRd"]==1]["Rank_PWB_End_ClkRd"].count()])
-
-							lst.append([2, lsa, bidder, temp[temp["Rank_PWB_End_ClkRd"]==2]["Rank_PWB_End_ClkRd"].count()])
-
-							lst.append([3, lsa, bidder, temp[temp["Rank_PWB_End_ClkRd"]==3]["Rank_PWB_End_ClkRd"].count()])
-
-							lst.append([4, lsa, bidder, temp[temp["Rank_PWB_End_ClkRd"]==4]["Rank_PWB_End_ClkRd"].count()])
-
-					dfbidsel = pd.DataFrame(lst)
-
-					dfbidsel.columns = ["RankNo","LSA","Bidder", "RankCount"]
-
-					dfbidsel = dfbidsel.set_index("LSA").reset_index()
-
-
-					dfbidsel["Rank_Bidder"] = dfbidsel[["RankNo", "Bidder"]].apply(lambda x: "-".join(map(str, x)), axis=1)
-
-
-					dfbidsel = dfbidsel.pivot(index="Rank_Bidder", columns='LSA', values="RankCount")
-
-					dfbidsel = dfbidsel.sort_index(ascending = False)
-
-					sortbylsa = st.sidebar.selectbox("Select a Circle to Sort", state_dict.values())
-
-					selected_lsa = [k for k, v in state_dict.items() if v == sortbylsa]
-
-					dfbidsel = dfbidsel.sort_values(selected_lsa[0], ascending = True)
-
-					dfbidsel = dfbidsel.replace(0, np.nan).dropna(axis =0, how = "all")
-
-					data = [go.Heatmap(
-							z=dfbidsel.values,
-					        y= dfbidsel.index,
-					        x=dfbidsel.columns,
-							xgap = 1,
-							ygap = 1,
-							hoverinfo ='text',
-							# text = hovertext,
-							colorscale='Hot',
-							# showscale=False,
-								texttemplate="%{z}", 
-								textfont={"size":8},
-								reversescale=True,
+				figauc.update_layout(
+					    xaxis=dict(showgrid=False),
+					    yaxis=dict(showgrid=False),
+					     
 								)
-							]
 
-					figauc = go.Figure(data=data)
+				hoverlabel_bgcolor = "#000000" #subdued black
 
-					figauc.update_layout(
-					    template="seaborn",
-					    xaxis_side= 'top',
-					   	height = 800,
-					   	yaxis=dict(
-				        tickmode='array',
-				        	))
+				figauc.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 
-					title = "3G Auctions (Year-2010) - Bidder's Aggregrated Ranks (1-4) in a Chosen Window of Rounds"
-					subtitle = "Source - DOT; Between Round Nos "+str(start_round)+" & "+str(end_round)+ "; Number of Rounds = "+ str(end_round-start_round)
+				if chartoption == "Absolute Values":
+					col1,col2 = st.columns([8,1]) #create collumns of uneven width
+					col1.plotly_chart(figauc, use_container_width=True)
+					col2.header("")
+					col2.plotly_chart(figpanindiabids, use_container_width=True)
 
-					style = "<style>h3 {text-align: left;}</style>"
-					with st.container():
-						#plotting the main chart
-						st.markdown(style, unsafe_allow_html=True)
-						st.header(title)
-						st.markdown(subtitle)
-
-					#Drawning a black border around the heatmap chart 
-					figauc.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
-					figauc.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
-
-					figauc.update_layout(
-						    xaxis=dict(showgrid=False),
-						    yaxis=dict(showgrid=False)
-						)
-
+				if chartoption =="ReservePrice Multiple":
 					st.plotly_chart(figauc, use_container_width=True)
 
 
-			if SubFeature == "ProvWinningBid":
 
-				pwbtype = st.sidebar.selectbox("Select a PWB Type", ["Start CLK Round", "End CLK Round"])
+			if pwbtype == "End CLK Round":
 
-				df2ndrd = dfbid[dfbid["Clk_Round"] == 2].reset_index() #Identifying the 2nd round gives up the reserve price
+				round_number = st.slider("Select Auction Round Numbers using the Silder below", min_value=1, max_value=totalrounds, step=1, value = totalrounds)
 
-				df2ndrdpwb = df2ndrd.pivot(index="Bidder", columns='LSA', values="PWB_Start_ClkRd").sort_index(ascending=False)
+				dfbidpwb = dfbid.copy()
 
-				dfrp = df2ndrdpwb.mean()
+				filt  =(dfbidpwb["Clk_Round"] == round_number) 
 
-				dfrp.columns = ["ReservePrice"]
+				dfbidpwb = dfbidpwb[filt]
 
-				dfrp = dfrp.T
+				dftemp = dfbidpwb.drop(columns=["Rank_PWB_End_ClkRd","PWB_Start_ClkRd","Possible_Raise_Bid_ClkRd", "Rank_PWB_Start_ClkRd","Bid_Decision","Clk_Round", "PWB_Start_ClkRd"], axis=1).reset_index()
 
-				if pwbtype == "Start CLK Round":
+				dftemp = dftemp.groupby(["LSA", "Bidder", "PWB_End_ClkRd"]).sum().reset_index()
 
-					round_number = st.slider("Select Auction Round Numbers using the Silder below", min_value=1, max_value=totalrounds, step=1, value = totalrounds)
+				dftemp = dftemp.pivot(index="Bidder", columns='LSA', values="PWB_End_ClkRd").sort_index(ascending=False).round(0)
 
-					dfbidpwb = dfbid.copy()
+				chartoption = st.sidebar.radio('Click an Option', ["Absolute Values", "ReservePrice Multiple"])
 
-					filt  =(dfbidpwb["Clk_Round"] == round_number) 
+				if chartoption == "Absolute Values":
 
-					dfbidpwb = dfbidpwb[filt]
+					figpanindiabids = plotbiddertotal(dftemp)
 
-					dftemp = dfbidpwb.drop(columns=["Rank_PWB_End_ClkRd","Possible_Raise_Bid_ClkRd", "Rank_PWB_Start_ClkRd",
-													"Bid_Decision","Clk_Round", "PWB_End_ClkRd"], axis=1).reset_index()
+					showscale =False
 
-					dftemp = dftemp.groupby(["LSA", "Bidder", "PWB_Start_ClkRd"]).sum().reset_index()
+				if chartoption == "ReservePrice Multiple":
 
-					dftemp = dftemp.pivot(index="Bidder", columns='LSA', values="PWB_Start_ClkRd").sort_index(ascending=False).round(0)
+					dftemp = round(dftemp/dfrp,1)
 
-					chartoption = st.sidebar.radio('Click an Option', ["Absolute Values", "ReservePrice Multiple"])
+					showscale =True
 
-					if chartoption == "Absolute Values":
+				hovertext = htext_colormatrix_auctiondata_2010_3G_ProvWinningBid(dfrp, dftemp, pwbtype, round_number) #debug
 
-						figpanindiabids = plotbiddertotal(dftemp)
+				data = [go.Heatmap(
+					z=dftemp.values,
+			        y= dftemp.index,
+			        x=dftemp.columns,
+					xgap = 1,
+					ygap = 1,
+					hoverinfo ='text',
+					text = hovertext,
+					colorscale='Hot',
+					showscale=showscale,
+						texttemplate="%{z}", 
+						textfont={"size":10},
+						reversescale=True,
+						)]
+					
 
-						showscale = False
-				
-					if chartoption == "ReservePrice Multiple":
+				figauc = go.Figure(data=data)
 
-						dftemp = round(dftemp/dfrp,1)
+				figauc.update_layout(
+				    template="seaborn",
+				    xaxis_side= 'top',
+				   	height = 650,
+				   	yaxis=dict(
+			        tickmode='array',
+			        	))
 
-						showscale = True
+				title = "3G Auctions (Year-2010) - PWB End of Clock Round No - "+str(round_number)
+				subtitle = "Unit - Rs Cr; Source - DoT; "+chartoption+" - May be lower for bidders in same circle who did not agree to the higher round price"
 
-					hovertext = htext_colormatrix_auctiondata_2010_3G_ProvWinningBid(dfrp, dftemp, pwbtype, round_number) #debug
+				style = "<style>h3 {text-align: left;}</style>"
+				with st.container():
+					#plotting the main chart
+					st.markdown(style, unsafe_allow_html=True)
+					st.header(title)
+					st.markdown(subtitle)
 
-					data = [go.Heatmap(
-						z=dftemp.values,
-				        y= dftemp.index,
-				        x=dftemp.columns,
-						xgap = 1,
+
+				#Drawning a black border around the heatmap chart 
+				figauc.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
+				figauc.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
+
+				figauc.update_layout(
+					    xaxis=dict(showgrid=False),
+					    yaxis=dict(showgrid=False)
+					)
+
+				hoverlabel_bgcolor = "#000000" #subdued black
+
+				figauc.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
+
+				if chartoption == "Absolute Values":
+					col1,col2 = st.columns([8,1]) #create collumns of uneven width
+					col1.plotly_chart(figauc, use_container_width=True)
+					col2.header("")
+					col2.plotly_chart(figpanindiabids, use_container_width=True)
+
+				if chartoption == "ReservePrice Multiple":
+					st.plotly_chart(figauc, use_container_width=True)
+
+
+
+		if SubFeature == "BiddingActivity":
+
+			dfbid = loadauctionbiddata()[activitysheet].replace('-', np.nan, regex = True)
+
+			dfbid.columns = ["Clk_Round", "Bidder", "Pts_Start_Round", "Activity_Factor", "Activity_Requirement",
+							"Actual_Activity","Activity_at_PWB","Activity_NewBids","Point_Carry_Forward"]
+
+			dfbidactivity = dfbid.copy()
+
+			optiontype = st.sidebar.radio('Click an Option', ["Total Pts in Play", "Pts in PWB Circles", "Pts in New Circles", "Activity Factor"])
+
+			if optiontype == "Total Pts in Play":
+
+				filt = dfbidactivity["Clk_Round"]==1
+
+				dfbidactivityRd1 = dfbidactivity[filt]
+
+				dfbidactivity = dfbidactivity.pivot(index="Bidder", columns='Clk_Round', values="Actual_Activity").sort_index(ascending=True)
+
+				dfbidactivityRd1 = dfbidactivityRd1.pivot(index="Bidder", columns='Clk_Round', values="Actual_Activity").sort_index(ascending=True)
+
+				dfbidactivityratio = round((dfbidactivity/dfbidactivityRd1.values),2)
+
+
+				hovertext = htext_auctiondata_2010_3G_BiddingActivity(dfbid, "Actual_Activity")
+
+
+				data1 = [go.Heatmap(
+					z=dfbidactivity.values,
+			        y= dfbidactivity.index,
+			        x=dfbidactivity.columns,
+					xgap = 0.5,
+					ygap = 1,
+					hoverinfo ='text',
+					text = hovertext,
+					colorscale='Hot',
+					showscale=True,
+						# texttemplate="%{z}", 
+						# textfont={"size":10},
+						reversescale=True,
+						)]
+
+			
+
+				data2 = [go.Heatmap(
+						z=dfbidactivityratio.values,
+				        y= dfbidactivityratio.index,
+				        x=dfbidactivityratio.columns,
+						xgap = 0.5,
 						ygap = 1,
 						hoverinfo ='text',
 						text = hovertext,
 						colorscale='Hot',
-						showscale=showscale,
-							texttemplate="%{z}", 
-							textfont={"size":10},
+						showscale=True,
+							# texttemplate="%{z}", 
+							# textfont={"size":10},
 							reversescale=True,
 							)]
-						
+							
 
-					figauc = go.Figure(data=data)
+				figauc1 = go.Figure(data=data1)
+				figauc2 = go.Figure(data=data2)
 
-					figauc.update_layout(
-					    template="seaborn",
-					    xaxis_side= 'top',
-					   	height = 650,
-					   	yaxis=dict(
-				        tickmode='array',
-				        	))
-
-					title = "3G Auctions (Year-2010) - PWB Start of Clock Round No - "+str(round_number)
-					subtitle = "Unit - Rs Cr; Source - DoT; "+ chartoption+" - May be lower for bidders in same circle who did not agree to the higher round price"
-
-					style = "<style>h3 {text-align: left;}</style>"
-					with st.container():
-						#plotting the main chart
-						st.markdown(style, unsafe_allow_html=True)
-						st.header(title)
-						st.markdown(subtitle)
-
-
-					#Drawning a black border around the heatmap chart 
-					figauc.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True, range=[-0.5, len(dftemp.columns) -0.5])
-					figauc.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True, range=[-0.5, len(dftemp.index) -0.5])
-
-					figauc.update_layout(
-						    xaxis=dict(showgrid=False),
-						    yaxis=dict(showgrid=False),
-						     
-									)
-
-					hoverlabel_bgcolor = "#000000" #subdued black
-
-					figauc.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
-
-					if chartoption == "Absolute Values":
-						col1,col2 = st.columns([8,1]) #create collumns of uneven width
-						col1.plotly_chart(figauc, use_container_width=True)
-						col2.header("")
-						col2.plotly_chart(figpanindiabids, use_container_width=True)
-
-					if chartoption =="ReservePrice Multiple":
-						st.plotly_chart(figauc, use_container_width=True)
+				figauc1.update_layout(uniformtext_minsize=12, 
+				  uniformtext_mode='hide', 
+				  xaxis_title=None, 
+				  yaxis_title=None, 
+				  yaxis_autorange='reversed',
+				  font=dict(size=12),
+				  template='simple_white',
+				  paper_bgcolor=None,
+				  height=600, 
+				  width=1200,
+				  margin=dict(t=80, b=50, l=50, r=50, pad=0),
+				  yaxis=dict(
+		        	  tickmode='array'),
+				  xaxis = dict(
+				  side = 'top',
+				  tickmode = 'linear',
+				  tickangle=0,
+				  dtick = 10), 
+				)
 
 
+				#Drawning a black border around the heatmap chart 
+				figauc1.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
+				figauc1.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
 
-				if pwbtype == "End CLK Round":
+				figauc1.update_layout(
+					    xaxis=dict(showgrid=False),
+					    yaxis=dict(showgrid=False)
+					)
 
-					round_number = st.slider("Select Auction Round Numbers using the Silder below", min_value=1, max_value=totalrounds, step=1, value = totalrounds)
-
-					dfbidpwb = dfbid.copy()
-
-					filt  =(dfbidpwb["Clk_Round"] == round_number) 
-
-					dfbidpwb = dfbidpwb[filt]
-
-					dftemp = dfbidpwb.drop(columns=["Rank_PWB_End_ClkRd","PWB_Start_ClkRd","Possible_Raise_Bid_ClkRd", "Rank_PWB_Start_ClkRd","Bid_Decision","Clk_Round", "PWB_Start_ClkRd"], axis=1).reset_index()
-
-					dftemp = dftemp.groupby(["LSA", "Bidder", "PWB_End_ClkRd"]).sum().reset_index()
-
-					dftemp = dftemp.pivot(index="Bidder", columns='LSA', values="PWB_End_ClkRd").sort_index(ascending=False).round(0)
-
-					chartoption = st.sidebar.radio('Click an Option', ["Absolute Values", "ReservePrice Multiple"])
-
-					if chartoption == "Absolute Values":
-
-						figpanindiabids = plotbiddertotal(dftemp)
-
-						showscale =False
-
-					if chartoption == "ReservePrice Multiple":
-
-						dftemp = round(dftemp/dfrp,1)
-
-						showscale =True
-
-					hovertext = htext_colormatrix_auctiondata_2010_3G_ProvWinningBid(dfrp, dftemp, pwbtype, round_number) #debug
-
-					data = [go.Heatmap(
-						z=dftemp.values,
-				        y= dftemp.index,
-				        x=dftemp.columns,
-						xgap = 1,
-						ygap = 1,
-						hoverinfo ='text',
-						text = hovertext,
-						colorscale='Hot',
-						showscale=showscale,
-							texttemplate="%{z}", 
-							textfont={"size":10},
-							reversescale=True,
-							)]
-						
-
-					figauc = go.Figure(data=data)
-
-					figauc.update_layout(
-					    template="seaborn",
-					    xaxis_side= 'top',
-					   	height = 650,
-					   	yaxis=dict(
-				        tickmode='array',
-				        	))
-
-					title = "3G Auctions (Year-2010) - PWB End of Clock Round No - "+str(round_number)
-					subtitle = "Unit - Rs Cr; Source - DoT; "+chartoption+" - May be lower for bidders in same circle who did not agree to the higher round price"
-
-					style = "<style>h3 {text-align: left;}</style>"
-					with st.container():
-						#plotting the main chart
-						st.markdown(style, unsafe_allow_html=True)
-						st.header(title)
-						st.markdown(subtitle)
+				figauc2.update_layout(uniformtext_minsize=12, 
+				  uniformtext_mode='hide', 
+				  xaxis_title=None, 
+				  yaxis_title=None, 
+				  yaxis_autorange='reversed',
+				  font=dict(size=12),
+				  template='simple_white',
+				  paper_bgcolor=None,
+				  height=600, 
+				  width=1200,
+				  margin=dict(t=80, b=50, l=50, r=50, pad=0),
+				  yaxis=dict(
+		        	  tickmode='array'),
+				  xaxis = dict(
+				  side = 'top',
+				  tickmode = 'linear',
+				  tickangle=0,
+				  dtick = 10), 
+				)
 
 
-					#Drawning a black border around the heatmap chart 
-					figauc.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
-					figauc.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
+				#Drawning a black border around the heatmap chart 
+				figauc2.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
+				figauc2.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
 
-					figauc.update_layout(
-						    xaxis=dict(showgrid=False),
-						    yaxis=dict(showgrid=False)
-						)
+				figauc2.update_layout(
+					    xaxis=dict(showgrid=False),
+					    yaxis=dict(showgrid=False)
+					)
 
-					hoverlabel_bgcolor = "#000000" #subdued black
+				title = "3G Auctions (Year-2010) - Points in Play"
+				subtitle = "Unit - Nos; Source - DoT; Xaxis - Round Numbers"
+				style = "<style>h3 {text-align: left;}</style>"
+				with st.container():
+					#plotting the main chart
+					st.markdown(style, unsafe_allow_html=True)
+					st.header(title)
+					st.markdown(subtitle)
 
-					figauc.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 
-					if chartoption == "Absolute Values":
-						col1,col2 = st.columns([8,1]) #create collumns of uneven width
-						col1.plotly_chart(figauc, use_container_width=True)
-						col2.header("")
-						col2.plotly_chart(figpanindiabids, use_container_width=True)
+				hoverlabel_bgcolor = "#000000" #subdued black
 
-					if chartoption == "ReservePrice Multiple":
-						st.plotly_chart(figauc, use_container_width=True)
+				figauc1.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
+				figauc2.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
+
+				tab1, tab2 = st.tabs(["Actual", "Ratio (Actual/Initial)"]) #For showning the absolute and Ratio charts in two differet tabs
+				tab1.plotly_chart(figauc1, use_container_width=True)
+				tab2.plotly_chart(figauc2, use_container_width=True)
 
 
 
-			if SubFeature == "BiddingActivity":
+			if optiontype == "Pts in PWB Circles":
 
-				dfbid = loadauctionbiddata()["2010_3G_Activity"].replace('-', np.nan, regex = True)
+				filt = dfbidactivity["Clk_Round"]==1
 
-				dfbid.columns = ["Clk_Round", "Bidder", "Pts_Start_Round", "Activity_Factor", "Activity_Requirement",
-								"Actual_Activity","Activity_at_PWB","Activity_NewBids","Point_Carry_Forward"]
+				dfbidactivityRd1 = dfbidactivity[filt]
 
-				dfbidactivity = dfbid.copy()
+				dfbidactivity = dfbidactivity.pivot(index="Bidder", columns='Clk_Round', values="Activity_at_PWB").sort_index(ascending=True)
 
-				optiontype = st.sidebar.radio('Click an Option', ["Total Pts in Play", "Pts in PWB Circles", "Pts in New Circles", "Activity Factor"])
+				dfbidactivityRd1 = dfbidactivityRd1.pivot(index="Bidder", columns='Clk_Round', values="Actual_Activity").sort_index(ascending=True)
 
-				if optiontype == "Total Pts in Play":
-
-					filt = dfbidactivity["Clk_Round"]==1
-
-					dfbidactivityRd1 = dfbidactivity[filt]
-
-					dfbidactivity = dfbidactivity.pivot(index="Bidder", columns='Clk_Round', values="Actual_Activity").sort_index(ascending=True)
-
-					dfbidactivityRd1 = dfbidactivityRd1.pivot(index="Bidder", columns='Clk_Round', values="Actual_Activity").sort_index(ascending=True)
-
-					dfbidactivityratio = round((dfbidactivity/dfbidactivityRd1.values),2)
+				dfbidactivityratio = round((dfbidactivity/dfbidactivityRd1.values),2)
 
 
-					hovertext = htext_auctiondata_2010_3G_BiddingActivity(dfbid, "Actual_Activity")
+				hovertext = htext_auctiondata_2010_3G_BiddingActivity(dfbid, "Activity_at_PWB")
 
 
-					data1 = [go.Heatmap(
+				data1 = [go.Heatmap(
 						z=dfbidactivity.values,
 				        y= dfbidactivity.index,
 				        x=dfbidactivity.columns,
@@ -2416,148 +2566,330 @@ if authentication_status:
 							reversescale=True,
 							)]
 
-				
+				data2 = [go.Heatmap(
+						z=dfbidactivityratio.values,
+				        y= dfbidactivityratio.index,
+				        x=dfbidactivityratio.columns,
+						xgap = 0.5,
+						ygap = 1,
+						hoverinfo ='text',
+						text = hovertext,
+						colorscale='Hot',
+						showscale=True,
+							# texttemplate="%{z}", 
+							# textfont={"size":10},
+							reversescale=True,
+							)]
+						
 
-					data2 = [go.Heatmap(
-							z=dfbidactivityratio.values,
-					        y= dfbidactivityratio.index,
-					        x=dfbidactivityratio.columns,
-							xgap = 0.5,
-							ygap = 1,
-							hoverinfo ='text',
-							text = hovertext,
-							colorscale='Hot',
-							showscale=True,
-								# texttemplate="%{z}", 
-								# textfont={"size":10},
-								reversescale=True,
-								)]
-								
+				figauc1 = go.Figure(data=data1)
+				figauc2 = go.Figure(data=data2)
 
-					figauc1 = go.Figure(data=data1)
-					figauc2 = go.Figure(data=data2)
+				figauc1.update_layout(uniformtext_minsize=12, 
+				  uniformtext_mode='hide', 
+				  xaxis_title=None, 
+				  yaxis_title=None, 
+				  yaxis_autorange='reversed',
+				  font=dict(size=12),
+				  template='simple_white',
+				  paper_bgcolor=None,
+				  height=600, 
+				  width=1200,
+				  margin=dict(t=80, b=50, l=50, r=50, pad=0),
+				  yaxis=dict(
+		        	  tickmode='array'),
+				  xaxis = dict(
+				  side = 'top',
+				  tickmode = 'linear',
+				  tickangle=0,
+				  dtick = 10), 
+				)
 
-					figauc1.update_layout(uniformtext_minsize=12, 
-					  uniformtext_mode='hide', 
-					  xaxis_title=None, 
-					  yaxis_title=None, 
-					  yaxis_autorange='reversed',
-					  font=dict(size=12),
-					  template='simple_white',
-					  paper_bgcolor=None,
-					  height=600, 
-					  width=1200,
-					  margin=dict(t=80, b=50, l=50, r=50, pad=0),
-					  yaxis=dict(
-			        	  tickmode='array'),
-					  xaxis = dict(
-					  side = 'top',
-					  tickmode = 'linear',
-					  tickangle=0,
-					  dtick = 10), 
+
+				#Drawning a black border around the heatmap chart 
+				figauc1.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
+				figauc1.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
+
+				figauc1.update_layout(
+					    xaxis=dict(showgrid=False),
+					    yaxis=dict(showgrid=False)
+					)
+
+				figauc2.update_layout(uniformtext_minsize=12, 
+				  uniformtext_mode='hide', 
+				  xaxis_title=None, 
+				  yaxis_title=None, 
+				  yaxis_autorange='reversed',
+				  font=dict(size=12),
+				  template='simple_white',
+				  paper_bgcolor=None,
+				  height=600, 
+				  width=1200,
+				  margin=dict(t=80, b=50, l=50, r=50, pad=0),
+				  yaxis=dict(
+		        	  tickmode='array'),
+				  xaxis = dict(
+				  side = 'top',
+				  tickmode = 'linear',
+				  tickangle=0,
+				  dtick = 10), 
+				)
+
+
+				#Drawning a black border around the heatmap chart 
+				figauc2.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
+				figauc2.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
+
+				figauc2.update_layout(
+					    xaxis=dict(showgrid=False),
+					    yaxis=dict(showgrid=False)
+					)
+
+				title = "3G Auctions (Year-2010) - Points in Play in Circles where the Bidder was a PWB"
+				subtitle = "Unit - Nos; Source - DoT; Xaxis - Round Numbers"
+
+				style = "<style>h3 {text-align: left;}</style>"
+				with st.container():
+					#plotting the main chart
+					st.markdown(style, unsafe_allow_html=True)
+					st.header(title)
+					st.markdown(subtitle)
+
+				hoverlabel_bgcolor = "#000000" #subdued black
+
+				figauc1.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
+				figauc2.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
+
+				tab1, tab2 = st.tabs(["Actual", "Ratio (Actual/Initial)"]) #For showning the absolute and Ratio charts in two differet tabs
+				tab1.plotly_chart(figauc1, use_container_width=True)
+				tab2.plotly_chart(figauc2, use_container_width=True)
+
+
+			if optiontype == "Pts in New Circles":
+
+
+				filt = dfbidactivity["Clk_Round"]==1
+
+				dfbidactivityRd1 = dfbidactivity[filt]
+
+				dfbidactivity = dfbidactivity.pivot(index="Bidder", columns='Clk_Round', values="Activity_NewBids").sort_index(ascending=True)
+
+				dfbidactivityRd1 = dfbidactivityRd1.pivot(index="Bidder", columns='Clk_Round', values="Actual_Activity").sort_index(ascending=True)
+
+				dfbidactivityratio = round((dfbidactivity/dfbidactivityRd1.values),2)
+
+				hovertext = htext_auctiondata_2010_3G_BiddingActivity(dfbid, "Activity_NewBids")
+
+
+				data1 = [go.Heatmap(
+						z=dfbidactivity.values,
+				        y= dfbidactivity.index,
+				        x=dfbidactivity.columns,
+						xgap = 0.5,
+						ygap = 1,
+						hoverinfo ='text',
+						text = hovertext,
+						colorscale='Hot',
+						showscale=True,
+							# texttemplate="%{z}", 
+							# textfont={"size":10},
+							reversescale=True,
+							)]
+
+				data2 = [go.Heatmap(
+						z=dfbidactivityratio.values,
+				        y= dfbidactivityratio.index,
+				        x=dfbidactivityratio.columns,
+						xgap = 0.5,
+						ygap = 1,
+						hoverinfo ='text',
+						text = hovertext,
+						colorscale='Hot',
+						showscale=True,
+							# texttemplate="%{z}", 
+							# textfont={"size":10},
+							reversescale=True,
+							)]
+						
+
+				figauc1 = go.Figure(data=data1)
+				figauc2 = go.Figure(data=data2)
+
+				figauc1.update_layout(uniformtext_minsize=12, 
+				  uniformtext_mode='hide', 
+				  xaxis_title=None, 
+				  yaxis_title=None, 
+				  yaxis_autorange='reversed',
+				  font=dict(size=12),
+				  template='simple_white',
+				  paper_bgcolor=None,
+				  height=600, 
+				  width=1200,
+				  margin=dict(t=80, b=50, l=50, r=50, pad=0),
+				  yaxis=dict(
+		        	  tickmode='array'),
+				  xaxis = dict(
+				  side = 'top',
+				  tickmode = 'linear',
+				  tickangle=0,
+				  dtick = 10), 
+				)
+
+
+				#Drawning a black border around the heatmap chart 
+				figauc1.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
+				figauc1.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
+
+				figauc1.update_layout(
+					    xaxis=dict(showgrid=False),
+					    yaxis=dict(showgrid=False)
+					)
+
+				figauc2.update_layout(uniformtext_minsize=12, 
+				  uniformtext_mode='hide', 
+				  xaxis_title=None, 
+				  yaxis_title=None, 
+				  yaxis_autorange='reversed',
+				  font=dict(size=12),
+				  template='simple_white',
+				  paper_bgcolor=None,
+				  height=600, 
+				  width=1200,
+				  margin=dict(t=80, b=50, l=50, r=50, pad=0),
+				  yaxis=dict(
+		        	  tickmode='array'),
+				  xaxis = dict(
+				  side = 'top',
+				  tickmode = 'linear',
+				  tickangle=0,
+				  dtick = 10), 
+				)
+
+
+				#Drawning a black border around the heatmap chart 
+				figauc2.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
+				figauc2.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
+
+				figauc2.update_layout(
+					    xaxis=dict(showgrid=False),
+					    yaxis=dict(showgrid=False)
 					)
 
 
-					#Drawning a black border around the heatmap chart 
-					figauc1.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
-					figauc1.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
+				title = "3G Auctions (Year-2010) - Points in Play for making New Bids"
+				subtitle = "Unit - Nos; Source - DoT; Xaxis - Round Numbers"
 
-					figauc1.update_layout(
-						    xaxis=dict(showgrid=False),
-						    yaxis=dict(showgrid=False)
-						)
+				style = "<style>h3 {text-align: left;}</style>"
+				with st.container():
+					#plotting the main chart
+					st.markdown(style, unsafe_allow_html=True)
+					st.header(title)
+					st.markdown(subtitle)
 
-					figauc2.update_layout(uniformtext_minsize=12, 
-					  uniformtext_mode='hide', 
-					  xaxis_title=None, 
-					  yaxis_title=None, 
-					  yaxis_autorange='reversed',
-					  font=dict(size=12),
-					  template='simple_white',
-					  paper_bgcolor=None,
-					  height=600, 
-					  width=1200,
-					  margin=dict(t=80, b=50, l=50, r=50, pad=0),
-					  yaxis=dict(
-			        	  tickmode='array'),
-					  xaxis = dict(
-					  side = 'top',
-					  tickmode = 'linear',
-					  tickangle=0,
-					  dtick = 10), 
+
+				hoverlabel_bgcolor = "#000000" #subdued black
+
+				figauc1.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
+				figauc2.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
+
+				tab1, tab2 = st.tabs(["Actual", "Ratio (Actual/Initial)"]) #For showning the absolute and Ratio charts in two differet tabs
+				tab1.plotly_chart(figauc1, use_container_width=True)
+				tab2.plotly_chart(figauc2, use_container_width=True)
+
+			if optiontype == "Activity Factor":
+
+
+				dfbidactivity = dfbidactivity.pivot(index="Bidder", columns='Clk_Round', values="Activity_Factor").sort_index(ascending=True)
+
+				data = [go.Heatmap(
+						z=dfbidactivity.values,
+				        y= dfbidactivity.index,
+				        x=dfbidactivity.columns,
+						xgap = 0.5,
+						ygap = 1,
+						hoverinfo ='text',
+						# text = hovertext,
+						colorscale='Hot',
+						zmin=0.5, zmax=1,
+						showscale=True,
+							# texttemplate="%{z}", 
+							# textfont={"size":10},
+							reversescale=True,
+							)]
+						
+
+				figauc = go.Figure(data=data)
+
+				figauc.update_layout(uniformtext_minsize=12, 
+				  uniformtext_mode='hide', 
+				  xaxis_title=None, 
+				  yaxis_title=None, 
+				  yaxis_autorange='reversed',
+				  font=dict(size=12),
+				  template='simple_white',
+				  paper_bgcolor=None,
+				  height=600, 
+				  width=1200,
+				  margin=dict(t=80, b=50, l=50, r=50, pad=0),
+				  yaxis=dict(
+		        	  tickmode='array'),
+				  xaxis = dict(
+				  side = 'top',
+				  tickmode = 'linear',
+				  tickangle=0,
+				  dtick = 10), 
+				)
+
+				title = "3G Auctions (Year-2010) - Activity Factor Announced by the Auctioneer"
+				subtitle = "Unit - Nos; Source - DoT; Xaxis - Round Numbers"
+
+				style = "<style>h3 {text-align: left;}</style>"
+				with st.container():
+					#plotting the main chart
+					st.markdown(style, unsafe_allow_html=True)
+					st.header(title)
+					st.markdown(subtitle)
+
+
+				#Drawning a black border around the heatmap chart 
+				figauc.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
+				figauc.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
+
+				figauc.update_layout(
+					    xaxis=dict(showgrid=False),
+					    yaxis=dict(showgrid=False)
 					)
 
+				# hoverlabel_bgcolor = "#000000" #subdued black
 
-					#Drawning a black border around the heatmap chart 
-					figauc2.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
-					figauc2.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
+				# figauc.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 
-					figauc2.update_layout(
-						    xaxis=dict(showgrid=False),
-						    yaxis=dict(showgrid=False)
-						)
-
-					title = "3G Auctions (Year-2010) - Points in Play"
-					subtitle = "Unit - Nos; Source - DoT; Xaxis - Round Numbers"
-					style = "<style>h3 {text-align: left;}</style>"
-					with st.container():
-						#plotting the main chart
-						st.markdown(style, unsafe_allow_html=True)
-						st.header(title)
-						st.markdown(subtitle)
+			
+				st.plotly_chart(figauc, use_container_width=True)
 
 
-					hoverlabel_bgcolor = "#000000" #subdued black
+		if SubFeature == "DemandActivity":
 
-					figauc1.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
-					figauc2.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
+			dfbid = loadauctionbiddata()[demandsheet].replace('-', np.nan, regex = True)
 
-					tab1, tab2 = st.tabs(["Actual", "Ratio (Actual/Initial)"]) #For showning the absolute and Ratio charts in two differet tabs
-					tab1.plotly_chart(figauc1, use_container_width=True)
-					tab2.plotly_chart(figauc2, use_container_width=True)
+			optiontype = st.sidebar.radio('Click an Option', ["Aggregate Demand", "Excess Demand"])
 
+			if optiontype == "Aggregate Demand":
 
+				dfbidaAD = dfbid.pivot(index="LSA", columns='Clock Round', values="Aggregate Demand").sort_index(ascending=True)
 
-				if optiontype == "Pts in PWB Circles":
+				hovertext = htext_auctiondata_2010_3G_DemandIntensity(dfbid)
 
-					filt = dfbidactivity["Clk_Round"]==1
-
-					dfbidactivityRd1 = dfbidactivity[filt]
-
-					dfbidactivity = dfbidactivity.pivot(index="Bidder", columns='Clk_Round', values="Activity_at_PWB").sort_index(ascending=True)
-
-					dfbidactivityRd1 = dfbidactivityRd1.pivot(index="Bidder", columns='Clk_Round', values="Actual_Activity").sort_index(ascending=True)
-
-					dfbidactivityratio = round((dfbidactivity/dfbidactivityRd1.values),2)
-
-
-					hovertext = htext_auctiondata_2010_3G_BiddingActivity(dfbid, "Activity_at_PWB")
-
-
-					data1 = [go.Heatmap(
-							z=dfbidactivity.values,
-					        y= dfbidactivity.index,
-					        x=dfbidactivity.columns,
+				data = [go.Heatmap(
+							z=dfbidaAD.values,
+					        y= dfbidaAD.index,
+					        x=dfbidaAD.columns,
 							xgap = 0.5,
 							ygap = 1,
 							hoverinfo ='text',
 							text = hovertext,
 							colorscale='Hot',
-							showscale=True,
-								# texttemplate="%{z}", 
-								# textfont={"size":10},
-								reversescale=True,
-								)]
-
-					data2 = [go.Heatmap(
-							z=dfbidactivityratio.values,
-					        y= dfbidactivityratio.index,
-					        x=dfbidactivityratio.columns,
-							xgap = 0.5,
-							ygap = 1,
-							hoverinfo ='text',
-							text = hovertext,
-							colorscale='Hot',
+							# zmin=0.5, zmax=1,
 							showscale=True,
 								# texttemplate="%{z}", 
 								# textfont={"size":10},
@@ -2565,129 +2897,72 @@ if authentication_status:
 								)]
 							
 
-					figauc1 = go.Figure(data=data1)
-					figauc2 = go.Figure(data=data2)
+				figauc = go.Figure(data=data)
 
-					figauc1.update_layout(uniformtext_minsize=12, 
-					  uniformtext_mode='hide', 
-					  xaxis_title=None, 
-					  yaxis_title=None, 
-					  yaxis_autorange='reversed',
-					  font=dict(size=12),
-					  template='simple_white',
-					  paper_bgcolor=None,
-					  height=600, 
-					  width=1200,
-					  margin=dict(t=80, b=50, l=50, r=50, pad=0),
-					  yaxis=dict(
-			        	  tickmode='array'),
-					  xaxis = dict(
-					  side = 'top',
-					  tickmode = 'linear',
-					  tickangle=0,
-					  dtick = 10), 
+				figauc.update_layout(uniformtext_minsize=12, 
+				  uniformtext_mode='hide', 
+				  xaxis_title=None, 
+				  yaxis_title=None, 
+				  yaxis_autorange='reversed',
+				  font=dict(size=12),
+				  template='simple_white',
+				  paper_bgcolor=None,
+				  height=600, 
+				  width=1200,
+				  margin=dict(t=80, b=50, l=50, r=50, pad=0),
+				  yaxis=dict(
+		        	  tickmode='array'),
+				  xaxis = dict(
+				  side = 'top',
+				  tickmode = 'linear',
+				  tickangle=0,
+				  dtick = 10), 
+				)
+
+				title = "3G Auctions (Year-2010) - Aggregrated Demand in Various Rounds"
+				subtitle = "Unit - Nos; Source - DoT; Xaxis - Round Numbers"
+
+				style = "<style>h3 {text-align: left;}</style>"
+				with st.container():
+					#plotting the main chart
+					st.markdown(style, unsafe_allow_html=True)
+					st.header(title)
+					st.markdown(subtitle)
+
+
+				#Drawning a black border around the heatmap chart 
+				figauc.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
+				figauc.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
+
+				figauc.update_layout(
+					    xaxis=dict(showgrid=False),
+					    yaxis=dict(showgrid=False)
 					)
 
+				hoverlabel_bgcolor = "#000000" #subdued black
 
-					#Drawning a black border around the heatmap chart 
-					figauc1.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
-					figauc1.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
+				figauc.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 
-					figauc1.update_layout(
-						    xaxis=dict(showgrid=False),
-						    yaxis=dict(showgrid=False)
-						)
-
-					figauc2.update_layout(uniformtext_minsize=12, 
-					  uniformtext_mode='hide', 
-					  xaxis_title=None, 
-					  yaxis_title=None, 
-					  yaxis_autorange='reversed',
-					  font=dict(size=12),
-					  template='simple_white',
-					  paper_bgcolor=None,
-					  height=600, 
-					  width=1200,
-					  margin=dict(t=80, b=50, l=50, r=50, pad=0),
-					  yaxis=dict(
-			        	  tickmode='array'),
-					  xaxis = dict(
-					  side = 'top',
-					  tickmode = 'linear',
-					  tickangle=0,
-					  dtick = 10), 
-					)
+			
+				st.plotly_chart(figauc, use_container_width=True)
 
 
-					#Drawning a black border around the heatmap chart 
-					figauc2.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
-					figauc2.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
+			if optiontype == "Excess Demand":
 
-					figauc2.update_layout(
-						    xaxis=dict(showgrid=False),
-						    yaxis=dict(showgrid=False)
-						)
+				dfbidaED = dfbid.pivot(index="LSA", columns='Clock Round', values="Excess Demand").sort_index(ascending=True)
 
-					title = "3G Auctions (Year-2010) - Points in Play in Circles where the Bidder was a PWB"
-					subtitle = "Unit - Nos; Source - DoT; Xaxis - Round Numbers"
+				hovertext = htext_auctiondata_2010_3G_DemandIntensity(dfbid)
 
-					style = "<style>h3 {text-align: left;}</style>"
-					with st.container():
-						#plotting the main chart
-						st.markdown(style, unsafe_allow_html=True)
-						st.header(title)
-						st.markdown(subtitle)
-
-					hoverlabel_bgcolor = "#000000" #subdued black
-
-					figauc1.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
-					figauc2.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
-
-					tab1, tab2 = st.tabs(["Actual", "Ratio (Actual/Initial)"]) #For showning the absolute and Ratio charts in two differet tabs
-					tab1.plotly_chart(figauc1, use_container_width=True)
-					tab2.plotly_chart(figauc2, use_container_width=True)
-
-
-				if optiontype == "Pts in New Circles":
-
-
-					filt = dfbidactivity["Clk_Round"]==1
-
-					dfbidactivityRd1 = dfbidactivity[filt]
-
-					dfbidactivity = dfbidactivity.pivot(index="Bidder", columns='Clk_Round', values="Activity_NewBids").sort_index(ascending=True)
-
-					dfbidactivityRd1 = dfbidactivityRd1.pivot(index="Bidder", columns='Clk_Round', values="Actual_Activity").sort_index(ascending=True)
-
-					dfbidactivityratio = round((dfbidactivity/dfbidactivityRd1.values),2)
-
-					hovertext = htext_auctiondata_2010_3G_BiddingActivity(dfbid, "Activity_NewBids")
-
-
-					data1 = [go.Heatmap(
-							z=dfbidactivity.values,
-					        y= dfbidactivity.index,
-					        x=dfbidactivity.columns,
+				data = [go.Heatmap(
+							z=dfbidaED.values,
+					        y= dfbidaED.index,
+					        x=dfbidaED.columns,
 							xgap = 0.5,
 							ygap = 1,
 							hoverinfo ='text',
 							text = hovertext,
 							colorscale='Hot',
-							showscale=True,
-								# texttemplate="%{z}", 
-								# textfont={"size":10},
-								reversescale=True,
-								)]
-
-					data2 = [go.Heatmap(
-							z=dfbidactivityratio.values,
-					        y= dfbidactivityratio.index,
-					        x=dfbidactivityratio.columns,
-							xgap = 0.5,
-							ygap = 1,
-							hoverinfo ='text',
-							text = hovertext,
-							colorscale='Hot',
+							# zmin=0.5, zmax=1,
 							showscale=True,
 								# texttemplate="%{z}", 
 								# textfont={"size":10},
@@ -2695,526 +2970,54 @@ if authentication_status:
 								)]
 							
 
-					figauc1 = go.Figure(data=data1)
-					figauc2 = go.Figure(data=data2)
+				figauc = go.Figure(data=data)
 
-					figauc1.update_layout(uniformtext_minsize=12, 
-					  uniformtext_mode='hide', 
-					  xaxis_title=None, 
-					  yaxis_title=None, 
-					  yaxis_autorange='reversed',
-					  font=dict(size=12),
-					  template='simple_white',
-					  paper_bgcolor=None,
-					  height=600, 
-					  width=1200,
-					  margin=dict(t=80, b=50, l=50, r=50, pad=0),
-					  yaxis=dict(
-			        	  tickmode='array'),
-					  xaxis = dict(
-					  side = 'top',
-					  tickmode = 'linear',
-					  tickangle=0,
-					  dtick = 10), 
+				figauc.update_layout(uniformtext_minsize=12, 
+				  uniformtext_mode='hide', 
+				  xaxis_title=None, 
+				  yaxis_title=None, 
+				  yaxis_autorange='reversed',
+				  font=dict(size=12),
+				  template='simple_white',
+				  paper_bgcolor=None,
+				  height=600, 
+				  width=1200,
+				  margin=dict(t=80, b=50, l=50, r=50, pad=0),
+				  yaxis=dict(
+		        	  tickmode='array'),
+				  xaxis = dict(
+				  side = 'top',
+				  tickmode = 'linear',
+				  tickangle=0,
+				  dtick = 10), 
+				)
+
+				title = "3G Auctions (Year-2010) - Excess Demand in Various Rounds"
+				subtitle = "Unit - Nos; Source - DoT; Xaxis - Round Numbers"
+
+				style = "<style>h3 {text-align: left;}</style>"
+				with st.container():
+					#plotting the main chart
+					st.markdown(style, unsafe_allow_html=True)
+					st.header(title)
+					st.markdown(subtitle)
+
+
+				#Drawning a black border around the heatmap chart 
+				figauc.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
+				figauc.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
+
+				figauc.update_layout(
+					    xaxis=dict(showgrid=False),
+					    yaxis=dict(showgrid=False)
 					)
 
+				hoverlabel_bgcolor = "#000000" #subdued black
 
-					#Drawning a black border around the heatmap chart 
-					figauc1.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
-					figauc1.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
+				figauc.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 
-					figauc1.update_layout(
-						    xaxis=dict(showgrid=False),
-						    yaxis=dict(showgrid=False)
-						)
-
-					figauc2.update_layout(uniformtext_minsize=12, 
-					  uniformtext_mode='hide', 
-					  xaxis_title=None, 
-					  yaxis_title=None, 
-					  yaxis_autorange='reversed',
-					  font=dict(size=12),
-					  template='simple_white',
-					  paper_bgcolor=None,
-					  height=600, 
-					  width=1200,
-					  margin=dict(t=80, b=50, l=50, r=50, pad=0),
-					  yaxis=dict(
-			        	  tickmode='array'),
-					  xaxis = dict(
-					  side = 'top',
-					  tickmode = 'linear',
-					  tickangle=0,
-					  dtick = 10), 
-					)
-
-
-					#Drawning a black border around the heatmap chart 
-					figauc2.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
-					figauc2.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
-
-					figauc2.update_layout(
-						    xaxis=dict(showgrid=False),
-						    yaxis=dict(showgrid=False)
-						)
-
-
-					title = "3G Auctions (Year-2010) - Points in Play for making New Bids"
-					subtitle = "Unit - Nos; Source - DoT; Xaxis - Round Numbers"
-
-					style = "<style>h3 {text-align: left;}</style>"
-					with st.container():
-						#plotting the main chart
-						st.markdown(style, unsafe_allow_html=True)
-						st.header(title)
-						st.markdown(subtitle)
-
-
-					hoverlabel_bgcolor = "#000000" #subdued black
-
-					figauc1.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
-					figauc2.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
-
-					tab1, tab2 = st.tabs(["Actual", "Ratio (Actual/Initial)"]) #For showning the absolute and Ratio charts in two differet tabs
-					tab1.plotly_chart(figauc1, use_container_width=True)
-					tab2.plotly_chart(figauc2, use_container_width=True)
-
-				if optiontype == "Activity Factor":
-
-
-					dfbidactivity = dfbidactivity.pivot(index="Bidder", columns='Clk_Round', values="Activity_Factor").sort_index(ascending=True)
-
-					data = [go.Heatmap(
-							z=dfbidactivity.values,
-					        y= dfbidactivity.index,
-					        x=dfbidactivity.columns,
-							xgap = 0.5,
-							ygap = 1,
-							hoverinfo ='text',
-							# text = hovertext,
-							colorscale='Hot',
-							zmin=0.5, zmax=1,
-							showscale=True,
-								# texttemplate="%{z}", 
-								# textfont={"size":10},
-								reversescale=True,
-								)]
-							
-
-					figauc = go.Figure(data=data)
-
-					figauc.update_layout(uniformtext_minsize=12, 
-					  uniformtext_mode='hide', 
-					  xaxis_title=None, 
-					  yaxis_title=None, 
-					  yaxis_autorange='reversed',
-					  font=dict(size=12),
-					  template='simple_white',
-					  paper_bgcolor=None,
-					  height=600, 
-					  width=1200,
-					  margin=dict(t=80, b=50, l=50, r=50, pad=0),
-					  yaxis=dict(
-			        	  tickmode='array'),
-					  xaxis = dict(
-					  side = 'top',
-					  tickmode = 'linear',
-					  tickangle=0,
-					  dtick = 10), 
-					)
-
-					title = "3G Auctions (Year-2010) - Activity Factor Announced by the Auctioneer"
-					subtitle = "Unit - Nos; Source - DoT; Xaxis - Round Numbers"
-
-					style = "<style>h3 {text-align: left;}</style>"
-					with st.container():
-						#plotting the main chart
-						st.markdown(style, unsafe_allow_html=True)
-						st.header(title)
-						st.markdown(subtitle)
-
-
-					#Drawning a black border around the heatmap chart 
-					figauc.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
-					figauc.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
-
-					figauc.update_layout(
-						    xaxis=dict(showgrid=False),
-						    yaxis=dict(showgrid=False)
-						)
-
-					# hoverlabel_bgcolor = "#000000" #subdued black
-
-					# figauc.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
-
-				
-					st.plotly_chart(figauc, use_container_width=True)
-
-
-			if SubFeature == "DemandActivity":
-
-				dfbid = loadauctionbiddata()["2010_3G_AD"].replace('-', np.nan, regex = True)
-
-				optiontype = st.sidebar.radio('Click an Option', ["Aggregate Demand", "Excess Demand"])
-
-				if optiontype == "Aggregate Demand":
-
-					dfbidaAD = dfbid.pivot(index="LSA", columns='Clock Round', values="Aggregate Demand").sort_index(ascending=True)
-
-					hovertext = htext_auctiondata_2010_3G_DemandIntensity(dfbid)
-
-					data = [go.Heatmap(
-								z=dfbidaAD.values,
-						        y= dfbidaAD.index,
-						        x=dfbidaAD.columns,
-								xgap = 0.5,
-								ygap = 1,
-								hoverinfo ='text',
-								text = hovertext,
-								colorscale='Hot',
-								# zmin=0.5, zmax=1,
-								showscale=True,
-									# texttemplate="%{z}", 
-									# textfont={"size":10},
-									reversescale=True,
-									)]
-								
-
-					figauc = go.Figure(data=data)
-
-					figauc.update_layout(uniformtext_minsize=12, 
-					  uniformtext_mode='hide', 
-					  xaxis_title=None, 
-					  yaxis_title=None, 
-					  yaxis_autorange='reversed',
-					  font=dict(size=12),
-					  template='simple_white',
-					  paper_bgcolor=None,
-					  height=600, 
-					  width=1200,
-					  margin=dict(t=80, b=50, l=50, r=50, pad=0),
-					  yaxis=dict(
-			        	  tickmode='array'),
-					  xaxis = dict(
-					  side = 'top',
-					  tickmode = 'linear',
-					  tickangle=0,
-					  dtick = 10), 
-					)
-
-					title = "3G Auctions (Year-2010) - Aggregrated Demand in Various Rounds"
-					subtitle = "Unit - Nos; Source - DoT; Xaxis - Round Numbers"
-
-					style = "<style>h3 {text-align: left;}</style>"
-					with st.container():
-						#plotting the main chart
-						st.markdown(style, unsafe_allow_html=True)
-						st.header(title)
-						st.markdown(subtitle)
-
-
-					#Drawning a black border around the heatmap chart 
-					figauc.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
-					figauc.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
-
-					figauc.update_layout(
-						    xaxis=dict(showgrid=False),
-						    yaxis=dict(showgrid=False)
-						)
-
-					hoverlabel_bgcolor = "#000000" #subdued black
-
-					figauc.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
-
-				
-					st.plotly_chart(figauc, use_container_width=True)
-
-
-				if optiontype == "Excess Demand":
-
-					dfbidaED = dfbid.pivot(index="LSA", columns='Clock Round', values="Excess Demand").sort_index(ascending=True)
-
-					hovertext = htext_auctiondata_2010_3G_DemandIntensity(dfbid)
-
-					data = [go.Heatmap(
-								z=dfbidaED.values,
-						        y= dfbidaED.index,
-						        x=dfbidaED.columns,
-								xgap = 0.5,
-								ygap = 1,
-								hoverinfo ='text',
-								text = hovertext,
-								colorscale='Hot',
-								# zmin=0.5, zmax=1,
-								showscale=True,
-									# texttemplate="%{z}", 
-									# textfont={"size":10},
-									reversescale=True,
-									)]
-								
-
-					figauc = go.Figure(data=data)
-
-					figauc.update_layout(uniformtext_minsize=12, 
-					  uniformtext_mode='hide', 
-					  xaxis_title=None, 
-					  yaxis_title=None, 
-					  yaxis_autorange='reversed',
-					  font=dict(size=12),
-					  template='simple_white',
-					  paper_bgcolor=None,
-					  height=600, 
-					  width=1200,
-					  margin=dict(t=80, b=50, l=50, r=50, pad=0),
-					  yaxis=dict(
-			        	  tickmode='array'),
-					  xaxis = dict(
-					  side = 'top',
-					  tickmode = 'linear',
-					  tickangle=0,
-					  dtick = 10), 
-					)
-
-					title = "3G Auctions (Year-2010) - Excess Demand in Various Rounds"
-					subtitle = "Unit - Nos; Source - DoT; Xaxis - Round Numbers"
-
-					style = "<style>h3 {text-align: left;}</style>"
-					with st.container():
-						#plotting the main chart
-						st.markdown(style, unsafe_allow_html=True)
-						st.header(title)
-						st.markdown(subtitle)
-
-
-					#Drawning a black border around the heatmap chart 
-					figauc.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
-					figauc.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
-
-					figauc.update_layout(
-						    xaxis=dict(showgrid=False),
-						    yaxis=dict(showgrid=False)
-						)
-
-					hoverlabel_bgcolor = "#000000" #subdued black
-
-					figauc.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
-
-				
-					st.plotly_chart(figauc, use_container_width=True)
-
-
-		# if Feature == "2010-Band2300":
-
-		# 	dfbid = loadauctionbiddata()["2010_BWA"].replace('-', np.nan, regex = True)
-
-		# 	dfbid.columns = ["Clk_Round", "Bidder","LSA","PWB_Start_ClkRd", "Rank_PWB_Start_ClkRd", 
-		# 					"Possible_Raise_Bid_ClkRd", "Bid_Decision", "PWB_End_ClkRd", "Rank_PWB_End_ClkRd"]
-
-		# 	dfbid = dfbid.replace("No Bid", 0)
-		# 	dfbid = dfbid.replace("Bid",1)
-
-		# 	listofbidders = sorted(list(set(dfbid["Bidder"])))
-
-		# 	dfbid = dfbid.set_index("LSA").sort_index(ascending = False)
-
-		# 	SubFeature = st.sidebar.selectbox("Select a SubFeature", ["BidsCircleWise","RanksCircleWise", "ProvWinningBid", "BiddingActivity", "DemandActivity"])
-
-
-		# 	if SubFeature == "BidsCircleWise":
-
-		# 		round_range = st.slider("Select Auction Round Numbers using the Silder below", value=(1,totalrounds))
-
-		# 		start_round = round_range[0]
-
-		# 		end_round = round_range[1]
-
-		# 		dfbidcirclwise = dfbid.copy()
-
-
-		# 		#filter data within the block of selected rounds 
-
-		# 		filt  =(dfbidcirclwise["Clk_Round"] >= start_round) & (dfbidcirclwise["Clk_Round"] <= end_round)
-
-		# 		dfbidcirclwise = dfbidcirclwise[filt]
-
-
-		# 		dftemp = dfbidcirclwise.drop(columns=["Possible_Raise_Bid_ClkRd", "Rank_PWB_Start_ClkRd", "Rank_PWB_End_ClkRd",
-		# 									"PWB_End_ClkRd","Clk_Round", "PWB_Start_ClkRd"], axis=1)
-
-		# 		dftemp = dftemp.groupby(["LSA", "Bidder"]).sum().reset_index()
-
-		# 		summarydf = dftemp.groupby(["LSA"]).sum().reset_index().drop(columns = "Bidder", axis =1)
-
-		# 		summarydf = summarydf.set_index("LSA")
-
-		# 		dftemp = dftemp.set_index("LSA")
-
-		# 		dftemp["Bid_Decision_Perc"] = round((dftemp["Bid_Decision"]/summarydf["Bid_Decision"])*100,1)
-
-		# 		dftemp = dftemp.reset_index()
-
-		# 		# #sort by LSA 
-
-		# 		sortbylsa = st.sidebar.selectbox("Select a Circle to Sort", state_dict.values())
-
-		# 		selected_lsa = [k for k, v in state_dict.items() if v == sortbylsa]
-
-		# 		# dftempheat = dftempheat.sort_values(selected_lsa[0], ascending = True)
-
-		# 		#processing hovertext and colormatrix
-		# 		hovertext,colormatrix,resultdf = htext_colormatrix_auctiondata_2010_3G_BidsCircleWise(dfbidcirclwise, dftemp,selected_lsa[0],end_round)
-		# 		hoverlabel_bgcolor = colormatrix
-
-
-		# 		radio_selection = st.sidebar.radio('Click an Option', ["Absolute Values", "Percentage of Total", "Provisional Winners"])
-
-		# 		if radio_selection == "Absolute Values":
-
-		# 			dftempheat = dftemp.pivot(index="Bidder", columns='LSA', values="Bid_Decision")
-
-		# 			dftempheat = dftempheat.sort_values(selected_lsa[0], ascending = True)
-
-		# 			summarydf = dftempheat.sum(axis=0).reset_index() #debug
-
-		# 			summarydf.columns = ["LSA","TotalBids"]
-
-		# 			#preparing the summary chart 
-		# 			chart = summarychart(summarydf, 'LSA', "TotalBids")
-		# 			SummaryFlag = True
-
-		# 			subsubtitle=""
-
-
-		# 			data = [go.Heatmap(
-		# 				z=dftempheat.values,
-		# 		        x=dftempheat.columns,
-		# 		        y=dftempheat.index,
-		# 				xgap = 1,
-		# 				ygap = 1,
-		# 				hoverinfo ='text',
-		# 				text = hovertext,
-		# 				colorscale="Hot",
-		# 					texttemplate="%{z}",
-		# 					textfont={"size":10},
-		# 					reversescale=True,
-		# 					),
-		# 				]
-
-		# 		if radio_selection == "Percentage of Total":
-
-		# 			dftempheatSum = dftemp.pivot(index="Bidder", columns='LSA', values="Bid_Decision") #for summary chrat below
-
-		# 			dftempheat = dftemp.pivot(index="Bidder", columns='LSA', values="Bid_Decision_Perc") #for heatmap
-
-		# 			dftempheat = dftempheat.sort_values(selected_lsa[0], ascending = True)
-
-		# 			summarydf = dftempheatSum.sum(axis=0).reset_index()
-
-		# 			summarydf.columns = ["LSA","TotalBids"]
-
-		# 			#preparing the summary chart 
-		# 			chart = summarychart(summarydf, 'LSA', "TotalBids")
-		# 			SummaryFlag = True
-
-		# 			subsubtitle=""
-
-
-		# 			data = [go.Heatmap(
-		# 				z=dftempheat.values,
-		# 		        x=dftempheat.columns,
-		# 		        y=dftempheat.index,
-		# 				xgap = 1,
-		# 				ygap = 1,
-		# 				hoverinfo ='text',
-		# 				text = hovertext,
-		# 				colorscale="Hot",
-		# 					texttemplate="%{z}",
-		# 					textfont={"size":10},
-		# 					reversescale=True,
-		# 					),
-		# 				]
-
-		# 		if radio_selection == "Provisional Winners":
-
-		# 			dftempheatSum = dftemp.pivot(index="Bidder", columns='LSA', values="Bid_Decision") #for summary chrat below
-
-		# 			summarydf = dftempheatSum.sum(axis=0).reset_index()
-
-		# 			summarydf.columns = ["LSA","TotalBids"]
-
-		# 			#preparing the summary chart 
-		# 			chart = summarychart(summarydf, 'LSA', "TotalBids")
-		# 			SummaryFlag = True
-
-
-		# 			resultdfheat = resultdf.replace("WON",1)
-
-		# 			resultdfheat = resultdfheat.replace("LOST",0)
-
-		# 			# dftempheat = dftemp.pivot(index="Bidder", columns='LSA', values="Bid_Decision")
-
-		# 			subsubtitle = "Provisional Winners are at the end of Round Number - "+str(end_round)
-
-
-
-		# 		# dftempheat = dftempheat.sort_values(selected_lsa[0], ascending = True)
-
-
-		# 			data = [go.Heatmap(
-		# 				z=resultdfheat.values,
-		# 		        x=resultdfheat.columns,
-		# 		        y=resultdfheat.index,
-		# 				xgap = 1,
-		# 				ygap = 1,
-		# 				hoverinfo ='text',
-		# 				text = resultdf.values,
-		# 				colorscale="Picnic",
-		# 					texttemplate="%{text}",
-		# 					textfont={"size":10},
-		# 					reversescale=True,
-		# 					),
-		# 				]
-				
-
-		# 		figauc = go.Figure(data=data)
-
-
-		# 		figauc.update_layout(
-		# 		    template="seaborn",
-		# 		    xaxis_side= 'top',
-		# 		   	height = 650,
-		# 		   	yaxis=dict(
-		# 	        tickmode='array',
-		# 	        showgrid=False,
-		# 	        	))
-
-		# 		title = "3G Auctions (Year-2010) - Total Number of Bids in Circles "+"("+radio_selection+")"
-		# 		subtitle = "Source - DoT; Between Round Nos "+str(start_round)+" & "+str(end_round)+ "; Number of Rounds = "+ str(end_round-start_round)+"; "+subsubtitle
-
-		# 		style = "<style>h3 {text-align: left;}</style>"
-		# 		with st.container():
-		# 			#plotting the main chart
-		# 			st.markdown(style, unsafe_allow_html=True)
-		# 			st.header(title)
-		# 			st.markdown(subtitle)
-
-		# 		#Drawning a black border around the heatmap chart 
-		# 		figauc.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
-		# 		figauc.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
-
-		# 		figauc.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
-
-		# 		st.plotly_chart(figauc, use_container_width=True)
-
-		# 		#plotting the final summary chart 
-		# 		col1,col2,col3 = st.columns([0.2,14,1]) #create collumns of uneven width
-		# 		if SummaryFlag ==True:
-		# 			# st.altair_chart(chart, use_container_width=True)
-		# 			col2.altair_chart(chart, use_container_width=True)
-
-
-					
-
+			
+				st.plotly_chart(figauc, use_container_width=True)
 
 
 
