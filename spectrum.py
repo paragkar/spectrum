@@ -1793,10 +1793,10 @@ if authentication_status:
 				st.plotly_chart(figauc, use_container_width=True)
 
 				#plotting the final summary chart 
-				col1,col2,col3 = st.columns([14,1.1]) #create collumns of uneven width
+				col1,col2 = st.columns([14,1.1]) #create collumns of uneven width
 				if SummaryFlag ==True:
 					# st.altair_chart(chart, use_container_width=True)
-					col2.altair_chart(chart, use_container_width=True)
+					col1.altair_chart(chart, use_container_width=True)
 
 			if SubFeature == "RanksCircleWise":
 
