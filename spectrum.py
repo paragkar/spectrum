@@ -1823,9 +1823,6 @@ if authentication_status:
 					SummaryFlag = True
 
 
-					st.write(resultdf) #debug
-
-
 					resultdfheat = resultdf.replace("WON",1)
 
 					resultdfheat = resultdfheat.replace("LOST",0)
