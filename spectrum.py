@@ -2503,7 +2503,7 @@ if authentication_status:
 							hoverinfo ='text',
 							# text = hovertext,
 							colorscale='Hot',
-							cmin=0, cmax=1,
+							zmin=0, zmax=1,
 							showscale=True,
 								# texttemplate="%{z}", 
 								# textfont={"size":10},
