@@ -1713,6 +1713,11 @@ if authentication_status:
 				if radio_selection == "Absolute Values":
 
 					dftempheat = dftemp.pivot(index="Bidder", columns='LSA', values="Bid_Decision")
+
+					summarydf = dftempheat.sum(axis=1) #debug
+					st.write(summarydf) #debug
+
+
 					texttemplate = "%{z}"
 					text = hovertext
 
