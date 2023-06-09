@@ -2396,7 +2396,7 @@ if authentication_status:
 					dfbidactivityratio = round((dfbidactivity/dfbidactivityRd1.values),2)
 
 
-					hovertext = htext_auctiondata_2010_3G_BiddingActivityTotal(dfbid, "Actual_Activity")
+					hovertext = htext_auctiondata_2010_3G_BiddingActivity(dfbid, "Actual_Activity")
 
 
 					data1 = [go.Heatmap(
