@@ -1845,7 +1845,7 @@ if authentication_status:
 						hoverinfo ='text',
 						text = resultdf.values,
 						colorscale="Picnic",
-							texttemplate="%{z}",
+							texttemplate="%{text}",
 							textfont={"size":10},
 							reversescale=True,
 							),
