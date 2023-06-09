@@ -2268,6 +2268,14 @@ if authentication_status:
 						st.plotly_chart(figauc, use_container_width=True)
 
 
+			if SubFeature == "BiddingActivity":
+
+				dfbid = loadauctionbiddata()["2010_3G_Activity"].replace('-', np.nan, regex = True)
+
+				st.write(dfbid)
+
+
+
 #---------------New Auction Bid Data Cide Ends Here----------------------
 
 
