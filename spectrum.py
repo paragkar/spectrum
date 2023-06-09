@@ -2286,7 +2286,7 @@ if authentication_status:
 				# st.write(dfbidactivity)
 
 
-				dfbidactivity = dfbidactivity.pivot(index="Bidder", columns='Clk_Round', values="Actual_Activity").sort_index(ascending=False)
+				dfbidactivity = dfbidactivity.pivot(index="Bidder", columns='Clk_Round', values="Actual_Activity").sort_index(ascending=True)
 
 				st.write(dfbidactivity)
 
