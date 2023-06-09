@@ -1714,7 +1714,12 @@ if authentication_status:
 
 					dftempheat = dftemp.pivot(index="Bidder", columns='LSA', values="Bid_Decision")
 
-					summarydf = dftempheat.sum(axis=0) #debug
+					summarydf = dftempheat.sum(axis=0).reset_index() #debug
+
+					summarydf.columns = ["LSA","TotalBids"]
+
+					summarydf = summarydf.set_index("LSA")
+
 					st.write(summarydf) #debug
 
 
