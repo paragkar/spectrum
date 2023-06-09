@@ -1001,7 +1001,7 @@ if authentication_status:
 						    <br>Circle: {}\
 						    <br>Total Bids: {} Nos\
 						    <br>Total Bids: {} % of Total\
-						    <br>Result : {}\
+						    <br>Prov Result : {}\
 						    <br>Final Rank: {}'
 
 					     .format( 
