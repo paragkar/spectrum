@@ -2322,15 +2322,14 @@ if authentication_status:
 					  dtick = 10), 
 					)
 
-					# title = "3G Auctions (Year-2010) - PWB End of Clock Round No - "+str(round_number)
-					# subtitle = "Unit - Rs Cr; Source - DoT; "+chartoption+" - May be lower for bidders in same circle who did not agree to the higher round price"
-
-					# style = "<style>h3 {text-align: left;}</style>"
-					# with st.container():
-					# 	#plotting the main chart
-					# 	st.markdown(style, unsafe_allow_html=True)
-					# 	st.header(title)
-					# 	st.markdown(subtitle)
+					title = "3G Auctions (Year-2010) - Total Points in Play"
+					subtitle = "Unit - Nos; Source - DoT;"
+					style = "<style>h3 {text-align: left;}</style>"
+					with st.container():
+						#plotting the main chart
+						st.markdown(style, unsafe_allow_html=True)
+						st.header(title)
+						st.markdown(subtitle)
 
 
 					#Drawning a black border around the heatmap chart 
@@ -2392,15 +2391,15 @@ if authentication_status:
 					  dtick = 10), 
 					)
 
-					# title = "3G Auctions (Year-2010) - PWB End of Clock Round No - "+str(round_number)
-					# subtitle = "Unit - Rs Cr; Source - DoT; "+chartoption+" - May be lower for bidders in same circle who did not agree to the higher round price"
+					title = "3G Auctions (Year-2010) - Points in Play in Circles where the Bidder was a PWB"
+					subtitle = "Unit - Nos; Source - DoT;"
 
-					# style = "<style>h3 {text-align: left;}</style>"
-					# with st.container():
-					# 	#plotting the main chart
-					# 	st.markdown(style, unsafe_allow_html=True)
-					# 	st.header(title)
-					# 	st.markdown(subtitle)
+					style = "<style>h3 {text-align: left;}</style>"
+					with st.container():
+						#plotting the main chart
+						st.markdown(style, unsafe_allow_html=True)
+						st.header(title)
+						st.markdown(subtitle)
 
 
 					#Drawning a black border around the heatmap chart 
@@ -2462,15 +2461,15 @@ if authentication_status:
 					  dtick = 10), 
 					)
 
-					# title = "3G Auctions (Year-2010) - PWB End of Clock Round No - "+str(round_number)
-					# subtitle = "Unit - Rs Cr; Source - DoT; "+chartoption+" - May be lower for bidders in same circle who did not agree to the higher round price"
+					title = "3G Auctions (Year-2010) - Points in Play for making New Bids"
+					subtitle = "Unit - Nos; Source - DoT;"
 
-					# style = "<style>h3 {text-align: left;}</style>"
-					# with st.container():
-					# 	#plotting the main chart
-					# 	st.markdown(style, unsafe_allow_html=True)
-					# 	st.header(title)
-					# 	st.markdown(subtitle)
+					style = "<style>h3 {text-align: left;}</style>"
+					with st.container():
+						#plotting the main chart
+						st.markdown(style, unsafe_allow_html=True)
+						st.header(title)
+						st.markdown(subtitle)
 
 
 					#Drawning a black border around the heatmap chart 
@@ -2533,15 +2532,15 @@ if authentication_status:
 					  dtick = 10), 
 					)
 
-					# title = "3G Auctions (Year-2010) - PWB End of Clock Round No - "+str(round_number)
-					# subtitle = "Unit - Rs Cr; Source - DoT; "+chartoption+" - May be lower for bidders in same circle who did not agree to the higher round price"
+					title = "3G Auctions (Year-2010) - Activity Factor Announced by the Auctioneer"
+					subtitle = "Unit - Nos; Source - DoT;"
 
-					# style = "<style>h3 {text-align: left;}</style>"
-					# with st.container():
-					# 	#plotting the main chart
-					# 	st.markdown(style, unsafe_allow_html=True)
-					# 	st.header(title)
-					# 	st.markdown(subtitle)
+					style = "<style>h3 {text-align: left;}</style>"
+					with st.container():
+						#plotting the main chart
+						st.markdown(style, unsafe_allow_html=True)
+						st.header(title)
+						st.markdown(subtitle)
 
 
 					#Drawning a black border around the heatmap chart 
