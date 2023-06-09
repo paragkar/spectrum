@@ -2009,7 +2009,7 @@ if authentication_status:
 				
 					if chartoption == "ReservePrice Multiple":
 
-						dftemp = round(dftemp/dfrp,2)
+						dftemp = round(dftemp/dfrp,1)
 
 						showscale = True
 
