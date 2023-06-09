@@ -2288,7 +2288,59 @@ if authentication_status:
 
 				dfbidactivity = dfbidactivity.pivot(index="Bidder", columns='Clk_Round', values="Actual_Activity").sort_index(ascending=True)
 
-				st.write(dfbidactivity)
+				data = [go.Heatmap(
+						z=dfbidactivity.values,
+				        y= dfbidactivity.index,
+				        x=dfbidactivity.columns,
+						xgap = 1,
+						ygap = 1,
+						hoverinfo ='text',
+						# text = hovertext,
+						colorscale='Hot',
+						showscale=showscale,
+							texttemplate="%{z}", 
+							textfont={"size":10},
+							reversescale=True,
+							)]
+						
+
+				figauc = go.Figure(data=data)
+
+				figauc.update_layout(
+				    template="seaborn",
+				    xaxis_side= 'top',
+				   	height = 650,
+				   	yaxis=dict(
+			        tickmode='array',
+			        	))
+
+				title = "3G Auctions (Year-2010) - PWB End of Clock Round No - "+str(round_number)
+				subtitle = "Unit - Rs Cr; Source - DoT; "+chartoption+" - May be lower for bidders in same circle who did not agree to the higher round price"
+
+				style = "<style>h3 {text-align: left;}</style>"
+				with st.container():
+					#plotting the main chart
+					st.markdown(style, unsafe_allow_html=True)
+					st.header(title)
+					st.markdown(subtitle)
+
+
+				#Drawning a black border around the heatmap chart 
+				figauc.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
+				figauc.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
+
+				figauc.update_layout(
+					    xaxis=dict(showgrid=False),
+					    yaxis=dict(showgrid=False)
+					)
+
+				# hoverlabel_bgcolor = "#000000" #subdued black
+
+				# figauc.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
+
+			
+				st.plotly_chart(figauc, use_container_width=True)
+
 
 
 
