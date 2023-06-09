@@ -2279,11 +2279,18 @@ if authentication_status:
 
 				dfbidactivity = dfbid.copy()
 
+				st.write(dfbidactivity)
+
 				filt  =(dfbidactivity["Clk_Round"] == round_number) 
 
 				dfbidactivity = dfbidactivity[filt]
 
-				plottype = st.sidebar.selectbox("Select an Option", ["Point Start of Round", "Points Consumed", "Points Carrried Forward"])
+				optiontype = st.sidebar.selectbox("Select an Option", ["Point Start of Round", "Points Consumed", "Points Carrried Forward"])
+
+				if optiontype == "Point Start of Round":
+
+					dftemp = dftemp.groupby(["LSA", "Bidder", "PWB_End_ClkRd"]).sum().reset_index()
+
 
 
 
