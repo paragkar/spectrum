@@ -1113,6 +1113,54 @@ if authentication_status:
 #---------------Hovertest for Demand Intensity Ends---------------------
 
 
+#---------------Hovertest for Bidding Activity Total---------------------
+
+	@st.cache_resource
+	def htext_auctiondata_2010_3G_BiddingActivityTotal(dfbid):
+
+		filt = dfbid["Clk_Round"]==1
+
+		dfbidRD1 = dfbid[filt]
+
+		dfbidactivity = dfbid.pivot(index="Bidder", columns='Clk_Round', values="Actual_Activity").sort_index(ascending=True)
+
+		dfbidactivityRd1 = dfbidRD1.pivot(index="Bidder", columns='Clk_Round', values="Actual_Activity").sort_index(ascending=True)
+
+		dfbidactivityratio = round((dfbidactivity/dfbidactivityRd1.values),2)
+
+
+		hovertext = []
+		for yi,yy in enumerate(dfbidactivity.index):
+			hovertext.append([])
+
+			for xi,xx in enumerate(dfbidactivity.columns):
+
+				pointsinplay = dfbidactivity.loc[yy,xx]
+				pointsratio = dfbidactivityratio.loc[yy,xx]
+
+
+				hovertext[-1].append(
+						    'Circle: {}\
+						    <br>Round No: {}\
+						    <br>Points in Play : {} Nos\
+						    <br>Ratio (Actual/Initial) : {}'
+					
+
+					     .format( 
+						    yy,
+						    xx,
+						    pointsinplay,
+						    pointsratio,
+						    )
+						    )
+
+		return hovertext
+
+
+#---------------Hovertest for Bidding Activity Total Ends---------------------
+
+
+
 
 	#preparing color scale for hoverbox for Spectrum and Expiry maps
 	@st.cache_resource
@@ -2323,6 +2371,7 @@ if authentication_status:
 						st.plotly_chart(figauc, use_container_width=True)
 
 
+
 			if SubFeature == "BiddingActivity":
 
 				dfbid = loadauctionbiddata()["2010_3G_Activity"].replace('-', np.nan, regex = True)
@@ -2347,6 +2396,9 @@ if authentication_status:
 					dfbidactivityratio = round((dfbidactivity/dfbidactivityRd1.values),2)
 
 
+					hovertext = htext_auctiondata_2010_3G_BiddingActivityTotal(dfbid)
+
+
 					data1 = [go.Heatmap(
 						z=dfbidactivity.values,
 				        y= dfbidactivity.index,
@@ -2354,7 +2406,7 @@ if authentication_status:
 						xgap = 0.5,
 						ygap = 1,
 						hoverinfo ='text',
-						# text = hovertext,
+						text = hovertext,
 						colorscale='Hot',
 						showscale=True,
 							# texttemplate="%{z}", 
@@ -2371,7 +2423,7 @@ if authentication_status:
 							xgap = 0.5,
 							ygap = 1,
 							hoverinfo ='text',
-							# text = hovertext,
+							text = hovertext,
 							colorscale='Hot',
 							showscale=True,
 								# texttemplate="%{z}", 
@@ -2453,9 +2505,9 @@ if authentication_status:
 						st.markdown(subtitle)
 
 
-					# hoverlabel_bgcolor = "#000000" #subdued black
+					hoverlabel_bgcolor = "#000000" #subdued black
 
-					# figauc.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
+					figauc.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 
 					tab1, tab2 = st.tabs(["Actual", "Ratio (Actual/Initial)"]) #For showning the absolute and Ratio charts in two differet tabs
 					tab1.plotly_chart(figauc1, use_container_width=True)
