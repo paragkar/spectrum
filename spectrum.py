@@ -2079,7 +2079,7 @@ if authentication_status:
 
 
 					#Drawning a black border around the heatmap chart 
-					figauc.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True, range=[-0.5, len(dftemp.columns) - 1])
+					figauc.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True, range=[-0.5, len(dftemp.columns) +0.5])
 					figauc.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
 
 					figauc.update_layout(
