@@ -2293,7 +2293,11 @@ if authentication_status:
 
 					st.write(dfbidactivityratio)
 
-					data = [go.Heatmap(
+					tab1, tab2 = st.tabs(["Absolute", "Ratio"]) #For showning the absolute and Ratio charts in two differet tabs
+
+					if tab1 == "Absolute":
+
+						data = [go.Heatmap(
 							z=dfbidactivity.values,
 					        y= dfbidactivity.index,
 					        x=dfbidactivity.columns,
@@ -2307,7 +2311,24 @@ if authentication_status:
 								# textfont={"size":10},
 								reversescale=True,
 								)]
-							
+
+					if tab2 == "Ratio":
+
+						data = [go.Heatmap(
+								z=dfbidactivityratio.values,
+						        y= dfbidactivityratio.index,
+						        x=dfbidactivityratio.columns,
+								xgap = 0.5,
+								ygap = 1,
+								hoverinfo ='text',
+								# text = hovertext,
+								colorscale='Hot',
+								showscale=True,
+									# texttemplate="%{z}", 
+									# textfont={"size":10},
+									reversescale=True,
+									)]
+								
 
 					figauc = go.Figure(data=data)
 
@@ -2354,8 +2375,11 @@ if authentication_status:
 
 					# figauc.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 
+					tab1.plotly_chart(figauc, use_container_width=True)
+					tab2.plotly_chart(figauc, use_container_width=True)
+
 				
-					st.plotly_chart(figauc, use_container_width=True)
+					# st.plotly_chart(figauc, use_container_width=True)
 
 				if optiontype == "Pts in PWB Circles":
 
