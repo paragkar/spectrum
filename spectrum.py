@@ -1880,7 +1880,7 @@ if authentication_status:
 
 					st.write("") #debug
 
-					filt  =(dfbidsel["Clk_Round"] > start_round) & (dfbidsel["Clk_Round"] <= end_round)
+					filt  =(dfbidsel["Clk_Round"] >= start_round) & (dfbidsel["Clk_Round"] <= end_round)
 
 					dfbidsel = dfbidsel[filt].reset_index()
 
