@@ -2101,7 +2101,7 @@ if authentication_status:
 						showscale =True
 
 					data = [go.Heatmap(
-						z=dftemp.values,
+						z=round(dftemp.values,0),
 				        y= dftemp.index,
 				        x=dftemp.columns,
 						xgap = 1,
