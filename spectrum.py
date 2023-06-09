@@ -3005,7 +3005,17 @@ if authentication_status:
 
 			dfbid = loadauctionbiddata()["2010_BWA"].replace('-', np.nan, regex = True)
 
-			st.write(dfbid)
+			dfbid.columns = ["Clk_Round", "Bidder","LSA","PWB_Start_ClkRd", "Rank_PWB_Start_ClkRd", 
+							"Possible_Raise_Bid_ClkRd", "Bid_Decision", "PWB_End_ClkRd", "Rank_PWB_End_ClkRd"]
+
+			dfbid = dfbid.replace("No Bid", 0)
+			dfbid = dfbid.replace("Bid",1)
+
+			listofbidders = sorted(list(set(dfbid["Bidder"])))
+
+			dfbid = dfbid.set_index("LSA").sort_index(ascending = False)
+
+			SubFeature = st.sidebar.selectbox("Select a SubFeature", ["BidsCircleWise","RanksCircleWise", "ProvWinningBid", "BiddingActivity", "DemandActivity"])
 
 
 					
