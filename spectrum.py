@@ -2277,7 +2277,7 @@ if authentication_status:
 
 				dfbidactivity = dfbid.copy()
 
-				optiontype = st.sidebar.radio('Click an Option', ["Total Activity", "PWB Activity", "NewBids Activity", "Activity_Factor"])
+				optiontype = st.sidebar.radio('Click an Option', ["Total Activity", "PWB Activity", "NewBids Activity", "Activity Factor"])
 
 				if optiontype == "Total Activity":
 
@@ -2489,7 +2489,7 @@ if authentication_status:
 				
 					st.plotly_chart(figauc, use_container_width=True)
 
-				if optiontype == "AActivity_Factor":
+				if optiontype == "Activity Factor":
 
 
 					dfbidactivity = dfbidactivity.pivot(index="Bidder", columns='Clk_Round', values="Activity_Factor").sort_index(ascending=True)
