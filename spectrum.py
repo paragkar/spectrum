@@ -2009,7 +2009,7 @@ if authentication_status:
 				
 					if chartoption == "ReservePrice Multiple":
 
-						dftemp = round(dftemp/dfrp,1)
+						dftemp = round(dftemp/dfrp,0)
 
 						showscale = True
 
@@ -2096,12 +2096,12 @@ if authentication_status:
 
 					if chartoption == "ReservePrice Multiple":
 
-						dftemp = round(dftemp/dfrp,1)
+						dftemp = round(dftemp/dfrp,0)
 
 						showscale =True
 
 					data = [go.Heatmap(
-						z=round(dftemp.values,0),
+						z=dftemp.values,
 				        y= dftemp.index,
 				        x=dftemp.columns,
 						xgap = 1,
