@@ -1072,6 +1072,48 @@ if authentication_status:
 #-----------------Hovertext for Provisional Winning Bids Ends----------------------
 
 
+#---------------Hovertest for Demand Intensity---------------------
+
+	@st.cache_resource
+	def htext_auctiondata_2010_3G_DemandIntensity(dfbid):
+
+		dfbidaAD = dfbid.pivot(index="LSA", columns='Clock Round', values="Aggregate Demand").sort_index(ascending=True)
+
+		dfbidaED = dfbid.pivot(index="LSA", columns='Clock Round', values="Excess Demand").sort_index(ascending=True)
+
+
+		hovertext = []
+		for yi,yy in enumerate(dfbidaAD.index):
+			hovertext.append([])
+
+			for xi,xx in enumerate(dfbidaAD.columns):
+
+				aggdemand = dfbidaAD.loc[yy,xx]
+				excessdemand = dfbidaED.loc[yy,xx]
+
+
+				hovertext[-1].append(
+						    'Bidder: {}\
+						    <br>Round No: {}\
+						    <br>Aggregate Demand : {} Slots\
+						    <br>Excess Demand: {} Slots'
+					
+
+					     .format( 
+						    yy,
+						    xx,
+						    aggdemand,
+						    excessdemand,
+						    )
+						    )
+
+		return hovertext
+
+
+#---------------Hovertest for Demand Intensity Ends---------------------
+
+
+
 	#preparing color scale for hoverbox for Spectrum and Expiry maps
 	@st.cache_resource
 	def colscale_hbox_spectrum_expiry_maps(operators, colcodes):
@@ -2746,6 +2788,7 @@ if authentication_status:
 				
 					st.plotly_chart(figauc, use_container_width=True)
 
+
 			if SubFeature == "DemandIntensity":
 
 				dfbid = loadauctionbiddata()["2010_3G_AD"].replace('-', np.nan, regex = True)
@@ -2756,6 +2799,8 @@ if authentication_status:
 
 					dfbidaAD = dfbid.pivot(index="LSA", columns='Clock Round', values="Aggregate Demand").sort_index(ascending=True)
 
+					hovertext = htext_auctiondata_2010_3G_DemandIntensity(dfbid)
+
 					data = [go.Heatmap(
 								z=dfbidaAD.values,
 						        y= dfbidaAD.index,
@@ -2763,7 +2808,7 @@ if authentication_status:
 								xgap = 0.5,
 								ygap = 1,
 								hoverinfo ='text',
-								# text = hovertext,
+								text = hovertext,
 								colorscale='Hot',
 								# zmin=0.5, zmax=1,
 								showscale=True,
@@ -2815,9 +2860,9 @@ if authentication_status:
 						    yaxis=dict(showgrid=False)
 						)
 
-					# hoverlabel_bgcolor = "#000000" #subdued black
+					hoverlabel_bgcolor = "#000000" #subdued black
 
-					# figauc.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
+					figauc.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 
 				
 					st.plotly_chart(figauc, use_container_width=True)
@@ -2827,6 +2872,7 @@ if authentication_status:
 
 					dfbidaED = dfbid.pivot(index="LSA", columns='Clock Round', values="Excess Demand").sort_index(ascending=True)
 
+					hovertext = htext_auctiondata_2010_3G_DemandIntensity(dfbid)
 
 					data = [go.Heatmap(
 								z=dfbidaED.values,
@@ -2835,7 +2881,7 @@ if authentication_status:
 								xgap = 0.5,
 								ygap = 1,
 								hoverinfo ='text',
-								# text = hovertext,
+								text = hovertext,
 								colorscale='Hot',
 								# zmin=0.5, zmax=1,
 								showscale=True,
@@ -2887,9 +2933,9 @@ if authentication_status:
 						    yaxis=dict(showgrid=False)
 						)
 
-					# hoverlabel_bgcolor = "#000000" #subdued black
+					hoverlabel_bgcolor = "#000000" #subdued black
 
-					# figauc.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
+					figauc.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 
 				
 					st.plotly_chart(figauc, use_container_width=True)
