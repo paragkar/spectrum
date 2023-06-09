@@ -948,8 +948,6 @@ if authentication_status:
 						    )
 		return hovertext	
 
-
-#----------------New Code Starts Here------------------------------
 #processing hovertext for auction data 
 
 	@st.cache_resource
@@ -1034,8 +1032,44 @@ if authentication_status:
 		return hovertext, colormatrix, resultdf
 
 
-#----------------New Code Ends Here------------------------------
+#-----------------Hovertext for Provisional Winning Bids Starts----------------------
 
+	@st.cache_resource
+	def htext_colormatrix_auctiondata_2010_3G_ProvWinningBid(dfrp, dftemp, pwbtype, round_number):
+
+		dftemprpmul = round(dftemp/dfrp,1)
+
+		hovertext = []
+		for yi,yy in enumerate(dftemp.index):
+			hovertext.append([])
+
+			for xi,xx in enumerate(dftemp.columns):
+
+				pwb = dftemp.loc[yy,xx]
+				pwbmulofrp = dftemprpmul.loc[yy,xx]
+
+
+				hovertext[-1].append(
+						    'Bidder: {}\
+						    <br>Circle: {}\
+						    <br>PWB : {} Rs Cr\
+						    <br>PWB / Reserve P: {}\
+						    <br>PWB Type : {}\
+						    <br>Round No: {}'
+
+					     .format( 
+						    yy,
+						    state_dict[xx],
+						    pwb,
+						    pwbmulofrp,
+						    pwbtype,
+						    round_number,
+						    )
+						    )
+
+		return hovertext
+
+#-----------------Hovertext for Provisional Winning Bids Ends----------------------
 
 
 	#preparing color scale for hoverbox for Spectrum and Expiry maps
@@ -2037,7 +2071,7 @@ if authentication_status:
 
 				pwbtype = st.sidebar.selectbox("Select a PWB Type", ["Start CLK Round", "End CLK Round"])
 
-				df2ndrd = dfbid[dfbid["Clk_Round"] == 2].reset_index()
+				df2ndrd = dfbid[dfbid["Clk_Round"] == 2].reset_index() #Identifying the 2nd round gives up the reserve price
 
 				df2ndrdpwb = df2ndrd.pivot(index="Bidder", columns='LSA', values="PWB_Start_ClkRd").sort_index(ascending=False)
 
@@ -2057,7 +2091,8 @@ if authentication_status:
 
 					dfbidpwb = dfbidpwb[filt]
 
-					dftemp = dfbidpwb.drop(columns=["Rank_PWB_End_ClkRd","Possible_Raise_Bid_ClkRd", "Rank_PWB_Start_ClkRd","Bid_Decision","Clk_Round", "PWB_End_ClkRd"], axis=1).reset_index()
+					dftemp = dfbidpwb.drop(columns=["Rank_PWB_End_ClkRd","Possible_Raise_Bid_ClkRd", "Rank_PWB_Start_ClkRd",
+													"Bid_Decision","Clk_Round", "PWB_End_ClkRd"], axis=1).reset_index()
 
 					dftemp = dftemp.groupby(["LSA", "Bidder", "PWB_Start_ClkRd"]).sum().reset_index()
 
@@ -2077,6 +2112,8 @@ if authentication_status:
 
 						showscale = True
 
+					hovertext = htext_colormatrix_auctiondata_2010_3G_ProvWinningBid(dfrp, dftemp, pwbtype, round_number) #debug
+
 					data = [go.Heatmap(
 						z=dftemp.values,
 				        y= dftemp.index,
@@ -2084,7 +2121,7 @@ if authentication_status:
 						xgap = 1,
 						ygap = 1,
 						hoverinfo ='text',
-						# text = hovertext,
+						text = hovertext,
 						colorscale='Hot',
 						showscale=showscale,
 							texttemplate="%{z}", 
