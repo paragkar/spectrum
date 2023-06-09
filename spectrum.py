@@ -2040,7 +2040,7 @@ if authentication_status:
 				        	))
 
 					title = "3G Auctions (Year-2010) - PWB Start of Clock Round No - "+str(round_number)
-					subtitle = "Unit - Rs Cr; Source - DoT; "+ chartoption+" May not be same for all bidders in same circle - Bidder with lower value did not agree to the higher round price"
+					subtitle = "Unit - Rs Cr; Source - DoT; "+ chartoption+" - May be lower for bidders in same circle who did not agree to the higher round price"
 
 					style = "<style>h3 {text-align: left;}</style>"
 					with st.container():
