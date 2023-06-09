@@ -2737,7 +2737,7 @@ if authentication_status:
 
 				dfbid = loadauctionbiddata()["2010_3G_AD"].replace('-', np.nan, regex = True)
 
-				dfbidaAD = dfbid.pivot(index="LSA", columns='Clk_Round', values="Aggregate Demand").sort_index(ascending=True)
+				dfbidaAD = dfbid.pivot(index="LSA", columns='Clock Round', values="Aggregate Demand").sort_index(ascending=True)
 
 				st.write(dfbidaAD)
 
