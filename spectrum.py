@@ -1716,11 +1716,15 @@ if authentication_status:
 					texttemplate = "%{z}"
 					text = hovertext
 
+					subsubtitle=""
+
 				if radio_selection == "Percentage of Total":
 
 					dftempheat = dftemp.pivot(index="Bidder", columns='LSA', values="Bid_Decision_Perc")
 					texttemplate = "%{z}"
 					text = hovertext
+
+					subsubtitle=""
 
 				if radio_selection == "Provisional Winners":
 
@@ -1729,6 +1733,8 @@ if authentication_status:
 					text = resultdf.values
 
 					dftempheat = dftemp.pivot(index="Bidder", columns='LSA', values="Bid_Decision")
+
+					subsubtitle = "Provisional Winners are at the end of Round Number - "+str(end_round)
 
 
 				dftempheat = dftempheat.sort_values(selected_lsa[0], ascending = True)
@@ -1760,7 +1766,7 @@ if authentication_status:
 			        	))
 
 				title = "3G Auctions (Year-2010) - Total Number of Bids in Circles "+"("+radio_selection+")"
-				subtitle = "Source - DoT; Between Round Nos "+str(start_round)+" & "+str(end_round)+ "; Number of Rounds = "+ str(end_round-start_round)
+				subtitle = "Source - DoT; Between Round Nos "+str(start_round)+" & "+str(end_round)+ "; Number of Rounds = "+ str(end_round-start_round)+"; "+subsubtitle
 
 				style = "<style>h3 {text-align: left;}</style>"
 				with st.container():
