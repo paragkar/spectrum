@@ -13,7 +13,7 @@ import streamlit as st
 import matplotlib.pyplot as plt
 import altair as alt
 from datetime import datetime
-import datetime as dt #debug
+import datetime as dt 
 import calendar
 import time
 
@@ -953,7 +953,7 @@ if authentication_status:
 	@st.cache_resource
 	def htext_colormatrix_auctiondata_2010_3G_BWA_BidsCircleWise(dfbidcirclwise, dftemp, selected_lsa,end_round):
 
-		filt_last_round = (dfbidcirclwise["Clk_Round"] == end_round) #debug
+		filt_last_round = (dfbidcirclwise["Clk_Round"] == end_round)
 
 		dfbidcirclwiselastrd = dfbidcirclwise[filt_last_round].drop(columns = ["Clk_Round","PWB_Start_ClkRd","Rank_PWB_Start_ClkRd",
 			"Possible_Raise_Bid_ClkRd","Bid_Decision","PWB_End_ClkRd"], axis =1).reset_index()
@@ -1803,7 +1803,7 @@ if authentication_status:
 			zmax=3
 
 
-		dfbid = loadauctionbiddata()[mainsheet].replace('-', np.nan, regex = True) #debug
+		dfbid = loadauctionbiddata()[mainsheet].replace('-', np.nan, regex = True)
 
 		dfbid.columns = ["Clk_Round", "Bidder","LSA","PWB_Start_ClkRd", "Rank_PWB_Start_ClkRd", 
 						"Possible_Raise_Bid_ClkRd", "Bid_Decision", "PWB_End_ClkRd", "Rank_PWB_End_ClkRd"]
@@ -1871,7 +1871,7 @@ if authentication_status:
 
 				dftempheat = dftempheat.sort_values(selected_lsa[0], ascending = True)
 
-				summarydf = dftempheat.sum(axis=0).reset_index() #debug
+				summarydf = dftempheat.sum(axis=0).reset_index()
 
 				summarydf.columns = ["LSA","TotalBids"]
 
@@ -1890,7 +1890,6 @@ if authentication_status:
 					ygap = 1,
 					hoverinfo ='text',
 					text = hovertext,
-					zmin=zmin, zmax=zmax, #debug
 					colorscale="Hot",
 					texttemplate="%{z}",
 					textfont={"size":10},
@@ -2053,6 +2052,7 @@ if authentication_status:
 					xgap = 1,
 					ygap = 1,
 					hoverinfo ='text',
+					zmin=zmin, zmax=zmax, #debug
 					# text = hovertext,
 					colorscale='Hot',
 					# showscale=False,
@@ -3281,7 +3281,7 @@ if authentication_status:
 
 			#converting the columns into datetime and then date
 
-			df5gbtsf.columns = pd.to_datetime(df5gbtsf.columns) #debug
+			df5gbtsf.columns = pd.to_datetime(df5gbtsf.columns)
 			df5gbtsf.columns= [x.date() for x in list(df5gbtsf.columns)]
 
 
