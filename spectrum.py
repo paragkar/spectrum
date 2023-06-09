@@ -1725,6 +1725,8 @@ if authentication_status:
 					texttemplate = "%{z}"
 					text = hovertext
 
+					z = dftempheat.values
+
 					subsubtitle=""
 
 					colorscale = "Hot"
@@ -1743,6 +1745,7 @@ if authentication_status:
 					chart = summarychart(summarydf, 'LSA', "TotalBids")
 					SummaryFlag = True
 
+					z = dftempheat.values
 
 					texttemplate = "%{z}"
 					text = hovertext
@@ -1768,6 +1771,8 @@ if authentication_status:
 
 					text = resultdf.values
 
+					z = resultdf.values
+
 					dftempheat = dftemp.pivot(index="Bidder", columns='LSA', values="Bid_Decision")
 
 					subsubtitle = "Provisional Winners are at the end of Round Number - "+str(end_round)
@@ -1779,7 +1784,7 @@ if authentication_status:
 
 
 				data = [go.Heatmap(
-					z=dftempheat.values,
+					z=z,
 			        x=dftempheat.columns,
 			        y=dftempheat.index,
 					xgap = 1,
