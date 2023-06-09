@@ -1727,6 +1727,8 @@ if authentication_status:
 
 					subsubtitle=""
 
+					colorscale = "Hot"
+
 				if radio_selection == "Percentage of Total":
 
 					dftempheat = dftemp.pivot(index="Bidder", columns='LSA', values="Bid_Decision_Perc")
@@ -1734,6 +1736,8 @@ if authentication_status:
 					text = hovertext
 
 					subsubtitle=""
+
+					colorscale ="Hot"
 
 				if radio_selection == "Provisional Winners":
 
@@ -1744,6 +1748,8 @@ if authentication_status:
 					dftempheat = dftemp.pivot(index="Bidder", columns='LSA', values="Bid_Decision")
 
 					subsubtitle = "Provisional Winners are at the end of Round Number - "+str(end_round)
+
+					colorscale = "Picnic"
 
 
 				dftempheat = dftempheat.sort_values(selected_lsa[0], ascending = True)
@@ -1757,7 +1763,7 @@ if authentication_status:
 					ygap = 1,
 					hoverinfo ='text',
 					text = text,
-					colorscale='Picnic', #debug
+					colorscale=colorscale,
 						texttemplate=texttemplate,
 						textfont={"size":10},
 						reversescale=True,
