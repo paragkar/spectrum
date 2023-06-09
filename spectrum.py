@@ -1954,7 +1954,7 @@ if authentication_status:
 				        	))
 
 					title = "3G Auctions (Year-2010) - Bidder's Aggregrated Ranks (1-4) in a Chosen Window of Rounds"
-					subtitle = "Source - DoT Selected Round Nos - Start "+str(start_round)+"; End "+str(end_round)
+					subtitle = "Source - DOT; Between Round Nos "+str(start_round)+" & "+str(end_round)+ "; Number of Rounds = "+ str(end_round-start_round)
 
 					style = "<style>h3 {text-align: left;}</style>"
 					with st.container():
