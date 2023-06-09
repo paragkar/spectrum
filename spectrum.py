@@ -2388,7 +2388,7 @@ if authentication_status:
 						    yaxis=dict(showgrid=False)
 						)
 
-					title = "3G Auctions (Year-2010) - Total Points in Play"
+					title = "3G Auctions (Year-2010) - Points in Play"
 					subtitle = "Unit - Nos; Source - DoT; Xaxis - Round Numbers"
 					style = "<style>h3 {text-align: left;}</style>"
 					with st.container():
