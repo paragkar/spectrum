@@ -2275,7 +2275,15 @@ if authentication_status:
 				dfbid.columns = ["Clk_Round", "Bidder", "Pts_Start_Round", "Activity_Factor", "Activity_Requirement",
 								"Actual_Activity","Activity_at_PWB","Activity_NewBids","Point_Carry_Forward"]
 
-				st.write(dfbid)
+				round_number = st.slider("Select Auction Round Numbers using the Silder below", min_value=1, max_value=183, step=1, value = 183)
+
+				dfbidactivity = dfbid.copy()
+
+				filt  =(dfbidactivity["Clk_Round"] == round_number) 
+
+				dfbidactivity = dfbidactivity[filt]
+
+				st.write(dfbidactivity)
 
 
 
