@@ -2161,6 +2161,10 @@ if authentication_status:
 						     
 									)
 
+					hoverlabel_bgcolor = "#000000" #subdued black
+
+					figauc.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
+
 					if chartoption == "Absolute Values":
 						col1,col2 = st.columns([8,1]) #create collumns of uneven width
 						col1.plotly_chart(figauc, use_container_width=True)
@@ -2249,6 +2253,10 @@ if authentication_status:
 						    xaxis=dict(showgrid=False),
 						    yaxis=dict(showgrid=False)
 						)
+
+					hoverlabel_bgcolor = "#000000" #subdued black
+
+					figauc.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 
 					if chartoption == "Absolute Values":
 						col1,col2 = st.columns([8,1]) #create collumns of uneven width
