@@ -1778,6 +1778,7 @@ if authentication_status:
 				   	height = 650,
 				   	yaxis=dict(
 			        tickmode='array',
+			        showgrid=False,
 			        	))
 
 				title = "3G Auctions (Year-2010) - Total Number of Bids in Circles "+"("+radio_selection+")"
