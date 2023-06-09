@@ -2323,7 +2323,7 @@ if authentication_status:
 					)
 
 					title = "3G Auctions (Year-2010) - Total Points in Play"
-					subtitle = "Unit - Nos; Source - DoT;"
+					subtitle = "Unit - Nos; Source - DoT; Xaxis - Round Numbers"
 					style = "<style>h3 {text-align: left;}</style>"
 					with st.container():
 						#plotting the main chart
@@ -2392,7 +2392,7 @@ if authentication_status:
 					)
 
 					title = "3G Auctions (Year-2010) - Points in Play in Circles where the Bidder was a PWB"
-					subtitle = "Unit - Nos; Source - DoT;"
+					subtitle = "Unit - Nos; Source - DoT; Xaxis - Round Numbers"
 
 					style = "<style>h3 {text-align: left;}</style>"
 					with st.container():
@@ -2462,7 +2462,7 @@ if authentication_status:
 					)
 
 					title = "3G Auctions (Year-2010) - Points in Play for making New Bids"
-					subtitle = "Unit - Nos; Source - DoT;"
+					subtitle = "Unit - Nos; Source - DoT; Xaxis - Round Numbers"
 
 					style = "<style>h3 {text-align: left;}</style>"
 					with st.container():
@@ -2533,8 +2533,8 @@ if authentication_status:
 					)
 
 					title = "3G Auctions (Year-2010) - Activity Factor Announced by the Auctioneer"
-					subtitle = "Unit - Nos; Source - DoT;"
-
+					subtitle = "Unit - Nos; Source - DoT; Xaxis - Round Numbers"
+					
 					style = "<style>h3 {text-align: left;}</style>"
 					with st.container():
 						#plotting the main chart
