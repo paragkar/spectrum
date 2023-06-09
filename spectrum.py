@@ -1772,7 +1772,7 @@ if authentication_status:
 
 		if Feature == "2010-Band2100":
 
-			dfbid = loadauctionbiddata()["2010_3G"].replace('-', np.nan, regex = True)
+			dfbid = loadauctionbiddata()["2010_BWA"].replace('-', np.nan, regex = True) #debug
 
 			dfbid.columns = ["Clk_Round", "Bidder","LSA","PWB_Start_ClkRd", "Rank_PWB_Start_ClkRd", 
 							"Possible_Raise_Bid_ClkRd", "Bid_Decision", "PWB_End_ClkRd", "Rank_PWB_End_ClkRd"]
@@ -3001,21 +3001,21 @@ if authentication_status:
 					st.plotly_chart(figauc, use_container_width=True)
 
 
-		if Feature == "2010-Band2300":
+		# if Feature == "2010-Band2300":
 
-			dfbid = loadauctionbiddata()["2010_BWA"].replace('-', np.nan, regex = True)
+		# 	dfbid = loadauctionbiddata()["2010_BWA"].replace('-', np.nan, regex = True)
 
-			dfbid.columns = ["Clk_Round", "Bidder","LSA","PWB_Start_ClkRd", "Rank_PWB_Start_ClkRd", 
-							"Possible_Raise_Bid_ClkRd", "Bid_Decision", "PWB_End_ClkRd", "Rank_PWB_End_ClkRd"]
+		# 	dfbid.columns = ["Clk_Round", "Bidder","LSA","PWB_Start_ClkRd", "Rank_PWB_Start_ClkRd", 
+		# 					"Possible_Raise_Bid_ClkRd", "Bid_Decision", "PWB_End_ClkRd", "Rank_PWB_End_ClkRd"]
 
-			dfbid = dfbid.replace("No Bid", 0)
-			dfbid = dfbid.replace("Bid",1)
+		# 	dfbid = dfbid.replace("No Bid", 0)
+		# 	dfbid = dfbid.replace("Bid",1)
 
-			listofbidders = sorted(list(set(dfbid["Bidder"])))
+		# 	listofbidders = sorted(list(set(dfbid["Bidder"])))
 
-			dfbid = dfbid.set_index("LSA").sort_index(ascending = False)
+		# 	dfbid = dfbid.set_index("LSA").sort_index(ascending = False)
 
-			SubFeature = st.sidebar.selectbox("Select a SubFeature", ["BidsCircleWise","RanksCircleWise", "ProvWinningBid", "BiddingActivity", "DemandActivity"])
+		# 	SubFeature = st.sidebar.selectbox("Select a SubFeature", ["BidsCircleWise","RanksCircleWise", "ProvWinningBid", "BiddingActivity", "DemandActivity"])
 
 
 					
