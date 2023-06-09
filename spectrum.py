@@ -2272,6 +2272,9 @@ if authentication_status:
 
 				dfbid = loadauctionbiddata()["2010_3G_Activity"].replace('-', np.nan, regex = True)
 
+				dfbid.columns = ["Clk_Round", "Bidder", "Pts_Start_Round", "Activity_Factor", "Activity_Requirement",
+								"Actual_Activity","Activity_at_PWB","Activity_NewBids","Point_Carry_Forward"]
+
 				st.write(dfbid)
 
 
