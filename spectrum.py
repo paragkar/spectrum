@@ -2162,7 +2162,6 @@ if authentication_status:
 						ygap = 1,
 						hoverinfo ='text',
 						# text = hovertext,
-						zmin=-10,  #debug
 						colorscale='Hot',
 						# showscale=False,
 							texttemplate="%{z}", 
