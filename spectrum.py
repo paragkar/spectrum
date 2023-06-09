@@ -2564,9 +2564,9 @@ if authentication_status:
 								)]
 
 					data2 = [go.Heatmap(
-							z=dfbidactivity.values,
-					        y= dfbidactivity.index,
-					        x=dfbidactivity.columns,
+							z=dfbidactivityratio.values,
+					        y= dfbidactivityratio.index,
+					        x=dfbidactivityratio.columns,
 							xgap = 0.5,
 							ygap = 1,
 							hoverinfo ='text',
