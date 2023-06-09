@@ -2277,7 +2277,7 @@ if authentication_status:
 
 				dfbidactivity = dfbid.copy()
 
-				optiontype = st.sidebar.radio('Click an Option', ["Total Activity", "PWB Activity", "NewBids Activity", "Activity Requirement"])
+				optiontype = st.sidebar.radio('Click an Option', ["Total Activity", "PWB Activity", "NewBids Activity", "Activity_Factor"])
 
 				if optiontype == "Total Activity":
 
@@ -2489,10 +2489,10 @@ if authentication_status:
 				
 					st.plotly_chart(figauc, use_container_width=True)
 
-				if optiontype == "Activity Requirement":
+				if optiontype == "AActivity_Factor":
 
 
-					dfbidactivity = dfbidactivity.pivot(index="Bidder", columns='Clk_Round', values="Activity_Requirement").sort_index(ascending=True)
+					dfbidactivity = dfbidactivity.pivot(index="Bidder", columns='Clk_Round', values="Activity_Factor").sort_index(ascending=True)
 
 					data = [go.Heatmap(
 							z=dfbidactivity.values,
