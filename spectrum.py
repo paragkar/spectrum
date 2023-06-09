@@ -2307,13 +2307,25 @@ if authentication_status:
 
 				figauc = go.Figure(data=data)
 
-				figauc.update_layout(
-				    template="seaborn",
-				    xaxis_side= 'top',
-				   	height = 650,
-				   	yaxis=dict(
-			        tickmode='array',
-			        	))
+				fig.update_layout(uniformtext_minsize=12, 
+				  uniformtext_mode='hide', 
+				  xaxis_title=None, 
+				  yaxis_title=None, 
+				  yaxis_autorange='reversed',
+				  font=dict(size=12),
+				  template='simple_white',
+				  paper_bgcolor=None,
+				  height=600, 
+				  # width=1200,
+				  margin=dict(t=80, b=50, l=50, r=50, pad=0),
+				  yaxis=dict(
+		        	  tickmode='array'),
+				  xaxis = dict(
+				  side = 'top',
+				  tickmode = 'array',
+				  tickangle=0,
+				  dtick = 10), 
+				)
 
 				# title = "3G Auctions (Year-2010) - PWB End of Clock Round No - "+str(round_number)
 				# subtitle = "Unit - Rs Cr; Source - DoT; "+chartoption+" - May be lower for bidders in same circle who did not agree to the higher round price"
