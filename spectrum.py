@@ -1096,7 +1096,7 @@ if authentication_status:
 						    'Bidder: {}\
 						    <br>Round No: {}\
 						    <br>Aggregate Demand : {} Slots\
-						    <br>Excess Demand: {} Slots'
+						    <br>Excess Demand : {} Slots'
 					
 
 					     .format( 
