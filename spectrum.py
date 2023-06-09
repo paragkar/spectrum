@@ -1675,7 +1675,7 @@ if authentication_status:
 
 				#filter data within the block of selected rounds 
 
-				filt  =(dfbidcirclwise["Clk_Round"] > start_round) & (dfbidcirclwise["Clk_Round"] <= end_round)
+				filt  =(dfbidcirclwise["Clk_Round"] >= start_round) & (dfbidcirclwise["Clk_Round"] <= end_round)
 
 				dfbidcirclwise = dfbidcirclwise[filt]
 
@@ -1760,7 +1760,7 @@ if authentication_status:
 			        	))
 
 				title = "3G Auctions (Year-2010) - Total Number of Bids in Circles "+"("+radio_selection+")"
-				subtitle = "Source - DoT; Between Round Nos "+str(start_round)+" & "+str(end_round)+ "; No of Rounds = "+ str(end_round-start_round)
+				subtitle = "Source - DoT; Between Round Nos "+str(start_round)+" & "+str(end_round)+ "; Number of Rounds = "+ str(end_round-start_round)
 
 				style = "<style>h3 {text-align: left;}</style>"
 				with st.container():
