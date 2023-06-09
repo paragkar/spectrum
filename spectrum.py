@@ -1767,7 +1767,7 @@ if authentication_status:
 
 			return df
 
-		Feature = st.sidebar.selectbox("Select a Feature", ["2010-Band2100"])
+		Feature = st.sidebar.selectbox("Select a Feature", ["2010-Band2100","2010-Band2300"])
 
 
 		if Feature == "2010-Band2100":
@@ -3000,6 +3000,15 @@ if authentication_status:
 				
 					st.plotly_chart(figauc, use_container_width=True)
 
+
+		if Feature == "2010-Band2300":
+
+			dfbid = loadauctionbiddata()["2010_BWA"].replace('-', np.nan, regex = True)
+
+			st.write(dfbid)
+
+
+					
 
 
 
