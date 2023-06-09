@@ -2307,7 +2307,7 @@ if authentication_status:
 
 				figauc = go.Figure(data=data)
 
-				fig.update_layout(uniformtext_minsize=12, 
+				figauc.update_layout(uniformtext_minsize=12, 
 				  uniformtext_mode='hide', 
 				  xaxis_title=None, 
 				  yaxis_title=None, 
