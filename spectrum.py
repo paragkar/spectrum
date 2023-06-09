@@ -2760,54 +2760,54 @@ if authentication_status:
 									)]
 								
 
-						figauc = go.Figure(data=data)
+					figauc = go.Figure(data=data)
 
-						figauc.update_layout(uniformtext_minsize=12, 
-						  uniformtext_mode='hide', 
-						  xaxis_title=None, 
-						  yaxis_title=None, 
-						  yaxis_autorange='reversed',
-						  font=dict(size=12),
-						  template='simple_white',
-						  paper_bgcolor=None,
-						  height=600, 
-						  width=1200,
-						  margin=dict(t=80, b=50, l=50, r=50, pad=0),
-						  yaxis=dict(
-				        	  tickmode='array'),
-						  xaxis = dict(
-						  side = 'top',
-						  tickmode = 'linear',
-						  tickangle=0,
-						  dtick = 10), 
+					figauc.update_layout(uniformtext_minsize=12, 
+					  uniformtext_mode='hide', 
+					  xaxis_title=None, 
+					  yaxis_title=None, 
+					  yaxis_autorange='reversed',
+					  font=dict(size=12),
+					  template='simple_white',
+					  paper_bgcolor=None,
+					  height=600, 
+					  width=1200,
+					  margin=dict(t=80, b=50, l=50, r=50, pad=0),
+					  yaxis=dict(
+			        	  tickmode='array'),
+					  xaxis = dict(
+					  side = 'top',
+					  tickmode = 'linear',
+					  tickangle=0,
+					  dtick = 10), 
+					)
+
+					title = "3G Auctions (Year-2010) - Aggregrated Demand in Various Rounds"
+					subtitle = "Unit - Nos; Source - DoT; Xaxis - Round Numbers"
+
+					style = "<style>h3 {text-align: left;}</style>"
+					with st.container():
+						#plotting the main chart
+						st.markdown(style, unsafe_allow_html=True)
+						st.header(title)
+						st.markdown(subtitle)
+
+
+					#Drawning a black border around the heatmap chart 
+					figauc.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
+					figauc.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
+
+					figauc.update_layout(
+						    xaxis=dict(showgrid=False),
+						    yaxis=dict(showgrid=False)
 						)
 
-						title = "3G Auctions (Year-2010) - Aggregrated Demand in Various Rounds"
-						subtitle = "Unit - Nos; Source - DoT; Xaxis - Round Numbers"
+					# hoverlabel_bgcolor = "#000000" #subdued black
 
-						style = "<style>h3 {text-align: left;}</style>"
-						with st.container():
-							#plotting the main chart
-							st.markdown(style, unsafe_allow_html=True)
-							st.header(title)
-							st.markdown(subtitle)
+					# figauc.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 
-
-						#Drawning a black border around the heatmap chart 
-						figauc.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
-						figauc.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
-
-						figauc.update_layout(
-							    xaxis=dict(showgrid=False),
-							    yaxis=dict(showgrid=False)
-							)
-
-						# hoverlabel_bgcolor = "#000000" #subdued black
-
-						# figauc.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
-
-					
-						st.plotly_chart(figauc, use_container_width=True)
+				
+					st.plotly_chart(figauc, use_container_width=True)
 
 
 				if optiontype == "Excess Demand":
@@ -2832,54 +2832,54 @@ if authentication_status:
 									)]
 								
 
-						figauc = go.Figure(data=data)
+					figauc = go.Figure(data=data)
 
-						figauc.update_layout(uniformtext_minsize=12, 
-						  uniformtext_mode='hide', 
-						  xaxis_title=None, 
-						  yaxis_title=None, 
-						  yaxis_autorange='reversed',
-						  font=dict(size=12),
-						  template='simple_white',
-						  paper_bgcolor=None,
-						  height=600, 
-						  width=1200,
-						  margin=dict(t=80, b=50, l=50, r=50, pad=0),
-						  yaxis=dict(
-				        	  tickmode='array'),
-						  xaxis = dict(
-						  side = 'top',
-						  tickmode = 'linear',
-						  tickangle=0,
-						  dtick = 10), 
+					figauc.update_layout(uniformtext_minsize=12, 
+					  uniformtext_mode='hide', 
+					  xaxis_title=None, 
+					  yaxis_title=None, 
+					  yaxis_autorange='reversed',
+					  font=dict(size=12),
+					  template='simple_white',
+					  paper_bgcolor=None,
+					  height=600, 
+					  width=1200,
+					  margin=dict(t=80, b=50, l=50, r=50, pad=0),
+					  yaxis=dict(
+			        	  tickmode='array'),
+					  xaxis = dict(
+					  side = 'top',
+					  tickmode = 'linear',
+					  tickangle=0,
+					  dtick = 10), 
+					)
+
+					title = "3G Auctions (Year-2010) - Excess Demand in Various Rounds"
+					subtitle = "Unit - Nos; Source - DoT; Xaxis - Round Numbers"
+
+					style = "<style>h3 {text-align: left;}</style>"
+					with st.container():
+						#plotting the main chart
+						st.markdown(style, unsafe_allow_html=True)
+						st.header(title)
+						st.markdown(subtitle)
+
+
+					#Drawning a black border around the heatmap chart 
+					figauc.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
+					figauc.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
+
+					figauc.update_layout(
+						    xaxis=dict(showgrid=False),
+						    yaxis=dict(showgrid=False)
 						)
 
-						title = "3G Auctions (Year-2010) - Excess Demand in Various Rounds"
-						subtitle = "Unit - Nos; Source - DoT; Xaxis - Round Numbers"
+					# hoverlabel_bgcolor = "#000000" #subdued black
 
-						style = "<style>h3 {text-align: left;}</style>"
-						with st.container():
-							#plotting the main chart
-							st.markdown(style, unsafe_allow_html=True)
-							st.header(title)
-							st.markdown(subtitle)
+					# figauc.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 
-
-						#Drawning a black border around the heatmap chart 
-						figauc.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
-						figauc.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
-
-						figauc.update_layout(
-							    xaxis=dict(showgrid=False),
-							    yaxis=dict(showgrid=False)
-							)
-
-						# hoverlabel_bgcolor = "#000000" #subdued black
-
-						# figauc.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
-
-					
-						st.plotly_chart(figauc, use_container_width=True)
+				
+					st.plotly_chart(figauc, use_container_width=True)
 
 
 
