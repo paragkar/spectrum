@@ -2301,6 +2301,7 @@ if authentication_status:
 							# texttemplate="%{z}", 
 							# textfont={"size":10},
 							reversescale=True,
+							dtick = 10,
 							)]
 						
 
