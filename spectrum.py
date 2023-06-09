@@ -2281,18 +2281,18 @@ if authentication_status:
 
 				if optiontype == "Total Pts in Play":
 
+
+					dfbidactivity = dfbidactivity.pivot(index="Bidder", columns='Clk_Round', values="Actual_Activity").sort_index(ascending=True)
+
 					filt = dfbidactivity["Clk_Round"]==1
 
 					dfbidactivityRd1 = dfbidactivity[filt]
 
-
-					dfbidactivity = dfbidactivity.pivot(index="Bidder", columns='Clk_Round', values="Actual_Activity").sort_index(ascending=True)
-
 					dfbidactivityRd1 = dfbidactivityRd1.pivot(index="Bidder", columns='Clk_Round', values="Actual_Activity").sort_index(ascending=True)
 
-					dfbidactivityprec = round((dfbidactivity/dfbidactivityRd1.values)*100,1)
+					dfbidactivityratio = round((dfbidactivity/dfbidactivityRd1.values)*100,1)
 
-					st.write(dfbidactivityprec)
+					st.write(dfbidactivityratio)
 
 					data = [go.Heatmap(
 							z=dfbidactivity.values,
@@ -2363,6 +2363,18 @@ if authentication_status:
 
 					dfbidactivity = dfbidactivity.pivot(index="Bidder", columns='Clk_Round', values="Activity_at_PWB").sort_index(ascending=True)
 
+
+					filt = dfbidactivity["Clk_Round"]==1
+
+					dfbidactivityRd1 = dfbidactivity[filt]
+
+					dfbidactivityRd1 = dfbidactivityRd1.pivot(index="Bidder", columns='Clk_Round', values="Actual_Activity").sort_index(ascending=True)
+
+					dfbidactivityratio = round((dfbidactivity/dfbidactivityRd1.values)*100,1)
+
+					st.write(dfbidactivityratio)
+
+
 					data = [go.Heatmap(
 							z=dfbidactivity.values,
 					        y= dfbidactivity.index,
@@ -2432,6 +2444,17 @@ if authentication_status:
 
 
 					dfbidactivity = dfbidactivity.pivot(index="Bidder", columns='Clk_Round', values="Activity_NewBids").sort_index(ascending=True)
+
+
+					filt = dfbidactivity["Clk_Round"]==1
+
+					dfbidactivityRd1 = dfbidactivity[filt]
+
+					dfbidactivityRd1 = dfbidactivityRd1.pivot(index="Bidder", columns='Clk_Round', values="Actual_Activity").sort_index(ascending=True)
+
+					dfbidactivityratio = round((dfbidactivity/dfbidactivityRd1.values)*100,1)
+
+					st.write(dfbidactivityratio)
 
 					data = [go.Heatmap(
 							z=dfbidactivity.values,
