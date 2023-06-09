@@ -1780,6 +1780,8 @@ if authentication_status:
 
 			demandsheet = "2010_3G_AD"
 
+			titlesubpart = "3G Auctions"
+
 		if Feature == "2010-Band2300":
 
 			totalrounds = 117
@@ -1789,6 +1791,8 @@ if authentication_status:
 			activitysheet = "2010_BWA_Activity"
 
 			demandsheet = "2010_BWA_AD"
+
+			titlesubpart = "BWA Auctions"
 
 
 		dfbid = loadauctionbiddata()[mainsheet].replace('-', np.nan, regex = True) #debug
@@ -1973,7 +1977,7 @@ if authentication_status:
 		        showgrid=False,
 		        	))
 
-			title = "3G Auctions (Year-2010) - Total Number of Bids in Circles "+"("+radio_selection+")"
+			title = titlesubpart+" (Year-2010) - Total Number of Bids in Circles "+"("+radio_selection+")"
 			subtitle = "Source - DoT; Between Round Nos "+str(start_round)+" & "+str(end_round)+ "; Number of Rounds = "+ str(end_round-start_round)+"; "+subsubtitle
 
 			style = "<style>h3 {text-align: left;}</style>"
@@ -2059,7 +2063,7 @@ if authentication_status:
 			        tickmode='array',
 			        	))
 
-				title = "3G Auctions (Year-2010) - Bidder's Rank at the End of Clock Round No - "+str(round_number)
+				title = titlesubpart+" (Year-2010) - Bidder's Rank at the End of Clock Round No - "+str(round_number)
 				subtitle = "Unit - RankNo; Higher the Rank More Aggressive is the Bidding; Sorted by Circle -"+selected_lsa[0]+" ; Source - DoT"
 
 				style = "<style>h3 {text-align: left;}</style>"
@@ -2167,7 +2171,7 @@ if authentication_status:
 			        tickmode='array',
 			        	))
 
-				title = "3G Auctions (Year-2010) - Bidder's Aggregrated Ranks (1-4) in a Chosen Window of Rounds"
+				title = titlesubpart+" (Year-2010) - Bidder's Aggregrated Ranks (1-4) in a Chosen Window of Rounds"
 				subtitle = "Source - DOT; Between Round Nos "+str(start_round)+" & "+str(end_round)+ "; Number of Rounds = "+ str(end_round-start_round)
 
 				style = "<style>h3 {text-align: left;}</style>"
@@ -2262,7 +2266,7 @@ if authentication_status:
 			        tickmode='array',
 			        	))
 
-				title = "3G Auctions (Year-2010) - PWB Start of Clock Round No - "+str(round_number)
+				title = titlesubpart+" (Year-2010) - PWB Start of Clock Round No - "+str(round_number)
 				subtitle = "Unit - Rs Cr; Source - DoT; "+ chartoption+" - May be lower for bidders in same circle who did not agree to the higher round price"
 
 				style = "<style>h3 {text-align: left;}</style>"
@@ -2356,7 +2360,7 @@ if authentication_status:
 			        tickmode='array',
 			        	))
 
-				title = "3G Auctions (Year-2010) - PWB End of Clock Round No - "+str(round_number)
+				title = titlesubpart+" (Year-2010) - PWB End of Clock Round No - "+str(round_number)
 				subtitle = "Unit - Rs Cr; Source - DoT; "+chartoption+" - May be lower for bidders in same circle who did not agree to the higher round price"
 
 				style = "<style>h3 {text-align: left;}</style>"
@@ -2514,7 +2518,7 @@ if authentication_status:
 					    yaxis=dict(showgrid=False)
 					)
 
-				title = "3G Auctions (Year-2010) - Points in Play"
+				title = titlesubpart+" (Year-2010) - Points in Play"
 				subtitle = "Unit - Nos; Source - DoT; Xaxis - Round Numbers"
 				style = "<style>h3 {text-align: left;}</style>"
 				with st.container():
@@ -2645,7 +2649,7 @@ if authentication_status:
 					    yaxis=dict(showgrid=False)
 					)
 
-				title = "3G Auctions (Year-2010) - Points in Play in Circles where the Bidder was a PWB"
+				title = titlesubpart+" (Year-2010) - Points in Play in Circles where the Bidder was a PWB"
 				subtitle = "Unit - Nos; Source - DoT; Xaxis - Round Numbers"
 
 				style = "<style>h3 {text-align: left;}</style>"
@@ -2776,7 +2780,7 @@ if authentication_status:
 					)
 
 
-				title = "3G Auctions (Year-2010) - Points in Play for making New Bids"
+				title = titlesubpart+" (Year-2010) - Points in Play for making New Bids"
 				subtitle = "Unit - Nos; Source - DoT; Xaxis - Round Numbers"
 
 				style = "<style>h3 {text-align: left;}</style>"
@@ -2840,7 +2844,7 @@ if authentication_status:
 				  dtick = 10), 
 				)
 
-				title = "3G Auctions (Year-2010) - Activity Factor Announced by the Auctioneer"
+				title = titlesubpart+" (Year-2010) - Activity Factor Announced by the Auctioneer"
 				subtitle = "Unit - Nos; Source - DoT; Xaxis - Round Numbers"
 
 				style = "<style>h3 {text-align: left;}</style>"
@@ -2919,7 +2923,7 @@ if authentication_status:
 				  dtick = 10), 
 				)
 
-				title = "3G Auctions (Year-2010) - Aggregrated Demand in Various Rounds"
+				title = titlesubpart+" (Year-2010) - Aggregrated Demand in Various Rounds"
 				subtitle = "Unit - Nos; Source - DoT; Xaxis - Round Numbers"
 
 				style = "<style>h3 {text-align: left;}</style>"
@@ -2992,7 +2996,7 @@ if authentication_status:
 				  dtick = 10), 
 				)
 
-				title = "3G Auctions (Year-2010) - Excess Demand in Various Rounds"
+				title = titlesubpart+" (Year-2010) - Excess Demand in Various Rounds"
 				subtitle = "Unit - Nos; Source - DoT; Xaxis - Round Numbers"
 
 				style = "<style>h3 {text-align: left;}</style>"
