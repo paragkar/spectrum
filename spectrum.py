@@ -2281,8 +2281,16 @@ if authentication_status:
 
 				if optiontype == "Total Pts in Play":
 
+					filt = dfbidactivity["Clk_Round"]==1
+
+					dfbidactivityRd1 = dfbidactivity[filt]
+
 
 					dfbidactivity = dfbidactivity.pivot(index="Bidder", columns='Clk_Round', values="Actual_Activity").sort_index(ascending=True)
+
+					dfbidactivityRd1 = dfbidactivityRd1.pivot(index="Bidder", columns='Clk_Round', values="Actual_Activity").sort_index(ascending=True)
+
+					st.write(dfbidactivityRd1)
 
 					data = [go.Heatmap(
 							z=dfbidactivity.values,
@@ -2534,7 +2542,7 @@ if authentication_status:
 
 					title = "3G Auctions (Year-2010) - Activity Factor Announced by the Auctioneer"
 					subtitle = "Unit - Nos; Source - DoT; Xaxis - Round Numbers"
-					
+
 					style = "<style>h3 {text-align: left;}</style>"
 					with st.container():
 						#plotting the main chart
