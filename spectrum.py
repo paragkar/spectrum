@@ -951,7 +951,7 @@ if authentication_status:
 #processing hovertext for auction data 
 
 	@st.cache_resource
-	def htext_colormatrix_auctiondata_2010_3G_BidsCircleWise(dfbidcirclwise, dftemp, selected_lsa,end_round):
+	def htext_colormatrix_auctiondata_2010_3G_BWA_BidsCircleWise(dfbidcirclwise, dftemp, selected_lsa,end_round):
 
 		filt_last_round = (dfbidcirclwise["Clk_Round"] == end_round) #debug
 
@@ -1035,7 +1035,7 @@ if authentication_status:
 #-----------------Hovertext for Provisional Winning Bids Starts----------------------
 
 	@st.cache_resource
-	def htext_colormatrix_auctiondata_2010_3G_ProvWinningBid(dfrp, dftemp, pwbtype, round_number):
+	def htext_colormatrix_auctiondata_2010_3G_BWA_ProvWinningBid(dfrp, dftemp, pwbtype, round_number):
 
 		dftemprpmul = round(dftemp/dfrp,1)
 
@@ -1075,7 +1075,7 @@ if authentication_status:
 #---------------Hovertest for Demand Intensity---------------------
 
 	@st.cache_resource
-	def htext_auctiondata_2010_3G_DemandIntensity(dfbid):
+	def htext_auctiondata_2010_3G_BWA_DemandIntensity(dfbid):
 
 		dfbidaAD = dfbid.pivot(index="LSA", columns='Clock Round', values="Aggregate Demand").sort_index(ascending=True)
 
@@ -1116,7 +1116,7 @@ if authentication_status:
 #---------------Hovertest for Bidding Activity Total---------------------
 
 	@st.cache_resource
-	def htext_auctiondata_2010_3G_BiddingActivity(dfbid, column_name):
+	def htext_auctiondata_2010_3G_BWA_BiddingActivity(dfbid, column_name):
 
 		filt = dfbid["Clk_Round"]==1
 
@@ -1851,7 +1851,7 @@ if authentication_status:
 			# dftempheat = dftempheat.sort_values(selected_lsa[0], ascending = True)
 
 			#processing hovertext and colormatrix
-			hovertext,colormatrix,resultdf = htext_colormatrix_auctiondata_2010_3G_BidsCircleWise(dfbidcirclwise, dftemp,selected_lsa[0],end_round)
+			hovertext,colormatrix,resultdf = htext_colormatrix_auctiondata_2010_3G_BWA_BidsCircleWise(dfbidcirclwise, dftemp,selected_lsa[0],end_round)
 			hoverlabel_bgcolor = colormatrix
 
 
@@ -2238,7 +2238,7 @@ if authentication_status:
 
 					showscale = True
 
-				hovertext = htext_colormatrix_auctiondata_2010_3G_ProvWinningBid(dfrp, dftemp, pwbtype, round_number) #debug
+				hovertext = htext_colormatrix_auctiondata_2010_3G_BWA_ProvWinningBid(dfrp, dftemp, pwbtype, round_number) #debug
 
 				data = [go.Heatmap(
 					z=dftemp.values,
@@ -2332,7 +2332,7 @@ if authentication_status:
 
 					showscale =True
 
-				hovertext = htext_colormatrix_auctiondata_2010_3G_ProvWinningBid(dfrp, dftemp, pwbtype, round_number) #debug
+				hovertext = htext_colormatrix_auctiondata_2010_3G_BWA_ProvWinningBid(dfrp, dftemp, pwbtype, round_number) #debug
 
 				data = [go.Heatmap(
 					z=dftemp.values,
@@ -2419,7 +2419,7 @@ if authentication_status:
 				dfbidactivityratio = round((dfbidactivity/dfbidactivityRd1.values),2)
 
 
-				hovertext = htext_auctiondata_2010_3G_BiddingActivity(dfbid, "Actual_Activity")
+				hovertext = htext_auctiondata_2010_3G_BWA_BiddingActivity(dfbid, "Actual_Activity")
 
 
 				data1 = [go.Heatmap(
@@ -2552,7 +2552,7 @@ if authentication_status:
 				dfbidactivityratio = round((dfbidactivity/dfbidactivityRd1.values),2)
 
 
-				hovertext = htext_auctiondata_2010_3G_BiddingActivity(dfbid, "Activity_at_PWB")
+				hovertext = htext_auctiondata_2010_3G_BWA_BiddingActivity(dfbid, "Activity_at_PWB")
 
 
 				data1 = [go.Heatmap(
@@ -2682,7 +2682,7 @@ if authentication_status:
 
 				dfbidactivityratio = round((dfbidactivity/dfbidactivityRd1.values),2)
 
-				hovertext = htext_auctiondata_2010_3G_BiddingActivity(dfbid, "Activity_NewBids")
+				hovertext = htext_auctiondata_2010_3G_BWA_BiddingActivity(dfbid, "Activity_NewBids")
 
 
 				data1 = [go.Heatmap(
@@ -2882,7 +2882,7 @@ if authentication_status:
 
 				dfbidaAD = dfbid.pivot(index="LSA", columns='Clock Round', values="Aggregate Demand").sort_index(ascending=True)
 
-				hovertext = htext_auctiondata_2010_3G_DemandIntensity(dfbid)
+				hovertext = htext_auctiondata_2010_3G_BWA_DemandIntensity(dfbid)
 
 				data = [go.Heatmap(
 							z=dfbidaAD.values,
@@ -2955,7 +2955,7 @@ if authentication_status:
 
 				dfbidaED = dfbid.pivot(index="LSA", columns='Clock Round', values="Excess Demand").sort_index(ascending=True)
 
-				hovertext = htext_auctiondata_2010_3G_DemandIntensity(dfbid)
+				hovertext = htext_auctiondata_2010_3G_BWA_DemandIntensity(dfbid)
 
 				data = [go.Heatmap(
 							z=dfbidaED.values,
