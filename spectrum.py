@@ -2907,7 +2907,7 @@ if authentication_status:
 						ygap = 1,
 						hoverinfo ='text',
 						# text = hovertext,
-						colorscale='Hot',
+						colorscale='Picnic',
 						# zmin=0.5, zmax=1,
 						showscale=True,
 							# texttemplate="%{z}", 
