@@ -2936,6 +2936,8 @@ if authentication_status:
 
 				totalpointslostperc.columns = ["Bidder", "% of Pts Lost"]
 
+				totalpointslostperc = totalpointslostperc.set_index("Bidder")
+
 				figptslostabs = plotlosttotal(totalpointslost, "Bidder", "TotalLostPoints")
 
 				figptslostperc = plotlosttotal(totalpointslostperc, "Bidder", "% of Pts Lost")
