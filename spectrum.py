@@ -1840,7 +1840,7 @@ if authentication_status:
 
 	if selected_dimension == "Auction Data":
 
-		Feature = st.sidebar.selectbox("Select a Feature", ["2010-Band2100","2010-Band2300"])
+		Feature = st.sidebar.selectbox("Select a Feature", ["2010-Band2100","2010-Band2300", "2012-Band1800"])
 
 
 		if Feature == "2010-Band2100":
@@ -1853,7 +1853,7 @@ if authentication_status:
 
 			demandsheet = "2010_3G_AD"
 
-			titlesubpart = "3G Auctions"
+			titlesubpart = "3G 2100 MHz Auctions (CY-2010)"
 
 			zmin=1 
 
@@ -1869,7 +1869,23 @@ if authentication_status:
 
 			demandsheet = "2010_BWA_AD"
 
-			titlesubpart = "BWA Auctions"
+			titlesubpart = "BWA 2300 MHz Auctions (CY-2010)"
+
+			zmin=1
+
+			zmax=3
+
+		if Feature == "2010-Band1800":
+
+			totalrounds = 14
+
+			mainsheet = "2012_2G_1800"
+
+			activitysheet = "2012_2G_1800_Activity"
+
+			demandsheet = "2012_2G_1800_AD"
+
+			titlesubpart = "2G 1800 MHz Auctions (CY-2012)"
 
 			zmin=1
 
@@ -1879,7 +1895,8 @@ if authentication_status:
 		dfbid = loadauctionbiddata()[mainsheet].replace('-', np.nan, regex = True)
 
 		dfbid.columns = ["Clk_Round", "Bidder","LSA","PWB_Start_ClkRd", "Rank_PWB_Start_ClkRd", 
-						"Possible_Raise_Bid_ClkRd", "Bid_Decision", "PWB_End_ClkRd", "Rank_PWB_End_ClkRd"]
+						"Possible_Raise_Bid_ClkRd", "Bid_Decision", "PWB_End_ClkRd", "Rank_PWB_End_ClkRd", 
+						"No_of_BLK_Selected", "Prov_Alloc_BLK_Start_ClkRd", "Prov_Alloc_BLK_End_ClkRd", "Prov_Win_Price_End_ClkRd"]
 
 		dfbid = dfbid.replace("No Bid", 0)
 		dfbid = dfbid.replace("Bid",1)
@@ -2058,7 +2075,7 @@ if authentication_status:
 		        showgrid=False,
 		        	))
 
-			title = titlesubpart+" (Year-2010) - Total Number of Bids in Circles "+"("+radio_selection+")"
+			title = titlesubpart+" - Total Number of Bids in Circles "+"("+radio_selection+")"
 			subtitle = "Source - DoT; Between Round Nos "+str(start_round)+" & "+str(end_round)+ "; Number of Rounds = "+ str(end_round-start_round)+"; "+subsubtitle
 
 			style = "<style>h3 {text-align: left;}</style>"
@@ -2145,7 +2162,7 @@ if authentication_status:
 			        tickmode='array',
 			        	))
 
-				title = titlesubpart+" (Year-2010) - Bidder's Rank at the End of Clock Round No - "+str(round_number)
+				title = titlesubpart+" - Bidder's Rank at the End of Clock Round No - "+str(round_number)
 				subtitle = "Unit - RankNo; Higher the Rank More Aggressive is the Bidding; Sorted by Circle -"+selected_lsa[0]+" ; Source - DoT"
 
 				style = "<style>h3 {text-align: left;}</style>"
@@ -2253,7 +2270,7 @@ if authentication_status:
 			        tickmode='array',
 			        	))
 
-				title = titlesubpart+" (Year-2010) - Bidder's Aggregrated Ranks (1-4) in a Chosen Window of Rounds"
+				title = titlesubpart+" - Bidder's Aggregrated Ranks (1-4) in a Chosen Window of Rounds"
 				subtitle = "Source - DOT; Between Round Nos "+str(start_round)+" & "+str(end_round)+ "; Number of Rounds = "+ str(end_round-start_round)
 
 				style = "<style>h3 {text-align: left;}</style>"
@@ -2352,7 +2369,7 @@ if authentication_status:
 			        tickmode='array',
 			        	))
 
-				title = titlesubpart+" (Year-2010) - PWB Start of Clock Round No - "+str(round_number)
+				title = titlesubpart+" - PWB Start of Clock Round No - "+str(round_number)
 				subtitle = "Unit - Rs Cr; Source - DoT; "+ chartoption+" - May be lower for bidders in same circle who did not agree to the higher round price"
 
 				style = "<style>h3 {text-align: left;}</style>"
@@ -2446,7 +2463,7 @@ if authentication_status:
 			        tickmode='array',
 			        	))
 
-				title = titlesubpart+" (Year-2010) - PWB End of Clock Round No - "+str(round_number)
+				title = titlesubpart+" - PWB End of Clock Round No - "+str(round_number)
 				subtitle = "Unit - Rs Cr; Source - DoT; "+chartoption+" - May be lower for bidders in same circle who did not agree to the higher round price"
 
 				style = "<style>h3 {text-align: left;}</style>"
@@ -2607,7 +2624,7 @@ if authentication_status:
 					    yaxis=dict(showgrid=False)
 					)
 
-				title = titlesubpart+" (Year-2010) - Points in Play"
+				title = titlesubpart+" - Points in Play"
 				subtitle = "Unit - Nos; Source - DoT; Xaxis - Round Numbers"
 				style = "<style>h3 {text-align: left;}</style>"
 				with st.container():
@@ -2740,7 +2757,7 @@ if authentication_status:
 					    yaxis=dict(showgrid=False)
 					)
 
-				title = titlesubpart+" (Year-2010) - Points in Play in Circles where the Bidder was a PWB"
+				title = titlesubpart+" - Points in Play in Circles where the Bidder was a PWB"
 				subtitle = "Unit - Nos; Source - DoT; Xaxis - Round Numbers"
 
 				style = "<style>h3 {text-align: left;}</style>"
@@ -2873,7 +2890,7 @@ if authentication_status:
 					)
 
 
-				title = titlesubpart+" (Year-2010) - Points in Play for making New Bids"
+				title = titlesubpart+" - Points in Play for making New Bids"
 				subtitle = "Unit - Nos; Source - DoT; Xaxis - Round Numbers"
 
 				style = "<style>h3 {text-align: left;}</style>"
@@ -2937,7 +2954,7 @@ if authentication_status:
 				  dtick = 10), 
 				)
 
-				title = titlesubpart+" (Year-2010) - Activity Factor Announced by the Auctioneer"
+				title = titlesubpart+" - Activity Factor Announced by the Auctioneer"
 				subtitle = "Unit - Nos; Source - DoT; Xaxis - Round Numbers"
 
 				style = "<style>h3 {text-align: left;}</style>"
@@ -3037,7 +3054,7 @@ if authentication_status:
 				  dtick = 10), 
 				)
 
-				title = titlesubpart+" (Year-2010) - Points Lost in Various Rounds During the Auction"
+				title = titlesubpart+" - Points Lost in Various Rounds During the Auction"
 				subtitle = "Unit - Nos; Source - DoT; Xaxis - Round Numbers; Points are lost due to Bidder's inability to confirm to the Activity Factor"
 
 				style = "<style>h3 {text-align: left;}</style>"
@@ -3133,7 +3150,7 @@ if authentication_status:
 				  dtick = 10), 
 				)
 
-				title = titlesubpart+" (Year-2010) - Aggregrated Demand in Various Rounds"
+				title = titlesubpart+" - Aggregrated Demand in Various Rounds"
 				subtitle = "Unit - Nos; Source - DoT; Xaxis - Round Numbers"
 
 				style = "<style>h3 {text-align: left;}</style>"
@@ -3206,7 +3223,7 @@ if authentication_status:
 				  dtick = 10), 
 				)
 
-				title = titlesubpart+" (Year-2010) - Excess Demand in Various Rounds"
+				title = titlesubpart+" - Excess Demand in Various Rounds"
 				subtitle = "Unit - Nos; Source - DoT; Xaxis - Round Numbers"
 
 				style = "<style>h3 {text-align: left;}</style>"
