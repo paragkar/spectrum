@@ -1846,68 +1846,44 @@ if authentication_status:
 		if Feature == "2010-Band2100":
 
 			totalrounds = 183
-
 			mainsheet = "2010_3G"
-
 			activitysheet = "2010_3G_Activity"
-
 			demandsheet = "2010_3G_AD"
-
 			titlesubpart = "3G 2100 MHz Auctions (CY-2010)"
-
 			xdtick =10
-
 			zmin=1 
-
 			zmax=5
-
 			zmin_af = 0.5
-
 			zmax_af = 1
+			texttemplatebidactivity = ""
 
 		if Feature == "2010-Band2300":
 
 			totalrounds = 117
-
 			mainsheet = "2010_BWA"
-
 			activitysheet = "2010_BWA_Activity"
-
 			demandsheet = "2010_BWA_AD"
-
 			titlesubpart = "BWA 2300 MHz Auctions (CY-2010)"
-
 			xdtick =10
-
 			zmin=1
-
 			zmax=3
-
 			zmin_af = 0.5
-
 			zmax_af = 1
+			texttemplatebidactivity = ""
 
 		if Feature == "2012-Band1800":
 
 			totalrounds = 14
-
 			mainsheet = "2012_2G_1800"
-
 			activitysheet = "2012_2G_1800_Activity"
-
 			demandsheet = "2012_2G_1800_AD"
-
 			titlesubpart = "2G 1800 MHz Auctions (CY-2012)"
-
 			xdtick =1
-
 			zmin=1
-
 			zmax=3
-
 			zmin_af = 0.5
-
 			zmax_af = 1
+			texttemplatebidactivity = "%{z}"
 
 
 		dfbid = loadauctionbiddata()[mainsheet].replace('-', np.nan, regex = True)
@@ -2546,6 +2522,7 @@ if authentication_status:
 				hovertext = htext_auctiondata_2010_3G_BWA_BiddingActivity(dfbid, "Actual_Activity")
 
 
+
 				data1 = [go.Heatmap(
 					z=dfbidactivity.values,
 			        y= dfbidactivity.index,
@@ -2556,7 +2533,7 @@ if authentication_status:
 					text = hovertext,
 					colorscale='Hot',
 					showscale=True,
-						# texttemplate="%{z}", 
+						texttemplate=texttemplatebidactivity, 
 						# textfont={"size":10},
 						reversescale=True,
 						)]
@@ -2573,7 +2550,7 @@ if authentication_status:
 						text = hovertext,
 						colorscale='Hot',
 						showscale=True,
-							# texttemplate="%{z}", 
+							texttemplate=texttemplatebidactivity, 
 							# textfont={"size":10},
 							reversescale=True,
 							)]
