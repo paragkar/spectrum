@@ -2956,7 +2956,7 @@ if authentication_status:
 						# text = hovertext,
 						colorscale='Picnic',
 						# zmin=0.5, zmax=1,
-						# showscale=True,
+						showscale=False,
 							# texttemplate="%{z}", 
 							# textfont={"size":10},
 							# reversescale=True,
