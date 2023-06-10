@@ -1856,6 +1856,7 @@ if authentication_status:
 			zmin_af = 0.5
 			zmax_af = 1
 			texttempbiddemandactivity = ""
+			blocksize = 5
 
 		if Feature == "2010-Band2300":
 
@@ -1870,6 +1871,7 @@ if authentication_status:
 			zmin_af = 0.5
 			zmax_af = 1
 			texttempbiddemandactivity = ""
+			blocksize = 20
 
 		if Feature == "2012-Band1800":
 
@@ -1884,6 +1886,7 @@ if authentication_status:
 			zmin_af = 0.5
 			zmax_af = 1
 			texttempbiddemandactivity = "%{z}"
+			blocksize = 0.25
 
 
 		dfbid = loadauctionbiddata()[mainsheet].replace('-', np.nan, regex = True)
@@ -2535,7 +2538,7 @@ if authentication_status:
 		        	))
 
 			title = titlesubpart+" - Number of Blocks Selected  - "+str(round_number)
-			subtitle = "Unit - Numbers; Source - DoT"
+			subtitle = "Unit - Numbers; Block Size = ", blocksize +" MHz; Source - DoT"
 
 			style = "<style>h3 {text-align: left;}</style>"
 			with st.container():
