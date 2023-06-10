@@ -1923,6 +1923,11 @@ if authentication_status:
 
 			dfbidcirclwise = dfbid.copy()
 
+			dfbidcirclwise_endrd = dfbidcirclwise[dfbidcirclwise["Clk_Round"]==end_round] #debug
+
+			dfprovallcblks_endrd = dfbidcirclwise_endrd.pivot(index="Bidder", columns='LSA', values="Prov_Alloc_BLK_End_ClkRd") #debug
+
+			st.write(dfprovallcblks_endrd) #debug
 
 			#filter data within the block of selected rounds 
 
