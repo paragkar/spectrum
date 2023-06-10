@@ -3013,17 +3013,24 @@ if authentication_status:
 				# st.plotly_chart(figauc, use_container_width=True)
 
 
-				tab1, tab2 = st.tabs(["Pts Lost(Actual)", "Pts Lost(Percentage)"]) 
-				col1,col2 = tab1.columns([8,1]) #create collumns of uneven width
-				col1.tab1.plotly_chart(figauc, use_container_width=True)
-				col2.tab1.header("")
-				col2.tab1.plotly_chart(figptslostabs, use_container_width=True)
+				tab1,tab2 = st.tabs(["Pts Lost(Actual)", "Pts Lost(Percentage)"]) 
 
-				col1,col2 = tab2.columns([8,1]) #create collumns of uneven width
-				col1.tab1.plotly_chart(figauc, use_container_width=True)
-				col2.tab2.header("")
-				col2.tab2.plotly_chart(figptslostperc, use_container_width=True)
-	
+				with tab1:
+				col1,col2 = st.columns([8,1]) #create collumns of uneven width
+					with col1:
+						st.plotly_chart(figauc, use_container_width=True)
+					with col2:
+						st.header("")
+						st.plotly_chart(figptslostabs, use_container_width=True)
+
+				with tab2:
+				col1,col2 = st.columns([8,1]) #create collumns of uneven width
+					with col1:
+						st.plotly_chart(figauc, use_container_width=True)
+					with col2:
+						st.header("")
+						st.plotly_chart(figptslostperc, use_container_width=True)
+
 
 
 		if SubFeature == "DemandActivity":
