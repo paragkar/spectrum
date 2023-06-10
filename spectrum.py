@@ -1784,6 +1784,8 @@ if authentication_status:
 
 		df_final = dfblocks.mindf.values
 
+		st.write(df_final)
+
 		# # Regex pattern to match floating-point numbers
 		# pattern = re.compile(r'^[+-]?((?=.*[1-9])\d*\.\d+|0\.\d*[1-9]\d*)$')
 
