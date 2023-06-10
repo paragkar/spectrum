@@ -1983,7 +1983,7 @@ if authentication_status:
 				chart = summarychart(summarydf, 'LSA', "TotalBids")
 				SummaryFlag = True
 
-				titlesubpart2 = "Total Aggregrated Bids in the Selected Rounds"
+				titlesubpart2 = " - Total Agg Bids (Within Selected Rounds)"
 
 
 				data = [go.Heatmap(
@@ -2017,7 +2017,7 @@ if authentication_status:
 				chart = summarychart(summarydf, 'LSA', "TotalBids")
 				SummaryFlag = True
 
-				titlesubpart2 = "Percentage of Total Aggregrated Bids in the Selected Rounds"
+				titlesubpart2 = " - % of Total Agg Bids (Within Selected Rounds)"
 
 
 				data = [go.Heatmap(
@@ -2055,7 +2055,7 @@ if authentication_status:
 				# dftempheat = dftemp.pivot(index="Bidder", columns='LSA', values="Bid_Decision")
 
 
-				titlesubpart2 = "Provisional Winners in the End of the Selected Rounds"
+				titlesubpart2 = " - Provisional Winners (End of Selected Rounds)"
 
 
 				data = [go.Heatmap(
