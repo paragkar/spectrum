@@ -1095,7 +1095,7 @@ if authentication_status:
 #---------------Hovertest for Demand Intensity---------------------
 
 	@st.cache_resource
-	def htext_auctiondata_2010_3G_BWA_DemandIntensity(dfbid):
+	def htext_auctiondata_2010_3G_BWA_DemandIntensity(dfbid,ADPrecOfBlksforSale):
 
 		dfbidaAD = dfbid.pivot(index="LSA", columns='Clock Round', values="Aggregate Demand").sort_index(ascending=True)
 
@@ -1109,13 +1109,14 @@ if authentication_status:
 			for xi,xx in enumerate(dfbidaAD.columns):
 
 				aggdemand = dfbidaAD.loc[yy,xx]
+				aggdemperc = ADPrecOfBlksforSale.loc[yy,xx]
 				excessdemand = dfbidaED.loc[yy,xx]
-
 
 				hovertext[-1].append(
 						    'Circle: {}\
 						    <br>Round No: {}\
 						    <br>Aggregate Demand : {} Slots\
+						    <br>Aggregate Demand : {} % of TotalBLKs\
 						    <br>Excess Demand : {} Slots'
 					
 
@@ -1123,6 +1124,7 @@ if authentication_status:
 						    yy,
 						    xx,
 						    aggdemand,
+						    aggdemperc,
 						    excessdemand,
 						    )
 						    )
@@ -3335,11 +3337,9 @@ if authentication_status:
 				ADPrecOfBlksforSale = round((dfbidaAD/dfbidaBlksSale.values),1) #debug
 
 
-				st.write(ADPrecOfBlksforSale) #debug
+				hovertext = htext_auctiondata_2010_3G_BWA_DemandIntensity(dfbid,ADPrecOfBlksforSale)
 
-				hovertext = htext_auctiondata_2010_3G_BWA_DemandIntensity(dfbid)
-
-				data = [go.Heatmap(
+				data1 = [go.Heatmap(
 							z=dfbidaAD.values,
 					        y= dfbidaAD.index,
 					        x=dfbidaAD.columns,
@@ -3354,11 +3354,48 @@ if authentication_status:
 								textfont={"size":10},
 								reversescale=True,
 								)]
+
+				data2 = [go.Heatmap(
+							z=ADPrecOfBlksforSale.values,
+					        y= ADPrecOfBlksforSale.index,
+					        x=ADPrecOfBlksforSale.columns,
+							xgap = 0.5,
+							ygap = 1,
+							hoverinfo ='text',
+							text = hovertext,
+							colorscale='Hot',
+							# zmin=0.5, zmax=1,
+							showscale=True,
+								texttemplate=texttempbiddemandactivity, 
+								textfont={"size":10},
+								reversescale=True,
+								)]
 							
 
-				figauc = go.Figure(data=data)
+				figauc1 = go.Figure(data=data1)
+				figauc2 = go.Figure(data=data2)
 
-				figauc.update_layout(uniformtext_minsize=12, 
+				figauc1.update_layout(uniformtext_minsize=12, 
+				  uniformtext_mode='hide', 
+				  xaxis_title=None, 
+				  yaxis_title=None, 
+				  yaxis_autorange='reversed',
+				  font=dict(size=12),
+				  template='simple_white',
+				  paper_bgcolor=None,
+				  height=600, 
+				  width=1200,
+				  margin=dict(t=80, b=50, l=50, r=50, pad=0),
+				  yaxis=dict(
+		        	  tickmode='array'),
+				  xaxis = dict(
+				  side = 'top',
+				  tickmode = 'linear',
+				  tickangle=0,
+				  dtick = xdtick), 
+				)
+
+				figauc2.update_layout(uniformtext_minsize=12, 
 				  uniformtext_mode='hide', 
 				  xaxis_title=None, 
 				  yaxis_title=None, 
@@ -3390,27 +3427,47 @@ if authentication_status:
 
 
 				#Drawning a black border around the heatmap chart 
-				figauc.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
-				figauc.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
+				figauc1.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
+				figauc1.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
 
-				figauc.update_layout(
+				figauc2.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
+				figauc2.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
+
+				figauc1.update_layout(
+					    xaxis=dict(showgrid=False),
+					    yaxis=dict(showgrid=False)
+					)
+
+				figauc2.update_layout(
 					    xaxis=dict(showgrid=False),
 					    yaxis=dict(showgrid=False)
 					)
 
 				hoverlabel_bgcolor = "#000000" #subdued black
 
-				figauc.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
+				figauc1.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
+
+				figauc2.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 
 			
-				st.plotly_chart(figauc, use_container_width=True)
+				# st.plotly_chart(figauc, use_container_width=True)
+
+				tab1, tab2 = st.tabs(["Aggregate Demand", "Ratio (AD/Total)"]) #For showning the absolute and Ratio charts in two differet tabs
+				tab1.plotly_chart(figauc1, use_container_width=True)
+				tab2.plotly_chart(figauc2, use_container_width=True)
 
 
 			if optiontype == "Excess Demand":
 
 				dfbidaED = dfbid.pivot(index="LSA", columns='Clock Round', values="Excess Demand").sort_index(ascending=True)
 
-				hovertext = htext_auctiondata_2010_3G_BWA_DemandIntensity(dfbid)
+				dfbidaAD = dfbid.pivot(index="LSA", columns='Clock Round', values="Aggregate Demand").sort_index(ascending=True)
+
+				dfbidaBlksSale = dfbid.pivot(index="LSA", columns='Clock Round', values="Blocks For Sale").sort_index(ascending=True) #debug
+
+				ADPrecOfBlksforSale = round((dfbidaAD/dfbidaBlksSale.values),1) #debug
+
+				hovertext = htext_auctiondata_2010_3G_BWA_DemandIntensity(dfbid, ADPrecOfBlksforSale)
 
 				data = [go.Heatmap(
 							z=dfbidaED.values,
@@ -3475,7 +3532,7 @@ if authentication_status:
 
 				figauc.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 
-			
+
 				st.plotly_chart(figauc, use_container_width=True)
 
 
