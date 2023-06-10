@@ -2343,9 +2343,7 @@ if authentication_status:
 
 				if chartoption == "Absolute Values":
 
-					totalvalueofbids = dftemp*dfblocksalloc_rdend #debug
-
-					st.write(totalvalueofbids) #debug
+					dftemp = dftemp*dfblocksalloc_rdend #total value of bids for all allocated slots
 
 					figpanindiabids = plotbiddertotal(dftemp)
 
