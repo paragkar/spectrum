@@ -1855,6 +1855,8 @@ if authentication_status:
 
 			titlesubpart = "3G 2100 MHz Auctions (CY-2010)"
 
+			xdtick =10
+
 			zmin=1 
 
 			zmax=5
@@ -1871,6 +1873,8 @@ if authentication_status:
 
 			titlesubpart = "BWA 2300 MHz Auctions (CY-2010)"
 
+			xdtick =10
+
 			zmin=1
 
 			zmax=3
@@ -1886,6 +1890,8 @@ if authentication_status:
 			demandsheet = "2012_2G_1800_AD"
 
 			titlesubpart = "2G 1800 MHz Auctions (CY-2012)"
+
+			xdtick =1
 
 			zmin=1
 
@@ -2581,7 +2587,7 @@ if authentication_status:
 				  side = 'top',
 				  tickmode = 'linear',
 				  tickangle=0,
-				  dtick = 10), 
+				  dtick = xdtick), 
 				)
 
 
