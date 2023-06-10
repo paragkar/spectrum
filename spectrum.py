@@ -3015,14 +3015,14 @@ if authentication_status:
 
 				tab1, tab2 = st.tabs(["Pts Lost(Actual)", "Pts Lost(Percentage)"]) 
 				col1,col2 = tab1.columns([8,1]) #create collumns of uneven width
-				tab1.col1.plotly_chart(figauc, use_container_width=True)
-				tab1.col2.header("")
-				tab1.col2.plotly_chart(figptslostabs, use_container_width=True)
+				col1.tab1.plotly_chart(figauc, use_container_width=True)
+				col2.tab1.header("")
+				col2.tab1.plotly_chart(figptslostabs, use_container_width=True)
 
 				col1,col2 = tab2.columns([8,1]) #create collumns of uneven width
-				tab2.col1.plotly_chart(figauc, use_container_width=True)
-				tab2.col2.header("")
-				tab2.col2.plotly_chart(figptslostperc, use_container_width=True)
+				col1.tab1.plotly_chart(figauc, use_container_width=True)
+				col2.tab2.header("")
+				col2.tab2.plotly_chart(figptslostperc, use_container_width=True)
 	
 
 
