@@ -1020,8 +1020,8 @@ if authentication_status:
 				hovertext[-1].append(
 						    'Bidder: {}\
 						    <br>Circle: {}\
-						    <br>Bids : {} Nos\
-						    <br>Bids: {} % of Total\
+						    <br>Agg Bids : {} Nos\
+						    <br>Agg Bids: {} % of Total\
 						    <br>Prov Result : {}\
 						    <br>Prov Rank: {}\
 						    <br>Prov BLKs: {}'
