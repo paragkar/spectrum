@@ -2617,7 +2617,7 @@ if authentication_status:
 				  side = 'top',
 				  tickmode = 'linear',
 				  tickangle=0,
-				  dtick = 10), 
+				  dtick = xdtick), 
 				)
 
 
@@ -2720,7 +2720,7 @@ if authentication_status:
 				  side = 'top',
 				  tickmode = 'linear',
 				  tickangle=0,
-				  dtick = 10), 
+				  dtick = xdtick), 
 				)
 
 
@@ -2750,7 +2750,7 @@ if authentication_status:
 				  side = 'top',
 				  tickmode = 'linear',
 				  tickangle=0,
-				  dtick = 10), 
+				  dtick = xdtick), 
 				)
 
 
@@ -2852,7 +2852,7 @@ if authentication_status:
 				  side = 'top',
 				  tickmode = 'linear',
 				  tickangle=0,
-				  dtick = 10), 
+				  dtick = xdtick), 
 				)
 
 
@@ -2882,7 +2882,7 @@ if authentication_status:
 				  side = 'top',
 				  tickmode = 'linear',
 				  tickangle=0,
-				  dtick = 10), 
+				  dtick = xdtick), 
 				)
 
 
@@ -2957,7 +2957,7 @@ if authentication_status:
 				  side = 'top',
 				  tickmode = 'linear',
 				  tickangle=0,
-				  dtick = 10), 
+				  dtick = xdtick), 
 				)
 
 				title = titlesubpart+" - Activity Factor Announced by the Auctioneer"
@@ -3057,7 +3057,7 @@ if authentication_status:
 				  side = 'top',
 				  tickmode = 'linear',
 				  tickangle=0,
-				  dtick = 10), 
+				  dtick = xdtick), 
 				)
 
 				title = titlesubpart+" - Points Lost in Various Rounds During the Auction"
@@ -3153,7 +3153,7 @@ if authentication_status:
 				  side = 'top',
 				  tickmode = 'linear',
 				  tickangle=0,
-				  dtick = 10), 
+				  dtick = xdtick), 
 				)
 
 				title = titlesubpart+" - Aggregrated Demand in Various Rounds"
@@ -3226,7 +3226,7 @@ if authentication_status:
 				  side = 'top',
 				  tickmode = 'linear',
 				  tickangle=0,
-				  dtick = 10), 
+				  dtick = xdtick), 
 				)
 
 				title = titlesubpart+" - Excess Demand in Various Rounds"
