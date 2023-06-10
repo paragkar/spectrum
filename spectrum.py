@@ -1861,6 +1861,10 @@ if authentication_status:
 
 			zmax=5
 
+			zmin_af = 0.5
+
+			zmax_af = 1
+
 		if Feature == "2010-Band2300":
 
 			totalrounds = 117
@@ -1879,6 +1883,10 @@ if authentication_status:
 
 			zmax=3
 
+			zmin_af = 0.5
+
+			zmax_af = 1
+
 		if Feature == "2012-Band1800":
 
 			totalrounds = 14
@@ -1896,6 +1904,10 @@ if authentication_status:
 			zmin=1
 
 			zmax=3
+
+			zmin_af = 0
+
+			zmax_af = 1
 
 
 		dfbid = loadauctionbiddata()[mainsheet].replace('-', np.nan, regex = True)
@@ -2930,7 +2942,7 @@ if authentication_status:
 						hoverinfo ='text',
 						# text = hovertext,
 						colorscale='Hot',
-						zmin=0.5, zmax=1,
+						zmin=zmin_af, zmax=zmax_af,
 						showscale=True,
 							# texttemplate="%{z}", 
 							# textfont={"size":10},
