@@ -1033,7 +1033,7 @@ if authentication_status:
 						    totalbissperc,
 						    result,
 						    finalrank,
-						    totalblksrdend,
+						    round(totalblksrdend,0),
 						    )
 						    )
 
