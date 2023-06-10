@@ -1182,8 +1182,8 @@ if authentication_status:
 				hovertext[-1].append(
 						    'Bidder: {}\
 						    <br>Round No: {}\
-						    <br>Points in Play : {} Nos\
-						    <br>Ratio (Actual/Initial) : {}'
+						    <br>Points Lost : {} Nos\
+						    <br>Points Lost : {} % of Initial'
 					
 					     .format( 
 						    yy,
