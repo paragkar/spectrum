@@ -971,7 +971,7 @@ if authentication_status:
 #processing hovertext for auction data 
 
 	@st.cache_resource
-	def htext_colormatrix_auctiondata_2010_3G_BWA_BidsCircleWise(dfbidcirclwise, dftemp, selected_lsa,end_round,dfprovallcblks_endrd):
+	def htext_colormatrix_auctiondata_2010_3G_BWA_BidsCircleWise(dfbidcirclwise, dftemp, selected_lsa,start_round,end_round,dfprovallcblks_endrd):
 
 		filt_last_round = (dfbidcirclwise["Clk_Round"] == end_round)
 
@@ -1020,8 +1020,8 @@ if authentication_status:
 				hovertext[-1].append(
 						    'Bidder: {}\
 						    <br>Circle: {}\
-						    <br>Total Bids: {} Nos\
-						    <br>Total Bids: {} % of Total\
+						    <br>Bids : {} Nos\
+						    <br>Bids: {} % of Total\
 						    <br>Prov Result : {}\
 						    <br>Prov Rank: {}\
 						    <br>Prov BLKs: {}'
@@ -1963,7 +1963,7 @@ if authentication_status:
 
 			#processing hovertext and colormatrix
 			hovertext,colormatrix,resultdf = htext_colormatrix_auctiondata_2010_3G_BWA_BidsCircleWise(dfbidcirclwise, 
-												dftemp,selected_lsa[0],end_round,dfprovallcblks_endrd)
+												dftemp,selected_lsa[0],start_round,end_round,dfprovallcblks_endrd)
 			hoverlabel_bgcolor = colormatrix
 
 
