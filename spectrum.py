@@ -128,6 +128,26 @@ if authentication_status:
 
 		return dfT
 
+
+
+	@st.cache_resource
+	def loadauctionbiddata():
+
+		password = st.secrets["db_password"]
+
+		excel_content = io.BytesIO()
+
+		with open("auctionbiddata.xlsx", 'rb') as f:
+			excel = msoffcrypto.OfficeFile(f)
+			excel.load_key(password)
+			excel.decrypt(excel_content)
+
+		xl = pd.ExcelFile(excel_content)
+		sheetauctiondata = xl.sheet_names
+		df = pd.read_excel(excel_content, sheet_name=sheetauctiondata)
+
+		return df
+
 #--------Fuctions for loading File Ends--------------------
 
 
@@ -1823,9 +1843,18 @@ if authentication_status:
 		@st.cache_resource
 		def loadauctionbiddata():
 
-			xl = pd.ExcelFile("auctionbiddata.xlsx")
+			password = st.secrets["db_password"]
+
+			excel_content = io.BytesIO()
+
+			with open("auctionbiddata.xlsx", 'rb') as f:
+				excel = msoffcrypto.OfficeFile(f)
+				excel.load_key(password)
+				excel.decrypt(excel_content)
+
+			xl = pd.ExcelFile(excel_content)
 			sheet = xl.sheet_names
-			df = pd.read_excel("auctionbiddata.xlsx", sheet_name=sheet)
+			df = pd.read_excel(excel_content, sheet_name=sheet)
 
 			return df
 
