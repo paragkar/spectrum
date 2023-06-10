@@ -3330,6 +3330,13 @@ if authentication_status:
 
 				dfbidaAD = dfbid.pivot(index="LSA", columns='Clock Round', values="Aggregate Demand").sort_index(ascending=True)
 
+				dfbidaBlksSale = dfbid.pivot(index="LSA", columns='Clock Round', values="Blocks For Sale").sort_index(ascending=True) #debug
+
+				ADPrecOfBlksforSale = round((dfbidaAD/dfbidaBlksSale.values)*100,1) #debug
+
+
+				st.write(ADPrecOfBlksforSale) #debug
+
 				hovertext = htext_auctiondata_2010_3G_BWA_DemandIntensity(dfbid)
 
 				data = [go.Heatmap(
