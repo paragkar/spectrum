@@ -1778,10 +1778,6 @@ if authentication_status:
 		mindf = pd.DataFrame(min_values).T
 		mindf.columns = df.columns
 
-		st.write(mindf)
-
-		st.write(dfblocks)
-
 		df_final = dfblocks*mindf.values
 
 		st.write(df_final)
@@ -1797,7 +1793,7 @@ if authentication_status:
 
 		# df_final = matrix * mindf.values
 
-		# df_final = df_final.sum(axis =1).round(1)
+		df_final = df_final.sum(axis =1).round(1)
 
 		return df_final
 
