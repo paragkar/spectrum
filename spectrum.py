@@ -2956,7 +2956,7 @@ if authentication_status:
 						# text = hovertext,
 						colorscale='Picnic',
 						# zmin=0.5, zmax=1,
-						showscale=True,
+						# showscale=True,
 							# texttemplate="%{z}", 
 							# textfont={"size":10},
 							# reversescale=True,
@@ -3010,17 +3010,20 @@ if authentication_status:
 				# figauc.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 
 			
-				st.plotly_chart(figauc, use_container_width=True)
+				# st.plotly_chart(figauc, use_container_width=True)
 
 
-				if chartoption == "Absolute Values":
-					col1,col2 = st.columns([8,1]) #create collumns of uneven width
-					col1.plotly_chart(figauc, use_container_width=True)
-					col2.header("")
-					col2.plotly_chart(figpanindiabids, use_container_width=True)
+				tab1, tab2 = st.tabs(["Pts Lost(Actual)", "Pts Lost(Percentage)"]) 
+				col1,col2 = tab1.columns([8,1]) #create collumns of uneven width
+				tab1.col1.plotly_chart(figauc, use_container_width=True)
+				tab1.col2.header("")
+				tab1.col2.plotly_chart(figptslostabs, use_container_width=True)
 
-				if chartoption =="ReservePrice Multiple":
-					st.plotly_chart(figauc, use_container_width=True)
+				col1,col2 = tab2.columns([8,1]) #create collumns of uneven width
+				tab2.col1.plotly_chart(figauc, use_container_width=True)
+				tab2.col2.header("")
+				tab2.col2.plotly_chart(figptslostperc, use_container_width=True)
+	
 
 
 		if SubFeature == "DemandActivity":
