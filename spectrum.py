@@ -2281,7 +2281,7 @@ if authentication_status:
 			        tickmode='array',
 			        	))
 
-				title = titlesubpart+" - Bidder's Aggregrated Ranks (1-4) in a Chosen Window of Rounds"
+				title = titlesubpart+" - Bidder's Agg Ranks (1-4) in the Chosen Window of Rounds"
 				subtitle = "Source - DOT; Between Round Nos "+str(start_round)+" & "+str(end_round)+ "; Number of Rounds = "+ str(end_round-start_round)
 
 				style = "<style>h3 {text-align: left;}</style>"
