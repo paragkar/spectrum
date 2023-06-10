@@ -1899,7 +1899,8 @@ if authentication_status:
 
 		dfbid = dfbid.set_index("LSA").sort_index(ascending = False)
 
-		SubFeature = st.sidebar.selectbox("Select a SubFeature", ["BidsCircleWise","RanksCircleWise", "ProvWinningBid", "BiddingActivity", "DemandActivity"])
+		SubFeature = st.sidebar.selectbox("Select a SubFeature", ["BidsCircleWise","RanksCircleWise", "ProvWinningBid", "BlocksSelected",
+										  "ProvAllocBLKStart","ProvAllocBLKEnd","BiddingActivity", "DemandActivity"])
 
 		if SubFeature == "BidsCircleWise":
 
@@ -2489,6 +2490,27 @@ if authentication_status:
 
 				if chartoption == "ReservePrice Multiple":
 					st.plotly_chart(figauc, use_container_width=True)
+
+
+
+		if SubFeature == "BlocksSelected":
+
+			round_number = st.slider("Select Auction Round Numbers using the Silder below", min_value=1, max_value=totalrounds, step=1, value = totalrounds)
+
+			dfbidblksec = dfbid.copy()
+
+			filt  =(dfbidblksec["Clk_Round"] == round_number) 
+
+			dfbidblksec = dfbidblksec[filt]
+
+			dftemp = dftemp.groupby(["LSA", "Bidder", "PWB_End_ClkRd"]).sum().reset_index()
+
+			dftemp = dftemp.pivot(index="Bidder", columns='LSA', values="No_of_BLK_Selected").sort_index(ascending=False).round(0)
+
+			st.write(dftemp)
+
+
+
 
 
 
