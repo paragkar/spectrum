@@ -1118,7 +1118,7 @@ if authentication_status:
 				hovertext[-1].append(
 						    'Circle: {}\
 						    <br>Round No: {}\
-						    <br>Aggregate Demand : {} Slots\
+						    <br>Agg Demand : {} Slots\
 						    <br>Ratio (AD/Total) : {} \
 						    <br>Excess Demand : {} Slots'
 					
