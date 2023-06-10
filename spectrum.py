@@ -2524,42 +2524,42 @@ if authentication_status:
 						)]
 					
 
-				figauc = go.Figure(data=data)
+			figauc = go.Figure(data=data)
 
-				figauc.update_layout(
-				    template="seaborn",
-				    xaxis_side= 'top',
-				   	height = 650,
-				   	yaxis=dict(
-			        tickmode='array',
-			        	))
+			figauc.update_layout(
+			    template="seaborn",
+			    xaxis_side= 'top',
+			   	height = 650,
+			   	yaxis=dict(
+		        tickmode='array',
+		        	))
 
-				title = titlesubpart+" - Number of Blocks Selected  - "+str(round_number)
-				subtitle = "Unit - Rs Cr; Source - DoT"
+			title = titlesubpart+" - Number of Blocks Selected  - "+str(round_number)
+			subtitle = "Unit - Rs Cr; Source - DoT"
 
-				style = "<style>h3 {text-align: left;}</style>"
-				with st.container():
-					#plotting the main chart
-					st.markdown(style, unsafe_allow_html=True)
-					st.header(title)
-					st.markdown(subtitle)
+			style = "<style>h3 {text-align: left;}</style>"
+			with st.container():
+				#plotting the main chart
+				st.markdown(style, unsafe_allow_html=True)
+				st.header(title)
+				st.markdown(subtitle)
 
 
-				#Drawning a black border around the heatmap chart 
-				figauc.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
-				figauc.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
+			#Drawning a black border around the heatmap chart 
+			figauc.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
+			figauc.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
 
-				figauc.update_layout(
-					    xaxis=dict(showgrid=False),
-					    yaxis=dict(showgrid=False)
-					)
+			figauc.update_layout(
+				    xaxis=dict(showgrid=False),
+				    yaxis=dict(showgrid=False)
+				)
 
-				# hoverlabel_bgcolor = "#000000" #subdued black
+			# hoverlabel_bgcolor = "#000000" #subdued black
 
-				# figauc.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
+			# figauc.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 
-				
-				st.plotly_chart(figauc, use_container_width=True)
+			
+			st.plotly_chart(figauc, use_container_width=True)
 
 
 
