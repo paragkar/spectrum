@@ -2616,7 +2616,7 @@ if authentication_status:
 		        tickmode='array',
 		        	))
 
-			title = titlesubpart+" - Number of Blocks Provisionally Allocated in the Start of Round No -"+str(round_number)
+			title = titlesubpart+" - No of Blocks Prov Allocated Start of Round No -"+str(round_number)
 			subtitle = "Unit - Numbers; Block Size = "+ str(blocksize) +" MHz; Source - DoT"
 
 			style = "<style>h3 {text-align: left;}</style>"
