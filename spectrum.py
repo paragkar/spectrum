@@ -1163,6 +1163,44 @@ if authentication_status:
 
 
 
+#---------------Hovertest for Points Lost---------------------
+
+	@st.cache_resource
+	def htext_auctiondata_2010_3G_BWA_PointsLost(dfbidactivity, dfbidactivityperc):
+
+
+		hovertext = []
+		for yi,yy in enumerate(dfbidactivity.index):
+			hovertext.append([])
+
+			for xi,xx in enumerate(dfbidactivity.columns):
+
+				pointslost = dfbidactivity.loc[yy,xx]
+				pointslostperc = dfbidactivityperc.loc[yy,xx]
+
+
+				hovertext[-1].append(
+						    'Bidder: {}\
+						    <br>Round No: {}\
+						    <br>Points in Play : {} Nos\
+						    <br>Ratio (Actual/Initial) : {}'
+					
+					     .format( 
+						    yy,
+						    xx,
+						    pointslost,
+						    pointslostperc,
+						    )
+						    )
+
+		return hovertext
+
+
+#---------------Hovertest for Points Lost Ends---------------------
+
+
+
+
 
 	#preparing color scale for hoverbox for Spectrum and Expiry maps
 	@st.cache_resource
@@ -2916,56 +2954,6 @@ if authentication_status:
 				st.plotly_chart(figauc, use_container_width=True)
 
 
-#---------------Hovertest for Points Lost---------------------
-
-	# @st.cache_resource
-	# def htext_auctiondata_2010_3G_BWA_PointsLost(dfbid, column_name):
-
-	# 	filt = dfbid["Clk_Round"]==1
-
-	# 	dfbidRD1 = dfbid[filt]
-
-	# 	dfbidactivity = dfbid.pivot(index="Bidder", columns='Clk_Round', values=column_name).sort_index(ascending=True)
-
-	# 	# dfbidactivityRd1 = dfbidRD1.pivot(index="Bidder", columns='Clk_Round', values="Actual_Activity").sort_index(ascending=True) #debug
-
-	# 	dfbidactivityRd1 = dfbidRD1.pivot(index="Bidder", columns='Clk_Round', values="Pts_Start_Round").sort_index(ascending=True) #debug
-
-	# 	dfbidactivityratio = round((dfbidactivity/dfbidactivityRd1.values),2)
-
-
-	# 	hovertext = []
-	# 	for yi,yy in enumerate(dfbidactivity.index):
-	# 		hovertext.append([])
-
-	# 		for xi,xx in enumerate(dfbidactivity.columns):
-
-	# 			pointsinplay = dfbidactivity.loc[yy,xx]
-	# 			pointsratio = dfbidactivityratio.loc[yy,xx]
-
-
-	# 			hovertext[-1].append(
-	# 					    'Bidder: {}\
-	# 					    <br>Round No: {}\
-	# 					    <br>Points in Play : {} Nos\
-	# 					    <br>Ratio (Actual/Initial) : {}'
-					
-
-	# 				     .format( 
-	# 					    yy,
-	# 					    xx,
-	# 					    pointsinplay,
-	# 					    pointsratio,
-	# 					    )
-	# 					    )
-
-	# 	return hovertext
-
-
-#---------------Hovertest for Points Lost Ends---------------------
-
-
-
 
 			if optiontype == "Points Lost":
 
@@ -2987,10 +2975,7 @@ if authentication_status:
 
 				dfbidactivityperc = round((dfbidactivity/dfbidactivityRd1.values)*100,1) # % of points lost with respect to the initial awarded
 
-				st.write(dfbidactivityperc) #debug
-
 				totalpointslost = totalpointslost.sort_index(ascending=False)
-
 
 				totalpointslostperc.columns = ["Bidder", "% Pts Lost"]
 
@@ -3000,9 +2985,7 @@ if authentication_status:
 
 				figptslostperc = plotlosttotal(totalpointslostperc, "Bidder", "% Pts Lost")
 
-				# showscale = False
-
-				# hovertext = htext_colormatrix_auctiondata_2010_3G_BWA_ProvWinningBid(dfrp, dftemp, pwbtype, round_number) #debug
+				hovertext = htext_auctiondata_2010_3G_BWA_PointsLost(dfbidactivity, dfbidactivityperc)
 
 				data = [go.Heatmap(
 						z=dfbidactivity.values,
@@ -3011,7 +2994,7 @@ if authentication_status:
 						xgap = 0.5,
 						ygap = 1,
 						hoverinfo ='text',
-						# text = hovertext,
+						text = hovertext,
 						colorscale='Jet',
 						# zmin=0.5, zmax=1,
 						showscale=False,
@@ -3063,9 +3046,9 @@ if authentication_status:
 					    yaxis=dict(showgrid=False)
 					)
 
-				# hoverlabel_bgcolor = "#000000" #subdued black
+				hoverlabel_bgcolor = "#000000" #subdued black
 
-				# figauc.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
+				figauc.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 
 
 				tab1,tab2 = st.tabs(["Pts Lost(Actual)", "Pts Lost(Percentage)"]) 
