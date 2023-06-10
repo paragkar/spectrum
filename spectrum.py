@@ -1768,9 +1768,9 @@ if authentication_status:
 		for col in df.columns:
 			lst =[]
 			for value in list(df[col]):
-				st.write(value) #debug
 				if value != 0:
 					lst.append(value)
+			st.write(lst) #debug
 			min_values.append(min(lst))
 
 		mindf = pd.DataFrame(min_values).T
