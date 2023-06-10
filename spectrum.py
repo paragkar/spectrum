@@ -2347,21 +2347,9 @@ if authentication_status:
 
 					figpanindiabids = plotbiddertotal(dftemp)
 
-					showscale = False
-
 					hovertext = htext_colormatrix_auctiondata_2010_3G_BWA_ProvWinningBid(dfrp, dftemp, pwbtype, round_number) #debug
-			
-				if chartoption == "ReservePrice Multiple":
 
-					dftemp1 = dftemp.copy()
-
-					dftemp = round(dftemp/dfrp,1)
-
-					showscale = True
-
-					hovertext = htext_colormatrix_auctiondata_2010_3G_BWA_ProvWinningBid(dfrp, dftemp1, pwbtype, round_number) #debug
-
-				data = [go.Heatmap(
+					data = [go.Heatmap(
 					z=dftemp.values,
 			        y= dftemp.index,
 			        x=dftemp.columns,
@@ -2370,11 +2358,35 @@ if authentication_status:
 					hoverinfo ='text',
 					text = hovertext,
 					colorscale='Hot',
-					showscale=showscale,
+					showscale=False,
 						texttemplate="%{z}", 
 						textfont={"size":10},
 						reversescale=True,
 						)]
+
+			
+				if chartoption == "ReservePrice Multiple":
+
+					dftemp1 = dftemp.copy()
+
+					dftemp = round(dftemp/dfrp,1)
+
+					hovertext = htext_colormatrix_auctiondata_2010_3G_BWA_ProvWinningBid(dfrp, dftemp1, pwbtype, round_number) #debug
+
+					data = [go.Heatmap(
+						z=dftemp.values,
+				        y= dftemp.index,
+				        x=dftemp.columns,
+						xgap = 1,
+						ygap = 1,
+						hoverinfo ='text',
+						text = hovertext,
+						colorscale='Hot',
+						showscale=True,
+							texttemplate="%{z}", 
+							textfont={"size":10},
+							reversescale=True,
+							)]
 					
 
 				figauc = go.Figure(data=data)
