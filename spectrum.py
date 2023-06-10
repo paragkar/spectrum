@@ -1909,7 +1909,7 @@ if authentication_status:
 		dfbid = dfbid.set_index("LSA").sort_index(ascending = False)
 
 		SubFeature = st.sidebar.selectbox("Select a SubFeature", ["BidsCircleWise","RanksCircleWise", "ProvWinningBid", "BlocksSelected",
-										  "ProvAllocBLKStart","ProvAllocBLKEnd","BiddingActivity", "DemandActivity"])
+										  "BlocksAllocProvStart","ProvAllocBLKEnd","BiddingActivity", "DemandActivity"])
 
 		if SubFeature == "BidsCircleWise":
 
@@ -2512,7 +2512,7 @@ if authentication_status:
 
 			dfbidblksec = dfbidblksec[filt]
 
-			dftemp = dfbidblksec.groupby(["LSA", "Bidder", "PWB_End_ClkRd"]).sum().reset_index()
+			dftemp = dfbidblksec.groupby(["LSA", "Bidder", "No_of_BLK_Selected"]).sum().reset_index()
 
 			dftemp = dftemp.pivot(index="Bidder", columns='LSA', values="No_of_BLK_Selected").sort_index(ascending=False).round(0)
 
@@ -2546,6 +2546,77 @@ if authentication_status:
 		        	))
 
 			title = titlesubpart+" - Number of Blocks Selected in Round No -"+str(round_number)
+			subtitle = "Unit - Numbers; Block Size = "+ str(blocksize) +" MHz; Source - DoT"
+
+			style = "<style>h3 {text-align: left;}</style>"
+			with st.container():
+				#plotting the main chart
+				st.markdown(style, unsafe_allow_html=True)
+				st.header(title)
+				st.markdown(subtitle)
+
+
+			#Drawning a black border around the heatmap chart 
+			figauc.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
+			figauc.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
+
+			figauc.update_layout(
+				    xaxis=dict(showgrid=False),
+				    yaxis=dict(showgrid=False)
+				)
+
+			# hoverlabel_bgcolor = "#000000" #subdued black
+
+			# figauc.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
+
+			
+			st.plotly_chart(figauc, use_container_width=True)
+
+
+		if SubFeature == "BlocksAllocProvStart":
+
+			round_number = st.slider("Select Auction Round Numbers using the Silder below", min_value=1, max_value=totalrounds, step=1, value = totalrounds)
+
+			dfbidblksec = dfbid.copy()
+
+			filt  =(dfbidblksec["Clk_Round"] == round_number) 
+
+			dfbidblksec = dfbidblksec[filt]
+
+			dftemp = dfbidblksec.groupby(["LSA", "Bidder", "Prov_Alloc_BLK_Start_ClkRd"]).sum().reset_index()
+
+			dftemp = dftemp.pivot(index="Bidder", columns='LSA', values="Prov_Alloc_BLK_Start_ClkRd").sort_index(ascending=False).round(0)
+
+
+			data = [go.Heatmap(
+					z=dftemp.values,
+			        y= dftemp.index,
+			        x=dftemp.columns,
+					xgap = 1,
+					ygap = 1,
+					hoverinfo ='text',
+					# text = hovertext,
+					zmin = zmin_blk_sec, 
+					zmax = zmax_blk_sec, 
+					colorscale='Hot',
+					# showscale=showscale,
+						texttemplate="%{z}", 
+						textfont={"size":10},
+						reversescale=True,
+						)]
+					
+
+			figauc = go.Figure(data=data)
+
+			figauc.update_layout(
+			    template="seaborn",
+			    xaxis_side= 'top',
+			   	height = 650,
+			   	yaxis=dict(
+		        tickmode='array',
+		        	))
+
+			title = titlesubpart+" - Number of Blocks Provisionally Allocated in the Start of Round No -"+str(round_number)
 			subtitle = "Unit - Numbers; Block Size = "+ str(blocksize) +" MHz; Source - DoT"
 
 			style = "<style>h3 {text-align: left;}</style>"
