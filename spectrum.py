@@ -2334,7 +2334,8 @@ if authentication_status:
 
 				dftemp = dftemp.groupby(["LSA", "Bidder", "PWB_Start_ClkRd"]).sum().reset_index()
 
-				dfblocksalloc_rdend = dfbidpwb.pivot(index="Bidder", columns='LSA', values="Prov_Alloc_BLK_End_ClkRd").sort_index(ascending=False).round(0) #debug
+				dfblocksalloc_rdend = dfbidpwb.reset_index().pivot(index="Bidder", columns='LSA', values="Prov_Alloc_BLK_End_ClkRd")
+															.sort_index(ascending=False).round(0) #debug
 
 				st.write(dfblocksalloc_rdend) #debug
 
