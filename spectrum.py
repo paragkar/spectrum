@@ -1761,7 +1761,7 @@ if authentication_status:
 
 	def plotlosttotal(df,ydim,xdim):
 
-		fig = px.bar(df, y =ydim, x=xdim, orientation ='h', height = 625)
+		fig = px.bar(df, y =ydim, x=xdim, orientation ='h', height = 600)
 
 		fig.update_layout(xaxis=dict(title='Row Total'), yaxis=dict(title=''))
 
