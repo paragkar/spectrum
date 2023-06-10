@@ -1854,7 +1854,7 @@ if authentication_status:
 			mainsheet = "2010_3G"
 			activitysheet = "2010_3G_Activity"
 			demandsheet = "2010_3G_AD"
-			titlesubpart = "3G 2100 MHz Auctions (CY-2010)"
+			titlesubpart = "2100 MHz Auctions (CY-2010)"
 			xdtick =10
 			zmin=1 
 			zmax=5
@@ -1871,7 +1871,7 @@ if authentication_status:
 			mainsheet = "2010_BWA"
 			activitysheet = "2010_BWA_Activity"
 			demandsheet = "2010_BWA_AD"
-			titlesubpart = "BWA 2300 MHz Auctions (CY-2010)"
+			titlesubpart = "2300 MHz Auctions (CY-2010)"
 			xdtick =10
 			zmin=1
 			zmax=3
@@ -1888,7 +1888,7 @@ if authentication_status:
 			mainsheet = "2012_2G_1800"
 			activitysheet = "2012_2G_1800_Activity"
 			demandsheet = "2012_2G_1800_AD"
-			titlesubpart = "2G 1800 MHz Auctions (CY-2012)"
+			titlesubpart = "1800 MHz Auctions (CY-2012)"
 			xdtick =1
 			zmin=1
 			zmax=3
