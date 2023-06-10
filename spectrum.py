@@ -1761,11 +1761,11 @@ if authentication_status:
 
 	def plotlosttotal(df,ydim,xdim):
 
-		fig = px.bar(panindiabids, y = ydim, x=xdim, orientation ='h', height = 625)
+		fig = px.bar(df, y = ydim, x=xdim, orientation ='h', height = 625)
 
 		fig.update_layout(xaxis=dict(title='Row Total'), yaxis=dict(title=''))
 
-		fig.update_traces(text=panindiabids['Total Pts Lost'], textposition='auto')
+		fig.update_traces(text=df['Total Pts Lost'], textposition='auto')
 
 		fig.update_xaxes(tickvals=[])
 
