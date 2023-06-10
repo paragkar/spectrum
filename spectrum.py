@@ -2343,7 +2343,7 @@ if authentication_status:
 
 				if chartoption == "Absolute Values":
 
-					totalvalueofbids = dftemp*(dfblocksalloc_rdend.values) #debug
+					totalvalueofbids = dftemp*dfblocksalloc_rdend #debug
 
 					st.write(totalvalueofbids) #debug
 
