@@ -2928,7 +2928,7 @@ if authentication_status:
 
 				totalpointslost = dfbidactivity.sum(axis=1).reset_index() #debug
 
-				totalpointslost.columns = ["Bidder", "TotalLostPoints"]
+				totalpointslost.columns = ["Bidder", "Total Pts Lost"]
 
 				totalpointslost = totalpointslost.set_index("Bidder").sort_index(ascending=True)
 
@@ -2942,7 +2942,7 @@ if authentication_status:
 
 				totalpointslost = totalpointslost.reset_index()
 
-				figptslostabs = plotlosttotal(totalpointslost, "Bidder", "TotalLostPoints")
+				figptslostabs = plotlosttotal(totalpointslost, "Bidder", "Total Pts Lost")
 
 				figptslostperc = plotlosttotal(totalpointslostperc, "Bidder", "% of Pts Lost")
 
