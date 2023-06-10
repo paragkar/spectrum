@@ -2937,7 +2937,7 @@ if authentication_status:
 
 				st.write(dfbidactivityRd1)
 
-				totalpointslostperc = totalpointslost/dfbidactivityRd1.values
+				totalpointslostperc = round((totalpointslost/dfbidactivityRd1.values)*100,1)
 
 				st.write(totalpointslostperc)
 
