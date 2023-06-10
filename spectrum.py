@@ -2912,7 +2912,7 @@ if authentication_status:
 						showscale=True,
 							# texttemplate="%{z}", 
 							# textfont={"size":10},
-							reversescale=True,
+							# reversescale=True,
 							)]
 						
 
