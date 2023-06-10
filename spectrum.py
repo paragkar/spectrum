@@ -2938,6 +2938,8 @@ if authentication_status:
 
 				st.write(totalpointslost) #debug
 
+				st.write(totalpointslostperc) #debug
+
 				totalpointslostperc.columns = ["Bidder", "% of Pts Lost"]
 
 				totalpointslost = totalpointslost.reset_index()
