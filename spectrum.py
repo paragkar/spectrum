@@ -2417,11 +2417,10 @@ if authentication_status:
 			dfbid.columns = ["Clk_Round", "Bidder", "Pts_Start_Round", "Activity_Factor", "Activity_Requirement",
 							"Actual_Activity","Activity_at_PWB","Activity_NewBids","Point_Carry_Forward", "Points_Lost"] #debug
 
-			st.write(dfbid) #debug
 
 			dfbidactivity = dfbid.copy()
 
-			optiontype = st.sidebar.radio('Click an Option', ["Total Pts in Play", "Pts in PWB Circles", "Pts in New Circles", "Activity Factor"])
+			optiontype = st.sidebar.radio('Click an Option', ["Total Pts in Play", "Pts in PWB Circles", "Pts in New Circles", "Activity Factor","Points Lost"])
 
 			if optiontype == "Total Pts in Play":
 
@@ -2868,6 +2867,78 @@ if authentication_status:
 				)
 
 				title = titlesubpart+" (Year-2010) - Activity Factor Announced by the Auctioneer"
+				subtitle = "Unit - Nos; Source - DoT; Xaxis - Round Numbers"
+
+				style = "<style>h3 {text-align: left;}</style>"
+				with st.container():
+					#plotting the main chart
+					st.markdown(style, unsafe_allow_html=True)
+					st.header(title)
+					st.markdown(subtitle)
+
+
+				#Drawning a black border around the heatmap chart 
+				figauc.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
+				figauc.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
+
+				figauc.update_layout(
+					    xaxis=dict(showgrid=False),
+					    yaxis=dict(showgrid=False)
+					)
+
+				# hoverlabel_bgcolor = "#000000" #subdued black
+
+				# figauc.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
+
+			
+				st.plotly_chart(figauc, use_container_width=True)
+
+
+			if optiontype == "Points Lost":
+
+
+				dfbidactivity = dfbidactivity.pivot(index="Bidder", columns='Clk_Round', values="Points_Lost").sort_index(ascending=True)
+
+				data = [go.Heatmap(
+						z=dfbidactivity.values,
+				        y= dfbidactivity.index,
+				        x=dfbidactivity.columns,
+						xgap = 0.5,
+						ygap = 1,
+						hoverinfo ='text',
+						# text = hovertext,
+						colorscale='Hot',
+						zmin=0.5, zmax=1,
+						showscale=True,
+							# texttemplate="%{z}", 
+							# textfont={"size":10},
+							reversescale=True,
+							)]
+						
+
+				figauc = go.Figure(data=data)
+
+				figauc.update_layout(uniformtext_minsize=12, 
+				  uniformtext_mode='hide', 
+				  xaxis_title=None, 
+				  yaxis_title=None, 
+				  yaxis_autorange='reversed',
+				  font=dict(size=12),
+				  template='simple_white',
+				  paper_bgcolor=None,
+				  height=600, 
+				  width=1200,
+				  margin=dict(t=80, b=50, l=50, r=50, pad=0),
+				  yaxis=dict(
+		        	  tickmode='array'),
+				  xaxis = dict(
+				  side = 'top',
+				  tickmode = 'linear',
+				  tickangle=0,
+				  dtick = 10), 
+				)
+
+				title = titlesubpart+" (Year-2010) - Points Lost in Various Rounds During the Auction"
 				subtitle = "Unit - Nos; Source - DoT; Xaxis - Round Numbers"
 
 				style = "<style>h3 {text-align: left;}</style>"
