@@ -1983,7 +1983,7 @@ if authentication_status:
 				chart = summarychart(summarydf, 'LSA', "TotalBids")
 				SummaryFlag = True
 
-				subsubtitle=""
+				titlesubpart2 = "Total Aggregrated Bids in the Selected Rounds"
 
 
 				data = [go.Heatmap(
@@ -2017,7 +2017,7 @@ if authentication_status:
 				chart = summarychart(summarydf, 'LSA', "TotalBids")
 				SummaryFlag = True
 
-				subsubtitle=""
+				titlesubpart2 = "Percentage of Total Aggregrated Bids in the Selected Rounds"
 
 
 				data = [go.Heatmap(
@@ -2054,11 +2054,8 @@ if authentication_status:
 
 				# dftempheat = dftemp.pivot(index="Bidder", columns='LSA', values="Bid_Decision")
 
-				subsubtitle = "Provisional Winners are at the end of Round Number - "+str(end_round)
 
-
-
-			# dftempheat = dftempheat.sort_values(selected_lsa[0], ascending = True)
+				titlesubpart2 = "Provisional Winners in the End of the Selected Rounds"
 
 
 				data = [go.Heatmap(
@@ -2089,8 +2086,8 @@ if authentication_status:
 		        showgrid=False,
 		        	))
 
-			title = titlesubpart+" - Total Number of Bids in Circles "+"("+radio_selection+")"
-			subtitle = "Source - DoT; Between Round Nos "+str(start_round)+" & "+str(end_round)+ "; Number of Rounds = "+ str(end_round-start_round)+"; "+subsubtitle
+			title = titlesubpart+titlesubpart2
+			subtitle = "Source - DoT; Between Round Nos "+str(start_round)+" & "+str(end_round)+ "; Number of Rounds = "+ str(end_round-start_round)
 
 			style = "<style>h3 {text-align: left;}</style>"
 			with st.container():
