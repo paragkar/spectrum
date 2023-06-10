@@ -2503,7 +2503,7 @@ if authentication_status:
 
 			dfbidblksec = dfbidblksec[filt]
 
-			dftemp = dftemp.groupby(["LSA", "Bidder", "PWB_End_ClkRd"]).sum().reset_index()
+			dftemp = dfbidblksec.groupby(["LSA", "Bidder", "PWB_End_ClkRd"]).sum().reset_index()
 
 			dftemp = dftemp.pivot(index="Bidder", columns='LSA', values="No_of_BLK_Selected").sort_index(ascending=False).round(0)
 
