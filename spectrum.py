@@ -3332,7 +3332,7 @@ if authentication_status:
 
 				dfbidaBlksSale = dfbid.pivot(index="LSA", columns='Clock Round', values="Blocks For Sale").sort_index(ascending=True) #debug
 
-				ADPrecOfBlksforSale = round((dfbidaAD/dfbidaBlksSale.values)*100,1) #debug
+				ADPrecOfBlksforSale = round((dfbidaAD/dfbidaBlksSale.values),1) #debug
 
 
 				st.write(ADPrecOfBlksforSale) #debug
