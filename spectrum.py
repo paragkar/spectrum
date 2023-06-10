@@ -2433,9 +2433,9 @@ if authentication_status:
 
 				dfbidpwb = dfbidpwb[filt]
 
-				dftemp = dfbidpwb.drop(columns=["Rank_PWB_End_ClkRd","PWB_Start_ClkRd","Possible_Raise_Bid_ClkRd", "Rank_PWB_Start_ClkRd","Bid_Decision","Clk_Round", "PWB_Start_ClkRd"], axis=1).reset_index()
+				# dftemp = dfbidpwb.drop(columns=["Rank_PWB_End_ClkRd","PWB_Start_ClkRd","Possible_Raise_Bid_ClkRd", "Rank_PWB_Start_ClkRd","Bid_Decision","Clk_Round", "PWB_Start_ClkRd"], axis=1).reset_index()
 
-				dftemp = dftemp.groupby(["LSA", "Bidder", "PWB_End_ClkRd"]).sum().reset_index()
+				# dftemp = dftemp.groupby(["LSA", "Bidder", "PWB_End_ClkRd"]).sum().reset_index()
 
 				dftemp = dftemp.pivot(index="Bidder", columns='LSA', values="PWB_End_ClkRd").sort_index(ascending=False).round(0)
 
