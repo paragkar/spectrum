@@ -2535,7 +2535,7 @@ if authentication_status:
 		        	))
 
 			title = titlesubpart+" - Number of Blocks Selected  - "+str(round_number)
-			subtitle = "Unit - Rs Cr; Source - DoT"
+			subtitle = "Unit - Numbers; Source - DoT"
 
 			style = "<style>h3 {text-align: left;}</style>"
 			with st.container():
