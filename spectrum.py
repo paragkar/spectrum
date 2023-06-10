@@ -2916,6 +2916,57 @@ if authentication_status:
 				st.plotly_chart(figauc, use_container_width=True)
 
 
+#---------------Hovertest for Points Lost---------------------
+
+	@st.cache_resource
+	def htext_auctiondata_2010_3G_BWA_PointsLost(dfbid, column_name):
+
+		filt = dfbid["Clk_Round"]==1
+
+		dfbidRD1 = dfbid[filt]
+
+		dfbidactivity = dfbid.pivot(index="Bidder", columns='Clk_Round', values=column_name).sort_index(ascending=True)
+
+		# dfbidactivityRd1 = dfbidRD1.pivot(index="Bidder", columns='Clk_Round', values="Actual_Activity").sort_index(ascending=True) #debug
+
+		dfbidactivityRd1 = dfbidRD1.pivot(index="Bidder", columns='Clk_Round', values="Pts_Start_Round").sort_index(ascending=True) #debug
+
+		dfbidactivityratio = round((dfbidactivity/dfbidactivityRd1.values),2)
+
+
+		hovertext = []
+		for yi,yy in enumerate(dfbidactivity.index):
+			hovertext.append([])
+
+			for xi,xx in enumerate(dfbidactivity.columns):
+
+				pointsinplay = dfbidactivity.loc[yy,xx]
+				pointsratio = dfbidactivityratio.loc[yy,xx]
+
+
+				hovertext[-1].append(
+						    'Bidder: {}\
+						    <br>Round No: {}\
+						    <br>Points in Play : {} Nos\
+						    <br>Ratio (Actual/Initial) : {}'
+					
+
+					     .format( 
+						    yy,
+						    xx,
+						    pointsinplay,
+						    pointsratio,
+						    )
+						    )
+
+		return hovertext
+
+
+#---------------Hovertest for Points Lost Ends---------------------
+
+
+
+
 			if optiontype == "Points Lost":
 
 				filt = dfbidactivity["Clk_Round"]==1 #debug
@@ -2934,6 +2985,9 @@ if authentication_status:
 
 				totalpointslostperc = round((totalpointslost/dfbidactivityRd1.values)*100,1).sort_index(ascending=False).reset_index()
 
+				dfbidactivityperc = round((dfbidactivity/dfbidactivityRd1.values)*100,1) # % of points lost with respect to the initial awarded
+
+				st.write(dfbidactivityperc) #debug
 
 				totalpointslost = totalpointslost.sort_index(ascending=False)
 
