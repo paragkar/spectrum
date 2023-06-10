@@ -1769,13 +1769,13 @@ if authentication_status:
 		min_values=[]
 		for col in df.columns:
 			lst =[]
-			if len(list(df[col])) > 0:
+			if sum(list(df[col])) > 0:
 				for value in list(df[col]):
 					st.write(value)
 					if value != 0:
 						lst.append(value)
 				min_values.append(min(lst))
-			if len(list(df[col]))==0:
+			if sum(list(df[col])) == 0:
 				min_values.append(np.nan)
 
 		mindf = pd.DataFrame(min_values).T
