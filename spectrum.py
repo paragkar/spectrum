@@ -2896,14 +2896,16 @@ if authentication_status:
 
 			if optiontype == "Points Lost":
 
+				filt = dfbidactivity["Clk_Round"]==1 #debug
+
+				dfbidactivityRd1 = dfbidactivity[filt] #debug
+
+
+				dfbidactivityRd1 = dfbidactivityRd1.pivot(index="Bidder", columns='Clk_Round', values="Pts_Start_Round").sort_index(ascending=True) #debug
 
 				dfbidactivity = dfbidactivity.pivot(index="Bidder", columns='Clk_Round', values="Points_Lost").sort_index(ascending=True)
 
-				startofroundpts = dfbidactivity.pivot(index="Bidder", columns='Clk_Round', values="Pts_Start_Round").sort_index(ascending=True) #debug
-
-				startofroundptsrd1 = startofroundpts[startofroundpts["Clk_Round"]==1] #debug
-
-				st.write(startofroundptsrd1) #debug
+				st.write(dfbidactivityRd1) #debug
 
 				summarydf = dfbidactivity.sum(axis=1) #debug
 
