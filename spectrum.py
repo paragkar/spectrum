@@ -2899,6 +2899,12 @@ if authentication_status:
 
 				dfbidactivity = dfbidactivity.pivot(index="Bidder", columns='Clk_Round', values="Points_Lost").sort_index(ascending=True)
 
+				startofroundpts = dfbidactivity.pivot(index="Bidder", columns='Clk_Round', values="Pts_Start_Round").sort_index(ascending=True) #debug
+
+				startofroundptsrd1 = startofroundpts[startofroundpts["Clk_Round"]==1] #debug
+
+				st.write(startofroundptsrd1) #debug
+
 				summarydf = dfbidactivity.sum(axis=1) #debug
 
 				st.write(summarydf) #debug
