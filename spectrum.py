@@ -1000,7 +1000,7 @@ if authentication_status:
 
 				totalbidsagg = dftempheatabs.loc[yy,xx]
 				totalbissperc = dftempheatperc.loc[yy,xx]
-				totalblksrdend = dfprovallcblks_endrd.loc[yy,xx]
+				totalblksrdend = round(dfprovallcblks_endrd.loc[yy,xx],0)
 
 	
 				finalrank = dfbidcirclwiselastrd.loc[yy,xx]
@@ -1024,7 +1024,7 @@ if authentication_status:
 						    <br>Total Bids: {} % of Total\
 						    <br>Prov Result : {}\
 						    <br>Final Rank: {}\
-						    <br>Blks Alloc: {} Rd End'
+						    <br>BLKs Alloc: {} RdEnd'
 
 					     .format( 
 						    yy,
