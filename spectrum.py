@@ -1905,7 +1905,7 @@ if authentication_status:
 
 			zmax=3
 
-			zmin_af = 0
+			zmin_af = 0.7
 
 			zmax_af = 1
 
