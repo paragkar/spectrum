@@ -2899,6 +2899,14 @@ if authentication_status:
 
 				dfbidactivity = dfbidactivity.pivot(index="Bidder", columns='Clk_Round', values="Points_Lost").sort_index(ascending=True)
 
+				summarydf = dfbidactivity.sum(axis=1) #debug
+
+				st.write(summarydf) #debug
+
+				# showscale = False
+
+				# hovertext = htext_colormatrix_auctiondata_2010_3G_BWA_ProvWinningBid(dfrp, dftemp, pwbtype, round_number) #debug
+
 				data = [go.Heatmap(
 						z=dfbidactivity.values,
 				        y= dfbidactivity.index,
