@@ -2537,7 +2537,7 @@ if authentication_status:
 		        tickmode='array',
 		        	))
 
-			title = titlesubpart+" - Number of Blocks Selected  - "+str(round_number)
+			title = titlesubpart+" - Number of Blocks Selected in Round No -"+str(round_number)
 			subtitle = "Unit - Numbers; Block Size = "+ str(blocksize) +" MHz; Source - DoT"
 
 			style = "<style>h3 {text-align: left;}</style>"
