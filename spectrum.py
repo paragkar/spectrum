@@ -2900,16 +2900,13 @@ if authentication_status:
 
 				dfbidactivityRd1 = dfbidactivity[filt] #debug
 
-
 				dfbidactivityRd1 = dfbidactivityRd1.pivot(index="Bidder", columns='Clk_Round', values="Pts_Start_Round").sort_index(ascending=True) #debug
 
 				dfbidactivity = dfbidactivity.pivot(index="Bidder", columns='Clk_Round', values="Points_Lost").sort_index(ascending=True)
 
-				st.write(dfbidactivityRd1) #debug
-
 				summarydf = dfbidactivity.sum(axis=1) #debug
 
-				st.write(summarydf) #debug
+				figpanindiabids = plotbiddertotal(summarydf) #debug
 
 				# showscale = False
 
@@ -2980,6 +2977,16 @@ if authentication_status:
 
 			
 				st.plotly_chart(figauc, use_container_width=True)
+
+
+				# if chartoption == "Absolute Values":
+				# 	col1,col2 = st.columns([8,1]) #create collumns of uneven width
+				# 	col1.plotly_chart(figauc, use_container_width=True)
+				# 	col2.header("")
+				# 	col2.plotly_chart(figpanindiabids, use_container_width=True)
+
+				# if chartoption =="ReservePrice Multiple":
+				# 	st.plotly_chart(figauc, use_container_width=True)
 
 
 		if SubFeature == "DemandActivity":
