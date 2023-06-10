@@ -2932,17 +2932,13 @@ if authentication_status:
 
 				totalpointslost = totalpointslost.set_index("Bidder")
 
-
-				st.write(totalpointslost)
-
-				st.write(dfbidactivityRd1)
-
 				totalpointslostperc = round((totalpointslost/dfbidactivityRd1.values)*100,1)
 
-				st.write(totalpointslostperc)
+				totalpointslostperc.columns = ["Bidder", "% of Pts Lost"]
 
+				figptslostabs = plotlosttotal(totalpointslost, "Bidder", "TotalLostPoints")
 
-				# figptslost = plotlosttotal(totalpointslost, "Bidder", "TotalLostPoints")
+				figptslostperc = plotlosttotal(totalpointslostperc, "Bidder", "% of Pts Lost")
 
 				# showscale = False
 
@@ -3015,14 +3011,14 @@ if authentication_status:
 				st.plotly_chart(figauc, use_container_width=True)
 
 
-				# if chartoption == "Absolute Values":
-				# 	col1,col2 = st.columns([8,1]) #create collumns of uneven width
-				# 	col1.plotly_chart(figauc, use_container_width=True)
-				# 	col2.header("")
-				# 	col2.plotly_chart(figpanindiabids, use_container_width=True)
+				if chartoption == "Absolute Values":
+					col1,col2 = st.columns([8,1]) #create collumns of uneven width
+					col1.plotly_chart(figauc, use_container_width=True)
+					col2.header("")
+					col2.plotly_chart(figpanindiabids, use_container_width=True)
 
-				# if chartoption =="ReservePrice Multiple":
-				# 	st.plotly_chart(figauc, use_container_width=True)
+				if chartoption =="ReservePrice Multiple":
+					st.plotly_chart(figauc, use_container_width=True)
 
 
 		if SubFeature == "DemandActivity":
