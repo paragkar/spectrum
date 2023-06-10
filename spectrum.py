@@ -1782,7 +1782,7 @@ if authentication_status:
 
 		st.write(dfblocks)
 
-		df_final = mindf*dfblocks
+		df_final = dfblocks.mindf.values
 
 		# # Regex pattern to match floating-point numbers
 		# pattern = re.compile(r'^[+-]?((?=.*[1-9])\d*\.\d+|0\.\d*[1-9]\d*)$')
