@@ -1909,7 +1909,7 @@ if authentication_status:
 
 		if SubFeature == "BidsCircleWise":
 
-			round_range = st.slider("Select Auction Round Numbers using the Silder below", value=(1,totalrounds))
+			round_range = st.slider("Select Auction Round Numbers using the Silder below", min_value=1, max_value = totalrounds, value=(1,totalrounds))
 
 			start_round = round_range[0]
 
@@ -2187,7 +2187,7 @@ if authentication_status:
 
 			if plottype == "RanksInRounds":
 
-				round_range = st.slider("Select Auction Round Numbers using the Silder below", value=(1,totalrounds))
+				round_range = st.slider("Select Auction Round Numbers using the Silder below", min_value = 0, max_value = totalrounds, value=(1,totalrounds))
 
 				start_round = round_range[0]
 
