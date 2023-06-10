@@ -2985,7 +2985,7 @@ if authentication_status:
 					    yaxis=dict(showgrid=False)
 					)
 
-				title = titlesubpart+" - Points in Play in Circles where the Bidder was a PWB"
+				title = titlesubpart+" - Points in Play in LSAs where the Bidder was a PWB"
 				subtitle = "Unit - Nos; Source - DoT; Xaxis - Round Numbers"
 
 				style = "<style>h3 {text-align: left;}</style>"
@@ -3118,7 +3118,7 @@ if authentication_status:
 					)
 
 
-				title = titlesubpart+" - Points in Play for making New Bids"
+				title = titlesubpart+" - Points used for making New Bids"
 				subtitle = "Unit - Nos; Source - DoT; Xaxis - Round Numbers"
 
 				style = "<style>h3 {text-align: left;}</style>"
