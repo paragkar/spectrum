@@ -1023,8 +1023,8 @@ if authentication_status:
 						    <br>Total Bids: {} Nos\
 						    <br>Total Bids: {} % of Total\
 						    <br>Prov Result : {}\
-						    <br>Final Rank: {}\
-						    <br>Prov BLKs: {} RdEnd'
+						    <br>Prov Rank: {}\
+						    <br>Prov BLKs: {}'
 
 					     .format( 
 						    yy,
