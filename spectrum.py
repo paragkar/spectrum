@@ -1763,18 +1763,17 @@ if authentication_status:
 
 		# df = dftemp.copy()
 
-		st.write(df) #debug
-
 		df = df.replace(np.nan, 0)
 		min_values=[]
 		for col in df.columns:
 			lst =[]
-			for value in list(df[col]):
-				if value != 0:
-					lst.append(value)
-			st.write(lst) #debug
-			min_values.append(min(lst))
-
+			if len(list(df[col]))>0:
+				for value in list(df[col]):
+					if value != 0:
+						lst.append(value)
+					min_values.append(min(lst))
+			if len(list(df[col]))=0:
+					min_values.append(np.nan)
 		mindf = pd.DataFrame(min_values).T
 		mindf.columns = df.columns
 
