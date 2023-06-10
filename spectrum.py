@@ -1840,23 +1840,23 @@ if authentication_status:
 
 	if selected_dimension == "Auction Data":
 
-		@st.cache_resource
-		def loadauctionbiddata():
+		# @st.cache_resource
+		# def loadauctionbiddata():
 
-			password = st.secrets["db_password"]
+		# 	password = st.secrets["db_password"]
 
-			excel_content = io.BytesIO()
+		# 	excel_content = io.BytesIO()
 
-			with open("auctionbiddata.xlsx", 'rb') as f:
-				excel = msoffcrypto.OfficeFile(f)
-				excel.load_key(password)
-				excel.decrypt(excel_content)
+		# 	with open("auctionbiddata.xlsx", 'rb') as f:
+		# 		excel = msoffcrypto.OfficeFile(f)
+		# 		excel.load_key(password)
+		# 		excel.decrypt(excel_content)
 
-			xl = pd.ExcelFile(excel_content)
-			sheet = xl.sheet_names
-			df = pd.read_excel(excel_content, sheet_name=sheet)
+		# 	xl = pd.ExcelFile(excel_content)
+		# 	sheet = xl.sheet_names
+		# 	df = pd.read_excel(excel_content, sheet_name=sheet)
 
-			return df
+		# 	return df
 
 		Feature = st.sidebar.selectbox("Select a Feature", ["2010-Band2100","2010-Band2300"])
 
