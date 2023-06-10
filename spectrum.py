@@ -2934,11 +2934,9 @@ if authentication_status:
 
 				totalpointslostperc = round((totalpointslost/dfbidactivityRd1.values)*100,1).sort_index(ascending=False).reset_index()
 
-				st.write(dfbidactivityRd1) #debug
 
 				totalpointslost = totalpointslost.sort_index(ascending=False)
 
-				st.write(totalpointslostperc) #debug
 
 				totalpointslostperc.columns = ["Bidder", "% of Pts Lost"]
 
