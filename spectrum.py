@@ -2074,6 +2074,8 @@ if authentication_status:
 					]
 			
 
+			#Ploting the heatmap for all the above three options
+
 			figauc = go.Figure(data=data)
 
 
@@ -2331,6 +2333,10 @@ if authentication_status:
 												"Bid_Decision","Clk_Round", "PWB_End_ClkRd"], axis=1).reset_index()
 
 				dftemp = dftemp.groupby(["LSA", "Bidder", "PWB_Start_ClkRd"]).sum().reset_index()
+
+				dfblocksalloc_rdend = dfbidpwb.groupby(["LSA", "Bidder", "ProvAllocBLKEnd"]).reset_index() #debug
+
+				st.write(dfblocksalloc_rdend) #debug
 
 				dftemp = dftemp.pivot(index="Bidder", columns='LSA', values="PWB_Start_ClkRd").sort_index(ascending=False).round(0)
 
