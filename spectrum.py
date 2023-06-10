@@ -2538,7 +2538,7 @@ if authentication_status:
 		        	))
 
 			title = titlesubpart+" - Number of Blocks Selected  - "+str(round_number)
-			subtitle = "Unit - Numbers; Block Size = ", str(blocksize) +" MHz; Source - DoT"
+			subtitle = "Unit - Numbers; Block Size = "+ str(blocksize) +" MHz; Source - DoT"
 
 			style = "<style>h3 {text-align: left;}</style>"
 			with st.container():
