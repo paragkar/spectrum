@@ -1923,7 +1923,7 @@ if authentication_status:
 
 			dfbidcirclwise = dfbid.copy()
 
-			dfbidcirclwise_endrd = dfbidcirclwise[dfbidcirclwise["Clk_Round"]==end_round] #debug
+			dfbidcirclwise_endrd = dfbidcirclwise[dfbidcirclwise["Clk_Round"]==end_round].reset_index() #debug
 
 			dfprovallcblks_endrd = dfbidcirclwise_endrd.pivot(index="Bidder", columns='LSA', values="Prov_Alloc_BLK_End_ClkRd") #debug
 
