@@ -1875,7 +1875,7 @@ if authentication_status:
 
 			zmax=3
 
-		if Feature == "2010-Band1800":
+		if Feature == "2012-Band1800":
 
 			totalrounds = 14
 
