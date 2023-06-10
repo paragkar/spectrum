@@ -2329,10 +2329,10 @@ if authentication_status:
 
 				dfbidpwb = dfbidpwb[filt]
 
-				dftemp = dfbidpwb.drop(columns=["Rank_PWB_End_ClkRd","Possible_Raise_Bid_ClkRd", "Rank_PWB_Start_ClkRd",
-												"Bid_Decision","Clk_Round", "PWB_End_ClkRd"], axis=1).reset_index()
+				# dftemp = dfbidpwb.drop(columns=["Rank_PWB_End_ClkRd","Possible_Raise_Bid_ClkRd", "Rank_PWB_Start_ClkRd",
+				# 								"Bid_Decision","Clk_Round", "PWB_End_ClkRd"], axis=1).reset_index()
 
-				dftemp = dftemp.groupby(["LSA", "Bidder", "PWB_Start_ClkRd"]).sum().reset_index()
+				# dftemp = dftemp.groupby(["LSA", "Bidder", "PWB_Start_ClkRd"]).sum().reset_index()
 
 				dfblocksalloc_rdend = dfbidpwb.reset_index().pivot(index="Bidder", columns='LSA', values="Prov_Alloc_BLK_End_ClkRd")\
 															.sort_index(ascending=False).round(0) #debug
@@ -2342,10 +2342,6 @@ if authentication_status:
 				chartoption = st.sidebar.radio('Click an Option', ["Absolute Values", "ReservePrice Multiple"])
 
 				if chartoption == "Absolute Values":
-
-					dftempprocesss = bidvalue(dftemp) #debug
-
-					st.write(dftempprocesss)
 
 					# dftemp = dftemp*dfblocksalloc_rdend #total value of bids for all allocated slots
 
