@@ -971,7 +971,7 @@ if authentication_status:
 #processing hovertext for auction data 
 
 	@st.cache_resource
-	def htext_colormatrix_auctiondata_2010_3G_BWA_BidsCircleWise(dfbidcirclwise, dftemp, selected_lsa,end_round):
+	def htext_colormatrix_auctiondata_2010_3G_BWA_BidsCircleWise(dfbidcirclwise, dftemp, selected_lsa,end_round,dfprovallcblks_endrd):
 
 		filt_last_round = (dfbidcirclwise["Clk_Round"] == end_round)
 
@@ -1000,6 +1000,7 @@ if authentication_status:
 
 				totalbidsagg = dftempheatabs.loc[yy,xx]
 				totalbissperc = dftempheatperc.loc[yy,xx]
+				totalblksrdend = dfprovallcblks_endrd.loc[yy,xx]
 
 	
 				finalrank = dfbidcirclwiselastrd.loc[yy,xx]
@@ -1022,7 +1023,8 @@ if authentication_status:
 						    <br>Total Bids: {} Nos\
 						    <br>Total Bids: {} % of Total\
 						    <br>Prov Result : {}\
-						    <br>Final Rank: {}'
+						    <br>Final Rank: {}\
+						    <br>Blks Alloc: {} Rd End'
 
 					     .format( 
 						    yy,
@@ -1031,6 +1033,7 @@ if authentication_status:
 						    totalbissperc,
 						    result,
 						    finalrank,
+						    totalblksrdend,
 						    )
 						    )
 
@@ -1927,7 +1930,6 @@ if authentication_status:
 
 			dfprovallcblks_endrd = dfbidcirclwise_endrd.pivot(index="Bidder", columns='LSA', values="Prov_Alloc_BLK_End_ClkRd") #debug
 
-			st.write(dfprovallcblks_endrd) #debug
 
 			#filter data within the block of selected rounds 
 
@@ -1960,7 +1962,7 @@ if authentication_status:
 			# dftempheat = dftempheat.sort_values(selected_lsa[0], ascending = True)
 
 			#processing hovertext and colormatrix
-			hovertext,colormatrix,resultdf = htext_colormatrix_auctiondata_2010_3G_BWA_BidsCircleWise(dfbidcirclwise, dftemp,selected_lsa[0],end_round)
+			hovertext,colormatrix,resultdf = htext_colormatrix_auctiondata_2010_3G_BWA_BidsCircleWise(dfbidcirclwise, dftemp,selected_lsa[0],end_round,dfprovallcblks_endrd)
 			hoverlabel_bgcolor = colormatrix
 
 
