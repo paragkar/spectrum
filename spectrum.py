@@ -1024,7 +1024,7 @@ if authentication_status:
 						    <br>Total Bids: {} % of Total\
 						    <br>Prov Result : {}\
 						    <br>Final Rank: {}\
-						    <br>BLKs Alloc: {} RdEnd'
+						    <br>Final BLKs: {} Alloc RdEnd'
 
 					     .format( 
 						    yy,
@@ -1962,7 +1962,8 @@ if authentication_status:
 			# dftempheat = dftempheat.sort_values(selected_lsa[0], ascending = True)
 
 			#processing hovertext and colormatrix
-			hovertext,colormatrix,resultdf = htext_colormatrix_auctiondata_2010_3G_BWA_BidsCircleWise(dfbidcirclwise, dftemp,selected_lsa[0],end_round,dfprovallcblks_endrd)
+			hovertext,colormatrix,resultdf = htext_colormatrix_auctiondata_2010_3G_BWA_BidsCircleWise(dfbidcirclwise, 
+												dftemp,selected_lsa[0],end_round,dfprovallcblks_endrd)
 			hoverlabel_bgcolor = colormatrix
 
 
