@@ -1761,7 +1761,7 @@ if authentication_status:
 
 	def bidvalue(df):
 
-		df = dftemp.copy()
+		# df = dftemp.copy()
 		df = df.replace(np.nan, 0)
 		min_values=[]
 		for col in df.columns:
