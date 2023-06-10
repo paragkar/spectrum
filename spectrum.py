@@ -3020,7 +3020,7 @@ if authentication_status:
 					with col1:
 						st.plotly_chart(figauc, use_container_width=True)
 					with col2:
-						# st.header("")
+						st.markdown("")
 						st.plotly_chart(figptslostabs, use_container_width=True)
 
 				with tab2:
@@ -3028,7 +3028,7 @@ if authentication_status:
 					with col1:
 						st.plotly_chart(figauc, use_container_width=True)
 					with col2:
-						# st.header("")
+						st.markdown("")
 						st.plotly_chart(figptslostperc, use_container_width=True)
 
 
