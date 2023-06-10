@@ -2939,7 +2939,7 @@ if authentication_status:
 				)
 
 				title = titlesubpart+" (Year-2010) - Points Lost in Various Rounds During the Auction"
-				subtitle = "Unit - Nos; Source - DoT; Xaxis - Round Numbers"
+				subtitle = "Unit - Nos; Source - DoT; Xaxis - Round Numbers; Points are lost due to Bidder's inability to confirm to the Activity Factor"
 
 				style = "<style>h3 {text-align: left;}</style>"
 				with st.container():
