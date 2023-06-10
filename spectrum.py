@@ -2668,7 +2668,7 @@ if authentication_status:
 						text = hovertext,
 						colorscale='Hot',
 						showscale=True,
-							# texttemplate="%{z}", 
+							texttemplate=texttemplatebidactivity, 
 							# textfont={"size":10},
 							reversescale=True,
 							)]
@@ -2683,7 +2683,7 @@ if authentication_status:
 						text = hovertext,
 						colorscale='Hot',
 						showscale=True,
-							# texttemplate="%{z}", 
+							texttemplate=texttemplatebidactivity, 
 							# textfont={"size":10},
 							reversescale=True,
 							)]
@@ -2800,7 +2800,7 @@ if authentication_status:
 						text = hovertext,
 						colorscale='Hot',
 						showscale=True,
-							# texttemplate="%{z}", 
+							texttemplate=texttemplatebidactivity, 
 							# textfont={"size":10},
 							reversescale=True,
 							)]
@@ -2815,7 +2815,7 @@ if authentication_status:
 						text = hovertext,
 						colorscale='Hot',
 						showscale=True,
-							# texttemplate="%{z}", 
+							texttemplate=texttemplatebidactivity, 
 							# textfont={"size":10},
 							reversescale=True,
 							)]
@@ -2921,7 +2921,7 @@ if authentication_status:
 						colorscale='Hot',
 						zmin=zmin_af, zmax=zmax_af,
 						showscale=True,
-							# texttemplate="%{z}", 
+							texttemplate=texttemplatebidactivity, 
 							# textfont={"size":10},
 							reversescale=True,
 							)]
@@ -3021,7 +3021,7 @@ if authentication_status:
 						colorscale='Jet',
 						# zmin=0.5, zmax=1,
 						showscale=False,
-							# texttemplate="%{z}", 
+							texttemplate=texttemplatebidactivity, 
 							# textfont={"size":10},
 							reversescale=True,
 							)]
@@ -3117,7 +3117,7 @@ if authentication_status:
 							colorscale='Hot',
 							# zmin=0.5, zmax=1,
 							showscale=True,
-								# texttemplate="%{z}", 
+								texttemplate=texttemplatebidactivity, 
 								# textfont={"size":10},
 								reversescale=True,
 								)]
@@ -3190,7 +3190,7 @@ if authentication_status:
 							colorscale='Hot',
 							# zmin=0.5, zmax=1,
 							showscale=True,
-								# texttemplate="%{z}", 
+								texttemplate=texttemplatebidactivity, 
 								# textfont={"size":10},
 								reversescale=True,
 								)]
