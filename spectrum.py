@@ -1116,7 +1116,7 @@ if authentication_status:
 						    'Circle: {}\
 						    <br>Round No: {}\
 						    <br>Aggregate Demand : {} Slots\
-						    <br>Aggregate Demand : {} % of TotalBLKs\
+						    <br>Aggregate Demand : {} AD/Sale\
 						    <br>Excess Demand : {} Slots'
 					
 
