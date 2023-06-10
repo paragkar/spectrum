@@ -1782,7 +1782,7 @@ if authentication_status:
 
 		st.write(dfblocks)
 
-		df_final = dfblocks.mindf.values
+		df_final = dfblocks*mindf.values
 
 		st.write(df_final)
 
