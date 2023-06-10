@@ -1000,7 +1000,7 @@ if authentication_status:
 
 				totalbidsagg = dftempheatabs.loc[yy,xx]
 				totalbissperc = dftempheatperc.loc[yy,xx]
-				totalblksrdend = round(dfprovallcblks_endrd.loc[yy,xx],0)
+				totalblksrdend = dfprovallcblks_endrd.loc[yy,xx]
 
 	
 				finalrank = dfbidcirclwiselastrd.loc[yy,xx]
@@ -1929,6 +1929,9 @@ if authentication_status:
 			dfbidcirclwise_endrd = dfbidcirclwise[dfbidcirclwise["Clk_Round"]==end_round].reset_index() #debug
 
 			dfprovallcblks_endrd = dfbidcirclwise_endrd.pivot(index="Bidder", columns='LSA', values="Prov_Alloc_BLK_End_ClkRd") #debug
+
+			for col in dfprovallcblks_endrd.columns:
+				dfprovallcblks_endrd[col] = dfprovallcblks_endrd[col].astype(int)
 
 
 			#filter data within the block of selected rounds 
