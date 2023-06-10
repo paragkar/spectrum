@@ -2363,11 +2363,11 @@ if authentication_status:
 					ygap = 1,
 					hoverinfo ='text',
 					text = hovertext,
-					colorscale='Hot',
+					colorscale='Picnic',
 					showscale=False,
 						texttemplate="%{z}", 
 						textfont={"size":10},
-						reversescale=True,
+						# reversescale=True,
 						)]
 
 			
@@ -2476,11 +2476,11 @@ if authentication_status:
 					ygap = 1,
 					hoverinfo ='text',
 					text = hovertext,
-					colorscale='Hot',
+					colorscale='Picnic',
 					showscale=False,
 						texttemplate="%{z}", 
 						textfont={"size":10},
-						reversescale=True,
+						# reversescale=True,
 						)]
 
 				if chartoption == "ReservePrice Multiple":
