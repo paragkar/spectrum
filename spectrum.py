@@ -1757,6 +1757,28 @@ if authentication_status:
 		return fig
 
 
+#----------New Code Starts----------------------
+
+	def plotlosttotal(df,ydim,xdim):
+
+		fig = px.bar(panindiabids, y = ydim, x=xdim, orientation ='h', height = 625)
+
+		fig.update_layout(xaxis=dict(title='Row Total'), yaxis=dict(title=''))
+
+		fig.update_traces(text=panindiabids['Total Pts Lost'], textposition='auto')
+
+		fig.update_xaxes(tickvals=[])
+
+		fig.update_layout(xaxis=dict(side='top', title_standoff=0, ticklen=0, title_font=dict(size=14)))
+
+		fig.update_layout(xaxis_title_standoff=5)
+
+		fig.update_traces(marker=dict(color='red'))
+
+		return fig
+
+#----------New Code Ends----------------------
+
 
 	if selected_dimension == "Auction Data":
 
@@ -2904,9 +2926,17 @@ if authentication_status:
 
 				dfbidactivity = dfbidactivity.pivot(index="Bidder", columns='Clk_Round', values="Points_Lost").sort_index(ascending=True)
 
-				summarydf = dfbidactivity.sum(axis=1) #debug
+				totalpointslost = dfbidactivity.sum(axis=1).reset_index() #debug
 
-				figpanindiabids = plotbiddertotal(summarydf) #debug
+
+				totalpointslost.columns = ["Bidder", "TotalLostPoints"]
+
+				totalpointslostperc = totalpointslost/dfbidactivityRd1.values
+
+				st.write(totalpointslostperc)
+
+
+				# figptslost = plotlosttotal(totalpointslost, "Bidder", "TotalLostPoints")
 
 				# showscale = False
 
