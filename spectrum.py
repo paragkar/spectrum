@@ -1763,7 +1763,7 @@ if authentication_status:
 
 		fig = px.bar(df, y =ydim, x=xdim, orientation ='h', height = 615)
 
-		fig.update_layout(xaxis=dict(title='Points Lost'), yaxis=dict(title=''))
+		fig.update_layout(xaxis=dict(title=xdim), yaxis=dict(title=''))
 
 		fig.update_traces(text=df[xdim], textposition='auto')
 
