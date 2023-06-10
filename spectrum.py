@@ -2930,13 +2930,16 @@ if authentication_status:
 
 				totalpointslost.columns = ["Bidder", "TotalLostPoints"]
 
+				totalpointslost = totalpointslost.set_index("Bidder")
+
+
 				st.write(totalpointslost)
 
 				st.write(dfbidactivityRd1)
 
-				# totalpointslostperc = totalpointslost/dfbidactivityRd1.values
+				totalpointslostperc = totalpointslost/dfbidactivityRd1.values
 
-				# st.write(totalpointslostperc)
+				st.write(totalpointslostperc)
 
 
 				# figptslost = plotlosttotal(totalpointslost, "Bidder", "TotalLostPoints")
