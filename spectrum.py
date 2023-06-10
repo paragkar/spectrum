@@ -2345,6 +2345,8 @@ if authentication_status:
 
 					# dftemp = dftemp*dfblocksalloc_rdend #total value of bids for all allocated slots
 
+					st.write(dftemp) #debug
+
 					figpanindiabids = plotbiddertotal(dftemp)
 
 					hovertext = htext_colormatrix_auctiondata_2010_3G_BWA_ProvWinningBid(dfrp, dftemp, pwbtype, round_number) #debug
