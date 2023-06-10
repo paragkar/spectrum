@@ -1759,7 +1759,7 @@ if authentication_status:
 #----------------New Auction Bid Data Code Starts Here------------------
 	#function used to calculate the total bid values 
 
-	def bidvalue(df):
+	def bidvalue(df,dfblocks):
 
 		# df = dftemp.copy()
 
@@ -1778,27 +1778,33 @@ if authentication_status:
 		mindf = pd.DataFrame(min_values).T
 		mindf.columns = df.columns
 
-		# Regex pattern to match floating-point numbers
-		pattern = re.compile(r'^[+-]?((?=.*[1-9])\d*\.\d+|0\.\d*[1-9]\d*)$')
+		st.write(mindf)
 
-		# Function to replace floating-point numbers with 1
-		replace_func = lambda x: 1 if re.match(pattern, str(x)) else x
+		st.write(dfblocks)
 
-		# Apply the function to each cell in the DataFrame
-		matrix = df.applymap(replace_func)
+		df_final = mindf*dfblocks
 
-		df_final = matrix * mindf.values
+		# # Regex pattern to match floating-point numbers
+		# pattern = re.compile(r'^[+-]?((?=.*[1-9])\d*\.\d+|0\.\d*[1-9]\d*)$')
 
-		df_final = df_final.sum(axis =1).round(1)
+		# # Function to replace floating-point numbers with 1
+		# replace_func = lambda x: 1 if re.match(pattern, str(x)) else x
+
+		# # Apply the function to each cell in the DataFrame
+		# matrix = df.applymap(replace_func)
+
+		# df_final = matrix * mindf.values
+
+		# df_final = df_final.sum(axis =1).round(1)
 
 		return df_final
 
 
-	def plotbiddertotal(dftemp):
+	def plotbiddertotal(dftemp,dfblocksalloc_rdend):
 
 		dftemp = round(dftemp,1)
 						
-		panindiabids = bidvalue(dftemp).sort_index().reset_index()
+		panindiabids = bidvalue(dftemp,dfblocksalloc_rdend).sort_index().reset_index()
 
 		panindiabids.columns =["Bidder","PanIndiaBid"]
 
@@ -2349,7 +2355,7 @@ if authentication_status:
 
 					# dftemp = dftemp*dfblocksalloc_rdend #total value of bids for all allocated slots
 
-					figpanindiabids = plotbiddertotal(dftemp)
+					figpanindiabids = plotbiddertotal(dftemp,dfblocksalloc_rdend)
 
 					hovertext = htext_colormatrix_auctiondata_2010_3G_BWA_ProvWinningBid(dfrp, dftemp, pwbtype, round_number) #debug
 
@@ -2455,11 +2461,14 @@ if authentication_status:
 
 				dftemp = dfbidpwb.reset_index().pivot(index="Bidder", columns='LSA', values="PWB_End_ClkRd").sort_index(ascending=False).round(0)
 
+				dfblocksalloc_rdend = dfbidpwb.reset_index().pivot(index="Bidder", columns='LSA', values="Prov_Alloc_BLK_End_ClkRd")\
+															.sort_index(ascending=False).round(0) #debug
+
 				chartoption = st.sidebar.radio('Click an Option', ["Absolute Values", "ReservePrice Multiple"])
 
 				if chartoption == "Absolute Values":
 
-					figpanindiabids = plotbiddertotal(dftemp)
+					figpanindiabids = plotbiddertotal(dftemp,dfblocksalloc_rdend)
 
 					hovertext = htext_colormatrix_auctiondata_2010_3G_BWA_ProvWinningBid(dfrp, dftemp, pwbtype, round_number) #debug
 
