@@ -2959,7 +2959,7 @@ if authentication_status:
 						showscale=False,
 							# texttemplate="%{z}", 
 							# textfont={"size":10},
-							reversescale=True,
+							# reversescale=True,
 							)]
 						
 
