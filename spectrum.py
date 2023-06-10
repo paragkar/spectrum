@@ -1024,7 +1024,7 @@ if authentication_status:
 						    <br>Total Bids: {} % of Total\
 						    <br>Prov Result : {}\
 						    <br>Final Rank: {}\
-						    <br>Final BLKs: {} RdEnd'
+						    <br>Prov BLKs: {} RdEnd'
 
 					     .format( 
 						    yy,
