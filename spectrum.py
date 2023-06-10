@@ -1763,7 +1763,7 @@ if authentication_status:
 
 		fig = px.bar(df, y =ydim, x=xdim, orientation ='h', height = 615)
 
-		fig.update_layout(xaxis=dict(title='Row Total'), yaxis=dict(title=''))
+		fig.update_layout(xaxis=dict(title='Points Lost'), yaxis=dict(title=''))
 
 		fig.update_traces(text=df[xdim], textposition='auto')
 
@@ -3012,9 +3012,6 @@ if authentication_status:
 				# hoverlabel_bgcolor = "#000000" #subdued black
 
 				# figauc.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
-
-			
-				# st.plotly_chart(figauc, use_container_width=True)
 
 
 				tab1,tab2 = st.tabs(["Pts Lost(Actual)", "Pts Lost(Percentage)"]) 
