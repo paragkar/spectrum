@@ -1855,7 +1855,7 @@ if authentication_status:
 			zmax=5
 			zmin_af = 0.5
 			zmax_af = 1
-			texttemplatebidactivity = ""
+			texttempbiddemandactivity = ""
 
 		if Feature == "2010-Band2300":
 
@@ -1869,7 +1869,7 @@ if authentication_status:
 			zmax=3
 			zmin_af = 0.5
 			zmax_af = 1
-			texttemplatebidactivity = ""
+			texttempbiddemandactivity = ""
 
 		if Feature == "2012-Band1800":
 
@@ -1883,7 +1883,7 @@ if authentication_status:
 			zmax=3
 			zmin_af = 0.5
 			zmax_af = 1
-			texttemplatebidactivity = "%{z}"
+			texttempbiddemandactivity = "%{z}"
 
 
 		dfbid = loadauctionbiddata()[mainsheet].replace('-', np.nan, regex = True)
@@ -2533,8 +2533,8 @@ if authentication_status:
 					text = hovertext,
 					colorscale='Hot',
 					showscale=True,
-						texttemplate=texttemplatebidactivity, 
-						# textfont={"size":10},
+						texttemplate=texttempbiddemandactivity, 
+						textfont={"size":10},
 						reversescale=True,
 						)]
 
@@ -2550,8 +2550,8 @@ if authentication_status:
 						text = hovertext,
 						colorscale='Hot',
 						showscale=True,
-							texttemplate=texttemplatebidactivity, 
-							# textfont={"size":10},
+							texttemplate=texttempbiddemandactivity, 
+							textfont={"size":10},
 							reversescale=True,
 							)]
 							
@@ -2668,8 +2668,8 @@ if authentication_status:
 						text = hovertext,
 						colorscale='Hot',
 						showscale=True,
-							texttemplate=texttemplatebidactivity, 
-							# textfont={"size":10},
+							texttemplate=texttempbiddemandactivity, 
+							textfont={"size":10},
 							reversescale=True,
 							)]
 
@@ -2683,8 +2683,8 @@ if authentication_status:
 						text = hovertext,
 						colorscale='Hot',
 						showscale=True,
-							texttemplate=texttemplatebidactivity, 
-							# textfont={"size":10},
+							texttemplate=texttempbiddemandactivity, 
+							textfont={"size":10},
 							reversescale=True,
 							)]
 						
@@ -2800,8 +2800,8 @@ if authentication_status:
 						text = hovertext,
 						colorscale='Hot',
 						showscale=True,
-							texttemplate=texttemplatebidactivity, 
-							# textfont={"size":10},
+							texttemplate=texttempbiddemandactivity, 
+							textfont={"size":10},
 							reversescale=True,
 							)]
 
@@ -2815,8 +2815,8 @@ if authentication_status:
 						text = hovertext,
 						colorscale='Hot',
 						showscale=True,
-							texttemplate=texttemplatebidactivity, 
-							# textfont={"size":10},
+							texttemplate=texttempbiddemandactivity, 
+							textfont={"size":10},
 							reversescale=True,
 							)]
 						
@@ -2921,8 +2921,8 @@ if authentication_status:
 						colorscale='Hot',
 						zmin=zmin_af, zmax=zmax_af,
 						showscale=True,
-							texttemplate=texttemplatebidactivity, 
-							# textfont={"size":10},
+							texttemplate=texttempbiddemandactivity, 
+							textfont={"size":10},
 							reversescale=True,
 							)]
 						
@@ -3021,8 +3021,8 @@ if authentication_status:
 						colorscale='Jet',
 						# zmin=0.5, zmax=1,
 						showscale=False,
-							texttemplate=texttemplatebidactivity, 
-							# textfont={"size":10},
+							texttemplate=texttempbiddemandactivity, 
+							textfont={"size":10},
 							reversescale=True,
 							)]
 						
@@ -3117,8 +3117,8 @@ if authentication_status:
 							colorscale='Hot',
 							# zmin=0.5, zmax=1,
 							showscale=True,
-								texttemplate=texttemplatebidactivity, 
-								# textfont={"size":10},
+								texttemplate=texttempbiddemandactivity, 
+								textfont={"size":10},
 								reversescale=True,
 								)]
 							
@@ -3190,8 +3190,8 @@ if authentication_status:
 							colorscale='Hot',
 							# zmin=0.5, zmax=1,
 							showscale=True,
-								texttemplate=texttemplatebidactivity, 
-								# textfont={"size":10},
+								texttemplate=texttempbiddemandactivity, 
+								textfont={"size":10},
 								reversescale=True,
 								)]
 							
