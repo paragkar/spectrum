@@ -2337,13 +2337,15 @@ if authentication_status:
 				dfblocksalloc_rdend = dfbidpwb.reset_index().pivot(index="Bidder", columns='LSA', values="Prov_Alloc_BLK_End_ClkRd")\
 															.sort_index(ascending=False).round(0) #debug
 
-				st.write(dfblocksalloc_rdend) #debug
-
 				dftemp = dftemp.pivot(index="Bidder", columns='LSA', values="PWB_Start_ClkRd").sort_index(ascending=False).round(0)
 
 				chartoption = st.sidebar.radio('Click an Option', ["Absolute Values", "ReservePrice Multiple"])
 
 				if chartoption == "Absolute Values":
+
+					totalvalueofbids = dftemp*(dfblocksalloc_rdend.values) #debug
+
+					st.write(totalvalueofbids) #debug
 
 					figpanindiabids = plotbiddertotal(dftemp)
 
