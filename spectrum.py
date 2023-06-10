@@ -2173,7 +2173,7 @@ if authentication_status:
 			        tickmode='array',
 			        	))
 
-				title = titlesubpart+" - Bidder's Rank at the End of Clock Round No - "+str(round_number)
+				title = titlesubpart+" - Bidder's Rank at the End of CLK Round No - "+str(round_number)
 				subtitle = "Unit - RankNo; Higher the Rank More Aggressive is the Bidding; Sorted by Circle -"+selected_lsa[0]+" ; Source - DoT"
 
 				style = "<style>h3 {text-align: left;}</style>"
