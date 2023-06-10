@@ -2936,7 +2936,7 @@ if authentication_status:
 
 				st.write(dfbidactivityRd1) #debug
 
-				st.write(totalpointslost) #debug
+				totalpointslost = totalpointslost.set_index(ascending=False)
 
 				st.write(totalpointslostperc) #debug
 
