@@ -2405,7 +2405,7 @@ if authentication_status:
 			        tickmode='array',
 			        	))
 
-				title = titlesubpart+" - PWB Start of Clock Round No - "+str(round_number)
+				title = titlesubpart+" - PWB/Block at the Start of Clock Round No - "+str(round_number)
 				subtitle = "Unit - Rs Cr; Source - DoT; "+ chartoption+" - May be lower for bidders in same circle who did not agree to the higher round price"
 
 				style = "<style>h3 {text-align: left;}</style>"
@@ -2517,7 +2517,7 @@ if authentication_status:
 			        tickmode='array',
 			        	))
 
-				title = titlesubpart+" - PWB End of Clock Round No - "+str(round_number)
+				title = titlesubpart+" - PWB/Block at the End of Clock Round No - "+str(round_number)
 				subtitle = "Unit - Rs Cr; Source - DoT; "+chartoption+" - May be lower for bidders in same circle who did not agree to the higher round price"
 
 				style = "<style>h3 {text-align: left;}</style>"
