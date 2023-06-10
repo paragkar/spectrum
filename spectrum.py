@@ -1763,15 +1763,12 @@ if authentication_status:
 
 		# df = dftemp.copy()
 
-		st.write(df)
-
 		df = df.replace(np.nan, 0)
 		min_values=[]
 		for col in df.columns:
 			lst =[]
 			if sum(list(df[col])) > 0:
 				for value in list(df[col]):
-					st.write(value)
 					if value != 0:
 						lst.append(value)
 				min_values.append(min(lst))
