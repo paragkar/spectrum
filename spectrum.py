@@ -1886,7 +1886,7 @@ if authentication_status:
 			zmin_af = 0.5
 			zmax_af = 1
 			texttempbiddemandactivity = "%{z}"
-			blocksize = 0.25
+			blocksize = 1.25
 
 
 		dfbid = loadauctionbiddata()[mainsheet].replace('-', np.nan, regex = True)
