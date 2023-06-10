@@ -1762,6 +1762,9 @@ if authentication_status:
 	def bidvalue(df):
 
 		# df = dftemp.copy()
+
+		st.write(df) #debug
+
 		df = df.replace(np.nan, 0)
 		min_values=[]
 		for col in df.columns:
@@ -2344,8 +2347,6 @@ if authentication_status:
 				if chartoption == "Absolute Values":
 
 					# dftemp = dftemp*dfblocksalloc_rdend #total value of bids for all allocated slots
-
-					st.write(dftemp) #debug
 
 					figpanindiabids = plotbiddertotal(dftemp)
 
