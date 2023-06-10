@@ -1761,7 +1761,7 @@ if authentication_status:
 
 	def plotlosttotal(df,ydim,xdim):
 
-		fig = px.bar(df, y = ydim, x=xdim, orientation ='h', height = 625)
+		fig = px.bar(df, y =ydim, x=xdim, orientation ='h', height = 625)
 
 		fig.update_layout(xaxis=dict(title='Row Total'), yaxis=dict(title=''))
 
@@ -2936,7 +2936,7 @@ if authentication_status:
 
 				totalpointslostperc.columns = ["Bidder", "% of Pts Lost"]
 
-				totalpointslostperc = totalpointslostperc.set_index("Bidder")
+				totalpointslost = totalpointslost.reset_index()
 
 				figptslostabs = plotlosttotal(totalpointslost, "Bidder", "TotalLostPoints")
 
