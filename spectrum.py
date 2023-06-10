@@ -1857,6 +1857,8 @@ if authentication_status:
 			zmax_af = 1
 			texttempbiddemandactivity = ""
 			blocksize = 5
+			zmin_blk_sec = 0
+			zmax_blk_sec = 1
 
 		if Feature == "2010-Band2300":
 
@@ -1872,6 +1874,8 @@ if authentication_status:
 			zmax_af = 1
 			texttempbiddemandactivity = ""
 			blocksize = 20
+			zmin_blk_sec = 0
+			zmax_blk_sec = 1
 
 		if Feature == "2012-Band1800":
 
@@ -1887,6 +1891,8 @@ if authentication_status:
 			zmax_af = 1
 			texttempbiddemandactivity = "%{z}"
 			blocksize = 1.25
+			zmin_blk_sec = 0
+			zmax_blk_sec = 4
 
 
 		dfbid = loadauctionbiddata()[mainsheet].replace('-', np.nan, regex = True)
@@ -2519,6 +2525,8 @@ if authentication_status:
 					ygap = 1,
 					hoverinfo ='text',
 					# text = hovertext,
+					zmin = zmin_blk_sec, 
+					zmax = zmax_blk_sec, 
 					colorscale='Hot',
 					# showscale=showscale,
 						texttemplate="%{z}", 
