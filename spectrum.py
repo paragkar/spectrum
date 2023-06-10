@@ -1930,9 +1930,6 @@ if authentication_status:
 
 			dfprovallcblks_endrd = dfbidcirclwise_endrd.pivot(index="Bidder", columns='LSA', values="Prov_Alloc_BLK_End_ClkRd") #debug
 
-			for col in dfprovallcblks_endrd.columns:
-				dfprovallcblks_endrd[col] = dfprovallcblks_endrd[col].astype(int)
-
 
 			#filter data within the block of selected rounds 
 
