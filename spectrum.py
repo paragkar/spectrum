@@ -983,11 +983,12 @@ if authentication_status:
 
 		dftempheatperc = dftemp.pivot(index="Bidder", columns='LSA', values="Bid_Decision_Perc")
 
-		st.write(dftempheatperc)
 
 		dftempheatperc = dftempheatperc.sort_values(selected_lsa, ascending = True)
 
 		dftempheatabs = dftemp.pivot(index="Bidder", columns='LSA', values="Bid_Decision")
+
+		st.write(dftempheatabs)
 
 		dftempheatabs = dftempheatabs.sort_values(selected_lsa, ascending = True)
 
