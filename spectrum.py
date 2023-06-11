@@ -2842,8 +2842,11 @@ if authentication_status:
 
 				figsumrows = plotrwototal(sumrows,"Bidders", "Total Slots")
 
+				figsumrows.update_yaxes(visible=False, showticklabels=False)
+
 
 				figsumcols = summarychart(sumcols, "LSA", "Total Slots")
+
 
 
 				data = [go.Heatmap(
