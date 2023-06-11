@@ -1843,6 +1843,28 @@ if authentication_status:
 		return fig
 
 
+	def plotrwototal(sumrows, ydim, xdim):
+						
+
+		fig = px.bar(sumrows, y = ydim, x=xdim, orientation ='h', height = 625)
+
+		fig.update_layout(xaxis=dict(title='India Total'), yaxis=dict(title=''))
+
+		fig.update_traces(text=sumrows[ydim], textposition='auto')
+
+		fig.update_xaxes(tickvals=[])
+
+		fig.update_layout(xaxis=dict(side='top', title_standoff=0, ticklen=0, title_font=dict(size=14)))
+
+		fig.update_layout(xaxis_title_standoff=5)
+
+		fig.update_traces(marker=dict(color='red'))
+
+
+		return fig
+
+
+
 #----------New Code Starts----------------------
 
 	def plotlosttotal(df,ydim,xdim):
@@ -2747,6 +2769,8 @@ if authentication_status:
 
 				figsumcols = summarychart(sumcols, "LSA", "Total Slots")
 
+				figsumrows = plotrwototal(sumrows,"Bidder", "Total Slots")
+
 
 				data = [go.Heatmap(
 						z=dftemp.values,
@@ -2801,12 +2825,11 @@ if authentication_status:
 				# figauc.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 
 				
-				st.plotly_chart(figauc, use_container_width=True)
-
-				#plotting the column sums of all slots
-				col1,col2,col3 = st.columns([0.2,14,1]) #create collumns of uneven width
-				col2.altair_chart(figsumcols, use_container_width=True)
-
+				#plotting all charts 
+				col1,col2 = st.columns([14,1]) #create collumns of uneven width
+				col1.plotly_chart(figauc, use_container_width=True)
+				col1.altair_chart(figsumcols, use_container_width=True)
+				col2.plotly_chart(figsumrows, use_container_width=True)
 
 
 			if blkallocoption == "End of Round":
@@ -2826,6 +2849,9 @@ if authentication_status:
 				sumcols = dftemp.sum(axis=0).reset_index() #degug
 
 				sumcols.columns = ["LSA", "Total Slots"]
+
+
+				figsumrows = plotrwototal(sumrows,"Bidder", "Total Slots")
 
 
 				figsumcols = summarychart(sumcols, "LSA", "Total Slots")
@@ -2884,12 +2910,13 @@ if authentication_status:
 				# figauc.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 
 				
-				st.plotly_chart(figauc, use_container_width=True)
+				# st.plotly_chart(figauc, use_container_width=True)
 
-				#plotting the column sums of all slots
-				col1,col2,col3 = st.columns([0.2,14,1]) #create collumns of uneven width
-				col2.altair_chart(figsumcols, use_container_width=True)
-
+				#plotting all charts 
+				col1,col2 = st.columns([14,1]) #create collumns of uneven width
+				col1.plotly_chart(figauc, use_container_width=True)
+				col1.altair_chart(figsumcols, use_container_width=True)
+				col2.plotly_chart(figsumrows, use_container_width=True)
 
 
 		if SubFeature == "BiddingActivity":
