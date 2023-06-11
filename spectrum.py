@@ -1827,7 +1827,7 @@ if authentication_status:
 
 		mindf = pd.DataFrame(min_values).T
 
-		st.write(mindf) #debug
+		st.write(dfblocks) #debug
 		mindf.columns = df.columns
 
 		df_final = dfblocks*mindf.values #calculating the total value of bids
