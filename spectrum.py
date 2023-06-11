@@ -1931,7 +1931,7 @@ if authentication_status:
 			xdtick =5
 			zmin=1
 			zmax=5
-			zmin_af = 0
+			zmin_af = 0.5
 			zmax_af = 1
 			texttempbiddemandactivity = ""
 			blocksize = 0.2
@@ -1948,7 +1948,7 @@ if authentication_status:
 			xdtick =5
 			zmin=1
 			zmax=5
-			zmin_af = 0
+			zmin_af = 0.5
 			zmax_af = 1
 			texttempbiddemandactivity = ""
 			blocksize = 0.2
