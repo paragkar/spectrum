@@ -983,12 +983,9 @@ if authentication_status:
 
 		dftempheatperc = dftemp.pivot(index="Bidder", columns='LSA', values="Bid_Decision_Perc")
 
-		st.write(dftemp)
-
 		dftempheatperc = dftempheatperc.sort_values(selected_lsa, ascending = True)
 
 		dftempheatabs = dftemp.pivot(index="Bidder", columns='LSA', values="Bid_Decision")
-
 
 		dftempheatabs = dftempheatabs.sort_values(selected_lsa, ascending = True)
 
@@ -2023,6 +2020,10 @@ if authentication_status:
 		dfbid = dfbid.replace("Bid",1)
 
 		listofbidders = sorted(list(set(dfbid["Bidder"])))
+
+		list_of_circles = ssorted(list(set(dfbid["LSA"]))) #debug
+
+		st.write(list_of_circles)
 
 		dfbid = dfbid.set_index("LSA").sort_index(ascending = False)
 
