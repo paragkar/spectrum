@@ -2432,7 +2432,7 @@ if authentication_status:
 			        	))
 
 					figauc.update_layout(
-					    coloraxis_colorbar=dict(
+					    coloraxis=dict(
 					        cmin=0,  # Set the minimum value of the color bar
 					        # zmax=10  # Set the maximum value of the color bar
 					    )
