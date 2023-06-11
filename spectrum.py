@@ -2788,6 +2788,10 @@ if authentication_status:
 
 				dftemp = dftemp.pivot(index="Bidder", columns='LSA', values="Prov_Alloc_BLK_End_ClkRd").sort_index(ascending=False).round(0)
 
+				summarydf = dftemp.sum(axis=1) #debug
+
+				st.write(summarydf) #debug
+
 
 				data = [go.Heatmap(
 						z=dftemp.values,
