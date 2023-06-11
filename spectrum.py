@@ -2405,28 +2405,28 @@ if authentication_status:
 			        tickmode='array',
 			        	))
 
-#-------------New Layout Code for Testing ---------------
-				figauc.update_layout(  
-				    plot_bgcolor="#FFFFFF",
-				    hovermode="x",
-				    hoverdistance=100, # Distance to show hover label of data point
-				    spikedistance=1000, # Distance to show spike
-				    yaxis=dict(
-				        title="time",
-				        linecolor="#BCCCDC",
-				        showspikes=True, # Show spike line for X-axis
-				        # Format spike
-				        spikethickness=1,
-				        spikedash="dot",
-				        spikecolor="#999999",
-				        spikemode="across",
-				    ),
-				    xaxis=dict(
-				        title="price",
-				        linecolor="#BCCCDC"
-				    )
-						)
-#-------------New Layout Code for Testing Ends-----------------
+# #-------------New Layout Code for Testing ---------------
+# 				figauc.update_layout(  
+# 				    plot_bgcolor="#FFFFFF",
+# 				    hovermode="x",
+# 				    hoverdistance=100, # Distance to show hover label of data point
+# 				    spikedistance=1000, # Distance to show spike
+# 				    yaxis=dict(
+# 				        title="time",
+# 				        linecolor="#BCCCDC",
+# 				        showspikes=True, # Show spike line for X-axis
+# 				        # Format spike
+# 				        spikethickness=1,
+# 				        spikedash="dot",
+# 				        spikecolor="#999999",
+# 				        spikemode="across",
+# 				    ),
+# 				    xaxis=dict(
+# 				        title="price",
+# 				        linecolor="#BCCCDC"
+# 				    )
+# 						)
+# #-------------New Layout Code for Testing Ends-----------------
 
 
 				title = titlesubpart+" - PWB/BLK at the Start of Clock Round No - "+str(round_number)
