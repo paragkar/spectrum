@@ -2363,7 +2363,7 @@ if authentication_status:
 					ygap = 1,
 					hoverinfo ='text',
 					text = hovertext,
-					colorscale='Turbo',
+					colorscale='picnic',
 					showscale=False,
 						texttemplate="%{z}", 
 						textfont={"size":10},
@@ -2500,7 +2500,7 @@ if authentication_status:
 					ygap = 1,
 					hoverinfo ='text',
 					text = hovertext,
-					colorscale='reds',
+					colorscale='picnic',
 					showscale=False,
 						texttemplate="%{z}", 
 						textfont={"size":10},
@@ -2523,7 +2523,7 @@ if authentication_status:
 						ygap = 1,
 						hoverinfo ='text',
 						text = hovertext,
-						colorscale='reds',
+						colorscale='picnic',
 						showscale=True,
 							texttemplate="%{z}", 
 							textfont={"size":10},
@@ -2534,7 +2534,7 @@ if authentication_status:
 				figauc = go.Figure(data=data)
 
 				figauc.update_layout(
-				    template="seaborn",
+				    template="plotly",
 				    xaxis_side= 'top',
 				   	height = 650,
 				   	yaxis=dict(
