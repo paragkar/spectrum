@@ -2416,7 +2416,7 @@ if authentication_status:
 				        linecolor="#BCCCDC",
 				        showspikes=True, # Show spike line for X-axis
 				        # Format spike
-				        spikethickness=2,
+				        spikethickness=1,
 				        spikedash="dot",
 				        spikecolor="#999999",
 				        spikemode="across",
