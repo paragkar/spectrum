@@ -2769,7 +2769,7 @@ if authentication_status:
 
 				figsumcols = summarychart(sumcols, "LSA", "Total Slots")
 
-				figsumrows = plotrwototal(sumrows,"Bidder", "Total Slots")
+				figsumrows = plotrwototal(sumrows,"Bidders", "Total Slots")
 
 
 				data = [go.Heatmap(
@@ -2851,7 +2851,7 @@ if authentication_status:
 				sumcols.columns = ["LSA", "Total Slots"]
 
 
-				figsumrows = plotrwototal(sumrows,"Bidder", "Total Slots")
+				figsumrows = plotrwototal(sumrows,"Bidders", "Total Slots")
 
 
 				figsumcols = summarychart(sumcols, "LSA", "Total Slots")
