@@ -1108,6 +1108,8 @@ if authentication_status:
 		
 		colormatrix = list(temp.values)
 
+		st.write(colormatrix) #debug
+
 		return hovertext, colormatrix
 
 #-----------------Hovertext for Provisional Winning Bids Ends----------------------
