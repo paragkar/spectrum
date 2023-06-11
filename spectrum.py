@@ -2398,7 +2398,7 @@ if authentication_status:
 				figauc = go.Figure(data=data)
 
 				figauc.update_layout(
-				    template="simple_white",
+				    template="ggplot2",
 				    xaxis_side= 'top',
 				   	height = 650,
 				   	yaxis=dict(
