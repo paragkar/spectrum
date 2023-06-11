@@ -2367,7 +2367,7 @@ if authentication_status:
 					showscale=False,
 						texttemplate="%{z}", 
 						textfont={"size":10},
-						reversescale=True,
+						# reversescale=True,
 						)]
 
 			
@@ -2391,7 +2391,7 @@ if authentication_status:
 						showscale=True,
 							texttemplate="%{z}", 
 							textfont={"size":10},
-							reversescale=True,
+							# reversescale=True,
 							)]
 					
 
@@ -2504,7 +2504,7 @@ if authentication_status:
 					showscale=False,
 						texttemplate="%{z}", 
 						textfont={"size":10},
-						reversescale=True,
+						# reversescale=True,
 						)]
 
 				if chartoption == "ReservePrice Multiple":
@@ -2527,7 +2527,7 @@ if authentication_status:
 						showscale=True,
 							texttemplate="%{z}", 
 							textfont={"size":10},
-							reversescale=True,
+							# reversescale=True,
 							)]
 					
 
