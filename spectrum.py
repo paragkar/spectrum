@@ -2871,9 +2871,9 @@ if authentication_status:
 				
 				st.plotly_chart(figauc, use_container_width=True)
 
-				# #plotting the column sums of all slots
-				# col1,col2,col3 = st.columns([0.2,14,1]) #create collumns of uneven width
-				# col2.altair_chart(figsumcols, use_container_width=True)
+				#plotting the column sums of all slots
+				col1,col2,col3 = st.columns([0.2,14,1]) #create collumns of uneven width
+				col2.altair_chart(figsumcols, use_container_width=True)
 
 
 
