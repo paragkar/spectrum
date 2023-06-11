@@ -1072,6 +1072,8 @@ if authentication_status:
 				pwb = dftemp.loc[yy,xx]
 				pwbmulofrp = dftemprpmul.loc[yy,xx]
 
+				st.write(pwb) #debug
+
 
 				if pwb  == np.nan:
 					ccode = '#228B22' #(green)
