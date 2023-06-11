@@ -2645,6 +2645,19 @@ if authentication_status:
 			dftemp = dfbidblksec.reset_index().pivot(index="Bidder", columns='LSA', values="No_of_BLK_Selected").sort_index(ascending=False).round(0)
 
 
+			sumrows = dftemp.sum(axis=1).reset_index() #debug
+
+			sumrows.columns = ["Bidders", "Total Slots"]
+
+			sumcols = dftemp.sum(axis=0).reset_index() #degug
+
+			sumcols.columns = ["LSA", "Total Slots"]
+
+
+			figsumcols = summarychart(sumcols, "LSA", "Total Slots")
+
+
+
 			data = [go.Heatmap(
 					z=dftemp.values,
 			        y= dftemp.index,
@@ -2699,6 +2712,11 @@ if authentication_status:
 
 			
 			st.plotly_chart(figauc, use_container_width=True)
+
+			#plotting the column sums of all slots
+			col1,col2,col3 = st.columns([0.2,14,1]) #create collumns of uneven width
+			col2.altair_chart(figsumcols, use_container_width=True)
+
 
 
 		if SubFeature == "BlocksAllocated":
