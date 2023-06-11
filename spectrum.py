@@ -2021,9 +2021,7 @@ if authentication_status:
 
 		listofbidders = sorted(list(set(dfbid["Bidder"])))
 
-		list_of_circles = sorted(list(set(dfbid["LSA"]))) #debug
-
-		st.write(list_of_circles)
+		listofcircles = sorted(list(set(dfbid["LSA"]))) #debug
 
 		dfbid = dfbid.set_index("LSA").sort_index(ascending = False)
 
@@ -2067,9 +2065,17 @@ if authentication_status:
 
 			dftemp = dftemp.reset_index()
 
-			# #sort by LSA 
+			# #sort by LSA
 
-			sortbylsa = st.sidebar.selectbox("Select a Circle to Sort", state_dict.values())
+			circle_list=[]
+
+			for circle in listofcircles: #this extracts the full name of the circle from the code
+				circle_list.append(state_dict[circle])
+
+
+			# sortbylsa = st.sidebar.selectbox("Select a Circle to Sort", state_dict.values())
+
+			sortbylsa = st.sidebar.selectbox("Select a Circle to Sort", circle_list)
 
 			selected_lsa = [k for k, v in state_dict.items() if v == sortbylsa]
 
