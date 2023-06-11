@@ -2757,6 +2757,8 @@ if authentication_status:
 
 				figsumrows = plotrwototal(sumrows,"Bidders", "Total Slots")
 
+				figsumrows.update_yaxes(visible=False, showticklabels=False)
+
 
 				data = [go.Heatmap(
 						z=dftemp.values,
