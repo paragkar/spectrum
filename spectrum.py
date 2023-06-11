@@ -1866,7 +1866,7 @@ if authentication_status:
 
 		fig = px.bar(df, y =ydim, x=xdim, orientation ='h', height = 615)
 
-		fig.update_layout(xaxis=dict(title=""), yaxis=dict(title=''))
+		fig.update_layout(xaxis=dict(title=ydim), yaxis=dict(title=''))
 
 		fig.update_traces(text=df[xdim], textposition='auto')
 
