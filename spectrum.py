@@ -1075,7 +1075,7 @@ if authentication_status:
 				st.write(pwb) #debug
 
 
-				if pwb  == np.nan:
+				if text(pwb)  == "nan":
 					ccode = '#228B22' #(green)
 					# ccode = '#808080' #(grey)
 				else:
