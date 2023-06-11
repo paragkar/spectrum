@@ -2826,7 +2826,7 @@ if authentication_status:
 
 				
 				#plotting all charts 
-				col1,col2 = st.columns([14,1]) #create collumns of uneven width
+				col1,col2 = st.columns([10,1]) #create collumns of uneven width
 				col1.plotly_chart(figauc, use_container_width=True)
 				col1.altair_chart(figsumcols, use_container_width=True)
 				col2.plotly_chart(figsumrows, use_container_width=True)
@@ -2913,7 +2913,7 @@ if authentication_status:
 				# st.plotly_chart(figauc, use_container_width=True)
 
 				#plotting all charts 
-				col1,col2 = st.columns([14,1]) #create collumns of uneven width
+				col1,col2 = st.columns([10,1]) #create collumns of uneven width
 				col1.plotly_chart(figauc, use_container_width=True)
 				col1.altair_chart(figsumcols, use_container_width=True)
 				col2.plotly_chart(figsumrows, use_container_width=True)
