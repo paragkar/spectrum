@@ -973,6 +973,8 @@ if authentication_status:
 	@st.cache_resource
 	def htext_colormatrix_auctiondata_2010_3G_BWA_BidsCircleWise(dfbidcirclwise, dftemp, selected_lsa,start_round,end_round,dfprovallcblks_endrd):
 
+		st.write(dfbidcirclwise) #debug
+
 		filt_last_round = (dfbidcirclwise["Clk_Round"] == end_round)
 
 		dfbidcirclwiselastrd = dfbidcirclwise[filt_last_round].drop(columns = ["Clk_Round","PWB_Start_ClkRd","Rank_PWB_Start_ClkRd",
@@ -987,8 +989,6 @@ if authentication_status:
 		dftempheatabs = dftemp.pivot(index="Bidder", columns='LSA', values="Bid_Decision")
 
 		dftempheatabs = dftempheatabs.sort_values(selected_lsa, ascending = True)
-
-		st.write(dftempheatabs) #debug
 
 
 		hovertext = []
