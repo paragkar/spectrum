@@ -2788,13 +2788,16 @@ if authentication_status:
 
 				dftemp = dftemp.pivot(index="Bidder", columns='LSA', values="Prov_Alloc_BLK_End_ClkRd").sort_index(ascending=False).round(0)
 
-				sumrows = dftemp.sum(axis=1) #debug
+				sumrows = dftemp.sum(axis=1).reset_index() #debug
 
-				sumcols = dftemp.sum(axis=0) #degug
+				sumrows.columns = ["Bidders", "Total Slots"]
 
-				st.write(sumrows*blocksize) #debug
+				sumcols = dftemp.sum(axis=0).reset_index() #degug
 
-				st.write(sumcols*blocksize) #debug
+				sumcols.columns = ["LSA", "Total Slots"]
+
+
+				figsumcols = summarychart(sumcols, "LSA", "Total Slots")
 
 
 				data = [go.Heatmap(
@@ -2851,6 +2854,12 @@ if authentication_status:
 
 				
 				st.plotly_chart(figauc, use_container_width=True)
+
+				#plotting the final summary chart 
+				col1,col2,col3 = st.columns([0.2,14,1]) #create collumns of uneven width
+				if SummaryFlag ==True:
+					# st.altair_chart(chart, use_container_width=True)
+					col2.altair_chart(figsumcols, use_container_width=True)
 
 
 
