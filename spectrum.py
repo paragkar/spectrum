@@ -998,17 +998,14 @@ if authentication_status:
 			list_result=[]
 			for xi,xx in enumerate(dftempheatabs.columns):
 
-				try:
-					totalbidsagg = dftempheatabs.loc[yy,xx]
+				totalbidsagg = dftempheatabs.loc[yy,xx]
 
-					totalbissperc = dftempheatperc.loc[yy,xx]
+				totalbissperc = dftempheatperc.loc[yy,xx]
 
-					totalblksrdend = dfprovallcblks_endrd.loc[yy,xx]
-	
-					finalrank = dfbidcirclwiselastrd.loc[yy,xx]
-				except:
-					pass
+				totalblksrdend = dfprovallcblks_endrd.loc[yy,xx]
 
+				finalrank = dfbidcirclwiselastrd.loc[yy,xx]
+		
 			
 				if finalrank in [1,2,3,4]:
 					result = "WON"
