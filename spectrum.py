@@ -1241,9 +1241,6 @@ if authentication_status:
 #---------------Hovertest for Points Lost Ends---------------------
 
 
-
-
-
 	#preparing color scale for hoverbox for Spectrum and Expiry maps
 	@st.cache_resource
 	def colscale_hbox_spectrum_expiry_maps(operators, colcodes):
@@ -1771,8 +1768,6 @@ if authentication_status:
 			hoverlabel_bgcolor = transform_colscale_for_hbox_auction_map(dff,reserveprice,auctionprice)
 
 
-
-
 #----------------New Auction Bid Data Code Starts Here------------------
 	#function used to calculate the total bid values 
 
@@ -1871,7 +1866,7 @@ if authentication_status:
 
 		fig = px.bar(df, y =ydim, x=xdim, orientation ='h', height = 615)
 
-		fig.update_layout(xaxis=dict(title=xdim), yaxis=dict(title=''))
+		fig.update_layout(xaxis=dict(title=""), yaxis=dict(title=''))
 
 		fig.update_traces(text=df[xdim], textposition='auto')
 
@@ -2064,7 +2059,6 @@ if authentication_status:
 
 				titlesubpart2 = " - % of Total Agg Bids (Within Selected Rounds)"
 
-
 				data = [go.Heatmap(
 					z=dftempheat.values,
 			        x=dftempheat.columns,
@@ -2118,11 +2112,9 @@ if authentication_status:
 						),
 					]
 			
-
 			#Ploting the heatmap for all the above three options
 
 			figauc = go.Figure(data=data)
-
 
 			figauc.update_layout(
 			    template="seaborn",
@@ -2209,7 +2201,6 @@ if authentication_status:
 						# reversescale=True,
 						)]
 					
-
 				figauc = go.Figure(data=data)
 
 				figauc.update_layout(
@@ -2521,7 +2512,6 @@ if authentication_status:
 					st.plotly_chart(figauc, use_container_width=True)
 
 
-
 			if pwbtype == "End CLK Round":
 
 				round_number = st.slider("Select Auction Round Numbers using the Silder below", min_value=1, max_value=totalrounds, step=1, value = totalrounds)
@@ -2572,8 +2562,7 @@ if authentication_status:
 				   	height = 650,
 				   	yaxis=dict(
 			        tickmode='array',
-			        	))
-					
+			        	))				
 
 				if chartoption == "ReservePrice Multiple":
 
@@ -2614,8 +2603,7 @@ if authentication_status:
 					        # zmax=10  # Set the maximum value of the color bar
 					    )
 					)
-					
-
+	
 
 				title = titlesubpart+" - PWB/BLK at the End of Clock Round No - "+str(round_number)
 				subtitle = "Unit - Rs Cr; Source - DoT; "+chartoption+" - May be lower for bidders in same circle who did not agree to the higher round price"
@@ -2651,7 +2639,6 @@ if authentication_status:
 					st.plotly_chart(figauc, use_container_width=True)
 
 
-
 		if SubFeature == "BlocksSelected":
 
 			round_number = st.slider("Select Auction Round Numbers using the Silder below", min_value=1, max_value=totalrounds, step=1, value = totalrounds)
@@ -2677,7 +2664,6 @@ if authentication_status:
 
 
 			figsumcols = summarychart(sumcols, "LSA", "Total Slots")
-
 
 
 			data = [go.Heatmap(
