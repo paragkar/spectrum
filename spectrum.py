@@ -1066,7 +1066,7 @@ if authentication_status:
 		dict_col={}
 		for yi,yy in enumerate(dftemp.index):
 			hovertext.append([])
-
+			list_col=[]
 			for xi,xx in enumerate(dftemp.columns):
 
 				pwb = dftemp.loc[yy,xx]
