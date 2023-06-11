@@ -1063,6 +1063,7 @@ if authentication_status:
 		dftemprpmul = round(dftemp/dfrp,1)
 
 		hovertext = []
+		dict_col={}
 		for yi,yy in enumerate(dftemp.index):
 			hovertext.append([])
 
@@ -1070,6 +1071,14 @@ if authentication_status:
 
 				pwb = dftemp.loc[yy,xx]
 				pwbmulofrp = dftemprpmul.loc[yy,xx]
+
+
+				if pwb  == np.nan:
+					ccode = '#808080' #(grey)
+				else:
+					ccode = '#228B22' #(red)
+
+				list_col.append(ccode)
 
 
 				hovertext[-1].append(
@@ -1090,7 +1099,16 @@ if authentication_status:
 						    )
 						    )
 
-		return hovertext
+		dict_col[yy]=list_col
+
+		temp = pd.DataFrame(dict_col).T
+
+
+		temp.columns = dftemp.columns
+		
+		colormatrix = list(temp.values)
+
+		return hovertext, colormatrix
 
 #-----------------Hovertext for Provisional Winning Bids Ends----------------------
 
@@ -2353,7 +2371,7 @@ if authentication_status:
 
 					figpanindiabids = plotbiddertotal(dftemp,dfblocksalloc_rdend)
 
-					hovertext = htext_colormatrix_auctiondata_2010_3G_BWA_ProvWinningBid(dfrp, dftemp, pwbtype, round_number) #debug
+					hovertext, colormatrix = htext_colormatrix_auctiondata_2010_3G_BWA_ProvWinningBid(dfrp, dftemp, pwbtype, round_number) #debug
 
 					data = [go.Heatmap(
 					z=dftemp.values,
@@ -2377,7 +2395,7 @@ if authentication_status:
 
 					dftemp = round(dftemp/dfrp,1)
 
-					hovertext = htext_colormatrix_auctiondata_2010_3G_BWA_ProvWinningBid(dfrp, dftemp1, pwbtype, round_number) #debug
+					hovertext, colormatrix = htext_colormatrix_auctiondata_2010_3G_BWA_ProvWinningBid(dfrp, dftemp1, pwbtype, round_number) #debug
 
 					data = [go.Heatmap(
 						z=dftemp.values,
@@ -2490,7 +2508,7 @@ if authentication_status:
 
 					figpanindiabids = plotbiddertotal(dftemp,dfblocksalloc_rdend)
 
-					hovertext = htext_colormatrix_auctiondata_2010_3G_BWA_ProvWinningBid(dfrp, dftemp, pwbtype, round_number) #debug
+					hovertext, colormatrix = htext_colormatrix_auctiondata_2010_3G_BWA_ProvWinningBid(dfrp, dftemp, pwbtype, round_number) #debug
 
 					data = [go.Heatmap(
 					z=dftemp.values,
@@ -2513,7 +2531,7 @@ if authentication_status:
 
 					dftemp = round(dftemp/dfrp,1)
 
-					hovertext = htext_colormatrix_auctiondata_2010_3G_BWA_ProvWinningBid(dfrp, dftemp1, pwbtype, round_number) #debug
+					hovertext, colormatrix = htext_colormatrix_auctiondata_2010_3G_BWA_ProvWinningBid(dfrp, dftemp1, pwbtype, round_number) #debug
 
 					data = [go.Heatmap(
 						z=dftemp.values,
@@ -2561,7 +2579,7 @@ if authentication_status:
 					    yaxis=dict(showgrid=False)
 					)
 
-				hoverlabel_bgcolor = "#000000" #subdued black
+				hoverlabel_bgcolor = colormatrix
 
 				figauc.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 
