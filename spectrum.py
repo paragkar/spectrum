@@ -1073,7 +1073,7 @@ if authentication_status:
 				pwbmulofrp = dftemprpmul.loc[yy,xx]
 
 
-				if pwb  == 0:
+				if pwb  == np.nan:
 					ccode = '#808080' #(grey)
 				else:
 					ccode = '#228B22' #(red)
@@ -1107,8 +1107,6 @@ if authentication_status:
 		temp.columns = dftemp.columns
 		
 		colormatrix = list(temp.values)
-
-		st.write(colormatrix) #debug
 
 		return hovertext, colormatrix
 
