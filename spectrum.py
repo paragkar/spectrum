@@ -2715,7 +2715,6 @@ if authentication_status:
 
 				dfbidblksec = dfbidblksec[filt]
 
-				# dftemp = dfbidblksec.groupby(["LSA", "Bidder", "Prov_Alloc_BLK_Start_ClkRd"]).sum().reset_index()
 
 				dftemp = dfbidblksec.reset_index().pivot(index="Bidder", columns='LSA', values="Prov_Alloc_BLK_Start_ClkRd").sort_index(ascending=False).round(0)
 
@@ -2799,8 +2798,6 @@ if authentication_status:
 				filt  =(dfbidblksec["Clk_Round"] == round_number) 
 
 				dfbidblksec = dfbidblksec[filt]
-
-				# dftemp = dfbidblksec.groupby(["LSA", "Bidder", "Prov_Alloc_BLK_End_ClkRd"]).sum().reset_index()
 
 				dftemp = dfbidblksec.reset_index().pivot(index="Bidder", columns='LSA', values="Prov_Alloc_BLK_End_ClkRd").sort_index(ascending=False).round(0)
 
@@ -2896,8 +2893,6 @@ if authentication_status:
 				dfbidactivityRd1 = dfbidactivity[filt]
 
 				dfbidactivity = dfbidactivity.pivot(index="Bidder", columns='Clk_Round', values="Actual_Activity").sort_index(ascending=True)
-
-				# dfbidactivityRd1 = dfbidactivityRd1.pivot(index="Bidder", columns='Clk_Round', values="Actual_Activity").sort_index(ascending=True)
 
 				dfbidactivityRd1 = dfbidactivityRd1.pivot(index="Bidder", columns='Clk_Round', values="Pts_Start_Round").sort_index(ascending=True) #debug
 
