@@ -2468,7 +2468,7 @@ if authentication_status:
 					     
 								)
 
-				hoverlabel_bgcolor = "#000000" #subdued black
+				hoverlabel_bgcolor = colormatrix
 
 				figauc.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 
