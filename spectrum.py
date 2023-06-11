@@ -2411,7 +2411,7 @@ if authentication_status:
 				    hovermode="x",
 				    hoverdistance=100, # Distance to show hover label of data point
 				    spikedistance=1000, # Distance to show spike
-				    xaxis=dict(
+				    yaxis=dict(
 				        title="time",
 				        linecolor="#BCCCDC",
 				        showspikes=True, # Show spike line for X-axis
@@ -2421,7 +2421,7 @@ if authentication_status:
 				        spikecolor="#999999",
 				        spikemode="across",
 				    ),
-				    yaxis=dict(
+				    xaxis=dict(
 				        title="price",
 				        linecolor="#BCCCDC"
 				    )
