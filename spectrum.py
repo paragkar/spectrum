@@ -1241,6 +1241,42 @@ if authentication_status:
 #---------------Hovertest for Points Lost Ends---------------------
 
 
+#---------------Hovertest for BlocksAllocatedStart Starts---------------------
+
+	@st.cache_resource
+	def htext_auctiondata_2010_3G_BWA_BlocksAllocatedStart(dftemp):
+
+
+		hovertext = []
+		for yi,yy in enumerate(dftemp.index):
+			hovertext.append([])
+
+			for xi,xx in enumerate(dftemp.columns):
+
+				blocksalloc = dftemp.loc[yy,xx]
+				spectrumMHz = (dftemp.loc[yy,xx])*blocksize
+
+
+				hovertext[-1].append(
+						    'Bidder: {}\
+						    <br>Circle: {}\
+						    <br>BLKs Allocated : {} Nos\
+						    <br>Spectrum : {} MHz'
+					
+					     .format( 
+						    yy,
+						    xx,
+						    blocksalloc,
+						    spectrumMHz,
+						    )
+						    )
+
+		return hovertext
+
+
+#---------------Hovertest for BlocksAllocatedStart Ends---------------------
+
+
 	#preparing color scale for hoverbox for Spectrum and Expiry maps
 	@st.cache_resource
 	def colscale_hbox_spectrum_expiry_maps(operators, colcodes):
@@ -1858,8 +1894,6 @@ if authentication_status:
 
 		return fig
 
-
-
 #----------New Code Starts----------------------
 
 	def plotlosttotal(df,ydim,xdim):
@@ -2453,8 +2487,6 @@ if authentication_status:
 					    )
 					)
 					
-
-
 # #-------------New Layout Code for Testing ---------------
 # 				figauc.update_layout(  
 # 				    plot_bgcolor="#FFFFFF",
@@ -2763,6 +2795,7 @@ if authentication_status:
 
 				figsumrows.update_yaxes(visible=False, showticklabels=False)
 
+				hovertext = htext_auctiondata_2010_3G_BWA_BlocksAllocatedStart(dftemp)
 
 				data = [go.Heatmap(
 						z=dftemp.values,
@@ -2771,7 +2804,7 @@ if authentication_status:
 						xgap = 1,
 						ygap = 1,
 						hoverinfo ='text',
-						# text = hovertext,
+						text = hovertext,
 						zmin = zmin_blk_sec, 
 						zmax = zmax_blk_sec, 
 						colorscale='Hot',
@@ -2812,9 +2845,9 @@ if authentication_status:
 					    yaxis=dict(showgrid=False)
 					)
 
-				# hoverlabel_bgcolor = "#000000" #subdued black
+				hoverlabel_bgcolor = "#000000" #subdued black
 
-				# figauc.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
+				figauc.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 
 				
 				#plotting all charts 
