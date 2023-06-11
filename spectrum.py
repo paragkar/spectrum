@@ -2503,7 +2503,7 @@ if authentication_status:
 					hoverinfo ='text',
 					text = hovertext,
 					colorscale='picnic',
-					zmin = -10
+					zmin = -10,
 					showscale=False,
 						texttemplate="%{z}", 
 						textfont={"size":10},
