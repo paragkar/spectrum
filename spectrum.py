@@ -1241,10 +1241,10 @@ if authentication_status:
 #---------------Hovertest for Points Lost Ends---------------------
 
 
-#---------------Hovertest for BlocksAllocatedStart Starts---------------------
+#---------------Hovertest for BlocksAllocated Starts---------------------
 
 	@st.cache_resource
-	def htext_auctiondata_2010_3G_BWA_BlocksAllocatedStart(dftemp):
+	def htext_auctiondata_2010_3G_BWA_BlocksAllocated(dftemp):
 
 
 		hovertext = []
@@ -1274,7 +1274,7 @@ if authentication_status:
 		return hovertext
 
 
-#---------------Hovertest for BlocksAllocatedStart Ends---------------------
+#---------------Hovertest for BlocksAllocated Ends---------------------
 
 
 	#preparing color scale for hoverbox for Spectrum and Expiry maps
@@ -2795,7 +2795,7 @@ if authentication_status:
 
 				figsumrows.update_yaxes(visible=False, showticklabels=False)
 
-				hovertext = htext_auctiondata_2010_3G_BWA_BlocksAllocatedStart(dftemp)
+				hovertext = htext_auctiondata_2010_3G_BWA_BlocksAllocated(dftemp)
 
 				data = [go.Heatmap(
 						z=dftemp.values,
@@ -2884,7 +2884,7 @@ if authentication_status:
 
 				figsumcols = summarychart(sumcols, "LSA", "Total Slots")
 
-
+				hovertext = htext_auctiondata_2010_3G_BWA_BlocksAllocated(dftemp)
 
 				data = [go.Heatmap(
 						z=dftemp.values,
@@ -2893,7 +2893,7 @@ if authentication_status:
 						xgap = 1,
 						ygap = 1,
 						hoverinfo ='text',
-						# text = hovertext,
+						text = hovertext,
 						zmin = zmin_blk_sec, 
 						zmax = zmax_blk_sec, 
 						colorscale='Hot',
@@ -2934,12 +2934,10 @@ if authentication_status:
 					    yaxis=dict(showgrid=False)
 					)
 
-				# hoverlabel_bgcolor = "#000000" #subdued black
+				hoverlabel_bgcolor = "#000000" #subdued black
 
-				# figauc.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
+				figauc.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 
-				
-				# st.plotly_chart(figauc, use_container_width=True)
 
 				#plotting all charts 
 				col1,col2 = st.columns([9,1]) #create collumns of uneven width
