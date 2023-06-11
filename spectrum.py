@@ -2792,9 +2792,9 @@ if authentication_status:
 
 				sumcols = dftemp.sum(axis=0) #degug
 
-				st.write(sumrows) #debug
+				st.write(sumrows*blocksize) #debug
 
-				st.write(sumcols) #debug
+				st.write(sumcols*blocksize) #debug
 
 
 				data = [go.Heatmap(
