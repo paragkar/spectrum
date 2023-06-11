@@ -2715,9 +2715,9 @@ if authentication_status:
 
 				dfbidblksec = dfbidblksec[filt]
 
-				dftemp = dfbidblksec.groupby(["LSA", "Bidder", "Prov_Alloc_BLK_Start_ClkRd"]).sum().reset_index()
+				# dftemp = dfbidblksec.groupby(["LSA", "Bidder", "Prov_Alloc_BLK_Start_ClkRd"]).sum().reset_index()
 
-				dftemp = dftemp.pivot(index="Bidder", columns='LSA', values="Prov_Alloc_BLK_Start_ClkRd").sort_index(ascending=False).round(0)
+				dftemp = dftemp.reset_index().pivot(index="Bidder", columns='LSA', values="Prov_Alloc_BLK_Start_ClkRd").sort_index(ascending=False).round(0)
 
 				sumrows = dftemp.sum(axis=1).reset_index() #debug
 
@@ -2800,9 +2800,9 @@ if authentication_status:
 
 				dfbidblksec = dfbidblksec[filt]
 
-				dftemp = dfbidblksec.groupby(["LSA", "Bidder", "Prov_Alloc_BLK_End_ClkRd"]).sum().reset_index()
+				# dftemp = dfbidblksec.groupby(["LSA", "Bidder", "Prov_Alloc_BLK_End_ClkRd"]).sum().reset_index()
 
-				dftemp = dftemp.pivot(index="Bidder", columns='LSA', values="Prov_Alloc_BLK_End_ClkRd").sort_index(ascending=False).round(0)
+				dftemp = dftemp.reset_index().pivot(index="Bidder", columns='LSA', values="Prov_Alloc_BLK_End_ClkRd").sort_index(ascending=False).round(0)
 
 				sumrows = dftemp.sum(axis=1).reset_index() #debug
 
