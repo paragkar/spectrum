@@ -1826,9 +1826,11 @@ if authentication_status:
 				min_values.append(np.nan)
 
 		mindf = pd.DataFrame(min_values).T
+
+		st.write(mindf) #debug
 		mindf.columns = df.columns
 
-		df_final = dfblocks*mindf.values
+		df_final = dfblocks*mindf.values #calculating the total value of bids
 
 		# # Regex pattern to match floating-point numbers
 		# pattern = re.compile(r'^[+-]?((?=.*[1-9])\d*\.\d+|0\.\d*[1-9]\d*)$')
