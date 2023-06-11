@@ -1902,7 +1902,7 @@ if authentication_status:
 
 		fig.update_layout(xaxis=dict(title=ydim), yaxis=dict(title=''))
 
-		fig.update_traces(text=df["Total"], textposition='auto')
+		fig.update_traces(text=df[xdim], textposition='auto')
 
 		fig.update_xaxes(tickvals=[])
 
