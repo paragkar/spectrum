@@ -1073,7 +1073,7 @@ if authentication_status:
 				pwbmulofrp = dftemprpmul.loc[yy,xx]
 
 
-				if pwb  == np.nan:
+				if pwb  == "nan":
 					ccode = '#808080' #(grey)
 				else:
 					ccode = '#228B22' #(red)
