@@ -2363,7 +2363,7 @@ if authentication_status:
 					ygap = 1,
 					hoverinfo ='text',
 					text = hovertext,
-					colorscale='Blackbody',
+					colorscale='Turbo',
 					showscale=False,
 						texttemplate="%{z}", 
 						textfont={"size":10},
