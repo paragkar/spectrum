@@ -2021,7 +2021,7 @@ if authentication_status:
 
 		listofbidders = sorted(list(set(dfbid["Bidder"])))
 
-		list_of_circles = ssorted(list(set(dfbid["LSA"]))) #debug
+		list_of_circles = sorted(list(set(dfbid["LSA"]))) #debug
 
 		st.write(list_of_circles)
 
