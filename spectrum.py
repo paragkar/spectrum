@@ -1074,11 +1074,9 @@ if authentication_status:
 
 
 				if str(pwb)  == "nan":
-					ccode = '#228B22' #(green)
-					# ccode = '#808080' #(grey)
-				else:
-					# ccode = '#228B22' #(green)
 					ccode = '#808080' #(grey)
+				else:
+					ccode = '#228B22' #(green)
 
 				list_col.append(ccode)
 
