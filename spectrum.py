@@ -2387,6 +2387,8 @@ if authentication_status:
 						# reversescale=True,
 						)]
 
+					figauc = go.Figure(data=data)
+
 					figauc.update_layout(
 				    template="plotly",
 				    xaxis_side= 'top',
@@ -2419,6 +2421,8 @@ if authentication_status:
 							# reversescale=True,
 							)]
 
+					figauc = go.Figure(data=data)
+
 					figauc.update_layout(
 				    template="plotly",
 				    xaxis_side= 'top',
@@ -2434,8 +2438,6 @@ if authentication_status:
 					    )
 					)
 					
-
-				figauc = go.Figure(data=data)
 
 
 # #-------------New Layout Code for Testing ---------------
@@ -2540,6 +2542,8 @@ if authentication_status:
 						# reversescale=True,
 						)]
 
+					figauc = go.Figure(data=data)
+
 					figauc.update_layout(
 				    template="plotly",
 				    xaxis_side= 'top',
@@ -2572,6 +2576,8 @@ if authentication_status:
 							# reversescale=True,
 							)]
 
+					figauc = go.Figure(data=data)
+
 					figauc.update_layout(
 				    template="plotly",
 				    xaxis_side= 'top',
@@ -2587,8 +2593,6 @@ if authentication_status:
 					    )
 					)
 					
-
-				figauc = go.Figure(data=data)
 
 
 				title = titlesubpart+" - PWB/BLK at the End of Clock Round No - "+str(round_number)
