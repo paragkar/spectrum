@@ -2364,7 +2364,7 @@ if authentication_status:
 					hoverinfo ='text',
 					text = hovertext,
 					colorscale='Turbo',
-					showscale=False,
+					showscale=True,
 						texttemplate="%{z}", 
 						textfont={"size":10},
 						reversescale=True,
