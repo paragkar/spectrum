@@ -2387,6 +2387,14 @@ if authentication_status:
 						# reversescale=True,
 						)]
 
+					figauc.update_layout(
+				    template="plotly",
+				    xaxis_side= 'top',
+				   	height = 650,
+				   	yaxis=dict(
+			        tickmode='array',
+			        	))
+
 			
 				if chartoption == "ReservePrice Multiple":
 
@@ -2405,23 +2413,30 @@ if authentication_status:
 						hoverinfo ='text',
 						text = hovertext,
 						colorscale='picnic',
-						zmin =0,
 						showscale=True,
 							texttemplate="%{z}", 
 							textfont={"size":10},
 							# reversescale=True,
 							)]
-					
 
-				figauc = go.Figure(data=data)
-
-				figauc.update_layout(
+					figauc.update_layout(
 				    template="plotly",
 				    xaxis_side= 'top',
 				   	height = 650,
 				   	yaxis=dict(
 			        tickmode='array',
 			        	))
+
+					figauc.update_layout(
+					    coloraxis_colorbar=dict(
+					        zmin=0,  # Set the minimum value of the color bar
+					        # zmax=10  # Set the maximum value of the color bar
+					    )
+					)
+					
+
+				figauc = go.Figure(data=data)
+
 
 # #-------------New Layout Code for Testing ---------------
 # 				figauc.update_layout(  
@@ -2525,6 +2540,15 @@ if authentication_status:
 						# reversescale=True,
 						)]
 
+					figauc.update_layout(
+				    template="plotly",
+				    xaxis_side= 'top',
+				   	height = 650,
+				   	yaxis=dict(
+			        tickmode='array',
+			        	))
+					
+
 				if chartoption == "ReservePrice Multiple":
 
 					dftemp1 = dftemp.copy()
@@ -2542,23 +2566,30 @@ if authentication_status:
 						hoverinfo ='text',
 						text = hovertext,
 						colorscale='picnic',
-						zmin= 0,
 						showscale=True,
 							texttemplate="%{z}", 
 							textfont={"size":10},
 							# reversescale=True,
 							)]
-					
 
-				figauc = go.Figure(data=data)
-
-				figauc.update_layout(
+					figauc.update_layout(
 				    template="plotly",
 				    xaxis_side= 'top',
 				   	height = 650,
 				   	yaxis=dict(
 			        tickmode='array',
 			        	))
+
+					figauc.update_layout(
+					    coloraxis_colorbar=dict(
+					        zmin=0,  # Set the minimum value of the color bar
+					        # zmax=10  # Set the maximum value of the color bar
+					    )
+					)
+					
+
+				figauc = go.Figure(data=data)
+
 
 				title = titlesubpart+" - PWB/BLK at the End of Clock Round No - "+str(round_number)
 				subtitle = "Unit - Rs Cr; Source - DoT; "+chartoption+" - May be lower for bidders in same circle who did not agree to the higher round price"
