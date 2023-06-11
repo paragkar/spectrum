@@ -2360,8 +2360,6 @@ if authentication_status:
 
 			dfrp = dfpwb1strdend.mean()
 
-			st.write(dfrp) #debug
-
 			dfrp.columns = ["ReservePrice"]
 
 			dfrp = dfrp.T
