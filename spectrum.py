@@ -1933,7 +1933,7 @@ if authentication_status:
 			zmax=5
 			zmin_af = 0
 			zmax_af = 1
-			texttempbiddemandactivity = "%{z}"
+			texttempbiddemandactivity = ""
 			blocksize = 0.2
 			zmin_blk_sec = 0
 			zmax_blk_sec = 4
@@ -1950,7 +1950,7 @@ if authentication_status:
 			zmax=5
 			zmin_af = 0
 			zmax_af = 1
-			texttempbiddemandactivity = "%{z}"
+			texttempbiddemandactivity = ""
 			blocksize = 0.2
 			zmin_blk_sec = 0
 			zmax_blk_sec = 4
