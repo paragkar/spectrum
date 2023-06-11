@@ -1074,12 +1074,13 @@ if authentication_status:
 
 
 				if pwb  == np.nan:
-					ccode = '#808080' #(grey)
+					ccode = '#228B22' #(green)
+					# ccode = '#808080' #(grey)
 				else:
-					ccode = '#228B22' #(red)
+					# ccode = '#228B22' #(green)
+					ccode = '#808080' #(grey)
 
 				list_col.append(ccode)
-
 
 				hovertext[-1].append(
 						    'Bidder: {}\
