@@ -4079,7 +4079,7 @@ if authentication_status:
 
 				st.write(dfBLKsEndRd) #debug
 
-				pattern = '[1-9]+'
+				pattern = r'[1-9]+'
 
 				mask = dfBLKsEndRd.replace(re.pattern, 1, regex = True)
 
