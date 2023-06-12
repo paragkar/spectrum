@@ -2035,9 +2035,14 @@ if authentication_status:
 			zmax_blk_sec = 4
 
 
+		#This is processed separtely as this tab is unique to this year from others
 		if Feature == "2014-Combined":
 
 			dfbid = loadauctionbiddata()[mainsheet].replace('-', np.nan, regex = True)
+
+			dfbid.columns = ["Clk_Round", "LSA", "Band", "Bidder", "Bidder_Type", "CLK_RD_No_Bid_Submission", "BidValuePerBLK",
+							"BidNosUniqueCLKRdPrice", "HighestCLKRdPriceBidSubmitted", "BLKsBidCurrentCLKRdPrice", "TotalValueBid",
+							"TotalValueBidsAllLSABands", "RanddomIndex"]
 
 			st.write(dfbid)
 
