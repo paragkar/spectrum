@@ -3887,14 +3887,15 @@ if authentication_status:
 				values="Prov_Alloc_BLK_Start_ClkRd").sort_index(ascending=True).round(0)
 
 				def combine_text(x, y):
-				    if pd.notnull(x) and pd.notnull(y):
-				        return str(x) + '\n' + str(y)
-				    elif pd.notnull(x):
-				        return str(x)
+				    if x.notnull().all() and y.notnull().all():
+				        return x + '\n' + y
+				    elif x.notnull().all():
+				        return x
 				    else:
-				        return str(y)
+				        return y
 
-				df_combined = dflastsubbidheat.applymap(str).combine(dfBLKsStartRd.applymap(str), combine_text)
+				df_combined = dflastsubbidheat.applymap(str).combine(dfBLKsStartRd.applymap(str), lambda x, y: combine_text(x, y))
+
 				
 				st.write(df_combined)
 
