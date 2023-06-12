@@ -4096,7 +4096,7 @@ if authentication_status:
 
 				dfwithbids = dflastsubbidheat*mask.values #final datframe with actual submitted bids
 
-				df_final = bidvalue(dfwithbids,dfBLKsEndRd)
+				df_final = bidvalue(dfwithbids,dfBLKsEndRd).round(0)
 
 				st.write(df_final)
 
