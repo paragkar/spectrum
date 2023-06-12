@@ -3899,6 +3899,8 @@ if authentication_status:
 
 				#for rendering text of the final heatmap for Data1
 
+				dflastsubbidheat = dflastsubbidheat.round(1)
+
 				df_combined1 = dflastsubbidheat.applymap(str).combine(dfBLKsStartRd.applymap(str), lambda x, y: combine_text(x, y, 'BA-'))
 
 				#dfrp is the reserve price
@@ -4050,6 +4052,8 @@ if authentication_status:
 				        return y
 
 				#for rendering text of the final heatmap for Data1
+
+				dflastsubbidheat = dflastsubbidheat.round(1)
 
 				df_combined1 = dflastsubbidheat.applymap(str).combine(dfBLKsSelEndRd.applymap(str), lambda x, y: combine_text(x, y,'BS-'))
 
