@@ -2053,7 +2053,7 @@ if authentication_status:
 
 			dftemp = dftemp[filt]
 
-			# dftemp = dftemp.replace(',','',regex=True)
+			dftemp = dftemp.replace(',','',regex=True)
 
 			# dftemp = dftemp.groupby(['Band', 'Bidder']).aggregate({'TotalValueBid' : 'sum', 'TotalValueBidsAllLSABands': 'mean'}).reset_index()
 
