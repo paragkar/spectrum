@@ -4096,7 +4096,11 @@ if authentication_status:
 				for col in mask.columns:
 					mask[col] = mask[col].astype(int)
 
-				st.write(mask)
+
+
+				dfwithbids = dflastsubbidheat*mask.values
+
+				st.write(dfwithbids)
 
 				data1 = [go.Heatmap(
 							z=dflastsubbidheat.values,
