@@ -3886,9 +3886,13 @@ if authentication_status:
 
 				dflastsubbid = dflastsubbid.replace(0, np.nan).dropna().sort_index()
 
-				dfrp = dflastsubbidRD2["Last_Sub_Bid_Start_CLKRd"].drop_duplicates().replace(0, np.nan).dropna().sort_index()
+				df
 
-				st.write(dflastsubbid/dfrp.values)
+				# dfrp = dflastsubbidRD2["Last_Sub_Bid_Start_CLKRd"].drop_duplicates().replace(0, np.nan).dropna().sort_index()
+
+				dfrp = dflastsubbidRD2["Last_Sub_Bid_Start_CLKRd"].sort_index()
+
+				st.write(dfrp)
 
 
 
