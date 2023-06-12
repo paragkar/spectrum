@@ -4099,9 +4099,19 @@ if authentication_status:
 
 				dfwithbids = dfprovwinbid*mask.values #final datframe with actual submitted bids
 
-				df_final = bidvalue(dfwithbids,dfBLKsEndRd).round(0)
+				summarydf = bidvalue(dfwithbids,dfBLKsEndRd).round(0)
 
-				st.write(df_final)
+				st.write(df_final) #Final datframe gives the summary of prices at PWB
+
+				#prepare the summary chart
+
+				summarydf = summarydf.reset_index()
+
+				summarydf.columns = ["Bidder","TotalBids"]
+
+				#preparing the summary chart 
+				figsummary = summarychart(summarydf, 'Bidder', "TotalBids")
+	
 
 				data1 = [go.Heatmap(
 							z=dflastsubbidheat.values,
@@ -4212,9 +4222,31 @@ if authentication_status:
 				# figauc.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 
 
+				# tab1,tab2 = st.tabs(["Absolute Value", "Ratio (Bid/Reserve)"])  #For showning the absolute and Ratio charts in two differet tabs
+				# tab1.plotly_chart(figauc1, use_container_width=True)
+				# tab2.plotly_chart(figauc2, use_container_width=True)
+
+
 				tab1,tab2 = st.tabs(["Absolute Value", "Ratio (Bid/Reserve)"])  #For showning the absolute and Ratio charts in two differet tabs
-				tab1.plotly_chart(figauc1, use_container_width=True)
-				tab2.plotly_chart(figauc2, use_container_width=True)
+
+				with tab1:
+					col1,col2 = st.columns([8,1]) #create collumns of uneven width
+					with col1:
+						st.plotly_chart(figauc1, use_container_width=True)
+					with col2:
+						st.markdown("")
+						st.plotly_chart(figsummary, use_container_width=True)
+
+				with tab2:
+					col1,col2 = st.columns([8,1]) #create collumns of uneven width
+					with col1:
+						st.plotly_chart(figauc2, use_container_width=True)
+					with col2:
+						st.markdown("")
+						st.plotly_chart(figsummary, use_container_width=True)
+
+
+
 
 
 #---------------New Auction Bid Data Cide Ends Here----------------------
