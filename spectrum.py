@@ -3879,13 +3879,13 @@ if authentication_status:
 			if roundoption == "Start of Round":
 
 				dflastsubbid = dflastsubbid.reset_index().pivot(index="Bidder", columns='LSA', 
-								values="Last_Sub_Bid_Start_CLKRd").sort_index(ascending=False)
+								values="Last_Sub_Bid_Start_CLKRd").sort_index(ascending=False).round(2)
 
 				#dfrp is the reserve price
 
 				dfrp = dflastsubbidRD2["Last_Sub_Bid_Start_CLKRd"].reset_index().drop_duplicates().replace(0,np.nan).dropna().set_index("LSA").sort_index()
 
-				dflastsubbidratio = round((dflastsubbid.T/dfrp.values).T,1)
+				dflastsubbidratio = round((dflastsubbid.T/dfrp.values).T,2)
 
 				data1 = [go.Heatmap(
 							z=dflastsubbid.values,
