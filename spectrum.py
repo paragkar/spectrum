@@ -4074,6 +4074,11 @@ if authentication_status:
 
 				dflastsubbidheat = dflastsubbidheat.sort_index(ascending=True)
 
+
+				st.write(dflastsubbidheat) #debug
+
+				st.write(dfBLKsSelEndRd) #debug
+
 				data1 = [go.Heatmap(
 							z=dflastsubbidheat.values,
 					        y= dflastsubbidheat.index,
