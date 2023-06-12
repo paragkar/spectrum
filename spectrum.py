@@ -2053,15 +2053,16 @@ if authentication_status:
 
 			dftemp = dftemp[filt]
 
-			dftemp = dftemp.replace(',','',regex=True)
+			# dftemp = dftemp.replace(',','',regex=True)
 
-			dftemp = dftemp.groupby(['Band', 'Bidder']).aggregate({'TotalValueBid' : 'sum', 'TotalValueBidsAllLSABands': 'mean'}).reset_index()
+			# dftemp = dftemp.groupby(['Band', 'Bidder']).aggregate({'TotalValueBid' : 'sum', 'TotalValueBidsAllLSABands': 'mean'}).reset_index()
 
-			dftemp["PercentBidofTotal"] = round((dftemp["TotalValueBid"]/dftemp["TotalValueBidsAllLSABands"])*100,1)
+			dftemp = dftemp.groupby(['Band', 'Bidder','LSA']).aggregate({'BidValuePerBLK' : 'sum'}).reset_index()
 
+			# dftemp["PercentBidofTotal"] = round((dftemp["TotalValueBid"]/dftemp["TotalValueBidsAllLSABands"])*100,1)
 
-			dftemp = dftemp.pivot(index="Bidder", columns='Band', values="PercentBidofTotal") #debug
-									
+			dftemp = dftemp.pivot(index=["Band","Bidder"], columns='LSA', values="BidValuePerBLK") #debug
+						
 
 			st.write(dftemp.T)
 
