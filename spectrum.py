@@ -3082,7 +3082,7 @@ if authentication_status:
 					colorscale='Hot',
 					showscale=True,
 						texttemplate=texttempbiddemandactivity, 
-						textfont={"size":10},
+						textfont={"size":8},
 						reversescale=True,
 						)]
 
@@ -3099,7 +3099,7 @@ if authentication_status:
 						colorscale='Hot',
 						showscale=True,
 							texttemplate=texttempbiddemandactivity, 
-							textfont={"size":10},
+							textfont={"size":8},
 							reversescale=True,
 							)]
 							
@@ -3217,7 +3217,7 @@ if authentication_status:
 						colorscale='Hot',
 						showscale=True,
 							texttemplate=texttempbiddemandactivity, 
-							textfont={"size":10},
+							textfont={"size":8},
 							reversescale=True,
 							)]
 
@@ -3232,7 +3232,7 @@ if authentication_status:
 						colorscale='Hot',
 						showscale=True,
 							texttemplate=texttempbiddemandactivity, 
-							textfont={"size":10},
+							textfont={"size":8},
 							reversescale=True,
 							)]
 						
@@ -3349,7 +3349,7 @@ if authentication_status:
 						colorscale='Hot',
 						showscale=True,
 							texttemplate=texttempbiddemandactivity, 
-							textfont={"size":10},
+							textfont={"size":8},
 							reversescale=True,
 							)]
 
@@ -3364,7 +3364,7 @@ if authentication_status:
 						colorscale='Hot',
 						showscale=True,
 							texttemplate=texttempbiddemandactivity, 
-							textfont={"size":10},
+							textfont={"size":8},
 							reversescale=True,
 							)]
 						
@@ -3470,7 +3470,7 @@ if authentication_status:
 						zmin=zmin_af, zmax=zmax_af,
 						showscale=True,
 							texttemplate=texttempbiddemandactivity, 
-							textfont={"size":10},
+							textfont={"size":8},
 							reversescale=True,
 							)]
 						
@@ -3574,7 +3574,7 @@ if authentication_status:
 						# zmin=0.5, zmax=1,
 						showscale=False,
 							texttemplate=texttempbiddemandactivity, 
-							textfont={"size":10},
+							textfont={"size":8},
 							reversescale=True,
 							)]
 						
@@ -3675,7 +3675,7 @@ if authentication_status:
 							# zmin=0.5, zmax=1,
 							showscale=True,
 								texttemplate=texttempbiddemandactivity, 
-								textfont={"size":10},
+								textfont={"size":8},
 								reversescale=True,
 								)]
 
@@ -3691,7 +3691,7 @@ if authentication_status:
 							# zmin=0.5, zmax=1,
 							showscale=True,
 								texttemplate=texttempbiddemandactivity, 
-								textfont={"size":10},
+								textfont={"size":8},
 								reversescale=True,
 								)]
 							
@@ -3805,7 +3805,7 @@ if authentication_status:
 							# zmin=0.5, zmax=1,
 							showscale=True,
 								texttemplate=texttempbiddemandactivity, 
-								textfont={"size":10},
+								textfont={"size":8},
 								reversescale=True,
 								)]
 							
