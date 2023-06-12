@@ -3911,7 +3911,7 @@ if authentication_status:
 
 				#for rendering text of the final heatmap for Data2
 
-				df_combined2 = dflastsubbidratio.applymap(str).combine(dfBLKsStartRd.applymap(str), lambda x, y: combine_text(x, y, 'BA-'))
+				df_combined2 = dflastsubbidratio.applymap(str).combine(dfBLKsStartRd.applymap(str), lambda x, y: combine_text('Ratio- ', x, y, 'BA-'))
 
 				dflastsubbidheat = dflastsubbidheat.sort_index(ascending=True)
 
@@ -4057,7 +4057,7 @@ if authentication_status:
 
 				df_combined1 = dflastsubbidheat.applymap(str).combine(dfBLKsSelEndRd.applymap(str), lambda x, y: combine_text('Rs ', x, y,'BS-'))
 
-				df_combined1 = df_combined1.applymap(str).combine(dfBLKsEndRd.applymap(str), lambda x, y: combine_text(x, y, 'BA-'))
+				df_combined1 = df_combined1.applymap(str).combine(dfBLKsEndRd.applymap(str), lambda x, y: combine_text("", x, y, 'BA-'))
 
 
 				#dfrp is the reserve price
@@ -4068,9 +4068,9 @@ if authentication_status:
 
 				#for rendering text of the final heatmap for Data2
 
-				df_combined2 = dflastsubbidratio.applymap(str).combine(dfBLKsSelEndRd.applymap(str), lambda x, y: combine_text(x, y, 'BS-'))
+				df_combined2 = dflastsubbidratio.applymap(str).combine(dfBLKsSelEndRd.applymap(str), lambda x, y: combine_text('Ratio- ', x, y, 'BS-'))
 
-				df_combined2 = df_combined2.applymap(str).combine(dfBLKsEndRd.applymap(str), lambda x, y: combine_text(x, y, 'BA-'))
+				df_combined2 = df_combined2.applymap(str).combine(dfBLKsEndRd.applymap(str), lambda x, y: combine_text("", x, y, 'BA-'))
 
 				dflastsubbidheat = dflastsubbidheat.sort_index(ascending=True)
 
