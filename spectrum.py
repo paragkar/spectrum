@@ -3894,16 +3894,19 @@ if authentication_status:
 				    else:
 				        return y
 
-				df_combined = dflastsubbidheat.applymap(str).combine(dfBLKsStartRd.applymap(str), lambda x, y: combine_text(x, y))
+				#for rendering text of the final heatmap for Data1
 
-				
-				st.write(df_combined)
+				df_combined1 = dflastsubbidheat.applymap(str).combine(dfBLKsStartRd.applymap(str), lambda x, y: combine_text(x, y))
 
 				#dfrp is the reserve price
 
 				dfrp = dflastsubbidRD2["Last_Sub_Bid_Start_CLKRd"].reset_index().drop_duplicates().replace(0,np.nan).dropna().set_index("LSA").sort_index()
 
 				dflastsubbidratio = round((dflastsubbidheat.T/dfrp.values).T,2).sort_index(ascending=True)
+
+				#for rendering text of the final heatmap for Data2
+
+				df_combined2 = dflastsubbidratio.applymap(str).combine(dfBLKsStartRd.applymap(str), lambda x, y: combine_text(x, y))
 
 				dflastsubbidheat = dflastsubbidheat.sort_index(ascending=True)
 
@@ -3914,11 +3917,11 @@ if authentication_status:
 							xgap = 0.5,
 							ygap = 1,
 							hoverinfo ='text',
-							# text = hovertext,
+							text = df_combined1.values,
 							colorscale='reds',
 							# zmin=0.5, zmax=1,
 							showscale=True,
-								texttemplate="%{z}", 
+								texttemplate="%{text}", 
 								textfont={"size":10},
 								# reversescale=True,
 								)]
@@ -3930,11 +3933,11 @@ if authentication_status:
 							xgap = 0.5,
 							ygap = 1,
 							hoverinfo ='text',
-							# text = hovertext,
+							text = df_combined2.values,
 							colorscale='reds',
 							# zmin=0.5, zmax=1,
 							showscale=True,
-								texttemplate="%{z}", 
+								texttemplate="%{text}", 
 								textfont={"size":10},
 								# reversescale=True,
 								)]			
