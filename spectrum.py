@@ -2048,8 +2048,8 @@ if authentication_status:
 
 			dftemp = dftemp.replace(',','',regex=True)
 
-			dftemp = dftemp.groupby(['Clk_Round', 'Band', 'Bidder'])[["TotalValueBid", "TotalValueBidsAllLSABands"]].aggregate([
-									'sum','mean'])
+			dftemp = dftemp.groupby(['Clk_Round', 'Band', 'Bidder']).aggregate({'TotalValueBid' : 'sum', 'TotalValueBidsAllLSABands': 'mean'})
+									
 
 			st.write(dftemp)
 
