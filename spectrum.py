@@ -2055,7 +2055,7 @@ if authentication_status:
 
 			dftemp = dftemp.replace(',','',regex=True)
 
-			dftemp = dftemp.groupby(['Band', 'Bidder']).aggregate({'TotalValueBid' : 'sum', 'TotalValueBidsAllLSABands': 'mean'})
+			dftemp = dftemp.groupby(['Band', 'Bidder']).aggregate({'TotalValueBid' : 'sum', 'TotalValueBidsAllLSABands': 'mean'}).reset_index()
 
 			dftemp["PercentBidofTotal"] = round((dftemp["TotalValueBid"]/dftemp["TotalValueBidsAllLSABands"])*100,1)
 
