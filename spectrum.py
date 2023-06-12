@@ -1931,13 +1931,13 @@ if authentication_status:
 			activitysheet = "2014_2G_Activity"
 			demandsheet = "2014_2G_1800_AD"
 			titlesubpart = "1800 MHz Auctions (CY-2014)"
-			subtitlesubpartbidactivity = ""
+			subtitlesubpartbidactivity = "; Combined for both 1800 & 900 MHz Bands"
 			xdtick =5
 			zmin=1
 			zmax=5
 			zmin_af = 0.5
 			zmax_af = 1
-			texttempbiddemandactivity = "; Combined for both 1800 & 900 MHz Bands"
+			texttempbiddemandactivity = ""
 			blocksize = 0.2
 			zmin_blk_sec = 0
 			zmax_blk_sec = 4
