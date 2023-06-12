@@ -4224,7 +4224,7 @@ if authentication_status:
 						st.plotly_chart(figauc1, use_container_width=True)
 					with col2:
 						st.markdown("")
-						st.plotly_chart(figsummary, use_container_width=True)
+						st.plotly_chart(figsummry, use_container_width=True)
 
 				with tab2:
 					col1,col2 = st.columns([8,1]) #create collumns of uneven width
@@ -4232,7 +4232,7 @@ if authentication_status:
 						st.plotly_chart(figauc2, use_container_width=True)
 					with col2:
 						st.markdown("")
-						st.plotly_chart(figsummary, use_container_width=True)
+						st.plotly_chart(figsummry, use_container_width=True)
 
 
 
