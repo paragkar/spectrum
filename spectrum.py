@@ -2272,6 +2272,8 @@ if authentication_status:
 
 				dftempheat = dftempheat.sort_values(selected_lsa[0], key=lambda x: x.map(sort_key), ascending = False)
 
+				dftempheat = dftempheat.replace(0,np.nan)
+
 
 				data = [go.Heatmap(
 					z=dftempheat.values,
@@ -2282,7 +2284,7 @@ if authentication_status:
 					hoverinfo ='text',
 					zmin=zmin, zmax=zmax, #debug
 					# text = hovertext,
-					colorscale='Rainbow',
+					colorscale='Hot',
 					# showscale=False,
 						texttemplate="%{z}", 
 						textfont={"size":10},
