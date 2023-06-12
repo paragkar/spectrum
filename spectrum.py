@@ -3776,7 +3776,7 @@ if authentication_status:
 			
 				# st.plotly_chart(figauc, use_container_width=True)
 
-				tab1, tab2 = st.tabs(["Aggregate Demand", "Ratio (AD/Total)"]) #For showning the absolute and Ratio charts in two differet tabs
+				tab1, tab2 = st.tabs(["Aggregate Demand", "Ratio (AggD/BLKsforSale)"]) #For showning the absolute and Ratio charts in two differet tabs
 				tab1.plotly_chart(figauc1, use_container_width=True)
 				tab2.plotly_chart(figauc2, use_container_width=True)
 
