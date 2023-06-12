@@ -4053,7 +4053,7 @@ if authentication_status:
 
 				df_combined1 = dflastsubbidheat.applymap(str).combine(dfBLKsSelEndRd.applymap(str), lambda x, y: combine_text(x, y))
 
-				df_combined1 = dflastsubbidheat.applymap(str).combine(dfBLKsEndRd.applymap(str), lambda x, y: combine_text(x, y))
+				df_combined1 = df_combined1.applymap(str).combine(dfBLKsEndRd.applymap(str), lambda x, y: combine_text(x, y))
 
 
 				#dfrp is the reserve price
@@ -4066,7 +4066,7 @@ if authentication_status:
 
 				df_combined2 = dflastsubbidratio.applymap(str).combine(dfBLKsSelEndRd.applymap(str), lambda x, y: combine_text(x, y))
 
-				df_combined2 = dflastsubbidratio.applymap(str).combine(dfBLKsEndRd.applymap(str), lambda x, y: combine_text(x, y))
+				df_combined2 = df_combined2.applymap(str).combine(dfBLKsEndRd.applymap(str), lambda x, y: combine_text(x, y))
 
 				dflastsubbidheat = dflastsubbidheat.sort_index(ascending=True)
 
