@@ -3868,12 +3868,11 @@ if authentication_status:
 
 			filt1 =(dflastsubbid["Clk_Round"] == round_number)
 
-			filt2 = (dflastsubbid["Clk_Round"] == 2)
+			filt2 = (dflastsubbid["Clk_Round"] == 2) #bids at start of 2nd round will give us RP when all circles were bid
 
 			dflastsubbidRD2 = dflastsubbid[filt2]
 
 			dflastsubbid = dflastsubbid[filt1]
-
 
 			roundoption = st.sidebar.radio('Click an Option', ["Start of Round", "End of Round"])
 
@@ -3882,13 +3881,123 @@ if authentication_status:
 				dflastsubbid = dflastsubbid.reset_index().pivot(index="Bidder", columns='LSA', 
 								values="Last_Sub_Bid_Start_CLKRd").sort_index(ascending=False)
 
+				#dfrp is the reserve price
+
 				dfrp = dflastsubbidRD2["Last_Sub_Bid_Start_CLKRd"].reset_index().drop_duplicates().replace(0,np.nan).dropna().set_index("LSA").sort_index()
 
-				st.write((dflastsubbid.T/dfrp.values).T)
+				dflastsubbidratio = (dflastsubbid.T/dfrp.values).T
+
+				data1 = [go.Heatmap(
+							z=dflastsubbid.values,
+					        y= dflastsubbid.index,
+					        x=dflastsubbid.columns,
+							xgap = 0.5,
+							ygap = 1,
+							hoverinfo ='text',
+							# text = hovertext,
+							colorscale='Hot',
+							# zmin=0.5, zmax=1,
+							showscale=True,
+								# texttemplate=texttempbiddemandactivity, 
+								textfont={"size":10},
+								reversescale=True,
+								)]
+
+				data2 = [go.Heatmap(
+							z=dflastsubbidratio.values,
+					        y= dflastsubbidratio.index,
+					        x=dflastsubbidratio.columns,
+							xgap = 0.5,
+							ygap = 1,
+							hoverinfo ='text',
+							# text = hovertext,
+							colorscale='Hot',
+							# zmin=0.5, zmax=1,
+							showscale=True,
+								# texttemplate=texttempbiddemandactivity, 
+								textfont={"size":10},
+								reversescale=True,
+								)]			
+
+				figauc1 = go.Figure(data=data1)
+				figauc2 = go.Figure(data=data2)
 
 
+				figauc1.update_layout(uniformtext_minsize=12, 
+				  uniformtext_mode='hide', 
+				  xaxis_title=None, 
+				  yaxis_title=None, 
+				  yaxis_autorange='reversed',
+				  font=dict(size=12),
+				  template='simple_white',
+				  paper_bgcolor=None,
+				  height=600, 
+				  width=1200,
+				  margin=dict(t=80, b=50, l=50, r=50, pad=0),
+				  yaxis=dict(
+		        	  tickmode='array'),
+				  xaxis = dict(
+				  side = 'top',
+				  tickmode = 'linear',
+				  tickangle=0,
+				  dtick = 1), 
+				)
+
+				figauc2.update_layout(uniformtext_minsize=12, 
+				  uniformtext_mode='hide', 
+				  xaxis_title=None, 
+				  yaxis_title=None, 
+				  yaxis_autorange='reversed',
+				  font=dict(size=12),
+				  template='simple_white',
+				  paper_bgcolor=None,
+				  height=600, 
+				  width=1200,
+				  margin=dict(t=80, b=50, l=50, r=50, pad=0),
+				  yaxis=dict(
+		        	  tickmode='array'),
+				  xaxis = dict(
+				  side = 'top',
+				  tickmode = 'linear',
+				  tickangle=0,
+				  dtick = 1), 
+				)
+
+				# title = titlesubpart+" - Excess Demand in Various Rounds"
+				# subtitle = "Unit - Nos; Source - DoT; Xaxis - Round Numbers"
+
+				# style = "<style>h3 {text-align: left;}</style>"
+				# with st.container():
+				# 	#plotting the main chart
+				# 	st.markdown(style, unsafe_allow_html=True)
+				# 	st.header(title)
+				# 	st.markdown(subtitle)
 
 
+				#Drawning a black border around the heatmap chart 
+				figauc1.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
+				figauc1.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
+				figauc1.update_layout(
+					    xaxis=dict(showgrid=False),
+					    yaxis=dict(showgrid=False)
+					)
+
+				#Drawning a black border around the heatmap chart 
+				figauc2.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
+				figauc2.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
+				figauc2.update_layout(
+					    xaxis=dict(showgrid=False),
+					    yaxis=dict(showgrid=False)
+					)
+
+				# hoverlabel_bgcolor = "#000000" #subdued black
+
+				# figauc.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
+
+
+				tab1,tab2 = st.tabs(["Absolute", "Ratio (Actual/ReserveP)"])  #For showning the absolute and Ratio charts in two differet tabs
+				tab1.plotly_chart(figauc1, use_container_width=True)
+				tab2.plotly_chart(figauc2, use_container_width=True)
 
 
 #---------------New Auction Bid Data Cide Ends Here----------------------
