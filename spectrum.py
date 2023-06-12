@@ -3860,6 +3860,29 @@ if authentication_status:
 				st.plotly_chart(figauc, use_container_width=True)
 
 
+		if SubFeature == "LastSubBidPrice":
+
+			round_number = st.slider("Select Auction Round Numbers using the Silder below", min_value=1, max_value=totalrounds, step=1, value = totalrounds)
+
+			dflastsubbid = dfbid.copy()
+
+			filt  =(dflastsubbid["Clk_Round"] == round_number) 
+
+			dflastsubbid = dflastsubbid[filt]
+
+			roundoption = st.sidebar.radio('Click an Option', ["Start of Round", "End of Round"])
+
+			if roundoption == "Start of Round":
+
+				dflastsubbid = dflastsubbid.reset_index().pivot(index="Bidder", columns='LSA', 
+								values="Last_Sub_Bid_Start_CLKRd").sort_index(ascending=False)
+				
+				st.write(dflastsubbid)
+
+
+
+
+
 
 #---------------New Auction Bid Data Cide Ends Here----------------------
 
