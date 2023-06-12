@@ -4051,6 +4051,8 @@ if authentication_status:
 
 				#for rendering text of the final heatmap for Data1
 
+				df_combined1 = dflastsubbidheat.applymap(str).combine(dfBLKsSelEndRd.applymap(str), lambda x, y: combine_text(x, y))
+
 				df_combined1 = dflastsubbidheat.applymap(str).combine(dfBLKsEndRd.applymap(str), lambda x, y: combine_text(x, y))
 
 
@@ -4061,6 +4063,8 @@ if authentication_status:
 				dflastsubbidratio = round((dflastsubbidheat.T/dfrp.values).T,2).sort_index(ascending=True)
 
 				#for rendering text of the final heatmap for Data2
+
+				df_combined2 = dflastsubbidratio.applymap(str).combine(dfBLKsSelEndRd.applymap(str), lambda x, y: combine_text(x, y))
 
 				df_combined2 = dflastsubbidratio.applymap(str).combine(dfBLKsEndRd.applymap(str), lambda x, y: combine_text(x, y))
 
