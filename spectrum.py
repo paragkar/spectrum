@@ -4099,18 +4099,7 @@ if authentication_status:
 
 				dfwithbids = dfprovwinbid*mask.values #final datframe with actual submitted bids
 
-				summarydf = bidvalue(dfwithbids,dfBLKsEndRd).round(0)
-
-				#prepare the summary chart
-
-				summarydf = summarydf.reset_index()
-
-				summarydf.columns = ["Bidder","TotalBids"]
-
-				st.write(summarydf)
-
-				#preparing the summary chart 
-				figsummary = summarychart(summarydf, 'Bidder', "TotalBids")
+				figsummry = plotbiddertotal(dfwithbids,dfBLKsEndRd)
 	
 
 				data1 = [go.Heatmap(
