@@ -2063,7 +2063,7 @@ if authentication_status:
 			dftemp = dftemp.pivot(index="Bidder", columns='Band', values="PercentBidofTotal") #debug
 									
 
-			st.write(dftemp)
+			st.write(dftemp.T)
 
 		else:
 
