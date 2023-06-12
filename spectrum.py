@@ -4036,6 +4036,9 @@ if authentication_status:
 				dfBLKsEndRd = dflastsubbid.reset_index().pivot(index="Bidder", columns='LSA', 
 				values="Prov_Alloc_BLK_End_ClkRd").sort_index(ascending=True).round(0)
 
+				dfBLKsSelEndRd = dflastsubbid.reset_index().pivot(index="Bidder", columns='LSA', 
+				values="No_of_BLK_Selected").sort_index(ascending=True).round(0)
+
 				#function to combine text from two dataframe 
 
 				def combine_text(x, y):
