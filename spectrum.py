@@ -3891,7 +3891,7 @@ if authentication_status:
 
 				def combine_text(x, y):
 				    if x.notnull().all() and y.notnull().all():
-				        return x + '\n' + "("+y+")"
+				        return x + '<br>' + "("+y+")"
 				    elif x.notnull().all():
 				        return x
 				    else:
