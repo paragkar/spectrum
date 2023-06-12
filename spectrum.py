@@ -4079,6 +4079,10 @@ if authentication_status:
 
 				st.write(dfBLKsEndRd) #debug
 
+				mask = dfBLKsEndRd.replace(r'[1-9]+',1)
+
+				st.write(mask)
+
 				data1 = [go.Heatmap(
 							z=dflastsubbidheat.values,
 					        y= dflastsubbidheat.index,
