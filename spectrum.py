@@ -3886,9 +3886,16 @@ if authentication_status:
 				dfBLKsStartRd = dflastsubbid.reset_index().pivot(index="Bidder", columns='LSA', 
 				values="Prov_Alloc_BLK_Start_ClkRd").sort_index(ascending=True).round(0)
 
+				def combine_text(x, y):
+				    if pd.notnull(x) and pd.notnull(y):
+				        return str(x) + '\n' + str(y)
+				    elif pd.notnull(x):
+				        return str(x)
+				    else:
+				        return str(y)
 
-				df_combined = dflastsubbidheat.combine(dfBLKsStartRd, lambda x, y: str(x) + '\n' + str(y))
-
+				df_combined = dflastsubbidheat.applymap(str).combine(dfBLKsStartRd.applymap(str), combine_text)
+				
 				st.write(df_combined)
 
 				#dfrp is the reserve price
