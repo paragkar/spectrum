@@ -2044,7 +2044,12 @@ if authentication_status:
 							"BidNosUniqueCLKRdPrice", "HighestCLKRdPriceBidSubmitted", "BLKsBidCurrentCLKRdPrice", "TotalValueBid",
 							"TotalValueBidsAllLSABands", "RanddomIndex"]
 
-			st.write(dfbid)
+			dftemp = dfbid.copy()
+
+			dftemp = dftemp.groupby(['Clk_Round', "Band", "Bidder"])["TotalValueBid", "TotalValueBidsAllLSABands"].aggregate([
+									'sum','mean'])
+
+			st.write(dftemp)
 
 		else:
 
