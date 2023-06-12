@@ -3965,7 +3965,7 @@ if authentication_status:
 				  dtick = 1), 
 				)
 
-				title = titlesubpart+" - Last Submitted Bid Price (Start of Round No - "+ str(round_number)+")"
+				title = titlesubpart+" - Last Submitted Bid (Start of Round No - "+ str(round_number)+")"
 				subtitle = "Unit - Rs Cr (except ratio); Source - DoT; Winning Price is the Minimum Value (of Bid) at that Round"
 
 				style = "<style>h3 {text-align: left;}</style>"
@@ -4090,7 +4090,7 @@ if authentication_status:
 				  dtick = 1), 
 				)
 
-				title = titlesubpart+" - Last Submitted Bid Price (End of Round No - "+ str(round_number)+")"
+				title = titlesubpart+" - Last Submitted Bid (End of Round No - "+ str(round_number)+")"
 				subtitle = "Unit - Rs Cr (except ratio); Source - DoT; Winning Price is the Minimum Value (of Bid) at that Round"
 
 				style = "<style>h3 {text-align: left;}</style>"
