@@ -3966,7 +3966,7 @@ if authentication_status:
 				)
 
 				title = titlesubpart+" - Last Submitted Bid Price (Start of Round)"
-				subtitle = "Unit - Rs Cr (except ratio); Source - DoT"
+				subtitle = "Unit - Rs Cr (except ratio); Source - DoT; Winning Price is the Minimum Value (of Bid) at that Round"
 
 				style = "<style>h3 {text-align: left;}</style>"
 				with st.container():
@@ -4091,7 +4091,7 @@ if authentication_status:
 				)
 
 				title = titlesubpart+" - Last Submitted Bid Price (End of Round)"
-				subtitle = "Unit - Rs Cr (except ratio); Source - DoT"
+				subtitle = "Unit - Rs Cr (except ratio); Source - DoT; Winning Price is the Minimum Value (of Bid) at that Round"
 
 				style = "<style>h3 {text-align: left;}</style>"
 				with st.container():
