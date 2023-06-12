@@ -3965,15 +3965,15 @@ if authentication_status:
 				  dtick = 1), 
 				)
 
-				# title = titlesubpart+" - Excess Demand in Various Rounds"
-				# subtitle = "Unit - Nos; Source - DoT; Xaxis - Round Numbers"
+				title = titlesubpart+" - Last Submitted Bid Price (Start of Round)"
+				subtitle = "Unit - Rs Cr (except ratio); Source - DoT"
 
-				# style = "<style>h3 {text-align: left;}</style>"
-				# with st.container():
-				# 	#plotting the main chart
-				# 	st.markdown(style, unsafe_allow_html=True)
-				# 	st.header(title)
-				# 	st.markdown(subtitle)
+				style = "<style>h3 {text-align: left;}</style>"
+				with st.container():
+					#plotting the main chart
+					st.markdown(style, unsafe_allow_html=True)
+					st.header(title)
+					st.markdown(subtitle)
 
 
 				#Drawning a black border around the heatmap chart 
@@ -4090,15 +4090,15 @@ if authentication_status:
 				  dtick = 1), 
 				)
 
-				# title = titlesubpart+" - Excess Demand in Various Rounds"
-				# subtitle = "Unit - Nos; Source - DoT; Xaxis - Round Numbers"
+				title = titlesubpart+" - Last Submitted Bid Price (End of Round)"
+				subtitle = "Unit - Rs Cr (except ratio); Source - DoT"
 
-				# style = "<style>h3 {text-align: left;}</style>"
-				# with st.container():
-				# 	#plotting the main chart
-				# 	st.markdown(style, unsafe_allow_html=True)
-				# 	st.header(title)
-				# 	st.markdown(subtitle)
+				style = "<style>h3 {text-align: left;}</style>"
+				with st.container():
+					#plotting the main chart
+					st.markdown(style, unsafe_allow_html=True)
+					st.header(title)
+					st.markdown(subtitle)
 
 
 				#Drawning a black border around the heatmap chart 
