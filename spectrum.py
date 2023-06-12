@@ -2282,7 +2282,7 @@ if authentication_status:
 					hoverinfo ='text',
 					zmin=zmin, zmax=zmax, #debug
 					# text = hovertext,
-					colorscale='Hot',
+					colorscale='Rainbow',
 					# showscale=False,
 						texttemplate="%{z}", 
 						textfont={"size":10},
