@@ -3885,9 +3885,9 @@ if authentication_status:
 
 				dfrp = dflastsubbidRD2["Last_Sub_Bid_Start_CLKRd"].reset_index().drop_duplicates().replace(0,np.nan).dropna().set_index("LSA").sort_index()
 
-				dflastsubbidratio = round((dflastsubbid.T/dfrp.values).T,2).sort_index(ascending=False)
+				dflastsubbidratio = round((dflastsubbid.T/dfrp.values).T,2).sort_index(ascending=True)
 
-				dflastsubbid = dflastsubbid.sort_index(ascending=False)
+				dflastsubbid = dflastsubbid.sort_index(ascending=True)
 
 				data1 = [go.Heatmap(
 							z=dflastsubbid.values,
@@ -4010,9 +4010,9 @@ if authentication_status:
 
 				dfrp = dflastsubbidRD2["Last_Sub_Bid_Start_CLKRd"].reset_index().drop_duplicates().replace(0,np.nan).dropna().set_index("LSA").sort_index()
 
-				dflastsubbidratio = round((dflastsubbid.T/dfrp.values).T,2).sort_index(ascending=False)
+				dflastsubbidratio = round((dflastsubbid.T/dfrp.values).T,2).sort_index(ascending=True)
 
-				dflastsubbid = dflastsubbid.sort_index(ascending=False)
+				dflastsubbid = dflastsubbid.sort_index(ascending=True)
 
 				data1 = [go.Heatmap(
 							z=dflastsubbid.values,
