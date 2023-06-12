@@ -3990,7 +3990,7 @@ if authentication_status:
 				)
 
 				title = titlesubpart+" - Last Submitted Bid (Start of Round No - "+ str(round_number)+")"
-				subtitle = "Unit - Rs Cr (except ratio); BlockSize - "+str(blocksize)+" MHz; Source - DoT;"\
+				subtitle = "Unit - Rs Cr (Except Ratio); BlockSize - "+str(blocksize)+" MHz; Source - DoT;"\
 				" Winning Price - Min of Bid Value; Text below Bid Value:- (BA)- BLKS Allocated"
 
 				style = "<style>h3 {text-align: left;}</style>"
@@ -4147,7 +4147,7 @@ if authentication_status:
 				)
 
 				title = titlesubpart+" - Last Submitted Bid (End of Round No - "+ str(round_number)+")"
-				subtitle = "Unit - Rs Cr (except ratio); BlockSize - "+str(blocksize)+" MHz; Source - DoT;"\
+				subtitle = "Unit - Rs Cr (Except Ratio); BlockSize - "+str(blocksize)+" MHz; Source - DoT;"\
 				" Winning Price - Min of Bid Value; Text Below Bid Value:- (BS)- Blocks Selected; (BA)- Blocks Allocated"
 
 				style = "<style>h3 {text-align: left;}</style>"
