@@ -3890,7 +3890,7 @@ if authentication_status:
 
 				# dfrp = dflastsubbidRD2["Last_Sub_Bid_Start_CLKRd"].drop_duplicates().replace(0, np.nan).dropna().sort_index()
 
-				dfrp = dflastsubbidRD2["Last_Sub_Bid_Start_CLKRd"].sort_index()
+				dfrp = dflastsubbidRD2["Last_Sub_Bid_Start_CLKRd"].reset_index().drop_duplicates()
 
 				st.write(dfrp)
 
