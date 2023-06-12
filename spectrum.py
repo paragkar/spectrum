@@ -3881,6 +3881,13 @@ if authentication_status:
 				dflastsubbid = dflastsubbid.reset_index().pivot(index="Bidder", columns='LSA', 
 								values="Last_Sub_Bid_Start_CLKRd").sort_index(ascending=False).round(2)
 
+				#provisionaally allocated blocks in the start of selected round
+
+				dfBLKsEndRd = dflastsubbid.reset_index().pivot(index="Bidder", columns='LSA', 
+				values="Prov_Alloc_BLK_Start_ClkRd").sort_index(ascending=False).round(0)
+
+				st.write(dfBLKsEndRd)
+
 				#dfrp is the reserve price
 
 				dfrp = dflastsubbidRD2["Last_Sub_Bid_Start_CLKRd"].reset_index().drop_duplicates().replace(0,np.nan).dropna().set_index("LSA").sort_index()
