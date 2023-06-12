@@ -4077,7 +4077,7 @@ if authentication_status:
 
 				st.write(dflastsubbidheat) #debug
 
-				st.write(dfBLKsSelEndRd) #debug
+				st.write(dfBLKsEndRd) #debug
 
 				data1 = [go.Heatmap(
 							z=dflastsubbidheat.values,
