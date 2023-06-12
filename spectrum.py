@@ -1928,6 +1928,8 @@ if authentication_status:
 
 			totalrounds = 68
 			mainsheet = "2014_2G_1800"
+			mainsheetoriginal = "2014_2G_1800_Original"
+			mainoriflag = True
 			activitysheet = "2014_2G_Activity"
 			demandsheet = "2014_2G_1800_AD"
 			titlesubpart = "1800 MHz Auctions (CY-2014)"
@@ -1946,6 +1948,8 @@ if authentication_status:
 
 			totalrounds = 68
 			mainsheet = "2014_2G_900"
+			mainsheetoriginal = "2014_2G_900_Original"
+			mainoriflag = True
 			activitysheet = "2014_2G_Activity"
 			demandsheet = "2014_2G_900_AD"
 			titlesubpart = "900 MHz Auctions (CY-2014)"
@@ -1965,6 +1969,7 @@ if authentication_status:
 
 			totalrounds = 183
 			mainsheet = "2010_3G"
+			mainoriflag = False
 			activitysheet = "2010_3G_Activity"
 			demandsheet = "2010_3G_AD"
 			titlesubpart = "2100 MHz Auctions (CY-2010)"
@@ -1983,6 +1988,7 @@ if authentication_status:
 
 			totalrounds = 117
 			mainsheet = "2010_BWA"
+			mainoriflag = False
 			activitysheet = "2010_BWA_Activity"
 			demandsheet = "2010_BWA_AD"
 			titlesubpart = "2300 MHz Auctions (CY-2010)"
@@ -2001,6 +2007,7 @@ if authentication_status:
 
 			totalrounds = 14
 			mainsheet = "2012_2G_1800"
+			mainoriflag = False
 			activitysheet = "2012_2G_1800_Activity"
 			demandsheet = "2012_2G_1800_AD"
 			titlesubpart = "1800 MHz Auctions (CY-2012)"
@@ -2015,6 +2022,14 @@ if authentication_status:
 			zmin_blk_sec = 0
 			zmax_blk_sec = 4
 		
+
+
+		if mainoriflag == True:
+
+			dfbidori = loadauctionbiddata()[mainsheetoriginal].replace('-', np.nan, regex = True)
+
+			st.write(dfbidori)
+
 
 		dfbid = loadauctionbiddata()[mainsheet].replace('-', np.nan, regex = True)
 
