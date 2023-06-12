@@ -3878,7 +3878,7 @@ if authentication_status:
 
 			if roundoption == "Start of Round":
 
-				dflastsubbid = dflastsubbid.reset_index().pivot(index="Bidder", columns='LSA', 
+				dflastsubbidheat = dflastsubbid.reset_index().pivot(index="Bidder", columns='LSA', 
 								values="Last_Sub_Bid_Start_CLKRd").sort_index(ascending=False).round(2)
 
 				#provisionaally allocated blocks in the start of selected round
@@ -3897,9 +3897,9 @@ if authentication_status:
 				dflastsubbid = dflastsubbid.sort_index(ascending=True)
 
 				data1 = [go.Heatmap(
-							z=dflastsubbid.values,
-					        y= dflastsubbid.index,
-					        x=dflastsubbid.columns,
+							z=dflastsubbidheat.values,
+					        y= dflastsubbidheat.index,
+					        x=dflastsubbidheat.columns,
 							xgap = 0.5,
 							ygap = 1,
 							hoverinfo ='text',
@@ -4010,14 +4010,14 @@ if authentication_status:
 
 			if roundoption == "End of Round":
 
-				dflastsubbid = dflastsubbid.reset_index().pivot(index="Bidder", columns='LSA', 
+				dflastsubbidheat = dflastsubbid.reset_index().pivot(index="Bidder", columns='LSA', 
 								values="Last_Sub_Bid_End_CLKRd").sort_index(ascending=False).round(2)
 
 				#dfrp is the reserve price
 
 				dfrp = dflastsubbidRD2["Last_Sub_Bid_Start_CLKRd"].reset_index().drop_duplicates().replace(0,np.nan).dropna().set_index("LSA").sort_index()
 
-				dflastsubbidratio = round((dflastsubbid.T/dfrp.values).T,2).sort_index(ascending=True)
+				dflastsubbidratio = round((dflastsubbidheat.T/dfrp.values).T,2).sort_index(ascending=True)
 
 				dflastsubbid = dflastsubbid.sort_index(ascending=True)
 
