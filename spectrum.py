@@ -3884,6 +3884,8 @@ if authentication_status:
 				dflastsubbid = dflastsubbid.reset_index().pivot(index="Bidder", columns='LSA', 
 								values="Last_Sub_Bid_Start_CLKRd").sort_index(ascending=False)
 
+				dflastsubbid = dflastsubbid.replace(0, np.nan).dropna().sort_index()
+
 				dfrp = dflastsubbidRD2["Last_Sub_Bid_Start_CLKRd"].drop_duplicates().replace(0, np.nan).dropna().sort_index()
 
 				st.write(dflastsubbid/dfrp.values)
