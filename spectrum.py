@@ -3872,9 +3872,10 @@ if authentication_status:
 
 			filt2 = (dflastsubbid["Clk_Round"] == 2)
 
+			dflastsubbidRD2 = dflastsubbid[filt2]
+
 			dflastsubbid = dflastsubbid[filt1]
 
-			dflastsubbidRD2 = dflastsubbid[filt2]
 
 			roundoption = st.sidebar.radio('Click an Option', ["Start of Round", "End of Round"])
 
