@@ -4079,9 +4079,19 @@ if authentication_status:
 
 				st.write(dfBLKsEndRd) #debug
 
-				pattern = r'[1-9]+'
+				# Define a regular expression pattern to match numbers
+				pattern = r'\b(?!0)\d+\b'
 
-				mask = dfBLKsEndRd.replace(re.pattern, 1, regex = True)
+				# Function to replace numbers with 1, except 0
+				def replace_numbers(match):
+				    num = int(match.group())
+				    if num != 0:
+				        return '1'
+				    else:
+				        return str(num)
+
+				# Apply the regular expression pattern and replacement function to the dataframe
+				mask = dfBLKsEndRd.applymap(lambda x: re.sub(pattern, replace_numbers, str(x)))
 
 				st.write(mask)
 
