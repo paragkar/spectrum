@@ -3884,7 +3884,7 @@ if authentication_status:
 				#provisionaally allocated blocks in the start of selected round
 
 				dfBLKsEndRd = dflastsubbid.reset_index().pivot(index="Bidder", columns='LSA', 
-				values="Prov_Alloc_BLK_Start_ClkRd").sort_index(ascending=False).round(0)
+				values="Prov_Alloc_BLK_Start_ClkRd").sort_index(ascending=True).round(0)
 
 				st.write(dfBLKsEndRd)
 
