@@ -3868,9 +3868,13 @@ if authentication_status:
 
 			dflastsubbid = dfbidori.copy()
 
-			filt  =(dflastsubbid["Clk_Round"] == round_number) 
+			filt1 =(dflastsubbid["Clk_Round"] == round_number)
 
-			dflastsubbid = dflastsubbid[filt]
+			filt2 = (dflastsubbid["Clk_Round"] == 2)
+
+			dflastsubbid = dflastsubbid[filt1]
+
+			dflastsubbidRD2 = dflastsubbid[filt2]
 
 			roundoption = st.sidebar.radio('Click an Option', ["Start of Round", "End of Round"])
 
@@ -3880,6 +3884,8 @@ if authentication_status:
 								values="Last_Sub_Bid_Start_CLKRd").sort_index(ascending=False)
 
 				st.write(dflastsubbid)
+
+				st.write(dflastsubbidRD2)
 
 
 
