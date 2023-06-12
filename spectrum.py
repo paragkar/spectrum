@@ -3889,9 +3889,9 @@ if authentication_status:
 
 				#function to combine text from two dataframe 
 
-				def combine_text(x, y):
+				def combine_text(x, y, sep1): #sep is seperator
 				    if x.notnull().all() and y.notnull().all():
-				        return x + '<br>' + "("+y+")"
+				        return x + '<br>' + sep1 + y
 				    elif x.notnull().all():
 				        return x
 				    else:
@@ -3899,7 +3899,7 @@ if authentication_status:
 
 				#for rendering text of the final heatmap for Data1
 
-				df_combined1 = dflastsubbidheat.applymap(str).combine(dfBLKsStartRd.applymap(str), lambda x, y: combine_text(x, y))
+				df_combined1 = dflastsubbidheat.applymap(str).combine(dfBLKsStartRd.applymap(str), lambda x, y: combine_text(x, y, 'BA-'))
 
 				#dfrp is the reserve price
 
@@ -3909,7 +3909,7 @@ if authentication_status:
 
 				#for rendering text of the final heatmap for Data2
 
-				df_combined2 = dflastsubbidratio.applymap(str).combine(dfBLKsStartRd.applymap(str), lambda x, y: combine_text(x, y))
+				df_combined2 = dflastsubbidratio.applymap(str).combine(dfBLKsStartRd.applymap(str), lambda x, y: combine_text(x, y, 'BA-'))
 
 				dflastsubbidheat = dflastsubbidheat.sort_index(ascending=True)
 
@@ -4041,9 +4041,9 @@ if authentication_status:
 
 				#function to combine text from two dataframe 
 
-				def combine_text(x, y):
+				def combine_text(x, y, sep1): #sep is seperator
 				    if x.notnull().all() and y.notnull().all():
-				        return x + '<br>' + "("+y+")"
+				        return x + '<br>' + sep1 + y
 				    elif x.notnull().all():
 				        return x
 				    else:
@@ -4051,9 +4051,9 @@ if authentication_status:
 
 				#for rendering text of the final heatmap for Data1
 
-				df_combined1 = dflastsubbidheat.applymap(str).combine(dfBLKsSelEndRd.applymap(str), lambda x, y: combine_text(x, y))
+				df_combined1 = dflastsubbidheat.applymap(str).combine(dfBLKsSelEndRd.applymap(str), lambda x, y: combine_text(x, y,'BS-'))
 
-				df_combined1 = df_combined1.applymap(str).combine(dfBLKsEndRd.applymap(str), lambda x, y: combine_text(x, y))
+				df_combined1 = df_combined1.applymap(str).combine(dfBLKsEndRd.applymap(str), lambda x, y: combine_text(x, y, 'BA-'))
 
 
 				#dfrp is the reserve price
@@ -4064,9 +4064,9 @@ if authentication_status:
 
 				#for rendering text of the final heatmap for Data2
 
-				df_combined2 = dflastsubbidratio.applymap(str).combine(dfBLKsSelEndRd.applymap(str), lambda x, y: combine_text(x, y))
+				df_combined2 = dflastsubbidratio.applymap(str).combine(dfBLKsSelEndRd.applymap(str), lambda x, y: combine_text(x, y, 'BS-'))
 
-				df_combined2 = df_combined2.applymap(str).combine(dfBLKsEndRd.applymap(str), lambda x, y: combine_text(x, y))
+				df_combined2 = df_combined2.applymap(str).combine(dfBLKsEndRd.applymap(str), lambda x, y: combine_text(x, y, 'BA-'))
 
 				dflastsubbidheat = dflastsubbidheat.sort_index(ascending=True)
 
