@@ -1922,7 +1922,7 @@ if authentication_status:
 
 	if selected_dimension == "Auction Data":
 
-		Feature = st.sidebar.selectbox("Select a Feature", ["2010-Band2100","2010-Band2300", "2012-Band1800","2014-Band1800","2014-Band900","2014-Combined"])
+		Feature = st.sidebar.selectbox("Select a Feature", ["2010-Band2100","2010-Band2300", "2012-Band1800","2014-Band1800","2014-Band900"])
 
 		if Feature == "2014-Band1800":
 
