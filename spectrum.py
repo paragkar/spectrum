@@ -3889,9 +3889,9 @@ if authentication_status:
 
 				#function to combine text from two dataframe 
 
-				def combine_text(x, y, sep1): #sep is seperator
+				def combine_text(sep2, x, y, sep1): #sep is seperator
 				    if x.notnull().all() and y.notnull().all():
-				        return x + '<br>' + sep1 + y
+				        return sep2 + x + '<br>' + sep1 + y
 				    elif x.notnull().all():
 				        return x
 				    else:
@@ -3901,7 +3901,7 @@ if authentication_status:
 
 				dflastsubbidheat = dflastsubbidheat.round(1)
 
-				df_combined1 = dflastsubbidheat.applymap(str).combine(dfBLKsStartRd.applymap(str), lambda x, y: combine_text(x, y, 'BA-'))
+				df_combined1 = dflastsubbidheat.applymap(str).combine(dfBLKsStartRd.applymap(str), lambda x, y: combine_text('Rs ', x, y, 'BA-'))
 
 				#dfrp is the reserve price
 
@@ -4043,9 +4043,9 @@ if authentication_status:
 
 				#function to combine text from two dataframe 
 
-				def combine_text(x, y, sep1): #sep is seperator
+				def combine_text(sep2, x, y, sep1): #sep is seperator
 				    if x.notnull().all() and y.notnull().all():
-				        return x + '<br>' + sep1 + y
+				        return sep2 + x + '<br>' + sep1 + y
 				    elif x.notnull().all():
 				        return x
 				    else:
@@ -4055,7 +4055,7 @@ if authentication_status:
 
 				dflastsubbidheat = dflastsubbidheat.round(1)
 
-				df_combined1 = dflastsubbidheat.applymap(str).combine(dfBLKsSelEndRd.applymap(str), lambda x, y: combine_text(x, y,'BS-'))
+				df_combined1 = dflastsubbidheat.applymap(str).combine(dfBLKsSelEndRd.applymap(str), lambda x, y: combine_text('Rs ', x, y,'BS-'))
 
 				df_combined1 = df_combined1.applymap(str).combine(dfBLKsEndRd.applymap(str), lambda x, y: combine_text(x, y, 'BA-'))
 
