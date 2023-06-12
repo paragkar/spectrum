@@ -2041,7 +2041,7 @@ if authentication_status:
 
 			dfbidori = dfbidori.set_index("LSA").sort_index(ascending = False)
 
-			# st.write(dfbidori)
+			st.write(dfbidori)
 
 
 		dfbid = loadauctionbiddata()[mainsheet].replace('-', np.nan, regex = True)
