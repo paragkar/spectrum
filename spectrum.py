@@ -2044,13 +2044,23 @@ if authentication_status:
 							"BidNosUniqueCLKRdPrice", "HighestCLKRdPriceBidSubmitted", "BLKsBidCurrentCLKRdPrice", "TotalValueBid",
 							"TotalValueBidsAllLSABands", "RanddomIndex"]
 
+
+			round_number = st.slider("Select Auction Round Numbers using the Silder below", min_value=1, max_value=totalrounds, step=1, value = totalrounds)
+
 			dftemp = dfbid.copy()
+
+			filt  =(dftemp["Clk_Round"] == round_number) 
+
+			dftemp = dftemp[filt]
 
 			dftemp = dftemp.replace(',','',regex=True)
 
-			dftemp = dftemp.groupby(['Clk_Round', 'Band', 'Bidder']).aggregate({'TotalValueBid' : 'sum', 'TotalValueBidsAllLSABands': 'mean'})
+			dftemp = dftemp.groupby(['Band', 'Bidder']).aggregate({'TotalValueBid' : 'sum', 'TotalValueBidsAllLSABands': 'mean'})
 
 			dftemp["PercentBidofTotal"] = round((dftemp["TotalValueBid"]/dftemp["TotalValueBidsAllLSABands"])*100,1)
+
+
+			dftemp = dftemp.pivot(index="Bidder", columns='Band', values="PercentBidofTotal") #debug
 									
 
 			st.write(dftemp)
