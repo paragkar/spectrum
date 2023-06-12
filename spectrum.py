@@ -1931,12 +1931,13 @@ if authentication_status:
 			activitysheet = "2014_2G_Activity"
 			demandsheet = "2014_2G_1800_AD"
 			titlesubpart = "1800 MHz Auctions (CY-2014)"
+			subtitlesubpartbidactivity = ""
 			xdtick =5
 			zmin=1
 			zmax=5
 			zmin_af = 0.5
 			zmax_af = 1
-			texttempbiddemandactivity = ""
+			texttempbiddemandactivity = "; Combined for both 1800 & 900 MHz Bands"
 			blocksize = 0.2
 			zmin_blk_sec = 0
 			zmax_blk_sec = 4
@@ -1948,6 +1949,7 @@ if authentication_status:
 			activitysheet = "2014_2G_Activity"
 			demandsheet = "2014_2G_900_AD"
 			titlesubpart = "900 MHz Auctions (CY-2014)"
+			subtitlesubpartbidactivity = "; Combined for both 1800 & 900 MHz Bands"
 			xdtick =5
 			zmin=1
 			zmax=5
@@ -1966,6 +1968,7 @@ if authentication_status:
 			activitysheet = "2010_3G_Activity"
 			demandsheet = "2010_3G_AD"
 			titlesubpart = "2100 MHz Auctions (CY-2010)"
+			subtitlesubpartbidactivity = ""
 			xdtick =10
 			zmin=1 
 			zmax=5
@@ -1983,6 +1986,7 @@ if authentication_status:
 			activitysheet = "2010_BWA_Activity"
 			demandsheet = "2010_BWA_AD"
 			titlesubpart = "2300 MHz Auctions (CY-2010)"
+			subtitlesubpartbidactivity=""
 			xdtick =10
 			zmin=1
 			zmax=3
@@ -2000,6 +2004,7 @@ if authentication_status:
 			activitysheet = "2012_2G_1800_Activity"
 			demandsheet = "2012_2G_1800_AD"
 			titlesubpart = "1800 MHz Auctions (CY-2012)"
+			subtitlesubpartbidactivity = ""
 			xdtick =1
 			zmin=1
 			zmax=3
@@ -3128,7 +3133,7 @@ if authentication_status:
 					)
 
 				title = titlesubpart+" - Points in Play"
-				subtitle = "Unit - Nos; Source - DoT; Xaxis - Round Numbers"
+				subtitle = "Unit - Nos; Source - DoT; Xaxis - Round Numbers"+subtitlesubpartbidactivity
 				style = "<style>h3 {text-align: left;}</style>"
 				with st.container():
 					#plotting the main chart
