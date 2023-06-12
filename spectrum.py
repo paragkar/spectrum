@@ -4107,6 +4107,8 @@ if authentication_status:
 
 				summarydf.columns = ["Bidder","TotalBids"]
 
+				st.write(summarydf)
+
 				#preparing the summary chart 
 				figsummary = summarychart(summarydf, 'Bidder', "TotalBids")
 	
