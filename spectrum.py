@@ -3900,7 +3900,7 @@ if authentication_status:
 							showscale=True,
 								texttemplate="%{z}", 
 								textfont={"size":10},
-								reversescale=True,
+								# reversescale=True,
 								)]
 
 				data2 = [go.Heatmap(
@@ -3916,7 +3916,7 @@ if authentication_status:
 							showscale=True,
 								texttemplate="%{z}", 
 								textfont={"size":10},
-								reversescale=True,
+								# reversescale=True,
 								)]			
 
 				figauc1 = go.Figure(data=data1)
