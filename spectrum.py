@@ -4075,9 +4075,7 @@ if authentication_status:
 				dflastsubbidheat = dflastsubbidheat.sort_index(ascending=True)
 
 
-				st.write(dflastsubbidheat) #debug
-
-				st.write(dfBLKsEndRd) #debug
+				#working for the summary bar chart at the bottom of the heatmap
 
 				# Define a regular expression pattern to match numbers
 				pattern = r'\b(?!0)\d+\b'
@@ -4096,11 +4094,11 @@ if authentication_status:
 				for col in mask.columns:
 					mask[col] = mask[col].astype(int)
 
+				dfwithbids = dflastsubbidheat*mask.values #final datframe with actual submitted bids
 
+				df_final = bidvalue(dfwithbids,dfBLKsEndRd)
 
-				dfwithbids = dflastsubbidheat*mask.values
-
-				st.write(dfwithbids)
+				st.write(df_final)
 
 				data1 = [go.Heatmap(
 							z=dflastsubbidheat.values,
