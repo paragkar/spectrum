@@ -3886,7 +3886,7 @@ if authentication_status:
 
 				st.write(dflastsubbid)
 
-				st.write(dflastsubbidRD2["Last_Sub_Bid_Start_CLKRd"])
+				st.write(dflastsubbidRD2["Last_Sub_Bid_Start_CLKRd"].drop_duplicates())
 
 
 
