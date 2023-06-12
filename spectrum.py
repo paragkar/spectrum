@@ -2028,6 +2028,10 @@ if authentication_status:
 
 			dfbidori = loadauctionbiddata()[mainsheetoriginal].replace('-', np.nan, regex = True)
 
+			dfbidori.columns = ["Clk_Round", "Bidder","LSA","Last_Sub_Bid_Start_CLKRd", "Rank_Start_ClkRd", 
+						"Possible_Raise_Bid_ClkRd", "Bid_Decision", "Last_Sub_Bid_End_CLKRd", "Rank_End_ClkRd", 
+						"No_of_BLK_Selected", "Prov_Alloc_BLK_Start_ClkRd", "Prov_Alloc_BLK_End_ClkRd", "Prov_Win_Price_End_ClkRd"]
+
 			st.write(dfbidori)
 
 
