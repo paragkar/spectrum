@@ -2043,7 +2043,7 @@ if authentication_status:
 
 			dfbidori = dfbidori.set_index("LSA").sort_index(ascending = False)
 
-			st.write(dfbidori.T)
+			st.write(dfbidori)
 
 
 		dfbid = loadauctionbiddata()[mainsheet].replace('-', np.nan, regex = True)
@@ -3879,7 +3879,7 @@ if authentication_status:
 				dflastsubbid = dflastsubbid.reset_index().pivot(index="Bidder", columns='LSA', 
 								values="Last_Sub_Bid_Start_CLKRd").sort_index(ascending=False)
 
-				st.write(dflastsubbid)
+				st.write(dflastsubbid.T)
 
 
 
