@@ -2046,7 +2046,7 @@ if authentication_status:
 
 			dftemp = dfbid.copy()
 
-			dftemp = dftemp.groupby([['Clk_Round', 'Band', 'Bidder']])["TotalValueBid", "TotalValueBidsAllLSABands"].aggregate([
+			dftemp = dftemp.groupby(['Clk_Round', 'Band', 'Bidder'])[["TotalValueBid", "TotalValueBidsAllLSABands"]].aggregate([
 									'sum','mean'])
 
 			st.write(dftemp)
