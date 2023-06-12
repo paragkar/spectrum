@@ -3864,7 +3864,7 @@ if authentication_status:
 
 			round_number = st.slider("Select Auction Round Numbers using the Silder below", min_value=1, max_value=totalrounds, step=1, value = totalrounds)
 
-			dflastsubbid = dfbid.copy()
+			dflastsubbid = dfbidori.copy()
 
 			filt  =(dflastsubbid["Clk_Round"] == round_number) 
 
