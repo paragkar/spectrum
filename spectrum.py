@@ -2032,6 +2032,8 @@ if authentication_status:
 						"Possible_Raise_Bid_ClkRd", "Bid_Decision", "Last_Sub_Bid_End_CLKRd", "Rank_End_ClkRd", 
 						"No_of_BLK_Selected", "Prov_Alloc_BLK_Start_ClkRd", "Prov_Alloc_BLK_End_ClkRd", "Prov_Win_Price_End_ClkRd"]
 
+			dfbidori = dfbidori.drop(columns = ["Possible_Raise_Bid_ClkRd"])
+
 			dfbidori = dfbidori.replace("No Bid", 0)
 			dfbidori = dfbidori.replace("Bid",1)
 
@@ -3876,7 +3878,7 @@ if authentication_status:
 
 				dflastsubbid = dflastsubbid.reset_index().pivot(index="Bidder", columns='LSA', 
 								values="Last_Sub_Bid_Start_CLKRd").sort_index(ascending=False)
-				
+
 				st.write(dflastsubbid)
 
 
