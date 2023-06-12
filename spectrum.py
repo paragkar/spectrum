@@ -4075,7 +4075,10 @@ if authentication_status:
 				dflastsubbidheat = dflastsubbidheat.sort_index(ascending=True)
 
 
-				#working for the summary bar chart at the bottom of the heatmap
+				#working for the summary bar chart at the side of the heatmap
+
+				dfprovwinbid = dflastsubbid.reset_index().pivot(index="Bidder", columns='LSA', 
+								values="Prov_Win_Price_End_ClkRd").sort_index(ascending=False).round(2)
 
 				# Define a regular expression pattern to match numbers
 				pattern = r'\b(?!0)\d+\b'
@@ -4094,7 +4097,7 @@ if authentication_status:
 				for col in mask.columns:
 					mask[col] = mask[col].astype(int)
 
-				dfwithbids = dflastsubbidheat*mask.values #final datframe with actual submitted bids
+				dfwithbids = dfprovwinbid*mask.values #final datframe with actual submitted bids
 
 				df_final = bidvalue(dfwithbids,dfBLKsEndRd).round(0)
 
