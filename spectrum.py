@@ -4101,8 +4101,6 @@ if authentication_status:
 
 				summarydf = bidvalue(dfwithbids,dfBLKsEndRd).round(0)
 
-				st.write(df_final) #Final datframe gives the summary of prices at PWB
-
 				#prepare the summary chart
 
 				summarydf = summarydf.reset_index()
