@@ -4093,7 +4093,10 @@ if authentication_status:
 				# Apply the regular expression pattern and replacement function to the dataframe
 				mask = dfBLKsEndRd.applymap(lambda x: re.sub(pattern, replace_numbers, str(x)))
 
-				st.write(type(mask))
+				for col in mask.columns:
+					mask[col] = mask[col].astype(int)
+
+				st.write(mask)
 
 				data1 = [go.Heatmap(
 							z=dflastsubbidheat.values,
