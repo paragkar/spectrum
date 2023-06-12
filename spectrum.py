@@ -2032,7 +2032,16 @@ if authentication_status:
 						"Possible_Raise_Bid_ClkRd", "Bid_Decision", "Last_Sub_Bid_End_CLKRd", "Rank_End_ClkRd", 
 						"No_of_BLK_Selected", "Prov_Alloc_BLK_Start_ClkRd", "Prov_Alloc_BLK_End_ClkRd", "Prov_Win_Price_End_ClkRd"]
 
-			st.write(dfbidori)
+			dfbidori = dfbidori.replace("No Bid", 0)
+			dfbidori = dfbidori.replace("Bid",1)
+
+			listofbidders = sorted(list(set(dfbidori["Bidder"])))
+
+			listofcircles = sorted(list(set(dfbidori["LSA"]))) #debug
+
+			dfbidori = dfbidori.set_index("LSA").sort_index(ascending = False)
+
+			# st.write(dfbidori)
 
 
 		dfbid = loadauctionbiddata()[mainsheet].replace('-', np.nan, regex = True)
