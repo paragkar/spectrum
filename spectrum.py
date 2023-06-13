@@ -4272,11 +4272,11 @@ if authentication_status:
 
 				st.write(dfBLKsEndRd)
 
-				df_value = (dfwithbids*dfBLKsEndRd.values).sum(axis=0)
+				df_value = (dfwithbids*dfBLKsEndRd.values).sum(axis=0).reset_index()
 
-				st.write(df_value)
+				df_value.columns = ["LSA", "Total"]
 
-				# figsumcols = summarychart(dfcolsumbidvalue, 'Bidder', "LSA") #debug
+				figsumcols = summarychart(df_value, 'LSA', "Total") #debug
 	
 
 				data1 = [go.Heatmap(
@@ -4394,7 +4394,7 @@ if authentication_status:
 					col1,col2 = st.columns([8,1]) #create collumns of uneven width
 					with col1:
 						st.plotly_chart(figauc1, use_container_width=True)
-						# st.altair_chart(figsumcols, use_container_width=True)
+						st.altair_chart(figsumcols, use_container_width=True)
 
 					with col2:
 						st.markdown("")
@@ -4404,7 +4404,7 @@ if authentication_status:
 					col1,col2 = st.columns([8,1]) #create collumns of uneven width
 					with col1:
 						st.plotly_chart(figauc2, use_container_width=True)
-						# st.altair_chart(figsumcols, use_container_width=True)
+						st.altair_chart(figsumcols, use_container_width=True)
 					with col2:
 						st.markdown("")
 						st.plotly_chart(figsummry, use_container_width=True)
