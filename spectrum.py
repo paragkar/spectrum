@@ -2218,21 +2218,24 @@ if authentication_status:
 
 				titlesubpart2 = " - Provisional Winners (End of Selected Rounds)"
 
-				st.write(resultdf[::-1])
+				resultdf = resultdf[::-1] #reverse the dataframe from the index point of view
+
+
+				st.write(dfprovallcblks_endrd)
 
 
 
-				# def combine_text(x, y, sep1): #sep is seperator
-				#     if x.notnull().all() and y.notnull().all():
-				#         return x + '<br>' + sep1 + y
-				#     elif x.notnull().all():
-				#         return x
-				#     else:
-				#         return y
+				def combine_text(x, y, sep1): #sep is seperator
+				    if x.notnull().all() and y.notnull().all():
+				        return x + '<br>' + sep1 + y
+				    elif x.notnull().all():
+				        return x
+				    else:
+				        return y
 
-				#for rendering text of the final heatmap for Data
+				for rendering text of the final heatmap for Data
 
-				# df_combined = resultdf.applymap(str).combine(dfprovallcblks_endrd.applymap(str), lambda x, y: combine_text(x, y, 'BA-'))
+				df_combined = resultdf.applymap(str).combine(dfprovallcblks_endrd.applymap(str), lambda x, y: combine_text(x, y, 'BA-'))
 
 
 
