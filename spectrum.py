@@ -4239,7 +4239,7 @@ if authentication_status:
 				values="No_of_BLK_Selected").sort_index(ascending=True).round(0)
 
 
-				st.write(dfBLKsSelEndRd) #debug
+				st.write(dfBLKsEndRd) #debug
 
 				#function to combine text from two dataframe 
 
