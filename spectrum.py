@@ -2239,7 +2239,7 @@ if authentication_status:
 
 				df_combined = resultdf1.applymap(str).combine(dfprovallcblks_endrd.applymap(str), lambda x, y: combine_text(x, y, 'BA-'))
 
-				df_combined = df_combined.sort_values(selected_lsa[0], ascending = True)
+				# df_combined = df_combined.sort_values(selected_lsa[0], ascending = True)
 
 
 				st.write(df_combined)
