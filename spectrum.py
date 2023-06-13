@@ -2097,7 +2097,7 @@ if authentication_status:
 			# dftemp = dfbidcirclwise.drop(columns=["Possible_Raise_Bid_ClkRd", "Rank_PWB_Start_ClkRd", "Rank_PWB_End_ClkRd",
 			# 							"PWB_End_ClkRd","Clk_Round", "PWB_Start_ClkRd"], axis=1)
 
-			dftemp = dftemp.reset_index().groupby(["LSA", "Bidder"]).sum().reset_index()
+			dftemp = dfbidcirclwise.groupby(["LSA", "Bidder"]).sum().reset_index()
 
 			summarydf = dftemp.groupby(["LSA"]).sum().reset_index().drop(columns = "Bidder", axis =1)
 
