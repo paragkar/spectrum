@@ -3927,7 +3927,7 @@ if authentication_status:
 							# zmin=0.5, zmax=1,
 							showscale=True,
 								texttemplate="%{text}", 
-								textfont={"size":10},
+								textfont={"size":8},
 								# reversescale=True,
 								)]
 
@@ -3943,7 +3943,7 @@ if authentication_status:
 							# zmin=0.5, zmax=1,
 							showscale=True,
 								texttemplate="%{text}", 
-								textfont={"size":10},
+								textfont={"size":8},
 								# reversescale=True,
 								)]			
 
@@ -4114,7 +4114,7 @@ if authentication_status:
 							# zmin=0.5, zmax=1,
 							showscale=True,
 								texttemplate="%{text}", 
-								textfont={"size":10},
+								textfont={"size":8},
 								# reversescale=True,
 								)]
 
@@ -4130,7 +4130,7 @@ if authentication_status:
 							# zmin=0.5, zmax=1,
 							showscale=True,
 								texttemplate="%{text}", 
-								textfont={"size":10},
+								textfont={"size":8},
 								# reversescale=True,
 								)]			
 
