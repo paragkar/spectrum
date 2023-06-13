@@ -4258,17 +4258,21 @@ if authentication_status:
 
 				dfwithbids = dfprovwinbid*mask.values #final datframe with actual submitted bids
 
+				#plotting the barchart for row sums
+
 				figsummry = plotbiddertotal(dfwithbids,dfBLKsEndRd)
 
 				figsummry.update_yaxes(visible=False, showticklabels=False)
 
 				figsummry.update_layout(height=615)
 
+				#plotting the barchart for collumn sums
 
-				st.write(dflastsubbidheat)
+				dfcolsumbidvalue = bidvalue(dfwithbids,dfBLKsEndRd)
 
+				st.write(dfcolsumbidvalue)
 
-				figsumcols = summarychart(dflastsubbidheat, 'Bidder', "LSA") #debug
+				# figsumcols = summarychart(dfcolsumbidvalue, 'Bidder', "LSA") #debug
 	
 
 				data1 = [go.Heatmap(
@@ -4386,7 +4390,7 @@ if authentication_status:
 					col1,col2 = st.columns([8,1]) #create collumns of uneven width
 					with col1:
 						st.plotly_chart(figauc1, use_container_width=True)
-						st.altair_chart(figsumcols, use_container_width=True)
+						# st.altair_chart(figsumcols, use_container_width=True)
 
 					with col2:
 						st.markdown("")
@@ -4396,7 +4400,7 @@ if authentication_status:
 					col1,col2 = st.columns([8,1]) #create collumns of uneven width
 					with col1:
 						st.plotly_chart(figauc2, use_container_width=True)
-						st.altair_chart(figsumcols, use_container_width=True)
+						# st.altair_chart(figsumcols, use_container_width=True)
 					with col2:
 						st.markdown("")
 						st.plotly_chart(figsummry, use_container_width=True)
