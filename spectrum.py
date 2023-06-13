@@ -4268,7 +4268,7 @@ if authentication_status:
 
 				#plotting the barchart for collumn sums
 
-				dfcolsumbidvalue = bidvalue(dfwithbids,dfBLKsEndRd)
+				dfcolsumbidvalue = bidvalue(dfwithbids,dfBLKsEndRd.T)
 
 				st.write(dfcolsumbidvalue)
 
