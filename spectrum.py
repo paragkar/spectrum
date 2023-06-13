@@ -3819,7 +3819,7 @@ if authentication_status:
 
 				ADPrecOfBlksforSale = round((dfbidaAD/dfbidaBlksSale.values),1) #debug
 
-				st.write(dfbidaBlksSale.iloc[:,1])
+				st.write(dfbidaBlksSale.iloc[:,0])
 
 
 				hovertext = htext_auctiondata_2010_3G_BWA_DemandIntensity(dfbid,ADPrecOfBlksforSale)
