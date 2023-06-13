@@ -2589,7 +2589,7 @@ if authentication_status:
 						hoverinfo ='text',
 						text = hovertext,
 						colorscale='picnic',
-						showscale=True,
+						# showscale=True,
 							texttemplate="%{z}", 
 							textfont={"size":10},
 							# reversescale=True,
