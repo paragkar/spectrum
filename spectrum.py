@@ -2561,6 +2561,13 @@ if authentication_status:
 					  dtick = 1), 
 					)
 
+					figauc.update_layout(
+					    coloraxis=dict(
+					        cmin=0,  # Set the minimum value of the color bar
+					        # zmax=10  # Set the maximum value of the color bar
+					    )
+					)
+
 					# figauc.update_layout(
 				    # template="plotly",
 				    # xaxis_side= 'top',
@@ -2589,7 +2596,7 @@ if authentication_status:
 						hoverinfo ='text',
 						text = hovertext,
 						colorscale='picnic',
-						# showscale=True,
+						showscale=True,
 							texttemplate="%{z}", 
 							textfont={"size":10},
 							# reversescale=True,
