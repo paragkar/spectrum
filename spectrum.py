@@ -3001,7 +3001,7 @@ if authentication_status:
 
 				figsumrows.update_layout(height = 615)
 
-				dftemp1 = dftemp.sort_index(ascending=False) # for inputing data into hovertext for proper alignment
+				dftemp1 = dftemp.sort_index(ascending=True) # for inputing data into hovertext for proper alignment
 
 				hovertext = htext_auctiondata_2010_3G_BWA_BlocksAllocated(dftemp1)
 
