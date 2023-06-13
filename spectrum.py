@@ -4268,11 +4268,8 @@ if authentication_status:
 
 				#plotting the barchart for collumn sums
 
-				st.write(dfwithbids)
 
-				st.write(dfBLKsEndRd)
-
-				df_value = (dfwithbids*dfBLKsEndRd.values).sum(axis=0).reset_index()
+				df_value = (dfwithbids*dfBLKsEndRd.values).sum(axis=0).reset_index().round(0)
 
 				df_value.columns = ["LSA", "Total"]
 
