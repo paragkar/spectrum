@@ -3840,6 +3840,8 @@ if authentication_status:
 
 				figblkssale.update_traces(marker=dict(color='red'))
 
+				figblkssale.update_yaxes(visible=False, showticklabels=False)
+
 
 				hovertext = htext_auctiondata_2010_3G_BWA_DemandIntensity(dfbid,ADPrecOfBlksforSale)
 
