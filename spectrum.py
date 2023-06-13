@@ -4127,8 +4127,7 @@ if authentication_status:
 
 				dfrp = dflastsubbidRD2["Last_Sub_Bid_Start_CLKRd"].reset_index().drop_duplicates().set_index("LSA").sort_index()
 
-				# dfrp = dfrp.reset_index().drop_duplicates(subset="LSA", keep='last').set_index("LSA")
-
+				dfrp = dfrp.groupby('Index').filter(lambda x: not (x['Last_Sub_Bid_Start_CLKRd'] == 0).any() and len(x) == 1)
 
 				st.write(dflastsubbidheat) #debug
 
