@@ -3826,10 +3826,8 @@ if authentication_status:
 
 				blocksforsale.columns = ["LSA", "Blocks"]
 
-				blocksforsale = blocksforsale.set_index("LSA")
+				figblkssale = px.bar(blocksforsale, x="Blocks", y="LSA", orientation='h') #plotly horizontal bar chart 
 
-
-				st.write(blocksforsale)
 
 
 
@@ -3948,9 +3946,28 @@ if authentication_status:
 			
 				# st.plotly_chart(figauc, use_container_width=True)
 
+
 				tab1, tab2 = st.tabs(["Aggregate Demand", "Ratio (AD/BLKsForSale)"]) #For showning the absolute and Ratio charts in two differet tabs
-				tab1.plotly_chart(figauc1, use_container_width=True)
-				tab2.plotly_chart(figauc2, use_container_width=True)
+
+				with tab1:
+					col1,col2 = st.columns([8,1]) #create collumns of uneven width
+					with col1:
+						st.plotly_chart(figauc1, use_container_width=True)
+					with col2:
+						st.markdown("")
+						st.plotly_chart(figblkssale, use_container_width=True)
+
+				with tab2:
+					col1,col2 = st.columns([8,1]) #create collumns of uneven width
+					with col1:
+						st.plotly_chart(figauc2, use_container_width=True)
+					with col2:
+						st.markdown("")
+						st.plotly_chart(figblkssale, use_container_width=True)
+
+				# tab1, tab2 = st.tabs(["Aggregate Demand", "Ratio (AD/BLKsForSale)"]) #For showning the absolute and Ratio charts in two differet tabs
+				# tab1.plotly_chart(figauc1, use_container_width=True)
+				# tab2.plotly_chart(figauc2, use_container_width=True)
 
 
 			if optiontype == "Excess Demand":
