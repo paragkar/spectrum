@@ -2633,9 +2633,12 @@ if authentication_status:
 
 				if chartoption == "Absolute Values":
 					col1,col2 = st.columns([8,1]) #create collumns of uneven width
-					col1.plotly_chart(figauc, use_container_width=True)
-					col2.header("")
-					col2.plotly_chart(figpanindiabids, use_container_width=True)
+					with col1:
+						st.plotly_chart(figauc, use_container_width=True)
+					with col2:
+						st.markdown("")
+						st.plotly_chart(figpanindiabids, use_container_width=True)
+
 
 				if chartoption =="ReservePrice Multiple":
 					st.plotly_chart(figauc, use_container_width=True)
