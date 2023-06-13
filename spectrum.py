@@ -3001,7 +3001,7 @@ if authentication_status:
 
 				figsumrows.update_layout(height = 615)
 
-				hovertext = htext_auctiondata_2010_3G_BWA_BlocksAllocated(dftemp)
+				hovertext = htext_auctiondata_2010_3G_BWA_BlocksAllocated(dftemp.sort_index(ascending=False))
 
 				dftemp = dftemp.sort_index(ascending=True)
 
