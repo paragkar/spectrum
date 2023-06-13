@@ -4268,7 +4268,7 @@ if authentication_status:
 				st.write(dflastsubbidheat)
 
 
-				figsumcols = summarychart(dflastsubbidheat, 'LSA', "Total") #debug
+				figsumcols = summarychart(dflastsubbidheat, 'Bidder', "LSA") #debug
 	
 
 				data1 = [go.Heatmap(
