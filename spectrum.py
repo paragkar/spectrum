@@ -3819,7 +3819,15 @@ if authentication_status:
 
 				ADPrecOfBlksforSale = round((dfbidaAD/dfbidaBlksSale.values),1) #debug
 
-				st.write(dfbidaBlksSale.iloc[:,0])
+
+				#summary chart for total blocks for sale on right
+
+				blocksforsale = dfbidaBlksSale.iloc[:,0].reset_index()
+
+				blocksforsale.columns = ["LSA", "Blocks"]
+
+				st.write(blocksforsale)
+
 
 
 				hovertext = htext_auctiondata_2010_3G_BWA_DemandIntensity(dfbid,ADPrecOfBlksforSale)
