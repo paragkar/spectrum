@@ -4144,6 +4144,9 @@ if authentication_status:
 
 				dflastsubbidratio = round((dflastsubbidheat.T/dfrp.values).T,2).sort_index(ascending=True)
 
+
+				st.write(dflastsubbidratio) #debug
+
 				#for rendering text of the final heatmap for Data2
 
 				df_combined2 = dflastsubbidratio.applymap(str).combine(dfBLKsStartRd.applymap(str), lambda x, y: combine_text('Ratio-', x, y, 'BA-'))
