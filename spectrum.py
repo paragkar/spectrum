@@ -3141,6 +3141,7 @@ if authentication_status:
 					colorscale='Hot',
 					showscale=True,
 						texttemplate=texttempbiddemandactivity,
+						textangle=-90,
 						textfont={"size":8},
 						reversescale=True,
 						)]
