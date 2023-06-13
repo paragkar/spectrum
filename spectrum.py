@@ -4272,7 +4272,7 @@ if authentication_status:
 
 				st.write(dfBLKsEndRd)
 
-				df_value = dfwithbids*dfBLKsEndRd
+				df_value = dfwithbids*dfBLKsEndRd.values
 
 				st.write(df_value)
 
