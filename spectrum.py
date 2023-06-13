@@ -2224,8 +2224,9 @@ if authentication_status:
 
 				st.write(resultdf1)
 
-				st.write(dfprovallcblks_endrd)
+				dfprovallcblks_endrd = dfprovallcblks_endrd.replace(np.nan,0)
 
+				st.write(dfprovallcblks_endrd)
 
 				def combine_text(x, y): #sep is seperator
 				    if x.notnull().all() and y.notnull().all():
