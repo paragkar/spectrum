@@ -4139,6 +4139,8 @@ if authentication_status:
 				# Concatenate the repeated and non-repeated dataframes
 				dfrp = pd.concat([df_repeated, df_non_repeated])
 
+				dfrp = dfrp.set_index("LSA").sort_index()
+
 
 				st.write(dflastsubbidheat) #debug
 
