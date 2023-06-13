@@ -1925,7 +1925,28 @@ if authentication_status:
 
 	if selected_dimension == "Auction Data":
 
-		Feature = st.sidebar.selectbox("Select a Feature", ["2010-Band2100","2010-Band2300", "2012-Band1800","2014-Band1800","2014-Band900"])
+		Feature = st.sidebar.selectbox("Select a Feature", ["2010-Band2100","2010-Band2300", "2012-Band1800","2014-Band1800","2014-Band900","2015-Band800"])
+
+		if Feature == "2014-Band800":
+
+			totalrounds = 115
+			mainsheet = "2015_2G_800"
+			mainsheetoriginal = "2015_2G_800_Original"
+			mainoriflag = True
+			activitysheet = "2014_2G_Activity"
+			demandsheet = "2015_2G_800_AD"
+			titlesubpart = "800 MHz Auctions (CY-2015)"
+			subtitlesubpartbidactivity = "; Combined for All Bands"
+			xdtick =5
+			zmin=1
+			zmax=5
+			zmin_af = 0.5
+			zmax_af = 1
+			texttempbiddemandactivity = ""
+			blocksize = 0.2
+			zmin_blk_sec = 0
+			zmax_blk_sec = 4
+
 
 		if Feature == "2014-Band1800":
 
