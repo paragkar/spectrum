@@ -2215,10 +2215,25 @@ if authentication_status:
 
 				resultdfheat = resultdfheat.replace("LOST",0)
 
-				# dftempheat = dftemp.pivot(index="Bidder", columns='LSA', values="Bid_Decision")
-
 
 				titlesubpart2 = " - Provisional Winners (End of Selected Rounds)"
+
+
+				dfprovallcblks_endrd = dfbidori.pivot(index="Bidder", columns='LSA', values="Prov_Alloc_BLK_End_ClkRd") #debug
+
+
+				def combine_text(x, y, sep1): #sep is seperator
+				    if x.notnull().all() and y.notnull().all():
+				        return x + '<br>' + sep1 + y
+				    elif x.notnull().all():
+				        return x
+				    else:
+				        return y
+
+				#for rendering text of the final heatmap for Data
+
+				df_combined = resultdf.applymap(str).combine(dfprovallcblks_endrd.applymap(str), lambda x, y: combine_text(x, y, 'BA-'))
+
 
 
 				data = [go.Heatmap(
@@ -2228,7 +2243,7 @@ if authentication_status:
 					xgap = 1,
 					ygap = 1,
 					hoverinfo ='text',
-					text = resultdf.values,
+					text = df_combined.values,
 					colorscale="Picnic",
 						texttemplate="%{text}",
 						textfont={"size":10},
