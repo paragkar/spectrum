@@ -4103,7 +4103,7 @@ if authentication_status:
 
 				figsummry.update_yaxes(visible=False, showticklabels=False)
 
-				figsummry.update_layout(height=625)
+				figsummry.update_layout(height=615)
 	
 
 				data1 = [go.Heatmap(
