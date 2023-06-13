@@ -4272,9 +4272,9 @@ if authentication_status:
 
 				st.write(dfBLKsEndRd)
 
-				# dfcolsumbidvalue = bidvalue(dfwithbids,dfBLKsEndRd.T)
+				df_value = dfwithbids*dfBLKsEndRd
 
-				# st.write(dfcolsumbidvalue)
+				st.write(df_value)
 
 				# figsumcols = summarychart(dfcolsumbidvalue, 'Bidder', "LSA") #debug
 	
