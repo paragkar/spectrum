@@ -4263,6 +4263,9 @@ if authentication_status:
 				figsummry.update_yaxes(visible=False, showticklabels=False)
 
 				figsummry.update_layout(height=615)
+
+
+				figsumcols = summarychart(dflastsubbidheat, 'LSA', "Total") #debug
 	
 
 				data1 = [go.Heatmap(
@@ -4380,6 +4383,8 @@ if authentication_status:
 					col1,col2 = st.columns([8,1]) #create collumns of uneven width
 					with col1:
 						st.plotly_chart(figauc1, use_container_width=True)
+						st.altair_chart(figsumcols, use_container_width=True)
+
 					with col2:
 						st.markdown("")
 						st.plotly_chart(figsummry, use_container_width=True)
@@ -4388,6 +4393,7 @@ if authentication_status:
 					col1,col2 = st.columns([8,1]) #create collumns of uneven width
 					with col1:
 						st.plotly_chart(figauc2, use_container_width=True)
+						st.altair_chart(figsumcols, use_container_width=True)
 					with col2:
 						st.markdown("")
 						st.plotly_chart(figsummry, use_container_width=True)
