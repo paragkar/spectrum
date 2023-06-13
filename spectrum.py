@@ -4317,7 +4317,23 @@ if authentication_status:
 
 				#dfrp is the reserve price
 
-				dfrp = dflastsubbidRD2["Last_Sub_Bid_Start_CLKRd"].reset_index().drop_duplicates().replace(0,np.nan).dropna().set_index("LSA").sort_index()
+				# dfrp = dflastsubbidRD2["Last_Sub_Bid_Start_CLKRd"].reset_index().drop_duplicates().replace(0,np.nan).dropna().set_index("LSA").sort_index()
+
+				dfrp = dflastsubbidRD2["Last_Sub_Bid_Start_CLKRd"].reset_index().drop_duplicates().set_index("LSA").sort_index().reset_index()
+
+				# Identify indexes that are repeated twice
+				repeated_indexes = dfrp['LSA'].duplicated(keep=False)
+
+				# Select non-zero values for repeated indexes
+				df_repeated = dfrp[repeated_indexes & (dfrp['Last_Sub_Bid_Start_CLKRd'] != 0)]
+
+				# Include values for non-repeated indexes
+				df_non_repeated = dfrp[~repeated_indexes]
+
+				# Concatenate the repeated and non-repeated dataframes
+				dfrp = pd.concat([df_repeated, df_non_repeated])
+
+				dfrp = dfrp.set_index("LSA").sort_index()
 
 				dflastsubbidratio = round((dflastsubbidheat.T/dfrp.values).T,2).sort_index(ascending=True)
 
