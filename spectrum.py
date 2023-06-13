@@ -4268,9 +4268,13 @@ if authentication_status:
 
 				#plotting the barchart for collumn sums
 
-				dfcolsumbidvalue = bidvalue(dfwithbids,dfBLKsEndRd.T)
+				st.write(dfwithbids)
 
-				st.write(dfcolsumbidvalue)
+				st.write(dfBLKsEndRd)
+
+				# dfcolsumbidvalue = bidvalue(dfwithbids,dfBLKsEndRd.T)
+
+				# st.write(dfcolsumbidvalue)
 
 				# figsumcols = summarychart(dfcolsumbidvalue, 'Bidder', "LSA") #debug
 	
