@@ -4265,6 +4265,9 @@ if authentication_status:
 				figsummry.update_layout(height=615)
 
 
+				st.write(dflastsubbidheat)
+
+
 				figsumcols = summarychart(dflastsubbidheat, 'LSA', "Total") #debug
 	
 
