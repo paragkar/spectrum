@@ -2085,7 +2085,6 @@ if authentication_status:
 
 		dfprallauctions = loadauctionbiddata()["Reserve_Prices_All_Auctions"]
 
-		st.write(dfprallauctions)
 
 		dfbid = loadauctionbiddata()[mainsheet].replace('-', np.nan, regex = True)
 
