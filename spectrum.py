@@ -4123,7 +4123,10 @@ if authentication_status:
 
 				#dfrp is the reserve price
 
-				dfrp = dflastsubbidRD2["Last_Sub_Bid_Start_CLKRd"].reset_index().drop_duplicates().replace(0,np.nan).dropna().set_index("LSA").sort_index()
+				# dfrp = dflastsubbidRD2["Last_Sub_Bid_Start_CLKRd"].reset_index().drop_duplicates().replace(0,np.nan).dropna().set_index("LSA").sort_index()
+
+				dfrp = dflastsubbidRD2["Last_Sub_Bid_Start_CLKRd"].reset_index().drop_duplicates().set_index("LSA").sort_index()
+
 
 				st.write(dflastsubbidheat) #debug
 
