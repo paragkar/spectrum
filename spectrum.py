@@ -2516,7 +2516,7 @@ if authentication_status:
 
 					figpanindiabids.update_yaxes(visible=False, showticklabels=False)
 
-					figpanindiabids.update_layout(height = 625)
+					figpanindiabids.update_layout(height = 620)
 
 
 					hovertext, colormatrix = htext_colormatrix_auctiondata_2010_3G_BWA_ProvWinningBid(dfrp, dftemp, pwbtype, round_number) #debug
