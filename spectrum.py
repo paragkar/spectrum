@@ -4238,8 +4238,27 @@ if authentication_status:
 				dfBLKsSelEndRd = dflastsubbid.reset_index().pivot(index="Bidder", columns='LSA', 
 				values="No_of_BLK_Selected").sort_index(ascending=True).round(0)
 
+				#process for win and lost for heatmap color
 
-				st.write(dfBLKsEndRd) #debug
+				# Define a regular expression pattern to match numbers
+				pattern = r'\b(?!0)\d+\b'
+
+				# Function to replace numbers with 1, except 0
+				def replace_numbers(match):
+				    num = int(match.group())
+				    if num != 0:
+				        return '1'
+				    else:
+				        return str(num)
+
+				# Apply the regular expression pattern and replacement function to the dataframe
+				mask = dfBLKsEndRd.applymap(lambda x: re.sub(pattern, replace_numbers, str(x)))
+
+				for col in mask.columns:
+					mask[col] = mask[col].astype(int)
+
+				st.write(mask)
+
 
 				#function to combine text from two dataframe 
 
