@@ -2797,6 +2797,8 @@ if authentication_status:
 
 					hovertext, colormatrix = htext_colormatrix_auctiondata_2010_3G_BWA_ProvWinningBid(dfrp, dftemp1, pwbtype, round_number) #debug
 
+					dftemp = dftemp.sort_index(ascending=True)
+
 					data = [go.Heatmap(
 						z=dftemp.values,
 				        y= dftemp.index,
