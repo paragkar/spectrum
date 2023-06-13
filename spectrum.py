@@ -3826,7 +3826,7 @@ if authentication_status:
 
 				blocksforsale.columns = ["LSA", "Blocks"]
 
-				figblkssale = px.bar(blocksforsale, x="Blocks", y="LSA", orientation='h', height = 610) #plotly horizontal bar chart 
+				figblkssale = px.bar(blocksforsale, x="Blocks", y="LSA", orientation='h', height = 615) #plotly horizontal bar chart 
 
 				figblkssale.update_layout(xaxis=dict(title='BlocksForSale'), yaxis=dict(title=''))
 
