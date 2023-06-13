@@ -1933,7 +1933,7 @@ if authentication_status:
 			mainsheet = "2015_2G_800"
 			mainsheetoriginal = "2015_2G_800_Original"
 			mainoriflag = True
-			activitysheet = "2015_2G_Activity"
+			activitysheet = "2015_2G_3G_Activity"
 			demandsheet = "2015_2G_800_AD"
 			titlesubpart = "800 MHz Auctions (CY-2015)"
 			subtitlesubpartbidactivity = "; Combined for All Bands"
