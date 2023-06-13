@@ -4252,13 +4252,11 @@ if authentication_status:
 				        return str(num)
 
 				# Apply the regular expression pattern and replacement function to the dataframe
+				# mask dataframe has 1 for winners and 0 for losers
 				mask = dfBLKsEndRd.applymap(lambda x: re.sub(pattern, replace_numbers, str(x)))
 
 				for col in mask.columns:
 					mask[col] = mask[col].astype(int)
-
-				st.write(mask) #mask dataframe has 1 for winners and 0 for losers
-
 
 				#function to combine text from two dataframe 
 
@@ -4338,13 +4336,13 @@ if authentication_status:
 
 				data1 = [go.Heatmap(
 							z=mask.values,
-					        y= mask.index,
+					        y=mask.index,
 					        x=mask.columns,
 							xgap = 0.5,
 							ygap = 1,
 							hoverinfo ='text',
 							text = df_combined1.values,
-							colorscale='reds',
+							colorscale='Picnic',
 							# zmin=0.5, zmax=1,
 							showscale=False,
 								texttemplate="%{text}", 
@@ -4360,7 +4358,7 @@ if authentication_status:
 							ygap = 1,
 							hoverinfo ='text',
 							text = df_combined2.values,
-							colorscale='reds',
+							colorscale='Picnic',
 							# zmin=0.5, zmax=1,
 							showscale=False,
 								texttemplate="%{text}", 
