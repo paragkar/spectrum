@@ -2219,7 +2219,7 @@ if authentication_status:
 				titlesubpart2 = " - Provisional Winners (End of Selected Rounds)"
 
 
-				dfprovallcblks_endrd = dfbidori.pivot(index="Bidder", columns='LSA', values="Prov_Alloc_BLK_End_ClkRd") #debug
+				dfprovallcblks_endrd = dfbidori.reset_index().pivot(index="Bidder", columns='LSA', values="Prov_Alloc_BLK_End_ClkRd") #debug
 
 
 				def combine_text(x, y, sep1): #sep is seperator
