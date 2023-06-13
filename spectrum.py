@@ -1939,7 +1939,7 @@ if authentication_status:
 			zmax=5
 			zmin_af = 0.5
 			zmax_af = 1
-			texttempbiddemandactivity = "%{z}"
+			texttempbiddemandactivity = ""
 			blocksize = 0.2
 			zmin_blk_sec = 0
 			zmax_blk_sec = 4
@@ -3141,7 +3141,6 @@ if authentication_status:
 					colorscale='Hot',
 					showscale=True,
 						texttemplate=texttempbiddemandactivity,
-						textangle=-90,
 						textfont={"size":8},
 						reversescale=True,
 						)]
