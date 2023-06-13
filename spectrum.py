@@ -2065,7 +2065,7 @@ if authentication_status:
 		if mainoriflag == True:
 
 			SubFeature = st.sidebar.selectbox("Select a SubFeature", ["BidsCircleWise","RanksCircleWise", "ProvWinningBid", "BlocksSelected",
-										  "BlocksAllocated","BiddingActivity", "DemandActivity","LastBidPriceSub"])
+										  "BlocksAllocated","BiddingActivity", "DemandActivity","LastBidPrice"])
 
 		if mainoriflag == False:
 
@@ -4057,7 +4057,7 @@ if authentication_status:
 				st.plotly_chart(figauc, use_container_width=True)
 
 
-		if SubFeature == "LastBidPriceSub":
+		if SubFeature == "LastBidPrice":
 
 			round_number = st.slider("Select Auction Round Numbers using the Silder below", min_value=1, max_value=totalrounds, step=1, value = totalrounds)
 
