@@ -2510,11 +2510,15 @@ if authentication_status:
 
 				if chartoption == "Absolute Values":
 
+
 					figpanindiabids = plotbiddertotal(dftemp,dfblocksalloc_rdend)
+
 
 					figpanindiabids.update_yaxes(visible=False, showticklabels=False)
 
 					figpanindiabids.update_layout(height = 640)
+
+					dftemp = dftemp.sort_index(ascending=False)
 
 					hovertext, colormatrix = htext_colormatrix_auctiondata_2010_3G_BWA_ProvWinningBid(dfrp, dftemp, pwbtype, round_number) #debug
 
