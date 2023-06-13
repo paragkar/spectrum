@@ -4100,6 +4100,8 @@ if authentication_status:
 				dfwithbids = dfprovwinbid*mask.values #final datframe with actual submitted bids
 
 				figsummry = plotbiddertotal(dfwithbids,dfBLKsEndRd)
+
+				figsummry.update_yaxes(visible=False, showticklabels=False)
 	
 
 				data1 = [go.Heatmap(
