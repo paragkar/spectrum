@@ -3953,9 +3953,6 @@ if authentication_status:
 
 				figauc2.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 
-			
-				# st.plotly_chart(figauc, use_container_width=True)
-
 
 				tab1, tab2 = st.tabs(["Aggregate Demand", "Ratio (AD/BLKsForSale)"]) #For showning the absolute and Ratio charts in two differet tabs
 				with tab1:
