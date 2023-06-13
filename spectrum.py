@@ -2218,6 +2218,8 @@ if authentication_status:
 
 				titlesubpart2 = " - Provisional Winners (End of Selected Rounds)"
 
+				st.write(resultdf)
+
 
 
 				# def combine_text(x, y, sep1): #sep is seperator
