@@ -1937,6 +1937,8 @@ if authentication_status:
 			demandsheet = "2015_2G_800_AD"
 			titlesubpart = "800 MHz Auctions (CY-2015)"
 			subtitlesubpartbidactivity = "; Combined for All Bands"
+			year =2015
+			band = 800
 			xdtick =5
 			zmin=1
 			zmax=5
@@ -1958,6 +1960,8 @@ if authentication_status:
 			demandsheet = "2014_2G_1800_AD"
 			titlesubpart = "1800 MHz Auctions (CY-2014)"
 			subtitlesubpartbidactivity = "; Combined for both 1800 & 900 MHz Bands"
+			year = 2014
+			band = 1800
 			xdtick =5
 			zmin=1
 			zmax=5
@@ -1978,6 +1982,8 @@ if authentication_status:
 			demandsheet = "2014_2G_900_AD"
 			titlesubpart = "900 MHz Auctions (CY-2014)"
 			subtitlesubpartbidactivity = "; Combined for both 1800 & 900 MHz Bands"
+			year = 2014
+			band = 900
 			xdtick =5
 			zmin=1
 			zmax=5
@@ -1998,6 +2004,8 @@ if authentication_status:
 			demandsheet = "2010_3G_AD"
 			titlesubpart = "2100 MHz Auctions (CY-2010)"
 			subtitlesubpartbidactivity = ""
+			year = 2010
+			band = 2100
 			xdtick =10
 			zmin=1 
 			zmax=5
@@ -2017,6 +2025,8 @@ if authentication_status:
 			demandsheet = "2010_BWA_AD"
 			titlesubpart = "2300 MHz Auctions (CY-2010)"
 			subtitlesubpartbidactivity=""
+			year = 2010
+			band = 2300
 			xdtick =10
 			zmin=1
 			zmax=3
@@ -2036,6 +2046,8 @@ if authentication_status:
 			demandsheet = "2012_2G_1800_AD"
 			titlesubpart = "1800 MHz Auctions (CY-2012)"
 			subtitlesubpartbidactivity = ""
+			year = 2012
+			band = 1800
 			xdtick =1
 			zmin=1
 			zmax=3
@@ -2049,6 +2061,10 @@ if authentication_status:
 
 
 		if mainoriflag == True:
+
+			dfprallauctions = loadauctionbiddata()["Reserve_Prices_All_Auctions"]
+
+			st.write(dfprallauctions)
 
 			dfbidori = loadauctionbiddata()[mainsheetoriginal].replace('-', np.nan, regex = True)
 
@@ -2067,6 +2083,8 @@ if authentication_status:
 
 			dfbidori = dfbidori.set_index("LSA").sort_index(ascending = False)
 
+
+		dfprallauctions = loadauctionbiddata()["Reserve_Prices_All_Auctions"]
 
 		dfbid = loadauctionbiddata()[mainsheet].replace('-', np.nan, regex = True)
 
