@@ -2518,7 +2518,7 @@ if authentication_status:
 
 					figpanindiabids.update_layout(height = 620)
 
-					dftemp = dftemp.sort_index(ascending=False)
+					dftemp = dftemp.sort_index(ascending=True)
 
 
 					hovertext, colormatrix = htext_colormatrix_auctiondata_2010_3G_BWA_ProvWinningBid(dfrp, dftemp, pwbtype, round_number) #debug
