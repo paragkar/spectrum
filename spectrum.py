@@ -3828,6 +3828,17 @@ if authentication_status:
 
 				figblkssale = px.bar(blocksforsale, x="Blocks", y="LSA", orientation='h') #plotly horizontal bar chart 
 
+				figblkssale.update_layout(xaxis=dict(title='BlocksForSale'), yaxis=dict(title=''))
+
+				figblkssale.update_traces(text=blocksforsale['Blocks'], textposition='auto')
+
+				figblkssale.update_xaxes(tickvals=[])
+
+				figblkssale.update_layout(xaxis=dict(side='top', title_standoff=0, ticklen=0, title_font=dict(size=14)))
+
+				figblkssale.update_layout(xaxis_title_standoff=5)
+
+				figblkssale.update_traces(marker=dict(color='red'))
 
 
 
