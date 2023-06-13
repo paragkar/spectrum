@@ -4238,6 +4238,9 @@ if authentication_status:
 				dfBLKsSelEndRd = dflastsubbid.reset_index().pivot(index="Bidder", columns='LSA', 
 				values="No_of_BLK_Selected").sort_index(ascending=True).round(0)
 
+
+				st.write(dfBLKsSelEndRd) #debug
+
 				#function to combine text from two dataframe 
 
 				def combine_text(sep2, x, y, sep1): #sep is seperator
