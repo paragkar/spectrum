@@ -3001,9 +3001,9 @@ if authentication_status:
 
 				figsumrows.update_layout(height = 615)
 
-				dftemp = dftemp.sort_index(ascending=True)
-
 				hovertext = htext_auctiondata_2010_3G_BWA_BlocksAllocated(dftemp)
+
+				dftemp = dftemp.sort_index(ascending=True)
 
 				data = [go.Heatmap(
 						z=dftemp.values,
@@ -3113,9 +3113,10 @@ if authentication_status:
 
 				figsumcols = summarychart(sumcols, "LSA", "Total Slots")
 
+				hovertext = htext_auctiondata_2010_3G_BWA_BlocksAllocated(dftemp)
+
 				dftemp = dftemp.sort_index(ascending=True)
 
-				hovertext = htext_auctiondata_2010_3G_BWA_BlocksAllocated(dftemp)
 
 				data = [go.Heatmap(
 						z=dftemp.values,
