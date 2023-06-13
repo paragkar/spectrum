@@ -2999,7 +2999,6 @@ if authentication_status:
 
 				figsumrows.update_yaxes(visible=False, showticklabels=False)
 
-
 				figsumrows.update_layout(height = 615)
 
 				dftemp = dftemp.sort_index(ascending=True)
@@ -3109,10 +3108,10 @@ if authentication_status:
 
 				figsumrows.update_yaxes(visible=False, showticklabels=False)
 
+				figsumrows.update_layout(height = 615)
+
 
 				figsumcols = summarychart(sumcols, "LSA", "Total Slots")
-
-				figsumcols.update_layout(height = 615)
 
 				dftemp = dftemp.sort_index(ascending=True)
 
