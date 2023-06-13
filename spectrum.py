@@ -2638,7 +2638,7 @@ if authentication_status:
 					with col1:
 						st.plotly_chart(figauc, use_container_width=True)
 					with col2:
-						st.markdown("")
+						st.header("")
 						st.plotly_chart(figpanindiabids, use_container_width=True)
 
 
