@@ -1927,7 +1927,7 @@ if authentication_status:
 
 		Feature = st.sidebar.selectbox("Select a Feature", ["2010-Band2100","2010-Band2300", "2012-Band1800","2014-Band1800","2014-Band900","2015-Band800"])
 
-		if Feature == "2014-Band800":
+		if Feature == "2015-Band800":
 
 			totalrounds = 115
 			mainsheet = "2015_2G_800"
