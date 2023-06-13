@@ -3140,7 +3140,8 @@ if authentication_status:
 					text = hovertext,
 					colorscale='Hot',
 					showscale=True,
-						texttemplate=texttempbiddemandactivity, 
+						texttemplate=texttempbiddemandactivity,
+						textangle=-90, 
 						textfont={"size":8},
 						reversescale=True,
 						)]
