@@ -1257,7 +1257,7 @@ if authentication_status:
 			for xi,xx in enumerate(dftemp.columns):
 
 				blocksalloc = dftemp.loc[yy,xx]
-				spectrumMHz = round((dftemp.loc[yy,xx])*blocksize,1)
+				spectrumMHz = (dftemp.loc[yy,xx])*blocksize
 
 
 				hovertext[-1].append(
@@ -1270,7 +1270,7 @@ if authentication_status:
 						    yy,
 						    xx,
 						    blocksalloc,
-						    spectrumMHz,
+						    round(spectrumMHz,2),
 						    )
 						    )
 
