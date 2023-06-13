@@ -2222,6 +2222,10 @@ if authentication_status:
 
 				dfprovallcblks_endrd = dfprovallcblks_endrd.sort_values(selected_lsa[0], ascending = False)
 
+				st.write(resultdf1)
+
+				st.write(dfprovallcblks_endrd)
+
 
 				def combine_text(x, y, sep1): #sep is seperator
 				    if x.notnull().all() and y.notnull().all():
