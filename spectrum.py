@@ -4102,6 +4102,8 @@ if authentication_status:
 				figsummry = plotbiddertotal(dfwithbids,dfBLKsEndRd)
 
 				figsummry.update_yaxes(visible=False, showticklabels=False)
+
+				figsummry.update_layout(height=625)
 	
 
 				data1 = [go.Heatmap(
