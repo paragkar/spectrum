@@ -3021,13 +3021,32 @@ if authentication_status:
 
 				figauc = go.Figure(data=data)
 
-				figauc.update_layout(
-				    template="seaborn",
-				    xaxis_side= 'top',
-				   	height = 650,
-				   	yaxis=dict(
-			        tickmode='array',
-			        	))
+				figauc.update_layout(uniformtext_minsize=12, 
+					  uniformtext_mode='hide', 
+					  xaxis_title=None, 
+					  yaxis_title=None, 
+					  yaxis_autorange='reversed',
+					  font=dict(size=12),
+					  template='simple_white',
+					  paper_bgcolor=None,
+					  height=600, 
+					  # width=1200,
+					  margin=dict(t=80, b=50, l=0, r=0, pad=0),
+					  yaxis=dict(
+			        	  tickmode='array'),
+					  xaxis = dict(
+					  side = 'top',
+					  tickmode = 'linear',
+					  tickangle=0,
+					  dtick = 1), 
+					)
+
+					figauc.update_layout(
+					    coloraxis=dict(
+					        cmin=0,  # Set the minimum value of the color bar
+					        # zmax=10  # Set the maximum value of the color bar
+					    )
+					)
 
 				title = titlesubpart+" - Blocks Allocated at the Start of Round No -"+str(round_number)
 				subtitle = "Unit - Numbers; Block Size = "+ str(blocksize) +" MHz; Source - DoT"
@@ -3110,13 +3129,32 @@ if authentication_status:
 
 				figauc = go.Figure(data=data)
 
-				figauc.update_layout(
-				    template="seaborn",
-				    xaxis_side= 'top',
-				   	height = 650,
-				   	yaxis=dict(
-			        tickmode='array',
-			        	))
+				figauc.update_layout(uniformtext_minsize=12, 
+					  uniformtext_mode='hide', 
+					  xaxis_title=None, 
+					  yaxis_title=None, 
+					  yaxis_autorange='reversed',
+					  font=dict(size=12),
+					  template='simple_white',
+					  paper_bgcolor=None,
+					  height=600, 
+					  # width=1200,
+					  margin=dict(t=80, b=50, l=0, r=0, pad=0),
+					  yaxis=dict(
+			        	  tickmode='array'),
+					  xaxis = dict(
+					  side = 'top',
+					  tickmode = 'linear',
+					  tickangle=0,
+					  dtick = 1), 
+					)
+
+					figauc.update_layout(
+					    coloraxis=dict(
+					        cmin=0,  # Set the minimum value of the color bar
+					        # zmax=10  # Set the maximum value of the color bar
+					    )
+					)
 
 				title = titlesubpart+" - Blocks Allocated at the End of Round No -"+str(round_number)
 				subtitle = "Unit - Numbers; Block Size = "+ str(blocksize) +" MHz; Source - DoT"
