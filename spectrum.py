@@ -2514,7 +2514,7 @@ if authentication_status:
 
 					figpanindiabids.update_yaxes(visible=False, showticklabels=False)
 
-					figpanindiabids.update_layout(height = 620)
+					figpanindiabids.update_layout(height = 600)
 
 					hovertext, colormatrix = htext_colormatrix_auctiondata_2010_3G_BWA_ProvWinningBid(dfrp, dftemp, pwbtype, round_number) #debug
 
@@ -2671,7 +2671,7 @@ if authentication_status:
 					with col1:
 						st.plotly_chart(figauc, use_container_width=True)
 					with col2:
-						st.header("")
+						st.markdown("")
 						st.plotly_chart(figpanindiabids, use_container_width=True)
 
 
