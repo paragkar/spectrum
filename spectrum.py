@@ -3889,7 +3889,7 @@ if authentication_status:
 				  paper_bgcolor=None,
 				  height=600, 
 				  width=1200,
-				  margin=dict(t=80, b=0, l=0, r=0, pad=0),
+				  margin=dict(t=80, b=50, l=0, r=0, pad=0),
 				  yaxis=dict(
 		        	  tickmode='array'),
 				  xaxis = dict(
