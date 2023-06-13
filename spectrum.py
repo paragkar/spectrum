@@ -3826,6 +3826,9 @@ if authentication_status:
 
 				blocksforsale.columns = ["LSA", "Blocks"]
 
+				blocksforsale = blocksforsale.set_index("LSA")
+
+
 				st.write(blocksforsale)
 
 
