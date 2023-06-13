@@ -2218,34 +2218,6 @@ if authentication_status:
 
 				titlesubpart2 = " - Provisional Winners (End of Selected Rounds)"
 
-				resultdf1 = resultdf[::-1] #reverse the dataframe from the index point of view
-
-				dfprovallcblks_endrd = dfprovallcblks_endrd.sort_values(selected_lsa[0], ascending = False)
-
-				st.write(resultdf1)
-
-				dfprovallcblks_endrd = dfprovallcblks_endrd.replace(np.nan,0)
-
-				st.write(dfprovallcblks_endrd)
-
-				def combine_text(x, y): #sep is seperator
-				    if x.notnull().all() and y.notnull().all():
-				        return x + '<br>' + y
-				    elif x.notnull().all():
-				        return x
-				    else:
-				        return y
-
-				# for rendering text of the final heatmap for Data
-
-				df_combined = dfprovallcblks_endrd.applymap(str).combine(resultdf1.applymap(str), lambda x, y: combine_text(x, y))
-
-				df_combined = df_combined.sort_values(selected_lsa[0], ascending = True)
-
-
-				st.write(df_combined)
-
-
 				data = [go.Heatmap(
 					z=resultdfheat.values,
 			        x=resultdfheat.columns,
@@ -2253,7 +2225,7 @@ if authentication_status:
 					xgap = 1,
 					ygap = 1,
 					hoverinfo ='text',
-					text = df_combined.values,
+					text = resultdf.values,
 					colorscale="Picnic",
 						texttemplate="%{text}",
 						textfont={"size":10},
