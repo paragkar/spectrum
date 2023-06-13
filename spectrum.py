@@ -2218,7 +2218,7 @@ if authentication_status:
 
 				titlesubpart2 = " - Provisional Winners (End of Selected Rounds)"
 
-				resultdf = resultdf[::-1] #reverse the dataframe from the index point of view
+				resultdf1 = resultdf[::-1] #reverse the dataframe from the index point of view
 
 				# dfprovallcblks_endrd = dfprovallcblks_endrd.sort_values(selected_lsa[0], ascending = True)
 
