@@ -3822,7 +3822,7 @@ if authentication_status:
 
 				#summary chart for total blocks for sale on right
 
-				blocksforsale = dfbidaBlksSale.iloc[:,0].reset_index()
+				blocksforsale = dfbidaBlksSale.iloc[:,0].sort_index(ascending = False).reset_index()
 
 				blocksforsale.columns = ["LSA", "Blocks"]
 
