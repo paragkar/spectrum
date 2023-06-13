@@ -2514,7 +2514,7 @@ if authentication_status:
 					figpanindiabids = plotbiddertotal(dftemp,dfblocksalloc_rdend)
 
 
-					figpanindiabids.update_yaxes(visible=False, showticklabels=False)
+					# figpanindiabids.update_yaxes(visible=False, showticklabels=False)
 
 					figpanindiabids.update_layout(height = 615)
 
