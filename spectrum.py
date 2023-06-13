@@ -1062,6 +1062,8 @@ if authentication_status:
 	@st.cache_resource
 	def htext_colormatrix_auctiondata_2010_3G_BWA_ProvWinningBid(dfrp, dftemp, pwbtype, round_number):
 
+		dftemp = dftemp.sort_index(ascending=True)
+
 		dftemprpmul = round(dftemp/dfrp,1)
 
 		hovertext = []
