@@ -1248,6 +1248,7 @@ if authentication_status:
 	@st.cache_resource
 	def htext_auctiondata_2010_3G_BWA_BlocksAllocated(dftemp):
 
+		dftemp = dftemp.sort_index(ascending=True)
 
 		hovertext = []
 		for yi,yy in enumerate(dftemp.index):
@@ -1256,7 +1257,7 @@ if authentication_status:
 			for xi,xx in enumerate(dftemp.columns):
 
 				blocksalloc = dftemp.loc[yy,xx]
-				spectrumMHz = (dftemp.loc[yy,xx])*blocksize
+				spectrumMHz = round((dftemp.loc[yy,xx])*blocksize,1)
 
 
 				hovertext[-1].append(
@@ -3000,8 +3001,6 @@ if authentication_status:
 				figsumrows.update_yaxes(visible=False, showticklabels=False)
 
 				figsumrows.update_layout(height = 615)
-
-				dftemp1 = dftemp.sort_index(ascending=True) # for inputing data into hovertext for proper alignment
 
 				hovertext = htext_auctiondata_2010_3G_BWA_BlocksAllocated(dftemp1)
 
