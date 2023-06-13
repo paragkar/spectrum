@@ -4342,12 +4342,12 @@ if authentication_status:
 							ygap = 1,
 							hoverinfo ='text',
 							text = df_combined1.values,
-							colorscale='Rainbow',
+							colorscale='Picnic',
 							# zmin=0.5, zmax=1,
 							showscale=False,
 								texttemplate="%{text}", 
 								textfont={"size":8},
-								# reversescale=True,
+								reversescale=True,
 								)]
 
 				data2 = [go.Heatmap(
@@ -4358,12 +4358,12 @@ if authentication_status:
 							ygap = 1,
 							hoverinfo ='text',
 							text = df_combined2.values,
-							colorscale='Rainbow',
+							colorscale='Picnic',
 							# zmin=0.5, zmax=1,
 							showscale=False,
 								texttemplate="%{text}", 
 								textfont={"size":8},
-								# reversescale=True,
+								reversescale=True,
 								)]			
 
 				figauc1 = go.Figure(data=data1)
