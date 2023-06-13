@@ -4211,11 +4211,6 @@ if authentication_status:
 				# figauc.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 
 
-				# tab1,tab2 = st.tabs(["Absolute Value", "Ratio (Bid/Reserve)"])  #For showning the absolute and Ratio charts in two differet tabs
-				# tab1.plotly_chart(figauc1, use_container_width=True)
-				# tab2.plotly_chart(figauc2, use_container_width=True)
-
-
 				tab1,tab2 = st.tabs(["Absolute Value", "Ratio (Bid/Reserve)"])  #For showning the absolute and Ratio charts in two differet tabs
 
 				with tab1:
@@ -4233,8 +4228,6 @@ if authentication_status:
 					with col2:
 						st.markdown("")
 						st.plotly_chart(figsummry, use_container_width=True)
-
-
 
 
 
