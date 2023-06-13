@@ -4257,7 +4257,7 @@ if authentication_status:
 				for col in mask.columns:
 					mask[col] = mask[col].astype(int)
 
-				st.write(mask)
+				st.write(mask) #mask dataframe has 1 for winners and 0 for losers
 
 
 				#function to combine text from two dataframe 
@@ -4337,9 +4337,9 @@ if authentication_status:
 	
 
 				data1 = [go.Heatmap(
-							z=dflastsubbidheat.values,
-					        y= dflastsubbidheat.index,
-					        x=dflastsubbidheat.columns,
+							z=mask.values,
+					        y= mask.index,
+					        x=mask.columns,
 							xgap = 0.5,
 							ygap = 1,
 							hoverinfo ='text',
@@ -4353,9 +4353,9 @@ if authentication_status:
 								)]
 
 				data2 = [go.Heatmap(
-							z=dflastsubbidratio.values,
-					        y= dflastsubbidratio.index,
-					        x=dflastsubbidratio.columns,
+							z=mask.values,
+					        y= mask.index,
+					        x=mask.columns,
 							xgap = 0.5,
 							ygap = 1,
 							hoverinfo ='text',
