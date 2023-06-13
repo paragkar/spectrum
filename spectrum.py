@@ -2516,7 +2516,7 @@ if authentication_status:
 
 					figpanindiabids.update_yaxes(visible=False, showticklabels=False)
 
-					figpanindiabids.update_layout(height = 620)
+					figpanindiabids.update_layout(height = 615)
 
 					dftemp = dftemp.sort_index(ascending=True)
 
