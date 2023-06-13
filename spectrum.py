@@ -4346,7 +4346,7 @@ if authentication_status:
 							# zmin=0.5, zmax=1,
 							showscale=False,
 								texttemplate="%{text}", 
-								textfont={"size":8},
+								textfont={"size":10},
 								reversescale=True,
 								)]
 
@@ -4362,7 +4362,7 @@ if authentication_status:
 							# zmin=0.5, zmax=1,
 							showscale=False,
 								texttemplate="%{text}", 
-								textfont={"size":8},
+								textfont={"size":10},
 								reversescale=True,
 								)]			
 
