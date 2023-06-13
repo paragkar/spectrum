@@ -2617,6 +2617,13 @@ if authentication_status:
 					  dtick = 1), 
 					)
 
+					figauc.update_layout(
+					    coloraxis=dict(
+					        cmin=0,  # Set the minimum value of the color bar
+					        # zmax=10  # Set the maximum value of the color bar
+					    )
+					)
+
 					# figauc.update_layout(
 					#     coloraxis=dict(
 					#         cmin=0,  # Set the minimum value of the color bar
