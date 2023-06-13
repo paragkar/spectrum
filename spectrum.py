@@ -2218,7 +2218,7 @@ if authentication_status:
 
 				titlesubpart2 = " - Provisional Winners (End of Selected Rounds)"
 
-				st.write(resultdf[::-1].reset_index(drop=True))
+				st.write(resultdf[::-1])
 
 
 
