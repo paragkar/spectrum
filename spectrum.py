@@ -2220,9 +2220,9 @@ if authentication_status:
 
 				resultdf = resultdf[::-1] #reverse the dataframe from the index point of view
 
-				dfprovallcblks_endrd = dfprovallcblks_endrd.sort_values(selected_lsa[0], ascending = True)
+				# dfprovallcblks_endrd = dfprovallcblks_endrd.sort_values(selected_lsa[0], ascending = True)
 
-				st.write(dfprovallcblks_endrd)
+				# st.write(dfprovallcblks_endrd)
 
 
 
