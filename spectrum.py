@@ -2227,9 +2227,9 @@ if authentication_status:
 				st.write(dfprovallcblks_endrd)
 
 
-				def combine_text(x, y, sep1): #sep is seperator
+				def combine_text(x, y): #sep is seperator
 				    if x.notnull().all() and y.notnull().all():
-				        return x + '<br>' + sep1 + y
+				        return x + '<br>' + y
 				    elif x.notnull().all():
 				        return x
 				    else:
@@ -2237,7 +2237,7 @@ if authentication_status:
 
 				# for rendering text of the final heatmap for Data
 
-				df_combined = resultdf1.applymap(str).combine(dfprovallcblks_endrd.applymap(str), lambda x, y: combine_text(x, y, 'BA-'))
+				df_combined = dfprovallcblks_endrd.applymap(str).combine(resultdf1.applymap(str), lambda x, y: combine_text(x, y))
 
 				# df_combined = df_combined.sort_values(selected_lsa[0], ascending = True)
 
