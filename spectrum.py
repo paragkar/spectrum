@@ -2732,9 +2732,10 @@ if authentication_status:
 
 					figpanindiabids.update_layout(height = 615)
 
-					dftemp = dftemp.sort_index(ascending=True)
 
 					hovertext, colormatrix = htext_colormatrix_auctiondata_2010_3G_BWA_ProvWinningBid(dfrp, dftemp, pwbtype, round_number) #debug
+
+					dftemp = dftemp.sort_index(ascending=True)
 
 					data = [go.Heatmap(
 					z=dftemp.values,
