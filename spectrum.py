@@ -4142,10 +4142,6 @@ if authentication_status:
 				dfrp = dfrp.set_index("LSA").sort_index()
 
 
-				st.write(dflastsubbidheat) #debug
-
-				st.write(dfrp) #debug
-
 				dflastsubbidratio = round((dflastsubbidheat.T/dfrp.values).T,2).sort_index(ascending=True)
 
 				#for rendering text of the final heatmap for Data2
