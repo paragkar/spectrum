@@ -3826,7 +3826,7 @@ if authentication_status:
 
 				blocksforsale.columns = ["LSA", "Blocks"]
 
-				figblkssale = px.bar(blocksforsale, x="Blocks", y="LSA", orientation='h') #plotly horizontal bar chart 
+				figblkssale = px.bar(blocksforsale, x="Blocks", y="LSA", orientation='h', height = 600) #plotly horizontal bar chart 
 
 				figblkssale.update_layout(xaxis=dict(title='BlocksForSale'), yaxis=dict(title=''))
 
@@ -3839,7 +3839,6 @@ if authentication_status:
 				figblkssale.update_layout(xaxis_title_standoff=5)
 
 				figblkssale.update_traces(marker=dict(color='red'))
-
 
 
 				hovertext = htext_auctiondata_2010_3G_BWA_DemandIntensity(dfbid,ADPrecOfBlksforSale)
@@ -3959,7 +3958,6 @@ if authentication_status:
 
 
 				tab1, tab2 = st.tabs(["Aggregate Demand", "Ratio (AD/BLKsForSale)"]) #For showning the absolute and Ratio charts in two differet tabs
-
 				with tab1:
 					col1,col2 = st.columns([8,1]) #create collumns of uneven width
 					with col1:
