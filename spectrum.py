@@ -4127,7 +4127,18 @@ if authentication_status:
 
 				dfrp = dflastsubbidRD2["Last_Sub_Bid_Start_CLKRd"].reset_index().drop_duplicates().set_index("LSA").sort_index().reset_index()
 
-				dfrp = dfrp.groupby('LSA').filter(lambda x: not (x['Last_Sub_Bid_Start_CLKRd'] == 0).any() and len(x) == 1)
+				# Identify indexes that are repeated twice
+				repeated_indexes = dfrp['LSA'].duplicated(keep=False)
+
+				# Select non-zero values for repeated indexes
+				df_repeated = dfrp[repeated_indexes & (dfrp['Last_Sub_Bid_Start_CLKRd'] != 0)]
+
+				# Include values for non-repeated indexes
+				df_non_repeated = dfrp[~repeated_indexes]
+
+				# Concatenate the repeated and non-repeated dataframes
+				dfrp = pd.concat([df_repeated, df_non_repeated])
+
 
 				st.write(dflastsubbidheat) #debug
 
