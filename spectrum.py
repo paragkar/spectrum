@@ -2145,7 +2145,7 @@ if authentication_status:
 
 			dfrp.columns = ["LSA", "ReservePricePerBLK"]
 
-			dfrp = dfrp.set_index("LSA")
+			dfrp = dfrp.set_index("LSA").sort_index(ascending = True)
 
 
 			dfbidori = loadauctionbiddata()[mainsheetoriginal].replace('-', np.nan, regex = True)
@@ -2178,7 +2178,7 @@ if authentication_status:
 
 		dfrp.columns = ["LSA", "ReservePricePerBLK"]
 
-		dfrp = dfrp.set_index("LSA")
+		dfrp = dfrp.set_index("LSA").sort_index(ascending = True)
 
 		dfbid = loadauctionbiddata()[mainsheet].replace('-', np.nan, regex = True)
 
