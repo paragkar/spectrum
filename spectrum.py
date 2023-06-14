@@ -2645,6 +2645,8 @@ if authentication_status:
 
 					dftemp1 = dftemp.copy()
 
+					st.write(dftemp)
+
 					dftemp = round(dftemp/dfrp,1)
 
 					st.write(dftemp) #debug
