@@ -2072,7 +2072,7 @@ if authentication_status:
 
 			dfrp = dfrp.drop(columns =["Auction Year","Band"])
 
-			dfrp.columns = ["LSA", "ReservePrice"]
+			dfrp.columns = ["LSA", "ReservePricePerBLK"]
 
 			dfrp = dfrp.set_index("LSA")
 
@@ -2107,7 +2107,7 @@ if authentication_status:
 
 		dfrp = dfrp.drop(columns =["Auction Year","Band"])
 
-		dfrp.columns = ["LSA", "ReservePrice"]
+		dfrp.columns = ["LSA", "ReservePricePerBLK"]
 
 		dfrp = dfrp.set_index("LSA")
 
