@@ -2062,7 +2062,15 @@ if authentication_status:
 
 		if mainoriflag == True:
 
+			#filtering the reserve price for the auction year
+
 			dfprallauctions = loadauctionbiddata()["Reserve_Prices_All_Auctions"]
+
+			filt = (dfprallauctions["Band"]==band) & (dfprallauctions["Auction Year"]==year)
+
+			dfrp = dfprallauctions[filt]
+
+			st.write(dfrp)
 
 
 			dfbidori = loadauctionbiddata()[mainsheetoriginal].replace('-', np.nan, regex = True)
@@ -2083,7 +2091,16 @@ if authentication_status:
 			dfbidori = dfbidori.set_index("LSA").sort_index(ascending = False)
 
 
+		#filtering the reserve price for the auction year
+		
 		dfprallauctions = loadauctionbiddata()["Reserve_Prices_All_Auctions"]
+
+		filt = (dfprallauctions["Band"]==band) & (dfprallauctions["Auction Year"]==year)
+
+		dfrp = dfprallauctions[filt]
+
+		st.write(dfrp)
+
 
 
 		dfbid = loadauctionbiddata()[mainsheet].replace('-', np.nan, regex = True)
