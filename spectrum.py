@@ -2070,6 +2070,12 @@ if authentication_status:
 
 			dfrp = dfprallauctions[filt]
 
+			dfrp = dfrp.drop(columns =["Auction Year","Band"])
+
+			dfrp.columns = ["LSA", "ReservePrice"]
+
+			dfrp = dfrp.set_index("LSA")
+
 			st.write(dfrp)
 
 
@@ -2092,12 +2098,18 @@ if authentication_status:
 
 
 		#filtering the reserve price for the auction year
-		
+
 		dfprallauctions = loadauctionbiddata()["Reserve_Prices_All_Auctions"]
 
 		filt = (dfprallauctions["Band"]==band) & (dfprallauctions["Auction Year"]==year)
 
 		dfrp = dfprallauctions[filt]
+
+		dfrp = dfrp.drop(columns =["Auction Year","Band"])
+
+		dfrp.columns = ["LSA", "ReservePrice"]
+
+		dfrp = dfrp.set_index("LSA")
 
 		st.write(dfrp)
 
