@@ -1063,8 +1063,6 @@ if authentication_status:
 	def htext_colormatrix_auctiondata_2010_3G_BWA_ProvWinningBid(dfrp, dftemp, pwbtype, round_number):
 
 
-		st.write(dfrp) #debug
-
 		dftemp = dftemp.sort_index(ascending=True)
 
 		dftemprpmul = round(dftemp/dfrp.values,1)
