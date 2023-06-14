@@ -1067,7 +1067,7 @@ if authentication_status:
 
 		dftemp = dftemp.sort_index(ascending=True)
 
-		dftemprpmul = round(dftemp/dfrp,1)
+		dftemprpmul = round(dftemp/dfrp.values,1)
 
 		hovertext = []
 		dict_col={}
