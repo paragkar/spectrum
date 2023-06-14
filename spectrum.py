@@ -1945,7 +1945,7 @@ if authentication_status:
 			zmax=5
 			zmin_af = 0.5
 			zmax_af = 1
-			texttempbiddemandactivity = ""
+			texttempbiddemandactivity = "%{z}"
 			blocksize = 1.25
 			zmin_blk_sec = 0
 			zmax_blk_sec = 4
@@ -2171,6 +2171,7 @@ if authentication_status:
 
 
 			dfbidori = loadauctionbiddata()[mainsheetoriginal].replace('-', np.nan, regex = True)
+
 
 			dfbidori.columns = ["Clk_Round", "Bidder","LSA","Last_Sub_Bid_Start_CLKRd", "Rank_Start_ClkRd", 
 						"Possible_Raise_Bid_ClkRd", "Bid_Decision", "Last_Sub_Bid_End_CLKRd", "Rank_End_ClkRd", 
