@@ -2547,6 +2547,8 @@ if authentication_status:
 
 			dfpwb1strdend = df1strd.pivot(index="Bidder", columns='LSA', values="PWB_End_ClkRd").sort_index(ascending=False)
 
+			st.write(dfpwb1strdend)
+
 			dfrp = dfpwb1strdend.mean()
 
 			dfrp.columns = ["ReservePrice"]
