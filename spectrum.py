@@ -2553,7 +2553,6 @@ if authentication_status:
 
 			dfrp = dfrp.T
 
-			st.write(dfrp) #debug
 
 			if pwbtype == "Start CLK Round":
 
