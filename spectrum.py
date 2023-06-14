@@ -1926,7 +1926,31 @@ if authentication_status:
 	if selected_dimension == "Auction Data":
 
 		Feature = st.sidebar.selectbox("Select a Feature", ["2010-Band2100","2010-Band2300", "2012-Band1800","2014-Band1800","2014-Band900",
-										"2015-Band800", "2015-Band900","2015-Band1800", "2015-Band2100", "2016-Band800"])
+										"2015-Band800", "2015-Band900","2015-Band1800", "2015-Band2100", "2016-Band800","2016-Band1800"])
+
+		
+		if Feature == "2016-Band1800":
+
+			totalrounds = 31
+			mainsheet = "2016_4G_1800"
+			mainsheetoriginal = "2016_4G_1800_Original"
+			mainoriflag = True
+			activitysheet = "2016_4G_Activity"
+			demandsheet = "2016_4G_1800_AD"
+			titlesubpart = "1800 MHz Auctions (CY-2016)"
+			subtitlesubpartbidactivity = "; Combined for All Bands"
+			year =2016
+			band = 800
+			xdtick =5
+			zmin=1
+			zmax=5
+			zmin_af = 0.5
+			zmax_af = 1
+			texttempbiddemandactivity = "%{z}"
+			blocksize = 0.2
+			zmin_blk_sec = 0
+			zmax_blk_sec = 4
+
 
 		if Feature == "2016-Band800":
 
