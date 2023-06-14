@@ -2551,7 +2551,7 @@ if authentication_status:
 
 			# dfrp.columns = ["ReservePrice"]
 
-			dfrp = dfrp.T
+			# dfrp = dfrp.T
 
 			if pwbtype == "Start CLK Round":
 
