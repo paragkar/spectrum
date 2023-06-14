@@ -4282,6 +4282,10 @@ if authentication_status:
 
 				df_combined1 = dflastsubbidheat.applymap(str).combine(dfBLKsStartRd.applymap(str), lambda x, y: combine_text('Rs-', x, y, 'BA-'))
 
+				st.write(dflastsubbidheat) #debug
+
+				st.write(dfrp) #debug
+
 
 				dflastsubbidratio = round((dflastsubbidheat.T/dfrp.values).T,2).sort_index(ascending=True)
 
