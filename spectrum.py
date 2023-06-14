@@ -2549,11 +2549,13 @@ if authentication_status:
 
 			st.write(dfpwb1strdend)
 
-			dfrp = dfpwb1strdend.mean()
+			st.write(dfrp)
 
-			dfrp.columns = ["ReservePrice"]
+			# dfrp = dfpwb1strdend.mean()
 
-			dfrp = dfrp.T
+			# dfrp.columns = ["ReservePrice"]
+
+			# dfrp = dfrp.T
 
 			if pwbtype == "Start CLK Round":
 
