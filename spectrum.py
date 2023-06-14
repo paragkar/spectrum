@@ -2547,15 +2547,13 @@ if authentication_status:
 
 			dfpwb1strdend = df1strd.pivot(index="Bidder", columns='LSA', values="PWB_End_ClkRd").sort_index(ascending=False)
 
-			st.write(dfpwb1strdend)
-
 			# dfrp = dfpwb1strdend.mean()
 
 			# dfrp.columns = ["ReservePrice"]
 
 			dfrp = dfrp.T
 
-			st.write(dfrp)
+			st.write(dfrp) #debug
 
 			if pwbtype == "Start CLK Round":
 
@@ -2648,6 +2646,8 @@ if authentication_status:
 					dftemp1 = dftemp.copy()
 
 					dftemp = round(dftemp/dfrp,1)
+
+					st.write(dftemp) #debug
 
 					hovertext, colormatrix = htext_colormatrix_auctiondata_2010_3G_BWA_ProvWinningBid(dfrp, dftemp1, pwbtype, round_number) #debug
 
