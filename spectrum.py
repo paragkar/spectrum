@@ -2645,11 +2645,8 @@ if authentication_status:
 
 					dftemp1 = dftemp.copy()
 
-					st.write(dftemp)
-
 					dftemp = round(dftemp/dfrp.values,1)
 
-					st.write(dftemp) #debug
 
 					hovertext, colormatrix = htext_colormatrix_auctiondata_2010_3G_BWA_ProvWinningBid(dfrp, dftemp1, pwbtype, round_number) #debug
 
@@ -2858,7 +2855,7 @@ if authentication_status:
 
 					dftemp1 = dftemp.copy()
 
-					dftemp = round(dftemp/dfrp,1)
+					dftemp = round(dftemp/dfrp.values,1)
 
 					hovertext, colormatrix = htext_colormatrix_auctiondata_2010_3G_BWA_ProvWinningBid(dfrp, dftemp1, pwbtype, round_number) #debug
 
