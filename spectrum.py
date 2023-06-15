@@ -4534,7 +4534,9 @@ if authentication_status:
 
 				hoverlabel_bgcolor = colormatrix
 
-				figauc.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
+				figauc1.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
+
+				figauc2.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 
 
 				tab1,tab2 = st.tabs(["Absolute Value", "Ratio (Bid/Reserve)"])  #For showning the absolute and Ratio charts in two differet tabs
