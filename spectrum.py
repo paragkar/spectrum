@@ -4119,7 +4119,7 @@ if authentication_status:
 							text = hovertext,
 							colorscale='Hot',
 							# zmin=0.5, zmax=1,
-							showscale=True,
+							showscale=False,
 								texttemplate=texttempbiddemandactivity, 
 								textfont={"size":8},
 								reversescale=True,
