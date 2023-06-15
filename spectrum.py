@@ -1170,9 +1170,7 @@ if authentication_status:
 
 		dfbidactivity = dfbid.pivot(index="Bidder", columns='Clk_Round', values=column_name).sort_index(ascending=True)
 
-		# dfbidactivityRd1 = dfbidRD1.pivot(index="Bidder", columns='Clk_Round', values="Actual_Activity").sort_index(ascending=True) #debug
-
-		dfbidactivityRd1 = dfbidRD1.pivot(index="Bidder", columns='Clk_Round', values="Pts_Start_Round").sort_index(ascending=True) #debug
+		dfbidactivityRd1 = dfbidRD1.pivot(index="Bidder", columns='Clk_Round', values="Pts_Start_Round").sort_index(ascending=True)
 
 		dfbidactivityratio = round((dfbidactivity/dfbidactivityRd1.values),2)
 
@@ -1955,7 +1953,7 @@ if authentication_status:
 
 		return fig
 
-#----------New Code Starts----------------------
+
 
 	def plotlosttotal(df,ydim,xdim):
 
@@ -1975,7 +1973,7 @@ if authentication_status:
 
 		return fig
 
-#----------New Code Ends----------------------
+
 
 
 	if selected_dimension == "Auction Data":
@@ -2446,7 +2444,7 @@ if authentication_status:
 
 			listofbidders = sorted(list(set(dfbidori["Bidder"])))
 
-			listofcircles = sorted(list(set(dfbidori["LSA"]))) #debug
+			listofcircles = sorted(list(set(dfbidori["LSA"])))
 
 			dfbidori = dfbidori.set_index("LSA").sort_index(ascending = False)
 
@@ -2476,7 +2474,7 @@ if authentication_status:
 
 		listofbidders = sorted(list(set(dfbid["Bidder"])))
 
-		listofcircles = sorted(list(set(dfbid["LSA"]))) #debug
+		listofcircles = sorted(list(set(dfbid["LSA"])))
 
 		dfbid = dfbid.set_index("LSA").sort_index(ascending = False)
 
@@ -2500,9 +2498,9 @@ if authentication_status:
 
 			dfbidcirclwise = dfbid.copy()
 
-			dfbidcirclwise_endrd = dfbidcirclwise[dfbidcirclwise["Clk_Round"]==end_round].reset_index() #debug
+			dfbidcirclwise_endrd = dfbidcirclwise[dfbidcirclwise["Clk_Round"]==end_round].reset_index()
 
-			dfprovallcblks_endrd = dfbidcirclwise_endrd.pivot(index="Bidder", columns='LSA', values="Prov_Alloc_BLK_End_ClkRd") #debug
+			dfprovallcblks_endrd = dfbidcirclwise_endrd.pivot(index="Bidder", columns='LSA', values="Prov_Alloc_BLK_End_ClkRd")
 
 
 			#filter data within the block of selected rounds 
@@ -2740,7 +2738,7 @@ if authentication_status:
 					xgap = 1,
 					ygap = 1,
 					hoverinfo ='text',
-					zmin=zmin, zmax=zmax, #debug
+					zmin=zmin, zmax=zmax,
 					# text = hovertext,
 					colorscale='Hot',
 					# showscale=False,
@@ -2792,7 +2790,7 @@ if authentication_status:
 
 				dfbidsel = dfbid.copy()
 
-				st.write("") #debug
+				st.write("") #This is very important as this statement triggers section to become active
 
 				filt  =(dfbidsel["Clk_Round"] >= start_round) & (dfbidsel["Clk_Round"] <= end_round)
 
@@ -2921,7 +2919,7 @@ if authentication_status:
 				dfbidpwb = dfbidpwb[filt]
 
 				dfblocksalloc_rdend = dfbidpwb.reset_index().pivot(index="Bidder", columns='LSA', values="Prov_Alloc_BLK_End_ClkRd")\
-															.sort_index(ascending=False).round(0) #debug
+															.sort_index(ascending=False).round(0)
 
 				dftemp = dfbidpwb.reset_index().pivot(index="Bidder", columns='LSA', values="PWB_Start_ClkRd").sort_index(ascending=False).round(1)
 
@@ -2940,7 +2938,7 @@ if authentication_status:
 					dftemp = dftemp.sort_index(ascending=True)
 
 
-					hovertext, colormatrix = htext_colormatrix_auctiondata_2010_3G_BWA_ProvWinningBid(dfrp, dftemp, pwbtype, round_number) #debug
+					hovertext, colormatrix = htext_colormatrix_auctiondata_2010_3G_BWA_ProvWinningBid(dfrp, dftemp, pwbtype, round_number)
 
 					data = [go.Heatmap(
 					z=dftemp.values,
@@ -2986,15 +2984,6 @@ if authentication_status:
 					        # zmax=10  # Set the maximum value of the color bar
 					    )
 					)
-
-					# figauc.update_layout(
-				    # template="plotly",
-				    # xaxis_side= 'top',
-				   	# height = 650,
-				   	# yaxis=dict(
-			        # tickmode='array',
-			        # 	))
-
 			
 				if chartoption == "ReservePrice Multiple":
 
@@ -3003,7 +2992,7 @@ if authentication_status:
 					dftemp = round(dftemp/dfrp.values,1)
 
 
-					hovertext, colormatrix = htext_colormatrix_auctiondata_2010_3G_BWA_ProvWinningBid(dfrp, dftemp1, pwbtype, round_number) #debug
+					hovertext, colormatrix = htext_colormatrix_auctiondata_2010_3G_BWA_ProvWinningBid(dfrp, dftemp1, pwbtype, round_number)
 
 					dftemp = dftemp.sort_index(ascending=True)
 
@@ -3051,12 +3040,6 @@ if authentication_status:
 					    )
 					)
 
-					# figauc.update_layout(
-					#     coloraxis=dict(
-					#         cmin=0,  # Set the minimum value of the color bar
-					#         # zmax=10  # Set the maximum value of the color bar
-					#     )
-					# )
 					
 # #-------------New Layout Code for Testing ---------------
 # 				figauc.update_layout(  
@@ -3137,7 +3120,7 @@ if authentication_status:
 				dftemp = dfbidpwb.reset_index().pivot(index="Bidder", columns='LSA', values="PWB_End_ClkRd").sort_index(ascending=False).round(1)
 
 				dfblocksalloc_rdend = dfbidpwb.reset_index().pivot(index="Bidder", columns='LSA', values="Prov_Alloc_BLK_End_ClkRd")\
-															.sort_index(ascending=False).round(0) #debug
+															.sort_index(ascending=False).round(0)
 
 				chartoption = st.sidebar.radio('Click an Option', ["Absolute Values", "ReservePrice Multiple"])
 
@@ -3150,7 +3133,7 @@ if authentication_status:
 					figpanindiabids.update_layout(height = 615)
 
 
-					hovertext, colormatrix = htext_colormatrix_auctiondata_2010_3G_BWA_ProvWinningBid(dfrp, dftemp, pwbtype, round_number) #debug
+					hovertext, colormatrix = htext_colormatrix_auctiondata_2010_3G_BWA_ProvWinningBid(dfrp, dftemp, pwbtype, round_number)
 
 					dftemp = dftemp.sort_index(ascending=True)
 
@@ -3198,13 +3181,6 @@ if authentication_status:
 					    )
 					)
 
-					# figauc.update_layout(
-				    # template="plotly",
-				    # xaxis_side= 'top',
-				   	# height = 650,
-				   	# yaxis=dict(
-			        # tickmode='array',
-			        # 	))
 
 				if chartoption == "ReservePrice Multiple":
 
@@ -3212,7 +3188,7 @@ if authentication_status:
 
 					dftemp = round(dftemp/dfrp.values,1)
 
-					hovertext, colormatrix = htext_colormatrix_auctiondata_2010_3G_BWA_ProvWinningBid(dfrp, dftemp1, pwbtype, round_number) #debug
+					hovertext, colormatrix = htext_colormatrix_auctiondata_2010_3G_BWA_ProvWinningBid(dfrp, dftemp1, pwbtype, round_number)
 
 					dftemp = dftemp.sort_index(ascending=True)
 
@@ -3260,13 +3236,6 @@ if authentication_status:
 					    )
 					)
 
-					# figauc.update_layout(
-					#     coloraxis=dict(
-					#         cmin=0,  # Set the minimum value of the color bar
-					#         # zmax=10  # Set the maximum value of the color bar
-					#     )
-					# )
-	
 
 				title = titlesubpart+" - PWB/BLK at the End of Clock Round No - "+str(round_number)
 				subtitle = "Unit - Rs Cr; Source - DoT; "+chartoption+" - May be lower for bidders in same circle who did not agree to the higher round price"
@@ -3317,11 +3286,11 @@ if authentication_status:
 			dftemp = dfbidblksec.reset_index().pivot(index="Bidder", columns='LSA', values="No_of_BLK_Selected").sort_index(ascending=False).round(0)
 
 
-			sumrows = dftemp.sum(axis=1).reset_index() #debug
+			sumrows = dftemp.sum(axis=1).reset_index()
 
 			sumrows.columns = ["Bidders", "Total Slots"]
 
-			sumcols = dftemp.sum(axis=0).reset_index() #degug
+			sumcols = dftemp.sum(axis=0).reset_index()
 
 			sumcols.columns = ["LSA", "Total Slots"]
 
@@ -3407,11 +3376,11 @@ if authentication_status:
 
 				dftemp = dfbidblksec.reset_index().pivot(index="Bidder", columns='LSA', values="Prov_Alloc_BLK_Start_ClkRd").sort_index(ascending=False).round(0)
 
-				sumrows = dftemp.sum(axis=1).reset_index() #debug
+				sumrows = dftemp.sum(axis=1).reset_index()
 
 				sumrows.columns = ["Bidders", "Total Slots"]
 
-				sumcols = dftemp.sum(axis=0).reset_index() #degug
+				sumcols = dftemp.sum(axis=0).reset_index()
 
 				sumcols.columns = ["LSA", "Total Slots"]
 
@@ -3518,11 +3487,11 @@ if authentication_status:
 
 				dftemp = dfbidblksec.reset_index().pivot(index="Bidder", columns='LSA', values="Prov_Alloc_BLK_End_ClkRd").sort_index(ascending=False).round(0)
 
-				sumrows = dftemp.sum(axis=1).reset_index() #debug
+				sumrows = dftemp.sum(axis=1).reset_index()
 
 				sumrows.columns = ["Bidders", "Total Slots"]
 
-				sumcols = dftemp.sum(axis=0).reset_index() #degug
+				sumcols = dftemp.sum(axis=0).reset_index()
 
 				sumcols.columns = ["LSA", "Total Slots"]
 
@@ -3626,7 +3595,7 @@ if authentication_status:
 			dfbid = loadauctionbiddata()[activitysheet].replace('-', np.nan, regex = True)
 
 			dfbid.columns = ["Clk_Round", "Bidder", "Pts_Start_Round", "Activity_Factor", "Activity_Requirement",
-							"Actual_Activity","Activity_at_PWB","Activity_NewBids","Point_Carry_Forward", "Points_Lost"] #debug
+							"Actual_Activity","Activity_at_PWB","Activity_NewBids","Point_Carry_Forward", "Points_Lost"] 
 
 
 			dfbidactivity = dfbid.copy()
@@ -3641,7 +3610,7 @@ if authentication_status:
 
 				dfbidactivity = dfbidactivity.pivot(index="Bidder", columns='Clk_Round', values="Actual_Activity").sort_index(ascending=True)
 
-				dfbidactivityRd1 = dfbidactivityRd1.pivot(index="Bidder", columns='Clk_Round', values="Pts_Start_Round").sort_index(ascending=True) #debug
+				dfbidactivityRd1 = dfbidactivityRd1.pivot(index="Bidder", columns='Clk_Round', values="Pts_Start_Round").sort_index(ascending=True)
 
 				dfbidactivityratio = round((dfbidactivity/dfbidactivityRd1.values),2)
 
@@ -3777,7 +3746,7 @@ if authentication_status:
 
 				# dfbidactivityRd1 = dfbidactivityRd1.pivot(index="Bidder", columns='Clk_Round', values="Actual_Activity").sort_index(ascending=True)
 
-				dfbidactivityRd1 = dfbidactivityRd1.pivot(index="Bidder", columns='Clk_Round', values="Pts_Start_Round").sort_index(ascending=True) #debug
+				dfbidactivityRd1 = dfbidactivityRd1.pivot(index="Bidder", columns='Clk_Round', values="Pts_Start_Round").sort_index(ascending=True)
 
 				dfbidactivityratio = round((dfbidactivity/dfbidactivityRd1.values),2)
 
@@ -3910,7 +3879,7 @@ if authentication_status:
 
 				# dfbidactivityRd1 = dfbidactivityRd1.pivot(index="Bidder", columns='Clk_Round', values="Actual_Activity").sort_index(ascending=True)
 
-				dfbidactivityRd1 = dfbidactivityRd1.pivot(index="Bidder", columns='Clk_Round', values="Pts_Start_Round").sort_index(ascending=True) #debug
+				dfbidactivityRd1 = dfbidactivityRd1.pivot(index="Bidder", columns='Clk_Round', values="Pts_Start_Round").sort_index(ascending=True)
 
 				dfbidactivityratio = round((dfbidactivity/dfbidactivityRd1.values),2)
 
@@ -4107,15 +4076,15 @@ if authentication_status:
 
 			if optiontype == "Points Lost":
 
-				filt = dfbidactivity["Clk_Round"]==1 #debug
+				filt = dfbidactivity["Clk_Round"]==1 
 
-				dfbidactivityRd1 = dfbidactivity[filt] #debug
+				dfbidactivityRd1 = dfbidactivity[filt] 
 
-				dfbidactivityRd1 = dfbidactivityRd1.pivot(index="Bidder", columns='Clk_Round', values="Pts_Start_Round").sort_index(ascending=True) #debug
+				dfbidactivityRd1 = dfbidactivityRd1.pivot(index="Bidder", columns='Clk_Round', values="Pts_Start_Round").sort_index(ascending=True) 
 
 				dfbidactivity = dfbidactivity.pivot(index="Bidder", columns='Clk_Round', values="Points_Lost").sort_index(ascending=True)
 
-				totalpointslost = dfbidactivity.sum(axis=1).reset_index() #debug
+				totalpointslost = dfbidactivity.sum(axis=1).reset_index() 
 
 				totalpointslost.columns = ["Bidder", "Points Lost"]
 
@@ -4235,9 +4204,9 @@ if authentication_status:
 
 				dfbidaAD = dfbid.pivot(index="LSA", columns='Clock Round', values="Aggregate Demand").sort_index(ascending=True)
 
-				dfbidaBlksSale = dfbid.pivot(index="LSA", columns='Clock Round', values="Blocks For Sale").sort_index(ascending=True) #debug
+				dfbidaBlksSale = dfbid.pivot(index="LSA", columns='Clock Round', values="Blocks For Sale").sort_index(ascending=True)
 
-				ADPrecOfBlksforSale = round((dfbidaAD/dfbidaBlksSale.values),1) #debug
+				ADPrecOfBlksforSale = round((dfbidaAD/dfbidaBlksSale.values),1)
 
 
 				#summary chart for total blocks for sale on right
@@ -4393,10 +4362,7 @@ if authentication_status:
 						st.markdown("")
 						st.plotly_chart(figblkssale, use_container_width=True)
 
-				# tab1, tab2 = st.tabs(["Aggregate Demand", "Ratio (AD/BLKsForSale)"]) #For showning the absolute and Ratio charts in two differet tabs
-				# tab1.plotly_chart(figauc1, use_container_width=True)
-				# tab2.plotly_chart(figauc2, use_container_width=True)
-
+			
 
 			if optiontype == "Excess Demand":
 
@@ -4404,9 +4370,9 @@ if authentication_status:
 
 				dfbidaAD = dfbid.pivot(index="LSA", columns='Clock Round', values="Aggregate Demand").sort_index(ascending=True)
 
-				dfbidaBlksSale = dfbid.pivot(index="LSA", columns='Clock Round', values="Blocks For Sale").sort_index(ascending=True) #debug
+				dfbidaBlksSale = dfbid.pivot(index="LSA", columns='Clock Round', values="Blocks For Sale").sort_index(ascending=True) 
 
-				ADPrecOfBlksforSale = round((dfbidaAD/dfbidaBlksSale.values),1) #debug
+				ADPrecOfBlksforSale = round((dfbidaAD/dfbidaBlksSale.values),1)
 
 				hovertext = htext_auctiondata_2010_3G_BWA_DemandIntensity(dfbid, ADPrecOfBlksforSale)
 
@@ -4799,7 +4765,7 @@ if authentication_status:
 
 				df_value.columns = ["LSA", "Total"]
 
-				figsumcols = summarychart(df_value, 'LSA', "Total") #debug
+				figsumcols = summarychart(df_value, 'LSA', "Total")
 
 
 				hovertext, colormatrix = htext_colormatrix_auctiondata_2010_3G_BWA_LastBidPrice(dflastsubbidheat,dflastsubbidratio,dfbid)
