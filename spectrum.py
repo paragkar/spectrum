@@ -4307,6 +4307,10 @@ if authentication_status:
 
 		if SubFeature == "LastBidPrice":
 
+			dfbid = loadauctionbiddata()[demandsheet].replace('-', np.nan, regex = True) #for number of blocks for sale for hovertext
+
+			st.write(dfbid) #debug
+
 			round_number = st.slider("Select Auction Round Numbers using the Silder below", min_value=1, max_value=totalrounds, step=1, value = totalrounds)
 
 			dflastsubbid = dfbidori.copy()
