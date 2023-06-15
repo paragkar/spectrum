@@ -1312,14 +1312,14 @@ if authentication_status:
 				hovertext[-1].append(
 						    'Bidder: {}\
 						    <br>Circle: {}\
-						    <br>lastbid : {} RsCr/BLK\
+						    <br>LastBid : {} RsCr/BLK\
 						    <br>LastBidRatio : {} Bid/RP\
 						    <br>BLKsForSale : {} Nos'
 					
 					     .format( 
 						    yy,
 						    xx,
-						    blocksforsale,
+						    lastbid,
 						    round(lastbidratiorp,2),
 						    blocksforsale,
 						    )
