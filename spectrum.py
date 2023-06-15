@@ -4641,6 +4641,26 @@ if authentication_status:
 				for col in mask2.columns:
 					mask2[col] = mask2[col].astype(int)
 
+				lst2=[]
+				for index in mask2.index:
+					lst1=[]
+					for col in mask2.columns:
+						mask1val = mask1.loc[index,col]
+						mask2val = mask2.loc[index,col]
+						if mask1val == mask2val:
+							lst1.append(1)
+						else:
+							lst1.append(2)
+					lst2.append(lst1)
+
+				mask2 = pd.DataFrame(lst2)
+
+				mask2.index = mask1,index1
+				mask2.columns = mask1.columns
+
+				st.write(mask2)
+
+
 				with st.sidebar:
 
 					check = st.checkbox('Click to Filter Winners', value = False)
