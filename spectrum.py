@@ -4661,7 +4661,7 @@ if authentication_status:
 
 				with st.sidebar:
 
-					check = st.checkbox('Click to Filter Winners', value = False)
+					check = st.checkbox('Filter Winners', value = False)
 
 					if check:
 						mask = mask1
