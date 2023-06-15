@@ -1301,7 +1301,7 @@ if authentication_status:
 				blocksforsale = dfbid.T.loc["Blocks For Sale",xx]
 
 				if lastbid > 0:
-					ccode = '#FF0000' #(red)
+					ccode = '#880808' #(red)
 				else:
 					ccode = '#808080' #(grey)
 
