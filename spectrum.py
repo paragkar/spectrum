@@ -4641,7 +4641,7 @@ if authentication_status:
 				for col in mask2.columns:
 					mask2[col] = mask2[col].astype(int)
 
-				check = st.checkbox('Click Here', value = True)
+				check = st.checkbox('Click Here', value = False)
 
 				if check:
 					mask = mask1
