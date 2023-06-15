@@ -2693,6 +2693,8 @@ if authentication_status:
 
 					st.write(dftemp) #debug
 
+					st.write(dfblocksalloc_rdend) #debug
+
 
 					figpanindiabids = plotbiddertotal(dftemp,dfblocksalloc_rdend)
 
