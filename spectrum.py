@@ -4623,12 +4623,30 @@ if authentication_status:
 				        return str(num)
 
 				# Apply the regular expression pattern and replacement function to the dataframe
-				mask = dfBLKsEndRd.applymap(lambda x: re.sub(pattern, replace_numbers, str(x)))
+				# To calculate the winners who are those who have been assigned blocks
+				mask1 = dfBLKsEndRd.applymap(lambda x: re.sub(pattern, replace_numbers, str(x)))
 
 				for col in mask.columns:
-					mask[col] = mask[col].astype(int)
+					mask1[col] = mask1[col].astype(int)
 
 				dfwithbids = dfprovwinbid*mask.values #final datframe with actual submitted bids
+
+
+				# To identify those bidders who have submitted bids during the auction
+				mask2 = dflastsubbidheat.applymap(lambda x: re.sub(pattern, replace_numbers, str(x)))
+
+				#create a checkbox to filter winners from those who have bid in the auction
+
+				for col in mask2.columns:
+					mask2[col] = mask2[col].astype(int)
+
+				check = st.checkbox('Click Here', value = True)
+
+				if check:
+					mask = mask1
+				else:
+					mask = mask2
+
 
 				#plotting the barchart for row sums
 
