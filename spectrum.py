@@ -4633,7 +4633,7 @@ if authentication_status:
 
 
 				# To identify those bidders who have submitted bids during the auction
-				mask2 = dflastsubbidheat.applymap(lambda x: re.sub(pattern, replace_numbers, str(x)))
+				mask2 = dflastsubbidheat.applymap(lambda x: re.sub(pattern, replace_numbers, str(x).split('.')[0]))
 
 				st.write(dflastsubbidheat)
 
