@@ -1061,10 +1061,6 @@ if authentication_status:
 	@st.cache_resource
 	def htext_colormatrix_auctiondata_2010_3G_BWA_ProvWinningBid(dfrp, dftemp, pwbtype, round_number):
 
-		st.write(dftemp) #debug
-
-		st.write(dfrp) #debug
-
 
 		dftemp = dftemp.sort_index(ascending=True)
 
@@ -1942,7 +1938,7 @@ if authentication_status:
 			titlesubpart = "1800 MHz Auctions (CY-2016)"
 			subtitlesubpartbidactivity = "; Combined for All Bands"
 			year =2016
-			band = 800
+			band = 1800
 			xdtick =5
 			zmin=1
 			zmax=5
