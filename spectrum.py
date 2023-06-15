@@ -1990,14 +1990,14 @@ if authentication_status:
 		if Feature == "2021-Band800":
 
 			totalrounds = 6
-			mainsheet = "2016_4G_800"
-			mainsheetoriginal = "2016_4G_800_Original"
+			mainsheet = "2021_4G_800"
+			mainsheetoriginal = "2021_4G_800_Original"
 			mainoriflag = True
 			activitysheet = "2021_4G_Activity"
-			demandsheet = "2016_4G_800_AD"
+			demandsheet = "2021_4G_800_AD"
 			titlesubpart = "800 MHz Auctions (CY-2021)"
 			subtitlesubpartbidactivity = "; Combined for All Bands"
-			year =2016
+			year =2021
 			band = 800
 			xdtick =1
 			zmin=1
@@ -2008,9 +2008,6 @@ if authentication_status:
 			blocksize = 1.25
 			zmin_blk_sec = 0
 			zmax_blk_sec = 4
-
-
-
 
 
 
