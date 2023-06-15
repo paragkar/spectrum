@@ -4641,12 +4641,14 @@ if authentication_status:
 				for col in mask2.columns:
 					mask2[col] = mask2[col].astype(int)
 
-				check = st.siderbar.checkbox('Click to Filter Winners', value = False)
+				with st,sidebar:
 
-				if check:
-					mask = mask1
-				else:
-					mask = mask2
+					check = st.checkbox('Click to Filter Winners', value = False)
+
+					if check:
+						mask = mask1
+					else:
+						mask = mask2
 
 
 				#plotting the barchart for row sums
