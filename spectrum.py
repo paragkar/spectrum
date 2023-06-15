@@ -1319,7 +1319,7 @@ if authentication_status:
 					     .format( 
 						    yy,
 						    xx,
-						    blocksalloc,
+						    blocksforsale,
 						    round(lastbidratiorp,2),
 						    blocksforsale,
 						    )
