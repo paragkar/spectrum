@@ -1289,9 +1289,6 @@ if authentication_status:
 	def htext_colormatrix_auctiondata_2010_3G_BWA_LastBidPrice(dflastsubbidheat,dflastsubbidratio,dfbid):
 
 
-		st.write(dflastsubbidheat) #debug
-
-
 		hovertext = []
 		dict_col = {}
 		for yi,yy in enumerate(dflastsubbidheat.index):
@@ -1315,7 +1312,7 @@ if authentication_status:
 				hovertext[-1].append(
 						    'Bidder: {}\
 						    <br>Circle: {}\
-						    <br>LastBid : {} RsCr/BLK\
+						    <br>lastbid : {} RsCr/BLK\
 						    <br>LastBidRatio : {} Bid/RP\
 						    <br>BLKsForSale : {} Nos'
 					
