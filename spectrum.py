@@ -4311,6 +4311,8 @@ if authentication_status:
 
 			dfbid = dfbid.drop(columns =["Clock Round", "Clock Round Price (Rs. Crore)","Aggregate Demand", "Excess Demand"], axis =1).drop_duplicates()
 
+			dfbid = dfbid.set_index("LSA")
+
 			st.write(dfbid) #debug
 
 			round_number = st.slider("Select Auction Round Numbers using the Silder below", min_value=1, max_value=totalrounds, step=1, value = totalrounds)
