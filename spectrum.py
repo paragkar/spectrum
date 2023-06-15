@@ -4363,64 +4363,6 @@ if authentication_status:
 
 
 
-#---------------Hovertest for LastBidPrice Starts---------------------
-
-	@st.cache_resource
-	def htext_colormatrix_auctiondata_2010_3G_BWA_LastBidPrice(dflastsubbidheat,dflastsubbidratio,dfbid):
-
-
-		hovertext = []
-		dict_col = {}
-		for yi,yy in enumerate(dflastsubbidheat.index):
-			hovertext.append([])
-			list_col=[]
-			for xi,xx in enumerate(dflastsubbidheat.columns):
-
-				lastbid = dflastsubbidheat.loc[yy,xx]
-				lastbidratiorp = dflastsubbidratio.loc[yy,xx]
-				blocksforsale = dfbid.T.loc["Blocks For Sale",xx]
-
-				if lastbid > 0:
-					ccode = '#FF0000' #(red)
-				else:
-					ccode = '#808080' #(grey)
-
-				list_col.append(ccode)
-
-
-
-				hovertext[-1].append(
-						    'Bidder: {}\
-						    <br>Circle: {}\
-						    <br>LastBid : {} RsCr/BLK\
-						    <br>LastBidRatio : {} Bid/RP\
-						    <br>BLKsForSale : {} Nos'
-					
-					     .format( 
-						    yy,
-						    xx,
-						    blocksalloc,
-						    round(lastbidratiorp,2),
-						    blocksforsale,
-						    )
-						    )
-
-			dict_col[yy]=list_col
-
-		temp = pd.DataFrame(dict_col).T
-
-		temp.columns = dflastsubbidheat.columns
-
-		colormatrix = list(temp.values)
-
-		return hovertext, colormatrix
-
-
-#---------------Hovertest for LastBidPrice Ends---------------------
-
-
-
-
 		if SubFeature == "LastBidPrice":
 
 			dfbid = loadauctionbiddata()[demandsheet].replace('-', np.nan, regex = True) #for number of blocks for sale for hovertext
