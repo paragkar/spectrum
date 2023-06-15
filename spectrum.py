@@ -1282,6 +1282,63 @@ if authentication_status:
 #---------------Hovertest for BlocksAllocated Ends---------------------
 
 
+
+#---------------Hovertest for LastBidPrice Starts---------------------
+
+	@st.cache_resource
+	def htext_colormatrix_auctiondata_2010_3G_BWA_LastBidPrice(dflastsubbidheat,dflastsubbidratio,dfbid):
+
+
+		hovertext = []
+		dict_col = {}
+		for yi,yy in enumerate(dflastsubbidheat.index):
+			hovertext.append([])
+			list_col=[]
+			for xi,xx in enumerate(dflastsubbidheat.columns):
+
+				lastbid = dflastsubbidheat.loc[yy,xx]
+				lastbidratiorp = dflastsubbidratio.loc[yy,xx]
+				blocksforsale = dfbid.T.loc["Blocks For Sale",xx]
+
+				if lastbid > 0:
+					ccode = '#FF0000' #(red)
+				else:
+					ccode = '#808080' #(grey)
+
+				list_col.append(ccode)
+
+
+
+				hovertext[-1].append(
+						    'Bidder: {}\
+						    <br>Circle: {}\
+						    <br>LastBid : {} RsCr/BLK\
+						    <br>LastBidRatio : {} Bid/RP\
+						    <br>BLKsForSale : {} Nos'
+					
+					     .format( 
+						    yy,
+						    xx,
+						    blocksalloc,
+						    round(lastbidratiorp,2),
+						    blocksforsale,
+						    )
+						    )
+
+			dict_col[yy]=list_col
+
+		temp = pd.DataFrame(dict_col).T
+
+		temp.columns = dflastsubbidheat.columns
+
+		colormatrix = list(temp.values)
+
+		return hovertext, colormatrix
+
+
+#---------------Hovertest for LastBidPrice Ends---------------------
+
+
 	#preparing color scale for hoverbox for Spectrum and Expiry maps
 	@st.cache_resource
 	def colscale_hbox_spectrum_expiry_maps(operators, colcodes):
@@ -4305,6 +4362,65 @@ if authentication_status:
 				st.plotly_chart(figauc, use_container_width=True)
 
 
+
+#---------------Hovertest for LastBidPrice Starts---------------------
+
+	@st.cache_resource
+	def htext_colormatrix_auctiondata_2010_3G_BWA_LastBidPrice(dflastsubbidheat,dflastsubbidratio,dfbid):
+
+
+		hovertext = []
+		dict_col = {}
+		for yi,yy in enumerate(dflastsubbidheat.index):
+			hovertext.append([])
+			list_col=[]
+			for xi,xx in enumerate(dflastsubbidheat.columns):
+
+				lastbid = dflastsubbidheat.loc[yy,xx]
+				lastbidratiorp = dflastsubbidratio.loc[yy,xx]
+				blocksforsale = dfbid.T.loc["Blocks For Sale",xx]
+
+				if lastbid > 0:
+					ccode = '#FF0000' #(red)
+				else:
+					ccode = '#808080' #(grey)
+
+				list_col.append(ccode)
+
+
+
+				hovertext[-1].append(
+						    'Bidder: {}\
+						    <br>Circle: {}\
+						    <br>LastBid : {} RsCr/BLK\
+						    <br>LastBidRatio : {} Bid/RP\
+						    <br>BLKsForSale : {} Nos'
+					
+					     .format( 
+						    yy,
+						    xx,
+						    blocksalloc,
+						    round(lastbidratiorp,2),
+						    blocksforsale,
+						    )
+						    )
+
+			dict_col[yy]=list_col
+
+		temp = pd.DataFrame(dict_col).T
+
+		temp.columns = dflastsubbidheat.columns
+
+		colormatrix = list(temp.values)
+
+		return hovertext, colormatrix
+
+
+#---------------Hovertest for LastBidPrice Ends---------------------
+
+
+
+
 		if SubFeature == "LastBidPrice":
 
 			dfbid = loadauctionbiddata()[demandsheet].replace('-', np.nan, regex = True) #for number of blocks for sale for hovertext
@@ -4312,8 +4428,6 @@ if authentication_status:
 			dfbid = dfbid.drop(columns =["Clock Round", "Clock Round Price (Rs. Crore)","Aggregate Demand", "Excess Demand"], axis =1).drop_duplicates()
 
 			dfbid = dfbid.set_index("LSA")
-
-			st.write(dfbid) #debug
 
 			round_number = st.slider("Select Auction Round Numbers using the Silder below", min_value=1, max_value=totalrounds, step=1, value = totalrounds)
 
@@ -4326,6 +4440,7 @@ if authentication_status:
 			dflastsubbidRD2 = dflastsubbid[filt2]
 
 			dflastsubbid = dflastsubbid[filt1]
+
 
 			roundoption = st.sidebar.radio('Click an Option', ["Start of Round", "End of Round"])
 
@@ -4366,6 +4481,9 @@ if authentication_status:
 
 				dflastsubbidheat = dflastsubbidheat.sort_index(ascending=True)
 
+
+				hovertext, colormatrix = htext_colormatrix_auctiondata_2010_3G_BWA_LastBidPrice(dflastsubbidheat,dflastsubbidratio,dfbid)
+
 				data1 = [go.Heatmap(
 							z=dflastsubbidheat.values,
 					        y= dflastsubbidheat.index,
@@ -4373,6 +4491,7 @@ if authentication_status:
 							xgap = 0.5,
 							ygap = 1,
 							hoverinfo ='text',
+							hovertext= hovertext,
 							text = df_combined1.values,
 							colorscale='reds',
 							# zmin=0.5, zmax=1,
@@ -4389,6 +4508,7 @@ if authentication_status:
 							xgap = 0.5,
 							ygap = 1,
 							hoverinfo ='text',
+							hovertext= hovertext,
 							text = df_combined2.values,
 							colorscale='reds',
 							# zmin=0.5, zmax=1,
@@ -4470,9 +4590,9 @@ if authentication_status:
 					    yaxis=dict(showgrid=False)
 					)
 
-				# hoverlabel_bgcolor = "#000000" #subdued black
+				hoverlabel_bgcolor = colormatrix
 
-				# figauc.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
+				figauc.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 
 
 				tab1,tab2 = st.tabs(["Absolute Value", "Ratio (Bid/Reserve)"])  #For showning the absolute and Ratio charts in two differet tabs
@@ -4582,6 +4702,9 @@ if authentication_status:
 				df_value.columns = ["LSA", "Total"]
 
 				figsumcols = summarychart(df_value, 'LSA', "Total") #debug
+
+
+				hovertext, colormatrix = htext_colormatrix_auctiondata_2010_3G_BWA_LastBidPrice(dflastsubbidheat,dflastsubbidratio,dfbid)
 	
 
 				data1 = [go.Heatmap(
@@ -4591,6 +4714,7 @@ if authentication_status:
 							xgap = 0.5,
 							ygap = 1,
 							hoverinfo ='text',
+							hovertext = hovertext,
 							text = df_combined1.values,
 							colorscale='Picnic',
 							# zmin=0.5, zmax=1,
@@ -4607,6 +4731,7 @@ if authentication_status:
 							xgap = 0.5,
 							ygap = 1,
 							hoverinfo ='text',
+							hovertext = hovertext,
 							text = df_combined2.values,
 							colorscale='Picnic',
 							# zmin=0.5, zmax=1,
@@ -4688,9 +4813,9 @@ if authentication_status:
 					    yaxis=dict(showgrid=False)
 					)
 
-				# hoverlabel_bgcolor = "#000000" #subdued black
+				hoverlabel_bgcolor = colormatrix
 
-				# figauc.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
+				figauc.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 
 
 				tab1,tab2 = st.tabs(["Absolute Value", "Ratio (Bid/Reserve)"])  #For showning the absolute and Ratio charts in two differet tabs
