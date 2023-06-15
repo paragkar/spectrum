@@ -4655,7 +4655,7 @@ if authentication_status:
 
 				mask2 = pd.DataFrame(lst2)
 
-				mask2.index = mask1,index1
+				mask2.index = mask1.index1
 				mask2.columns = mask1.columns
 
 				st.write(mask2)
