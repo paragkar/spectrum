@@ -4641,7 +4641,7 @@ if authentication_status:
 				for col in mask2.columns:
 					mask2[col] = mask2[col].astype(int)
 
-				with st,sidebar:
+				with st.sidebar:
 
 					check = st.checkbox('Click to Filter Winners', value = False)
 
