@@ -2691,6 +2691,8 @@ if authentication_status:
 
 				if chartoption == "Absolute Values":
 
+					st.write(dftemp) #debug
+
 
 					figpanindiabids = plotbiddertotal(dftemp,dfblocksalloc_rdend)
 
