@@ -4676,6 +4676,11 @@ if authentication_status:
 				df_combined1 = df_combined1.applymap(str).combine(dfBLKsEndRd.applymap(str), lambda x, y: combine_text("", x, y, 'BA-'))
 
 
+				st.write(dflastsubbidheat) #debug
+
+				st.write(dfrp) #debug
+
+
 				dflastsubbidratio = round((dflastsubbidheat.T/dfrp.values).T,2).sort_index(ascending=True)
 
 				#for rendering text of the final heatmap for Data2
