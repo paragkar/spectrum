@@ -1981,7 +1981,7 @@ if authentication_status:
 		Feature = st.sidebar.selectbox("Select a Feature", ["2010-Band2100","2010-Band2300", "2012-Band1800","2014-Band1800","2014-Band900",
 										"2015-Band800", "2015-Band900","2015-Band1800", "2015-Band2100", "2016-Band800","2016-Band1800",
 										"2016-Band2100", "2016-Band2300", "2016-Band2500","2021-Band800","2021-Band900","2021-Band1800",
-										"2021-Band2100","2021-Band2300","2022-Band700"])
+										"2021-Band2100","2021-Band2300","2022-Band700","2022-Band800"])
 
 		if Feature == "2022-Band800":
 
