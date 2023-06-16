@@ -2006,7 +2006,7 @@ if authentication_status:
 			zmin_af = 0.5
 			zmax_af = 1
 			texttempbiddemandactivity = ""
-			blocksize = 50
+			blocksize = 25
 			zmin_blk_sec = 0
 			zmax_blk_sec = 4
 
