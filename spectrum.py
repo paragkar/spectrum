@@ -5976,7 +5976,7 @@ if authentication_status:
 
 			df_fin = df["TRAI_Financial"]
 
-			st.write(df_fin)
+			st.write(df_fin["Date"].date())
 
 		if Feature == "TowerBTS Trends":
 
