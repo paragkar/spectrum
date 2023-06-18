@@ -6010,7 +6010,7 @@ if authentication_status:
 
 			df_fin = df_fin.reset_index()
 
-			df_fin.rename(columns = {"index":"Date"})
+			df_fin.rename(columns = {"index":"Date"}, inplace = True)
 
 			
 			df_temp = df_fin.groupby(["Date", 'Circle',"Operator","License"]).sum()
