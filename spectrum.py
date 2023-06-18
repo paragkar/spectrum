@@ -6010,9 +6010,10 @@ if authentication_status:
 
 			st.write(df_fin)
 
+			
 			df_temp = df_fin.groupby(['Circle',"Operator","License"]).sum()
 
-			st.write(df_temp)
+			# st.write(df_temp)
 
 
 			gr = df_fin.loc[:,["Operator","Circle", "GR"]].reset_index()
