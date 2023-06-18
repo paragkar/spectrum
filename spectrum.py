@@ -6039,12 +6039,16 @@ if authentication_status:
 			SummaryFlag = True #for ploting the summary chart
 
 
-			radio_selection = st.sidebar.radio('Click an Option', ["Absolute Values", "Percentage of Total"])
+			radio_selection = st.sidebar.radio('Click an Option', ["Absolute Values", "Percentage of Total", "Quarterly Increments"])
 
 			if radio_selection == "Absolute Values":
 				df_heatmap = df_finmetric.copy()
 			if radio_selection == "Percentage of Total":
 				df_heatmap = df_finmetric_prec.copy()
+
+			if radio_selection == "Quarterly Increments":
+				df_heatmap = df_finmetricINC.copy()
+
 
 
 			data = [go.Heatmap(
