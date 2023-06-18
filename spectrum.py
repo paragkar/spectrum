@@ -5992,13 +5992,11 @@ if authentication_status:
 			start_date, end_date = st.select_slider("Select a Range of Dates", 
 				options = list_of_dates, value =(list_of_dates[0],list_of_dates[-1]))
 
-			st.write(end_date)
-
 
 			df_rev = df_rev.set_index("Date")
 
 
-			filt = (df_rev.index > start_date) 
+			filt = (df_rev.index => start_date) & (df_rev.index <= end_date)
 
 			st.write(filt)
 
