@@ -5995,17 +5995,15 @@ if authentication_status:
 				options = list_of_dates, value =(list_of_dates[0],list_of_dates[-1]))
 
 
-			# date_range = st.select_slider("Select a range of dates using the Silder below", min_value = min_date, value =(min_date, max_date))
-
-
-
-			# df_fin["Date"] = df_fin["Date"].dt.strftime("%d/%m/%Y")
-
 			df_fin = df_fin.set_index("Date")
+
+			filt = (df_fin.index >=start_date) & (df_fin.index <=end_date)
+
+			df_fin = df_fin[filt]
 
 			gr = df_fin.loc[:,["Operator","Circle", "GR"]]
 
-			# st.write(gr)
+			st.write(gr)
 			# agr = df_fin["AGR"]
 			# apgr = df_fin["APGR"]
 			# lf = df_
