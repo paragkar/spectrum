@@ -5995,6 +5995,8 @@ if authentication_status:
 
 			df_rev = df_rev.set_index("Date")
 
+			st.write(df_rev.index)
+
 
 			filt = (df_rev.index => start_date) & (df_rev.index <= end_date)
 
