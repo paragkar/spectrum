@@ -6023,7 +6023,7 @@ if authentication_status:
 
 			finmetric = st.sidebar.selectbox("Select from Options", ["GrossRevenue", "ApplicableRev", "AdjustedGR", "LicenseFee", "SpectrumFee"])
 
-			fin_dic = {'GrossRev':'GR', 'ApplicableRev':'APGR','AdjustedGR':'AGR','LicenseFee':'LF', 'SpectrumFee': 'SF'}
+			fin_dic = {'GrossRevenue':'GR', 'ApplicableRev':'APGR','AdjustedGR':'AGR','LicenseFee':'LF', 'SpectrumFee': 'SF'}
 
 
 			gr = (df_temp.pivot(index ="Operator", columns ="Date", values =fin_dic[finmetric]).sort_values(list_of_dates[-1], ascending=False)/1000).round(2)
