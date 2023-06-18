@@ -5980,7 +5980,7 @@ if authentication_status:
 
 			df_fin = df_fin.set_index("Date")
 
-			gr = df_fin[:,["Operator","Circle", "GR"]]
+			gr = df_fin.loc[:,["Operator","Circle", "GR"]]
 
 			st.write(gr)
 			# agr = df_fin["AGR"]
