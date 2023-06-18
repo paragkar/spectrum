@@ -5986,7 +5986,7 @@ if authentication_status:
 
 			diff = relativedelta(max_date,min_date)
 
-			st.write(diff)
+			st.write(diff.years)
 
 
 			# date_range = st.slider("Select a range of dates using the Silder below", min_value=min_date, max_value = max_date, value=(1,totalrounds))
