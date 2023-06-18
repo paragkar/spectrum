@@ -6023,7 +6023,7 @@ if authentication_status:
 			fin_dic = {'GrossRevenue':'GR', 'ApplicableRev':'APGR','AdjustedGR':'AGR','LicenseFee':'LF', 'SpectrumFee': 'SF'}
 
 
-			df_finmetric = (df_temp.pivot(index ="Operator", columns ="Date", values =fin_dic[finmetric])/1000).round(2)
+			df_finmetric = (df_temp.pivot(index ="Operator", columns ="Date", values =fin_dic[finmetric])/1000).round(1)
 
 			df_finmetric = df_finmetric.sort_values(df_finmetric.columns[-1], ascending = False)
 
@@ -6043,7 +6043,7 @@ if authentication_status:
 					# text = hovertext,
 					colorscale='Hot',
 						texttemplate="%{z}", 
-						textfont={"size":10},
+						textfont={"size":8},
 						reversescale=True,
 						),
 					]
