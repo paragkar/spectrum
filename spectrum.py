@@ -6430,6 +6430,7 @@ if authentication_status:
 		subtitle = ""
 
 	if (Feature == "Industry Revenue"):
+		col1val=1
 		xdtickangle =-45
 		xdtickval = 2
 		title = "Indian Telecom Financial Metric"
