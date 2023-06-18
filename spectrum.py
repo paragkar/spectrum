@@ -6430,7 +6430,6 @@ if authentication_status:
 		subtitle = ""
 
 	if (Feature == "Industry Revenue"):
-		col1val=1
 		xdtickangle =-45
 		xdtickval = 2
 		title = "Indian Telecom Financial Metric"
@@ -6515,6 +6514,8 @@ if authentication_status:
 			if (selected_dimension=="Business Data") and (Feature == "License Fees") and (SubFeature=="Operators"):
 				col1val =4.5
 			if (selected_dimension=="Business Data") and (Feature == "License Fees") and (SubFeature=="LicenseType"):
+				col1val =1
+			if (selected_dimension=="Business Data") and (Feature == "Telecom Financial"):
 				col1val =1
 			else:
 				col1val = 0.2
