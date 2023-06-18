@@ -6025,6 +6025,10 @@ if authentication_status:
 
 			summarydf_INC = df_finmetricINC.sum(axis=0)
 
+			summarydf_INC = summarydf_INC.reset_index()
+
+			summarydf_INC.columns = ["Date", "IndiaTotal"]
+
 			summarydf = df_finmetric.sum(axis=0)
 
 			df_finmetric_prec = round((df_finmetric/summarydf.values)*100,1).head(15)
@@ -6034,20 +6038,24 @@ if authentication_status:
 
 			summarydf.columns = ["Date", "IndiaTotal"]
 
-			#preparing the summary chart 
-			chart = summarychart(summarydf, "Date", "IndiaTotal")
-			SummaryFlag = True #for ploting the summary chart
-
 
 			radio_selection = st.sidebar.radio('Click an Option', ["Absolute Values", "Percentage of Total", "Quarterly Increments"])
 
 			if radio_selection == "Absolute Values":
 				df_heatmap = df_finmetric.copy()
+				summarydf = summarydf.copy()
 			if radio_selection == "Percentage of Total":
 				df_heatmap = df_finmetric_prec.copy()
-
+				summarydf = summarydf.copy()
 			if radio_selection == "Quarterly Increments":
 				df_heatmap = df_finmetricINC.copy()
+				summarydf = summarydf_INC.copy()
+
+
+
+			#preparing the summary chart 
+			chart = summarychart(summarydf, "Date", "IndiaTotal")
+			SummaryFlag = True #for ploting the summary chart
 
 
 
