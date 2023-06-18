@@ -6021,6 +6021,8 @@ if authentication_status:
 
 			df_finmetric = df_finmetric.sort_values(df_finmetric.columns[-1], ascending = False)
 
+			st.write(df_finmetric)
+
 			summarydf = df_finmetric.sum(axis=0)
 
 			df_finmetric_prec = round((df_finmetric/summarydf.values)*100,1).head(15)
