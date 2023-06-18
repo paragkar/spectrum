@@ -5963,7 +5963,7 @@ if authentication_status:
 					hoverinfo ='text',
 					text = hovertext,
 					colorscale='reds',
-						texttemplate="%{z:.2f}", 
+						# texttemplate="%{z:.2f}", 
 						textfont={"size":10},
 						# reversescale=True,
 						),
