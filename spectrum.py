@@ -6421,8 +6421,8 @@ if authentication_status:
 		subtitle = ""
 
 	if (Feature == "Industry Revenue"):
-		xdtickangle =0
-		xdtickval = 10
+		xdtickangle =-45
+		xdtickval = 2
 		title = "Indian Telecom Tower and BTS rollout Trends"
 		subtitle = ""
 
