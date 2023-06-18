@@ -6023,7 +6023,7 @@ if authentication_status:
 
 			df_finmetricINC = (df_finmetric - df_finmetric.shift(1, axis =1)).head(15)
 
-			summarydf_INC = df_finmetricINC.sum(axis=0)
+			summarydf_INC = df_finmetricINC.sum(axis=0).round(1)
 
 			summarydf_INC = summarydf_INC.reset_index()
 
