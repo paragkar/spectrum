@@ -5976,7 +5976,7 @@ if authentication_status:
 
 			df_fin = df["TRAI_Financial"]
 
-			# df_fin["Date"] = df_fin["Date"].dt.strftime("%d/%m/%Y")
+			df_fin["Date"] = df_fin["Date"].dt.strftime("%d/%m/%Y")
 
 			df_fin = df_fin.set_index("Date")
 
