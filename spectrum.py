@@ -6021,10 +6021,7 @@ if authentication_status:
 			df_temp = df_temp.reset_index()
 
 
-			st.write(df_temp)
-
-
-			finmetric = st.sidebar.selectbox("Select from Options", ["GrossRev", "ApplicableRev", "AdjustedGR", "LicenseFee", "SpectrumFee"])
+			finmetric = st.sidebar.selectbox("Select from Options", ["GrossRevenue", "ApplicableRev", "AdjustedGR", "LicenseFee", "SpectrumFee"])
 
 			fin_dic = {'GrossRev':'GR', 'ApplicableRev':'APGR','AdjustedGR':'AGR','LicenseFee':'LF', 'SpectrumFee': 'SF'}
 
