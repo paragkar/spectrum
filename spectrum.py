@@ -5998,7 +5998,7 @@ if authentication_status:
 			st.write(df_rev.index)
 
 
-			filt = (df_rev.index => start_date) & (df_rev.index <= end_date)
+			# filt = (df_rev.index => start_date) & (df_rev.index <= end_date)
 
 			st.write(filt)
 
