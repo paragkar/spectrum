@@ -6423,7 +6423,7 @@ if authentication_status:
 	if (Feature == "Industry Revenue"):
 		xdtickangle =-45
 		xdtickval = 2
-		title = "Indian Telecom Tower and BTS rollout Trends"
+		title = "Indian Telecom Financial Metric"
 		subtitle = ""
 
 
