@@ -6013,12 +6013,10 @@ if authentication_status:
 
 			sf = df_fin.loc[:,["Operator","Circle", "SF"]].reset_index()
 
+
+			gr = gr.pivot(index ='Circle', columns =index, values ='GR') 
+
 			st.write(gr)
-
-
-			# gr = gr.pivot(index ='Circle', columns ="Date", values ='GR') 
-
-			# st.write(gr)
 
 
 
