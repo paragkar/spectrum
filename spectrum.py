@@ -6012,10 +6012,10 @@ if authentication_status:
 
 			df_fin.rename(columns = {"index":"Date"}, inplace = True)
 
-			df_fin.drop(columns=["License"], inplace = True)
+			df_fin.drop(columns=["License", "Year", "Month","Circle"], inplace = True)
 
 			
-			df_temp = df_fin.groupby(["Date", 'Circle',"Operator"]).sum()
+			df_temp = df_fin.groupby(["Date","Operator"]).sum()
 
 			st.write(df_temp)
 
