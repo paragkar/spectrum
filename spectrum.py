@@ -6008,7 +6008,7 @@ if authentication_status:
 
 				df_fin[col] = pd.to_numeric(df_fin[col], errors='coerce')
 
-			st.write(df_fin)
+			st.write(df_fin.reset_index())
 
 			
 			df_temp = df_fin.groupby(['Circle',"Operator","License"]).sum()
