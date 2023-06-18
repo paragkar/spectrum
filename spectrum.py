@@ -6042,7 +6042,7 @@ if authentication_status:
 					hoverinfo ='text',
 					# text = hovertext,
 					colorscale='Hot',
-						# texttemplate="%{z}", 
+						texttemplate="%{z}", 
 						textfont={"size":10},
 						reversescale=True,
 						),
