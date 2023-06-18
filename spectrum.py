@@ -5996,7 +5996,7 @@ if authentication_status:
 
 			st.write(end_date)
 
-
+			df_rev["Date"] = df["Date"].dt.date()
 
 			df_rev = df_rev.set_index("Date")
 
