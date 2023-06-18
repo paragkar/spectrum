@@ -5977,7 +5977,7 @@ if authentication_status:
 
 			df_fin = df["TRAI_Financial"]
 
-			min_date = 31/1/2010
+			min_date = datetime(2010,1,31)
 			max_date = max(df_fin["Date"])
 
 			st.write(min_date, max_date)
