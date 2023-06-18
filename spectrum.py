@@ -6011,7 +6011,7 @@ if authentication_status:
 			st.write(df_fin.reset_index())
 
 			
-			df_temp = df_fin.groupby(['Circle',"Operator","License"]).sum()
+			df_temp = df_fin.groupby(["index", 'Circle',"Operator","License"]).sum()
 
 			# st.write(df_temp)
 
