@@ -5982,7 +5982,7 @@ if authentication_status:
 
 			gr = df_fin[:,["Operator","Circle", "GR"]
 
-			st.write("gr")
+			st.write(gr)
 			# agr = df_fin["AGR"]
 			# apgr = df_fin["APGR"]
 			# lf = df_
