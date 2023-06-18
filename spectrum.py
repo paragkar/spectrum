@@ -6003,6 +6003,8 @@ if authentication_status:
 
 			df_fin.index = [x.date() for x in df_fin.index]
 
+			st.write(df_fin)
+
 			gr = df_fin.loc[:,["Operator","Circle", "GR"]].reset_index()
 
 			agr = df_fin.loc[:,["Operator","Circle", "AGR"]].reset_index()
@@ -6016,7 +6018,7 @@ if authentication_status:
 
 			gr = gr.pivot(index ='Circle', columns ="index", values ='GR') 
 
-			st.write(gr)
+			# st.write(gr)
 
 
 
