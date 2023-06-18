@@ -6015,7 +6015,7 @@ if authentication_status:
 			df_fin.drop(columns=["License", "Year", "Month","Circle","Dollar Rate"], inplace = True)
 
 			
-			df_temp = df_fin.groupby(["Date","Operator"]).sum().sort_values("GR")
+			df_temp = df_fin.groupby(["Date","Operator"]).sum().sort_values("GR", ascending = False)
 
 			st.write(df_temp)
 
