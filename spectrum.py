@@ -5991,6 +5991,8 @@ if authentication_status:
 
 			date_range = st.select_slider("Select a range of dates using the Silder below", min_value = min_date, value =(min_date, max_date))
 
+			slider = cols1.slider('Select date', min_value=min_date, value=[min_date,max_date] ,max_value=max_date)
+
 
 			# df_fin["Date"] = df_fin["Date"].dt.strftime("%d/%m/%Y")
 
