@@ -6016,7 +6016,7 @@ if authentication_status:
 
 			
 			df_temp = df_rev.groupby(["Date","Operator"]).agg{"GR":'sum','AGR':'sum','LF':'sum','SF':'sum','Dollar Rate':'mean'}\
-						.sum().sort_index(ascending = False).sort_values("GR", ascending = False).round(0)
+						.sort_index(ascending = False).sort_values("GR", ascending = False).round(0)
 
 			st.write(df_temp)
 
