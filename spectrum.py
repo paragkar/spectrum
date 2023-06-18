@@ -5983,16 +5983,16 @@ if authentication_status:
 
 			list_of_dates = sorted(list(set(df_fin["Date"])))[11:]
 
-			min_date = datetime(2010,3,31).date()
-			max_date = max(df_fin["Date"]).date()
+			# min_date = datetime(2010,3,31).date()
+			# max_date = max(df_fin["Date"]).date()
 
-			diff = relativedelta(max_date,min_date)
+			# diff = relativedelta(max_date,min_date)
 
-			total_months = diff.months +diff.years *12
+			# total_months = diff.months +diff.years *12
 
 
 			start_date, end_date = st.select_slider("Select a Range of Dates", 
-				options = list_of_dates, value =(min_date,max_date))
+				options = list_of_dates, value =(list_of_dates[0],list_of_dates[-1]))
 
 
 			# date_range = st.select_slider("Select a range of dates using the Silder below", min_value = min_date, value =(min_date, max_date))
