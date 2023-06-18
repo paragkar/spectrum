@@ -6034,7 +6034,7 @@ if authentication_status:
 			# sf = df_temp.loc[:,["Operator", "SF"]].reset_index()
 
 
-			gr = gr.pivot(index ="Operator", columns ="Date", values ='GR') 
+			gr = df_temp.pivot(index ="Operator", columns ="Date", values ='GR') 
 
 			st.write(gr)
 
