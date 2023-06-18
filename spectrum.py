@@ -5989,22 +5989,8 @@ if authentication_status:
 			# total_months = diff.months +diff.years *12
 
 
-			start_date, end_date = st.select_slider("Select a Range of Dates", 
-				options = list_of_dates, value =(list_of_dates[0],list_of_dates[-1]))
-
 
 			df_rev = df_rev.set_index("Date")
-
-			st.write(df_rev.index)
-
-
-			# filt = (df_rev.index => start_date) & (df_rev.index <= end_date)
-
-			st.write(filt)
-
-			df_rev = df_rev[filt]
-
-			df_rev.index = [x.date() for x in df_rev.index]
 
 
 			for col in ["GR","APGR", "AGR", "LF", "SF"]:
@@ -6020,6 +6006,12 @@ if authentication_status:
 			
 			df_temp = df_rev.groupby(["Date","Operator"]).agg({"GR":'sum','APGR':'sum','AGR':'sum','LF':'sum','SF':'sum','Dollar Rate':'mean'})\
 						.sort_index(ascending = False).sort_values("GR", ascending = False).round(0)
+
+
+			start_date, end_date = st.select_slider("Select a Range of Dates", 
+				options = list_of_dates, value =(list_of_dates[0],list_of_dates[-1]))
+
+			st.write(df_temp)
 
 			df_temp = df_temp.reset_index()
 
