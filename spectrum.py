@@ -5986,10 +5986,10 @@ if authentication_status:
 
 			diff = relativedelta(max_date,min_date)
 
-			st.write(diff.years)
+			total_months = diff.months +diff.years *12
 
 
-			# date_range = st.slider("Select a range of dates using the Silder below", min_value=min_date, max_value = max_date, value=(1,totalrounds))
+			date_range = st.slider("Select a range of dates using the Silder below", min_value=min_date, max_value = max_date, value=(1,total_months))
 
 
 			# df_fin["Date"] = df_fin["Date"].dt.strftime("%d/%m/%Y")
