@@ -5974,7 +5974,15 @@ if authentication_status:
 
 			df = loadtraiagr()
 
+
 			df_fin = df["TRAI_Financial"]
+
+			st.write(df_fin["Date"])
+
+
+
+			# date_range = st.slider("Select a range of dates using the Silder below", min_value=1, max_value = totalrounds, value=(1,totalrounds))
+
 
 			# df_fin["Date"] = df_fin["Date"].dt.strftime("%d/%m/%Y")
 
@@ -5982,7 +5990,7 @@ if authentication_status:
 
 			gr = df_fin.loc[:,["Operator","Circle", "GR"]]
 
-			st.write(gr)
+			# st.write(gr)
 			# agr = df_fin["AGR"]
 			# apgr = df_fin["APGR"]
 			# lf = df_
