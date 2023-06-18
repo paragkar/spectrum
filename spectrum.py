@@ -6026,7 +6026,7 @@ if authentication_status:
 
 			df_finmetric = (df_temp.pivot(index ="Operator", columns ="Date", values =fin_dic[finmetric])/1000).round(2)
 
-			df_finmetric = df_finmetric.sort_values(df_finmetric.columns[-1])
+			df_finmetric = df_finmetric.sort_values(df_finmetric.columns[-1], ascending = False)
 
 			df_total = df_finmetric.sum(axis=0)
 
