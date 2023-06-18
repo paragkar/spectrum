@@ -6003,7 +6003,10 @@ if authentication_status:
 
 			df_fin.index = [x.date() for x in df_fin.index]
 
-			st.write(df_fin)
+
+			df_temp = df_fin.groupby(['Circle',"GR","APGR", "AGR", "LF", "SF"]).sum()
+
+			st.write(df_temp)
 
 			gr = df_fin.loc[:,["Operator","Circle", "GR"]].reset_index()
 
