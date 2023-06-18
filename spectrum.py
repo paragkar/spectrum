@@ -5991,12 +5991,10 @@ if authentication_status:
 			# total_months = diff.months +diff.years *12
 
 
-			# start_date, end_date = st.select_slider("Select a Range of Dates", 
-			# 	options = list_of_dates, value =(list_of_dates[0],list_of_dates[-1]))
-
-
 			start_date, end_date = st.select_slider("Select a Range of Dates", 
-				options = list_of_dates)
+				options = list_of_dates, value =(list_of_dates[0],list_of_dates[-1]))
+
+			st.write(list_of_dates[-1])
 
 
 
