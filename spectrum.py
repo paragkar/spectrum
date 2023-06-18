@@ -6006,7 +6006,7 @@ if authentication_status:
 
 			for col in ["GR","APGR", "AGR", "LF", "SF"]:
 
-				df_fin[col] = df_fin[col].astype(float)
+				df_temp = pd.to_numeric(df_fin[col], errors='coerce')
 
 			df_temp = df_fin.groupby(['Circle',"GR","APGR", "AGR", "LF", "SF"]).sum()
 
