@@ -5991,8 +5991,13 @@ if authentication_status:
 			# total_months = diff.months +diff.years *12
 
 
+			# start_date, end_date = st.select_slider("Select a Range of Dates", 
+			# 	options = list_of_dates, value =(list_of_dates[0],list_of_dates[-1]))
+
+
 			start_date, end_date = st.select_slider("Select a Range of Dates", 
-				options = list_of_dates, value =(list_of_dates[0],list_of_dates[-1]))
+				options = list_of_dates)
+
 
 
 			df_rev = df_rev.set_index("Date")
