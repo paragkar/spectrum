@@ -6419,6 +6419,13 @@ if authentication_status:
 		title = "Indian Telecom Tower and BTS rollout Trends"
 		subtitle = ""
 
+	if (Feature == "Industry Revenue"):
+		xdtickangle =0
+		xdtickval = 10
+		title = "Indian Telecom Tower and BTS rollout Trends"
+		subtitle = ""
+
+
 		
 	#---------Dimension = Business Data Ends ----------------
 
