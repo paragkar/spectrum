@@ -5963,7 +5963,7 @@ if authentication_status:
 					hoverinfo ='text',
 					text = hovertext,
 					colorscale='reds',
-						# texttemplate="%{z:.2f}", 
+						texttemplate="%{z:.2f}", 
 						textfont={"size":10},
 						# reversescale=True,
 						),
@@ -6029,7 +6029,8 @@ if authentication_status:
 
 			df_total = df_finmetric.sum(axis=0)
 
-			df_finmetric_prec = round((df_finmetric/df_total.values)*100,2)
+			df_finmetric_prec = round((df_finmetric/df_total.values)*100,2).head(20)
+			df_finmetric = df_finmetric.head(20)
 
 
 			data = [go.Heatmap(
@@ -6041,7 +6042,7 @@ if authentication_status:
 					hoverinfo ='text',
 					# text = hovertext,
 					colorscale='Hot',
-						texttemplate="%{z}", 
+						# texttemplate="%{z}", 
 						textfont={"size":10},
 						reversescale=True,
 						),
