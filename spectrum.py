@@ -6014,7 +6014,7 @@ if authentication_status:
 
 			df_temp = df_temp.reset_index()
 
-			filt = df_temp["Date"] <= start_date
+			filt = df_temp["Date"] >= start_date
 
 			st.write(filt)
 
