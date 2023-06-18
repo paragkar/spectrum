@@ -5981,6 +5981,8 @@ if authentication_status:
 
 			df_fin["Date"] = pd.to_datetime(df_fin["Date"])
 
+			st.write(list(df_fin["Date"]))
+
 			min_date = datetime(2010,1,31).date()
 			max_date = max(df_fin["Date"]).date()
 
@@ -5989,9 +5991,12 @@ if authentication_status:
 			total_months = diff.months +diff.years *12
 
 
+			start_date, end_date = st.select_slider("Select a Range of Dates", 
+				options = listofallcolumns, value =(dftotal.columns[-18],dftotal.columns[-1]))
+
+
 			date_range = st.select_slider("Select a range of dates using the Silder below", min_value = min_date, value =(min_date, max_date))
 
-			slider = cols1.slider('Select date', min_value=min_date, value=[min_date,max_date] ,max_value=max_date)
 
 
 			# df_fin["Date"] = df_fin["Date"].dt.strftime("%d/%m/%Y")
