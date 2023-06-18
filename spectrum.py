@@ -6048,8 +6048,8 @@ if authentication_status:
 				df_heatmap = df_finmetric_prec.copy()
 				summarydf = summarydf.copy()
 			if radio_selection == "Quarterly Increments":
-				df_heatmap = df_finmetricINC.copy()
-				summarydf = summarydf_INC.copy()
+				df_heatmap = df_finmetricINC.iloc[:,1:].copy()
+				summarydf = summarydf_INC.iloc[:,1:].copy()
 
 
 
