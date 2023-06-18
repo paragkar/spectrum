@@ -6005,10 +6005,22 @@ if authentication_status:
 
 			gr = df_fin.loc[:,["Operator","Circle", "GR"]]
 
+			agr = df_fin.loc[:,["Operator","Circle", "AGR"]]
+
+			apgr = df_fin.loc[:,["Operator","Circle", "APGR"]]
+
+			lf = df_fin.loc[:,["Operator","Circle", "LF"]]
+
+			sf = df_fin.loc[:,["Operator","Circle", "SF"]]
+
+
+			gr = gr.pivot(index ='Circle', columns =gr.index, values ='GR') 
+
 			st.write(gr)
-			# agr = df_fin["AGR"]
-			# apgr = df_fin["APGR"]
-			# lf = df_
+
+
+
+
 
 		if Feature == "TowerBTS Trends":
 
