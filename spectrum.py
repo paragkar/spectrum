@@ -5974,7 +5974,9 @@ if authentication_status:
 
 			df = loadtraiagr()
 
-			st.write(df) #debug
+			df_fin = df["TRAI_Financial"]
+
+			st.write(df_fin)
 
 		if Feature == "TowerBTS Trends":
 
