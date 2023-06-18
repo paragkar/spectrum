@@ -6001,6 +6001,8 @@ if authentication_status:
 
 			df_fin = df_fin[filt]
 
+			df_fin.index = [x.date() for x in df_fin.index]
+
 			gr = df_fin.loc[:,["Operator","Circle", "GR"]]
 
 			st.write(gr)
