@@ -6016,7 +6016,7 @@ if authentication_status:
 
 			filt = (df_temp["Date"] >= start_date) & (df_temp["Date"] <= end_date) 
 
-			st.write(filt)
+			df_temp = df_temp[filt]
 
 
 			finmetric = st.sidebar.selectbox("Select from Options", ["GrossRevenue", "ApplicableRev", "AdjustedGR", "LicenseFee", "SpectrumFee"])
