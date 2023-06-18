@@ -5981,7 +5981,7 @@ if authentication_status:
 
 			df_rev["Date"] = pd.to_datetime(df_rev["Date"])
 
-			list_of_dates = [x.date() for x in sorted(list(set(df_rev["Date"])))[11:]]
+			# list_of_dates = [x.date() for x in sorted(list(set(df_rev["Date"])))[11:]]
 
 			# min_date = datetime(2010,3,31).date()
 			# max_date = max(df_rev["Date"]).date()
