@@ -6020,16 +6020,18 @@ if authentication_status:
 
 			st.write(df_temp)
 
+			df_temp = df_temp.reset_index()
 
-			gr = df_temp.loc[:,["Operator", "GR"]].reset_index()
 
-			agr = df_temp.loc[:,["Operator", "AGR"]].reset_index()
+			# gr = df_temp.loc[:,["Operator", "GR"]].reset_index()
 
-			apgr = df_temp.loc[:,["Operator","APGR"]].reset_index()
+			# agr = df_temp.loc[:,["Operator", "AGR"]].reset_index()
 
-			lf = df_temp.loc[:,["Operator","LF"]].reset_index()
+			# apgr = df_temp.loc[:,["Operator","APGR"]].reset_index()
 
-			sf = df_temp.loc[:,["Operator", "SF"]].reset_index()
+			# lf = df_temp.loc[:,["Operator","LF"]].reset_index()
+
+			# sf = df_temp.loc[:,["Operator", "SF"]].reset_index()
 
 
 			gr = gr.pivot(index ="Operator", columns ="Date", values ='GR') 
