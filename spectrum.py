@@ -5992,7 +5992,7 @@ if authentication_status:
 
 
 			start_date, end_date = st.select_slider("Select a Range of Dates", 
-				options = list_of_dates, value =(list_of_dates[0],list_of_dates[-1]))
+				options = list_of_dates, value =(list_of_dates[0],list_of_dates[-1]), format ="%d/%m/%Y")
 
 
 			# date_range = st.select_slider("Select a range of dates using the Silder below", min_value = min_date, value =(min_date, max_date))
