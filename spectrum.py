@@ -5981,7 +5981,7 @@ if authentication_status:
 
 			df_fin["Date"] = pd.to_datetime(df_fin["Date"])
 
-			st.write(list(df_fin["Date"])[100:])
+			st.write(sorted(list(set(df_fin["Date"]))))
 
 			min_date = datetime(2010,1,31).date()
 			max_date = max(df_fin["Date"]).date()
