@@ -147,6 +147,24 @@ if authentication_status:
 
 		return df
 
+	@st.cache_resource
+	def loadtraiagr():
+
+		password = st.secrets["db_password"]
+
+		excel_content = io.BytesIO()
+
+		with open("trai_agr.xlsx", 'rb') as f:
+			excel = msoffcrypto.OfficeFile(f)
+			excel.load_key(password)
+			excel.decrypt(excel_content)
+
+		xl = pd.ExcelFile(excel_content)
+		sheetauctiondata = xl.sheet_names
+		df = pd.read_excel(excel_content, sheet_name=sheetauctiondata)
+
+		return df
+
 #--------Fuctions for loading File Ends--------------------
 
 
@@ -5314,7 +5332,8 @@ if authentication_status:
 
 		dfT = loadtelecomdatafile()
 		
-		Feature = st.sidebar.selectbox('Select a Feature', ["5GBTS Trends", "Subscriber Trends", "Subscriber MShare", "License Fees", "TowerBTS Trends"])
+		Feature = st.sidebar.selectbox('Select a Feature', ["5GBTS Trends", "Subscriber Trends", "Subscriber MShare", "License Fees", "TowerBTS Trends",
+															"Industry Revenue"])
 
 		if Feature== "5GBTS Trends":
 
@@ -5948,6 +5967,14 @@ if authentication_status:
 						),
 					]
 			fig = go.Figure(data=data)
+
+
+		if Feature == "Industry Revenue":
+
+
+			df = loadtraiagr()
+
+			st.write(df) #debug
 
 		if Feature == "TowerBTS Trends":
 
