@@ -5984,7 +5984,7 @@ if authentication_status:
 			min_date = datetime(2010,1,31).date()
 			max_date = max(df_fin["Date"]).date()
 
-			diff = relativedelta.relativedelta(max_date,min_date)
+			diff = relativedelta(max_date,min_date)
 
 			st.write(diff)
 
