@@ -6046,7 +6046,7 @@ if authentication_status:
 						reversescale=True,
 						),
 					]
-				fig = go.Figure(data=data)
+			fig = go.Figure(data=data)
 
 
 
