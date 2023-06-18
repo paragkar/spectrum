@@ -5984,12 +5984,6 @@ if authentication_status:
 			list_of_dates = sorted(list(set(df_rev["Date"])))[11:]
 
 
-			# diff = relativedelta(max_date,min_date)
-
-			# total_months = diff.months +diff.years *12
-
-
-
 			df_rev = df_rev.set_index("Date")
 
 
@@ -6041,11 +6035,18 @@ if authentication_status:
 			SummaryFlag = True #for ploting the summary chart
 
 
+			radio_selection = st.sidebar.radio('Click an Option', ["Absolute Values", "Percentage of Total"])
+
+			if radio_selection == "Absolute Values":
+				df_heatmap = df_finmetric.copy()
+			if radio_selection == "Percentage of Total":
+				df_heatmap = df_finmetric_prec.copy()
+
 
 			data = [go.Heatmap(
-					z = df_finmetric.values,
-					y = df_finmetric.index,
-					x = df_finmetric.columns,
+					z = df_heatmap.values,
+					y = df_heatmap.index,
+					x = df_heatmap.columns,
 					xgap = 1,
 					ygap = 1,
 					hoverinfo ='text',
@@ -6057,8 +6058,6 @@ if authentication_status:
 						),
 					]
 			fig = go.Figure(data=data)
-
-
 
 
 
