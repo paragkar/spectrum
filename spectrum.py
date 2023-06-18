@@ -5335,7 +5335,7 @@ if authentication_status:
 		dfT = loadtelecomdatafile()
 		
 		Feature = st.sidebar.selectbox('Select a Feature', ["5GBTS Trends", "Subscriber Trends", "Subscriber MShare", "License Fees", "TowerBTS Trends",
-															"Industry Revenue"])
+															"Industry Financial"])
 
 		if Feature== "5GBTS Trends":
 
@@ -5971,7 +5971,7 @@ if authentication_status:
 			fig = go.Figure(data=data)
 
 
-		if Feature == "Industry Revenue":
+		if Feature == "Industry Financial":
 
 
 			df = loadtraiagr()
@@ -6429,7 +6429,7 @@ if authentication_status:
 		title = "Indian Telecom Tower and BTS rollout Trends"
 		subtitle = ""
 
-	if (Feature == "Industry Revenue"):
+	if (Feature == "Industry Financial"):
 		xdtickangle =-45
 		xdtickval = 2
 		title = "Indian Telecom Financial Metric"
@@ -6515,7 +6515,7 @@ if authentication_status:
 				col1val =4.5
 			if (selected_dimension=="Business Data") and (Feature == "License Fees") and (SubFeature=="LicenseType"):
 				col1val =1
-			if (selected_dimension=="Business Data") and (Feature == "Industry Revenue"):
+			if (selected_dimension=="Business Data") and (Feature == "Industry Financial"):
 				col1val =0.7
 			else:
 				col1val = 0.2
