@@ -6516,7 +6516,7 @@ if authentication_status:
 			if (selected_dimension=="Business Data") and (Feature == "License Fees") and (SubFeature=="LicenseType"):
 				col1val =1
 			if (selected_dimension=="Business Data") and (Feature == "Industry Revenue"):
-				col1val =0.8
+				col1val =0.7
 			else:
 				col1val = 0.2
 
