@@ -6001,7 +6001,7 @@ if authentication_status:
 
 			df_rev.rename(columns = {"index":"Date"}, inplace = True)
 
-			df_rev.drop(columns=["License", "Year", "Month","Circle"], inplace = True)
+			df_rev.drop(columns=["License", "Year", "Month","Circle","Dollar Rate"], inplace = True)
 
 			
 			df_temp = df_rev.groupby(["Date","Operator"]).agg({"GR":'sum','APGR':'sum','AGR':'sum','LF':'sum','SF':'sum','Dollar Rate':'mean'})\
