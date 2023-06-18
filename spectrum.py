@@ -5989,7 +5989,7 @@ if authentication_status:
 			total_months = diff.months +diff.years *12
 
 
-			date_range = st.select_slider("Select a range of dates using the Silder below", value =(min_date, max_date))
+			date_range = st.select_slider("Select a range of dates using the Silder below", min_value = min_date, value =(min_date, max_date))
 
 
 			# df_fin["Date"] = df_fin["Date"].dt.strftime("%d/%m/%Y")
