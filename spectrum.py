@@ -5979,12 +5979,10 @@ if authentication_status:
 
 			df_rev = df["TRAI_Financial"]
 
-			df_rev["Date"] = pd.to_datetime(df_rev["Date"])
+			df_rev["Date"] = pd.to_datetime(df_rev["Date"]).dt.date
 
-			# list_of_dates = [x.date() for x in sorted(list(set(df_rev["Date"])))[11:]]
+			list_of_dates = sorted(list(set(df_rev["Date"])))[11:]
 
-			# min_date = datetime(2010,3,31).date()
-			# max_date = max(df_rev["Date"]).date()
 
 			# diff = relativedelta(max_date,min_date)
 
@@ -5996,7 +5994,6 @@ if authentication_status:
 
 			st.write(end_date)
 
-			df_rev["Date"] = df_rev["Date"].dt.date
 
 			df_rev = df_rev.set_index("Date")
 
