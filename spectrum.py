@@ -17,6 +17,8 @@ import datetime as dt
 import calendar
 import time
 
+from PIL import Image
+
 from dateutil import relativedelta
 
 import re
@@ -1420,7 +1422,9 @@ if authentication_status:
 	#**********  Main Program Starts here ***************
 
 	authenticator.logout("Logout", "sidebar") #logging out authentication
-	st.sidebar.title(f"Welcome {name}") 
+	st.sidebar.title(f"Welcome {name}")
+	impage = Image.open('parag_kar.jpg') #debug
+	st.sidebar.image(image) #debug
 
 
 	#set flags extracting chart data in the data tab
