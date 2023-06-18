@@ -1423,8 +1423,8 @@ if authentication_status:
 
 	authenticator.logout("Logout", "sidebar") #logging out authentication
 	st.sidebar.title(f"Welcome {name}")
-	image = Image.open('parag_kar.jpg') #debug
-	st.sidebar.image(image) #debug
+	# image = Image.open('parag_kar.jpg') #debug
+	# st.sidebar.image(image) #debug
 
 
 	#set flags extracting chart data in the data tab
