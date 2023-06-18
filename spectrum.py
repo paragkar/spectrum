@@ -5977,14 +5977,14 @@ if authentication_status:
 			df = loadtraiagr()
 
 
-			df_fin = df["TRAI_Financial"]
+			df_rev = df["TRAI_Financial"]
 
-			df_fin["Date"] = pd.to_datetime(df_fin["Date"])
+			df_rev["Date"] = pd.to_datetime(df_rev["Date"])
 
-			list_of_dates = [x.date() for x in sorted(list(set(df_fin["Date"])))[11:]]
+			list_of_dates = [x.date() for x in sorted(list(set(df_rev["Date"])))[11:]]
 
 			# min_date = datetime(2010,3,31).date()
-			# max_date = max(df_fin["Date"]).date()
+			# max_date = max(df_rev["Date"]).date()
 
 			# diff = relativedelta(max_date,min_date)
 
@@ -5995,40 +5995,40 @@ if authentication_status:
 				options = list_of_dates, value =(list_of_dates[0],list_of_dates[-1]))
 
 
-			df_fin = df_fin.set_index("Date")
+			df_rev = df_rev.set_index("Date")
 
-			filt = ((df_fin.index).date >=start_date) & ((df_fin.index).date <=end_date)
+			filt = ((df_rev.index).date >=start_date) & ((df_rev.index).date <=end_date)
 
-			df_fin = df_fin[filt]
+			df_rev = df_rev[filt]
 
-			df_fin.index = [x.date() for x in df_fin.index]
+			df_rev.index = [x.date() for x in df_rev.index]
 
 
 			for col in ["GR","APGR", "AGR", "LF", "SF"]:
 
-				df_fin[col] = pd.to_numeric(df_fin[col], errors='coerce')
+				df_rev[col] = pd.to_numeric(df_rev[col], errors='coerce')
 
-			df_fin = df_fin.reset_index()
+			df_rev = df_rev.reset_index()
 
-			df_fin.rename(columns = {"index":"Date"}, inplace = True)
+			df_rev.rename(columns = {"index":"Date"}, inplace = True)
 
-			df_fin.drop(columns=["License", "Year", "Month","Circle","Dollar Rate"], inplace = True)
+			df_rev.drop(columns=["License", "Year", "Month","Circle","Dollar Rate"], inplace = True)
 
 			
-			df_temp = df_fin.groupby(["Date","Operator"]).sum().sort_values("GR", ascending = False)
+			df_temp = df_rev.groupby(["Date","Operator"]).sum().sort_values("GR", ascending = False).round(0)
 
 			st.write(df_temp)
 
 
-			gr = df_fin.loc[:,["Operator","Circle", "GR"]].reset_index()
+			gr = df_rev.loc[:,["Operator","Circle", "GR"]].reset_index()
 
-			agr = df_fin.loc[:,["Operator","Circle", "AGR"]].reset_index()
+			agr = df_rev.loc[:,["Operator","Circle", "AGR"]].reset_index()
 
-			apgr = df_fin.loc[:,["Operator","Circle", "APGR"]].reset_index()
+			apgr = df_rev.loc[:,["Operator","Circle", "APGR"]].reset_index()
 
-			lf = df_fin.loc[:,["Operator","Circle", "LF"]].reset_index()
+			lf = df_rev.loc[:,["Operator","Circle", "LF"]].reset_index()
 
-			sf = df_fin.loc[:,["Operator","Circle", "SF"]].reset_index()
+			sf = df_rev.loc[:,["Operator","Circle", "SF"]].reset_index()
 
 
 			gr = gr.pivot(index ='Circle', columns ="index", values ='GR') 
