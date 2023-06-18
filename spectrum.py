@@ -6011,7 +6011,7 @@ if authentication_status:
 			start_date, end_date = st.select_slider("Select a Range of Dates", 
 				options = list_of_dates, value =(list_of_dates[0],list_of_dates[-1]))
 
-			st.write(df_temp.columns)
+			st.write(df_temp.index)
 
 
 			df_temp = df_temp.reset_index()
