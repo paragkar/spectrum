@@ -5982,7 +5982,7 @@ if authentication_status:
 			min_date = datetime(2010,1,31).date()
 			max_date = max(df_fin["Date"]).date()
 
-			no_of_months = max_date-min_date
+			no_of_months = max_date.month()-min_date.month()
 
 			st.write(no_of_months)
 
