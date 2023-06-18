@@ -6018,23 +6018,15 @@ if authentication_status:
 			df_temp = df_rev.groupby(["Date","Operator"]).agg({"GR":'sum','AGR':'sum','LF':'sum','SF':'sum','Dollar Rate':'mean'})\
 						.sort_index(ascending = False).sort_values("GR", ascending = False).round(0)
 
-			st.write(df_temp)
-
 			df_temp = df_temp.reset_index()
 
 
-			# gr = df_temp.loc[:,["Operator", "GR"]].reset_index()
+			finmetric = st.sidebar.selectbox("Select from Options", ["GrossRev", "ApplicableRev", "AdjustedGR", "LicenseFee", "SpectrumFee"])
 
-			# agr = df_temp.loc[:,["Operator", "AGR"]].reset_index()
-
-			# apgr = df_temp.loc[:,["Operator","APGR"]].reset_index()
-
-			# lf = df_temp.loc[:,["Operator","LF"]].reset_index()
-
-			# sf = df_temp.loc[:,["Operator", "SF"]].reset_index()
+			fin_dic = {'GrossRev':'GR', 'ApplicableRev':'APGR','AdjustedGR':'AGR','LicenseFee':'LF', 'SpectrumFee': 'SF'}
 
 
-			gr = (df_temp.pivot(index ="Operator", columns ="Date", values ='GR').sort_values(list_of_dates[-1], ascending=False)/1000).round(2).sum(axis=0)
+			gr = (df_temp.pivot(index ="Operator", columns ="Date", values =fin_dic[finmetric]).sort_values(list_of_dates[-1], ascending=False)/1000).round(2)
 
 			st.write(gr)
 
