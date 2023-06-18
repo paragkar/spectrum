@@ -5977,9 +5977,10 @@ if authentication_status:
 
 			df_fin = df["TRAI_Financial"]
 
-			st.write(df_fin["Date"])
+			min_date = 31/1/2010
+			max_date = max(df_fin["Date"])
 
-
+			st.write(min_date, max_date)
 
 			# date_range = st.slider("Select a range of dates using the Silder below", min_value=1, max_value = totalrounds, value=(1,totalrounds))
 
