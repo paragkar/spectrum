@@ -6030,7 +6030,9 @@ if authentication_status:
 
 			df_total = df_finmetric.sum(axis=0)
 
-			st.write(df_total)
+			df_finmetric_prec = df_finmetric/df_total.values
+
+			st.write(df_finmetric_prec)
 
 
 
