@@ -5982,9 +5982,12 @@ if authentication_status:
 			min_date = datetime(2010,1,31).date()
 			max_date = max(df_fin["Date"]).date()
 
-			st.write(min_date, max_date)
+			no_of_months = max_date-min_date
 
-			# date_range = st.slider("Select a range of dates using the Silder below", min_value=1, max_value = totalrounds, value=(1,totalrounds))
+			st.write(no_of_months)
+
+
+			# date_range = st.slider("Select a range of dates using the Silder below", min_value=min_date, max_value = max_date, value=(1,totalrounds))
 
 
 			# df_fin["Date"] = df_fin["Date"].dt.strftime("%d/%m/%Y")
