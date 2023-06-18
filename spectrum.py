@@ -6015,7 +6015,7 @@ if authentication_status:
 			df_rev.drop(columns=["License", "Year", "Month","Circle"], inplace = True)
 
 			
-			df_temp = df_rev.groupby(["Date","Operator"]).agg{"GR":'sum','AGR':'sum','LF':'sum','SF':'sum','Dollar Rate':'mean'}\
+			df_temp = df_rev.groupby(["Date","Operator"]).agg({"GR":'sum','AGR':'sum','LF':'sum','SF':'sum','Dollar Rate':'mean'})\
 						.sort_index(ascending = False).sort_values("GR", ascending = False).round(0)
 
 			st.write(df_temp)
