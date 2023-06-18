@@ -5981,9 +5981,9 @@ if authentication_status:
 
 			df_fin["Date"] = pd.to_datetime(df_fin["Date"])
 
-			st.write(sorted(list(set(df_fin["Date"])))[11:])
+			list_of_dates = sorted(list(set(df_fin["Date"])))[11:]
 
-			min_date = datetime(2010,1,31).date()
+			min_date = datetime(2010,3,31).date()
 			max_date = max(df_fin["Date"]).date()
 
 			diff = relativedelta(max_date,min_date)
@@ -5992,10 +5992,10 @@ if authentication_status:
 
 
 			start_date, end_date = st.select_slider("Select a Range of Dates", 
-				options = listofallcolumns, value =(dftotal.columns[-18],dftotal.columns[-1]))
+				options = list_of_dates, value =(min_date,max_date))
 
 
-			date_range = st.select_slider("Select a range of dates using the Silder below", min_value = min_date, value =(min_date, max_date))
+			# date_range = st.select_slider("Select a range of dates using the Silder below", min_value = min_date, value =(min_date, max_date))
 
 
 
