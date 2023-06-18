@@ -17,6 +17,8 @@ import datetime as dt
 import calendar
 import time
 
+from dateutil import relativedelta
+
 import re
 
 from collections import defaultdict
@@ -5982,9 +5984,9 @@ if authentication_status:
 			min_date = datetime(2010,1,31).date()
 			max_date = max(df_fin["Date"]).date()
 
-			no_of_months = max_date-min_date.
+			diff = relativedelta.relativedelta(max_date,min_date)
 
-			st.write(no_of_months.month)
+			st.write(diff)
 
 
 			# date_range = st.slider("Select a range of dates using the Silder below", min_value=min_date, max_value = max_date, value=(1,totalrounds))
