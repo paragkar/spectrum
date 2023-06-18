@@ -6021,7 +6021,7 @@ if authentication_status:
 
 			df_finmetric = df_finmetric.sort_values(df_finmetric.columns[-1], ascending = False)
 
-			df_finmetricINC = (df_finmetric - df_finmetric.shift(1, axis =1))
+			df_finmetricINC = (df_finmetric - df_finmetric.shift(1, axis =1)).head(15)
 
 			summarydf = df_finmetric.sum(axis=0)
 
