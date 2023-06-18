@@ -5977,6 +5977,8 @@ if authentication_status:
 
 			df_fin = df["TRAI_Financial"]
 
+			df_fin["Date"] = pd.to_datetime(df_fin["Date"])
+
 			min_date = datetime(2010,1,31)
 			max_date = max(df_fin["Date"])
 
