@@ -6024,7 +6024,7 @@ if authentication_status:
 			fin_dic = {'GrossRevenue':'GR', 'ApplicableRev':'APGR','AdjustedGR':'AGR','LicenseFee':'LF', 'SpectrumFee': 'SF'}
 
 
-			df_finmetric = (df_temp.pivot(index ="Operator", columns ="Date", values =fin_dic[finmetric]).sort_values(list_of_dates[-1], ascending=False)/1000).round(2)
+			df_finmetric = (df_temp.pivot(index ="Operator", columns ="Date", values =fin_dic[finmetric]).sort_values(df_temp.columns[-1], ascending=False)/1000).round(2)
 
 			df_total = df_finmetric.sum(axis=0)
 
