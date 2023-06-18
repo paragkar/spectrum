@@ -5980,7 +5980,12 @@ if authentication_status:
 
 			df_fin = df_fin.set_index("Date")
 
-			st.write(df_fin)
+			gr = df_fin[:,["Operator","Circle", "GR"]
+
+			st.write("gr")
+			# agr = df_fin["AGR"]
+			# apgr = df_fin["APGR"]
+			# lf = df_
 
 		if Feature == "TowerBTS Trends":
 
