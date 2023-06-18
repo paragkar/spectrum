@@ -6018,7 +6018,6 @@ if authentication_status:
 
 			df_temp = df_temp[filt]
 
-
 			finmetric = st.sidebar.selectbox("Select from Options", ["GrossRevenue", "ApplicableRev", "AdjustedGR", "LicenseFee", "SpectrumFee"])
 
 			fin_dic = {'GrossRevenue':'GR', 'ApplicableRev':'APGR','AdjustedGR':'AGR','LicenseFee':'LF', 'SpectrumFee': 'SF'}
@@ -6032,7 +6031,22 @@ if authentication_status:
 
 			df_finmetric_prec = round((df_finmetric/df_total.values)*100,2)
 
-			st.write(df_finmetric_prec)
+
+			data = [go.Heatmap(
+					z = df_finmetric.values,
+					y = df_finmetric.index,
+					x = df_finmetric.columns,
+					xgap = 1,
+					ygap = 1,
+					hoverinfo ='text',
+					text = hovertext,
+					colorscale='Hot',
+						texttemplate="%{z}", 
+						textfont={"size":10},
+						reversescale=True,
+						),
+					]
+				fig = go.Figure(data=data)
 
 
 
