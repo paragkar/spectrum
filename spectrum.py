@@ -5997,7 +5997,7 @@ if authentication_status:
 
 			df_fin = df_fin.set_index("Date")
 
-			filt = (df_fin.index >=start_date) & (df_fin.index <=end_date)
+			filt = ((df_fin.index).date() >=start_date) & ((df_fin.index).date() <=end_date)
 
 			df_fin = df_fin[filt]
 
