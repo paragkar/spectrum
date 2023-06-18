@@ -5994,7 +5994,7 @@ if authentication_status:
 			start_date, end_date = st.select_slider("Select a Range of Dates", 
 				options = list_of_dates, value =(list_of_dates[0],list_of_dates[-1]))
 
-			st.write(list_of_dates[-1])
+			st.write(end_date)
 
 
 
