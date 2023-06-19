@@ -72,7 +72,7 @@ def fetch_all_users():
 
 users = fetch_all_users()
 
-st.write(users)
+st.write(pd.DataFrame(users))
 
 usernames = [user["key"] for user in users]
 names = [user["name"] for user in users]
