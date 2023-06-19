@@ -92,6 +92,7 @@ authenticator = stauth.Authenticate(
 	config['cookie']['expiry_days']
 	)
 
+st.write(authenticator)
 
 
 name, authentication_status, username = authenticator.login("Login", "main")
