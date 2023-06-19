@@ -19,6 +19,8 @@ import time
 
 from PIL import Image
 
+import database as db
+
 from dateutil import relativedelta
 
 import re
