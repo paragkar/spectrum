@@ -87,8 +87,8 @@ st.set_page_config(layout="wide")
 # 	'abcde')
 
 
-# with open('config.yaml') as file:
-#     config = yaml.load(file, Loader=SafeLoader)
+with open('config.yaml') as file:
+    config = yaml.load(file, Loader=SafeLoader)
 
 
 authenticator = stauth.Authenticate(
