@@ -17,9 +17,6 @@ import datetime as dt
 import calendar
 import time
 
-import databases as db
-
-
 from PIL import Image
 
 from dateutil import relativedelta
