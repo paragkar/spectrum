@@ -85,9 +85,9 @@ users = fetch_all_users()
 
 authenticator = stauth.Authenticate(
 	users, 
-	config['cookie']['name'],
-	config['cookie']['key'],
-	config['cookie']['expiry_days']
+	"somename",
+	abcdef,
+	20
 	)
 
 
