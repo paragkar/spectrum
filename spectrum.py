@@ -47,28 +47,28 @@ st.set_page_config(layout="wide")
 #--------User Authentication Starts-------
 
 
-# DETA_KEY= st.secrets["deta_auth_tele_app"]
+DETA_KEY= st.secrets["deta_auth_tele_app"]
 
-# deta = Deta(DETA_KEY)
+deta = Deta(DETA_KEY)
 
-# db = deta.Base("users_db")
+db = deta.Base("users_db")
 
-# def insert_user(username, name, password):
+def insert_user(username, name, password):
 
-# 	#Returns the users on a successful user creation, othewise raises an error
+	#Returns the users on a successful user creation, othewise raises an error
 
-# 	return db.put({"key" : username, "name": name, "password" : password})
+	return db.put({"key" : username, "name": name, "password" : password})
 
-# # insert_user("pparker", "Peter Parker", "abc123")
+# insert_user("pparker", "Peter Parker", "abc123")
 
-# def fetch_all_users():
-# 	#"Returns a dict of all users"
+def fetch_all_users():
+	#"Returns a dict of all users"
 
-# 	res = db.fetch()
+	res = db.fetch()
 
-# 	return res.items
+	return res.items
 
-# users = fetch_all_users()
+users = fetch_all_users()
 
 # st.write(pd.DataFrame(users))
 
@@ -87,16 +87,27 @@ st.set_page_config(layout="wide")
 # 	'abcde')
 
 
-with open('config.yaml') as file:
-    config = yaml.load(file, Loader=SafeLoader)
+def convert_dict_to_yaml_text(users):
+    yaml_text = yaml.dump(data, sort_keys=False)
+    return yaml_text
+
+# Convert dictionary to YAML text
+yaml_text = convert_dict_to_yaml_text(data)
+
+# Use the YAML text in memory for further processing
+st.write(yaml_text)
 
 
-authenticator = stauth.Authenticate(
-	config['credentials'], 
-	config['cookie']['name'],
-	config['cookie']['key'],
-	config['cookie']['expiry_days']
-	)
+# with open('config.yaml') as file:
+#     config = yaml.load(file, Loader=SafeLoader)
+
+
+# authenticator = stauth.Authenticate(
+# 	config['credentials'], 
+# 	config['cookie']['name'],
+# 	config['cookie']['key'],
+# 	config['cookie']['expiry_days']
+# 	)
 
 # st.write(authenticator)
 
