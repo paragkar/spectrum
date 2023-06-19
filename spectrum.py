@@ -49,50 +49,52 @@ st.set_page_config(layout="wide")
 
 
 
-# DETA_KEY= st.secrets["deta_auth_tele_app"]
+DETA_KEY= st.secrets["deta_auth_tele_app"]
 
-# deta = Deta(DETA_KEY)
+deta = Deta(DETA_KEY)
 
-# db = deta.Base("users_db")
+db = deta.Base("users_db")
 
-# def insert_user(username, name, password):
+def insert_user(username, name, password):
 
-# 	#Returns the users on a successful user creation, othewise raises an error
+	#Returns the users on a successful user creation, othewise raises an error
 
-# 	return db.put({"key" : username, "name": name, "password" : password})
+	return db.put({"key" : username, "name": name, "password" : password})
 
-# # insert_user("pparker", "Peter Parker", "abc123")
+# insert_user("pparker", "Peter Parker", "abc123")
 
-# def fetch_all_users():
-# 	#"Returns a dict of all users"
+def fetch_all_users():
+	#"Returns a dict of all users"
 
-# 	res = db.fetch()
+	res = db.fetch()
 
-# 	return res.items
+	return res.items
 
-# users = fetch_all_users()
+users = fetch_all_users()
 
-# usernames = [user["key"] for user in users]
-# names = [user["name"] for user in users]
-# hashed_passwords = [user["password"] for user in users]
+st.write(users)
 
-
-# authenticator = stauth.Authenticate(names, usernames, hashed_passwords,
-#     "telecommapp", "abcdef", 30)
+usernames = [user["key"] for user in users]
+names = [user["name"] for user in users]
+hashed_passwords = [user["password"] for user in users]
 
 
-with open('config.yaml') as file:
-    config = yaml.load(file, Loader=SafeLoader)
+authenticator = stauth.Authenticate(names, usernames, hashed_passwords,
+    "telecommapp", "abcdef", 30)
 
 
-authenticator = stauth.Authenticate(
-	config['credentials'], 
-	config['cookie']['name'],
-	config['cookie']['key'],
-	config['cookie']['expiry_days']
-	)
+# with open('config.yaml') as file:
+#     config = yaml.load(file, Loader=SafeLoader)
 
-st.write(authenticator)
+
+# authenticator = stauth.Authenticate(
+# 	config['credentials'], 
+# 	config['cookie']['name'],
+# 	config['cookie']['key'],
+# 	config['cookie']['expiry_days']
+# 	)
+
+# st.write(authenticator)
 
 
 name, authentication_status, username = authenticator.login("Login", "main")
