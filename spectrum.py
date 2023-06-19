@@ -84,7 +84,9 @@ users = fetch_all_users()
 
 
 authenticator = stauth.Authenticate(
-	users)
+	users,
+	'cookie_name':'name',
+	'key': 'abcde')
 
 
 # with open('config.yaml') as file:
