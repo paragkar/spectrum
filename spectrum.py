@@ -86,7 +86,7 @@ users = fetch_all_users()
 authenticator = stauth.Authenticate(
 	users, 
 	"somename",
-	abcdef,
+	"abcdef",
 	20
 	)
 
