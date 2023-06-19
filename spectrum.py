@@ -5339,7 +5339,7 @@ if authentication_status:
 		dfT = loadtelecomdatafile()
 		
 		Feature = st.sidebar.selectbox('Select a Feature', ["5GBTS Trends", "Subscriber Trends", "Subscriber MShare", "License Fees", "TowerBTS Trends",
-															"Industry Financial"])
+															"Financial SPWise"])
 
 		if Feature== "5GBTS Trends":
 
@@ -5975,7 +5975,7 @@ if authentication_status:
 			fig = go.Figure(data=data)
 
 
-		if Feature == "Industry Financial":
+		if Feature == "Financial SPWise":
 
 
 			df = loadtraiagr()
@@ -5993,7 +5993,7 @@ if authentication_status:
 
 			for col in ["GR","APGR", "AGR", "LF", "SF"]:
 
-				df_rev[col] = pd.to_numeric(df_rev[col], errors='coerce')
+				df_rev[col] = pd.to_numeric(df_rev[col], errors='coerce') #to convert rougue strings (errors during PDF conversion) into numeric
 
 			df_rev = df_rev.reset_index()
 
@@ -6448,7 +6448,7 @@ if authentication_status:
 		title = "Indian Telecom Tower and BTS rollout Trends"
 		subtitle = ""
 
-	if (Feature == "Industry Financial"):
+	if (Feature == "Financial SPWise"):
 		xdtickangle =-45
 		xdtickval = 2
 		title = "Indian Telecom Financial Metric - Top 15 Operators ("+finmetric+")"
@@ -6534,7 +6534,7 @@ if authentication_status:
 				col1val =4.5
 			if (selected_dimension=="Business Data") and (Feature == "License Fees") and (SubFeature=="LicenseType"):
 				col1val =1
-			if (selected_dimension=="Business Data") and (Feature == "Industry Financial"):
+			if (selected_dimension=="Business Data") and (Feature == "Financial SPWise"):
 				col1val =0.7
 			else:
 				col1val = 0.2
