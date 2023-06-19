@@ -6571,7 +6571,7 @@ if authentication_status:
 		subtitle = "Rs K Cr (Except %); Source - TRAI; ("+radio_selection+")"
 
 
-		if (Feature == "Financial LSAWise"):
+	if (Feature == "Financial LSAWise"):
 		xdtickangle =-45
 		xdtickval = 2
 		title = "Indian Telecom Financial Metric ("+finmetric+")"
