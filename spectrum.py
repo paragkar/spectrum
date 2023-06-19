@@ -6452,7 +6452,7 @@ if authentication_status:
 		xdtickangle =-45
 		xdtickval = 2
 		title = "Indian Telecom Financial Metric - Top 15 Operators ("+finmetric+")"
-		subtitle = "Rs Cr (Except %); Source - TRAI"
+		subtitle = "Rs Cr (Except %); Source - TRAI; ("+radio_selection+")"
 
 
 		
