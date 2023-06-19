@@ -6084,7 +6084,7 @@ if authentication_status:
 #------------------------New Code ----------------------
 
 
-if Feature == "Financial LSAWise":
+		if Feature == "Financial LSAWise":
 
 
 			df = loadtraiagr()
