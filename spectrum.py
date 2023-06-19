@@ -6451,7 +6451,7 @@ if authentication_status:
 	if (Feature == "Industry Financial"):
 		xdtickangle =-45
 		xdtickval = 2
-		title = "Indian Telecom Financial Metric"
+		title = "Indian Telecom Financial Metric ("+finmetric+")"
 		subtitle = ""
 
 
