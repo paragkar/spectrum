@@ -17,7 +17,9 @@ import datetime as dt
 import calendar
 import time
 
-import database as db
+# import database as db
+
+from databases import Database
 
 from PIL import Image
 
