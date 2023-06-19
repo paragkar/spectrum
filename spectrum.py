@@ -47,30 +47,28 @@ st.set_page_config(layout="wide")
 #--------User Authentication Starts-------
 
 
+# DETA_KEY= st.secrets["deta_auth_tele_app"]
 
+# deta = Deta(DETA_KEY)
 
-DETA_KEY= st.secrets["deta_auth_tele_app"]
+# db = deta.Base("users_db")
 
-deta = Deta(DETA_KEY)
+# def insert_user(username, name, password):
 
-db = deta.Base("users_db")
+# 	#Returns the users on a successful user creation, othewise raises an error
 
-def insert_user(username, name, password):
+# 	return db.put({"key" : username, "name": name, "password" : password})
 
-	#Returns the users on a successful user creation, othewise raises an error
+# # insert_user("pparker", "Peter Parker", "abc123")
 
-	return db.put({"key" : username, "name": name, "password" : password})
+# def fetch_all_users():
+# 	#"Returns a dict of all users"
 
-# insert_user("pparker", "Peter Parker", "abc123")
+# 	res = db.fetch()
 
-def fetch_all_users():
-	#"Returns a dict of all users"
+# 	return res.items
 
-	res = db.fetch()
-
-	return res.items
-
-users = fetch_all_users()
+# users = fetch_all_users()
 
 # st.write(pd.DataFrame(users))
 
@@ -83,22 +81,22 @@ users = fetch_all_users()
 #     "telecommapp", "abcdef", 30)
 
 
-authenticator = stauth.Authenticate(
-	users,
-	'name',
-	'abcde')
+# authenticator = stauth.Authenticate(
+# 	users,
+# 	'name',
+# 	'abcde')
 
 
 # with open('config.yaml') as file:
 #     config = yaml.load(file, Loader=SafeLoader)
 
 
-# authenticator = stauth.Authenticate(
-# 	config['credentials'], 
-# 	config['cookie']['name'],
-# 	config['cookie']['key'],
-# 	config['cookie']['expiry_days']
-# 	)
+authenticator = stauth.Authenticate(
+	config['credentials'], 
+	config['cookie']['name'],
+	config['cookie']['key'],
+	config['cookie']['expiry_days']
+	)
 
 st.write(authenticator)
 
