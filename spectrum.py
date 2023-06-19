@@ -1479,7 +1479,7 @@ if authentication_status:
 	def fetch_all_users():
 		#"Returns a dict of all users"
 
-		red = db.fetch()
+		res = db.fetch()
 
 		return res.items
 
