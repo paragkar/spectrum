@@ -87,12 +87,12 @@ users = fetch_all_users()
 # 	'abcde')
 
 
-def convert_dict_to_yaml_text(users):
+def convert_dict_to_yaml_text(data):
     yaml_text = yaml.dump(data, sort_keys=False)
     return yaml_text
 
 # Convert dictionary to YAML text
-yaml_text = convert_dict_to_yaml_text(data)
+yaml_text = convert_dict_to_yaml_text(users)
 
 # Use the YAML text in memory for further processing
 st.write(yaml_text)
