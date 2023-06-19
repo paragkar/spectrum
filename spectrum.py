@@ -70,7 +70,7 @@ def fetch_all_users():
 
 	return res.items
 
-users = db.fetch_all_users()
+users = fetch_all_users()
 
 usernames = [user["key"] for user in users]
 names = [user["name"] for user in users]
