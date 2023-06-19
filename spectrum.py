@@ -1018,7 +1018,7 @@ if authentication_status:
 						    xx,
 						    absvalue,
 						    percentoftotal,
-						    increments,
+						    round(increments,2),
 						    )
 						    )
 
@@ -6615,7 +6615,7 @@ if authentication_status:
 		hoverlabel_bgcolor = "#000000" #subdued black
 
 		fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white'))) #hoverbox color is black
-		
+
 		xdtickangle =-45
 		xdtickval = 2
 		title = "Indian Telecom Financial Metric ("+finmetric+")"
