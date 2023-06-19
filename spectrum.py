@@ -37,6 +37,8 @@ import streamlit_authenticator as stauth
 import yaml
 from yaml.loader import SafeLoader
 
+from deta import Deta
+
 
 
 #Set page layout here
@@ -45,16 +47,51 @@ st.set_page_config(layout="wide")
 #--------User Authentication Starts-------
 
 
-with open('config.yaml') as file:
-    config = yaml.load(file, Loader=SafeLoader)
 
 
-authenticator = stauth.Authenticate(
-	config['credentials'], 
-	config['cookie']['name'],
-	config['cookie']['key'],
-	config['cookie']['expiry_days']
-	)
+DETA_KEY= st.secrets["deta_auth_tele_app"]
+
+deta = Deta(DETA_KEY)
+
+db = deta.Base("users_db")
+
+def insert_user(username, name, password):
+
+	#Returns the users on a successful user creation, othewise raises an error
+
+	return db.put({"key" : username, "name": name, "password" : password})
+
+# insert_user("pparker", "Peter Parker", "abc123")
+
+def fetch_all_users():
+	#"Returns a dict of all users"
+
+	res = db.fetch()
+
+	return res.items
+
+users = db.fetch_all_users()
+
+usernames = [user["key"] for user in users]
+names = [user["name"] for user in users]
+hashed_passwords = [user["password"] for user in users]
+
+
+authenticator = stauth.Authenticate(names, usernames, hashed_passwords,
+    "telecommapp", "abcdef", cookie_expiry_days=30)
+
+
+# with open('config.yaml') as file:
+#     config = yaml.load(file, Loader=SafeLoader)
+
+
+# authenticator = stauth.Authenticate(
+# 	config['credentials'], 
+# 	config['cookie']['name'],
+# 	config['cookie']['key'],
+# 	config['cookie']['expiry_days']
+# 	)
+
 
 
 name, authentication_status, username = authenticator.login("Login", "main")
@@ -1458,36 +1495,6 @@ if authentication_status:
 
 
 	#**********  Main Program Starts here ***************
-
-	from deta import Deta
-
-
-	DETA_KEY= st.secrets["deta_auth_tele_app"]
-
-	deta = Deta(DETA_KEY)
-
-	db = deta.Base("users_db")
-
-	def insert_user(username, name, password):
-
-		#Returns the users on a successful user creation, othewise raises an error
-
-		return db.put({"key" : username, "name": name, "password" : password})
-
-	# insert_user("pparker", "Peter Parker", "abc123")
-
-	def fetch_all_users():
-		#"Returns a dict of all users"
-
-		res = db.fetch()
-
-		return res.items
-
-	st.write(fetch_all_users())
-
-
-
-
 
 
 	authenticator.logout("Logout", "sidebar") #logging out authentication
