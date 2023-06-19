@@ -76,8 +76,6 @@ usernames = [user["key"] for user in users]
 names = [user["name"] for user in users]
 hashed_passwords = [user["password"] for user in users]
 
-st.write(hashed_passwords)
-
 
 authenticator = stauth.Authenticate(names, usernames, hashed_passwords,
     "telecommapp", "abcdef", 30)
