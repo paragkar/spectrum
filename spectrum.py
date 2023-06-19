@@ -1474,7 +1474,16 @@ if authentication_status:
 
 		return db.put({"key" : username, "name": name, "password" : password})
 
-	insert_user("pparker", "Peter Parker", "abc123")
+	# insert_user("pparker", "Peter Parker", "abc123")
+
+	def fetch_all_users():
+		#"Returns a dict of all users"
+
+		red = db.fetch()
+
+		return res.items
+
+	st.write(fetch_all_users())
 
 
 
