@@ -84,11 +84,7 @@ users = fetch_all_users()
 
 
 authenticator = stauth.Authenticate(
-	users, 
-	"somename",
-	"abcdef",
-	20
-	)
+	users)
 
 
 # with open('config.yaml') as file:
