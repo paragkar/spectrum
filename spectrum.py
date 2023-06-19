@@ -78,7 +78,7 @@ hashed_passwords = [user["password"] for user in users]
 
 
 authenticator = stauth.Authenticate(names, usernames, hashed_passwords,
-    "telecommapp", "abcdef", cookie_expiry_days=30)
+    "telecommapp", "abcdef", 30)
 
 
 # with open('config.yaml') as file:
