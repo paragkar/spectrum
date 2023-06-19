@@ -5339,7 +5339,7 @@ if authentication_status:
 		dfT = loadtelecomdatafile()
 		
 		Feature = st.sidebar.selectbox('Select a Feature', ["5GBTS Trends", "Subscriber Trends", "Subscriber MShare", "License Fees", "TowerBTS Trends",
-															"Financial SPWise"])
+															"Financial SPWise", "Financial LSAWise"])
 
 		if Feature== "5GBTS Trends":
 
@@ -6081,6 +6081,122 @@ if authentication_status:
 
 
 
+#------------------------New Code ----------------------
+
+
+if Feature == "Financial LSAWise":
+
+
+			df = loadtraiagr()
+
+
+			df_rev = df["TRAI_Financial"]
+
+			df_rev["Date"] = pd.to_datetime(df_rev["Date"]).dt.date
+
+			list_of_dates = sorted(list(set(df_rev["Date"])))[11:]
+
+
+			df_rev = df_rev.set_index("Date")
+
+
+			for col in ["GR","APGR", "AGR", "LF", "SF"]:
+
+				df_rev[col] = pd.to_numeric(df_rev[col], errors='coerce') #to convert rougue strings (errors during PDF conversion) into numeric
+
+			df_rev = df_rev.reset_index()
+
+			df_rev.rename(columns = {"index":"Date"}, inplace = True)
+
+			selected_operator = st.sidebar.selectbox("Select from Options", ["RJIO", "Bharti", "Vodafone Idea", "BSNL"])
+
+			df_rev = df_rev[df_rev["Operator"]==selected_operator]
+
+			df_rev.drop(columns=["License", "Year", "Month","Operator","Dollar Rate"], inplace = True)
+
+			
+			df_temp = df_rev.groupby(["Date","Circle"]).agg({"GR":'sum','APGR':'sum','AGR':'sum','LF':'sum','SF':'sum'})\
+						.sort_index(ascending = False).sort_values("GR", ascending = False).round(0)
+
+
+			start_date, end_date = st.select_slider("Select a Range of Dates", 
+				options = list_of_dates, value =(list_of_dates[0],list_of_dates[-1]))
+
+
+			df_temp = df_temp.reset_index()
+
+			filt = (df_temp["Date"] >= start_date) & (df_temp["Date"] <= end_date) 
+
+			df_temp = df_temp[filt]
+
+			finmetric = st.sidebar.selectbox("Select from Options", ["GrossRevenue", "ApplicableRev", "AdjustedGR", "LicenseFee", "SpectrumFee"])
+
+			fin_dic = {'GrossRevenue':'GR', 'ApplicableRev':'APGR','AdjustedGR':'AGR','LicenseFee':'LF', 'SpectrumFee': 'SF'}
+
+
+			df_finmetric = (df_temp.pivot(index ="Circle", columns ="Date", values =fin_dic[finmetric])/1000).round(1)
+
+			df_finmetric = df_finmetric.sort_values(df_finmetric.columns[-1], ascending = False)
+
+			df_finmetricINC = (df_finmetric - df_finmetric.shift(1, axis =1))
+
+			summarydf_INC = df_finmetricINC.sum(axis=0).round(1)
+
+			summarydf_INC = summarydf_INC.reset_index()
+
+			summarydf_INC.columns = ["Date", "IndiaTotal"]
+
+			summarydf = df_finmetric.sum(axis=0)
+
+			df_finmetric_prec = round((df_finmetric/summarydf.values)*100,1)
+			df_finmetric = df_finmetric
+
+			summarydf = summarydf.reset_index()
+
+			summarydf.columns = ["Date", "IndiaTotal"]
+
+
+			radio_selection = st.sidebar.radio('Click an Option', ["Absolute Values", "Percentage of Total", "Quarterly Increments"])
+
+			if radio_selection == "Absolute Values":
+				df_heatmap = df_finmetric.copy()
+				summarydf = summarydf.copy()
+			if radio_selection == "Percentage of Total":
+				df_heatmap = df_finmetric_prec.copy()
+				summarydf = summarydf.copy()
+			if radio_selection == "Quarterly Increments":
+				df_heatmap = df_finmetricINC.iloc[:,1:].copy()
+				summarydf = summarydf_INC.iloc[1:,:].copy()
+
+
+
+			#preparing the summary chart 
+			chart = summarychart(summarydf, "Date", "IndiaTotal")
+			SummaryFlag = True #for ploting the summary chart
+
+
+
+			data = [go.Heatmap(
+					z = df_heatmap.values,
+					y = df_heatmap.index,
+					x = df_heatmap.columns,
+					xgap = 1,
+					ygap = 1,
+					hoverinfo ='text',
+					# text = hovertext,
+					colorscale='Hot',
+						texttemplate="%{z}", 
+						textfont={"size":8},
+						reversescale=True,
+						),
+					]
+			fig = go.Figure(data=data)
+
+
+#-------------------- New Code Ends ------------------------
+
+
+
 		if Feature == "TowerBTS Trends":
 
 
@@ -6455,6 +6571,13 @@ if authentication_status:
 		subtitle = "Rs K Cr (Except %); Source - TRAI; ("+radio_selection+")"
 
 
+		if (Feature == "Financial LSAWise"):
+		xdtickangle =-45
+		xdtickval = 2
+		title = "Indian Telecom Financial Metric ("+finmetric+")"
+		subtitle = "Rs K Cr (Except %); Source - TRAI; ("+radio_selection+")"
+
+
 		
 	#---------Dimension = Business Data Ends ----------------
 
@@ -6535,6 +6658,8 @@ if authentication_status:
 			if (selected_dimension=="Business Data") and (Feature == "License Fees") and (SubFeature=="LicenseType"):
 				col1val =1
 			if (selected_dimension=="Business Data") and (Feature == "Financial SPWise"):
+				col1val =0.7
+			if (selected_dimension=="Business Data") and (Feature == "Financial LSAWise"):
 				col1val =0.7
 			else:
 				col1val = 0.2
