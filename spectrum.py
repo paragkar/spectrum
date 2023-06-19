@@ -987,7 +987,45 @@ if authentication_status:
 						    percent,
 						    )
 						    )
-		return hovertext	
+		return hovertext
+
+#---------------Hovertest for BlocksAllocated Starts---------------------
+
+	@st.cache_resource
+	def htext_businessdata_FinancialSPWise(df_finmetric,df_finmetric_prec,df_finmetricINC):
+
+		hovertext = []
+		for yi,yy in enumerate(df_finmetric.index):
+			hovertext.append([])
+
+			for xi,xx in enumerate(df_finmetric.columns):
+
+				absvalue = df_finmetric.loc[yy,xx]
+				percentoftotal = df_finmetric_prec.loc[yy,xx]
+				increments = df_finmetricINC.loc[yy,xx]
+
+
+
+				hovertext[-1].append(
+						    'Bidder: {}\
+						    <br>Date: {}\
+						    <br>Abs Value : {} Rs K Cr\
+						    <br>Perc : {} of Total \
+						    <br>Increments : {} Rs K Cr'
+					
+					     .format( 
+						    yy,
+						    xx,
+						    absvalue,
+						    percentoftotal,
+						    increments,
+						    )
+						    )
+
+		return hovertext
+
+
+#---------------Hovertest for BlocksAllocated Ends---------------------	
 
 #processing hovertext for auction data 
 
@@ -5975,6 +6013,7 @@ if authentication_status:
 			fig = go.Figure(data=data)
 
 
+
 		if Feature == "Financial SPWise":
 
 
@@ -6061,7 +6100,7 @@ if authentication_status:
 			chart = summarychart(summarydf, "Date", "IndiaTotal")
 			SummaryFlag = True #for ploting the summary chart
 
-
+			hovertext = htext_businessdata_FinancialSPWise(df_finmetric,df_finmetric_prec,df_finmetricINC)
 
 			data = [go.Heatmap(
 					z = df_heatmap.values,
@@ -6070,7 +6109,7 @@ if authentication_status:
 					xgap = 1,
 					ygap = 1,
 					hoverinfo ='text',
-					# text = hovertext,
+					text = hovertext,
 					colorscale='Hot',
 						texttemplate="%{z}", 
 						textfont={"size":8},
@@ -6572,6 +6611,11 @@ if authentication_status:
 
 
 	if (Feature == "Financial LSAWise"):
+
+		hoverlabel_bgcolor = "#000000" #subdued black
+
+		fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white'))) #hoverbox color is black
+		
 		xdtickangle =-45
 		xdtickval = 2
 		title = "Indian Telecom Financial Metric ("+finmetric+")"
