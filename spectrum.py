@@ -1550,7 +1550,7 @@ if authentication_status:
 	#loading file rupee to USD
 
 
-	auction_eom_list = [x.date() for x in list(auction_eom_dates_dict.values())]
+	auction_eom_list = [x.date().date for x in list(auction_eom_dates_dict.values())]
 
 	dfrsrate = loadrstousd()
 
