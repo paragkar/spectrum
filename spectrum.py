@@ -6478,8 +6478,8 @@ if authentication_status:
 	else:
 		pass
 
-	if selected_dimension = "Spectrum Bands":
-		
+	if selected_dimension == "Spectrum Bands":
+
 		units_dict = {"Reserve Price" : "Rs Cr/MHz", "Auction Price" : "Rs Cr/MHz", "Quantum Offered": "MHz", 
 				          "Quantum Sold" : "MHz", "Quantum Unsold" : "MHz", "Total EMD" : "Rs Cr", "Total Outflow" : "Rs Cr",
 				          "Auction/Reserve" : "Ratio", "Percent Unsold" : "% of Total Spectrum", "Percent Sold" : "% of Total Spectrum", 
