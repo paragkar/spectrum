@@ -1547,12 +1547,13 @@ if authentication_status:
 			default_index =0,
 			)
 
-	#loading file rupee to USD
-
+	#loading file rupee to USD and finding the exchange rate in the auction eom
 
 	auction_eom_list = [x.date() for x in list(auction_eom_dates_dict.values())]
 
 	dfrsrate = loadrstousd()
+
+	auction_rsrate_dict ={}
 
 	dfrsrate["Date"] = pd.to_datetime(dfrsrate["Date"])
 
@@ -1562,6 +1563,10 @@ if authentication_status:
 
 		if index.date() in auction_eom_list:
 			st.write(dfrsrate.loc[index,:])
+
+		auction_rsrate_dict[index.year] = dfrsrate.loc[index,:].value
+
+	st.write(auction_rsrate_dict)
 
 	
 
