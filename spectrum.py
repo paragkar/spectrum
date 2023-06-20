@@ -5325,10 +5325,17 @@ if authentication_status:
 				df1_temp2 = df1_temp2[["Band", "Circle", "Total Outflow"]]
 				df1_temp2 = df1_temp2.pivot(index="Circle", columns='Band', values="Total Outflow")
 				df1_temp2.columns = [str(x) for x in sorted(df1_temp2.columns)]
-				z = df1_temp2.values.round(0)
-				x = df1_temp2.columns
-				y = df1_temp2.index
-				summarydf = df1_temp2.sum()
+
+				if currency_flag == False: #USD
+					z = np.around(df1_temp2.values/auction_rsrate_dict[Year]*10,2)
+					x = df1_temp2.columns
+					y = df1_temp2.index
+					summarydf = round(df1_temp2.sum()/auction_rsrate_dict[Year]*10,1)
+				if currency_flag == True: #Rupee
+					z = df1_temp2.values.round(0)
+					x = df1_temp2.columns
+					y = df1_temp2.index
+					summarydf = df1_temp2.sum()
 
 			if SubFeature == "Auction/Reserve":
 				df1 = df1.reset_index()
