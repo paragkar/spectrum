@@ -1553,7 +1553,7 @@ if authentication_status:
 
 	for value in dfrsrate.values:
 
-		st.write(value)
+		st.write(value[0])
 
 	# 	if value[0] in auction_eom_dates_dict.keys:
 
