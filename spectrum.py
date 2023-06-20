@@ -2020,8 +2020,8 @@ if authentication_status:
 				if radio_currency == "Rupees":
 					summarydf = summarydf
 				if radio_currency == "US Dollars":
+					summarydf["India Total"] = summarydf["India Total"].values/curr_list
 					st.write(summarydf)
-					summarydf = summarydf.values/curr_list
 
 			#preparing the summary chart 
 				chart = summarychart(summarydf, "Years", "India Total")
