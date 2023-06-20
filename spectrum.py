@@ -5420,11 +5420,20 @@ if authentication_status:
 				df2_temp1 = df2_temp1.groupby(["Circle"]).sum().round(0)
 				df2_temp1 = df2_temp1.reindex(sorted(df2_temp1.columns), axis=1)
 				
-				z = df2_temp1.values
-				x = df2_temp1.columns
-				y = df2_temp1.index
-				
-				summarydf = df2_temp1.sum(axis=0)
+				if currency_flag == False: #USD
+					z = np.around(df2_temp1.values/auction_rsrate_dict[Year]*10,2)
+					x = df2_temp1.columns
+					y = df2_temp1.index
+					summarydf = round(df2_temp1.sum(axis=0)//auction_rsrate_dict[Year]*10,2)
+
+				if currency_flag == True: #Rupees
+
+					z = df2_temp1.values
+					x = df2_temp1.columns
+					y = df2_temp1.index
+					summarydf = df2_temp1.sum(axis=0)
+
+
 				summarydf = summarydf.reset_index()
 				summarydf.columns = ["Operators", SubFeature] 
 				summarydf = summarydf.sort_values("Operators", ascending = False)
@@ -5450,6 +5459,7 @@ if authentication_status:
 				df2_temp2.drop("Band", inplace = True, axis =1)
 				df2_temp2 = df2_temp2.groupby(["Circle"]).sum().round(2)
 				df2_temp2 = df2_temp2.reindex(sorted(df2_temp2.columns), axis=1)
+
 				z = df2_temp2.values
 				x = df2_temp2.columns
 				y = df2_temp2.index
@@ -5465,7 +5475,6 @@ if authentication_status:
 				#processing hovertext and colormatrix for operator wise in cal year dim
 				hovertext,colormatrix = htext_colmatrix_auction_year_operator_metric(df1, selectedbands, SubFeature, df2_temp2)
 				hoverlabel_bgcolor = colormatrix #colormatrix processed from fuction "hovertext_and_colmatrix" for same above
-		
 
 		data = [go.Heatmap(
 			  z = z,
