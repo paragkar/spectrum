@@ -149,7 +149,7 @@ if authentication_status:
 #--------Functions for loading File Starts---------------------
 
 	@st.cache_resource
-	def loadspectrumfile():
+	def loadrstousd():
 
 		dfrsrate = pd.read_csv("rs_to_usd.csv")
 
