@@ -1561,7 +1561,7 @@ if authentication_status:
 
 		st.write(index.date())
 
-		if index.date() in auction_eom_dates_dict.keys().date():
+		if index.date() in auction_eom_dates_dict.values().date():
 
 			st.write(auction_eom_dates_dict[index.year])
 
