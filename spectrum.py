@@ -1555,7 +1555,7 @@ if authentication_status:
 
 	for value in dfrsrate.values:
 
-		if value[0].year in list(auction_eom_dates_dict.keys):
+		if value[0].year in auction_eom_dates_dict.keys():
 
 			st.write(auction_eom_dates_dict[value[0].year])
 
