@@ -1551,7 +1551,7 @@ if authentication_status:
 
 	dfrsrate = loadrstousd()
 
-	for value in dfsrate.values:
+	for value in dfrsrate.values:
 
 		st.write(value)
 
