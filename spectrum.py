@@ -1998,8 +1998,8 @@ if authentication_status:
 				if radio_currency == "Rupees":
 					z = typedf.values
 				if radio_currency == "US Dollars":
-					for i, line in enumerate(typedf.values):
-						for val in line:
+					for line in typedf.values:
+						for i, val in enumerate(line):
 							if val == "NA":
 								pass
 							else:
