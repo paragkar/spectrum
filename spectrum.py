@@ -2014,6 +2014,14 @@ if authentication_status:
 				summarydf = typedf.replace('[a-zA-Z]+\s*',np.nan, regex=True)
 				summarydf = summarydf.sum().reset_index()
 				summarydf.columns = ["Years", "India Total"]
+
+			if SubFeature in ["Auction Price", "Reserve Price"]:
+
+				if radio_currency == "Rupees":
+					summarydf = summarydf
+				if radio_currency == "US Dollars":
+					summarydf = summarydf.values/curr_list
+
 			#preparing the summary chart 
 				chart = summarychart(summarydf, "Years", "India Total")
 				SummaryFlag = True
