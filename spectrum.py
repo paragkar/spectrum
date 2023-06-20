@@ -1999,7 +1999,9 @@ if authentication_status:
 					z = typedf.values
 				if radio_currency == "US Dollars":
 					for i, val in enumerate(typedf.values):
-						if val !="NA":
+						if val == "NA":
+							pass
+						else:
 							st.write(val/[curr_list[i]])
 					
 			
