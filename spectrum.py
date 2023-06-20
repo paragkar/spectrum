@@ -1557,7 +1557,7 @@ if authentication_status:
 
 		if value[0].year in auction_eom_dates_dict.keys():
 
-			st.write(auction_eom_dates_dict[value[0].year])
+			st.write(set(auction_eom_dates_dict[value[0].year])
 
 
 
