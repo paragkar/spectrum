@@ -1987,6 +1987,17 @@ if authentication_status:
 			typedf = type_dict[SubFeature].copy()
 
 			hovertext = htext_auctionmap(dff)
+
+			if SubFeature in ["Auction Price", "Reserve Price"]:
+
+				st.write(auction_rsrate_dict[typedf.columns])
+
+				radio_currency = st.sidebar.radio('Click Currency', ["Rupees", "US Dollars"])
+					if radio_currency == "Rupees":
+						z = typedf.values
+					if radio_currency == "US Dollars":
+						z = typedf.values
+			
 			
 			#preparing the dataframe of the summary bar chart on top of the heatmap
 			if SubFeature not in ["Percent Sold", "Percent Unsold"]:
@@ -1999,7 +2010,7 @@ if authentication_status:
 			
 			#setting the data of the heatmap 
 			data = [go.Heatmap(
-				z = typedf.values,
+				z = z,
 				y = typedf.index,
 				x = typedf.columns,
 				xgap = 1,
