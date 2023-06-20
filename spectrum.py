@@ -6486,7 +6486,7 @@ if authentication_status:
 	else:
 		pass
 
-	if selected_dimension == "Spectrum Bands":
+	if (selected_dimension == "Spectrum Bands") & (SubFeature in ["Reserve Price", "Auction Price"]):
 
 		if radio_currency == "Rupees":
 
