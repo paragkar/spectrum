@@ -1553,11 +1553,13 @@ if authentication_status:
 
 	dfrsrate["Date"] = pd.to_datetime(dfrsrate["Date"])
 
+	# dfrsrate = dfrsrate.set_index("Date")
+
 	for value in dfrsrate.values:
 
 		if value[0].year in auction_eom_dates_dict.keys():
 
-			st.write(dfrsrate.loc[auction_eom_dates_dict[value[0].year].date(),:])
+			st.write(dfrsrate["Date"] == auction_eom_dates_dict[value[0].year].date())
 
 
 
