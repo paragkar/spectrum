@@ -1551,6 +1551,8 @@ if authentication_status:
 
 	dfrsrate = loadrstousd()
 
+	dfrsrate["Date"] = pd.to_datetime(dfrsrate["Date"])
+
 	for value in dfrsrate.values:
 
 		st.write(value[0])
