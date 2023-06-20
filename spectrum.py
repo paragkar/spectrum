@@ -151,6 +151,14 @@ if authentication_status:
 	@st.cache_resource
 	def loadspectrumfile():
 
+		dfrsrate = pd.read_csv("rs_to_usd.csv")
+
+		return df
+
+
+	@st.cache_resource
+	def loadspectrumfile():
+
 		password = st.secrets["db_password"]
 
 		excel_content = io.BytesIO()
