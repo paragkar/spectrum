@@ -1561,7 +1561,7 @@ if authentication_status:
 	for index in dfrsrate.index:
 
 		if index.date() in auction_eom_list:
-			st.write(True)
+			st.write(dfrsrate.iloc[index,:])
 
 	
 
