@@ -1998,8 +1998,10 @@ if authentication_status:
 				if radio_currency == "Rupees":
 					z = typedf.values
 				if radio_currency == "US Dollars":
-					z = typedf.values
-					st.write(z)
+					for i, val in typedf.values:
+						if val !="NA":
+							st.write(val/[curr_list[i]])
+					
 			
 			
 			#preparing the dataframe of the summary bar chart on top of the heatmap
