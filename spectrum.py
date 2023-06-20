@@ -1998,10 +1998,16 @@ if authentication_status:
 				if radio_currency == "Rupees":
 					z = typedf.values
 				if radio_currency == "US Dollars":
+					lst1=[]
 					for line in typedf.values:
+						lst2=[]
 						for i, val in enumerate(line):
-							if str(val).strip() != "NA":
-								st.write(round(val/[curr_list[i]][0]*10,2))
+							if str(val).strip() == "NA":
+								lst2.append(val)
+							else:
+								lst2.append(round(val/[curr_list[i]][0]*10,2))
+						lst1.append(lst2)
+					st.write(lst1)
 						
 			
 			
