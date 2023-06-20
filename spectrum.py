@@ -1549,24 +1549,21 @@ if authentication_status:
 
 	#loading file rupee to USD
 
+
+	auction_eom_list = [x.date() for x in list(auction_eom_dates_dict.values())]
+
 	dfrsrate = loadrstousd()
 
 	dfrsrate["Date"] = pd.to_datetime(dfrsrate["Date"])
 
 	dfrsrate = dfrsrate.set_index("Date").asfreq("m")
 
-	# st.write(dfrsrate)
+	for index in dfrsrate.index:
 
-	# for index in dfrsrate.index:
+		if index in auction_eom_list:
+			st.write(True)
 
-	# 	st.write(index.date())
-
-		# if index.date() in auction_eom_dates_dict.values().date():
-
-		# 	st.write(auction_eom_dates_dict[index.year])
-
-	st.write([x.date() for x in list(auction_eom_dates_dict.values())])
-
+	
 
 	if selected_dimension == "Spectrum Bands":
 
