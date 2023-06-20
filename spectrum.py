@@ -1564,7 +1564,7 @@ if authentication_status:
 		if index.date() in auction_eom_list:
 			st.write(dfrsrate.loc[index,:])
 
-		auction_rsrate_dict[index.year] = dfrsrate.loc[index,:].value
+		auction_rsrate_dict[index.year] = dfrsrate.loc[index,:].values
 
 	st.write(auction_rsrate_dict)
 
