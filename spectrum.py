@@ -1993,10 +1993,10 @@ if authentication_status:
 				st.write(auction_rsrate_dict[typedf.columns])
 
 				radio_currency = st.sidebar.radio('Click Currency', ["Rupees", "US Dollars"])
-					if radio_currency == "Rupees":
-						z = typedf.values
-					if radio_currency == "US Dollars":
-						z = typedf.values
+				if radio_currency == "Rupees":
+					z = typedf.values
+				if radio_currency == "US Dollars":
+					z = typedf.values
 			
 			
 			#preparing the dataframe of the summary bar chart on top of the heatmap
