@@ -329,7 +329,7 @@ if authentication_status:
 
 	#end of month auction completion dates dictionary for the purpose of evaluting rs-usd rates 
 
-	auction_comp_dates = {2010 : datetime(2010,6,30), 2012: datetime(2012,11,30),2013: datetime(2013,3,31), 2014: datetime(2014,2,28),
+	auction_eom_dates_dict = {2010 : datetime(2010,6,30), 2012: datetime(2012,11,30),2013: datetime(2013,3,31), 2014: datetime(2014,2,28),
 						2015 : datetime(2015,3,31), 2016 : datetime(2016,10,31), 2021: datetime(2021,3,31), 2022: datetime(2022,8,31)}
 
 	#Error dicts defines the window width = difference between the auction closing date and the auction freq assignment dates
@@ -1550,6 +1550,8 @@ if authentication_status:
 	#loading file rupee to USD
 
 	dfrsrate = loadrstousd()
+
+	st.write(auction_eom_dates_dict) #debug
 
 	if selected_dimension == "Spectrum Bands":
 
