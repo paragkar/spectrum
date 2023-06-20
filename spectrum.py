@@ -5302,7 +5302,7 @@ if authentication_status:
 				df1_temp1.columns = [str(x) for x in sorted(df1_temp1.columns)]
 
 				if currency_flag == False: #USD
-					z = round(df1_temp1.values/auction_rsrate_dict[Year]*10,2)
+					z = df1_temp1.values/auction_rsrate_dict[Year].round(2)*10
 					x = df1_temp1.columns
 					y = df1_temp1.index
 					summarydf = round(df1_temp1.sum()/auction_rsrate_dict[Year]*10,1)
