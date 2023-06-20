@@ -1559,7 +1559,7 @@ if authentication_status:
 
 	for index in dfrsrate.index:
 
-		st.write(index.year)
+		st.write(index.date())
 
 		# if index.year in auction_eom_dates_dict.keys():
 
