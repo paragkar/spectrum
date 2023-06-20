@@ -5300,10 +5300,17 @@ if authentication_status:
 				else:
 					df1_temp1 = df1_temp1.pivot(index="Circle", columns='Band', values=subfeature_dict[SubFeature])
 				df1_temp1.columns = [str(x) for x in sorted(df1_temp1.columns)]
-				z = df1_temp1.values.round(1)
-				x = df1_temp1.columns
-				y = df1_temp1.index
-				summarydf = df1_temp1.sum()
+
+				if currency_flag == False: #USD
+					z = df1_temp1.values.round(1)/auction_rsrate_dict[Year]
+					x = df1_temp1.columns
+					y = df1_temp1.index
+					summarydf = df1_temp1.sum()/auction_rsrate_dict[Year]
+				if currency_flag == True: #Rupee
+					z = df1_temp1.values.round(1)
+					x = df1_temp1.columns
+					y = df1_temp1.index
+					summarydf = df1_temp1.sum()
 
 			if SubFeature == "Total Outflow":
 				df1 = df1.reset_index()
