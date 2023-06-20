@@ -6480,10 +6480,18 @@ if authentication_status:
 
 	if selected_dimension == "Spectrum Bands":
 
-		units_dict = {"Reserve Price" : "Rs Cr/MHz", "Auction Price" : "Rs Cr/MHz", "Quantum Offered": "MHz", 
-				          "Quantum Sold" : "MHz", "Quantum Unsold" : "MHz", "Total EMD" : "Rs Cr", "Total Outflow" : "Rs Cr",
-				          "Auction/Reserve" : "Ratio", "Percent Unsold" : "% of Total Spectrum", "Percent Sold" : "% of Total Spectrum", 
-				          "Total Purchase" : "MHz"}
+		if radio_currency == "Rupees":
+
+			units_dict = {"Reserve Price" : "Rs Cr/MHz", "Auction Price" : "Rs Cr/MHz", "Quantum Offered": "MHz", 
+					          "Quantum Sold" : "MHz", "Quantum Unsold" : "MHz", "Total EMD" : "Rs Cr", "Total Outflow" : "Rs Cr",
+					          "Auction/Reserve" : "Ratio", "Percent Unsold" : "% of Total Spectrum", "Percent Sold" : "% of Total Spectrum", 
+					          "Total Purchase" : "MHz"}
+		if radio_currency == "US Dollars":
+			units_dict = {"Reserve Price" : "$ Million/MHz", "Auction Price" : "$ Million/MHz", "Quantum Offered": "MHz", 
+					          "Quantum Sold" : "MHz", "Quantum Unsold" : "MHz", "Total EMD" : "$ Million", "Total Outflow" : "$ Million",
+					          "Auction/Reserve" : "Ratio", "Percent Unsold" : "% of Total Spectrum", "Percent Sold" : "% of Total Spectrum", 
+					          "Total Purchase" : "MHz"}
+
 
 
 
