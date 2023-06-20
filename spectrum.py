@@ -1990,7 +1990,9 @@ if authentication_status:
 
 			if SubFeature in ["Auction Price", "Reserve Price"]:
 
-				st.write(auction_rsrate_dict[typedf.columns])
+				# st.write(auction_rsrate_dict[typedf.columns])
+
+				st.write(typedf.columns)
 
 				radio_currency = st.sidebar.radio('Click Currency', ["Rupees", "US Dollars"])
 				if radio_currency == "Rupees":
