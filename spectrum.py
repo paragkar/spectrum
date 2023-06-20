@@ -1991,7 +1991,7 @@ if authentication_status:
 			if SubFeature in ["Auction Price", "Reserve Price"]:
 
 				for col in typedf.columns:
-					st.write(auction_rsrate_dict[col])
+					st.write(auction_rsrate_dict)
 
 				st.write(typedf.columns)
 
