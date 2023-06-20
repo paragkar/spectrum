@@ -6438,14 +6438,14 @@ if authentication_status:
 
 	#This section deals with titles and subtitles and hoverlabel color for all the heatmap charts
 
-	if currency_flag == True: #Rupees
+	if selected_dimension == "Auction Years" & currency_flag == True: #Rupees
 
 		units_dict = {"Reserve Price" : "Rs Cr/MHz", "Auction Price" : "Rs Cr/MHz", "Quantum Offered": "MHz", 
 			          "Quantum Sold" : "MHz", "Quantum Unsold" : "MHz", "Total EMD" : "Rs Cr", "Total Outflow" : "Rs Cr",
 			          "Auction/Reserve" : "Ratio", "Percent Unsold" : "% of Total Spectrum", "Percent Sold" : "% of Total Spectrum", 
 			          "Total Purchase" : "MHz"}
 
-	if currency_flag == False: #USD
+	if selected_dimension == "Auction Years" & currency_flag == False: #USD
 
 		units_dict = {"Reserve Price" : "USD Million/MHz", "Auction Price" : "USD Million/MHz", "Quantum Offered": "MHz", 
 			          "Quantum Sold" : "MHz", "Quantum Unsold" : "MHz", "Total EMD" : "USD Million", "Total Outflow" : "USD Million",
