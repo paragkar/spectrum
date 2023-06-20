@@ -2007,7 +2007,7 @@ if authentication_status:
 							else:
 								lst2.append(round(val/[curr_list[i]][0]*10,2))
 						lst1.append(lst2)
-					st.write(lst1)
+					st.write(pd.DataFrame(lst1))
 						
 			
 			
