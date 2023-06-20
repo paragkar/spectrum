@@ -1551,6 +1551,18 @@ if authentication_status:
 
 	dfrsrate = loadrstousd()
 
+	for value in dfsrate.values:
+
+		st.write(value)
+
+	# 	if value[0] in auction_eom_dates_dict.keys:
+
+	# for kay in auction_eom_dates_dict.keys:
+
+	# 	if auction_eom_dates_dict[key]
+
+
+
 	st.write(auction_eom_dates_dict) #debug
 
 	if selected_dimension == "Spectrum Bands":
