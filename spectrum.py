@@ -2001,7 +2001,7 @@ if authentication_status:
 					for line in typedf.values:
 						for i, val in enumerate(line):
 							if str(val).strip() != "NA":
-								st.write(val,[curr_list[i]][0])
+								st.write(val/[curr_list[i]][0])
 						
 			
 			
