@@ -151,7 +151,7 @@ if authentication_status:
 	@st.cache_resource
 	def loadrstousd():
 
-		dfrsrate = pd.read_csv("rs_to_usd.csv")
+		df = pd.read_csv("rs_to_usd.csv")
 
 		return df
 
