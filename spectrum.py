@@ -2003,7 +2003,7 @@ if authentication_status:
 							if val == "NA":
 								pass
 							else:
-								st.write(val/[curr_list[i]][0])
+								st.write(val, [curr_list[i]][0])
 						
 			
 			
