@@ -2020,6 +2020,7 @@ if authentication_status:
 				if radio_currency == "Rupees":
 					summarydf = summarydf
 				if radio_currency == "US Dollars":
+					st.write(summarydf)
 					summarydf = summarydf.values/curr_list
 
 			#preparing the summary chart 
