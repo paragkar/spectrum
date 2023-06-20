@@ -1989,18 +1989,17 @@ if authentication_status:
 			hovertext = htext_auctionmap(dff)
 
 			if SubFeature in ["Auction Price", "Reserve Price"]:
-
+				curr_list=[]
 				for col in typedf.columns:
-					st.write(auction_rsrate_dict[int(col)])
+					curr_list.append(auction_rsrate_dict[int(col)])
 
-
-				st.write(typedf.columns)
 
 				radio_currency = st.sidebar.radio('Click Currency', ["Rupees", "US Dollars"])
 				if radio_currency == "Rupees":
 					z = typedf.values
 				if radio_currency == "US Dollars":
-					z = typedf.values
+					z = typedf.values/curr_list
+					st.write(z)
 			
 			
 			#preparing the dataframe of the summary bar chart on top of the heatmap
