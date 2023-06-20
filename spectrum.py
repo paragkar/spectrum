@@ -1553,7 +1553,7 @@ if authentication_status:
 
 	dfrsrate = loadrstousd()
 
-	auction_rsrate_dict ={}
+	auction_rsrate_dict ={} #the dictionary which stores all the values of the rupee usd rates
 
 	dfrsrate["Date"] = pd.to_datetime(dfrsrate["Date"])
 
@@ -1565,7 +1565,7 @@ if authentication_status:
 
 			auction_rsrate_dict[index.year] = dfrsrate.loc[index,:].values[0]
 
-	st.write(auction_rsrate_dict)
+	# st.write(auction_rsrate_dict)
 
 	
 
@@ -5257,6 +5257,15 @@ if authentication_status:
 
 	#Processing For Dimension = "Auction Year"
 	if selected_dimension == "Auction Years":
+
+
+		radio_currency = st.sidebar.radio('Click Currency', ["Rupees", "US Dollars"])
+
+		if radio_currency == "Rupees":
+			currency_flag = True
+		if radio_currency == "US Dollars":
+			currency_flag = False
+
 
 		df = loadspectrumfile()
 
