@@ -1561,6 +1561,14 @@ if authentication_status:
 		spectrumofferedvssold = "Spectrum_Offered_vs_Sold"
 		masterall = "MasterAll-TDDValueConventional" #all auction related information 
 
+		
+		#loading file rupee to USD
+
+
+		dfrsrate = loadrstousd()
+
+		st.write(dfrsrate)
+
 		#loading spectrum excel file
 
 		df = loadspectrumfile()
