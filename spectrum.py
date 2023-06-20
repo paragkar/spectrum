@@ -1555,15 +1555,17 @@ if authentication_status:
 
 	dfrsrate = dfrsrate.set_index("Date").asfreq("m")
 
-	st.write(dfrsrate)
+	# st.write(dfrsrate)
 
-	for index in dfrsrate.index:
+	# for index in dfrsrate.index:
 
-		st.write(index.date())
+	# 	st.write(index.date())
 
-		if index.date() in auction_eom_dates_dict.values().date():
+		# if index.date() in auction_eom_dates_dict.values().date():
 
-			st.write(auction_eom_dates_dict[index.year])
+		# 	st.write(auction_eom_dates_dict[index.year])
+
+	st.write(auction_eom_dates_dict.values())
 
 
 	if selected_dimension == "Spectrum Bands":
