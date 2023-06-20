@@ -1998,7 +1998,7 @@ if authentication_status:
 				if radio_currency == "Rupees":
 					z = typedf.values
 				if radio_currency == "US Dollars":
-					for i, val in typedf.values:
+					for i, val in enumerate(typedf.values):
 						if val !="NA":
 							st.write(val/[curr_list[i]])
 					
