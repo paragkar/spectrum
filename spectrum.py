@@ -1565,7 +1565,7 @@ if authentication_status:
 
 		# 	st.write(auction_eom_dates_dict[index.year])
 
-	st.write(list(auction_eom_dates_dict.values()))
+	st.write([x.date() for x in list(auction_eom_dates_dict.values())])
 
 
 	if selected_dimension == "Spectrum Bands":
