@@ -6491,7 +6491,7 @@ if authentication_status:
 	else:
 		pass
 
-	if (selected_dimension == "Spectrum Bands") & 
+	if (selected_dimension == "Spectrum Bands"):
 
 		if SubFeature in ["Reserve Price", "Auction Price"]:
 
