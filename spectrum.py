@@ -6504,7 +6504,11 @@ if authentication_status:
 					          "Quantum Sold" : "MHz", "Quantum Unsold" : "MHz", "Total EMD" : "$ Million", "Total Outflow" : "$ Million",
 					          "Auction/Reserve" : "Ratio", "Percent Unsold" : "% of Total Spectrum", "Percent Sold" : "% of Total Spectrum", 
 					          "Total Purchase" : "MHz"}
-
+	else:
+		units_dict = {"Reserve Price" : "Rs Cr/MHz", "Auction Price" : "Rs Cr/MHz", "Quantum Offered": "MHz", 
+					          "Quantum Sold" : "MHz", "Quantum Unsold" : "MHz", "Total EMD" : "Rs Cr", "Total Outflow" : "Rs Cr",
+					          "Auction/Reserve" : "Ratio", "Percent Unsold" : "% of Total Spectrum", "Percent Sold" : "% of Total Spectrum", 
+					          "Total Purchase" : "MHz"}
 
 
 
