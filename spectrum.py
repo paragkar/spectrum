@@ -2008,6 +2008,9 @@ if authentication_status:
 								lst2.append(round(val/[curr_list[i]][0]*10,2))
 						lst1.append(lst2)
 					z = pd.DataFrame(lst1).values
+
+			else:
+				z = typedf.values
 						
 			#preparing the dataframe of the summary bar chart on top of the heatmap
 			if SubFeature not in ["Percent Sold", "Percent Unsold"]:
@@ -2025,6 +2028,8 @@ if authentication_status:
 			#preparing the summary chart 
 				chart = summarychart(summarydf, "Years", "India Total")
 				SummaryFlag = True
+			else:
+				pass
 			
 			#setting the data of the heatmap 
 			data = [go.Heatmap(
