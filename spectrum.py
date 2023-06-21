@@ -5454,13 +5454,13 @@ if authentication_status:
 				df2_temp1 = df2_temp1.groupby(["Circle"]).sum().round(0)
 				df2_temp1 = df2_temp1.reindex(sorted(df2_temp1.columns), axis=1)
 				
-				if currency_flag == False: #USD
+				if currency_flag1 == False: #USD
 					z = np.around(df2_temp1.values/auction_rsrate_dict[Year]*10,2)
 					x = df2_temp1.columns
 					y = df2_temp1.index
 					summarydf = round(df2_temp1.sum(axis=0)//auction_rsrate_dict[Year]*10,2)
 
-				if currency_flag == True: #Rupees
+				if currency_flag1 == True: #Rupees
 
 					z = df2_temp1.values
 					x = df2_temp1.columns
