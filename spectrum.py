@@ -5296,9 +5296,9 @@ if authentication_status:
 		radio_currency = st.sidebar.radio('Click Currency', ["Rupees", "US Dollars"])
 
 		if radio_currency == "Rupees":
-			currency_flag = True
+			currency_flag1 = True
 		if radio_currency == "US Dollars":
-			currency_flag = False
+			currency_flag1 = False
 
 
 		df = loadspectrumfile()
@@ -6474,14 +6474,14 @@ if authentication_status:
 
 	if selected_dimension == "Auction Years":
 
-		if currency_flag == True: #Rupees
+		if currency_flag1 == True: #Rupees
 
 			units_dict = {"Reserve Price" : "Rs Cr/MHz", "Auction Price" : "Rs Cr/MHz", "Quantum Offered": "MHz", 
 				          "Quantum Sold" : "MHz", "Quantum Unsold" : "MHz", "Total EMD" : "Rs Cr", "Total Outflow" : "Rs Cr",
 				          "Auction/Reserve" : "Ratio", "Percent Unsold" : "% of Total Spectrum", "Percent Sold" : "% of Total Spectrum", 
 				          "Total Purchase" : "MHz"}
 
-		if currency_flag == False: #USD
+		if currency_flag1 == False: #USD
 
 			units_dict = {"Reserve Price" : "USD Million/MHz", "Auction Price" : "USD Million/MHz", "Quantum Offered": "MHz", 
 				          "Quantum Sold" : "MHz", "Quantum Unsold" : "MHz", "Total EMD" : "USD Million", "Total Outflow" : "USD Million",
