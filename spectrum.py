@@ -6488,8 +6488,6 @@ if authentication_status:
 				          "Auction/Reserve" : "Ratio", "Percent Unsold" : "% of Total Spectrum", "Percent Sold" : "% of Total Spectrum", 
 				          "Total Purchase" : "MHz"}
 
-	else:
-		pass
 
 	if (selected_dimension == "Spectrum Bands"):
 
