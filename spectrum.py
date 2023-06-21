@@ -1756,6 +1756,8 @@ if authentication_status:
 				
 				hcolscale=colscale_hbox_spectrum_expiry_maps(operators, colcodes)  #colorscale for hoverbox
 				hoverlabel_bgcolor = transform_colscale_for_spec_exp_maps(hcolscale, hf) #shaping the hfcolorscale
+
+				currency_flag = True #default
 				
 			if SubFeature == "Operator Holdings":
 				selected_operators=[]
@@ -1806,6 +1808,8 @@ if authentication_status:
 					]
 
 				fig = go.Figure(data=data)
+
+				currency_flag = True # default
 				
 			if SubFeature == "Operator %Share":
 				selected_operators=[]
@@ -1871,6 +1875,8 @@ if authentication_status:
 
 				fig = go.Figure(data=data)
 
+				currency_flag = True #default
+
 		#Feature ="Expiry Map" linked to Dimension = "Spectrum Band"
 		if  Feature == "Expiry Map":
 			SubFeature = st.sidebar.selectbox('Select a Sub Feature', ["Frequency Layout", "Yearly Trends"],0)
@@ -1911,6 +1917,8 @@ if authentication_status:
 					  ]
 
 				fig = go.Figure(data=data)
+
+				currency_flag = True #default
 
 				hcolscale=colscale_hbox_spectrum_expiry_maps(operators, colcodes)  #colorscale for hoverbox
 				hoverlabel_bgcolor = transform_colscale_for_spec_exp_maps(hcolscale, hf) #shaping the hfcolorscale
@@ -1969,6 +1977,8 @@ if authentication_status:
 
 				fig = go.Figure(data=data)
 
+				currency_flag = True #default
+
 		#Feature ="Auction Map" linked to Dimension = "Spectrum Band"
 		if  Feature == "Auction Map":
 
@@ -1997,6 +2007,7 @@ if authentication_status:
 				radio_currency = st.sidebar.radio('Click Currency', ["Rupees", "US Dollars"])
 				if radio_currency == "Rupees":
 					z = typedf.values
+					currency_flag = True #Rupees
 				if radio_currency == "US Dollars":
 					lst1=[]
 					for line in typedf.values:
@@ -2008,9 +2019,11 @@ if authentication_status:
 								lst2.append(round(val/[curr_list[i]][0]*10,2))
 						lst1.append(lst2)
 					z = pd.DataFrame(lst1).values
+					currency_flag = False #USD
 
 			else:
 				z = typedf.values
+				currency_flag = True #Default
 						
 			#preparing the dataframe of the summary bar chart on top of the heatmap
 			if SubFeature not in ["Percent Sold", "Percent Unsold"]:
@@ -2164,6 +2177,8 @@ if authentication_status:
 
 
 	if selected_dimension == "Auction Data":
+
+		currency_flag = True #default 
 
 		Feature = st.sidebar.selectbox("Select a Feature", ["2010-Band2100","2010-Band2300", "2012-Band1800","2014-Band1800","2014-Band900",
 										"2015-Band800", "2015-Band900","2015-Band1800", "2015-Band2100", "2016-Band800","2016-Band1800",
@@ -5296,9 +5311,9 @@ if authentication_status:
 		radio_currency = st.sidebar.radio('Click Currency', ["Rupees", "US Dollars"])
 
 		if radio_currency == "Rupees":
-			currency_flag1 = True
+			currency_flag = True
 		if radio_currency == "US Dollars":
-			currency_flag1 = False
+			currency_flag = False
 
 
 		df = loadspectrumfile()
@@ -5382,6 +5397,7 @@ if authentication_status:
 				z = df1_temp3.values.round(2)
 				x = df1_temp3.columns
 				y = df1_temp3.index
+				currency_flag = True #default
 
 			if SubFeature == "Percent Unsold":
 				df1 = df1.reset_index()
@@ -5394,6 +5410,7 @@ if authentication_status:
 				z = df1_temp4.values.round(1)
 				x = df1_temp4.columns
 				y = df1_temp4.index
+				currency_flag = True #default
 
 			if SubFeature == "Percent Sold":
 				df1 = df1.reset_index()
@@ -5406,6 +5423,7 @@ if authentication_status:
 				z = df1_temp5.values.round(1)
 				x = df1_temp5.columns
 				y = df1_temp5.index
+				currency_flag = True #default
 				
 			#excluding summarydf as it is not needed for these SubFeatures
 			if SubFeature not in  ["Auction/Reserve", "Percent Unsold", "Percent Sold"]:
@@ -5454,13 +5472,13 @@ if authentication_status:
 				df2_temp1 = df2_temp1.groupby(["Circle"]).sum().round(0)
 				df2_temp1 = df2_temp1.reindex(sorted(df2_temp1.columns), axis=1)
 				
-				if currency_flag1 == False: #USD
+				if currency_flag == False: #USD
 					z = np.around(df2_temp1.values/auction_rsrate_dict[Year]*10,2)
 					x = df2_temp1.columns
 					y = df2_temp1.index
 					summarydf = round(df2_temp1.sum(axis=0)//auction_rsrate_dict[Year]*10,2)
 
-				if currency_flag1 == True: #Rupees
+				if currency_flag == True: #Rupees
 
 					z = df2_temp1.values
 					x = df2_temp1.columns
@@ -5510,6 +5528,8 @@ if authentication_status:
 				hovertext,colormatrix = htext_colmatrix_auction_year_operator_metric(df1, selectedbands, SubFeature, df2_temp2)
 				hoverlabel_bgcolor = colormatrix #colormatrix processed from fuction "hovertext_and_colmatrix" for same above
 
+				currency_flag = True #default
+
 		data = [go.Heatmap(
 			  z = z,
 			  x = x,
@@ -5530,6 +5550,8 @@ if authentication_status:
 	#This is section is to visulize important data related to the telecom industry (may not be directed related to spectrum)
 
 	if selected_dimension == "Business Data":
+
+		currency_flag = True #default
 
 		dfT = loadtelecomdatafile()
 		
@@ -6466,22 +6488,16 @@ if authentication_status:
 
 
 
-	#Plotting the final Heatmap	
-	# fig = go.Figure(data=data)
-
-
 	#This section deals with titles and subtitles and hoverlabel color for all the heatmap charts
 
-	if selected_dimension == "Auction Years":
+	if currency_flag == True: #Rupees
 
-		if currency_flag1 == True: #Rupees
+		units_dict = {"Reserve Price" : "Rs Cr/MHz", "Auction Price" : "Rs Cr/MHz", "Quantum Offered": "MHz", 
+			          "Quantum Sold" : "MHz", "Quantum Unsold" : "MHz", "Total EMD" : "Rs Cr", "Total Outflow" : "Rs Cr",
+			          "Auction/Reserve" : "Ratio", "Percent Unsold" : "% of Total Spectrum", "Percent Sold" : "% of Total Spectrum", 
+			          "Total Purchase" : "MHz"}
 
-			units_dict = {"Reserve Price" : "Rs Cr/MHz", "Auction Price" : "Rs Cr/MHz", "Quantum Offered": "MHz", 
-				          "Quantum Sold" : "MHz", "Quantum Unsold" : "MHz", "Total EMD" : "Rs Cr", "Total Outflow" : "Rs Cr",
-				          "Auction/Reserve" : "Ratio", "Percent Unsold" : "% of Total Spectrum", "Percent Sold" : "% of Total Spectrum", 
-				          "Total Purchase" : "MHz"}
-
-		if currency_flag1 == False: #USD
+	if currency_flag == False: #USD
 
 			units_dict = {"Reserve Price" : "USD Million/MHz", "Auction Price" : "USD Million/MHz", "Quantum Offered": "MHz", 
 				          "Quantum Sold" : "MHz", "Quantum Unsold" : "MHz", "Total EMD" : "USD Million", "Total Outflow" : "USD Million",
@@ -6489,26 +6505,26 @@ if authentication_status:
 				          "Total Purchase" : "MHz"}
 
 
-	if (selected_dimension == "Spectrum Bands"):
+	# if (selected_dimension == "Spectrum Bands"):
 
-		if SubFeature in ["Reserve Price", "Auction Price"]:
+	# 	if SubFeature in ["Reserve Price", "Auction Price"]:
 
-			if radio_currency == "Rupees":
+	# 		if radio_currency == "Rupees":
 
-				units_dict = {"Reserve Price" : "Rs Cr/MHz", "Auction Price" : "Rs Cr/MHz", "Quantum Offered": "MHz", 
-						          "Quantum Sold" : "MHz", "Quantum Unsold" : "MHz", "Total EMD" : "Rs Cr", "Total Outflow" : "Rs Cr",
-						          "Auction/Reserve" : "Ratio", "Percent Unsold" : "% of Total Spectrum", "Percent Sold" : "% of Total Spectrum", 
-						          "Total Purchase" : "MHz"}
-			if radio_currency == "US Dollars":
-				units_dict = {"Reserve Price" : "$ Million/MHz", "Auction Price" : "$ Million/MHz", "Quantum Offered": "MHz", 
-						          "Quantum Sold" : "MHz", "Quantum Unsold" : "MHz", "Total EMD" : "$ Million", "Total Outflow" : "$ Million",
-						          "Auction/Reserve" : "Ratio", "Percent Unsold" : "% of Total Spectrum", "Percent Sold" : "% of Total Spectrum", 
-						          "Total Purchase" : "MHz"}
-	else:
-		units_dict = {"Reserve Price" : "Rs Cr/MHz", "Auction Price" : "Rs Cr/MHz", "Quantum Offered": "MHz", 
-					          "Quantum Sold" : "MHz", "Quantum Unsold" : "MHz", "Total EMD" : "Rs Cr", "Total Outflow" : "Rs Cr",
-					          "Auction/Reserve" : "Ratio", "Percent Unsold" : "% of Total Spectrum", "Percent Sold" : "% of Total Spectrum", 
-					          "Total Purchase" : "MHz"}
+	# 			units_dict = {"Reserve Price" : "Rs Cr/MHz", "Auction Price" : "Rs Cr/MHz", "Quantum Offered": "MHz", 
+	# 					          "Quantum Sold" : "MHz", "Quantum Unsold" : "MHz", "Total EMD" : "Rs Cr", "Total Outflow" : "Rs Cr",
+	# 					          "Auction/Reserve" : "Ratio", "Percent Unsold" : "% of Total Spectrum", "Percent Sold" : "% of Total Spectrum", 
+	# 					          "Total Purchase" : "MHz"}
+	# 		if radio_currency == "US Dollars":
+	# 			units_dict = {"Reserve Price" : "$ Million/MHz", "Auction Price" : "$ Million/MHz", "Quantum Offered": "MHz", 
+	# 					          "Quantum Sold" : "MHz", "Quantum Unsold" : "MHz", "Total EMD" : "$ Million", "Total Outflow" : "$ Million",
+	# 					          "Auction/Reserve" : "Ratio", "Percent Unsold" : "% of Total Spectrum", "Percent Sold" : "% of Total Spectrum", 
+	# 					          "Total Purchase" : "MHz"}
+	# else:
+	# 	units_dict = {"Reserve Price" : "Rs Cr/MHz", "Auction Price" : "Rs Cr/MHz", "Quantum Offered": "MHz", 
+	# 				          "Quantum Sold" : "MHz", "Quantum Unsold" : "MHz", "Total EMD" : "Rs Cr", "Total Outflow" : "Rs Cr",
+	# 				          "Auction/Reserve" : "Ratio", "Percent Unsold" : "% of Total Spectrum", "Percent Sold" : "% of Total Spectrum", 
+	# 				          "Total Purchase" : "MHz"}
 
 
 
