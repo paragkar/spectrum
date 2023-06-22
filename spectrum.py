@@ -2936,8 +2936,6 @@ if authentication_status:
 			hoverlabel_bgcolor = colormatrix
 
 
-			st.write(resultdf[::-1]) #debug
-
 
 			radio_selection = st.sidebar.radio('Click an Option', ["Absolute Values", "Percentage of Total", "Provisional Winners"])
 
@@ -2956,6 +2954,16 @@ if authentication_status:
 				SummaryFlag = True
 
 				titlesubpart2 = " - Total Agg Bids (Within Selected Rounds)"
+
+
+				#--------New Code Starts------------#
+
+				# st.write(resultdf[::-1]) #what to use this in the heatmap text added with values
+
+				for value in dftempheat.values:
+					st.write(value)
+
+				#------New Code Ends----------------#
 
 
 				data = [go.Heatmap(
