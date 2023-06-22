@@ -2958,22 +2958,22 @@ if authentication_status:
 
 				#--------New Code Starts------------#
 
-				data2 = [go.Heatmap(
-							z=mask.values,
-					        y= mask.index,
-					        x=mask.columns,
-							xgap = 0.5,
-							ygap = 1,
-							hoverinfo ='text',
-							hovertext = hovertext,
-							text = df_combined2.values,
-							colorscale='Picnic',
-							# zmin=0.5, zmax=1,
-							showscale=False,
-								texttemplate="%{text}", 
-								textfont={"size":10},
-								reversescale=True,
-								)]			
+				# data2 = [go.Heatmap(
+				# 			z=mask.values,
+				# 	        y= mask.index,
+				# 	        x=mask.columns,
+				# 			xgap = 0.5,
+				# 			ygap = 1,
+				# 			hoverinfo ='text',
+				# 			hovertext = hovertext,
+				# 			text = df_combined2.values,
+				# 			colorscale='Picnic',
+				# 			# zmin=0.5, zmax=1,
+				# 			showscale=False,
+				# 				texttemplate="%{text}", 
+				# 				textfont={"size":10},
+				# 				reversescale=True,
+				# 				)]			
 
 				# st.write(resultdf[::-1]) #what to use this in the heatmap text added with values
 
