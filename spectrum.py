@@ -2968,7 +2968,7 @@ if authentication_status:
 				    else:
 				        return y
 
-				#for rendering text of the final heatmap for Data1
+				#for rendering text of the final heatmap for Data
 
 				dftempheat = dftempheat.applymap(int)
 
@@ -3012,6 +3012,28 @@ if authentication_status:
 
 				titlesubpart2 = " - % of Total Agg Bids (Within Selected Rounds)"
 
+
+				#--------New Code Starts------------#
+
+				#function to combine text from two dataframe 
+
+				def combine_text(x, y): #sep is seperator
+				    if x.notnull().all() and y.notnull().all():
+				        return x + '<br>' + y
+				    elif x.notnull().all():
+				        return x
+				    else:
+				        return y
+
+				#for rendering text of the final heatmap for Data
+
+				dftempheat = dftempheat.applymap(int)
+
+				df_combined = dftempheat.applymap(str).combine(resultdf.applymap(str), lambda x, y: combine_text(x, y))
+
+
+				#------New Code Ends----------------#
+
 				data = [go.Heatmap(
 					z=dftempheat.values,
 			        x=dftempheat.columns,
@@ -3019,9 +3041,10 @@ if authentication_status:
 					xgap = 1,
 					ygap = 1,
 					hoverinfo ='text',
-					text = hovertext,
+					hovertext = hovertext,
+					text = df_combined.values,
 					colorscale="Hot",
-						texttemplate="%{z}",
+						texttemplate="%{text}",
 						textfont={"size":10},
 						reversescale=True,
 						),
