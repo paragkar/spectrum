@@ -4823,7 +4823,7 @@ if authentication_status:
 							# zmin=0.5, zmax=1,
 							showscale=True,
 								texttemplate=texttempbiddemandactivity, 
-								textfont={"size":10},
+								textfont={"size":12},
 								reversescale=True,
 								)]
 							
