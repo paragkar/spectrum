@@ -2958,6 +2958,23 @@ if authentication_status:
 
 				#--------New Code Starts------------#
 
+				data2 = [go.Heatmap(
+							z=mask.values,
+					        y= mask.index,
+					        x=mask.columns,
+							xgap = 0.5,
+							ygap = 1,
+							hoverinfo ='text',
+							hovertext = hovertext,
+							text = df_combined2.values,
+							colorscale='Picnic',
+							# zmin=0.5, zmax=1,
+							showscale=False,
+								texttemplate="%{text}", 
+								textfont={"size":10},
+								reversescale=True,
+								)]			
+
 				# st.write(resultdf[::-1]) #what to use this in the heatmap text added with values
 
 				# st.write(dftempheat[::-1])
@@ -2976,8 +2993,6 @@ if authentication_status:
 
 				df_combined = dftempheat.applymap(str).combine(resultdf.applymap(str), lambda x, y: combine_text(x, y))
 
-				st.write(df_combined)
-
 
 				#------New Code Ends----------------#
 
@@ -2989,9 +3004,10 @@ if authentication_status:
 					xgap = 1,
 					ygap = 1,
 					hoverinfo ='text',
-					text = hovertext,
+					hovertext = hovertext,
+					text = df_combined.values,
 					colorscale="Hot",
-					texttemplate="%{z}",
+					texttemplate="%{text}",
 					textfont={"size":10},
 					reversescale=True,
 					),
