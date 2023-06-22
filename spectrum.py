@@ -2962,10 +2962,22 @@ if authentication_status:
 
 				# st.write(dftempheat[::-1])
 
-				for line1, line2 in zip(dftempheat.values, resultdf.values):
-					for val1, val2 in zip(line1, line2):
-						combtext = str(val1)+<br>+val2
-						st.write(combtext)
+				#function to combine text from two dataframe 
+
+				def combine_text(x, y): #sep is seperator
+				    if x.notnull().all() and y.notnull().all():
+				        return x + '<br>' + y
+				    elif x.notnull().all():
+				        return x
+				    else:
+				        return y
+
+				#for rendering text of the final heatmap for Data1
+
+				df_combined = dftempheat.applymap(str).combine(resultdf.applymap(str), lambda x, y: combine_text(x, y))
+
+				st.write(df_combined)
+
 
 				#------New Code Ends----------------#
 
