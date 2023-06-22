@@ -2936,6 +2936,9 @@ if authentication_status:
 			hoverlabel_bgcolor = colormatrix
 
 
+			st.write(resultdf) #debug
+
+
 			radio_selection = st.sidebar.radio('Click an Option', ["Absolute Values", "Percentage of Total", "Provisional Winners"])
 
 			if radio_selection == "Absolute Values":
