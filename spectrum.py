@@ -3027,7 +3027,6 @@ if authentication_status:
 
 				#for rendering text of the final heatmap for Data
 
-				dftempheat = dftempheat.applymap(int)
 
 				df_combined = dftempheat.applymap(str).combine(resultdf.applymap(str), lambda x, y: combine_text(x, y))
 
