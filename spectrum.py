@@ -2964,7 +2964,7 @@ if authentication_status:
 
 				for line1, line2 in zip(dftempheat.values, resultdf.values):
 					for val1, val2 in zip(line1, line2):
-						combtext = str(val1)+"<br>"+val2
+						combtext = str(val1)+<br>+val2
 						st.write(combtext)
 
 				#------New Code Ends----------------#
