@@ -3044,7 +3044,7 @@ if authentication_status:
 					text = df_combined.values,
 					colorscale="Hot",
 						texttemplate="%{text}",
-						textfont={"size":10},
+						textfont={"size":12},
 						reversescale=True,
 						),
 					]
