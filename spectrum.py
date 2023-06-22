@@ -2960,7 +2960,7 @@ if authentication_status:
 
 				# st.write(resultdf[::-1]) #what to use this in the heatmap text added with values
 
-				st.write(dftempheat)
+				st.write(dftempheat[::-1])
 
 				#------New Code Ends----------------#
 
