@@ -2960,7 +2960,11 @@ if authentication_status:
 
 				# st.write(resultdf[::-1]) #what to use this in the heatmap text added with values
 
-				st.write(dftempheat[::-1])
+				# st.write(dftempheat[::-1])
+
+				for value1, value2 in zip(dftempheat.values, resultdf.values):
+					combtext = str(value1)+"<br>"+value2
+					st.write(combtext)
 
 				#------New Code Ends----------------#
 
