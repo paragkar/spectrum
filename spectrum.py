@@ -3017,9 +3017,9 @@ if authentication_status:
 
 				#function to combine text from two dataframe 
 
-				def combine_text(x, y): #sep is seperator
+				def combine_text(x,sym, y): #sym is for %
 				    if x.notnull().all() and y.notnull().all():
-				        return x + '<br>' + y
+				        return x + sym + '<br>' + y
 				    elif x.notnull().all():
 				        return x
 				    else:
@@ -3028,7 +3028,7 @@ if authentication_status:
 				#for rendering text of the final heatmap for Data
 
 
-				df_combined = dftempheat.applymap(str).combine(resultdf.applymap(str), lambda x, y: combine_text(x, y))
+				df_combined = dftempheat.applymap(str).combine(resultdf.applymap(str), lambda x, y: combine_text(x," %", y))
 
 
 				#------New Code Ends----------------#
