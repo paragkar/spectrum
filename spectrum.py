@@ -3386,7 +3386,7 @@ if authentication_status:
 					colorscale='picnic',
 					showscale=False,
 						texttemplate="%{z}", 
-						textfont={"size":10},
+						textfont={"size":12},
 						# reversescale=True,
 						)]
 
@@ -3442,7 +3442,7 @@ if authentication_status:
 						colorscale='picnic',
 						showscale=True,
 							texttemplate="%{z}", 
-							textfont={"size":10},
+							textfont={"size":12},
 							# reversescale=True,
 							)]
 
