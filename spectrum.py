@@ -3845,7 +3845,7 @@ if authentication_status:
 						colorscale='Hot',
 						showscale=False,
 							texttemplate="%{z}", 
-							textfont={"size":10},
+							textfont={"size":12},
 							reversescale=True,
 							)]
 						
