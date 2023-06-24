@@ -3337,7 +3337,7 @@ if authentication_status:
 
 			dfbid1 = dfbid1.drop(columns =["Clock Round", "Clock Round Price (Rs. Crore)", "Aggregate Demand", "Excess Demand"], axis =1)
 
-			dfbid1 = dfbid1.groupby(["LSA"]).mean().rest_index()
+			dfbid1 = dfbid1.groupby(["LSA"]).mean().reset_index()
 
 			dfbid1.columns = ["LSA", "BlocksForSale"]
 
@@ -3730,7 +3730,7 @@ if authentication_status:
 
 				if chartoption == "ReservePrice Multiple":
 					st.plotly_chart(figauc, use_container_width=True)
-					
+
 				#plotting the final summary chart 
 				# col1,col2,col3 = st.columns([0.2,14,1]) #create collumns of uneven width
 				if SummaryFlag ==True:
