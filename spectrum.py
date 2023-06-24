@@ -3557,12 +3557,13 @@ if authentication_status:
 
 
 				if chartoption =="ReservePrice Multiple":
+
 					st.plotly_chart(figauc, use_container_width=True)
 
 				#plotting the final summary chart 
-				# col1,col2,col3 = st.columns([0.2,14,1]) #create collumns of uneven width
+				col1,col2,col3 = st.columns([0.2, 14,1 ]) #create collumns of uneven width
 				if SummaryFlag ==True:
-					st.altair_chart(chart, use_container_width=True)
+					col2.altair_chart(chart, use_container_width=True)
 
 
 			if pwbtype == "End CLK Round":
