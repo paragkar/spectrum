@@ -3333,9 +3333,9 @@ if authentication_status:
 			#------------------New Code ---------------------#
 
 
-			dfbid = loadauctionbiddata()[demandsheet].replace('-', np.nan, regex = True)
+			dfbid1 = loadauctionbiddata()[demandsheet].replace('-', np.nan, regex = True)
 
-			st.write(dfbid)
+			st.write(dfbid1)
 
 
 			# dfbidaBlksSale = dfbid.pivot(index="LSA", columns='Clock Round', values="Blocks For Sale").sort_index(ascending=True)
