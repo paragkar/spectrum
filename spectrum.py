@@ -3330,6 +3330,21 @@ if authentication_status:
 
 		if SubFeature == "ProvWinningBid":
 
+			#------------------New Code ---------------------#
+
+
+			dfbid = loadauctionbiddata()[demandsheet].replace('-', np.nan, regex = True)
+
+			dfbidaAD = dfbid.pivot(index="LSA", columns='Clock Round', values="Aggregate Demand").sort_index(ascending=True)
+
+			dfbidaBlksSale = dfbid.pivot(index="LSA", columns='Clock Round', values="Blocks For Sale").sort_index(ascending=True)
+
+			st.write(dfbidaBlksSale)
+
+
+			#-----------------New Code ----------------------#
+
+
 			pwbtype = st.sidebar.selectbox("Select a PWB Type", ["Start CLK Round", "End CLK Round"])
 
 			df1strd = dfbid[dfbid["Clk_Round"] == 1].reset_index() #Identifying the 2nd round gives up the reserve price
