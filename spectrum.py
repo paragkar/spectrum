@@ -3335,11 +3335,12 @@ if authentication_status:
 
 			dfbid = loadauctionbiddata()[demandsheet].replace('-', np.nan, regex = True)
 
-			dfbidaAD = dfbid.pivot(index="LSA", columns='Clock Round', values="Aggregate Demand").sort_index(ascending=True)
+			st.write(dfbid)
 
-			dfbidaBlksSale = dfbid.pivot(index="LSA", columns='Clock Round', values="Blocks For Sale").sort_index(ascending=True)
 
-			st.write(dfbidaBlksSale)
+			# dfbidaBlksSale = dfbid.pivot(index="LSA", columns='Clock Round', values="Blocks For Sale").sort_index(ascending=True)
+
+			# st.write(dfbidaBlksSale)
 
 
 			#-----------------New Code ----------------------#
