@@ -3555,9 +3555,6 @@ if authentication_status:
 						st.markdown("")
 						st.plotly_chart(figpanindiabids, use_container_width=True)
 
-				#plotting the final summary chart 
-				if SummaryFlag ==True:
-					col1.altair_chart(chart, use_container_width=True)
 
 
 				if chartoption =="ReservePrice Multiple":
