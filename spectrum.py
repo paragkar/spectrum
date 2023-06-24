@@ -3341,12 +3341,11 @@ if authentication_status:
 
 			dfbid1.columns = ["LSA", "BlocksForSale"]
 
-			st.write(dfbid1)
 
 			summarydf = dfbid1.copy()
 
 			#preparing the summary chart total slots up for auctions
-			chart = summarychart(summarydf, 'LSA', "TotalBids")
+			chart = summarychart(summarydf, 'LSA', "BlocksForSale")
 			SummaryFlag = True
 
 
