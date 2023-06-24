@@ -3335,6 +3335,8 @@ if authentication_status:
 
 			dfbid1 = loadauctionbiddata()[demandsheet].replace('-', np.nan, regex = True)
 
+			dfbid1 = dfbid1.drop(columns =["Clock Round", "Clock Round Price (Rs. Crore)", "Aggregate Demand", "Excess Demand"], axis =1)
+
 			st.write(dfbid1)
 
 
