@@ -3555,6 +3555,11 @@ if authentication_status:
 						st.markdown("")
 						st.plotly_chart(figpanindiabids, use_container_width=True)
 
+				#plotting the final summary chart 
+				col1,col2,col3 = st.columns([0.2, 14,0.8]) #create collumns of uneven width
+				if SummaryFlag ==True:
+					col2.altair_chart(chart, use_container_width=True)
+
 
 				if chartoption =="ReservePrice Multiple":
 
