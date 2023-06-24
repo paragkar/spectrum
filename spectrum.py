@@ -3330,24 +3330,25 @@ if authentication_status:
 
 		if SubFeature == "ProvWinningBid":
 
-			#------------------New Code ---------------------#
+			#------------------New Code Starts---------------------#
 
 
 			dfbid1 = loadauctionbiddata()[demandsheet].replace('-', np.nan, regex = True)
 
 			dfbid1 = dfbid1.drop(columns =["Clock Round", "Clock Round Price (Rs. Crore)", "Aggregate Demand", "Excess Demand"], axis =1)
 
-			dfbid1 = dfbid1.groupby(["LSA"]).mean()
+			dfbid1 = dfbid1.groupby(["LSA"]).mean().rest_index()
 
-			st.write(dfbid1)
+			dfbid1.columns = ["LSA", "BlocksForSale"]
+
+			summarydf = dfbid1.copy()
+
+			#preparing the summary chart total slots up for auctions
+			chart = summarychart(summarydf, 'LSA', "TotalBids")
+			SummaryFlag = True
 
 
-			# dfbidaBlksSale = dfbid.pivot(index="LSA", columns='Clock Round', values="Blocks For Sale").sort_index(ascending=True)
-
-			# st.write(dfbidaBlksSale)
-
-
-			#-----------------New Code ----------------------#
+			#-----------------New Code Ends ----------------------#
 
 
 			pwbtype = st.sidebar.selectbox("Select a PWB Type", ["Start CLK Round", "End CLK Round"])
@@ -3557,6 +3558,11 @@ if authentication_status:
 				if chartoption =="ReservePrice Multiple":
 					st.plotly_chart(figauc, use_container_width=True)
 
+				#plotting the final summary chart 
+				# col1,col2,col3 = st.columns([0.2,14,1]) #create collumns of uneven width
+				if SummaryFlag ==True:
+					st.altair_chart(chart, use_container_width=True)
+
 
 			if pwbtype == "End CLK Round":
 
@@ -3724,6 +3730,12 @@ if authentication_status:
 
 				if chartoption == "ReservePrice Multiple":
 					st.plotly_chart(figauc, use_container_width=True)
+					
+				#plotting the final summary chart 
+				# col1,col2,col3 = st.columns([0.2,14,1]) #create collumns of uneven width
+				if SummaryFlag ==True:
+					st.altair_chart(chart, use_container_width=True)
+
 
 
 		if SubFeature == "BlocksSelected":
