@@ -6511,7 +6511,7 @@ if authentication_status:
 
 			urban = dfRU[dfRU["Type"]=="Urban"].drop(columns ="Type", axis=1).set_index(["Date","Category"])
 
-			lamdba x+y: x,y in zip(rural.values,urban.values)
+			# lamdba x+y: x,y in zip(rural.values,urban.values)
 
 			st.write(rural)
 
