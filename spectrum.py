@@ -6507,9 +6507,9 @@ if authentication_status:
 
 			dfRU["Date"] = pd.to_datetime(dfRU["Date"]).dt.date
 
-			rural = dfRU[dfRU["Type"]=="Rural"].drop(columns ="Type", axis=1).groupby("Date").sum().drop(columns="Category", axis=1).T
+			rural = dfRU[dfRU["Type"]=="Rural"].drop(columns ="Type", axis=1).groupby("Date").sum().drop(columns="Category", axis=1).head(20).T
 
-			urban = dfRU[dfRU["Type"]=="Urban"].drop(columns ="Type", axis=1).groupby("Date").sum().drop(columns="Category", axis=1).T
+			urban = dfRU[dfRU["Type"]=="Urban"].drop(columns ="Type", axis=1).groupby("Date").sum().drop(columns="Category", axis=1).head(20).T
 
 			rural = round(rural.sort_values(rural.columns[-1], ascending = False)/1000000,1)
 
