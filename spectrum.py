@@ -6507,9 +6507,8 @@ if authentication_status:
 
 			dfRU["Date"] = pd.to_datetime(dfRU["Date"]).dt.date
 
-			dfRU.sketch.ask("What is this dataset about?")
 
-			# st.write(dfRU)
+			st.write(dfRU)
 
 			# list_of_dates = sorted(list(set(df_rev["Date"])))[11:]
 
