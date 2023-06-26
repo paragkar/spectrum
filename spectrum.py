@@ -38,6 +38,7 @@ import yaml
 from yaml.loader import SafeLoader
 
 from deta import Deta
+import sketch
 
 
 
@@ -6506,7 +6507,9 @@ if authentication_status:
 
 			dfRU["Date"] = pd.to_datetime(dfRU["Date"]).dt.date
 
-			st.write(dfRU)
+			dfRU.sketch.ask("What is this dataset about?")
+
+			# st.write(dfRU)
 
 			# list_of_dates = sorted(list(set(df_rev["Date"])))[11:]
 
