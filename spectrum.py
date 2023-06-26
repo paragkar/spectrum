@@ -6515,7 +6515,7 @@ if authentication_status:
 
 			urban = round(urban.sort_values(urban.columns[-1], ascending = False)/1000000,1)
 
-			rural_perc = round(rural/rural.sum(axis=0)*100,1)
+			rural_perc = round(rural/rural.sum(axis=0)*100,1).head(4)
 
 			urban_perc = round(urban/urban.sum(axis=0)*100,1)
 			
