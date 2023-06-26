@@ -6507,9 +6507,9 @@ if authentication_status:
 
 			dfRU["Date"] = pd.to_datetime(dfRU["Date"]).dt.date
 
-			rural = dfRU[dfRU["Type"]=="Rural"].drop(columns ="Type", axis=1).groupby("Category")
+			rural = dfRU[dfRU["Type"]=="Rural"].drop(columns ="Type", axis=1).set_index("Date").groupby("Category").sum()
 
-			urban = dfRU[dfRU["Type"]=="Urban"].drop(columns ="Type", axis=1).groupby("Category")
+			urban = dfRU[dfRU["Type"]=="Urban"].drop(columns ="Type", axis=1).set_index("Date").groupby("Category").sum()
 
 			# lamdba x+y: x,y in zip(rural.values,urban.values)
 
