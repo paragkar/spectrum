@@ -6511,7 +6511,11 @@ if authentication_status:
 
 			urban = dfRU[dfRU["Type"]=="Urban"].drop(columns ="Type", axis=1).groupby("Date").sum().drop(columns="Category", axis=1).T
 
-			# lamdba x+y: x,y in zip(rural.values,urban.values)
+			rural = rural.sort_values(rural.columns[-1])
+
+			urban = urban.sort_values(urban.columns[-1])
+
+		
 
 			st.write(rural)
 
