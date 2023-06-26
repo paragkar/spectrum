@@ -6507,8 +6507,13 @@ if authentication_status:
 
 			dfRU["Date"] = pd.to_datetime(dfRU["Date"]).dt.date
 
+			rural = dfRU[dfRU["Type"]=="Rural"]
 
-			st.write(dfRU)
+			urban = dfRU[dfRU["Type"]=="Urban"]
+
+			st.write(rural)
+
+			st.write(urban)
 
 			# list_of_dates = sorted(list(set(df_rev["Date"])))[11:]
 
