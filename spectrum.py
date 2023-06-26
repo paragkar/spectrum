@@ -6515,11 +6515,15 @@ if authentication_status:
 
 			urban = round(urban.sort_values(urban.columns[-1], ascending = False)/1000000,1)
 
+			rural_perc = rural/rural.sum(axis=1)
+
+			urban_perc = urban/urban.sum(axis=1)
+
 		
 
-			st.write(rural)
+			st.write(rural_perc)
 
-			st.write(urban)
+			st.write(urban_perc)
 
 			# st.write(total)
 
