@@ -6511,9 +6511,9 @@ if authentication_status:
 
 			urban = dfRU[dfRU["Type"]=="Urban"].drop(columns ="Type", axis=1).groupby("Date").sum().drop(columns="Category", axis=1).T
 
-			rural = rural.sort_values(rural.columns[-1])
+			rural = rural.sort_values(rural.columns[-1], ascending = False)
 
-			urban = urban.sort_values(urban.columns[-1])
+			urban = urban.sort_values(urban.columns[-1], ascending = False)
 
 		
 
