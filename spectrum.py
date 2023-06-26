@@ -6507,9 +6507,9 @@ if authentication_status:
 
 			dfRU["Date"] = pd.to_datetime(dfRU["Date"]).dt.date
 
-			rural = dfRU[dfRU["Type"]=="Rural"]
+			rural = dfRU[dfRU["Type"]=="Rural"].drop(columns ="Rural", axis=1).set_index(["Date","Category"])
 
-			urban = dfRU[dfRU["Type"]=="Urban"]
+			urban = dfRU[dfRU["Type"]=="Urban"].drop(columns ="Urban", axis=1).set_index(["Date","Category"])
 
 			st.write(rural)
 
