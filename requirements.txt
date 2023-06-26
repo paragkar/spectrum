@@ -10,4 +10,4 @@ xlrd
 deta
 streamlit_lottie
 Pillow
-sketch
+

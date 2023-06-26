@@ -38,7 +38,7 @@ import yaml
 from yaml.loader import SafeLoader
 
 from deta import Deta
-import sketch
+
 
 
 
