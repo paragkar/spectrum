@@ -6511,13 +6511,13 @@ if authentication_status:
 
 			urban = dfRU[dfRU["Type"]=="Urban"].drop(columns ="Type", axis=1).set_index(["Date","Category"])
 
-			total = lambda x+y: for x,y in zip(rural.values,urban.values)
+			lamdba x+y: x,y in zip(rural.values,urban.values)
 
 			st.write(rural)
 
 			st.write(urban)
 
-			st.write(total)
+			# st.write(total)
 
 			# list_of_dates = sorted(list(set(df_rev["Date"])))[11:]
 
