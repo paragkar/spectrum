@@ -5653,6 +5653,8 @@ if authentication_status:
 			lastcolumn = df5gbtsf.columns[-1]
 
 
+			df5gbtsfall = df5gbtsf.copy()
+
 			df5gbtsf = df5gbtsf.sort_values(lastcolumn, ascending = False).head(20) #sort by the last column
 
 			df5gbtsf = round(df5gbtsf/1000,2) #convert the BTS data in thousands (K)
@@ -5690,7 +5692,7 @@ if authentication_status:
 					]
 				fig = go.Figure(data=data)
 
-				summarydf = df5gbtsf.sum(axis=0)
+				summarydf = df5gbtsfall.sum(axis=0) #debug
 				summarydf = summarydf.reset_index()
 				summarydf.columns = ["Dates", SubFeature] 
 				summarydf = summarydf.sort_values("Dates", ascending = False)
