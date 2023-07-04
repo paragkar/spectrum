@@ -5714,7 +5714,7 @@ if authentication_status:
 
 				summarydf.columns = list(summarydf.iloc[0,:])
 
-				summarydf = summarydf.iloc[1:,:]
+				summarydf = summarydf.iloc[1:,:]/1000
 
 				summarydf.columns = pd.to_datetime(summarydf.columns)
 				summarydf.columns= [x.date() for x in list(summarydf.columns)]
@@ -5724,7 +5724,7 @@ if authentication_status:
 
 				st.write(summarydf)
 
-				df5gbtsfPercent = round((df5gbtsf/summarydf.values/1000)*100,2)
+				df5gbtsfPercent = round((df5gbtsf/summarydf.values)*100,2)
 
 
 				# df5gbtsfPercent = round((df5gbtsf/summarydf.T)*100,2)
