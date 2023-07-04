@@ -5710,6 +5710,8 @@ if authentication_status:
 
 				df5gbtsf = df5gbtsf.head(16)
 
+				summarydf = summarydf[::-1]
+
 				st.write(df5gbtsf)
 
 				st.write(summarydf.values)
