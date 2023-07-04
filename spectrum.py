@@ -5708,12 +5708,14 @@ if authentication_status:
 
 				summarydf = df5gbtsfall.sum(axis=0).sort_index(ascending=False).head(16) #debug
 
-				st.write(df5gbtsf)
+				# st.write(df5gbtsf)
 
-				st.write(summarydf.T)
+				# st.write(summarydf.T)
+
+				df5gbtsfPercent = round(df5gbtsf.div(summarydf, axis =1)*100,2)
 
 
-				df5gbtsfPercent = round((df5gbtsf/summarydf.T)*100,2)
+				# df5gbtsfPercent = round((df5gbtsf/summarydf.T)*100,2)
 
 
 				#setting the data of the heatmap 
