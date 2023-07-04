@@ -5692,7 +5692,7 @@ if authentication_status:
 					]
 				fig = go.Figure(data=data)
 
-				summarydf = df5gbtsfall.sum(axis=0) #debug
+				summarydf = df5gbtsfall.sum(axis=0)/1000 #debug
 				summarydf = summarydf.reset_index()
 				summarydf.columns = ["Dates", SubFeature] 
 				summarydf = summarydf.sort_values("Dates", ascending = False)
