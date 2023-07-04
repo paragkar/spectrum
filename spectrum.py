@@ -5711,7 +5711,7 @@ if authentication_status:
 				st.write(summarydf)
 
 
-				df5gbtsfPercent = round((df5gbtsf/summarydf)*100,2)
+				df5gbtsfPercent = round((df5gbtsf/summarydf.values)*100,2)
 
 
 				#setting the data of the heatmap 
