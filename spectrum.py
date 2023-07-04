@@ -5720,11 +5720,8 @@ if authentication_status:
 				summarydf.columns= [x.date() for x in list(summarydf.columns)]
 
 
-				st.write(df5gbtsf)
 
-				st.write(summarydf)
-
-				df5gbtsfPercent = ((df5gbtsf/summarydf.values)*100).round(1)
+				df5gbtsfPercent = round((df5gbtsf/summarydf.values)*100,2)
 
 
 				# df5gbtsfPercent = round((df5gbtsf/summarydf.T)*100,2)
