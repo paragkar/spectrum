@@ -5721,7 +5721,7 @@ if authentication_status:
 
 
 
-				df5gbtsfPercent = round((df5gbtsf/summarydf.values)*100,2)
+				df5gbtsfPercent = (df5gbtsf/summarydf.values)*100
 
 
 				# df5gbtsfPercent = round((df5gbtsf/summarydf.T)*100,2)
@@ -5738,6 +5738,7 @@ if authentication_status:
 					hoverinfo ='text',
 					text = hovertext,
 					colorscale='Hot',
+						hover_format = '.2f',
 						texttemplate="%{z}", 
 						textfont={"size":10},
 						reversescale=True,
