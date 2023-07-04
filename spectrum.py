@@ -5703,6 +5703,21 @@ if authentication_status:
 
 			if SubFeature == "Percent of Total":
 
+				#------------New Code Start----------------
+
+				df5gbts = dfT["5GBTS"] #load 5G BTS deployment data from excel file
+
+				df5gbtsf = pd.pivot(df5gbts, values ="Total", index = "StateCode", columns = "Date")
+
+				df5gbtsf.columns = [str(x) for x in df5gbtsf.columns ] #convet the dates into string 
+
+				lastcolumn = df5gbtsf.columns[-1]
+
+
+				df5gbtsfall = df5gbtsf.copy()
+
+				#-------------New Code Ends----------------
+
 
 				hovertext = htext_businessdata_5gbts(df5gbtsf)
 
