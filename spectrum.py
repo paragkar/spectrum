@@ -5724,7 +5724,7 @@ if authentication_status:
 
 				st.write(summarydf)
 
-				df5gbtsfPercent = (df5gbtsf/summarydf.values)*100
+				df5gbtsfPercent = ((df5gbtsf/summarydf.values)*100).round(1)
 
 
 				# df5gbtsfPercent = round((df5gbtsf/summarydf.T)*100,2)
@@ -5733,7 +5733,7 @@ if authentication_status:
 				#setting the data of the heatmap 
 
 				data = [go.Heatmap(
-					z = round(df5gbtsfPercent.values,2),
+					z = df5gbtsfPercent.values,
 					y = df5gbtsfPercent.index,
 					x = df5gbtsfPercent.columns,
 					xgap = 1,
