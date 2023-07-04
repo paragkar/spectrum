@@ -5714,6 +5714,8 @@ if authentication_status:
 
 				summarydf.columns = list(summarydf.iloc[0,:])
 
+				summarydf = summarydf.iloc[1:,:]
+
 
 				st.write(df5gbtsf)
 
