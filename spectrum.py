@@ -5712,7 +5712,7 @@ if authentication_status:
 
 				# st.write(summarydf.T)
 
-				df5gbtsfPercent = round(df5gbtsf.div(summarydf.values, axis =1)*100,2)
+				df5gbtsfPercent = round(df5gbtsf.div(summarydf.values, axis =0)*100,2)
 
 
 				# df5gbtsfPercent = round((df5gbtsf/summarydf.T)*100,2)
