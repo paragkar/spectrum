@@ -5716,6 +5716,9 @@ if authentication_status:
 
 				summarydf = summarydf.iloc[1:,:]
 
+				summarydf.columns = pd.to_datetime(summarydf.columns)
+				summarydf.columns= [x.date() for x in list(summarydf.columns)]
+
 
 				st.write(df5gbtsf)
 
