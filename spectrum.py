@@ -5708,6 +5708,8 @@ if authentication_status:
 
 				summarydf = df5gbtsfall.sum(axis=0).sort_index(ascending=False).head(16) #debug
 
+				st.write(summarydf)
+
 
 				df5gbtsfPercent = round((df5gbtsf/summarydf.values)*100,2)
 
