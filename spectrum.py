@@ -5706,9 +5706,9 @@ if authentication_status:
 
 				hovertext = htext_businessdata_5gbts(df5gbtsf)
 
-				st.write(df5gbtsfall) #debug
-
 				summarydf = df5gbtsfall.sum(axis=0) #debug
+
+				st.write(summarydf) #debug
 
 				df5gbtsfPercent = round((df5gbtsf/summarydf)*100,2)
 
