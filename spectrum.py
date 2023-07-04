@@ -5738,7 +5738,7 @@ if authentication_status:
 					hoverinfo ='text',
 					text = hovertext,
 					colorscale='Hot',
-						texttemplate="%{z.{}2f}", 
+						texttemplate="%{z}.format(2)", 
 						textfont={"size":10},
 						reversescale=True,
 						),
