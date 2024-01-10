@@ -496,11 +496,6 @@ if authentication_status:
 					
 		df_final = pd.DataFrame(lst)
 
-		st.write(ef) #debug 2024
-		st.write(excepf) #debug 2024
-		st.write(pf1) #debug 2024
-		st.write(lst) #debug 2024
-
 		df_final.columns = ["LSA", "StartFreq", "TP", "RP", "AP", "Year", "Error"]
 		df_final["Year"] = df_final["Year"].astype(int)
 		ayear = df_final.pivot_table(index=["LSA"], columns='StartFreq', values="Year", aggfunc='first').fillna("NA")
