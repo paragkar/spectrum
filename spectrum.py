@@ -494,7 +494,7 @@ if authentication_status:
 					
 		df_final = pd.DataFrame(lst)
 
-		print(df_final) #debug
+		st.write(df_final) #debug
 
 		df_final.columns = ["LSA", "StartFreq", "TP", "RP", "AP", "Year", "Error"]
 		df_final["Year"] = df_final["Year"].astype(int)
