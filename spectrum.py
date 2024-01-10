@@ -493,8 +493,9 @@ if authentication_status:
 						lst.append([ef.index[i],col-xaxisadj_dict[Band],pf1val[1],pf1val[2], pf1val[3], pf1val[4], error]) 
 					
 		df_final = pd.DataFrame(lst)
+		
 
-		st.write(pf1) #debug 2024
+		st.write(lst) #debug 2024
 
 		df_final.columns = ["LSA", "StartFreq", "TP", "RP", "AP", "Year", "Error"]
 		df_final["Year"] = df_final["Year"].astype(int)
