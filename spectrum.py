@@ -494,6 +494,8 @@ if authentication_status:
 					
 		df_final = pd.DataFrame(lst)
 
+		st.write(df_final) #debug 2024
+
 		df_final.columns = ["LSA", "StartFreq", "TP", "RP", "AP", "Year", "Error"]
 		df_final["Year"] = df_final["Year"].astype(int)
 		ayear = df_final.pivot_table(index=["LSA"], columns='StartFreq', values="Year", aggfunc='first').fillna("NA")
@@ -1594,7 +1596,6 @@ if authentication_status:
 
 		df = loadspectrumfile()
 
-		st.write(df) #debug 2024
 
 		#processing colorcode excel data tab
 		colcodes = df["ColorCodes"]
