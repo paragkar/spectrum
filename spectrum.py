@@ -1594,6 +1594,8 @@ if authentication_status:
 
 		df = loadspectrumfile()
 
+		st.write(df) #debug 2024
+
 		#processing colorcode excel data tab
 		colcodes = df["ColorCodes"]
 		colcodes=colcodes.set_index("Description")
