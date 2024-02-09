@@ -1532,8 +1532,8 @@ def summarychart(summarydf, xcolumn, ycolumn):
 #**********  Main Program Starts here ***************
 
 
-authenticator.logout("Logout", "sidebar") #logging out authentication
-st.sidebar.title(f"Welcome {name}")
+# authenticator.logout("Logout", "sidebar") #logging out authentication
+# st.sidebar.title(f"Welcome {name}")
 # image = Image.open('parag_kar.jpg') #debug
 # st.sidebar.image(image) #debug
 
