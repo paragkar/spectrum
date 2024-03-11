@@ -1942,8 +1942,10 @@ if selected_dimension == "Spectrum Bands":
 
 				for i, row in enumerate(bandexpcalsheetf.values):
 					for j, item in enumerate(row):
-						st.write(item) #debug 2024
-						op = item.split(";")[1]
+						try: # debug 2024
+							op = item.split(";")[1]
+						except: #debug 2024
+							pass #debug 2024
 
 						if op != selected_operator:
 							temp.iloc[i,j] = np.nan
