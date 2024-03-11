@@ -1942,6 +1942,7 @@ if selected_dimension == "Spectrum Bands":
 
 				for i, row in enumerate(bandexpcalsheetf.values):
 					for j, item in enumerate(row):
+						st.write(item) #debug 2024
 						op = item.split(";")[1]
 
 						if op != selected_operator:
