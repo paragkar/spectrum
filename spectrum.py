@@ -4944,19 +4944,16 @@ if selected_dimension == "Auction Data":
 
 		#--------------------New Slider Logic Starts------------------#
 
-		# Replace the original slider with the Play/Pause button and conditional logic
+		# Place this where your slider was originally, or where you want the play/pause functionality:
+		if st.button('Advance to Next Round'):
+    	# Increment the round number, with wrapping to loop back to the start.
+    		st.session_state.current_round = (st.session_state.current_round % totalrounds) + 1
 
-		if st.button('Play/Pause Automatic Iteration'):
-			st.session_state.auto_iterate = not st.session_state.auto_iterate
+		# Use the session state variable to set the slider's value dynamically.
+		round_number = st.session_state.current_round = st.slider("Select Auction Round Numbers using the Slider below", 
+		                                             min_value=1, max_value=totalrounds, step=1, 
+		                                             value=st.session_state.current_round)
 
-		if not st.session_state.auto_iterate:
-			# Allow manual control if not auto iterating
-			st.session_state.current_round = st.slider("Select Auction Round Numbers using the Slider below", min_value=1, max_value=totalrounds, step=1, value=st.session_state.current_round)
-		
-		# Note: The actual round iteration will happen elsewhere, so it doesn't block rendering.
-		round_number = st.session_state.current_round
-
-		st.write(round_number)
 
 		# round_number = st.slider("Select Auction Round Numbers using the Silder below", min_value=1, max_value=totalrounds, step=1, value = totalrounds)
 
