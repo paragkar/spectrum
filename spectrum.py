@@ -4944,6 +4944,12 @@ if selected_dimension == "Auction Data":
 
 		#--------------------New Slider Logic Starts------------------#
 
+		if 'auto_iterate' not in st.session_state:
+        	st.session_state.auto_iterate = False
+    	if 'current_round' not in st.session_state:
+        	st.session_state.current_round = 1
+
+
 		# Place this where your slider was originally, or where you want the play/pause functionality:
 		if st.button('Advance to Next Round'):
 			# Increment the round number, with wrapping to loop back to the start.
