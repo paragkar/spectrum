@@ -4953,14 +4953,6 @@ if selected_dimension == "Auction Data":
 		if st.button('Play/Pause Iteration'):
 			st.session_state.auto_iterate = not st.session_state.auto_iterate
 
-		# Display the slider
-		round_number = st.session_state.current_round = st.slider(
-        "Select Auction Round Numbers using the Slider below",
-        min_value=1,
-        max_value=totalrounds,
-        step=1,
-        value=st.session_state.current_round
-    	)
 
     	# If auto-iterate is enabled and the current round is less than the total rounds, increment and rerun
 		if st.session_state.auto_iterate and st.session_state.current_round < totalrounds:
@@ -4970,9 +4962,21 @@ if selected_dimension == "Auction Data":
 		# If the current round reaches the total rounds, you can choose to stop or loop
 		if st.session_state.current_round >= totalrounds and st.session_state.auto_iterate:
 			# Reset to the first round or stop the iteration
-			# st.session_state.auto_iterate = False  # Uncomment to stop at the last round
+			st.session_state.auto_iterate = False  # Uncomment to stop at the last round
 			st.session_state.current_round = 1  # Uncomment to loop back to the start
 			st.experimental_rerun()
+
+
+		# Display the slider and update round_number from the session state
+		round_number = st.session_state.current_round = st.slider(
+		"Select Auction Round Numbers using the Slider below",
+		min_value=1, max_value=totalrounds,
+		step=1,
+		value=st.session_state.current_round
+		)
+
+		# Debugging output to verify round_number updates
+		st.write(f"Current round: {round_number}")
 
 
 		# # Place this where your slider was originally, or where you want the play/pause functionality:
@@ -4989,8 +4993,6 @@ if selected_dimension == "Auction Data":
 		# round_number = st.slider("Select Auction Round Numbers using the Silder below", min_value=1, max_value=totalrounds, step=1, value = totalrounds)
 
 		#--------------------New Slider Logic Ends------------------#
-
-		st.write(round_number) #debug 2024
 
 		dflastsubbid = dfbidori.copy()
 
