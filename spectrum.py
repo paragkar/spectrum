@@ -4946,7 +4946,7 @@ if selected_dimension == "Auction Data":
 
 		if 'auto_iterate' not in st.session_state:
 			st.session_state.auto_iterate = False
-    	if 'current_round' not in st.session_state:
+		if 'current_round' not in st.session_state:
     		st.session_state.current_round = 1
 
 
