@@ -4949,16 +4949,41 @@ if selected_dimension == "Auction Data":
 		if 'current_round' not in st.session_state:
 			st.session_state.current_round = 1
 
+		# Use a button to toggle the 'auto_iterate' state
+		if st.button('Play/Pause Iteration'):
+			st.session_state.auto_iterate = not st.session_state.auto_iterate
 
-		# Place this where your slider was originally, or where you want the play/pause functionality:
-		if st.button('Advance to Next Round'):
-			# Increment the round number, with wrapping to loop back to the start.
-			st.session_state.current_round = (st.session_state.current_round % totalrounds) + 1
+		# Display the slider
+		round_number = st.session_state.current_round = st.slider(
+        "Select Auction Round Numbers using the Slider below",
+        min_value=1,
+        max_value=totalrounds,
+        step=1,
+        value=st.session_state.current_round
+    	)
 
-		# Use the session state variable to set the slider's value dynamically.
-		round_number = st.session_state.current_round = st.slider("Select Auction Round Numbers using the Slider below", 
-		                                             min_value=1, max_value=totalrounds, step=1, 
-		                                             value=st.session_state.current_round)
+    	# If auto-iterate is enabled and the current round is less than the total rounds, increment and rerun
+		if st.session_state.auto_iterate and st.session_state.current_round < totalrounds:
+			st.session_state.current_round += 1
+			st.experimental_rerun()
+
+		# If the current round reaches the total rounds, you can choose to stop or loop
+		if st.session_state.current_round >= totalrounds and st.session_state.auto_iterate:
+			# Reset to the first round or stop the iteration
+			# st.session_state.auto_iterate = False  # Uncomment to stop at the last round
+			st.session_state.current_round = 1  # Uncomment to loop back to the start
+			st.experimental_rerun()
+
+
+		# # Place this where your slider was originally, or where you want the play/pause functionality:
+		# if st.button('Advance to Next Round'):
+		# 	# Increment the round number, with wrapping to loop back to the start.
+		# 	st.session_state.current_round = (st.session_state.current_round % totalrounds) + 1
+
+		# # Use the session state variable to set the slider's value dynamically.
+		# round_number = st.session_state.current_round = st.slider("Select Auction Round Numbers using the Slider below", 
+		#                                              min_value=1, max_value=totalrounds, step=1, 
+		#                                              value=st.session_state.current_round)
 
 
 		# round_number = st.slider("Select Auction Round Numbers using the Silder below", min_value=1, max_value=totalrounds, step=1, value = totalrounds)
