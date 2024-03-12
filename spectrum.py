@@ -4952,18 +4952,7 @@ if selected_dimension == "Auction Data":
 		if st.button('Play/Pause Iteration'):
 			st.session_state.auto_iterate = not st.session_state.auto_iterate
 
-		# Condition to increment round number automatically
-		if st.session_state.auto_iterate and st.session_state.current_round < totalrounds:
-			st.session_state.current_round += 1
-			st.experimental_rerun()
-
-		# Condition to reset or stop iteration at the last round
-		if st.session_state.current_round >= totalrounds and st.session_state.auto_iterate:
-			# st.session_state.auto_iterate = False  # Stop at the last round
-			st.session_state.current_round = 1  # Optionally reset to the start (remove if not needed)
-			st.experimental_rerun()
-
-		# Display the slider and update round_number from the session state
+		# Display and update round_number from the session state before checking to increment
 		round_number = st.session_state.current_round = st.slider(
 		"Select Auction Round Numbers using the Slider below",
 		min_value=1, max_value=totalrounds,
@@ -4971,8 +4960,18 @@ if selected_dimension == "Auction Data":
 		value=st.session_state.current_round
 		)
 
-		# Debugging output to verify round_number updates
+		# Show the current round for debugging
 		st.write(f"Current round: {round_number}")
+
+		# Check to increment the round after displaying the slider
+		if st.session_state.auto_iterate and round_number < totalrounds:
+			st.session_state.current_round += 1
+			st.experimental_rerun()
+
+		# Handle reaching the last round
+		if round_number >= totalrounds and st.session_state.auto_iterate:
+			st.session_state.current_round = 1  # Or set to stop auto_iterate
+			st.experimental_rerun()
 
 
 		# # Place this where your slider was originally, or where you want the play/pause functionality:
