@@ -40,6 +40,16 @@ from yaml.loader import SafeLoader
 from deta import Deta
 
 
+#-------------------New Code for auto iterate Starts-------------#
+
+if 'auto_iterate' not in st.session_state:
+	st.session_state.auto_iterate = False
+if 'current_round' not in st.session_state:
+	st.session_state.current_round = 1
+
+#-------------------New Code for auto iterate Ends-------------#
+
+
 
 
 #Set page layout here
@@ -4923,15 +4933,6 @@ if selected_dimension == "Auction Data":
 
 
 
-	#-------------------New Code for auto iterate Starts-------------#
-
-	if 'auto_iterate' not in st.session_state:
-		st.session_state.auto_iterate = False
-	if 'current_round' not in st.session_state:
-		st.session_state.current_round = 1
-
-	#-------------------New Code for auto iterate Ends-------------#
-
 	if SubFeature == "LastBidPrice":
 
 		dfbid = loadauctionbiddata()[demandsheet].replace('-', np.nan, regex = True) #for number of blocks for sale for hovertext
@@ -4948,14 +4949,12 @@ if selected_dimension == "Auction Data":
 		if st.button('Play/Pause Automatic Iteration'):
 			st.session_state.auto_iterate = not st.session_state.auto_iterate
 
-		if st.session_state.auto_iterate:
-			# Auto-increment the round number, with a delay for visualization
-			st.session_state.current_round = (st.session_state.current_round % totalrounds) + 1
-			time.sleep(1)
-		else:
-		    # Manual control
-		    st.session_state.current_round = st.slider("Select Auction Round Numbers using the Slider below", min_value=1, max_value=totalrounds, step=1, value=st.session_state.current_round)
-		    
+		if not st.session_state.auto_iterate:
+    		# Allow manual control if not auto iterating
+    		st.session_state.current_round = st.slider("Select Auction Round Numbers using the Slider below", 
+                                               min_value=1, max_value=totalrounds, step=1, 
+                                               value=st.session_state.current_round)
+		# Note: The actual round iteration will happen elsewhere, so it doesn't block rendering.
 		round_number = st.session_state.current_round
 
 		# round_number = st.slider("Select Auction Round Numbers using the Silder below", min_value=1, max_value=totalrounds, step=1, value = totalrounds)
