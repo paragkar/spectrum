@@ -4931,11 +4931,11 @@ if selected_dimension == "Auction Data":
 		dfbid = dfbid.set_index("LSA")
 
 		# Use st.number_input instead of st.slider
-    	round_number = st.number_input("Select Auction Round Number using the Box below", 
-                                   min_value=1, 
-                                   max_value=totalrounds, 
-                                   value=totalrounds, 
-                                   step=1)
+		round_number = st.number_input("Select Auction Round Number using the Box below", 
+		                           min_value=1, 
+		                           max_value=totalrounds, 
+		                           value=totalrounds, 
+		                           step=1)
 
 		# round_number = st.slider("Select Auction Round Numbers using the Silder below", min_value=1, max_value=totalrounds, step=1, value = totalrounds)
 
