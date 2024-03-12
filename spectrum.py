@@ -40,17 +40,6 @@ from yaml.loader import SafeLoader
 from deta import Deta
 
 
-#-------------------New Code for auto iterate Starts-------------#
-
-if 'auto_iterate' not in st.session_state:
-	st.session_state.auto_iterate = False
-if 'current_round' not in st.session_state:
-	st.session_state.current_round = 1
-
-#-------------------New Code for auto iterate Ends-------------#
-
-
-
 
 #Set page layout here
 st.set_page_config(layout="wide")
@@ -4941,53 +4930,7 @@ if selected_dimension == "Auction Data":
 
 		dfbid = dfbid.set_index("LSA")
 
-
-		#--------------------New Slider Logic Starts------------------#
-
-		if 'auto_iterate' not in st.session_state:
-			st.session_state.auto_iterate = False
-		if 'current_round' not in st.session_state:
-			st.session_state.current_round = 1
-
-		if st.button('Play/Pause Iteration'):
-			st.session_state.auto_iterate = not st.session_state.auto_iterate
-
-		# Display and update round_number from the session state before checking to increment
-		round_number = st.session_state.current_round = st.slider(
-		"Select Auction Round Numbers using the Slider below",
-		min_value=1, max_value=totalrounds,
-		step=1,
-		value=st.session_state.current_round
-		)
-
-		# Show the current round for debugging
-		st.write(f"Current round: {round_number}")
-
-		# Check to increment the round after displaying the slider
-		if st.session_state.auto_iterate and round_number < totalrounds:
-			st.session_state.current_round += 1
-			st.experimental_rerun()
-
-		# Handle reaching the last round
-		if round_number >= totalrounds and st.session_state.auto_iterate:
-			st.session_state.current_round = 1  # Or set to stop auto_iterate
-			st.experimental_rerun()
-
-
-		# # Place this where your slider was originally, or where you want the play/pause functionality:
-		# if st.button('Advance to Next Round'):
-		# 	# Increment the round number, with wrapping to loop back to the start.
-		# 	st.session_state.current_round = (st.session_state.current_round % totalrounds) + 1
-
-		# # Use the session state variable to set the slider's value dynamically.
-		# round_number = st.session_state.current_round = st.slider("Select Auction Round Numbers using the Slider below", 
-		#                                              min_value=1, max_value=totalrounds, step=1, 
-		#                                              value=st.session_state.current_round)
-
-
-		# round_number = st.slider("Select Auction Round Numbers using the Silder below", min_value=1, max_value=totalrounds, step=1, value = totalrounds)
-
-		#--------------------New Slider Logic Ends------------------#
+		round_number = st.slider("Select Auction Round Numbers using the Silder below", min_value=1, max_value=totalrounds, step=1, value = totalrounds)
 
 		dflastsubbid = dfbidori.copy()
 
