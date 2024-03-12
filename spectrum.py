@@ -4948,15 +4948,15 @@ if selected_dimension == "Auction Data":
 		if st.button('Play/Pause Automatic Iteration'):
 			st.session_state.auto_iterate = not st.session_state.auto_iterate
 
-	    if st.session_state.auto_iterate:
-	        # Auto-increment the round number, with a delay for visualization
-	        st.session_state.current_round = (st.session_state.current_round % totalrounds) + 1
-	        time.sleep(1)
-	    else:
-	        # Manual control
-	        st.session_state.current_round = st.slider("Select Auction Round Numbers using the Slider below", 
-	                                                   min_value=1, max_value=totalrounds, step=1, 
-	                                                   value=st.session_state.current_round)
+		if st.session_state.auto_iterate:
+			# Auto-increment the round number, with a delay for visualization
+			st.session_state.current_round = (st.session_state.current_round % totalrounds) + 1
+			time.sleep(1)
+		else:
+		    # Manual control
+		    st.session_state.current_round = st.slider("Select Auction Round Numbers using the Slider below", 
+		                                               min_value=1, max_value=totalrounds, step=1, 
+		                                               value=st.session_state.current_round)
 
 	     # Continue with the adjusted round number
 	    round_number = st.session_state.current_round
