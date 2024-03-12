@@ -4990,6 +4990,7 @@ if selected_dimension == "Auction Data":
 
 		#--------------------New Slider Logic Ends------------------#
 
+		st.write(round_number) #debug 2024
 
 		dflastsubbid = dfbidori.copy()
 
