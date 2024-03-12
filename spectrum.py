@@ -4957,9 +4957,9 @@ if selected_dimension == "Auction Data":
 		    st.session_state.current_round = st.slider("Select Auction Round Numbers using the Slider below", 
 		                                               min_value=1, max_value=totalrounds, step=1, 
 		                                               value=st.session_state.current_round)
-       # Continue with the adjusted round number
+       	# Continue with the adjusted round number
 
-       round_number = st.session_state.current_round
+       	round_number = st.session_state.current_round
 
 		# round_number = st.slider("Select Auction Round Numbers using the Silder below", min_value=1, max_value=totalrounds, step=1, value = totalrounds)
 
