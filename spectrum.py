@@ -4946,8 +4946,8 @@ if selected_dimension == "Auction Data":
 
 		# Place this where your slider was originally, or where you want the play/pause functionality:
 		if st.button('Advance to Next Round'):
-    	# Increment the round number, with wrapping to loop back to the start.
-    		st.session_state.current_round = (st.session_state.current_round % totalrounds) + 1
+			# Increment the round number, with wrapping to loop back to the start.
+			st.session_state.current_round = (st.session_state.current_round % totalrounds) + 1
 
 		# Use the session state variable to set the slider's value dynamically.
 		round_number = st.session_state.current_round = st.slider("Select Auction Round Numbers using the Slider below", 
