@@ -4962,7 +4962,7 @@ if selected_dimension == "Auction Data":
 		# If the current round reaches the total rounds, you can choose to stop or loop
 		if st.session_state.current_round >= totalrounds and st.session_state.auto_iterate:
 			# Reset to the first round or stop the iteration
-			st.session_state.auto_iterate = False  # Uncomment to stop at the last round
+			# st.session_state.auto_iterate = False  # Uncomment to stop at the last round
 			st.session_state.current_round = 1  # Uncomment to loop back to the start
 			st.experimental_rerun()
 
