@@ -4944,7 +4944,8 @@ if selected_dimension == "Auction Data":
 		#--------------------New Slider Logic Starts------------------#
 
 		# Replace the original slider with the Play/Pause button and conditional logic
-	    if st.button('Play/Pause Automatic Iteration'):
+
+		if st.button('Play/Pause Automatic Iteration'):
 	    	st.session_state.auto_iterate = not st.session_state.auto_iterate
 
 	    if st.session_state.auto_iterate:
