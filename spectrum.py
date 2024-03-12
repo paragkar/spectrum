@@ -4949,23 +4949,19 @@ if selected_dimension == "Auction Data":
 		if 'current_round' not in st.session_state:
 			st.session_state.current_round = 1
 
-		# Use a button to toggle the 'auto_iterate' state
 		if st.button('Play/Pause Iteration'):
 			st.session_state.auto_iterate = not st.session_state.auto_iterate
 
-
-    	# If auto-iterate is enabled and the current round is less than the total rounds, increment and rerun
+		# Condition to increment round number automatically
 		if st.session_state.auto_iterate and st.session_state.current_round < totalrounds:
 			st.session_state.current_round += 1
 			st.experimental_rerun()
 
-		# If the current round reaches the total rounds, you can choose to stop or loop
+		# Condition to reset or stop iteration at the last round
 		if st.session_state.current_round >= totalrounds and st.session_state.auto_iterate:
-			# Reset to the first round or stop the iteration
-			# st.session_state.auto_iterate = False  # Uncomment to stop at the last round
-			st.session_state.current_round = 1  # Uncomment to loop back to the start
+			st.session_state.auto_iterate = False  # Stop at the last round
+			st.session_state.current_round = 1  # Optionally reset to the start (remove if not needed)
 			st.experimental_rerun()
-
 
 		# Display the slider and update round_number from the session state
 		round_number = st.session_state.current_round = st.slider(
