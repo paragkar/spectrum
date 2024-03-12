@@ -4946,7 +4946,7 @@ if selected_dimension == "Auction Data":
 		# Replace the original slider with the Play/Pause button and conditional logic
 
 		if st.button('Play/Pause Automatic Iteration'):
-	    	st.session_state.auto_iterate = not st.session_state.auto_iterate
+			st.session_state.auto_iterate = not st.session_state.auto_iterate
 
 	    if st.session_state.auto_iterate:
 	        # Auto-increment the round number, with a delay for visualization
