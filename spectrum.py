@@ -2991,11 +2991,6 @@ if selected_dimension == "Auction Data":
 
 		# dftempheat = dftempheat.sort_values(selected_lsa[0], ascending = True)
 
-		#-----------Debug 30th March 2024
-
-		st.write(dftemp, summarydf)
-
-		#-----------Debug 30th March 2024
 
 		#processing hovertext and colormatrix
 		hovertext,colormatrix,resultdf = htext_colormatrix_auctiondata_2010_3G_BWA_BidsCircleWise(dfbidcirclwise, 
