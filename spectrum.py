@@ -1634,7 +1634,7 @@ if selected_dimension == "Spectrum Bands":
 	dff = cal_bw_mapped_to_operators_auctionmap(dff)
 	dff = coltostr(dff)
 	dff = adddummycols(dff,auctionfailyears_dict[Band])
-	dff = dff.applymap(lambda x: "NA  " if x=="" else x) # space with NA is delibelitratly added as it gets removed with ","
+	dff = dff.map(lambda x: "NA  " if x=="" else x) # space with NA is delibelitratly added as it gets removed with ","
 
 	#processing the pricemaster excel tab data in the file "spectrum map"
 	pricemaster = df["Master_Price_Sheet"]
