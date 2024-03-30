@@ -2949,7 +2949,7 @@ if selected_dimension == "Auction Data":
 
 			# dftemp["Bid_Decision_Perc"] = round((dftemp["Bid_Decision"]/summarydf["Bid_Decision"])*100,1)
 
-			dftemp["Bid_Decision_Perc"] = np.where(summarydf["Bid_Decision"] != 0,
+		dftemp["Bid_Decision_Perc"] = np.where(summarydf["Bid_Decision"] != 0,
                                        round((dftemp["Bid_Decision"] / summarydf["Bid_Decision"]) * 100, 1),
                                        0.0)
 
