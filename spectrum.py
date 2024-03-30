@@ -2187,13 +2187,19 @@ def plotlosttotal(df,ydim,xdim):
 
 
 #------------------------- debug 30th Mar 2024
-# Define a function to select auction round numbers
-def select_auction_round_numbers(total_rounds):
-    min_round, max_round = st.sidebar.select_slider(
-        "Select Auction Round Numbers",
-        options=range(1, total_rounds + 1),
-        value=(1, total_rounds)
-    )
+def select_round_range(total_rounds):
+    # Sidebar elements for selecting round numbers
+    col1, col2 = st.sidebar.columns(2)
+    with col1:
+        min_round = st.number_input('From Round', min_value=1, max_value=total_rounds, value=1)
+    with col2:
+        max_round = st.number_input('To Round', min_value=1, max_value=total_rounds, value=total_rounds)
+    
+    # Ensure 'From Round' is always less than 'To Round'
+    if min_round >= max_round:
+        st.sidebar.error('Please ensure From Round is less than To Round.')
+        max_round = min_round + 1
+
     return min_round, max_round
 #------------------------- debug 30th Mar 2024
 
@@ -2905,7 +2911,7 @@ if selected_dimension == "Auction Data":
 
 
 		# debug 30th Mar 2024
-		start_round, end_round = select_auction_round_numbers(totalrounds)
+		start_round, end_round = select_round_range(total_rounds)
 
 		# round_range = st.slider("Select Auction Round Numbers using the Silder below", min_value=1, max_value = totalrounds, value=(1,totalrounds))
 
