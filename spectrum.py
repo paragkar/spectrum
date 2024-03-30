@@ -3442,7 +3442,7 @@ if selected_dimension == "Auction Data":
 		    #     	))
 
 			title = titlesubpart+" - Bidder's Agg Ranks in the Chosen Window of Rounds"
-			subtitle = "Source - DOT; Between Round Nos "+str(start_round)+" & "+str(end_round)+ "; Number of Rounds = "+ str(end_round-start_round)
+			subtitle = "Source - DOT; Between Round Nos "+str(start_round)+" & "+str(end_round)+ "; Number of Rounds = "+ str(end_round-start_round+1)
 
 			style = "<style>h3 {text-align: left;}</style>"
 			with st.container():
