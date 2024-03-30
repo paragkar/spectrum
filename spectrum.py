@@ -7242,16 +7242,16 @@ if selected_dimension in ["Spectrum Bands", "Auction Years", "Business Data"]:
 		if chart_data_flag==True:
 			tab1, tab2 = st.tabs(["📈 Chart", "🗃 Data"]) #for listing the summary chart for freq layout
 			# Add each trace from your first figure to the first row of the subplot
-	    	for trace in fig.data:
-	        	tab1.combined_fig.add_trace(trace, row=1, col=1)
+			for trace in fig.data:
+				tab1.combined_fig.add_trace(trace, row=1, col=1)
 				tab2.table(chartdata_df)
 			for trace in fig2.data:
-	            combined_fig.add_trace(trace, row=2, col=1)
+			    combined_fig.add_trace(trace, row=2, col=1)
 		else:
 			for trace in fig.data:
-	        	combined_fig.add_trace(trace, row=1, col=1)
+				combined_fig.add_trace(trace, row=1, col=1)
 			for trace in fig2.data:
-	            combined_fig.add_trace(trace, row=2, col=1)
+			    combined_fig.add_trace(trace, row=2, col=1)
 	  
 
 
