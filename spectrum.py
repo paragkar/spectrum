@@ -2975,7 +2975,7 @@ if selected_dimension == "Auction Data":
 
 		#-----------Debug 30th March 2024
 
-		st.write(dftemp)
+		st.write(dftemp, summarydf)
 
 		#-----------Debug 30th March 2024
 
