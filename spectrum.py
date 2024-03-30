@@ -3093,14 +3093,14 @@ if selected_dimension == "Auction Data":
 			#for rendering text of the final heatmap for Data
 
 
+			#-------debug 30th March 2024
+
+			st.write(resultdf)
+
+			#-------debug 30th March 2024
+
+
 			df_combined = dftempheat.map(str).combine(resultdf.map(str), lambda x, y: combine_text(x," %", y))
-
-
-			#-------debug 30th March 2024
-
-			st.write(df_combined)
-
-			#-------debug 30th March 2024
 
 
 			#------New Code Ends----------------#
