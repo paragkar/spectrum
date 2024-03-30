@@ -41,7 +41,7 @@ from deta import Deta
 
 #debug 30th March 2024 to remove waring and future downcasting 
 
-# pd.set_option('future.no_silent_downcasting', True)
+pd.set_option('future.no_silent_downcasting', True)
 
 
 
