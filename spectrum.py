@@ -2914,9 +2914,9 @@ if selected_dimension == "Auction Data":
 
 		# round_range = st.slider("Select Auction Round Numbers using the Silder below", min_value=1, max_value = totalrounds, value=(1,totalrounds))
 
-		start_round = round_range[0]
+		# start_round = round_range[0]
 
-		end_round = round_range[1]
+		# end_round = round_range[1]
 
 
 		dfbidcirclwise = dfbid.copy()
