@@ -3383,7 +3383,7 @@ if selected_dimension == "Auction Data":
 					xgap = 2,
 					ygap = 2,
 					hoverinfo ='text',
-					# text = hovertext,
+					text = hovertext,
 					colorscale='Hot',
 					# showscale=False,
 						texttemplate="%{z}", 
