@@ -2958,14 +2958,16 @@ if selected_dimension == "Auction Data":
 
 		st.write(dftemp)
 
-		# Compute 'Bid_Decision_Perc' safely, avoiding division by zero
+		# Calculate 'Bid_Decision_Perc' safely
+		# Set it to zero where 'Bid_Decision_summary' is zero to avoid division by zero errors
 		dftemp['Bid_Decision_Perc'] = np.where(
-		    dftemp['Bid_Decision_summary'] != 0,
-		    round((dftemp['Bid_Decision'] / dftemp['Bid_Decision_summary']) * 100, 1),
+		    dftemp['Bid_Decision_summary'] > 0,
+		    (dftemp['Bid_Decision'] / dftemp['Bid_Decision_summary']) * 100,
 		    0.0
 		)
 
-		# Now dftemp contains the 'Bid_Decision_Perc' calculated safely. 
+		# Optionally, you might want to round the result to a certain number of decimal places
+		dftemp['Bid_Decision_Perc'] = dftemp['Bid_Decision_Perc'].round(1)
 		# If needed, drop the 'Bid_Decision_summary' column
 		dftemp.drop('Bid_Decision_summary', axis=1, inplace=True)
 
