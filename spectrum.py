@@ -2956,6 +2956,9 @@ if selected_dimension == "Auction Data":
 
 		dftemp = pd.merge(dftemp, summarydf[['LSA', 'Bid_Decision']], on='LSA', how='left', suffixes=('', '_summary'))
 
+
+		dftemp = dftemp.replace(0, np.nan)
+
 		st.write(dftemp)
 
 		# Correctly encapsulated division inside np.where to avoid direct division when Bid_Decision_summary is 0
