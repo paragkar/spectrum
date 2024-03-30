@@ -3093,8 +3093,9 @@ if selected_dimension == "Auction Data":
 			#for rendering text of the final heatmap for Data
 
 
-			df_combined = dftempheat.map(str).combine(resultdf.map(str), lambda x, y: combine_text(x," %", y))
+			# df_combined = dftempheat.map(str).combine(resultdf.map(str), lambda x, y: combine_text(x," %", y))
 
+			df_combined = dftempheat.map(str).combine(resultdf, lambda x, y: combine_text(str(round(x,2))," %", str(y))
 
 			#-------debug 30th March 2024
 
