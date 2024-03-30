@@ -2951,6 +2951,9 @@ if selected_dimension == "Auction Data":
 
 
 		# Merge the relevant 'Bid_Decision' from summarydf into dftemp based on 'LSA'
+
+		summarydf = summarydf.reset_index()
+
 		dftemp = pd.merge(dftemp, summarydf[['LSA', 'Bid_Decision']], on='LSA', how='left', suffixes=('', '_summary'))
 
 		# Compute 'Bid_Decision_Perc' safely, avoiding division by zero
