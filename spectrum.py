@@ -3290,14 +3290,20 @@ if selected_dimension == "Auction Data":
 			#------------------------------ debug 30th May 2024
 
 			# Split the 'RankCompany' into two separate columns
-			dfbidsel['Rank'] = dfbidsel['RankCompany'].apply(lambda x: int(x.split('-')[0]))
-			dfbidsel['Company'] = dfbidsel['RankCompany'].apply(lambda x: x.split('-')[1])
 
-			# Sort by 'Company' and then by 'Rank'
-			df_sorted = dfbidsel.sort_values(by=['Company', 'Rank'])
+			dfbidsel = dfbidsel.reset_index()
 
-			# If you only want to display the original combined values in the sorted order:
-			dfbidsel = df_sorted[['RankCompany']]
+			st.write(dfbidsel)
+
+
+			# dfbidsel['Rank'] = dfbidsel['RankCompany'].apply(lambda x: int(x.split('-')[0]))
+			# dfbidsel['Company'] = dfbidsel['RankCompany'].apply(lambda x: x.split('-')[1])
+
+			# # Sort by 'Company' and then by 'Rank'
+			# df_sorted = dfbidsel.sort_values(by=['Company', 'Rank'])
+
+			# # If you only want to display the original combined values in the sorted order:
+			# dfbidsel = df_sorted[['RankCompany']]
 
 			#--------------------------- degug 30th May 2024
 
