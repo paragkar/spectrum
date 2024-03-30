@@ -3376,21 +3376,37 @@ if selected_dimension == "Auction Data":
 			#--------------------------- degug 30th March 2024
 
 
+			# Define the heatmap with embedded text and customized hover information
 			data = [go.Heatmap(
-					z=dfbidsel.values,
-			        y= dfbidsel.index,
-			        x=dfbidsel.columns,
-					xgap = 2,
-					ygap = 2,
-					hoverinfo ='text',
-					text = hovertext,
-					colorscale='Hot',
-					# showscale=False,
-						texttemplate="%{z}", 
-						textfont={"size":10},
-						reversescale=True,
-						)
-					]
+			    z=dfbidsel.values,
+			    y=dfbidsel.index,
+			    x=dfbidsel.columns,
+			    xgap=2,
+			    ygap=2,
+			    colorscale='Hot',
+			    reversescale=True,
+			    text=dfbidsel.values,  # Set text to the same values as z for display
+			    texttemplate="%{text}",  # Define how text is displayed based on the text array
+			    textfont={"size":10},  # Adjust text font size within cells
+			    hoverinfo='x+y',  # Customize hover info to show only x and y values
+			)]
+
+
+			# data = [go.Heatmap(
+			# 		z=dfbidsel.values,
+			#         y= dfbidsel.index,
+			#         x=dfbidsel.columns,
+			# 		xgap = 2,
+			# 		ygap = 2,
+			# 		hoverinfo ='text',
+			# 		# text = hovertext,
+			# 		colorscale='Hot',
+			# 		# showscale=False,
+			# 			texttemplate="%{z}", 
+			# 			textfont={"size":10},
+			# 			reversescale=True,
+			# 			)
+			# 		]
 
 			figauc = go.Figure(data=data)
 
