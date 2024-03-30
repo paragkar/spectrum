@@ -3097,8 +3097,6 @@ if selected_dimension == "Auction Data":
 
 			dftempheat = dftempheat.astype(float).apply(lambda x : round(x,2))
 
-			st.write(dftempheat)
-
 			#-------debug 30th March 2024
 
 
