@@ -7237,7 +7237,7 @@ if selected_dimension in ["Spectrum Bands", "Auction Years", "Business Data"]:
 		# summarydf = summarydf.T.reset_index()
 		# summarydf.columns =[timescale, dimension]
 		# bar_data = summarychart(summarydf, timescale, dimension)
-		fig2 = go.Figure(data=chart)
+		# fig2 = go.Figure(data=chart)
 
 		if chart_data_flag==True:
 			tab1, tab2 = st.tabs(["📈 Chart", "🗃 Data"]) #for listing the summary chart for freq layout
