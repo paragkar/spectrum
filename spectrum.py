@@ -7205,7 +7205,7 @@ if selected_dimension in ["Spectrum Bands", "Auction Years", "Business Data"]:
 			tab1.plotly_chart(fig, use_container_width=True)
 			tab2.table(chartdata_df)
 		else:
-			st.plotly_chart(fig, use_container_width=True) # for heatmaps
+			# st.plotly_chart(fig, use_container_width=True) # for heatmaps
 
 
 		#preparing the container layout for the dimension business data
