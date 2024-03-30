@@ -3298,7 +3298,7 @@ if selected_dimension == "Auction Data":
 			dfbidsel['Company'] = dfbidsel['Rank_Bidder'].apply(lambda x: x.split('-')[1])
 
 			# Sort by 'Company' and then by 'Rank'
-			dfbidsel = dfbidsel.sort_values(by=['Company', 'Rank'])
+			dfbidsel = dfbidsel.sort_values(by=['Company', 'Rank'], ascending = False)
 
 			# If you only want to display the original combined values in the sorted order:
 			# dfbidsel = df_sorted[['Rank_Bidder']]
