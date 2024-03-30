@@ -1564,7 +1564,7 @@ auction_rsrate_dict ={} #the dictionary which stores all the values of the rupee
 
 dfrsrate["Date"] = pd.to_datetime(dfrsrate["Date"])
 
-dfrsrate = dfrsrate.set_index("Date").asfreq("m")
+dfrsrate = dfrsrate.set_index("Date").asfreq("ME")
 
 for index in dfrsrate.index:
 
