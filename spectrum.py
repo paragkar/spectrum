@@ -3387,7 +3387,7 @@ if selected_dimension == "Auction Data":
 					colorscale='Hot',
 					# showscale=False,
 						texttemplate="%{z}", 
-						textfont={"size":8},
+						textfont={"size":10},
 						reversescale=True,
 						)
 					]
