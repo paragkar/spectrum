@@ -2947,13 +2947,7 @@ if selected_dimension == "Auction Data":
 		#--------- debug try and except statement added on 30th March 2024
 
 
-		# dftemp["Bid_Decision_Perc"] = round((dftemp["Bid_Decision"]/summarydf["Bid_Decision"])*100,1)
-
-		dftemp['Bid_Decision_Perc'] = np.where(
-    				summarydf['Bid_Decision'].reindex(dftemp.index) != 0,
-    				round((dftemp['Bid_Decision'] / summarydf['Bid_Decision'].reindex(dftemp.index)) * 100, 1),
-    									0.0
-											)
+		dftemp["Bid_Decision_Perc"] = round((dftemp["Bid_Decision"]/summarydf["Bid_Decision"])*100,1)
 
 
 		#----------------------------
