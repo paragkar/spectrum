@@ -3287,6 +3287,8 @@ if selected_dimension == "Auction Data":
 
 			dfbidsel = dfbidsel.replace(0, np.nan).dropna(axis =0, how = "all")
 
+			st.write(dfbidsel) #debug 30th Mar 2024
+
 			data = [go.Heatmap(
 					z=dfbidsel.values,
 			        y= dfbidsel.index,
