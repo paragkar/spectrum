@@ -39,6 +39,10 @@ from yaml.loader import SafeLoader
 
 from deta import Deta
 
+#debug 30th March 2024 to remove waring and future downcasting 
+
+# pd.set_option('future.no_silent_downcasting', True)
+
 
 
 #Set page layout here
@@ -231,6 +235,7 @@ def loadtraiagr():
 	df = pd.read_excel(excel_content, sheet_name=sheetauctiondata)
 
 	return df
+
 
 #--------Fuctions for loading File Ends--------------------
 
@@ -432,7 +437,7 @@ def bw_exp_cal_yearly_trends(sff,ef):
 # @st.cache_resource
 def cal_bw_mapped_to_operators_auctionmap(dff):
 	dff = dff.replace(0,np.nan).fillna(0)
-	dff = dff.applymap(lambda x: round(x,2) if type(x)!=str else x)
+	dff = dff.map(lambda x: round(x,2) if type(x)!=str else x)
 	dff = dff[(dff["Band"]==Band) & (dff["Cat"]=="L") & (dff["OperatorOld"] != "Free") & (dff["Year"] >= 2010)]
 	dff = dff.drop(['OperatorNew', 'Band','Cat'], axis = 1)
 	for col in dff.columns[3:]:
@@ -1560,7 +1565,7 @@ auction_rsrate_dict ={} #the dictionary which stores all the values of the rupee
 
 dfrsrate["Date"] = pd.to_datetime(dfrsrate["Date"])
 
-dfrsrate = dfrsrate.set_index("Date").asfreq("m")
+dfrsrate = dfrsrate.set_index("Date").asfreq("ME")
 
 for index in dfrsrate.index:
 
@@ -1630,7 +1635,7 @@ if selected_dimension == "Spectrum Bands":
 	dff = cal_bw_mapped_to_operators_auctionmap(dff)
 	dff = coltostr(dff)
 	dff = adddummycols(dff,auctionfailyears_dict[Band])
-	dff = dff.applymap(lambda x: "NA  " if x=="" else x) # space with NA is delibelitratly added as it gets removed with ","
+	dff = dff.map(lambda x: "NA  " if x=="" else x) # space with NA is delibelitratly added as it gets removed with ","
 
 	#processing the pricemaster excel tab data in the file "spectrum map"
 	pricemaster = df["Master_Price_Sheet"]
@@ -1647,21 +1652,21 @@ if selected_dimension == "Spectrum Bands":
 	percentsold = offeredvssold.pivot(index=["LSA"], columns='Year', values="%Sold")
 	percentsold = percentsold.replace("NA", np.nan)
 	percentsold = percentsold*100 #for rationalising the percentage number
-	percentsold = percentsold.applymap(lambda x: round(float(x),1))
+	percentsold = percentsold.map(lambda x: round(float(x),1))
 	percentsold = coltostr(percentsold) #convert columns data type to string
 	unsoldspectrum = offeredvssold.pivot(index=["LSA"], columns='Year', values="Unsold").fillna("NA")
 	unsoldspectrum = coltostr(unsoldspectrum) #convert columns data type to string
 	percentunsold = offeredvssold.pivot(index=["LSA"], columns='Year', values="%Unsold")
 	percentunsold = percentunsold.replace("NA", np.nan)
 	percentunsold = percentunsold*100 #for rationalising the percentage number
-	percentunsold = percentunsold.applymap(lambda x: round(float(x),1))
+	percentunsold = percentunsold.map(lambda x: round(float(x),1))
 	percentunsold = coltostr(percentunsold) #convert columns data type to string
 
 	#processing & restructuring dataframe auction price for hovertext of the data of heatmap
 	auctionprice = pricemaster[(pricemaster["Band"] == Band) & (pricemaster["Year"] != 2018)]
 	auctionprice = auctionprice.pivot(index=["LSA"], columns='Year', values="Auction Price").fillna("NA")
 	auctionprice = auctionprice.loc[:, (auctionprice != 0).any(axis=0)]
-	auctionprice = auctionprice.applymap(lambda x: round(x,2))
+	auctionprice = auctionprice.map(lambda x: round(x,2))
 	auctionprice = coltostr(auctionprice) #convert columns data type to string
 	auctionprice = adddummycols(auctionprice,auctionfailyears_dict[Band])
 	auctionprice = auctionprice.replace(0,"NA")
@@ -1670,7 +1675,7 @@ if selected_dimension == "Spectrum Bands":
 	reserveprice = pricemaster[(pricemaster["Band"] == Band) & (pricemaster["Year"] != 2018)]
 	reserveprice = reserveprice.pivot(index=["LSA"], columns='Year', values="Reserve Price").fillna("NA")
 	reserveprice = reserveprice.loc[:, (reserveprice != 0).any(axis=0)]
-	reserveprice = reserveprice.applymap(lambda x: round(x,2))
+	reserveprice = reserveprice.map(lambda x: round(x,2))
 	reserveprice = coltostr(reserveprice) #convert columns data type to string
 	reserveprice = reserveprice.replace(0,"NA")
 
@@ -2101,7 +2106,7 @@ def bidvalue(df,dfblocks):
 	# replace_func = lambda x: 1 if re.match(pattern, str(x)) else x
 
 	# # Apply the function to each cell in the DataFrame
-	# matrix = df.applymap(replace_func)
+	# matrix = df.map(replace_func)
 
 	# df_final = matrix * mindf.values
 
@@ -2179,6 +2184,24 @@ def plotlosttotal(df,ydim,xdim):
 	fig.update_traces(marker=dict(color='red'))
 
 	return fig
+
+
+#------------------------- debug 30th Mar 2024
+def select_round_range(total_rounds):
+    # Sidebar elements for selecting round numbers
+    col1, col2 = st.sidebar.columns(2)
+    with col1:
+        min_round = st.number_input('From Round', min_value=1, max_value=total_rounds, value=1)
+    with col2:
+        max_round = st.number_input('To Round', min_value=1, max_value=total_rounds, value=total_rounds)
+    
+    # Ensure 'From Round' is always less than 'To Round'
+    if min_round >= max_round:
+        st.sidebar.error('Please ensure From Round is less than To Round.')
+        max_round = min_round + 1
+
+    return min_round, max_round
+#------------------------- debug 30th Mar 2024
 
 
 
@@ -2886,11 +2909,16 @@ if selected_dimension == "Auction Data":
 
 	if SubFeature == "BidsCircleWise":
 
+
+		# debug 30th Mar 2024
+		# start_round, end_round = select_round_range(totalrounds)
+
 		round_range = st.slider("Select Auction Round Numbers using the Silder below", min_value=1, max_value = totalrounds, value=(1,totalrounds))
 
 		start_round = round_range[0]
 
 		end_round = round_range[1]
+
 
 		dfbidcirclwise = dfbid.copy()
 
@@ -2977,9 +3005,9 @@ if selected_dimension == "Auction Data":
 
 			#for rendering text of the final heatmap for Data
 
-			dftempheat = dftempheat.applymap(int)
+			dftempheat = dftempheat.map(int)
 
-			df_combined = dftempheat.applymap(str).combine(resultdf.applymap(str), lambda x, y: combine_text(x, y))
+			df_combined = dftempheat.map(str).combine(resultdf.map(str), lambda x, y: combine_text(x, y))
 
 
 			#------New Code Ends----------------#
@@ -3035,7 +3063,7 @@ if selected_dimension == "Auction Data":
 			#for rendering text of the final heatmap for Data
 
 
-			df_combined = dftempheat.applymap(str).combine(resultdf.applymap(str), lambda x, y: combine_text(x," %", y))
+			df_combined = dftempheat.map(str).combine(resultdf.map(str), lambda x, y: combine_text(x," %", y))
 
 
 			#------New Code Ends----------------#
@@ -3286,6 +3314,30 @@ if selected_dimension == "Auction Data":
 			dfbidsel = dfbidsel.sort_values(selected_lsa[0], ascending = True)
 
 			dfbidsel = dfbidsel.replace(0, np.nan).dropna(axis =0, how = "all")
+
+			#------------------------------ debug 30th March 2024
+
+			# Split the 'RankCompany' into two separate columns
+
+			dfbidsel = dfbidsel.reset_index()
+
+
+			dfbidsel['Rank'] = dfbidsel['Rank_Bidder'].apply(lambda x: int(x.split('-')[0]))
+			dfbidsel['Company'] = dfbidsel['Rank_Bidder'].apply(lambda x: x.split('-')[1])
+
+			# Sort by 'Company' and then by 'Rank'
+			dfbidsel = dfbidsel.sort_values(by=['Company', 'Rank'], ascending = False)
+
+			dfbidsel = dfbidsel.drop(columns = ['Company', 'Rank'])
+
+			# If you only want to display the original combined values in the sorted order:
+			# dfbidsel = df_sorted[['Rank_Bidder']]
+
+
+			dfbidsel = dfbidsel.set_index("Rank_Bidder")
+
+			#--------------------------- degug 30th March 2024
+
 
 			data = [go.Heatmap(
 					z=dfbidsel.values,
@@ -4977,7 +5029,7 @@ if selected_dimension == "Auction Data":
 
 			dflastsubbidheat = dflastsubbidheat.round(1)
 
-			df_combined1 = dflastsubbidheat.applymap(str).combine(dfBLKsStartRd.applymap(str), lambda x, y: combine_text('Rs-', x, y, 'BA-'))
+			df_combined1 = dflastsubbidheat.map(str).combine(dfBLKsStartRd.map(str), lambda x, y: combine_text('Rs-', x, y, 'BA-'))
 
 
 			dflastsubbidratio = round((dflastsubbidheat.T/dfrp.values).T,2).sort_index(ascending=True)
@@ -4985,7 +5037,7 @@ if selected_dimension == "Auction Data":
 
 			#for rendering text of the final heatmap for Data2
 
-			df_combined2 = dflastsubbidratio.applymap(str).combine(dfBLKsStartRd.applymap(str), lambda x, y: combine_text('Ratio-', x, y, 'BA-'))
+			df_combined2 = dflastsubbidratio.map(str).combine(dfBLKsStartRd.map(str), lambda x, y: combine_text('Ratio-', x, y, 'BA-'))
 
 			dflastsubbidheat = dflastsubbidheat.sort_index(ascending=True)
 
@@ -5137,7 +5189,7 @@ if selected_dimension == "Auction Data":
 
 			# Apply the regular expression pattern and replacement function to the dataframe
 			# mask dataframe has 1 for winners and 0 for losers
-			mask = dfBLKsEndRd.applymap(lambda x: re.sub(pattern, replace_numbers, str(x)))
+			mask = dfBLKsEndRd.map(lambda x: re.sub(pattern, replace_numbers, str(x)))
 
 			for col in mask.columns:
 				mask[col] = mask[col].astype(int)
@@ -5156,18 +5208,18 @@ if selected_dimension == "Auction Data":
 
 			dflastsubbidheat = dflastsubbidheat.round(1)
 
-			df_combined1 = dflastsubbidheat.applymap(str).combine(dfBLKsSelEndRd.applymap(str), lambda x, y: combine_text('Rs-', x, y,'BS-'))
+			df_combined1 = dflastsubbidheat.map(str).combine(dfBLKsSelEndRd.map(str), lambda x, y: combine_text('Rs-', x, y,'BS-'))
 
-			df_combined1 = df_combined1.applymap(str).combine(dfBLKsEndRd.applymap(str), lambda x, y: combine_text("", x, y, 'BA-'))
+			df_combined1 = df_combined1.map(str).combine(dfBLKsEndRd.map(str), lambda x, y: combine_text("", x, y, 'BA-'))
 
 
 			dflastsubbidratio = round((dflastsubbidheat.T/dfrp.values).T,2).sort_index(ascending=True)
 
 			#for rendering text of the final heatmap for Data2
 
-			df_combined2 = dflastsubbidratio.applymap(str).combine(dfBLKsSelEndRd.applymap(str), lambda x, y: combine_text('Ratio-', x, y, 'BS-'))
+			df_combined2 = dflastsubbidratio.map(str).combine(dfBLKsSelEndRd.map(str), lambda x, y: combine_text('Ratio-', x, y, 'BS-'))
 
-			df_combined2 = df_combined2.applymap(str).combine(dfBLKsEndRd.applymap(str), lambda x, y: combine_text("", x, y, 'BA-'))
+			df_combined2 = df_combined2.map(str).combine(dfBLKsEndRd.map(str), lambda x, y: combine_text("", x, y, 'BA-'))
 
 			dflastsubbidheat = dflastsubbidheat.sort_index(ascending=True)
 
@@ -5190,7 +5242,7 @@ if selected_dimension == "Auction Data":
 
 			# Apply the regular expression pattern and replacement function to the dataframe
 			# To calculate the winners who are those who have been assigned blocks
-			mask1 = dfBLKsEndRd.applymap(lambda x: re.sub(pattern, replace_numbers, str(x)))
+			mask1 = dfBLKsEndRd.map(lambda x: re.sub(pattern, replace_numbers, str(x)))
 
 			for col in mask.columns:
 				mask1[col] = mask1[col].astype(int)
@@ -5199,7 +5251,7 @@ if selected_dimension == "Auction Data":
 
 
 			# To identify those bidders who have submitted bids during the auction
-			mask2 = dflastsubbidheat.applymap(lambda x: re.sub(pattern, replace_numbers, str(x).split('.')[0]))
+			mask2 = dflastsubbidheat.map(lambda x: re.sub(pattern, replace_numbers, str(x).split('.')[0]))
 
 			for col in mask2.columns:
 				mask2[col] = mask2[col].astype(int)
