@@ -3401,7 +3401,7 @@ if selected_dimension == "Auction Data":
 			    xaxis_side='top',
 			    height=800,
 			    plot_bgcolor='#f0f0f0',  # Background color for the plot area
-			    paper_bgcolor='white',  # Background color for the entire figure
+			    paper_bgcolor='#f0f0f0',  # Background color for the entire figure
 			)
 			#-------- Debug 30th March 2024
 
