@@ -3400,8 +3400,8 @@ if selected_dimension == "Auction Data":
 			    template="seaborn",
 			    xaxis_side='top',
 			    height=800,
-			    plot_bgcolor='#f0f0f0',  # Background color for the plot area
-			    paper_bgcolor='#f0f0f0',  # Background color for the entire figure
+			    plot_bgcolor='#f0f0f0',  # Background color for the plot area light grey
+			    paper_bgcolor='white',  # Background color for the entire figure
 			)
 			#-------- Debug 30th March 2024
 
