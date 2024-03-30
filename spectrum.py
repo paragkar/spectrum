@@ -44,7 +44,6 @@ from deta import Deta
 pd.set_option('future.no_silent_downcasting', True)
 
 
-
 #Set page layout here
 st.set_page_config(layout="wide")
 
@@ -2945,7 +2944,16 @@ if selected_dimension == "Auction Data":
 
 		dftemp = dftemp.set_index("LSA")
 
-		dftemp["Bid_Decision_Perc"] = round((dftemp["Bid_Decision"]/summarydf["Bid_Decision"])*100,1)
+		#--------- debug try and except statement added on 30th March 2024
+
+		try:
+
+			dftemp["Bid_Decision_Perc"] = round((dftemp["Bid_Decision"]/summarydf["Bid_Decision"])*100,1)
+
+		except:
+			pass
+
+		#----------------------------
 
 		dftemp = dftemp.reset_index()
 
