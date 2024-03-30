@@ -1166,7 +1166,7 @@ def htext_colormatrix_auctiondata_2010_3G_BWA_BidsCircleWise(dfbidcirclwise, dft
 					    yy,
 					    state_dict[xx],
 					    totalbidsagg,
-					    totalbissperc,
+					    round(totalbissperc,2),
 					    result,
 					    finalrank,
 					    round(totalblksrdend,0),
