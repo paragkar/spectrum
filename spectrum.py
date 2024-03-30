@@ -7234,10 +7234,10 @@ if selected_dimension in ["Spectrum Bands", "Auction Years", "Business Data"]:
 
 
 		#processing chart for total of all columns 
-	    total_df = total_df.T.reset_index()
-	    total_df.columns =[timescale, dimension]
-	    bar_data = summarychart(total_df, timescale, dimension)
-	    fig2 = go.Figure(data=chart)
+		total_df = total_df.T.reset_index()
+		total_df.columns =[timescale, dimension]
+		bar_data = summarychart(total_df, timescale, dimension)
+		fig2 = go.Figure(data=chart)
 
 		if chart_data_flag==True:
 			tab1, tab2 = st.tabs(["📈 Chart", "🗃 Data"]) #for listing the summary chart for freq layout
