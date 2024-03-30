@@ -3039,12 +3039,6 @@ if selected_dimension == "Auction Data":
 
 			df_combined = dftempheat.map(str).combine(resultdf.map(str), lambda x, y: combine_text(x, y))
 
-			#-------debug 30th March 2024
-
-			st.write(df_combined)
-
-			#-------debug 30th March 2024
-
 
 			#------New Code Ends----------------#
 
@@ -3100,6 +3094,13 @@ if selected_dimension == "Auction Data":
 
 
 			df_combined = dftempheat.map(str).combine(resultdf.map(str), lambda x, y: combine_text(x," %", y))
+
+
+			#-------debug 30th March 2024
+
+			st.write(df_combined)
+
+			#-------debug 30th March 2024
 
 
 			#------New Code Ends----------------#
