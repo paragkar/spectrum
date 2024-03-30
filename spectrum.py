@@ -3502,7 +3502,14 @@ if selected_dimension == "Auction Data":
 
 		if pwbtype == "Start CLK Round":
 
-			round_number = st.slider("Select Auction Round Numbers using the Silder below", min_value=1, max_value=totalrounds, step=1, value = totalrounds)
+			# debug 30th Mar 2024
+			# Generate a list of all round numbers
+			round_numbers = list(range(1, totalrounds + 1))
+
+			# Create a select box for round numbers
+			round_number = st.sidebar.selectbox("Select Auction Round Number", round_numbers)
+
+			# round_number = st.slider("Select Auction Round Numbers using the Silder below", min_value=1, max_value=totalrounds, step=1, value = totalrounds)
 
 			dfbidpwb = dfbid.copy()
 
@@ -3704,7 +3711,15 @@ if selected_dimension == "Auction Data":
 
 		if pwbtype == "End CLK Round":
 
-			round_number = st.slider("Select Auction Round Numbers using the Silder below", min_value=1, max_value=totalrounds, step=1, value = totalrounds)
+
+			# debug 30th Mar 2024
+			# Generate a list of all round numbers
+			round_numbers = list(range(1, totalrounds + 1))
+
+			# Create a select box for round numbers
+			round_number = st.sidebar.selectbox("Select Auction Round Number", round_numbers)
+
+			# round_number = st.slider("Select Auction Round Numbers using the Silder below", min_value=1, max_value=totalrounds, step=1, value = totalrounds)
 
 			dfbidpwb = dfbid.copy()
 
