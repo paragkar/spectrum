@@ -2973,6 +2973,8 @@ if selected_dimension == "Auction Data":
 		# If needed, drop the 'Bid_Decision_summary' column
 		dftemp.drop('Bid_Decision_summary', axis=1, inplace=True)
 
+		dftemp = dftemp.replace(np.nan, 0)
+
 
 		#---------- debug 30th March 2024
 
