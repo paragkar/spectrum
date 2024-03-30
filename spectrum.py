@@ -7225,7 +7225,7 @@ if selected_dimension in ["Spectrum Bands", "Auction Years", "Business Data"]:
 
 
 		# Create a subplot layout with two rows and one column
-	    combined_fig = make_subplots(
+		combined_fig = make_subplots(
 	        rows=2, cols=1,
 	        vertical_spacing=0,  # Adjust spacing as needed
 	        shared_xaxes=False,  # Set to True if the x-axes should be aligned
