@@ -3297,11 +3297,15 @@ if selected_dimension == "Auction Data":
 
 		if plottype == "RanksInRounds":
 
-			round_range = st.slider("Select Auction Round Numbers using the Silder below", min_value = 0, max_value = totalrounds, value=(1,totalrounds))
 
-			start_round = round_range[0]
+			# debug 30th Mar 2024
+			start_round, end_round = select_round_range(totalrounds)
 
-			end_round = round_range[1]
+			# round_range = st.slider("Select Auction Round Numbers using the Silder below", min_value = 0, max_value = totalrounds, value=(1,totalrounds))
+
+			# start_round = round_range[0]
+
+			# end_round = round_range[1]
 
 			dfbidsel = dfbid.copy()
 
