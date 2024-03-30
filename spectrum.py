@@ -3394,13 +3394,24 @@ if selected_dimension == "Auction Data":
 
 			figauc = go.Figure(data=data)
 
+			#-------- Debug 30th March 2024
+			# Adjust plot and paper background color for contrast
 			figauc.update_layout(
 			    template="seaborn",
-			    xaxis_side= 'top',
-			   	height = 800,
-			   	yaxis=dict(
-		        tickmode='array',
-		        	))
+			    xaxis_side='top',
+			    height=800,
+			    plot_bgcolor='white',  # Background color for the plot area
+			    paper_bgcolor='white',  # Background color for the entire figure
+			)
+			#-------- Debug 30th March 2024
+
+			# figauc.update_layout(
+			#     template="seaborn",
+			#     xaxis_side= 'top',
+			#    	height = 800,
+			#    	yaxis=dict(
+		    #     tickmode='array',
+		    #     	))
 
 			title = titlesubpart+" - Bidder's Agg Ranks in the Chosen Window of Rounds"
 			subtitle = "Source - DOT; Between Round Nos "+str(start_round)+" & "+str(end_round)+ "; Number of Rounds = "+ str(end_round-start_round)
