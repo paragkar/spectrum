@@ -2911,7 +2911,7 @@ if selected_dimension == "Auction Data":
 
 
 		# debug 30th Mar 2024
-		start_round, end_round = select_round_range(total_rounds)
+		start_round, end_round = select_round_range(totalrounds)
 
 		# round_range = st.slider("Select Auction Round Numbers using the Silder below", min_value=1, max_value = totalrounds, value=(1,totalrounds))
 
