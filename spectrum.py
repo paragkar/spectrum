@@ -2956,6 +2956,8 @@ if selected_dimension == "Auction Data":
 
 		dftemp = pd.merge(dftemp, summarydf[['LSA', 'Bid_Decision']], on='LSA', how='left', suffixes=('', '_summary'))
 
+		st.write(dftemp)
+
 		# Compute 'Bid_Decision_Perc' safely, avoiding division by zero
 		dftemp['Bid_Decision_Perc'] = np.where(
 		    dftemp['Bid_Decision_summary'] != 0,
