@@ -3303,6 +3303,8 @@ if selected_dimension == "Auction Data":
 			# If you only want to display the original combined values in the sorted order:
 			dfbidsel = df_sorted[['Rank_Bidder']]
 
+			st.write(dfbidsel)
+
 			dfbidsel = dfbidsel.set_index("Rank_Bidder")
 
 			#--------------------------- degug 30th May 2024
