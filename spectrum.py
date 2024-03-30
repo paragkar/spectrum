@@ -7234,9 +7234,9 @@ if selected_dimension in ["Spectrum Bands", "Auction Years", "Business Data"]:
 
 
 		#processing chart for total of all columns 
-		total_df = total_df.T.reset_index()
-		total_df.columns =[timescale, dimension]
-		bar_data = summarychart(total_df, timescale, dimension)
+		summarydf = summarydf.T.reset_index()
+		summarydf.columns =[timescale, dimension]
+		bar_data = summarychart(summarydf, timescale, dimension)
 		fig2 = go.Figure(data=chart)
 
 		if chart_data_flag==True:
