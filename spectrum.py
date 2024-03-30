@@ -2976,6 +2976,13 @@ if selected_dimension == "Auction Data":
 		#processing hovertext and colormatrix
 		hovertext,colormatrix,resultdf = htext_colormatrix_auctiondata_2010_3G_BWA_BidsCircleWise(dfbidcirclwise, 
 											dftemp,selected_lsa[0],start_round,end_round,dfprovallcblks_endrd)
+
+		#-------------debug 30th March 2024
+
+		st.write(hovertext,colormatrix,resultdf)
+
+		#-------------debug 30th March 2024
+
 		hoverlabel_bgcolor = colormatrix
 
 
