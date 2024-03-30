@@ -3380,8 +3380,8 @@ if selected_dimension == "Auction Data":
 					z=dfbidsel.values,
 			        y= dfbidsel.index,
 			        x=dfbidsel.columns,
-					xgap = 1,
-					ygap = 1,
+					xgap = 1.5,
+					ygap = 1.5,
 					hoverinfo ='text',
 					# text = hovertext,
 					colorscale='Hot',
@@ -3400,7 +3400,7 @@ if selected_dimension == "Auction Data":
 			    template="seaborn",
 			    xaxis_side='top',
 			    height=800,
-			    plot_bgcolor='white',  # Background color for the plot area
+			    plot_bgcolor='grey',  # Background color for the plot area
 			    paper_bgcolor='white',  # Background color for the entire figure
 			)
 			#-------- Debug 30th March 2024
