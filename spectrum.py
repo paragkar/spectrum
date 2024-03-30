@@ -2959,14 +2959,8 @@ if selected_dimension == "Auction Data":
 
 		dftemp = dftemp.replace(0, np.nan)
 
-		st.write(dftemp)
-
 		# Correctly encapsulated division inside np.where to avoid direct division when Bid_Decision_summary is 0
-		dftemp['Bid_Decision_Perc'] = np.where(
-		    dftemp['Bid_Decision_summary'] > 0,
-		    (dftemp['Bid_Decision'] / dftemp['Bid_Decision_summary']) * 100,
-		    0.0
-		)
+		dftemp['Bid_Decision_Perc'] = (dftemp['Bid_Decision'] / dftemp['Bid_Decision_summary']) * 100
 
 		# Now rounding the result after ensuring there is no division by zero
 		dftemp['Bid_Decision_Perc'] = dftemp['Bid_Decision_Perc'].round(1)
@@ -2974,7 +2968,6 @@ if selected_dimension == "Auction Data":
 		dftemp.drop('Bid_Decision_summary', axis=1, inplace=True)
 
 		dftemp = dftemp.replace(np.nan, 0)
-
 
 		#---------- debug 30th March 2024
 
