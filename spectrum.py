@@ -3788,12 +3788,24 @@ if selected_dimension == "Auction Data":
 				  dtick = 1), 
 				)
 
+				# debug 30th March 2024
+
+				# Adjust background colors for plot and paper to light grey
 				figauc.update_layout(
-				    coloraxis=dict(
-				        cmin=0,  # Set the minimum value of the color bar
-				        # zmax=10  # Set the maximum value of the color bar
-				    )
+				    template="seaborn",
+				    xaxis_side='top',
+				    height=800,
+				    plot_bgcolor='#f0f0f0',  # Setting plot background to light grey
+				    paper_bgcolor='#f0f0f0',  # Setting figure background to light grey
 				)
+
+
+				# figauc.update_layout(
+				#     coloraxis=dict(
+				#         cmin=0,  # Set the minimum value of the color bar
+				#         # zmax=10  # Set the maximum value of the color bar
+				#     )
+				# )
 
 
 			if chartoption == "ReservePrice Multiple":
