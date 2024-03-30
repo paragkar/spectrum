@@ -236,6 +236,7 @@ def loadtraiagr():
 
 	return df
 
+
 #--------Fuctions for loading File Ends--------------------
 
 
@@ -2185,6 +2186,18 @@ def plotlosttotal(df,ydim,xdim):
 	return fig
 
 
+#------------------------- debug 30th Mar 2024
+# Define a function to select auction round numbers
+def select_auction_round_numbers(total_rounds):
+    min_round, max_round = st.sidebar.select_slider(
+        "Select Auction Round Numbers",
+        options=range(1, total_rounds + 1),
+        value=(1, total_rounds)
+    )
+    return min_round, max_round
+#------------------------- debug 30th Mar 2024
+
+
 
 
 if selected_dimension == "Auction Data":
@@ -2890,11 +2903,16 @@ if selected_dimension == "Auction Data":
 
 	if SubFeature == "BidsCircleWise":
 
-		round_range = st.slider("Select Auction Round Numbers using the Silder below", min_value=1, max_value = totalrounds, value=(1,totalrounds))
 
-		start_round = round_range[0]
+		# debug 30th Mar 2024
+		start_round, end_round = select_auction_round_numbers(total_rounds)
 
-		end_round = round_range[1]
+		# round_range = st.slider("Select Auction Round Numbers using the Silder below", min_value=1, max_value = totalrounds, value=(1,totalrounds))
+
+		# start_round = round_range[0]
+
+		# end_round = round_range[1]
+
 
 		dfbidcirclwise = dfbid.copy()
 
@@ -3291,7 +3309,7 @@ if selected_dimension == "Auction Data":
 
 			dfbidsel = dfbidsel.replace(0, np.nan).dropna(axis =0, how = "all")
 
-			#------------------------------ debug 30th May 2024
+			#------------------------------ debug 30th March 2024
 
 			# Split the 'RankCompany' into two separate columns
 
@@ -3312,7 +3330,7 @@ if selected_dimension == "Auction Data":
 
 			dfbidsel = dfbidsel.set_index("Rank_Bidder")
 
-			#--------------------------- degug 30th May 2024
+			#--------------------------- degug 30th March 2024
 
 
 			data = [go.Heatmap(
