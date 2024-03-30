@@ -2944,13 +2944,29 @@ if selected_dimension == "Auction Data":
 
 		dftemp = dftemp.set_index("LSA")
 
-		#--------- debug try and except statement added on 30th March 2024
+		#--------- debug 30th March 2024
 
 
-		dftemp["Bid_Decision_Perc"] = round((dftemp["Bid_Decision"]/summarydf["Bid_Decision"])*100,1)
+		# dftemp["Bid_Decision_Perc"] = round((dftemp["Bid_Decision"]/summarydf["Bid_Decision"])*100,1)
 
 
-		#----------------------------
+		# Merge the relevant 'Bid_Decision' from summarydf into dftemp based on 'LSA'
+		dftemp = pd.merge(dftemp, summarydf[['LSA', 'Bid_Decision']], on='LSA', how='left', suffixes=('', '_summary'))
+
+		# Compute 'Bid_Decision_Perc' safely, avoiding division by zero
+		dftemp['Bid_Decision_Perc'] = np.where(
+		    dftemp['Bid_Decision_summary'] != 0,
+		    round((dftemp['Bid_Decision'] / dftemp['Bid_Decision_summary']) * 100, 1),
+		    0.0
+		)
+
+		# Now dftemp contains the 'Bid_Decision_Perc' calculated safely. 
+		# If needed, drop the 'Bid_Decision_summary' column
+		dftemp.drop('Bid_Decision_summary', axis=1, inplace=True)
+
+
+
+		#---------- debug 30th March 2024
 
 		dftemp = dftemp.reset_index()
 
