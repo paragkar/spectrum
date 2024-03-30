@@ -1517,19 +1517,40 @@ def transform_colscale_for_hbox_auction_map(dff,reserveprice, auctionprice):
 	return colormatrix
 
 
+
+#----------Debug 30 March 2024
 #function for preparing the summary chart 
 def summarychart(summarydf, xcolumn, ycolumn):
-	bar = alt.Chart(summarydf).mark_bar().encode(
-	y = alt.Y(ycolumn+':Q', axis=alt.Axis(labels=False)),
-	x = alt.X(xcolumn+':O', axis=alt.Axis(labels=False)),
-	color = alt.Color(xcolumn+':N', legend=None))
+    bar = go.Bar(
+        x=summarydf[xcolumn], 
+        y=summarydf[ycolumn],
+        text=summarydf[ycolumn],
+        textposition='outside',
+        texttemplate='%{y:.1f}',  # Format text to one decimal place
+        orientation='v',  # Horizontal bar chart
+        marker=dict(
+        line=dict(color='Black', width=2)
+        ),  # Sets the border color and width
+        )
+    return bar
+
+
+
+#function for preparing the summary chart 
+# def summarychart(summarydf, xcolumn, ycolumn):
+# 	bar = alt.Chart(summarydf).mark_bar().encode(
+# 	y = alt.Y(ycolumn+':Q', axis=alt.Axis(labels=False)),
+# 	x = alt.X(xcolumn+':O', axis=alt.Axis(labels=False)),
+# 	color = alt.Color(xcolumn+':N', legend=None))
 
 	
-	text = bar.mark_text(size = 10, dx=0, dy=-7, color = 'white').encode(text=ycolumn+':Q')
+# 	text = bar.mark_text(size = 10, dx=0, dy=-7, color = 'white').encode(text=ycolumn+':Q')
 	
-	chart = (bar + text).properties(width=1120, height =150)
-	chart = chart.configure_title(fontSize = 20, font ='Arial', anchor = 'middle', color ='black')
-	return chart
+# 	chart = (bar + text).properties(width=1120, height =150)
+# 	chart = chart.configure_title(fontSize = 20, font ='Arial', anchor = 'middle', color ='black')
+# 	return chart
+
+#----------Debug 30 March 2024
 
 
 #**********  Main Program Starts here ***************
@@ -7192,6 +7213,8 @@ if selected_dimension in ["Spectrum Bands", "Auction Years", "Business Data"]:
 	#Except for features which are not heatmaps
 
 
+	#--------------- Debug 30th March 2024
+
 	#Final plotting of various charts on the output page
 	style = "<style>h3 {text-align: left;}</style>"
 	with st.container():
@@ -7200,34 +7223,77 @@ if selected_dimension in ["Spectrum Bands", "Auction Years", "Business Data"]:
 		st.header(title)
 		st.markdown(subtitle)
 
+
+		# Create a subplot layout with two rows and one column
+	    combined_fig = make_subplots(
+	        rows=2, cols=1,
+	        vertical_spacing=0,  # Adjust spacing as needed
+	        shared_xaxes=False,  # Set to True if the x-axes should be aligned
+	        row_heights=[0.8, 0.2]  # First row is 80% of the height, second row is 20%
+	    )
+
+
+		#processing chart for total of all columns 
+	    total_df = total_df.T.reset_index()
+	    total_df.columns =[timescale, dimension]
+	    bar_data = summarychart(total_df, timescale, dimension)
+	    fig2 = go.Figure(data=chart)
+
 		if chart_data_flag==True:
 			tab1, tab2 = st.tabs(["📈 Chart", "🗃 Data"]) #for listing the summary chart for freq layout
-			tab1.plotly_chart(fig, use_container_width=True)
-			tab2.table(chartdata_df)
+			# Add each trace from your first figure to the first row of the subplot
+	    	for trace in fig.data:
+	        	tab1.combined_fig.add_trace(trace, row=1, col=1)
+				tab2.table(chartdata_df)
+			for trace in fig2.data:
+	            combined_fig.add_trace(trace, row=2, col=1)
 		else:
-			pass
-			# st.plotly_chart(fig, use_container_width=True) # for heatmaps
+			for trace in fig.data:
+	        	combined_fig.add_trace(trace, row=1, col=1)
+			for trace in fig2.data:
+	            combined_fig.add_trace(trace, row=2, col=1)
+	  
 
 
-		#preparing the container layout for the dimension business data
-		if (selected_dimension=="Business Data") and (Feature == "License Fees") and (SubFeature=="Operators"):
-			col1val =4.5
-		if (selected_dimension=="Business Data") and (Feature == "License Fees") and (SubFeature=="LicenseType"):
-			col1val =1
-		if (selected_dimension=="Business Data") and (Feature == "Financial SPWise"):
-			col1val =0.7
-		if (selected_dimension=="Business Data") and (Feature == "Financial LSAWise"):
-			col1val =0.7
-		else:
-			col1val = 0.2
+	#Final plotting of various charts on the output page
+	# style = "<style>h3 {text-align: left;}</style>"
+	# with st.container():
+	# 	#plotting the main chart
+	# 	st.markdown(style, unsafe_allow_html=True)
+	# 	st.header(title)
+	# 	st.markdown(subtitle)
+
+	# 	if chart_data_flag==True:
+	# 		tab1, tab2 = st.tabs(["📈 Chart", "🗃 Data"]) #for listing the summary chart for freq layout
+	# 		tab1.plotly_chart(fig, use_container_width=True)
+	# 		tab2.table(chartdata_df)
+	# 	else:
+	# 		st.plotly_chart(fig, use_container_width=True) # for heatmaps
 
 
-		#plotting the final summary chart 
+	# 	#preparing the container layout for the dimension business data
+	# 	if (selected_dimension=="Business Data") and (Feature == "License Fees") and (SubFeature=="Operators"):
+	# 		col1val =4.5
+	# 	if (selected_dimension=="Business Data") and (Feature == "License Fees") and (SubFeature=="LicenseType"):
+	# 		col1val =1
+	# 	if (selected_dimension=="Business Data") and (Feature == "Financial SPWise"):
+	# 		col1val =0.7
+	# 	if (selected_dimension=="Business Data") and (Feature == "Financial LSAWise"):
+	# 		col1val =0.7
+	# 	else:
+	# 		col1val = 0.2
 
-		col1,col2,col3 = st.columns([col1val,14,1.1]) #create collumns of uneven width
-		if SummaryFlag ==True:
-			# st.altair_chart(chart, use_container_width=True)
-			col2.altair_chart(chart, use_container_width=True)
+
+	# 	#plotting the final summary chart 
+
+	# 	col1,col2,col3 = st.columns([col1val,14,1.1]) #create collumns of uneven width
+	# 	if SummaryFlag ==True:
+	# 		# st.altair_chart(chart, use_container_width=True)
+	# 		col2.altair_chart(chart, use_container_width=True)
+
+
+
+	#--------------- Debug 30th March 2024
 
 
 #--------The expander is used to add note for the user on reading the color codes for every chart -------
