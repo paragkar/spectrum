@@ -39,6 +39,10 @@ from yaml.loader import SafeLoader
 
 from deta import Deta
 
+#debug 30th March 2024 to remove waring and future downcasting 
+
+pd.set_option('future.no_silent_downcasting', True)
+
 
 
 #Set page layout here
