@@ -2969,6 +2969,8 @@ if selected_dimension == "Auction Data":
 
 		dftemp = dftemp.replace(np.nan, 0)
 
+		summarydf = summarydf.set_index("LSA")
+
 		#---------- debug 30th March 2024
 
 		dftemp = dftemp.reset_index()
