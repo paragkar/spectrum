@@ -3262,11 +3262,21 @@ if selected_dimension == "Auction Data":
 			    else:
 			        return value
 
-			#debug 31st March 2024
+			#------debug 31st March 2024
 
-			st.write(dftempheat)
 
-			dftempheat = dftempheat.sort_values(selected_lsa[0], key=lambda x: x.map(sort_key), ascending = False)
+			sort_flag = False
+
+			if selected_lsa[0] in dftempheat.columns:
+				sort_flag = True
+
+			if sort_flag:
+
+				dftempheat = dftempheat.sort_values(selected_lsa[0], key=lambda x: x.map(sort_key), ascending = False)
+			else:
+				pass
+
+			#------debug 31st March 2024
 
 			dftempheat = dftempheat.replace(0,np.nan)
 
