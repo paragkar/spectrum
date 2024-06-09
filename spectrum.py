@@ -3939,7 +3939,7 @@ if selected_dimension == "Auction Data":
 
 		#debug 9th June 2024
 		
-		round_number = st.sidebar.number_input("Select Auction Round Number", min_value=min(totalrounds), max_value=max(totalrounds), value=initial_value, step=1)
+		round_number = st.sidebar.number_input("Select Auction Round Number", min_value=min(round_numbers), max_value=max(round_numbers), value=initial_value, step=1)
 
 
 		# round_number = st.slider("Select Auction Round Numbers using the Silder below", min_value=1, max_value=totalrounds, step=1, value = totalrounds)
