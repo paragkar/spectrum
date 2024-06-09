@@ -7240,7 +7240,9 @@ if selected_dimension in ["Spectrum Bands", "Auction Years", "Business Data"]:
 	    yaxis_title=None, 
 	    yaxis_autorange='reversed',
 	    font=dict(size=12),
-	    paper_bgcolor=None,
+	    paper_bgcolor='white',  # Explicitly setting background color
+        plot_bgcolor='white',   # Ensuring plot background is also white
+
 	    height=600, 
 	    width=1200,
 	    margin=dict(t=80, b=50, l=50, r=50, pad=0),
@@ -7248,7 +7250,7 @@ if selected_dimension in ["Spectrum Bands", "Auction Years", "Business Data"]:
 	    yaxis=dict(
 	        tickmode='array',
 	        showgrid=True,         # Ensure grid lines are visible
-	        gridcolor='darkgrey', # Set grid color for visibility
+	        gridcolor='black', # Set grid color for visibility
 	        gridwidth=1            # Increase grid line width for better visibility
 	    ),
 	    xaxis=dict(
@@ -7257,7 +7259,7 @@ if selected_dimension in ["Spectrum Bands", "Auction Years", "Business Data"]:
 	        tickangle=xdtickangle,
 	        dtick=xdtickval,
 	        showgrid=True,         # Ensure grid lines are visible
-	        gridcolor='darkgrey', # Set grid color for visibility
+	        gridcolor='black', # Set grid color for visibility
 	        gridwidth=1            # Increase grid line width for better visibility
 	    )
 	)
