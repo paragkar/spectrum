@@ -7244,6 +7244,7 @@ if selected_dimension in ["Spectrum Bands", "Auction Years", "Business Data"]:
 	    height=600, 
 	    width=1200,
 	    margin=dict(t=80, b=50, l=50, r=50, pad=0),
+	    template=None,  # Setting template to None to avoid any default styling
 	    yaxis=dict(
 	        tickmode='array',
 	        showgrid=True,         # Ensure grid lines are visible
