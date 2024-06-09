@@ -7233,49 +7233,49 @@ if selected_dimension in ["Spectrum Bands", "Auction Years", "Business Data"]:
 	# )
 
 	# Layout for heatmaps
-    fig.update_layout(
-        uniformtext_minsize=12, 
-        uniformtext_mode='hide', 
-        xaxis_title=None, 
-        yaxis_title=None, 
-        yaxis_autorange='reversed',
-        font=dict(size=12),
-        paper_bgcolor=None,
-        height=600, 
-        width=1200,
-        margin=dict(t=80, b=50, l=50, r=50, pad=0),
-        yaxis=dict(
-            tickmode='array',
-            showgrid=True,         # Ensure grid lines are visible
-            gridcolor='lightgrey', # Set grid color for visibility
-            gridwidth=1            # Increase grid line width for better visibility
-        ),
-        xaxis=dict(
-            side='top',
-            tickmode='linear',
-            tickangle=xdtickangle,
-            dtick=xdtickval,
-            showgrid=True,         # Ensure grid lines are visible
-            gridcolor='lightgrey', # Set grid color for visibility
-            gridwidth=1            # Increase grid line width for better visibility
-        )
-    )
+	fig.update_layout(
+	    uniformtext_minsize=12, 
+	    uniformtext_mode='hide', 
+	    xaxis_title=None, 
+	    yaxis_title=None, 
+	    yaxis_autorange='reversed',
+	    font=dict(size=12),
+	    paper_bgcolor=None,
+	    height=600, 
+	    width=1200,
+	    margin=dict(t=80, b=50, l=50, r=50, pad=0),
+	    yaxis=dict(
+	        tickmode='array',
+	        showgrid=True,         # Ensure grid lines are visible
+	        gridcolor='lightgrey', # Set grid color for visibility
+	        gridwidth=1            # Increase grid line width for better visibility
+	    ),
+	    xaxis=dict(
+	        side='top',
+	        tickmode='linear',
+	        tickangle=xdtickangle,
+	        dtick=xdtickval,
+	        showgrid=True,         # Ensure grid lines are visible
+	        gridcolor='lightgrey', # Set grid color for visibility
+	        gridwidth=1            # Increase grid line width for better visibility
+	    )
+	)
 
-    # Drawing a black border around the heatmap chart
-    fig.update_xaxes(
-        fixedrange=True,
-        showline=True,
-        linewidth=1.2,
-        linecolor='black',
-        mirror=True
-    )
-    fig.update_yaxes(
-        fixedrange=True,
-        showline=True,
-        linewidth=1.2,
-        linecolor='black',
-        mirror=True
-    )
+	# Drawing a black border around the heatmap chart
+	fig.update_xaxes(
+	    fixedrange=True,
+	    showline=True,
+	    linewidth=1.2,
+	    linecolor='black',
+	    mirror=True
+	)
+	fig.update_yaxes(
+	    fixedrange=True,
+	    showline=True,
+	    linewidth=1.2,
+	    linecolor='black',
+	    mirror=True
+	)
 
 
 	#Some last minute exceptions and changes in the plot
