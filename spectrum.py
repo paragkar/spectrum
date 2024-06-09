@@ -7184,25 +7184,25 @@ if selected_dimension in ["Spectrum Bands", "Auction Years", "Business Data"]:
 
 	#layout for heatmaps 
 
-	fig.update_layout(uniformtext_minsize=12, 
-			  uniformtext_mode='hide', 
-			  xaxis_title=None, 
-			  yaxis_title=None, 
-			  yaxis_autorange='reversed',
-			  font=dict(size=12),
-			  template='simple_white',
-			  paper_bgcolor=None,
-			  height=600, 
-			  width=1200,
-			  margin=dict(t=80, b=50, l=50, r=50, pad=0),
-			  yaxis=dict(
-	        	  tickmode='array'),
-			  xaxis = dict(
-			  side = 'top',
-			  tickmode = 'linear',
-			  tickangle=xdtickangle,
-			  dtick = xdtickval), 
-			)
+	# fig.update_layout(uniformtext_minsize=12, 
+	# 		  uniformtext_mode='hide', 
+	# 		  xaxis_title=None, 
+	# 		  yaxis_title=None, 
+	# 		  yaxis_autorange='reversed',
+	# 		  font=dict(size=12),
+	# 		  template='simple_white',
+	# 		  paper_bgcolor=None,
+	# 		  height=600, 
+	# 		  width=1200,
+	# 		  margin=dict(t=80, b=50, l=50, r=50, pad=0),
+	# 		  yaxis=dict(
+	#         	  tickmode='array'),
+	# 		  xaxis = dict(
+	# 		  side = 'top',
+	# 		  tickmode = 'linear',
+	# 		  tickangle=xdtickangle,
+	# 		  dtick = xdtickval), 
+	# 		)
 
 		#Drawning a black border around the heatmap chart 
 	# fig.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
@@ -7211,26 +7211,71 @@ if selected_dimension in ["Spectrum Bands", "Auction Years", "Business Data"]:
 	#debug 9th June 2024
 
 	# Drawing a black border around the heatmap chart
-	fig.update_xaxes(
-	fixedrange=True,
-	showline=True,
-	linewidth=1.2,
-	linecolor='black',
-	mirror=True,
-	showgrid=True,        # Enable grid lines for x-axis
-	gridcolor='lightgrey', # Customize grid line color
-	gridwidth=0.5         # Customize grid line width
-	)
-	fig.update_yaxes(
-	fixedrange=True,
-	showline=True,
-	linewidth=1.2,
-	linecolor='black',
-	mirror=True,
-	showgrid=True,        # Enable grid lines for y-axis
-	gridcolor='lightgrey', # Customize grid line color
-	gridwidth=0.5         # Customize grid line width
-	)
+	# fig.update_xaxes(
+	# fixedrange=True,
+	# showline=True,
+	# linewidth=1.2,
+	# linecolor='black',
+	# mirror=True,
+	# showgrid=True,        # Enable grid lines for x-axis
+	# gridcolor='lightgrey', # Customize grid line color
+	# gridwidth=0.5         # Customize grid line width
+	# )
+	# fig.update_yaxes(
+	# fixedrange=True,
+	# showline=True,
+	# linewidth=1.2,
+	# linecolor='black',
+	# mirror=True,
+	# showgrid=True,        # Enable grid lines for y-axis
+	# gridcolor='lightgrey', # Customize grid line color
+	# gridwidth=0.5         # Customize grid line width
+	# )
+
+	# Layout for heatmaps
+    fig.update_layout(
+        uniformtext_minsize=12, 
+        uniformtext_mode='hide', 
+        xaxis_title=None, 
+        yaxis_title=None, 
+        yaxis_autorange='reversed',
+        font=dict(size=12),
+        paper_bgcolor=None,
+        height=600, 
+        width=1200,
+        margin=dict(t=80, b=50, l=50, r=50, pad=0),
+        yaxis=dict(
+            tickmode='array',
+            showgrid=True,         # Ensure grid lines are visible
+            gridcolor='lightgrey', # Set grid color for visibility
+            gridwidth=1            # Increase grid line width for better visibility
+        ),
+        xaxis=dict(
+            side='top',
+            tickmode='linear',
+            tickangle=xdtickangle,
+            dtick=xdtickval,
+            showgrid=True,         # Ensure grid lines are visible
+            gridcolor='lightgrey', # Set grid color for visibility
+            gridwidth=1            # Increase grid line width for better visibility
+        )
+    )
+
+    # Drawing a black border around the heatmap chart
+    fig.update_xaxes(
+        fixedrange=True,
+        showline=True,
+        linewidth=1.2,
+        linecolor='black',
+        mirror=True
+    )
+    fig.update_yaxes(
+        fixedrange=True,
+        showline=True,
+        linewidth=1.2,
+        linecolor='black',
+        mirror=True
+    )
 
 
 	#Some last minute exceptions and changes in the plot
