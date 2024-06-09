@@ -7220,29 +7220,29 @@ if selected_dimension in ["Spectrum Bands", "Auction Years", "Business Data"]:
 	fig.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
 	fig.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
 
-	debug 9th June 2024
+	# debug 9th June 2024
 
-	Drawing a black border around the heatmap chart
-	fig.update_xaxes(
-	fixedrange=True,
-	showline=True,
-	linewidth=1.2,
-	linecolor='black',
-	mirror=True,
-	showgrid=True,        # Enable grid lines for x-axis
-	gridcolor='lightgrey', # Customize grid line color
-	gridwidth=0.5         # Customize grid line width
-	)
-	fig.update_yaxes(
-	fixedrange=True,
-	showline=True,
-	linewidth=1.2,
-	linecolor='black',
-	mirror=True,
-	showgrid=True,        # Enable grid lines for y-axis
-	gridcolor='lightgrey', # Customize grid line color
-	gridwidth=0.5         # Customize grid line width
-	)
+	# Drawing a black border around the heatmap chart
+	# fig.update_xaxes(
+	# fixedrange=True,
+	# showline=True,
+	# linewidth=1.2,
+	# linecolor='black',
+	# mirror=True,
+	# showgrid=True,        # Enable grid lines for x-axis
+	# gridcolor='lightgrey', # Customize grid line color
+	# gridwidth=0.5         # Customize grid line width
+	# )
+	# fig.update_yaxes(
+	# fixedrange=True,
+	# showline=True,
+	# linewidth=1.2,
+	# linecolor='black',
+	# mirror=True,
+	# showgrid=True,        # Enable grid lines for y-axis
+	# gridcolor='lightgrey', # Customize grid line color
+	# gridwidth=0.5         # Customize grid line width
+	# )
 
 	# # Layout for heatmaps
 	# fig.update_layout(
