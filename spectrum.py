@@ -4043,12 +4043,13 @@ if selected_dimension == "Auction Data":
 
 		# figauc.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 
-		
-		st.plotly_chart(figauc, use_container_width=True)
+
 
 		#Debug 10th June 2024
 
 		#-------------------Start-----------------------
+		
+		# st.plotly_chart(figauc, use_container_width=True)
 
 		#plotting the column sums of all slots
 		# col1,col2,col3 = st.columns([0.2,14,1]) #create collumns of uneven width
