@@ -3655,31 +3655,25 @@ if selected_dimension == "Auction Data":
 
 				figauc = go.Figure(data=data)
 
-				figauc.update_layout(
-				    uniformtext_minsize=12,
-				    uniformtext_mode='hide',
-				    xaxis_title=None,
-				    yaxis_title=None,
-				    yaxis_autorange='reversed',
-				    font=dict(size=12, color='white'),  # Adjusted font color for dark theme
-				    template='plotly_dark',  # Changed to dark theme
-				    paper_bgcolor='rgba(0,0,0,0)',  # Set background color transparent
-				    plot_bgcolor='rgba(0,0,0,0)',  # Set plot background color transparent
-				    height=600,
-				    margin=dict(t=80, b=50, l=50, r=50, pad=0),
-				    yaxis=dict(
-				        tickmode='array',
-				        color='white'  # Set y-axis tick color to white for visibility on dark background
-				    ),
-				    xaxis=dict(
-				        side='top',
-				        tickmode='linear',
-				        tickangle=0,
-				        dtick=1,
-				        color='white'  # Set x-axis tick color to white for visibility on dark background
-				    ),
+				figauc.update_layout(uniformtext_minsize=12, 
+				  uniformtext_mode='hide', 
+				  xaxis_title=None, 
+				  yaxis_title=None, 
+				  yaxis_autorange='reversed',
+				  font=dict(size=12),
+				  template='simple_white',
+				  paper_bgcolor=None,
+				  height=600, 
+				  # width=1200,
+				  margin=dict(t=80, b=50, l=50, r=50, pad=0),
+				  yaxis=dict(
+		        	  tickmode='array'),
+				  xaxis = dict(
+				  side = 'top',
+				  tickmode = 'linear',
+				  tickangle=0,
+				  dtick = 1), 
 				)
-				
 
 				figauc.update_layout(
 				    coloraxis=dict(
