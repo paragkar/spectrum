@@ -3863,7 +3863,7 @@ if selected_dimension == "Auction Data":
 					hoverinfo ='text',
 					text = hovertext,
 					colorscale='picnic',
-					showscale=False, #Debug 10th June 2024
+					showscale=True,
 						texttemplate="%{z}", 
 						textfont={"size":10},
 						# reversescale=True,
@@ -4002,7 +4002,7 @@ if selected_dimension == "Auction Data":
 				zmin = zmin_blk_sec, 
 				zmax = zmax_blk_sec, 
 				colorscale='Hot',
-				# showscale=showscale,
+				showscale=False, #Debug 10th June 2024
 					texttemplate="%{z}", 
 					textfont={"size":10},
 					reversescale=True,
