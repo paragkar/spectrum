@@ -4094,7 +4094,7 @@ if selected_dimension == "Auction Data":
 
 
 		#plotting all charts 
-		col1,col2 = st.columns([11,2]) #create collumns of uneven width
+		col1,col2 = st.columns([9,1.5]) #create collumns of uneven width
 		col1.plotly_chart(figauc, use_container_width=True)
 		col1.altair_chart(figsumcols, use_container_width=True)
 		col2.markdown("")
