@@ -2326,7 +2326,7 @@ if selected_dimension == "Auction Data":
 		zmax=5
 		zmin_af = 0.5
 		zmax_af = 1
-		texttempbiddemandactivity = ""
+		texttempbiddemandactivity = "%{z}" #debug 10th June 2024
 		blocksize = 5
 		zmin_blk_sec = 0
 		zmax_blk_sec = 4
@@ -2373,7 +2373,7 @@ if selected_dimension == "Auction Data":
 		zmax=5
 		zmin_af = 0.5
 		zmax_af = 1
-		texttempbiddemandactivity = ""
+		texttempbiddemandactivity = "%{z}" #debug 10th June 2024
 		blocksize = 0.2
 		zmin_blk_sec = 0
 		zmax_blk_sec = 4
@@ -2396,7 +2396,7 @@ if selected_dimension == "Auction Data":
 		zmax=5
 		zmin_af = 0.5
 		zmax_af = 1
-		texttempbiddemandactivity = ""
+		texttempbiddemandactivity = "%{z}" #debug 10th June 2024
 		blocksize = 1.25
 		zmin_blk_sec = 0
 		zmax_blk_sec = 4
@@ -2419,7 +2419,7 @@ if selected_dimension == "Auction Data":
 		zmax=5
 		zmin_af = 0.5
 		zmax_af = 1
-		texttempbiddemandactivity = ""
+		texttempbiddemandactivity = "%{z}" #debug 10th June 2024
 		blocksize = 5
 		zmin_blk_sec = 0
 		zmax_blk_sec = 4
