@@ -3971,6 +3971,10 @@ if selected_dimension == "Auction Data":
 
 		sumrows.columns = ["Bidders", "Total Slots"]
 
+		#Reverse the order of the daraframe 
+
+		sumrows = sumrows.iloc[::-1].reset_index(drop=True) #Debug 10th June 2024
+
 		sumcols = dftemp.sum(axis=0).reset_index()
 
 		sumcols.columns = ["LSA", "Total Slots"]
