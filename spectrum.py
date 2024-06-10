@@ -3661,7 +3661,7 @@ if selected_dimension == "Auction Data":
 				  yaxis_title=None, 
 				  yaxis_autorange='reversed',
 				  font=dict(size=12),
-				  template='simple_white',
+				  template='plotly_dark',
 				  paper_bgcolor=None,
 				  height=600, 
 				  # width=1200,
