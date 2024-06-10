@@ -4011,13 +4011,49 @@ if selected_dimension == "Auction Data":
 
 		figauc = go.Figure(data=data)
 
+
+		#Debug 10th June 2024
+
+		#------------------Start-------------------
+
+		# figauc.update_layout(
+		#     template="seaborn",
+		#     xaxis_side= 'top',
+		#    	height = 650,
+		#    	yaxis=dict(
+	    #     tickmode='array',
+	    #     	))
+
+
+
+		figauc.update_layout(uniformtext_minsize=12, 
+		  uniformtext_mode='hide', 
+		  xaxis_title=None, 
+		  yaxis_title=None, 
+		  yaxis_autorange='reversed',
+		  font=dict(size=12),
+		  template='simple_white',
+		  paper_bgcolor=None,
+		  height=600, 
+		  # width=1200,
+		  margin=dict(t=80, b=50, l=50, r=50, pad=0),
+		  yaxis=dict(
+        	  tickmode='array'),
+		  xaxis = dict(
+		  side = 'top',
+		  tickmode = 'linear',
+		  tickangle=0,
+		  dtick = 1), 
+		)
+
 		figauc.update_layout(
-		    template="seaborn",
-		    xaxis_side= 'top',
-		   	height = 650,
-		   	yaxis=dict(
-	        tickmode='array',
-	        	))
+		    coloraxis=dict(
+		        cmin=0,  # Set the minimum value of the color bar
+		        # zmax=10  # Set the maximum value of the color bar
+		    )
+		)
+
+		#--------------End-----------------------
 
 		title = titlesubpart+" - Blocks Selected at Round No -"+str(round_number)
 		subtitle = "Unit - Numbers; Block Size = "+ str(blocksize) +" MHz; Source - DoT"
@@ -4058,7 +4094,7 @@ if selected_dimension == "Auction Data":
 
 
 		#plotting all charts 
-		col1,col2 = st.columns([10,1]) #create collumns of uneven width
+		col1,col2 = st.columns([9,1]) #create collumns of uneven width
 		col1.plotly_chart(figauc, use_container_width=True)
 		col1.altair_chart(figsumcols, use_container_width=True)
 		col2.markdown("")
