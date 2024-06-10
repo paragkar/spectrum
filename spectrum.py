@@ -4056,12 +4056,6 @@ if selected_dimension == "Auction Data":
 		# col2.altair_chart(figsumcols, use_container_width=True)
 
 
-		style = "<style>h3 {text-align: left;}</style>"
-		with st.container():
-			#plotting the main chart
-			st.markdown(style, unsafe_allow_html=True)
-			st.header(title)
-			st.markdown(subtitle)
 
 		#plotting all charts 
 		col1,col2 = st.columns([9,1]) #create collumns of uneven width
