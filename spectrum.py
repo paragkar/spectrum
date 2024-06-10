@@ -4370,7 +4370,7 @@ if selected_dimension == "Auction Data":
 
 		if Feature in year_band_exp:
 			st.write("DATA NOT AVAILABLE")
-			break:
+			break
 
 		dfbid = loadauctionbiddata()[activitysheet].replace('-', np.nan, regex = True)
 
