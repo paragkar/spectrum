@@ -4366,7 +4366,7 @@ if selected_dimension == "Auction Data":
 
 	if SubFeature == "BiddingActivity" and (Feature in year_band_exp): #Debug 10th June 2024
 		
-		st.write("DATA NOT AVAILABLE")
+		st.markdown('<p style="font-size: 24px;">DATA NOT AVAILABLE</p>', unsafe_allow_html=True)
 
 	if SubFeature == "BiddingActivity" and (Feature not in year_band_exp): #Debug 10th June 2024
 
