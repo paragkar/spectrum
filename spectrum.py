@@ -4371,15 +4371,8 @@ if selected_dimension == "Auction Data":
 
 			dfbidactivity = dfbidactivity.pivot(index="Bidder", columns='Clk_Round', values="Actual_Activity").sort_index(ascending=True)
 
-			#Debug 10th June 2024
-
-			st.write(dfbidactivity)
-
 			dfbidactivityRd1 = dfbidactivityRd1.pivot(index="Bidder", columns='Clk_Round', values="Pts_Start_Round").sort_index(ascending=True)
 
-			#Debug 10th June 2024
-
-			st.write(dfbidactivityRd1)
 
 			dfbidactivityratio = round((dfbidactivity/dfbidactivityRd1.values),2)
 
