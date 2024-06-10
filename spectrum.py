@@ -4046,9 +4046,25 @@ if selected_dimension == "Auction Data":
 		
 		st.plotly_chart(figauc, use_container_width=True)
 
+		#Debug 10th June 2024
+
+		#-------------------Start-----------------------
+
 		#plotting the column sums of all slots
-		col1,col2,col3 = st.columns([0.2,14,1]) #create collumns of uneven width
-		col2.altair_chart(figsumcols, use_container_width=True)
+		# col1,col2,col3 = st.columns([0.2,14,1]) #create collumns of uneven width
+		# col2.altair_chart(figsumcols, use_container_width=True)
+
+
+
+		#plotting all charts 
+		col1,col2 = st.columns([9,1]) #create collumns of uneven width
+		col1.plotly_chart(figauc, use_container_width=True)
+		col1.altair_chart(figsumcols, use_container_width=True)
+		col2.markdown("")
+		col2.plotly_chart(figsumrows, use_container_width=True)
+
+
+		#-------------------End-----------------------
 
 
 
