@@ -4364,6 +4364,10 @@ if selected_dimension == "Auction Data":
 			col2.plotly_chart(figsumrows, use_container_width=True)
 
 
+	if SubFeature == "BiddingActivity" and (Feature in year_band_exp): #Debug 10th June 2024
+		
+		st.write("DATA NOT AVAILABLE")
+
 	if SubFeature == "BiddingActivity" and (Feature not in year_band_exp): #Debug 10th June 2024
 
 
