@@ -3170,7 +3170,7 @@ if selected_dimension == "Auction Data":
 				ygap = 1,
 				hoverinfo ='text',
 				text = resultdf.values,
-				colorscale="Picnic",
+				colorscale="YlGnBu", #Debug 10th June 2024
 					texttemplate="%{text}",
 					textfont={"size":10},
 					reversescale=True,
@@ -3806,7 +3806,7 @@ if selected_dimension == "Auction Data":
 				ygap = 1,
 				hoverinfo ='text',
 				text = hovertext,
-				colorscale='picnic',
+				colorscale='YlGnBu', #Debug 10th June 2024
 				showscale=False,
 					texttemplate="%{z}", 
 					textfont={"size":10},
@@ -3862,7 +3862,7 @@ if selected_dimension == "Auction Data":
 					ygap = 1,
 					hoverinfo ='text',
 					text = hovertext,
-					colorscale='picnic',
+					colorscale='YlGnBu', #Debug 10th June 2024
 					showscale=True,
 						texttemplate="%{z}", 
 						textfont={"size":10},
@@ -5544,7 +5544,7 @@ if selected_dimension == "Auction Data":
 						hoverinfo ='text',
 						hovertext = hovertext,
 						text = df_combined1.values,
-						colorscale='Picnic',
+						colorscale='YlGnBu', #Debug 10th June 2024
 						# zmin=0.5, zmax=1,
 						showscale=False,
 							texttemplate="%{text}", 
@@ -5561,7 +5561,7 @@ if selected_dimension == "Auction Data":
 						hoverinfo ='text',
 						hovertext = hovertext,
 						text = df_combined2.values,
-						colorscale='Picnic',
+						colorscale='YlGnBu', #Debug 10th June 2024
 						# zmin=0.5, zmax=1,
 						showscale=False,
 							texttemplate="%{text}", 
