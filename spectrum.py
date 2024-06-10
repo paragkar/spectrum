@@ -4077,7 +4077,7 @@ if selected_dimension == "Auction Data":
 
 		# hoverlabel_bgcolor = "#000000" #subdued black
 
-		# figauc.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
+		figauc.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 
 
 
