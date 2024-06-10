@@ -4364,7 +4364,7 @@ if selected_dimension == "Auction Data":
 			col2.plotly_chart(figsumrows, use_container_width=True)
 
 
-	if SubFeature == "BiddingActivity" & (Feature not in year_band_exp): #Debug 10th June 2024
+	if SubFeature == "BiddingActivity" and (Feature not in year_band_exp): #Debug 10th June 2024
 
 
 		dfbid = loadauctionbiddata()[activitysheet].replace('-', np.nan, regex = True)
