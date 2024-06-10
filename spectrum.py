@@ -345,6 +345,12 @@ errors_dict= {700:0.25, 800:1, 900:1, 1800:1, 2100:1.5, 2300:1.25, 2500:1, 3500:
 list_of_circles_codes = ['AP','AS', 'BH', 'DL', 'GU', 'HA', 'HP', 'JK', 'KA', 'KE', 'KO', 'MA', 'MP',
        	   'MU', 'NE', 'OR', 'PU', 'RA', 'TN', 'UPE', 'UPW', 'WB']
 
+ year_band =["2010-Band2100","2010-Band2300", "2012-Band1800","2014-Band1800","2014-Band900",
+									"2015-Band800", "2015-Band900","2015-Band1800", "2015-Band2100", "2016-Band800","2016-Band1800",
+									"2016-Band2100", "2016-Band2300", "2016-Band2500","2021-Band800","2021-Band900","2021-Band1800",
+									"2021-Band2100","2021-Band2300","2022-Band700","2022-Band800","2022-Band900","2022-Band1800",
+									"2022-Band2100","2022-Band2500","2022-Band3500","2022-Band26000"]
+
 
 #function to count number of items in a list and outputs the result as dictionary
 #Used to extract data table for Spectrum Layout Dimension when it is filtered by Operators      	   
@@ -2230,11 +2236,13 @@ if selected_dimension == "Auction Data":
 
 	currency_flag = True #default 
 
-	Feature = st.sidebar.selectbox("Select a Feature", ["2010-Band2100","2010-Band2300", "2012-Band1800","2014-Band1800","2014-Band900",
-									"2015-Band800", "2015-Band900","2015-Band1800", "2015-Band2100", "2016-Band800","2016-Band1800",
-									"2016-Band2100", "2016-Band2300", "2016-Band2500","2021-Band800","2021-Band900","2021-Band1800",
-									"2021-Band2100","2021-Band2300","2022-Band700","2022-Band800","2022-Band900","2022-Band1800",
-									"2022-Band2100","2022-Band2500","2022-Band3500","2022-Band26000"])
+	# Feature = st.sidebar.selectbox("Select a Feature", ["2010-Band2100","2010-Band2300", "2012-Band1800","2014-Band1800","2014-Band900",
+									# "2015-Band800", "2015-Band900","2015-Band1800", "2015-Band2100", "2016-Band800","2016-Band1800",
+									# "2016-Band2100", "2016-Band2300", "2016-Band2500","2021-Band800","2021-Band900","2021-Band1800",
+									# "2021-Band2100","2021-Band2300","2022-Band700","2022-Band800","2022-Band900","2022-Band1800",
+									# "2022-Band2100","2022-Band2500","2022-Band3500","2022-Band26000"])
+
+	Feature = st.sidebar.selectbox("Select a Feature", year_band)
 
 	
 	
