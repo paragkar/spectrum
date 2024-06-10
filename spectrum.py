@@ -3590,7 +3590,7 @@ if selected_dimension == "Auction Data":
 				ygap = 1,
 				hoverinfo ='text',
 				text = hovertext,
-				colorscale='picnic',
+				colorscale='YlGnBu', #10th June 2024
 				showscale=False,
 					texttemplate="%{z}", 
 					textfont={"size":12},
@@ -3646,7 +3646,7 @@ if selected_dimension == "Auction Data":
 					ygap = 1,
 					hoverinfo ='text',
 					text = hovertext,
-					colorscale='YlGnBu',
+					colorscale='YlGnBu', #Debug 10th June 2024
 					showscale=True,
 						texttemplate="%{z}", 
 						textfont={"size":12},
