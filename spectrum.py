@@ -3978,6 +3978,18 @@ if selected_dimension == "Auction Data":
 
 		figsumcols = summarychart(sumcols, "LSA", "Total Slots")
 
+		#debug 10th June 2024
+
+		#----------Start-------------
+
+		figsumrows = plotrwototal(sumrows,"Bidders", "Total Slots")
+
+		figsumrows.update_yaxes(visible=False, showticklabels=False)
+
+		figsumrows.update_layout(height = 615)
+
+		#----------End-------------
+
 
 		data = [go.Heatmap(
 				z=dftemp.values,
