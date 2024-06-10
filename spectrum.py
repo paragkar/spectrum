@@ -3646,7 +3646,7 @@ if selected_dimension == "Auction Data":
 					ygap = 1,
 					hoverinfo ='text',
 					text = hovertext,
-					colorscale='picnic',
+					colorscale='YlGnBu',
 					showscale=True,
 						texttemplate="%{z}", 
 						textfont={"size":12},
