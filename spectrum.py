@@ -3891,7 +3891,11 @@ if selected_dimension == "Auction Data":
 
 				#-------------Start---------------
 
+				figpanindiabids = plotbiddertotal(dftemp,dfblocksalloc_rdend)
 
+				figpanindiabids.update_yaxes(visible=False, showticklabels=False)
+
+				figpanindiabids.update_layout(height = 615)
 
 				dfbidblksec = dfbid.copy()
 
@@ -3996,7 +4000,7 @@ if selected_dimension == "Auction Data":
 
 			if chartoption == "ReservePrice Multiple":
 				# st.plotly_chart(figauc, use_container_width=True)
-				
+
 				col1,col2 = st.columns([8,1]) #create collumns of uneven width
 				col1.plotly_chart(figauc, use_container_width=True)
 				col2.markdown("")
