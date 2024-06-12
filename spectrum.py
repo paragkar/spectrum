@@ -2183,7 +2183,7 @@ def plotrwototal(sumrows, ydim, xdim):
 
 	fig.update_layout(xaxis=dict(title='India Total'), yaxis=dict(title=''))
 
-	fig.update_traces(text=sumrows[xdim], textposition='auto')
+	fig.update_traces(text=sumrows[xdim], textposition='auto',textfont=dict(size=16, color='white')) #Debug 12th June 2024 (Changed 14 to 20)
 
 	fig.update_xaxes(tickvals=[])
 
