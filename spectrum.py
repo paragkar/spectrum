@@ -3807,6 +3807,28 @@ if selected_dimension == "Auction Data":
 				figpanindiabids.update_layout(height = 615)
 
 
+				#Debug 12th June 2024
+
+				#-------------Start---------------
+
+				dfbidblksec = dfbid.copy()
+
+				filtbsec  =(dfbidblksec["Clk_Round"] == round_number) 
+
+				dfbidblksec = dfbidblksec[filtbsec].loc[:,["Bidder", "No_of_BLK_Selected"]]
+
+				dfbidblksec = dfbidblksec.sort_index(ascending=True)
+
+
+				# dfbidblksec = dfbidblksec.pivot_table(index='LSA', columns='Bidder', values='No_of_BLK_Selected', aggfunc=lambda x: list(x)).T
+
+				dfbidblksec = dfbidblksec.pivot_table(index='LSA', columns='Bidder', values='No_of_BLK_Selected', aggfunc='max').T
+
+				st.write(dfbidblksec)
+
+				#-----------End---------------------
+
+
 				hovertext, colormatrix = htext_colormatrix_auctiondata_2010_3G_BWA_ProvWinningBid(dfrp, dftemp, pwbtype, round_number)
 
 				dftemp = dftemp.sort_index(ascending=True)
