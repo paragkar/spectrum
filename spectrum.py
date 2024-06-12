@@ -3867,6 +3867,8 @@ if selected_dimension == "Auction Data":
 
 				#-------------Start---------------
 
+				import ast
+
 				dfbidblksec = dfbid.copy()
 
 				filtbsec  =(dfbidblksec["Clk_Round"] == round_number) 
@@ -3878,10 +3880,13 @@ if selected_dimension == "Auction Data":
 				
 				dfbidblksec = dfbidblksec.pivot_table(index='LSA', columns='Bidder', values='No_of_BLK_Selected', aggfunc=lambda x: list(x)).T
 
+				# Convert string representation of list to actual list
+				dfbidblksec[col] = dfbidblksec[col].apply(ast.literal_eval)
+
 				for col in dfbidblksec.columns:
 
-					dfbidblksec[col] = dfbidblksec[col].replace(',', '', regex=True).astype(float)
-
+					# Now clean and convert
+					dfbidblksec[col] = dfbidblksec[col].apply(lambda x: clean_and_convert(x) if isinstance(x, list) else x)
 
 				st.write(dfbidblksec)
 
