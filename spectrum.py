@@ -3863,6 +3863,20 @@ if selected_dimension == "Auction Data":
 
 				dftemp = round(dftemp/dfrp.values,1)
 
+				#Debug 12th June 2024
+
+				#-------------Start---------------
+
+				dfbidblksec = dfbid.copy()
+
+				filtbsec  =(dfbidblksec["Clk_Round"] == round_number) 
+
+				dfbidblksec = dfbidblksec[filtbsec]
+
+				st.write(dfbidblksec)
+
+				#-----------End---------------------
+
 				hovertext, colormatrix = htext_colormatrix_auctiondata_2010_3G_BWA_ProvWinningBid(dfrp, dftemp1, pwbtype, round_number)
 
 				dftemp = dftemp.sort_index(ascending=True)
