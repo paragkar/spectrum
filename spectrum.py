@@ -3875,9 +3875,13 @@ if selected_dimension == "Auction Data":
 
 				dfbidblksec = dfbidblksec.sort_index(ascending=True)
 
-				pivot_df11 = dfbidblksec.pivot_table(index='LSA', columns='Bidder', values='No_of_BLK_Selected', aggfunc='max')  
+				dfbidblksec['Counter'] = dfbidblksec.groupby(['LSA', 'Bidder']).cumcount()  # Create a counter for duplicate pairs
+				dfbidblksec = dfbidblksec.set_index(['LSA', 'Counter', 'Bidder']).unstack('Bidder')
+				dfbidblksec.columns = dfbidblksec.columns.droplevel(0)  # Optional: to remove the extra level created by 'values'
 
-				st.write(pivot_df11)
+				# pivot_df11 = dfbidblksec.pivot_table(index='LSA', columns='Bidder', values='No_of_BLK_Selected', aggfunc='max')  
+
+				st.write(dfbidblksec)
 
 				#-----------End---------------------
 
