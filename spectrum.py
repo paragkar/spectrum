@@ -3891,7 +3891,7 @@ if selected_dimension == "Auction Data":
 
 				#-------------Start---------------
 
-				figpanindiabids = plotbiddertotal(dftemp,dfblocksalloc_rdend)
+				figpanindiabids = plotbiddertotal(dftemp1,dfblocksalloc_rdend)
 
 				figpanindiabids.update_yaxes(visible=False, showticklabels=False)
 
