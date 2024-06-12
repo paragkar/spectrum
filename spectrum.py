@@ -3875,7 +3875,7 @@ if selected_dimension == "Auction Data":
 
 				dfbidblksec = dfbidblksec.sort_index(ascending=True)
 
-				pivot_df11 = df.pivot_table(index='LSA', columns='Bidder', values='No_of_BLK_Selected', aggfunc='max')  
+				pivot_df11 = dfbidblksec.pivot_table(index='LSA', columns='Bidder', values='No_of_BLK_Selected', aggfunc='max')  
 
 				st.write(pivot_df11)
 
