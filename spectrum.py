@@ -3867,7 +3867,7 @@ if selected_dimension == "Auction Data":
 
 				#-------------Start---------------
 
-				import ast
+
 
 				dfbidblksec = dfbid.copy()
 
@@ -3881,7 +3881,9 @@ if selected_dimension == "Auction Data":
 				dfbidblksec = dfbidblksec.pivot_table(index='LSA', columns='Bidder', values='No_of_BLK_Selected', aggfunc=lambda x: list(x)).T
 
 
-				st.write(pd.DataFrame(dfbidblksec.values))
+				dfbidblksec = dfbidblksec.replace("", np.nan, regex = True)
+
+				st.write(dfbidblksec)
 
 				#-----------End---------------------
 
