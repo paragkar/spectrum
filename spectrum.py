@@ -3878,17 +3878,10 @@ if selected_dimension == "Auction Data":
 				dfbidblksec = dfbidblksec.sort_index(ascending=True)
 
 				
-				dfbidblksec = dfbidblksec.pivot_table(index='LSA', columns='Bidder', values='No_of_BLK_Selected', aggfunc=lambda x: list(x)).T
+				dfbidblksec = dfbidblksec.pivot_table(index='LSA', columns='Bidder', values='No_of_BLK_Selected', aggfunc=lambda x: list(str(x)).T
 
 
-				dfbidblksec.replace("", np.nan, inplace=True)
-
-				dfbidblksec.replace(0, np.nan, inplace=True)
-
-				dfbidblksec.replace("placeholder", np.nan, inplace=True)
-
-
-				st.write(dfbidblksec.values[0])
+				st.write(dfbidblksec)
 
 				#-----------End---------------------
 
