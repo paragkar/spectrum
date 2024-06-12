@@ -3877,9 +3877,11 @@ if selected_dimension == "Auction Data":
 
 				dfbidblksec = dfbidblksec.sort_index(ascending=True)
 
-				for col in dfbidblksec.columns:
+				st.write(dfbidblksec)
 
-					dfbidblksec[col]=dfbidblksec[col].astype(float)
+				# for col in dfbidblksec.columns:
+
+				# 	dfbidblksec[col]=dfbidblksec[col].astype(float)
 
 
 				dfbidblksec = dfbidblksec.pivot_table(index='LSA', columns='Bidder', values='No_of_BLK_Selected', aggfunc=lambda x: list(x)).T
