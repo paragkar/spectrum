@@ -1551,7 +1551,7 @@ def transform_colscale_for_hbox_auction_map(dff,reserveprice, auctionprice):
 def summarychart(summarydf, xcolumn, ycolumn):
 	bar = alt.Chart(summarydf).mark_bar().encode(
 	y = alt.Y(ycolumn+':Q', axis=alt.Axis(labels=False)),
-	x = alt.X(xcolumn+':O', axis=alt.Axis(labels=True), labelAngle=0), #Debug 12th June 2024 (Changed False to True)
+	x = alt.X(xcolumn+':O', axis=alt.Axis(labels=True, labelAngle=0)), #Debug 12th June 2024 (Changed False to True)
 	color = alt.Color(xcolumn+':N', legend=None))
 
 	
