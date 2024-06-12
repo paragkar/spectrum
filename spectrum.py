@@ -3888,7 +3888,7 @@ if selected_dimension == "Auction Data":
 				dfbidblksec.replace("placeholder", np.nan, inplace=True)
 
 
-				st.write(dfbidblksec.dtypes)
+				st.write(dfbidblksec.values)
 
 				#-----------End---------------------
 
