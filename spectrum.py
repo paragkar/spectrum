@@ -2183,7 +2183,7 @@ def plotrwototal(sumrows, ydim, xdim):
 
 	fig.update_layout(xaxis=dict(title='India Total'), yaxis=dict(title=''))
 
-	fig.update_traces(text=sumrows[xdim], textposition='auto',textfont=dict(size=16, color='white')) #Debug 12th June 2024 (Changed 14 to 20)
+	fig.update_traces(text=sumrows[xdim], textposition='auto',textfont=dict(size=20, color='white')) #Debug 12th June 2024 (Changed 14 to 20)
 
 	fig.update_xaxes(tickvals=[])
 
@@ -2204,11 +2204,11 @@ def plotlosttotal(df,ydim,xdim):
 
 	fig.update_layout(xaxis=dict(title="Total"), yaxis=dict(title=''))
 
-	fig.update_traces(text=df[xdim], textposition='auto')
+	fig.update_traces(text=df[xdim], textposition='auto',textfont=dict(size=20, color='white')) #Debug 12th June 2024 (Changed 14 to 20)
 
 	fig.update_xaxes(tickvals=[])
 
-	fig.update_layout(xaxis=dict(side='top', title_standoff=0, ticklen=0, title_font=dict(size=14)))
+	fig.update_layout(xaxis=dict(side='top', title_standoff=0, ticklen=0, title_font=dict(size=20))) #Debug 12th June 2024 (Changed 14 to 20)
 
 	fig.update_layout(xaxis_title_standoff=5)
 
