@@ -3880,7 +3880,7 @@ if selected_dimension == "Auction Data":
 
 				for col in dfbidblksec.columns:
 
-					dfbidblksec[col] = dfbidblksec[col].atype(float)
+					dfbidblksec[col] = dfbidblksec[col].astype(float)
 
 				st.write(dfbidblksec)
 
