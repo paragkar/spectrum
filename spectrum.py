@@ -3606,7 +3606,7 @@ if selected_dimension == "Auction Data":
 				colorscale='YlGnBu', #10th June 2024
 				showscale=False,
 					texttemplate="%{z}", 
-					textfont={"size":12},
+					textfont={"size":14},#Debug 12th June 2024
 					# reversescale=True,
 					)]
 
@@ -3618,7 +3618,7 @@ if selected_dimension == "Auction Data":
 				  xaxis_title=None, 
 				  yaxis_title=None, 
 				  yaxis_autorange='reversed',
-				  font=dict(size=12),
+				  font=dict(size=14), #Debug 12th June 2024
 				  template='simple_white',
 				  paper_bgcolor=None,
 				  height=600, 
