@@ -3882,7 +3882,7 @@ if selected_dimension == "Auction Data":
 
 				#-----------End---------------------
 
-				hovertext, colormatrix = htext_colormatrix_auctiondata_2010_3G_BWA_ProvWinningBid(dfrp, dftemp1, pwbtype, round_number)
+				hovertext, colormatrix = htext_colormatrix_auctiondata_2010_3G_BWA_ProvWinningBid(dfrp, dfbidblksec, pwbtype, round_number)
 
 				dftemp = dftemp.sort_index(ascending=True)
 
