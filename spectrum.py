@@ -3871,7 +3871,7 @@ if selected_dimension == "Auction Data":
 
 				filtbsec  =(dfbidblksec["Clk_Round"] == round_number) 
 
-				dfbidblksec = dfbidblksec[filtbsec].loc[:,["Bidder", "No_of_BLK_Selected"]].dropna()
+				dfbidblksec = dfbidblksec[filtbsec].loc[:,["Bidder", "No_of_BLK_Selected"]]
 
 				dfbidblksec = dfbidblksec.sort_index(ascending=True)
 
@@ -3883,7 +3883,6 @@ if selected_dimension == "Auction Data":
 
 				dftemp = dftemp.sort_index(ascending=True)
 
-				st.write(dftemp)
 
 				data = [go.Heatmap(
 					z=dftemp.values,
