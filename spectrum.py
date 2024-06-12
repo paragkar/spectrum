@@ -3881,7 +3881,7 @@ if selected_dimension == "Auction Data":
 				dfbidblksec = dfbidblksec.pivot_table(index='LSA', columns='Bidder', values='No_of_BLK_Selected', aggfunc=lambda x: list(x)).T
 
 
-				st.write(dfbidblksec)
+				st.write(dfbidblksec.dtypes)
 
 				#-----------End---------------------
 
