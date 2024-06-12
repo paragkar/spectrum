@@ -2162,7 +2162,7 @@ def plotbiddertotal(dftemp,dfblocksalloc_rdend):
 
 	fig.update_layout(xaxis=dict(title='Total Value'), yaxis=dict(title=''))
 
-	fig.update_traces(text=panindiabids['PanIndiaBid'], textposition='auto')
+	fig.update_traces(text=panindiabids['PanIndiaBid'], textposition='auto',textfont=dict(size=20, color='white')) #Debug 12th June 2024 (Changed 14 to 20)
 
 	fig.update_xaxes(tickvals=[])
 
