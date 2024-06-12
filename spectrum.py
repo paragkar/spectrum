@@ -3876,13 +3876,13 @@ if selected_dimension == "Auction Data":
 				dfbidblksec = dfbidblksec.sort_index(ascending=True)
 
 				
-				dfbidblksec = dfbidblksec.pivot_table(index='LSA', columns='Bidder', values='No_of_BLK_Selected', aggfunc=lambda x: list(x)[0]).T 
+				dfbidblksec = dfbidblksec.pivot_table(index='LSA', columns='Bidder', values='No_of_BLK_Selected', aggfunc=lambda x: list(x)).T 
 
 				st.write(dfbidblksec)
 
 				#-----------End---------------------
 
-				hovertext, colormatrix = htext_colormatrix_auctiondata_2010_3G_BWA_ProvWinningBid(dfrp, dfbidblksec, pwbtype, round_number)
+				hovertext, colormatrix = htext_colormatrix_auctiondata_2010_3G_BWA_ProvWinningBid(dfrp, dftemp1, pwbtype, round_number)
 
 				dftemp = dftemp.sort_index(ascending=True)
 
