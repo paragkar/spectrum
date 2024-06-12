@@ -3878,7 +3878,7 @@ if selected_dimension == "Auction Data":
 				
 				pivot_df11 = dfbidblksec.pivot_table(index='LSA', columns='Bidder', values='No_of_BLK_Selected', aggfunc=lambda x: list(x)) 
 
-				st.write(dfbidblksec)
+				st.write(pivot_df11)
 
 				#-----------End---------------------
 
