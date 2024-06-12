@@ -3871,7 +3871,7 @@ if selected_dimension == "Auction Data":
 
 				filtbsec  =(dfbidblksec["Clk_Round"] == round_number) 
 
-				dfbidblksec = dfbidblksec[filtbsec].loc[:,["Bidder", "No_of_BLK_Selected"]]
+				dfbidblksec = dfbidblksec[filtbsec].loc[:,["Bidder", "No_of_BLK_Selected"]].dropna()
 
 				dfbidblksec = dfbidblksec.sort_index(ascending=True)
 
