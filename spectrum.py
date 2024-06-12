@@ -3824,6 +3824,8 @@ if selected_dimension == "Auction Data":
 
 				dfbidblksec = dfbidblksec.pivot_table(index='LSA', columns='Bidder', values='No_of_BLK_Selected', aggfunc='max').T
 
+				dfbidblksec = dfbidblksec.replace(0, "NoBid", regex = True)
+
 				st.write(dfbidblksec)
 
 				#-----------End---------------------
