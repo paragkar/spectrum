@@ -3873,6 +3873,8 @@ if selected_dimension == "Auction Data":
 
 				dfbidblksec = dfbidblksec[filtbsec]
 
+				dfbidblksec = dfbidblksec.sort_index(ascending=True)
+
 				st.write(dfbidblksec)
 
 				#-----------End---------------------
