@@ -3883,7 +3883,7 @@ if selected_dimension == "Auction Data":
 
 				dftemp = dftemp.sort_index(ascending=True)
 
-				st.print(dftemp)
+				st.write(dftemp)
 
 				data = [go.Heatmap(
 					z=dftemp.values,
