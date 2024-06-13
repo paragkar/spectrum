@@ -7357,7 +7357,7 @@ if selected_dimension in ["Spectrum Bands", "Auction Years", "Business Data"]:
 			  xaxis_title=None, 
 			  yaxis_title=None, 
 			  yaxis_autorange='reversed',
-			  font=dict(size=12),
+			  font=dict(size=16), #Debug 13th May 2024 (Changed from 12 to 16)
 			  template='simple_white',
 			  paper_bgcolor=None,
 			  height=600, 
