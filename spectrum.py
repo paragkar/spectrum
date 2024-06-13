@@ -6002,7 +6002,7 @@ if selected_dimension == "Auction Years":
 		  text = hovertext,
 		  colorscale = 'Hot',
 		    texttemplate="%{z}", 
-		    textfont={"size":12},
+		    textfont={"size":16}, #Debug 13th June 2024 (Changed from 12 to 16)
 		    reversescale=True,
 			)]
 
