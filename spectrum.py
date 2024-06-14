@@ -7160,7 +7160,7 @@ if Feature == "Auction Map":
 
 if (Feature == "Band Metric"):
 
-	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
+	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=16, color='white'))) #Debug 14th June 2024 (Changed from 12 to 16)
 	
 	xdtickangle =0
 	xdtickval =1
