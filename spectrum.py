@@ -324,7 +324,6 @@ year_band =["2010-Band2100","2010-Band2300", "2012-Band1800","2014-Band1800","20
 #Debug 19th June 2024
 year_band_exp =["2021-Band800","2021-Band900","2021-Band1800","2021-Band2100","2021-Band2300"]
 
-
 #function to count number of items in a list and outputs the result as dictionary
 #Used to extract data table for Spectrum Layout Dimension when it is filtered by Operators      	   
 def count_items_in_dataframe(df):
@@ -363,7 +362,6 @@ def colscalefreqlayout(operators, colcodes):
 	for line in col.values:
 		colorscale.append((line[0],line[1]))
 		colorscale.append((line[2],line[1]))
-	
 	return colorscale
 
 #function used for calculating the expiry year heatmap for the subfeature yearly trends
@@ -407,7 +405,6 @@ def bw_exp_cal_yearly_trends(sff,ef):
 	df = df.groupby(["ExpYear"])[["LSA","Operators"]].value_counts()*channelsize_dict[Band]
 	df = df.reset_index()
 	df.columns =["ExpYear","LSA", "Operators","BW"]
-	
 	return df
 
 #funtion used for processing pricing datframe for hovertext for the feature auction map
