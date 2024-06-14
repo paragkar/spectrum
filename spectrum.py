@@ -7361,7 +7361,7 @@ if selected_dimension in ["Spectrum Bands", "Auction Years", "Business Data"]:
 			  font=dict(size=16), #Debug 13th May 2024 (Changed from 12 to 16)
 			  template='simple_white',
 			  paper_bgcolor=None,
-			  height=600, 
+			  height=850, #Debug 14th June 2024 (Changed from 600 to 850)
 			  width=1200,
 			  margin=dict(t=80, b=50, l=50, r=50, pad=0),
 			  yaxis=dict(
