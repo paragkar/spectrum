@@ -1795,6 +1795,8 @@ if selected_dimension == "Spectrum Bands":
 
 			hovertext,colormatrix = htext_colmatrix_spec_map_op_hold_share(dfff, selected_operators, operatorlist) #processing hovertext and colormatrix for operatorwise in freqband dim
 			hoverlabel_bgcolor = colormatrix #colormatrix processed from fuction "hovertext_and_colmatrix" for same above
+
+			st.write(dfff) #Debug 14th June 2024
 			
 			data = [go.Heatmap(
 			      z = dfff.values,
