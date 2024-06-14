@@ -1,43 +1,63 @@
 #importing libraries
+# import plotly.express as px
+# import plotly.graph_objects as go
+# import plotly.subplots as sp
+# import numpy as np
+# from collections import OrderedDict
+# from plotly.subplots import make_subplots
+# from streamlit_option_menu import option_menu
+# import plotly
+# import pandas as pd
+# import plotly.figure_factory as ff
+# import streamlit as st
+# import matplotlib.pyplot as plt
+# import altair as alt
+# from datetime import datetime
+# import datetime as dt 
+# import calendar
+# import time
+# from PIL import Image
+# from dateutil import relativedelta
+# import re
+# from collections import defaultdict
+# from dateutil.relativedelta import relativedelta
+# import io
+# import msoffcrypto
+# import pickle
+# from pathlib import Path
+# import streamlit_authenticator as stauth
+# import yaml
+# from yaml.loader import SafeLoader
+# from deta import Deta
+
+import altair as alt
+import calendar
+from collections import OrderedDict, defaultdict
+from datetime import datetime
+from dateutil.relativedelta import relativedelta
+from deta import Deta
+import io
+from matplotlib import pyplot as plt
+import msoffcrypto
+import numpy as np
+from pathlib import Path
+import pandas as pd
+import pickle
+from PIL import Image
+import plotly
 import plotly.express as px
+import plotly.figure_factory as ff
 import plotly.graph_objects as go
 import plotly.subplots as sp
-import numpy as np
-from collections import OrderedDict
 from plotly.subplots import make_subplots
-from streamlit_option_menu import option_menu
-import plotly
-import pandas as pd
-import plotly.figure_factory as ff
-import streamlit as st
-import matplotlib.pyplot as plt
-import altair as alt
-from datetime import datetime
-import datetime as dt 
-import calendar
-import time
-
-from PIL import Image
-
-from dateutil import relativedelta
-
 import re
-
-from collections import defaultdict
-
-from dateutil.relativedelta import relativedelta
-
-import io
-import msoffcrypto
-
-import pickle
-from pathlib import Path
+import streamlit as st
 import streamlit_authenticator as stauth
-
+import streamlit_option_menu as st_option_menu
+import time
 import yaml
 from yaml.loader import SafeLoader
 
-from deta import Deta
 
 #debug 30th March 2024 to remove waring and future downcasting 
 
