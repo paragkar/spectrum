@@ -2099,7 +2099,7 @@ if selected_dimension == "Spectrum Bands":
 			text = hovertext,
 			colorscale='Hot',
 				texttemplate="%{z}", 
-				textfont={"size":10},
+				textfont={"size":16},# Debug 14th June 2024 (changed from 10 to 16)
 				reversescale=True,
 				),
 			]
