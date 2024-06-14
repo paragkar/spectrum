@@ -4803,7 +4803,7 @@ if selected_dimension == "Auction Data":
 			  font=dict(size=12),
 			  template='simple_white',
 			  paper_bgcolor=None,
-			  height=600, 
+			  height=850, #Debug 14th June 2024 (Changed from 600 to 850)
 			  width=1200,
 			  margin=dict(t=80, b=50, l=50, r=50, pad=0),
 			  yaxis=dict(
