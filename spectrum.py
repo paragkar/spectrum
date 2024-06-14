@@ -3186,7 +3186,7 @@ if selected_dimension == "Auction Data":
 				text = resultdf.values,
 				colorscale="YlGnBu", #Debug 10th June 2024
 					texttemplate="%{text}",
-					textfont={"size":10},
+					textfont={"size":16}, #Debug 14th June 2024 (Changed from 10 to 16)
 					reversescale=True,
 					),
 				]
