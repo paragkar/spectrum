@@ -5982,999 +5982,999 @@ if selected_dimension == "Auction Years":
 
 #This is section is to visulize important data related to the telecom industry (may not be directed related to spectrum)
 
-if selected_dimension == "Business Data":
+# if selected_dimension == "Business Data":
 
-	currency_flag = True #default
+# 	currency_flag = True #default
 
-	dfT = loadtelecomdatafile()
+# 	dfT = loadtelecomdatafile()
 	
-	Feature = st.sidebar.selectbox('Select a Feature', ["5GBTS Trends", "Subscriber Trends", "Subscriber MShare", "License Fees", "TowerBTS Trends",
-														"Financial SPWise", "Financial LSAWise", "Subs RuralUrban"])
+# 	Feature = st.sidebar.selectbox('Select a Feature', ["5GBTS Trends", "Subscriber Trends", "Subscriber MShare", "License Fees", "TowerBTS Trends",
+# 														"Financial SPWise", "Financial LSAWise", "Subs RuralUrban"])
 
-	if Feature== "5GBTS Trends":
-
-
-		df5gbts = dfT["5GBTS"] #load 5G BTS deployment data from excel file
-
-		df5gbtsf = pd.pivot(df5gbts, values ="Total", index = "StateCode", columns = "Date")
-
-		df5gbtsf.columns = [str(x) for x in df5gbtsf.columns ] #convet the dates into string 
-
-		lastcolumn = df5gbtsf.columns[-1]
+# 	if Feature== "5GBTS Trends":
 
 
-		df5gbtsfall = df5gbtsf.copy()
+# 		df5gbts = dfT["5GBTS"] #load 5G BTS deployment data from excel file
 
-		df5gbtsf = df5gbtsf.sort_values(lastcolumn, ascending = False).head(20) #sort by the last column
+# 		df5gbtsf = pd.pivot(df5gbts, values ="Total", index = "StateCode", columns = "Date")
 
-		df5gbtsf = round(df5gbtsf/1000,2) #convert the BTS data in thousands (K)
+# 		df5gbtsf.columns = [str(x) for x in df5gbtsf.columns ] #convet the dates into string 
 
-		df5gbtsf = df5gbtsf.iloc[:,-16:] #select on last 16 dates
-
-		#converting the columns into datetime and then date
-
-		df5gbtsf.columns = pd.to_datetime(df5gbtsf.columns)
-		df5gbtsf.columns= [x.date() for x in list(df5gbtsf.columns)]
+# 		lastcolumn = df5gbtsf.columns[-1]
 
 
-		SubFeature = st.sidebar.selectbox('Select a SubFeature', ["Cumulative Values", "Percent of Total", "Incremental Values"])
+# 		df5gbtsfall = df5gbtsf.copy()
 
-		if SubFeature == "Cumulative Values":
+# 		df5gbtsf = df5gbtsf.sort_values(lastcolumn, ascending = False).head(20) #sort by the last column
+
+# 		df5gbtsf = round(df5gbtsf/1000,2) #convert the BTS data in thousands (K)
+
+# 		df5gbtsf = df5gbtsf.iloc[:,-16:] #select on last 16 dates
+
+# 		#converting the columns into datetime and then date
+
+# 		df5gbtsf.columns = pd.to_datetime(df5gbtsf.columns)
+# 		df5gbtsf.columns= [x.date() for x in list(df5gbtsf.columns)]
 
 
-			hovertext = htext_businessdata_5gbts(df5gbtsf)
+# 		SubFeature = st.sidebar.selectbox('Select a SubFeature', ["Cumulative Values", "Percent of Total", "Incremental Values"])
 
-			#setting the data of the heatmap 
+# 		if SubFeature == "Cumulative Values":
 
-			data = [go.Heatmap(
-				z = df5gbtsf.values,
-				y = df5gbtsf.index,
-				x = df5gbtsf.columns,
-				xgap = 1,
-				ygap = 1,
-				hoverinfo ='text',
-				text = hovertext,
-				colorscale='Hot',
-					texttemplate="%{z}", 
-					textfont={"size":10},
-					reversescale=True,
-					),
-				]
-			fig = go.Figure(data=data)
 
-			summarydf = round(df5gbtsfall.sum(axis=0)/1000,2) #debug
-			summarydf = summarydf.reset_index()
-			summarydf.columns = ["Dates", SubFeature] 
-			summarydf = summarydf.sort_values("Dates", ascending = False)
-			#preparing the summary chart 
-			chart = summarychart(summarydf, 'Dates', SubFeature)
-			SummaryFlag = True
+# 			hovertext = htext_businessdata_5gbts(df5gbtsf)
+
+# 			#setting the data of the heatmap 
+
+# 			data = [go.Heatmap(
+# 				z = df5gbtsf.values,
+# 				y = df5gbtsf.index,
+# 				x = df5gbtsf.columns,
+# 				xgap = 1,
+# 				ygap = 1,
+# 				hoverinfo ='text',
+# 				text = hovertext,
+# 				colorscale='Hot',
+# 					texttemplate="%{z}", 
+# 					textfont={"size":10},
+# 					reversescale=True,
+# 					),
+# 				]
+# 			fig = go.Figure(data=data)
+
+# 			summarydf = round(df5gbtsfall.sum(axis=0)/1000,2) #debug
+# 			summarydf = summarydf.reset_index()
+# 			summarydf.columns = ["Dates", SubFeature] 
+# 			summarydf = summarydf.sort_values("Dates", ascending = False)
+# 			#preparing the summary chart 
+# 			chart = summarychart(summarydf, 'Dates', SubFeature)
+# 			SummaryFlag = True
 			
 
-		if SubFeature == "Percent of Total":
+# 		if SubFeature == "Percent of Total":
 
 
-			hovertext = htext_businessdata_5gbts(df5gbtsf)
+# 			hovertext = htext_businessdata_5gbts(df5gbtsf)
 
-			summarydf = df5gbtsfall.sum(axis=0).sort_index(ascending=False).head(16) #debug
+# 			summarydf = df5gbtsfall.sum(axis=0).sort_index(ascending=False).head(16) #debug
 
-			df5gbtsf = df5gbtsf.head(16)
+# 			df5gbtsf = df5gbtsf.head(16)
 
-			summarydf = summarydf[::-1].reset_index().T
+# 			summarydf = summarydf[::-1].reset_index().T
 
-			summarydf.columns = list(summarydf.iloc[0,:])
+# 			summarydf.columns = list(summarydf.iloc[0,:])
 
-			summarydf = summarydf.iloc[1:,:]/1000
+# 			summarydf = summarydf.iloc[1:,:]/1000
 
-			summarydf.columns = pd.to_datetime(summarydf.columns)
-			summarydf.columns= [x.date() for x in list(summarydf.columns)]
-
-
-
-			df5gbtsfPercent = (df5gbtsf/summarydf.values)*100
-
-
-			# df5gbtsfPercent = round((df5gbtsf/summarydf.T)*100,2)
-
-
-			#setting the data of the heatmap 
-
-			data = [go.Heatmap(
-				z = df5gbtsfPercent.values,
-				y = df5gbtsfPercent.index,
-				x = df5gbtsfPercent.columns,
-				xgap = 1,
-				ygap = 1,
-				hoverinfo ='text',
-				text = hovertext,
-				colorscale='Hot',
-					texttemplate="%{z:.2f}", 
-					textfont={"size":10},
-					reversescale=True,
-					),
-				]
-			fig = go.Figure(data=data)
-
-			SummaryFlag = False #No summary chart to plot
-
-
-		if SubFeature == "Incremental Values":
-
-			lst =[]
-			for row in df5gbtsf.values:
-
-				increments = np.diff(row)
-				lst.append(increments)
-
-			df5gbtsincf = pd.DataFrame(lst)
-
-			df5gbtsincf.index = df5gbtsf.index 
-			df5gbtsincf.columns = df5gbtsf.columns[1:]
-
-
-			lastcolumn = df5gbtsincf.columns[-1]
-
-
-			df5gbtsincf = df5gbtsincf.sort_values(lastcolumn, ascending = False) #sort by the last column
-
-
-			hovertext = htext_businessdata_5gbts(df5gbtsf)
-
-			#setting the data of the heatmap 
-
-			data = [go.Heatmap(
-				z = df5gbtsincf.values,
-				y = df5gbtsincf.index,
-				x = df5gbtsincf.columns,
-				xgap = 1,
-				ygap = 1,
-				hoverinfo ='text',
-				text = hovertext,
-				colorscale='Hot',
-					texttemplate="%{z}", 
-					textfont={"size":10},
-					reversescale=True,
-					),
-				]
-
-			fig = go.Figure(data=data)
-
-			summarydf = df5gbtsincf.sum(axis=0)
-			summarydf = summarydf.reset_index()
-			summarydf.columns = ["Dates", SubFeature] 
-			summarydf = summarydf.sort_values("Dates", ascending = False)
-			#preparing the summary chart 
-			chart = summarychart(summarydf, 'Dates', SubFeature)
-			SummaryFlag = True
+# 			summarydf.columns = pd.to_datetime(summarydf.columns)
+# 			summarydf.columns= [x.date() for x in list(summarydf.columns)]
 
 
 
-	if Feature== "Subscriber Trends":
-
-		@st.cache_resource
-		def loaddata():
-
-			df = dfT["TelecomSubs"] #load 5G BTS deployment data from excel file
-
-			return df
-
-		#function to extract a list of dates from the list using start and end date from the slider
-		def get_selected_date_list(listofallcolumns, start_date, end_date):
-			    # Find the index of the first selected date
-			    index1 = listofallcolumns.index(start_date)
-
-			    # Find the index of the second selected date
-			    index2 = listofallcolumns.index(end_date)
-
-			    # Return a new list containing the dates from index1 to index2 (inclusive)
-			    return listofallcolumns[index1:index2+1]
+# 			df5gbtsfPercent = (df5gbtsf/summarydf.values)*100
 
 
-		dftelesubs = loaddata()
+# 			# df5gbtsfPercent = round((df5gbtsf/summarydf.T)*100,2)
 
-		dftelesubs = dftelesubs[dftelesubs["Date"]>=datetime(2013,1,31)] #filter the datframe for all dates more than the year 2013
 
-		dftelesubs["Date"] = dftelesubs["Date"].dt.date
+# 			#setting the data of the heatmap 
 
-		dftelesubs.columns = [str(x) for x in dftelesubs.columns]
+# 			data = [go.Heatmap(
+# 				z = df5gbtsfPercent.values,
+# 				y = df5gbtsfPercent.index,
+# 				x = df5gbtsfPercent.columns,
+# 				xgap = 1,
+# 				ygap = 1,
+# 				hoverinfo ='text',
+# 				text = hovertext,
+# 				colorscale='Hot',
+# 					texttemplate="%{z:.2f}", 
+# 					textfont={"size":10},
+# 					reversescale=True,
+# 					),
+# 				]
+# 			fig = go.Figure(data=data)
 
-		dftelesubs = dftelesubs.replace(',','', regex=True)
+# 			SummaryFlag = False #No summary chart to plot
 
-		dftelesubs.drop(columns = ["Year","Months"], axis =1, inplace = True)
 
-		selected_category = st.sidebar.multiselect('Select Categories', ["Wireless", "Wireline"])
+# 		if SubFeature == "Incremental Values":
 
-		if len(selected_category) == 0 or len(selected_category) == 2:
+# 			lst =[]
+# 			for row in df5gbtsf.values:
 
-			dftelesubsprocess = dftelesubs.copy()
+# 				increments = np.diff(row)
+# 				lst.append(increments)
 
-		if len(selected_category) == 1:
+# 			df5gbtsincf = pd.DataFrame(lst)
 
-			dftelesubsprocess = dftelesubs[dftelesubs["Category"]==selected_category[0]]
+# 			df5gbtsincf.index = df5gbtsf.index 
+# 			df5gbtsincf.columns = df5gbtsf.columns[1:]
+
+
+# 			lastcolumn = df5gbtsincf.columns[-1]
+
+
+# 			df5gbtsincf = df5gbtsincf.sort_values(lastcolumn, ascending = False) #sort by the last column
+
+
+# 			hovertext = htext_businessdata_5gbts(df5gbtsf)
+
+# 			#setting the data of the heatmap 
+
+# 			data = [go.Heatmap(
+# 				z = df5gbtsincf.values,
+# 				y = df5gbtsincf.index,
+# 				x = df5gbtsincf.columns,
+# 				xgap = 1,
+# 				ygap = 1,
+# 				hoverinfo ='text',
+# 				text = hovertext,
+# 				colorscale='Hot',
+# 					texttemplate="%{z}", 
+# 					textfont={"size":10},
+# 					reversescale=True,
+# 					),
+# 				]
+
+# 			fig = go.Figure(data=data)
+
+# 			summarydf = df5gbtsincf.sum(axis=0)
+# 			summarydf = summarydf.reset_index()
+# 			summarydf.columns = ["Dates", SubFeature] 
+# 			summarydf = summarydf.sort_values("Dates", ascending = False)
+# 			#preparing the summary chart 
+# 			chart = summarychart(summarydf, 'Dates', SubFeature)
+# 			SummaryFlag = True
+
+
+
+# 	if Feature== "Subscriber Trends":
+
+# 		@st.cache_resource
+# 		def loaddata():
+
+# 			df = dfT["TelecomSubs"] #load 5G BTS deployment data from excel file
+
+# 			return df
+
+# 		#function to extract a list of dates from the list using start and end date from the slider
+# 		def get_selected_date_list(listofallcolumns, start_date, end_date):
+# 			    # Find the index of the first selected date
+# 			    index1 = listofallcolumns.index(start_date)
+
+# 			    # Find the index of the second selected date
+# 			    index2 = listofallcolumns.index(end_date)
+
+# 			    # Return a new list containing the dates from index1 to index2 (inclusive)
+# 			    return listofallcolumns[index1:index2+1]
+
+
+# 		dftelesubs = loaddata()
+
+# 		dftelesubs = dftelesubs[dftelesubs["Date"]>=datetime(2013,1,31)] #filter the datframe for all dates more than the year 2013
+
+# 		dftelesubs["Date"] = dftelesubs["Date"].dt.date
+
+# 		dftelesubs.columns = [str(x) for x in dftelesubs.columns]
+
+# 		dftelesubs = dftelesubs.replace(',','', regex=True)
+
+# 		dftelesubs.drop(columns = ["Year","Months"], axis =1, inplace = True)
+
+# 		selected_category = st.sidebar.multiselect('Select Categories', ["Wireless", "Wireline"])
+
+# 		if len(selected_category) == 0 or len(selected_category) == 2:
+
+# 			dftelesubsprocess = dftelesubs.copy()
+
+# 		if len(selected_category) == 1:
+
+# 			dftelesubsprocess = dftelesubs[dftelesubs["Category"]==selected_category[0]]
 			
 
-		dftelesubsprocess.drop(columns = ["Category"], axis =1, inplace = True)
+# 		dftelesubsprocess.drop(columns = ["Category"], axis =1, inplace = True)
 
 
-		#processsing the dataframe for total subs
+# 		#processsing the dataframe for total subs
 
-		dftotal = dftelesubsprocess.copy()
+# 		dftotal = dftelesubsprocess.copy()
 
 
-		dftotal = dftotal.melt(id_vars =["Date", "Circle"], value_vars = list(dftotal.columns[2:]))
+# 		dftotal = dftotal.melt(id_vars =["Date", "Circle"], value_vars = list(dftotal.columns[2:]))
 
-		dftotal.columns = ["Date", "Circle", "Operator", "Subs"]
+# 		dftotal.columns = ["Date", "Circle", "Operator", "Subs"]
 
 
-		list_of_circles = list(state_dict.values())
+# 		list_of_circles = list(state_dict.values())
 
-		selected_circles = st.sidebar.multiselect('Select Circles', list_of_circles) #drop down to select circles
+# 		selected_circles = st.sidebar.multiselect('Select Circles', list_of_circles) #drop down to select circles
 
 
-		selected_circle_codes = [k for k, v in state_dict.items() if v in selected_circles]
+# 		selected_circle_codes = [k for k, v in state_dict.items() if v in selected_circles]
 
-		if len(selected_circles) > 0:
+# 		if len(selected_circles) > 0:
 
-			temp = pd.DataFrame()
-			for circle_code in selected_circle_codes:
+# 			temp = pd.DataFrame()
+# 			for circle_code in selected_circle_codes:
 
-				temp = pd.concat([temp, dftotal[dftotal["Circle"]==circle_code]], axis =0)
+# 				temp = pd.concat([temp, dftotal[dftotal["Circle"]==circle_code]], axis =0)
 
-			dftotal = temp
+# 			dftotal = temp
 
-		else:
-			pass
+# 		else:
+# 			pass
 
 
-		dftotal = dftotal.groupby(["Date","Operator","Circle"]).sum()
+# 		dftotal = dftotal.groupby(["Date","Operator","Circle"]).sum()
 
-		dftotal = dftotal.reset_index()
+# 		dftotal = dftotal.reset_index()
 
-		dftotal.drop(columns = ["Circle"], axis =1, inplace = True)
+# 		dftotal.drop(columns = ["Circle"], axis =1, inplace = True)
 
-		dftotal = dftotal.groupby(["Date","Operator"]).sum()
+# 		dftotal = dftotal.groupby(["Date","Operator"]).sum()
 
-		dftotal = dftotal.reset_index()
+# 		dftotal = dftotal.reset_index()
 
 
-		dftotal = pd.pivot(dftotal, index="Operator", columns = "Date", values = "Subs")
+# 		dftotal = pd.pivot(dftotal, index="Operator", columns = "Date", values = "Subs")
 
-		SubFeature = st.sidebar.radio('Click an Option', ["Cumulative Values", "Incremental Values"])
+# 		SubFeature = st.sidebar.radio('Click an Option', ["Cumulative Values", "Incremental Values"])
 
-		if SubFeature=="Cumulative Values":
+# 		if SubFeature=="Cumulative Values":
 
-			listofallcolumns = list(dftotal.columns)
+# 			listofallcolumns = list(dftotal.columns)
 
 
-			# with st.sidebar:
+# 			# with st.sidebar:
 
-			# 	start_date, end_date = st.select_slider("Select a Range of Dates", 
-			# 		options = listofallcolumns, value =(dftotal.columns[-24],dftotal.columns[-1]))
+# 			# 	start_date, end_date = st.select_slider("Select a Range of Dates", 
+# 			# 		options = listofallcolumns, value =(dftotal.columns[-24],dftotal.columns[-1]))
 
-			start_date, end_date = st.select_slider("Select a Range of Dates", 
-				options = listofallcolumns, value =(dftotal.columns[-18],dftotal.columns[-1]))
+# 			start_date, end_date = st.select_slider("Select a Range of Dates", 
+# 				options = listofallcolumns, value =(dftotal.columns[-18],dftotal.columns[-1]))
 
 
-			date_range_list = get_selected_date_list(listofallcolumns, start_date, end_date)
+# 			date_range_list = get_selected_date_list(listofallcolumns, start_date, end_date)
 
 
-			dftotalfilt = dftotal[date_range_list] #filter the dataframe with the selected dates
+# 			dftotalfilt = dftotal[date_range_list] #filter the dataframe with the selected dates
 
 
-			dftotalfilt = dftotalfilt.sort_values(end_date, ascending = False) #filter the data on the first column selected by slider
+# 			dftotalfilt = dftotalfilt.sort_values(end_date, ascending = False) #filter the data on the first column selected by slider
 
 
-			dftotalfilt = round(dftotalfilt.loc[~(dftotalfilt ==0).all(axis=1)]/1000000,2) # delete all rows with value zero and convert into millions
+# 			dftotalfilt = round(dftotalfilt.loc[~(dftotalfilt ==0).all(axis=1)]/1000000,2) # delete all rows with value zero and convert into millions
 
-			if len(selected_category) ==0:
-				selected_category = ["All"]
+# 			if len(selected_category) ==0:
+# 				selected_category = ["All"]
 
-			if len(selected_circles) == 0:
-				selected_circles = ["All"]
+# 			if len(selected_circles) == 0:
+# 				selected_circles = ["All"]
 
 
-			if len(date_range_list) >=24:
-				texttemplate =""
-			else:
-				texttemplate = "%{z}"
+# 			if len(date_range_list) >=24:
+# 				texttemplate =""
+# 			else:
+# 				texttemplate = "%{z}"
 
 
-			hovertext = htext_businessdata_telesubscum(dftotalfilt)
+# 			hovertext = htext_businessdata_telesubscum(dftotalfilt)
 
-			#setting the data of the heatmap 
+# 			#setting the data of the heatmap 
 
-			data = [go.Heatmap(
-				z = dftotalfilt.values,
-				y = dftotalfilt.index,
-				x = dftotalfilt.columns,
-				xgap = 1,
-				ygap = 1,
-				hoverinfo ='text',
-				text = hovertext,
-				colorscale='reds',
-					texttemplate=texttemplate, 
-					textfont={"size":10},
-					# reversescale=True,
-					),
-				]
+# 			data = [go.Heatmap(
+# 				z = dftotalfilt.values,
+# 				y = dftotalfilt.index,
+# 				x = dftotalfilt.columns,
+# 				xgap = 1,
+# 				ygap = 1,
+# 				hoverinfo ='text',
+# 				text = hovertext,
+# 				colorscale='reds',
+# 					texttemplate=texttemplate, 
+# 					textfont={"size":10},
+# 					# reversescale=True,
+# 					),
+# 				]
 
-			fig = go.Figure(data=data)
+# 			fig = go.Figure(data=data)
 
-			# dftotalfilt = (dftotalfilt/1000).round(1)
-			# summarydf = dftotalfilt.sum(axis=0)
-			# summarydf = summarydf.reset_index()
-			# summarydf.columns = ["Dates", Feature] 
-			# summarydf = summarydf.sort_values("Dates", ascending = False)
-			# #preparing the summary chart 
-			# chart = summarychart(summarydf/1000, 'Dates', Feature)
-			# SummaryFlag = True
+# 			# dftotalfilt = (dftotalfilt/1000).round(1)
+# 			# summarydf = dftotalfilt.sum(axis=0)
+# 			# summarydf = summarydf.reset_index()
+# 			# summarydf.columns = ["Dates", Feature] 
+# 			# summarydf = summarydf.sort_values("Dates", ascending = False)
+# 			# #preparing the summary chart 
+# 			# chart = summarychart(summarydf/1000, 'Dates', Feature)
+# 			# SummaryFlag = True
 
-		if SubFeature=="Incremental Values":
+# 		if SubFeature=="Incremental Values":
 
 
-			lst =[]
-			for row in dftotal.values:
+# 			lst =[]
+# 			for row in dftotal.values:
 
-				increments = np.diff(row)
-				lst.append(increments)
+# 				increments = np.diff(row)
+# 				lst.append(increments)
 
-			dftotalinc = pd.DataFrame(lst)
+# 			dftotalinc = pd.DataFrame(lst)
 
-			dftotalinc.index = dftotal.index 
-			dftotalinc.columns = dftotal.columns[1:]
+# 			dftotalinc.index = dftotal.index 
+# 			dftotalinc.columns = dftotal.columns[1:]
 
-			listofallcolumns = list(dftotalinc.columns)
+# 			listofallcolumns = list(dftotalinc.columns)
 
 
-			# with st.sidebar:
+# 			# with st.sidebar:
 
-			# 	start_date, end_date = st.select_slider("Select a Range of Dates", 
-			# 		options = listofallcolumns, value =(dftotalinc.columns[-24],dftotalinc.columns[-1]))
+# 			# 	start_date, end_date = st.select_slider("Select a Range of Dates", 
+# 			# 		options = listofallcolumns, value =(dftotalinc.columns[-24],dftotalinc.columns[-1]))
 
 
-			start_date, end_date = st.select_slider("Select a Range of Dates", 
-					options = listofallcolumns, value =(dftotalinc.columns[-18],dftotalinc.columns[-1]))
+# 			start_date, end_date = st.select_slider("Select a Range of Dates", 
+# 					options = listofallcolumns, value =(dftotalinc.columns[-18],dftotalinc.columns[-1]))
 
 
-			date_range_list = get_selected_date_list(listofallcolumns, start_date, end_date)
+# 			date_range_list = get_selected_date_list(listofallcolumns, start_date, end_date)
 
 
-			dftotalincfilt = dftotalinc[date_range_list] #filter the dataframe with the selected dates
+# 			dftotalincfilt = dftotalinc[date_range_list] #filter the dataframe with the selected dates
 
 
-			dftotalincfilt = dftotalincfilt.sort_values(end_date, ascending = False) #filter the data on the first column selected by slider
+# 			dftotalincfilt = dftotalincfilt.sort_values(end_date, ascending = False) #filter the data on the first column selected by slider
 
 
-			dftotalincfilt = round(dftotalincfilt.loc[~(dftotalincfilt ==0).all(axis=1)]/1000000,2) # delete all rows with value zero and convert into millions
+# 			dftotalincfilt = round(dftotalincfilt.loc[~(dftotalincfilt ==0).all(axis=1)]/1000000,2) # delete all rows with value zero and convert into millions
 
-			if len(selected_category) ==0:
-				selected_category = ["All"]
+# 			if len(selected_category) ==0:
+# 				selected_category = ["All"]
 
-			if len(selected_circles) == 0:
-				selected_circles = ["All"]
+# 			if len(selected_circles) == 0:
+# 				selected_circles = ["All"]
 
-			if len(date_range_list) >=24:
-				texttemplate =""
-			else:
-				texttemplate = "%{z}"
+# 			if len(date_range_list) >=24:
+# 				texttemplate =""
+# 			else:
+# 				texttemplate = "%{z}"
 
 
-			hovertext = htext_businessdata_telesubsinc(dftotalincfilt)
+# 			hovertext = htext_businessdata_telesubsinc(dftotalincfilt)
 
-			#setting the data of the heatmap 
+# 			#setting the data of the heatmap 
 
-			data = [go.Heatmap(
-				z = dftotalincfilt.values,
-				y = dftotalincfilt.index,
-				x = dftotalincfilt.columns,
-				xgap = 1,
-				ygap = 1,
-				hoverinfo ='text',
-				text = hovertext,
-				colorscale='reds',
-					texttemplate=texttemplate, 
-					textfont={"size":10},
-					reversescale=True,
-					),
-				]
+# 			data = [go.Heatmap(
+# 				z = dftotalincfilt.values,
+# 				y = dftotalincfilt.index,
+# 				x = dftotalincfilt.columns,
+# 				xgap = 1,
+# 				ygap = 1,
+# 				hoverinfo ='text',
+# 				text = hovertext,
+# 				colorscale='reds',
+# 					texttemplate=texttemplate, 
+# 					textfont={"size":10},
+# 					reversescale=True,
+# 					),
+# 				]
 
-			fig = go.Figure(data=data)
+# 			fig = go.Figure(data=data)
 
-	if Feature== "Subscriber MShare":
+# 	if Feature== "Subscriber MShare":
 
-		@st.cache_resource
-		def loaddata():
+# 		@st.cache_resource
+# 		def loaddata():
 
-			df = dfT["TelecomSubs"] #load 5G BTS deployment data from excel file
+# 			df = dfT["TelecomSubs"] #load 5G BTS deployment data from excel file
 
-			return df
+# 			return df
 
-		#function to extract a list of dates from the list using start and end date from the slider
-		def get_selected_date_list(listofallcolumns, start_date, end_date):
-			    # Find the index of the first selected date
-			    index1 = listofallcolumns.index(start_date)
+# 		#function to extract a list of dates from the list using start and end date from the slider
+# 		def get_selected_date_list(listofallcolumns, start_date, end_date):
+# 			    # Find the index of the first selected date
+# 			    index1 = listofallcolumns.index(start_date)
 
-			    # Find the index of the second selected date
-			    index2 = listofallcolumns.index(end_date)
+# 			    # Find the index of the second selected date
+# 			    index2 = listofallcolumns.index(end_date)
 
-			    # Return a new list containing the dates from index1 to index2 (inclusive)
-			    return listofallcolumns[index1:index2+1]
+# 			    # Return a new list containing the dates from index1 to index2 (inclusive)
+# 			    return listofallcolumns[index1:index2+1]
 
 
-		dftelesubs = loaddata()
+# 		dftelesubs = loaddata()
 
-		dftelesubs = dftelesubs[dftelesubs["Date"]>=datetime(2013,1,31)] #filter the datframe for all dates more than the year 2013
+# 		dftelesubs = dftelesubs[dftelesubs["Date"]>=datetime(2013,1,31)] #filter the datframe for all dates more than the year 2013
 
-		dftelesubs["Date"] = dftelesubs["Date"].dt.date
+# 		dftelesubs["Date"] = dftelesubs["Date"].dt.date
 
-		dftelesubs.columns = [str(x) for x in dftelesubs.columns]
+# 		dftelesubs.columns = [str(x) for x in dftelesubs.columns]
 
-		dftelesubs = dftelesubs.replace(',','', regex=True)
+# 		dftelesubs = dftelesubs.replace(',','', regex=True)
 
-		dftelesubs.drop(columns = ["Year","Months"], axis =1, inplace = True)
+# 		dftelesubs.drop(columns = ["Year","Months"], axis =1, inplace = True)
 
-		selected_category = st.sidebar.multiselect('Select Categories', ["Wireless", "Wireline"])
+# 		selected_category = st.sidebar.multiselect('Select Categories', ["Wireless", "Wireline"])
 
-		if len(selected_category) == 0 or len(selected_category) == 2:
+# 		if len(selected_category) == 0 or len(selected_category) == 2:
 
-			dftelesubsprocess = dftelesubs.copy()
+# 			dftelesubsprocess = dftelesubs.copy()
 
-		if len(selected_category) == 1:
+# 		if len(selected_category) == 1:
 
-			dftelesubsprocess = dftelesubs[dftelesubs["Category"]==selected_category[0]]
+# 			dftelesubsprocess = dftelesubs[dftelesubs["Category"]==selected_category[0]]
 			
 
-		dftelesubsprocess.drop(columns = ["Category"], axis =1, inplace = True)
+# 		dftelesubsprocess.drop(columns = ["Category"], axis =1, inplace = True)
 
 
-		#processsing the dataframe for total subs
+# 		#processsing the dataframe for total subs
 
-		dftotal = dftelesubsprocess.copy()
-
-
-		dftotal = dftotal.melt(id_vars =["Date", "Circle"], value_vars = list(dftotal.columns[2:]))
-
-		dftotal.columns = ["Date", "Circle", "Operator", "Subs"]
+# 		dftotal = dftelesubsprocess.copy()
 
 
-		dftotal = dftotal[dftotal["Date"]==sorted(list(set(dftotal["Date"].values)))[-1]] # filtering the dataframe on the latest date
+# 		dftotal = dftotal.melt(id_vars =["Date", "Circle"], value_vars = list(dftotal.columns[2:]))
 
-		dftotal.drop(columns = ["Date"], axis =1, inplace = True)
-
-		dftotal = dftotal.groupby(["Circle", "Operator"])["Subs"].sum().reset_index()
+# 		dftotal.columns = ["Date", "Circle", "Operator", "Subs"]
 
 
-		dftotal = pd.pivot(dftotal, values = 'Subs', index='Operator' , columns = 'Circle')
+# 		dftotal = dftotal[dftotal["Date"]==sorted(list(set(dftotal["Date"].values)))[-1]] # filtering the dataframe on the latest date
 
-		dftotal= dftotal.loc[~(dftotal == 0).all(axis=1)]
+# 		dftotal.drop(columns = ["Date"], axis =1, inplace = True)
 
-		dftotal["Total"] = dftotal.sum(axis=1)
-
-		dftotal = dftotal.sort_values("Total", ascending = False)
-
-		dftotal.drop(columns = ["Total"], axis =1, inplace = True)
-
-		summarydf = dftotal.sum(axis=0)
-
-		dftotalpercentms = round((dftotal/summarydf)*100,2)
+# 		dftotal = dftotal.groupby(["Circle", "Operator"])["Subs"].sum().reset_index()
 
 
-		hovertext = htext_businessdata_telesubsms(dftotal,dftotalpercentms)
+# 		dftotal = pd.pivot(dftotal, values = 'Subs', index='Operator' , columns = 'Circle')
+
+# 		dftotal= dftotal.loc[~(dftotal == 0).all(axis=1)]
+
+# 		dftotal["Total"] = dftotal.sum(axis=1)
+
+# 		dftotal = dftotal.sort_values("Total", ascending = False)
+
+# 		dftotal.drop(columns = ["Total"], axis =1, inplace = True)
+
+# 		summarydf = dftotal.sum(axis=0)
+
+# 		dftotalpercentms = round((dftotal/summarydf)*100,2)
 
 
-		data = [go.Heatmap(
-				z = dftotalpercentms.values,
-				y = dftotalpercentms.index,
-				x = dftotalpercentms.columns,
-				xgap = 1,
-				ygap = 1,
-				hoverinfo ='text',
-				text = hovertext,
-				colorscale='reds',
-					texttemplate="%{z}", 
-					textfont={"size":10},
-					# reversescale=True,
-					),
-				]
-
-		fig = go.Figure(data=data)
-
-		summarydf= round(summarydf/1000000,1) # converting the numbers to million
-		summarydf = summarydf.reset_index()
-		summarydf.columns = ["Circle", "Total Subs"]
-
-		# summarydf = summarydf.sort_values("Dates", ascending = False)
-
-		#preparing the summary chart 
-		chart = summarychart(summarydf, 'Circle', "Total Subs")
-		SummaryFlag = True
+# 		hovertext = htext_businessdata_telesubsms(dftotal,dftotalpercentms)
 
 
-		if len(selected_category) ==0:
-			selected_category = ["All"]
+# 		data = [go.Heatmap(
+# 				z = dftotalpercentms.values,
+# 				y = dftotalpercentms.index,
+# 				x = dftotalpercentms.columns,
+# 				xgap = 1,
+# 				ygap = 1,
+# 				hoverinfo ='text',
+# 				text = hovertext,
+# 				colorscale='reds',
+# 					texttemplate="%{z}", 
+# 					textfont={"size":10},
+# 					# reversescale=True,
+# 					),
+# 				]
+
+# 		fig = go.Figure(data=data)
+
+# 		summarydf= round(summarydf/1000000,1) # converting the numbers to million
+# 		summarydf = summarydf.reset_index()
+# 		summarydf.columns = ["Circle", "Total Subs"]
+
+# 		# summarydf = summarydf.sort_values("Dates", ascending = False)
+
+# 		#preparing the summary chart 
+# 		chart = summarychart(summarydf, 'Circle', "Total Subs")
+# 		SummaryFlag = True
 
 
-	if Feature == "License Fees":
+# 		if len(selected_category) ==0:
+# 			selected_category = ["All"]
 
-		dflfsf = dfT["LFSF"]
 
-		dfoperatornames = dfT["LFSF_Op_Names_Map"]
+# 	if Feature == "License Fees":
 
-		def dataframe_to_dictionary(df):
-		    dictionary = {}
-		    for index, row in df.iterrows():
-		        key = row[0]
-		        value = row[1]
-		        dictionary[key] = value
-		    return dictionary
+# 		dflfsf = dfT["LFSF"]
 
-		operator_dict = dataframe_to_dictionary(dfoperatornames)
+# 		dfoperatornames = dfT["LFSF_Op_Names_Map"]
+
+# 		def dataframe_to_dictionary(df):
+# 		    dictionary = {}
+# 		    for index, row in df.iterrows():
+# 		        key = row[0]
+# 		        value = row[1]
+# 		        dictionary[key] = value
+# 		    return dictionary
+
+# 		operator_dict = dataframe_to_dictionary(dfoperatornames)
 		
 
-		dflfsf = dflfsf.replace(r'[^A-Za-z0-9\-()/\s.]','', regex=True)
+# 		dflfsf = dflfsf.replace(r'[^A-Za-z0-9\-()/\s.]','', regex=True)
 
 
-		dflfsfprocess = dflfsf.copy()
+# 		dflfsfprocess = dflfsf.copy()
 
-		dflfsfprocess = dflfsfprocess.replace(operator_dict)
+# 		dflfsfprocess = dflfsfprocess.replace(operator_dict)
 
-		listoflicensetypes = sorted(list(set(dflfsf["LicenseType"])))
+# 		listoflicensetypes = sorted(list(set(dflfsf["LicenseType"])))
 
-		listofFY = sorted(list(set(dflfsf["FY"])), reverse = True)
+# 		listofFY = sorted(list(set(dflfsf["FY"])), reverse = True)
 
 
-		selected_category = st.sidebar.multiselect('Select Categories', ["LF", "SF"])
+# 		selected_category = st.sidebar.multiselect('Select Categories', ["LF", "SF"])
 
-		if (len(selected_category)==0) or (len(selected_category)==2):
+# 		if (len(selected_category)==0) or (len(selected_category)==2):
 
-			pass
+# 			pass
 		
-		else:
+# 		else:
 
-			dflfsfprocess = dflfsf[dflfsf["Category"]==selected_category[0]]
+# 			dflfsfprocess = dflfsf[dflfsf["Category"]==selected_category[0]]
 
-		subfeature_list = ["Operators", "LicenseType"]
+# 		subfeature_list = ["Operators", "LicenseType"]
 
 
-		SubFeature = st.sidebar.selectbox('Select a SubFeature', subfeature_list,0)
+# 		SubFeature = st.sidebar.selectbox('Select a SubFeature', subfeature_list,0)
 
-		if SubFeature == "Operators":
+# 		if SubFeature == "Operators":
 
-			column_to_drop = "LicenseType"
+# 			column_to_drop = "LicenseType"
 
-		if SubFeature == "LicenseType":
+# 		if SubFeature == "LicenseType":
 
-			column_to_drop = "Operators"
+# 			column_to_drop = "Operators"
 
-		#This is for creating a list of 30 important operators 
+# 		#This is for creating a list of 30 important operators 
 
-		if SubFeature == "LicenseType":
+# 		if SubFeature == "LicenseType":
 
-			#sort operators by the last FY, and might get revised later
+# 			#sort operators by the last FY, and might get revised later
 
-			sorted_df = dflfsfprocess[dflfsfprocess["FY"]=="2022-2023"]
+# 			sorted_df = dflfsfprocess[dflfsfprocess["FY"]=="2022-2023"]
 
-			sorted_df = sorted_df.groupby(["Operators","FY"]).sum().reset_index().sort_values(by='Amount', ascending=False)
+# 			sorted_df = sorted_df.groupby(["Operators","FY"]).sum().reset_index().sort_values(by='Amount', ascending=False)
 
 
-			sorted_operators = sorted_df.head(29)["Operators"].tolist() #pick on 29 operators and add BSNL to list later
+# 			sorted_operators = sorted_df.head(29)["Operators"].tolist() #pick on 29 operators and add BSNL to list later
 
-			sorted_operators = ["BSNL"]+sorted_operators
+# 			sorted_operators = ["BSNL"]+sorted_operators
 
-			#Filtering the viz by the selected operator
+# 			#Filtering the viz by the selected operator
 
-			selected_operators = st.sidebar.multiselect('Select Operators', sorted_operators)
+# 			selected_operators = st.sidebar.multiselect('Select Operators', sorted_operators)
 
-			if len(selected_operators)==0:
+# 			if len(selected_operators)==0:
 
-				selected_operators = sorted_operators
+# 				selected_operators = sorted_operators
 
-			else:
-				pass
+# 			else:
+# 				pass
 
-			#Filter the dataframe with the list of selected operators
+# 			#Filter the dataframe with the list of selected operators
 
-			temp = pd.DataFrame()
-			for operator in selected_operators:
+# 			temp = pd.DataFrame()
+# 			for operator in selected_operators:
 
-				df = dflfsfprocess[dflfsfprocess["Operators"]==operator]
+# 				df = dflfsfprocess[dflfsfprocess["Operators"]==operator]
 
-				temp = pd.concat([temp, df], axis =0)
+# 				temp = pd.concat([temp, df], axis =0)
 
-			dflfsfprocess = temp
+# 			dflfsfprocess = temp
 
-		else:
+# 		else:
 
-			pass
+# 			pass
 
 
-		dflfsfprocess = dflfsfprocess.groupby([SubFeature,'FY']).sum().drop(columns=['Category', column_to_drop], axis =1).reset_index()
+# 		dflfsfprocess = dflfsfprocess.groupby([SubFeature,'FY']).sum().drop(columns=['Category', column_to_drop], axis =1).reset_index()
 
-		selected_fy_for_sort = st.sidebar.selectbox('Select FY for Sorting', listofFY)
+# 		selected_fy_for_sort = st.sidebar.selectbox('Select FY for Sorting', listofFY)
 
 
-		dflfsfbysubfeature = round(dflfsfprocess.pivot(index =SubFeature, columns ='FY', values ='Amount')
-								.sort_values(selected_fy_for_sort, ascending = False)/10000000,0)
+# 		dflfsfbysubfeature = round(dflfsfprocess.pivot(index =SubFeature, columns ='FY', values ='Amount')
+# 								.sort_values(selected_fy_for_sort, ascending = False)/10000000,0)
 
-		chosen_metric = st.sidebar.radio('Click an Option', ["Absolute", "Percentage"])
+# 		chosen_metric = st.sidebar.radio('Click an Option', ["Absolute", "Percentage"])
 
-		summarydf = dflfsfbysubfeature.sum(axis =0)
+# 		summarydf = dflfsfbysubfeature.sum(axis =0)
 
-		summarydf_for_hovertext = summarydf.copy()
+# 		summarydf_for_hovertext = summarydf.copy()
 
-		if chosen_metric=="Absolute":
+# 		if chosen_metric=="Absolute":
 
-			df = dflfsfbysubfeature.head(20).copy()
+# 			df = dflfsfbysubfeature.head(20).copy()
 
-		if chosen_metric=="Percentage":
+# 		if chosen_metric=="Percentage":
 
-			df = round(((dflfsfbysubfeature/summarydf).head(20))*100,2)
+# 			df = round(((dflfsfbysubfeature/summarydf).head(20))*100,2)
 
 
-		#preparing the summary chart 
+# 		#preparing the summary chart 
 
-		summarydf = summarydf.reset_index()
-		summarydf.columns = ["FY", "Total Fees"]
+# 		summarydf = summarydf.reset_index()
+# 		summarydf.columns = ["FY", "Total Fees"]
 
-		# summarydf = summarydf.sort_values("Dates", ascending = False)
+# 		# summarydf = summarydf.sort_values("Dates", ascending = False)
 
-		#preparing the summary chart 
-		chart = summarychart(summarydf, 'FY', 'Total Fees')
-		SummaryFlag = True
+# 		#preparing the summary chart 
+# 		chart = summarychart(summarydf, 'FY', 'Total Fees')
+# 		SummaryFlag = True
 
-		dflfsfbysubfeature = dflfsfbysubfeature.head(20)
+# 		dflfsfbysubfeature = dflfsfbysubfeature.head(20)
 
-		hovertext = htext_businessdata_licensefees(dflfsfbysubfeature,summarydf_for_hovertext)
+# 		hovertext = htext_businessdata_licensefees(dflfsfbysubfeature,summarydf_for_hovertext)
 
-		data = [go.Heatmap(
-				z = df.values,
-				y = df.index,
-				x = df.columns,
-				xgap = 1,
-				ygap = 1,
-				hoverinfo ='text',
-				text = hovertext,
-				colorscale='reds',
-					texttemplate="%{z:.2f}", 
-					textfont={"size":10},
-					# reversescale=True,
-					),
-				]
-		fig = go.Figure(data=data)
+# 		data = [go.Heatmap(
+# 				z = df.values,
+# 				y = df.index,
+# 				x = df.columns,
+# 				xgap = 1,
+# 				ygap = 1,
+# 				hoverinfo ='text',
+# 				text = hovertext,
+# 				colorscale='reds',
+# 					texttemplate="%{z:.2f}", 
+# 					textfont={"size":10},
+# 					# reversescale=True,
+# 					),
+# 				]
+# 		fig = go.Figure(data=data)
 
 
 
-	if Feature == "Financial SPWise":
+# 	if Feature == "Financial SPWise":
 
 
-		df = loadtraiagr()
+# 		df = loadtraiagr()
 
 
-		df_rev = df["TRAI_Financial"]
+# 		df_rev = df["TRAI_Financial"]
 
-		df_rev["Date"] = pd.to_datetime(df_rev["Date"]).dt.date
+# 		df_rev["Date"] = pd.to_datetime(df_rev["Date"]).dt.date
 
-		list_of_dates = sorted(list(set(df_rev["Date"])))[11:]
+# 		list_of_dates = sorted(list(set(df_rev["Date"])))[11:]
 
 
-		df_rev = df_rev.set_index("Date")
+# 		df_rev = df_rev.set_index("Date")
 
 
-		for col in ["GR","APGR", "AGR", "LF", "SF"]:
+# 		for col in ["GR","APGR", "AGR", "LF", "SF"]:
 
-			df_rev[col] = pd.to_numeric(df_rev[col], errors='coerce') #to convert rougue strings (errors during PDF conversion) into numeric
+# 			df_rev[col] = pd.to_numeric(df_rev[col], errors='coerce') #to convert rougue strings (errors during PDF conversion) into numeric
 
-		df_rev = df_rev.reset_index()
+# 		df_rev = df_rev.reset_index()
 
-		df_rev.rename(columns = {"index":"Date"}, inplace = True)
+# 		df_rev.rename(columns = {"index":"Date"}, inplace = True)
 
-		df_rev.drop(columns=["License", "Year", "Month","Circle","Dollar Rate"], inplace = True)
-
-		
-		df_temp = df_rev.groupby(["Date","Operator"]).agg({"GR":'sum','APGR':'sum','AGR':'sum','LF':'sum','SF':'sum'})\
-					.sort_index(ascending = False).sort_values("GR", ascending = False).round(0)
-
-
-		start_date, end_date = st.select_slider("Select a Range of Dates", 
-			options = list_of_dates, value =(list_of_dates[0],list_of_dates[-1]))
-
-
-		df_temp = df_temp.reset_index()
-
-		filt = (df_temp["Date"] >= start_date) & (df_temp["Date"] <= end_date) 
-
-		df_temp = df_temp[filt]
-
-		finmetric = st.sidebar.selectbox("Select from Options", ["GrossRevenue", "ApplicableRev", "AdjustedGR", "LicenseFee", "SpectrumFee"])
-
-		fin_dic = {'GrossRevenue':'GR', 'ApplicableRev':'APGR','AdjustedGR':'AGR','LicenseFee':'LF', 'SpectrumFee': 'SF'}
-
-
-		df_finmetric = (df_temp.pivot(index ="Operator", columns ="Date", values =fin_dic[finmetric])/1000).round(1)
-
-		df_finmetric = df_finmetric.sort_values(df_finmetric.columns[-1], ascending = False)
-
-		df_finmetricINC = (df_finmetric - df_finmetric.shift(1, axis =1)).head(15)
-
-		summarydf_INC = df_finmetricINC.sum(axis=0).round(1)
-
-		summarydf_INC = summarydf_INC.reset_index()
-
-		summarydf_INC.columns = ["Date", "IndiaTotal"]
-
-		summarydf = df_finmetric.sum(axis=0)
-
-		df_finmetric_prec = round((df_finmetric/summarydf.values)*100,1).head(15)
-		df_finmetric = df_finmetric.head(15)
-
-		summarydf = summarydf.reset_index()
-
-		summarydf.columns = ["Date", "IndiaTotal"]
-
-
-		radio_selection = st.sidebar.radio('Click an Option', ["Absolute Values", "Percentage of Total", "Quarterly Increments"])
-
-		if radio_selection == "Absolute Values":
-			df_heatmap = df_finmetric.copy()
-			summarydf = summarydf.copy()
-		if radio_selection == "Percentage of Total":
-			df_heatmap = df_finmetric_prec.copy()
-			summarydf = summarydf.copy()
-		if radio_selection == "Quarterly Increments":
-			df_heatmap = df_finmetricINC.iloc[:,1:].copy()
-			summarydf = summarydf_INC.iloc[1:,:].copy()
-
-
-
-		#preparing the summary chart 
-		chart = summarychart(summarydf, "Date", "IndiaTotal")
-		SummaryFlag = True #for ploting the summary chart
-
-		hovertext = htext_businessdata_FinancialSPWise(df_finmetric,df_finmetric_prec,df_finmetricINC)
-
-		data = [go.Heatmap(
-				z = df_heatmap.values,
-				y = df_heatmap.index,
-				x = df_heatmap.columns,
-				xgap = 1,
-				ygap = 1,
-				hoverinfo ='text',
-				text = hovertext,
-				colorscale='Hot',
-					texttemplate="%{z}", 
-					textfont={"size":8},
-					reversescale=True,
-					),
-				]
-		fig = go.Figure(data=data)
-
-
-
-#------------------------New Code ----------------------
-
-
-	if Feature == "Financial LSAWise":
-
-
-		df = loadtraiagr()
-
-
-		df_rev = df["TRAI_Financial"]
-
-		df_rev["Date"] = pd.to_datetime(df_rev["Date"]).dt.date
-
-		list_of_dates = sorted(list(set(df_rev["Date"])))[11:]
-
-
-		df_rev = df_rev.set_index("Date")
-
-
-		for col in ["GR","APGR", "AGR", "LF", "SF"]:
-
-			df_rev[col] = pd.to_numeric(df_rev[col], errors='coerce') #to convert rougue strings (errors during PDF conversion) into numeric
-
-		df_rev = df_rev.reset_index()
-
-		df_rev.rename(columns = {"index":"Date"}, inplace = True)
-
-		selected_operator = st.sidebar.selectbox("Select from Options", ["RJIO", "Bharti", "Vodafone Idea", "BSNL"])
-
-		df_rev = df_rev[df_rev["Operator"]==selected_operator]
-
-		df_rev.drop(columns=["License", "Year", "Month","Operator","Dollar Rate"], inplace = True)
+# 		df_rev.drop(columns=["License", "Year", "Month","Circle","Dollar Rate"], inplace = True)
 
 		
-		df_temp = df_rev.groupby(["Date","Circle"]).agg({"GR":'sum','APGR':'sum','AGR':'sum','LF':'sum','SF':'sum'})\
-					.sort_index(ascending = False).sort_values("GR", ascending = False).round(0)
+# 		df_temp = df_rev.groupby(["Date","Operator"]).agg({"GR":'sum','APGR':'sum','AGR':'sum','LF':'sum','SF':'sum'})\
+# 					.sort_index(ascending = False).sort_values("GR", ascending = False).round(0)
 
 
-		start_date, end_date = st.select_slider("Select a Range of Dates", 
-			options = list_of_dates, value =(list_of_dates[0],list_of_dates[-1]))
+# 		start_date, end_date = st.select_slider("Select a Range of Dates", 
+# 			options = list_of_dates, value =(list_of_dates[0],list_of_dates[-1]))
 
 
-		df_temp = df_temp.reset_index()
+# 		df_temp = df_temp.reset_index()
 
-		filt = (df_temp["Date"] >= start_date) & (df_temp["Date"] <= end_date) 
+# 		filt = (df_temp["Date"] >= start_date) & (df_temp["Date"] <= end_date) 
 
-		df_temp = df_temp[filt]
+# 		df_temp = df_temp[filt]
 
-		finmetric = st.sidebar.selectbox("Select from Options", ["GrossRevenue", "ApplicableRev", "AdjustedGR", "LicenseFee", "SpectrumFee"])
+# 		finmetric = st.sidebar.selectbox("Select from Options", ["GrossRevenue", "ApplicableRev", "AdjustedGR", "LicenseFee", "SpectrumFee"])
 
-		fin_dic = {'GrossRevenue':'GR', 'ApplicableRev':'APGR','AdjustedGR':'AGR','LicenseFee':'LF', 'SpectrumFee': 'SF'}
-
-
-		df_finmetric = (df_temp.pivot(index ="Circle", columns ="Date", values =fin_dic[finmetric])/1000).round(1)
-
-		df_finmetric = df_finmetric.sort_values(df_finmetric.columns[-1], ascending = False)
-
-		df_finmetricINC = (df_finmetric - df_finmetric.shift(1, axis =1))
-
-		summarydf_INC = df_finmetricINC.sum(axis=0).round(1)
-
-		summarydf_INC = summarydf_INC.reset_index()
-
-		summarydf_INC.columns = ["Date", "IndiaTotal"]
-
-		summarydf = df_finmetric.sum(axis=0)
-
-		df_finmetric_prec = round((df_finmetric/summarydf.values)*100,1)
-		df_finmetric = df_finmetric
-
-		summarydf = summarydf.reset_index()
-
-		summarydf.columns = ["Date", "IndiaTotal"]
+# 		fin_dic = {'GrossRevenue':'GR', 'ApplicableRev':'APGR','AdjustedGR':'AGR','LicenseFee':'LF', 'SpectrumFee': 'SF'}
 
 
-		radio_selection = st.sidebar.radio('Click an Option', ["Absolute Values", "Percentage of Total", "Quarterly Increments"])
+# 		df_finmetric = (df_temp.pivot(index ="Operator", columns ="Date", values =fin_dic[finmetric])/1000).round(1)
 
-		if radio_selection == "Absolute Values":
-			df_heatmap = df_finmetric.copy()
-			summarydf = summarydf.copy()
-		if radio_selection == "Percentage of Total":
-			df_heatmap = df_finmetric_prec.copy()
-			summarydf = summarydf.copy()
-		if radio_selection == "Quarterly Increments":
-			df_heatmap = df_finmetricINC.iloc[:,1:].copy()
-			summarydf = summarydf_INC.iloc[1:,:].copy()
+# 		df_finmetric = df_finmetric.sort_values(df_finmetric.columns[-1], ascending = False)
+
+# 		df_finmetricINC = (df_finmetric - df_finmetric.shift(1, axis =1)).head(15)
+
+# 		summarydf_INC = df_finmetricINC.sum(axis=0).round(1)
+
+# 		summarydf_INC = summarydf_INC.reset_index()
+
+# 		summarydf_INC.columns = ["Date", "IndiaTotal"]
+
+# 		summarydf = df_finmetric.sum(axis=0)
+
+# 		df_finmetric_prec = round((df_finmetric/summarydf.values)*100,1).head(15)
+# 		df_finmetric = df_finmetric.head(15)
+
+# 		summarydf = summarydf.reset_index()
+
+# 		summarydf.columns = ["Date", "IndiaTotal"]
 
 
+# 		radio_selection = st.sidebar.radio('Click an Option', ["Absolute Values", "Percentage of Total", "Quarterly Increments"])
 
-		#preparing the summary chart 
-		chart = summarychart(summarydf, "Date", "IndiaTotal")
-		SummaryFlag = True #for ploting the summary chart
+# 		if radio_selection == "Absolute Values":
+# 			df_heatmap = df_finmetric.copy()
+# 			summarydf = summarydf.copy()
+# 		if radio_selection == "Percentage of Total":
+# 			df_heatmap = df_finmetric_prec.copy()
+# 			summarydf = summarydf.copy()
+# 		if radio_selection == "Quarterly Increments":
+# 			df_heatmap = df_finmetricINC.iloc[:,1:].copy()
+# 			summarydf = summarydf_INC.iloc[1:,:].copy()
 
 
 
-		data = [go.Heatmap(
-				z = df_heatmap.values,
-				y = df_heatmap.index,
-				x = df_heatmap.columns,
-				xgap = 1,
-				ygap = 1,
-				hoverinfo ='text',
-				# text = hovertext,
-				colorscale='Hot',
-					texttemplate="%{z}", 
-					textfont={"size":8},
-					reversescale=True,
-					),
-				]
-		fig = go.Figure(data=data)
+# 		#preparing the summary chart 
+# 		chart = summarychart(summarydf, "Date", "IndiaTotal")
+# 		SummaryFlag = True #for ploting the summary chart
+
+# 		hovertext = htext_businessdata_FinancialSPWise(df_finmetric,df_finmetric_prec,df_finmetricINC)
+
+# 		data = [go.Heatmap(
+# 				z = df_heatmap.values,
+# 				y = df_heatmap.index,
+# 				x = df_heatmap.columns,
+# 				xgap = 1,
+# 				ygap = 1,
+# 				hoverinfo ='text',
+# 				text = hovertext,
+# 				colorscale='Hot',
+# 					texttemplate="%{z}", 
+# 					textfont={"size":8},
+# 					reversescale=True,
+# 					),
+# 				]
+# 		fig = go.Figure(data=data)
 
 
-#-------------------- New Code Ends ------------------------
+
+# #------------------------New Code ----------------------
 
 
-#---------------------New Code Starts----------------------
+# 	if Feature == "Financial LSAWise":
 
 
-	if Feature == "Subs RuralUrban":
+# 		df = loadtraiagr()
 
 
-		dfRU = dfT["TelecomSubsRuralUrban"] #load 5G BTS deployment data from excel file
+# 		df_rev = df["TRAI_Financial"]
 
-		dfRU["Date"] = pd.to_datetime(dfRU["Date"]).dt.date
+# 		df_rev["Date"] = pd.to_datetime(df_rev["Date"]).dt.date
 
-		rural = dfRU[dfRU["Type"]=="Rural"].drop(columns ="Type", axis=1).groupby("Date").sum().drop(columns="Category", axis=1).tail(20).T
+# 		list_of_dates = sorted(list(set(df_rev["Date"])))[11:]
 
-		urban = dfRU[dfRU["Type"]=="Urban"].drop(columns ="Type", axis=1).groupby("Date").sum().drop(columns="Category", axis=1).tail(20).T
 
-		rural = round(rural.sort_values(rural.columns[-1], ascending = False)/1000000,1)
+# 		df_rev = df_rev.set_index("Date")
 
-		urban = round(urban.sort_values(urban.columns[-1], ascending = False)/1000000,1)
 
-		rural_perc = round(rural/rural.sum(axis=0)*100,1).head(4)
+# 		for col in ["GR","APGR", "AGR", "LF", "SF"]:
 
-		urban_perc = round(urban/urban.sum(axis=0)*100,1)
+# 			df_rev[col] = pd.to_numeric(df_rev[col], errors='coerce') #to convert rougue strings (errors during PDF conversion) into numeric
+
+# 		df_rev = df_rev.reset_index()
+
+# 		df_rev.rename(columns = {"index":"Date"}, inplace = True)
+
+# 		selected_operator = st.sidebar.selectbox("Select from Options", ["RJIO", "Bharti", "Vodafone Idea", "BSNL"])
+
+# 		df_rev = df_rev[df_rev["Operator"]==selected_operator]
+
+# 		df_rev.drop(columns=["License", "Year", "Month","Operator","Dollar Rate"], inplace = True)
+
+		
+# 		df_temp = df_rev.groupby(["Date","Circle"]).agg({"GR":'sum','APGR':'sum','AGR':'sum','LF':'sum','SF':'sum'})\
+# 					.sort_index(ascending = False).sort_values("GR", ascending = False).round(0)
+
+
+# 		start_date, end_date = st.select_slider("Select a Range of Dates", 
+# 			options = list_of_dates, value =(list_of_dates[0],list_of_dates[-1]))
+
+
+# 		df_temp = df_temp.reset_index()
+
+# 		filt = (df_temp["Date"] >= start_date) & (df_temp["Date"] <= end_date) 
+
+# 		df_temp = df_temp[filt]
+
+# 		finmetric = st.sidebar.selectbox("Select from Options", ["GrossRevenue", "ApplicableRev", "AdjustedGR", "LicenseFee", "SpectrumFee"])
+
+# 		fin_dic = {'GrossRevenue':'GR', 'ApplicableRev':'APGR','AdjustedGR':'AGR','LicenseFee':'LF', 'SpectrumFee': 'SF'}
+
+
+# 		df_finmetric = (df_temp.pivot(index ="Circle", columns ="Date", values =fin_dic[finmetric])/1000).round(1)
+
+# 		df_finmetric = df_finmetric.sort_values(df_finmetric.columns[-1], ascending = False)
+
+# 		df_finmetricINC = (df_finmetric - df_finmetric.shift(1, axis =1))
+
+# 		summarydf_INC = df_finmetricINC.sum(axis=0).round(1)
+
+# 		summarydf_INC = summarydf_INC.reset_index()
+
+# 		summarydf_INC.columns = ["Date", "IndiaTotal"]
+
+# 		summarydf = df_finmetric.sum(axis=0)
+
+# 		df_finmetric_prec = round((df_finmetric/summarydf.values)*100,1)
+# 		df_finmetric = df_finmetric
+
+# 		summarydf = summarydf.reset_index()
+
+# 		summarydf.columns = ["Date", "IndiaTotal"]
+
+
+# 		radio_selection = st.sidebar.radio('Click an Option', ["Absolute Values", "Percentage of Total", "Quarterly Increments"])
+
+# 		if radio_selection == "Absolute Values":
+# 			df_heatmap = df_finmetric.copy()
+# 			summarydf = summarydf.copy()
+# 		if radio_selection == "Percentage of Total":
+# 			df_heatmap = df_finmetric_prec.copy()
+# 			summarydf = summarydf.copy()
+# 		if radio_selection == "Quarterly Increments":
+# 			df_heatmap = df_finmetricINC.iloc[:,1:].copy()
+# 			summarydf = summarydf_INC.iloc[1:,:].copy()
+
+
+
+# 		#preparing the summary chart 
+# 		chart = summarychart(summarydf, "Date", "IndiaTotal")
+# 		SummaryFlag = True #for ploting the summary chart
+
+
+
+# 		data = [go.Heatmap(
+# 				z = df_heatmap.values,
+# 				y = df_heatmap.index,
+# 				x = df_heatmap.columns,
+# 				xgap = 1,
+# 				ygap = 1,
+# 				hoverinfo ='text',
+# 				# text = hovertext,
+# 				colorscale='Hot',
+# 					texttemplate="%{z}", 
+# 					textfont={"size":8},
+# 					reversescale=True,
+# 					),
+# 				]
+# 		fig = go.Figure(data=data)
+
+
+# #-------------------- New Code Ends ------------------------
+
+
+# #---------------------New Code Starts----------------------
+
+
+# 	if Feature == "Subs RuralUrban":
+
+
+# 		dfRU = dfT["TelecomSubsRuralUrban"] #load 5G BTS deployment data from excel file
+
+# 		dfRU["Date"] = pd.to_datetime(dfRU["Date"]).dt.date
+
+# 		rural = dfRU[dfRU["Type"]=="Rural"].drop(columns ="Type", axis=1).groupby("Date").sum().drop(columns="Category", axis=1).tail(20).T
+
+# 		urban = dfRU[dfRU["Type"]=="Urban"].drop(columns ="Type", axis=1).groupby("Date").sum().drop(columns="Category", axis=1).tail(20).T
+
+# 		rural = round(rural.sort_values(rural.columns[-1], ascending = False)/1000000,1)
+
+# 		urban = round(urban.sort_values(urban.columns[-1], ascending = False)/1000000,1)
+
+# 		rural_perc = round(rural/rural.sum(axis=0)*100,1).head(4)
+
+# 		urban_perc = round(urban/urban.sum(axis=0)*100,1)
 		
 
 
-		data = [go.Heatmap(
-				z = rural_perc.values,
-				y = rural_perc.index,
-				x = rural_perc.columns,
-				xgap = 1,
-				ygap = 1,
-				hoverinfo ='text',
-				# text = hovertext,
-				colorscale='Hot',
-					texttemplate="%{z}", 
-					textfont={"size":8},
-					reversescale=True,
-					),
-				]
-		fig = go.Figure(data=data)
+# 		data = [go.Heatmap(
+# 				z = rural_perc.values,
+# 				y = rural_perc.index,
+# 				x = rural_perc.columns,
+# 				xgap = 1,
+# 				ygap = 1,
+# 				hoverinfo ='text',
+# 				# text = hovertext,
+# 				colorscale='Hot',
+# 					texttemplate="%{z}", 
+# 					textfont={"size":8},
+# 					reversescale=True,
+# 					),
+# 				]
+# 		fig = go.Figure(data=data)
 
 
-#-------------------- New Code Ends ------------------------
+# #-------------------- New Code Ends ------------------------
 
 
 
-	if Feature == "TowerBTS Trends":
+# 	if Feature == "TowerBTS Trends":
 
 
-		dftowersbts = dfT["bts_towers"] #load 5G BTS deployment data from excel file
+# 		dftowersbts = dfT["bts_towers"] #load 5G BTS deployment data from excel file
 
-		# dftowersbts["Date"] = pd.to_datetime(dftowersbts["Date"])
+# 		# dftowersbts["Date"] = pd.to_datetime(dftowersbts["Date"])
 
-		# dftowersbts['Date'] = dftowersbts['Date'].apply(lambda x: x.strftime('%B-%Y')) 
+# 		# dftowersbts['Date'] = dftowersbts['Date'].apply(lambda x: x.strftime('%B-%Y')) 
 
-		dftowersbts = dftowersbts.set_index("Date")
+# 		dftowersbts = dftowersbts.set_index("Date")
 
-		dftowersbts = dftowersbts.asfreq("m")
+# 		dftowersbts = dftowersbts.asfreq("m")
 
-		dftowersbts.index = dftowersbts.index.strftime("%Y-%m")
-
-
-		dftowersbts = dftowersbts.sort_values("Date", ascending=True)
-		dftowersbts["Ratio"] = dftowersbts["BTS"] / dftowersbts["Towers"]
-
-		trace1 = go.Scatter(x=dftowersbts.index, y=dftowersbts["Ratio"], name="BTSs/Towers", yaxis="y1", 
-							textfont=dict(family="sans serif",size=8,color="DarkBlue"),
-							mode = 'lines+markers+text',text=list(round(dftowersbts["Ratio"],1)),
-							textposition="bottom center", showlegend = False, line = dict(color ='red'))
-		trace2 = go.Scatter(x=dftowersbts.index, y=dftowersbts["BTS"], name="BTS Trends", yaxis="y2", 
-							textfont=dict(family="sans serif",size=8,color="DarkBlue"),
-							mode = 'lines+markers+text',text=list(round(dftowersbts["BTS"]/100000,1)),
-							textposition="bottom center", showlegend = False, line = dict(color = 'green'))
-		trace3 = go.Scatter(x=dftowersbts.index, y=dftowersbts["Towers"], name="Tower Trends", yaxis="y3", 
-							textfont=dict(family="sans serif",size=8,color="DarkBlue"),
-							mode = 'lines+markers+text',text=list(round(dftowersbts["Towers"]/1000,0)),
-							textposition="bottom center", showlegend = False, line = dict(color = 'blue'))
-		# trace3 = go.Scatter(x=dftowersbts.index, y=dftowersbts["Towers"], name="Tower Trends", yaxis="y3", mode = 'lines+markers',
-		# 					showlegend = False, line = dict(color = 'blue'))
+# 		dftowersbts.index = dftowersbts.index.strftime("%Y-%m")
 
 
-		data = [trace1, trace2, trace3] #Data for line chart stacked on top of each other
+# 		dftowersbts = dftowersbts.sort_values("Date", ascending=True)
+# 		dftowersbts["Ratio"] = dftowersbts["BTS"] / dftowersbts["Towers"]
 
-		figtowerbts = go.Figure(data=data)
+# 		trace1 = go.Scatter(x=dftowersbts.index, y=dftowersbts["Ratio"], name="BTSs/Towers", yaxis="y1", 
+# 							textfont=dict(family="sans serif",size=8,color="DarkBlue"),
+# 							mode = 'lines+markers+text',text=list(round(dftowersbts["Ratio"],1)),
+# 							textposition="bottom center", showlegend = False, line = dict(color ='red'))
+# 		trace2 = go.Scatter(x=dftowersbts.index, y=dftowersbts["BTS"], name="BTS Trends", yaxis="y2", 
+# 							textfont=dict(family="sans serif",size=8,color="DarkBlue"),
+# 							mode = 'lines+markers+text',text=list(round(dftowersbts["BTS"]/100000,1)),
+# 							textposition="bottom center", showlegend = False, line = dict(color = 'green'))
+# 		trace3 = go.Scatter(x=dftowersbts.index, y=dftowersbts["Towers"], name="Tower Trends", yaxis="y3", 
+# 							textfont=dict(family="sans serif",size=8,color="DarkBlue"),
+# 							mode = 'lines+markers+text',text=list(round(dftowersbts["Towers"]/1000,0)),
+# 							textposition="bottom center", showlegend = False, line = dict(color = 'blue'))
+# 		# trace3 = go.Scatter(x=dftowersbts.index, y=dftowersbts["Towers"], name="Tower Trends", yaxis="y3", mode = 'lines+markers',
+# 		# 					showlegend = False, line = dict(color = 'blue'))
 
-		end_date = dt.datetime(2023, 6, 30)  # Use datetime.datetime instead of just datetime
-		figtowerbts.update_xaxes(range=[dftowersbts.index[0], end_date], dtick=2)
 
-		figtowerbts.update_layout(
-			    # title='Multiple Line Charts',
-			    yaxis=dict(
-			        title='Ratio - BTS/Towers',
-			        range=[2.5, 4],  # Set the range for y-axis 1
-			        domain=[0, 0.27]
-			    ),
-			    yaxis2=dict(
-			        title='BTS',
-			        range=[1500000, 3000000],  # Set the range for y-axis 2
-			        domain=[0.35, 0.62]
-			    ),
-			    yaxis3=dict(
-			        title='Towers',
-			        range=[400000, 800000],  # Set the range for y-axis 3
-			        domain=[0.69, 1]
-			    ),
-			    xaxis=dict(
-			        title='Date'
-			    ),
-			    height=900,
-			    width=1000,
-			)
+# 		data = [trace1, trace2, trace3] #Data for line chart stacked on top of each other
+
+# 		figtowerbts = go.Figure(data=data)
+
+# 		end_date = dt.datetime(2023, 6, 30)  # Use datetime.datetime instead of just datetime
+# 		figtowerbts.update_xaxes(range=[dftowersbts.index[0], end_date], dtick=2)
+
+# 		figtowerbts.update_layout(
+# 			    # title='Multiple Line Charts',
+# 			    yaxis=dict(
+# 			        title='Ratio - BTS/Towers',
+# 			        range=[2.5, 4],  # Set the range for y-axis 1
+# 			        domain=[0, 0.27]
+# 			    ),
+# 			    yaxis2=dict(
+# 			        title='BTS',
+# 			        range=[1500000, 3000000],  # Set the range for y-axis 2
+# 			        domain=[0.35, 0.62]
+# 			    ),
+# 			    yaxis3=dict(
+# 			        title='Towers',
+# 			        range=[400000, 800000],  # Set the range for y-axis 3
+# 			        domain=[0.69, 1]
+# 			    ),
+# 			    xaxis=dict(
+# 			        title='Date'
+# 			    ),
+# 			    height=900,
+# 			    width=1000,
+# 			)
 
 		# st.plotly_chart(figtowerbts, use_container_width=True) #for towerdata
 
