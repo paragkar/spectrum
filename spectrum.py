@@ -1952,7 +1952,7 @@ if selected_dimension == "Spectrum Bands":
 			      ygap = 1,
 			      hoverinfo ='text',
 			      text = hovertext,
-			      colorscale ='YlGnBu', #Debug 14th June 2024 (Hot to YlGnBu)
+			      colorscale ='Hot', 
 			      reversescale=True,
 				)
 				  ]
