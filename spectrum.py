@@ -3452,7 +3452,7 @@ if selected_dimension == "Auction Data":
 			    reversescale=True,
 			    text=dfbidsel.values,  # Set text to the same values as z for display
 			    texttemplate="%{z}",  # Define how text is displayed based on the text array
-			    textfont={"size":10},  # Adjust text font size within cells
+			    textfont={"size":16},  #Debug 14th June 2024 (Changed from 10 to 16)
 			    hoverinfo='x+y',  # Customize hover info to show only x and y values
 			)]
 
