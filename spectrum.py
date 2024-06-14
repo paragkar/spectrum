@@ -30,35 +30,6 @@ import yaml
 from yaml.loader import SafeLoader
 from deta import Deta
 
-# import altair as alt
-# import calendar
-# from collections import OrderedDict, defaultdict
-# from datetime import datetime
-# from dateutil.relativedelta import relativedelta
-# from deta import Deta
-# import io
-# from matplotlib import pyplot as plt
-# import msoffcrypto
-# import numpy as np
-# from pathlib import Path
-# import pandas as pd
-# import pickle
-# from PIL import Image
-# import plotly
-# import plotly.express as px
-# import plotly.figure_factory as ff
-# import plotly.graph_objects as go
-# import plotly.subplots as sp
-# from plotly.subplots import make_subplots
-# import re
-# import streamlit as st
-# import streamlit_authenticator as stauth
-# import streamlit_option_menu as st_option_menu
-# import time
-# import yaml
-# from yaml.loader import SafeLoader
-
-
 #debug 30th March 2024 to remove waring and future downcasting 
 
 pd.set_option('future.no_silent_downcasting', True)
@@ -68,47 +39,31 @@ pd.set_option('future.no_silent_downcasting', True)
 st.set_page_config(layout="wide")
 
 #--------User Authentication Starts-------
-
-
 # DETA_KEY= st.secrets["deta_auth_tele_app"]
-
 # deta = Deta(DETA_KEY)
-
 # db = deta.Base("users_db")
-
 # def insert_user(username, name, password):
-
-# 	#Returns the users on a successful user creation, othewise raises an error
-
-# 	return db.put({"key" : username, "name": name, "password" : password})
-
-# # insert_user("pparker", "Peter Parker", "abc123")
+#Returns the users on a successful user creation, othewise raises an error
+#return db.put({"key" : username, "name": name, "password" : password})
+#insert_user("pparker", "Peter Parker", "abc123")
 
 # def fetch_all_users():
-# 	#"Returns a dict of all users"
-
+	#"Returns a dict of all users"
 # 	res = db.fetch()
-
 # 	return res.items
-
 # users = fetch_all_users()
-
 # st.write(pd.DataFrame(users))
-
 # usernames = [user["key"] for user in users]
 # names = [user["name"] for user in users]
 # hashed_passwords = [user["password"] for user in users]
 
-
 # authenticator = stauth.Authenticate(names, usernames, hashed_passwords,
 #     "telecommapp", "abcdef", 30)
-
 
 # authenticator = stauth.Authenticate(
 # 	users,
 # 	'name',
 # 	'abcde')
-
 
 # def convert_dict_to_yaml_text(data):
 #     yaml_text = yaml.dump(data, sort_keys=False)
@@ -120,10 +75,8 @@ st.set_page_config(layout="wide")
 # # Use the YAML text in memory for further processing
 # st.write(yaml_text)
 
-
 # with open('config.yaml') as file:
 #     config = yaml.load(file, Loader=SafeLoader)
-
 
 # authenticator = stauth.Authenticate(
 # 	config['credentials'], 
@@ -133,7 +86,6 @@ st.set_page_config(layout="wide")
 # 	)
 
 # st.write(authenticator)
-
 
 # name, authentication_status, username = authenticator.login("Login", "main")
 
@@ -156,7 +108,6 @@ st.set_page_config(layout="wide")
 
 SummaryFlag = False # Code below will toggle to True to show summary chart
 
-
 #--------hide streamlit style and buttons--------------
 
 hide_st_style = '''
@@ -177,7 +128,6 @@ def loadrstousd():
 	df = pd.read_csv("rs_to_usd.csv")
 
 	return df
-
 
 @st.cache_resource
 def loadspectrumfile():
@@ -216,8 +166,6 @@ def loadtelecomdatafile():
 	dfT = pd.read_excel(excel_content, sheet_name=sheetT)
 
 	return dfT
-
-
 
 @st.cache_resource
 def loadauctionbiddata():
