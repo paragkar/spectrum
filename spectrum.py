@@ -1090,7 +1090,6 @@ def htext_colormatrix_auctiondata_2010_3G_BWA_BidsCircleWise(dfbidcirclwise, dft
 
 	dfbidcirclwiselastrd = dfbidcirclwiselastrd.pivot(index="Bidder", columns='LSA', values="Rank_PWB_End_ClkRd").sort_index(ascending=False)
 
-
 	dftempheatperc = dftemp.pivot(index="Bidder", columns='LSA', values="Bid_Decision_Perc")
 
 	dftempheatperc = dftempheatperc.sort_values(selected_lsa, ascending = True)
@@ -1519,7 +1518,6 @@ def summarychart(summarydf, xcolumn, ycolumn):
 	x = alt.X(xcolumn+':O', axis=alt.Axis(labels=True, labelAngle=0)), #Debug 12th June 2024 (Changed False to True)
 	color = alt.Color(xcolumn+':N', legend=None))
 
-	
 	text = bar.mark_text(size = 16, dx=0, dy=-7, color = 'white').encode(text=ycolumn+':Q') #Debug 12th June 2024 (Chnaged Bar Text Sixe from 10 to 16)
 	
 	chart = (bar + text).properties(width=1120, height =150)
@@ -1530,7 +1528,6 @@ def summarychart(summarydf, xcolumn, ycolumn):
 
 
 #**********  Main Program Starts here ***************
-
 
 # authenticator.logout("Logout", "sidebar") #logging out authentication
 # st.sidebar.title(f"Welcome {name}")
