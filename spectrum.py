@@ -3320,7 +3320,7 @@ if selected_dimension == "Auction Data":
 			figauc.update_layout(
 			    template="seaborn",
 			    xaxis_side= 'top',
-			   	height = 650,
+			   	height = 850, #Debug 14th June 2024 (Changed from 650 to 850)
 			   	yaxis=dict(
 		        tickmode='array',
 		        	))
