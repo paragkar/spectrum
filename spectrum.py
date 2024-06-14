@@ -2160,7 +2160,7 @@ def plotrwototal(sumrows, ydim, xdim):
 
 	fig.update_layout(xaxis=dict(side='top', title_standoff=0, ticklen=0, title_font=dict(size=20))) #Debug 12th June 2024 (Changed 14 to 20)
 
-	fig.update_layout(xaxis_title_standoff=10) #Debug 12th June 2024 (Changed 5 to 10)
+	fig.update_layout(xaxis_title_standoff=5) 
 
 	fig.update_traces(marker=dict(color='red'))
 
@@ -7371,8 +7371,6 @@ if selected_dimension in ["Spectrum Bands", "Auction Years", "Business Data"]:
 	#encircle the heatmaps with a rectangular box made up of black lines
 	#Except for features which are not heatmaps
 
-
-	
 
 
 	# Final plotting of various charts on the output page
