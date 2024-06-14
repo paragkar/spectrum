@@ -7079,7 +7079,7 @@ if (Feature == "Spectrum Map") and (SubFeature == "Operator Holdings"):
 
 if (Feature == "Spectrum Map") and (SubFeature == "Operator %Share"):
 
-	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
+	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=16, color='white'))) #Debug 14th June 2024 (Changed from 12 to 16)
 
 	xdtickangle = 0
 	xdtickval = 1
@@ -7103,7 +7103,7 @@ if (Feature == "Spectrum Map") and (SubFeature == "Operator %Share"):
 	
 if (Feature == "Expiry Map") and (SubFeature == "Frequency Layout"):
 
-	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
+	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=16, color='white'))) #Debug 14th June 2024 (Changed from 12 to 16)
 
 	xdtickangle = -90
 	xdtickval = xdtickfreq_dict[Band]
@@ -7124,7 +7124,7 @@ if (Feature == "Expiry Map") and (SubFeature == "Yearly Trends"):
 
 	hoverlabel_bgcolor = "#000000" #subdued black
 
-	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white'))) #hoverbox color is black
+	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=16, color='white'))) #Debug 14th June 2024 (Changed from 12 to 16)
 
 	xdtickangle = 0
 	xdtickval = dtickauction_dict[Band]
@@ -7141,7 +7141,7 @@ if (Feature == "Expiry Map") and (SubFeature == "Yearly Trends"):
 
 if Feature == "Auction Map":
 
-	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
+	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=16, color='white'))) #Debug 14th June 2024 (Changed from 12 to 16)
 
 	parttitle = "Yearly Trend of "+SubFeature
 	xdtickangle=0
