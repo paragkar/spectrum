@@ -3089,7 +3089,7 @@ if selected_dimension == "Auction Data":
 				text = df_combined.values,
 				colorscale="Hot",
 				texttemplate="%{text}",
-				textfont={"size":12},
+				textfont={"size":16}, #Debug 14th June 2024 (Changed from 12 to 16)
 				reversescale=True,
 				),
 				]
