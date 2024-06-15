@@ -2973,8 +2973,17 @@ if selected_dimension == "Auction Data":
 			    xaxis_side= 'top',
 			   	height = heatmapheight, #Debug 14th June 2024 (Changed from 650 to 850)
 			   	yaxis=dict(
-		        tickmode='array',
-		        	))
+	        	  tickmode='array',
+	        	  tickfont=dict(size=text_embed_in_chart_size),
+	        	  ),
+				  xaxis = dict(
+				  side = 'top',
+				  tickmode = 'linear',
+				  tickangle=0,
+				  dtick = 1,
+				  tickfont=dict(size=text_embed_in_chart_size),
+				   ), 
+				)
 
 			title = titlesubpart+" - Bidder's Rank at the End of CLK Round No - "+str(round_number)
 			subtitle = "Unit - RankNo; Higher the Rank More Aggressive is the Bidding; Sorted by Circle -"+selected_lsa[0]+" ; Source - DoT"
