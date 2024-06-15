@@ -1872,8 +1872,6 @@ def plotbiddertotal(dftemp,dfblocksalloc_rdend):
 	panindiabids = panindiabids.round(0)
 	panindiabids = panindiabids.sort_values("Bidder", ascending=False)
 
-	st.write(panindiabids)
-
 	fig = px.bar(panindiabids, y = 'Bidder', x='PanIndiaBid', orientation ='h', height = heatmapheight)
 
 	fig.update_layout(xaxis=dict(title='Total Value'), yaxis=dict(title=''))
@@ -3223,6 +3221,8 @@ if selected_dimension == "Auction Data":
 
 			dfblocksalloc_rdend = dfbidpwb.reset_index().pivot(index="Bidder", columns='LSA', values="Prov_Alloc_BLK_End_ClkRd")\
 														.sort_index(ascending=False).round(0)
+
+			st.write(dfblocksalloc_rdend)
 
 			dftemp = dfbidpwb.reset_index().pivot(index="Bidder", columns='LSA', values="PWB_Start_ClkRd").sort_index(ascending=False).round(1)
 
