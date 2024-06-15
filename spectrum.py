@@ -1292,9 +1292,7 @@ with st.sidebar:
 
 #loading file rupee to USD and finding the exchange rate in the auction eom
 
-auction_eom_list = [x.date() for x in list(auction_eom_dates_dict.values())]
-
-st.write(auction_eom_list)
+auction_eom_list = [x.date() for x in list(auction_eom_dates_dict.values())] #List of Auction End of Months Dates
 
 dfrsrate = loadrstousd()
 
@@ -1310,7 +1308,7 @@ for index in dfrsrate.index:
 
 		auction_rsrate_dict[index.year] = dfrsrate.loc[index,:].values[0]
 
-# st.write(auction_rsrate_dict)
+st.write(auction_rsrate_dict)
 
 
 
