@@ -7067,7 +7067,7 @@ if selected_dimension in ["Spectrum Bands", "Auction Years", "Business Data"]:
 
 	#layout for heatmaps 
 
-	fig.update_layout(uniformtext_minsize=12, 
+	fig.update_layout(uniformtext_minsize=16, 
 			  uniformtext_mode='hide', 
 			  xaxis_title=None, 
 			  yaxis_title=None, 
