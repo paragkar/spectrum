@@ -5936,7 +5936,7 @@ if selected_dimension in ["Spectrum Bands", "Auction Years", "Business Data"]:
 
 
 
-	Final plotting of various charts on the output page
+	# Final plotting of various charts on the output page
 	style = "<style>h3 {text-align: left;}</style>"
 	with st.container():
 		#plotting the main chart
