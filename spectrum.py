@@ -1688,6 +1688,7 @@ if selected_dimension == "Spectrum Bands":
 			      hoverinfo ='text',
 			      text = hovertext,
 			      colorscale ='Hot', 
+			      showscale = False,
 			      reversescale=True,
 				)
 				  ]
