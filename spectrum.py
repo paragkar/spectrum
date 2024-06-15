@@ -1866,7 +1866,7 @@ def plotbiddertotal(dftemp,dfblocksalloc_rdend):
 
 	dftemp = round(dftemp,1)
 					
-	panindiabids = bidvalue(dftemp,dfblocksalloc_rdend).sort_index().reset_index()
+	panindiabids = bidvalue(dftemp,dfblocksalloc_rdend).reset_index()
 
 	panindiabids.columns =["Bidder","PanIndiaBid"]
 	panindiabids = panindiabids.round(0)
