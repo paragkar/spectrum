@@ -3206,7 +3206,6 @@ if selected_dimension == "Auction Data":
 
 		#-----------------New Code Ends ----------------------#
 
-
 		pwbtype = st.sidebar.selectbox("Select a PWB Type", ["Start CLK Round", "End CLK Round"])
 
 		df1strd = dfbid[dfbid["Clk_Round"] == 1].reset_index() #Identifying the 2nd round gives up the reserve price
@@ -3253,13 +3252,11 @@ if selected_dimension == "Auction Data":
 
 				figpanindiabids = plotbiddertotal(dftemp,dfblocksalloc_rdend)
 
-
 				figpanindiabids.update_yaxes(visible=False, showticklabels=False)
 
-				figpanindiabids.update_layout(height = 615)
+				figpanindiabids.update_layout(height = heatmapheight)
 
 				dftemp = dftemp.sort_index(ascending=True)
-
 
 				hovertext, colormatrix = htext_colormatrix_auctiondata_2010_3G_BWA_ProvWinningBid(dfrp, dftemp, pwbtype, round_number)
 
