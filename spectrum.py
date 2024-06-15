@@ -289,7 +289,6 @@ year_band =["2010-Band2100","2010-Band2300", "2012-Band1800","2014-Band1800","20
 #Debug 19th June 2024
 year_band_exp =["2021-Band800","2021-Band900","2021-Band1800","2021-Band2100","2021-Band2300"] # As the DOT auction data is incomplete for these years
 
-
 #function to count number of items in a list and outputs the result as dictionary
 #Used to extract data table for Spectrum Layout Dimension when it is filtered by Operators      	   
 def count_items_in_dataframe(df):
@@ -332,12 +331,12 @@ def colscalefreqlayout(operators, colcodes):
 
 #function used for calculating the expiry year heatmap for the subfeature yearly trends
 @st.cache_resource
-def exp_year_cal_yearly_trends(df, selected_operator):
-	lst =[]
-	for i, line in enumerate(df.values):
-		explst = list(set(line))
-		processed_line = [[df.index[i],round(list(line).count(x)*channelsize_dict[Band],2), round(x,2)] for x in explst]
-		lst.append(processed_line)
+def exp_year_cal_yearly_trends(ef, selected_operator):
+	lst1 =[]
+	for i, line1 in enumerate(ef.values):
+		explst = list(set(line1))
+		l1 = [[ef.index[i],round(list(line1).count(x)*channelsize_dict[Band],2), round(x,2)] for x in explst]
+		lst1.append(l1)
 
 	lst2 =[]
 	for i, val in enumerate(lst1):
@@ -1251,7 +1250,6 @@ def transform_colscale_for_hbox_auction_map(dff,reserveprice, auctionprice):
 			colormatrix = temp.pivot(index='LSA', columns='Year', values="Color")
 			colormatrix = list(colormatrix.values)
 	return colormatrix
-
 
 
 
