@@ -2972,7 +2972,7 @@ if selected_dimension == "Auction Data":
 				zmin=zmin, zmax=zmax,
 				# text = hovertext,
 				colorscale='Hot',
-				# showscale=False,
+				showscale=False,
 					texttemplate="%{z}", 
 					textfont={"size":text_embed_in_chart_size},
 					# reversescale=True,
