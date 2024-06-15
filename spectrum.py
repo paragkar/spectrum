@@ -1632,18 +1632,18 @@ if selected_dimension == "Spectrum Bands":
 			
 			#Figure data for "Operator %Share"
 			data = [go.Heatmap(
-			      z = dfffshare.values,
-			      y = dfffshare.index,
-			      x = dfffshare.columns,
-			      xgap = 1,
-			      ygap = 1,
-			      hoverinfo ='text',
-			      text = hovertext,
-			       colorscale = 'Hot',
-			       showscale=False,
-			    texttemplate="%{z}", 
-			    textfont={"size":text_embed_in_chart_size}, # Debug 14th June 2024 (changed from 10 to 16)
-			    reversescale=True,)
+		      z = dfffshare.values,
+		      y = dfffshare.index,
+		      x = dfffshare.columns,
+		      xgap = 1,
+		      ygap = 1,
+		      hoverinfo ='text',
+		      text = hovertext,
+		      colorscale = 'Hot',
+		      showscale=False,
+			  texttemplate="%{z}", 
+			  textfont={"size":text_embed_in_chart_size}, # Debug 14th June 2024 (changed from 10 to 16)
+			  reversescale=True,)
 				]
 
 			fig = go.Figure(data=data)
