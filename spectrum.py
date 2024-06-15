@@ -7110,7 +7110,8 @@ if selected_dimension in ["Spectrum Bands", "Auction Years", "Business Data"]:
         tickfont=dict(size=18),
         showgrid=True,  # Enable grid lines for y-axis
         gridcolor='lightgrey',  # Set grid line color for y-axis
-        gridwidth=1  # Set grid line width for y-axis
+        gridwidth=1,  # Set grid line width for y-axis
+        gridpattern='dot'  # Set grid line pattern to dotted for y-axis
     ),
     xaxis=dict(
         side='top',
@@ -7120,9 +7121,11 @@ if selected_dimension in ["Spectrum Bands", "Auction Years", "Business Data"]:
         tickfont=dict(size=18),
         showgrid=True,  # Enable grid lines for x-axis
         gridcolor='lightgrey',  # Set grid line color for x-axis
-        gridwidth=1  # Set grid line width for x-axis
+        gridwidth=1,  # Set grid line width for x-axis
+        gridpattern='dot'  # Set grid line pattern to dotted for x-axis
     ),
 	)
+
 
 
 	#Drawning a black border around the heatmap chart 
