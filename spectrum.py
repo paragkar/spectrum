@@ -30,8 +30,6 @@ import yaml
 from yaml.loader import SafeLoader
 from deta import Deta
 
-#debug 30th March 2024 to remove waring and future downcasting 
-
 pd.set_option('future.no_silent_downcasting', True)
 
 
@@ -118,7 +116,6 @@ hide_st_style = '''
 				<style>
 				'''
 st.markdown(hide_st_style, unsafe_allow_html =True)
-
 
 #--------Functions for loading File Starts---------------------
 
@@ -1482,8 +1479,9 @@ if selected_dimension == "Spectrum Bands":
 
 			chartdata_df = chartdata_df.T
 
-			chart_data_flag = True #Plot only if this flag is true 
+			st.write(chartdata_df)
 
+			chart_data_flag = True #Plot only if this flag is true 
 
 			#Figure data for frequency map 
 			data = [go.Heatmap(
