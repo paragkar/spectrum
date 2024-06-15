@@ -5281,12 +5281,16 @@ if selected_dimension == "Auction Data":
 			  width=heatmapwidth,
 			  margin=dict(t=80, b=50, l=0, r=0, pad=0),
 			  yaxis=dict(
-	        	  tickmode='array'),
+        	  tickmode='array',
+        	  tickfont=dict(size=text_embed_in_chart_size),
+        	  ),
 			  xaxis = dict(
 			  side = 'top',
 			  tickmode = 'linear',
 			  tickangle=0,
-			  dtick = 1), 
+			  dtick = 1,
+			  tickfont=dict(size=text_embed_in_chart_size),
+			   ), 
 			)
 
 			figauc2.update_layout(uniformtext_minsize=text_embed_in_chart_size, 
@@ -5301,12 +5305,16 @@ if selected_dimension == "Auction Data":
 			  width=heatmapwidth,
 			  margin=dict(t=80, b=50, l=0, r=0, pad=0),
 			  yaxis=dict(
-	        	  tickmode='array'),
+        	  tickmode='array',
+        	  tickfont=dict(size=text_embed_in_chart_size),
+        	  ),
 			  xaxis = dict(
 			  side = 'top',
 			  tickmode = 'linear',
 			  tickangle=0,
-			  dtick = 1), 
+			  dtick = 1,
+			  tickfont=dict(size=text_embed_in_chart_size),
+			   ), 
 			)
 
 			title = titlesubpart+" - Last Submitted Bid (End of Round No - "+ str(round_number)+")"
