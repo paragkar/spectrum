@@ -1575,7 +1575,9 @@ if selected_dimension == "Spectrum Bands":
 
 			sumrows = dfff.sum(axis=1).reset_index()
 
-			figsumrows = plotrwototal(sumrows,"Operators", "Total MHz")
+			st.write(sumrows)
+
+			# figsumrows = plotrwototal(sumrows,"Operators", "Total MHz")
 
 			#Debug 14th June 2024 -----End
 
