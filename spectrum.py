@@ -918,9 +918,7 @@ def htext_colormatrix_auctiondata_2010_3G_BWA_BidsCircleWise(dfbidcirclwise, dft
 
 	temp = pd.DataFrame(dict_col).T
 
-
 	temp.columns = dftempheatabs.columns
-
 
 	resultdf = pd.DataFrame(dict_result).T
 
@@ -2845,10 +2843,19 @@ if selected_dimension == "Auction Data":
 		    template="seaborn",
 		    xaxis_side= 'top',
 		   	height = heatmapheight, #Debug 14th June 2024 (Changed from 650 to 850)
+
 		   	yaxis=dict(
 	        tickmode='array',
-	        showgrid=False,
-	        	))
+	        tickfont=dict(size=text_embed_in_chart_size),
+	        showgrid=False,  # Enable grid lines for y-axis
+    		),
+		    xaxis=dict(
+	        side='top',
+	        tickmode='linear',
+	        tickangle=xdtickangle,
+	        dtick=xdtickval,
+	        tickfont=dict(size=text_embed_in_chart_size),
+	        ))
 
 		title = titlesubpart+titlesubpart2
 		subtitle = "Source - DoT; Between Round Nos "+str(start_round)+" & "+str(end_round)+ "; Number of Rounds = "+ str(end_round-start_round)
