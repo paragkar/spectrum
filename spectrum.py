@@ -1474,7 +1474,7 @@ if selected_dimension == "Spectrum Bands":
 
 			chart_data_flag = True #Plot only if this flag is true 
 
-			
+			#Preparing data for "spectrum map" heatmap
 			data = [go.Heatmap(
 			      z = sf.values,
 			      y = sf.index,
