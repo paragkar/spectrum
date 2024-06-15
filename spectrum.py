@@ -2863,7 +2863,7 @@ if selected_dimension == "Auction Data":
 		#Drawning a black border around the heatmap chart 
 		figauc.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
 		figauc.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
-		figauc.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
+		figauc.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=text_embed_in_hover_size, color='white')))
 
 		st.plotly_chart(figauc, use_container_width=True)
 
@@ -3311,7 +3311,7 @@ if selected_dimension == "Auction Data":
 			figauc.update_layout(xaxis=dict(showgrid=False),yaxis=dict(showgrid=False))
 
 			hoverlabel_bgcolor = colormatrix
-			figauc.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
+			figauc.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=text_embed_in_hover_size, color='white')))
 
 			
 			#Plotting Charts for both Absolute values and Reserve Price Multiple 
@@ -3548,7 +3548,7 @@ if selected_dimension == "Auction Data":
 
 			hoverlabel_bgcolor = colormatrix
 
-			figauc.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
+			figauc.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=text_embed_in_hover_size, color='white')))
 
 			if chartoption == "Absolute Values":
 				col1,col2 = st.columns([8,1]) #create collumns of uneven width
@@ -3718,11 +3718,6 @@ if selected_dimension == "Auction Data":
 			    yaxis=dict(showgrid=False)
 			)
 
-		# hoverlabel_bgcolor = "#000000" #subdued black
-
-		# figauc.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
-
-
 
 		#Debug 10th June 2024
 
@@ -3866,7 +3861,7 @@ if selected_dimension == "Auction Data":
 
 			hoverlabel_bgcolor = "#000000" #subdued black
 
-			figauc.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
+			figauc.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=text_embed_in_hover_size, color='white')))
 
 			
 			#plotting all charts 
@@ -3979,7 +3974,7 @@ if selected_dimension == "Auction Data":
 
 			hoverlabel_bgcolor = "#000000" #subdued black
 
-			figauc.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
+			figauc.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=text_embed_in_hover_size, color='white')))
 
 
 			#plotting all charts 
@@ -4066,7 +4061,7 @@ if selected_dimension == "Auction Data":
 			  xaxis_title=None, 
 			  yaxis_title=None, 
 			  yaxis_autorange='reversed',
-			  font=dict(size=12),
+			  font=dict(size=text_embed_in_chart_size),
 			  template='simple_white',
 			  paper_bgcolor=None,
 			  height=heatmapheight, #Debug 14th June 2024 (Changed from 600 to 850)
@@ -4096,7 +4091,7 @@ if selected_dimension == "Auction Data":
 			  xaxis_title=None, 
 			  yaxis_title=None, 
 			  yaxis_autorange='reversed',
-			  font=dict(size=12),
+			  font=dict(size=text_embed_in_chart_size),
 			  template='simple_white',
 			  paper_bgcolor=None,
 			  height=heatmapheight, #Debug 14th June 2024 (Changed from 600 to 850)
@@ -4133,8 +4128,8 @@ if selected_dimension == "Auction Data":
 
 			hoverlabel_bgcolor = "#000000" #subdued black
 
-			figauc1.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
-			figauc2.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
+			figauc1.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=text_embed_in_hover_size, color='white')))
+			figauc2.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=text_embed_in_hover_size, color='white')))
 
 			tab1, tab2 = st.tabs(["Actual", "Ratio (Actual/Initial)"]) #For showning the absolute and Ratio charts in two differet tabs
 			tab1.plotly_chart(figauc1, use_container_width=True)
@@ -4199,7 +4194,7 @@ if selected_dimension == "Auction Data":
 			  xaxis_title=None, 
 			  yaxis_title=None, 
 			  yaxis_autorange='reversed',
-			  font=dict(size=12),
+			  font=dict(size=text_embed_in_chart_size),
 			  template='simple_white',
 			  paper_bgcolor=None,
 			  height=heatmapheight, #Debug 14th June 2024 (Changed from 600 to 850)
@@ -4229,7 +4224,7 @@ if selected_dimension == "Auction Data":
 			  xaxis_title=None, 
 			  yaxis_title=None, 
 			  yaxis_autorange='reversed',
-			  font=dict(size=12),
+			  font=dict(size=text_embed_in_chart_size),
 			  template='simple_white',
 			  paper_bgcolor=None,
 			  height=heatmapheight, #Debug 14th June 2024 (Changed from 600 to 850)
@@ -4266,8 +4261,8 @@ if selected_dimension == "Auction Data":
 
 			hoverlabel_bgcolor = "#000000" #subdued black
 
-			figauc1.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
-			figauc2.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
+			figauc1.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=text_embed_in_hover_size, color='white')))
+			figauc2.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=text_embed_in_hover_size, color='white')))
 
 			tab1, tab2 = st.tabs(["Actual", "Ratio (Actual/Initial)"]) #For showning the absolute and Ratio charts in two differet tabs
 			tab1.plotly_chart(figauc1, use_container_width=True)
@@ -4331,7 +4326,7 @@ if selected_dimension == "Auction Data":
 			  xaxis_title=None, 
 			  yaxis_title=None, 
 			  yaxis_autorange='reversed',
-			  font=dict(size=12),
+			  font=dict(size=text_embed_in_chart_size),
 			  template='simple_white',
 			  paper_bgcolor=None,
 			  height=heatmapheight, #Debug 14th June 2024 (Changed from 600 to 850)
@@ -4361,7 +4356,7 @@ if selected_dimension == "Auction Data":
 			  xaxis_title=None, 
 			  yaxis_title=None, 
 			  yaxis_autorange='reversed',
-			  font=dict(size=12),
+			  font=dict(size=text_embed_in_chart_size),
 			  template='simple_white',
 			  paper_bgcolor=None,
 			  height=heatmapheight, #Debug 14th June 2024 (Changed from 600 to 850)
@@ -4400,8 +4395,8 @@ if selected_dimension == "Auction Data":
 
 			hoverlabel_bgcolor = "#000000" #subdued black
 
-			figauc1.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
-			figauc2.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
+			figauc1.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=text_embed_in_hover_size, color='white')))
+			figauc2.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=text_embed_in_hover_size, color='white')))
 
 			tab1, tab2 = st.tabs(["Actual", "Ratio (Actual/Initial)"]) #For showning the absolute and Ratio charts in two differet tabs
 			tab1.plotly_chart(figauc1, use_container_width=True)
@@ -4436,7 +4431,7 @@ if selected_dimension == "Auction Data":
 			  xaxis_title=None, 
 			  yaxis_title=None, 
 			  yaxis_autorange='reversed',
-			  font=dict(size=12),
+			  font=dict(size=text_embed_in_chart_size),
 			  template='simple_white',
 			  paper_bgcolor=None,
 			  height=heatmapheight, #Debug 14th June 2024 (Changed from 600 to 850)
@@ -4470,10 +4465,6 @@ if selected_dimension == "Auction Data":
 				    xaxis=dict(showgrid=False),
 				    yaxis=dict(showgrid=False)
 				)
-
-			# hoverlabel_bgcolor = "#000000" #subdued black
-
-			# figauc.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 
 		
 			st.plotly_chart(figauc, use_container_width=True)
@@ -4535,12 +4526,12 @@ if selected_dimension == "Auction Data":
 
 			figauc = go.Figure(data=data)
 
-			figauc.update_layout(uniformtext_minsize=12, 
+			figauc.update_layout(uniformtext_minsize=text_embed_in_chart_size, 
 			  uniformtext_mode='hide', 
 			  xaxis_title=None, 
 			  yaxis_title=None, 
 			  yaxis_autorange='reversed',
-			  font=dict(size=12),
+			  font=dict(size=text_embed_in_chart_size),
 			  template='simple_white',
 			  paper_bgcolor=None,
 			  height=heatmapheight, #Debug 14th June 2024 (Changed from 600 to 850)
@@ -4577,7 +4568,7 @@ if selected_dimension == "Auction Data":
 
 			hoverlabel_bgcolor = "#000000" #subdued black
 
-			figauc.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
+			figauc.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=text_embed_in_hover_size, color='white')))
 
 
 			tab1,tab2 = st.tabs(["Pts Lost(Actual)", "Pts Lost(Percentage)"]) 
@@ -4652,7 +4643,7 @@ if selected_dimension == "Auction Data":
 						# zmin=0.5, zmax=1,
 						showscale=False,
 							texttemplate=texttempbiddemandactivity, 
-							textfont={"size":12},
+							textfont={"size":text_embed_in_chart_size},
 							reversescale=True,
 							)]
 
@@ -4668,7 +4659,7 @@ if selected_dimension == "Auction Data":
 						# zmin=0.5, zmax=1,
 						showscale=False,
 							texttemplate=texttempbiddemandactivity, 
-							textfont={"size":8},
+							textfont={"size":text_embed_in_chart_size},
 							reversescale=True,
 							)]
 						
@@ -4676,12 +4667,12 @@ if selected_dimension == "Auction Data":
 			figauc1 = go.Figure(data=data1)
 			figauc2 = go.Figure(data=data2)
 
-			figauc1.update_layout(uniformtext_minsize=12, 
+			figauc1.update_layout(uniformtext_minsize=text_embed_in_chart_size, 
 			  uniformtext_mode='hide', 
 			  xaxis_title=None, 
 			  yaxis_title=None, 
 			  yaxis_autorange='reversed',
-			  font=dict(size=12),
+			  font=dict(size=text_embed_in_chart_size),
 			  template='simple_white',
 			  paper_bgcolor=None,
 			  height=heatmapheight, #Debug 14th June 2024 (Changed from 600 to 850)
@@ -4696,12 +4687,12 @@ if selected_dimension == "Auction Data":
 			  dtick = xdtick), 
 			)
 
-			figauc2.update_layout(uniformtext_minsize=12, 
+			figauc2.update_layout(uniformtext_minsize=text_embed_in_chart_size, 
 			  uniformtext_mode='hide', 
 			  xaxis_title=None, 
 			  yaxis_title=None, 
 			  yaxis_autorange='reversed',
-			  font=dict(size=12),
+			  font=dict(size=text_embed_in_chart_size),
 			  template='simple_white',
 			  paper_bgcolor=None,
 			  height=heatmapheight, #Debug 14th June 2024 (Changed from 600 to 850)
@@ -4746,9 +4737,9 @@ if selected_dimension == "Auction Data":
 
 			hoverlabel_bgcolor = "#000000" #subdued black
 
-			figauc1.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
+			figauc1.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=text_embed_in_hover_size, color='white')))
 
-			figauc2.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
+			figauc2.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=text_embed_in_hover_size, color='white')))
 
 
 			tab1, tab2 = st.tabs(["Aggregate Demand", "Ratio (AD/BLKsForSale)"]) #For showning the absolute and Ratio charts in two differet tabs
@@ -4794,24 +4785,24 @@ if selected_dimension == "Auction Data":
 						# zmin=0.5, zmax=1,
 						showscale=True,
 							texttemplate=texttempbiddemandactivity, 
-							textfont={"size":12},
+							textfont={"size":text_embed_in_chart_size},
 							reversescale=True,
 							)]
 						
 
 			figauc = go.Figure(data=data)
 
-			figauc.update_layout(uniformtext_minsize=12, 
+			figauc.update_layout(uniformtext_minsize=text_embed_in_chart_size, 
 			  uniformtext_mode='hide', 
 			  xaxis_title=None, 
 			  yaxis_title=None, 
 			  yaxis_autorange='reversed',
-			  font=dict(size=12),
+			  font=dict(size=text_embed_in_chart_size),
 			  template='simple_white',
 			  paper_bgcolor=None,
 			  height=heatmapheight, #Debug 14th June 2024 (Changed from 600 to 850)
 			  width=heatmapwidth,
-			  margin=dict(t=80, b=50, l=50, r=50, pad=0),
+			  margin=dict(t=80, b=50, l=50, r=0, pad=0),
 			  yaxis=dict(
 	        	  tickmode='array'),
 			  xaxis = dict(
@@ -4843,7 +4834,7 @@ if selected_dimension == "Auction Data":
 
 			hoverlabel_bgcolor = "#000000" #subdued black
 
-			figauc.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
+			figauc.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=text_embed_in_hover_size, color='white')))
 
 
 			st.plotly_chart(figauc, use_container_width=True)
@@ -4933,7 +4924,7 @@ if selected_dimension == "Auction Data":
 						# zmin=0.5, zmax=1,
 						showscale=True,
 							texttemplate="%{text}", 
-							textfont={"size":12},
+							textfont={"size":text_embed_in_chart_size},
 							# reversescale=True,
 							)]
 
@@ -4950,7 +4941,7 @@ if selected_dimension == "Auction Data":
 						# zmin=0.5, zmax=1,
 						showscale=True,
 							texttemplate="%{text}", 
-							textfont={"size":12},
+							textfont={"size":text_embed_in_chart_size},
 							# reversescale=True,
 							)]			
 
@@ -4958,17 +4949,17 @@ if selected_dimension == "Auction Data":
 			figauc2 = go.Figure(data=data2)
 
 
-			figauc1.update_layout(uniformtext_minsize=12, 
+			figauc1.update_layout(uniformtext_minsize=text_embed_in_chart_size, 
 			  uniformtext_mode='hide', 
 			  xaxis_title=None, 
 			  yaxis_title=None, 
 			  yaxis_autorange='reversed',
-			  font=dict(size=12),
+			  font=dict(size=text_embed_in_chart_size),
 			  template='simple_white',
 			  paper_bgcolor=None,
 			  height=heatmapheight, #Debug 14th June 2024 (Changed from 600 to 850)
 			  width=heatmapwidth,
-			  margin=dict(t=80, b=50, l=50, r=50, pad=0),
+			  margin=dict(t=80, b=50, l=50, r=0, pad=0),
 			  yaxis=dict(
 	        	  tickmode='array'),
 			  xaxis = dict(
@@ -4978,17 +4969,17 @@ if selected_dimension == "Auction Data":
 			  dtick = 1), 
 			)
 
-			figauc2.update_layout(uniformtext_minsize=12, 
+			figauc2.update_layout(uniformtext_minsize=text_embed_in_chart_size, 
 			  uniformtext_mode='hide', 
 			  xaxis_title=None, 
 			  yaxis_title=None, 
 			  yaxis_autorange='reversed',
-			  font=dict(size=12),
+			  font=dict(size=text_embed_in_chart_size),
 			  template='simple_white',
 			  paper_bgcolor=None,
 			  height=heatmapheight, #Debug 14th June 2024 (Changed from 600 to 850)
 			  width=heatmapwidth,
-			  margin=dict(t=80, b=50, l=50, r=50, pad=0),
+			  margin=dict(t=80, b=50, l=50, r=0, pad=0),
 			  yaxis=dict(
 	        	  tickmode='array'),
 			  xaxis = dict(
@@ -5028,9 +5019,9 @@ if selected_dimension == "Auction Data":
 
 			hoverlabel_bgcolor = colormatrix
 
-			figauc1.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
+			figauc1.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=text_embed_in_hover_size, color='white')))
 
-			figauc2.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
+			figauc2.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=text_embed_in_hover_size, color='white')))
 
 
 			tab1,tab2 = st.tabs(["Absolute Value", "Ratio (Bid/Reserve)"])  #For showning the absolute and Ratio charts in two differet tabs
@@ -5196,7 +5187,7 @@ if selected_dimension == "Auction Data":
 						# zmin=0.5, zmax=1,
 						showscale=False,
 							texttemplate="%{text}", 
-							textfont={"size":12},
+							textfont={"size":text_embed_in_chart_size},
 							reversescale=True,
 							)]
 
@@ -5213,19 +5204,19 @@ if selected_dimension == "Auction Data":
 						# zmin=0.5, zmax=1,
 						showscale=False,
 							texttemplate="%{text}", 
-							textfont={"size":12},
+							textfont={"size":text_embed_in_chart_size},
 							reversescale=True,
 							)]			
 
 			figauc1 = go.Figure(data=data1)
 			figauc2 = go.Figure(data=data2)
 
-			figauc1.update_layout(uniformtext_minsize=12, 
+			figauc1.update_layout(uniformtext_minsize=text_embed_in_chart_size, 
 			  uniformtext_mode='hide', 
 			  xaxis_title=None, 
 			  yaxis_title=None, 
 			  yaxis_autorange='reversed',
-			  font=dict(size=12),
+			  font=dict(size=text_embed_in_chart_size),
 			  template='simple_white',
 			  paper_bgcolor=None,
 			  height=heatmapheight, #Debug 14th June 2024 (Changed from 600 to 850)
@@ -5240,12 +5231,12 @@ if selected_dimension == "Auction Data":
 			  dtick = 1), 
 			)
 
-			figauc2.update_layout(uniformtext_minsize=12, 
+			figauc2.update_layout(uniformtext_minsize=text_embed_in_chart_size, 
 			  uniformtext_mode='hide', 
 			  xaxis_title=None, 
 			  yaxis_title=None, 
 			  yaxis_autorange='reversed',
-			  font=dict(size=12),
+			  font=dict(size=text_embed_in_chart_size),
 			  template='simple_white',
 			  paper_bgcolor=None,
 			  height=heatmapheight, #Debug 14th June 2024 (Changed from 600 to 850)
@@ -5290,8 +5281,8 @@ if selected_dimension == "Auction Data":
 
 			hoverlabel_bgcolor = colormatrix
 
-			figauc1.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
-			figauc2.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
+			figauc1.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=text_embed_in_hover_size, color='white')))
+			figauc2.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=text_embed_in_hover_size, color='white')))
 
 
 			tab1,tab2 = st.tabs(["Absolute Value", "Ratio (Bid/Reserve)"])  #For showning the absolute and Ratio charts in two differet tabs
