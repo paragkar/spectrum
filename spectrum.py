@@ -5022,7 +5022,7 @@ if selected_dimension == "Auction Data":
 						text = df_combined2.values,
 						colorscale='reds',
 						# zmin=0.5, zmax=1,
-						showscale=True,
+						showscale=False,
 							texttemplate="%{text}", 
 							textfont={"size":text_embed_in_chart_size},
 							# reversescale=True,
