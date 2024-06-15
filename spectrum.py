@@ -7067,25 +7067,51 @@ if selected_dimension in ["Spectrum Bands", "Auction Years", "Business Data"]:
 
 	#layout for heatmaps 
 
-	fig.update_layout(uniformtext_minsize=16, 
-			  uniformtext_mode='hide', 
-			  xaxis_title=None, 
-			  yaxis_title=None, 
-			  yaxis_autorange='reversed',
-			  font=dict(size=16), #Debug 13th May 2024 (Changed from 12 to 16)
-			  template='simple_white',
-			  paper_bgcolor=None,
-			  height=850, #Debug 14th June 2024 (Changed from 600 to 850)
-			  width=1200,
-			  margin=dict(t=80, b=50, l=50, r=50, pad=0),
-			  yaxis=dict(
-	        	  tickmode='array'),
-			  xaxis = dict(
-			  side = 'top',
-			  tickmode = 'linear',
-			  tickangle=xdtickangle,
-			  dtick = xdtickval),
-			)
+	# fig.update_layout(uniformtext_minsize=16, 
+	# 		  uniformtext_mode='hide', 
+	# 		  xaxis_title=None, 
+	# 		  yaxis_title=None, 
+	# 		  yaxis_autorange='reversed',
+	# 		  font=dict(size=16), #Debug 13th May 2024 (Changed from 12 to 16)
+	# 		  template='simple_white',
+	# 		  paper_bgcolor=None,
+	# 		  height=850, #Debug 14th June 2024 (Changed from 600 to 850)
+	# 		  width=1200,
+	# 		  margin=dict(t=80, b=50, l=50, r=50, pad=0),
+	# 		  yaxis=dict(
+	#         	  tickmode='array'),
+	# 		  xaxis = dict(
+	# 		  side = 'top',
+	# 		  tickmode = 'linear',
+	# 		  tickangle=xdtickangle,
+	# 		  dtick = xdtickval),
+	# 		)
+
+
+	fig.update_layout(
+    uniformtext_minsize=16, 
+    uniformtext_mode='hide', 
+    xaxis_title=None,  # No title for the x-axis
+    yaxis_title=None,  # No title for the y-axis
+    yaxis_autorange='reversed',
+    font=dict(size=16),  # Sets the overall font size, impacting legend, color bar, etc.
+    template='simple_white',
+    paper_bgcolor=None,
+    height=850,  # Changed from 600 to 850
+    width=1200,
+    margin=dict(t=80, b=50, l=50, r=50, pad=0),
+    yaxis=dict(
+        tickmode='array',
+        tickfont=dict(size=18)  # Increase the font size of the y-axis tick labels here
+    ),
+    xaxis=dict(
+        side='top',
+        tickmode='linear',
+        tickangle=xdtickangle,
+        dtick=xdtickval,
+        tickfont=dict(size=18)  # Increase the font size of the x-axis tick labels here
+    ),
+		)
 
 	#Drawning a black border around the heatmap chart 
 	fig.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
