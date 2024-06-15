@@ -6160,22 +6160,22 @@ if selected_dimension in ["Spectrum Bands", "Auction Years", "Business Data"]:
 			st.plotly_chart(fig, use_container_width=True) # for heatmaps
 
 
-		#preparing the container layout for the dimension business data
-		if (selected_dimension=="Business Data") and (Feature == "License Fees") and (SubFeature=="Operators"):
-			col1val =4.5
-		if (selected_dimension=="Business Data") and (Feature == "License Fees") and (SubFeature=="LicenseType"):
-			col1val =1
-		if (selected_dimension=="Business Data") and (Feature == "Financial SPWise"):
-			col1val =0.7
-		if (selected_dimension=="Business Data") and (Feature == "Financial LSAWise"):
-			col1val =0.7
-		else:
-			col1val = 0.2
+		# #preparing the container layout for the dimension business data
+		# if (selected_dimension=="Business Data") and (Feature == "License Fees") and (SubFeature=="Operators"):
+		# 	col1val =4.5
+		# if (selected_dimension=="Business Data") and (Feature == "License Fees") and (SubFeature=="LicenseType"):
+		# 	col1val =1
+		# if (selected_dimension=="Business Data") and (Feature == "Financial SPWise"):
+		# 	col1val =0.7
+		# if (selected_dimension=="Business Data") and (Feature == "Financial LSAWise"):
+		# 	col1val =0.7
+		# else:
+			# col1val = 0.2
 
 
 		#plotting the final summary chart 
 
-		col1,col2,col3 = st.columns([col1val,14,1.1]) #create collumns of uneven width
+		col1,col2,col3 = st.columns([0.2,14,1.1]) #create collumns of uneven width
 		if SummaryFlag ==True:
 			# st.altair_chart(chart, use_container_width=True)
 			col2.altair_chart(chart, use_container_width=True)
