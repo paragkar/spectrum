@@ -1887,7 +1887,7 @@ def plotbiddertotal(dftemp,dfblocksalloc_rdend):
 
 	panindiabids = panindiabids.sort_values("Bidder", ascending=False)
 
-	fig = px.bar(panindiabids, y = 'Bidder', x='PanIndiaBid', orientation ='h', height = 625)
+	fig = px.bar(panindiabids, y = 'Bidder', x='PanIndiaBid', orientation ='h', height = heatmapheight)
 
 	fig.update_layout(xaxis=dict(title='Total Value'), yaxis=dict(title=''))
 
@@ -1907,8 +1907,7 @@ def plotbiddertotal(dftemp,dfblocksalloc_rdend):
 
 def plotrwototal(sumrows, ydim, xdim):
 					
-
-	fig = px.bar(sumrows, y = ydim, x=xdim, orientation ='h', height = 625)
+	fig = px.bar(sumrows, y = ydim, x=xdim, orientation ='h', height = heatmapheight)
 
 	fig.update_layout(xaxis=dict(title='India Total'), yaxis=dict(title=''))
 
@@ -1922,14 +1921,13 @@ def plotrwototal(sumrows, ydim, xdim):
 
 	fig.update_traces(marker=dict(color='red'))
 
-
 	return fig
 
 
 
 def plotlosttotal(df,ydim,xdim):
 
-	fig = px.bar(df, y =ydim, x=xdim, orientation ='h', height = 615)
+	fig = px.bar(df, y =ydim, x=xdim, orientation ='h', height = heatmapheight)
 
 	fig.update_layout(xaxis=dict(title="Total"), yaxis=dict(title=''))
 
@@ -2666,7 +2664,6 @@ if selected_dimension == "Auction Data":
 
 		#--------- debug 30th March 2024
 
-
 		# dftemp["Bid_Decision_Perc"] = round((dftemp["Bid_Decision"]/summarydf["Bid_Decision"])*100,1)
 
 
@@ -2675,7 +2672,6 @@ if selected_dimension == "Auction Data":
 		summarydf = summarydf.reset_index()
 
 		dftemp = pd.merge(dftemp, summarydf[['LSA', 'Bid_Decision']], on='LSA', how='left', suffixes=('', '_summary'))
-
 
 		dftemp = dftemp.replace(0, np.nan)
 
@@ -2715,8 +2711,6 @@ if selected_dimension == "Auction Data":
 											dftemp,selected_lsa[0],start_round,end_round,dfprovallcblks_endrd)
 
 		hoverlabel_bgcolor = colormatrix
-
-
 
 		radio_selection = st.sidebar.radio('Click an Option', ["Absolute Values", "Percentage of Total", "Provisional Winners"])
 
@@ -2844,7 +2838,6 @@ if selected_dimension == "Auction Data":
 			chart = summarychart(summarydf, 'LSA', "TotalBids")
 			SummaryFlag = True
 
-
 			resultdfheat = resultdf.replace("WON",1)
 
 			resultdfheat = resultdfheat.replace("LOST",0)
@@ -2893,7 +2886,6 @@ if selected_dimension == "Auction Data":
 		#Drawning a black border around the heatmap chart 
 		figauc.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
 		figauc.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
-
 		figauc.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 
 		st.plotly_chart(figauc, use_container_width=True)
@@ -2909,7 +2901,6 @@ if selected_dimension == "Auction Data":
 		plottype = st.sidebar.selectbox("Select a Plot Type", ["RanksInRound", "RanksInRounds"])
 
 		if plottype == "RanksInRound":
-
 
 			# debug 30th Mar 2024
 			# Generate a list of all round numbers
