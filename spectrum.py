@@ -1479,7 +1479,7 @@ if selected_dimension == "Spectrum Bands":
 
 			chartdata_df = chartdata_df.T
 
-			st.write(chartdata_df)
+			st.write(chartdata_df.sum(axis=1))
 
 			chart_data_flag = True #Plot only if this flag is true 
 
