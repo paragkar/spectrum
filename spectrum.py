@@ -1294,6 +1294,8 @@ with st.sidebar:
 
 auction_eom_list = [x.date() for x in list(auction_eom_dates_dict.values())]
 
+st.write(auction_eom_list)
+
 dfrsrate = loadrstousd()
 
 auction_rsrate_dict ={} #the dictionary which stores all the values of the rupee usd rates
