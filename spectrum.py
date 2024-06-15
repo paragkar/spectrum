@@ -291,6 +291,7 @@ year_band_exp =["2021-Band800","2021-Band900","2021-Band1800","2021-Band2100","2
 heatmapheight = 900
 heatmapwidth = 900
 text_embed_in_chart_size = 20
+text_embed_in_hover_size = 16
 
 
 #function to count number of items in a list and outputs the result as dictionary
@@ -1265,7 +1266,7 @@ def summarychart(summarydf, xcolumn, ycolumn):
 	x = alt.X(xcolumn+':O', axis=alt.Axis(labels=True, labelAngle=0)), #Debug 12th June 2024 (Changed False to True)
 	color = alt.Color(xcolumn+':N', legend=None))
 
-	text = bar.mark_text(size = 16, dx=0, dy=-7, color = 'white').encode(text=ycolumn+':Q') #Debug 12th June 2024 (Chnaged Bar Text Sixe from 10 to 16)
+	text = bar.mark_text(size = text_embed_in_chart_size, dx=0, dy=-7, color = 'white').encode(text=ycolumn+':Q') #Debug 12th June 2024 (Chnaged Bar Text Sixe from 10 to 16)
 	
 	chart = (bar + text).properties(width=1120, height =150)
 	chart = chart.configure_title(fontSize = text_embed_in_chart_size, font ='Arial', anchor = 'middle', color ='black')
@@ -1558,7 +1559,7 @@ if selected_dimension == "Spectrum Bands":
 			      text = hovertext,
 			       colorscale = 'Hot',
 			    texttemplate="%{z}", 
-			    textfont={"size":16}, # Debug 14th June 2024 (changed from 10 to 16)
+			    textfont={"size":text_embed_in_chart_size}, # Debug 14th June 2024 (changed from 10 to 16)
 			    reversescale=True,)
 				]
 
@@ -1632,7 +1633,7 @@ if selected_dimension == "Spectrum Bands":
 			      text = hovertext,
 			       colorscale = 'Hot',
 			    texttemplate="%{z}", 
-			    textfont={"size":16}, # Debug 14th June 2024 (changed from 10 to 16)
+			    textfont={"size":text_embed_in_chart_size}, # Debug 14th June 2024 (changed from 10 to 16)
 			    reversescale=True,)
 				]
 
@@ -1824,7 +1825,7 @@ if selected_dimension == "Spectrum Bands":
 			text = hovertext,
 			colorscale='Hot',
 				texttemplate="%{z}", 
-				textfont={"size":16},# Debug 14th June 2024 (changed from 10 to 16)
+				textfont={"size":text_embed_in_chart_size},# Debug 14th June 2024 (changed from 10 to 16)
 				reversescale=True,
 				),
 			]
@@ -2739,7 +2740,7 @@ if selected_dimension == "Auction Data":
 				text = df_combined.values,
 				colorscale="Hot",
 				texttemplate="%{text}",
-				textfont={"size":16}, #Debug 14th June 2024 (Changed from 12 to 16)
+				textfont={"size":text_embed_in_chart_size}, #Debug 14th June 2024 (Changed from 12 to 16)
 				reversescale=True,
 				),
 				]
@@ -2797,7 +2798,7 @@ if selected_dimension == "Auction Data":
 				text = df_combined.values,
 				colorscale="Hot",
 					texttemplate="%{text}",
-					textfont={"size":16}, #Debug 14th June 2024 (Changed from 12 to 16)
+					textfont={"size":text_embed_in_chart_size}, #Debug 14th June 2024 (Changed from 12 to 16)
 					reversescale=True,
 					),
 				]
@@ -2831,7 +2832,7 @@ if selected_dimension == "Auction Data":
 				text = resultdf.values,
 				colorscale="YlGnBu", #Debug 10th June 2024
 					texttemplate="%{text}",
-					textfont={"size":16}, #Debug 14th June 2024 (Changed from 10 to 16)
+					textfont={"size":text_embed_in_chart_size}, #Debug 14th June 2024 (Changed from 10 to 16)
 					reversescale=True,
 					),
 				]
@@ -3095,7 +3096,7 @@ if selected_dimension == "Auction Data":
 			    reversescale=True,
 			    text=dfbidsel.values,  # Set text to the same values as z for display
 			    texttemplate="%{z}",  # Define how text is displayed based on the text array
-			    textfont={"size":16},  #Debug 14th June 2024 (Changed from 10 to 16)
+			    textfont={"size":text_embed_in_chart_size},  #Debug 14th June 2024 (Changed from 10 to 16)
 			    hoverinfo='x+y',  # Customize hover info to show only x and y values
 			)]
 
@@ -3209,7 +3210,7 @@ if selected_dimension == "Auction Data":
 				colorscale='YlGnBu', #10th June 2024
 				showscale=False,
 					texttemplate="%{z}", 
-					textfont={"size":16},#Debug 12th June 2024
+					textfont={"size":text_embed_in_chart_size},#Debug 12th June 2024
 					# reversescale=True,
 					)]
 
@@ -3220,7 +3221,7 @@ if selected_dimension == "Auction Data":
 				  xaxis_title=None, 
 				  yaxis_title=None, 
 				  yaxis_autorange='reversed',
-				  font=dict(size=16), #Debug 12th June 2024
+				  font=dict(size=text_embed_in_chart_size), #Debug 12th June 2024
 				  template='simple_white',
 				  paper_bgcolor=None,
 				  height=heatmapheight, #Debug 14th June 2024 (Changed from 600 to 850)
@@ -3267,7 +3268,7 @@ if selected_dimension == "Auction Data":
 					colorscale='YlGnBu', #Debug 10th June 2024
 					showscale=False,
 						texttemplate="%{z}", 
-						textfont={"size":16},#Debug 12th June 2024
+						textfont={"size":text_embed_in_chart_size},#Debug 12th June 2024
 						# reversescale=True,
 						)]
 
@@ -3278,7 +3279,7 @@ if selected_dimension == "Auction Data":
 				  xaxis_title=None, 
 				  yaxis_title=None, 
 				  yaxis_autorange='reversed',
-				  font=dict(size=16),#Debug 12th June 2024
+				  font=dict(size=text_embed_in_chart_size),#Debug 12th June 2024
 				  template='simple_white',
 				  paper_bgcolor=None,
 				  height=heatmapheight, #Debug 14th June 2024 (Changed from 600 to 850)
@@ -3423,7 +3424,7 @@ if selected_dimension == "Auction Data":
 				colorscale='YlGnBu', #Debug 10th June 2024
 				showscale=False,
 					texttemplate="%{z}", 
-					textfont={"size":16},#Debug 12th June 2024
+					textfont={"size":text_embed_in_chart_size},#Debug 12th June 2024
 					# reversescale=True,
 					)]
 
@@ -3434,7 +3435,7 @@ if selected_dimension == "Auction Data":
 				  xaxis_title=None, 
 				  yaxis_title=None, 
 				  yaxis_autorange='reversed',
-				  font=dict(size=16),#Debug 12th June 2024
+				  font=dict(size=text_embed_in_chart_size),#Debug 12th June 2024
 				  template='simple_white',
 				  paper_bgcolor=None,
 				  height=heatmapheight, #Debug 14th June 2024 (Changed from 600 to 850)
@@ -3505,7 +3506,7 @@ if selected_dimension == "Auction Data":
 					colorscale='YlGnBu', #Debug 10th June 2024
 					showscale=False, #Debug 12th June 2024
 						texttemplate="%{z}", 
-						textfont={"size":16},#Debug 12th June 2024
+						textfont={"size":text_embed_in_chart_size},#Debug 12th June 2024
 						# reversescale=True,
 						)]
 
@@ -3516,7 +3517,7 @@ if selected_dimension == "Auction Data":
 				  xaxis_title=None, 
 				  yaxis_title=None, 
 				  yaxis_autorange='reversed',
-				  font=dict(size=16),#Debug 12th June 2024
+				  font=dict(size=text_embed_in_chart_size),#Debug 12th June 2024
 				  template='simple_white',
 				  paper_bgcolor=None,
 				  height=heatmapheight, #Debug 14th June 2024 (Changed from 600 to 850)
@@ -3660,7 +3661,7 @@ if selected_dimension == "Auction Data":
 				colorscale='Hot',
 				showscale=False, #Debug 10th June 2024
 					texttemplate="%{z}", 
-					textfont={"size":16}, #Debug 12th June 2024
+					textfont={"size":text_embed_in_chart_size}, #Debug 12th June 2024
 					reversescale=True,
 					)]
 				
@@ -3687,7 +3688,7 @@ if selected_dimension == "Auction Data":
 		  xaxis_title=None, 
 		  yaxis_title=None, 
 		  yaxis_autorange='reversed',
-		  font=dict(size=16),#Debug 12th June 2024
+		  font=dict(size=text_embed_in_chart_size),#Debug 12th June 2024
 		  template='simple_white',
 		  paper_bgcolor=None,
 		  height=heatmapheight, #Debug 14th June 2024 (Changed from 600 to 850)
@@ -3823,7 +3824,7 @@ if selected_dimension == "Auction Data":
 					colorscale='Hot',
 					showscale=False,
 						texttemplate="%{z}", 
-						textfont={"size":16},#Debug 12th June 2024
+						textfont={"size":text_embed_in_chart_size},#Debug 12th June 2024
 						reversescale=True,
 						)]
 					
@@ -3835,7 +3836,7 @@ if selected_dimension == "Auction Data":
 				  xaxis_title=None, 
 				  yaxis_title=None, 
 				  yaxis_autorange='reversed',
-				  font=dict(size=16), #Debug 12th June 2024
+				  font=dict(size=text_embed_in_chart_size), #Debug 12th June 2024
 				  template='simple_white',
 				  paper_bgcolor=None,
 				  height=heatmapheight, #Debug 14th June 2024 (Changed from 600 to 850)
@@ -3936,7 +3937,7 @@ if selected_dimension == "Auction Data":
 					colorscale='Hot',
 					showscale=False,
 						texttemplate="%{z}", 
-						textfont={"size":16}, #Debug 12th June 2024
+						textfont={"size":text_embed_in_chart_size}, #Debug 12th June 2024
 						reversescale=True,
 						)]
 					
@@ -3948,7 +3949,7 @@ if selected_dimension == "Auction Data":
 				  xaxis_title=None, 
 				  yaxis_title=None, 
 				  yaxis_autorange='reversed',
-				  font=dict(size=16), #Debug 12th June 2024
+				  font=dict(size=text_embed_in_chart_size), #Debug 12th June 2024
 				  template='simple_white',
 				  paper_bgcolor=None,
 				  height=heatmapheight, #Debug 14th June 2024 (Changed from 600 to 850)
@@ -5574,7 +5575,7 @@ if selected_dimension == "Auction Years":
 		  text = hovertext,
 		  colorscale = 'Hot',
 		    texttemplate="%{z}", 
-		    textfont={"size":16}, #Debug 13th June 2024 (Changed from 12 to 16)
+		    textfont={"size":text_embed_in_chart_size}, #Debug 13th June 2024 (Changed from 12 to 16)
 		    reversescale=True,
 			)]
 
@@ -5608,7 +5609,7 @@ if currency_flag == False: #USD
 
 if (Feature == "Spectrum Map") and (SubFeature == "Frequency Layout"):
 
-	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=16, color='white'))) #Debug 14th June 2024 (Chnaged from 12 to 16)
+	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=text_embed_in_hover_size, color='white'))) #Debug 14th June 2024 (Chnaged from 12 to 16)
 
 	xdtickangle = -90
 	xdtickval = xdtickfreq_dict[Band]
@@ -5627,7 +5628,7 @@ if (Feature == "Spectrum Map") and (SubFeature == "Frequency Layout"):
 
 if (Feature == "Spectrum Map") and (SubFeature == "Operator Holdings"):
 
-	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=16, color='white'))) #Debug 14th June 2024 (Chnaged from 12 to 16)
+	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=text_embed_in_hover_size, color='white'))) #Debug 14th June 2024 (Chnaged from 12 to 16)
 
 	xdtickangle = 0
 	xdtickval = 1
@@ -5652,7 +5653,7 @@ if (Feature == "Spectrum Map") and (SubFeature == "Operator Holdings"):
 
 if (Feature == "Spectrum Map") and (SubFeature == "Operator %Share"):
 
-	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=16, color='white'))) #Debug 14th June 2024 (Changed from 12 to 16)
+	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=text_embed_in_hover_size, color='white'))) #Debug 14th June 2024 (Changed from 12 to 16)
 
 	xdtickangle = 0
 	xdtickval = 1
@@ -5676,7 +5677,7 @@ if (Feature == "Spectrum Map") and (SubFeature == "Operator %Share"):
 	
 if (Feature == "Expiry Map") and (SubFeature == "Frequency Layout"):
 
-	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=16, color='white'))) #Debug 14th June 2024 (Changed from 12 to 16)
+	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=text_embed_in_hover_size, color='white'))) #Debug 14th June 2024 (Changed from 12 to 16)
 
 	xdtickangle = -90
 	xdtickval = xdtickfreq_dict[Band]
@@ -5697,7 +5698,7 @@ if (Feature == "Expiry Map") and (SubFeature == "Yearly Trends"):
 
 	hoverlabel_bgcolor = "#000000" #subdued black
 
-	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=16, color='white'))) #Debug 14th June 2024 (Changed from 12 to 16)
+	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=text_embed_in_hover_size, color='white'))) #Debug 14th June 2024 (Changed from 12 to 16)
 
 	xdtickangle = 0
 	xdtickval = dtickauction_dict[Band]
@@ -5714,7 +5715,7 @@ if (Feature == "Expiry Map") and (SubFeature == "Yearly Trends"):
 
 if Feature == "Auction Map":
 
-	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=16, color='white'))) #Debug 14th June 2024 (Changed from 12 to 16)
+	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=text_embed_in_hover_size, color='white'))) #Debug 14th June 2024 (Changed from 12 to 16)
 
 	parttitle = "Yearly Trend of "+SubFeature
 	xdtickangle=0
@@ -5733,7 +5734,7 @@ if Feature == "Auction Map":
 
 if (Feature == "Band Metric"):
 
-	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=16, color='white'))) #Debug 14th June 2024 (Changed from 12 to 16)
+	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=text_embed_in_hover_size, color='white'))) #Debug 14th June 2024 (Changed from 12 to 16)
 	
 	xdtickangle =0
 	xdtickval =1
@@ -5759,7 +5760,7 @@ if (Feature == "Band Metric"):
 	
 if (Feature == "Operator Metric"):
 
-	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=16, color='white'))) #Debug 14th June 2024 (Changed from 12 to 16)
+	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=text_embed_in_hover_size, color='white'))) #Debug 14th June 2024 (Changed from 12 to 16)
 
 	xdtickangle =0
 	xdtickval =1
@@ -5787,12 +5788,12 @@ if selected_dimension in ["Spectrum Bands", "Auction Years", "Business Data"]:
 	#layout for heatmaps 
 
 	fig.update_layout(
-    uniformtext_minsize=16, 
+    uniformtext_minsize=text_embed_in_chart_size, 
     uniformtext_mode='hide', 
     xaxis_title=None, 
     yaxis_title=None, 
     yaxis_autorange='reversed',
-    font=dict(size=16),
+    font=dict(size=text_embed_in_chart_size),
     template='simple_white',
     paper_bgcolor=None,
     height=heatmapheight, #Changing this will adjust the height of all heat maps
@@ -5800,7 +5801,7 @@ if selected_dimension in ["Spectrum Bands", "Auction Years", "Business Data"]:
     margin=dict(t=80, b=50, l=50, r=50, pad=0),
     yaxis=dict(
         tickmode='array',
-        tickfont=dict(size=18),
+        tickfont=dict(size=text_embed_in_chart_size),
         showgrid=True,  # Enable grid lines for y-axis
         gridcolor='lightgrey',  # Set grid line color for y-axis
         gridwidth=1  # Set grid line width for y-axis
@@ -5810,7 +5811,7 @@ if selected_dimension in ["Spectrum Bands", "Auction Years", "Business Data"]:
         tickmode='linear',
         tickangle=xdtickangle,
         dtick=xdtickval,
-        tickfont=dict(size=18),
+        tickfont=dict(size=text_embed_in_chart_size),
         showgrid=True,  # Enable grid lines for x-axis
         gridcolor='lightgrey',  # Set grid line color for x-axis
         gridwidth=1  # Set grid line width for x-axis
