@@ -3190,9 +3190,7 @@ if selected_dimension == "Auction Data":
 
 
 				figpanindiabids = plotbiddertotal(dftemp,dfblocksalloc_rdend)
-
 				figpanindiabids.update_yaxes(visible=False, showticklabels=False)
-
 				figpanindiabids.update_layout(height = heatmapheight)
 
 				dftemp = dftemp.sort_index(ascending=True)
@@ -3245,8 +3243,11 @@ if selected_dimension == "Auction Data":
 		
 			if chartoption == "ReservePrice Multiple":
 
-				dftemp1 = dftemp.copy()
+				figpanindiabids = plotbiddertotal(dftemp,dfblocksalloc_rdend)
+				figpanindiabids.update_yaxes(visible=False, showticklabels=False)
+				figpanindiabids.update_layout(height = heatmapheight)
 
+				dftemp1 = dftemp.copy()
 				dftemp = round(dftemp/dfrp.values,1)
 
 
@@ -3313,16 +3314,14 @@ if selected_dimension == "Auction Data":
 			#Drawning a black border around the heatmap chart 
 			figauc.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True, range=[-0.5, len(dftemp.columns) -0.5])
 			figauc.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True, range=[-0.5, len(dftemp.index) -0.5])
-
-			figauc.update_layout(
-				    xaxis=dict(showgrid=False),
-				    yaxis=dict(showgrid=False),
-				     
-							)
+			figauc.update_layout(xaxis=dict(showgrid=False),yaxis=dict(showgrid=False))
 
 			hoverlabel_bgcolor = colormatrix
 
 			figauc.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
+
+			
+			#Plotting Charts for both Absolute values and Reserve Price Multiple 
 
 			if chartoption == "Absolute Values":
 				col1,col2 = st.columns([8,1]) #create collumns of uneven width
@@ -3332,11 +3331,15 @@ if selected_dimension == "Auction Data":
 					st.markdown("")
 					st.plotly_chart(figpanindiabids, use_container_width=True)
 
-
-
 			if chartoption =="ReservePrice Multiple":
-
-				st.plotly_chart(figauc, use_container_width=True)
+				# st.plotly_chart(figauc, use_container_width=True)
+				
+				col1,col2 = st.columns([8,1]) #create collumns of uneven width
+				with col1:
+					st.plotly_chart(figauc, use_container_width=True)
+				with col2:
+					st.markdown("")
+					st.plotly_chart(figpanindiabids, use_container_width=True)
 
 				#plotting the final summary chart 
 				col1,col2,col3 = st.columns([0.35, 14,1.1]) #create collumns of uneven width
