@@ -3127,7 +3127,19 @@ if selected_dimension == "Auction Data":
 			    height=heatmapheight,
 			    plot_bgcolor='#D2B48C',  # Background color for the plot area light pink
 			    paper_bgcolor='white',  # Background color for the entire figure
-			)
+			    yaxis=dict(
+		        	  tickmode='array',
+		        	  tickfont=dict(size=text_embed_in_chart_size),
+		        	  ),
+				  xaxis = dict(
+				  side = 'top',
+				  tickmode = 'linear',
+				  tickangle=0,
+				  dtick = 1,
+				  tickfont=dict(size=text_embed_in_chart_size),
+				   ), 
+				)
+			
 			
 
 			title = titlesubpart+" - Bidder's Agg Ranks in the Chosen Window of Rounds"
