@@ -3264,7 +3264,7 @@ if selected_dimension == "Auction Data":
 					hoverinfo ='text',
 					text = hovertext,
 					colorscale='YlGnBu', #Debug 10th June 2024
-					showscale=True,
+					showscale=False,
 						texttemplate="%{z}", 
 						textfont={"size":16},#Debug 12th June 2024
 						# reversescale=True,
