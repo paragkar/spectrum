@@ -2584,58 +2584,38 @@ if selected_dimension == "Auction Data":
 	
 
 
-	if mainoriflag == True:
+	if mainoriflag == True: #This flag is used to differeniate between file structure of differnt years 
 
 		#filtering the reserve price for the auction year
 
 		dfprallauctions = loadauctionbiddata()["Reserve_Prices_All_Auctions"]
-
-		st.write(dfprallauctions)
-
 		filt = (dfprallauctions["Band"]==band) & (dfprallauctions["Auction Year"]==year)
-
 		dfrp = dfprallauctions[filt]
-
 		dfrp = dfrp.drop(columns =["Auction Year","Band"])
-
 		dfrp.columns = ["LSA", "ReservePricePerBLK"]
-
 		dfrp = dfrp.set_index("LSA").sort_index(ascending = True)
-
-
 		dfbidori = loadauctionbiddata()[mainsheetoriginal].replace('-', np.nan, regex = True)
-
 
 		dfbidori.columns = ["Clk_Round", "Bidder","LSA","Last_Sub_Bid_Start_CLKRd", "Rank_Start_ClkRd", 
 					"Possible_Raise_Bid_ClkRd", "Bid_Decision", "Last_Sub_Bid_End_CLKRd", "Rank_End_ClkRd", 
 					"No_of_BLK_Selected", "Prov_Alloc_BLK_Start_ClkRd", "Prov_Alloc_BLK_End_ClkRd", "Prov_Win_Price_End_ClkRd"]
 
 		dfbidori = dfbidori.drop(columns = ["Possible_Raise_Bid_ClkRd"])
-
 		dfbidori = dfbidori.replace("No Bid", 0)
 		dfbidori = dfbidori.replace("Bid",1)
-
 		listofbidders = sorted(list(set(dfbidori["Bidder"])))
-
 		listofcircles = sorted(list(set(dfbidori["LSA"])))
-
 		dfbidori = dfbidori.set_index("LSA").sort_index(ascending = False)
 
 
 	#filtering the reserve price for the auction year
 
 	dfprallauctions = loadauctionbiddata()["Reserve_Prices_All_Auctions"]
-
 	filt = (dfprallauctions["Band"]==band) & (dfprallauctions["Auction Year"]==year)
-
 	dfrp = dfprallauctions[filt]
-
 	dfrp = dfrp.drop(columns =["Auction Year","Band"])
-
 	dfrp.columns = ["LSA", "ReservePricePerBLK"]
-
 	dfrp = dfrp.set_index("LSA").sort_index(ascending = True)
-
 	dfbid = loadauctionbiddata()[mainsheet].replace('-', np.nan, regex = True)
 
 	dfbid.columns = ["Clk_Round", "Bidder","LSA","PWB_Start_ClkRd", "Rank_PWB_Start_ClkRd", 
@@ -2644,26 +2624,20 @@ if selected_dimension == "Auction Data":
 
 	dfbid = dfbid.replace("No Bid", 0)
 	dfbid = dfbid.replace("Bid",1)
-
 	listofbidders = sorted(list(set(dfbid["Bidder"])))
-
 	listofcircles = sorted(list(set(dfbid["LSA"])))
-
 	dfbid = dfbid.set_index("LSA").sort_index(ascending = False)
 
 	if mainoriflag == True:
 
 		SubFeature = st.sidebar.selectbox("Select a SubFeature", ["BidsCircleWise","RanksCircleWise", "ProvWinningBid", "BlocksSelected",
 									  "BlocksAllocated","BiddingActivity", "DemandActivity","LastBidPrice"])
-
 	if mainoriflag == False:
 
 		SubFeature = st.sidebar.selectbox("Select a SubFeature", ["BidsCircleWise","RanksCircleWise", "ProvWinningBid", "BlocksSelected",
-									  "BlocksAllocated","BiddingActivity", "DemandActivity"])
-
+								  		"BlocksAllocated","BiddingActivity", "DemandActivity"])
+	
 	if SubFeature == "BidsCircleWise":
-
-
 		# debug 30th Mar 2024
 		start_round, end_round = select_round_range(totalrounds)
 
