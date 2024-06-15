@@ -1498,6 +1498,7 @@ if selected_dimension == "Spectrum Bands":
 			      hoverinfo ='text',
 			      text = hovertext,
 			      colorscale=colorscale,
+			      showscale = False,
 		# 	      reversescale=True,
 			      colorbar=dict(
 		# 	      tickcolor ="black",
