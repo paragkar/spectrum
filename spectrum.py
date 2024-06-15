@@ -3317,11 +3317,11 @@ if selected_dimension == "Auction Data":
 			figauc.update_layout(xaxis=dict(showgrid=False),yaxis=dict(showgrid=False))
 
 			hoverlabel_bgcolor = colormatrix
-
 			figauc.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
 
 			
 			#Plotting Charts for both Absolute values and Reserve Price Multiple 
+			#----------Starts-----------------------
 
 			if chartoption == "Absolute Values":
 				col1,col2 = st.columns([8,1]) #create collumns of uneven width
@@ -3340,11 +3340,11 @@ if selected_dimension == "Auction Data":
 				with col2:
 					st.markdown("")
 					st.plotly_chart(figpanindiabids, use_container_width=True)
-
 				# #plotting the final summary chart 
-				# col1,col2,col3 = st.columns([0.35, 14,1.1]) #create collumns of uneven width
 				if SummaryFlag ==True:
 					col1.altair_chart(chart, use_container_width=True)
+
+			#--------Ends----------------------------
 
 
 		if pwbtype == "End CLK Round":
@@ -5181,7 +5181,7 @@ if selected_dimension == "Auction Data":
 
 			figsummry.update_yaxes(visible=False, showticklabels=False)
 
-			figsummry.update_layout(height=615)
+			figsummry.update_layout(height=heatmapheight)
 
 			#plotting the barchart for collumn sums
 
