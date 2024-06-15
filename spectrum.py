@@ -1570,7 +1570,7 @@ if selected_dimension == "Spectrum Bands":
 
 			#Debug 14th June 2024 -----Start
 
-			sumrows = dfff.sum(axis=1)
+			sumrows = dfff.sum(axis=1).reset_index(drop=True)
 			# figsumrows = plotrwototal(sumrows,"Operators", "Total MHz")
 
 			#Debug 14th June 2024 -----End
