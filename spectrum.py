@@ -2641,26 +2641,17 @@ if selected_dimension == "Auction Data":
 		# debug 30th Mar 2024
 		start_round, end_round = select_round_range(totalrounds)
 
-		# round_range = st.slider("Select Auction Round Numbers using the Silder below", min_value=1, max_value = totalrounds, value=(1,totalrounds))
-
-		# start_round = round_range[0]
-
-		# end_round = round_range[1]
-
-
 		dfbidcirclwise = dfbid.copy()
 
 		dfbidcirclwise_endrd = dfbidcirclwise[dfbidcirclwise["Clk_Round"]==end_round].reset_index()
 
 		dfprovallcblks_endrd = dfbidcirclwise_endrd.pivot(index="Bidder", columns='LSA', values="Prov_Alloc_BLK_End_ClkRd")
 
-
 		#filter data within the block of selected rounds 
 
 		filt  =(dfbidcirclwise["Clk_Round"] >= start_round) & (dfbidcirclwise["Clk_Round"] <= end_round)
 
 		dfbidcirclwise = dfbidcirclwise[filt]
-
 
 		dftemp = dfbidcirclwise.drop(columns=["Possible_Raise_Bid_ClkRd", "Rank_PWB_Start_ClkRd", "Rank_PWB_End_ClkRd",
 									"PWB_End_ClkRd","Clk_Round", "PWB_Start_ClkRd"], axis=1)
@@ -2711,7 +2702,6 @@ if selected_dimension == "Auction Data":
 		for circle in listofcircles: #this extracts the full name of the circle from the code
 			circle_list.append(state_dict[circle])
 
-
 		# sortbylsa = st.sidebar.selectbox("Select a Circle to Sort", state_dict.values())
 
 		sortbylsa = st.sidebar.selectbox("Select a Circle to Sort", circle_list)
@@ -2720,12 +2710,9 @@ if selected_dimension == "Auction Data":
 
 		# dftempheat = dftempheat.sort_values(selected_lsa[0], ascending = True)
 
-
 		#processing hovertext and colormatrix
 		hovertext,colormatrix,resultdf = htext_colormatrix_auctiondata_2010_3G_BWA_BidsCircleWise(dfbidcirclwise, 
 											dftemp,selected_lsa[0],start_round,end_round,dfprovallcblks_endrd)
-
-
 
 		hoverlabel_bgcolor = colormatrix
 
@@ -2748,7 +2735,6 @@ if selected_dimension == "Auction Data":
 			SummaryFlag = True
 
 			titlesubpart2 = " - Total Agg Bids (Within Selected Rounds)"
-
 
 			#--------New Code Starts------------#
 
@@ -2791,13 +2777,9 @@ if selected_dimension == "Auction Data":
 		if radio_selection == "Percentage of Total":
 
 			dftempheatSum = dftemp.pivot(index="Bidder", columns='LSA', values="Bid_Decision") #for summary chrat below
-
 			dftempheat = dftemp.pivot(index="Bidder", columns='LSA', values="Bid_Decision_Perc") #for heatmap
-
 			dftempheat = dftempheat.sort_values(selected_lsa[0], ascending = True)
-
 			summarydf = dftempheatSum.sum(axis=0).reset_index()
-
 			summarydf.columns = ["LSA","TotalBids"]
 
 			#preparing the summary chart 
