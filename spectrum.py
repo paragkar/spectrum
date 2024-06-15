@@ -2590,6 +2590,8 @@ if selected_dimension == "Auction Data":
 
 		dfprallauctions = loadauctionbiddata()["Reserve_Prices_All_Auctions"]
 
+		st.write(dfprallauctions)
+
 		filt = (dfprallauctions["Band"]==band) & (dfprallauctions["Auction Year"]==year)
 
 		dfrp = dfprallauctions[filt]
