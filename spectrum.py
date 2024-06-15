@@ -3124,7 +3124,7 @@ if selected_dimension == "Auction Data":
 			figauc.update_layout(
 			    template="seaborn",
 			    xaxis_side='top',
-			    height=heatmapheight,
+			    height=heatmapheight*1.2,
 			    plot_bgcolor='#D2B48C',  # Background color for the plot area light pink
 			    paper_bgcolor='white',  # Background color for the entire figure
 			    yaxis=dict(
