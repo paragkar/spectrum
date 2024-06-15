@@ -3166,6 +3166,8 @@ if selected_dimension == "Auction Data":
 
 		dfrp = dfrp.T
 
+		st.write(dfrp)
+
 		if pwbtype == "Start CLK Round":
 
 			# debug 30th Mar 2024
