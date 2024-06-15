@@ -3266,7 +3266,7 @@ if selected_dimension == "Auction Data":
 
 				figauc = go.Figure(data=data)
 
-				figauc.update_layout(uniformtext_minsize=12, 
+				figauc.update_layout(uniformtext_minsize=text_embed_in_chart_size, 
 				  uniformtext_mode='hide', 
 				  xaxis_title=None, 
 				  yaxis_title=None, 
