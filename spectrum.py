@@ -1566,7 +1566,7 @@ if selected_dimension == "Spectrum Bands":
 
 			fig = go.Figure(data=data)
 
-			st.write(dfff)
+			st.write(dfff.sum(axis=1))
 
 			#Debug 14th June 2024 -----Start
 			#preparing the dataframe of the summary bar chart on top of the heatmap
