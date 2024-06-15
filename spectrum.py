@@ -3222,8 +3222,6 @@ if selected_dimension == "Auction Data":
 			dfblocksalloc_rdend = dfbidpwb.reset_index().pivot(index="Bidder", columns='LSA', values="Prov_Alloc_BLK_End_ClkRd")\
 														.sort_index(ascending=False).round(0)
 
-			st.write(dfblocksalloc_rdend)
-
 			dftemp = dfbidpwb.reset_index().pivot(index="Bidder", columns='LSA', values="PWB_Start_ClkRd").sort_index(ascending=False).round(1)
 
 			chartoption = st.sidebar.radio('Click an Option', ["Absolute Values", "ReservePrice Multiple"])
@@ -3516,7 +3514,7 @@ if selected_dimension == "Auction Data":
 
 				figpanindiabids.update_yaxes(visible=False, showticklabels=False)
 
-				figpanindiabids.update_layout(height = 615)
+				figpanindiabids.update_layout(height = heatmapheight)
 
 				dfbidblksec = dfbid.copy()
 
@@ -3531,7 +3529,7 @@ if selected_dimension == "Auction Data":
 
 				dfbidblksec = dfbidblksec.pivot_table(index='LSA', columns='Bidder', values='No_of_BLK_Selected', aggfunc='max').T
 
-				st.write(dfbidblksec)
+				# st.write(dfbidblksec)
 
 				#-----------End---------------------
 
