@@ -5963,7 +5963,7 @@ if selected_dimension in ["Spectrum Bands", "Auction Years"]:
 					if SummaryFlag ==True:
 						col1.altair_chart(chart, use_container_width=True)
 				with col2:
-					st.markdown("")
+					st.markdown(" ")
 					st.plotly_chart(figsumrows, use_container_width=True)
 			with tab2:
 				st.table(chartdata_df)
