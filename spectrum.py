@@ -3108,19 +3108,11 @@ if selected_dimension == "Auction Data":
 			figauc.update_layout(
 			    template="seaborn",
 			    xaxis_side='top',
-			    height=800,
+			    height=heatmapheight,
 			    plot_bgcolor='#D2B48C',  # Background color for the plot area light pink
 			    paper_bgcolor='white',  # Background color for the entire figure
 			)
-			#-------- Debug 30th March 2024
-
-			# figauc.update_layout(
-			#     template="seaborn",
-			#     xaxis_side= 'top',
-			#    	height = 800,
-			#    	yaxis=dict(
-		    #     tickmode='array',
-		    #     	))
+			
 
 			title = titlesubpart+" - Bidder's Agg Ranks in the Chosen Window of Rounds"
 			subtitle = "Source - DOT; Between Round Nos "+str(start_round)+" & "+str(end_round)+ "; Number of Rounds = "+ str(end_round-start_round+1)
@@ -3216,7 +3208,7 @@ if selected_dimension == "Auction Data":
 
 				figauc = go.Figure(data=data)
 
-				figauc.update_layout(uniformtext_minsize=12, 
+				figauc.update_layout(uniformtext_minsize=text_embed_in_chart_size, 
 				  uniformtext_mode='hide', 
 				  xaxis_title=None, 
 				  yaxis_title=None, 
@@ -5861,8 +5853,6 @@ if selected_dimension in ["Spectrum Bands", "Auction Years", "Business Data"]:
 			tab2.table(chartdata_df)
 		else:
 			st.plotly_chart(fig, use_container_width=True) # for heatmaps
-
-
 
 		#plotting the final summary chart 
 		col1,col2,col3 = st.columns([0.2,14,1.1]) #create collumns of uneven width
