@@ -4836,12 +4836,16 @@ if selected_dimension == "Auction Data":
 			  width=heatmapwidth,
 			  margin=dict(t=80, b=50, l=50, r=0, pad=0),
 			  yaxis=dict(
-	        	  tickmode='array'),
+        	  tickmode='array',
+        	  tickfont=dict(size=text_embed_in_chart_size),
+        	  ),
 			  xaxis = dict(
 			  side = 'top',
 			  tickmode = 'linear',
 			  tickangle=0,
-			  dtick = xdtick), 
+			  dtick = xdtick,
+			  tickfont=dict(size=text_embed_in_chart_size),
+			   ), 
 			)
 
 			title = titlesubpart+" - Excess Demand in Various Rounds"
