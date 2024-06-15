@@ -1857,9 +1857,7 @@ def bidvalue(df,dfblocks):
 	mindf.columns = df.columns
 	df_final = dfblocks*mindf.values #calculating the total value of bids
 
-	df_final = df_final.sum(axis =1).round(1)
-
-	st.write(df_final.sort_index())
+	df_final = df_final.sum(axis =1).round(1).sort_index()
 
 	return df_final
 
