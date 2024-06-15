@@ -1859,8 +1859,6 @@ def bidvalue(df,dfblocks):
 
 	df_final = df_final.sum(axis =1).round(1).sort_index()
 
-	st.write(df_final)
-
 	return df_final
 
 
@@ -1868,7 +1866,9 @@ def plotbiddertotal(dftemp,dfblocksalloc_rdend):
 
 	dftemp = round(dftemp,1)
 					
-	panindiabids = bidvalue(dftemp,dfblocksalloc_rdend).sort_index().reset_index()
+	# panindiabids = bidvalue(dftemp,dfblocksalloc_rdend).sort_index().reset_index()
+
+	panindiabids = bidvalue(dftemp,dfblocksalloc_rdend).reset_index()
 	panindiabids.columns =["Bidder","PanIndiaBid"]
 	panindiabids = panindiabids.round(0)
 	panindiabids = panindiabids.sort_values("Bidder", ascending=False)
