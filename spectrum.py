@@ -1838,7 +1838,6 @@ if selected_dimension == "Spectrum Bands":
 
 #----------------New Auction Bid Data Code Starts Here------------------
 #function used to calculate the total bid values 
-
 def bidvalue(df,dfblocks):
 
 	df = df.replace(np.nan, 0)
@@ -1856,19 +1855,7 @@ def bidvalue(df,dfblocks):
 	mindf = pd.DataFrame(min_values).T
 
 	mindf.columns = df.columns
-
 	df_final = dfblocks*mindf.values #calculating the total value of bids
-
-	# # Regex pattern to match floating-point numbers
-	# pattern = re.compile(r'^[+-]?((?=.*[1-9])\d*\.\d+|0\.\d*[1-9]\d*)$')
-
-	# # Function to replace floating-point numbers with 1
-	# replace_func = lambda x: 1 if re.match(pattern, str(x)) else x
-
-	# # Apply the function to each cell in the DataFrame
-	# matrix = df.map(replace_func)
-
-	# df_final = matrix * mindf.values
 
 	df_final = df_final.sum(axis =1).round(1)
 
@@ -1880,27 +1867,18 @@ def plotbiddertotal(dftemp,dfblocksalloc_rdend):
 	dftemp = round(dftemp,1)
 					
 	panindiabids = bidvalue(dftemp,dfblocksalloc_rdend).sort_index().reset_index()
-
 	panindiabids.columns =["Bidder","PanIndiaBid"]
-
 	panindiabids = panindiabids.round(0)
-
 	panindiabids = panindiabids.sort_values("Bidder", ascending=False)
 
 	fig = px.bar(panindiabids, y = 'Bidder', x='PanIndiaBid', orientation ='h', height = heatmapheight)
 
 	fig.update_layout(xaxis=dict(title='Total Value'), yaxis=dict(title=''))
-
 	fig.update_traces(text=panindiabids['PanIndiaBid'], textposition='auto',textfont=dict(size=20, color='white')) #Debug 12th June 2024 (Changed 14 to 20)
-
 	fig.update_xaxes(tickvals=[])
-
 	fig.update_layout(xaxis=dict(side='top', title_standoff=0, ticklen=0, title_font=dict(size=14)))
-
 	fig.update_layout(xaxis_title_standoff=5)
-
 	fig.update_traces(marker=dict(color='red'))
-
 
 	return fig
 
@@ -3277,7 +3255,6 @@ if selected_dimension == "Auction Data":
 
 				figauc = go.Figure(data=data)
 
-
 				figauc.update_layout(uniformtext_minsize=12, 
 				  uniformtext_mode='hide', 
 				  xaxis_title=None, 
@@ -3359,30 +3336,6 @@ if selected_dimension == "Auction Data":
 				        # zmax=10  # Set the maximum value of the color bar
 				    )
 				)
-
-				
-# #-------------New Layout Code for Testing ---------------
-# 				figauc.update_layout(  
-# 				    plot_bgcolor="#FFFFFF",
-# 				    hovermode="x",
-# 				    hoverdistance=100, # Distance to show hover label of data point
-# 				    spikedistance=1000, # Distance to show spike
-# 				    yaxis=dict(
-# 				        title="time",
-# 				        linecolor="#BCCCDC",
-# 				        showspikes=True, # Show spike line for X-axis
-# 				        # Format spike
-# 				        spikethickness=1,
-# 				        spikedash="dot",
-# 				        spikecolor="#999999",
-# 				        spikemode="across",
-# 				    ),
-# 				    xaxis=dict(
-# 				        title="price",
-# 				        linecolor="#BCCCDC"
-# 				    )
-# 						)
-# #-------------New Layout Code for Testing Ends-----------------
 
 
 			title = titlesubpart+" - PWB/BLK at the Start of Clock Round No - "+str(round_number)
