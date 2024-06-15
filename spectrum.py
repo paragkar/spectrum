@@ -5872,7 +5872,6 @@ if selected_dimension in ["Spectrum Bands", "Auction Years", "Business Data"]:
     height=heatmapheight, #Changing this will adjust the height of all heat maps
     width=heatmapwidth, #Changing this will adjust the witdth of all heat maps
     margin=dict(t=80, b=50, l=50, r=0, pad=0),
-    showscale=False,
     yaxis=dict(
         tickmode='array',
         tickfont=dict(size=text_embed_in_chart_size),
