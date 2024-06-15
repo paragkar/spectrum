@@ -3125,6 +3125,7 @@ if selected_dimension == "Auction Data":
 			    xgap=2,
 			    ygap=2,
 			    colorscale='Hot',
+			    showscale = False,
 			    reversescale=True,
 			    text=dfbidsel.values,  # Set text to the same values as z for display
 			    texttemplate="%{z}",  # Define how text is displayed based on the text array
