@@ -1540,7 +1540,7 @@ if selected_dimension == "Spectrum Bands":
 			hovertext,colormatrix = htext_colmatrix_spec_map_op_hold_share(dfff, selected_operators, operatorlist) #processing hovertext and colormatrix for operatorwise in freqband dim
 			hoverlabel_bgcolor = colormatrix #colormatrix processed from fuction "hovertext_and_colmatrix" for same above
 
-			
+			#Figure data for Operator Holdings
 			data = [go.Heatmap(
 			      z = dfff.values,
 			      y = dfff.index,
@@ -1614,6 +1614,8 @@ if selected_dimension == "Spectrum Bands":
 			hovertext,colormatrix = htext_colmatrix_spec_map_op_hold_share(dfff, selected_operators, operatorlist) #processing hovertext and colormatrix for operatorwise in freqband dim
 			hoverlabel_bgcolor = colormatrix #colormatrix processed from fuction "hovertext_and_colmatrix" for same above
 
+			
+			#Figure data for "Operator %Share"
 			data = [go.Heatmap(
 			      z = dfffshare.values,
 			      y = dfffshare.index,
