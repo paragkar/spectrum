@@ -5949,7 +5949,7 @@ if selected_dimension in ["Spectrum Bands", "Auction Years", "Business Data"]:
 		if chart_data_flag==True:
 			tab1, tab2 = st.tabs(["📈 Chart", "🗃 Data"]) #for listing the summary chart for freq layout
 			with tab1:
-				col1,col2 = st.columns([8,1]) #create collumns of uneven width
+				col1,col2 = st.columns([10,1]) #create collumns of uneven width
 				with col1:
 					st.plotly_chart(fig, use_container_width=True)
 					if SummaryFlag ==True:
