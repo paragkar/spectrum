@@ -1557,10 +1557,21 @@ if selected_dimension == "Spectrum Bands":
 
 			fig = go.Figure(data=data)
 
+			def plotrwototal(sumrows, ydim, xdim):
+				fig = px.bar(sumrows, y = ydim, x=xdim, orientation ='h', height = 625)
+				fig.update_layout(xaxis=dict(title='India Total'), yaxis=dict(title=''))
+				fig.update_traces(text=sumrows[xdim], textposition='auto',textfont=dict(size=20, color='white')) #Debug 12th June 2024 (Changed 14 to 20)
+				fig.update_xaxes(tickvals=[])
+				fig.update_layout(xaxis=dict(side='top', title_standoff=0, ticklen=0, title_font=dict(size=20))) #Debug 12th June 2024 (Changed 14 to 20)
+				fig.update_layout(xaxis_title_standoff=5) 
+				fig.update_traces(marker=dict(color='red'))
+				return fig
+
+
 			#Debug 14th June 2024 -----Start
 
-			# sumrows = dfff.sum(axis=1).reset_index()
-			# figsumrows = plotrwototal(sumrows,"Operators", "Total MHz")
+			sumrows = dfff.sum(axis=1).reset_index()
+			figsumrows = plotrwototal(sumrows,"Operators", "Total MHz")
 
 			#Debug 14th June 2024 -----End
 
@@ -1660,6 +1671,8 @@ if selected_dimension == "Spectrum Bands":
 
 			hovertext = htext_expmap_freq_layout(hf)
 
+			
+			#Figure Data for Expiry Map
 			data = [go.Heatmap(
 			      z = expf.values,
 			      y = expf.index,
@@ -1721,6 +1734,7 @@ if selected_dimension == "Spectrum Bands":
 			SummaryFlag = True #for ploting the summary chart
 			
 
+			#Figure Data for Expiry Map
 			data = [go.Heatmap(
 			  z = eff.values,
 			  y = eff.index,
@@ -1804,7 +1818,7 @@ if selected_dimension == "Spectrum Bands":
 		else:
 			pass
 		
-		#setting the data of the heatmap 
+		#setting the data of the heatmaps 
 		data = [go.Heatmap(
 			z = z,
 			y = typedf.index,
