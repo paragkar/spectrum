@@ -5958,7 +5958,7 @@ if selected_dimension in ["Spectrum Bands", "Auction Years", "Business Data"]:
 					st.plotly_chart(figsumrows, use_container_width=True)
 
 			with tab2:
-				table(chartdata_df)
+				# table(chartdata_df)
 		
 
 
