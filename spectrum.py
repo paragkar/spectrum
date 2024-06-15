@@ -2927,7 +2927,7 @@ if selected_dimension == "Auction Data":
 		figauc.update_layout(
 		    template="seaborn",
 		    xaxis_side= 'top',
-		   	height = 850, #Debug 14th June 2024 (Changed from 650 to 850)
+		   	height = heatmapheight, #Debug 14th June 2024 (Changed from 650 to 850)
 		   	yaxis=dict(
 	        tickmode='array',
 	        showgrid=False,
@@ -3049,7 +3049,7 @@ if selected_dimension == "Auction Data":
 			figauc.update_layout(
 			    template="seaborn",
 			    xaxis_side= 'top',
-			   	height = 850, #Debug 14th June 2024 (Changed from 650 to 850)
+			   	height = heatmapheight, #Debug 14th June 2024 (Changed from 650 to 850)
 			   	yaxis=dict(
 		        tickmode='array',
 		        	))
@@ -3351,7 +3351,7 @@ if selected_dimension == "Auction Data":
 				  font=dict(size=16), #Debug 12th June 2024
 				  template='simple_white',
 				  paper_bgcolor=None,
-				  height=850, #Debug 14th June 2024 (Changed from 600 to 850)
+				  height=heatmapheight, #Debug 14th June 2024 (Changed from 600 to 850)
 				  # width=1200,
 				  margin=dict(t=80, b=50, l=0, r=0, pad=0),
 				  yaxis=dict(
@@ -3406,7 +3406,7 @@ if selected_dimension == "Auction Data":
 				  font=dict(size=16),#Debug 12th June 2024
 				  template='simple_white',
 				  paper_bgcolor=None,
-				  height=850, #Debug 14th June 2024 (Changed from 600 to 850)
+				  height=heatmapheight, #Debug 14th June 2024 (Changed from 600 to 850)
 				  # width=1200,
 				  margin=dict(t=80, b=50, l=50, r=50, pad=0),
 				  yaxis=dict(
@@ -3590,7 +3590,7 @@ if selected_dimension == "Auction Data":
 				  font=dict(size=16),#Debug 12th June 2024
 				  template='simple_white',
 				  paper_bgcolor=None,
-				  height=650, #Debug 14th June 2024 (Changed from 600 to 850)
+				  height=heatmapheight, #Debug 14th June 2024 (Changed from 600 to 850)
 				  # width=1200,
 				  margin=dict(t=80, b=50, l=0, r=0, pad=0),
 				  yaxis=dict(
@@ -3674,7 +3674,7 @@ if selected_dimension == "Auction Data":
 				  font=dict(size=16),#Debug 12th June 2024
 				  template='simple_white',
 				  paper_bgcolor=None,
-				  height=850, #Debug 14th June 2024 (Changed from 600 to 850)
+				  height=heatmapheight, #Debug 14th June 2024 (Changed from 600 to 850)
 				  # width=1200,
 				  margin=dict(t=80, b=50, l=50, r=50, pad=0),
 				  yaxis=dict(
@@ -3845,7 +3845,7 @@ if selected_dimension == "Auction Data":
 		  font=dict(size=16),#Debug 12th June 2024
 		  template='simple_white',
 		  paper_bgcolor=None,
-		  height=850, #Debug 14th June 2024 (Changed from 600 to 850)
+		  height=heatmapheight, #Debug 14th June 2024 (Changed from 600 to 850)
 		  # width=1200,
 		  margin=dict(t=80, b=50, l=50, r=50, pad=0),
 		  yaxis=dict(
@@ -3993,7 +3993,7 @@ if selected_dimension == "Auction Data":
 				  font=dict(size=16), #Debug 12th June 2024
 				  template='simple_white',
 				  paper_bgcolor=None,
-				  height=850, #Debug 14th June 2024 (Changed from 600 to 850)
+				  height=heatmapheight, #Debug 14th June 2024 (Changed from 600 to 850)
 				  # width=1200,
 				  margin=dict(t=80, b=50, l=0, r=0, pad=0),
 				  yaxis=dict(
@@ -4106,7 +4106,7 @@ if selected_dimension == "Auction Data":
 				  font=dict(size=16), #Debug 12th June 2024
 				  template='simple_white',
 				  paper_bgcolor=None,
-				  height=850, #Debug 14th June 2024 (Changed from 600 to 850)
+				  height=heatmapheight, #Debug 14th June 2024 (Changed from 600 to 850)
 				  # width=1200,
 				  margin=dict(t=80, b=50, l=0, r=0, pad=0),
 				  yaxis=dict(
@@ -4237,7 +4237,7 @@ if selected_dimension == "Auction Data":
 			  font=dict(size=12),
 			  template='simple_white',
 			  paper_bgcolor=None,
-			  height=850, #Debug 14th June 2024 (Changed from 600 to 850)
+			  height=heatmapheight, #Debug 14th June 2024 (Changed from 600 to 850)
 			  width=1200,
 			  margin=dict(t=80, b=50, l=50, r=50, pad=0),
 			  yaxis=dict(
@@ -4267,7 +4267,7 @@ if selected_dimension == "Auction Data":
 			  font=dict(size=12),
 			  template='simple_white',
 			  paper_bgcolor=None,
-			  height=850, #Debug 14th June 2024 (Changed from 600 to 850)
+			  height=heatmapheight, #Debug 14th June 2024 (Changed from 600 to 850)
 			  width=1200,
 			  margin=dict(t=80, b=50, l=50, r=50, pad=0),
 			  yaxis=dict(
@@ -4370,7 +4370,7 @@ if selected_dimension == "Auction Data":
 			  font=dict(size=12),
 			  template='simple_white',
 			  paper_bgcolor=None,
-			  height=850, #Debug 14th June 2024 (Changed from 600 to 850)
+			  height=heatmapheight, #Debug 14th June 2024 (Changed from 600 to 850)
 			  width=1200,
 			  margin=dict(t=80, b=50, l=50, r=50, pad=0),
 			  yaxis=dict(
@@ -4400,7 +4400,7 @@ if selected_dimension == "Auction Data":
 			  font=dict(size=12),
 			  template='simple_white',
 			  paper_bgcolor=None,
-			  height=850, #Debug 14th June 2024 (Changed from 600 to 850)
+			  height=heatmapheight, #Debug 14th June 2024 (Changed from 600 to 850)
 			  width=1200,
 			  margin=dict(t=80, b=50, l=50, r=50, pad=0),
 			  yaxis=dict(
@@ -4502,7 +4502,7 @@ if selected_dimension == "Auction Data":
 			  font=dict(size=12),
 			  template='simple_white',
 			  paper_bgcolor=None,
-			  height=850, #Debug 14th June 2024 (Changed from 600 to 850)
+			  height=heatmapheight, #Debug 14th June 2024 (Changed from 600 to 850)
 			  width=1200,
 			  margin=dict(t=80, b=50, l=50, r=50, pad=0),
 			  yaxis=dict(
@@ -4532,7 +4532,7 @@ if selected_dimension == "Auction Data":
 			  font=dict(size=12),
 			  template='simple_white',
 			  paper_bgcolor=None,
-			  height=850, #Debug 14th June 2024 (Changed from 600 to 850)
+			  height=heatmapheight, #Debug 14th June 2024 (Changed from 600 to 850)
 			  width=1200,
 			  margin=dict(t=80, b=50, l=50, r=50, pad=0),
 			  yaxis=dict(
@@ -4607,7 +4607,7 @@ if selected_dimension == "Auction Data":
 			  font=dict(size=12),
 			  template='simple_white',
 			  paper_bgcolor=None,
-			  height=850, #Debug 14th June 2024 (Changed from 600 to 850)
+			  height=heatmapheight, #Debug 14th June 2024 (Changed from 600 to 850)
 			  width=1200,
 			  margin=dict(t=80, b=50, l=50, r=50, pad=0),
 			  yaxis=dict(
@@ -4711,7 +4711,7 @@ if selected_dimension == "Auction Data":
 			  font=dict(size=12),
 			  template='simple_white',
 			  paper_bgcolor=None,
-			  height=850, #Debug 14th June 2024 (Changed from 600 to 850)
+			  height=heatmapheight, #Debug 14th June 2024 (Changed from 600 to 850)
 			  width=1200,
 			  margin=dict(t=80, b=50, l=0, r=0, pad=0),
 			  yaxis=dict(
@@ -4852,7 +4852,7 @@ if selected_dimension == "Auction Data":
 			  font=dict(size=12),
 			  template='simple_white',
 			  paper_bgcolor=None,
-			  height=850, #Debug 14th June 2024 (Changed from 600 to 850)
+			  height=heatmapheight, #Debug 14th June 2024 (Changed from 600 to 850)
 			  width=1200,
 			  margin=dict(t=80, b=50, l=0, r=0, pad=0),
 			  yaxis=dict(
@@ -4872,7 +4872,7 @@ if selected_dimension == "Auction Data":
 			  font=dict(size=12),
 			  template='simple_white',
 			  paper_bgcolor=None,
-			  height=850, #Debug 14th June 2024 (Changed from 600 to 850)
+			  height=heatmapheight, #Debug 14th June 2024 (Changed from 600 to 850)
 			  width=1200,
 			  margin=dict(t=80, b=50, l=0, r=0, pad=0),
 			  yaxis=dict(
@@ -4977,7 +4977,7 @@ if selected_dimension == "Auction Data":
 			  font=dict(size=12),
 			  template='simple_white',
 			  paper_bgcolor=None,
-			  height=850, #Debug 14th June 2024 (Changed from 600 to 850)
+			  height=heatmapheight, #Debug 14th June 2024 (Changed from 600 to 850)
 			  width=1200,
 			  margin=dict(t=80, b=50, l=50, r=50, pad=0),
 			  yaxis=dict(
@@ -5134,7 +5134,7 @@ if selected_dimension == "Auction Data":
 			  font=dict(size=12),
 			  template='simple_white',
 			  paper_bgcolor=None,
-			  height=850, #Debug 14th June 2024 (Changed from 600 to 850)
+			  height=heatmapheight, #Debug 14th June 2024 (Changed from 600 to 850)
 			  width=1200,
 			  margin=dict(t=80, b=50, l=50, r=50, pad=0),
 			  yaxis=dict(
@@ -5154,7 +5154,7 @@ if selected_dimension == "Auction Data":
 			  font=dict(size=12),
 			  template='simple_white',
 			  paper_bgcolor=None,
-			  height=850, #Debug 14th June 2024 (Changed from 600 to 850)
+			  height=heatmapheight, #Debug 14th June 2024 (Changed from 600 to 850)
 			  width=1200,
 			  margin=dict(t=80, b=50, l=50, r=50, pad=0),
 			  yaxis=dict(
@@ -5351,7 +5351,6 @@ if selected_dimension == "Auction Data":
 
 			hovertext, colormatrix = htext_colormatrix_auctiondata_2010_3G_BWA_LastBidPrice(dflastsubbidheat,dflastsubbidratio,dfbid)
 
-
 			data1 = [go.Heatmap(
 						z=mask.values,
 				        y=mask.index,
@@ -5389,7 +5388,6 @@ if selected_dimension == "Auction Data":
 			figauc1 = go.Figure(data=data1)
 			figauc2 = go.Figure(data=data2)
 
-
 			figauc1.update_layout(uniformtext_minsize=12, 
 			  uniformtext_mode='hide', 
 			  xaxis_title=None, 
@@ -5398,7 +5396,7 @@ if selected_dimension == "Auction Data":
 			  font=dict(size=12),
 			  template='simple_white',
 			  paper_bgcolor=None,
-			  height=850, #Debug 14th June 2024 (Changed from 600 to 850)
+			  height=heatmapheight, #Debug 14th June 2024 (Changed from 600 to 850)
 			  width=1200,
 			  margin=dict(t=80, b=50, l=0, r=0, pad=0),
 			  yaxis=dict(
@@ -5418,7 +5416,7 @@ if selected_dimension == "Auction Data":
 			  font=dict(size=12),
 			  template='simple_white',
 			  paper_bgcolor=None,
-			  height=850, #Debug 14th June 2024 (Changed from 600 to 850)
+			  height=heatmapheight, #Debug 14th June 2024 (Changed from 600 to 850)
 			  width=1200,
 			  margin=dict(t=80, b=50, l=0, r=0, pad=0),
 			  yaxis=dict(
@@ -5498,7 +5496,6 @@ subfeature_list = ["Reserve Price", "Auction Price", "Auction/Reserve", "Quantum
 
 #Processing For Dimension = "Auction Year"
 if selected_dimension == "Auction Years":
-
 
 	radio_currency = st.sidebar.radio('Click Currency', ["Rupees", "US Dollars"])
 
