@@ -1859,6 +1859,8 @@ def bidvalue(df,dfblocks):
 
 	df_final = df_final.sum(axis =1).round(1)
 
+	st.write(df_final)
+
 	return df_final
 
 
