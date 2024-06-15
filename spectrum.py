@@ -5858,7 +5858,7 @@ if (Feature == "Operator Metric"):
 #---------Dimension = Auction Years Ends ------------------
 
 
-if selected_dimension in ["Spectrum Bands", "Auction Years", "Business Data"]:
+if selected_dimension in ["Spectrum Bands", "Auction Years"]:
 
 	#layout for heatmaps 
 
