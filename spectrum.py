@@ -2809,6 +2809,7 @@ if selected_dimension == "Auction Data":
 				hovertext = hovertext,
 				text = df_combined.values,
 				colorscale="Hot",
+				showscale = False,
 					texttemplate="%{text}",
 					textfont={"size":text_embed_in_chart_size}, #Debug 14th June 2024 (Changed from 12 to 16)
 					reversescale=True,
