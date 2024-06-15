@@ -1333,8 +1333,6 @@ if selected_dimension == "Spectrum Bands":
 	#loading spectrum excel file
 	df = loadspectrumfile()
 
-	st.write(df)
-
 
 	#processing colorcode excel data tab
 	colcodes = df["ColorCodes"]
@@ -1421,7 +1419,7 @@ if selected_dimension == "Spectrum Bands":
 
 	#Processing For Dimension = "Frequency Band" & Features
 	if  Feature == "Spectrum Map":
-		SubFeature = st.sidebar.selectbox('Select a Sub Feature', ["Frequency Layout", "Operator Holdings", "Operator %Share"],0)
+		SubFeature = st.sidebar.selectbox('Select a Sub Feature', ["Frequency Layout", "Operator Holdings", "Operator PercentShare"],0)
 		if SubFeature == "Frequency Layout":
 			sf = sff.copy()
 			operators = newoperators_dict[Band]
@@ -1563,7 +1561,7 @@ if selected_dimension == "Spectrum Bands":
 
 			currency_flag = True # default
 			
-		if SubFeature == "Operator %Share":
+		if SubFeature == "Operator PercentShare":
 			selected_operators=[]
 			dfff = dffcopy[(dffcopy["Band"]==Band)]
 			operatorlist = sorted(list(set(dfff["OperatorNew"])))
@@ -6788,7 +6786,7 @@ if (Feature == "Spectrum Map") and (SubFeature == "Operator Holdings"):
 	title = "Operator Holdings for the "+str(Band)+" MHz Band"
 
 
-if (Feature == "Spectrum Map") and (SubFeature == "Operator %Share"):
+if (Feature == "Spectrum Map") and (SubFeature == "Operator PercentShare"):
 
 	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=16, color='white'))) #Debug 14th June 2024 (Changed from 12 to 16)
 
