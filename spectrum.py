@@ -3344,7 +3344,7 @@ if selected_dimension == "Auction Data":
 				# #plotting the final summary chart 
 				# col1,col2,col3 = st.columns([0.35, 14,1.1]) #create collumns of uneven width
 				if SummaryFlag ==True:
-					col2.altair_chart(chart, use_container_width=True)
+					col1.altair_chart(chart, use_container_width=True)
 
 
 		if pwbtype == "End CLK Round":
