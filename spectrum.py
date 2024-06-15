@@ -1566,11 +1566,18 @@ if selected_dimension == "Spectrum Bands":
 
 			fig = go.Figure(data=data)
 
+			st.write(dfff)
+
 			#Debug 14th June 2024 -----Start
-			sumrows = dfff.sum(axis=1).sort_index().reset_index()
-			sumrows.columns = ["Operators", "Total MHz"]
-			sumrows = sumrows[~(sumrows["Operators"] == "India Total")]
-			figsumrows = plotrwototal(sumrows,"Operators", "Total MHz")
+			#preparing the dataframe of the summary bar chart on top of the heatmap
+			# summarydf = summarydf.round(1)
+			# summarydf = summarydf.reset_index()
+			# summarydf.columns = ["Band", "Total"]
+			# summarydf["Band"] = summarydf["Band"].astype(int)
+			# summarydf = summarydf.sort_values("Band")
+			# #preparing the summary chart 
+			# chart = summarychart(summarydf, 'Band', "Total")
+			# SummaryFlag = True
 			#Debug 14th June 2024 -----End
 
 			currency_flag = True # default
