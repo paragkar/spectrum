@@ -1263,7 +1263,7 @@ def summarychart(summarydf, xcolumn, ycolumn):
 
 	text = bar.mark_text(size = text_embed_in_chart_size, dx=0, dy=-7, color = 'white').encode(text=ycolumn+':Q') #Debug 12th June 2024 (Chnaged Bar Text Sixe from 10 to 16)
 	
-	chart = (bar + text).properties(width=1120, height =150)
+	chart = (bar + text).properties(width=heatmapwidth, height =150)
 	chart = chart.configure_title(fontSize = text_embed_in_chart_size, font ='Arial', anchor = 'middle', color ='black')
 	return chart
 
