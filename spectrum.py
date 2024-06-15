@@ -1478,7 +1478,8 @@ if selected_dimension == "Spectrum Bands":
 
 			chart_data_flag = True #Plot only if this flag is true 
 
-			
+
+			#Figure data for frequency map 
 			data = [go.Heatmap(
 			      z = sf.values,
 			      y = sf.index,
@@ -7083,7 +7084,9 @@ if selected_dimension in ["Spectrum Bands", "Auction Years", "Business Data"]:
 			  side = 'top',
 			  tickmode = 'linear',
 			  tickangle=xdtickangle,
-			  dtick = xdtickval), 
+			  dtick = xdtickval),
+			  tickfont=dict(size=14),  # Set the font size of x-axis tick labels
+        	  # title_font=dict(size=16)  # Set the font size of the x-axis title, 
 			)
 
 	#Drawning a black border around the heatmap chart 
