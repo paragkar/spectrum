@@ -5916,29 +5916,6 @@ if selected_dimension in ["Spectrum Bands", "Auction Years", "Business Data"]:
 
 
 	# # Final plotting of various charts on the output page
-	style = "<style>h3 {text-align: left;}</style>"
-	with st.container():
-		#plotting the main chart
-		st.markdown(style, unsafe_allow_html=True)
-		st.header(title)
-		st.markdown(subtitle)
-
-		if chart_data_flag==True:
-			tab1, tab2 = st.tabs(["📈 Chart", "🗃 Data"]) #for listing the summary chart for freq layout
-			tab1.plotly_chart(fig, use_container_width=True)
-			tab2.table(chartdata_df)
-		else:
-			st.plotly_chart(fig, use_container_width=True) # for heatmaps
-
-		#plotting the final summary chart 
-		col1,col2,col3 = st.columns([0.2,14,1.1]) #create collumns of uneven width
-		if SummaryFlag ==True:
-			# st.altair_chart(chart, use_container_width=True)
-			col2.altair_chart(chart, use_container_width=True)
-
-
-
-	# Final plotting of various charts on the output page
 	# style = "<style>h3 {text-align: left;}</style>"
 	# with st.container():
 	# 	#plotting the main chart
@@ -5948,17 +5925,43 @@ if selected_dimension in ["Spectrum Bands", "Auction Years", "Business Data"]:
 
 	# 	if chart_data_flag==True:
 	# 		tab1, tab2 = st.tabs(["📈 Chart", "🗃 Data"]) #for listing the summary chart for freq layout
-	# 		with tab1:
-	# 			col1,col2 = st.columns([8,1]) #create collumns of uneven width
-	# 			with col1:
-	# 				st.plotly_chart(fig, use_container_width=True)
-	# 				if SummaryFlag ==True:
-	# 					col1.altair_chart(chart, use_container_width=True)
-	# 			with col2:
-	# 				st.markdown("")
-	# 				st.plotly_chart(figsumrows, use_container_width=True)
-	# 		with tab2:
-	# 			st.table(chartdata_df)
+	# 		tab1.plotly_chart(fig, use_container_width=True)
+	# 		tab2.table(chartdata_df)
+	# 	else:
+	# 		st.plotly_chart(fig, use_container_width=True) # for heatmaps
+
+	# 	#plotting the final summary chart 
+	# 	col1,col2,col3 = st.columns([0.2,14,1.1]) #create collumns of uneven width
+	# 	if SummaryFlag ==True:
+	# 		# st.altair_chart(chart, use_container_width=True)
+	# 		col2.altair_chart(chart, use_container_width=True)
+
+
+
+	# Final plotting of various charts on the output page
+	style = "<style>h3 {text-align: left;}</style>"
+	with st.container():
+		#plotting the main chart
+		st.markdown(style, unsafe_allow_html=True)
+		st.header(title)
+		st.markdown(subtitle)
+
+		if chart_data_flag==True:
+			tab1, tab2 = st.tabs(["📈 Chart", "🗃 Data"]) #for listing the summary chart for freq layout
+			with tab1:
+				col1,col2 = st.columns([8,1]) #create collumns of uneven width
+				with col1:
+					st.plotly_chart(fig, use_container_width=True)
+					if SummaryFlag ==True:
+						col1.altair_chart(chart, use_container_width=True)
+				with col2:
+					st.markdown("")
+					st.plotly_chart(figsumrows, use_container_width=True)
+			with tab2:
+				st.table(chartdata_df)
+		else:
+			st.plotly_chart(fig, use_container_width=True) # for heatmaps
+
 		
 
 
