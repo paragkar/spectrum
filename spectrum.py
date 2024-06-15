@@ -5943,141 +5943,139 @@ if (Feature == "Operator Metric"):
 #---------Dimension = Business Data Starts ----------------
 
 
-if (Feature == "5GBTS Trends") and (SubFeature == "Cumulative Values"):
+# if (Feature == "5GBTS Trends") and (SubFeature == "Cumulative Values"):
 
-	hoverlabel_bgcolor = "#000000" #subdued black
+# 	hoverlabel_bgcolor = "#000000" #subdued black
 
-	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
-	xdtickangle= -45
-	xdtickval=1
-	title = "Indian 5G Base Stations Roll Out Trends"
-	subtitle = "Cumulative BTS growth; Top 20 States/UT; Unit - Thousands; Sorted by the Recent Date; Source - DOT"
-
-
-if (Feature == "5GBTS Trends") and (SubFeature == "Percent of Total"):
-
-	hoverlabel_bgcolor = "#000000" #subdued black
-
-	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
-	xdtickangle= -45
-	xdtickval=1
-	title = "Indian 5G Base Stations Roll Out Trends"
-	subtitle = "Percent of Total; Top 20 States/UT; Unit - %; Sorted by the Recent Date; Source - DOT"
-
-if (Feature == "5GBTS Trends") and (SubFeature == "Incremental Values"):
-
-	hoverlabel_bgcolor = "#000000" #subdued black
-
-	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
-	xdtickangle= -45
-	xdtickval=1
-	title = "Indian 5G Base Stations Roll Out Trends"
-	subtitle = "Incremental Values; Top 20 States/UT; Unit - Thousands; Sorted by the Recent Date; Source - DOT"
+# 	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
+# 	xdtickangle= -45
+# 	xdtickval=1
+# 	title = "Indian 5G Base Stations Roll Out Trends"
+# 	subtitle = "Cumulative BTS growth; Top 20 States/UT; Unit - Thousands; Sorted by the Recent Date; Source - DOT"
 
 
-if (Feature == "Subscriber Trends"):
+# if (Feature == "5GBTS Trends") and (SubFeature == "Percent of Total"):
 
-	hoverlabel_bgcolor = "#000000" #subdued black
+# 	hoverlabel_bgcolor = "#000000" #subdued black
 
-	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
-	xdtickangle= -45
-	xdtickval=1
+# 	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
+# 	xdtickangle= -45
+# 	xdtickval=1
+# 	title = "Indian 5G Base Stations Roll Out Trends"
+# 	subtitle = "Percent of Total; Top 20 States/UT; Unit - %; Sorted by the Recent Date; Source - DOT"
 
-	subtitle = "Cumulative Values; Selected Category -" +",".join(selected_category)+ "; Selected Circles - "+ \
-				",".join(selected_circles)+"; Unit - Millions; Sorted by the Recent Date; Source - TRAI"
-	title = "Indian Telecom Subscribers Trends"
+# if (Feature == "5GBTS Trends") and (SubFeature == "Incremental Values"):
 
+# 	hoverlabel_bgcolor = "#000000" #subdued black
 
-if (Feature == "Subscriber MShare"):
-
-	hoverlabel_bgcolor = "#000000" #subdued black
-
-	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
-	xdtickangle= 0
-	xdtickval=1
-
-	subtitle = "Unit - % of Total; Total in Millions ; Selected Category -"+ ",".join(selected_category)+ " ;Source - TRAI"
-	title = "Indian Telecom Operator's Latest Subs Market Share"
-
-if (Feature == "License Fees"):
-
-	if (len(selected_category)==0) or (len(selected_category)==2):
-
-		selected_category=["All"]
-	else:
-		selected_category = selected_category
-
-	if chosen_metric == "Absolute":
-		unit = "Rs Cr"
-	if chosen_metric == "Percentage":
-		unit = "% of Total"
-
-	# if len(selected_operators) > 0:
-	# 	selected_operators = selected_operators
+# 	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
+# 	xdtickangle= -45
+# 	xdtickval=1
+# 	title = "Indian 5G Base Stations Roll Out Trends"
+# 	subtitle = "Incremental Values; Top 20 States/UT; Unit - Thousands; Sorted by the Recent Date; Source - DOT"
 
 
-	if SubFeature == "LicenseType":
+# if (Feature == "Subscriber Trends"):
 
-		if (len(selected_operators)==0) or (len(selected_operators)==30):
-			selected_operators = ["NA"]
-		else:
-			pass
-	if SubFeature == "Operators":
-		selected_operators = ["NA"]
+# 	hoverlabel_bgcolor = "#000000" #subdued black
 
+# 	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
+# 	xdtickangle= -45
+# 	xdtickval=1
 
-	hoverlabel_bgcolor = "#000000" #subdued black
-
-	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
-	xdtickangle= 0
-	xdtickval=1
-
-	subfeature_dict = {"Operators" : "Operators", "LicenseType" : "License Types"}
-
-	subtitle = "Selected Category - "+",".join(selected_category)+"; "+chosen_metric+\
-				"; Unit - "+unit+"; Sorted by - "+selected_fy_for_sort+"; Selected Operators -"+",".join(selected_operators)+"; Source - DOT"
-	title = "Indian Telecom Regulatory Fees Trend Top N "+subfeature_dict[SubFeature]
-
-if (Feature == "TowerBTS Trends"):
-	xdtickangle =0
-	xdtickval = 100
-	title = "Indian Telecom Tower and BTS rollout Trends"
-	subtitle = ""
-
-if (Feature == "Financial SPWise"):
-	xdtickangle =-45
-	xdtickval = 2
-	title = "Indian Telecom Financial Metric - Top 15 Operators ("+finmetric+")"
-	subtitle = "Rs K Cr (Except %); Source - TRAI; ("+radio_selection+")"
+# 	subtitle = "Cumulative Values; Selected Category -" +",".join(selected_category)+ "; Selected Circles - "+ \
+# 				",".join(selected_circles)+"; Unit - Millions; Sorted by the Recent Date; Source - TRAI"
+# 	title = "Indian Telecom Subscribers Trends"
 
 
-if (Feature == "Financial LSAWise"):
+# if (Feature == "Subscriber MShare"):
 
-	hoverlabel_bgcolor = "#000000" #subdued black
+# 	hoverlabel_bgcolor = "#000000" #subdued black
 
-	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white'))) #hoverbox color is black
+# 	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
+# 	xdtickangle= 0
+# 	xdtickval=1
 
-	xdtickangle =-45
-	xdtickval = 2
-	title = "Indian Telecom Financial Metric ("+finmetric+")"
-	subtitle = "Rs K Cr (Except %); Source - TRAI; ("+radio_selection+")"
+# 	subtitle = "Unit - % of Total; Total in Millions ; Selected Category -"+ ",".join(selected_category)+ " ;Source - TRAI"
+# 	title = "Indian Telecom Operator's Latest Subs Market Share"
 
-if (Feature == "Subs RuralUrban"):
+# if (Feature == "License Fees"):
 
-	# hoverlabel_bgcolor = "#000000" #subdued black
+# 	if (len(selected_category)==0) or (len(selected_category)==2):
 
-	# fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white'))) #hoverbox color is black
+# 		selected_category=["All"]
+# 	else:
+# 		selected_category = selected_category
 
-	xdtickangle =-45
-	xdtickval = 2
-	title = "Indian Telecom Financial Metric"
-	subtitle = ""
+# 	if chosen_metric == "Absolute":
+# 		unit = "Rs Cr"
+# 	if chosen_metric == "Percentage":
+# 		unit = "% of Total"
+
+# 	# if len(selected_operators) > 0:
+# 	# 	selected_operators = selected_operators
+
+
+# 	if SubFeature == "LicenseType":
+
+# 		if (len(selected_operators)==0) or (len(selected_operators)==30):
+# 			selected_operators = ["NA"]
+# 		else:
+# 			pass
+# 	if SubFeature == "Operators":
+# 		selected_operators = ["NA"]
+
+
+# 	hoverlabel_bgcolor = "#000000" #subdued black
+
+# 	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white')))
+# 	xdtickangle= 0
+# 	xdtickval=1
+
+# 	subfeature_dict = {"Operators" : "Operators", "LicenseType" : "License Types"}
+
+# 	subtitle = "Selected Category - "+",".join(selected_category)+"; "+chosen_metric+\
+# 				"; Unit - "+unit+"; Sorted by - "+selected_fy_for_sort+"; Selected Operators -"+",".join(selected_operators)+"; Source - DOT"
+# 	title = "Indian Telecom Regulatory Fees Trend Top N "+subfeature_dict[SubFeature]
+
+# if (Feature == "TowerBTS Trends"):
+# 	xdtickangle =0
+# 	xdtickval = 100
+# 	title = "Indian Telecom Tower and BTS rollout Trends"
+# 	subtitle = ""
+
+# if (Feature == "Financial SPWise"):
+# 	xdtickangle =-45
+# 	xdtickval = 2
+# 	title = "Indian Telecom Financial Metric - Top 15 Operators ("+finmetric+")"
+# 	subtitle = "Rs K Cr (Except %); Source - TRAI; ("+radio_selection+")"
+
+
+# if (Feature == "Financial LSAWise"):
+
+# 	hoverlabel_bgcolor = "#000000" #subdued black
+
+# 	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white'))) #hoverbox color is black
+
+# 	xdtickangle =-45
+# 	xdtickval = 2
+# 	title = "Indian Telecom Financial Metric ("+finmetric+")"
+# 	subtitle = "Rs K Cr (Except %); Source - TRAI; ("+radio_selection+")"
+
+# if (Feature == "Subs RuralUrban"):
+
+# 	# hoverlabel_bgcolor = "#000000" #subdued black
+
+# 	# fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=12, color='white'))) #hoverbox color is black
+
+# 	xdtickangle =-45
+# 	xdtickval = 2
+# 	title = "Indian Telecom Financial Metric"
+# 	subtitle = ""
 
 
 	
 #---------Dimension = Business Data Ends ----------------
-
-
 
 
 if selected_dimension in ["Spectrum Bands", "Auction Years", "Business Data"]:
@@ -6160,21 +6158,8 @@ if selected_dimension in ["Spectrum Bands", "Auction Years", "Business Data"]:
 			st.plotly_chart(fig, use_container_width=True) # for heatmaps
 
 
-		# #preparing the container layout for the dimension business data
-		# if (selected_dimension=="Business Data") and (Feature == "License Fees") and (SubFeature=="Operators"):
-		# 	col1val =4.5
-		# if (selected_dimension=="Business Data") and (Feature == "License Fees") and (SubFeature=="LicenseType"):
-		# 	col1val =1
-		# if (selected_dimension=="Business Data") and (Feature == "Financial SPWise"):
-		# 	col1val =0.7
-		# if (selected_dimension=="Business Data") and (Feature == "Financial LSAWise"):
-		# 	col1val =0.7
-		# else:
-			# col1val = 0.2
-
 
 		#plotting the final summary chart 
-
 		col1,col2,col3 = st.columns([0.2,14,1.1]) #create collumns of uneven width
 		if SummaryFlag ==True:
 			# st.altair_chart(chart, use_container_width=True)
