@@ -5650,6 +5650,7 @@ if selected_dimension == "Auction Years":
 		  hoverinfo ='text',
 		  text = hovertext,
 		  colorscale = 'Hot',
+		  showscale= False,
 		    texttemplate="%{z}", 
 		    textfont={"size":text_embed_in_chart_size}, #Debug 13th June 2024 (Changed from 12 to 16)
 		    reversescale=True,
