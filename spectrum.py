@@ -4361,13 +4361,17 @@ if selected_dimension == "Auction Data":
 			  width=heatmapwidth,
 			  margin=dict(t=80, b=50, l=50, r=0, pad=0),
 			  yaxis=dict(
-	        	  tickmode='array'),
+        	  tickmode='array',
+        	  tickfont=dict(size=text_embed_in_chart_size),
+        	  ),
 			  xaxis = dict(
 			  side = 'top',
 			  tickmode = 'linear',
 			  tickangle=0,
-			  dtick = xdtick), 
-			)
+			  dtick = xdtick,
+			  tickfont=dict(size=text_embed_in_chart_size),
+			   ), 
+				)
 
 
 			#Drawning a black border around the heatmap chart 
@@ -4391,13 +4395,17 @@ if selected_dimension == "Auction Data":
 			  width=heatmapwidth,
 			  margin=dict(t=80, b=50, l=50, r=0, pad=0),
 			  yaxis=dict(
-	        	  tickmode='array'),
+        	  tickmode='array',
+        	  tickfont=dict(size=text_embed_in_chart_size),
+        	  ),
 			  xaxis = dict(
 			  side = 'top',
 			  tickmode = 'linear',
 			  tickangle=0,
-			  dtick = xdtick), 
-			)
+			  dtick = xdtick,
+			  tickfont=dict(size=text_embed_in_chart_size),
+			   ), 
+				)
 
 
 			#Drawning a black border around the heatmap chart 
@@ -4466,12 +4474,16 @@ if selected_dimension == "Auction Data":
 			  width=heatmapwidth,
 			  margin=dict(t=80, b=50, l=50, r=0, pad=0),
 			  yaxis=dict(
-	        	  tickmode='array'),
+        	  tickmode='array',
+        	  tickfont=dict(size=text_embed_in_chart_size),
+        	  ),
 			  xaxis = dict(
 			  side = 'top',
 			  tickmode = 'linear',
 			  tickangle=0,
-			  dtick = xdtick), 
+			  dtick = xdtick,
+			  tickfont=dict(size=text_embed_in_chart_size),
+			   ), 
 			)
 
 			title = titlesubpart+" - Activity Factor Announced by the Auctioneer"
@@ -4566,12 +4578,16 @@ if selected_dimension == "Auction Data":
 			  width=heatmapwidth,
 			  margin=dict(t=80, b=50, l=0, r=0, pad=0),
 			  yaxis=dict(
-	        	  tickmode='array'),
+        	  tickmode='array',
+        	  tickfont=dict(size=text_embed_in_chart_size),
+        	  ),
 			  xaxis = dict(
 			  side = 'top',
 			  tickmode = 'linear',
 			  tickangle=0,
-			  dtick = xdtick), 
+			  dtick = xdtick,
+			  tickfont=dict(size=text_embed_in_chart_size),
+			   ), 
 			)
 
 			title = titlesubpart+" - Points Lost in Various Rounds During the Auction"
@@ -4717,7 +4733,8 @@ if selected_dimension == "Auction Data":
 			  dtick = xdtick,
 			  tickfont=dict(size=text_embed_in_chart_size),
 			   ), 
-				)
+			)
+				
 
 			figauc2.update_layout(uniformtext_minsize=text_embed_in_chart_size, 
 			  uniformtext_mode='hide', 
@@ -4731,13 +4748,17 @@ if selected_dimension == "Auction Data":
 			  width=heatmapwidth,
 			  margin=dict(t=80, b=50, l=0, r=0, pad=0),
 			  yaxis=dict(
-	        	  tickmode='array'),
+        	  tickmode='array',
+        	  tickfont=dict(size=text_embed_in_chart_size),
+        	  ),
 			  xaxis = dict(
 			  side = 'top',
 			  tickmode = 'linear',
 			  tickangle=0,
-			  dtick = xdtick), 
-			)
+			  dtick = xdtick,
+			  tickfont=dict(size=text_embed_in_chart_size),
+			   ), 
+				)
 
 			title = titlesubpart+" - Aggregrated Demand in Various Rounds"
 			subtitle = "Unit - Nos; Source - DoT; Xaxis - Round Numbers"
@@ -4846,7 +4867,7 @@ if selected_dimension == "Auction Data":
 			  dtick = xdtick,
 			  tickfont=dict(size=text_embed_in_chart_size),
 			   ), 
-			)
+				)
 
 			title = titlesubpart+" - Excess Demand in Various Rounds"
 			subtitle = "Unit - Nos; Source - DoT; Xaxis - Round Numbers"
@@ -4884,13 +4905,6 @@ if selected_dimension == "Auction Data":
 		dfbid = dfbid.drop(columns =["Clock Round", "Clock Round Price (Rs. Crore)","Aggregate Demand", "Excess Demand"], axis =1).drop_duplicates()
 
 		dfbid = dfbid.set_index("LSA")
-
-		# Use st.number_input instead of st.slider
-		# round_number = st.number_input("Select Auction Round Number using the Box below", 
-		#                            min_value=1, 
-		#                            max_value=totalrounds, 
-		#                            value=totalrounds, 
-		#                            step=1)
 
 		round_number = st.slider("Select Auction Round Numbers using the Silder below", min_value=1, max_value=totalrounds, step=1, value = totalrounds)
 
