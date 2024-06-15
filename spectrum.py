@@ -7076,8 +7076,8 @@ if selected_dimension in ["Spectrum Bands", "Auction Years", "Business Data"]:
     font=dict(size=16),
     template='simple_white',
     paper_bgcolor=None,
-    height=900,
-    width=1200,
+    height=900, #Changing this will adjust the height of all heat maps
+    width=1200, #Changing this will adjust the witdth of all heat maps
     margin=dict(t=80, b=50, l=50, r=50, pad=0),
     yaxis=dict(
         tickmode='array',
