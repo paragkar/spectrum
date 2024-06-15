@@ -1569,13 +1569,9 @@ if selected_dimension == "Spectrum Bands":
 			fig = go.Figure(data=data)
 
 			#Debug 14th June 2024 -----Start
-
 			sumrows = dfff.sum(axis=1).reset_index()
-
 			sumrows.columns = ["Operators", "Total MHz"]
-
 			figsumrows = plotrwototal(sumrows,"Operators", "Total MHz")
-
 			#Debug 14th June 2024 -----End
 
 			currency_flag = True # default
@@ -6164,17 +6160,17 @@ if selected_dimension in ["Spectrum Bands", "Auction Years", "Business Data"]:
 			st.plotly_chart(fig, use_container_width=True) # for heatmaps
 
 
-		#preparing the container layout for the dimension business data
-		if (selected_dimension=="Business Data") and (Feature == "License Fees") and (SubFeature=="Operators"):
-			col1val =4.5
-		if (selected_dimension=="Business Data") and (Feature == "License Fees") and (SubFeature=="LicenseType"):
-			col1val =1
-		if (selected_dimension=="Business Data") and (Feature == "Financial SPWise"):
-			col1val =0.7
-		if (selected_dimension=="Business Data") and (Feature == "Financial LSAWise"):
-			col1val =0.7
-		else:
-			col1val = 0.2
+		# #preparing the container layout for the dimension business data
+		# if (selected_dimension=="Business Data") and (Feature == "License Fees") and (SubFeature=="Operators"):
+		# 	col1val =4.5
+		# if (selected_dimension=="Business Data") and (Feature == "License Fees") and (SubFeature=="LicenseType"):
+		# 	col1val =1
+		# if (selected_dimension=="Business Data") and (Feature == "Financial SPWise"):
+		# 	col1val =0.7
+		# if (selected_dimension=="Business Data") and (Feature == "Financial LSAWise"):
+		# 	col1val =0.7
+		# else:
+		# 	col1val = 0.2
 
 
 		#plotting the final summary chart 
