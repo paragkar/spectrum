@@ -3186,6 +3186,8 @@ if selected_dimension == "Auction Data":
 			dfblocksalloc_rdend = dfbidpwb.reset_index().pivot(index="Bidder", columns='LSA', values="Prov_Alloc_BLK_End_ClkRd")\
 														.sort_index(ascending=False).round(0)
 
+			st.write(dfblocksalloc_rdend)
+
 			dftemp = dfbidpwb.reset_index().pivot(index="Bidder", columns='LSA', values="PWB_Start_ClkRd").sort_index(ascending=False).round(1)
 
 			chartoption = st.sidebar.radio('Click an Option', ["Absolute Values", "ReservePrice Multiple"])
