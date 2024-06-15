@@ -290,6 +290,7 @@ year_band_exp =["2021-Band800","2021-Band900","2021-Band1800","2021-Band2100","2
 #Define heights of all Heatmaps 
 heatmapheight = 900
 heatmapwidth = 900
+text_embed_in_chart_size = 20
 
 
 #function to count number of items in a list and outputs the result as dictionary
@@ -1267,16 +1268,16 @@ def summarychart(summarydf, xcolumn, ycolumn):
 	text = bar.mark_text(size = 16, dx=0, dy=-7, color = 'white').encode(text=ycolumn+':Q') #Debug 12th June 2024 (Chnaged Bar Text Sixe from 10 to 16)
 	
 	chart = (bar + text).properties(width=1120, height =150)
-	chart = chart.configure_title(fontSize = 20, font ='Arial', anchor = 'middle', color ='black')
+	chart = chart.configure_title(fontSize = text_embed_in_chart_size, font ='Arial', anchor = 'middle', color ='black')
 	return chart
 
 #function for preparing the chart for row total
 def plotrwototal(sumrows, ydim, xdim):
 	fig = px.bar(sumrows, y = ydim, x=xdim, orientation ='h', height = heatmapheight)
 	fig.update_layout(xaxis=dict(title='India Total'), yaxis=dict(title=''))
-	fig.update_traces(text=sumrows[xdim], textposition='auto',textfont=dict(size=20, color='white')) #Debug 12th June 2024 (Changed 14 to 20)
+	fig.update_traces(text=sumrows[xdim], textposition='auto',textfont=dict(size=text_embed_in_chart_size, color='white')) #Debug 12th June 2024 (Changed 14 to 20)
 	fig.update_xaxes(tickvals=[])
-	fig.update_layout(xaxis=dict(side='top', title_standoff=0, ticklen=0, title_font=dict(size=20))) #Debug 12th June 2024 (Changed 14 to 20)
+	fig.update_layout(xaxis=dict(side='top', title_standoff=0, ticklen=0, title_font=dict(size=text_embed_in_chart_size))) #Debug 12th June 2024 (Changed 14 to 20)
 	fig.update_layout(xaxis_title_standoff=5) 
 	fig.update_traces(marker=dict(color='red'))
 	return fig
@@ -1871,7 +1872,7 @@ def plotbiddertotal(dftemp,dfblocksalloc_rdend):
 	fig = px.bar(panindiabids, y = 'Bidder', x='PanIndiaBid', orientation ='h', height = heatmapheight)
 
 	fig.update_layout(xaxis=dict(title='Total Value'), yaxis=dict(title=''))
-	fig.update_traces(text=panindiabids['PanIndiaBid'], textposition='auto',textfont=dict(size=20, color='white')) #Debug 12th June 2024 (Changed 14 to 20)
+	fig.update_traces(text=panindiabids['PanIndiaBid'], textposition='auto',textfont=dict(size=text_embed_in_chart_size, color='white')) #Debug 12th June 2024 (Changed 14 to 20)
 	fig.update_xaxes(tickvals=[])
 	fig.update_layout(xaxis=dict(side='top', title_standoff=0, ticklen=0, title_font=dict(size=14)))
 	fig.update_layout(xaxis_title_standoff=5)
@@ -1886,11 +1887,11 @@ def plotrwototal(sumrows, ydim, xdim):
 
 	fig.update_layout(xaxis=dict(title='India Total'), yaxis=dict(title=''))
 
-	fig.update_traces(text=sumrows[xdim], textposition='auto',textfont=dict(size=20, color='white')) #Debug 12th June 2024 (Changed 14 to 20)
+	fig.update_traces(text=sumrows[xdim], textposition='auto',textfont=dict(size=text_embed_in_chart_size, color='white')) #Debug 12th June 2024 (Changed 14 to 20)
 
 	fig.update_xaxes(tickvals=[])
 
-	fig.update_layout(xaxis=dict(side='top', title_standoff=0, ticklen=0, title_font=dict(size=20))) #Debug 12th June 2024 (Changed 14 to 20)
+	fig.update_layout(xaxis=dict(side='top', title_standoff=0, ticklen=0, title_font=dict(size=text_embed_in_chart_size))) #Debug 12th June 2024 (Changed 14 to 20)
 
 	fig.update_layout(xaxis_title_standoff=5) 
 
@@ -1906,11 +1907,11 @@ def plotlosttotal(df,ydim,xdim):
 
 	fig.update_layout(xaxis=dict(title="Total"), yaxis=dict(title=''))
 
-	fig.update_traces(text=df[xdim], textposition='auto',textfont=dict(size=20, color='white')) #Debug 12th June 2024 (Changed 14 to 20)
+	fig.update_traces(text=df[xdim], textposition='auto',textfont=dict(size=text_embed_in_chart_size, color='white')) #Debug 12th June 2024 (Changed 14 to 20)
 
 	fig.update_xaxes(tickvals=[])
 
-	fig.update_layout(xaxis=dict(side='top', title_standoff=0, ticklen=0, title_font=dict(size=20))) #Debug 12th June 2024 (Changed 14 to 20)
+	fig.update_layout(xaxis=dict(side='top', title_standoff=0, ticklen=0, title_font=dict(size=text_embed_in_chart_size))) #Debug 12th June 2024 (Changed 14 to 20)
 
 	fig.update_layout(xaxis_title_standoff=5)
 
