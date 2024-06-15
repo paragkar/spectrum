@@ -1296,7 +1296,6 @@ chart_data_flag = False #set this to true only if this chart exists.
 with st.sidebar:
 	selected_dimension = option_menu(
 		menu_title = "Select a Menu",
-		# options = ["Spectrum Bands", "Auction Years", "Business Data", "Auction Data"],
 		options = ["Spectrum Bands", "Auction Years", "Auction Data"], #Debug 14th June 2024
 		icons = ["1-circle-fill", "2-circle-fill", "3-circle-fill", "4-circle-fill"],
 		menu_icon = "arrow-down-circle-fill",
@@ -1971,17 +1970,7 @@ if selected_dimension == "Auction Data":
 
 	currency_flag = True #default 
 
-	# Feature = st.sidebar.selectbox("Select a Feature", ["2010-Band2100","2010-Band2300", "2012-Band1800","2014-Band1800","2014-Band900",
-									# "2015-Band800", "2015-Band900","2015-Band1800", "2015-Band2100", "2016-Band800","2016-Band1800",
-									# "2016-Band2100", "2016-Band2300", "2016-Band2500","2021-Band800","2021-Band900","2021-Band1800",
-									# "2021-Band2100","2021-Band2300","2022-Band700","2022-Band800","2022-Band900","2022-Band1800",
-									# "2022-Band2100","2022-Band2500","2022-Band3500","2022-Band26000"])
-
 	Feature = st.sidebar.selectbox("Select a Feature", year_band) #Debug 10th June 2024
-
-	
-	
-
 
 	if Feature == "2022-Band26000":
 
