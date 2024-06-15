@@ -1320,10 +1320,6 @@ for index in dfrsrate.index:
 
 		auction_rsrate_dict[index.year] = dfrsrate.loc[index,:].values[0]
 
-# st.write(auction_rsrate_dict)
-
-
-
 if selected_dimension == "Spectrum Bands":
 
 	#selecting a Spectrum band
@@ -3186,8 +3182,6 @@ if selected_dimension == "Auction Data":
 			dfblocksalloc_rdend = dfbidpwb.reset_index().pivot(index="Bidder", columns='LSA', values="Prov_Alloc_BLK_End_ClkRd")\
 														.sort_index(ascending=False).round(0)
 
-			st.write(dfblocksalloc_rdend)
-
 			dftemp = dfbidpwb.reset_index().pivot(index="Bidder", columns='LSA', values="PWB_Start_ClkRd").sort_index(ascending=False).round(1)
 
 			chartoption = st.sidebar.radio('Click an Option', ["Absolute Values", "ReservePrice Multiple"])
@@ -3407,8 +3401,6 @@ if selected_dimension == "Auction Data":
 
 				dfbidblksec = dfbidblksec.replace(0, "None", regex = True)
 
-				# st.write(dfbidblksec)
-
 				#-----------End---------------------
 
 
@@ -3490,8 +3482,6 @@ if selected_dimension == "Auction Data":
 				# dfbidblksec = dfbidblksec.pivot_table(index='LSA', columns='Bidder', values='No_of_BLK_Selected', aggfunc=lambda x: list(x)).T
 
 				dfbidblksec = dfbidblksec.pivot_table(index='LSA', columns='Bidder', values='No_of_BLK_Selected', aggfunc='max').T
-
-				# st.write(dfbidblksec)
 
 				#-----------End---------------------
 
