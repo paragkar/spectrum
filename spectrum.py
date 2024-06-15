@@ -3653,7 +3653,7 @@ if selected_dimension == "Auction Data":
 
 		figsumrows.update_yaxes(visible=False, showticklabels=False)
 
-		figsumrows.update_layout(height = 615)
+		figsumrows.update_layout(height = heatmapheight)
 
 		#----------End-------------
 
@@ -3814,7 +3814,7 @@ if selected_dimension == "Auction Data":
 
 			figsumrows.update_yaxes(visible=False, showticklabels=False)
 
-			figsumrows.update_layout(height = 615)
+			figsumrows.update_layout(height = heatmapheight)
 
 			hovertext = htext_auctiondata_2010_3G_BWA_BlocksAllocated(dftemp)
 
@@ -3923,7 +3923,7 @@ if selected_dimension == "Auction Data":
 
 			figsumrows.update_yaxes(visible=False, showticklabels=False)
 
-			figsumrows.update_layout(height = 615)
+			figsumrows.update_layout(height = heatmapheight)
 
 
 			figsumcols = summarychart(sumcols, "LSA", "Total Slots")
@@ -4640,7 +4640,7 @@ if selected_dimension == "Auction Data":
 
 			blocksforsale.columns = ["LSA", "Blocks"]
 
-			figblkssale = px.bar(blocksforsale, x="Blocks", y="LSA", orientation='h', height = 615) #plotly horizontal bar chart 
+			figblkssale = px.bar(blocksforsale, x="Blocks", y="LSA", orientation='h', height = heatmapheight) #plotly horizontal bar chart 
 
 			figblkssale.update_layout(xaxis=dict(title='BlocksForSale'), yaxis=dict(title=''))
 
