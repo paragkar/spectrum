@@ -2844,6 +2844,7 @@ if selected_dimension == "Auction Data":
 				hoverinfo ='text',
 				text = resultdf.values,
 				colorscale="YlGnBu", #Debug 10th June 2024
+				showscale = False,
 					texttemplate="%{text}",
 					textfont={"size":text_embed_in_chart_size}, #Debug 14th June 2024 (Changed from 10 to 16)
 					reversescale=True,
