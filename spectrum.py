@@ -148,24 +148,6 @@ def loadspectrumfile():
 
 	return df
 
-@st.cache_resource
-def loadtelecomdatafile():
-
-	password = st.secrets["db_password"]
-
-	excel_content = io.BytesIO()
-
-	with open("telecomdata_protected.xlsx", 'rb') as f:
-		excel = msoffcrypto.OfficeFile(f)
-		excel.load_key(password)
-		excel.decrypt(excel_content)
-
-	#loading data from excel file, the last letter "T" stands for telecom
-	xlT = pd.ExcelFile(excel_content)
-	sheetT = xlT.sheet_names
-	dfT = pd.read_excel(excel_content, sheet_name=sheetT)
-
-	return dfT
 
 @st.cache_resource
 def loadauctionbiddata():
@@ -185,23 +167,6 @@ def loadauctionbiddata():
 
 	return df
 
-@st.cache_resource
-def loadtraiagr():
-
-	password = st.secrets["db_password"]
-
-	excel_content = io.BytesIO()
-
-	with open("trai_agr.xlsx", 'rb') as f:
-		excel = msoffcrypto.OfficeFile(f)
-		excel.load_key(password)
-		excel.decrypt(excel_content)
-
-	xl = pd.ExcelFile(excel_content)
-	sheetauctiondata = xl.sheet_names
-	df = pd.read_excel(excel_content, sheet_name=sheetauctiondata)
-
-	return df
 
 
 #--------Fuctions for loading File Ends--------------------
@@ -322,7 +287,7 @@ year_band =["2010-Band2100","2010-Band2300", "2012-Band1800","2014-Band1800","20
 									"2022-Band2100","2022-Band2500","2022-Band3500","2022-Band26000"]
 
 #Debug 19th June 2024
-year_band_exp =["2021-Band800","2021-Band900","2021-Band1800","2021-Band2100","2021-Band2300"]
+year_band_exp =["2021-Band800","2021-Band900","2021-Band1800","2021-Band2100","2021-Band2300"] # As the DOT auction data is incomplete for these years
 
 #function to count number of items in a list and outputs the result as dictionary
 #Used to extract data table for Spectrum Layout Dimension when it is filtered by Operators      	   
@@ -835,210 +800,210 @@ def htext_colmatrix_auction_year_operator_metric(df1, selectedbands, SubFeature,
 	return hovertext, colormatrix
 
 
-#processing for hovertext for Business Data and 5G BTS Trends
-@st.cache_resource
-def htext_businessdata_5gbts(df5gbtsf): 
+# #processing for hovertext for Business Data and 5G BTS Trends
+# @st.cache_resource
+# def htext_businessdata_5gbts(df5gbtsf): 
 
-	summarydf = df5gbtsf.sum(axis=0)
-	df5gbtsfPercent = round((df5gbtsf/summarydf)*100,2)
+# 	summarydf = df5gbtsf.sum(axis=0)
+# 	df5gbtsfPercent = round((df5gbtsf/summarydf)*100,2)
 
-	lst =[]
-	for row in df5gbtsf.values:
+# 	lst =[]
+# 	for row in df5gbtsf.values:
 
-		increments = np.diff(row)
-		lst.append(increments)
+# 		increments = np.diff(row)
+# 		lst.append(increments)
 
-	df5gbtsincf = pd.DataFrame(lst)
+# 	df5gbtsincf = pd.DataFrame(lst)
 
-	df5gbtsincf.index = df5gbtsf.index 
+# 	df5gbtsincf.index = df5gbtsf.index 
 
-	df5gbtsincf.columns = df5gbtsf.columns[1:]
+# 	df5gbtsincf.columns = df5gbtsf.columns[1:]
 
-	lastcolumn = df5gbtsincf.columns[-1]
-	df5gbtsincf = df5gbtsincf.sort_values(lastcolumn, ascending = False) #sort by the last column
+# 	lastcolumn = df5gbtsincf.columns[-1]
+# 	df5gbtsincf = df5gbtsincf.sort_values(lastcolumn, ascending = False) #sort by the last column
 
-	hovertext=[]
+# 	hovertext=[]
 
-	for yi,yy in enumerate(df5gbtsf.index):
-		hovertext.append([])
-		for xi,xx in enumerate(df5gbtsf.columns):
+# 	for yi,yy in enumerate(df5gbtsf.index):
+# 		hovertext.append([])
+# 		for xi,xx in enumerate(df5gbtsf.columns):
 
-			# btscum = df5gbtsf.values[yi][xi]
-			# btspercent = df5gbtsfPercent.values[yi][xi]
-			btscum = df5gbtsf.loc[yy,xx]
-			btspercent = df5gbtsfPercent.loc[yy,xx]
+# 			# btscum = df5gbtsf.values[yi][xi]
+# 			# btspercent = df5gbtsfPercent.values[yi][xi]
+# 			btscum = df5gbtsf.loc[yy,xx]
+# 			btspercent = df5gbtsfPercent.loc[yy,xx]
 
-			try:
-				btsinc = df5gbtsincf.loc[yy,xx]
-			except:
-				btsinc = np.nan
-
-
-			hovertext[-1].append(
-					    'State: {}\
-					    <br>Date: {}\
-					    <br>BTS Cum: {} K Nos\
-					    <br>BTS Inc: {} K Nos\
-					    <br>BTS Cum: {} % of Total'
-
-				     .format( 
-					    yy,
-					    xx,
-					    btscum,
-					    round(btsinc,2),
-					    btspercent,
-					    )
-					    )
-	return hovertext
+# 			try:
+# 				btsinc = df5gbtsincf.loc[yy,xx]
+# 			except:
+# 				btsinc = np.nan
 
 
+# 			hovertext[-1].append(
+# 					    'State: {}\
+# 					    <br>Date: {}\
+# 					    <br>BTS Cum: {} K Nos\
+# 					    <br>BTS Inc: {} K Nos\
+# 					    <br>BTS Cum: {} % of Total'
 
-#processing for hovertext for Business Data and Subscribers Trends Cumulatitive
-@st.cache_resource
-def htext_businessdata_telesubscum(dftotalfilt): 
-
-	summarydf = dftotalfilt.sum(axis=0)
-	dftotalfiltPercent = round((dftotalfilt/summarydf)*100,2)
-
-	lst =[]
-	for row in dftotalfilt.values:
-
-		increments = np.diff(row)
-		lst.append(increments)
-
-	dftotalfiltInc = pd.DataFrame(lst)
-
-	dftotalfiltInc.index = dftotalfilt.index 
-
-	dftotalfiltInc.columns = dftotalfilt.columns[1:]
-
-	lastcolumn = dftotalfiltInc.columns[-1]
-	dftotalfiltInc = dftotalfiltInc.sort_values(lastcolumn, ascending = False) #sort by the last column
-
-	hovertext=[]
-
-	for yi,yy in enumerate(dftotalfilt.index):
-		hovertext.append([])
-		for xi,xx in enumerate(dftotalfilt.columns):
-
-			subcum = dftotalfilt.loc[yy,xx]
-			subpercent = dftotalfiltPercent.loc[yy,xx]
-
-			try:
-				subinc = dftotalfiltInc.loc[yy,xx]
-			except:
-				subinc = np.nan
-
-
-			hovertext[-1].append(
-					    'Operator: {}\
-					    <br>Date: {}\
-					    <br>Subs Cum: {} Millions\
-					    <br>Subs Inc: {} Millions\
-					    <br>Subs Cum: {} % of Total'
-
-				     .format( 
-					    yy,
-					    xx,
-					    subcum,
-					    round(subinc,2),
-					    subpercent,
-					    )
-					    )
-	return hovertext
+# 				     .format( 
+# 					    yy,
+# 					    xx,
+# 					    btscum,
+# 					    round(btsinc,2),
+# 					    btspercent,
+# 					    )
+# 					    )
+# 	return hovertext
 
 
 
-#processing for hovertext for Business Data and Subscribers Trends Cumulatitive
-@st.cache_resource
-def htext_businessdata_telesubsinc(dftotalfiltinc): 
-	hovertext=[]
+# #processing for hovertext for Business Data and Subscribers Trends Cumulatitive
+# @st.cache_resource
+# def htext_businessdata_telesubscum(dftotalfilt): 
 
-	for yi,yy in enumerate(dftotalfiltinc.index):
-		hovertext.append([])
-		for xi,xx in enumerate(dftotalfiltinc.columns):
+# 	summarydf = dftotalfilt.sum(axis=0)
+# 	dftotalfiltPercent = round((dftotalfilt/summarydf)*100,2)
 
-			subinc = dftotalfiltinc.loc[yy,xx]
+# 	lst =[]
+# 	for row in dftotalfilt.values:
 
+# 		increments = np.diff(row)
+# 		lst.append(increments)
 
-			hovertext[-1].append(
-					    'Operator: {}\
-					    <br>Date: {}\
-					    <br>Subs Inc: {} Millions'
+# 	dftotalfiltInc = pd.DataFrame(lst)
 
-				     .format( 
-					    yy,
-					    xx,
-					    round(subinc,2),
-					    )
-					    )
-	return hovertext
+# 	dftotalfiltInc.index = dftotalfilt.index 
 
+# 	dftotalfiltInc.columns = dftotalfilt.columns[1:]
 
-#processing for hovertext for Business Data and Subscribers Market Share
-@st.cache_resource
-def htext_businessdata_telesubsms(dftotal,dftotalpercentms): 
+# 	lastcolumn = dftotalfiltInc.columns[-1]
+# 	dftotalfiltInc = dftotalfiltInc.sort_values(lastcolumn, ascending = False) #sort by the last column
 
-	hovertext=[]
+# 	hovertext=[]
 
-	for yi,yy in enumerate(dftotal.index):
-		hovertext.append([])
-		for xi,xx in enumerate(dftotal.columns):
+# 	for yi,yy in enumerate(dftotalfilt.index):
+# 		hovertext.append([])
+# 		for xi,xx in enumerate(dftotalfilt.columns):
 
-			subtotal = dftotal.loc[yy,xx]
-			subpercentms = dftotalpercentms.loc[yy,xx]
+# 			subcum = dftotalfilt.loc[yy,xx]
+# 			subpercent = dftotalfiltPercent.loc[yy,xx]
+
+# 			try:
+# 				subinc = dftotalfiltInc.loc[yy,xx]
+# 			except:
+# 				subinc = np.nan
 
 
-			hovertext[-1].append(
-					    'Operator: {}\
-					    <br>Circle: {}\
-					    <br>Subs Total: {} Millions\
-					    <br>Subs Share: {} % of Total'
+# 			hovertext[-1].append(
+# 					    'Operator: {}\
+# 					    <br>Date: {}\
+# 					    <br>Subs Cum: {} Millions\
+# 					    <br>Subs Inc: {} Millions\
+# 					    <br>Subs Cum: {} % of Total'
 
-				     .format( 
-					    yy,
-					    xx,
-					    round(subtotal/1000000,1),
-					    subpercentms,
-					    )
-					    )
-	return hovertext
-
-
-#processing for hovertext for Business Data and License Fees
-@st.cache_resource
-def htext_businessdata_licensefees(dflfsfbysubfeature, summarydf_for_hovertext): 
-
-	dfabsolute = dflfsfbysubfeature.copy()
+# 				     .format( 
+# 					    yy,
+# 					    xx,
+# 					    subcum,
+# 					    round(subinc,2),
+# 					    subpercent,
+# 					    )
+# 					    )
+# 	return hovertext
 
 
-	dfpercent = round((dflfsfbysubfeature/summarydf_for_hovertext)*100,2)
+
+# #processing for hovertext for Business Data and Subscribers Trends Cumulatitive
+# @st.cache_resource
+# def htext_businessdata_telesubsinc(dftotalfiltinc): 
+# 	hovertext=[]
+
+# 	for yi,yy in enumerate(dftotalfiltinc.index):
+# 		hovertext.append([])
+# 		for xi,xx in enumerate(dftotalfiltinc.columns):
+
+# 			subinc = dftotalfiltinc.loc[yy,xx]
 
 
-	hovertext=[]
+# 			hovertext[-1].append(
+# 					    'Operator: {}\
+# 					    <br>Date: {}\
+# 					    <br>Subs Inc: {} Millions'
 
-	for yi,yy in enumerate(dfabsolute.index):
-		hovertext.append([])
-		for xi,xx in enumerate(dfabsolute.columns):
+# 				     .format( 
+# 					    yy,
+# 					    xx,
+# 					    round(subinc,2),
+# 					    )
+# 					    )
+# 	return hovertext
 
-			absolute = dfabsolute.loc[yy,xx]
-			percent = dfpercent.loc[yy,xx]
+
+# #processing for hovertext for Business Data and Subscribers Market Share
+# @st.cache_resource
+# def htext_businessdata_telesubsms(dftotal,dftotalpercentms): 
+
+# 	hovertext=[]
+
+# 	for yi,yy in enumerate(dftotal.index):
+# 		hovertext.append([])
+# 		for xi,xx in enumerate(dftotal.columns):
+
+# 			subtotal = dftotal.loc[yy,xx]
+# 			subpercentms = dftotalpercentms.loc[yy,xx]
 
 
-			hovertext[-1].append(
-					    'Yaxis Label: {}\
-					    <br>FY: {}\
-					    <br>Abs Value: {} Rs Cr\
-					    <br>Percentage: {} % of Total'
+# 			hovertext[-1].append(
+# 					    'Operator: {}\
+# 					    <br>Circle: {}\
+# 					    <br>Subs Total: {} Millions\
+# 					    <br>Subs Share: {} % of Total'
 
-				     .format( 
-					    yy,
-					    xx,
-					    absolute,
-					    percent,
-					    )
-					    )
-	return hovertext
+# 				     .format( 
+# 					    yy,
+# 					    xx,
+# 					    round(subtotal/1000000,1),
+# 					    subpercentms,
+# 					    )
+# 					    )
+# 	return hovertext
+
+
+# #processing for hovertext for Business Data and License Fees
+# @st.cache_resource
+# def htext_businessdata_licensefees(dflfsfbysubfeature, summarydf_for_hovertext): 
+
+# 	dfabsolute = dflfsfbysubfeature.copy()
+
+
+# 	dfpercent = round((dflfsfbysubfeature/summarydf_for_hovertext)*100,2)
+
+
+# 	hovertext=[]
+
+# 	for yi,yy in enumerate(dfabsolute.index):
+# 		hovertext.append([])
+# 		for xi,xx in enumerate(dfabsolute.columns):
+
+# 			absolute = dfabsolute.loc[yy,xx]
+# 			percent = dfpercent.loc[yy,xx]
+
+
+# 			hovertext[-1].append(
+# 					    'Yaxis Label: {}\
+# 					    <br>FY: {}\
+# 					    <br>Abs Value: {} Rs Cr\
+# 					    <br>Percentage: {} % of Total'
+
+# 				     .format( 
+# 					    yy,
+# 					    xx,
+# 					    absolute,
+# 					    percent,
+# 					    )
+# 					    )
+# 	return hovertext
 
 #---------------Hovertest for BlocksAllocated Starts---------------------
 
