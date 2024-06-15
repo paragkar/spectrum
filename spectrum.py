@@ -3262,7 +3262,6 @@ if selected_dimension == "Auction Data":
 					xgap = 1,
 					ygap = 1,
 					hoverinfo ='text',
-					showscale=False,
 					text = hovertext,
 					colorscale='YlGnBu', #Debug 10th June 2024
 					showscale=True,
