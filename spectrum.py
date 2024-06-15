@@ -1291,6 +1291,7 @@ with st.sidebar:
 		)
 
 #loading file rupee to USD and finding the exchange rate in the auction eom
+#----------Start----------------
 
 auction_eom_list = [x.date() for x in list(auction_eom_dates_dict.values())] #List of Auction End of Months Dates
 
@@ -1307,13 +1308,12 @@ for index in dfrsrate.index:
 	if index.date() in auction_eom_list:
 
 		auction_rsrate_dict[index.year] = dfrsrate.loc[index,:].values[0]
+#----------End------------------
 
-st.write(auction_rsrate_dict)
 
 
 
 if selected_dimension == "Spectrum Bands":
-
 	#selecting a Spectrum band
 	Band = st.sidebar.selectbox('Select a Band', list(exptab_dict.keys()), 3) #default index 1800 MHz Band
 	
@@ -1330,10 +1330,10 @@ if selected_dimension == "Spectrum Bands":
 	spectrumofferedvssold = "Spectrum_Offered_vs_Sold"
 	masterall = "MasterAll-TDDValueConventional" #all auction related information 
 
-
 	#loading spectrum excel file
-
 	df = loadspectrumfile()
+
+	st.write(df)
 
 
 	#processing colorcode excel data tab
