@@ -374,7 +374,7 @@ def bw_exp_cal_yearly_trends(sff,ef):
 
 #funtion used for processing pricing datframe for hovertext for the feature auction map
 #The feature auction map is under the dimension Spectrum Bands
-# @st.cache_resource
+@st.cache_resource
 def cal_bw_mapped_to_operators_auctionmap(dff):
 	dff = dff.replace(0,np.nan).fillna(0)
 	dff = dff.map(lambda x: round(x,2) if type(x)!=str else x)
@@ -1253,7 +1253,6 @@ def transform_colscale_for_hbox_auction_map(dff,reserveprice, auctionprice):
 
 
 
-
 #function for preparing the summary chart 
 def summarychart(summarydf, xcolumn, ycolumn):
 	bar = alt.Chart(summarydf).mark_bar().encode(
@@ -1285,7 +1284,6 @@ chart_data_flag = False #set this to true only if this chart exists.
 with st.sidebar:
 	selected_dimension = option_menu(
 		menu_title = "Select a Menu",
-		# options = ["Spectrum Bands", "Auction Years", "Business Data", "Auction Data"],
 		options = ["Spectrum Bands", "Auction Years", "Auction Data"], #Debug 14th June 2024
 		icons = ["1-circle-fill", "2-circle-fill", "3-circle-fill", "4-circle-fill"],
 		menu_icon = "arrow-down-circle-fill",
@@ -1293,8 +1291,9 @@ with st.sidebar:
 		)
 
 #loading file rupee to USD and finding the exchange rate in the auction eom
+#----------Start----------------
 
-auction_eom_list = [x.date() for x in list(auction_eom_dates_dict.values())]
+auction_eom_list = [x.date() for x in list(auction_eom_dates_dict.values())] #List of Auction End of Months Dates
 
 dfrsrate = loadrstousd()
 
@@ -1309,13 +1308,12 @@ for index in dfrsrate.index:
 	if index.date() in auction_eom_list:
 
 		auction_rsrate_dict[index.year] = dfrsrate.loc[index,:].values[0]
+#----------End------------------
 
-# st.write(auction_rsrate_dict)
 
 
 
 if selected_dimension == "Spectrum Bands":
-
 	#selecting a Spectrum band
 	Band = st.sidebar.selectbox('Select a Band', list(exptab_dict.keys()), 3) #default index 1800 MHz Band
 	
@@ -1332,9 +1330,7 @@ if selected_dimension == "Spectrum Bands":
 	spectrumofferedvssold = "Spectrum_Offered_vs_Sold"
 	masterall = "MasterAll-TDDValueConventional" #all auction related information 
 
-
 	#loading spectrum excel file
-
 	df = loadspectrumfile()
 
 
@@ -1423,7 +1419,7 @@ if selected_dimension == "Spectrum Bands":
 
 	#Processing For Dimension = "Frequency Band" & Features
 	if  Feature == "Spectrum Map":
-		SubFeature = st.sidebar.selectbox('Select a Sub Feature', ["Frequency Layout", "Operator Holdings", "Operator %Share"],0)
+		SubFeature = st.sidebar.selectbox('Select a Sub Feature', ["Frequency Layout", "Operator Holdings", "Operator PercentShare"],0)
 		if SubFeature == "Frequency Layout":
 			sf = sff.copy()
 			operators = newoperators_dict[Band]
@@ -1478,7 +1474,7 @@ if selected_dimension == "Spectrum Bands":
 
 			chart_data_flag = True #Plot only if this flag is true 
 
-			
+			#Preparing data for "spectrum map" heatmap
 			data = [go.Heatmap(
 			      z = sf.values,
 			      y = sf.index,
@@ -1565,7 +1561,7 @@ if selected_dimension == "Spectrum Bands":
 
 			currency_flag = True # default
 			
-		if SubFeature == "Operator %Share":
+		if SubFeature == "Operator PercentShare":
 			selected_operators=[]
 			dfff = dffcopy[(dffcopy["Band"]==Band)]
 			operatorlist = sorted(list(set(dfff["OperatorNew"])))
@@ -6790,7 +6786,7 @@ if (Feature == "Spectrum Map") and (SubFeature == "Operator Holdings"):
 	title = "Operator Holdings for the "+str(Band)+" MHz Band"
 
 
-if (Feature == "Spectrum Map") and (SubFeature == "Operator %Share"):
+if (Feature == "Spectrum Map") and (SubFeature == "Operator PercentShare"):
 
 	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=16, color='white'))) #Debug 14th June 2024 (Changed from 12 to 16)
 
