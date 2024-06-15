@@ -3262,6 +3262,7 @@ if selected_dimension == "Auction Data":
 					xgap = 1,
 					ygap = 1,
 					hoverinfo ='text',
+					showscale=False,
 					text = hovertext,
 					colorscale='YlGnBu', #Debug 10th June 2024
 					showscale=True,
@@ -3333,7 +3334,7 @@ if selected_dimension == "Auction Data":
 
 			if chartoption =="ReservePrice Multiple":
 				# st.plotly_chart(figauc, use_container_width=True)
-				
+
 				col1,col2 = st.columns([8,1]) #create collumns of uneven width
 				with col1:
 					st.plotly_chart(figauc, use_container_width=True)
