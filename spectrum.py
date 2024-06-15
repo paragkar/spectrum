@@ -3103,22 +3103,6 @@ if selected_dimension == "Auction Data":
 			)]
 
 
-			# data = [go.Heatmap(
-			# 		z=dfbidsel.values,
-			#         y= dfbidsel.index,
-			#         x=dfbidsel.columns,
-			# 		xgap = 2,
-			# 		ygap = 2,
-			# 		hoverinfo ='text',
-			# 		# text = hovertext,
-			# 		colorscale='Hot',
-			# 		# showscale=False,
-			# 			texttemplate="%{z}", 
-			# 			textfont={"size":10},
-			# 			reversescale=True,
-			# 			)
-			# 		]
-
 			figauc = go.Figure(data=data)
 
 			#-------- Debug 30th March 2024
@@ -3165,38 +3149,22 @@ if selected_dimension == "Auction Data":
 	if SubFeature == "ProvWinningBid":
 
 		#------------------New Code Starts---------------------#
-
-
 		dfbid1 = loadauctionbiddata()[demandsheet].replace('-', np.nan, regex = True)
-
 		dfbid1 = dfbid1.drop(columns =["Clock Round", "Clock Round Price (Rs. Crore)", "Aggregate Demand", "Excess Demand"], axis =1)
-
 		dfbid1 = dfbid1.groupby(["LSA"]).mean().reset_index()
-
 		dfbid1.columns = ["LSA", "BlocksForSale"]
-
-
 		summarydf = dfbid1.copy()
 
 		#preparing the summary chart total slots up for auctions
 		chart = summarychart(summarydf, 'LSA', "BlocksForSale")
 		SummaryFlag = True
-
-
 		#-----------------New Code Ends ----------------------#
 
 		pwbtype = st.sidebar.selectbox("Select a PWB Type", ["Start CLK Round", "End CLK Round"])
-
 		df1strd = dfbid[dfbid["Clk_Round"] == 1].reset_index() #Identifying the 2nd round gives up the reserve price
-
 		dfpwb1strdend = df1strd.pivot(index="Bidder", columns='LSA', values="PWB_End_ClkRd").sort_index(ascending=False)
 
-		# dfrp = dfpwb1strdend.mean()
-
-		# dfrp.columns = ["ReservePrice"]
-
 		dfrp = dfrp.T
-
 
 		if pwbtype == "Start CLK Round":
 
