@@ -3445,7 +3445,7 @@ if selected_dimension == "Auction Data":
 
 				dfbidblksec = dfbidblksec.replace(0, "None", regex = True)
 
-				st.write(dfbidblksec)
+				# st.write(dfbidblksec)
 
 				#-----------End---------------------
 
