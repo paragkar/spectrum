@@ -3341,8 +3341,8 @@ if selected_dimension == "Auction Data":
 					st.markdown("")
 					st.plotly_chart(figpanindiabids, use_container_width=True)
 
-				#plotting the final summary chart 
-				col1,col2,col3 = st.columns([0.35, 14,1.1]) #create collumns of uneven width
+				# #plotting the final summary chart 
+				# col1,col2,col3 = st.columns([0.35, 14,1.1]) #create collumns of uneven width
 				if SummaryFlag ==True:
 					col2.altair_chart(chart, use_container_width=True)
 
