@@ -374,7 +374,7 @@ def bw_exp_cal_yearly_trends(sff,ef):
 
 #funtion used for processing pricing datframe for hovertext for the feature auction map
 #The feature auction map is under the dimension Spectrum Bands
-# @st.cache_resource
+@st.cache_resource
 def cal_bw_mapped_to_operators_auctionmap(dff):
 	dff = dff.replace(0,np.nan).fillna(0)
 	dff = dff.map(lambda x: round(x,2) if type(x)!=str else x)
