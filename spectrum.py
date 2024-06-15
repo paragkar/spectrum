@@ -3504,7 +3504,7 @@ if selected_dimension == "Auction Data":
 
 				figauc = go.Figure(data=data)
 
-				figauc.update_layout(uniformtext_minsize=12, 
+				figauc.update_layout(uniformtext_minsize=text_embed_in_chart_size, 
 				  uniformtext_mode='hide', 
 				  xaxis_title=None, 
 				  yaxis_title=None, 
@@ -3514,7 +3514,7 @@ if selected_dimension == "Auction Data":
 				  paper_bgcolor=None,
 				  height=heatmapheight, #Debug 14th June 2024 (Changed from 600 to 850)
 				  # width=heatmapwidth,
-				  margin=dict(t=80, b=50, l=50, r=50, pad=0),
+				  margin=dict(t=80, b=50, l=50, r=0, pad=0),
 				  yaxis=dict(
 		        	  tickmode='array'),
 				  xaxis = dict(
