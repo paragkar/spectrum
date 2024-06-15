@@ -1482,6 +1482,7 @@ if selected_dimension == "Spectrum Bands":
 			#Debug 14th June 2024 -----Start
 			sumrows = chartdata_df.sum(axis=1).sort_index(ascending=False).reset_index()
 			sumrows.columns = ["LSA", "Total MHz"]
+			sumrows = sumrows[~(sumrows["LSA"] == "Total")]
 			figsumrows = plotrwototal(sumrows,"LSA", "Total MHz")
 			#Debug 14th June 2024 -----End
 
