@@ -2852,7 +2852,7 @@ if selected_dimension == "Auction Data":
 		    xaxis=dict(
 	        side='top',
 	        tickmode='linear',
-	        tickangle=xdtickangle,
+	        # tickangle=xdtickangle,
 	        dtick=xdtickval,
 	        tickfont=dict(size=text_embed_in_chart_size),
 	        ))
