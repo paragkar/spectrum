@@ -7085,8 +7085,6 @@ if selected_dimension in ["Spectrum Bands", "Auction Years", "Business Data"]:
 			  tickmode = 'linear',
 			  tickangle=xdtickangle,
 			  dtick = xdtickval),
-			  tickfont=dict(size=14),  # Set the font size of x-axis tick labels
-        	  # title_font=dict(size=16)  # Set the font size of the x-axis title, 
 			)
 
 	#Drawning a black border around the heatmap chart 
