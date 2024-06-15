@@ -3712,17 +3712,7 @@ if selected_dimension == "Auction Data":
 		figauc = go.Figure(data=data)
 
 
-		#Debug 10th June 2024
-
-		#------------------Start-------------------
-
-		# figauc.update_layout(
-		#     template="seaborn",
-		#     xaxis_side= 'top',
-		#    	height = 650,
-		#    	yaxis=dict(
-	    #     tickmode='array',
-	    #     	))
+	
 
 
 
@@ -4090,7 +4080,7 @@ if selected_dimension == "Auction Data":
 				hoverinfo ='text',
 				text = hovertext,
 				colorscale='Hot',
-				showscale=True,
+				showscale=False,
 					texttemplate=texttempbiddemandactivity,
 					textfont={"size":8},
 					reversescale=True,
@@ -4107,7 +4097,7 @@ if selected_dimension == "Auction Data":
 					hoverinfo ='text',
 					text = hovertext,
 					colorscale='Hot',
-					showscale=True,
+					showscale=False,
 						texttemplate=texttempbiddemandactivity, 
 						textfont={"size":8},
 						reversescale=True,
@@ -4225,7 +4215,7 @@ if selected_dimension == "Auction Data":
 					hoverinfo ='text',
 					text = hovertext,
 					colorscale='Hot',
-					showscale=True,
+					showscale=False,
 						texttemplate=texttempbiddemandactivity, 
 						textfont={"size":8},
 						reversescale=True,
@@ -4240,7 +4230,7 @@ if selected_dimension == "Auction Data":
 					hoverinfo ='text',
 					text = hovertext,
 					colorscale='Hot',
-					showscale=True,
+					showscale=False,
 						texttemplate=texttempbiddemandactivity, 
 						textfont={"size":8},
 						reversescale=True,
@@ -4357,7 +4347,7 @@ if selected_dimension == "Auction Data":
 					hoverinfo ='text',
 					text = hovertext,
 					colorscale='Hot',
-					showscale=True,
+					showscale=False,
 						texttemplate=texttempbiddemandactivity, 
 						textfont={"size":8},
 						reversescale=True,
@@ -4372,7 +4362,7 @@ if selected_dimension == "Auction Data":
 					hoverinfo ='text',
 					text = hovertext,
 					colorscale='Hot',
-					showscale=True,
+					showscale=False,
 						texttemplate=texttempbiddemandactivity, 
 						textfont={"size":8},
 						reversescale=True,
@@ -4486,7 +4476,7 @@ if selected_dimension == "Auction Data":
 					# text = hovertext,
 					colorscale='Hot',
 					zmin=zmin_af, zmax=zmax_af,
-					showscale=True,
+					showscale=False,
 						texttemplate=texttempbiddemandactivity, 
 						textfont={"size":8},
 						reversescale=True,
@@ -4869,7 +4859,7 @@ if selected_dimension == "Auction Data":
 						text = hovertext,
 						colorscale='Hot',
 						# zmin=0.5, zmax=1,
-						showscale=True,
+						showscale=False,
 							texttemplate=texttempbiddemandactivity, 
 							textfont={"size":text_embed_in_chart_size},
 							reversescale=True,
@@ -5005,7 +4995,7 @@ if selected_dimension == "Auction Data":
 						text = df_combined1.values,
 						colorscale='reds',
 						# zmin=0.5, zmax=1,
-						showscale=True,
+						showscale=False,
 							texttemplate="%{text}", 
 							textfont={"size":text_embed_in_chart_size},
 							# reversescale=True,
