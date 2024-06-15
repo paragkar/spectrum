@@ -5962,7 +5962,7 @@ if selected_dimension in ["Spectrum Bands", "Auction Years", "Business Data"]:
 		else:
 			st.plotly_chart(fig, use_container_width=True) # for heatmaps
 			if SummaryFlag ==True:
-				altair_chart(chart, use_container_width=True)
+				st.altair_chart(chart, use_container_width=True)
 
 		
 
