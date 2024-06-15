@@ -1566,8 +1566,9 @@ if selected_dimension == "Spectrum Bands":
 			fig = go.Figure(data=data)
 
 			#Debug 14th June 2024 -----Start
-			sumrows = dfff.sum(axis=1).reset_index()
+			sumrows = dfff.sum(axis=1).sort_index().reset_index()
 			sumrows.columns = ["Operators", "Total MHz"]
+			sumrows = sumrows[~(sumrows["Operators"] == "India Total")]
 			figsumrows = plotrwototal(sumrows,"Operators", "Total MHz")
 			#Debug 14th June 2024 -----End
 
