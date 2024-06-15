@@ -289,7 +289,7 @@ year_band =["2010-Band2100","2010-Band2300", "2012-Band1800","2014-Band1800","20
 year_band_exp =["2021-Band800","2021-Band900","2021-Band1800","2021-Band2100","2021-Band2300"] # As the DOT auction data is incomplete for these years
 #Define heights of all Heatmaps 
 heatmapheight = 900
-heatmapwidth = 1200
+heatmapwidth = 1000
 
 
 #function to count number of items in a list and outputs the result as dictionary
