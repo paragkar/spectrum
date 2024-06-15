@@ -3391,9 +3391,6 @@ if selected_dimension == "Auction Data":
 
 				dfbidblksec = dfbidblksec.sort_index(ascending=True)
 
-
-				# dfbidblksec = dfbidblksec.pivot_table(index='LSA', columns='Bidder', values='No_of_BLK_Selected', aggfunc=lambda x: list(x)).T
-
 				dfbidblksec = dfbidblksec.pivot_table(index='LSA', columns='Bidder', values='No_of_BLK_Selected', aggfunc='max').T
 
 				dfbidblksec = dfbidblksec.replace(0, "None", regex = True)
@@ -3422,7 +3419,7 @@ if selected_dimension == "Auction Data":
 
 				figauc = go.Figure(data=data)
 
-				figauc.update_layout(uniformtext_minsize=12, 
+				figauc.update_layout(uniformtext_minsize=text_embed_in_chart_size, 
 				  uniformtext_mode='hide', 
 				  xaxis_title=None, 
 				  yaxis_title=None, 
@@ -3474,9 +3471,6 @@ if selected_dimension == "Auction Data":
 				dfbidblksec = dfbidblksec[filtbsec].loc[:,["Bidder", "No_of_BLK_Selected"]]
 
 				dfbidblksec = dfbidblksec.sort_index(ascending=True)
-
-
-				# dfbidblksec = dfbidblksec.pivot_table(index='LSA', columns='Bidder', values='No_of_BLK_Selected', aggfunc=lambda x: list(x)).T
 
 				dfbidblksec = dfbidblksec.pivot_table(index='LSA', columns='Bidder', values='No_of_BLK_Selected', aggfunc='max').T
 
@@ -3578,9 +3572,9 @@ if selected_dimension == "Auction Data":
 			#----------------End--------------------
 
 			#plotting the final summary chart 
-				col1,col2,col3 = st.columns([0.35, 14,1.1]) #create collumns of uneven width
+				# col1,col2,col3 = st.columns([0.35, 14,1.1]) #create collumns of uneven width
 				if SummaryFlag ==True:
-					col2.altair_chart(chart, use_container_width=True)
+					col1.altair_chart(chart, use_container_width=True)
 
 
 
