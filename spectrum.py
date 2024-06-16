@@ -1274,7 +1274,7 @@ def plotrwototal(sumrows, ydim, xdim):
 	fig.update_traces(text=sumrows[xdim], textposition='auto',textfont=dict(size=text_embed_in_chart_size, color='white')) #Debug 12th June 2024 (Changed 14 to 20)
 	fig.update_xaxes(tickvals=[])
 	fig.update_layout(xaxis=dict(side='top', title_standoff=0, ticklen=0, title_font=dict(size=text_embed_in_chart_size))) #Debug 12th June 2024 (Changed 14 to 20)
-	fig.update_layout(xaxis_title_standoff=1) 
+	fig.update_layout(xaxis_title_standoff=0) 
 	fig.update_traces(marker=dict(color='red'))
 	return fig
 
