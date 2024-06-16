@@ -2079,7 +2079,7 @@ features = {
         "blocksize": 5,
         "zmin_blk_sec": 0,
         "zmax_blk_sec": 4
-    }
+    },
     "2021-Band800": {
         "totalrounds": 6,
         "mainsheet": "2021_4G_800",
