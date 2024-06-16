@@ -3307,7 +3307,7 @@ if selected_dimension == "Auction Data":
 				  yaxis_autorange='reversed',
 				  font=dict(size=text_embed_in_chart_size), #Debug 12th June 2024
 				  template='simple_white',
-				  plot_bgcolor='#D2B48C',  # Background color for the plot area light pink
+				  plot_bgcolor='#D3D3D3',  # Background color for the plot area light pink
 				  paper_bgcolor=None,
 				  height=heatmapheight, #Debug 14th June 2024 (Changed from 600 to 850)
 				  # width=heatmapwidth,
