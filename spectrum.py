@@ -5331,10 +5331,10 @@ if selected_dimension == "Auction YearWise":
 	df1 = masterdf[masterdf["Auction Year"]==Year]
 	df1 = df1.set_index("Circle")
 
-	Feature = st.sidebar.selectbox('Select a Feature',["Band Metric", "Operator Metric"])
+	Feature = st.sidebar.selectbox('Select a Feature',["Band Wise", "Operator Metric"])
 
 
-	if Feature == "Band Metric":
+	if Feature == "Band Wise":
 
 		SubFeature = st.sidebar.selectbox('Select a SubFeature', subfeature_list)
 
@@ -5701,7 +5701,7 @@ if Feature == "Auction Map":
 
 #---------Dimension = Auction Years Starts ------------------
 
-if (Feature == "Band Metric"):
+if (Feature == "Band Wise"):
 
 	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=text_embed_in_hover_size, color='white'))) #Debug 14th June 2024 (Changed from 12 to 16)
 	
@@ -5863,7 +5863,7 @@ if selected_dimension in ["Spectrum Bands", "Auction YearWise"]:
 			st.info("Hoverbox's Background Color = GREY (No Purchase Made)")
 
 
-		if (Feature == "Band Metric"):
+		if (Feature == "Band Wise"):
 			st.info("Heatmap's Color Intensity - Directly Proportional to the Value of the Cell")
 			st.info("Hoverbox's Background Color = GREY (No Auction)")
 			st.info("Hoverbox's Background Color = BLACK (Failed Auction)")
