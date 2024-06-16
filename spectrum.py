@@ -3250,7 +3250,7 @@ if selected_dimension == "Auction Data":
 			dfblocksalloc_rdstart = dfbidpwb.reset_index().pivot(index="Bidder", columns='LSA', values="Prov_Alloc_BLK_Start_ClkRd")\
 														.sort_index(ascending=False).round(0)
 
-			st.write(dfblocksalloc_rdstart)
+			st.write(dfblocksalloc_rdstart.sort_index())
 
 
 			dftemp = dfbidpwb.reset_index().pivot(index="Bidder", columns='LSA', values="PWB_Start_ClkRd").sort_index(ascending=False).round(1)
