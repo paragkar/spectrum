@@ -164,14 +164,12 @@ def loadauctionbiddata():
 
 	return df
 
-
-
 #--------Fuctions for loading File Ends--------------------
+
 
 
 #--------Setting up the Constants Starts-------------------
 
-  
 state_dict = {'AP': 'Andhra Pradesh', 'AS': 'Assam', 'BH': 'Bihar', 'DL': 'Delhi', 'GU': 'Gujarat',
     'HA': 'Haryana','HP': 'Himachal Pradesh','JK': 'Jammu & Kashmir','KA': 'Karnataka',
     'KE': 'Kerala','KO': 'Kolkata','MP': 'Madhya Pradesh','MA': 'Maharashtra','MU': 'Mumbai',
@@ -284,21 +282,22 @@ year_band =["2010-Band2100","2010-Band2300", "2012-Band1800","2014-Band1800","20
 
 #Debug 19th June 2024
 year_band_exp =["2021-Band800","2021-Band900","2021-Band1800","2021-Band2100","2021-Band2300"] # As the DOT auction data is incomplete for these years
-#Define heights of all Heatmaps 
-heatmapheight = 900
-heatmapwidth = 900
+
+#Constants for Charts 
+heatmapheight = 900 #Height of Heatmaps
+heatmapwidth = 900 #Width of Heatmaps
 #Heatmap Chart Margins
 t=80
 b=50
 l=10
 r=10
 pad=0
-summarychartheight = 200
-text_embed_in_chart_size = 20
-text_embed_in_hover_size = 16
+summarychartheight = 200 #Summary Chart at Bottom Height 
+text_embed_in_chart_size = 20 #Size of Text Embedded in all Charts 
+text_embed_in_hover_size = 16 #Size of Text Embedded in tooltips
 plot_row_total_chart_ht_mul = 1.018 #This multiplier aligns the row total chart with the heatmap
-stcol1 = 9 #Columns for Heatmap
-stcol2 = 1 #Column for row total chart 
+stcol1 = 9 #No of Columns for Heatmap to Fit 
+stcol2 = 1 #No of Columns for row total chart to Fit
 
 
 #function to count number of items in a list and outputs the result as dictionary
