@@ -3219,8 +3219,6 @@ if selected_dimension == "Auction Data":
 				   ), 
 				)
 			
-			
-
 			title = titlesubpart+" - Bidder's Agg Ranks in the Chosen Window of Rounds"
 			subtitle = "Source - DOT; Between Round Nos "+str(start_round)+" & "+str(end_round)+ "; Number of Rounds = "+ str(end_round-start_round+1)
 
@@ -3288,7 +3286,6 @@ if selected_dimension == "Auction Data":
 			chartoption = st.sidebar.radio('Click an Option', ["Absolute Values", "ReservePrice Multiple"])
 
 			if chartoption == "Absolute Values":
-
 
 				figpanindiabids = plotbiddertotal(dftemp,dfblocksalloc_rdend)
 				figpanindiabids.update_yaxes(visible=False, showticklabels=False)
@@ -3440,6 +3437,9 @@ if selected_dimension == "Auction Data":
 				with col2:
 					st.markdown("")
 					st.plotly_chart(figpanindiabids, use_container_width=True)
+				# #plotting the final summary chart 
+				if SummaryFlag ==True:
+					col1.altair_chart(chart, use_container_width=True)
 
 			if chartoption =="ReservePrice Multiple":
 				# st.plotly_chart(figauc, use_container_width=True)
