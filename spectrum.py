@@ -2247,7 +2247,7 @@ features = {
         "blocksize": 5,
         "zmin_blk_sec": 0,
         "zmax_blk_sec": 4
-    }
+    },
      "2016-Band1800": {
         "totalrounds": 31,
         "mainsheet": "2016_4G_1800",
