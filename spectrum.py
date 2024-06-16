@@ -5449,7 +5449,7 @@ if selected_dimension == "Auction YearWise":
 		df1 = df1.reset_index()
 		df2_temp1 = df1.copy()
 
-		selectedbands = st.sidebar.multiselect('Select Bands',bands_auctioned_dict[Year])
+		selectedbands = st.sidebar.multiselect('Filter By Bands',bands_auctioned_dict[Year])
 
 		subfeature_list = ["Total Outflow", "Total Purchase"]
 		SubFeature = st.sidebar.selectbox('Select a SubFeature', subfeature_list,0)
