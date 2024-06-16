@@ -1918,7 +1918,6 @@ if selected_dimension == "Auction Data":
 	Feature = st.sidebar.selectbox("Select a Feature", year_band) #Debug 10th June 2024
 
 	if Feature == "2022-Band26000":
-
 		totalrounds = 40
 		mainsheet = "2022_5G_26000"
 		mainsheetoriginal = "2022_5G_26000_Original"
@@ -1941,7 +1940,6 @@ if selected_dimension == "Auction Data":
 
 
 	if Feature == "2022-Band3500":
-
 		totalrounds = 40
 		mainsheet = "2022_5G_3500"
 		mainsheetoriginal = "2022_5G_3500_Original"
@@ -1964,7 +1962,6 @@ if selected_dimension == "Auction Data":
 
 
 	if Feature == "2022-Band2500":
-
 		totalrounds = 40
 		mainsheet = "2022_4G_2500"
 		mainsheetoriginal = "2022_4G_2500_Original"
@@ -1987,7 +1984,6 @@ if selected_dimension == "Auction Data":
 
 
 	if Feature == "2022-Band2100":
-
 		totalrounds = 40
 		mainsheet = "2022_4G_2100"
 		mainsheetoriginal = "2022_4G_2100_Original"
@@ -2011,7 +2007,6 @@ if selected_dimension == "Auction Data":
 
 
 	if Feature == "2022-Band1800":
-
 		totalrounds = 40
 		mainsheet = "2022_4G_1800"
 		mainsheetoriginal = "2022_4G_1800_Original"
@@ -2034,7 +2029,6 @@ if selected_dimension == "Auction Data":
 
 
 	if Feature == "2022-Band900":
-
 		totalrounds = 40
 		mainsheet = "2022_4G_900"
 		mainsheetoriginal = "2022_4G_900_Original"
@@ -2057,7 +2051,6 @@ if selected_dimension == "Auction Data":
 
 
 	if Feature == "2022-Band800":
-
 		totalrounds = 40
 		mainsheet = "2022_4G_800"
 		mainsheetoriginal = "2022_4G_800_Original"
@@ -2080,7 +2073,6 @@ if selected_dimension == "Auction Data":
 
 
 	if Feature == "2022-Band700":
-
 		totalrounds = 40
 		mainsheet = "2022_5G_700"
 		mainsheetoriginal = "2022_5G_700_Original"
@@ -2102,7 +2094,6 @@ if selected_dimension == "Auction Data":
 		zmax_blk_sec = 4
 	
 	if Feature == "2021-Band800":
-
 		totalrounds = 6
 		mainsheet = "2021_4G_800"
 		mainsheetoriginal = "2021_4G_800_Original"
@@ -2124,7 +2115,6 @@ if selected_dimension == "Auction Data":
 		zmax_blk_sec = 4
 
 	if Feature == "2021-Band900":
-
 		totalrounds = 6
 		mainsheet = "2021_4G_900"
 		mainsheetoriginal = "2021_4G_900_Original"
@@ -2146,7 +2136,6 @@ if selected_dimension == "Auction Data":
 		zmax_blk_sec = 4
 
 	if Feature == "2021-Band1800":
-
 		totalrounds = 6
 		mainsheet = "2021_4G_1800"
 		mainsheetoriginal = "2021_4G_1800_Original"
@@ -2168,7 +2157,6 @@ if selected_dimension == "Auction Data":
 		zmax_blk_sec = 4
 
 	if Feature == "2021-Band2100":
-
 		totalrounds = 6
 		mainsheet = "2021_4G_2100"
 		mainsheetoriginal = "2021_4G_2100_Original"
@@ -2190,7 +2178,6 @@ if selected_dimension == "Auction Data":
 		zmax_blk_sec = 4
 
 	if Feature == "2021-Band2300":
-
 		totalrounds = 6
 		mainsheet = "2021_4G_2300"
 		mainsheetoriginal = "2021_4G_2300_Original"
@@ -2211,11 +2198,7 @@ if selected_dimension == "Auction Data":
 		zmin_blk_sec = 0
 		zmax_blk_sec = 4
 
-
-
-
 	if Feature == "2016-Band2500":
-
 		totalrounds = 31
 		mainsheet = "2016_4G_2500"
 		mainsheetoriginal = "2016_4G_2500_Original"
@@ -2236,9 +2219,7 @@ if selected_dimension == "Auction Data":
 		zmin_blk_sec = 0
 		zmax_blk_sec = 4
 
-
 	if Feature == "2016-Band2300":
-
 		totalrounds = 31
 		mainsheet = "2016_4G_2300"
 		mainsheetoriginal = "2016_4G_2300_Original"
@@ -2260,7 +2241,6 @@ if selected_dimension == "Auction Data":
 		zmax_blk_sec = 4
 
 	if Feature == "2016-Band2100":
-
 		totalrounds = 31
 		mainsheet = "2016_4G_2100"
 		mainsheetoriginal = "2016_4G_2100_Original"
@@ -2282,7 +2262,6 @@ if selected_dimension == "Auction Data":
 		zmax_blk_sec = 4
 	
 	if Feature == "2016-Band1800":
-
 		totalrounds = 31
 		mainsheet = "2016_4G_1800"
 		mainsheetoriginal = "2016_4G_1800_Original"
@@ -2305,7 +2284,6 @@ if selected_dimension == "Auction Data":
 
 
 	if Feature == "2016-Band800":
-
 		totalrounds = 31
 		mainsheet = "2016_4G_800"
 		mainsheetoriginal = "2016_4G_800_Original"
@@ -2328,7 +2306,6 @@ if selected_dimension == "Auction Data":
 
 
 	if Feature == "2015-Band2100":
-
 		totalrounds = 115
 		mainsheet = "2015_3G_2100"
 		mainsheetoriginal = "2015_3G_2100_Original"
@@ -2351,7 +2328,6 @@ if selected_dimension == "Auction Data":
 
 
 	if Feature == "2015-Band1800":
-
 		totalrounds = 115
 		mainsheet = "2015_2G_1800"
 		mainsheetoriginal = "2015_2G_1800_Original"
@@ -2374,7 +2350,6 @@ if selected_dimension == "Auction Data":
 
 
 	if Feature == "2015-Band900":
-
 		totalrounds = 115
 		mainsheet = "2015_2G_900"
 		mainsheetoriginal = "2015_2G_900_Original"
@@ -2397,7 +2372,6 @@ if selected_dimension == "Auction Data":
 
 
 	if Feature == "2015-Band800":
-
 		totalrounds = 115
 		mainsheet = "2015_2G_800"
 		mainsheetoriginal = "2015_2G_800_Original"
@@ -2420,7 +2394,6 @@ if selected_dimension == "Auction Data":
 
 
 	if Feature == "2014-Band1800":
-
 		totalrounds = 68
 		mainsheet = "2014_2G_1800"
 		mainsheetoriginal = "2014_2G_1800_Original"
@@ -2442,7 +2415,6 @@ if selected_dimension == "Auction Data":
 		zmax_blk_sec = 4
 
 	if Feature == "2014-Band900":
-
 		totalrounds = 68
 		mainsheet = "2014_2G_900"
 		mainsheetoriginal = "2014_2G_900_Original"
@@ -2465,7 +2437,6 @@ if selected_dimension == "Auction Data":
 
 
 	if Feature == "2010-Band2100":
-
 		totalrounds = 183
 		mainsheet = "2010_3G"
 		mainoriflag = False
@@ -2486,7 +2457,6 @@ if selected_dimension == "Auction Data":
 		zmax_blk_sec = 1
 
 	if Feature == "2010-Band2300":
-
 		totalrounds = 117
 		mainsheet = "2010_BWA"
 		mainoriflag = False
@@ -2507,7 +2477,6 @@ if selected_dimension == "Auction Data":
 		zmax_blk_sec = 1
 
 	if Feature == "2012-Band1800":
-
 		totalrounds = 14
 		mainsheet = "2012_2G_1800"
 		mainoriflag = False
