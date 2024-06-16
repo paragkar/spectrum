@@ -2783,7 +2783,7 @@ if selected_dimension == "Auction Data":
 		title = titlesubpart+titlesubpart2
 		subtitle = "Source - DoT; Between Round Nos "+str(start_round)+" & "+str(end_round)+ "; Number of Rounds = "+ str(end_round-start_round)
 
-		style_title = "<style>h3 {text-align: left;}</style>"
+		style = "<style>h3 {text-align: left;}</style>"
 		with st.container():
 			#plotting the main chart
 			st.markdown(style, unsafe_allow_html=True)
