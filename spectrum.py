@@ -3241,15 +3241,16 @@ if selected_dimension == "Auction Data":
 
 			dfbidpwb = dfbidpwb[filt]
 
+
+			#No of Blocks Allocated at the end of Round
 			dfblocksalloc_rdend = dfbidpwb.reset_index().pivot(index="Bidder", columns='LSA', values="Prov_Alloc_BLK_End_ClkRd")\
 														.sort_index(ascending=False).round(0)
 			#Debug 16th June 2024 (added the line dfblocksalloc_rdstart)
+			#No of Blocks Allocated at the start of Round
 			dfblocksalloc_rdstart = dfbidpwb.reset_index().pivot(index="Bidder", columns='LSA', values="Prov_Alloc_BLK_Start_ClkRd")\
 														.sort_index(ascending=True).round(0)
 
 			dftemp = dfbidpwb.reset_index().pivot(index="Bidder", columns='LSA', values="PWB_Start_ClkRd").sort_index(ascending=False).round(1)
-
-
 
 			chartoption = st.sidebar.radio('Click an Option', ["Absolute Values", "ReservePrice Multiple"])
 
@@ -3275,8 +3276,6 @@ if selected_dimension == "Auction Data":
 				for col in dfblocksalloc_rdstart.columns:
 					dfblocksalloc_rdstart[col] = dfblocksalloc_rdstart[col].astype(int)
 				dftemp_comb = dftemp.map(str).combine(dfblocksalloc_rdstart.map(str), lambda x, y: combine_text(x, y)).replace('nan', '', regex = True)
-
-
 
 				data = [go.Heatmap(
 				z=dftemp.values,
@@ -3340,8 +3339,22 @@ if selected_dimension == "Auction Data":
 
 
 				hovertext, colormatrix = htext_colormatrix_auctiondata_2010_3G_BWA_ProvWinningBid(dfrp, dftemp1, pwbtype, round_number)
-
 				dftemp = dftemp.sort_index(ascending=True)
+
+
+				def combine_text(x, y): #sep is seperator
+				    if x.notnull().all() and y.notnull().all():
+				        return x + '<br>' + y
+				    elif x.notnull().all():
+				        return x
+				    else:
+				        return y
+
+				#for rendering text of the final heatmap for Data
+				dfblocksalloc_rdstart = dfblocksalloc_rdstart.replace(np.nan, 0)
+				for col in dfblocksalloc_rdstart.columns:
+					dfblocksalloc_rdstart[col] = dfblocksalloc_rdstart[col].astype(int)
+				dftemp_comb = dftemp.map(str).combine(dfblocksalloc_rdstart.map(str), lambda x, y: combine_text(x, y)).replace('nan', '', regex = True)
 
 				data = [go.Heatmap(
 					z=dftemp.values,
@@ -3350,10 +3363,11 @@ if selected_dimension == "Auction Data":
 					xgap = 1,
 					ygap = 1,
 					hoverinfo ='text',
-					text = hovertext,
+					hovertext = hovertext,
+					text = dftemp_comb.values,
 					colorscale='YlGnBu', #Debug 10th June 2024
 					showscale=False,
-						texttemplate="%{z}", 
+						texttemplate="%{text}", 
 						textfont={"size":text_embed_in_chart_size},#Debug 12th June 2024
 						# reversescale=True,
 						)]
