@@ -2310,7 +2310,7 @@ features = {
         "blocksize": 5,
         "zmin_blk_sec": 0,
         "zmax_blk_sec": 4
-    }
+    },
      "2015-Band1800": {
         "totalrounds": 115,
         "mainsheet": "2015_2G_1800",
