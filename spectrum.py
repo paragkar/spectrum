@@ -287,6 +287,7 @@ year_band_exp =["2021-Band800","2021-Band900","2021-Band1800","2021-Band2100","2
 #Define heights of all Heatmaps 
 heatmapheight = 900
 heatmapwidth = 900
+summarychartheight = 200
 text_embed_in_chart_size = 20
 text_embed_in_hover_size = 16
 plot_row_total_chart_ht_mul = 1.017 #This multiplier aligns the row total chart with the heatmap
@@ -1264,7 +1265,7 @@ def summarychart(summarydf, xcolumn, ycolumn):
 
 	text = bar.mark_text(size = text_embed_in_chart_size, dx=0, dy=-7, color = 'white').encode(text=ycolumn+':Q') #Debug 12th June 2024 (Chnaged Bar Text Sixe from 10 to 16)
 	
-	chart = (bar + text).properties(width=heatmapwidth, height =200)
+	chart = (bar + text).properties(width=heatmapwidth, height =summarychartheight)
 	chart = chart.configure_title(fontSize = text_embed_in_chart_size, font ='Arial', anchor = 'middle', color ='black')
 	return chart
 
@@ -2959,8 +2960,8 @@ if selected_dimension == "Auction Data":
 			st.markdown(subtitle)
 
 		#Drawning a black border around the heatmap chart 
-		figauc.update_xaxes(fixedrange=True,showline=True,linewidth=1.4,linecolor='black', mirror=True)
-		figauc.update_yaxes(fixedrange=True,showline=True, linewidth=1.4, linecolor='black', mirror=True)
+		figauc.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
+		figauc.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
 		figauc.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=text_embed_in_hover_size, color='white')))
 
 
