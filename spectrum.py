@@ -2959,10 +2959,12 @@ if selected_dimension == "Auction Data":
 			st.markdown(subtitle)
 
 		#Drawning a black border around the heatmap chart 
-		figauc.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
-		figauc.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
+		figauc.update_xaxes(fixedrange=True,showline=True,linewidth=1.4,linecolor='black', mirror=True)
+		figauc.update_yaxes(fixedrange=True,showline=True, linewidth=1.4, linecolor='black', mirror=True)
 		figauc.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=text_embed_in_hover_size, color='white')))
 
+
+		#Plotting Provisional Winners Charts 
 		st.plotly_chart(figauc, use_container_width=True)
 		st.altair_chart(chart, use_container_width=True)
 
