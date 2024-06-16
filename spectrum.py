@@ -2797,8 +2797,6 @@ if selected_dimension == "Auction Data":
 				text = df_combined.values,
 				colorscale="Hot",
 				showscale=False,
-				plot_bgcolor='#D2B48C',  # Background color for the plot area light pink
-			    paper_bgcolor='white',  # Background color for the entire figure
 				texttemplate="%{text}",
 				textfont={"size":text_embed_in_chart_size}, #Debug 14th June 2024 (Changed from 12 to 16)
 				reversescale=True,
