@@ -3855,26 +3855,19 @@ if selected_dimension == "Auction Data":
 			dftemp = dfbidblksec.reset_index().pivot(index="Bidder", columns='LSA', values="Prov_Alloc_BLK_Start_ClkRd").sort_index(ascending=False).round(0)
 
 			sumrows = dftemp.sum(axis=1).reset_index()
-
 			sumrows.columns = ["Bidders", "Total Slots"]
-
-			sumcols = dftemp.sum(axis=0).reset_index()
-
-			sumcols.columns = ["LSA", "Total Slots"]
-
-
-			figsumcols = summarychart(sumcols, "LSA", "Total Slots")
-
 			figsumrows = plotrwototal(sumrows,"Bidders", "Total Slots")
-
 			figsumrows.update_yaxes(visible=False, showticklabels=False)
-
 			figsumrows.update_layout(height = heatmapheight)
 
+
+			sumcols = dftemp.sum(axis=0).reset_index()
+			sumcols.columns = ["LSA", "Slots Selected"]
+			figsumcols = summarychart(sumcols, "LSA", "Slots Selected")
+
+
 			hovertext = htext_auctiondata_2010_3G_BWA_BlocksAllocated(dftemp)
-
 			dftemp = dftemp.sort_index(ascending=True)
-
 			dftemp = dftemp.replace(0, np.nan)
 
 			data = [go.Heatmap(
@@ -3984,7 +3977,6 @@ if selected_dimension == "Auction Data":
 			hovertext = htext_auctiondata_2010_3G_BWA_BlocksAllocated(dftemp)
 
 			dftemp = dftemp.sort_index(ascending=True)
-
 
 			data = [go.Heatmap(
 					z=dftemp.values,
