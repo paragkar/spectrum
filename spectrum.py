@@ -3755,7 +3755,7 @@ if selected_dimension == "Auction Data":
 		sumcols.columns = ["LSA", "Total Slots"]
 
 
-		figsumcols = summarychart(sumcols, "LSA", "Total Slots ")
+		figsumcols = summarychart(sumcols, "LSA", "Total Slots")
 
 		#debug 10th June 2024
 
