@@ -2142,7 +2142,7 @@ features = {
         "blocksize": 0.2,
         "zmin_blk_sec": 0,
         "zmax_blk_sec": 4
-    }
+    },
     "2021-Band2100": {
         "totalrounds": 6,
         "mainsheet": "2021_4G_2100",
