@@ -1911,590 +1911,1161 @@ if selected_dimension == "Spectrum Bands":
 
 #----------------New Auction Bid Data Code Starts Here------------------
 
+features = {
+    "2022-Band26000": {
+        "totalrounds": 40,
+        "mainsheet": "2022_5G_26000",
+        "mainsheetoriginal": "2022_5G_26000_Original",
+        "mainoriflag": True,
+        "activitysheet": "2022_4G_5G_Activity",
+        "demandsheet": "2022_5G_26000_AD",
+        "titlesubpart": "26000 MHz Auctions (CY-2022)",
+        "subtitlesubpartbidactivity": "; Combined for All Bands",
+        "year": 2022,
+        "band": 26000,
+        "xdtick": 1,
+        "zmin": 1,
+        "zmax": 5,
+        "zmin_af": 0.5,
+        "zmax_af": 1,
+        "texttempbiddemandactivity": "%{z}",
+        "blocksize": 50,
+        "zmin_blk_sec": 0,
+        "zmax_blk_sec": 4
+    },
+    "2022-Band3500": {
+        "totalrounds": 40,
+        "mainsheet": "2022_5G_3500",
+        "mainsheetoriginal": "2022_5G_3500_Original",
+        "mainoriflag": True,
+        "activitysheet": "2022_4G_5G_Activity",
+        "demandsheet": "2022_5G_3500_AD",
+        "titlesubpart": "3500 MHz Auctions (CY-2022)",
+        "subtitlesubpartbidactivity": "; Combined for All Bands",
+        "year": 2022,
+        "band": 3500,
+        "xdtick": 1,
+        "zmin": 1,
+        "zmax": 5,
+        "zmin_af": 0.5,
+        "zmax_af": 1,
+        "texttempbiddemandactivity": "%{z}",
+        "blocksize": 10,
+        "zmin_blk_sec": 0,
+        "zmax_blk_sec": 4
+    },
+    "2022-Band2500": {
+        "totalrounds": 40,
+        "mainsheet": "2022_4G_2500",
+        "mainsheetoriginal": "2022_4G_2500_Original",
+        "mainoriflag": True,
+        "activitysheet": "2022_4G_5G_Activity",
+        "demandsheet": "2022_4G_2500_AD",
+        "titlesubpart": "2500 MHz Auctions (CY-2022)",
+        "subtitlesubpartbidactivity": "; Combined for All Bands",
+        "year": 2022,
+        "band": 2500,
+        "xdtick": 1,
+        "zmin": 1,
+        "zmax": 5,
+        "zmin_af": 0.5,
+        "zmax_af": 1,
+        "texttempbiddemandactivity": "%{z}",
+        "blocksize": 10,
+        "zmin_blk_sec": 0,
+        "zmax_blk_sec": 4
+    },
+    "2022-Band2100": {
+        "totalrounds": 40,
+        "mainsheet": "2022_4G_2100",
+        "mainsheetoriginal": "2022_4G_2100_Original",
+        "mainoriflag": True,
+        "activitysheet": "2022_4G_5G_Activity",
+        "demandsheet": "2022_4G_2100_AD",
+        "titlesubpart": "2100 MHz Auctions (CY-2022)",
+        "subtitlesubpartbidactivity": "; Combined for All Bands",
+        "year": 2022,
+        "band": 2100,
+        "xdtick": 1,
+        "zmin": 1,
+        "zmax": 5,
+        "zmin_af": 0.5,
+        "zmax_af": 1,
+        "texttempbiddemandactivity": "%{z}",
+        "blocksize": 5,
+        "zmin_blk_sec": 0,
+        "zmax_blk_sec": 4
+    },
+    "2022-Band1800": {
+        "totalrounds": 40,
+        "mainsheet": "2022_4G_1800",
+        "mainsheetoriginal": "2022_4G_1800_Original",
+        "mainoriflag": True,
+        "activitysheet": "2022_4G_5G_Activity",
+        "demandsheet": "2022_4G_1800_AD",
+        "titlesubpart": "1800 MHz Auctions (CY-2022)",
+        "subtitlesubpartbidactivity": "; Combined for All Bands",
+        "year": 2022,
+        "band": 1800,
+        "xdtick": 1,
+        "zmin": 1,
+        "zmax": 5,
+        "zmin_af": 0.5,
+        "zmax_af": 1,
+        "texttempbiddemandactivity": "%{z}",
+        "blocksize": 0.2,
+        "zmin_blk_sec": 0,
+        "zmax_blk_sec": 4
+    },
+     "2022-Band900": {
+        "totalrounds": 40,
+        "mainsheet": "2022_4G_900",
+        "mainsheetoriginal": "2022_4G_900_Original",
+        "mainoriflag": True,
+        "activitysheet": "2022_4G_5G_Activity",
+        "demandsheet": "2022_4G_900_AD",
+        "titlesubpart": "900 MHz Auctions (CY-2022)",
+        "subtitlesubpartbidactivity": "; Combined for All Bands",
+        "year": 2022,
+        "band": 900,
+        "xdtick": 1,
+        "zmin": 1,
+        "zmax": 5,
+        "zmin_af": 0.5,
+        "zmax_af": 1,
+        "texttempbiddemandactivity": "%{z}",  # Debug 10th June 2024
+        "blocksize": 0.2,
+        "zmin_blk_sec": 0,
+        "zmax_blk_sec": 4
+    },
+    "2022-Band800": {
+        "totalrounds": 40,
+        "mainsheet": "2022_4G_800",
+        "mainsheetoriginal": "2022_4G_800_Original",
+        "mainoriflag": True,
+        "activitysheet": "2022_4G_5G_Activity",
+        "demandsheet": "2022_4G_800_AD",
+        "titlesubpart": "800 MHz Auctions (CY-2022)",
+        "subtitlesubpartbidactivity": "; Combined for All Bands",
+        "year": 2022,
+        "band": 800,
+        "xdtick": 1,
+        "zmin": 1,
+        "zmax": 5,
+        "zmin_af": 0.5,
+        "zmax_af": 1,
+        "texttempbiddemandactivity": "%{z}",  # Debug 10th June 2024
+        "blocksize": 1.25,
+        "zmin_blk_sec": 0,
+        "zmax_blk_sec": 4
+    },
+    "2022-Band700": {
+        "totalrounds": 40,
+        "mainsheet": "2022_5G_700",
+        "mainsheetoriginal": "2022_5G_700_Original",
+        "mainoriflag": True,
+        "activitysheet": "2022_4G_5G_Activity",
+        "demandsheet": "2022_5G_700_AD",
+        "titlesubpart": "700 MHz Auctions (CY-2022)",
+        "subtitlesubpartbidactivity": "; Combined for All Bands",
+        "year": 2022,
+        "band": 700,
+        "xdtick": 1,
+        "zmin": 1,
+        "zmax": 5,
+        "zmin_af": 0.5,
+        "zmax_af": 1,
+        "texttempbiddemandactivity": "%{z}",  # Debug 10th June 2024
+        "blocksize": 5,
+        "zmin_blk_sec": 0,
+        "zmax_blk_sec": 4
+    }
+    "2021-Band800": {
+        "totalrounds": 6,
+        "mainsheet": "2021_4G_800",
+        "mainsheetoriginal": "2021_4G_800_Original",
+        "mainoriflag": True,
+        "activitysheet": "2021_4G_Activity",
+        "demandsheet": "2021_4G_800_AD",
+        "titlesubpart": "800 MHz Auctions (CY-2021)",
+        "subtitlesubpartbidactivity": "; Combined for All Bands",
+        "year": 2021,
+        "band": 800,
+        "xdtick": 1,
+        "zmin": 1,
+        "zmax": 5,
+        "zmin_af": 0.5,
+        "zmax_af": 1,
+        "texttempbiddemandactivity": "%{z}",
+        "blocksize": 1.25,
+        "zmin_blk_sec": 0,
+        "zmax_blk_sec": 4
+    },
+    "2021-Band900": {
+        "totalrounds": 6,
+        "mainsheet": "2021_4G_900",
+        "mainsheetoriginal": "2021_4G_900_Original",
+        "mainoriflag": True,
+        "activitysheet": "2021_4G_Activity",
+        "demandsheet": "2021_4G_900_AD",
+        "titlesubpart": "900 MHz Auctions (CY-2021)",
+        "subtitlesubpartbidactivity": "; Combined for All Bands",
+        "year": 2021,
+        "band": 900,
+        "xdtick": 1,
+        "zmin": 1,
+        "zmax": 5,
+        "zmin_af": 0.5,
+        "zmax_af": 1,
+        "texttempbiddemandactivity": "%{z}",
+        "blocksize": 0.2,
+        "zmin_blk_sec": 0,
+        "zmax_blk_sec": 4
+    },
+    "2021-Band1800": {
+        "totalrounds": 6,
+        "mainsheet": "2021_4G_1800",
+        "mainsheetoriginal": "2021_4G_1800_Original",
+        "mainoriflag": True,
+        "activitysheet": "2021_4G_Activity",
+        "demandsheet": "2021_4G_1800_AD",
+        "titlesubpart": "1800 MHz Auctions (CY-2021)",
+        "subtitlesubpartbidactivity": "; Combined for All Bands",
+        "year": 2021,
+        "band": 1800,
+        "xdtick": 1,
+        "zmin": 1,
+        "zmax": 5,
+        "zmin_af": 0.5,
+        "zmax_af": 1,
+        "texttempbiddemandactivity": "%{z}",
+        "blocksize": 0.2,
+        "zmin_blk_sec": 0,
+        "zmax_blk_sec": 4
+    }
+    "2021-Band2100": {
+        "totalrounds": 6,
+        "mainsheet": "2021_4G_2100",
+        "mainsheetoriginal": "2021_4G_2100_Original",
+        "mainoriflag": True,
+        "activitysheet": "2021_4G_Activity",
+        "demandsheet": "2021_4G_2100_AD",
+        "titlesubpart": "2100 MHz Auctions (CY-2021)",
+        "subtitlesubpartbidactivity": "; Combined for All Bands",
+        "year": 2021,
+        "band": 2100,
+        "xdtick": 1,
+        "zmin": 1,
+        "zmax": 5,
+        "zmin_af": 0.5,
+        "zmax_af": 1,
+        "texttempbiddemandactivity": "%{z}",
+        "blocksize": 5,
+        "zmin_blk_sec": 0,
+        "zmax_blk_sec": 4
+    },
+    "2021-Band2300": {
+        "totalrounds": 6,
+        "mainsheet": "2021_4G_2300",
+        "mainsheetoriginal": "2021_4G_2300_Original",
+        "mainoriflag": True,
+        "activitysheet": "2021_4G_Activity",
+        "demandsheet": "2021_4G_2300_AD",
+        "titlesubpart": "2300 MHz Auctions (CY-2021)",
+        "subtitlesubpartbidactivity": "; Combined for All Bands",
+        "year": 2021,
+        "band": 2300,
+        "xdtick": 1,
+        "zmin": 1,
+        "zmax": 5,
+        "zmin_af": 0.5,
+        "zmax_af": 1,
+        "texttempbiddemandactivity": "%{z}",
+        "blocksize": 10,
+        "zmin_blk_sec": 0,
+        "zmax_blk_sec": 4
+    },
+    "2016-Band2500": {
+        "totalrounds": 31,
+        "mainsheet": "2016_4G_2500",
+        "mainsheetoriginal": "2016_4G_2500_Original",
+        "mainoriflag": True,
+        "activitysheet": "2016_4G_Activity",
+        "demandsheet": "2016_4G_2500_AD",
+        "titlesubpart": "2500 MHz Auctions (CY-2016)",
+        "subtitlesubpartbidactivity": "; Combined for All Bands",
+        "year": 2016,
+        "band": 2500,
+        "xdtick": 5,
+        "zmin": 1,
+        "zmax": 5,
+        "zmin_af": 0.5,
+        "zmax_af": 1,
+        "texttempbiddemandactivity": "%{z}",
+        "blocksize": 10,
+        "zmin_blk_sec": 0,
+        "zmax_blk_sec": 4
+    }
+    "2016-Band2300": {
+        "totalrounds": 31,
+        "mainsheet": "2016_4G_2300",
+        "mainsheetoriginal": "2016_4G_2300_Original",
+        "mainoriflag": True,
+        "activitysheet": "2016_4G_Activity",
+        "demandsheet": "2016_4G_2300_AD",
+        "titlesubpart": "2300 MHz Auctions (CY-2016)",
+        "subtitlesubpartbidactivity": "; Combined for All Bands",
+        "year": 2016,
+        "band": 2300,
+        "xdtick": 5,
+        "zmin": 1,
+        "zmax": 5,
+        "zmin_af": 0.5,
+        "zmax_af": 1,
+        "texttempbiddemandactivity": "%{z}",
+        "blocksize": 10,
+        "zmin_blk_sec": 0,
+        "zmax_blk_sec": 4
+    },
+    "2016-Band2100": {
+        "totalrounds": 31,
+        "mainsheet": "2016_4G_2100",
+        "mainsheetoriginal": "2016_4G_2100_Original",
+        "mainoriflag": True,
+        "activitysheet": "2016_4G_Activity",
+        "demandsheet": "2016_4G_2100_AD",
+        "titlesubpart": "2100 MHz Auctions (CY-2016)",
+        "subtitlesubpartbidactivity": "; Combined for All Bands",
+        "year": 2016,
+        "band": 2100,
+        "xdtick": 5,
+        "zmin": 1,
+        "zmax": 5,
+        "zmin_af": 0.5,
+        "zmax_af": 1,
+        "texttempbiddemandactivity": "%{z}",
+        "blocksize": 5,
+        "zmin_blk_sec": 0,
+        "zmax_blk_sec": 4
+    }
+     "2016-Band1800": {
+        "totalrounds": 31,
+        "mainsheet": "2016_4G_1800",
+        "mainsheetoriginal": "2016_4G_1800_Original",
+        "mainoriflag": True,
+        "activitysheet": "2016_4G_Activity",
+        "demandsheet": "2016_4G_1800_AD",
+        "titlesubpart": "1800 MHz Auctions (CY-2016)",
+        "subtitlesubpartbidactivity": "; Combined for All Bands",
+        "year": 2016,
+        "band": 1800,
+        "xdtick": 5,
+        "zmin": 1,
+        "zmax": 5,
+        "zmin_af": 0.5,
+        "zmax_af": 1,
+        "texttempbiddemandactivity": "%{z}",
+        "blocksize": 0.2,
+        "zmin_blk_sec": 0,
+        "zmax_blk_sec": 4
+    },
+    "2016-Band800": {
+        "totalrounds": 31,
+        "mainsheet": "2016_4G_800",
+        "mainsheetoriginal": "2016_4G_800_Original",
+        "mainoriflag": True,
+        "activitysheet": "2016_4G_Activity",
+        "demandsheet": "2016_4G_800_AD",
+        "titlesubpart": "800 MHz Auctions (CY-2016)",
+        "subtitlesubpartbidactivity": "; Combined for All Bands",
+        "year": 2016,
+        "band": 800,
+        "xdtick": 5,
+        "zmin": 1,
+        "zmax": 5,
+        "zmin_af": 0.5,
+        "zmax_af": 1,
+        "texttempbiddemandactivity": "%{z}",
+        "blocksize": 1.25,
+        "zmin_blk_sec": 0,
+        "zmax_blk_sec": 4
+    },
+    "2015-Band2100": {
+        "totalrounds": 115,
+        "mainsheet": "2015_3G_2100",
+        "mainsheetoriginal": "2015_3G_2100_Original",
+        "mainoriflag": True,
+        "activitysheet": "2015_2G_3G_Activity",
+        "demandsheet": "2015_3G_2100_AD",
+        "titlesubpart": "2100 MHz Auctions (CY-2015)",
+        "subtitlesubpartbidactivity": "; Combined for All Bands",
+        "year": 2015,
+        "band": 2100,
+        "xdtick": 5,
+        "zmin": 1,
+        "zmax": 5,
+        "zmin_af": 0.5,
+        "zmax_af": 1,
+        "texttempbiddemandactivity": "",
+        "blocksize": 5,
+        "zmin_blk_sec": 0,
+        "zmax_blk_sec": 4
+    }
+     "2015-Band1800": {
+        "totalrounds": 115,
+        "mainsheet": "2015_2G_1800",
+        "mainsheetoriginal": "2015_2G_1800_Original",
+        "mainoriflag": True,
+        "activitysheet": "2015_2G_3G_Activity",
+        "demandsheet": "2015_2G_1800_AD",
+        "titlesubpart": "1800 MHz Auctions (CY-2015)",
+        "subtitlesubpartbidactivity": "; Combined for All Bands",
+        "year": 2015,
+        "band": 1800,
+        "xdtick": 5,
+        "zmin": 1,
+        "zmax": 5,
+        "zmin_af": 0.5,
+        "zmax_af": 1,
+        "texttempbiddemandactivity": "",
+        "blocksize": 0.2,
+        "zmin_blk_sec": 0,
+        "zmax_blk_sec": 4
+    },
+    "2015-Band900": {
+        "totalrounds": 115,
+        "mainsheet": "2015_2G_900",
+        "mainsheetoriginal": "2015_2G_900_Original",
+        "mainoriflag": True,
+        "activitysheet": "2015_2G_3G_Activity",
+        "demandsheet": "2015_2G_900_AD",
+        "titlesubpart": "900 MHz Auctions (CY-2015)",
+        "subtitlesubpartbidactivity": "; Combined for All Bands",
+        "year": 2015,
+        "band": 900,
+        "xdtick": 5,
+        "zmin": 1,
+        "zmax": 5,
+        "zmin_af": 0.5,
+        "zmax_af": 1,
+        "texttempbiddemandactivity": "",
+        "blocksize": 0.2,
+        "zmin_blk_sec": 0,
+        "zmax_blk_sec": 4
+    },
+    "2015-Band800": {
+        "totalrounds": 115,
+        "mainsheet": "2015_2G_800",
+        "mainsheetoriginal": "2015_2G_800_Original",
+        "mainoriflag": True,
+        "activitysheet": "2015_2G_3G_Activity",
+        "demandsheet": "2015_2G_800_AD",
+        "titlesubpart": "800 MHz Auctions (CY-2015)",
+        "subtitlesubpartbidactivity": "; Combined for All Bands",
+        "year": 2015,
+        "band": 800,
+        "xdtick": 5,
+        "zmin": 1,
+        "zmax": 5,
+        "zmin_af": 0.5,
+        "zmax_af": 1,
+        "texttempbiddemandactivity": "",
+        "blocksize": 1.25,
+        "zmin_blk_sec": 0,
+        "zmax_blk_sec": 4
+    }
+    "2014-Band1800": {
+        "totalrounds": 68,
+        "mainsheet": "2014_2G_1800",
+        "mainsheetoriginal": "2014_2G_1800_Original",
+        "mainoriflag": True,
+        "activitysheet": "2014_2G_Activity",
+        "demandsheet": "2014_2G_1800_AD",
+        "titlesubpart": "1800 MHz Auctions (CY-2014)",
+        "subtitlesubpartbidactivity": "; Combined for both 1800 & 900 MHz Bands",
+        "year": 2014,
+        "band": 1800,
+        "xdtick": 5,
+        "zmin": 1,
+        "zmax": 5,
+        "zmin_af": 0.5,
+        "zmax_af": 1,
+        "texttempbiddemandactivity": "",
+        "blocksize": 0.2,
+        "zmin_blk_sec": 0,
+        "zmax_blk_sec": 4
+    },
+    "2014-Band900": {
+        "totalrounds": 68,
+        "mainsheet": "2014_2G_900",
+        "mainsheetoriginal": "2014_2G_900_Original",
+        "mainoriflag": True,
+        "activitysheet": "2014_2G_Activity",
+        "demandsheet": "2014_2G_900_AD",
+        "titlesubpart": "900 MHz Auctions (CY-2014)",
+        "subtitlesubpartbidactivity": "; Combined for both 1800 & 900 MHz Bands",
+        "year": 2014,
+        "band": 900,
+        "xdtick": 5,
+        "zmin": 1,
+        "zmax": 5,
+        "zmin_af": 0.5,
+        "zmax_af": 1,
+        "texttempbiddemandactivity": "",
+        "blocksize": 1,
+        "zmin_blk_sec": 0,
+        "zmax_blk_sec": 4
+    },
+    "2010-Band2100": {
+        "totalrounds": 183,
+        "mainsheet": "2010_3G",
+        "mainoriflag": False,
+        "activitysheet": "2010_3G_Activity",
+        "demandsheet": "2010_3G_AD",
+        "titlesubpart": "2100 MHz Auctions (CY-2010)",
+        "subtitlesubpartbidactivity": "",
+        "year": 2010,
+        "band": 2100,
+        "xdtick": 10,
+        "zmin": 1,
+        "zmax": 5,
+        "zmin_af": 0.5,
+        "zmax_af": 1,
+        "texttempbiddemandactivity": "",
+        "blocksize": 5,
+        "zmin_blk_sec": 0,
+        "zmax_blk_sec": 1
+    },
+    "2010-Band2300": {
+        "totalrounds": 117,
+        "mainsheet": "2010_BWA",
+        "mainoriflag": False,
+        "activitysheet": "2010_BWA_Activity",
+        "demandsheet": "2010_BWA_AD",
+        "titlesubpart": "2300 MHz Auctions (CY-2010)",
+        "subtitlesubpartbidactivity": "",
+        "year": 2010,
+        "band": 2300,
+        "xdtick": 10,
+        "zmin": 1,
+        "zmax": 3,
+        "zmin_af": 0.5,
+        "zmax_af": 1,
+        "texttempbiddemandactivity": "",
+        "blocksize": 20,
+        "zmin_blk_sec": 0,
+        "zmax_blk_sec": 1
+    }
+     "2012-Band1800": {
+        "totalrounds": 14,
+        "mainsheet": "2012_2G_1800",
+        "mainoriflag": False,
+        "activitysheet": "2012_2G_1800_Activity",
+        "demandsheet": "2012_2G_1800_AD",
+        "titlesubpart": "1800 MHz Auctions (CY-2012)",
+        "subtitlesubpartbidactivity": "",
+        "year": 2012,
+        "band": 1800,
+        "xdtick": 1,
+        "zmin": 1,
+        "zmax": 3,
+        "zmin_af": 0.5,
+        "zmax_af": 1,
+        "texttempbiddemandactivity": "%{z}",
+        "blocksize": 1.25,
+        "zmin_blk_sec": 0,
+        "zmax_blk_sec": 4
+    }
+ 
+}
+
 if selected_dimension == "Auction BandWise":
 
 	currency_flag = True #default 
 
 	Feature = st.sidebar.selectbox("Select a Feature", year_band) #Debug 10th June 2024
 
-	if Feature == "2022-Band26000":
-		totalrounds = 40
-		mainsheet = "2022_5G_26000"
-		mainsheetoriginal = "2022_5G_26000_Original"
-		mainoriflag = True
-		activitysheet = "2022_4G_5G_Activity"
-		demandsheet = "2022_5G_26000_AD"
-		titlesubpart = "26000 MHz Auctions (CY-2022)"
-		subtitlesubpartbidactivity = "; Combined for All Bands"
-		year =2022
-		band = 26000
-		xdtick =1
-		zmin=1
-		zmax=5
-		zmin_af = 0.5
-		zmax_af = 1
-		texttempbiddemandactivity = "%{z}" #debug 10th June 2024
-		blocksize = 50
-		zmin_blk_sec = 0
-		zmax_blk_sec = 4
+	if Feature in features:
+		st.write(Feature)
+
+	# if Feature == "2022-Band26000":
+	# 	totalrounds = 40
+	# 	mainsheet = "2022_5G_26000"
+	# 	mainsheetoriginal = "2022_5G_26000_Original"
+	# 	mainoriflag = True
+	# 	activitysheet = "2022_4G_5G_Activity"
+	# 	demandsheet = "2022_5G_26000_AD"
+	# 	titlesubpart = "26000 MHz Auctions (CY-2022)"
+	# 	subtitlesubpartbidactivity = "; Combined for All Bands"
+	# 	year =2022
+	# 	band = 26000
+	# 	xdtick =1
+	# 	zmin=1
+	# 	zmax=5
+	# 	zmin_af = 0.5
+	# 	zmax_af = 1
+	# 	texttempbiddemandactivity = "%{z}" #debug 10th June 2024
+	# 	blocksize = 50
+	# 	zmin_blk_sec = 0
+	# 	zmax_blk_sec = 4
 
 
-	if Feature == "2022-Band3500":
-		totalrounds = 40
-		mainsheet = "2022_5G_3500"
-		mainsheetoriginal = "2022_5G_3500_Original"
-		mainoriflag = True
-		activitysheet = "2022_4G_5G_Activity"
-		demandsheet = "2022_5G_3500_AD"
-		titlesubpart = "3500 MHz Auctions (CY-2022)"
-		subtitlesubpartbidactivity = "; Combined for All Bands"
-		year =2022
-		band = 3500
-		xdtick =1
-		zmin=1
-		zmax=5
-		zmin_af = 0.5
-		zmax_af = 1
-		texttempbiddemandactivity = "%{z}" #debug 10th June 2024
-		blocksize = 10
-		zmin_blk_sec = 0
-		zmax_blk_sec = 4
+	# if Feature == "2022-Band3500":
+	# 	totalrounds = 40
+	# 	mainsheet = "2022_5G_3500"
+	# 	mainsheetoriginal = "2022_5G_3500_Original"
+	# 	mainoriflag = True
+	# 	activitysheet = "2022_4G_5G_Activity"
+	# 	demandsheet = "2022_5G_3500_AD"
+	# 	titlesubpart = "3500 MHz Auctions (CY-2022)"
+	# 	subtitlesubpartbidactivity = "; Combined for All Bands"
+	# 	year =2022
+	# 	band = 3500
+	# 	xdtick =1
+	# 	zmin=1
+	# 	zmax=5
+	# 	zmin_af = 0.5
+	# 	zmax_af = 1
+	# 	texttempbiddemandactivity = "%{z}" #debug 10th June 2024
+	# 	blocksize = 10
+	# 	zmin_blk_sec = 0
+	# 	zmax_blk_sec = 4
 
 
-	if Feature == "2022-Band2500":
-		totalrounds = 40
-		mainsheet = "2022_4G_2500"
-		mainsheetoriginal = "2022_4G_2500_Original"
-		mainoriflag = True
-		activitysheet = "2022_4G_5G_Activity"
-		demandsheet = "2022_4G_2500_AD"
-		titlesubpart = "2500 MHz Auctions (CY-2022)"
-		subtitlesubpartbidactivity = "; Combined for All Bands"
-		year =2022
-		band = 2500
-		xdtick =1
-		zmin=1
-		zmax=5
-		zmin_af = 0.5
-		zmax_af = 1
-		texttempbiddemandactivity = "%{z}" #debug 10th June 2024
-		blocksize = 10
-		zmin_blk_sec = 0
-		zmax_blk_sec = 4
+	# if Feature == "2022-Band2500":
+	# 	totalrounds = 40
+	# 	mainsheet = "2022_4G_2500"
+	# 	mainsheetoriginal = "2022_4G_2500_Original"
+	# 	mainoriflag = True
+	# 	activitysheet = "2022_4G_5G_Activity"
+	# 	demandsheet = "2022_4G_2500_AD"
+	# 	titlesubpart = "2500 MHz Auctions (CY-2022)"
+	# 	subtitlesubpartbidactivity = "; Combined for All Bands"
+	# 	year =2022
+	# 	band = 2500
+	# 	xdtick =1
+	# 	zmin=1
+	# 	zmax=5
+	# 	zmin_af = 0.5
+	# 	zmax_af = 1
+	# 	texttempbiddemandactivity = "%{z}" #debug 10th June 2024
+	# 	blocksize = 10
+	# 	zmin_blk_sec = 0
+	# 	zmax_blk_sec = 4
 
 
-	if Feature == "2022-Band2100":
-		totalrounds = 40
-		mainsheet = "2022_4G_2100"
-		mainsheetoriginal = "2022_4G_2100_Original"
-		mainoriflag = True
-		activitysheet = "2022_4G_5G_Activity"
-		demandsheet = "2022_4G_2100_AD"
-		titlesubpart = "2100 MHz Auctions (CY-2022)"
-		subtitlesubpartbidactivity = "; Combined for All Bands"
-		year =2022
-		band = 2100
-		xdtick =1
-		zmin=1
-		zmax=5
-		zmin_af = 0.5
-		zmax_af = 1
-		texttempbiddemandactivity = "%{z}" #debug 10th June 2024
-		blocksize = 5
-		zmin_blk_sec = 0
-		zmax_blk_sec = 4
+	# if Feature == "2022-Band2100":
+	# 	totalrounds = 40
+	# 	mainsheet = "2022_4G_2100"
+	# 	mainsheetoriginal = "2022_4G_2100_Original"
+	# 	mainoriflag = True
+	# 	activitysheet = "2022_4G_5G_Activity"
+	# 	demandsheet = "2022_4G_2100_AD"
+	# 	titlesubpart = "2100 MHz Auctions (CY-2022)"
+	# 	subtitlesubpartbidactivity = "; Combined for All Bands"
+	# 	year =2022
+	# 	band = 2100
+	# 	xdtick =1
+	# 	zmin=1
+	# 	zmax=5
+	# 	zmin_af = 0.5
+	# 	zmax_af = 1
+	# 	texttempbiddemandactivity = "%{z}" #debug 10th June 2024
+	# 	blocksize = 5
+	# 	zmin_blk_sec = 0
+	# 	zmax_blk_sec = 4
 
 
 
-	if Feature == "2022-Band1800":
-		totalrounds = 40
-		mainsheet = "2022_4G_1800"
-		mainsheetoriginal = "2022_4G_1800_Original"
-		mainoriflag = True
-		activitysheet = "2022_4G_5G_Activity"
-		demandsheet = "2022_4G_1800_AD"
-		titlesubpart = "1800 MHz Auctions (CY-2022)"
-		subtitlesubpartbidactivity = "; Combined for All Bands"
-		year =2022
-		band = 1800
-		xdtick =1
-		zmin=1
-		zmax=5
-		zmin_af = 0.5
-		zmax_af = 1
-		texttempbiddemandactivity = "%{z}" #debug 2024
-		blocksize = 0.2
-		zmin_blk_sec = 0
-		zmax_blk_sec = 4
+	# if Feature == "2022-Band1800":
+	# 	totalrounds = 40
+	# 	mainsheet = "2022_4G_1800"
+	# 	mainsheetoriginal = "2022_4G_1800_Original"
+	# 	mainoriflag = True
+	# 	activitysheet = "2022_4G_5G_Activity"
+	# 	demandsheet = "2022_4G_1800_AD"
+	# 	titlesubpart = "1800 MHz Auctions (CY-2022)"
+	# 	subtitlesubpartbidactivity = "; Combined for All Bands"
+	# 	year =2022
+	# 	band = 1800
+	# 	xdtick =1
+	# 	zmin=1
+	# 	zmax=5
+	# 	zmin_af = 0.5
+	# 	zmax_af = 1
+	# 	texttempbiddemandactivity = "%{z}" #debug 2024
+	# 	blocksize = 0.2
+	# 	zmin_blk_sec = 0
+	# 	zmax_blk_sec = 4
 
 
-	if Feature == "2022-Band900":
-		totalrounds = 40
-		mainsheet = "2022_4G_900"
-		mainsheetoriginal = "2022_4G_900_Original"
-		mainoriflag = True
-		activitysheet = "2022_4G_5G_Activity"
-		demandsheet = "2022_4G_900_AD"
-		titlesubpart = "900 MHz Auctions (CY-2022)"
-		subtitlesubpartbidactivity = "; Combined for All Bands"
-		year =2022
-		band = 900
-		xdtick =1
-		zmin=1
-		zmax=5
-		zmin_af = 0.5
-		zmax_af = 1
-		texttempbiddemandactivity = "%{z}" #debug 10th June 2024
-		blocksize = 0.2
-		zmin_blk_sec = 0
-		zmax_blk_sec = 4
+	# if Feature == "2022-Band900":
+	# 	totalrounds = 40
+	# 	mainsheet = "2022_4G_900"
+	# 	mainsheetoriginal = "2022_4G_900_Original"
+	# 	mainoriflag = True
+	# 	activitysheet = "2022_4G_5G_Activity"
+	# 	demandsheet = "2022_4G_900_AD"
+	# 	titlesubpart = "900 MHz Auctions (CY-2022)"
+	# 	subtitlesubpartbidactivity = "; Combined for All Bands"
+	# 	year =2022
+	# 	band = 900
+	# 	xdtick =1
+	# 	zmin=1
+	# 	zmax=5
+	# 	zmin_af = 0.5
+	# 	zmax_af = 1
+	# 	texttempbiddemandactivity = "%{z}" #debug 10th June 2024
+	# 	blocksize = 0.2
+	# 	zmin_blk_sec = 0
+	# 	zmax_blk_sec = 4
 
 
-	if Feature == "2022-Band800":
-		totalrounds = 40
-		mainsheet = "2022_4G_800"
-		mainsheetoriginal = "2022_4G_800_Original"
-		mainoriflag = True
-		activitysheet = "2022_4G_5G_Activity"
-		demandsheet = "2022_4G_800_AD"
-		titlesubpart = "800 MHz Auctions (CY-2022)"
-		subtitlesubpartbidactivity = "; Combined for All Bands"
-		year =2022
-		band = 800
-		xdtick =1
-		zmin=1
-		zmax=5
-		zmin_af = 0.5
-		zmax_af = 1
-		texttempbiddemandactivity = "%{z}" #debug 10th June 2024
-		blocksize = 1.25
-		zmin_blk_sec = 0
-		zmax_blk_sec = 4
+	# if Feature == "2022-Band800":
+	# 	totalrounds = 40
+	# 	mainsheet = "2022_4G_800"
+	# 	mainsheetoriginal = "2022_4G_800_Original"
+	# 	mainoriflag = True
+	# 	activitysheet = "2022_4G_5G_Activity"
+	# 	demandsheet = "2022_4G_800_AD"
+	# 	titlesubpart = "800 MHz Auctions (CY-2022)"
+	# 	subtitlesubpartbidactivity = "; Combined for All Bands"
+	# 	year =2022
+	# 	band = 800
+	# 	xdtick =1
+	# 	zmin=1
+	# 	zmax=5
+	# 	zmin_af = 0.5
+	# 	zmax_af = 1
+	# 	texttempbiddemandactivity = "%{z}" #debug 10th June 2024
+	# 	blocksize = 1.25
+	# 	zmin_blk_sec = 0
+	# 	zmax_blk_sec = 4
 
 
-	if Feature == "2022-Band700":
-		totalrounds = 40
-		mainsheet = "2022_5G_700"
-		mainsheetoriginal = "2022_5G_700_Original"
-		mainoriflag = True
-		activitysheet = "2022_4G_5G_Activity"
-		demandsheet = "2022_5G_700_AD"
-		titlesubpart = "700 MHz Auctions (CY-2022)"
-		subtitlesubpartbidactivity = "; Combined for All Bands"
-		year =2022
-		band = 700
-		xdtick =1
-		zmin=1
-		zmax=5
-		zmin_af = 0.5
-		zmax_af = 1
-		texttempbiddemandactivity = "%{z}" #debug 10th June 2024
-		blocksize = 5
-		zmin_blk_sec = 0
-		zmax_blk_sec = 4
+	# if Feature == "2022-Band700":
+	# 	totalrounds = 40
+	# 	mainsheet = "2022_5G_700"
+	# 	mainsheetoriginal = "2022_5G_700_Original"
+	# 	mainoriflag = True
+	# 	activitysheet = "2022_4G_5G_Activity"
+	# 	demandsheet = "2022_5G_700_AD"
+	# 	titlesubpart = "700 MHz Auctions (CY-2022)"
+	# 	subtitlesubpartbidactivity = "; Combined for All Bands"
+	# 	year =2022
+	# 	band = 700
+	# 	xdtick =1
+	# 	zmin=1
+	# 	zmax=5
+	# 	zmin_af = 0.5
+	# 	zmax_af = 1
+	# 	texttempbiddemandactivity = "%{z}" #debug 10th June 2024
+	# 	blocksize = 5
+	# 	zmin_blk_sec = 0
+	# 	zmax_blk_sec = 4
 	
-	if Feature == "2021-Band800":
-		totalrounds = 6
-		mainsheet = "2021_4G_800"
-		mainsheetoriginal = "2021_4G_800_Original"
-		mainoriflag = True
-		activitysheet = "2021_4G_Activity"
-		demandsheet = "2021_4G_800_AD"
-		titlesubpart = "800 MHz Auctions (CY-2021)"
-		subtitlesubpartbidactivity = "; Combined for All Bands"
-		year =2021
-		band = 800
-		xdtick =1
-		zmin=1
-		zmax=5
-		zmin_af = 0.5
-		zmax_af = 1
-		texttempbiddemandactivity = "%{z}"
-		blocksize = 1.25
-		zmin_blk_sec = 0
-		zmax_blk_sec = 4
+	# if Feature == "2021-Band800":
+	# 	totalrounds = 6
+	# 	mainsheet = "2021_4G_800"
+	# 	mainsheetoriginal = "2021_4G_800_Original"
+	# 	mainoriflag = True
+	# 	activitysheet = "2021_4G_Activity"
+	# 	demandsheet = "2021_4G_800_AD"
+	# 	titlesubpart = "800 MHz Auctions (CY-2021)"
+	# 	subtitlesubpartbidactivity = "; Combined for All Bands"
+	# 	year =2021
+	# 	band = 800
+	# 	xdtick =1
+	# 	zmin=1
+	# 	zmax=5
+	# 	zmin_af = 0.5
+	# 	zmax_af = 1
+	# 	texttempbiddemandactivity = "%{z}"
+	# 	blocksize = 1.25
+	# 	zmin_blk_sec = 0
+	# 	zmax_blk_sec = 4
 
-	if Feature == "2021-Band900":
-		totalrounds = 6
-		mainsheet = "2021_4G_900"
-		mainsheetoriginal = "2021_4G_900_Original"
-		mainoriflag = True
-		activitysheet = "2021_4G_Activity"
-		demandsheet = "2021_4G_900_AD"
-		titlesubpart = "900 MHz Auctions (CY-2021)"
-		subtitlesubpartbidactivity = "; Combined for All Bands"
-		year =2021
-		band = 900
-		xdtick =1
-		zmin=1
-		zmax=5
-		zmin_af = 0.5
-		zmax_af = 1
-		texttempbiddemandactivity = "%{z}"
-		blocksize = 0.2
-		zmin_blk_sec = 0
-		zmax_blk_sec = 4
+	# if Feature == "2021-Band900":
+	# 	totalrounds = 6
+	# 	mainsheet = "2021_4G_900"
+	# 	mainsheetoriginal = "2021_4G_900_Original"
+	# 	mainoriflag = True
+	# 	activitysheet = "2021_4G_Activity"
+	# 	demandsheet = "2021_4G_900_AD"
+	# 	titlesubpart = "900 MHz Auctions (CY-2021)"
+	# 	subtitlesubpartbidactivity = "; Combined for All Bands"
+	# 	year =2021
+	# 	band = 900
+	# 	xdtick =1
+	# 	zmin=1
+	# 	zmax=5
+	# 	zmin_af = 0.5
+	# 	zmax_af = 1
+	# 	texttempbiddemandactivity = "%{z}"
+	# 	blocksize = 0.2
+	# 	zmin_blk_sec = 0
+	# 	zmax_blk_sec = 4
 
-	if Feature == "2021-Band1800":
-		totalrounds = 6
-		mainsheet = "2021_4G_1800"
-		mainsheetoriginal = "2021_4G_1800_Original"
-		mainoriflag = True
-		activitysheet = "2021_4G_Activity"
-		demandsheet = "2021_4G_1800_AD"
-		titlesubpart = "1800 MHz Auctions (CY-2021)"
-		subtitlesubpartbidactivity = "; Combined for All Bands"
-		year =2021
-		band = 1800
-		xdtick =1
-		zmin=1
-		zmax=5
-		zmin_af = 0.5
-		zmax_af = 1
-		texttempbiddemandactivity = "%{z}"
-		blocksize = 0.2
-		zmin_blk_sec = 0
-		zmax_blk_sec = 4
+	# if Feature == "2021-Band1800":
+	# 	totalrounds = 6
+	# 	mainsheet = "2021_4G_1800"
+	# 	mainsheetoriginal = "2021_4G_1800_Original"
+	# 	mainoriflag = True
+	# 	activitysheet = "2021_4G_Activity"
+	# 	demandsheet = "2021_4G_1800_AD"
+	# 	titlesubpart = "1800 MHz Auctions (CY-2021)"
+	# 	subtitlesubpartbidactivity = "; Combined for All Bands"
+	# 	year =2021
+	# 	band = 1800
+	# 	xdtick =1
+	# 	zmin=1
+	# 	zmax=5
+	# 	zmin_af = 0.5
+	# 	zmax_af = 1
+	# 	texttempbiddemandactivity = "%{z}"
+	# 	blocksize = 0.2
+	# 	zmin_blk_sec = 0
+	# 	zmax_blk_sec = 4
 
-	if Feature == "2021-Band2100":
-		totalrounds = 6
-		mainsheet = "2021_4G_2100"
-		mainsheetoriginal = "2021_4G_2100_Original"
-		mainoriflag = True
-		activitysheet = "2021_4G_Activity"
-		demandsheet = "2021_4G_2100_AD"
-		titlesubpart = "2100 MHz Auctions (CY-2021)"
-		subtitlesubpartbidactivity = "; Combined for All Bands"
-		year =2021
-		band = 2100
-		xdtick =1
-		zmin=1
-		zmax=5
-		zmin_af = 0.5
-		zmax_af = 1
-		texttempbiddemandactivity = "%{z}"
-		blocksize = 5
-		zmin_blk_sec = 0
-		zmax_blk_sec = 4
+	# if Feature == "2021-Band2100":
+	# 	totalrounds = 6
+	# 	mainsheet = "2021_4G_2100"
+	# 	mainsheetoriginal = "2021_4G_2100_Original"
+	# 	mainoriflag = True
+	# 	activitysheet = "2021_4G_Activity"
+	# 	demandsheet = "2021_4G_2100_AD"
+	# 	titlesubpart = "2100 MHz Auctions (CY-2021)"
+	# 	subtitlesubpartbidactivity = "; Combined for All Bands"
+	# 	year =2021
+	# 	band = 2100
+	# 	xdtick =1
+	# 	zmin=1
+	# 	zmax=5
+	# 	zmin_af = 0.5
+	# 	zmax_af = 1
+	# 	texttempbiddemandactivity = "%{z}"
+	# 	blocksize = 5
+	# 	zmin_blk_sec = 0
+	# 	zmax_blk_sec = 4
 
-	if Feature == "2021-Band2300":
-		totalrounds = 6
-		mainsheet = "2021_4G_2300"
-		mainsheetoriginal = "2021_4G_2300_Original"
-		mainoriflag = True
-		activitysheet = "2021_4G_Activity"
-		demandsheet = "2021_4G_2300_AD"
-		titlesubpart = "2300 MHz Auctions (CY-2021)"
-		subtitlesubpartbidactivity = "; Combined for All Bands"
-		year =2021
-		band = 2300
-		xdtick =1
-		zmin=1
-		zmax=5
-		zmin_af = 0.5
-		zmax_af = 1
-		texttempbiddemandactivity = "%{z}"
-		blocksize = 10
-		zmin_blk_sec = 0
-		zmax_blk_sec = 4
+	# if Feature == "2021-Band2300":
+	# 	totalrounds = 6
+	# 	mainsheet = "2021_4G_2300"
+	# 	mainsheetoriginal = "2021_4G_2300_Original"
+	# 	mainoriflag = True
+	# 	activitysheet = "2021_4G_Activity"
+	# 	demandsheet = "2021_4G_2300_AD"
+	# 	titlesubpart = "2300 MHz Auctions (CY-2021)"
+	# 	subtitlesubpartbidactivity = "; Combined for All Bands"
+	# 	year =2021
+	# 	band = 2300
+	# 	xdtick =1
+	# 	zmin=1
+	# 	zmax=5
+	# 	zmin_af = 0.5
+	# 	zmax_af = 1
+	# 	texttempbiddemandactivity = "%{z}"
+	# 	blocksize = 10
+	# 	zmin_blk_sec = 0
+	# 	zmax_blk_sec = 4
 
-	if Feature == "2016-Band2500":
-		totalrounds = 31
-		mainsheet = "2016_4G_2500"
-		mainsheetoriginal = "2016_4G_2500_Original"
-		mainoriflag = True
-		activitysheet = "2016_4G_Activity"
-		demandsheet = "2016_4G_2500_AD"
-		titlesubpart = "2500 MHz Auctions (CY-2016)"
-		subtitlesubpartbidactivity = "; Combined for All Bands"
-		year =2016
-		band = 2500
-		xdtick =5
-		zmin=1
-		zmax=5
-		zmin_af = 0.5
-		zmax_af = 1
-		texttempbiddemandactivity = "%{z}"
-		blocksize = 10
-		zmin_blk_sec = 0
-		zmax_blk_sec = 4
+	# if Feature == "2016-Band2500":
+	# 	totalrounds = 31
+	# 	mainsheet = "2016_4G_2500"
+	# 	mainsheetoriginal = "2016_4G_2500_Original"
+	# 	mainoriflag = True
+	# 	activitysheet = "2016_4G_Activity"
+	# 	demandsheet = "2016_4G_2500_AD"
+	# 	titlesubpart = "2500 MHz Auctions (CY-2016)"
+	# 	subtitlesubpartbidactivity = "; Combined for All Bands"
+	# 	year =2016
+	# 	band = 2500
+	# 	xdtick =5
+	# 	zmin=1
+	# 	zmax=5
+	# 	zmin_af = 0.5
+	# 	zmax_af = 1
+	# 	texttempbiddemandactivity = "%{z}"
+	# 	blocksize = 10
+	# 	zmin_blk_sec = 0
+	# 	zmax_blk_sec = 4
 
-	if Feature == "2016-Band2300":
-		totalrounds = 31
-		mainsheet = "2016_4G_2300"
-		mainsheetoriginal = "2016_4G_2300_Original"
-		mainoriflag = True
-		activitysheet = "2016_4G_Activity"
-		demandsheet = "2016_4G_2300_AD"
-		titlesubpart = "2300 MHz Auctions (CY-2016)"
-		subtitlesubpartbidactivity = "; Combined for All Bands"
-		year =2016
-		band = 2300
-		xdtick =5
-		zmin=1
-		zmax=5
-		zmin_af = 0.5
-		zmax_af = 1
-		texttempbiddemandactivity = "%{z}"
-		blocksize = 10
-		zmin_blk_sec = 0
-		zmax_blk_sec = 4
+	# if Feature == "2016-Band2300":
+	# 	totalrounds = 31
+	# 	mainsheet = "2016_4G_2300"
+	# 	mainsheetoriginal = "2016_4G_2300_Original"
+	# 	mainoriflag = True
+	# 	activitysheet = "2016_4G_Activity"
+	# 	demandsheet = "2016_4G_2300_AD"
+	# 	titlesubpart = "2300 MHz Auctions (CY-2016)"
+	# 	subtitlesubpartbidactivity = "; Combined for All Bands"
+	# 	year =2016
+	# 	band = 2300
+	# 	xdtick =5
+	# 	zmin=1
+	# 	zmax=5
+	# 	zmin_af = 0.5
+	# 	zmax_af = 1
+	# 	texttempbiddemandactivity = "%{z}"
+	# 	blocksize = 10
+	# 	zmin_blk_sec = 0
+	# 	zmax_blk_sec = 4
 
-	if Feature == "2016-Band2100":
-		totalrounds = 31
-		mainsheet = "2016_4G_2100"
-		mainsheetoriginal = "2016_4G_2100_Original"
-		mainoriflag = True
-		activitysheet = "2016_4G_Activity"
-		demandsheet = "2016_4G_2100_AD"
-		titlesubpart = "2100 MHz Auctions (CY-2016)"
-		subtitlesubpartbidactivity = "; Combined for All Bands"
-		year =2016
-		band = 2100
-		xdtick =5
-		zmin=1
-		zmax=5
-		zmin_af = 0.5
-		zmax_af = 1
-		texttempbiddemandactivity = "%{z}"
-		blocksize = 5
-		zmin_blk_sec = 0
-		zmax_blk_sec = 4
+	# if Feature == "2016-Band2100":
+	# 	totalrounds = 31
+	# 	mainsheet = "2016_4G_2100"
+	# 	mainsheetoriginal = "2016_4G_2100_Original"
+	# 	mainoriflag = True
+	# 	activitysheet = "2016_4G_Activity"
+	# 	demandsheet = "2016_4G_2100_AD"
+	# 	titlesubpart = "2100 MHz Auctions (CY-2016)"
+	# 	subtitlesubpartbidactivity = "; Combined for All Bands"
+	# 	year =2016
+	# 	band = 2100
+	# 	xdtick =5
+	# 	zmin=1
+	# 	zmax=5
+	# 	zmin_af = 0.5
+	# 	zmax_af = 1
+	# 	texttempbiddemandactivity = "%{z}"
+	# 	blocksize = 5
+	# 	zmin_blk_sec = 0
+	# 	zmax_blk_sec = 4
 	
-	if Feature == "2016-Band1800":
-		totalrounds = 31
-		mainsheet = "2016_4G_1800"
-		mainsheetoriginal = "2016_4G_1800_Original"
-		mainoriflag = True
-		activitysheet = "2016_4G_Activity"
-		demandsheet = "2016_4G_1800_AD"
-		titlesubpart = "1800 MHz Auctions (CY-2016)"
-		subtitlesubpartbidactivity = "; Combined for All Bands"
-		year =2016
-		band = 1800
-		xdtick =5
-		zmin=1
-		zmax=5
-		zmin_af = 0.5
-		zmax_af = 1
-		texttempbiddemandactivity = "%{z}"
-		blocksize = 0.2
-		zmin_blk_sec = 0
-		zmax_blk_sec = 4
+	# if Feature == "2016-Band1800":
+	# 	totalrounds = 31
+	# 	mainsheet = "2016_4G_1800"
+	# 	mainsheetoriginal = "2016_4G_1800_Original"
+	# 	mainoriflag = True
+	# 	activitysheet = "2016_4G_Activity"
+	# 	demandsheet = "2016_4G_1800_AD"
+	# 	titlesubpart = "1800 MHz Auctions (CY-2016)"
+	# 	subtitlesubpartbidactivity = "; Combined for All Bands"
+	# 	year =2016
+	# 	band = 1800
+	# 	xdtick =5
+	# 	zmin=1
+	# 	zmax=5
+	# 	zmin_af = 0.5
+	# 	zmax_af = 1
+	# 	texttempbiddemandactivity = "%{z}"
+	# 	blocksize = 0.2
+	# 	zmin_blk_sec = 0
+	# 	zmax_blk_sec = 4
 
 
-	if Feature == "2016-Band800":
-		totalrounds = 31
-		mainsheet = "2016_4G_800"
-		mainsheetoriginal = "2016_4G_800_Original"
-		mainoriflag = True
-		activitysheet = "2016_4G_Activity"
-		demandsheet = "2016_4G_800_AD"
-		titlesubpart = "800 MHz Auctions (CY-2016)"
-		subtitlesubpartbidactivity = "; Combined for All Bands"
-		year =2016
-		band = 800
-		xdtick =5
-		zmin=1
-		zmax=5
-		zmin_af = 0.5
-		zmax_af = 1
-		texttempbiddemandactivity = "%{z}"
-		blocksize = 1.25
-		zmin_blk_sec = 0
-		zmax_blk_sec = 4
+	# if Feature == "2016-Band800":
+	# 	totalrounds = 31
+	# 	mainsheet = "2016_4G_800"
+	# 	mainsheetoriginal = "2016_4G_800_Original"
+	# 	mainoriflag = True
+	# 	activitysheet = "2016_4G_Activity"
+	# 	demandsheet = "2016_4G_800_AD"
+	# 	titlesubpart = "800 MHz Auctions (CY-2016)"
+	# 	subtitlesubpartbidactivity = "; Combined for All Bands"
+	# 	year =2016
+	# 	band = 800
+	# 	xdtick =5
+	# 	zmin=1
+	# 	zmax=5
+	# 	zmin_af = 0.5
+	# 	zmax_af = 1
+	# 	texttempbiddemandactivity = "%{z}"
+	# 	blocksize = 1.25
+	# 	zmin_blk_sec = 0
+	# 	zmax_blk_sec = 4
 
 
-	if Feature == "2015-Band2100":
-		totalrounds = 115
-		mainsheet = "2015_3G_2100"
-		mainsheetoriginal = "2015_3G_2100_Original"
-		mainoriflag = True
-		activitysheet = "2015_2G_3G_Activity"
-		demandsheet = "2015_3G_2100_AD"
-		titlesubpart = "2100 MHz Auctions (CY-2015)"
-		subtitlesubpartbidactivity = "; Combined for All Bands"
-		year =2015
-		band = 2100
-		xdtick =5
-		zmin=1
-		zmax=5
-		zmin_af = 0.5
-		zmax_af = 1
-		texttempbiddemandactivity = ""
-		blocksize = 5
-		zmin_blk_sec = 0
-		zmax_blk_sec = 4
+	# if Feature == "2015-Band2100":
+	# 	totalrounds = 115
+	# 	mainsheet = "2015_3G_2100"
+	# 	mainsheetoriginal = "2015_3G_2100_Original"
+	# 	mainoriflag = True
+	# 	activitysheet = "2015_2G_3G_Activity"
+	# 	demandsheet = "2015_3G_2100_AD"
+	# 	titlesubpart = "2100 MHz Auctions (CY-2015)"
+	# 	subtitlesubpartbidactivity = "; Combined for All Bands"
+	# 	year =2015
+	# 	band = 2100
+	# 	xdtick =5
+	# 	zmin=1
+	# 	zmax=5
+	# 	zmin_af = 0.5
+	# 	zmax_af = 1
+	# 	texttempbiddemandactivity = ""
+	# 	blocksize = 5
+	# 	zmin_blk_sec = 0
+	# 	zmax_blk_sec = 4
 
 
-	if Feature == "2015-Band1800":
-		totalrounds = 115
-		mainsheet = "2015_2G_1800"
-		mainsheetoriginal = "2015_2G_1800_Original"
-		mainoriflag = True
-		activitysheet = "2015_2G_3G_Activity"
-		demandsheet = "2015_2G_1800_AD"
-		titlesubpart = "1800 MHz Auctions (CY-2015)"
-		subtitlesubpartbidactivity = "; Combined for All Bands"
-		year =2015
-		band = 1800
-		xdtick =5
-		zmin=1
-		zmax=5
-		zmin_af = 0.5
-		zmax_af = 1
-		texttempbiddemandactivity = ""
-		blocksize = 0.2
-		zmin_blk_sec = 0
-		zmax_blk_sec = 4
+	# if Feature == "2015-Band1800":
+	# 	totalrounds = 115
+	# 	mainsheet = "2015_2G_1800"
+	# 	mainsheetoriginal = "2015_2G_1800_Original"
+	# 	mainoriflag = True
+	# 	activitysheet = "2015_2G_3G_Activity"
+	# 	demandsheet = "2015_2G_1800_AD"
+	# 	titlesubpart = "1800 MHz Auctions (CY-2015)"
+	# 	subtitlesubpartbidactivity = "; Combined for All Bands"
+	# 	year =2015
+	# 	band = 1800
+	# 	xdtick =5
+	# 	zmin=1
+	# 	zmax=5
+	# 	zmin_af = 0.5
+	# 	zmax_af = 1
+	# 	texttempbiddemandactivity = ""
+	# 	blocksize = 0.2
+	# 	zmin_blk_sec = 0
+	# 	zmax_blk_sec = 4
 
 
-	if Feature == "2015-Band900":
-		totalrounds = 115
-		mainsheet = "2015_2G_900"
-		mainsheetoriginal = "2015_2G_900_Original"
-		mainoriflag = True
-		activitysheet = "2015_2G_3G_Activity"
-		demandsheet = "2015_2G_900_AD"
-		titlesubpart = "900 MHz Auctions (CY-2015)"
-		subtitlesubpartbidactivity = "; Combined for All Bands"
-		year =2015
-		band = 900
-		xdtick =5
-		zmin=1
-		zmax=5
-		zmin_af = 0.5
-		zmax_af = 1
-		texttempbiddemandactivity = ""
-		blocksize = 0.2
-		zmin_blk_sec = 0
-		zmax_blk_sec = 4
+	# if Feature == "2015-Band900":
+	# 	totalrounds = 115
+	# 	mainsheet = "2015_2G_900"
+	# 	mainsheetoriginal = "2015_2G_900_Original"
+	# 	mainoriflag = True
+	# 	activitysheet = "2015_2G_3G_Activity"
+	# 	demandsheet = "2015_2G_900_AD"
+	# 	titlesubpart = "900 MHz Auctions (CY-2015)"
+	# 	subtitlesubpartbidactivity = "; Combined for All Bands"
+	# 	year =2015
+	# 	band = 900
+	# 	xdtick =5
+	# 	zmin=1
+	# 	zmax=5
+	# 	zmin_af = 0.5
+	# 	zmax_af = 1
+	# 	texttempbiddemandactivity = ""
+	# 	blocksize = 0.2
+	# 	zmin_blk_sec = 0
+	# 	zmax_blk_sec = 4
 
 
-	if Feature == "2015-Band800":
-		totalrounds = 115
-		mainsheet = "2015_2G_800"
-		mainsheetoriginal = "2015_2G_800_Original"
-		mainoriflag = True
-		activitysheet = "2015_2G_3G_Activity"
-		demandsheet = "2015_2G_800_AD"
-		titlesubpart = "800 MHz Auctions (CY-2015)"
-		subtitlesubpartbidactivity = "; Combined for All Bands"
-		year =2015
-		band = 800
-		xdtick =5
-		zmin=1
-		zmax=5
-		zmin_af = 0.5
-		zmax_af = 1
-		texttempbiddemandactivity = ""
-		blocksize = 1.25
-		zmin_blk_sec = 0
-		zmax_blk_sec = 4
+	# if Feature == "2015-Band800":
+	# 	totalrounds = 115
+	# 	mainsheet = "2015_2G_800"
+	# 	mainsheetoriginal = "2015_2G_800_Original"
+	# 	mainoriflag = True
+	# 	activitysheet = "2015_2G_3G_Activity"
+	# 	demandsheet = "2015_2G_800_AD"
+	# 	titlesubpart = "800 MHz Auctions (CY-2015)"
+	# 	subtitlesubpartbidactivity = "; Combined for All Bands"
+	# 	year =2015
+	# 	band = 800
+	# 	xdtick =5
+	# 	zmin=1
+	# 	zmax=5
+	# 	zmin_af = 0.5
+	# 	zmax_af = 1
+	# 	texttempbiddemandactivity = ""
+	# 	blocksize = 1.25
+	# 	zmin_blk_sec = 0
+	# 	zmax_blk_sec = 4
 
 
-	if Feature == "2014-Band1800":
-		totalrounds = 68
-		mainsheet = "2014_2G_1800"
-		mainsheetoriginal = "2014_2G_1800_Original"
-		mainoriflag = True
-		activitysheet = "2014_2G_Activity"
-		demandsheet = "2014_2G_1800_AD"
-		titlesubpart = "1800 MHz Auctions (CY-2014)"
-		subtitlesubpartbidactivity = "; Combined for both 1800 & 900 MHz Bands"
-		year = 2014
-		band = 1800
-		xdtick =5
-		zmin=1
-		zmax=5
-		zmin_af = 0.5
-		zmax_af = 1
-		texttempbiddemandactivity = ""
-		blocksize = 0.2
-		zmin_blk_sec = 0
-		zmax_blk_sec = 4
+	# if Feature == "2014-Band1800":
+	# 	totalrounds = 68
+	# 	mainsheet = "2014_2G_1800"
+	# 	mainsheetoriginal = "2014_2G_1800_Original"
+	# 	mainoriflag = True
+	# 	activitysheet = "2014_2G_Activity"
+	# 	demandsheet = "2014_2G_1800_AD"
+	# 	titlesubpart = "1800 MHz Auctions (CY-2014)"
+	# 	subtitlesubpartbidactivity = "; Combined for both 1800 & 900 MHz Bands"
+	# 	year = 2014
+	# 	band = 1800
+	# 	xdtick =5
+	# 	zmin=1
+	# 	zmax=5
+	# 	zmin_af = 0.5
+	# 	zmax_af = 1
+	# 	texttempbiddemandactivity = ""
+	# 	blocksize = 0.2
+	# 	zmin_blk_sec = 0
+	# 	zmax_blk_sec = 4
 
-	if Feature == "2014-Band900":
-		totalrounds = 68
-		mainsheet = "2014_2G_900"
-		mainsheetoriginal = "2014_2G_900_Original"
-		mainoriflag = True
-		activitysheet = "2014_2G_Activity"
-		demandsheet = "2014_2G_900_AD"
-		titlesubpart = "900 MHz Auctions (CY-2014)"
-		subtitlesubpartbidactivity = "; Combined for both 1800 & 900 MHz Bands"
-		year = 2014
-		band = 900
-		xdtick =5
-		zmin=1
-		zmax=5
-		zmin_af = 0.5
-		zmax_af = 1
-		texttempbiddemandactivity = ""
-		blocksize = 1
-		zmin_blk_sec = 0
-		zmax_blk_sec = 4
+	# if Feature == "2014-Band900":
+	# 	totalrounds = 68
+	# 	mainsheet = "2014_2G_900"
+	# 	mainsheetoriginal = "2014_2G_900_Original"
+	# 	mainoriflag = True
+	# 	activitysheet = "2014_2G_Activity"
+	# 	demandsheet = "2014_2G_900_AD"
+	# 	titlesubpart = "900 MHz Auctions (CY-2014)"
+	# 	subtitlesubpartbidactivity = "; Combined for both 1800 & 900 MHz Bands"
+	# 	year = 2014
+	# 	band = 900
+	# 	xdtick =5
+	# 	zmin=1
+	# 	zmax=5
+	# 	zmin_af = 0.5
+	# 	zmax_af = 1
+	# 	texttempbiddemandactivity = ""
+	# 	blocksize = 1
+	# 	zmin_blk_sec = 0
+	# 	zmax_blk_sec = 4
 
 
-	if Feature == "2010-Band2100":
-		totalrounds = 183
-		mainsheet = "2010_3G"
-		mainoriflag = False
-		activitysheet = "2010_3G_Activity"
-		demandsheet = "2010_3G_AD"
-		titlesubpart = "2100 MHz Auctions (CY-2010)"
-		subtitlesubpartbidactivity = ""
-		year = 2010
-		band = 2100
-		xdtick =10
-		zmin=1 
-		zmax=5
-		zmin_af = 0.5
-		zmax_af = 1
-		texttempbiddemandactivity = ""
-		blocksize = 5
-		zmin_blk_sec = 0
-		zmax_blk_sec = 1
+	# if Feature == "2010-Band2100":
+	# 	totalrounds = 183
+	# 	mainsheet = "2010_3G"
+	# 	mainoriflag = False
+	# 	activitysheet = "2010_3G_Activity"
+	# 	demandsheet = "2010_3G_AD"
+	# 	titlesubpart = "2100 MHz Auctions (CY-2010)"
+	# 	subtitlesubpartbidactivity = ""
+	# 	year = 2010
+	# 	band = 2100
+	# 	xdtick =10
+	# 	zmin=1 
+	# 	zmax=5
+	# 	zmin_af = 0.5
+	# 	zmax_af = 1
+	# 	texttempbiddemandactivity = ""
+	# 	blocksize = 5
+	# 	zmin_blk_sec = 0
+	# 	zmax_blk_sec = 1
 
-	if Feature == "2010-Band2300":
-		totalrounds = 117
-		mainsheet = "2010_BWA"
-		mainoriflag = False
-		activitysheet = "2010_BWA_Activity"
-		demandsheet = "2010_BWA_AD"
-		titlesubpart = "2300 MHz Auctions (CY-2010)"
-		subtitlesubpartbidactivity=""
-		year = 2010
-		band = 2300
-		xdtick =10
-		zmin=1
-		zmax=3
-		zmin_af = 0.5
-		zmax_af = 1
-		texttempbiddemandactivity = ""
-		blocksize = 20
-		zmin_blk_sec = 0
-		zmax_blk_sec = 1
+	# if Feature == "2010-Band2300":
+	# 	totalrounds = 117
+	# 	mainsheet = "2010_BWA"
+	# 	mainoriflag = False
+	# 	activitysheet = "2010_BWA_Activity"
+	# 	demandsheet = "2010_BWA_AD"
+	# 	titlesubpart = "2300 MHz Auctions (CY-2010)"
+	# 	subtitlesubpartbidactivity=""
+	# 	year = 2010
+	# 	band = 2300
+	# 	xdtick =10
+	# 	zmin=1
+	# 	zmax=3
+	# 	zmin_af = 0.5
+	# 	zmax_af = 1
+	# 	texttempbiddemandactivity = ""
+	# 	blocksize = 20
+	# 	zmin_blk_sec = 0
+	# 	zmax_blk_sec = 1
 
-	if Feature == "2012-Band1800":
-		totalrounds = 14
-		mainsheet = "2012_2G_1800"
-		mainoriflag = False
-		activitysheet = "2012_2G_1800_Activity"
-		demandsheet = "2012_2G_1800_AD"
-		titlesubpart = "1800 MHz Auctions (CY-2012)"
-		subtitlesubpartbidactivity = ""
-		year = 2012
-		band = 1800
-		xdtick =1
-		zmin=1
-		zmax=3
-		zmin_af = 0.5
-		zmax_af = 1
-		texttempbiddemandactivity = "%{z}"
-		blocksize = 1.25
-		zmin_blk_sec = 0
-		zmax_blk_sec = 4
+	# if Feature == "2012-Band1800":
+	# 	totalrounds = 14
+	# 	mainsheet = "2012_2G_1800"
+	# 	mainoriflag = False
+	# 	activitysheet = "2012_2G_1800_Activity"
+	# 	demandsheet = "2012_2G_1800_AD"
+	# 	titlesubpart = "1800 MHz Auctions (CY-2012)"
+	# 	subtitlesubpartbidactivity = ""
+	# 	year = 2012
+	# 	band = 1800
+	# 	xdtick =1
+	# 	zmin=1
+	# 	zmax=3
+	# 	zmin_af = 0.5
+	# 	zmax_af = 1
+	# 	texttempbiddemandactivity = "%{z}"
+	# 	blocksize = 1.25
+	# 	zmin_blk_sec = 0
+	# 	zmax_blk_sec = 4
 	
 
 
