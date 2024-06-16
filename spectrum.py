@@ -1285,19 +1285,13 @@ def plotrwototal(sumrows, ydim, xdim):
 	fig.update_layout(xaxis=dict(side='top', title_standoff=0, ticklen=0, title_font=dict(size=text_embed_in_chart_size))) 
 	fig.update_layout(xaxis_title_standoff=0) 
 	fig.update_traces(marker=dict(color='red'))
-	# Adjust margins to reduce unnecessary space
+	# Simulate a border by using a larger margin and setting the background color
 	fig.update_layout(
-       margin= dict(t=t,b=b,l=l,r=r,pad=pad),
+        margin=dict(t=20, b=20, l=20, r=20, pad=4),  # Adjust margins if necessary
+        paper_bgcolor='black',  # Outer color
+        plot_bgcolor='white',  # Inner color simulates the border
     )
 
-     # Add a black border around the chart
-	fig.update_layout(
-	    paper_bgcolor='rgba(0,0,0,0)',  # Transparent background
-	    plot_bgcolor='rgba(0,0,0,0)',  # Transparent background inside the plot area
-	    margin=dict(t=20, b=20, l=20, r=20, pad=4),  # Adjust margins if necessary
-	    bordercolor='black',
-	    borderwidth=2
-    )
 	return fig
 
 
