@@ -1288,7 +1288,7 @@ def plotrwototal(sumrows, ydim, xdim):
 	# Simulate a border by using a larger margin and setting the background color
 	fig.update_layout(
         margin=dict(t=20, b=20, l=20, r=20, pad=4),  # Adjust margins if necessary
-        paper_bgcolor='white',  # Outer color
+        paper_bgcolor='grey',  # Outer color
         plot_bgcolor='white',  # Inner color simulates the border
     )
 
