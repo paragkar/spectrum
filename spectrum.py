@@ -3863,9 +3863,9 @@ if selected_dimension == "Auction Data":
 			sumcols.columns = ["LSA", "Total Slots"]
 
 
-			figsumcols = summarychart(sumcols, "LSA", "Slots Selected")
+			figsumcols = summarychart(sumcols, "LSA", "Total Slots")
 
-			figsumrows = plotrwototal(sumrows,"Bidders", "Slots Selected")
+			figsumrows = plotrwototal(sumrows,"Bidders", "Total Slots")
 
 			figsumrows.update_yaxes(visible=False, showticklabels=False)
 
@@ -3978,14 +3978,14 @@ if selected_dimension == "Auction Data":
 			sumcols.columns = ["LSA", "Total Slots"]
 
 
-			figsumrows = plotrwototal(sumrows,"Bidders", "Slots Selected")
+			figsumrows = plotrwototal(sumrows,"Bidders", "Total Slots")
 
 			figsumrows.update_yaxes(visible=False, showticklabels=False)
 
 			figsumrows.update_layout(height = heatmapheight)
 
 
-			figsumcols = summarychart(sumcols, "LSA", "Slots Selected")
+			figsumcols = summarychart(sumcols, "LSA", "Total Slots")
 
 			hovertext = htext_auctiondata_2010_3G_BWA_BlocksAllocated(dftemp)
 
