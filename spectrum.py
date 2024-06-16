@@ -1333,11 +1333,11 @@ def plotbiddertotal(dftemp,dfblocksalloc_rdend):
 	fig = px.bar(panindiabids, y = 'Bidder', x='PanIndiaBid', orientation ='h', height = heatmapheight)
 
 	fig.update_layout(xaxis=dict(title='Total Value'), yaxis=dict(title=''))
-	fig.update_traces(text=panindiabids['PanIndiaBid'], textposition='auto',textfont=dict(size=text_embed_in_chart_size, color='black')) #Debug 12th June 2024 (Changed 14 to 20)
+	fig.update_traces(text=panindiabids['PanIndiaBid'], textposition='auto',textfont=dict(size=text_embed_in_chart_size, color='red')) #Debug 12th June 2024 (Changed 14 to 20)
 	fig.update_xaxes(tickvals=[])
 	fig.update_layout(xaxis=dict(side='top', title_standoff=0, ticklen=0, title_font=dict(size=text_embed_in_chart_size)))
 	fig.update_layout(xaxis_title_standoff=5)
-	fig.update_traces(marker=dict(color='red'))
+	fig.update_traces(marker=dict(color='yellow'))
 
 	return fig
 
