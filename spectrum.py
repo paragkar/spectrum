@@ -3659,9 +3659,9 @@ if selected_dimension == "Auction Data":
 				col2.markdown("")
 				col2.plotly_chart(figpanindiabids, use_container_width=True)
 
-			#plotting the final summary chart 
-			if SummaryFlag ==True:
-				col1.altair_chart(chart, use_container_width=True)
+			# #plotting the final summary chart 
+			# if SummaryFlag ==True:
+			# 	col1.altair_chart(chart, use_container_width=True)
 
 			#Debug 12th June 2024
 
@@ -3801,17 +3801,6 @@ if selected_dimension == "Auction Data":
 			    xaxis=dict(showgrid=False),
 			    yaxis=dict(showgrid=False)
 			)
-
-
-		#Debug 10th June 2024
-
-		#-------------------Start-----------------------
-		
-		# st.plotly_chart(figauc, use_container_width=True)
-
-		#plotting the column sums of all slots
-		# col1,col2,col3 = st.columns([0.2,14,1]) #create collumns of uneven width
-		# col2.altair_chart(figsumcols, use_container_width=True)
 
 
 
