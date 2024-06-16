@@ -3273,6 +3273,7 @@ if selected_dimension == "Auction Data":
 				        return y
 
 				#for rendering text of the final heatmap for Data
+				dfblocksalloc_rdstart = dfblocksalloc_rdstart.replace(np.nan, 0)
 				for col in dfblocksalloc_rdstart.columns:
 					dfblocksalloc_rdstart[col] = dfblocksalloc_rdstart[col].astype(int)
 				dftemp_comb = dftemp.map(str).combine(dfblocksalloc_rdstart.map(str), lambda x, y: combine_text(x, y)).replace('nan', '', regex = True)
