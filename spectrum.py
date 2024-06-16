@@ -3307,7 +3307,7 @@ if selected_dimension == "Auction Data":
 				  yaxis_autorange='reversed',
 				  font=dict(size=text_embed_in_chart_size), #Debug 12th June 2024
 				  template='simple_white',
-				  plot_bgcolor='#D3D3D3',  # Background color for the plot area light greay
+				  # plot_bgcolor='#D3D3D3',  # Background color for the plot area light greay
 				  paper_bgcolor=None,
 				  height=heatmapheight, #Debug 14th June 2024 (Changed from 600 to 850)
 				  # width=heatmapwidth,
@@ -3371,7 +3371,7 @@ if selected_dimension == "Auction Data":
 				  yaxis_autorange='reversed',
 				  font=dict(size=text_embed_in_chart_size),#Debug 12th June 2024
 				  template='simple_white',
-				  plot_bgcolor='#D3D3D3',  # Background color for the plot area light greay
+				  # plot_bgcolor='#D3D3D3',  # Background color for the plot area light greay
 				  paper_bgcolor=None,
 				  height=heatmapheight, #Debug 14th June 2024 (Changed from 600 to 850)
 				  # width=heatmapwidth,
@@ -3542,7 +3542,7 @@ if selected_dimension == "Auction Data":
 				  yaxis_autorange='reversed',
 				  font=dict(size=text_embed_in_chart_size),#Debug 12th June 2024
 				  template='simple_white',
-				  plot_bgcolor='#D3D3D3',  # Background color for the plot area light greay
+				  # plot_bgcolor='#D3D3D3',  # Background color for the plot area light greay
 				  paper_bgcolor=None,
 				  height=heatmapheight, #Debug 14th June 2024 (Changed from 600 to 850)
 				  # width=heatmapwidth,
@@ -3788,7 +3788,7 @@ if selected_dimension == "Auction Data":
 		  yaxis_autorange='reversed',
 		  font=dict(size=text_embed_in_chart_size),#Debug 12th June 2024
 		  template='simple_white',
-		  plot_bgcolor='#D3D3D3',  # Background color for the plot area light greay
+		  # plot_bgcolor='#D3D3D3',  # Background color for the plot area light greay
 		  paper_bgcolor=None,
 		  height=heatmapheight, #Debug 14th June 2024 (Changed from 600 to 850)
 		  # width=heatmapwidth,
@@ -3937,7 +3937,7 @@ if selected_dimension == "Auction Data":
 				  font=dict(size=text_embed_in_chart_size), #Debug 12th June 2024
 				  template='simple_white',
 				  paper_bgcolor=None,
-				  plot_bgcolor='#D3D3D3',  # Background color for the plot area light greay
+				  # plot_bgcolor='#D3D3D3',  # Background color for the plot area light greay
 				  height=heatmapheight, #Debug 14th June 2024 (Changed from 600 to 850)
 				  # width=heatmapwidth,
 				  margin= dict(t=t,b=b,l=l,r=r,pad=pad),
@@ -4051,7 +4051,7 @@ if selected_dimension == "Auction Data":
 				  font=dict(size=text_embed_in_chart_size), #Debug 12th June 2024
 				  template='simple_white',
 				  paper_bgcolor=None,
-				  plot_bgcolor='#D3D3D3',  # Background color for the plot area light greay
+				  # plot_bgcolor='#D3D3D3',  # Background color for the plot area light greay
 				  height=heatmapheight, #Debug 14th June 2024 (Changed from 600 to 850)
 				  # width=heatmapwidth,
 				  margin= dict(t=t,b=b,l=l,r=r,pad=pad),
@@ -4183,7 +4183,7 @@ if selected_dimension == "Auction Data":
 			  font=dict(size=text_embed_in_chart_size),
 			  template='simple_white',
 			  paper_bgcolor=None,
-			  plot_bgcolor='#D3D3D3',  # Background color for the plot area light greay
+			  # plot_bgcolor='#D3D3D3',  # Background color for the plot area light greay
 			  height=heatmapheight, #Debug 14th June 2024 (Changed from 600 to 850)
 			  width=heatmapwidth,
 			  margin= dict(t=t,b=b,l=l,r=r,pad=pad),
