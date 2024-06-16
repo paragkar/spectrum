@@ -2487,7 +2487,7 @@ if selected_dimension == "Auction BandWise":
 
 	if Feature in features:
 		f = features[Feature]
-		st.write(totalrounds)
+		st.write(f[totalrounds])
 
 	# if Feature == "2022-Band26000":
 	# 	totalrounds = 40
