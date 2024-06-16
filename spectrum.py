@@ -3205,6 +3205,7 @@ if selected_dimension == "Auction Data":
 			    height=heatmapheight*1.2,
 			    plot_bgcolor='#D2B48C',  # Background color for the plot area light pink
 			    paper_bgcolor='white',  # Background color for the entire figure
+			    margin=dict(l=0, r=20, t=20, b=20),
 			    yaxis=dict(
 		        	  tickmode='array',
 		        	  tickfont=dict(size=text_embed_in_chart_size),
