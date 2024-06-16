@@ -3274,7 +3274,7 @@ if selected_dimension == "Auction Data":
 
 				#for rendering text of the final heatmap for Data
 				# dftemp = dftemp.map(int)
-				dftemp_comb = dftemp.map(str).combine(dfblocksalloc_rdstart.map(str), lambda x, y: combine_text(x, y)).replace('nan', '', regex = True)
+				dftemp_comb = dftemp.map(str).combine(dfblocksalloc_rdstart.round(0).map(str), lambda x, y: combine_text(x, y)).replace('nan', '', regex = True)
 
 
 				# data = [go.Heatmap(
