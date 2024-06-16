@@ -3276,7 +3276,23 @@ if selected_dimension == "Auction Data":
 				# dftemp = dftemp.map(int)
 				dftemp_comb = dftemp.map(str).combine(dfblocksalloc_rdstart.map(str), lambda x, y: combine_text(x, y))
 
-				st.write(dftemp_comb)
+
+				# data = [go.Heatmap(
+				# z=dftempheat.values,
+		        # x=dftempheat.columns,
+		        # y=dftempheat.index,
+				# xgap = 1,
+				# ygap = 1,
+				# hoverinfo ='text',
+				# hovertext = hovertext,
+				# text = df_combined.values,
+				# colorscale="Hot",
+				# showscale=False,
+				# texttemplate="%{text}",
+				# textfont={"size":text_embed_in_chart_size}, #Debug 14th June 2024 (Changed from 12 to 16)
+				# reversescale=True,
+				# ),
+				# ]
 
 
 				data = [go.Heatmap(
@@ -3286,10 +3302,11 @@ if selected_dimension == "Auction Data":
 				xgap = 1,
 				ygap = 1,
 				hoverinfo ='text',
-				text = hovertext,
+				hovertext = hovertext,
+				text = dftemp_comb.values,
 				colorscale='YlGnBu', #10th June 2024
 				showscale=False,
-					texttemplate="%{z}", 
+					texttemplate="%{text}", 
 					textfont={"size":text_embed_in_chart_size},#Debug 12th June 2024
 					# reversescale=True,
 					)]
