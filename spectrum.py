@@ -3241,9 +3241,8 @@ if selected_dimension == "Auction Data":
 
 			dfbidpwb = dfbidpwb[filt]
 
-			dfblocksalloc_rdend = dfbidpwb.reset_index().pivot(index="Bidder", columns='LSA', values="Prov_Alloc_BLK_End_ClkRd")\
+			# dfblocksalloc_rdend = dfbidpwb.reset_index().pivot(index="Bidder", columns='LSA', values="Prov_Alloc_BLK_End_ClkRd")\
 														.sort_index(ascending=False).round(0)
-			
 			#Debug 16th June 2024 (added the line dfblocksalloc_rdstart)
 			dfblocksalloc_rdstart = dfbidpwb.reset_index().pivot(index="Bidder", columns='LSA', values="Prov_Alloc_BLK_Start_ClkRd")\
 														.sort_index(ascending=True).round(0)
@@ -3261,7 +3260,6 @@ if selected_dimension == "Auction Data":
 				figpanindiabids.update_layout(height = heatmapheight)
 
 				dftemp = dftemp.sort_index(ascending=True)
-
 				hovertext, colormatrix = htext_colormatrix_auctiondata_2010_3G_BWA_ProvWinningBid(dfrp, dftemp, pwbtype, round_number)
 
 				def combine_text(x, y): #sep is seperator
