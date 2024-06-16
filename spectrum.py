@@ -291,6 +291,8 @@ summarychartheight = 200
 text_embed_in_chart_size = 20
 text_embed_in_hover_size = 16
 plot_row_total_chart_ht_mul = 1.017 #This multiplier aligns the row total chart with the heatmap
+stcol1 = 9 #Columns for Heatmap
+stcol2 = 1 #Column for row total chart 
 
 
 #function to count number of items in a list and outputs the result as dictionary
@@ -3454,7 +3456,7 @@ if selected_dimension == "Auction Data":
 			# 	if SummaryFlag ==True:
 			# 		col1.altair_chart(chart, use_container_width=True)
 
-			col1,col2 = st.columns([8,1]) #create collumns of uneven width
+			col1,col2 = st.columns([stcol1,stcol2]) #create collumns of uneven width
 			with col1:
 				st.plotly_chart(figauc, use_container_width=True)
 			with col2:
@@ -3685,7 +3687,7 @@ if selected_dimension == "Auction Data":
 			figauc.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=text_embed_in_hover_size, color='white')))
 
 			if chartoption == "Absolute Values":
-				col1,col2 = st.columns([8,1]) #create collumns of uneven width
+				col1,col2 = st.columns([stcol1,stcol2]) #create collumns of uneven width
 				col1.plotly_chart(figauc, use_container_width=True)
 				col2.markdown("")
 				col2.plotly_chart(figpanindiabids, use_container_width=True)
@@ -3697,7 +3699,7 @@ if selected_dimension == "Auction Data":
 			if chartoption == "ReservePrice Multiple":
 				# st.plotly_chart(figauc, use_container_width=True)
 
-				col1,col2 = st.columns([8,1]) #create collumns of uneven width
+				col1,col2 = st.columns([stcol1,stcol2]) #create collumns of uneven width
 				col1.plotly_chart(figauc, use_container_width=True)
 				col2.markdown("")
 				col2.plotly_chart(figpanindiabids, use_container_width=True)
@@ -3856,7 +3858,7 @@ if selected_dimension == "Auction Data":
 
 
 		#plotting all charts 
-		col1,col2 = st.columns([10,1]) #create collumns of uneven width
+		col1,col2 = st.columns([stcol1,stcol2]) #create collumns of uneven width
 		col1.plotly_chart(figauc, use_container_width=True)
 		col1.altair_chart(figsumcols, use_container_width=True)
 		col2.markdown("")
@@ -3989,7 +3991,7 @@ if selected_dimension == "Auction Data":
 
 			
 			#plotting all charts 
-			col1,col2 = st.columns([9,1]) #create collumns of uneven width
+			col1,col2 = st.columns([stcol1,stcol2]) #create collumns of uneven width
 			col1.plotly_chart(figauc, use_container_width=True)
 			col1.altair_chart(figsumcols, use_container_width=True)
 			col2.markdown("")
@@ -4102,7 +4104,7 @@ if selected_dimension == "Auction Data":
 
 
 			#plotting all charts 
-			col1,col2 = st.columns([9,1]) #create collumns of uneven width
+			col1,col2 = st.columns([stcol1,stcol2]) #create collumns of uneven width
 			col1.plotly_chart(figauc, use_container_width=True)
 			col1.altair_chart(figsumcols, use_container_width=True)
 			col2.markdown("")
@@ -4714,7 +4716,7 @@ if selected_dimension == "Auction Data":
 			tab1,tab2 = st.tabs(["Pts Lost(Actual)", "Pts Lost(Percentage)"]) 
 
 			with tab1:
-				col1,col2 = st.columns([8,1]) #create collumns of uneven width
+				col1,col2 = st.columns([stcol1,stcol2]) #create collumns of uneven width
 				with col1:
 					st.plotly_chart(figauc, use_container_width=True)
 				with col2:
@@ -4722,7 +4724,7 @@ if selected_dimension == "Auction Data":
 					st.plotly_chart(figptslostabs, use_container_width=True)
 
 			with tab2:
-				col1,col2 = st.columns([8,1]) #create collumns of uneven width
+				col1,col2 = st.columns([stcol1,stcol2]) #create collumns of uneven width
 				with col1:
 					st.plotly_chart(figauc, use_container_width=True)
 				with col2:
@@ -4893,7 +4895,7 @@ if selected_dimension == "Auction Data":
 
 			tab1, tab2 = st.tabs(["Aggregate Demand", "Ratio (AD/BLKsForSale)"]) #For showning the absolute and Ratio charts in two differet tabs
 			with tab1:
-				col1,col2 = st.columns([8,1]) #create collumns of uneven width
+				col1,col2 = st.columns([stcol1,stcol2]) #create collumns of uneven width
 				with col1:
 					st.plotly_chart(figauc1, use_container_width=True)
 				with col2:
@@ -4901,7 +4903,7 @@ if selected_dimension == "Auction Data":
 					st.plotly_chart(figblkssale, use_container_width=True)
 
 			with tab2:
-				col1,col2 = st.columns([8,1]) #create collumns of uneven width
+				col1,col2 = st.columns([stcol1,stcol2]) #create collumns of uneven width
 				with col1:
 					st.plotly_chart(figauc2, use_container_width=True)
 				with col2:
@@ -5450,7 +5452,7 @@ if selected_dimension == "Auction Data":
 			tab1,tab2 = st.tabs(["Absolute Value", "Ratio (Bid/Reserve)"])  #For showning the absolute and Ratio charts in two differet tabs
 
 			with tab1:
-				col1,col2 = st.columns([8,1]) #create collumns of uneven width
+				col1,col2 = st.columns([stcol1,stcol2]) #create collumns of uneven width
 				with col1:
 					st.plotly_chart(figauc1, use_container_width=True)
 					st.altair_chart(figsumcols, use_container_width=True)
@@ -5460,7 +5462,7 @@ if selected_dimension == "Auction Data":
 					st.plotly_chart(figsummry, use_container_width=True)
 
 			with tab2:
-				col1,col2 = st.columns([8,1]) #create collumns of uneven width
+				col1,col2 = st.columns([stcol1,stcol2]) #create collumns of uneven width
 				with col1:
 					st.plotly_chart(figauc2, use_container_width=True)
 					st.altair_chart(figsumcols, use_container_width=True)
@@ -6021,7 +6023,7 @@ if selected_dimension in ["Spectrum Bands", "Auction Years"]:
 		if chart_data_flag==True:
 			tab1, tab2 = st.tabs(["📈 Chart", "🗃 Data"]) #for listing the summary chart for freq layout
 			with tab1:
-				col1,col2 = st.columns([10,1]) #create collumns of uneven width
+				col1,col2 = st.columns([stcol1,stcol2]) #create collumns of uneven width
 				with col1:
 					st.plotly_chart(fig, use_container_width=True)
 					if SummaryFlag ==True:
