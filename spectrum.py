@@ -2733,7 +2733,6 @@ if selected_dimension == "Auction Data":
 			dftempheat = dftemp.pivot(index="Bidder", columns='LSA', values="Bid_Decision")
 
 			dftempheat = dftempheat.sort_values(selected_lsa[0], ascending = True)
-
 			summarydf = dftempheat.sum(axis=0).reset_index()
 
 			summarydf.columns = ["LSA","TotalBids"]
@@ -2758,6 +2757,8 @@ if selected_dimension == "Auction Data":
 			#for rendering text of the final heatmap for Data
 			dftempheat = dftempheat.map(int)
 			df_combined = dftempheat.map(str).combine(resultdf.map(str), lambda x, y: combine_text(x, y))
+
+			st.write(resultdf)
 
 
 			#------New Code Ends----------------#
