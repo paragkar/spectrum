@@ -2493,13 +2493,13 @@ def get_value(feature_dict, feature_key, var_name):
     """
     return feature_dict.get(feature_key, {}).get(var_name, "Key not found")
 
-
 if selected_dimension == "Auction BandWise":
 
 	currency_flag = True #default 
 
 	Feature = st.sidebar.selectbox("Select a Feature", year_band) #Debug 10th June 2024
 
+#New Block Code Starts --------
 	if Feature in features:
 		totalrounds = get_value(features, Feature, 'totalrounds')
 		mainsheet = get_value(features, Feature, 'mainsheet')
@@ -2520,6 +2520,7 @@ if selected_dimension == "Auction BandWise":
 		blocksize = get_value(features, Feature, 'blocksize')
 		zmin_blk_sec = get_value(features, Feature, 'zmin_blk_sec')
 		zmax_blk_sec = get_value(features, Feature, 'zmax_blk_sec')
+#New Block Code Ends-------------
 	    
 
 	# if Feature == "2022-Band26000":
