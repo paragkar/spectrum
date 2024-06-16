@@ -1351,7 +1351,7 @@ chart_data_flag = False #set this to true only if this chart exists.
 with st.sidebar:
 	selected_dimension = option_menu(
 		menu_title = "Select a Menu",
-		options = ["Spectrum Bands", "Auction Years", "Auction Data"], #Debug 14th June 2024
+		options = ["Spectrum Bands", "Auction Years", "Auction BandWise"], #Debug 14th June 2024
 		icons = ["1-circle-fill", "2-circle-fill", "3-circle-fill", "4-circle-fill"],
 		menu_icon = "arrow-down-circle-fill",
 		default_index =0,
@@ -1911,7 +1911,7 @@ if selected_dimension == "Spectrum Bands":
 
 #----------------New Auction Bid Data Code Starts Here------------------
 
-if selected_dimension == "Auction Data":
+if selected_dimension == "Auction BandWise":
 
 	currency_flag = True #default 
 
