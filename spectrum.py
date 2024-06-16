@@ -3860,11 +3860,19 @@ if selected_dimension == "Auction Data":
 		#plotting all charts 
 		col1,col2 = st.columns([stcol1,stcol2]) #create collumns of uneven width
 		col1.plotly_chart(figauc, use_container_width=True)
-		# Inject custom CSS with st.markdown to add vertical space and shift right
-		col1.markdown('<div style="margin-top: 20px;"></div>', unsafe_allow_html=True)  # Adds vertical space
-		col1.markdown('<div style="margin-left: 20px;">', unsafe_allow_html=True)  # Begin div to shift content to the right
+		# Add a small vertical space if needed (optional, adjust as necessary)
+		col1.markdown('<div style="height: 20px;"></div>', unsafe_allow_html=True)  # Adds vertical space
+
+		# Inject custom CSS to shift the chart to the right
+		col1.markdown("""
+		<div style="margin-left: 20px;">  <!-- Begin div with left margin -->
+		""", unsafe_allow_html=True)
 		col1.altair_chart(figsumcols, use_container_width=True)
-		col1.markdown('</div>', unsafe_allow_html=True)  # Close the div that shifts content
+		# End the div after the chart
+		col1.markdown("""
+		</div>  <!-- End div with left margin -->
+		""", unsafe_allow_html=True)
+		
 		col2.markdown("")
 		col2.plotly_chart(figsumrows, use_container_width=True)
 
