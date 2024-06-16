@@ -2486,7 +2486,7 @@ if selected_dimension == "Auction BandWise":
 	Feature = st.sidebar.selectbox("Select a Feature", year_band) #Debug 10th June 2024
 
 	if Feature in features:
-		st.write(features[Feature])
+		# st.write(features[Feature])
 		st.write(features[Feature][totalrounds])
 
 	# if Feature == "2022-Band26000":
