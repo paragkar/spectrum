@@ -3266,7 +3266,7 @@ if selected_dimension == "Auction Data":
 
 				def combine_text(x, y): #sep is seperator
 				    if x.notnull().all() and y.notnull().all():
-				        return x + '<br>' + y
+				        return x + '(<br>)' + y
 				    elif x.notnull().all():
 				        return x
 				    else:
@@ -3274,7 +3274,7 @@ if selected_dimension == "Auction Data":
 
 				#for rendering text of the final heatmap for Data
 				# dftemp = dftemp.map(int)
-				dftemp_comb = dftemp.map(str).combine(dfblocksalloc_rdstart.round(0).map(str), lambda x, y: combine_text(x, y)).replace('nan', '', regex = True)
+				dftemp_comb = dftemp.map(str).combine(dfblocksalloc_rdstart.map(str), lambda x, y: combine_text(x, y)).replace('nan', '', regex = True)
 
 
 				# data = [go.Heatmap(
