@@ -3707,10 +3707,10 @@ if selected_dimension == "Auction Data":
 
 		sumcols = dftemp.sum(axis=0).reset_index()
 
-		sumcols.columns = ["LSA", "Total Slots Selected"] 
+		sumcols.columns = ["LSA", "Slots Selected"] 
 
 
-		figsumcols = summarychart(sumcols, "LSA", "Total Slots Selected")
+		figsumcols = summarychart(sumcols, "LSA", "Slots Selected")
 
 		#debug 10th June 2024
 
