@@ -287,6 +287,8 @@ year_band_exp =["2021-Band800","2021-Band900","2021-Band1800","2021-Band2100","2
 #Define heights of all Heatmaps 
 heatmapheight = 900
 heatmapwidth = 900
+#Heatmap Chart Margins
+t=80, b=50, l=10, r=10, pad=0
 summarychartheight = 200
 text_embed_in_chart_size = 20
 text_embed_in_hover_size = 16
@@ -3049,7 +3051,7 @@ if selected_dimension == "Auction Data":
 			    template="seaborn",
 			    xaxis_side= 'top',
 			   	height = heatmapheight, #Debug 14th June 2024 (Changed from 650 to 850)
-			   	margin=dict(l=0, r=20, t=20, b=20),
+			   	margin= dict(t=t,b=b,l=l, r=r,pad=0),
 		   		plot_bgcolor='white',
 			   	yaxis=dict(
 	        	  tickmode='array',
