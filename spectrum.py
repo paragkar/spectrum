@@ -1262,10 +1262,10 @@ def transform_colscale_for_hbox_auction_map(dff,reserveprice, auctionprice):
 def summarychart(summarydf, xcolumn, ycolumn):
 	bar = alt.Chart(summarydf).mark_bar().encode(
 	y = alt.Y(ycolumn+':Q', axis=alt.Axis(labels=True, titleAngle =0, titleFontSize=text_embed_in_chart_size,labelAngle=0,labelFontSize=text_embed_in_chart_size)),
-	x = alt.X(xcolumn+':O', axis=alt.Axis(labels=True, labelAngle=0, labelFontSize=text_embed_in_chart_size, titleFontSize=text_embed_in_chart_size)), #Debug 12th June 2024 (Changed False to True)
+	x = alt.X(xcolumn+':O', axis=alt.Axis(labels=True, labelAngle=0, labelFontSize=text_embed_in_chart_size, titleFontSize=text_embed_in_chart_size)),
 	color = alt.Color(xcolumn+':N', legend=None))
 
-	text = bar.mark_text(size = text_embed_in_chart_size, dx=0, dy=-7, color = 'white').encode(text=ycolumn+':Q') #Debug 12th June 2024 (Chnaged Bar Text Sixe from 10 to 16)
+	text = bar.mark_text(size = text_embed_in_chart_size, dx=0, dy=-7, color = 'white').encode(text=ycolumn+':Q')
 	chart = (bar + text).properties(width=heatmapwidth, height =summarychartheight)
 	chart = chart.configure_title(fontSize = text_embed_in_chart_size, font ='Arial', anchor = 'middle', color ='black')
 	return chart
@@ -1274,10 +1274,10 @@ def summarychart(summarydf, xcolumn, ycolumn):
 def plotrwototal(sumrows, ydim, xdim):
 	fig = px.bar(sumrows, y = ydim, x=xdim, orientation ='h', height = heatmapheight*plot_row_total_chart_ht_mul)
 	fig.update_layout(xaxis=dict(title='India Total'), yaxis=dict(title=''))
-	fig.update_traces(text=sumrows[xdim], textposition='auto',textfont=dict(size=text_embed_in_chart_size, color='white')) #Debug 12th June 2024 (Changed 14 to 20)
+	fig.update_traces(text=sumrows[xdim], textposition='auto',textfont=dict(size=text_embed_in_chart_size, color='white')) 
 	fig.update_xaxes(tickvals=[])
 	fig.update_yaxes(tickfont=dict(size=text_embed_in_chart_size))  # Change '16' to your desired font size for y-axis tick labels
-	fig.update_layout(xaxis=dict(side='top', title_standoff=0, ticklen=0, title_font=dict(size=text_embed_in_chart_size))) #Debug 12th June 2024 (Changed 14 to 20)
+	fig.update_layout(xaxis=dict(side='top', title_standoff=0, ticklen=0, title_font=dict(size=text_embed_in_chart_size))) 
 	fig.update_layout(xaxis_title_standoff=0) 
 	fig.update_traces(marker=dict(color='red'))
 	return fig
@@ -3755,7 +3755,7 @@ if selected_dimension == "Auction Data":
 		sumcols.columns = ["LSA", "Total Slots"]
 
 
-		figsumcols = summarychart(sumcols, "LSA", "Total Slots")
+		figsumcols = summarychart(sumcols, "LSA", "Total Slots ")
 
 		#debug 10th June 2024
 
