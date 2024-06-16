@@ -1278,7 +1278,7 @@ def summarychart(summarydf, xcolumn, ycolumn):
 #function for preparing the chart for row total
 def plotrwototal(sumrows, ydim, xdim):
 	fig = px.bar(sumrows, y = ydim, x=xdim, orientation ='h', height = heatmapheight*plot_row_total_chart_ht_mul)
-	fig.update_layout(xaxis=dict(title='India Total', showticklabels=False), yaxis=dict(title='', showticklabels=True))
+	fig.update_layout(xaxis=dict(title='India Total'), yaxis=dict(title='', showticklabels=True))
 	fig.update_traces(text=sumrows[xdim], textposition='auto',textfont=dict(size=text_embed_in_chart_size, color='white')) 
 	fig.update_xaxes(tickvals=[])
 	fig.update_yaxes(tickfont=dict(size=text_embed_in_chart_size))  # Change '16' to your desired font size for y-axis tick labels
@@ -1287,7 +1287,7 @@ def plotrwototal(sumrows, ydim, xdim):
 	fig.update_traces(marker=dict(color='red'))
 	# Adjust margins to reduce unnecessary space
 	fig.update_layout(
-       margin= dict(t=t,b=b,l=l,r=r,pad=pad),
+       margin= dict(t=t,b=b,l=0,r=r,pad=pad),
     )
 	return fig
 
