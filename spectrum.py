@@ -2784,13 +2784,11 @@ if selected_dimension == "Auction Data":
 		subtitle = "Source - DoT; Between Round Nos "+str(start_round)+" & "+str(end_round)+ "; Number of Rounds = "+ str(end_round-start_round)
 
 		style_title = "<style>h3 {text-align: left;}</style>"
-		style_subtitle = "<style>.subtitle {font-size: 40px;}</style>"
 		with st.container():
 			#plotting the main chart
-			st.markdown(style_title, unsafe_allow_html=True)
+			st.markdown(style, unsafe_allow_html=True)
 			st.header(title)
-			st.markdown(style_subtitle, unsafe_allow_html=True)
-			st.markdown(subtitle,unsafe_allow_html=True )
+			st.markdown(subtitle)
 
 		#Drawning a black border around the heatmap chart 
 		figauc.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
