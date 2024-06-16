@@ -2783,11 +2783,13 @@ if selected_dimension == "Auction Data":
 		title = titlesubpart+titlesubpart2
 		subtitle = "Source - DoT; Between Round Nos "+str(start_round)+" & "+str(end_round)+ "; Number of Rounds = "+ str(end_round-start_round)
 
-		style = "<style>h3 {text-align: left;}</style>"
+		style_title = "<style>h3 {text-align: left;}</style>"
+		style_subtitle = "<style>.subtitle {font-size: 20px;}</style>"
 		with st.container():
 			#plotting the main chart
-			st.markdown(style, unsafe_allow_html=True)
+			st.markdown(style_title, unsafe_allow_html=True)
 			st.header(title)
+			st.markdown(style_subtitle, unsafe_allow_html=True)
 			st.markdown(subtitle)
 
 		#Drawning a black border around the heatmap chart 
