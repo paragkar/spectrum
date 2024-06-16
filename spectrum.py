@@ -2205,7 +2205,7 @@ features = {
         "blocksize": 10,
         "zmin_blk_sec": 0,
         "zmax_blk_sec": 4
-    }
+    },
     "2016-Band2300": {
         "totalrounds": 31,
         "mainsheet": "2016_4G_2300",
