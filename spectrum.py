@@ -1339,12 +1339,6 @@ def plotbiddertotal(dftemp,dfblocksalloc_rdend):
 	fig.update_layout(xaxis_title_standoff=5)
 	fig.update_traces(marker=dict(color='red'))
 
-	fig.update_layout(
-        margin=dict(t=t, b=b*1.1, l=l*0, r=r, pad=pad+5),  # Adjust margins if necessary
-        paper_bgcolor='grey',  # Outer color
-        plot_bgcolor='white',  # Inner color simulates the border
-    )
-
 	return fig
 
 
