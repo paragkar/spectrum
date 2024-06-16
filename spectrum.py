@@ -3334,7 +3334,6 @@ if selected_dimension == "Auction Data":
 				hovertext, colormatrix = htext_colormatrix_auctiondata_2010_3G_BWA_ProvWinningBid(dfrp, dftemp1, pwbtype, round_number)
 				dftemp = dftemp.sort_index(ascending=True)
 
-
 				def combine_text(x, y): #sep is seperator
 				    if x.notnull().all() and y.notnull().all():
 				        return x + '<br>' + y
@@ -3410,7 +3409,6 @@ if selected_dimension == "Auction Data":
 				st.header(title)
 				st.markdown(subtitle)
 
-
 			#Drawning a black border around the heatmap chart 
 			figauc.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True, range=[-0.5, len(dftemp.columns) -0.5])
 			figauc.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True, range=[-0.5, len(dftemp.index) -0.5])
@@ -3418,7 +3416,6 @@ if selected_dimension == "Auction Data":
 
 			hoverlabel_bgcolor = colormatrix
 			figauc.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=text_embed_in_hover_size, color='white')))
-
 
 			#Rendering the Chart as an Output
 			col1,col2 = st.columns([stcol1,stcol2]) #create collumns of uneven width
@@ -3436,19 +3433,16 @@ if selected_dimension == "Auction Data":
 
 		if pwbtype == "End CLK Round":
 
-
 			# debug 30th Mar 2024
 			# Generate a list of all round numbers
 			round_numbers = list(range(1, totalrounds + 1))
 
 			#debug 9th June 2024
-
 			round_number = st.sidebar.number_input("Select Auction Round Number"+";Total Rounds= "+str(max(round_numbers)), min_value=min(round_numbers), max_value=max(round_numbers), value=1, step=1)
 
 			dfbidpwb = dfbid.copy()
 
 			filt  =(dfbidpwb["Clk_Round"] == round_number) 
-
 			dfbidpwb = dfbidpwb[filt]
 
 			dftemp = dfbidpwb.reset_index().pivot(index="Bidder", columns='LSA', values="PWB_End_ClkRd").sort_index(ascending=False).round(1)
@@ -3476,7 +3470,6 @@ if selected_dimension == "Auction Data":
 				dfbidblksec = dfbidblksec.replace(0, "None", regex = True)
 
 				#-----------End---------------------
-
 
 				hovertext, colormatrix = htext_colormatrix_auctiondata_2010_3G_BWA_ProvWinningBid(dfrp, dftemp, pwbtype, round_number)
 				dftemp = dftemp.sort_index(ascending=True)
@@ -3558,27 +3551,32 @@ if selected_dimension == "Auction Data":
 				#-------------Start---------------
 
 				figpanindiabids = plotbiddertotal(dftemp1,dfblocksalloc_rdend)
-
 				figpanindiabids.update_yaxes(visible=False, showticklabels=False)
-
 				figpanindiabids.update_layout(height = heatmapheight)
-
 				dfbidblksec = dfbid.copy()
-
 				filtbsec  =(dfbidblksec["Clk_Round"] == round_number) 
-
 				dfbidblksec = dfbidblksec[filtbsec].loc[:,["Bidder", "No_of_BLK_Selected"]]
-
 				dfbidblksec = dfbidblksec.sort_index(ascending=True)
-
 				dfbidblksec = dfbidblksec.pivot_table(index='LSA', columns='Bidder', values='No_of_BLK_Selected', aggfunc='max').T
 
 				#-----------End---------------------
 
 				hovertext, colormatrix = htext_colormatrix_auctiondata_2010_3G_BWA_ProvWinningBid(dfrp, dftemp1, pwbtype, round_number)
-
 				dftemp = dftemp.sort_index(ascending=True)
 
+				def combine_text(x, y): #sep is seperator
+				    if x.notnull().all() and y.notnull().all():
+				        return x + '<br>' + y
+				    elif x.notnull().all():
+				        return x
+				    else:
+				        return y
+
+				#for rendering text of the final heatmap for Data
+				dfblocksalloc_rdend = dfblocksalloc_rdend.replace(np.nan, 0)
+				for col in dfblocksalloc_rdend.columns:
+					dfblocksalloc_rdend[col] = dfblocksalloc_rdend[col].astype(int)
+				dftemp_comb = dftemp.map(str).combine(dfblocksalloc_rdend.map(str), lambda x, y: combine_text(x, y)).replace('nan', '', regex = True)
 
 				data = [go.Heatmap(
 					z=dftemp.values,
@@ -3587,10 +3585,11 @@ if selected_dimension == "Auction Data":
 					xgap = 1,
 					ygap = 1,
 					hoverinfo ='text',
-					text = hovertext,
+					hovertext = hovertext,
+					text = dftemp_comb.values,
 					colorscale='YlGnBu', #Debug 10th June 2024
 					showscale=False, #Debug 12th June 2024
-						texttemplate="%{z}", 
+						texttemplate="%{text}", 
 						textfont={"size":text_embed_in_chart_size},#Debug 12th June 2024
 						# reversescale=True,
 						)]
