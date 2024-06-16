@@ -1280,6 +1280,96 @@ def plotrwototal(sumrows, ydim, xdim):
 	fig.update_traces(marker=dict(color='red'))
 	return fig
 
+
+function used to calculate the total bid values 
+def bidvalue(df,dfblocks):
+
+	df = df.replace(np.nan, 0)
+	min_values=[]
+	for col in df.columns:
+		lst =[]
+		if sum(list(df[col])) > 0:
+			for value in list(df[col]):
+				if value != 0:
+					lst.append(value)
+			min_values.append(min(lst))
+		if sum(list(df[col])) == 0:
+			min_values.append(np.nan)
+
+	mindf = pd.DataFrame(min_values).T
+
+	mindf.columns = df.columns
+	df_final = dfblocks*mindf.values #calculating the total value of bids
+
+	df_final = df_final.sum(axis =1).round(1)
+
+	return df_final
+
+
+def plotbiddertotal(dftemp,dfblocksalloc_rdend):
+
+	dftemp = round(dftemp,1)
+					
+	panindiabids = bidvalue(dftemp,dfblocksalloc_rdend).reset_index()
+
+	panindiabids.columns =["Bidder","PanIndiaBid"]
+	panindiabids = panindiabids.round(0)
+	panindiabids = panindiabids.sort_values("Bidder", ascending=False)
+
+	fig = px.bar(panindiabids, y = 'Bidder', x='PanIndiaBid', orientation ='h', height = heatmapheight)
+
+	fig.update_layout(xaxis=dict(title='Total Value'), yaxis=dict(title=''))
+	fig.update_traces(text=panindiabids['PanIndiaBid'], textposition='auto',textfont=dict(size=text_embed_in_chart_size, color='white')) #Debug 12th June 2024 (Changed 14 to 20)
+	fig.update_xaxes(tickvals=[])
+	fig.update_layout(xaxis=dict(side='top', title_standoff=0, ticklen=0, title_font=dict(size=14)))
+	fig.update_layout(xaxis_title_standoff=5)
+	fig.update_traces(marker=dict(color='red'))
+
+	return fig
+
+
+# def plotrwototal(sumrows, ydim, xdim):					
+# 	fig = px.bar(sumrows, y = ydim, x=xdim, orientation ='h', height = heatmapheight)
+# 	fig.update_layout(xaxis=dict(title='India Total'), yaxis=dict(title=''))
+# 	fig.update_traces(text=sumrows[xdim], textposition='auto',textfont=dict(size=text_embed_in_chart_size, color='white')) #Debug 12th June 2024 (Changed 14 to 20)
+# 	fig.update_xaxes(tickvals=[])
+# 	fig.update_layout(xaxis=dict(side='top', title_standoff=0, ticklen=0, title_font=dict(size=text_embed_in_chart_size))) #Debug 12th June 2024 (Changed 14 to 20)
+# 	fig.update_layout(xaxis_title_standoff=5) 
+# 	fig.update_traces(marker=dict(color='red'))
+# 	return fig
+
+
+
+def plotlosttotal(df,ydim,xdim):
+	fig = px.bar(df, y =ydim, x=xdim, orientation ='h', height = heatmapheight)
+	fig.update_layout(xaxis=dict(title="Total"), yaxis=dict(title=''))
+	fig.update_traces(text=df[xdim], textposition='auto',textfont=dict(size=text_embed_in_chart_size, color='white')) #Debug 12th June 2024 (Changed 14 to 20)
+	fig.update_xaxes(tickvals=[])
+	fig.update_layout(xaxis=dict(side='top', title_standoff=0, ticklen=0, title_font=dict(size=text_embed_in_chart_size))) #Debug 12th June 2024 (Changed 14 to 20)
+	fig.update_layout(xaxis_title_standoff=5)
+	fig.update_traces(marker=dict(color='red'))
+	return fig
+
+
+#------------------------- debug 30th Mar 2024
+def select_round_range(total_rounds):
+    # Sidebar elements for selecting round numbers
+    col1, col2 = st.sidebar.columns(2)
+    with col1:
+        min_round = st.number_input('From Round', min_value=1, max_value=total_rounds, value=1)
+    with col2:
+        max_round = st.number_input('To Round', min_value=1, max_value=total_rounds, value=total_rounds)
+    
+    # Ensure 'From Round' is always less than 'To Round'
+    if min_round >= max_round:
+        st.sidebar.error('Please ensure From Round is less than To Round.')
+        max_round = min_round + 1
+
+    return min_round, max_round
+#------------------------- debug 30th Mar 2024
+
+
+
 #**********  Main Program Starts here ***************
 
 # authenticator.logout("Logout", "sidebar") #logging out authentication
@@ -1849,51 +1939,51 @@ if selected_dimension == "Spectrum Bands":
 
 
 #----------------New Auction Bid Data Code Starts Here------------------
-#function used to calculate the total bid values 
-def bidvalue(df,dfblocks):
+# function used to calculate the total bid values 
+# def bidvalue(df,dfblocks):
 
-	df = df.replace(np.nan, 0)
-	min_values=[]
-	for col in df.columns:
-		lst =[]
-		if sum(list(df[col])) > 0:
-			for value in list(df[col]):
-				if value != 0:
-					lst.append(value)
-			min_values.append(min(lst))
-		if sum(list(df[col])) == 0:
-			min_values.append(np.nan)
+# 	df = df.replace(np.nan, 0)
+# 	min_values=[]
+# 	for col in df.columns:
+# 		lst =[]
+# 		if sum(list(df[col])) > 0:
+# 			for value in list(df[col]):
+# 				if value != 0:
+# 					lst.append(value)
+# 			min_values.append(min(lst))
+# 		if sum(list(df[col])) == 0:
+# 			min_values.append(np.nan)
 
-	mindf = pd.DataFrame(min_values).T
+# 	mindf = pd.DataFrame(min_values).T
 
-	mindf.columns = df.columns
-	df_final = dfblocks*mindf.values #calculating the total value of bids
+# 	mindf.columns = df.columns
+# 	df_final = dfblocks*mindf.values #calculating the total value of bids
 
-	df_final = df_final.sum(axis =1).round(1)
+# 	df_final = df_final.sum(axis =1).round(1)
 
-	return df_final
+# 	return df_final
 
 
-def plotbiddertotal(dftemp,dfblocksalloc_rdend):
+# def plotbiddertotal(dftemp,dfblocksalloc_rdend):
 
-	dftemp = round(dftemp,1)
+# 	dftemp = round(dftemp,1)
 					
-	panindiabids = bidvalue(dftemp,dfblocksalloc_rdend).reset_index()
+# 	panindiabids = bidvalue(dftemp,dfblocksalloc_rdend).reset_index()
 
-	panindiabids.columns =["Bidder","PanIndiaBid"]
-	panindiabids = panindiabids.round(0)
-	panindiabids = panindiabids.sort_values("Bidder", ascending=False)
+# 	panindiabids.columns =["Bidder","PanIndiaBid"]
+# 	panindiabids = panindiabids.round(0)
+# 	panindiabids = panindiabids.sort_values("Bidder", ascending=False)
 
-	fig = px.bar(panindiabids, y = 'Bidder', x='PanIndiaBid', orientation ='h', height = heatmapheight)
+# 	fig = px.bar(panindiabids, y = 'Bidder', x='PanIndiaBid', orientation ='h', height = heatmapheight)
 
-	fig.update_layout(xaxis=dict(title='Total Value'), yaxis=dict(title=''))
-	fig.update_traces(text=panindiabids['PanIndiaBid'], textposition='auto',textfont=dict(size=text_embed_in_chart_size, color='white')) #Debug 12th June 2024 (Changed 14 to 20)
-	fig.update_xaxes(tickvals=[])
-	fig.update_layout(xaxis=dict(side='top', title_standoff=0, ticklen=0, title_font=dict(size=14)))
-	fig.update_layout(xaxis_title_standoff=5)
-	fig.update_traces(marker=dict(color='red'))
+# 	fig.update_layout(xaxis=dict(title='Total Value'), yaxis=dict(title=''))
+# 	fig.update_traces(text=panindiabids['PanIndiaBid'], textposition='auto',textfont=dict(size=text_embed_in_chart_size, color='white')) #Debug 12th June 2024 (Changed 14 to 20)
+# 	fig.update_xaxes(tickvals=[])
+# 	fig.update_layout(xaxis=dict(side='top', title_standoff=0, ticklen=0, title_font=dict(size=14)))
+# 	fig.update_layout(xaxis_title_standoff=5)
+# 	fig.update_traces(marker=dict(color='red'))
 
-	return fig
+# 	return fig
 
 
 # def plotrwototal(sumrows, ydim, xdim):					
@@ -1908,35 +1998,33 @@ def plotbiddertotal(dftemp,dfblocksalloc_rdend):
 
 
 
-def plotlosttotal(df,ydim,xdim):
-	fig = px.bar(df, y =ydim, x=xdim, orientation ='h', height = heatmapheight)
-	fig.update_layout(xaxis=dict(title="Total"), yaxis=dict(title=''))
-	fig.update_traces(text=df[xdim], textposition='auto',textfont=dict(size=text_embed_in_chart_size, color='white')) #Debug 12th June 2024 (Changed 14 to 20)
-	fig.update_xaxes(tickvals=[])
-	fig.update_layout(xaxis=dict(side='top', title_standoff=0, ticklen=0, title_font=dict(size=text_embed_in_chart_size))) #Debug 12th June 2024 (Changed 14 to 20)
-	fig.update_layout(xaxis_title_standoff=5)
-	fig.update_traces(marker=dict(color='red'))
-	return fig
+# def plotlosttotal(df,ydim,xdim):
+# 	fig = px.bar(df, y =ydim, x=xdim, orientation ='h', height = heatmapheight)
+# 	fig.update_layout(xaxis=dict(title="Total"), yaxis=dict(title=''))
+# 	fig.update_traces(text=df[xdim], textposition='auto',textfont=dict(size=text_embed_in_chart_size, color='white')) #Debug 12th June 2024 (Changed 14 to 20)
+# 	fig.update_xaxes(tickvals=[])
+# 	fig.update_layout(xaxis=dict(side='top', title_standoff=0, ticklen=0, title_font=dict(size=text_embed_in_chart_size))) #Debug 12th June 2024 (Changed 14 to 20)
+# 	fig.update_layout(xaxis_title_standoff=5)
+# 	fig.update_traces(marker=dict(color='red'))
+# 	return fig
 
 
-#------------------------- debug 30th Mar 2024
-def select_round_range(total_rounds):
-    # Sidebar elements for selecting round numbers
-    col1, col2 = st.sidebar.columns(2)
-    with col1:
-        min_round = st.number_input('From Round', min_value=1, max_value=total_rounds, value=1)
-    with col2:
-        max_round = st.number_input('To Round', min_value=1, max_value=total_rounds, value=total_rounds)
+# #------------------------- debug 30th Mar 2024
+# def select_round_range(total_rounds):
+#     # Sidebar elements for selecting round numbers
+#     col1, col2 = st.sidebar.columns(2)
+#     with col1:
+#         min_round = st.number_input('From Round', min_value=1, max_value=total_rounds, value=1)
+#     with col2:
+#         max_round = st.number_input('To Round', min_value=1, max_value=total_rounds, value=total_rounds)
     
-    # Ensure 'From Round' is always less than 'To Round'
-    if min_round >= max_round:
-        st.sidebar.error('Please ensure From Round is less than To Round.')
-        max_round = min_round + 1
+#     # Ensure 'From Round' is always less than 'To Round'
+#     if min_round >= max_round:
+#         st.sidebar.error('Please ensure From Round is less than To Round.')
+#         max_round = min_round + 1
 
-    return min_round, max_round
-#------------------------- debug 30th Mar 2024
-
-
+#     return min_round, max_round
+# #------------------------- debug 30th Mar 2024
 
 
 if selected_dimension == "Auction Data":
@@ -3702,10 +3790,6 @@ if selected_dimension == "Auction Data":
 				
 
 		figauc = go.Figure(data=data)
-
-
-	
-
 
 
 		figauc.update_layout(uniformtext_minsize=text_embed_in_chart_size, 
