@@ -1911,7 +1911,8 @@ if selected_dimension == "Spectrum Bands":
 
 #----------------New Auction Bid Data Code Starts Here------------------
 
-features = {
+
+Auction_Year_Band_Features = {
     "2022-Band26000": {
         "totalrounds": 40,
         "mainsheet": "2022_5G_26000",
@@ -2499,7 +2500,8 @@ if selected_dimension == "Auction BandWise":
 	Feature = st.sidebar.selectbox("Select a Feature", year_band) #Debug 10th June 2024
 
 #New Block Code Starts --------
-	if Feature in features:
+	if Feature in Auction_Year_Band_Features:
+
 		totalrounds = get_value(features, Feature, 'totalrounds')
 		mainsheet = get_value(features, Feature, 'mainsheet')
 		mainsheetoriginal = get_value(features, Feature, 'mainsheetoriginal')
@@ -2519,6 +2521,7 @@ if selected_dimension == "Auction BandWise":
 		blocksize = get_value(features, Feature, 'blocksize')
 		zmin_blk_sec = get_value(features, Feature, 'zmin_blk_sec')
 		zmax_blk_sec = get_value(features, Feature, 'zmax_blk_sec')
+
 #New Block Code Ends-------------
 	    
 
