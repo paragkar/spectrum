@@ -2911,13 +2911,6 @@ if selected_dimension == "Auction Data":
 		st.altair_chart(chart, use_container_width=True)
 
 
-		#plotting the final summary chart 
-		# col1,col2,col3 = st.columns([0.2,14,1]) #create collumns of uneven width
-		# col1,col2 = st.columns([10,1]) #create collumns of uneven width
-		# if SummaryFlag ==True:
-		# 	# st.altair_chart(chart, use_container_width=True)
-		# 	col1.altair_chart(chart, use_container_width=True)
-
 	if SubFeature == "RanksCircleWise":
 
 		plottype = st.sidebar.selectbox("Select a Plot Type", ["RanksInRound", "RanksInRounds"])
@@ -3683,7 +3676,6 @@ if selected_dimension == "Auction Data":
 			#----------------End--------------------
 
 			#plotting the final summary chart 
-				# col1,col2,col3 = st.columns([0.35, 14,1.1]) #create collumns of uneven width
 				if SummaryFlag ==True:
 					col1.altair_chart(chart, use_container_width=True)
 
@@ -5942,33 +5934,6 @@ if selected_dimension in ["Spectrum Bands", "Auction Years"]:
 			    tickvals=list(range(len(date_range_list)))
 			)
 
-	#encircle the heatmaps with a rectangular box made up of black lines
-	#Except for features which are not heatmaps
-
-
-
-	# # Final plotting of various charts on the output page
-	# style = "<style>h3 {text-align: left;}</style>"
-	# with st.container():
-	# 	#plotting the main chart
-	# 	st.markdown(style, unsafe_allow_html=True)
-	# 	st.header(title)
-	# 	st.markdown(subtitle)
-
-	# 	if chart_data_flag==True:
-	# 		tab1, tab2 = st.tabs(["📈 Chart", "🗃 Data"]) #for listing the summary chart for freq layout
-	# 		tab1.plotly_chart(fig, use_container_width=True)
-	# 		tab2.table(chartdata_df)
-	# 	else:
-	# 		st.plotly_chart(fig, use_container_width=True) # for heatmaps
-
-	# 	#plotting the final summary chart 
-	# 	col1,col2,col3 = st.columns([0.2,14,1.1]) #create collumns of uneven width
-	# 	if SummaryFlag ==True:
-	# 		# st.altair_chart(chart, use_container_width=True)
-	# 		col2.altair_chart(chart, use_container_width=True)
-
-
 
 	# Final plotting of various charts on the output page
 	style = "<style>h3 {text-align: left;}</style>"
@@ -5995,10 +5960,6 @@ if selected_dimension in ["Spectrum Bands", "Auction Years"]:
 			st.plotly_chart(fig, use_container_width=True) # for heatmaps
 			if SummaryFlag ==True:
 				st.altair_chart(chart, use_container_width=True)
-
-		
-
-
 
 
 #--------The expander is used to add note for the user on reading the color codes for every chart -------
