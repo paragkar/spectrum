@@ -989,9 +989,9 @@ def htext_auctiondata_2010_3G_BWA_DemandIntensity(dfbid,ADPrecOfBlksforSale):
 			hovertext[-1].append(
 					    'Circle: {}\
 					    <br>Round No: {}\
-					    <br>Agg Demand : {} Slots\
+					    <br>Agg Demand : {} Blocks\
 					    <br>Ratio (AD/Total) : {} \
-					    <br>Excess Demand : {} Slots'
+					    <br>Excess Demand : {} Blocks'
 				
 
 				     .format( 
@@ -3699,7 +3699,7 @@ if selected_dimension == "Auction Data":
 
 		sumrows = dftemp.sum(axis=1).reset_index()
 
-		sumrows.columns = ["Bidders", "Total Slots"] 
+		sumrows.columns = ["Bidders", "Total Blocks"] 
 
 		#Reverse the order of the daraframe 
 
@@ -3707,16 +3707,16 @@ if selected_dimension == "Auction Data":
 
 		sumcols = dftemp.sum(axis=0).reset_index()
 
-		sumcols.columns = ["LSA", "Slots Selected"] 
+		sumcols.columns = ["LSA", "Blocks Selected"] 
 
 
-		figsumcols = summarychart(sumcols, "LSA", "Slots Selected")
+		figsumcols = summarychart(sumcols, "LSA", "Blocks Selected")
 
 		#debug 10th June 2024
 
 		#----------Start-------------
 
-		figsumrows = plotrwototal(sumrows,"Bidders", "Total Slots")
+		figsumrows = plotrwototal(sumrows,"Bidders", "Total Blocks")
 
 		figsumrows.update_yaxes(visible=False, showticklabels=False)
 
@@ -3855,15 +3855,15 @@ if selected_dimension == "Auction Data":
 			dftemp = dfbidblksec.reset_index().pivot(index="Bidder", columns='LSA', values="Prov_Alloc_BLK_Start_ClkRd").sort_index(ascending=False).round(0)
 
 			sumrows = dftemp.sum(axis=1).reset_index()
-			sumrows.columns = ["Bidders", "Total Slots"]
-			figsumrows = plotrwototal(sumrows,"Bidders", "Total Slots")
+			sumrows.columns = ["Bidders", "Total Blocks"]
+			figsumrows = plotrwototal(sumrows,"Bidders", "Total Blocks")
 			figsumrows.update_yaxes(visible=False, showticklabels=False)
 			figsumrows.update_layout(height = heatmapheight)
 
 
 			sumcols = dftemp.sum(axis=0).reset_index()
-			sumcols.columns = ["LSA", "Slots Allocated"]
-			figsumcols = summarychart(sumcols, "LSA", "Slots Allocated")
+			sumcols.columns = ["LSA", "Blocks Allocated"]
+			figsumcols = summarychart(sumcols, "LSA", "Blocks Allocated")
 
 
 			hovertext = htext_auctiondata_2010_3G_BWA_BlocksAllocated(dftemp)
@@ -3964,15 +3964,15 @@ if selected_dimension == "Auction Data":
 
 			sumrows = dftemp.sum(axis=1).reset_index()
 
-			sumrows.columns = ["Bidders", "Total Slots"]
-			figsumrows = plotrwototal(sumrows,"Bidders", "Total Slots")
+			sumrows.columns = ["Bidders", "Total Blocks"]
+			figsumrows = plotrwototal(sumrows,"Bidders", "Total Blocks")
 			figsumrows.update_yaxes(visible=False, showticklabels=False)
 			figsumrows.update_layout(height = heatmapheight)
 
 
 			sumcols = dftemp.sum(axis=0).reset_index()
-			sumcols.columns = ["LSA", "Slots Allocated"]
-			figsumcols = summarychart(sumcols, "LSA", "Slots Allocated")
+			sumcols.columns = ["LSA", "Blocks Allocated"]
+			figsumcols = summarychart(sumcols, "LSA", "Blocks Allocated")
 
 			hovertext = htext_auctiondata_2010_3G_BWA_BlocksAllocated(dftemp)
 
