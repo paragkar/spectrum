@@ -1281,7 +1281,7 @@ def plotrwototal(sumrows, ydim, xdim):
 	return fig
 
 
-function used to calculate the total bid values 
+# function used to calculate the total bid values 
 def bidvalue(df,dfblocks):
 
 	df = df.replace(np.nan, 0)
