@@ -1341,7 +1341,7 @@ def plotbiddertotal(dftemp,dfblocksalloc_rdend):
 
 	fig.update_layout(
         margin=dict(t=t, b=b*1.1, l=l*0, r=r, pad=pad+5),  # Adjust margins if necessary
-        paper_bgcolor='yellow',  # Outer color
+        paper_bgcolor='grey',  # Outer color
         plot_bgcolor='white',  # Inner color simulates the border
     )
 
