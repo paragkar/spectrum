@@ -2914,7 +2914,8 @@ if selected_dimension == "Auction Data":
 		    template="seaborn",
 		    xaxis_side= 'top',
 		   	height = heatmapheight, #Debug 14th June 2024 (Changed from 650 to 850)
-
+		   	margin=dict(l=20, r=20, t=20, b=20),
+		   	plot_bgcolor='white',
 		   	yaxis=dict(
 	        tickmode='array',
 	        tickfont=dict(size=text_embed_in_chart_size),
@@ -2942,11 +2943,6 @@ if selected_dimension == "Auction Data":
 		figauc.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
 		figauc.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
 		figauc.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=text_embed_in_hover_size, color='white')))
-
-		figauc.update_layout(
-		    margin=dict(l=40, r=40, t=40, b=40),  # Adjust left, right, top, and bottom margins as needed
-		    plot_bgcolor='white'  # Ensuring the background is white (or another color) might help in visualizing the border
-		)
 
 
 		#Plotting Provisional Winners Charts 
