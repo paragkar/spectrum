@@ -2790,7 +2790,7 @@ if selected_dimension == "Auction Data":
 			st.markdown(style_title, unsafe_allow_html=True)
 			st.header(title)
 			st.markdown(style_subtitle, unsafe_allow_html=True)
-			st.markdown(subtitle)
+			st.markdown(subtitle,unsafe_allow_html=True )
 
 		#Drawning a black border around the heatmap chart 
 		figauc.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
