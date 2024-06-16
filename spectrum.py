@@ -2485,8 +2485,6 @@ if selected_dimension == "Auction BandWise":
 
 	Feature = st.sidebar.selectbox("Select a Feature", year_band) #Debug 10th June 2024
 
-	st.write(Feature)
-
 	if Feature in features:
 		st.write(Feature)
 
