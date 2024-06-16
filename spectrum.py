@@ -3055,7 +3055,7 @@ if selected_dimension == "Auction Data":
 			    template="seaborn",
 			    xaxis_side= 'top',
 			   	height = heatmapheight, #Debug 14th June 2024 (Changed from 650 to 850)
-			   	margin= dict(t=t, b=b,l=l,r=r, pad=0),
+			   	margin= dict(t=t,b=b,l=l,r=r,pad=pad),
 		   		plot_bgcolor='white',
 			   	yaxis=dict(
 	        	  tickmode='array',
@@ -3213,7 +3213,7 @@ if selected_dimension == "Auction Data":
 			    height=heatmapheight*1.2,
 			    plot_bgcolor='#D2B48C',  # Background color for the plot area light pink
 			    paper_bgcolor='white',  # Background color for the entire figure
-			    margin=dict(l=0, r=20, t=20, b=20),
+			    margin= dict(t=t,b=b,l=l,r=r,pad=pad),
 			    yaxis=dict(
 		        	  tickmode='array',
 		        	  tickfont=dict(size=text_embed_in_chart_size),
@@ -3330,7 +3330,7 @@ if selected_dimension == "Auction Data":
 				  paper_bgcolor=None,
 				  height=heatmapheight, #Debug 14th June 2024 (Changed from 600 to 850)
 				  # width=heatmapwidth,
-				  margin=dict(t=80, b=50, l=10, r=10, pad=0),
+				  margin= dict(t=t,b=b,l=l,r=r,pad=pad),
 				  yaxis=dict(
 		        	  tickmode='array',
 		        	  tickfont=dict(size=text_embed_in_chart_size),
