@@ -839,7 +839,6 @@ def htext_businessdata_FinancialSPWise(df_finmetric,df_finmetric_prec,df_finmetr
 
 	return hovertext
 
-
 #---------------Hovertest for BlocksAllocated Ends---------------------	
 
 #processing hovertext for auction data 
@@ -869,13 +868,9 @@ def htext_colormatrix_auctiondata_2010_3G_BWA_BidsCircleWise(dfbidcirclwise, dft
 		for xi,xx in enumerate(dftempheatabs.columns):
 
 			totalbidsagg = dftempheatabs.loc[yy,xx]
-
 			totalbissperc = dftempheatperc.loc[yy,xx]
-
 			totalblksrdend = dfprovallcblks_endrd.loc[yy,xx]
-
 			finalrank = dfbidcirclwiselastrd.loc[yy,xx]
-	
 		
 			if finalrank in [1,2,3,4]:
 				result = "WON"
@@ -912,15 +907,10 @@ def htext_colormatrix_auctiondata_2010_3G_BWA_BidsCircleWise(dfbidcirclwise, dft
 		dict_result[yy]=list_result
 
 	temp = pd.DataFrame(dict_col).T
-
 	temp.columns = dftempheatabs.columns
-
 	resultdf = pd.DataFrame(dict_result).T
-
 	resultdf.columns = dftempheatabs.columns 
-	
 	colormatrix = list(temp.values)
-
 	return hovertext, colormatrix, resultdf
 
 
@@ -970,11 +960,8 @@ def htext_colormatrix_auctiondata_2010_3G_BWA_ProvWinningBid(dfrp, dftemp, pwbty
 		dict_col[yy]=list_col
 
 	temp = pd.DataFrame(dict_col).T
-
 	temp.columns = dftemp.columns
-	
 	colormatrix = list(temp.values)
-
 	return hovertext, colormatrix
 
 #-----------------Hovertext for Provisional Winning Bids Ends----------------------
@@ -988,7 +975,6 @@ def htext_auctiondata_2010_3G_BWA_DemandIntensity(dfbid,ADPrecOfBlksforSale):
 	dfbidaAD = dfbid.pivot(index="LSA", columns='Clock Round', values="Aggregate Demand").sort_index(ascending=True)
 
 	dfbidaED = dfbid.pivot(index="LSA", columns='Clock Round', values="Excess Demand").sort_index(ascending=True)
-
 
 	hovertext = []
 	for yi,yy in enumerate(dfbidaAD.index):
@@ -1244,9 +1230,6 @@ def transform_colscale_for_hbox_auction_map(dff,reserveprice, auctionprice):
 			colormatrix = list(colormatrix.values)
 	return colormatrix
 
-
-
-
 #function for preparing the summary chart 
 def summarychart(summarydf, xcolumn, ycolumn):
 	bar = alt.Chart(summarydf).mark_bar().encode(
@@ -1279,7 +1262,6 @@ def plotrwototal(sumrows, ydim, xdim):
 
 	return fig
 
-
 # function used to calculate the total bid values 
 def bidvalue(df,dfblocks):
 
@@ -1304,7 +1286,6 @@ def bidvalue(df,dfblocks):
 
 	return df_final
 
-
 def plotbiddertotal(dftemp,dfblocksalloc_rdend):
 
 	dftemp = round(dftemp,1)
@@ -1325,8 +1306,6 @@ def plotbiddertotal(dftemp,dfblocksalloc_rdend):
 	fig.update_traces(marker=dict(color='red'))
 
 	return fig
-
-
 
 def plotlosttotal(df,ydim,xdim):
 	fig = px.bar(df, y =ydim, x=xdim, orientation ='h', height = heatmapheight)
@@ -1355,7 +1334,6 @@ def select_round_range(total_rounds):
 
     return min_round, max_round
 #------------------------- debug 30th Mar 2024
-
 
 
 #**********  Main Program Starts here ***************
@@ -1419,7 +1397,6 @@ if selected_dimension == "Spectrum Bands":
 	#loading spectrum excel file
 
 	df = loadspectrumfile()
-
 
 	#processing colorcode excel data tab
 	colcodes = df["ColorCodes"]
@@ -1710,7 +1687,6 @@ if selected_dimension == "Spectrum Bands":
 			hovertext,colormatrix = htext_colmatrix_spec_map_op_hold_share(dfff, selected_operators, operatorlist) #processing hovertext and colormatrix for operatorwise in freqband dim
 			hoverlabel_bgcolor = colormatrix #colormatrix processed from fuction "hovertext_and_colmatrix" for same above
 
-			
 			#Figure data for "Operator %Share"
 			data = [go.Heatmap(
 		      z = dfffshare.values,
@@ -1820,7 +1796,6 @@ if selected_dimension == "Spectrum Bands":
 			chart = summarychart(summarydf, "ExpYears", "TotalMHz")
 			SummaryFlag = True #for ploting the summary chart
 			
-
 			#Figure Data for Expiry Map
 			data = [go.Heatmap(
 			  z = eff.values,
