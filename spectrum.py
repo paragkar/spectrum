@@ -1896,15 +1896,15 @@ def plotbiddertotal(dftemp,dfblocksalloc_rdend):
 	return fig
 
 
-def plotrwototal(sumrows, ydim, xdim):					
-	fig = px.bar(sumrows, y = ydim, x=xdim, orientation ='h', height = heatmapheight)
-	fig.update_layout(xaxis=dict(title='India Total'), yaxis=dict(title=''))
-	fig.update_traces(text=sumrows[xdim], textposition='auto',textfont=dict(size=text_embed_in_chart_size, color='white')) #Debug 12th June 2024 (Changed 14 to 20)
-	fig.update_xaxes(tickvals=[])
-	fig.update_layout(xaxis=dict(side='top', title_standoff=0, ticklen=0, title_font=dict(size=text_embed_in_chart_size))) #Debug 12th June 2024 (Changed 14 to 20)
-	fig.update_layout(xaxis_title_standoff=5) 
-	fig.update_traces(marker=dict(color='red'))
-	return fig
+# def plotrwototal(sumrows, ydim, xdim):					
+# 	fig = px.bar(sumrows, y = ydim, x=xdim, orientation ='h', height = heatmapheight)
+# 	fig.update_layout(xaxis=dict(title='India Total'), yaxis=dict(title=''))
+# 	fig.update_traces(text=sumrows[xdim], textposition='auto',textfont=dict(size=text_embed_in_chart_size, color='white')) #Debug 12th June 2024 (Changed 14 to 20)
+# 	fig.update_xaxes(tickvals=[])
+# 	fig.update_layout(xaxis=dict(side='top', title_standoff=0, ticklen=0, title_font=dict(size=text_embed_in_chart_size))) #Debug 12th June 2024 (Changed 14 to 20)
+# 	fig.update_layout(xaxis_title_standoff=5) 
+# 	fig.update_traces(marker=dict(color='red'))
+# 	return fig
 
 
 
