@@ -3862,8 +3862,8 @@ if selected_dimension == "Auction Data":
 
 
 			sumcols = dftemp.sum(axis=0).reset_index()
-			sumcols.columns = ["LSA", "Slots Selected"]
-			figsumcols = summarychart(sumcols, "LSA", "Slots Selected")
+			sumcols.columns = ["LSA", "Slots Allocated"]
+			figsumcols = summarychart(sumcols, "LSA", "Slots Allocated")
 
 
 			hovertext = htext_auctiondata_2010_3G_BWA_BlocksAllocated(dftemp)
@@ -3971,8 +3971,8 @@ if selected_dimension == "Auction Data":
 
 
 			sumcols = dftemp.sum(axis=0).reset_index()
-			sumcols.columns = ["LSA", "Slots Selected"]
-			figsumcols = summarychart(sumcols, "LSA", "Slots Selected")
+			sumcols.columns = ["LSA", "Slots Allocated"]
+			figsumcols = summarychart(sumcols, "LSA", "Slots Allocated")
 
 			hovertext = htext_auctiondata_2010_3G_BWA_BlocksAllocated(dftemp)
 
