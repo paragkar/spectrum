@@ -3273,26 +3273,9 @@ if selected_dimension == "Auction Data":
 				        return y
 
 				#for rendering text of the final heatmap for Data
-				# dftemp = dftemp.map(int)
+				dfblocksalloc_rdstart = dfblocksalloc_rdstart.map(int)
 				dftemp_comb = dftemp.map(str).combine(dfblocksalloc_rdstart.map(str), lambda x, y: combine_text(x, y)).replace('nan', '', regex = True)
 
-
-				# data = [go.Heatmap(
-				# z=dftempheat.values,
-		        # x=dftempheat.columns,
-		        # y=dftempheat.index,
-				# xgap = 1,
-				# ygap = 1,
-				# hoverinfo ='text',
-				# hovertext = hovertext,
-				# text = df_combined.values,
-				# colorscale="Hot",
-				# showscale=False,
-				# texttemplate="%{text}",
-				# textfont={"size":text_embed_in_chart_size}, #Debug 14th June 2024 (Changed from 12 to 16)
-				# reversescale=True,
-				# ),
-				# ]
 
 
 				data = [go.Heatmap(
