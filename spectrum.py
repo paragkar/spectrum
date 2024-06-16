@@ -3242,7 +3242,7 @@ if selected_dimension == "Auction Data":
 			dfbidpwb = dfbidpwb[filt]
 
 			# dfblocksalloc_rdend = dfbidpwb.reset_index().pivot(index="Bidder", columns='LSA', values="Prov_Alloc_BLK_End_ClkRd")\
-														.sort_index(ascending=False).round(0)
+														# .sort_index(ascending=False).round(0)
 			#Debug 16th June 2024 (added the line dfblocksalloc_rdstart)
 			dfblocksalloc_rdstart = dfbidpwb.reset_index().pivot(index="Bidder", columns='LSA', values="Prov_Alloc_BLK_Start_ClkRd")\
 														.sort_index(ascending=True).round(0)
