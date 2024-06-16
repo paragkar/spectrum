@@ -3238,6 +3238,8 @@ if selected_dimension == "Auction Data":
 
 			dfbidpwb = dfbid.copy()
 
+			st.write(dfbid)
+
 			filt  =(dfbidpwb["Clk_Round"] == round_number) 
 
 			dfbidpwb = dfbidpwb[filt]
