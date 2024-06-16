@@ -1808,7 +1808,7 @@ if selected_dimension == "Spectrum Bands":
 			  colorscale = 'Hot',
 			  showscale = False,
 			    texttemplate="%{z}", 
-			    textfont={"size":10},
+			    textfont={"size":text_embed_in_chart_size},
 			    reversescale=True,
 				)]
 
