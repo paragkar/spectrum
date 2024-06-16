@@ -3697,7 +3697,6 @@ if selected_dimension == "Auction Data":
 
 		dftemp = dfbidblksec.reset_index().pivot(index="Bidder", columns='LSA', values="No_of_BLK_Selected").sort_index(ascending=False).round(0)
 
-
 		sumrows = dftemp.sum(axis=1).reset_index()
 
 		sumrows.columns = ["Bidders", "Total Slots"] 
@@ -3722,6 +3721,8 @@ if selected_dimension == "Auction Data":
 		figsumrows.update_yaxes(visible=False, showticklabels=False)
 
 		figsumrows.update_layout(height = heatmapheight)
+
+		dftemp = dftemp.replace(0, np.nan)
 
 		#----------End-------------
 
@@ -3818,7 +3819,6 @@ if selected_dimension == "Auction Data":
 		col1,col2 = st.columns([stcol1,stcol2]) #create collumns of uneven width
 		col1.plotly_chart(figauc, use_container_width=True)
 		col1.altair_chart(figsumcols, use_container_width=True)
-		col2.markdown("")
 		col2.plotly_chart(figsumrows, use_container_width=True)
 
 
