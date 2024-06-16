@@ -3875,6 +3875,8 @@ if selected_dimension == "Auction Data":
 
 			dftemp = dftemp.sort_index(ascending=True)
 
+			dftemp = dftemp.replace(0, np.nan)
+
 			data = [go.Heatmap(
 					z=dftemp.values,
 			        y= dftemp.index,
