@@ -1351,7 +1351,7 @@ chart_data_flag = False #set this to true only if this chart exists.
 with st.sidebar:
 	selected_dimension = option_menu(
 		menu_title = "Select a Menu",
-		options = ["Spectrum Bands", "Auction Years", "Auction BandWise"], #Debug 14th June 2024
+		options = ["Spectrum Bands", "Auction YearWise", "Auction BandWise"], #Debug 14th June 2024
 		icons = ["1-circle-fill", "2-circle-fill", "3-circle-fill", "4-circle-fill"],
 		menu_icon = "arrow-down-circle-fill",
 		default_index =0,
@@ -5309,7 +5309,7 @@ subfeature_list = ["Reserve Price", "Auction Price", "Auction/Reserve", "Quantum
 "Quantum Sold","Percent Sold", "Quantum Unsold", "Percent Unsold", "Total EMD", "Total Outflow"]
 
 #Processing For Dimension = "Auction Year"
-if selected_dimension == "Auction Years":
+if selected_dimension == "Auction YearWise":
 
 	radio_currency = st.sidebar.radio('Click Currency', ["Rupees", "US Dollars"])
 
@@ -5752,7 +5752,7 @@ if (Feature == "Operator Metric"):
 #---------Dimension = Auction Years Ends ------------------
 
 
-if selected_dimension in ["Spectrum Bands", "Auction Years"]:
+if selected_dimension in ["Spectrum Bands", "Auction YearWise"]:
 
 	#layout for heatmaps 
 
