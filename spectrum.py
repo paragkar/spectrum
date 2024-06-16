@@ -3799,7 +3799,7 @@ if selected_dimension == "Auction Data":
 		  paper_bgcolor=None,
 		  height=heatmapheight, #Debug 14th June 2024 (Changed from 600 to 850)
 		  # width=heatmapwidth,
-		  margin=dict(t=80, b=50, l=50, r=0, pad=0),
+		  margin=dict(t=80, b=50, l=50, r=10, pad=0),
 		  yaxis=dict(
     	  tickmode='array',
     	  tickfont=dict(size=text_embed_in_chart_size),
