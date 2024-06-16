@@ -4023,10 +4023,12 @@ if selected_dimension == "Auction Data":
 				  # width=heatmapwidth,
 				  margin= dict(t=t,b=b,l=l,r=r,pad=pad),
 				  yaxis=dict(
-		        	  tickmode='array'),
+		        	  tickmode='array',
+		        	  tickfont=dict(size=text_embed_in_chart_size),),
 				  xaxis = dict(
 				  side = 'top',
 				  tickmode = 'linear',
+				  tickfont=dict(size=text_embed_in_chart_size),
 				  tickangle=0,
 				  dtick = 1), 
 				)
