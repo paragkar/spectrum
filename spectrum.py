@@ -1806,7 +1806,7 @@ if selected_dimension == "Spectrum Bands":
 			  hoverinfo ='text',
 			  text = hovertext,
 			  colorscale = 'Hot',
-			  showscale = False
+			  showscale = False,
 			    texttemplate="%{z}", 
 			    textfont={"size":10},
 			    reversescale=True,
