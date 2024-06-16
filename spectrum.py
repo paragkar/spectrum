@@ -296,7 +296,7 @@ pad=0
 summarychartheight = 200
 text_embed_in_chart_size = 20
 text_embed_in_hover_size = 16
-plot_row_total_chart_ht_mul = 1.05 #This multiplier aligns the row total chart with the heatmap
+plot_row_total_chart_ht_mul = 1.018 #This multiplier aligns the row total chart with the heatmap
 stcol1 = 9 #Columns for Heatmap
 stcol2 = 1 #Column for row total chart 
 
