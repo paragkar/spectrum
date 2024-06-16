@@ -3266,7 +3266,7 @@ if selected_dimension == "Auction Data":
 
 				def combine_text(x, y): #sep is seperator
 				    if x.notnull().all() and y.notnull().all():
-				        return x + '(<br>)' + y
+				        return x + '<br>' + y
 				    elif x.notnull().all():
 				        return x
 				    else:
