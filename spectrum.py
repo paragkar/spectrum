@@ -1733,10 +1733,12 @@ if selected_dimension == "Spectrum Bands":
 
 			hovertext = htext_expmap_freq_layout(hf)
 
+			#Selecting text to render on heatmap depend on band
 			if Band in [900,1800]:
 				text = ""
 			else:
 				text = "%{z}"
+			
 
 			#Figure Data for Expiry Map
 			data = [go.Heatmap(
