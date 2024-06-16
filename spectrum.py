@@ -2758,7 +2758,7 @@ if selected_dimension == "Auction Data":
 			dftempheat = dftempheat.map(int)
 			df_combined = dftempheat.map(str).combine(resultdf.map(str), lambda x, y: combine_text(x, y))
 
-			st.write(resultdf)
+			st.write(dftempheat)
 
 
 			#------New Code Ends----------------#
