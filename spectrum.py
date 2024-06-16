@@ -1283,7 +1283,7 @@ def plotrwototal(sumrows, ydim, xdim):
 	fig.update_xaxes(tickvals=[])
 	fig.update_yaxes(tickfont=dict(size=text_embed_in_chart_size))  # Change '16' to your desired font size for y-axis tick labels
 	fig.update_layout(xaxis=dict(side='top', title_standoff=0, ticklen=0, title_font=dict(size=text_embed_in_chart_size))) 
-	fig.update_layout(xaxis_title_standoff=0) 
+	fig.update_layout(xaxis_title_standoff=5) 
 	fig.update_traces(marker=dict(color='red'))
 	# Simulate a border by using a larger margin and setting the background color
 	fig.update_layout(
