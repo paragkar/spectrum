@@ -3863,7 +3863,7 @@ if selected_dimension == "Auction Data":
 	
 		col1.write(" ")  # This adds a default small space
 		# Apply padding to the second chart container for horizontal shift
-		col1.markdown('<div style="padding-left: 20px;">', unsafe_allow_html=True)
+		col1.markdown('<div style="padding-left: 40px;">', unsafe_allow_html=True)
 		col1.altair_chart(figsumcols, use_container_width=True)
 		col1.markdown('</div>', unsafe_allow_html=True)
 
