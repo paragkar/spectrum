@@ -1286,7 +1286,7 @@ def plotrwototal(sumrows, ydim, xdim):
 	fig.update_layout(xaxis_title_standoff=0) 
 	fig.update_traces(marker=dict(color='red'))
 	# Adjust margins to reduce unnecessary space
-    fig.update_layout(
+	fig.update_layout(
         margin=dict(l=20, r=20, t=20, b=20)  # Adjust the margins as necessary
     )
 	return fig
