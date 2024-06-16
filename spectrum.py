@@ -2758,8 +2758,6 @@ if selected_dimension == "Auction Data":
 			dftempheat = dftempheat.map(int)
 			df_combined = dftempheat.map(str).combine(resultdf.map(str), lambda x, y: combine_text(x, y))
 
-			st.write(dftempheat)
-
 
 			#------New Code Ends----------------#
 
@@ -3250,10 +3248,9 @@ if selected_dimension == "Auction Data":
 			dfblocksalloc_rdstart = dfbidpwb.reset_index().pivot(index="Bidder", columns='LSA', values="Prov_Alloc_BLK_Start_ClkRd")\
 														.sort_index(ascending=True).round(0)
 
-			st.write(dfblocksalloc_rdstart)
-
-
 			dftemp = dfbidpwb.reset_index().pivot(index="Bidder", columns='LSA', values="PWB_Start_ClkRd").sort_index(ascending=False).round(1)
+
+
 
 			chartoption = st.sidebar.radio('Click an Option', ["Absolute Values", "ReservePrice Multiple"])
 
@@ -3266,6 +3263,20 @@ if selected_dimension == "Auction Data":
 				dftemp = dftemp.sort_index(ascending=True)
 
 				hovertext, colormatrix = htext_colormatrix_auctiondata_2010_3G_BWA_ProvWinningBid(dfrp, dftemp, pwbtype, round_number)
+
+				def combine_text(x, y): #sep is seperator
+			    if x.notnull().all() and y.notnull().all():
+			        return x + '<br>' + y
+			    elif x.notnull().all():
+			        return x
+			    else:
+			        return y
+
+				#for rendering text of the final heatmap for Data
+				dftemp = dftemp.map(int)
+				dftemp = dftemp.map(str).combine(dfblocksalloc_rdstart.map(str), lambda x, y: combine_text(x, y))
+
+				st.wrire(dftemp)
 
 				data = [go.Heatmap(
 				z=dftemp.values,
