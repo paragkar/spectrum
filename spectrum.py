@@ -2703,33 +2703,24 @@ if selected_dimension == "Auction Data":
 		start_round, end_round = select_round_range(totalrounds)
 
 		dfbidcirclwise = dfbid.copy()
-
 		dfbidcirclwise_endrd = dfbidcirclwise[dfbidcirclwise["Clk_Round"]==end_round].reset_index()
-
 		dfprovallcblks_endrd = dfbidcirclwise_endrd.pivot(index="Bidder", columns='LSA', values="Prov_Alloc_BLK_End_ClkRd")
 
 		#filter data within the block of selected rounds 
-
 		filt  =(dfbidcirclwise["Clk_Round"] >= start_round) & (dfbidcirclwise["Clk_Round"] <= end_round)
 
 		dfbidcirclwise = dfbidcirclwise[filt]
-
 		dftemp = dfbidcirclwise.drop(columns=["Possible_Raise_Bid_ClkRd", "Rank_PWB_Start_ClkRd", "Rank_PWB_End_ClkRd",
 									"PWB_End_ClkRd","Clk_Round", "PWB_Start_ClkRd"], axis=1)
 
 		dftemp = dftemp.groupby(["LSA", "Bidder"]).sum().reset_index()
-
 		summarydf = dftemp.groupby(["LSA"]).sum().reset_index().drop(columns = "Bidder", axis =1)
-
 		summarydf = summarydf.set_index("LSA")
-
 		dftemp = dftemp.set_index("LSA")
 
 		#--------- debug 30th March 2024
 
 		# dftemp["Bid_Decision_Perc"] = round((dftemp["Bid_Decision"]/summarydf["Bid_Decision"])*100,1)
-
-
 		# Merge the relevant 'Bid_Decision' from summarydf into dftemp based on 'LSA'
 
 		summarydf = summarydf.reset_index()
@@ -2762,9 +2753,7 @@ if selected_dimension == "Auction Data":
 			circle_list.append(state_dict[circle])
 
 		# sortbylsa = st.sidebar.selectbox("Select a Circle to Sort", state_dict.values())
-
 		sortbylsa = st.sidebar.selectbox("Select a Circle to Sort", circle_list)
-
 		selected_lsa = [k for k, v in state_dict.items() if v == sortbylsa]
 
 		# dftempheat = dftempheat.sort_values(selected_lsa[0], ascending = True)
@@ -2774,11 +2763,9 @@ if selected_dimension == "Auction Data":
 											dftemp,selected_lsa[0],start_round,end_round,dfprovallcblks_endrd)
 
 		hoverlabel_bgcolor = colormatrix
-
 		radio_selection = st.sidebar.radio('Click an Option', ["Absolute Values", "Percentage of Total", "Provisional Winners"])
 
 		if radio_selection == "Absolute Values":
-
 			dftempheat = dftemp.pivot(index="Bidder", columns='LSA', values="Bid_Decision")
 
 			dftempheat = dftempheat.sort_values(selected_lsa[0], ascending = True)
@@ -2790,7 +2777,6 @@ if selected_dimension == "Auction Data":
 			#preparing the summary chart 
 			chart = summarychart(summarydf, 'LSA', "TotalBids")
 			SummaryFlag = True
-
 			titlesubpart2 = " - Total Agg Bids (Within Selected Rounds)"
 
 			#--------New Code Starts------------#
@@ -2806,14 +2792,11 @@ if selected_dimension == "Auction Data":
 			        return y
 
 			#for rendering text of the final heatmap for Data
-
 			dftempheat = dftempheat.map(int)
-
 			df_combined = dftempheat.map(str).combine(resultdf.map(str), lambda x, y: combine_text(x, y))
 
 
 			#------New Code Ends----------------#
-
 
 			data = [go.Heatmap(
 				z=dftempheat.values,
@@ -2861,13 +2844,11 @@ if selected_dimension == "Auction Data":
 
 			#for rendering text of the final heatmap for Data
 
-
 			#-------debug 30th March 2024
 
 			dftempheat = dftempheat.astype(float).apply(lambda x : round(x,1))
 
 			#-------debug 30th March 2024
-
 
 			df_combined = dftempheat.map(str).combine(resultdf.map(str), lambda x, y: combine_text(x," %", y))
 
@@ -2906,7 +2887,6 @@ if selected_dimension == "Auction Data":
 			resultdfheat = resultdf.replace("WON",1)
 
 			resultdfheat = resultdfheat.replace("LOST",0)
-
 
 			titlesubpart2 = " - Provisional Winners (End of Selected Rounds)"
 
@@ -2962,6 +2942,11 @@ if selected_dimension == "Auction Data":
 		figauc.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
 		figauc.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
 		figauc.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=text_embed_in_hover_size, color='white')))
+
+		figauc.update_layout(
+		    margin=dict(l=40, r=40, t=40, b=40),  # Adjust left, right, top, and bottom margins as needed
+		    plot_bgcolor='white'  # Ensuring the background is white (or another color) might help in visualizing the border
+		)
 
 
 		#Plotting Provisional Winners Charts 
