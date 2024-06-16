@@ -1269,7 +1269,7 @@ def summarychart(summarydf, xcolumn, ycolumn):
 
 #function for preparing the chart for row total
 def plotrwototal(sumrows, ydim, xdim):
-	fig = px.bar(sumrows, y = ydim, x=xdim, orientation ='h', height = heatmapheight*1.1)
+	fig = px.bar(sumrows, y = ydim, x=xdim, orientation ='h', height = heatmapheight*1.01)
 	fig.update_layout(xaxis=dict(title='India Total'), yaxis=dict(title=''))
 	fig.update_traces(text=sumrows[xdim], textposition='auto',textfont=dict(size=text_embed_in_chart_size, color='white')) #Debug 12th June 2024 (Changed 14 to 20)
 	fig.update_xaxes(tickvals=[])
