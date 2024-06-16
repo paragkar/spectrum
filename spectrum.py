@@ -3393,7 +3393,7 @@ if selected_dimension == "Auction Data":
 				  paper_bgcolor=None,
 				  height=heatmapheight, #Debug 14th June 2024 (Changed from 600 to 850)
 				  # width=heatmapwidth,
-				  margin=dict(t=80, b=50, l=10, r=10, pad=0),
+				  margin= dict(t=t,b=b,l=l,r=r,pad=pad),
 				  yaxis=dict(
 		        	  tickmode='array',
 		        	  tickfont=dict(size=text_embed_in_chart_size),
@@ -3563,7 +3563,7 @@ if selected_dimension == "Auction Data":
 				  paper_bgcolor=None,
 				  height=heatmapheight, #Debug 14th June 2024 (Changed from 600 to 850)
 				  # width=heatmapwidth,
-				  margin=dict(t=80, b=50, l=0, r=0, pad=0),
+				  margin= dict(t=t,b=b,l=l,r=r,pad=pad),
 				  yaxis=dict(
 		        	  tickmode='array',
 		        	  tickfont=dict(size=text_embed_in_chart_size),
@@ -3646,7 +3646,7 @@ if selected_dimension == "Auction Data":
 				  paper_bgcolor=None,
 				  height=heatmapheight, #Debug 14th June 2024 (Changed from 600 to 850)
 				  # width=heatmapwidth,
-				  margin=dict(t=80, b=50, l=50, r=0, pad=0),
+				  margin= dict(t=t,b=b,l=l,r=r,pad=pad),
 				  yaxis=dict(
 		        	  tickmode='array',
 		        	  tickfont=dict(size=text_embed_in_chart_size),
@@ -3807,7 +3807,7 @@ if selected_dimension == "Auction Data":
 		  paper_bgcolor=None,
 		  height=heatmapheight, #Debug 14th June 2024 (Changed from 600 to 850)
 		  # width=heatmapwidth,
-		  margin=dict(t=80, b=50, l=50, r=10, pad=0),
+		  margin= dict(t=t,b=b,l=l,r=r,pad=pad),
 		  yaxis=dict(
     	  tickmode='array',
     	  tickfont=dict(size=text_embed_in_chart_size),
@@ -3954,7 +3954,7 @@ if selected_dimension == "Auction Data":
 				  paper_bgcolor=None,
 				  height=heatmapheight, #Debug 14th June 2024 (Changed from 600 to 850)
 				  # width=heatmapwidth,
-				  margin=dict(t=80, b=50, l=0, r=0, pad=0),
+				  margin= dict(t=t,b=b,l=l,r=r,pad=pad),
 				  yaxis=dict(
 		        	  tickmode='array'),
 				  xaxis = dict(
@@ -4067,7 +4067,7 @@ if selected_dimension == "Auction Data":
 				  paper_bgcolor=None,
 				  height=heatmapheight, #Debug 14th June 2024 (Changed from 600 to 850)
 				  # width=heatmapwidth,
-				  margin=dict(t=80, b=50, l=0, r=0, pad=0),
+				  margin= dict(t=t,b=b,l=l,r=r,pad=pad),
 				  yaxis=dict(
 		        	  tickmode='array'),
 				  xaxis = dict(
@@ -4198,7 +4198,7 @@ if selected_dimension == "Auction Data":
 			  paper_bgcolor=None,
 			  height=heatmapheight, #Debug 14th June 2024 (Changed from 600 to 850)
 			  width=heatmapwidth,
-			  margin=dict(t=80, b=50, l=50, r=0, pad=0),
+			  margin= dict(t=t,b=b,l=l,r=r,pad=pad),
 			  yaxis=dict(
 	        	  tickmode='array'),
 			  xaxis = dict(
@@ -4228,7 +4228,7 @@ if selected_dimension == "Auction Data":
 			  paper_bgcolor=None,
 			  height=heatmapheight, #Debug 14th June 2024 (Changed from 600 to 850)
 			  width=heatmapwidth,
-			  margin=dict(t=80, b=50, l=50, r=0, pad=0),
+			  margin= dict(t=t,b=b,l=l,r=r,pad=pad),
 			  yaxis=dict(
 	        	  tickmode='array'),
 			  xaxis = dict(
@@ -4331,7 +4331,7 @@ if selected_dimension == "Auction Data":
 			  paper_bgcolor=None,
 			  height=heatmapheight, #Debug 14th June 2024 (Changed from 600 to 850)
 			  width=heatmapwidth,
-			  margin=dict(t=80, b=50, l=50, r=0, pad=0),
+			  margin= dict(t=t,b=b,l=l,r=r,pad=pad),
 			  yaxis=dict(
 	        	  tickmode='array'),
 			  xaxis = dict(
@@ -4361,7 +4361,7 @@ if selected_dimension == "Auction Data":
 			  paper_bgcolor=None,
 			  height=heatmapheight, #Debug 14th June 2024 (Changed from 600 to 850)
 			  width=heatmapwidth,
-			  margin=dict(t=80, b=50, l=50, r=0, pad=0),
+			  margin= dict(t=t,b=b,l=l,r=r,pad=pad),
 			  yaxis=dict(
 	        	  tickmode='array'),
 			  xaxis = dict(
@@ -4463,7 +4463,7 @@ if selected_dimension == "Auction Data":
 			  paper_bgcolor=None,
 			  height=heatmapheight, #Debug 14th June 2024 (Changed from 600 to 850)
 			  width=heatmapwidth,
-			  margin=dict(t=80, b=50, l=50, r=0, pad=0),
+			  margin= dict(t=t,b=b,l=l,r=r,pad=pad),
 			  yaxis=dict(
         	  tickmode='array',
         	  tickfont=dict(size=text_embed_in_chart_size),
@@ -4497,7 +4497,7 @@ if selected_dimension == "Auction Data":
 			  paper_bgcolor=None,
 			  height=heatmapheight, #Debug 14th June 2024 (Changed from 600 to 850)
 			  width=heatmapwidth,
-			  margin=dict(t=80, b=50, l=50, r=0, pad=0),
+			  margin= dict(t=t,b=b,l=l,r=r,pad=pad),
 			  yaxis=dict(
         	  tickmode='array',
         	  tickfont=dict(size=text_embed_in_chart_size),
@@ -4576,7 +4576,7 @@ if selected_dimension == "Auction Data":
 			  paper_bgcolor=None,
 			  height=heatmapheight, #Debug 14th June 2024 (Changed from 600 to 850)
 			  width=heatmapwidth,
-			  margin=dict(t=80, b=50, l=50, r=0, pad=0),
+			  margin= dict(t=t,b=b,l=l,r=r,pad=pad),
 			  yaxis=dict(
         	  tickmode='array',
         	  tickfont=dict(size=text_embed_in_chart_size),
@@ -4680,7 +4680,7 @@ if selected_dimension == "Auction Data":
 			  paper_bgcolor=None,
 			  height=heatmapheight, #Debug 14th June 2024 (Changed from 600 to 850)
 			  width=heatmapwidth,
-			  margin=dict(t=80, b=50, l=0, r=0, pad=0),
+			  margin= dict(t=t,b=b,l=l,r=r,pad=pad),
 			  yaxis=dict(
         	  tickmode='array',
         	  tickfont=dict(size=text_embed_in_chart_size),
@@ -4825,7 +4825,7 @@ if selected_dimension == "Auction Data":
 			  paper_bgcolor=None,
 			  height=heatmapheight, #Debug 14th June 2024 (Changed from 600 to 850)
 			  width=heatmapwidth,
-			  margin=dict(t=80, b=50, l=0, r=0, pad=0),
+			  margin= dict(t=t,b=b,l=l,r=r,pad=pad),
 			  yaxis=dict(
         	  tickmode='array',
         	  tickfont=dict(size=text_embed_in_chart_size),
@@ -4850,7 +4850,7 @@ if selected_dimension == "Auction Data":
 			  paper_bgcolor=None,
 			  height=heatmapheight, #Debug 14th June 2024 (Changed from 600 to 850)
 			  width=heatmapwidth,
-			  margin=dict(t=80, b=50, l=0, r=0, pad=0),
+			  margin= dict(t=t,b=b,l=l,r=r,pad=pad),
 			  yaxis=dict(
         	  tickmode='array',
         	  tickfont=dict(size=text_embed_in_chart_size),
@@ -4959,7 +4959,7 @@ if selected_dimension == "Auction Data":
 			  paper_bgcolor=None,
 			  height=heatmapheight, #Debug 14th June 2024 (Changed from 600 to 850)
 			  width=heatmapwidth,
-			  margin=dict(t=80, b=50, l=50, r=0, pad=0),
+			  margin= dict(t=t,b=b,l=l,r=r,pad=pad),
 			  yaxis=dict(
         	  tickmode='array',
         	  tickfont=dict(size=text_embed_in_chart_size),
@@ -5113,7 +5113,7 @@ if selected_dimension == "Auction Data":
 			  paper_bgcolor=None,
 			  height=heatmapheight, #Debug 14th June 2024 (Changed from 600 to 850)
 			  width=heatmapwidth,
-			  margin=dict(t=80, b=50, l=50, r=0, pad=0),
+			  margin= dict(t=t,b=b,l=l,r=r,pad=pad),
 			  yaxis=dict(
         	  tickmode='array',
         	  tickfont=dict(size=text_embed_in_chart_size),
@@ -5137,7 +5137,7 @@ if selected_dimension == "Auction Data":
 			  paper_bgcolor=None,
 			  height=heatmapheight, #Debug 14th June 2024 (Changed from 600 to 850)
 			  width=heatmapwidth,
-			  margin=dict(t=80, b=50, l=50, r=0, pad=0),
+			  margin= dict(t=t,b=b,l=l,r=r,pad=pad),
 			  yaxis=dict(
         	  tickmode='array',
         	  tickfont=dict(size=text_embed_in_chart_size),
@@ -5383,7 +5383,7 @@ if selected_dimension == "Auction Data":
 			  paper_bgcolor=None,
 			  height=heatmapheight, #Debug 14th June 2024 (Changed from 600 to 850)
 			  width=heatmapwidth,
-			  margin=dict(t=80, b=50, l=0, r=0, pad=0),
+			  margin= dict(t=t,b=b,l=l,r=r,pad=pad),
 			  yaxis=dict(
         	  tickmode='array',
         	  tickfont=dict(size=text_embed_in_chart_size),
@@ -5407,7 +5407,7 @@ if selected_dimension == "Auction Data":
 			  paper_bgcolor=None,
 			  height=heatmapheight, #Debug 14th June 2024 (Changed from 600 to 850)
 			  width=heatmapwidth,
-			  margin=dict(t=80, b=50, l=0, r=0, pad=0),
+			  margin= dict(t=t,b=b,l=l,r=r,pad=pad),
 			  yaxis=dict(
         	  tickmode='array',
         	  tickfont=dict(size=text_embed_in_chart_size),
@@ -5946,7 +5946,7 @@ if selected_dimension in ["Spectrum Bands", "Auction Years"]:
     paper_bgcolor=None,
     height=heatmapheight, #Changing this will adjust the height of all heat maps
     width=heatmapwidth, #Changing this will adjust the witdth of all heat maps
-    margin=dict(t=80, b=50, l=50, r=0, pad=0),
+    margin= dict(t=t,b=b,l=l,r=r,pad=pad),
     yaxis=dict(
         tickmode='array',
         tickfont=dict(size=text_embed_in_chart_size),
