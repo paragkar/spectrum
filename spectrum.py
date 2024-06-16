@@ -2479,6 +2479,21 @@ features = {
  
 }
 
+def get_value(feature_dict, feature_key, var_name):
+    """
+    Retrieves a value from a nested dictionary using the variable name as the key.
+    
+    Args:
+    - feature_dict (dict): The main dictionary containing feature data.
+    - feature_key (str): The key to access the specific feature data.
+    - var_name (str): The variable name used as the key in the nested dictionary.
+    
+    Returns:
+    - The value from the nested dictionary or 'Key not found' if the key does not exist.
+    """
+    return feature_dict.get(feature_key, {}).get(var_name, "Key not found")
+
+
 if selected_dimension == "Auction BandWise":
 
 	currency_flag = True #default 
@@ -2486,8 +2501,9 @@ if selected_dimension == "Auction BandWise":
 	Feature = st.sidebar.selectbox("Select a Feature", year_band) #Debug 10th June 2024
 
 	if Feature in features:
-		f = features[Feature]
-		st.write(f["totalrounds"])  # Corrected to use string key
+		# Assuming 'totalrounds' is used elsewhere in your code and you want to use it directly
+	    totalrounds = get_value(features, Feature, 'totalrounds')
+	    st.write(totalrounds)  # This line uses the variable directly as before
 
 	# if Feature == "2022-Band26000":
 	# 	totalrounds = 40
