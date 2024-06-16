@@ -632,13 +632,9 @@ def htext_auctionmap(dff):
 @st.cache_resource
 def htext_colmatrix_spec_map_op_hold_share(dfff, selected_operators, operatorlist):
 
-
 	operators_to_process = list(dfff.columns)
-
 	dfffcopy =dfff.copy()
-	
 	dfffcopy["Total"] = dfffcopy.sum(axis=1)
-		
 	lst =[]
 
 	dfffshare = pd.DataFrame()
@@ -650,7 +646,6 @@ def htext_colmatrix_spec_map_op_hold_share(dfff, selected_operators, operatorlis
 	for col in dfffshare.columns:
 		dfffshare.rename(columns = {col:col[:-1]}, inplace = True) #stripping the last digit "1"
 
-	
 	hovertext=[]
 	lst = []
 	for yi, yy in enumerate(dfffshare.index):
@@ -826,8 +821,6 @@ def htext_businessdata_FinancialSPWise(df_finmetric,df_finmetric_prec,df_finmetr
 			percentoftotal = df_finmetric_prec.loc[yy,xx]
 			increments = df_finmetricINC.loc[yy,xx]
 
-
-
 			hovertext[-1].append(
 					    'Bidder: {}\
 					    <br>Date: {}\
@@ -860,13 +853,9 @@ def htext_colormatrix_auctiondata_2010_3G_BWA_BidsCircleWise(dfbidcirclwise, dft
 		"Possible_Raise_Bid_ClkRd","Bid_Decision","PWB_End_ClkRd"], axis =1).reset_index()
 
 	dfbidcirclwiselastrd = dfbidcirclwiselastrd.pivot(index="Bidder", columns='LSA', values="Rank_PWB_End_ClkRd").sort_index(ascending=False)
-
 	dftempheatperc = dftemp.pivot(index="Bidder", columns='LSA', values="Bid_Decision_Perc")
-
 	dftempheatperc = dftempheatperc.sort_values(selected_lsa, ascending = True)
-
 	dftempheatabs = dftemp.pivot(index="Bidder", columns='LSA', values="Bid_Decision")
-
 	dftempheatabs = dftempheatabs.sort_values(selected_lsa, ascending = True)
 
 
@@ -942,7 +931,6 @@ def htext_colormatrix_auctiondata_2010_3G_BWA_ProvWinningBid(dfrp, dftemp, pwbty
 
 
 	dftemp = dftemp.sort_index(ascending=True)
-
 	dftemprpmul = round(dftemp/dfrp.values,1)
 
 	hovertext = []
@@ -954,8 +942,6 @@ def htext_colormatrix_auctiondata_2010_3G_BWA_ProvWinningBid(dfrp, dftemp, pwbty
 
 			pwb = dftemp.loc[yy,xx]
 			pwbmulofrp = dftemprpmul.loc[yy,xx]
-
-
 			if str(pwb)  == "nan":
 				ccode = '#808080' #(grey)
 			else:
@@ -984,7 +970,6 @@ def htext_colormatrix_auctiondata_2010_3G_BWA_ProvWinningBid(dfrp, dftemp, pwbty
 		dict_col[yy]=list_col
 
 	temp = pd.DataFrame(dict_col).T
-
 
 	temp.columns = dftemp.columns
 	
@@ -1070,7 +1055,6 @@ def htext_auctiondata_2010_3G_BWA_BiddingActivity(dfbid, column_name):
 					    <br>Points in Play : {} Nos\
 					    <br>Ratio (Actual/Initial) : {}'
 				
-
 				     .format( 
 					    yy,
 					    xx,
@@ -2813,6 +2797,8 @@ if selected_dimension == "Auction Data":
 				text = df_combined.values,
 				colorscale="Hot",
 				showscale=False,
+				plot_bgcolor='#D2B48C',  # Background color for the plot area light pink
+			    paper_bgcolor='white',  # Background color for the entire figure
 				texttemplate="%{text}",
 				textfont={"size":text_embed_in_chart_size}, #Debug 14th June 2024 (Changed from 12 to 16)
 				reversescale=True,
