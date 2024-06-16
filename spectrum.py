@@ -2921,7 +2921,7 @@ if selected_dimension == "Auction Data":
 		    template="seaborn",
 		    xaxis_side= 'top',
 		   	height = heatmapheight, #Debug 14th June 2024 (Changed from 650 to 850)
-		   	margin=dict(l=0, r=20, t=20, b=20),
+		   	margin= dict(t=t,b=b,l=l,r=r,pad=pad),
 		   	plot_bgcolor='white',
 		   	yaxis=dict(
 	        tickmode='array',
