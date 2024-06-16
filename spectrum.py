@@ -2497,30 +2497,30 @@ if selected_dimension == "Auction BandWise":
 
 	currency_flag = True #default 
 
-	Feature = st.sidebar.selectbox("Select a Feature", year_band) #Debug 10th June 2024
+	SelectedFeature = st.sidebar.selectbox("Select a Feature", year_band) #Debug 10th June 2024
 
 #New Block Code Starts --------
-	if Feature in Auction_Year_Band_Features:
+	if SelectedFeature in Auction_Year_Band_Features:
 
-		totalrounds = get_value(features, Feature, 'totalrounds')
-		mainsheet = get_value(features, Feature, 'mainsheet')
-		mainsheetoriginal = get_value(features, Feature, 'mainsheetoriginal')
-		mainoriflag = get_value(features, Feature, 'mainoriflag')
-		activitysheet = get_value(features, Feature, 'activitysheet')
-		demandsheet = get_value(features, Feature, 'demandsheet')
-		titlesubpart = get_value(features, Feature, 'titlesubpart')
-		subtitlesubpartbidactivity = get_value(features, Feature, 'subtitlesubpartbidactivity')
-		year = get_value(features, Feature, 'year')
-		band = get_value(features, Feature, 'band')
-		xdtick = get_value(features, Feature, 'xdtick')
-		zmin = get_value(features, Feature, 'zmin')
-		zmax = get_value(features, Feature, 'zmax')
-		zmin_af = get_value(features, Feature, 'zmin_af')
-		zmax_af = get_value(features, Feature, 'zmax_af')
-		texttempbiddemandactivity = get_value(features, Feature, 'texttempbiddemandactivity')
-		blocksize = get_value(features, Feature, 'blocksize')
-		zmin_blk_sec = get_value(features, Feature, 'zmin_blk_sec')
-		zmax_blk_sec = get_value(features, Feature, 'zmax_blk_sec')
+		totalrounds = get_value(Auction_Year_Band_Features, SelectedFeature, 'totalrounds')
+		mainsheet = get_value(Auction_Year_Band_Features, SelectedFeature, 'mainsheet')
+		mainsheetoriginal = get_value(Auction_Year_Band_Features, SelectedFeature, 'mainsheetoriginal')
+		mainoriflag = get_value(Auction_Year_Band_Features, SelectedFeature, 'mainoriflag')
+		activitysheet = get_value(Auction_Year_Band_Features, SelectedFeature, 'activitysheet')
+		demandsheet = get_value(Auction_Year_Band_Features, SelectedFeature, 'demandsheet')
+		titlesubpart = get_value(Auction_Year_Band_Features, SelectedFeature, 'titlesubpart')
+		subtitlesubpartbidactivity = get_value(Auction_Year_Band_Features, SelectedFeature, 'subtitlesubpartbidactivity')
+		year = get_value(Auction_Year_Band_Features, SelectedFeature, 'year')
+		band = get_value(Auction_Year_Band_Features, SelectedFeature, 'band')
+		xdtick = get_value(Auction_Year_Band_Features, SelectedFeature, 'xdtick')
+		zmin = get_value(Auction_Year_Band_Features, SelectedFeature, 'zmin')
+		zmax = get_value(Auction_Year_Band_Features, SelectedFeature, 'zmax')
+		zmin_af = get_value(Auction_Year_Band_Features, SelectedFeature, 'zmin_af')
+		zmax_af = get_value(Auction_Year_Band_Features, SelectedFeature, 'zmax_af')
+		texttempbiddemandactivity = get_value(Auction_Year_Band_Features, SelectedFeature, 'texttempbiddemandactivity')
+		blocksize = get_value(Auction_Year_Band_Features, SelectedFeature, 'blocksize')
+		zmin_blk_sec = get_value(Auction_Year_Band_Features, SelectedFeature, 'zmin_blk_sec')
+		zmax_blk_sec = get_value(Auction_Year_Band_Features, SelectedFeature, 'zmax_blk_sec')
 
 #New Block Code Ends-------------
 	    
