@@ -3265,12 +3265,12 @@ if selected_dimension == "Auction Data":
 				hovertext, colormatrix = htext_colormatrix_auctiondata_2010_3G_BWA_ProvWinningBid(dfrp, dftemp, pwbtype, round_number)
 
 				def combine_text(x, y): #sep is seperator
-			    if x.notnull().all() and y.notnull().all():
-			        return x + '<br>' + y
-			    elif x.notnull().all():
-			        return x
-			    else:
-			        return y
+				    if x.notnull().all() and y.notnull().all():
+				        return x + '<br>' + y
+				    elif x.notnull().all():
+				        return x
+				    else:
+				        return y
 
 				#for rendering text of the final heatmap for Data
 				dftemp = dftemp.map(int)
