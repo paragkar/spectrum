@@ -1274,6 +1274,7 @@ def plotrwototal(sumrows, ydim, xdim):
 	fig.update_layout(xaxis=dict(title='India Total'), yaxis=dict(title=''))
 	fig.update_traces(text=sumrows[xdim], textposition='auto',textfont=dict(size=text_embed_in_chart_size, color='white')) #Debug 12th June 2024 (Changed 14 to 20)
 	fig.update_xaxes(tickvals=[])
+	fig.update_yaxes(tickfont=dict(size=16))  # Change '16' to your desired font size for y-axis tick labels
 	fig.update_layout(xaxis=dict(side='top', title_standoff=0, ticklen=0, title_font=dict(size=text_embed_in_chart_size))) #Debug 12th June 2024 (Changed 14 to 20)
 	fig.update_layout(xaxis_title_standoff=0) 
 	fig.update_traces(marker=dict(color='red'))
