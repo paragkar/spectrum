@@ -3664,19 +3664,15 @@ if selected_dimension == "Auction Data":
 			#----------------Start-------------------
 
 			if chartoption == "ReservePrice Multiple":
-				# st.plotly_chart(figauc, use_container_width=True)
-
 				col1,col2 = st.columns([stcol1,stcol2]) #create collumns of uneven width
 				col1.plotly_chart(figauc, use_container_width=True)
 				col2.markdown("")
 				col2.plotly_chart(figpanindiabids, use_container_width=True)
-
-
 			#----------------End--------------------
 
 			#plotting the final summary chart 
-				if SummaryFlag ==True:
-					col1.altair_chart(chart, use_container_width=True)
+				# if SummaryFlag ==True:
+			ol1.altair_chart(chart, use_container_width=True)
 
 
 
