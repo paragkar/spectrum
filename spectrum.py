@@ -1734,7 +1734,7 @@ if selected_dimension == "Spectrum Bands":
 			hovertext = htext_expmap_freq_layout(hf)
 
 			#Selecting text to render on heatmap depend on band
-			if Band in [900,1800, 2600]:
+			if Band in [900,1800, 26000, 3500]:
 				text = ""
 			else:
 				text = "%{z}"
