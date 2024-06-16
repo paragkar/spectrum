@@ -1280,7 +1280,7 @@ def plotrwototal(sumrows, ydim, xdim):
 	fig = px.bar(sumrows, y = ydim, x=xdim, orientation ='h', height = heatmapheight*plot_row_total_chart_ht_mul)
 	fig.update_layout(xaxis=dict(title='India Total',side='top', title_standoff=0, ticklen=0,title_font=dict(size=text_embed_in_chart_size)), 
 		yaxis=dict(title='', showticklabels=True))
-	fig.update_traces(text=sumrows[xdim], textposition='auto',textfont=dict(size=text_embed_in_chart_size, color='white')) 
+	fig.update_traces(text=sumrows[xdim], textposition='inside',textfont=dict(size=text_embed_in_chart_size, color='white')) 
 	fig.update_xaxes(tickvals=[])
 	fig.update_yaxes(tickfont=dict(size=text_embed_in_chart_size))  # Change '16' to your desired font size for y-axis tick labels
 	fig.update_layout(xaxis=dict(side='top', title_standoff=0, ticklen=0, title_font=dict(size=text_embed_in_chart_size))) 
