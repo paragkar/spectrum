@@ -3744,7 +3744,7 @@ if selected_dimension == "Auction Data":
 
 		sumrows = dftemp.sum(axis=1).reset_index()
 
-		sumrows.columns = ["Bidders", "Total Slots"]
+		sumrows.columns = ["Bidders", "Total Slots "] #Gap in 2nd col is provided astetics purpose 
 
 		#Reverse the order of the daraframe 
 
@@ -3755,7 +3755,7 @@ if selected_dimension == "Auction Data":
 		sumcols.columns = ["LSA", "Total Slots"]
 
 
-		figsumcols = summarychart(sumcols, "LSA", "Total Slots")
+		figsumcols = summarychart(sumcols, "LSA", "Total Slots ") #Gap in 2nd col is provided astetics purpose 
 
 		#debug 10th June 2024
 
