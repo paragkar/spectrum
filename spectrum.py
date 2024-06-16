@@ -3672,7 +3672,7 @@ if selected_dimension == "Auction Data":
 
 			#plotting the final summary chart 
 				# if SummaryFlag ==True:
-			ol1.altair_chart(chart, use_container_width=True)
+				col1.altair_chart(chart, use_container_width=True)
 
 
 
