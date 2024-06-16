@@ -2502,8 +2502,8 @@ if selected_dimension == "Auction BandWise":
 
 	if Feature in features:
 		# Assuming 'totalrounds' is used elsewhere in your code and you want to use it directly
-	    totalrounds = get_value(features, Feature, 'totalrounds')
-	    st.write(totalrounds)  # This line uses the variable directly as before
+	    mainsheet = get_value(features, Feature, 'mainsheet')
+	    st.write(mainsheet)  # This line uses the variable directly as before
 
 	# if Feature == "2022-Band26000":
 	# 	totalrounds = 40
