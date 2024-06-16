@@ -3711,23 +3711,13 @@ if selected_dimension == "Auction Data":
 		# Generate a list of all round numbers
 		round_numbers = list(range(1, totalrounds + 1))
 
-		# Create a select box for round numbers
-		# round_number = st.sidebar.selectbox("Select Auction Round Number", round_numbers)
-
-		#debug 9th June 2024
-
 		round_number = st.sidebar.number_input("Select Auction Round Number"+";Total Rounds= "+str(max(round_numbers)), min_value=min(round_numbers), max_value=max(round_numbers), value=1, step=1)
-
-
-		# round_number = st.slider("Select Auction Round Numbers using the Silder below", min_value=1, max_value=totalrounds, step=1, value = totalrounds)
 
 		dfbidblksec = dfbid.copy()
 
 		filt  =(dfbidblksec["Clk_Round"] == round_number) 
 
 		dfbidblksec = dfbidblksec[filt]
-
-		# dftemp = dfbidblksec.groupby(["LSA", "Bidder", "No_of_BLK_Selected"]).sum().reset_index()
 
 		dftemp = dfbidblksec.reset_index().pivot(index="Bidder", columns='LSA', values="No_of_BLK_Selected").sort_index(ascending=False).round(0)
 
