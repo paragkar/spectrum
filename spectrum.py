@@ -1259,9 +1259,10 @@ def transform_colscale_for_hbox_auction_map(dff,reserveprice, auctionprice):
 #function for preparing the summary chart 
 def summarychart(summarydf, xcolumn, ycolumn):
 	bar = alt.Chart(summarydf).mark_bar().encode(
-	y = alt.Y(ycolumn+':Q', axis=alt.Axis(labels=False)),
+	y = alt.Y(ycolumn+':Q', axis=alt.Axis(labels=False, labelAngle=0)),
 	x = alt.X(xcolumn+':O', axis=alt.Axis(labels=True, labelAngle=0, labelFontSize=text_embed_in_chart_size)), #Debug 12th June 2024 (Changed False to True)
 	color = alt.Color(xcolumn+':N', legend=None))
+
 	text = bar.mark_text(size = text_embed_in_chart_size, dx=0, dy=-7, color = 'white').encode(text=ycolumn+':Q') #Debug 12th June 2024 (Chnaged Bar Text Sixe from 10 to 16)
 	chart = (bar + text).properties(width=heatmapwidth, height =summarychartheight)
 	chart = chart.configure_title(fontSize = text_embed_in_chart_size, font ='Arial', anchor = 'middle', color ='black')
