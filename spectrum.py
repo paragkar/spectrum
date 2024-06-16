@@ -3659,6 +3659,10 @@ if selected_dimension == "Auction Data":
 				col2.markdown("")
 				col2.plotly_chart(figpanindiabids, use_container_width=True)
 
+			#plotting the final summary chart 
+			if SummaryFlag ==True:
+				col1.altair_chart(chart, use_container_width=True)
+
 			#Debug 12th June 2024
 
 			#----------------Start-------------------
@@ -3671,8 +3675,8 @@ if selected_dimension == "Auction Data":
 			#----------------End--------------------
 
 			#plotting the final summary chart 
-				# if SummaryFlag ==True:
-				col1.altair_chart(chart, use_container_width=True)
+				if SummaryFlag ==True:
+					col1.altair_chart(chart, use_container_width=True)
 
 
 
