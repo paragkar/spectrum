@@ -4577,35 +4577,20 @@ if selected_dimension == "Auction Data":
 		if optiontype == "Points Lost":
 
 			filt = dfbidactivity["Clk_Round"]==1 
-
 			dfbidactivityRd1 = dfbidactivity[filt] 
-
 			dfbidactivityRd1 = dfbidactivityRd1.pivot(index="Bidder", columns='Clk_Round', values="Pts_Start_Round").sort_index(ascending=True) 
-
 			dfbidactivity = dfbidactivity.pivot(index="Bidder", columns='Clk_Round', values="Points_Lost").sort_index(ascending=True)
-
 			totalpointslost = dfbidactivity.sum(axis=1).reset_index() 
-
 			totalpointslost.columns = ["Bidder", "Points Lost"]
-
 			totalpointslost = totalpointslost.set_index("Bidder").sort_index(ascending=True)
-
 			totalpointslostperc = round((totalpointslost/dfbidactivityRd1.values)*100,1).sort_index(ascending=False).reset_index()
-
 			dfbidactivityperc = round((dfbidactivity/dfbidactivityRd1.values)*100,1) # % of points lost with respect to the initial awarded
-
 			totalpointslost = totalpointslost.sort_index(ascending=False)
-
 			totalpointslostperc.columns = ["Bidder", "% Pts Lost"]
-
 			totalpointslost = totalpointslost.reset_index()
-
 			figptslostabs = plotlosttotal(totalpointslost, "Bidder", "Points Lost")
-
 			figptslostabs.update_yaxes(visible=False, showticklabels=False)
-
 			figptslostperc = plotlosttotal(totalpointslostperc, "Bidder", "% Pts Lost")
-
 			figptslostperc.update_yaxes(visible=False, showticklabels=False)
 
 			hovertext = htext_auctiondata_2010_3G_BWA_PointsLost(dfbidactivity, dfbidactivityperc)
