@@ -1287,7 +1287,7 @@ def plotrwototal(sumrows, ydim, xdim):
 	fig.update_traces(marker=dict(color='red'))
 	# Simulate a border by using a larger margin and setting the background color
 	fig.update_layout(
-        margin=dict(t=80, b=80, l=0, r=20, pad=4),  # Adjust margins if necessary
+        margin=dict(t=80, b=60, l=0, r=20, pad=4),  # Adjust margins if necessary
         paper_bgcolor='yellow',  # Outer color
         plot_bgcolor='white',  # Inner color simulates the border
     )
