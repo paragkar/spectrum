@@ -3752,10 +3752,10 @@ if selected_dimension == "Auction Data":
 
 		sumcols = dftemp.sum(axis=0).reset_index()
 
-		sumcols.columns = ["LSA", "Total Slots  "] #Gap in 2nd col is provided astetics purpose 
+		sumcols.columns = ["LSA", "Total Slots For Sale"] #Gap in 2nd col is provided astetics purpose 
 
 
-		figsumcols = summarychart(sumcols, "LSA", "Total Slots  ") #Gap in 2nd col is provided astetics purpose 
+		figsumcols = summarychart(sumcols, "LSA", "Total Slots For Sale") #Gap in 2nd col is provided astetics purpose 
 
 		#debug 10th June 2024
 
