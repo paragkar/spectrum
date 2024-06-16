@@ -5331,7 +5331,7 @@ if selected_dimension == "Auction YearWise":
 	df1 = masterdf[masterdf["Auction Year"]==Year]
 	df1 = df1.set_index("Circle")
 
-	Feature = st.sidebar.selectbox('Select a Feature',["Band Details", "Operator Details"])
+	Feature = st.sidebar.selectbox('Select a Feature',["Band Details", "Bidder Details"])
 
 
 	if Feature == "Band Details":
@@ -5445,7 +5445,7 @@ if selected_dimension == "Auction YearWise":
 		hoverlabel_bgcolor = colormatrix #colormatrix processed from fuction "hovertext_and_colmatrix" for same above
 
 
-	if Feature == "Operator Details": #for the dimension "Auction Years"
+	if Feature == "Bidder Details": #for the dimension "Auction Years"
 		df1 = df1.reset_index()
 		df2_temp1 = df1.copy()
 
@@ -5727,7 +5727,7 @@ if (Feature == "Band Details"):
 	subtitle = SubFeature+"; Unit -"+units_dict[SubFeature]+"; "+ "Selected Operators -" + ', '.join(selected_operators)+ partsubtitle+"; Source - DOT"
 
 	
-if (Feature == "Operator Details"):
+if (Feature == "Bidder Details"):
 
 	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=text_embed_in_hover_size, color='white'))) #Debug 14th June 2024 (Changed from 12 to 16)
 
@@ -5857,7 +5857,7 @@ if selected_dimension in ["Spectrum Bands", "Auction YearWise"]:
 			st.info("Hoverbox's Background Color = GREEN (Auction Price = Reserve Price)")
 			st.info("Hoverbox's Background Color = RED (Auction Price > Reserve Price)")
 
-		if (Feature == "Operator Details"):
+		if (Feature == "Bidder Details"):
 			st.info("Heatmap's Color Intensity - Directly proportional to value on Color Bar on the left")
 			st.info("Hoverbox's Background Color = GREEN (Purchase Made)")
 			st.info("Hoverbox's Background Color = GREY (No Purchase Made)")
