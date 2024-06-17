@@ -2498,12 +2498,12 @@ if selected_dimension == "Auction BandWise":
 
 	currency_flag = True #default 
 
-	# Initialize session state for SelectedFeature and SubFeature
-	# The Purpose of this set of instruction to preserve session state
-	if "SelectedFeature" not in st.session_state:
-	    st.session_state.SelectedFeature = None
-	if "SubFeature" not in st.session_state:
-	    st.session_state.SubFeature = None
+	# # Initialize session state for SelectedFeature and SubFeature
+	# # The Purpose of this set of instruction to preserve session state
+	# if "SelectedFeature" not in st.session_state:
+	#     st.session_state.SelectedFeature = None
+	# if "SubFeature" not in st.session_state:
+	#     st.session_state.SubFeature = None
 
 	SelectedFeature = st.sidebar.selectbox("Select a Feature", year_band) #Debug 10th June 2024
 
