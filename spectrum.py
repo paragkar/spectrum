@@ -2500,10 +2500,10 @@ if selected_dimension == "Auction BandWise":
 
 	# Initialize session state for SelectedFeature and SubFeature
 	# The Purpose of this set of instruction to preserve session state
-	if SelectedFeature not in st.session_state:
-	    st.session_state.main_category = None
-	if SubFeature not in st.session_state:
-	    st.session_state.sub_category = None
+	if "SelectedFeature" not in st.session_state:
+	    st.session_state.SelectedFeature = None
+	if "SubFeature" not in st.session_state:
+	    st.session_state.SubFeature = None
 
 	SelectedFeature = st.sidebar.selectbox("Select a Feature", year_band) #Debug 10th June 2024
 
@@ -3117,7 +3117,6 @@ if selected_dimension == "Auction BandWise":
 	if mainoriflag == True: #This flag is used to differeniate between file structure of differnt years 
 
 		#filtering the reserve price for the auction year
-
 		dfprallauctions = loadauctionbiddata()["Reserve_Prices_All_Auctions"]
 		filt = (dfprallauctions["Band"]==band) & (dfprallauctions["Auction Year"]==year)
 		dfrp = dfprallauctions[filt]
@@ -3139,7 +3138,6 @@ if selected_dimension == "Auction BandWise":
 
 
 	#filtering the reserve price for the auction year
-
 	dfprallauctions = loadauctionbiddata()["Reserve_Prices_All_Auctions"]
 	filt = (dfprallauctions["Band"]==band) & (dfprallauctions["Auction Year"]==year)
 	dfrp = dfprallauctions[filt]
@@ -3168,6 +3166,7 @@ if selected_dimension == "Auction BandWise":
 								  		"BlocksAllocated","BiddingActivity", "DemandActivity"])
 	
 	if SubFeature == "BidsCircleWise":
+
 		# debug 30th Mar 2024
 		start_round, end_round = select_round_range(totalrounds)
 
