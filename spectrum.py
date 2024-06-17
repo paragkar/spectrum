@@ -739,7 +739,7 @@ def htext_colmatrix_auction_year_band_metric(df1):
 
 #processing for hovertext and colormatrix for Auction Year, Operator Metric, SubFeatures - Total Outflow, Total Purchase
 @st.cache_resource
-def htext_colmatrix_auction_year_operator_metric(df1, selectedbands, SubFeature, df_subfeature):	
+def htext_colmatrix_auction_year_operator_metric(df1, selectedbands, SelectedSubFeature, df_subfeature):	
 	temp1 = pd.DataFrame()
 	if selectedbands != []:
 		for band in selectedbands:
@@ -747,7 +747,7 @@ def htext_colmatrix_auction_year_operator_metric(df1, selectedbands, SubFeature,
 			temp1 = pd.concat([temp2,temp1], axis =0)
 		df1  = temp1
 	
-	if SubFeature == "Total Purchase": #then process for total purchase
+	if SelectedSubFeature == "Total Purchase": #then process for total purchase
 		df_purchase = df_subfeature
 	else: 
 		columnstoextract = ["Circle", "Band"]+oldoperators_dict[Year]
@@ -757,7 +757,7 @@ def htext_colmatrix_auction_year_operator_metric(df1, selectedbands, SubFeature,
 		df2_temp2 = df2_temp2.reindex(sorted(df2_temp2.columns), axis=1)
 		df_purchase = df2_temp2
 	
-	if SubFeature == "Total Ouflow": #then process for total outflow
+	if SelectedSubFeature == "Total Ouflow": #then process for total outflow
 		df_outflow = df_subfeature
 	else:
 		operators_dim_cy_new=[]
@@ -1483,8 +1483,8 @@ if selected_dimension == "Spectrum Bands":
 
 	#Processing For Dimension = "Frequency Band" & Features
 	if  SelectedFeature == "Spectrum Map":
-		SubFeature = st.sidebar.selectbox('Select a Sub Feature', ["Frequency Layout", "Operator Holdings", "Operator %Share"],0)
-		if SubFeature == "Frequency Layout":
+		SelectedSubFeature = st.sidebar.selectbox('Select a Sub Feature', ["Frequency Layout", "Operator Holdings", "Operator %Share"],0)
+		if SelectedSubFeature == "Frequency Layout":
 			sf = sff.copy()
 			operators = newoperators_dict[Band]
 			hf = sf[sf.columns].replace(operators) # dataframe for hovertext
@@ -1573,7 +1573,7 @@ if selected_dimension == "Spectrum Bands":
 
 			currency_flag = True #default
 			
-		if SubFeature == "Operator Holdings":
+		if SelectedSubFeature == "Operator Holdings":
 			selected_operators=[]
 			dfff = dffcopy[(dffcopy["Band"]==Band)]
 			operatorlist = sorted(list(set(dfff["OperatorNew"])))
@@ -1639,7 +1639,7 @@ if selected_dimension == "Spectrum Bands":
 
 			currency_flag = True # default
 			
-		if SubFeature == "Operator %Share":
+		if SelectedSubFeature == "Operator %Share":
 			selected_operators=[]
 			dfff = dffcopy[(dffcopy["Band"]==Band)]
 			operatorlist = sorted(list(set(dfff["OperatorNew"])))
@@ -1709,8 +1709,8 @@ if selected_dimension == "Spectrum Bands":
 
 	#SelectedFeature ="Expiry Map" linked to Dimension = "Spectrum Band"
 	if  SelectedFeature == "Expiry Map":
-		SubFeature = st.sidebar.selectbox('Select a Sub Feature', ["Frequency Layout", "Yearly Trends"],0)
-		if SubFeature == "Frequency Layout":
+		SelectedSubFeature = st.sidebar.selectbox('Select a Sub Feature', ["Frequency Layout", "Yearly Trends"],0)
+		if SelectedSubFeature == "Frequency Layout":
 			sf = sff.copy()
 			operators = newoperators_dict[Band]
 			hf = sf[sf.columns].replace(operators) # dataframe for hovertext
@@ -1763,7 +1763,7 @@ if selected_dimension == "Spectrum Bands":
 			hcolscale=colscale_hbox_spectrum_expiry_maps(operators, colcodes)  #colorscale for hoverbox
 			hoverlabel_bgcolor = transform_colscale_for_spec_exp_maps(hcolscale, hf) #shaping the hfcolorscale
 
-		if SubFeature == "Yearly Trends":
+		if SelectedSubFeature == "Yearly Trends":
 			bandexpcalsheetf = bandexpcalsheetf.set_index("LSA") #Loading Dataframe from BandExpCalSheet
 			operatorslist = ["All"]+sorted(list(newoperators_dict[Band].keys()))
 			selected_operator = st.sidebar.selectbox('Select an Operator', operatorslist)
@@ -1835,14 +1835,14 @@ if selected_dimension == "Spectrum Bands":
 			    "Quantum Unsold": unsoldspectrum,
 			    "Percent Unsold": percentunsold}
 
-		SubFeature = st.sidebar.selectbox('Select a Sub Feature', ["Auction Price","Reserve Price","Quantum Offered", "Quantum Sold", 
+		SelectedSubFeature = st.sidebar.selectbox('Select a Sub Feature', ["Auction Price","Reserve Price","Quantum Offered", "Quantum Sold", 
 			"Percent Sold", "Quantum Unsold", "Percent Unsold"])
 
-		typedf = type_dict[SubFeature].copy()
+		typedf = type_dict[SelectedSubFeature].copy()
 
 		hovertext = htext_auctionmap(dff)
 
-		if SubFeature in ["Auction Price", "Reserve Price"]:
+		if SelectedSubFeature in ["Auction Price", "Reserve Price"]:
 			curr_list=[]
 			for col in typedf.columns:
 				curr_list.append(auction_rsrate_dict[int(col)])
@@ -1870,12 +1870,12 @@ if selected_dimension == "Spectrum Bands":
 			currency_flag = True #Default
 					
 		#preparing the dataframe of the summary bar chart on top of the heatmap
-		if SubFeature not in ["Percent Sold", "Percent Unsold"]:
+		if SelectedSubFeature not in ["Percent Sold", "Percent Unsold"]:
 			summarydf = typedf.replace('[a-zA-Z]+\s*',np.nan, regex=True)
 			summarydf = summarydf.sum().reset_index()
 			summarydf.columns = ["Years", "India Total"]
 
-		if SubFeature in ["Auction Price", "Reserve Price"]:
+		if SelectedSubFeature in ["Auction Price", "Reserve Price"]:
 
 			if radio_currency == "Rupees":
 				summarydf = summarydf
@@ -2498,12 +2498,6 @@ if selected_dimension == "Auction BandWise":
 
 	currency_flag = True #default 
 
-	# # Initialize session state for SelectedFeature and SubFeature
-	# # The Purpose of this set of instruction to preserve session state
-	# if "SelectedFeature" not in st.session_state:
-	#     st.session_state.SelectedFeature = None
-	# if "SubFeature" not in st.session_state:
-	#     st.session_state.SubFeature = None
 
 	SelectedFeature = st.sidebar.selectbox("Select a Feature", year_band) #Debug 10th June 2024
 
@@ -3158,14 +3152,14 @@ if selected_dimension == "Auction BandWise":
 
 	if mainoriflag == True:
 
-		SubFeature = st.sidebar.selectbox("Select a SubFeature", ["BidsCircleWise","RanksCircleWise", "ProvWinningBid", "BlocksSelected",
+		SelectedSubFeature = st.sidebar.selectbox("Select a SubFeature", ["BidsCircleWise","RanksCircleWise", "ProvWinningBid", "BlocksSelected",
 									  "BlocksAllocated","BiddingActivity", "DemandActivity","LastBidPrice"])
 	if mainoriflag == False:
 
-		SubFeature = st.sidebar.selectbox("Select a SubFeature", ["BidsCircleWise","RanksCircleWise", "ProvWinningBid", "BlocksSelected",
+		SelectedSubFeature = st.sidebar.selectbox("Select a SubFeature", ["BidsCircleWise","RanksCircleWise", "ProvWinningBid", "BlocksSelected",
 								  		"BlocksAllocated","BiddingActivity", "DemandActivity"])
 	
-	if SubFeature == "BidsCircleWise":
+	if SelectedSubFeature == "BidsCircleWise":
 
 		# debug 30th Mar 2024
 		start_round, end_round = select_round_range(totalrounds)
@@ -3415,7 +3409,7 @@ if selected_dimension == "Auction BandWise":
 		st.altair_chart(chart, use_container_width=True)
 
 
-	if SubFeature == "RanksCircleWise":
+	if SelectedSubFeature == "RanksCircleWise":
 
 		plottype = st.sidebar.selectbox("Select a Plot Type", ["RanksInRound", "RanksInRounds"])
 
@@ -3701,7 +3695,7 @@ if selected_dimension == "Auction BandWise":
 			st.plotly_chart(figauc, use_container_width=True)
 
 
-	if SubFeature == "ProvWinningBid":
+	if SelectedSubFeature == "ProvWinningBid":
 
 		#------------------New Code Starts---------------------#
 		dfbid1 = loadauctionbiddata()[demandsheet].replace('-', np.nan, regex = True)
@@ -4185,7 +4179,7 @@ if selected_dimension == "Auction BandWise":
 
 
 
-	if SubFeature == "BlocksSelected":
+	if SelectedSubFeature == "BlocksSelected":
 
 		# debug 30th Mar 2024
 		# Generate a list of all round numbers
@@ -4319,7 +4313,7 @@ if selected_dimension == "Auction BandWise":
 
 
 
-	if SubFeature == "BlocksAllocated":
+	if SelectedSubFeature == "BlocksAllocated":
 
 		# debug 30th Mar 2024
 		# Generate a list of all round numbers
@@ -4553,11 +4547,11 @@ if selected_dimension == "Auction BandWise":
 			col2.plotly_chart(figsumrows, use_container_width=True)
 
 
-	if SubFeature == "BiddingActivity" and (SelectedFeature in year_band_exp): #Debug 10th June 2024
+	if SelectedSubFeature == "BiddingActivity" and (SelectedFeature in year_band_exp): #Debug 10th June 2024
 
 		st.markdown('<p style="font-size: 48px;">DATA NOT AVAILABLE</p>', unsafe_allow_html=True)
 
-	if SubFeature == "BiddingActivity" and (SelectedFeature not in year_band_exp): #Debug 10th June 2024
+	if SelectedSubFeature == "BiddingActivity" and (SelectedFeature not in year_band_exp): #Debug 10th June 2024
 
 
 		dfbid = loadauctionbiddata()[activitysheet].replace('-', np.nan, regex = True)
@@ -5168,7 +5162,7 @@ if selected_dimension == "Auction BandWise":
 
 
 
-	if SubFeature == "DemandActivity":
+	if SelectedSubFeature == "DemandActivity":
 
 		dfbid = loadauctionbiddata()[demandsheet].replace('-', np.nan, regex = True)
 
@@ -5434,7 +5428,7 @@ if selected_dimension == "Auction BandWise":
 
 
 
-	if SubFeature == "LastBidPrice":
+	if SelectedSubFeature == "LastBidPrice":
 
 		dfbid = loadauctionbiddata()[demandsheet].replace('-', np.nan, regex = True) #for number of blocks for sale for hovertext
 
@@ -5951,21 +5945,21 @@ if selected_dimension == "Auction YearWise":
 
 	if SelectedFeature == "Band Details":
 
-		SubFeature = st.sidebar.selectbox('Select a SubFeature', subfeature_list)
+		SelectedSubFeature = st.sidebar.selectbox('Select a SubFeature', subfeature_list)
 
-		if SubFeature in ["Reserve Price", "Auction Price", "Total EMD", "Quantum Offered", "Quantum Sold", "Quantum Unsold" ]:
+		if SelectedSubFeature in ["Reserve Price", "Auction Price", "Total EMD", "Quantum Offered", "Quantum Sold", "Quantum Unsold" ]:
 			df1 = df1.reset_index()
 			df1_temp1 = df1.copy()
-			if SubFeature == "Quantum Sold":
+			if SelectedSubFeature == "Quantum Sold":
 				operatorslist = oldoperators_dict[Year]
 				selected_operators = st.sidebar.multiselect('Select an Operator', operatorslist)
 				if selected_operators == []:
-					df1_temp1 = df1_temp1.pivot(index="Circle", columns='Band', values=subfeature_dict[SubFeature])
+					df1_temp1 = df1_temp1.pivot(index="Circle", columns='Band', values=subfeature_dict[SelectedSubFeature])
 				else:
 					df1_temp1["OperatorTotal"] = df1_temp1[selected_operators].sum(axis=1)
 					df1_temp1 = df1_temp1.pivot(index="Circle", columns='Band', values='OperatorTotal')	
 			else:
-				df1_temp1 = df1_temp1.pivot(index="Circle", columns='Band', values=subfeature_dict[SubFeature])
+				df1_temp1 = df1_temp1.pivot(index="Circle", columns='Band', values=subfeature_dict[SelectedSubFeature])
 			df1_temp1.columns = [str(x) for x in sorted(df1_temp1.columns)]
 
 			if currency_flag == False: #USD
@@ -5979,7 +5973,7 @@ if selected_dimension == "Auction YearWise":
 				y = df1_temp1.index
 				summarydf = df1_temp1.sum()
 
-		if SubFeature == "Total Outflow":
+		if SelectedSubFeature == "Total Outflow":
 			df1 = df1.reset_index()
 			df1_temp2 = df1.set_index(["Band","Circle"])
 			operatorslist = oldoperators_dict[Year]
@@ -6004,7 +5998,7 @@ if selected_dimension == "Auction YearWise":
 				y = df1_temp2.index
 				summarydf = df1_temp2.sum()
 
-		if SubFeature == "Auction/Reserve":
+		if SelectedSubFeature == "Auction/Reserve":
 			df1 = df1.reset_index()
 			df1_temp3 = df1.set_index(["Band","Circle"])
 			df1_temp3["Auction/Reserve"] = np.divide(df1_temp3["Auction Price/MHz"],df1_temp3["RP/MHz"],out=np.full_like(df1_temp3["Auction Price/MHz"], np.nan), where=df1_temp3["RP/MHz"] != 0)
@@ -6017,7 +6011,7 @@ if selected_dimension == "Auction YearWise":
 			y = df1_temp3.index
 			currency_flag = True #default
 
-		if SubFeature == "Percent Unsold":
+		if SelectedSubFeature == "Percent Unsold":
 			df1 = df1.reset_index()
 			df1_temp4 = df1.set_index(["Band", "Circle"])
 			df1_temp4["Percent Unsold"] = np.divide(df1_temp4["Total Unsold (MHz)"],df1_temp4["Sale (MHz)"],out=np.full_like(df1_temp4["Total Unsold (MHz)"], np.nan), where=df1_temp4["Sale (MHz)"] != 0)*100
@@ -6030,7 +6024,7 @@ if selected_dimension == "Auction YearWise":
 			y = df1_temp4.index
 			currency_flag = True #default
 
-		if SubFeature == "Percent Sold":
+		if SelectedSubFeature == "Percent Sold":
 			df1 = df1.reset_index()
 			df1_temp5 = df1.set_index(["Band", "Circle"])
 			df1_temp5["Percent Sold"] = np.divide(df1_temp5["Total Sold (MHz)"],df1_temp5["Sale (MHz)"],out=np.full_like(df1_temp5["Total Sold (MHz)"], np.nan), where=df1_temp5["Sale (MHz)"] != 0)*100
@@ -6044,7 +6038,7 @@ if selected_dimension == "Auction YearWise":
 			currency_flag = True #default
 			
 		#excluding summarydf as it is not needed for these SubFeatures
-		if SubFeature not in  ["Auction/Reserve", "Percent Unsold", "Percent Sold"]:
+		if SelectedSubFeature not in  ["Auction/Reserve", "Percent Unsold", "Percent Sold"]:
 			#preparing the dataframe of the summary bar chart on top of the heatmap
 			summarydf = summarydf.round(1)
 			summarydf = summarydf.reset_index()
@@ -6067,9 +6061,9 @@ if selected_dimension == "Auction YearWise":
 		selectedbands = st.sidebar.multiselect('Filter By Bands',bands_auctioned_dict[Year])
 
 		subfeature_list = ["Total Outflow", "Total Purchase"]
-		SubFeature = st.sidebar.selectbox('Select a SubFeature', subfeature_list,0)
+		SelectedSubFeature = st.sidebar.selectbox('Select a SubFeature', subfeature_list,0)
 		
-		if SubFeature == "Total Outflow":
+		if SelectedSubFeature == "Total Outflow":
 			temp1 = pd.DataFrame()
 			if selectedbands != []:
 				for band in selectedbands:
@@ -6105,16 +6099,16 @@ if selected_dimension == "Auction YearWise":
 
 
 			summarydf = summarydf.reset_index()
-			summarydf.columns = ["Operators", SubFeature] 
+			summarydf.columns = ["Operators", SelectedSubFeature] 
 			summarydf = summarydf.sort_values("Operators", ascending = False)
 			#preparing the summary chart 
-			chart = summarychart(summarydf, 'Operators', SubFeature)
+			chart = summarychart(summarydf, 'Operators', SelectedSubFeature)
 			SummaryFlag = True
 			
-			hovertext,colormatrix = htext_colmatrix_auction_year_operator_metric(df1, selectedbands, SubFeature, df2_temp1) #processing hovertext and colormatrix for operator wise in cal year dim
+			hovertext,colormatrix = htext_colmatrix_auction_year_operator_metric(df1, selectedbands, SelectedSubFeature, df2_temp1) #processing hovertext and colormatrix for operator wise in cal year dim
 			hoverlabel_bgcolor = colormatrix #colormatrix processed from fuction "hovertext_and_colmatrix" for same above
 		
-		if SubFeature == "Total Purchase":
+		if SelectedSubFeature == "Total Purchase":
 			if selectedbands != []:
 				df2_temp2 = df1.copy()
 				temp1=pd.DataFrame()
@@ -6136,14 +6130,14 @@ if selected_dimension == "Auction YearWise":
 			
 			summarydf = df2_temp2.sum(axis=0)
 			summarydf = summarydf.reset_index()
-			summarydf.columns = ["Operators", SubFeature] 
+			summarydf.columns = ["Operators", SelectedSubFeature] 
 			summarydf = summarydf.sort_values("Operators", ascending = False)
 			#preparing the summary chart 
-			chart = summarychart(summarydf, 'Operators', SubFeature)
+			chart = summarychart(summarydf, 'Operators', SelectedSubFeature)
 			SummaryFlag = True
 			
 			#processing hovertext and colormatrix for operator wise in cal year dim
-			hovertext,colormatrix = htext_colmatrix_auction_year_operator_metric(df1, selectedbands, SubFeature, df2_temp2)
+			hovertext,colormatrix = htext_colmatrix_auction_year_operator_metric(df1, selectedbands, SelectedSubFeature, df2_temp2)
 			hoverlabel_bgcolor = colormatrix #colormatrix processed from fuction "hovertext_and_colmatrix" for same above
 
 			currency_flag = True #default
@@ -6191,7 +6185,7 @@ if currency_flag == False: #USD
 
 #---------Dimension = Spectrum Bands Starts -------------------
 
-if (SelectedFeature == "Spectrum Map") and (SubFeature == "Frequency Layout"):
+if (SelectedFeature == "Spectrum Map") and (SelectedSubFeature == "Frequency Layout"):
 
 	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=text_embed_in_hover_size, color='white'))) #Debug 14th June 2024 (Chnaged from 12 to 16)
 
@@ -6210,7 +6204,7 @@ if (SelectedFeature == "Spectrum Map") and (SubFeature == "Frequency Layout"):
 	title = "Spectrum Frequency Layout for the "+str(Band)+" MHz Band"
 
 
-if (SelectedFeature == "Spectrum Map") and (SubFeature == "Operator Holdings"):
+if (SelectedFeature == "Spectrum Map") and (SelectedSubFeature == "Operator Holdings"):
 
 	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=text_embed_in_hover_size, color='white'))) #Debug 14th June 2024 (Chnaged from 12 to 16)
 
@@ -6235,7 +6229,7 @@ if (SelectedFeature == "Spectrum Map") and (SubFeature == "Operator Holdings"):
 	title = "Operator Holdings for the "+str(Band)+" MHz Band"
 
 
-if (SelectedFeature == "Spectrum Map") and (SubFeature == "Operator %Share"):
+if (SelectedFeature == "Spectrum Map") and (SelectedSubFeature == "Operator %Share"):
 
 	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=text_embed_in_hover_size, color='white'))) #Debug 14th June 2024 (Changed from 12 to 16)
 
@@ -6259,7 +6253,7 @@ if (SelectedFeature == "Spectrum Map") and (SubFeature == "Operator %Share"):
 
 
 	
-if (SelectedFeature == "Expiry Map") and (SubFeature == "Frequency Layout"):
+if (SelectedFeature == "Expiry Map") and (SelectedSubFeature == "Frequency Layout"):
 
 	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=text_embed_in_hover_size, color='white'))) #Debug 14th June 2024 (Changed from 12 to 16)
 
@@ -6278,7 +6272,7 @@ if (SelectedFeature == "Expiry Map") and (SubFeature == "Frequency Layout"):
 	title = "Spectrum Expiry Layout for the "+str(Band)+" MHz Band"
 
 
-if (SelectedFeature == "Expiry Map") and (SubFeature == "Yearly Trends"):
+if (SelectedFeature == "Expiry Map") and (SelectedSubFeature == "Yearly Trends"):
 
 	hoverlabel_bgcolor = "#000000" #subdued black
 
@@ -6301,10 +6295,10 @@ if SelectedFeature == "Auction Map":
 
 	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=text_embed_in_hover_size, color='white'))) #Debug 14th June 2024 (Changed from 12 to 16)
 
-	parttitle = "Yearly Trend of "+SubFeature
+	parttitle = "Yearly Trend of "+SelectedSubFeature
 	xdtickangle=0
 	xdtickval = dtickauction_dict[Band]
-	unit = units_dict[SubFeature]
+	unit = units_dict[SelectedSubFeature]
 	selected_operators = ["NA"]
 	
 	subtitle = "Unit - "+unit+"; Selected Operators - "+', '.join(selected_operators)+ " ; Summary Below - Sum of all LSAs"+"; Source - DOT"
@@ -6323,7 +6317,7 @@ if (SelectedFeature == "Band Details"):
 	xdtickangle =0
 	xdtickval =1
 
-	if (SubFeature =="Total Outflow") or (SubFeature == "Quantum Sold"):
+	if (SelectedSubFeature =="Total Outflow") or (SelectedSubFeature == "Quantum Sold"):
 
 		if selected_operators==[]:
 			selected_operators = ["All"]
@@ -6334,12 +6328,12 @@ if (SelectedFeature == "Band Details"):
 		
 	title = "Band Wise Auction Summary for the Year "+str(Year)
 	
-	if SubFeature in ["Reserve Price", "Auction Price", "Quantum Offered", "Quantum Sold", "Quantum Unsold", "Total EMD", "Total Outflow"]:
+	if SelectedSubFeature in ["Reserve Price", "Auction Price", "Quantum Offered", "Quantum Sold", "Quantum Unsold", "Total EMD", "Total Outflow"]:
 		partsubtitle = "; Summary Below - Sum of all LSAs"
 	else:
 		partsubtitle = ""
 
-	subtitle = SubFeature+"; Unit -"+units_dict[SubFeature]+"; "+ "Selected Operators -" + ', '.join(selected_operators)+ partsubtitle+"; Source - DOT"
+	subtitle = SelectedSubFeature+"; Unit -"+units_dict[SelectedSubFeature]+"; "+ "Selected Operators -" + ', '.join(selected_operators)+ partsubtitle+"; Source - DOT"
 
 	
 if (SelectedFeature == "Bidder Details"):
@@ -6349,7 +6343,7 @@ if (SelectedFeature == "Bidder Details"):
 	xdtickangle =0
 	xdtickval =1
 
-	if (SubFeature =="Total Outflow") or (SubFeature == "Total Purchase"):
+	if (SelectedSubFeature =="Total Outflow") or (SelectedSubFeature == "Total Purchase"):
 		if selectedbands==[]:
 			selectedbands = ["All"]
 		else:
@@ -6360,7 +6354,7 @@ if (SelectedFeature == "Bidder Details"):
 
 	title = "Operator Wise Summary for the Year "+str(Year)
 
-	subtitle = SubFeature + "; Unit -"+units_dict[SubFeature]+"; Selected Bands -"+ ', '.join(selectedbands) + \
+	subtitle = SelectedSubFeature + "; Unit -"+units_dict[SelectedSubFeature]+"; Selected Bands -"+ ', '.join(selectedbands) + \
 				"; Summary Below - Sum of all LSAs"+"; Source - DOT"
 
 
@@ -6459,10 +6453,10 @@ if selected_dimension in ["Spectrum Bands", "Auction YearWise"]:
 	expander = st.expander("Click Here - To Learn About the Color Codes", expanded = False)
 
 	with expander:
-		if (SelectedFeature == "Spectrum Map") and (SubFeature=="Frequency Layout"):
+		if (SelectedFeature == "Spectrum Map") and (SelectedSubFeature=="Frequency Layout"):
 			st.info("Heatmap and Hoverbox's Background Color - Maps to the Specific Operator")
 
-		if (SelectedFeature == "Expiry Map") and (SubFeature=="Frequency Layout"):
+		if (SelectedFeature == "Expiry Map") and (SelectedSubFeature=="Frequency Layout"):
 			st.info("Heatmap's Color Intensity - Directly Proportional to length of the expiry period in years")
 			st.info("Hoverbox's Background Color - Directly Maps to the Specific Operator of the 'Spectrum Map' Layout")
 
