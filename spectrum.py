@@ -1954,8 +1954,7 @@ if selected_dimension == "Auction Integrated":
 			df = loadauctionbiddata()[sheet]
 			df["Auction Year"] = auctionyear
 			df["Band"] = band
-
-				dfcomb = pd.concat([dfcomb,df], axis =0)
+			dfcomb = pd.concat([dfcomb,df], axis =0)
 
 	st.write(dfcomb)
 
