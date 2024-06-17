@@ -3694,7 +3694,6 @@ if selected_dimension == "Auction BandWise":
 
 	if SelectedSubFeature == "ProvWinningBid":
 		dfbid1 = loadauctionbiddata()[demandsheet].replace('-', np.nan,regex=True)
-		st.write(dfbid1)
 		dfbid1 = dfbid1.drop(columns=["Clock Round", "Clock Round Price (Rs. Crore)", "Aggregate Demand", "Excess Demand"], axis=1)
 		dfbid1 = dfbid1.groupby(["LSA"]).mean().reset_index()
 		dfbid1.columns = ["LSA", "BlocksForSale"]
@@ -3706,7 +3705,8 @@ if selected_dimension == "Auction BandWise":
 		#-----------------New Code Ends ----------------------#
 
 		pwbtype = st.sidebar.selectbox("Select a PWB Type", ["Start CLK Round", "End CLK Round"])
-		df1strd = dfbid1[dfbid1["Clk_Round"] == 1].reset_index()  # Identifying the 2nd round gives up the reserve price
+		# df1strd = dfbid1[dfbid1["Clk_Round"] == 1].reset_index()  # Identifying the 2nd round gives up the reserve price
+		df1strd = dfbid1[dfbid1["Clock Round"] == 1].reset_index()  # Identifying the 2nd round gives up the reserve price
 		dfpwb1strdend = df1strd.pivot(index="Bidder", columns='LSA', values="PWB_End_ClkRd").sort_index(ascending=False)
 
 		dfrp = dfpwb1strdend.T  # Preparing the dataframe for reserve price per BLK
