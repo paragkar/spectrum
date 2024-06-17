@@ -1944,7 +1944,7 @@ for index in dfrsrate.index:
 if selected_dimension == "Auction Integrated":
 
 	for sepectrumband in year_band:
-		st.write(sepectrumband)
+		st.write(Auction_Year_Band_Features[sepectrumband]["demandsheet"])
 
 	# df = loadauctionbiddata()
 
