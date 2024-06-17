@@ -3100,6 +3100,7 @@ if selected_dimension == "Auction BandWise":
 		
 		dfbid1 = dfbid1.drop(columns =["Clock Round", "Clock Round Price (Rs. Crore)", "Aggregate Demand", "Excess Demand"], axis =1)
 		dfbid1 = dfbid1.groupby(["LSA"]).mean().reset_index()
+		st.write(dfbid1)
 		dfbid1.columns = ["LSA", "BlocksForSale"]
 		summarydf = dfbid1.copy()
 
