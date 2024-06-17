@@ -1951,7 +1951,11 @@ if selected_dimension == "Auction Integrated":
 
 		if auctionyear not in ["2010"]:
 
-			st.write(auctionyear,band,loadauctionbiddata()[sheet])
+			df = auctionyear,band,loadauctionbiddata()[sheet]
+			df["Auction Year"] = auctionyear
+			df["Band"] = band
+
+			st.write(df)
 
 
 if selected_dimension == "Spectrum Bands":
