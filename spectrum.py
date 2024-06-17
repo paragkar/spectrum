@@ -171,55 +171,55 @@ def loadauctionbiddata():
 #--------Setting up the Constants Starts-------------------
 
 state_dict = {'AP': 'Andhra Pradesh', 'AS': 'Assam', 'BH': 'Bihar', 'DL': 'Delhi', 'GU': 'Gujarat',
-    'HA': 'Haryana','HP': 'Himachal Pradesh','JK': 'Jammu & Kashmir','KA': 'Karnataka',
-    'KE': 'Kerala','KO': 'Kolkata','MP': 'Madhya Pradesh','MA': 'Maharashtra','MU': 'Mumbai',
-    'NE': 'Northeast','OR': 'Odisha','PU': 'Punjab','RA': 'Rajasthan','TN': 'Tamil Nadu',
-    'UPE': 'Uttar Pradesh (East)','UPW': 'Uttar Pradesh (West)','WB': 'West Bengal' }
+	'HA': 'Haryana','HP': 'Himachal Pradesh','JK': 'Jammu & Kashmir','KA': 'Karnataka',
+	'KE': 'Kerala','KO': 'Kolkata','MP': 'Madhya Pradesh','MA': 'Maharashtra','MU': 'Mumbai',
+	'NE': 'Northeast','OR': 'Odisha','PU': 'Punjab','RA': 'Rajasthan','TN': 'Tamil Nadu',
+	'UPE': 'Uttar Pradesh (East)','UPW': 'Uttar Pradesh (West)','WB': 'West Bengal' }
 
 subtitle_freqlayout_dict = {700:"FDD: Uplink - 703-748 MHz(shown); Downlink - 758-803(notshown); ",
-         800:"Uplink - 824-844 MHz(shown); Downlink - 869-889 MHz(not shown); ", 
-         900:"Uplink - 890-915 MHz(shown); Downlink - 935-960 MHz(not shown); ", 
-         1800:"Uplink - 1710-1785 MHz(shown); Downlink - 1805-1880 MHz(notshown); ", 
-         2100:"Uplink - 1919-1979 MHz(shown); Downlink - 2109-2169 MHz(notshown); ",
-         2300:"Up & Downlinks - 2300-2400 MHz(shown); ",
-         2500:"Up & Downlinks - 2500-2690 MHz(shown); ",
-         3500:"Up & Downlinks - 3300-3670 MHz(shown); ",
-         26000:"Up & Downlinks - 24250-27500 MHz(shown); "}
+		 800:"Uplink - 824-844 MHz(shown); Downlink - 869-889 MHz(not shown); ", 
+		 900:"Uplink - 890-915 MHz(shown); Downlink - 935-960 MHz(not shown); ", 
+		 1800:"Uplink - 1710-1785 MHz(shown); Downlink - 1805-1880 MHz(notshown); ", 
+		 2100:"Uplink - 1919-1979 MHz(shown); Downlink - 2109-2169 MHz(notshown); ",
+		 2300:"Up & Downlinks - 2300-2400 MHz(shown); ",
+		 2500:"Up & Downlinks - 2500-2690 MHz(shown); ",
+		 3500:"Up & Downlinks - 3300-3670 MHz(shown); ",
+		 26000:"Up & Downlinks - 24250-27500 MHz(shown); "}
 
 #Operators who are the current owners of blocks of spectrum in these bands 
 newoperators_dict = {700: {'Vacant':0,'Railways':1,'Govt':2,'RJIO':3,'BSNL':4},
-             800: {'Vacant':0,'RCOM':1,'Govt':2,'RJIO':3,'Bharti':4, 'MTS':5, 'BSNL':6},
-             900:{'Vacant':0,'RCOM':1,'Govt':2,'Railways':3,'Bharti':4, 'AircelU':5, 
-                  'BSNLU':6,'MTNLU':7,'BhartiU':8,'VI':9,'VIU':10},
-             1800: {'Vacant':0,'RCOM':1,'Govt':2,'RJIO':3,'Bharti':4,
-                    'BhartiU':5, 'AircelR':6, 'BSNL':7,'MTNL':8,'VI':9,'VIU':10,'AircelU':11, 'Aircel':12},
-             2100: {'Vacant':0,'RCOM':1,'Govt':2,'Bharti':3, 'BSNL':4,'MTNL':5,'VI':6, 'Aircel':7},
-             2300: {'Vacant':0,'RJIO':1,'Govt':2,'Bharti':3, 'VI':4},
-             2500: {'Vacant':0,'Govt':1,'BSNL':2, 'VI':3},
-             3500: {'Vacant':0,'Bharti':1,'RJIO':2,'BSNL':3, 'MTNL':4,'VI':5},
-             26000: {'Vacant':0,'Bharti':1,'RJIO':2,'BSNL':3, 'MTNL':4,'VI':5,'Adani':6}
-            }
+			 800: {'Vacant':0,'RCOM':1,'Govt':2,'RJIO':3,'Bharti':4, 'MTS':5, 'BSNL':6},
+			 900:{'Vacant':0,'RCOM':1,'Govt':2,'Railways':3,'Bharti':4, 'AircelU':5, 
+				  'BSNLU':6,'MTNLU':7,'BhartiU':8,'VI':9,'VIU':10},
+			 1800: {'Vacant':0,'RCOM':1,'Govt':2,'RJIO':3,'Bharti':4,
+					'BhartiU':5, 'AircelR':6, 'BSNL':7,'MTNL':8,'VI':9,'VIU':10,'AircelU':11, 'Aircel':12},
+			 2100: {'Vacant':0,'RCOM':1,'Govt':2,'Bharti':3, 'BSNL':4,'MTNL':5,'VI':6, 'Aircel':7},
+			 2300: {'Vacant':0,'RJIO':1,'Govt':2,'Bharti':3, 'VI':4},
+			 2500: {'Vacant':0,'Govt':1,'BSNL':2, 'VI':3},
+			 3500: {'Vacant':0,'Bharti':1,'RJIO':2,'BSNL':3, 'MTNL':4,'VI':5},
+			 26000: {'Vacant':0,'Bharti':1,'RJIO':2,'BSNL':3, 'MTNL':4,'VI':5,'Adani':6}
+			}
 
 #Operators who were the original buyer of spectrum
 oldoperators_dict = {2010 : ["Bharti", "QCOM", "Augere", "Vodafone", "Idea", "RJIO", "RCOM", "STel", "Tata", "Aircel", "Tikona"],
-		    2012 : ["Bharti", "Vodafone", "Idea", "Telenor", "Videocon"],
-		    2013 : ["MTS"],
-		    2014 : ["Bharti", "Vodafone", "Idea", "RJIO", "RCOM", "Aircel", "Telenor"],
-		    2015 : ["Bharti", "Vodafone", "Idea", "RJIO", "RCOM", "Tata", "Aircel"],
-		    2016 : ["Bharti", "Vodafone", "Idea", "RJIO", "RCOM", "Tata", "Aircel"],
-		    2021 : ["Bharti", "RJIO", "VodaIdea"],
-		    2022 : ["Bharti", "RJIO", "VodaIdea", "Adani"] }
+			2012 : ["Bharti", "Vodafone", "Idea", "Telenor", "Videocon"],
+			2013 : ["MTS"],
+			2014 : ["Bharti", "Vodafone", "Idea", "RJIO", "RCOM", "Aircel", "Telenor"],
+			2015 : ["Bharti", "Vodafone", "Idea", "RJIO", "RCOM", "Tata", "Aircel"],
+			2016 : ["Bharti", "Vodafone", "Idea", "RJIO", "RCOM", "Tata", "Aircel"],
+			2021 : ["Bharti", "RJIO", "VodaIdea"],
+			2022 : ["Bharti", "RJIO", "VodaIdea", "Adani"] }
 
 #Spectrum Bands Auctioned in that Calender Year
 bands_auctioned_dict = {2010 : [2100, 2300],
-	       2012 : [800, 1800],
-	       2013 : [800, 900, 1800],
-	       2014 : [900, 1800],
-	       2015 : [800, 900, 1800, 2100],
-	       2016 : [700, 800, 900, 1800, 2100, 2300, 2500],
-	       2021 : [700, 800, 900, 1800, 2100, 2300, 2500],
-	       2022 : [600, 700, 800, 900, 1800, 2100, 2300, 2500, 3500, 26000]}
-		    
+		   2012 : [800, 1800],
+		   2013 : [800, 900, 1800],
+		   2014 : [900, 1800],
+		   2015 : [800, 900, 1800, 2100],
+		   2016 : [700, 800, 900, 1800, 2100, 2300, 2500],
+		   2021 : [700, 800, 900, 1800, 2100, 2300, 2500],
+		   2022 : [600, 700, 800, 900, 1800, 2100, 2300, 2500, 3500, 26000]}
+			
 
 #if "1" the expiry tab in spectrum_map file is present and if "0" then not present
 exptab_dict = {700:1, 800:1, 900:1, 1800:1, 2100:1, 2300:1, 2500:1, 3500:1, 26000:1}
@@ -246,18 +246,18 @@ bandtype_dict = {700:"FDD", 800:"FDD", 900:"FDD", 1800:"FDD", 2100:"FDD", 2300:"
 
 #auctionfailyears when the auction prices for all LSAs were zero and there are no takers 
 auctionfailyears_dict = {700:["2016","2021"], 800:["2012"], 900:["2013","2016"], 1800:["2013"], 
-        2100:[], 2300:["2022"], 2500:["2021"], 3500:[], 26000:[]}
+		2100:[], 2300:["2022"], 2500:["2021"], 3500:[], 26000:[]}
 
 #auction sucess years are years where at least in one of the LASs there was a winner
 auctionsucessyears_dict = {700:[2022], 
-        800:[2013, 2015, 2016, 2021, 2022], 
-        900:[2014, 2015, 2021, 2022], 
-        1800:[2012, 2014, 2015, 2016, 2021, 2022], 
-        2100:[2010, 2015, 2016, 2021, 2022], 
-        2300:[2010, 2016, 2021, 2022],  #added 2022 an as exception (due to error) need to revist the logic of succes and failure
-        2500:[2010, 2016, 2022], 
-        3500:[2022], 
-        26000:[2022]}
+		800:[2013, 2015, 2016, 2021, 2022], 
+		900:[2014, 2015, 2021, 2022], 
+		1800:[2012, 2014, 2015, 2016, 2021, 2022], 
+		2100:[2010, 2015, 2016, 2021, 2022], 
+		2300:[2010, 2016, 2021, 2022],  #added 2022 an as exception (due to error) need to revist the logic of succes and failure
+		2500:[2010, 2016, 2022], 
+		3500:[2022], 
+		26000:[2022]}
 
 #end of month auction completion dates dictionary for the purpose of evaluting rs-usd rates 
 
@@ -271,7 +271,7 @@ auction_eom_dates_dict = {2010 : datetime(2010,6,30), 2012: datetime(2012,11,30)
 errors_dict= {700:0.25, 800:1, 900:1, 1800:1, 2100:1.5, 2300:1.25, 2500:1, 3500:1, 26000:10} #debug 2024 (Feb)
 
 list_of_circles_codes = ['AP','AS', 'BH', 'DL', 'GU', 'HA', 'HP', 'JK', 'KA', 'KE', 'KO', 'MA', 'MP',
-       	   'MU', 'NE', 'OR', 'PU', 'RA', 'TN', 'UPE', 'UPW', 'WB']
+		   'MU', 'NE', 'OR', 'PU', 'RA', 'TN', 'UPE', 'UPW', 'WB']
 
 #Debug 10th June 2024
 year_band =["2010-Band2100","2010-Band2300", "2012-Band1800","2014-Band1800","2014-Band900",
@@ -301,570 +301,570 @@ stcol2 = 1 #No of Columns for row total chart to Fit
 
 #Dictionary to Aggregrated Choosen year_band features 
 Auction_Year_Band_Features = {
-    "2022-Band26000": {
-        "totalrounds": 40,
-        "mainsheet": "2022_5G_26000",
-        "mainsheetoriginal": "2022_5G_26000_Original",
-        "mainoriflag": True,
-        "activitysheet": "2022_4G_5G_Activity",
-        "demandsheet": "2022_5G_26000_AD",
-        "titlesubpart": "26000 MHz Auctions (CY-2022)",
-        "subtitlesubpartbidactivity": "; Combined for All Bands",
-        "year": 2022,
-        "band": 26000,
-        "xdtick": 1,
-        "zmin": 1,
-        "zmax": 5,
-        "zmin_af": 0.5,
-        "zmax_af": 1,
-        "texttempbiddemandactivity": "%{z}",
-        "blocksize": 50,
-        "zmin_blk_sec": 0,
-        "zmax_blk_sec": 4
-    },
-    "2022-Band3500": {
-        "totalrounds": 40,
-        "mainsheet": "2022_5G_3500",
-        "mainsheetoriginal": "2022_5G_3500_Original",
-        "mainoriflag": True,
-        "activitysheet": "2022_4G_5G_Activity",
-        "demandsheet": "2022_5G_3500_AD",
-        "titlesubpart": "3500 MHz Auctions (CY-2022)",
-        "subtitlesubpartbidactivity": "; Combined for All Bands",
-        "year": 2022,
-        "band": 3500,
-        "xdtick": 1,
-        "zmin": 1,
-        "zmax": 5,
-        "zmin_af": 0.5,
-        "zmax_af": 1,
-        "texttempbiddemandactivity": "%{z}",
-        "blocksize": 10,
-        "zmin_blk_sec": 0,
-        "zmax_blk_sec": 4
-    },
-    "2022-Band2500": {
-        "totalrounds": 40,
-        "mainsheet": "2022_4G_2500",
-        "mainsheetoriginal": "2022_4G_2500_Original",
-        "mainoriflag": True,
-        "activitysheet": "2022_4G_5G_Activity",
-        "demandsheet": "2022_4G_2500_AD",
-        "titlesubpart": "2500 MHz Auctions (CY-2022)",
-        "subtitlesubpartbidactivity": "; Combined for All Bands",
-        "year": 2022,
-        "band": 2500,
-        "xdtick": 1,
-        "zmin": 1,
-        "zmax": 5,
-        "zmin_af": 0.5,
-        "zmax_af": 1,
-        "texttempbiddemandactivity": "%{z}",
-        "blocksize": 10,
-        "zmin_blk_sec": 0,
-        "zmax_blk_sec": 4
-    },
-    "2022-Band2100": {
-        "totalrounds": 40,
-        "mainsheet": "2022_4G_2100",
-        "mainsheetoriginal": "2022_4G_2100_Original",
-        "mainoriflag": True,
-        "activitysheet": "2022_4G_5G_Activity",
-        "demandsheet": "2022_4G_2100_AD",
-        "titlesubpart": "2100 MHz Auctions (CY-2022)",
-        "subtitlesubpartbidactivity": "; Combined for All Bands",
-        "year": 2022,
-        "band": 2100,
-        "xdtick": 1,
-        "zmin": 1,
-        "zmax": 5,
-        "zmin_af": 0.5,
-        "zmax_af": 1,
-        "texttempbiddemandactivity": "%{z}",
-        "blocksize": 5,
-        "zmin_blk_sec": 0,
-        "zmax_blk_sec": 4
-    },
-    "2022-Band1800": {
-        "totalrounds": 40,
-        "mainsheet": "2022_4G_1800",
-        "mainsheetoriginal": "2022_4G_1800_Original",
-        "mainoriflag": True,
-        "activitysheet": "2022_4G_5G_Activity",
-        "demandsheet": "2022_4G_1800_AD",
-        "titlesubpart": "1800 MHz Auctions (CY-2022)",
-        "subtitlesubpartbidactivity": "; Combined for All Bands",
-        "year": 2022,
-        "band": 1800,
-        "xdtick": 1,
-        "zmin": 1,
-        "zmax": 5,
-        "zmin_af": 0.5,
-        "zmax_af": 1,
-        "texttempbiddemandactivity": "%{z}",
-        "blocksize": 0.2,
-        "zmin_blk_sec": 0,
-        "zmax_blk_sec": 4
-    },
-     "2022-Band900": {
-        "totalrounds": 40,
-        "mainsheet": "2022_4G_900",
-        "mainsheetoriginal": "2022_4G_900_Original",
-        "mainoriflag": True,
-        "activitysheet": "2022_4G_5G_Activity",
-        "demandsheet": "2022_4G_900_AD",
-        "titlesubpart": "900 MHz Auctions (CY-2022)",
-        "subtitlesubpartbidactivity": "; Combined for All Bands",
-        "year": 2022,
-        "band": 900,
-        "xdtick": 1,
-        "zmin": 1,
-        "zmax": 5,
-        "zmin_af": 0.5,
-        "zmax_af": 1,
-        "texttempbiddemandactivity": "%{z}",  # Debug 10th June 2024
-        "blocksize": 0.2,
-        "zmin_blk_sec": 0,
-        "zmax_blk_sec": 4
-    },
-    "2022-Band800": {
-        "totalrounds": 40,
-        "mainsheet": "2022_4G_800",
-        "mainsheetoriginal": "2022_4G_800_Original",
-        "mainoriflag": True,
-        "activitysheet": "2022_4G_5G_Activity",
-        "demandsheet": "2022_4G_800_AD",
-        "titlesubpart": "800 MHz Auctions (CY-2022)",
-        "subtitlesubpartbidactivity": "; Combined for All Bands",
-        "year": 2022,
-        "band": 800,
-        "xdtick": 1,
-        "zmin": 1,
-        "zmax": 5,
-        "zmin_af": 0.5,
-        "zmax_af": 1,
-        "texttempbiddemandactivity": "%{z}",  # Debug 10th June 2024
-        "blocksize": 1.25,
-        "zmin_blk_sec": 0,
-        "zmax_blk_sec": 4
-    },
-    "2022-Band700": {
-        "totalrounds": 40,
-        "mainsheet": "2022_5G_700",
-        "mainsheetoriginal": "2022_5G_700_Original",
-        "mainoriflag": True,
-        "activitysheet": "2022_4G_5G_Activity",
-        "demandsheet": "2022_5G_700_AD",
-        "titlesubpart": "700 MHz Auctions (CY-2022)",
-        "subtitlesubpartbidactivity": "; Combined for All Bands",
-        "year": 2022,
-        "band": 700,
-        "xdtick": 1,
-        "zmin": 1,
-        "zmax": 5,
-        "zmin_af": 0.5,
-        "zmax_af": 1,
-        "texttempbiddemandactivity": "%{z}",  # Debug 10th June 2024
-        "blocksize": 5,
-        "zmin_blk_sec": 0,
-        "zmax_blk_sec": 4
-    },
-    "2021-Band800": {
-        "totalrounds": 6,
-        "mainsheet": "2021_4G_800",
-        "mainsheetoriginal": "2021_4G_800_Original",
-        "mainoriflag": True,
-        "activitysheet": "2021_4G_Activity",
-        "demandsheet": "2021_4G_800_AD",
-        "titlesubpart": "800 MHz Auctions (CY-2021)",
-        "subtitlesubpartbidactivity": "; Combined for All Bands",
-        "year": 2021,
-        "band": 800,
-        "xdtick": 1,
-        "zmin": 1,
-        "zmax": 5,
-        "zmin_af": 0.5,
-        "zmax_af": 1,
-        "texttempbiddemandactivity": "%{z}",
-        "blocksize": 1.25,
-        "zmin_blk_sec": 0,
-        "zmax_blk_sec": 4
-    },
-    "2021-Band900": {
-        "totalrounds": 6,
-        "mainsheet": "2021_4G_900",
-        "mainsheetoriginal": "2021_4G_900_Original",
-        "mainoriflag": True,
-        "activitysheet": "2021_4G_Activity",
-        "demandsheet": "2021_4G_900_AD",
-        "titlesubpart": "900 MHz Auctions (CY-2021)",
-        "subtitlesubpartbidactivity": "; Combined for All Bands",
-        "year": 2021,
-        "band": 900,
-        "xdtick": 1,
-        "zmin": 1,
-        "zmax": 5,
-        "zmin_af": 0.5,
-        "zmax_af": 1,
-        "texttempbiddemandactivity": "%{z}",
-        "blocksize": 0.2,
-        "zmin_blk_sec": 0,
-        "zmax_blk_sec": 4
-    },
-    "2021-Band1800": {
-        "totalrounds": 6,
-        "mainsheet": "2021_4G_1800",
-        "mainsheetoriginal": "2021_4G_1800_Original",
-        "mainoriflag": True,
-        "activitysheet": "2021_4G_Activity",
-        "demandsheet": "2021_4G_1800_AD",
-        "titlesubpart": "1800 MHz Auctions (CY-2021)",
-        "subtitlesubpartbidactivity": "; Combined for All Bands",
-        "year": 2021,
-        "band": 1800,
-        "xdtick": 1,
-        "zmin": 1,
-        "zmax": 5,
-        "zmin_af": 0.5,
-        "zmax_af": 1,
-        "texttempbiddemandactivity": "%{z}",
-        "blocksize": 0.2,
-        "zmin_blk_sec": 0,
-        "zmax_blk_sec": 4
-    },
-    "2021-Band2100": {
-        "totalrounds": 6,
-        "mainsheet": "2021_4G_2100",
-        "mainsheetoriginal": "2021_4G_2100_Original",
-        "mainoriflag": True,
-        "activitysheet": "2021_4G_Activity",
-        "demandsheet": "2021_4G_2100_AD",
-        "titlesubpart": "2100 MHz Auctions (CY-2021)",
-        "subtitlesubpartbidactivity": "; Combined for All Bands",
-        "year": 2021,
-        "band": 2100,
-        "xdtick": 1,
-        "zmin": 1,
-        "zmax": 5,
-        "zmin_af": 0.5,
-        "zmax_af": 1,
-        "texttempbiddemandactivity": "%{z}",
-        "blocksize": 5,
-        "zmin_blk_sec": 0,
-        "zmax_blk_sec": 4
-    },
-    "2021-Band2300": {
-        "totalrounds": 6,
-        "mainsheet": "2021_4G_2300",
-        "mainsheetoriginal": "2021_4G_2300_Original",
-        "mainoriflag": True,
-        "activitysheet": "2021_4G_Activity",
-        "demandsheet": "2021_4G_2300_AD",
-        "titlesubpart": "2300 MHz Auctions (CY-2021)",
-        "subtitlesubpartbidactivity": "; Combined for All Bands",
-        "year": 2021,
-        "band": 2300,
-        "xdtick": 1,
-        "zmin": 1,
-        "zmax": 5,
-        "zmin_af": 0.5,
-        "zmax_af": 1,
-        "texttempbiddemandactivity": "%{z}",
-        "blocksize": 10,
-        "zmin_blk_sec": 0,
-        "zmax_blk_sec": 4
-    },
-    "2016-Band2500": {
-        "totalrounds": 31,
-        "mainsheet": "2016_4G_2500",
-        "mainsheetoriginal": "2016_4G_2500_Original",
-        "mainoriflag": True,
-        "activitysheet": "2016_4G_Activity",
-        "demandsheet": "2016_4G_2500_AD",
-        "titlesubpart": "2500 MHz Auctions (CY-2016)",
-        "subtitlesubpartbidactivity": "; Combined for All Bands",
-        "year": 2016,
-        "band": 2500,
-        "xdtick": 5,
-        "zmin": 1,
-        "zmax": 5,
-        "zmin_af": 0.5,
-        "zmax_af": 1,
-        "texttempbiddemandactivity": "%{z}",
-        "blocksize": 10,
-        "zmin_blk_sec": 0,
-        "zmax_blk_sec": 4
-    },
-    "2016-Band2300": {
-        "totalrounds": 31,
-        "mainsheet": "2016_4G_2300",
-        "mainsheetoriginal": "2016_4G_2300_Original",
-        "mainoriflag": True,
-        "activitysheet": "2016_4G_Activity",
-        "demandsheet": "2016_4G_2300_AD",
-        "titlesubpart": "2300 MHz Auctions (CY-2016)",
-        "subtitlesubpartbidactivity": "; Combined for All Bands",
-        "year": 2016,
-        "band": 2300,
-        "xdtick": 5,
-        "zmin": 1,
-        "zmax": 5,
-        "zmin_af": 0.5,
-        "zmax_af": 1,
-        "texttempbiddemandactivity": "%{z}",
-        "blocksize": 10,
-        "zmin_blk_sec": 0,
-        "zmax_blk_sec": 4
-    },
-    "2016-Band2100": {
-        "totalrounds": 31,
-        "mainsheet": "2016_4G_2100",
-        "mainsheetoriginal": "2016_4G_2100_Original",
-        "mainoriflag": True,
-        "activitysheet": "2016_4G_Activity",
-        "demandsheet": "2016_4G_2100_AD",
-        "titlesubpart": "2100 MHz Auctions (CY-2016)",
-        "subtitlesubpartbidactivity": "; Combined for All Bands",
-        "year": 2016,
-        "band": 2100,
-        "xdtick": 5,
-        "zmin": 1,
-        "zmax": 5,
-        "zmin_af": 0.5,
-        "zmax_af": 1,
-        "texttempbiddemandactivity": "%{z}",
-        "blocksize": 5,
-        "zmin_blk_sec": 0,
-        "zmax_blk_sec": 4
-    },
-     "2016-Band1800": {
-        "totalrounds": 31,
-        "mainsheet": "2016_4G_1800",
-        "mainsheetoriginal": "2016_4G_1800_Original",
-        "mainoriflag": True,
-        "activitysheet": "2016_4G_Activity",
-        "demandsheet": "2016_4G_1800_AD",
-        "titlesubpart": "1800 MHz Auctions (CY-2016)",
-        "subtitlesubpartbidactivity": "; Combined for All Bands",
-        "year": 2016,
-        "band": 1800,
-        "xdtick": 5,
-        "zmin": 1,
-        "zmax": 5,
-        "zmin_af": 0.5,
-        "zmax_af": 1,
-        "texttempbiddemandactivity": "%{z}",
-        "blocksize": 0.2,
-        "zmin_blk_sec": 0,
-        "zmax_blk_sec": 4
-    },
-    "2016-Band800": {
-        "totalrounds": 31,
-        "mainsheet": "2016_4G_800",
-        "mainsheetoriginal": "2016_4G_800_Original",
-        "mainoriflag": True,
-        "activitysheet": "2016_4G_Activity",
-        "demandsheet": "2016_4G_800_AD",
-        "titlesubpart": "800 MHz Auctions (CY-2016)",
-        "subtitlesubpartbidactivity": "; Combined for All Bands",
-        "year": 2016,
-        "band": 800,
-        "xdtick": 5,
-        "zmin": 1,
-        "zmax": 5,
-        "zmin_af": 0.5,
-        "zmax_af": 1,
-        "texttempbiddemandactivity": "%{z}",
-        "blocksize": 1.25,
-        "zmin_blk_sec": 0,
-        "zmax_blk_sec": 4
-    },
-    "2015-Band2100": {
-        "totalrounds": 115,
-        "mainsheet": "2015_3G_2100",
-        "mainsheetoriginal": "2015_3G_2100_Original",
-        "mainoriflag": True,
-        "activitysheet": "2015_2G_3G_Activity",
-        "demandsheet": "2015_3G_2100_AD",
-        "titlesubpart": "2100 MHz Auctions (CY-2015)",
-        "subtitlesubpartbidactivity": "; Combined for All Bands",
-        "year": 2015,
-        "band": 2100,
-        "xdtick": 5,
-        "zmin": 1,
-        "zmax": 5,
-        "zmin_af": 0.5,
-        "zmax_af": 1,
-        "texttempbiddemandactivity": "",
-        "blocksize": 5,
-        "zmin_blk_sec": 0,
-        "zmax_blk_sec": 4
-    },
-     "2015-Band1800": {
-        "totalrounds": 115,
-        "mainsheet": "2015_2G_1800",
-        "mainsheetoriginal": "2015_2G_1800_Original",
-        "mainoriflag": True,
-        "activitysheet": "2015_2G_3G_Activity",
-        "demandsheet": "2015_2G_1800_AD",
-        "titlesubpart": "1800 MHz Auctions (CY-2015)",
-        "subtitlesubpartbidactivity": "; Combined for All Bands",
-        "year": 2015,
-        "band": 1800,
-        "xdtick": 5,
-        "zmin": 1,
-        "zmax": 5,
-        "zmin_af": 0.5,
-        "zmax_af": 1,
-        "texttempbiddemandactivity": "",
-        "blocksize": 0.2,
-        "zmin_blk_sec": 0,
-        "zmax_blk_sec": 4
-    },
-    "2015-Band900": {
-        "totalrounds": 115,
-        "mainsheet": "2015_2G_900",
-        "mainsheetoriginal": "2015_2G_900_Original",
-        "mainoriflag": True,
-        "activitysheet": "2015_2G_3G_Activity",
-        "demandsheet": "2015_2G_900_AD",
-        "titlesubpart": "900 MHz Auctions (CY-2015)",
-        "subtitlesubpartbidactivity": "; Combined for All Bands",
-        "year": 2015,
-        "band": 900,
-        "xdtick": 5,
-        "zmin": 1,
-        "zmax": 5,
-        "zmin_af": 0.5,
-        "zmax_af": 1,
-        "texttempbiddemandactivity": "",
-        "blocksize": 0.2,
-        "zmin_blk_sec": 0,
-        "zmax_blk_sec": 4
-    },
-    "2015-Band800": {
-        "totalrounds": 115,
-        "mainsheet": "2015_2G_800",
-        "mainsheetoriginal": "2015_2G_800_Original",
-        "mainoriflag": True,
-        "activitysheet": "2015_2G_3G_Activity",
-        "demandsheet": "2015_2G_800_AD",
-        "titlesubpart": "800 MHz Auctions (CY-2015)",
-        "subtitlesubpartbidactivity": "; Combined for All Bands",
-        "year": 2015,
-        "band": 800,
-        "xdtick": 5,
-        "zmin": 1,
-        "zmax": 5,
-        "zmin_af": 0.5,
-        "zmax_af": 1,
-        "texttempbiddemandactivity": "",
-        "blocksize": 1.25,
-        "zmin_blk_sec": 0,
-        "zmax_blk_sec": 4
-    },
-    "2014-Band1800": {
-        "totalrounds": 68,
-        "mainsheet": "2014_2G_1800",
-        "mainsheetoriginal": "2014_2G_1800_Original",
-        "mainoriflag": True,
-        "activitysheet": "2014_2G_Activity",
-        "demandsheet": "2014_2G_1800_AD",
-        "titlesubpart": "1800 MHz Auctions (CY-2014)",
-        "subtitlesubpartbidactivity": "; Combined for both 1800 & 900 MHz Bands",
-        "year": 2014,
-        "band": 1800,
-        "xdtick": 5,
-        "zmin": 1,
-        "zmax": 5,
-        "zmin_af": 0.5,
-        "zmax_af": 1,
-        "texttempbiddemandactivity": "",
-        "blocksize": 0.2,
-        "zmin_blk_sec": 0,
-        "zmax_blk_sec": 4
-    },
-    "2014-Band900": {
-        "totalrounds": 68,
-        "mainsheet": "2014_2G_900",
-        "mainsheetoriginal": "2014_2G_900_Original",
-        "mainoriflag": True,
-        "activitysheet": "2014_2G_Activity",
-        "demandsheet": "2014_2G_900_AD",
-        "titlesubpart": "900 MHz Auctions (CY-2014)",
-        "subtitlesubpartbidactivity": "; Combined for both 1800 & 900 MHz Bands",
-        "year": 2014,
-        "band": 900,
-        "xdtick": 5,
-        "zmin": 1,
-        "zmax": 5,
-        "zmin_af": 0.5,
-        "zmax_af": 1,
-        "texttempbiddemandactivity": "",
-        "blocksize": 1,
-        "zmin_blk_sec": 0,
-        "zmax_blk_sec": 4
-    },
-    "2010-Band2100": {
-        "totalrounds": 183,
-        "mainsheet": "2010_3G",
-        "mainoriflag": False,
-        "activitysheet": "2010_3G_Activity",
-        "demandsheet": "2010_3G_AD",
-        "titlesubpart": "2100 MHz Auctions (CY-2010)",
-        "subtitlesubpartbidactivity": "",
-        "year": 2010,
-        "band": 2100,
-        "xdtick": 10,
-        "zmin": 1,
-        "zmax": 5,
-        "zmin_af": 0.5,
-        "zmax_af": 1,
-        "texttempbiddemandactivity": "",
-        "blocksize": 5,
-        "zmin_blk_sec": 0,
-        "zmax_blk_sec": 1
-    },
-    "2010-Band2300": {
-        "totalrounds": 117,
-        "mainsheet": "2010_BWA",
-        "mainoriflag": False,
-        "activitysheet": "2010_BWA_Activity",
-        "demandsheet": "2010_BWA_AD",
-        "titlesubpart": "2300 MHz Auctions (CY-2010)",
-        "subtitlesubpartbidactivity": "",
-        "year": 2010,
-        "band": 2300,
-        "xdtick": 10,
-        "zmin": 1,
-        "zmax": 3,
-        "zmin_af": 0.5,
-        "zmax_af": 1,
-        "texttempbiddemandactivity": "",
-        "blocksize": 20,
-        "zmin_blk_sec": 0,
-        "zmax_blk_sec": 1
-    },
-     "2012-Band1800": {
-        "totalrounds": 14,
-        "mainsheet": "2012_2G_1800",
-        "mainoriflag": False,
-        "activitysheet": "2012_2G_1800_Activity",
-        "demandsheet": "2012_2G_1800_AD",
-        "titlesubpart": "1800 MHz Auctions (CY-2012)",
-        "subtitlesubpartbidactivity": "",
-        "year": 2012,
-        "band": 1800,
-        "xdtick": 1,
-        "zmin": 1,
-        "zmax": 3,
-        "zmin_af": 0.5,
-        "zmax_af": 1,
-        "texttempbiddemandactivity": "%{z}",
-        "blocksize": 1.25,
-        "zmin_blk_sec": 0,
-        "zmax_blk_sec": 4
-    }
+	"2022-Band26000": {
+		"totalrounds": 40,
+		"mainsheet": "2022_5G_26000",
+		"mainsheetoriginal": "2022_5G_26000_Original",
+		"mainoriflag": True,
+		"activitysheet": "2022_4G_5G_Activity",
+		"demandsheet": "2022_5G_26000_AD",
+		"titlesubpart": "26000 MHz Auctions (CY-2022)",
+		"subtitlesubpartbidactivity": "; Combined for All Bands",
+		"year": 2022,
+		"band": 26000,
+		"xdtick": 1,
+		"zmin": 1,
+		"zmax": 5,
+		"zmin_af": 0.5,
+		"zmax_af": 1,
+		"texttempbiddemandactivity": "%{z}",
+		"blocksize": 50,
+		"zmin_blk_sec": 0,
+		"zmax_blk_sec": 4
+	},
+	"2022-Band3500": {
+		"totalrounds": 40,
+		"mainsheet": "2022_5G_3500",
+		"mainsheetoriginal": "2022_5G_3500_Original",
+		"mainoriflag": True,
+		"activitysheet": "2022_4G_5G_Activity",
+		"demandsheet": "2022_5G_3500_AD",
+		"titlesubpart": "3500 MHz Auctions (CY-2022)",
+		"subtitlesubpartbidactivity": "; Combined for All Bands",
+		"year": 2022,
+		"band": 3500,
+		"xdtick": 1,
+		"zmin": 1,
+		"zmax": 5,
+		"zmin_af": 0.5,
+		"zmax_af": 1,
+		"texttempbiddemandactivity": "%{z}",
+		"blocksize": 10,
+		"zmin_blk_sec": 0,
+		"zmax_blk_sec": 4
+	},
+	"2022-Band2500": {
+		"totalrounds": 40,
+		"mainsheet": "2022_4G_2500",
+		"mainsheetoriginal": "2022_4G_2500_Original",
+		"mainoriflag": True,
+		"activitysheet": "2022_4G_5G_Activity",
+		"demandsheet": "2022_4G_2500_AD",
+		"titlesubpart": "2500 MHz Auctions (CY-2022)",
+		"subtitlesubpartbidactivity": "; Combined for All Bands",
+		"year": 2022,
+		"band": 2500,
+		"xdtick": 1,
+		"zmin": 1,
+		"zmax": 5,
+		"zmin_af": 0.5,
+		"zmax_af": 1,
+		"texttempbiddemandactivity": "%{z}",
+		"blocksize": 10,
+		"zmin_blk_sec": 0,
+		"zmax_blk_sec": 4
+	},
+	"2022-Band2100": {
+		"totalrounds": 40,
+		"mainsheet": "2022_4G_2100",
+		"mainsheetoriginal": "2022_4G_2100_Original",
+		"mainoriflag": True,
+		"activitysheet": "2022_4G_5G_Activity",
+		"demandsheet": "2022_4G_2100_AD",
+		"titlesubpart": "2100 MHz Auctions (CY-2022)",
+		"subtitlesubpartbidactivity": "; Combined for All Bands",
+		"year": 2022,
+		"band": 2100,
+		"xdtick": 1,
+		"zmin": 1,
+		"zmax": 5,
+		"zmin_af": 0.5,
+		"zmax_af": 1,
+		"texttempbiddemandactivity": "%{z}",
+		"blocksize": 5,
+		"zmin_blk_sec": 0,
+		"zmax_blk_sec": 4
+	},
+	"2022-Band1800": {
+		"totalrounds": 40,
+		"mainsheet": "2022_4G_1800",
+		"mainsheetoriginal": "2022_4G_1800_Original",
+		"mainoriflag": True,
+		"activitysheet": "2022_4G_5G_Activity",
+		"demandsheet": "2022_4G_1800_AD",
+		"titlesubpart": "1800 MHz Auctions (CY-2022)",
+		"subtitlesubpartbidactivity": "; Combined for All Bands",
+		"year": 2022,
+		"band": 1800,
+		"xdtick": 1,
+		"zmin": 1,
+		"zmax": 5,
+		"zmin_af": 0.5,
+		"zmax_af": 1,
+		"texttempbiddemandactivity": "%{z}",
+		"blocksize": 0.2,
+		"zmin_blk_sec": 0,
+		"zmax_blk_sec": 4
+	},
+	 "2022-Band900": {
+		"totalrounds": 40,
+		"mainsheet": "2022_4G_900",
+		"mainsheetoriginal": "2022_4G_900_Original",
+		"mainoriflag": True,
+		"activitysheet": "2022_4G_5G_Activity",
+		"demandsheet": "2022_4G_900_AD",
+		"titlesubpart": "900 MHz Auctions (CY-2022)",
+		"subtitlesubpartbidactivity": "; Combined for All Bands",
+		"year": 2022,
+		"band": 900,
+		"xdtick": 1,
+		"zmin": 1,
+		"zmax": 5,
+		"zmin_af": 0.5,
+		"zmax_af": 1,
+		"texttempbiddemandactivity": "%{z}",  # Debug 10th June 2024
+		"blocksize": 0.2,
+		"zmin_blk_sec": 0,
+		"zmax_blk_sec": 4
+	},
+	"2022-Band800": {
+		"totalrounds": 40,
+		"mainsheet": "2022_4G_800",
+		"mainsheetoriginal": "2022_4G_800_Original",
+		"mainoriflag": True,
+		"activitysheet": "2022_4G_5G_Activity",
+		"demandsheet": "2022_4G_800_AD",
+		"titlesubpart": "800 MHz Auctions (CY-2022)",
+		"subtitlesubpartbidactivity": "; Combined for All Bands",
+		"year": 2022,
+		"band": 800,
+		"xdtick": 1,
+		"zmin": 1,
+		"zmax": 5,
+		"zmin_af": 0.5,
+		"zmax_af": 1,
+		"texttempbiddemandactivity": "%{z}",  # Debug 10th June 2024
+		"blocksize": 1.25,
+		"zmin_blk_sec": 0,
+		"zmax_blk_sec": 4
+	},
+	"2022-Band700": {
+		"totalrounds": 40,
+		"mainsheet": "2022_5G_700",
+		"mainsheetoriginal": "2022_5G_700_Original",
+		"mainoriflag": True,
+		"activitysheet": "2022_4G_5G_Activity",
+		"demandsheet": "2022_5G_700_AD",
+		"titlesubpart": "700 MHz Auctions (CY-2022)",
+		"subtitlesubpartbidactivity": "; Combined for All Bands",
+		"year": 2022,
+		"band": 700,
+		"xdtick": 1,
+		"zmin": 1,
+		"zmax": 5,
+		"zmin_af": 0.5,
+		"zmax_af": 1,
+		"texttempbiddemandactivity": "%{z}",  # Debug 10th June 2024
+		"blocksize": 5,
+		"zmin_blk_sec": 0,
+		"zmax_blk_sec": 4
+	},
+	"2021-Band800": {
+		"totalrounds": 6,
+		"mainsheet": "2021_4G_800",
+		"mainsheetoriginal": "2021_4G_800_Original",
+		"mainoriflag": True,
+		"activitysheet": "2021_4G_Activity",
+		"demandsheet": "2021_4G_800_AD",
+		"titlesubpart": "800 MHz Auctions (CY-2021)",
+		"subtitlesubpartbidactivity": "; Combined for All Bands",
+		"year": 2021,
+		"band": 800,
+		"xdtick": 1,
+		"zmin": 1,
+		"zmax": 5,
+		"zmin_af": 0.5,
+		"zmax_af": 1,
+		"texttempbiddemandactivity": "%{z}",
+		"blocksize": 1.25,
+		"zmin_blk_sec": 0,
+		"zmax_blk_sec": 4
+	},
+	"2021-Band900": {
+		"totalrounds": 6,
+		"mainsheet": "2021_4G_900",
+		"mainsheetoriginal": "2021_4G_900_Original",
+		"mainoriflag": True,
+		"activitysheet": "2021_4G_Activity",
+		"demandsheet": "2021_4G_900_AD",
+		"titlesubpart": "900 MHz Auctions (CY-2021)",
+		"subtitlesubpartbidactivity": "; Combined for All Bands",
+		"year": 2021,
+		"band": 900,
+		"xdtick": 1,
+		"zmin": 1,
+		"zmax": 5,
+		"zmin_af": 0.5,
+		"zmax_af": 1,
+		"texttempbiddemandactivity": "%{z}",
+		"blocksize": 0.2,
+		"zmin_blk_sec": 0,
+		"zmax_blk_sec": 4
+	},
+	"2021-Band1800": {
+		"totalrounds": 6,
+		"mainsheet": "2021_4G_1800",
+		"mainsheetoriginal": "2021_4G_1800_Original",
+		"mainoriflag": True,
+		"activitysheet": "2021_4G_Activity",
+		"demandsheet": "2021_4G_1800_AD",
+		"titlesubpart": "1800 MHz Auctions (CY-2021)",
+		"subtitlesubpartbidactivity": "; Combined for All Bands",
+		"year": 2021,
+		"band": 1800,
+		"xdtick": 1,
+		"zmin": 1,
+		"zmax": 5,
+		"zmin_af": 0.5,
+		"zmax_af": 1,
+		"texttempbiddemandactivity": "%{z}",
+		"blocksize": 0.2,
+		"zmin_blk_sec": 0,
+		"zmax_blk_sec": 4
+	},
+	"2021-Band2100": {
+		"totalrounds": 6,
+		"mainsheet": "2021_4G_2100",
+		"mainsheetoriginal": "2021_4G_2100_Original",
+		"mainoriflag": True,
+		"activitysheet": "2021_4G_Activity",
+		"demandsheet": "2021_4G_2100_AD",
+		"titlesubpart": "2100 MHz Auctions (CY-2021)",
+		"subtitlesubpartbidactivity": "; Combined for All Bands",
+		"year": 2021,
+		"band": 2100,
+		"xdtick": 1,
+		"zmin": 1,
+		"zmax": 5,
+		"zmin_af": 0.5,
+		"zmax_af": 1,
+		"texttempbiddemandactivity": "%{z}",
+		"blocksize": 5,
+		"zmin_blk_sec": 0,
+		"zmax_blk_sec": 4
+	},
+	"2021-Band2300": {
+		"totalrounds": 6,
+		"mainsheet": "2021_4G_2300",
+		"mainsheetoriginal": "2021_4G_2300_Original",
+		"mainoriflag": True,
+		"activitysheet": "2021_4G_Activity",
+		"demandsheet": "2021_4G_2300_AD",
+		"titlesubpart": "2300 MHz Auctions (CY-2021)",
+		"subtitlesubpartbidactivity": "; Combined for All Bands",
+		"year": 2021,
+		"band": 2300,
+		"xdtick": 1,
+		"zmin": 1,
+		"zmax": 5,
+		"zmin_af": 0.5,
+		"zmax_af": 1,
+		"texttempbiddemandactivity": "%{z}",
+		"blocksize": 10,
+		"zmin_blk_sec": 0,
+		"zmax_blk_sec": 4
+	},
+	"2016-Band2500": {
+		"totalrounds": 31,
+		"mainsheet": "2016_4G_2500",
+		"mainsheetoriginal": "2016_4G_2500_Original",
+		"mainoriflag": True,
+		"activitysheet": "2016_4G_Activity",
+		"demandsheet": "2016_4G_2500_AD",
+		"titlesubpart": "2500 MHz Auctions (CY-2016)",
+		"subtitlesubpartbidactivity": "; Combined for All Bands",
+		"year": 2016,
+		"band": 2500,
+		"xdtick": 5,
+		"zmin": 1,
+		"zmax": 5,
+		"zmin_af": 0.5,
+		"zmax_af": 1,
+		"texttempbiddemandactivity": "%{z}",
+		"blocksize": 10,
+		"zmin_blk_sec": 0,
+		"zmax_blk_sec": 4
+	},
+	"2016-Band2300": {
+		"totalrounds": 31,
+		"mainsheet": "2016_4G_2300",
+		"mainsheetoriginal": "2016_4G_2300_Original",
+		"mainoriflag": True,
+		"activitysheet": "2016_4G_Activity",
+		"demandsheet": "2016_4G_2300_AD",
+		"titlesubpart": "2300 MHz Auctions (CY-2016)",
+		"subtitlesubpartbidactivity": "; Combined for All Bands",
+		"year": 2016,
+		"band": 2300,
+		"xdtick": 5,
+		"zmin": 1,
+		"zmax": 5,
+		"zmin_af": 0.5,
+		"zmax_af": 1,
+		"texttempbiddemandactivity": "%{z}",
+		"blocksize": 10,
+		"zmin_blk_sec": 0,
+		"zmax_blk_sec": 4
+	},
+	"2016-Band2100": {
+		"totalrounds": 31,
+		"mainsheet": "2016_4G_2100",
+		"mainsheetoriginal": "2016_4G_2100_Original",
+		"mainoriflag": True,
+		"activitysheet": "2016_4G_Activity",
+		"demandsheet": "2016_4G_2100_AD",
+		"titlesubpart": "2100 MHz Auctions (CY-2016)",
+		"subtitlesubpartbidactivity": "; Combined for All Bands",
+		"year": 2016,
+		"band": 2100,
+		"xdtick": 5,
+		"zmin": 1,
+		"zmax": 5,
+		"zmin_af": 0.5,
+		"zmax_af": 1,
+		"texttempbiddemandactivity": "%{z}",
+		"blocksize": 5,
+		"zmin_blk_sec": 0,
+		"zmax_blk_sec": 4
+	},
+	 "2016-Band1800": {
+		"totalrounds": 31,
+		"mainsheet": "2016_4G_1800",
+		"mainsheetoriginal": "2016_4G_1800_Original",
+		"mainoriflag": True,
+		"activitysheet": "2016_4G_Activity",
+		"demandsheet": "2016_4G_1800_AD",
+		"titlesubpart": "1800 MHz Auctions (CY-2016)",
+		"subtitlesubpartbidactivity": "; Combined for All Bands",
+		"year": 2016,
+		"band": 1800,
+		"xdtick": 5,
+		"zmin": 1,
+		"zmax": 5,
+		"zmin_af": 0.5,
+		"zmax_af": 1,
+		"texttempbiddemandactivity": "%{z}",
+		"blocksize": 0.2,
+		"zmin_blk_sec": 0,
+		"zmax_blk_sec": 4
+	},
+	"2016-Band800": {
+		"totalrounds": 31,
+		"mainsheet": "2016_4G_800",
+		"mainsheetoriginal": "2016_4G_800_Original",
+		"mainoriflag": True,
+		"activitysheet": "2016_4G_Activity",
+		"demandsheet": "2016_4G_800_AD",
+		"titlesubpart": "800 MHz Auctions (CY-2016)",
+		"subtitlesubpartbidactivity": "; Combined for All Bands",
+		"year": 2016,
+		"band": 800,
+		"xdtick": 5,
+		"zmin": 1,
+		"zmax": 5,
+		"zmin_af": 0.5,
+		"zmax_af": 1,
+		"texttempbiddemandactivity": "%{z}",
+		"blocksize": 1.25,
+		"zmin_blk_sec": 0,
+		"zmax_blk_sec": 4
+	},
+	"2015-Band2100": {
+		"totalrounds": 115,
+		"mainsheet": "2015_3G_2100",
+		"mainsheetoriginal": "2015_3G_2100_Original",
+		"mainoriflag": True,
+		"activitysheet": "2015_2G_3G_Activity",
+		"demandsheet": "2015_3G_2100_AD",
+		"titlesubpart": "2100 MHz Auctions (CY-2015)",
+		"subtitlesubpartbidactivity": "; Combined for All Bands",
+		"year": 2015,
+		"band": 2100,
+		"xdtick": 5,
+		"zmin": 1,
+		"zmax": 5,
+		"zmin_af": 0.5,
+		"zmax_af": 1,
+		"texttempbiddemandactivity": "",
+		"blocksize": 5,
+		"zmin_blk_sec": 0,
+		"zmax_blk_sec": 4
+	},
+	 "2015-Band1800": {
+		"totalrounds": 115,
+		"mainsheet": "2015_2G_1800",
+		"mainsheetoriginal": "2015_2G_1800_Original",
+		"mainoriflag": True,
+		"activitysheet": "2015_2G_3G_Activity",
+		"demandsheet": "2015_2G_1800_AD",
+		"titlesubpart": "1800 MHz Auctions (CY-2015)",
+		"subtitlesubpartbidactivity": "; Combined for All Bands",
+		"year": 2015,
+		"band": 1800,
+		"xdtick": 5,
+		"zmin": 1,
+		"zmax": 5,
+		"zmin_af": 0.5,
+		"zmax_af": 1,
+		"texttempbiddemandactivity": "",
+		"blocksize": 0.2,
+		"zmin_blk_sec": 0,
+		"zmax_blk_sec": 4
+	},
+	"2015-Band900": {
+		"totalrounds": 115,
+		"mainsheet": "2015_2G_900",
+		"mainsheetoriginal": "2015_2G_900_Original",
+		"mainoriflag": True,
+		"activitysheet": "2015_2G_3G_Activity",
+		"demandsheet": "2015_2G_900_AD",
+		"titlesubpart": "900 MHz Auctions (CY-2015)",
+		"subtitlesubpartbidactivity": "; Combined for All Bands",
+		"year": 2015,
+		"band": 900,
+		"xdtick": 5,
+		"zmin": 1,
+		"zmax": 5,
+		"zmin_af": 0.5,
+		"zmax_af": 1,
+		"texttempbiddemandactivity": "",
+		"blocksize": 0.2,
+		"zmin_blk_sec": 0,
+		"zmax_blk_sec": 4
+	},
+	"2015-Band800": {
+		"totalrounds": 115,
+		"mainsheet": "2015_2G_800",
+		"mainsheetoriginal": "2015_2G_800_Original",
+		"mainoriflag": True,
+		"activitysheet": "2015_2G_3G_Activity",
+		"demandsheet": "2015_2G_800_AD",
+		"titlesubpart": "800 MHz Auctions (CY-2015)",
+		"subtitlesubpartbidactivity": "; Combined for All Bands",
+		"year": 2015,
+		"band": 800,
+		"xdtick": 5,
+		"zmin": 1,
+		"zmax": 5,
+		"zmin_af": 0.5,
+		"zmax_af": 1,
+		"texttempbiddemandactivity": "",
+		"blocksize": 1.25,
+		"zmin_blk_sec": 0,
+		"zmax_blk_sec": 4
+	},
+	"2014-Band1800": {
+		"totalrounds": 68,
+		"mainsheet": "2014_2G_1800",
+		"mainsheetoriginal": "2014_2G_1800_Original",
+		"mainoriflag": True,
+		"activitysheet": "2014_2G_Activity",
+		"demandsheet": "2014_2G_1800_AD",
+		"titlesubpart": "1800 MHz Auctions (CY-2014)",
+		"subtitlesubpartbidactivity": "; Combined for both 1800 & 900 MHz Bands",
+		"year": 2014,
+		"band": 1800,
+		"xdtick": 5,
+		"zmin": 1,
+		"zmax": 5,
+		"zmin_af": 0.5,
+		"zmax_af": 1,
+		"texttempbiddemandactivity": "",
+		"blocksize": 0.2,
+		"zmin_blk_sec": 0,
+		"zmax_blk_sec": 4
+	},
+	"2014-Band900": {
+		"totalrounds": 68,
+		"mainsheet": "2014_2G_900",
+		"mainsheetoriginal": "2014_2G_900_Original",
+		"mainoriflag": True,
+		"activitysheet": "2014_2G_Activity",
+		"demandsheet": "2014_2G_900_AD",
+		"titlesubpart": "900 MHz Auctions (CY-2014)",
+		"subtitlesubpartbidactivity": "; Combined for both 1800 & 900 MHz Bands",
+		"year": 2014,
+		"band": 900,
+		"xdtick": 5,
+		"zmin": 1,
+		"zmax": 5,
+		"zmin_af": 0.5,
+		"zmax_af": 1,
+		"texttempbiddemandactivity": "",
+		"blocksize": 1,
+		"zmin_blk_sec": 0,
+		"zmax_blk_sec": 4
+	},
+	"2010-Band2100": {
+		"totalrounds": 183,
+		"mainsheet": "2010_3G",
+		"mainoriflag": False,
+		"activitysheet": "2010_3G_Activity",
+		"demandsheet": "2010_3G_AD",
+		"titlesubpart": "2100 MHz Auctions (CY-2010)",
+		"subtitlesubpartbidactivity": "",
+		"year": 2010,
+		"band": 2100,
+		"xdtick": 10,
+		"zmin": 1,
+		"zmax": 5,
+		"zmin_af": 0.5,
+		"zmax_af": 1,
+		"texttempbiddemandactivity": "",
+		"blocksize": 5,
+		"zmin_blk_sec": 0,
+		"zmax_blk_sec": 1
+	},
+	"2010-Band2300": {
+		"totalrounds": 117,
+		"mainsheet": "2010_BWA",
+		"mainoriflag": False,
+		"activitysheet": "2010_BWA_Activity",
+		"demandsheet": "2010_BWA_AD",
+		"titlesubpart": "2300 MHz Auctions (CY-2010)",
+		"subtitlesubpartbidactivity": "",
+		"year": 2010,
+		"band": 2300,
+		"xdtick": 10,
+		"zmin": 1,
+		"zmax": 3,
+		"zmin_af": 0.5,
+		"zmax_af": 1,
+		"texttempbiddemandactivity": "",
+		"blocksize": 20,
+		"zmin_blk_sec": 0,
+		"zmax_blk_sec": 1
+	},
+	 "2012-Band1800": {
+		"totalrounds": 14,
+		"mainsheet": "2012_2G_1800",
+		"mainoriflag": False,
+		"activitysheet": "2012_2G_1800_Activity",
+		"demandsheet": "2012_2G_1800_AD",
+		"titlesubpart": "1800 MHz Auctions (CY-2012)",
+		"subtitlesubpartbidactivity": "",
+		"year": 2012,
+		"band": 1800,
+		"xdtick": 1,
+		"zmin": 1,
+		"zmax": 3,
+		"zmin_af": 0.5,
+		"zmax_af": 1,
+		"texttempbiddemandactivity": "%{z}",
+		"blocksize": 1.25,
+		"zmin_blk_sec": 0,
+		"zmax_blk_sec": 4
+	}
  
 }
 
@@ -872,34 +872,34 @@ Auction_Year_Band_Features = {
 
 #Wrapper Function Auction BandWise Selected Feature
 def get_value(feature_dict, feature_key, var_name):
-    """
-    Retrieves a value from a nested dictionary using the variable name as the key.
-    Args:
-    - feature_dict (dict): The main dictionary containing feature data.
-    - feature_key (str): The key to access the specific feature data.
-    - var_name (str): The variable name used as the key in the nested dictionary.
-    Returns:
-    - The value from the nested dictionary or 'Key not found' if the key does not exist.
-    """
-    return feature_dict.get(feature_key, {}).get(var_name, "Key not found")
+	"""
+	Retrieves a value from a nested dictionary using the variable name as the key.
+	Args:
+	- feature_dict (dict): The main dictionary containing feature data.
+	- feature_key (str): The key to access the specific feature data.
+	- var_name (str): The variable name used as the key in the nested dictionary.
+	Returns:
+	- The value from the nested dictionary or 'Key not found' if the key does not exist.
+	"""
+	return feature_dict.get(feature_key, {}).get(var_name, "Key not found")
 
 
 #function to count number of items in a list and outputs the result as dictionary
 #Used to extract data table for Spectrum Layout Dimension when it is filtered by Operators      	   
 def count_items_in_dataframe(df):
-    counts = {}
+	counts = {}
 
-    for col in df.columns:
-        for idx, item in enumerate(df[col]):
-            if isinstance(item, (int, float)) and not pd.isnull(item):
-                # item_key = str(item)  # Convert float item to string
-                item_key = int(item) #adding this item solved the problem
-                if item_key not in counts:
-                    counts[item_key] = [0] * len(df)
-                counts[item_key][idx] += 1
+	for col in df.columns:
+		for idx, item in enumerate(df[col]):
+			if isinstance(item, (int, float)) and not pd.isnull(item):
+				# item_key = str(item)  # Convert float item to string
+				item_key = int(item) #adding this item solved the problem
+				if item_key not in counts:
+					counts[item_key] = [0] * len(df)
+				counts[item_key][idx] += 1
 
-    df_counts = pd.DataFrame.from_dict(counts, orient='columns')
-    return df_counts
+	df_counts = pd.DataFrame.from_dict(counts, orient='columns')
+	return df_counts
 
 
 #function used to prepare the color scale for the freqmap
@@ -1014,10 +1014,10 @@ def coltostr(df):
 #This functions adds dummy columns to the dataframe for auction failed years
 @st.cache_resource
 def adddummycols(df,col):
-    df[col]="NA  " # space with NA is delibelitratly added.
-    cols = sorted(df.columns)
-    df =df[cols]
-    return df
+	df[col]="NA  " # space with NA is delibelitratly added.
+	cols = sorted(df.columns)
+	df =df[cols]
+	return df
 
 #This function maps the year in which the spectrum was acquired
 @st.cache_resource
@@ -1052,33 +1052,33 @@ def htext_specmap_freq_layout(sf):
 			else:
 				expiry = "NA"
 			try:
-			    auction_year = round(ayear.loc[yy,round(xx-xaxisadj_dict[Band],3)])
+				auction_year = round(ayear.loc[yy,round(xx-xaxisadj_dict[Band],3)])
 			except:
-			    auction_year ="NA"
+				auction_year ="NA"
 				
 			operatornew = sff.values[yi][xi]
 			operatorold = of.values[yi][xi]
 			bandwidth = bandf.values[yi][xi]
 			hovertext[-1].append(
-					    'StartFreq: {} MHz\
-					     <br>Channel Size : {} MHz\
-					     <br>Circle : {}\
-				             <br>Operator: {}\
-					     <br>Total BW: {} MHz\
-					     <br>ChExp In: {} Years\
-					     <br>Acquired In: {} by {}'
+						'StartFreq: {} MHz\
+						 <br>Channel Size : {} MHz\
+						 <br>Circle : {}\
+							 <br>Operator: {}\
+						 <br>Total BW: {} MHz\
+						 <br>ChExp In: {} Years\
+						 <br>Acquired In: {} by {}'
 
-				     .format(
-					    round(xx-xaxisadj_dict[Band],2),
-					    channelsize_dict[Band],
-					    state_dict.get(yy),
-					    operatornew,
-					    bandwidth,
-					    expiry,
-					    auction_year,
-					    operatorold,
-					    )
-					    )
+					 .format(
+						round(xx-xaxisadj_dict[Band],2),
+						channelsize_dict[Band],
+						state_dict.get(yy),
+						operatornew,
+						bandwidth,
+						expiry,
+						auction_year,
+						operatorold,
+						)
+						)
 	return hovertext
 
 #This function processes the hovertext for Feature expiry map, and SubFeature Freq Layout
@@ -1093,34 +1093,34 @@ def htext_expmap_freq_layout(sf):
 			else:
 				expiry = "NA"
 			try:
-			    auction_year = round(ayear.loc[yy,round(xx-xaxisadj_dict[Band],3)])
+				auction_year = round(ayear.loc[yy,round(xx-xaxisadj_dict[Band],3)])
 			except:
-			    auction_year ="NA"
+				auction_year ="NA"
 			operatornew = sff.values[yi][xi]
 			operatorold = of.values[yi][xi]
 			bandwidthexpiring = bandexpf.values[yi][xi]
 			bandwidth = bandf.values[yi][xi]
 			hovertext[-1].append(
-					    'StartFreq: {} MHz\
-					     <br>Channel Size : {} MHz\
-					     <br>Circle : {}\
-				             <br>Operator: {}\
-					     <br>Expiring BW: {} of {} MHz\
-					     <br>Expiring In: {} Years\
-					     <br>Acquired In: {} by {}'
+						'StartFreq: {} MHz\
+						 <br>Channel Size : {} MHz\
+						 <br>Circle : {}\
+							 <br>Operator: {}\
+						 <br>Expiring BW: {} of {} MHz\
+						 <br>Expiring In: {} Years\
+						 <br>Acquired In: {} by {}'
 
-				     .format(
-					    round(xx-xaxisadj_dict[Band],2),
-					    channelsize_dict[Band],
-					    state_dict.get(yy),
-					    operatornew,
-					    bandwidthexpiring,
-					    bandwidth,
-					    expiry,
-					    auction_year,
-					    operatorold,
-					    )
-					    )
+					 .format(
+						round(xx-xaxisadj_dict[Band],2),
+						channelsize_dict[Band],
+						state_dict.get(yy),
+						operatornew,
+						bandwidthexpiring,
+						bandwidth,
+						expiry,
+						auction_year,
+						operatorold,
+						)
+						)
 	return hovertext
 
 #This function is used for processing hovertext for Feature expiry map, and subfeature Yearly Trends with operator selection "All"
@@ -1147,15 +1147,15 @@ def htext_expmap_yearly_trends_with_all_select(bwf,eff):
 				TotalBW = round(sum([float(x) for x in TotalBW]),2)
 
 			hovertext[-1].append(
-					    '{} : Expiry in {} Years\
-					    <br />Break Up : {}'
+						'{} : Expiry in {} Years\
+						<br />Break Up : {}'
 
-				     .format(
-					    state_dict.get(yy),
-					    xx, 
-					    opwiseexpMHz,
-					    )
-					    )
+					 .format(
+						state_dict.get(yy),
+						xx, 
+						opwiseexpMHz,
+						)
+						)
 	return hovertext
 
 
@@ -1168,14 +1168,14 @@ def htext_expmap_yearly_trends_with_op_select(eff):
 		for xi, xx in enumerate(eff.columns):
 
 			hovertext[-1].append(
-					    'Circle: {}\
-					    <br />Expiring In: {} Years'
+						'Circle: {}\
+						<br />Expiring In: {} Years'
 
-				     .format(
-					    state_dict.get(yy),
-					    xx, 
-					    )
-					    )
+					 .format(
+						state_dict.get(yy),
+						xx, 
+						)
+						)
 	return hovertext
 	
 #This if for processing for hovertext for the Feature Auction Map
@@ -1193,22 +1193,22 @@ def htext_auctionmap(dff):
 			unsoldmhz = unsoldspectrum.values[yi][xi]
 
 			hovertext[-1].append(
-					    '{} , {}\
-					     <br / >RP/AP: Rs {}/ {} Cr/MHz\
-					     <br / >Offered/Sold/Unsold: {} / {} / {} MHz\
-					     <br>Winners: {}'
+						'{} , {}\
+						 <br / >RP/AP: Rs {}/ {} Cr/MHz\
+						 <br / >Offered/Sold/Unsold: {} / {} / {} MHz\
+						 <br>Winners: {}'
 
-				     .format( 
-					    state_dict.get(yy),
-					    xx,
-					    resprice,
-					    aucprice,
-					    round(offmhz,2),
-					    round(soldmhz,2),
-					    round(unsoldmhz,2),
-					    winners,
-					    )
-					    )
+					 .format( 
+						state_dict.get(yy),
+						xx,
+						resprice,
+						aucprice,
+						round(offmhz,2),
+						round(soldmhz,2),
+						round(unsoldmhz,2),
+						winners,
+						)
+						)
 	return hovertext
 
 
@@ -1251,18 +1251,18 @@ def htext_colmatrix_spec_map_op_hold_share(dfff, selected_operators, operatorlis
 			colormatrix = list(colormatrix.values)
 			
 			hovertext[-1].append(
-					    'Circle: {}\
-					     <br>Operator: {}\
-					     <br>Holdings: {} MHz\
-					     <br>Market Share: {} %'
+						'Circle: {}\
+						 <br>Operator: {}\
+						 <br>Holdings: {} MHz\
+						 <br>Market Share: {} %'
 
-				     .format( 
-					    state_dict.get(yy),
-					    xx,
-					    round(holdings,2),
-					    round(share*100,2),
-					    )
-					    )
+					 .format( 
+						state_dict.get(yy),
+						xx,
+						round(holdings,2),
+						round(share*100,2),
+						)
+						)
 	return hovertext, colormatrix
 
 
@@ -1301,24 +1301,24 @@ def htext_colmatrix_auction_year_band_metric(df1):
 			colormatrix = list(colormatrix.values)
 			
 			hovertext[-1].append(
-					    'Circle: {}\
-					     <br>Band: {} MHz\
-					     <br>Reserve Price: {} Rs Cr/MHz\
-					     <br>Auction Price: {} Rs Cr/MHz\
-					     <br>Offered: {} MHz\
-					     <br>Sold: {} MHz\
-					     <br>Unsold: {} MHz'
+						'Circle: {}\
+						 <br>Band: {} MHz\
+						 <br>Reserve Price: {} Rs Cr/MHz\
+						 <br>Auction Price: {} Rs Cr/MHz\
+						 <br>Offered: {} MHz\
+						 <br>Sold: {} MHz\
+						 <br>Unsold: {} MHz'
 
-				     .format( 
-					    state_dict.get(yy),
-					    xx,
-					    round(resprice,1),
-					    round(aucprice,1),
-					    round(offered,2),
-					    round(sold,2),
-					    round(unsold,2),
-					    )
-					    )
+					 .format( 
+						state_dict.get(yy),
+						xx,
+						round(resprice,1),
+						round(aucprice,1),
+						round(offered,2),
+						round(sold,2),
+						round(unsold,2),
+						)
+						)
 	return hovertext, colormatrix
 
 #processing for hovertext and colormatrix for Auction Year, Operator Metric, SubFeatures - Total Outflow, Total Purchase
@@ -1375,18 +1375,18 @@ def htext_colmatrix_auction_year_operator_metric(df1, selectedbands, SelectedSub
 			colormatrix = list(colormatrix.values)
 			
 			hovertext[-1].append(
-					    'Circle: {}\
-					     <br>Operator: {}\
-					     <br>Outflow: {} Rs Cr\
-					     <br>Purchase: {} MHz'
+						'Circle: {}\
+						 <br>Operator: {}\
+						 <br>Outflow: {} Rs Cr\
+						 <br>Purchase: {} MHz'
 
-				     .format( 
-					    state_dict.get(yy),
-					    xx,
-					    round(outflow,0),
-					    round(purchase,2),
-					    )
-					    )
+					 .format( 
+						state_dict.get(yy),
+						xx,
+						round(outflow,0),
+						round(purchase,2),
+						)
+						)
 	return hovertext, colormatrix
 
 
@@ -1406,20 +1406,20 @@ def htext_businessdata_FinancialSPWise(df_finmetric,df_finmetric_prec,df_finmetr
 			increments = df_finmetricINC.loc[yy,xx]
 
 			hovertext[-1].append(
-					    'Bidder: {}\
-					    <br>Date: {}\
-					    <br>Abs Value : {} Rs K Cr\
-					    <br>Perc : {} of Total \
-					    <br>Increments : {} Rs K Cr'
+						'Bidder: {}\
+						<br>Date: {}\
+						<br>Abs Value : {} Rs K Cr\
+						<br>Perc : {} of Total \
+						<br>Increments : {} Rs K Cr'
 				
-				     .format( 
-					    yy,
-					    xx,
-					    absvalue,
-					    percentoftotal,
-					    round(increments,2),
-					    )
-					    )
+					 .format( 
+						yy,
+						xx,
+						absvalue,
+						percentoftotal,
+						round(increments,2),
+						)
+						)
 
 	return hovertext
 
@@ -1468,24 +1468,24 @@ def htext_colormatrix_auctiondata_2010_3G_BWA_BidsCircleWise(dfbidcirclwise, dft
 			list_col.append(ccode)
 
 			hovertext[-1].append(
-					    'Bidder: {}\
-					    <br>Circle: {}\
-					    <br>Agg Bids : {} Nos\
-					    <br>Agg Bids: {} % of Total\
-					    <br>Prov Result : {}\
-					    <br>Prov Rank: {}\
-					    <br>Prov BLKs: {}'
+						'Bidder: {}\
+						<br>Circle: {}\
+						<br>Agg Bids : {} Nos\
+						<br>Agg Bids: {} % of Total\
+						<br>Prov Result : {}\
+						<br>Prov Rank: {}\
+						<br>Prov BLKs: {}'
 
-				     .format( 
-					    yy,
-					    state_dict[xx],
-					    totalbidsagg,
-					    round(totalbissperc,2),
-					    result,
-					    finalrank,
-					    round(totalblksrdend,0),
-					    )
-					    )
+					 .format( 
+						yy,
+						state_dict[xx],
+						totalbidsagg,
+						round(totalbissperc,2),
+						result,
+						finalrank,
+						round(totalblksrdend,0),
+						)
+						)
 
 		dict_col[yy]=list_col
 		dict_result[yy]=list_result
@@ -1524,22 +1524,22 @@ def htext_colormatrix_auctiondata_2010_3G_BWA_ProvWinningBid(dfrp, dftemp, pwbty
 			list_col.append(ccode)
 
 			hovertext[-1].append(
-					    'Bidder: {}\
-					    <br>Circle: {}\
-					    <br>PWB : {} Rs Cr\
-					    <br>PWB / Reserve P: {}\
-					    <br>PWB Type : {}\
-					    <br>Round No: {}'
+						'Bidder: {}\
+						<br>Circle: {}\
+						<br>PWB : {} Rs Cr\
+						<br>PWB / Reserve P: {}\
+						<br>PWB Type : {}\
+						<br>Round No: {}'
 
-				     .format( 
-					    yy,
-					    state_dict[xx],
-					    pwb,
-					    pwbmulofrp,
-					    pwbtype,
-					    round_number,
-					    )
-					    )
+					 .format( 
+						yy,
+						state_dict[xx],
+						pwb,
+						pwbmulofrp,
+						pwbtype,
+						round_number,
+						)
+						)
 
 		dict_col[yy]=list_col
 
@@ -1571,21 +1571,21 @@ def htext_auctiondata_2010_3G_BWA_DemandIntensity(dfbid,ADPrecOfBlksforSale):
 			excessdemand = dfbidaED.loc[yy,xx]
 
 			hovertext[-1].append(
-					    'Circle: {}\
-					    <br>Round No: {}\
-					    <br>Agg Demand : {} Blocks\
-					    <br>Ratio (AD/Total) : {} \
-					    <br>Excess Demand : {} Blocks'
+						'Circle: {}\
+						<br>Round No: {}\
+						<br>Agg Demand : {} Blocks\
+						<br>Ratio (AD/Total) : {} \
+						<br>Excess Demand : {} Blocks'
 				
 
-				     .format( 
-					    yy,
-					    xx,
-					    aggdemand,
-					    aggdemperc,
-					    excessdemand,
-					    )
-					    )
+					 .format( 
+						yy,
+						xx,
+						aggdemand,
+						aggdemperc,
+						excessdemand,
+						)
+						)
 
 	return hovertext
 
@@ -1620,18 +1620,18 @@ def htext_auctiondata_2010_3G_BWA_BiddingActivity(dfbid, column_name):
 
 
 			hovertext[-1].append(
-					    'Bidder: {}\
-					    <br>Round No: {}\
-					    <br>Points in Play : {} Nos\
-					    <br>Ratio (Actual/Initial) : {}'
+						'Bidder: {}\
+						<br>Round No: {}\
+						<br>Points in Play : {} Nos\
+						<br>Ratio (Actual/Initial) : {}'
 				
-				     .format( 
-					    yy,
-					    xx,
-					    pointsinplay,
-					    pointsratio,
-					    )
-					    )
+					 .format( 
+						yy,
+						xx,
+						pointsinplay,
+						pointsratio,
+						)
+						)
 
 	return hovertext
 
@@ -1657,18 +1657,18 @@ def htext_auctiondata_2010_3G_BWA_PointsLost(dfbidactivity, dfbidactivityperc):
 
 
 			hovertext[-1].append(
-					    'Bidder: {}\
-					    <br>Round No: {}\
-					    <br>Points Lost : {} Nos\
-					    <br>Points Lost : {} % of Initial'
+						'Bidder: {}\
+						<br>Round No: {}\
+						<br>Points Lost : {} Nos\
+						<br>Points Lost : {} % of Initial'
 				
-				     .format( 
-					    yy,
-					    xx,
-					    pointslost,
-					    pointslostperc,
-					    )
-					    )
+					 .format( 
+						yy,
+						xx,
+						pointslost,
+						pointslostperc,
+						)
+						)
 
 	return hovertext
 
@@ -1694,18 +1694,18 @@ def htext_auctiondata_2010_3G_BWA_BlocksAllocated(dftemp):
 
 
 			hovertext[-1].append(
-					    'Bidder: {}\
-					    <br>Circle: {}\
-					    <br>BLKs Allocated : {} Nos\
-					    <br>Spectrum : {} MHz'
+						'Bidder: {}\
+						<br>Circle: {}\
+						<br>BLKs Allocated : {} Nos\
+						<br>Spectrum : {} MHz'
 				
-				     .format( 
-					    yy,
-					    xx,
-					    blocksalloc,
-					    round(spectrumMHz,2),
-					    )
-					    )
+					 .format( 
+						yy,
+						xx,
+						blocksalloc,
+						round(spectrumMHz,2),
+						)
+						)
 
 	return hovertext
 
@@ -1741,20 +1741,20 @@ def htext_colormatrix_auctiondata_2010_3G_BWA_LastBidPrice(dflastsubbidheat,dfla
 
 
 			hovertext[-1].append(
-					    'Bidder: {}\
-					    <br>Circle: {}\
-					    <br>LastBid : {} RsCr/BLK\
-					    <br>LastBidRatio : {} Bid/RP\
-					    <br>BLKsForSale : {} Nos'
+						'Bidder: {}\
+						<br>Circle: {}\
+						<br>LastBid : {} RsCr/BLK\
+						<br>LastBidRatio : {} Bid/RP\
+						<br>BLKsForSale : {} Nos'
 				
-				     .format( 
-					    yy,
-					    xx,
-					    lastbid,
-					    round(lastbidratiorp,2),
-					    blocksforsale,
-					    )
-					    )
+					 .format( 
+						yy,
+						xx,
+						lastbid,
+						round(lastbidratiorp,2),
+						blocksforsale,
+						)
+						)
 
 		dict_col[yy]=list_col
 
@@ -1772,20 +1772,20 @@ def htext_colormatrix_auctiondata_2010_3G_BWA_LastBidPrice(dflastsubbidheat,dfla
 #preparing color scale for hoverbox for Spectrum and Expiry maps
 @st.cache_resource
 def colscale_hbox_spectrum_expiry_maps(operators, colcodes):
-    scale = [round(x/(len(operators)-1),2) for x in range(len(operators))]
-    colors =[]
-    for k, v  in operators.items():
-        colors.append(colcodes.loc[k,:].values[0])
-    colorscale=[]
-    for i in range(len(scale)):
-        colorscale.append([scale[i],colors[i]])
-    return colorscale
+	scale = [round(x/(len(operators)-1),2) for x in range(len(operators))]
+	colors =[]
+	for k, v  in operators.items():
+		colors.append(colcodes.loc[k,:].values[0])
+	colorscale=[]
+	for i in range(len(scale)):
+		colorscale.append([scale[i],colors[i]])
+	return colorscale
 
 #shaping colorscale for driving the color of hoverbox of Spectrum and Expiry maps
 @st.cache_resource
 def transform_colscale_for_spec_exp_maps(colorscale, sf):
 	hlabel_bgcolor = [[x[1] for x in colorscale if x[0] == round(value/(len(colorscale) - 1),2)] 
-			      for row in sf.values for value in row]
+				  for row in sf.values for value in row]
 	hlabel_bgcolor = list(np.array(hlabel_bgcolor).reshape(22,int(len(hlabel_bgcolor)/22)))
 	return hlabel_bgcolor
 
@@ -1838,10 +1838,10 @@ def plotrwototal(sumrows, ydim, xdim):
 	fig.update_traces(marker=dict(color='red'))
 	# Simulate a border by using a larger margin and setting the background color
 	fig.update_layout(
-        margin=dict(t=t, b=b*1.1, l=l*0, r=r, pad=pad+5),  # Adjust margins if necessary
-        paper_bgcolor='yellow',  # Outer color
-        plot_bgcolor='white',  # Inner color simulates the border
-    )
+		margin=dict(t=t, b=b*1.1, l=l*0, r=r, pad=pad+5),  # Adjust margins if necessary
+		paper_bgcolor='yellow',  # Outer color
+		plot_bgcolor='white',  # Inner color simulates the border
+	)
 
 	return fig
 
@@ -1903,19 +1903,19 @@ def plotlosttotal(df,ydim,xdim):
 
 #------------------------- debug 30th Mar 2024
 def select_round_range(total_rounds):
-    # Sidebar elements for selecting round numbers
-    col1, col2 = st.sidebar.columns(2)
-    with col1:
-        min_round = st.number_input('From Round', min_value=1, max_value=total_rounds, value=1)
-    with col2:
-        max_round = st.number_input('To Round', min_value=1, max_value=total_rounds, value=total_rounds)
-    
-    # Ensure 'From Round' is always less than 'To Round'
-    if min_round >= max_round:
-        st.sidebar.error('Please ensure From Round is less than To Round.')
-        max_round = min_round + 1
+	# Sidebar elements for selecting round numbers
+	col1, col2 = st.sidebar.columns(2)
+	with col1:
+		min_round = st.number_input('From Round', min_value=1, max_value=total_rounds, value=1)
+	with col2:
+		max_round = st.number_input('To Round', min_value=1, max_value=total_rounds, value=total_rounds)
+	
+	# Ensure 'From Round' is always less than 'To Round'
+	if min_round >= max_round:
+		st.sidebar.error('Please ensure From Round is less than To Round.')
+		max_round = min_round + 1
 
-    return min_round, max_round
+	return min_round, max_round
 #------------------------- debug 30th Mar 2024
 
 
@@ -1997,10 +1997,10 @@ if selected_dimension == "Spectrum Bands":
 	pf1 = pf.copy()
 	pf = pf[pf["Year"]==2022]
 	if exptab_dict[Band]==1:
-	    ef = df[exptab]
-	    ef = ef.set_index("LSA")
-	    excepf = df[expexceptab]
-	    excepf = excepf.set_index("LSA")   
+		ef = df[exptab]
+		ef = ef.set_index("LSA")
+		excepf = df[expexceptab]
+		excepf = excepf.set_index("LSA")   
 	sf = sf.set_index("LSA")
 	of = of.set_index("LSA")
 	pf = pf.set_index("LSA")
@@ -2099,8 +2099,8 @@ if selected_dimension == "Spectrum Bands":
 			chartdata_df.index = sf.index
 
 			def get_key_from_value(dictionary, value):
-			    reverse_dict = {v: k for k, v in dictionary.items()}
-			    return reverse_dict.get(value)
+				reverse_dict = {v: k for k, v in dictionary.items()}
+				return reverse_dict.get(value)
 
 			if len(selected_operators) ==0:
 				for col in chartdata_df.columns:
@@ -2130,23 +2130,23 @@ if selected_dimension == "Spectrum Bands":
 
 			#Figure data for frequency map 
 			data = [go.Heatmap(
-			      z = sf.values,
-			      y = sf.index,
-			      x = sf.columns,
-			      xgap = xgap_dict[Band],
-			      ygap = 1,
-			      hoverinfo ='text',
-			      text = hovertext,
-			      colorscale=colorscale,
-			      showscale = False,
+				  z = sf.values,
+				  y = sf.index,
+				  x = sf.columns,
+				  xgap = xgap_dict[Band],
+				  ygap = 1,
+				  hoverinfo ='text',
+				  text = hovertext,
+				  colorscale=colorscale,
+				  showscale = False,
 		# 	      reversescale=True,
-			      colorbar=dict(
+				  colorbar=dict(
 		# 	      tickcolor ="black",
 		# 	      tickwidth =1,
-			      tickvals = tickvals,
-			      ticktext = ticktext,
-			      dtick=1, tickmode="array"),
-					    ),
+				  tickvals = tickvals,
+				  ticktext = ticktext,
+				  dtick=1, tickmode="array"),
+						),
 				]
 
 			fig = go.Figure(data=data)
@@ -2192,18 +2192,18 @@ if selected_dimension == "Spectrum Bands":
 
 			#Figure data for Operator Holdings
 			data = [go.Heatmap(
-			      z = dfff.values,
-			      y = dfff.index,
-			      x = dfff.columns,
-			      xgap = 1,
-			      ygap = 1,
-			      hoverinfo ='text',
-			      text = hovertext,
-			      colorscale = 'Hot',
-			      showscale=False,
-			    texttemplate="%{z}", 
-			    textfont={"size":text_embed_in_chart_size}, # Debug 14th June 2024 (changed from 10 to 16)
-			    reversescale=True,)
+				  z = dfff.values,
+				  y = dfff.index,
+				  x = dfff.columns,
+				  xgap = 1,
+				  ygap = 1,
+				  hoverinfo ='text',
+				  text = hovertext,
+				  colorscale = 'Hot',
+				  showscale=False,
+				texttemplate="%{z}", 
+				textfont={"size":text_embed_in_chart_size}, # Debug 14th June 2024 (changed from 10 to 16)
+				reversescale=True,)
 				]
 
 			fig = go.Figure(data=data)
@@ -2247,7 +2247,7 @@ if selected_dimension == "Spectrum Bands":
 			dfff = dfff.reset_index().drop(columns = ["Year", "Batch No", "Cat"], axis =1).groupby("OperatorNew").sum().T
 			
 			if bandtype_dict[Band]=="TDD": #doubling the TDD spectrum for aligning with normal convention 
-        			dfff = (dfff*2).round(2)
+					dfff = (dfff*2).round(2)
 				
 			dfffcopy =dfff.copy()
 			dfffcopy["Total"] = dfffcopy.sum(axis=1)
@@ -2272,15 +2272,15 @@ if selected_dimension == "Spectrum Bands":
 
 			#Figure data for "Operator %Share"
 			data = [go.Heatmap(
-		      z = dfffshare.values,
-		      y = dfffshare.index,
-		      x = dfffshare.columns,
-		      xgap = 1,
-		      ygap = 1,
-		      hoverinfo ='text',
-		      text = hovertext,
-		      colorscale = 'Hot',
-		      showscale=False,
+			  z = dfffshare.values,
+			  y = dfffshare.index,
+			  x = dfffshare.columns,
+			  xgap = 1,
+			  ygap = 1,
+			  hoverinfo ='text',
+			  text = hovertext,
+			  colorscale = 'Hot',
+			  showscale=False,
 			  texttemplate="%{z}", 
 			  textfont={"size":text_embed_in_chart_size}, # Debug 14th June 2024 (changed from 10 to 16)
 			  reversescale=True,)
@@ -2325,17 +2325,17 @@ if selected_dimension == "Spectrum Bands":
 
 			#Figure Data for Expiry Map
 			data = [go.Heatmap(
-			      z = expf.values,
-			      y = expf.index,
-			      x = expf.columns,
-			      xgap = xgap_dict[Band],
-			      ygap = 1,
-			      hoverinfo ='text',
-			      text = hovertext,
-			      colorscale ='Hot', 
-			      showscale = False,
-			      texttemplate=text, 
-			      reversescale=True,
+				  z = expf.values,
+				  y = expf.index,
+				  x = expf.columns,
+				  xgap = xgap_dict[Band],
+				  ygap = 1,
+				  hoverinfo ='text',
+				  text = hovertext,
+				  colorscale ='Hot', 
+				  showscale = False,
+				  texttemplate=text, 
+				  reversescale=True,
 				)
 				  ]
 
@@ -2397,9 +2397,9 @@ if selected_dimension == "Spectrum Bands":
 			  text = hovertext,
 			  colorscale = 'Hot',
 			  showscale = False,
-			    texttemplate="%{z}", 
-			    textfont={"size":text_embed_in_chart_size},
-			    reversescale=True,
+				texttemplate="%{z}", 
+				textfont={"size":text_embed_in_chart_size},
+				reversescale=True,
 				)]
 
 			fig = go.Figure(data=data)
@@ -2411,12 +2411,12 @@ if selected_dimension == "Spectrum Bands":
 
 		#This dict has been defined for the Feature = Auction Map
 		type_dict ={"Auction Price": auctionprice,
-			    "Reserve Price": reserveprice, 
-			    "Quantum Offered": offeredspectrum, 
-			    "Quantum Sold": soldspectrum,
-			    "Percent Sold": percentsold,
-			    "Quantum Unsold": unsoldspectrum,
-			    "Percent Unsold": percentunsold}
+				"Reserve Price": reserveprice, 
+				"Quantum Offered": offeredspectrum, 
+				"Quantum Sold": soldspectrum,
+				"Percent Sold": percentsold,
+				"Quantum Unsold": unsoldspectrum,
+				"Percent Unsold": percentunsold}
 
 		SelectedSubFeature = st.sidebar.selectbox('Select a Sub Feature', ["Auction Price","Reserve Price","Quantum Offered", "Quantum Sold", 
 			"Percent Sold", "Quantum Unsold", "Percent Unsold"])
@@ -2524,7 +2524,7 @@ if selected_dimension == "Auction BandWise":
 		zmax_blk_sec = get_value(Auction_Year_Band_Features, SelectedFeature, 'zmax_blk_sec')
 
 #New Block Code Ends-------------
-	    
+		
 #Old Code is Below
 	# if Feature == "2022-Band26000":
 	# 	totalrounds = 40
@@ -3158,7 +3158,7 @@ if selected_dimension == "Auction BandWise":
 	if mainoriflag == False:
 
 		SelectedSubFeature = st.sidebar.selectbox("Select a SubFeature", ["BidsCircleWise","RanksCircleWise", "ProvWinningBid", "BlocksSelected",
-								  		"BlocksAllocated","BiddingActivity", "DemandActivity"])
+										"BlocksAllocated","BiddingActivity", "DemandActivity"])
 	
 	if SelectedSubFeature == "BidsCircleWise":
 
@@ -3246,12 +3246,12 @@ if selected_dimension == "Auction BandWise":
 			#function to combine text from two dataframe 
 
 			def combine_text(x, y): #sep is seperator
-			    if x.notnull().all() and y.notnull().all():
-			        return x + '<br>' + y
-			    elif x.notnull().all():
-			        return x
-			    else:
-			        return y
+				if x.notnull().all() and y.notnull().all():
+					return x + '<br>' + y
+				elif x.notnull().all():
+					return x
+				else:
+					return y
 
 			#for rendering text of the final heatmap for Data
 			dftempheat = dftempheat.map(int)
@@ -3262,8 +3262,8 @@ if selected_dimension == "Auction BandWise":
 
 			data = [go.Heatmap(
 				z=dftempheat.values,
-		        x=dftempheat.columns,
-		        y=dftempheat.index,
+				x=dftempheat.columns,
+				y=dftempheat.index,
 				xgap = 1,
 				ygap = 1,
 				hoverinfo ='text',
@@ -3297,12 +3297,12 @@ if selected_dimension == "Auction BandWise":
 			#function to combine text from two dataframe 
 
 			def combine_text(x,sym, y): #sym is for %
-			    if x.notnull().all() and y.notnull().all():
-			        return x + sym + '<br>' + y
-			    elif x.notnull().all():
-			        return x
-			    else:
-			        return y
+				if x.notnull().all() and y.notnull().all():
+					return x + sym + '<br>' + y
+				elif x.notnull().all():
+					return x
+				else:
+					return y
 
 			#for rendering text of the final heatmap for Data
 
@@ -3319,8 +3319,8 @@ if selected_dimension == "Auction BandWise":
 
 			data = [go.Heatmap(
 				z=dftempheat.values,
-		        x=dftempheat.columns,
-		        y=dftempheat.index,
+				x=dftempheat.columns,
+				y=dftempheat.index,
 				xgap = 1,
 				ygap = 1,
 				hoverinfo ='text',
@@ -3354,8 +3354,8 @@ if selected_dimension == "Auction BandWise":
 
 			data = [go.Heatmap(
 				z=resultdfheat.values,
-		        x=resultdfheat.columns,
-		        y=resultdfheat.index,
+				x=resultdfheat.columns,
+				y=resultdfheat.index,
 				xgap = 1,
 				ygap = 1,
 				hoverinfo ='text',
@@ -3372,23 +3372,23 @@ if selected_dimension == "Auction BandWise":
 
 		figauc = go.Figure(data=data)
 		figauc.update_layout(
-		    template="seaborn",
-		    xaxis_side= 'top',
-		   	height = heatmapheight, #Debug 14th June 2024 (Changed from 650 to 850)
-		   	margin= dict(t=t,b=b,l=l,r=r,pad=pad),
-		   	plot_bgcolor='white',
-		   	yaxis=dict(
-	        tickmode='array',
-	        tickfont=dict(size=text_embed_in_chart_size),
-	        showgrid=False,  # Enable grid lines for y-axis
-    		),
-		    xaxis=dict(
-	        side='top',
-	        tickmode='linear',
-	        # tickangle=xdtickangle,
-	        dtick=1,
-	        tickfont=dict(size=text_embed_in_chart_size),
-	        ))
+			template="seaborn",
+			xaxis_side= 'top',
+			height = heatmapheight, #Debug 14th June 2024 (Changed from 650 to 850)
+			margin= dict(t=t,b=b,l=l,r=r,pad=pad),
+			plot_bgcolor='white',
+			yaxis=dict(
+			tickmode='array',
+			tickfont=dict(size=text_embed_in_chart_size),
+			showgrid=False,  # Enable grid lines for y-axis
+			),
+			xaxis=dict(
+			side='top',
+			tickmode='linear',
+			# tickangle=xdtickangle,
+			dtick=1,
+			tickfont=dict(size=text_embed_in_chart_size),
+			))
 
 		title = titlesubpart+titlesubpart2
 		subtitle = "Source - DoT; Between Round Nos "+str(start_round)+" & "+str(end_round)+ "; Number of Rounds = "+ str(end_round-start_round)
@@ -3456,10 +3456,10 @@ if selected_dimension == "Auction BandWise":
 
 			# Custom sorting key function
 			def sort_key(value):
-			    if pd.isnull(value) or value == 0:
-			        return float('inf')  # Assigning a very large value for zeros and np.nan
-			    else:
-			        return value
+				if pd.isnull(value) or value == 0:
+					return float('inf')  # Assigning a very large value for zeros and np.nan
+				else:
+					return value
 
 			#------debug 31st March 2024
 
@@ -3482,8 +3482,8 @@ if selected_dimension == "Auction BandWise":
 
 			data = [go.Heatmap(
 				z=dftempheat.values,
-		        y= dftempheat.index,
-		        x=dftempheat.columns,
+				y= dftempheat.index,
+				x=dftempheat.columns,
 				xgap = 1,
 				ygap = 1,
 				hoverinfo ='text',
@@ -3499,15 +3499,15 @@ if selected_dimension == "Auction BandWise":
 			figauc = go.Figure(data=data)
 
 			figauc.update_layout(
-			    template="seaborn",
-			    xaxis_side= 'top',
-			   	height = heatmapheight, #Debug 14th June 2024 (Changed from 650 to 850)
-			   	margin= dict(t=t,b=b,l=l,r=r,pad=pad),
-		   		plot_bgcolor='white',
-			   	yaxis=dict(
-	        	  tickmode='array',
-	        	  tickfont=dict(size=text_embed_in_chart_size),
-	        	  ),
+				template="seaborn",
+				xaxis_side= 'top',
+				height = heatmapheight, #Debug 14th June 2024 (Changed from 650 to 850)
+				margin= dict(t=t,b=b,l=l,r=r,pad=pad),
+				plot_bgcolor='white',
+				yaxis=dict(
+				  tickmode='array',
+				  tickfont=dict(size=text_embed_in_chart_size),
+				  ),
 				  xaxis = dict(
 				  side = 'top',
 				  tickmode = 'linear',
@@ -3533,8 +3533,8 @@ if selected_dimension == "Auction BandWise":
 			figauc.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
 
 			figauc.update_layout(
-				    xaxis=dict(showgrid=False),
-				    yaxis=dict(showgrid=False)
+					xaxis=dict(showgrid=False),
+					yaxis=dict(showgrid=False)
 				)
 
 			st.plotly_chart(figauc, use_container_width=True)
@@ -3632,18 +3632,18 @@ if selected_dimension == "Auction BandWise":
 
 			# Define the heatmap with embedded text and customized hover information
 			data = [go.Heatmap(
-			    z=dfbidsel.values,
-			    y=dfbidsel.index,
-			    x=dfbidsel.columns,
-			    xgap=2,
-			    ygap=2,
-			    colorscale='Hot',
-			    showscale = False,
-			    reversescale=True,
-			    text=dfbidsel.values,  # Set text to the same values as z for display
-			    texttemplate="%{z}",  # Define how text is displayed based on the text array
-			    textfont={"size":text_embed_in_chart_size},  #Debug 14th June 2024 (Changed from 10 to 16)
-			    hoverinfo='x+y',  # Customize hover info to show only x and y values
+				z=dfbidsel.values,
+				y=dfbidsel.index,
+				x=dfbidsel.columns,
+				xgap=2,
+				ygap=2,
+				colorscale='Hot',
+				showscale = False,
+				reversescale=True,
+				text=dfbidsel.values,  # Set text to the same values as z for display
+				texttemplate="%{z}",  # Define how text is displayed based on the text array
+				textfont={"size":text_embed_in_chart_size},  #Debug 14th June 2024 (Changed from 10 to 16)
+				hoverinfo='x+y',  # Customize hover info to show only x and y values
 			)]
 
 
@@ -3652,16 +3652,16 @@ if selected_dimension == "Auction BandWise":
 			#-------- Debug 30th March 2024
 			# Adjust plot and paper background color for contrast
 			figauc.update_layout(
-			    template="seaborn",
-			    xaxis_side='top',
-			    height=heatmapheight*1.2,
-			    plot_bgcolor='#D2B48C',  # Background color for the plot area light pink
-			    paper_bgcolor='white',  # Background color for the entire figure
-			    margin= dict(t=t,b=b,l=l,r=r,pad=pad),
-			    yaxis=dict(
-		        	  tickmode='array',
-		        	  tickfont=dict(size=text_embed_in_chart_size),
-		        	  ),
+				template="seaborn",
+				xaxis_side='top',
+				height=heatmapheight*1.2,
+				plot_bgcolor='#D2B48C',  # Background color for the plot area light pink
+				paper_bgcolor='white',  # Background color for the entire figure
+				margin= dict(t=t,b=b,l=l,r=r,pad=pad),
+				yaxis=dict(
+					  tickmode='array',
+					  tickfont=dict(size=text_embed_in_chart_size),
+					  ),
 				  xaxis = dict(
 				  side = 'top',
 				  tickmode = 'linear',
@@ -3686,29 +3686,29 @@ if selected_dimension == "Auction BandWise":
 			figauc.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
 
 			figauc.update_layout(
-				    xaxis=dict(showgrid=False),
-				    yaxis=dict(showgrid=False)
+					xaxis=dict(showgrid=False),
+					yaxis=dict(showgrid=False)
 				)
 
 			st.plotly_chart(figauc, use_container_width=True)
 
-    if SelectedSubFeature == "ProvWinningBid":
-        dfbid1 = loadauctionbiddata()[demandsheet].replace('-', np.nan,regex=True)
-        dfbid1 = dfbid1.drop(columns=["Clock Round", "Clock Round Price (Rs. Crore)", "Aggregate Demand", "Excess Demand"], axis=1)
-        dfbid1 = dfbid1.groupby(["LSA"]).mean().reset_index()
-        dfbid1.columns = ["LSA", "BlocksForSale"]
-        summarydf = dfbid1.copy()
+	if SelectedSubFeature == "ProvWinningBid":
+		dfbid1 = loadauctionbiddata()[demandsheet].replace('-', np.nan,regex=True)
+		dfbid1 = dfbid1.drop(columns=["Clock Round", "Clock Round Price (Rs. Crore)", "Aggregate Demand", "Excess Demand"], axis=1)
+		dfbid1 = dfbid1.groupby(["LSA"]).mean().reset_index()
+		dfbid1.columns = ["LSA", "BlocksForSale"]
+		summarydf = dfbid1.copy()
 
-        #preparing the summary chart total slots up for auctions
-        chart = summarychart(summarydf, 'LSA', "BlocksForSale")
-        SummaryFlag = True
-        #-----------------New Code Ends ----------------------#
+		#preparing the summary chart total slots up for auctions
+		chart = summarychart(summarydf, 'LSA', "BlocksForSale")
+		SummaryFlag = True
+		#-----------------New Code Ends ----------------------#
 
-        pwbtype = st.sidebar.selectbox("Select a PWB Type", ["Start CLK Round", "End CLK Round"])
-        df1strd = dfbid1[dfbid1["Clk_Round"] == 1].reset_index()  # Identifying the 2nd round gives up the reserve price
-        dfpwb1strdend = df1strd.pivot(index="Bidder", columns='LSA', values="PWB_End_ClkRd").sort_index(ascending=False)
+		pwbtype = st.sidebar.selectbox("Select a PWB Type", ["Start CLK Round", "End CLK Round"])
+		df1strd = dfbid1[dfbid1["Clk_Round"] == 1].reset_index()  # Identifying the 2nd round gives up the reserve price
+		dfpwb1strdend = df1strd.pivot(index="Bidder", columns='LSA', values="PWB_End_ClkRd").sort_index(ascending=False)
 
-        dfrp = dfpwb1strdend.T  # Preparing the dataframe for reserve price per BLK
+		dfrp = dfpwb1strdend.T  # Preparing the dataframe for reserve price per BLK
 
 		if pwbtype == "Start CLK Round":
 
@@ -3748,12 +3748,12 @@ if selected_dimension == "Auction BandWise":
 				hovertext, colormatrix = htext_colormatrix_auctiondata_2010_3G_BWA_ProvWinningBid(dfrp, dftemp, pwbtype, round_number)
 
 				def combine_text(x, y): #sep is seperator
-				    if x.notnull().all() and y.notnull().all():
-				        return x + '<br>' + y
-				    elif x.notnull().all():
-				        return x
-				    else:
-				        return y
+					if x.notnull().all() and y.notnull().all():
+						return x + '<br>' + y
+					elif x.notnull().all():
+						return x
+					else:
+						return y
 
 				#for rendering text of the final heatmap for Data
 				dfblocksalloc_rdstart = dfblocksalloc_rdstart.replace(np.nan, 0)
@@ -3765,8 +3765,8 @@ if selected_dimension == "Auction BandWise":
 
 				data = [go.Heatmap(
 				z=dftemp.values,
-		        y= dftemp.index,
-		        x=dftemp.columns,
+				y= dftemp.index,
+				x=dftemp.columns,
 				xgap = 1,
 				ygap = 1,
 				hoverinfo ='text',
@@ -3794,9 +3794,9 @@ if selected_dimension == "Auction BandWise":
 				  # width=heatmapwidth,
 				  margin= dict(t=t,b=b,l=l,r=r,pad=pad),
 				  yaxis=dict(
-		        	  tickmode='array',
-		        	  tickfont=dict(size=text_embed_in_chart_size),
-		        	  ),
+					  tickmode='array',
+					  tickfont=dict(size=text_embed_in_chart_size),
+					  ),
 				  xaxis = dict(
 				  side = 'top',
 				  tickmode = 'linear',
@@ -3808,10 +3808,10 @@ if selected_dimension == "Auction BandWise":
 
 
 				figauc.update_layout(
-				    coloraxis=dict(
-				        cmin=0,  # Set the minimum value of the color bar
-				        # zmax=10  # Set the maximum value of the color bar
-				    )
+					coloraxis=dict(
+						cmin=0,  # Set the minimum value of the color bar
+						# zmax=10  # Set the maximum value of the color bar
+					)
 				)
 		
 			if chartoption == "ReservePrice Multiple":
@@ -3828,12 +3828,12 @@ if selected_dimension == "Auction BandWise":
 				dftemp = dftemp.sort_index(ascending=True)
 
 				def combine_text(x, y): #sep is seperator
-				    if x.notnull().all() and y.notnull().all():
-				        return x + '<br>' + y
-				    elif x.notnull().all():
-				        return x
-				    else:
-				        return y
+					if x.notnull().all() and y.notnull().all():
+						return x + '<br>' + y
+					elif x.notnull().all():
+						return x
+					else:
+						return y
 
 				#for rendering text of the final heatmap for Data
 				dfblocksalloc_rdstart = dfblocksalloc_rdstart.replace(np.nan, 0)
@@ -3844,8 +3844,8 @@ if selected_dimension == "Auction BandWise":
 				dftemp = dftemp.replace(0,np.nan) #Removing all zeros from the heatmap
 				data = [go.Heatmap(
 					z=dftemp.values,
-			        y= dftemp.index,
-			        x=dftemp.columns,
+					y= dftemp.index,
+					x=dftemp.columns,
 					xgap = 1,
 					ygap = 1,
 					hoverinfo ='text',
@@ -3873,9 +3873,9 @@ if selected_dimension == "Auction BandWise":
 				  # width=heatmapwidth,
 				  margin= dict(t=t,b=b,l=l,r=r,pad=pad),
 				  yaxis=dict(
-		        	  tickmode='array',
-		        	  tickfont=dict(size=text_embed_in_chart_size),
-		        	  ),
+					  tickmode='array',
+					  tickfont=dict(size=text_embed_in_chart_size),
+					  ),
 				  xaxis = dict(
 				  side = 'top',
 				  tickmode = 'linear',
@@ -3886,10 +3886,10 @@ if selected_dimension == "Auction BandWise":
 				)
 
 				figauc.update_layout(
-				    coloraxis=dict(
-				        cmin=0,  # Set the minimum value of the color bar
-				        # zmax=10  # Set the maximum value of the color bar
-				    )
+					coloraxis=dict(
+						cmin=0,  # Set the minimum value of the color bar
+						# zmax=10  # Set the maximum value of the color bar
+					)
 				)
 
 
@@ -3969,12 +3969,12 @@ if selected_dimension == "Auction BandWise":
 				dftemp = dftemp.sort_index(ascending=True)
 
 				def combine_text(x, y): #sep is seperator
-				    if x.notnull().all() and y.notnull().all():
-				        return x + '<br>' + y
-				    elif x.notnull().all():
-				        return x
-				    else:
-				        return y
+					if x.notnull().all() and y.notnull().all():
+						return x + '<br>' + y
+					elif x.notnull().all():
+						return x
+					else:
+						return y
 
 				#for rendering text of the final heatmap for Data
 				dfblocksalloc_rdend = dfblocksalloc_rdend.replace(np.nan, 0)
@@ -3986,8 +3986,8 @@ if selected_dimension == "Auction BandWise":
 
 				data = [go.Heatmap(
 				z=dftemp.values,
-		        y= dftemp.index,
-		        x=dftemp.columns,
+				y= dftemp.index,
+				x=dftemp.columns,
 				xgap = 1,
 				ygap = 1,
 				hoverinfo ='text',
@@ -4015,9 +4015,9 @@ if selected_dimension == "Auction BandWise":
 				  # width=heatmapwidth,
 				  margin= dict(t=t,b=b,l=l,r=r,pad=pad),
 				  yaxis=dict(
-		        	  tickmode='array',
-		        	  tickfont=dict(size=text_embed_in_chart_size),
-		        	  ),
+					  tickmode='array',
+					  tickfont=dict(size=text_embed_in_chart_size),
+					  ),
 				  xaxis = dict(
 				  side = 'top',
 				  tickmode = 'linear',
@@ -4029,10 +4029,10 @@ if selected_dimension == "Auction BandWise":
 
 
 				figauc.update_layout(
-				    coloraxis=dict(
-				        cmin=0,  # Set the minimum value of the color bar
-				        # zmax=10  # Set the maximum value of the color bar
-				    )
+					coloraxis=dict(
+						cmin=0,  # Set the minimum value of the color bar
+						# zmax=10  # Set the maximum value of the color bar
+					)
 				)
 
 
@@ -4061,12 +4061,12 @@ if selected_dimension == "Auction BandWise":
 				dftemp = dftemp.sort_index(ascending=True)
 
 				def combine_text(x, y): #sep is seperator
-				    if x.notnull().all() and y.notnull().all():
-				        return x + '<br>' + y
-				    elif x.notnull().all():
-				        return x
-				    else:
-				        return y
+					if x.notnull().all() and y.notnull().all():
+						return x + '<br>' + y
+					elif x.notnull().all():
+						return x
+					else:
+						return y
 
 				#for rendering text of the final heatmap for Data
 				dfblocksalloc_rdend = dfblocksalloc_rdend.replace(np.nan, 0)
@@ -4078,8 +4078,8 @@ if selected_dimension == "Auction BandWise":
 
 				data = [go.Heatmap(
 					z=dftemp.values,
-			        y= dftemp.index,
-			        x=dftemp.columns,
+					y= dftemp.index,
+					x=dftemp.columns,
 					xgap = 1,
 					ygap = 1,
 					hoverinfo ='text',
@@ -4107,9 +4107,9 @@ if selected_dimension == "Auction BandWise":
 				  # width=heatmapwidth,
 				  margin= dict(t=t,b=b,l=l,r=r,pad=pad),
 				  yaxis=dict(
-		        	  tickmode='array',
-		        	  tickfont=dict(size=text_embed_in_chart_size),
-		        	  ),
+					  tickmode='array',
+					  tickfont=dict(size=text_embed_in_chart_size),
+					  ),
 				  xaxis = dict(
 				  side = 'top',
 				  tickmode = 'linear',
@@ -4120,10 +4120,10 @@ if selected_dimension == "Auction BandWise":
 				)
 
 				figauc.update_layout(
-				    coloraxis=dict(
-				        cmin=0,  # Set the minimum value of the color bar
-				        # zmax=10  # Set the maximum value of the color bar
-				    )
+					coloraxis=dict(
+						cmin=0,  # Set the minimum value of the color bar
+						# zmax=10  # Set the maximum value of the color bar
+					)
 				)
 
 
@@ -4143,8 +4143,8 @@ if selected_dimension == "Auction BandWise":
 			figauc.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
 
 			figauc.update_layout(
-				    xaxis=dict(showgrid=False),
-				    yaxis=dict(showgrid=False)
+					xaxis=dict(showgrid=False),
+					yaxis=dict(showgrid=False)
 				)
 
 			hoverlabel_bgcolor = colormatrix
@@ -4227,8 +4227,8 @@ if selected_dimension == "Auction BandWise":
 
 		data = [go.Heatmap(
 				z=dftemp.values,
-		        y= dftemp.index,
-		        x=dftemp.columns,
+				y= dftemp.index,
+				x=dftemp.columns,
 				xgap = 1,
 				ygap = 1,
 				hoverinfo ='text',
@@ -4259,9 +4259,9 @@ if selected_dimension == "Auction BandWise":
 		  # width=heatmapwidth,
 		  margin= dict(t=t,b=b,l=l,r=r,pad=pad),
 		  yaxis=dict(
-    	  tickmode='array',
-    	  tickfont=dict(size=text_embed_in_chart_size),
-    	  ),
+		  tickmode='array',
+		  tickfont=dict(size=text_embed_in_chart_size),
+		  ),
 		  xaxis = dict(
 		  side = 'top',
 		  tickmode = 'linear',
@@ -4272,10 +4272,10 @@ if selected_dimension == "Auction BandWise":
 		)
 
 		figauc.update_layout(
-		    coloraxis=dict(
-		        cmin=0,  # Set the minimum value of the color bar
-		        # zmax=10  # Set the maximum value of the color bar
-		    )
+			coloraxis=dict(
+				cmin=0,  # Set the minimum value of the color bar
+				# zmax=10  # Set the maximum value of the color bar
+			)
 		)
 
 		#--------------End-----------------------
@@ -4296,8 +4296,8 @@ if selected_dimension == "Auction BandWise":
 		figauc.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
 
 		figauc.update_layout(
-			    xaxis=dict(showgrid=False),
-			    yaxis=dict(showgrid=False)
+				xaxis=dict(showgrid=False),
+				yaxis=dict(showgrid=False)
 			)
 
 
@@ -4359,8 +4359,8 @@ if selected_dimension == "Auction BandWise":
 
 			data = [go.Heatmap(
 					z=dftemp.values,
-			        y= dftemp.index,
-			        x=dftemp.columns,
+					y= dftemp.index,
+					x=dftemp.columns,
 					xgap = 1,
 					ygap = 1,
 					hoverinfo ='text',
@@ -4390,8 +4390,8 @@ if selected_dimension == "Auction BandWise":
 				  # width=heatmapwidth,
 				  margin= dict(t=t,b=b,l=l,r=r,pad=pad),
 				  yaxis=dict(
-		        	  tickmode='array',
-		        	  tickfont=dict(size=text_embed_in_chart_size),),
+					  tickmode='array',
+					  tickfont=dict(size=text_embed_in_chart_size),),
 				  xaxis = dict(
 				  side = 'top',
 				  tickmode = 'linear',
@@ -4401,10 +4401,10 @@ if selected_dimension == "Auction BandWise":
 				)
 
 			figauc.update_layout(
-			    coloraxis=dict(
-			        cmin=0,  # Set the minimum value of the color bar
-			        # zmax=10  # Set the maximum value of the color bar
-			    )
+				coloraxis=dict(
+					cmin=0,  # Set the minimum value of the color bar
+					# zmax=10  # Set the maximum value of the color bar
+				)
 			)
 
 			title = titlesubpart+" - Blocks Allocated at the Start of Round No -"+str(round_number)
@@ -4423,8 +4423,8 @@ if selected_dimension == "Auction BandWise":
 			figauc.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
 
 			figauc.update_layout(
-				    xaxis=dict(showgrid=False),
-				    yaxis=dict(showgrid=False)
+					xaxis=dict(showgrid=False),
+					yaxis=dict(showgrid=False)
 				)
 
 			hoverlabel_bgcolor = "#000000" #subdued black
@@ -4467,8 +4467,8 @@ if selected_dimension == "Auction BandWise":
 
 			data = [go.Heatmap(
 					z=dftemp.values,
-			        y= dftemp.index,
-			        x=dftemp.columns,
+					y= dftemp.index,
+					x=dftemp.columns,
 					xgap = 1,
 					ygap = 1,
 					hoverinfo ='text',
@@ -4498,8 +4498,8 @@ if selected_dimension == "Auction BandWise":
 				  # width=heatmapwidth,
 				  margin= dict(t=t,b=b,l=l,r=r,pad=pad),
 				  yaxis=dict(
-		        	  tickmode='array',
-		        	  tickfont=dict(size=text_embed_in_chart_size),),
+					  tickmode='array',
+					  tickfont=dict(size=text_embed_in_chart_size),),
 				  xaxis = dict(
 				  side = 'top',
 				  tickmode = 'linear',
@@ -4509,10 +4509,10 @@ if selected_dimension == "Auction BandWise":
 				)
 
 			figauc.update_layout(
-			    coloraxis=dict(
-			        cmin=0,  # Set the minimum value of the color bar
-			        # zmax=10  # Set the maximum value of the color bar
-			    )
+				coloraxis=dict(
+					cmin=0,  # Set the minimum value of the color bar
+					# zmax=10  # Set the maximum value of the color bar
+				)
 			)
 
 			title = titlesubpart+" - Blocks Allocated at the End of Round No -"+str(round_number)
@@ -4531,8 +4531,8 @@ if selected_dimension == "Auction BandWise":
 			figauc.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
 
 			figauc.update_layout(
-				    xaxis=dict(showgrid=False),
-				    yaxis=dict(showgrid=False)
+					xaxis=dict(showgrid=False),
+					yaxis=dict(showgrid=False)
 				)
 
 			hoverlabel_bgcolor = "#000000" #subdued black
@@ -4584,8 +4584,8 @@ if selected_dimension == "Auction BandWise":
 
 			data1 = [go.Heatmap(
 				z=dfbidactivity.values,
-		        y= dfbidactivity.index,
-		        x=dfbidactivity.columns,
+				y= dfbidactivity.index,
+				x=dfbidactivity.columns,
 				xgap = 0.5,
 				ygap = 1,
 				hoverinfo ='text',
@@ -4601,8 +4601,8 @@ if selected_dimension == "Auction BandWise":
 
 			data2 = [go.Heatmap(
 					z=dfbidactivityratio.values,
-			        y= dfbidactivityratio.index,
-			        x=dfbidactivityratio.columns,
+					y= dfbidactivityratio.index,
+					x=dfbidactivityratio.columns,
 					xgap = 0.5,
 					ygap = 1,
 					hoverinfo ='text',
@@ -4631,7 +4631,7 @@ if selected_dimension == "Auction BandWise":
 			  width=heatmapwidth,
 			  margin= dict(t=t,b=b,l=l,r=r,pad=pad),
 			  yaxis=dict(
-	        	  tickmode='array'),
+				  tickmode='array'),
 			  xaxis = dict(
 			  side = 'top',
 			  tickmode = 'linear',
@@ -4645,8 +4645,8 @@ if selected_dimension == "Auction BandWise":
 			figauc1.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
 
 			figauc1.update_layout(
-				    xaxis=dict(showgrid=False),
-				    yaxis=dict(showgrid=False)
+					xaxis=dict(showgrid=False),
+					yaxis=dict(showgrid=False)
 				)
 
 			figauc2.update_layout(uniformtext_minsize=text_embed_in_chart_size, 
@@ -4662,7 +4662,7 @@ if selected_dimension == "Auction BandWise":
 			  width=heatmapwidth,
 			  margin= dict(t=t,b=b,l=l,r=r,pad=pad),
 			  yaxis=dict(
-	        	  tickmode='array'),
+				  tickmode='array'),
 			  xaxis = dict(
 			  side = 'top',
 			  tickmode = 'linear',
@@ -4676,8 +4676,8 @@ if selected_dimension == "Auction BandWise":
 			figauc2.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
 
 			figauc2.update_layout(
-				    xaxis=dict(showgrid=False),
-				    yaxis=dict(showgrid=False)
+					xaxis=dict(showgrid=False),
+					yaxis=dict(showgrid=False)
 				)
 
 			title = titlesubpart+" - Points in Play"
@@ -4721,8 +4721,8 @@ if selected_dimension == "Auction BandWise":
 
 			data1 = [go.Heatmap(
 					z=dfbidactivity.values,
-			        y= dfbidactivity.index,
-			        x=dfbidactivity.columns,
+					y= dfbidactivity.index,
+					x=dfbidactivity.columns,
 					xgap = 0.5,
 					ygap = 1,
 					hoverinfo ='text',
@@ -4736,8 +4736,8 @@ if selected_dimension == "Auction BandWise":
 
 			data2 = [go.Heatmap(
 					z=dfbidactivityratio.values,
-			        y= dfbidactivityratio.index,
-			        x=dfbidactivityratio.columns,
+					y= dfbidactivityratio.index,
+					x=dfbidactivityratio.columns,
 					xgap = 0.5,
 					ygap = 1,
 					hoverinfo ='text',
@@ -4766,7 +4766,7 @@ if selected_dimension == "Auction BandWise":
 			  width=heatmapwidth,
 			  margin= dict(t=t,b=b,l=l,r=r,pad=pad),
 			  yaxis=dict(
-	        	  tickmode='array'),
+				  tickmode='array'),
 			  xaxis = dict(
 			  side = 'top',
 			  tickmode = 'linear',
@@ -4780,8 +4780,8 @@ if selected_dimension == "Auction BandWise":
 			figauc1.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
 
 			figauc1.update_layout(
-				    xaxis=dict(showgrid=False),
-				    yaxis=dict(showgrid=False)
+					xaxis=dict(showgrid=False),
+					yaxis=dict(showgrid=False)
 				)
 
 			figauc2.update_layout(uniformtext_minsize=text_embed_in_chart_size, 
@@ -4797,7 +4797,7 @@ if selected_dimension == "Auction BandWise":
 			  width=heatmapwidth,
 			  margin= dict(t=t,b=b,l=l,r=r,pad=pad),
 			  yaxis=dict(
-	        	  tickmode='array'),
+				  tickmode='array'),
 			  xaxis = dict(
 			  side = 'top',
 			  tickmode = 'linear',
@@ -4811,8 +4811,8 @@ if selected_dimension == "Auction BandWise":
 			figauc2.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
 
 			figauc2.update_layout(
-				    xaxis=dict(showgrid=False),
-				    yaxis=dict(showgrid=False)
+					xaxis=dict(showgrid=False),
+					yaxis=dict(showgrid=False)
 				)
 
 			title = titlesubpart+" - Points in Play in LSAs where the Bidder was a PWB"
@@ -4855,8 +4855,8 @@ if selected_dimension == "Auction BandWise":
 
 			data1 = [go.Heatmap(
 					z=dfbidactivity.values,
-			        y= dfbidactivity.index,
-			        x=dfbidactivity.columns,
+					y= dfbidactivity.index,
+					x=dfbidactivity.columns,
 					xgap = 0.5,
 					ygap = 1,
 					hoverinfo ='text',
@@ -4870,8 +4870,8 @@ if selected_dimension == "Auction BandWise":
 
 			data2 = [go.Heatmap(
 					z=dfbidactivityratio.values,
-			        y= dfbidactivityratio.index,
-			        x=dfbidactivityratio.columns,
+					y= dfbidactivityratio.index,
+					x=dfbidactivityratio.columns,
 					xgap = 0.5,
 					ygap = 1,
 					hoverinfo ='text',
@@ -4900,9 +4900,9 @@ if selected_dimension == "Auction BandWise":
 			  width=heatmapwidth,
 			  margin= dict(t=t,b=b,l=l,r=r,pad=pad),
 			  yaxis=dict(
-        	  tickmode='array',
-        	  tickfont=dict(size=text_embed_in_chart_size),
-        	  ),
+			  tickmode='array',
+			  tickfont=dict(size=text_embed_in_chart_size),
+			  ),
 			  xaxis = dict(
 			  side = 'top',
 			  tickmode = 'linear',
@@ -4918,8 +4918,8 @@ if selected_dimension == "Auction BandWise":
 			figauc1.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
 
 			figauc1.update_layout(
-				    xaxis=dict(showgrid=False),
-				    yaxis=dict(showgrid=False)
+					xaxis=dict(showgrid=False),
+					yaxis=dict(showgrid=False)
 				)
 
 			figauc2.update_layout(uniformtext_minsize=text_embed_in_chart_size, 
@@ -4935,9 +4935,9 @@ if selected_dimension == "Auction BandWise":
 			  width=heatmapwidth,
 			  margin= dict(t=t,b=b,l=l,r=r,pad=pad),
 			  yaxis=dict(
-        	  tickmode='array',
-        	  tickfont=dict(size=text_embed_in_chart_size),
-        	  ),
+			  tickmode='array',
+			  tickfont=dict(size=text_embed_in_chart_size),
+			  ),
 			  xaxis = dict(
 			  side = 'top',
 			  tickmode = 'linear',
@@ -4953,8 +4953,8 @@ if selected_dimension == "Auction BandWise":
 			figauc2.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
 
 			figauc2.update_layout(
-				    xaxis=dict(showgrid=False),
-				    yaxis=dict(showgrid=False)
+					xaxis=dict(showgrid=False),
+					yaxis=dict(showgrid=False)
 				)
 
 
@@ -4985,8 +4985,8 @@ if selected_dimension == "Auction BandWise":
 
 			data = [go.Heatmap(
 					z=dfbidactivity.values,
-			        y= dfbidactivity.index,
-			        x=dfbidactivity.columns,
+					y= dfbidactivity.index,
+					x=dfbidactivity.columns,
 					xgap = 0.5,
 					ygap = 1,
 					hoverinfo ='text',
@@ -5015,9 +5015,9 @@ if selected_dimension == "Auction BandWise":
 			  width=heatmapwidth,
 			  margin= dict(t=t,b=b,l=l,r=r,pad=pad),
 			  yaxis=dict(
-        	  tickmode='array',
-        	  tickfont=dict(size=text_embed_in_chart_size),
-        	  ),
+			  tickmode='array',
+			  tickfont=dict(size=text_embed_in_chart_size),
+			  ),
 			  xaxis = dict(
 			  side = 'top',
 			  tickmode = 'linear',
@@ -5043,8 +5043,8 @@ if selected_dimension == "Auction BandWise":
 			figauc.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
 
 			figauc.update_layout(
-				    xaxis=dict(showgrid=False),
-				    yaxis=dict(showgrid=False)
+					xaxis=dict(showgrid=False),
+					yaxis=dict(showgrid=False)
 				)
 
 		
@@ -5075,8 +5075,8 @@ if selected_dimension == "Auction BandWise":
 
 			data = [go.Heatmap(
 					z=dfbidactivity.values,
-			        y= dfbidactivity.index,
-			        x=dfbidactivity.columns,
+					y= dfbidactivity.index,
+					x=dfbidactivity.columns,
 					xgap = 0.5,
 					ygap = 1,
 					hoverinfo ='text',
@@ -5105,9 +5105,9 @@ if selected_dimension == "Auction BandWise":
 			  width=heatmapwidth,
 			  margin= dict(t=t,b=b,l=l,r=r,pad=pad),
 			  yaxis=dict(
-        	  tickmode='array',
-        	  tickfont=dict(size=text_embed_in_chart_size),
-        	  ),
+			  tickmode='array',
+			  tickfont=dict(size=text_embed_in_chart_size),
+			  ),
 			  xaxis = dict(
 			  side = 'top',
 			  tickmode = 'linear',
@@ -5133,8 +5133,8 @@ if selected_dimension == "Auction BandWise":
 			figauc.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
 
 			figauc.update_layout(
-				    xaxis=dict(showgrid=False),
-				    yaxis=dict(showgrid=False)
+					xaxis=dict(showgrid=False),
+					yaxis=dict(showgrid=False)
 				)
 
 			hoverlabel_bgcolor = "#000000" #subdued black
@@ -5204,8 +5204,8 @@ if selected_dimension == "Auction BandWise":
 
 			data1 = [go.Heatmap(
 						z=dfbidaAD.values,
-				        y= dfbidaAD.index,
-				        x=dfbidaAD.columns,
+						y= dfbidaAD.index,
+						x=dfbidaAD.columns,
 						xgap = 0.5,
 						ygap = 1,
 						hoverinfo ='text',
@@ -5220,8 +5220,8 @@ if selected_dimension == "Auction BandWise":
 
 			data2 = [go.Heatmap(
 						z=ADPrecOfBlksforSale.values,
-				        y= ADPrecOfBlksforSale.index,
-				        x=ADPrecOfBlksforSale.columns,
+						y= ADPrecOfBlksforSale.index,
+						x=ADPrecOfBlksforSale.columns,
 						xgap = 0.5,
 						ygap = 1,
 						hoverinfo ='text',
@@ -5251,9 +5251,9 @@ if selected_dimension == "Auction BandWise":
 			  width=heatmapwidth,
 			  margin= dict(t=t,b=b,l=l,r=r,pad=pad),
 			  yaxis=dict(
-        	  tickmode='array',
-        	  tickfont=dict(size=text_embed_in_chart_size),
-        	  ),
+			  tickmode='array',
+			  tickfont=dict(size=text_embed_in_chart_size),
+			  ),
 			  xaxis = dict(
 			  side = 'top',
 			  tickmode = 'linear',
@@ -5277,9 +5277,9 @@ if selected_dimension == "Auction BandWise":
 			  width=heatmapwidth,
 			  margin= dict(t=t,b=b,l=l,r=r,pad=pad),
 			  yaxis=dict(
-        	  tickmode='array',
-        	  tickfont=dict(size=text_embed_in_chart_size),
-        	  ),
+			  tickmode='array',
+			  tickfont=dict(size=text_embed_in_chart_size),
+			  ),
 			  xaxis = dict(
 			  side = 'top',
 			  tickmode = 'linear',
@@ -5308,13 +5308,13 @@ if selected_dimension == "Auction BandWise":
 			figauc2.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
 
 			figauc1.update_layout(
-				    xaxis=dict(showgrid=False),
-				    yaxis=dict(showgrid=False)
+					xaxis=dict(showgrid=False),
+					yaxis=dict(showgrid=False)
 				)
 
 			figauc2.update_layout(
-				    xaxis=dict(showgrid=False),
-				    yaxis=dict(showgrid=False)
+					xaxis=dict(showgrid=False),
+					yaxis=dict(showgrid=False)
 				)
 
 			hoverlabel_bgcolor = "#000000" #subdued black
@@ -5357,8 +5357,8 @@ if selected_dimension == "Auction BandWise":
 
 			data = [go.Heatmap(
 						z=dfbidaED.values,
-				        y= dfbidaED.index,
-				        x=dfbidaED.columns,
+						y= dfbidaED.index,
+						x=dfbidaED.columns,
 						xgap = 0.5,
 						ygap = 1,
 						hoverinfo ='text',
@@ -5387,9 +5387,9 @@ if selected_dimension == "Auction BandWise":
 			  width=heatmapwidth,
 			  margin= dict(t=t,b=b,l=l,r=r,pad=pad),
 			  yaxis=dict(
-        	  tickmode='array',
-        	  tickfont=dict(size=text_embed_in_chart_size),
-        	  ),
+			  tickmode='array',
+			  tickfont=dict(size=text_embed_in_chart_size),
+			  ),
 			  xaxis = dict(
 			  side = 'top',
 			  tickmode = 'linear',
@@ -5415,8 +5415,8 @@ if selected_dimension == "Auction BandWise":
 			figauc.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
 
 			figauc.update_layout(
-				    xaxis=dict(showgrid=False),
-				    yaxis=dict(showgrid=False)
+					xaxis=dict(showgrid=False),
+					yaxis=dict(showgrid=False)
 				)
 
 			hoverlabel_bgcolor = "#000000" #subdued black
@@ -5465,12 +5465,12 @@ if selected_dimension == "Auction BandWise":
 			#function to combine text from two dataframe 
 
 			def combine_text(sep2, x, y, sep1): #sep is seperator
-			    if x.notnull().all() and y.notnull().all():
-			        return sep2 + x + '<br>' + sep1 + y
-			    elif x.notnull().all():
-			        return x
-			    else:
-			        return y
+				if x.notnull().all() and y.notnull().all():
+					return sep2 + x + '<br>' + sep1 + y
+				elif x.notnull().all():
+					return x
+				else:
+					return y
 
 			#for rendering text of the final heatmap for Data1
 
@@ -5493,8 +5493,8 @@ if selected_dimension == "Auction BandWise":
 
 			data1 = [go.Heatmap(
 						z=dflastsubbidheat.values,
-				        y= dflastsubbidheat.index,
-				        x=dflastsubbidheat.columns,
+						y= dflastsubbidheat.index,
+						x=dflastsubbidheat.columns,
 						xgap = 0.5,
 						ygap = 1,
 						hoverinfo ='text',
@@ -5510,8 +5510,8 @@ if selected_dimension == "Auction BandWise":
 
 			data2 = [go.Heatmap(
 						z=dflastsubbidratio.values,
-				        y= dflastsubbidratio.index,
-				        x=dflastsubbidratio.columns,
+						y= dflastsubbidratio.index,
+						x=dflastsubbidratio.columns,
 						xgap = 0.5,
 						ygap = 1,
 						hoverinfo ='text',
@@ -5542,9 +5542,9 @@ if selected_dimension == "Auction BandWise":
 			  width=heatmapwidth,
 			  margin= dict(t=t,b=b,l=l,r=r,pad=pad),
 			  yaxis=dict(
-        	  tickmode='array',
-        	  tickfont=dict(size=text_embed_in_chart_size),
-        	  ),
+			  tickmode='array',
+			  tickfont=dict(size=text_embed_in_chart_size),
+			  ),
 			  xaxis = dict(
 			  side = 'top',
 			  tickmode = 'linear',
@@ -5567,9 +5567,9 @@ if selected_dimension == "Auction BandWise":
 			  width=heatmapwidth,
 			  margin= dict(t=t,b=b,l=l,r=r,pad=pad),
 			  yaxis=dict(
-        	  tickmode='array',
-        	  tickfont=dict(size=text_embed_in_chart_size),
-        	  ),
+			  tickmode='array',
+			  tickfont=dict(size=text_embed_in_chart_size),
+			  ),
 			  xaxis = dict(
 			  side = 'top',
 			  tickmode = 'linear',
@@ -5595,16 +5595,16 @@ if selected_dimension == "Auction BandWise":
 			figauc1.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
 			figauc1.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
 			figauc1.update_layout(
-				    xaxis=dict(showgrid=False),
-				    yaxis=dict(showgrid=False)
+					xaxis=dict(showgrid=False),
+					yaxis=dict(showgrid=False)
 				)
 
 			#Drawning a black border around the heatmap chart 
 			figauc2.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
 			figauc2.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
 			figauc2.update_layout(
-				    xaxis=dict(showgrid=False),
-				    yaxis=dict(showgrid=False)
+					xaxis=dict(showgrid=False),
+					yaxis=dict(showgrid=False)
 				)
 
 			hoverlabel_bgcolor = colormatrix
@@ -5638,11 +5638,11 @@ if selected_dimension == "Auction BandWise":
 
 			# Function to replace numbers with 1, except 0
 			def replace_numbers(match):
-			    num = int(match.group())
-			    if num != 0:
-			        return '1'
-			    else:
-			        return str(num)
+				num = int(match.group())
+				if num != 0:
+					return '1'
+				else:
+					return str(num)
 
 			# Apply the regular expression pattern and replacement function to the dataframe
 			# mask dataframe has 1 for winners and 0 for losers
@@ -5654,12 +5654,12 @@ if selected_dimension == "Auction BandWise":
 			#function to combine text from two dataframe 
 
 			def combine_text(sep2, x, y, sep1): #sep is seperator
-			    if x.notnull().all() and y.notnull().all():
-			        return sep2 + x + '<br>' + sep1 + y
-			    elif x.notnull().all():
-			        return x
-			    else:
-			        return y
+				if x.notnull().all() and y.notnull().all():
+					return sep2 + x + '<br>' + sep1 + y
+				elif x.notnull().all():
+					return x
+				else:
+					return y
 
 			#for rendering text of the final heatmap for Data1
 
@@ -5691,11 +5691,11 @@ if selected_dimension == "Auction BandWise":
 
 			# Function to replace numbers with 1, except 0
 			def replace_numbers(match):
-			    num = int(match.group())
-			    if num != 0:
-			        return '1'
-			    else:
-			        return str(num)
+				num = int(match.group())
+				if num != 0:
+					return '1'
+				else:
+					return str(num)
 
 			# Apply the regular expression pattern and replacement function to the dataframe
 			# To calculate the winners who are those who have been assigned blocks
@@ -5766,8 +5766,8 @@ if selected_dimension == "Auction BandWise":
 
 			data1 = [go.Heatmap(
 						z=mask.values,
-				        y=mask.index,
-				        x=mask.columns,
+						y=mask.index,
+						x=mask.columns,
 						xgap = 0.5,
 						ygap = 1,
 						hoverinfo ='text',
@@ -5783,8 +5783,8 @@ if selected_dimension == "Auction BandWise":
 
 			data2 = [go.Heatmap(
 						z=mask.values,
-				        y= mask.index,
-				        x=mask.columns,
+						y= mask.index,
+						x=mask.columns,
 						xgap = 0.5,
 						ygap = 1,
 						hoverinfo ='text',
@@ -5814,9 +5814,9 @@ if selected_dimension == "Auction BandWise":
 			  width=heatmapwidth,
 			  margin= dict(t=t,b=b,l=l,r=r,pad=pad),
 			  yaxis=dict(
-        	  tickmode='array',
-        	  tickfont=dict(size=text_embed_in_chart_size),
-        	  ),
+			  tickmode='array',
+			  tickfont=dict(size=text_embed_in_chart_size),
+			  ),
 			  xaxis = dict(
 			  side = 'top',
 			  tickmode = 'linear',
@@ -5839,9 +5839,9 @@ if selected_dimension == "Auction BandWise":
 			  width=heatmapwidth,
 			  margin= dict(t=t,b=b,l=l,r=r,pad=pad),
 			  yaxis=dict(
-        	  tickmode='array',
-        	  tickfont=dict(size=text_embed_in_chart_size),
-        	  ),
+			  tickmode='array',
+			  tickfont=dict(size=text_embed_in_chart_size),
+			  ),
 			  xaxis = dict(
 			  side = 'top',
 			  tickmode = 'linear',
@@ -5867,16 +5867,16 @@ if selected_dimension == "Auction BandWise":
 			figauc1.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
 			figauc1.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
 			figauc1.update_layout(
-				    xaxis=dict(showgrid=False),
-				    yaxis=dict(showgrid=False)
+					xaxis=dict(showgrid=False),
+					yaxis=dict(showgrid=False)
 				)
 
 			#Drawning a black border around the heatmap chart 
 			figauc2.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
 			figauc2.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
 			figauc2.update_layout(
-				    xaxis=dict(showgrid=False),
-				    yaxis=dict(showgrid=False)
+					xaxis=dict(showgrid=False),
+					yaxis=dict(showgrid=False)
 				)
 
 			hoverlabel_bgcolor = colormatrix
@@ -6152,9 +6152,9 @@ if selected_dimension == "Auction YearWise":
 		  text = hovertext,
 		  colorscale = 'Hot',
 		  showscale= False,
-		    texttemplate="%{z}", 
-		    textfont={"size":text_embed_in_chart_size}, #Debug 13th June 2024 (Changed from 12 to 16)
-		    reversescale=True,
+			texttemplate="%{z}", 
+			textfont={"size":text_embed_in_chart_size}, #Debug 13th June 2024 (Changed from 12 to 16)
+			reversescale=True,
 			)]
 
 	fig = go.Figure(data=data)
@@ -6170,16 +6170,16 @@ if selected_dimension == "Auction YearWise":
 if currency_flag == True: #Rupees
 
 	units_dict = {"Reserve Price" : "Rs Cr/MHz", "Auction Price" : "Rs Cr/MHz", "Quantum Offered": "MHz", 
-		          "Quantum Sold" : "MHz", "Quantum Unsold" : "MHz", "Total EMD" : "Rs Cr", "Total Outflow" : "Rs Cr",
-		          "Auction/Reserve" : "Ratio", "Percent Unsold" : "% of Total Spectrum", "Percent Sold" : "% of Total Spectrum", 
-		          "Total Purchase" : "MHz"}
+				  "Quantum Sold" : "MHz", "Quantum Unsold" : "MHz", "Total EMD" : "Rs Cr", "Total Outflow" : "Rs Cr",
+				  "Auction/Reserve" : "Ratio", "Percent Unsold" : "% of Total Spectrum", "Percent Sold" : "% of Total Spectrum", 
+				  "Total Purchase" : "MHz"}
 
 if currency_flag == False: #USD
 
 		units_dict = {"Reserve Price" : "USD Million/MHz", "Auction Price" : "USD Million/MHz", "Quantum Offered": "MHz", 
-			          "Quantum Sold" : "MHz", "Quantum Unsold" : "MHz", "Total EMD" : "USD Million", "Total Outflow" : "USD Million",
-			          "Auction/Reserve" : "Ratio", "Percent Unsold" : "% of Total Spectrum", "Percent Sold" : "% of Total Spectrum", 
-			          "Total Purchase" : "MHz"}
+					  "Quantum Sold" : "MHz", "Quantum Unsold" : "MHz", "Total EMD" : "USD Million", "Total Outflow" : "USD Million",
+					  "Auction/Reserve" : "Ratio", "Percent Unsold" : "% of Total Spectrum", "Percent Sold" : "% of Total Spectrum", 
+					  "Total Purchase" : "MHz"}
 
 
 
@@ -6366,34 +6366,34 @@ if selected_dimension in ["Spectrum Bands", "Auction YearWise"]:
 	#layout for heatmaps 
 
 	fig.update_layout(
-    uniformtext_minsize=text_embed_in_chart_size, 
-    uniformtext_mode='hide', 
-    xaxis_title=None, 
-    yaxis_title=None, 
-    yaxis_autorange='reversed',
-    font=dict(size=text_embed_in_chart_size),
-    template='simple_white',
-    paper_bgcolor=None,
-    height=heatmapheight, #Changing this will adjust the height of all heat maps
-    width=heatmapwidth, #Changing this will adjust the witdth of all heat maps
-    margin= dict(t=t,b=b,l=l,r=r,pad=pad),
-    yaxis=dict(
-        tickmode='array',
-        tickfont=dict(size=text_embed_in_chart_size),
-        showgrid=True,  # Enable grid lines for y-axis
-        gridcolor='lightgrey',  # Set grid line color for y-axis
-        gridwidth=1  # Set grid line width for y-axis
-    ),
-    xaxis=dict(
-        side='top',
-        tickmode='linear',
-        tickangle=xdtickangle,
-        dtick=xdtickval,
-        tickfont=dict(size=text_embed_in_chart_size),
-        showgrid=True,  # Enable grid lines for x-axis
-        gridcolor='lightgrey',  # Set grid line color for x-axis
-        gridwidth=1  # Set grid line width for x-axis
-    ),
+	uniformtext_minsize=text_embed_in_chart_size, 
+	uniformtext_mode='hide', 
+	xaxis_title=None, 
+	yaxis_title=None, 
+	yaxis_autorange='reversed',
+	font=dict(size=text_embed_in_chart_size),
+	template='simple_white',
+	paper_bgcolor=None,
+	height=heatmapheight, #Changing this will adjust the height of all heat maps
+	width=heatmapwidth, #Changing this will adjust the witdth of all heat maps
+	margin= dict(t=t,b=b,l=l,r=r,pad=pad),
+	yaxis=dict(
+		tickmode='array',
+		tickfont=dict(size=text_embed_in_chart_size),
+		showgrid=True,  # Enable grid lines for y-axis
+		gridcolor='lightgrey',  # Set grid line color for y-axis
+		gridwidth=1  # Set grid line width for y-axis
+	),
+	xaxis=dict(
+		side='top',
+		tickmode='linear',
+		tickangle=xdtickangle,
+		dtick=xdtickval,
+		tickfont=dict(size=text_embed_in_chart_size),
+		showgrid=True,  # Enable grid lines for x-axis
+		gridcolor='lightgrey',  # Set grid line color for x-axis
+		gridwidth=1  # Set grid line width for x-axis
+	),
 	)
 
 	#Drawning a black border around the heatmap chart 
@@ -6415,9 +6415,9 @@ if selected_dimension in ["Spectrum Bands", "Auction YearWise"]:
 		# fig.data[0].update(zmin=110, zmax=450) #setting the max and min value of the colorscale
 		if len(date_range_list) >= 30:
 			fig.update_xaxes(
-			    tickmode='array',
-			    ticktext=[''] * len(date_range_list),
-			    tickvals=list(range(len(date_range_list)))
+				tickmode='array',
+				ticktext=[''] * len(date_range_list),
+				tickvals=list(range(len(date_range_list)))
 			)
 
 
