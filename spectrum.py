@@ -1922,7 +1922,7 @@ chart_data_flag = False #set this to true only if this chart exists.
 with st.sidebar:
 	selected_dimension = option_menu(
 		menu_title = "Select a Menu",
-		options = ["Spectrum Bands", "Auction YearWise", "Auction BandWise", "Auction BandIntegrated"], #Debug 14th June 2024
+		options = ["Spectrum Bands", "Auction YearWise", "Auction BandWise", "Auction Integrated"], #Debug 14th June 2024
 		icons = ["1-circle-fill", "2-circle-fill", "3-circle-fill", "4-circle-fill"],
 		menu_icon = "arrow-down-circle-fill",
 		default_index =0,
@@ -1939,6 +1939,10 @@ dfrsrate = dfrsrate.set_index("Date").asfreq("ME")
 for index in dfrsrate.index:
 	if index.date() in auction_eom_list:
 		auction_rsrate_dict[index.year] = dfrsrate.loc[index,:].values[0]
+
+
+if selected_dimension == "Auction Integrated":
+	st.write("Hello World")
 
 if selected_dimension == "Spectrum Bands":
 
