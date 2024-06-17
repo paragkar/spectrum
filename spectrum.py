@@ -3770,6 +3770,8 @@ if selected_dimension == "Auction BandWise":
 					dfblocksalloc_rdstart[col] = dfblocksalloc_rdstart[col].astype(int)
 				dftemp_comb = dftemp.map(str).combine(dfblocksalloc_rdstart.map(str), lambda x, y: combine_text(x, y)).replace('nan', '', regex = True)
 
+				dftemp = dftemp.replace(0,np.nan) #Removing all zeros from the heatmap
+
 				data = [go.Heatmap(
 				z=dftemp.values,
 		        y= dftemp.index,
