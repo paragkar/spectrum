@@ -1479,10 +1479,10 @@ if selected_dimension == "Spectrum Bands":
 	#mapping the year of auction with channels in the spectrum maps
 	ayear = cal_year_spectrum_acquired(ef,excepf,pf1)
 
-	Feature = st.sidebar.selectbox('Select a Feature', ["Spectrum Map", "Expiry Map", "Auction Map"], 0) #Default Index first
+	SelectedFeature = st.sidebar.selectbox('Select a Feature', ["Spectrum Map", "Expiry Map", "Auction Map"], 0) #Default Index first
 
 	#Processing For Dimension = "Frequency Band" & Features
-	if  Feature == "Spectrum Map":
+	if  SelectedFeature == "Spectrum Map":
 		SubFeature = st.sidebar.selectbox('Select a Sub Feature', ["Frequency Layout", "Operator Holdings", "Operator %Share"],0)
 		if SubFeature == "Frequency Layout":
 			sf = sff.copy()
@@ -1707,8 +1707,8 @@ if selected_dimension == "Spectrum Bands":
 
 			currency_flag = True #default
 
-	#Feature ="Expiry Map" linked to Dimension = "Spectrum Band"
-	if  Feature == "Expiry Map":
+	#SelectedFeature ="Expiry Map" linked to Dimension = "Spectrum Band"
+	if  SelectedFeature == "Expiry Map":
 		SubFeature = st.sidebar.selectbox('Select a Sub Feature', ["Frequency Layout", "Yearly Trends"],0)
 		if SubFeature == "Frequency Layout":
 			sf = sff.copy()
@@ -1824,7 +1824,7 @@ if selected_dimension == "Spectrum Bands":
 			currency_flag = True #default
 
 	#Feature ="Auction Map" linked to Dimension = "Spectrum Band"
-	if  Feature == "Auction Map":
+	if  SelectedFeature == "Auction Map":
 
 		#This dict has been defined for the Feature = Auction Map
 		type_dict ={"Auction Price": auctionprice,
@@ -4553,11 +4553,11 @@ if selected_dimension == "Auction BandWise":
 			col2.plotly_chart(figsumrows, use_container_width=True)
 
 
-	if SubFeature == "BiddingActivity" and (Feature in year_band_exp): #Debug 10th June 2024
+	if SubFeature == "BiddingActivity" and (SelectedFeature in year_band_exp): #Debug 10th June 2024
 
 		st.markdown('<p style="font-size: 48px;">DATA NOT AVAILABLE</p>', unsafe_allow_html=True)
 
-	if SubFeature == "BiddingActivity" and (Feature not in year_band_exp): #Debug 10th June 2024
+	if SubFeature == "BiddingActivity" and (SelectedFeature not in year_band_exp): #Debug 10th June 2024
 
 
 		dfbid = loadauctionbiddata()[activitysheet].replace('-', np.nan, regex = True)
@@ -5946,10 +5946,10 @@ if selected_dimension == "Auction YearWise":
 	df1 = masterdf[masterdf["Auction Year"]==Year]
 	df1 = df1.set_index("Circle")
 
-	Feature = st.sidebar.selectbox('Select a Feature',["Band Details", "Bidder Details"])
+	SelectedFeature = st.sidebar.selectbox('Select a Feature',["Band Details", "Bidder Details"])
 
 
-	if Feature == "Band Details":
+	if SelectedFeature == "Band Details":
 
 		SubFeature = st.sidebar.selectbox('Select a SubFeature', subfeature_list)
 
@@ -6060,7 +6060,7 @@ if selected_dimension == "Auction YearWise":
 		hoverlabel_bgcolor = colormatrix #colormatrix processed from fuction "hovertext_and_colmatrix" for same above
 
 
-	if Feature == "Bidder Details": #for the dimension "Auction Years"
+	if SelectedFeature == "Bidder Details": #for the dimension "Auction Years"
 		df1 = df1.reset_index()
 		df2_temp1 = df1.copy()
 
@@ -6191,7 +6191,7 @@ if currency_flag == False: #USD
 
 #---------Dimension = Spectrum Bands Starts -------------------
 
-if (Feature == "Spectrum Map") and (SubFeature == "Frequency Layout"):
+if (SelectedFeature == "Spectrum Map") and (SubFeature == "Frequency Layout"):
 
 	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=text_embed_in_hover_size, color='white'))) #Debug 14th June 2024 (Chnaged from 12 to 16)
 
@@ -6210,7 +6210,7 @@ if (Feature == "Spectrum Map") and (SubFeature == "Frequency Layout"):
 	title = "Spectrum Frequency Layout for the "+str(Band)+" MHz Band"
 
 
-if (Feature == "Spectrum Map") and (SubFeature == "Operator Holdings"):
+if (SelectedFeature == "Spectrum Map") and (SubFeature == "Operator Holdings"):
 
 	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=text_embed_in_hover_size, color='white'))) #Debug 14th June 2024 (Chnaged from 12 to 16)
 
@@ -6235,7 +6235,7 @@ if (Feature == "Spectrum Map") and (SubFeature == "Operator Holdings"):
 	title = "Operator Holdings for the "+str(Band)+" MHz Band"
 
 
-if (Feature == "Spectrum Map") and (SubFeature == "Operator %Share"):
+if (SelectedFeature == "Spectrum Map") and (SubFeature == "Operator %Share"):
 
 	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=text_embed_in_hover_size, color='white'))) #Debug 14th June 2024 (Changed from 12 to 16)
 
@@ -6259,7 +6259,7 @@ if (Feature == "Spectrum Map") and (SubFeature == "Operator %Share"):
 
 
 	
-if (Feature == "Expiry Map") and (SubFeature == "Frequency Layout"):
+if (SelectedFeature == "Expiry Map") and (SubFeature == "Frequency Layout"):
 
 	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=text_embed_in_hover_size, color='white'))) #Debug 14th June 2024 (Changed from 12 to 16)
 
@@ -6278,7 +6278,7 @@ if (Feature == "Expiry Map") and (SubFeature == "Frequency Layout"):
 	title = "Spectrum Expiry Layout for the "+str(Band)+" MHz Band"
 
 
-if (Feature == "Expiry Map") and (SubFeature == "Yearly Trends"):
+if (SelectedFeature == "Expiry Map") and (SubFeature == "Yearly Trends"):
 
 	hoverlabel_bgcolor = "#000000" #subdued black
 
@@ -6297,7 +6297,7 @@ if (Feature == "Expiry Map") and (SubFeature == "Yearly Trends"):
 	title = "Spectrum Expiry Yearly Trends for the "+str(Band)+" MHz Band"
 
 
-if Feature == "Auction Map":
+if SelectedFeature == "Auction Map":
 
 	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=text_embed_in_hover_size, color='white'))) #Debug 14th June 2024 (Changed from 12 to 16)
 
@@ -6316,7 +6316,7 @@ if Feature == "Auction Map":
 
 #---------Dimension = Auction Years Starts ------------------
 
-if (Feature == "Band Details"):
+if (SelectedFeature == "Band Details"):
 
 	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=text_embed_in_hover_size, color='white'))) #Debug 14th June 2024 (Changed from 12 to 16)
 	
@@ -6342,7 +6342,7 @@ if (Feature == "Band Details"):
 	subtitle = SubFeature+"; Unit -"+units_dict[SubFeature]+"; "+ "Selected Operators -" + ', '.join(selected_operators)+ partsubtitle+"; Source - DOT"
 
 	
-if (Feature == "Bidder Details"):
+if (SelectedFeature == "Bidder Details"):
 
 	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=text_embed_in_hover_size, color='white'))) #Debug 14th June 2024 (Changed from 12 to 16)
 
@@ -6417,7 +6417,7 @@ if selected_dimension in ["Spectrum Bands", "Auction YearWise"]:
 
 	#removes tic labels if the date_range_list greater than a value
 	#This is done to prevent cluttering of xaxis labels when a large range is selected
-	if (selected_dimension == "Business Data") and (Feature == "Subscriber Trends"):
+	if (selected_dimension == "Business Data") and (SelectedFeature == "Subscriber Trends"):
 		# fig.data[0].update(zmin=110, zmax=450) #setting the max and min value of the colorscale
 		if len(date_range_list) >= 30:
 			fig.update_xaxes(
@@ -6459,26 +6459,26 @@ if selected_dimension in ["Spectrum Bands", "Auction YearWise"]:
 	expander = st.expander("Click Here - To Learn About the Color Codes", expanded = False)
 
 	with expander:
-		if (Feature == "Spectrum Map") and (SubFeature=="Frequency Layout"):
+		if (SelectedFeature == "Spectrum Map") and (SubFeature=="Frequency Layout"):
 			st.info("Heatmap and Hoverbox's Background Color - Maps to the Specific Operator")
 
-		if (Feature == "Expiry Map") and (SubFeature=="Frequency Layout"):
+		if (SelectedFeature == "Expiry Map") and (SubFeature=="Frequency Layout"):
 			st.info("Heatmap's Color Intensity - Directly Proportional to length of the expiry period in years")
 			st.info("Hoverbox's Background Color - Directly Maps to the Specific Operator of the 'Spectrum Map' Layout")
 
-		if (Feature == "Auction Map"):
+		if (SelectedFeature == "Auction Map"):
 			st.info("Heatmap's Color Intensity - Directly Proportional to the Value of the Cell")
 			st.info("Hoverbox's Background Color = BLACK (Failed/No Auction)")
 			st.info("Hoverbox's Background Color = GREEN (Auction Price = Reserve Price)")
 			st.info("Hoverbox's Background Color = RED (Auction Price > Reserve Price)")
 
-		if (Feature == "Bidder Details"):
+		if (SelectedFeature == "Bidder Details"):
 			st.info("Heatmap's Color Intensity - Directly proportional to value on Color Bar on the left")
 			st.info("Hoverbox's Background Color = GREEN (Purchase Made)")
 			st.info("Hoverbox's Background Color = GREY (No Purchase Made)")
 
 
-		if (Feature == "Band Details"):
+		if (SelectedFeature == "Band Details"):
 			st.info("Heatmap's Color Intensity - Directly Proportional to the Value of the Cell")
 			st.info("Hoverbox's Background Color = GREY (No Auction)")
 			st.info("Hoverbox's Background Color = BLACK (Failed Auction)")
