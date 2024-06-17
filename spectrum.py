@@ -3705,7 +3705,7 @@ if selected_dimension == "Auction BandWise":
 		#-----------------New Code Ends ----------------------#
 
 		pwbtype = st.sidebar.selectbox("Select a PWB Type", ["Start CLK Round", "End CLK Round"])
-		df1strd = dfbid1[dfbid1["Clk_Round"] == 1].reset_index()  # Identifying the 2nd round gives up the reserve price
+		df1strd = dfbid1[dfbid1["Clock Round"] == 1].reset_index()  # Identifying the 2nd round gives up the reserve price
 		# df1strd = dfbid1[dfbid1["Clock Round"] == 1].reset_index()  # Identifying the 2nd round gives up the reserve price
 		dfpwb1strdend = df1strd.pivot(index="Bidder", columns='LSA', values="PWB_End_ClkRd").sort_index(ascending=False)
 
