@@ -1949,7 +1949,7 @@ if selected_dimension == "Auction Integrated":
 		band = sheet.split("_")[2]
 		auctionyear = sheet.split("_")[0]
 
-		if auctionyear not in [2010]:
+		if auctionyear not in ["2010"]:
 
 			st.write(auctionyear,band,loadauctionbiddata()[sheet])
 
