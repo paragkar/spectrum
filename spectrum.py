@@ -1785,7 +1785,7 @@ if selected_dimension == "Spectrum Bands":
 						if op != selected_operator:
 							temp.iloc[i,j] = np.nan
 						else:
-							temp.iloc[i,j] = item.split(";")[0]
+							temp.iloc[i,j] = str(item).split(";")[0]
 				
 				for col in temp.columns:
 					temp[col] = temp[col].astype(float)
