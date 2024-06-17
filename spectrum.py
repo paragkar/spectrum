@@ -1946,7 +1946,10 @@ if selected_dimension == "Auction Integrated":
 	for sepectrumband in year_band:
 		sheet = Auction_Year_Band_Features[sepectrumband]["demandsheet"]
 
-		st.write(sheet.split("_")[2],loadauctionbiddata()[sheet])
+		band = sheet.split("_")[2]
+		year = sheet.split("_")[0]
+
+		st.write(year,band,loadauctionbiddata()[sheet])
 
 
 if selected_dimension == "Spectrum Bands":
