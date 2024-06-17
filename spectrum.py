@@ -1943,7 +1943,11 @@ for index in dfrsrate.index:
 
 if selected_dimension == "Auction Integrated":
 
-	currency_flag = True #default 
+	df = loadauctionbiddata()
+
+	st.write(df)
+
+
 	st.write("Hello World")
 
 if selected_dimension == "Spectrum Bands":
