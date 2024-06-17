@@ -3116,7 +3116,7 @@ if selected_dimension == "Auction BandWise":
         dfrp = dfrp.T #Preparing the dataframe for reserve proce per BLK
 
 
-		if pwbtype == "Start CLK Round":
+        if pwbtype == "Start CLK Round":
 
 			# debug 30th Mar 2024
 			# Generate a list of all round numbers
