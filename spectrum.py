@@ -1946,8 +1946,6 @@ if selected_dimension == "Auction Integrated":
 	dfcomb = pd.DataFrame()
 	for sepectrumband in year_band:
 
-		# if sepectrumband not in year_band_exp:
-
 		sheet = Auction_Year_Band_Features[sepectrumband]["demandsheet"]
 		band = sheet.split("_")[2]
 		auctionyear = sheet.split("_")[0]
