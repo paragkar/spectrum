@@ -870,6 +870,20 @@ Auction_Year_Band_Features = {
 
 #-----------All Constant Deceleration End and Function Starts from Here -----
 
+#Wrapper Function Auction BandWise Selected Feature
+def get_value(feature_dict, feature_key, var_name):
+    """
+    Retrieves a value from a nested dictionary using the variable name as the key.
+    Args:
+    - feature_dict (dict): The main dictionary containing feature data.
+    - feature_key (str): The key to access the specific feature data.
+    - var_name (str): The variable name used as the key in the nested dictionary.
+    Returns:
+    - The value from the nested dictionary or 'Key not found' if the key does not exist.
+    """
+    return feature_dict.get(feature_key, {}).get(var_name, "Key not found")
+
+
 #function to count number of items in a list and outputs the result as dictionary
 #Used to extract data table for Spectrum Layout Dimension when it is filtered by Operators      	   
 def count_items_in_dataframe(df):
@@ -2479,20 +2493,6 @@ if selected_dimension == "Spectrum Bands":
 
 
 #----------------New Auction Bid Data Code Starts Here------------------
-
-#Wrapper Function Auction BandWise Selected Feature
-def get_value(feature_dict, feature_key, var_name):
-    """
-    Retrieves a value from a nested dictionary using the variable name as the key.
-    Args:
-    - feature_dict (dict): The main dictionary containing feature data.
-    - feature_key (str): The key to access the specific feature data.
-    - var_name (str): The variable name used as the key in the nested dictionary.
-    Returns:
-    - The value from the nested dictionary or 'Key not found' if the key does not exist.
-    """
-    return feature_dict.get(feature_key, {}).get(var_name, "Key not found")
-
 
 if selected_dimension == "Auction BandWise":
 
