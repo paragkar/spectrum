@@ -1945,7 +1945,7 @@ if selected_dimension == "Auction Integrated":
 
 	df = loadauctionbiddata()
 
-	st.write(df)
+	st.write(df["2015_2G_3G_Activity"])
 
 
 	st.write("Hello World")
