@@ -1948,7 +1948,6 @@ dfrsrate["Date"] = pd.to_datetime(dfrsrate["Date"])
 dfrsrate = dfrsrate.set_index("Date").asfreq("ME")
 
 for index in dfrsrate.index:
-
 	if index.date() in auction_eom_list:
 		auction_rsrate_dict[index.year] = dfrsrate.loc[index,:].values[0]
 
