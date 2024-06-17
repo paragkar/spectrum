@@ -1943,19 +1943,20 @@ for index in dfrsrate.index:
 
 if selected_dimension == "Auction Integrated":
 
+	dfcomb = pd.DataFrame()
 	for sepectrumband in year_band:
-		sheet = Auction_Year_Band_Features[sepectrumband]["demandsheet"]
 
+		sheet = Auction_Year_Band_Features[sepectrumband]["demandsheet"]
 		band = sheet.split("_")[2]
 		auctionyear = sheet.split("_")[0]
 
 		if auctionyear not in ["2010"]:
-
 			df = loadauctionbiddata()[sheet]
 			df["Auction Year"] = auctionyear
 			df["Band"] = band
 
-			st.write(df)
+			dfcomb = pd.concat([dfcomb,df], axis =1)
+	st.write(dfcomb)
 
 
 if selected_dimension == "Spectrum Bands":
