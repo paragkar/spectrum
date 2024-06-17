@@ -3595,7 +3595,6 @@ if selected_dimension == "Auction BandWise":
 
 			dfbidsel = dfbidsel.sort_index(ascending = False)
 
-
 			circle_list=[]
 
 			for circle in listofcircles: #this extracts the full name of the circle from the code
@@ -3615,7 +3614,6 @@ if selected_dimension == "Auction BandWise":
 
 			dfbidsel = dfbidsel.reset_index()
 
-
 			dfbidsel['Rank'] = dfbidsel['Rank_Bidder'].apply(lambda x: int(x.split('-')[0]))
 			dfbidsel['Company'] = dfbidsel['Rank_Bidder'].apply(lambda x: x.split('-')[1])
 
@@ -3631,7 +3629,6 @@ if selected_dimension == "Auction BandWise":
 			dfbidsel = dfbidsel.set_index("Rank_Bidder")
 
 			#--------------------------- degug 30th March 2024
-
 
 			# Define the heatmap with embedded text and customized hover information
 			data = [go.Heatmap(
@@ -3698,6 +3695,7 @@ if selected_dimension == "Auction BandWise":
 
 
     if SelectedSubFeature == "ProvWinningBid":
+        
         dfbid1 = loadauctionbiddata()[demandsheet].replace('-', np.nan,regex=True)
         dfbid1 = dfbid1.drop(columns=["Clock Round", "Clock Round Price (Rs. Crore)", "Aggregate Demand", "Excess Demand"], axis=1)
         dfbid1 = dfbid1.groupby(["LSA"]).mean().reset_index()
