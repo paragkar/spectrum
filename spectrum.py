@@ -2480,7 +2480,7 @@ Auction_Year_Band_Features = {
  
 }
 
-#Wrapper Function 
+#Wrapper Function Auction BandWise Selected Feature
 def get_value(feature_dict, feature_key, var_name):
     """
     Retrieves a value from a nested dictionary using the variable name as the key.
@@ -2493,9 +2493,17 @@ def get_value(feature_dict, feature_key, var_name):
     """
     return feature_dict.get(feature_key, {}).get(var_name, "Key not found")
 
+
 if selected_dimension == "Auction BandWise":
 
 	currency_flag = True #default 
+
+	# Initialize session state for SelectedFeature and SubFeature
+	# The Purpose of this set of instruction to preserve session state
+	if SelectedFeature not in st.session_state:
+	    st.session_state.main_category = None
+	if SubFeature not in st.session_state:
+	    st.session_state.sub_category = None
 
 	SelectedFeature = st.sidebar.selectbox("Select a Feature", year_band) #Debug 10th June 2024
 
