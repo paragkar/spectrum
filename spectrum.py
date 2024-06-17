@@ -3696,6 +3696,7 @@ if selected_dimension == "Auction BandWise":
 			st.plotly_chart(figauc, use_container_width=True)
 
 
+
     if SelectedSubFeature == "ProvWinningBid":
         dfbid1 = loadauctionbiddata()[demandsheet].replace('-', np.nan,regex=True)
         st.write(dfbid1)
