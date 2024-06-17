@@ -3129,6 +3129,8 @@ if selected_dimension == "Auction BandWise":
 		listofbidders = sorted(list(set(dfbidori["Bidder"])))
 		listofcircles = sorted(list(set(dfbidori["LSA"])))
 		dfbidori = dfbidori.set_index("LSA").sort_index(ascending = False)
+	else:
+		pass
 
 
 	#filtering the reserve price for the auction year
