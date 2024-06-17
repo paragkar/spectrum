@@ -1951,7 +1951,7 @@ if selected_dimension == "Auction Integrated":
 
 		if auctionyear not in ["2010"]:
 
-			df = auctionyear,band,loadauctionbiddata()[sheet]
+			df = loadauctionbiddata()[sheet]
 			df["Auction Year"] = auctionyear
 			df["Band"] = band
 
