@@ -121,18 +121,13 @@ st.markdown(hide_st_style, unsafe_allow_html =True)
 
 @st.cache_resource
 def loadrstousd():
-
 	df = pd.read_csv("rs_to_usd.csv")
-
 	return df
 
 @st.cache_resource
 def loadspectrumfile():
-
 	password = st.secrets["db_password"]
-
 	excel_content = io.BytesIO()
-
 	with open("spectrum_map_protected.xlsx", 'rb') as f:
 		excel = msoffcrypto.OfficeFile(f)
 		excel.load_key(password)
@@ -142,17 +137,13 @@ def loadspectrumfile():
 	xl = pd.ExcelFile(excel_content)
 	sheet = xl.sheet_names
 	df = pd.read_excel(excel_content, sheet_name=sheet)
-
 	return df
 
 
 @st.cache_resource
 def loadauctionbiddata():
-
 	password = st.secrets["db_password"]
-
 	excel_content = io.BytesIO()
-
 	with open("auctionbiddata.xlsx", 'rb') as f:
 		excel = msoffcrypto.OfficeFile(f)
 		excel.load_key(password)
@@ -161,7 +152,6 @@ def loadauctionbiddata():
 	xl = pd.ExcelFile(excel_content)
 	sheetauctiondata = xl.sheet_names
 	df = pd.read_excel(excel_content, sheet_name=sheetauctiondata)
-
 	return df
 
 #--------Fuctions for loading File Ends--------------------
@@ -1926,7 +1916,6 @@ def select_round_range(total_rounds):
 # image = Image.open('parag_kar.jpg') #debug
 # st.sidebar.image(image) #debug
 
-
 #set flags extracting chart data in the data tab
 chart_data_flag = False #set this to true only if this chart exists.
 
@@ -1971,7 +1960,6 @@ if selected_dimension == "Spectrum Bands":
 
 
 	#loading spectrum excel file
-
 	df = loadspectrumfile()
 
 	#processing colorcode excel data tab
