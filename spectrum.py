@@ -1959,7 +1959,7 @@ if selected_dimension == "Auction Integrated":
 		except:
 			pass
 
-	st.write(list(set(dfcomb["Auction Year"]))
+	st.write(list(set(dfcomb["Auction Year"])))
 
 	Band = st.sidebar.selectbox('Select an Auction Year', list(exptab_dict.keys()), 3) #default index 1800 MHz Band
 
