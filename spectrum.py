@@ -5694,6 +5694,8 @@ if currency_flag == False: #USD
 					  "Auction/Reserve" : "Ratio", "Percent Unsold" : "% of Total Spectrum", "Percent Sold" : "% of Total Spectrum", 
 					  "Total Purchase" : "MHz"}
 
+
+#-------This is a new Code---- for Auction Integrated Structure--Remove this if this does not work and change the indentation below 
 if currency_flag == "NA": #This option is for Auction Integrated so as ensure the current structure is preserved
 	pass
 else:
