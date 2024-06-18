@@ -1960,28 +1960,19 @@ if selected_dimension == "Auction Integrated":
 			pass
 
 	AuctionYears = sorted(list(set(dfcomb["Auction Year"])))
-
 	AuctionYear = st.sidebar.selectbox('Select an Auction Year', AuctionYears, 0) #default index 2012
-
 	dfcomb_auc_yr = dfcomb[dfcomb["Auction Year"] == AuctionYear]
-
 	clkrounds = sorted(list(set(dfcomb_auc_yr["Clock Round"])))
-
 	round_number = st.sidebar.number_input("Select Auction Round Number"+";Total Rounds= "+str(max(clkrounds)), min_value=min(clkrounds), max_value=max(clkrounds), value=1, step=1)
 
 	dfcomb_auc_yr_rd = dfcomb_auc_yr[dfcomb_auc_yr["Clock Round"] == round_number]
-
-
 	dfcomb_auc_yr_rd = dfcomb_auc_yr_rd[[ "Bidder", "Service Area","Band" ,"No. of Blocks Selected", "Provisionally Allocated Blocks at end of Clock Round"]]
-
 	dfcomb_auc_yr_rd = dfcomb_auc_yr_rd.replace("-", 0)
-
 	dfcomb_auc_yr_rd = dfcomb_auc_yr_rd.replace(0, np.nan).reset_index(drop = True)
 
 	
 	## Dynamically create the band_order list from the unique bands in your data
 	band_order = sorted(dfcomb_auc_yr_rd['Band'].unique(), reverse = True)
-
 	# Create a combined column for bidder information
 	dfcomb_auc_yr_rd = dfcomb_auc_yr_rd.pivot_table(
     index='Service Area', 
@@ -1994,8 +1985,43 @@ if selected_dimension == "Auction Integrated":
 	# Use pd.IndexSlice to correctly handle MultiIndex column sorting
 	dfcomb_auc_yr_rd = dfcomb_auc_yr_rd.loc[:, pd.IndexSlice[band_order, :]]
 
-	# Display the sorted DataFrame
-	st.write(dfcomb_auc_yr_rd)
+	# Prepare hovertext for the heatmap
+	hovertext = []
+	for yi, yy in enumerate(dfcomb_auc_yr_rd.index):
+	    hovertext.append([])
+	    for xi, xx in enumerate(dfcomb_auc_yr_rd.columns):
+	        value = dfcomb_auc_yr_rd.loc[yy, xx]
+	        hovertext[-1].append(f'Band: {xx[0]}<br>Bidder: {xx[1]}<br>Blocks Selected: {value}')
+
+	# Define a colorscale for the heatmap
+	colorscale = "Viridis"  # or any other color scale available in Plotly
+
+	# Create the heatmap object
+	heatmap = go.Heatmap(
+	    z=dfcomb_auc_yr_rd.fillna(0).values,  # Replace NaN with 0 for visualization purposes
+	    y=dfcomb_auc_yr_rd.index,
+	    x=[' - '.join(map(str, col)) for col in dfcomb_auc_yr_rd.columns],  # Combine the multi-index into a single string
+	    xgap=1,  # Modify as needed
+	    ygap=1,
+	    hoverinfo='text',
+	    text=hovertext,
+	    colorscale=colorscale,
+	    showscale=True
+	)
+
+	# Create the figure using the heatmap data
+	fig = go.Figure(data=[heatmap])
+
+	# Update layout if needed
+	fig.update_layout(
+	    title='Heatmap of No. of Blocks Selected by Service Area and Band',
+	    xaxis_title='Band - Bidder',
+	    yaxis_title='Service Area'
+	)
+
+	# Show the plot
+	fig.show()
+
 
 if selected_dimension == "Spectrum Bands":
 
