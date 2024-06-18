@@ -2014,7 +2014,7 @@ if selected_dimension == "Auction Integrated":
     text=text_values,  # Embed values directly in the heatmap cells
     hoverinfo='none',  # Disable hover info if values are embedded in cells
     colorscale=colorscale,
-    showscale=True
+    showscale=False
 	)
 
 	# Create the figure using the heatmap data
