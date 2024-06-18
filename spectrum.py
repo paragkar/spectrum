@@ -1979,7 +1979,7 @@ if selected_dimension == "Auction Integrated":
 	dfcomb_auc_yr_rd = dfcomb_auc_yr_rd.replace(0, np.nan).reset_index(drop = True)
 
 	# Create a combined column for bidder information
-	dfcomb_auc_yr_rd['Bidder Info'] = data.apply(
+	dfcomb_auc_yr_rd['Bidder Info'] = dfcomb_auc_yr_rd.apply(
 	    lambda row: f"{row['Bidder']} - Selected: {row['No. of Blocks Selected']} Allocated: {row['Provisionally Allocated Blocks at end of Clock Round']}",
 	    axis=1
 	)
