@@ -1969,7 +1969,7 @@ if selected_dimension == "Auction Integrated":
 
 	dfcomb_auc_yr = dfcomb[dfcomb["Auction Year"] == AuctionYear]
 
-	round_number = st.sidebar.number_input("Select Auction Round Number"+";Total Rounds= "+str(max(clkrounds)), min_value=min(clkrounds), max_value=max(round_numbers), value=1, step=1)
+	round_number = st.sidebar.number_input("Select Auction Round Number"+";Total Rounds= "+str(max(clkrounds)), min_value=min(clkrounds), max_value=max(clkrounds), value=1, step=1)
 
 	# st.write(dfcomb_auc_yr)
 
