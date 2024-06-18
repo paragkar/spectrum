@@ -2031,7 +2031,7 @@ if selected_dimension == "Auction Integrated":
 	        side='top'  # Set x-axis labels to top
 	    ),
 	    yaxis_title='Service Area',
-	    width=900,  # Specify width
+	    width=1200,  # Specify width
 	    height=900,  # Specify height
 	    autosize=True
 	)
