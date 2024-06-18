@@ -1981,6 +1981,8 @@ if selected_dimension == "Auction Integrated":
 	# Calculate the frequency of each band
 	band_frequencies = dfcomb_auc_yr_rd['Band'].value_counts()
 
+	st.write(band_frequencies)
+
 	# Create a combined column for bidder information
 	dfcomb_auc_yr_rd = dfcomb_auc_yr_rd.pivot_table(
     index='Service Area', 
