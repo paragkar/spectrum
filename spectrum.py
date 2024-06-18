@@ -2024,8 +2024,8 @@ if selected_dimension == "Auction Integrated":
 	# Update layout with defined dimensions and titles
 	fig.update_layout(
 	    title='Heatmap of No. of Blocks Selected by Service Area and Band',
-	    xaxis_title='Bidders (Band)',
-	    yaxis_title='Service Area',
+	    # xaxis_title='Bidders (Band)',
+	    # yaxis_title='Service Area',
 	    width=900,  # Specify width
 	    height=900  # Specify height
 	)
