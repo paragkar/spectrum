@@ -1978,10 +1978,9 @@ if selected_dimension == "Auction Integrated":
 
 	dfcomb_auc_yr_rd = dfcomb_auc_yr_rd.replace(0, np.nan).reset_index(drop = True)
 
-	# Calculate the frequency of each band
-	band_frequencies = dfcomb_auc_yr_rd['Band'].value_counts()
-
-	st.write(band_frequencies)
+	
+	## Dynamically create the band_order list from the unique bands in your data
+	band_order = sorted(dfcomb_auc_yr_rd['Band'].unique())
 
 	# Create a combined column for bidder information
 	dfcomb_auc_yr_rd = dfcomb_auc_yr_rd.pivot_table(
@@ -1991,12 +1990,10 @@ if selected_dimension == "Auction Integrated":
     aggfunc='first'  # you can change this to 'sum' if that's more appropriate
 	)
 
-	# Sort the columns based on the frequency of bands (ascending order)
-	# We use a custom sorting key that looks up the frequency of each band
-	dfcomb_auc_yr_rd = dfcomb_auc_yr_rd.reindex(
-	    columns=sorted(dfcomb_auc_yr_rd.columns, key=lambda x: band_frequencies[x[0]]),
-	    level='Band'
-	)
+
+	# Sort the columns based on the dynamic band order
+	# Use pd.IndexSlice to correctly handle MultiIndex column sorting
+	dfcomb_auc_yr_rd = dfcomb_auc_yr_rd.loc[:, pd.IndexSlice[band_order, :]]
 
 	# Display the sorted DataFrame
 	st.write(dfcomb_auc_yr_rd)
