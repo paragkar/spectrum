@@ -1947,21 +1947,21 @@ if selected_dimension == "Auction Integrated":
 	for sepectrumband in year_band:
 
 		sheet = Auction_Year_Band_Features[sepectrumband]["mainsheet"]
-
 		try:
 
 			band = sheet.split("_")[2]
 			auctionyear = sheet.split("_")[0]
-			
+
 			df = loadauctionbiddata()[sheet]
 			df["Auction Year"] = auctionyear
 			df["Band"] = band
 			dfcomb = pd.concat([dfcomb,df], axis =0)
-
 		except:
 			pass
 
-	st.write(dfcomb)
+	st.write(set(dfcomb["Auction Year"]))
+
+	Band = st.sidebar.selectbox('Select an Auction Year', list(exptab_dict.keys()), 3) #default index 1800 MHz Band
 
 
 if selected_dimension == "Spectrum Bands":
