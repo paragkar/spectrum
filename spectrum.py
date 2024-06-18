@@ -1959,9 +1959,9 @@ if selected_dimension == "Auction Integrated":
 		except:
 			pass
 
-	st.write(sorted(list(set(dfcomb["Auction Year"]))))
+	AuctionYears = sorted(list(set(dfcomb["Auction Year"]))))
 
-	Band = st.sidebar.selectbox('Select an Auction Year', list(exptab_dict.keys()), 3) #default index 1800 MHz Band
+	AuctionYear = st.sidebar.selectbox('Select an Auction Year', AuctionYearsAuctionYears, 0) #default index 2012
 
 
 if selected_dimension == "Spectrum Bands":
