@@ -1975,6 +1975,8 @@ if selected_dimension == "Auction Integrated":
 
 	dfcomb_auc_yr_rd = dfcomb_auc_yr_rd.replace("-", np.nan)
 
+	st.write(dfcomb_auc_yr_rd)
+
 
 if selected_dimension == "Spectrum Bands":
 
