@@ -1988,7 +1988,7 @@ if selected_dimension == "Auction Integrated":
 	grouped_data = dfcomb_auc_yr_rd.groupby(['Band', 'Service Area'])['Bidder Info'].apply(lambda x: '\n'.join(x.dropna())).unstack()
 
 	# Resulting DataFrame
-	st.write(grouped_data)
+	st.write(grouped_data.T)
 
 
 if selected_dimension == "Spectrum Bands":
