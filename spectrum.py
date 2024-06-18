@@ -2016,7 +2016,7 @@ if selected_dimension == "Auction Integrated":
     colorscale=colorscale,
     showscale=True
 	)
-	
+
 	# Create the figure using the heatmap data
 	fig = go.Figure(data=[heatmap])
 
@@ -2027,7 +2027,7 @@ if selected_dimension == "Auction Integrated":
 	    xaxis_title='Bidders (Band)',
 	    yaxis_title='Service Area',
 	    width=900,  # Specify width
-	    height=600  # Specify height
+	    height=900  # Specify height
 	)
 
 	tab1,tab2 = st.tabs(["Blocks Selected", "Blocks Allocated"])  #Two Tabs for different Purpose 
