@@ -1947,16 +1947,17 @@ if selected_dimension == "Auction Integrated":
 	for sepectrumband in year_band:
 
 		sheet = Auction_Year_Band_Features[sepectrumband]["mainsheet"]
-		band = sheet.split("_")[2]
-		auctionyear = sheet.split("_")[0]
+		st.write(sheet)
+	# 	band = sheet.split("_")[2]
+	# 	auctionyear = sheet.split("_")[0]
 
-		if auctionyear not in ["2010"]:
-			df = loadauctionbiddata()[sheet]
-			df["Auction Year"] = auctionyear
-			df["Band"] = band
-			dfcomb = pd.concat([dfcomb,df], axis =0)
+	# 	if auctionyear not in ["2010"]:
+	# 		df = loadauctionbiddata()[sheet]
+	# 		df["Auction Year"] = auctionyear
+	# 		df["Band"] = band
+	# 		dfcomb = pd.concat([dfcomb,df], axis =0)
 
-	st.write(dfcomb)
+	# st.write(dfcomb)
 
 
 if selected_dimension == "Spectrum Bands":
