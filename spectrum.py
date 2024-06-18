@@ -1943,8 +1943,6 @@ for index in dfrsrate.index:
 
 if selected_dimension == "Auction Integrated":
 
-	currency_flag = True
-
 	dfcomb = pd.DataFrame()
 	for sepectrumband in year_band:
 
@@ -1987,38 +1985,49 @@ if selected_dimension == "Auction Integrated":
 	# Use pd.IndexSlice to correctly handle MultiIndex column sorting
 	dfcomb_auc_yr_rd = dfcomb_auc_yr_rd.loc[:, pd.IndexSlice[band_order, :]]
 
+
+	# Simplify column names for display
+	column_labels = [f"{col[1]} ({col[0]})" for col in dfcomb_auc_yr_rd.columns]
+
 	# Prepare hovertext for the heatmap
-	hovertext = []
-	for yi, yy in enumerate(dfcomb_auc_yr_rd.index):
-	    hovertext.append([])
-	    for xi, xx in enumerate(dfcomb_auc_yr_rd.columns):
-	        value = dfcomb_auc_yr_rd.loc[yy, xx]
-	        hovertext[-1].append(f'Band: {xx[0]}<br>Bidder: {xx[1]}<br>Blocks Selected: {value}')
+	# hovertext = []
+	# for yi, yy in enumerate(dfcomb_auc_yr_rd.index):
+	#     hovertext.append([])
+	#     for xi, xx in enumerate(dfcomb_auc_yr_rd.columns):
+	#         value = dfcomb_auc_yr_rd.loc[yy, xx]
+	#         hovertext[-1].append(f'Band: {xx[0]}<br>Bidder: {xx[1]}<br>Blocks Selected: {value}')
+
+	# Prepare text to embed in the heatmap itself
+	text_values = [[f"{value}" if pd.notna(value) else "" for value in row] for row in dfcomb_auc_yr_rd.values]
 
 	# Define a colorscale for the heatmap
 	colorscale = "Viridis"  # or any other color scale available in Plotly
 
+
 	# Create the heatmap object
 	heatmap = go.Heatmap(
-	    z=dfcomb_auc_yr_rd.fillna(0).values,  # Replace NaN with 0 for visualization purposes
-	    y=dfcomb_auc_yr_rd.index,
-	    x=[' - '.join(map(str, col)) for col in dfcomb_auc_yr_rd.columns],  # Combine the multi-index into a single string
-	    xgap=1,  # Modify as needed
-	    ygap=1,
-	    hoverinfo='text',
-	    text=hovertext,
-	    colorscale=colorscale,
-	    showscale=True
+    z=dfcomb_auc_yr_rd.fillna(0).values,  # Replace NaN with 0 for visualization purposes
+    y=dfcomb_auc_yr_rd.index,
+    x=column_labels,  # Use simplified column labels
+    xgap=1,  # Modify as needed
+    ygap=1,
+    text=text_values,  # Embed values directly in the heatmap cells
+    hoverinfo='none',  # Disable hover info if values are embedded in cells
+    colorscale=colorscale,
+    showscale=True
 	)
-
+	
 	# Create the figure using the heatmap data
 	fig = go.Figure(data=[heatmap])
 
-	# Update layout if needed
+	
+	# Update layout with defined dimensions and titles
 	fig.update_layout(
 	    title='Heatmap of No. of Blocks Selected by Service Area and Band',
-	    xaxis_title='Band - Bidder',
-	    yaxis_title='Service Area'
+	    xaxis_title='Bidders (Band)',
+	    yaxis_title='Service Area',
+	    width=900,  # Specify width
+	    height=600  # Specify height
 	)
 
 	tab1,tab2 = st.tabs(["Blocks Selected", "Blocks Allocated"])  #Two Tabs for different Purpose 
