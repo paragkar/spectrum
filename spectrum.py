@@ -1980,7 +1980,7 @@ if selected_dimension == "Auction Integrated":
 
 	
 	## Dynamically create the band_order list from the unique bands in your data
-	band_order = sorted(dfcomb_auc_yr_rd['Band'].unique())
+	band_order = sorted(dfcomb_auc_yr_rd['Band'].unique(), ascending = True)
 
 	# Create a combined column for bidder information
 	dfcomb_auc_yr_rd = dfcomb_auc_yr_rd.pivot_table(
@@ -1989,7 +1989,6 @@ if selected_dimension == "Auction Integrated":
     values='No. of Blocks Selected', 
     aggfunc='first'  # you can change this to 'sum' if that's more appropriate
 	)
-
 
 	# Sort the columns based on the dynamic band order
 	# Use pd.IndexSlice to correctly handle MultiIndex column sorting
