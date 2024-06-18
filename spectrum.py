@@ -2015,6 +2015,7 @@ if selected_dimension == "Auction Integrated":
     text=text_values,  # Embed values directly in the heatmap cells
     hoverinfo='text',  # Disable hover info if values are embedded in cells
     texttemplate="%{text}",
+    textfont={"size":text_embed_in_chart_size}, 
     colorscale=colorscale,
     showscale=False
 	)
