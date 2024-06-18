@@ -2020,11 +2020,11 @@ if selected_dimension == "Auction Integrated":
 	)
 
 	tab1,tab2 = st.tabs(["Blocks Selected", "Blocks Allocated"])  #Two Tabs for different Purpose 
-		with tab1:
-			st.plotly_chart(fig, use_container_width=True)
+	with tab1:
+		st.plotly_chart(fig, use_container_width=True)
 
-		with tab2:
-			pass
+	with tab2:
+		pass
 
 
 
