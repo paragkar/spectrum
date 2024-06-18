@@ -1978,6 +1978,9 @@ if selected_dimension == "Auction Integrated":
 
 	dfcomb_auc_yr_rd = dfcomb_auc_yr_rd.replace(0, np.nan).reset_index(drop = True)
 
+	# Calculate the frequency of each band
+	band_frequencies = dfcomb_auc_yr_rd['Band'].value_counts()
+
 	# Create a combined column for bidder information
 	dfcomb_auc_yr_rd = dfcomb_auc_yr_rd.pivot_table(
     index='Service Area', 
@@ -1985,8 +1988,6 @@ if selected_dimension == "Auction Integrated":
     values='No. of Blocks Selected', 
     aggfunc='first'  # you can change this to 'sum' if that's more appropriate
 	)
-	# Calculate the frequency of each band
-	band_frequencies = dfcomb_auc_yr_rd['Band'].value_counts()
 
 	# Sort the columns based on the frequency of bands (ascending order)
 	# We use a custom sorting key that looks up the frequency of each band
