@@ -1972,7 +1972,7 @@ if selected_dimension == "Auction Integrated":
 	dfcomb_auc_yr_rd = dfcomb_auc_yr[dfcomb_auc_yr["Clock Round"] == round_number]
 
 
-	dfcomb_auc_yr_rd = dfcomb_auc_yr_rd[[ "Bidder", "Service Area", "No. of Blocks Selected", "Provisionally Allocated Blocks at end of Clock Round"]]
+	dfcomb_auc_yr_rd = dfcomb_auc_yr_rd[[ "Bidder", "Service Area","Band" "No. of Blocks Selected", "Provisionally Allocated Blocks at end of Clock Round"]]
 
 	dfcomb_auc_yr_rd = dfcomb_auc_yr_rd.replace("-", 0)
 
