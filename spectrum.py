@@ -2019,8 +2019,14 @@ if selected_dimension == "Auction Integrated":
 	    yaxis_title='Service Area'
 	)
 
-	# Show the plot
-	fig.show()
+	tab1,tab2 = st.tabs(["Blocks Selected", "Blocks Allocated"])  #Two Tabs for different Purpose 
+
+		with tab1:
+			st.plotly_chart(fig, use_container_width=True)
+
+		with tab2:
+			pass
+
 
 
 if selected_dimension == "Spectrum Bands":
