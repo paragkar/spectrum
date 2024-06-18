@@ -2012,7 +2012,8 @@ if selected_dimension == "Auction Integrated":
     xgap=1,  # Modify as needed
     ygap=1,
     text=text_values,  # Embed values directly in the heatmap cells
-    hoverinfo='none',  # Disable hover info if values are embedded in cells
+    hoverinfo='text',  # Disable hover info if values are embedded in cells
+    texttemplate="%{text}",
     colorscale=colorscale,
     showscale=False
 	)
@@ -2024,10 +2025,14 @@ if selected_dimension == "Auction Integrated":
 	# Update layout with defined dimensions and titles
 	fig.update_layout(
 	    title='Heatmap of No. of Blocks Selected by Service Area and Band',
-	    # xaxis_title='Bidders (Band)',
-	    # yaxis_title='Service Area',
+	    xaxis=dict(
+	        title='Bidders (Band)',
+	        side='top'  # Set x-axis labels to top
+	    ),
+	    yaxis_title='Service Area',
 	    width=900,  # Specify width
-	    height=900  # Specify height
+	    height=900,  # Specify height
+	    autosize=True
 	)
 
 	tab1,tab2 = st.tabs(["Blocks Selected", "Blocks Allocated"])  #Two Tabs for different Purpose 
