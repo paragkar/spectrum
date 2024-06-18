@@ -2003,7 +2003,7 @@ if selected_dimension == "Auction Integrated":
 	# Define a colorscale for the heatmap
 	colorscale = "Viridis"  # or any other color scale available in Plotly
 
-	dfcomb_auc_yr_rd = dfcomb_auc_yr_rd.sort_index(ascending = False)
+	dfcomb_auc_yr_rd = dfcomb_auc_yr_rd.sort_index(ascending = True)
 
 	# Create the heatmap object
 	heatmap = go.Heatmap(
