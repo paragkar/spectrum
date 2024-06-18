@@ -1981,7 +1981,7 @@ if selected_dimension == "Auction Integrated":
     aggfunc='first'  # you can change this to 'sum' if that's more appropriate
 	)
 
-	dfcomb_auc_yr_rd = dfcomb_auc_yr_rd.sort_index(ascending = True)
+	dfcomb_auc_yr_rd = dfcomb_auc_yr_rd.sort_index(ascending = False)
 
 	# Sort the columns based on the dynamic band order
 	# Use pd.IndexSlice to correctly handle MultiIndex column sorting
