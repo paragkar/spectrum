@@ -1972,6 +1972,8 @@ if selected_dimension == "Auction Integrated":
 	dfcomb_auc_yr_rd = dfcomb_auc_yr_rd.replace("-", 0)
 	dfcomb_auc_yr_rd = dfcomb_auc_yr_rd.replace(0, np.nan).reset_index(drop = True)
 
+	st.write(dfcomb_auc_yr_rd)
+
 	
 	## Dynamically create the band_order list from the unique bands in your data
 	band_order = sorted(dfcomb_auc_yr_rd['Band'].unique(), reverse = True)
