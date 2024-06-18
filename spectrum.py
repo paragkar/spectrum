@@ -1959,7 +1959,7 @@ if selected_dimension == "Auction Integrated":
 		except:
 			pass
 
-	AuctionYears = sorted(list(set(dfcomb["Auction Year"]))))
+	AuctionYears = sorted(list(set(dfcomb["Auction Year"])))
 
 	AuctionYear = st.sidebar.selectbox('Select an Auction Year', AuctionYearsAuctionYears, 0) #default index 2012
 
