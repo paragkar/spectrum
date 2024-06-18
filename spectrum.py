@@ -1943,7 +1943,7 @@ for index in dfrsrate.index:
 
 if selected_dimension == "Auction Integrated":
 
-	currency_flag = False
+	currency_flag = True
 
 	dfcomb = pd.DataFrame()
 	for sepectrumband in year_band:
