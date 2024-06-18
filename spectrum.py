@@ -1971,7 +1971,7 @@ if selected_dimension == "Auction Integrated":
 
 	dfcomb_auc_yr_rd = dfcomb_auc_yr[dfcomb_auc_yr["Clock Round"] == round_number]
 
-	st.write(dfcomb_auc_yr_rd)
+	st.write(dfcomb_auc_yr_rd[["Clock Round", "Bidder", "Bid decision", "No. of Blocks Selected", "Provisionally Allocated Blocks at end of Clock Round"]])
 
 
 if selected_dimension == "Spectrum Bands":
