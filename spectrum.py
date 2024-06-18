@@ -1979,16 +1979,15 @@ if selected_dimension == "Auction Integrated":
 	dfcomb_auc_yr_rd = dfcomb_auc_yr_rd.replace(0, np.nan).reset_index(drop = True)
 
 	# Create a combined column for bidder information
-	dfcomb_auc_yr_rd['Bidder Info'] = dfcomb_auc_yr_rd.apply(
-	    lambda row: f"{row['Bidder']} - Selected: {row['No. of Blocks Selected']} Allocated: {row['Provisionally Allocated Blocks at end of Clock Round']}",
-	    axis=1
+	dfcomb_auc_yr_rd = dfcomb_auc_yr_rd.pivot_table(
+    index='Service Area', 
+    columns=['Band', 'Bidder'], 
+    values='No. of Blocks Selected', 
+    aggfunc='first'  # you can change this to 'sum' if that's more appropriate
 	)
 
-	# Group by Band and Service Area, aggregating the bidder information
-	grouped_data = dfcomb_auc_yr_rd.groupby(['Band', 'Service Area'])['Bidder Info'].apply(lambda x: '\n'.join(x.dropna())).unstack()
-
-	# Resulting DataFrame
-	st.write(grouped_data.T)
+	# Display the reshaped DataFrame
+	st.write(dfcomb_auc_yr_rd)
 
 
 if selected_dimension == "Spectrum Bands":
