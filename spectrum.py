@@ -1972,7 +1972,7 @@ if selected_dimension == "Auction Integrated":
 	dfcomb_auc_yr_rd = dfcomb_auc_yr_rd.replace("-", 0)
 	dfcomb_auc_yr_rd = dfcomb_auc_yr_rd.replace(0, np.nan).reset_index(drop = True)
 
-	dfcomb_auc_yr_rd = dfcomb_auc_yr_rd.set_index(["Bidder", "Service Area", "Band"]).dropna(axis = 0, how ='all').reset_index()
+	dfcomb_auc_yr_rd = dfcomb_auc_yr_rd.set_index(["Bidder", "Service Area", "Band"]).dropna(axis = 1, how ='all').reset_index()
 
 	st.write(dfcomb_auc_yr_rd)
 
