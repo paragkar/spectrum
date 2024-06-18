@@ -1943,6 +1943,8 @@ for index in dfrsrate.index:
 
 if selected_dimension == "Auction Integrated":
 
+	currency_flag = "NA" #This is dummy variiable for this option done to preserve the current structure of the code 
+
 	dfcomb = pd.DataFrame()
 	for sepectrumband in year_band:
 
@@ -5691,6 +5693,9 @@ if currency_flag == False: #USD
 					  "Quantum Sold" : "MHz", "Quantum Unsold" : "MHz", "Total EMD" : "USD Million", "Total Outflow" : "USD Million",
 					  "Auction/Reserve" : "Ratio", "Percent Unsold" : "% of Total Spectrum", "Percent Sold" : "% of Total Spectrum", 
 					  "Total Purchase" : "MHz"}
+
+if currency_flag == "NA": #This option is for Auction Integrated so as ensure the current structure is preserved
+	pass
 
 
 
