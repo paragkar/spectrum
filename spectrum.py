@@ -1962,6 +1962,8 @@ if selected_dimension == "Auction Integrated":
 	AuctionYears = sorted(list(set(dfcomb["Auction Year"])))
 	AuctionYear = st.sidebar.selectbox('Select an Auction Year', AuctionYears, 0) #default index 2012
 
+	st.write(AuctionYear)
+
 	dfcomb_auc_yr = dfcomb[dfcomb["Auction Year"] == AuctionYear]
 
 	st.write(dfcomb_auc_yr)
