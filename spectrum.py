@@ -1985,10 +1985,18 @@ if selected_dimension == "Auction Integrated":
     values='No. of Blocks Selected', 
     aggfunc='first'  # you can change this to 'sum' if that's more appropriate
 	)
+	# Calculate the frequency of each band
+	band_frequencies = dfcomb_auc_yr_rd['Band'].value_counts()
 
-	# Display the reshaped DataFrame
+	# Sort the columns based on the frequency of bands (ascending order)
+	# We use a custom sorting key that looks up the frequency of each band
+	dfcomb_auc_yr_rd = dfcomb_auc_yr_rd.reindex(
+	    columns=sorted(dfcomb_auc_yr_rd.columns, key=lambda x: band_frequencies[x[0]]),
+	    level='Band'
+	)
+
+	# Display the sorted DataFrame
 	st.write(dfcomb_auc_yr_rd)
-
 
 if selected_dimension == "Spectrum Bands":
 
