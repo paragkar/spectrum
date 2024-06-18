@@ -1961,7 +1961,7 @@ if selected_dimension == "Auction Integrated":
 
 	AuctionYears = sorted(list(set(dfcomb["Auction Year"])))
 
-	AuctionYear = st.sidebar.selectbox('Select an Auction Year', AuctionYearsAuctionYears, 0) #default index 2012
+	AuctionYear = st.sidebar.selectbox('Select an Auction Year', AuctionYears, 0) #default index 2012
 
 
 if selected_dimension == "Spectrum Bands":
