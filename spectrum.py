@@ -1969,7 +1969,9 @@ if selected_dimension == "Auction Integrated":
 
 	round_number = st.sidebar.number_input("Select Auction Round Number"+";Total Rounds= "+str(max(clkrounds)), min_value=min(clkrounds), max_value=max(clkrounds), value=1, step=1)
 
-	# st.write(dfcomb_auc_yr)
+	dfcomb_auc_yr_rd = dfcomb_auc_yr[dfcomb_auc_yr["Clock Round"] == round_number]
+
+	st.write(dfcomb_auc_yr_rd)
 
 
 if selected_dimension == "Spectrum Bands":
