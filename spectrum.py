@@ -1980,7 +1980,7 @@ if selected_dimension == "Auction Integrated":
 
 	
 	## Dynamically create the band_order list from the unique bands in your data
-	band_order = sorted(dfcomb_auc_yr_rd['Band'].unique(), ascending = True)
+	band_order = sorted(dfcomb_auc_yr_rd['Band'].unique())
 
 	# Create a combined column for bidder information
 	dfcomb_auc_yr_rd = dfcomb_auc_yr_rd.pivot_table(
