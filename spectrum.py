@@ -2032,30 +2032,30 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	fig = go.Figure(data=[heatmap])
 
 	
-# 	# Update layout with defined dimensions and titles
-# 	fig.update_layout(
-# 	    title='Heatmap of No. of Blocks Selected by Service Area and Band',
-# 	    xaxis=dict(
-# 	        # title='Bidders (Band)',
-# 	        side='top'  # Set x-axis labels to top
-# 	    ),
-# 	    # yaxis_title='Service Area',
-# 	    width=heatmapwidth,  # Specify width
-# 	    height=heatmapheight*1.2,  # Specify height
-# 	    autosize=True,
-# 	    plot_bgcolor='#E2B47C',  # Background color for the plot area light pink
-# 		paper_bgcolor='white',  # Background color for the entire figure
-# 		margin= dict(t=t,b=b,l=l,r=r,pad=pad),
-# )
+	# Update layout with defined dimensions and titles
+	fig.update_layout(
+	    title='Heatmap of No. of Blocks Selected by Service Area and Band',
+	    xaxis=dict(
+	        # title='Bidders (Band)',
+	        side='top'  # Set x-axis labels to top
+	    ),
+	    # yaxis_title='Service Area',
+	    width=heatmapwidth,  # Specify width
+	    height=heatmapheight*1.2,  # Specify height
+	    autosize=True,
+	    plot_bgcolor='#E2B47C',  # Background color for the plot area light pink
+		paper_bgcolor='white',  # Background color for the entire figure
+		margin= dict(t=t,b=b,l=l,r=r,pad=pad),
+)
 
-# 	#Drawning a black border around the heatmap chart 
-# 	fig.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
-# 	fig.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
+	#Drawning a black border around the heatmap chart 
+	fig.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
+	fig.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
 
-# 	# Create a placeholder for the heatmap
-# 	placeholder = st.empty()
+	# Create a placeholder for the heatmap
+	placeholder = st.empty()
 
-# 	st.plotly_chart(fig, use_container_width=True, sharing='stream')
+	st.plotly_chart(fig, use_container_width=True, sharing='stream')
 
 
 if selected_dimension == "Spectrum Bands":
