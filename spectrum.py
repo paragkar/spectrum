@@ -2018,10 +2018,9 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	# Dictionary to hold dataframes for each band
 	df_dict = {band: group.drop('Band', axis=1) for band, group in df.groupby('Band')}
 
-	# Assuming df_dict is your dictionary of dataframes
-	num_bands = len(df_dict)  # Determine the number of bands
-	fig = make_subplots(rows=num_bands, cols=1, subplot_titles=[f'Band {band}' for band in df_dict.keys()],
-                    vertical_spacing=0.02)  # Adjusted spacing
+
+	# Create the figure with multiple subplots
+	fig = make_subplots(rows=len(df_dict), cols=1)
 
 	# Iterate through each band and its corresponding dataframe
 	for i, (band, df) in enumerate(df_dict.items(), start=1):
@@ -2033,51 +2032,33 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	            y=df.index,
 	            colorscale='Hot',  # You can change the color scale as needed
 	            texttemplate="%{z:.0f}",
-			    textfont={"size":text_embed_in_chart_size}, 
-			    showscale=False,
-			    reversescale=True
+	            textfont={"size": text_embed_in_chart_size}, 
+	            showscale=False,
+	            reversescale=True
 	        ),
 	        row=i, col=1
-
 	    )
 
-		# Update axes to draw a black border around each heatmap and hide x-axis labels
-	    fig.update_xaxes(row=i, col=1, fixedrange=True, showline=True, linewidth=1.2, linecolor='black', mirror=True, showticklabels=False)
-	    fig.update_yaxes(row=i, col=1, fixedrange=True, showline=True, linewidth=1.2, linecolor='black', mirror=True)
+	    # Update axes for each subplot
+	    fig.update_xaxes(row=i, col=1, fixedrange=True, showline=True, linewidth=1.2, linecolor='black', mirror=True,
+	                     showticklabels=(i == 1),  # Only show tick labels for the top heatmap
+	                     side='top' if i == 1 else None,  # Place x-axis on top only for the first plot
+	                     tickfont=dict(size=text_embed_in_chart_size))
+	    fig.update_yaxes(row=i, col=1, fixedrange=True, showline=True, linewidth=1.2, linecolor='black', mirror=True,
+	                     tickfont=dict(size=text_embed_in_chart_size))
 
-
-		# Update the overall layout
+	# Update the overall layout
 	fig.update_layout(
 	    title='Heatmap of No. of Blocks Selected by Service Area and Band',
 	    width=heatmapwidth,
-	    height=heatmapheight*0.35*num_bands,  # Total height based on the number of subplots
+	    height=heatmapheight * len(df_dict),  # Total height based on the number of subplots
 	    autosize=True,
 	    plot_bgcolor='#ADD8E6',
 	    paper_bgcolor='white',
-	    margin=dict(t=30, b=30, l=30, r=30, pad=4),
-	    xaxis=dict(
-	        side='top',
-	        tickfont=dict(size=text_embed_in_chart_size)),  # Set x-axis labels to top
-	     yaxis=dict(
-	        tickfont=dict(size=text_embed_in_chart_size)  # Increase size of y-axis tick labels
-	    ),
+	    margin=dict(t=30, b=30, l=30, r=30, pad=4)
 	)
 
-	# # Update layout for larger tick labels
-	# fig.update_layout(
-	#     xaxis=dict(
-	#         # title="X-axis Label",
-	#         tickfont=dict(size=text_embed_in_chart_size)  # Increase size of x-axis tick labels
-	#     ),
-	#     yaxis=dict(
-	#         # title="Y-axis Label",
-	#         tickfont=dict(size=text_embed_in_chart_size)  # Increase size of y-axis tick labels
-	#     ),
-	#     title="Your Heatmap Title"
-	# )
-
-
-	# # Create a placeholder for the heatmap
+	# Display the figure in Streamlit
 	placeholder = st.empty()
 	st.plotly_chart(fig, use_container_width=True, sharing='stream')
 
