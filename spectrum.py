@@ -2033,8 +2033,8 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
     x=dfcomb_aucyr_dim_rd.columns,  # Use simplified column labels
     xgap=1,  # Modify as needed
     ygap=1,
-    text=text_values,  # Embed values directly in the heatmap cells
-    hoverinfo='text',  # Disable hover info if values are embedded in cells
+    # text=text_values,  # Embed values directly in the heatmap cells
+    # hoverinfo='text',  # Disable hover info if values are embedded in cells
     texttemplate="%{z}",
     textfont={"size":text_embed_in_chart_size}, 
     colorscale=colorscale,
