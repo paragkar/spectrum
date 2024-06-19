@@ -2039,6 +2039,10 @@ if selected_dimension == "Auction Integrated":
 	    autosize=True
 	)
 
+	#Drawning a black border around the heatmap chart 
+	fig.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
+	fig.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
+
 	st.plotly_chart(fig, use_container_width=True)
 
 
