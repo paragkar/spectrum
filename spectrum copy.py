@@ -119,12 +119,12 @@ st.markdown(hide_st_style, unsafe_allow_html =True)
 
 #--------Functions for loading File Starts---------------------
 
-@st.cache_resource(suppress_st_warning=True)
+@st.cache_resource
 def loadrstousd():
 	df = pd.read_csv("rs_to_usd.csv")
 	return df
 
-@st.cache_resource(suppress_st_warning=True)
+@st.cache_resource
 def loadspectrumfile():
 	password = st.secrets["db_password"]
 	excel_content = io.BytesIO()
@@ -140,7 +140,7 @@ def loadspectrumfile():
 	return df
 
 
-@st.cache_resource(suppress_st_warning=True)
+@st.cache_resource
 def loadauctionbiddata():
 	password = st.secrets["db_password"]
 	excel_content = io.BytesIO()
