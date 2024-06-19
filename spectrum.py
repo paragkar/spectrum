@@ -2014,7 +2014,7 @@ if selected_dimension == "Auction Integrated":
     # z=dfcomb_aucyr_dim_rd.fillna(0).values,  # Replace NaN with 0 for visualization purposes
     z = text_values,
     y=dfcomb_aucyr_dim_rd.index,
-    x=column_labels,  # Use simplified column labels
+    x=dfcomb_aucyr_dim_rd.columns,  # Use simplified column labels
     xgap=1,  # Modify as needed
     ygap=1,
     text=text_values,  # Embed values directly in the heatmap cells
