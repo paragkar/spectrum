@@ -1979,7 +1979,7 @@ if selected_dimension == "Auction Integrated":
 	# Create a combined column for bidder information
 	dfcomb_auc_yr_rd = dfcomb_auc_yr_rd.pivot_table(
     index='Service Area', 
-    columns=['Band', 'Bidder'], 
+    columns=['Bidder', 'Band'], 
     values='Prov Alloc BLKs End Rd', 
     aggfunc='first'  # you can change this to 'sum' if that's more appropriate
 	)
