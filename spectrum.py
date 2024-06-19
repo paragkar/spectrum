@@ -2018,10 +2018,29 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	# Dictionary to hold dataframes for each band
 	df_dict = {band: group.drop('Band', axis=1) for band, group in df.groupby('Band')}
 
-	st.write(df_dict)
+	# Assuming df_dict is your dictionary of dataframes
+	num_bands = len(df_dict)  # Determine the number of bands
+	fig = make_subplots(rows=num_bands, cols=1, subplot_titles=[f'Band {band}' for band in df_dict.keys()])
 
-	# for i, key in enumerate(df_dict.keys()):
-	# 	df
+	# Iterate through each band and its corresponding dataframe
+	for i, (band, df) in enumerate(df_dict.items(), start=1):
+	    # Create a heatmap for each band
+	    fig.add_trace(
+	        go.Heatmap(
+	            z=df.values,
+	            x=df.columns,
+	            y=df.index,
+	            colorscale='Viridis',  # You can change the color scale as needed
+	            showscale=True if i == num_bands else False  # Only show color scale on the last heatmap for neatness
+	        ),
+	        row=i, col=1
+	    )
+
+	# Update layout if necessary
+	fig.update_layout(height=300*num_bands, width=1000, title_text="Heatmaps for Each Band")
+	fig.show()
+
+	
 
 
 	# # Create the heatmap object
