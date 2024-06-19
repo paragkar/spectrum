@@ -2056,9 +2056,9 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	    paper_bgcolor='white',
 	    margin=dict(t=30, b=30, l=30, r=30, pad=4),
 	    xaxis=dict(
-	        side='top'),  # Set x-axis labels to top
+	        side='top',
+	        tickfont=dict(size=text_embed_in_chart_size)),  # Set x-axis labels to top
 	     yaxis=dict(
-	        # title="Y-axis Label",
 	        tickfont=dict(size=text_embed_in_chart_size)  # Increase size of y-axis tick labels
 	    ),
 	)
