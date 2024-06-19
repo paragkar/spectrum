@@ -2043,10 +2043,10 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	                     showticklabels=(i == 1),  # Only show tick labels for the top heatmap
 	                     side='top' if i == 1 else None,  # Place x-axis on top only for the first plot
 	                     tickfont=dict(size=text_embed_in_chart_size),
-	                     showgrid=True, gridcolor='gray')  # Enable grid lines for x-axis
+	                     showgrid=False, gridcolor='gray')  # Enable grid lines for x-axis
 	    fig.update_yaxes(row=i, col=1, fixedrange=True, showline=True, linewidth=1.2, linecolor='black', mirror=True,
 	                     tickfont=dict(size=text_embed_in_chart_size),
-	                     showgrid=True, gridcolor='gray')  # Enable grid lines for y-axis
+	                     showgrid=False, gridcolor='gray')  # Enable grid lines for y-axis
 
 
 	# Update the overall layout
