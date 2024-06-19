@@ -1971,10 +1971,12 @@ if selected_dimension == "Auction Integrated":
 	round_number = st.sidebar.number_input("Select Auction Round Number"+";Total Rounds= "+str(max(clkrounds)), min_value=min(clkrounds), max_value=max(clkrounds), value=1, step=1)
 
 	dfcomb_auc_yr_rd = dfcomb_auc_yr[dfcomb_auc_yr["Clock Round"] == round_number]
-	dfcomb_auc_yr_rd = dfcomb_auc_yr_rd[[ "Bidder", "Service Area","Band" ,"No. of Blocks Selected", "Provisionally Allocated Blocks at end of Clock Round"]]
-	# dfcomb_auc_yr_rd = dfcomb_auc_yr_rd.replace("-", 0)
 
-	st.write(dfcomb_auc_yr_rd.columns)
+	st.write(dfcomb_auc_yr_rd)
+	
+	dfcomb_auc_yr_rd = dfcomb_auc_yr_rd[[ "Bidder", "Service Area","Band" ,"No. of Blocks Selected", "Provisionally Allocated Blocks at end of Clock Round"]]
+	dfcomb_auc_yr_rd = dfcomb_auc_yr_rd.replace("-", 0)
+
 	# dfcomb_auc_yr_rd = dfcomb_auc_yr_rd.replace(0, np.nan).reset_index(drop = True)
 
 	
