@@ -1968,34 +1968,10 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 
 	df = loadauctionbiddatayearbandcomb()["Sheet1"]
 
-	st.write(df.head())
-
-# 	#columns names are used to rename the loaded dataframe
-# 	column_names = ["Clock Round", "Bidder", "Service Area", "Prov WinBid Start Rd","Rank Start Rd","Can BidPrice Increase Y/N","Bid decision","Prov WinBid End Rd",	
-# 	"Rank End Rd","Blocks Selected", "Prov Alloc BLKs Start Rd","Prov Alloc BLKs End Rd", "Prov WinPrice End Rd", "Auction Year", "Band"]
-
-# 	#Initilise the dataframe to aggerate the excels tabs for auction years 
-# 	dfcomb = pd.DataFrame()
-
-# 	#This is used to aggregrated all tabs in above initialized dataframe
-# 	for sepectrumband in year_band:
-# 		sheet = Auction_Year_Band_Features[sepectrumband]["mainsheet"]
-# 		try:
-# 			band = sheet.split("_")[2]
-# 			auctionyear = sheet.split("_")[0]
-# 			df = loadauctionbiddata()[sheet]
-# 			df["Auction Year"] = auctionyear
-# 			df["Band"] = band
-# 			df.columns = column_names
-# 			dfcomb = pd.concat([dfcomb,df], axis =0)
-# 		except:
-# 			pass
-
-
-# 	AuctionYears = sorted(list(set(dfcomb["Auction Year"])))
-# 	AuctionYear = st.sidebar.selectbox('Select an Auction Year', AuctionYears, 0) #default index 2012
-# 	#Filtering the dataframe with selected auction year
-# 	dfcomb_aucyr = dfcomb[dfcomb["Auction Year"] == AuctionYear]
+	AuctionYears = sorted(list(set(df["Auction Year"])))
+	AuctionYear = st.sidebar.selectbox('Select an Auction Year', AuctionYears, 0) #default index 2012
+	#Filtering the dataframe with selected auction year
+	df_auc_yr = df[df["Auction Year"] == AuctionYear]
 
 
 # 	#Choosing the selected dimension
