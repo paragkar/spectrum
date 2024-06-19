@@ -2020,7 +2020,7 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 
 
 	# Create the figure with multiple subplots
-	fig = make_subplots(rows=len(df_dict), cols=1, vertical_spacing=0.02)
+	fig = make_subplots(rows=len(df_dict), cols=1, vertical_spacing=0.01)
 
 	# Iterate through each band and its corresponding dataframe
 	for i, (band, df) in enumerate(df_dict.items(), start=1):
@@ -2051,7 +2051,7 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	fig.update_layout(
 	    title='Heatmap of No. of Blocks Selected by Service Area and Band',
 	    width=heatmapwidth,
-	    height=heatmapheight * len(df_dict),  # Total height based on the number of subplots
+	    height=heatmapheight * len(df_dict)*0.4,  # Total height based on the number of subplots
 	    autosize=True,
 	    plot_bgcolor='#ADD8E6',
 	    paper_bgcolor='white',
