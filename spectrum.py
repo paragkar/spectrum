@@ -1959,7 +1959,7 @@ if selected_dimension == "Auction Integrated":
 			auctionyear = sheet.split("_")[0]
 
 			df = loadauctionbiddata()[sheet]
-			st.write(df)
+			# st.write(df)
 			df["Auction Year"] = auctionyear
 			df["Band"] = band
 			df.columns = column_names
@@ -1967,6 +1967,7 @@ if selected_dimension == "Auction Integrated":
 		except:
 			pass
 
+	st.write(dfcomb)
 
 	AuctionYears = sorted(list(set(dfcomb["Auction Year"])))
 	AuctionYear = st.sidebar.selectbox('Select an Auction Year', AuctionYears, 0) #default index 2012
