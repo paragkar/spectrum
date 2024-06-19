@@ -2062,6 +2062,9 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 
 	# Update layout if necessary
 	# fig.update_layout(height=300*num_bands, width=1000, title_text="Heatmaps for Each Band")
+
+	# # Create a placeholder for the heatmap
+	placeholder = st.empty()
 	st.plotly_chart(fig, use_container_width=True, sharing='stream')
 
 	
