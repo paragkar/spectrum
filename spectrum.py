@@ -2059,9 +2059,19 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	        side='top'  # Set x-axis labels to top
 	))
 
+	# Update layout for larger tick labels
+	fig.update_layout(
+	    xaxis=dict(
+	        # title="X-axis Label",
+	        tickfont=dict(size=text_embed_in_chart_size)  # Increase size of x-axis tick labels
+	    ),
+	    yaxis=dict(
+	        # title="Y-axis Label",
+	        tickfont=dict(size=text_embed_in_chart_size)  # Increase size of y-axis tick labels
+	    ),
+	    title="Your Heatmap Title"
+	)
 
-	# Update layout if necessary
-	# fig.update_layout(height=300*num_bands, width=1000, title_text="Heatmaps for Each Band")
 
 	# # Create a placeholder for the heatmap
 	placeholder = st.empty()
