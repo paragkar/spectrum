@@ -2039,7 +2039,7 @@ if selected_dimension == "Auction Integrated":
 	    ),
 	    # yaxis_title='Service Area',
 	    width=heatmapwidth,  # Specify width
-	    height=heatmapheight*1.5,  # Specify height
+	    height=heatmapheight*1.2,  # Specify height
 	    autosize=True,
 	    plot_bgcolor='#E2B47C',  # Background color for the plot area light pink
 		paper_bgcolor='white',  # Background color for the entire figure
