@@ -2026,6 +2026,7 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	colorscale = "Hot"  # or any other color scale available in Plotly
 
 	dfcomb_aucyr_dim_rd = dfcomb_aucyr_dim_rd.replace("", 0)
+	dfcomb_aucyr_dim_rd = dfcomb_aucyr_dim_rd.replace(np.nan, 0)
 
 	# Create the heatmap object
 	heatmap = go.Heatmap(
