@@ -2041,9 +2041,10 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 
 	    )
 
-		# Update axes to draw a black border around each heatmap
-	    fig.update_xaxes(row=i, col=1, fixedrange=True, showline=True, linewidth=1.2, linecolor='black', mirror=True)
+		# Update axes to draw a black border around each heatmap and hide x-axis labels
+	    fig.update_xaxes(row=i, col=1, fixedrange=True, showline=True, linewidth=1.2, linecolor='black', mirror=True, showticklabels=False)
 	    fig.update_yaxes(row=i, col=1, fixedrange=True, showline=True, linewidth=1.2, linecolor='black', mirror=True)
+
 
 		# Update the overall layout
 	fig.update_layout(
