@@ -1941,8 +1941,9 @@ for index in dfrsrate.index:
 		auction_rsrate_dict[index.year] = dfrsrate.loc[index,:].values[0]
 
 
-if selected_dimension == "Auction Integrated":
+if selected_dimension == "Auction Integrated": #This is the new dimension that is being tested
 
+	#This function is used to filter the dataframe based on round numbers
 	@st.cache
 	def filt_round(df, round_number):
 	    # Filtering and processing logic
@@ -1950,11 +1951,14 @@ if selected_dimension == "Auction Integrated":
 
 	currency_flag = "NA" #This is dummy variiable for this option done to preserve the current structure of the code 
 
+	#columns names are used to rename the loaded dataframe
 	column_names = ["Clock Round", "Bidder", "Service Area", "Prov WinBid Start Rd","Rank Start Rd","Can BidPrice Increase Y/N","Bid decision","Prov WinBid End Rd",	
 	"Rank End Rd","Blocks Selected", "Prov Alloc BLKs Start Rd","Prov Alloc BLKs End Rd", "Prov WinPrice End Rd", "Auction Year", "Band"]
 
+	#Initilise the dataframe to aggerate the excels tabs for auction years 
 	dfcomb = pd.DataFrame()
 
+	#This is used to aggregrated all tabs in above initialized dataframe
 	for sepectrumband in year_band:
 		sheet = Auction_Year_Band_Features[sepectrumband]["mainsheet"]
 		try:
@@ -1968,24 +1972,25 @@ if selected_dimension == "Auction Integrated":
 		except:
 			pass
 
+
 	AuctionYears = sorted(list(set(dfcomb["Auction Year"])))
 	AuctionYear = st.sidebar.selectbox('Select an Auction Year', AuctionYears, 0) #default index 2012
+	#Filtering the dataframe with selected auction year
 	dfcomb_aucyr = dfcomb[dfcomb["Auction Year"] == AuctionYear]
 
 
+	#Choosing the selected dimension
 	dim_to_select = ["Prov WinBid Start Rd","Rank Start Rd","Prov WinBid End Rd",	
 	"Rank End Rd","Blocks Selected", "Prov Alloc BLKs Start Rd","Prov Alloc BLKs End Rd"]
 
 	selected_dimension = st.sidebar.selectbox('Select a Dimension', dim_to_select, 0) #default index "Prov WinBid Start Rd"
 	dfcomb_aucyr_dim = dfcomb_aucyr[[ "Clock Round", "Bidder", "Service Area","Band", selected_dimension]]
 
+	#Choose clock round numbers
 	clkrounds = sorted(list(set(dfcomb_aucyr_dim["Clock Round"])))
 	round_number = st.sidebar.number_input("Select Auction Round Number"+";Total Rounds= "+str(max(clkrounds)), min_value=min(clkrounds), max_value=max(clkrounds), value=1, step=1)
-	
 
-	# dfcomb_aucyr_dim_rd = dfcomb_aucyr_dim[dfcomb_aucyr_dim["Clock Round"] == round_number]
 	dfcomb_aucyr_dim_rd = filt_round(dfcomb_aucyr_dim, round_number)
-
 	dfcomb_aucyr_dim_rd = dfcomb_aucyr_dim_rd.replace("-", 0).replace("",0).replace(np.nan, 0)
 
 	
@@ -1996,6 +2001,8 @@ if selected_dimension == "Auction Integrated":
     values= selected_dimension, 
     aggfunc='first'  # you can change this to 'sum' if that's more appropriate
 	)
+
+	st.write(dfcomb_aucyr_dim_rd)
 
 	dfcomb_aucyr_dim_rd = dfcomb_aucyr_dim_rd.sort_index(ascending = False)
 	# dfcomb_aucyr_dim_rd.columns = sorted(list(dfcomb_aucyr_dim_rd.columns))
