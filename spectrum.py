@@ -1967,14 +1967,17 @@ if selected_dimension == "Auction Integrated":
 	AuctionYear = st.sidebar.selectbox('Select an Auction Year', AuctionYears, 0) #default index 2012
 	dfcomb_auc_yr = dfcomb[dfcomb["Auction Year"] == AuctionYear]
 
+	selected_dimension = st.sidebar.selectbox('Select a Dimension', column_names[3:-2], 0) #default index 2012
+
+	dfcomb_auc_yr_rd = dfcomb_auc_yr_rd[[ "Clock Round", "Bidder", "Service Area","Band", selected_dimension]]
+
 	clkrounds = sorted(list(set(dfcomb_auc_yr["Clock Round"])))
+	
 	round_number = st.sidebar.number_input("Select Auction Round Number"+";Total Rounds= "+str(max(clkrounds)), min_value=min(clkrounds), max_value=max(clkrounds), value=1, step=1)
 
 	dfcomb_auc_yr_rd = dfcomb_auc_yr[dfcomb_auc_yr["Clock Round"] == round_number]
 
-	selected_dimension = st.sidebar.selectbox('Select a Dimension', column_names[3:-2], 0) #default index 2012
-
-	dfcomb_auc_yr_rd = dfcomb_auc_yr_rd[[ "Bidder", "Service Area","Band", selected_dimension]]
+	
 	dfcomb_auc_yr_rd = dfcomb_auc_yr_rd.replace("-", np.nan)
 
 	
