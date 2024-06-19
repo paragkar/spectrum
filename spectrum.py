@@ -2020,7 +2020,8 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 
 	# Assuming df_dict is your dictionary of dataframes
 	num_bands = len(df_dict)  # Determine the number of bands
-	fig = make_subplots(rows=num_bands, cols=1, subplot_titles=[f'Band {band}' for band in df_dict.keys()])
+	fig = make_subplots(rows=num_bands, cols=1, subplot_titles=[f'Band {band}' for band in df_dict.keys()],
+                    vertical_spacing=0.02)  # Adjusted spacing
 
 	# Iterate through each band and its corresponding dataframe
 	for i, (band, df) in enumerate(df_dict.items(), start=1):
