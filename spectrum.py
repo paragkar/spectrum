@@ -1997,7 +1997,7 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
     aggfunc='first'  # you can change this to 'sum' if that's more appropriate
 	)
 
-	st.write(df)
+
 
 # 	dfcomb_aucyr_dim_rd = dfcomb_aucyr_dim_rd.sort_index(ascending = False)
 # 	# # dfcomb_aucyr_dim_rd.columns = sorted(list(dfcomb_aucyr_dim_rd.columns))
@@ -2007,7 +2007,9 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 
 	df.columns = column_labels
 
-	st.write(df.T)
+	df = df.T.sort_index()
+
+	st.write(df)
 
 # 	# dfcomb_aucyr_dim_rd.columns = sorted(list(dfcomb_aucyr_dim_rd.columns))
 
