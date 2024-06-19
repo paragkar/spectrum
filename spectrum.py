@@ -2052,8 +2052,10 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	    autosize=True,
 	    plot_bgcolor='#E2B47C',
 	    paper_bgcolor='white',
-	    margin=dict(t=30, b=30, l=30, r=30, pad=4)
-	)
+	    margin=dict(t=30, b=30, l=30, r=30, pad=4),
+	    xaxis=dict(
+	        side='top'  # Set x-axis labels to top
+	))
 
 
 	# Update layout if necessary
