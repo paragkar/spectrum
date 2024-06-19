@@ -1972,15 +1972,10 @@ if selected_dimension == "Auction Integrated":
 
 	dfcomb_auc_yr_rd = dfcomb_auc_yr[dfcomb_auc_yr["Clock Round"] == round_number]
 
-
 	dfcomb_auc_yr_rd = dfcomb_auc_yr_rd[[ "Bidder", "Service Area","Band","Blocks Selected", "Prov Alloc BLKs End Rd"]]
 	dfcomb_auc_yr_rd = dfcomb_auc_yr_rd.replace("-", np.nan)
 
-	# dfcomb_auc_yr_rd = dfcomb_auc_yr_rd.replace(0, np.nan).reset_index(drop = True)
-
 	
-	## Dynamically create the band_order list from the unique bands in your data
-	# band_order = sorted(dfcomb_auc_yr_rd['Band'].unique(), reverse = True)
 	# Create a combined column for bidder information
 	dfcomb_auc_yr_rd = dfcomb_auc_yr_rd.pivot_table(
     index='Service Area', 
@@ -1991,21 +1986,8 @@ if selected_dimension == "Auction Integrated":
 
 	dfcomb_auc_yr_rd = dfcomb_auc_yr_rd.sort_index(ascending = False)
 
-	# Sort the columns based on the dynamic band order
-	# Use pd.IndexSlice to correctly handle MultiIndex column sorting
-	# dfcomb_auc_yr_rd = dfcomb_auc_yr_rd.loc[:, pd.IndexSlice[band_order, :]]
-
-
 	# Simplify column names for display
 	column_labels = [f"{col[1]} ({col[0]})" for col in dfcomb_auc_yr_rd.columns]
-
-	# Prepare hovertext for the heatmap
-	# hovertext = []
-	# for yi, yy in enumerate(dfcomb_auc_yr_rd.index):
-	#     hovertext.append([])
-	#     for xi, xx in enumerate(dfcomb_auc_yr_rd.columns):
-	#         value = dfcomb_auc_yr_rd.loc[yy, xx]
-	#         hovertext[-1].append(f'Band: {xx[0]}<br>Bidder: {xx[1]}<br>Blocks Selected: {value}')
 
 	# Prepare text to embed in the heatmap itself
 	text_values = [[f"{value}" if pd.notna(value) else "" for value in row] for row in dfcomb_auc_yr_rd.values]
@@ -2045,12 +2027,8 @@ if selected_dimension == "Auction Integrated":
 	    autosize=True
 	)
 
-	tab1,tab2 = st.tabs(["Blocks Selected", "Blocks Allocated"])  #Two Tabs for different Purpose 
-	with tab1:
-		st.plotly_chart(fig, use_container_width=True)
+	st.plotly_chart(fig, use_container_width=True)
 
-	with tab2:
-		pass
 
 
 
