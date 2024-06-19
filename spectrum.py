@@ -1922,7 +1922,7 @@ chart_data_flag = False #set this to true only if this chart exists.
 with st.sidebar:
 	selected_dimension = option_menu(
 		menu_title = "Select a Menu",
-		options = ["Spectrum Bands", "Auction YearWise", "Auction BandWise", "Auction Integrated"], #Debug 14th June 2024
+		options = ["Spectrum Bands", "Auction YearWise", "Auction BandWise"], #Debug 14th June 2024
 		icons = ["1-circle-fill", "2-circle-fill", "3-circle-fill", "4-circle-fill"],
 		menu_icon = "arrow-down-circle-fill",
 		default_index =0,
