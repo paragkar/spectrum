@@ -2004,7 +2004,7 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 
 	df = df.T.sort_index()
 
-	df = df.fillna("")
+	df = df.fillna("").replace(0,"")
 
 	st.write(df)
 
