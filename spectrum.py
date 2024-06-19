@@ -2006,8 +2006,6 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 
 	df = df.fillna("").replace(0,"")
 
-	st.write(df)
-
 	# Define a colorscale for the heatmap
 	colorscale = "Hot"  # or any other color scale available in Plotly
 
