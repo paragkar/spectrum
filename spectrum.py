@@ -1945,7 +1945,10 @@ if selected_dimension == "Auction Integrated":
 
 	currency_flag = "NA" #This is dummy variiable for this option done to preserve the current structure of the code 
 
-
+	column_names = ["Clock Round", "Bidder", "Service Area", "Last bid submitted at the start of round (Rs. Crore)","Rank at start of Clock Round",	
+	"Possible to raise Bid in Clock Round","Bid decision","Last bid submitted at the end of round (Rs. Crore)"	
+	"Rank at end of Clock Round","No. of Blocks Selected", "Provisionally Allocated Block(s) at start of Clock Round (In No.)",	
+	"Provisionally Allocated Block(s) at end of Clock Round", "Provisional Winning Price at the end of Clock round (Per Block)(Rs.  In Crore)"]
 
 	dfcomb = pd.DataFrame()
 	for sepectrumband in year_band:
@@ -1957,6 +1960,7 @@ if selected_dimension == "Auction Integrated":
 			auctionyear = sheet.split("_")[0]
 
 			df = loadauctionbiddata()[sheet]
+			df.columns = column_names
 			df["Auction Year"] = auctionyear
 			df["Band"] = band
 			dfcomb = pd.concat([dfcomb,df], axis =0)
@@ -1972,11 +1976,7 @@ if selected_dimension == "Auction Integrated":
 
 	dfcomb_auc_yr_rd = dfcomb_auc_yr[dfcomb_auc_yr["Clock Round"] == round_number]
 
-	column_names = ["Clock Round", "Bidder", "Service Area", "Last bid submitted at the start of round (Rs. Crore)","Rank at start of Clock Round",	
-	"Possible to raise Bid in Clock Round","Bid decision","Last bid submitted at the end of round (Rs. Crore)"	
-	"Rank at end of Clock Round","No. of Blocks Selected", "Provisionally Allocated Block(s) at start of Clock Round (In No.)",	
-	"Provisionally Allocated Block(s) at end of Clock Round", "Provisional Winning Price at the end of Clock round (Per Block)(Rs.  In Crore)"]
-
+	
 	dfcomb_auc_yr_rd.columns = column_names
 
 	dfcomb_auc_yr_rd = dfcomb_auc_yr_rd[[ "Bidder", "Service Area","Band" ,"No. of Blocks Selected", "Provisionally Allocated Blocks at end of Clock Round"]]
