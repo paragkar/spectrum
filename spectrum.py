@@ -2046,7 +2046,21 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	    plot_bgcolor='#E2B47C',  # Background color for the plot area light pink
 		paper_bgcolor='white',  # Background color for the entire figure
 		margin= dict(t=t,b=b,l=l,r=r,pad=pad),
-)
+		)
+
+	# Update layout for larger tick labels
+	fig.update_layout(
+	    xaxis=dict(
+	        # title="X-axis Label",
+	        tickfont=dict(size=text_embed_in_chart_size)  # Increase size of x-axis tick labels
+	    ),
+	    yaxis=dict(
+	        # title="Y-axis Label",
+	        tickfont=dict(size=text_embed_in_chart_size)  # Increase size of y-axis tick labels
+	    ),
+	    title="Your Heatmap Title"
+	)
+
 
 	#Drawning a black border around the heatmap chart 
 	fig.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
