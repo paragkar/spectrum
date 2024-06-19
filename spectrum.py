@@ -1975,11 +1975,13 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 
 
 # 	#Choosing the selected dimension
-# 	dim_to_select = ["Prov WinBid Start Rd","Rank Start Rd","Prov WinBid End Rd",	
-# 	"Rank End Rd","Blocks Selected", "Prov Alloc BLKs Start Rd","Prov Alloc BLKs End Rd"]
+	dim_to_select = ["Prov WinBid Start Rd","Rank Start Rd","Prov WinBid End Rd",	
+	"Rank End Rd","Blocks Selected", "Prov Alloc BLKs Start Rd","Prov Alloc BLKs End Rd"]
 
-# 	selected_dimension = st.sidebar.selectbox('Select a Dimension', dim_to_select, 0) #default index "Prov WinBid Start Rd"
-# 	dfcomb_aucyr_dim = dfcomb_aucyr[[ "Clock Round", "Bidder", "Service Area","Band", selected_dimension]]
+	selected_dimension = st.sidebar.selectbox('Select a Dimension', dim_to_select, 0) #default index "Prov WinBid Start Rd"
+	df_auc_yr_dim = df_auc_yr[[ "Clock Round", "Bidder", "Service Area","Band", selected_dimension]]
+
+	st.write(df_auc_yr_dim)
 
 # 	#Choose clock round numbers
 # 	clkrounds = sorted(list(set(dfcomb_aucyr_dim["Clock Round"])))
