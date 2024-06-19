@@ -1948,7 +1948,7 @@ if selected_dimension == "Auction Integrated":
 	column_names = ["Clock Round", "Bidder", "Service Area", "Last bid submitted at the start of round","Rank at start of Clock Round",	
 	"Possible to raise Bid in Clock Round","Bid decision","Last bid submitted at the end of round",	
 	"Rank at end of Clock Round","No. of Blocks Selected", "Provisionally Allocated Block(s) at start of Clock Round",	
-	"Provisionally Allocated Block(s) at end of Clock Round", "Provisional Winning Price at the end of Clock round"]
+	"Provisionally Allocated Block(s) at end of Clock Round", "Provisional Winning Price at the end of Clock round", "Auction Year", "Band"]
 
 	dfcomb = pd.DataFrame()
 	# dfcomb.columns = column_names
@@ -1958,10 +1958,10 @@ if selected_dimension == "Auction Integrated":
 			band = sheet.split("_")[2]
 			auctionyear = sheet.split("_")[0]
 			df = loadauctionbiddata()[sheet]
-			df.columns = column_names
 			st.write(df)
 			df["Auction Year"] = auctionyear
 			df["Band"] = band
+			df.columns = column_names
 			dfcomb = pd.concat([dfcomb,df], axis =0, ignore_index = True)
 		except:
 			pass
