@@ -1968,7 +1968,7 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 
 	df = loadauctionbiddatayearbandcomb()
 
-	st.write(df.dtypes)
+	st.write(df)
 
 # 	#columns names are used to rename the loaded dataframe
 # 	column_names = ["Clock Round", "Bidder", "Service Area", "Prov WinBid Start Rd","Rank Start Rd","Can BidPrice Increase Y/N","Bid decision","Prov WinBid End Rd",	
