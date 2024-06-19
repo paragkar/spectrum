@@ -2044,21 +2044,16 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	    fig.update_xaxes(row=i, col=1, fixedrange=True, showline=True, linewidth=1.2, linecolor='black', mirror=True)
 	    fig.update_yaxes(row=i, col=1, fixedrange=True, showline=True, linewidth=1.2, linecolor='black', mirror=True)
 
-	 # Update layout with defined dimensions and titles
+		# Update the overall layout
 	fig.update_layout(
 	    title='Heatmap of No. of Blocks Selected by Service Area and Band',
-	    xaxis=dict(
-	        # title='Bidders (Band)',
-	        side='top'  # Set x-axis labels to top
-	    ),
-	    # yaxis_title='Service Area',
-	    width=heatmapwidth,  # Specify width
-	    height=heatmapheight*0.3,  # Specify height
-	    # autosize=True,
-	    plot_bgcolor='#E2B47C',  # Background color for the plot area light pink
-		paper_bgcolor='white',  # Background color for the entire figure
-		# margin= dict(t=t,b=b,l=l,r=r,pad=pad),
-		)
+	    width=heatmapwidth,
+	    height=heatmapheight*num_bands,  # Total height based on the number of subplots
+	    autosize=True,
+	    plot_bgcolor='#E2B47C',
+	    paper_bgcolor='white',
+	    margin=dict(t=30, b=30, l=30, r=30, pad=4)
+	)
 
 
 	# Update layout if necessary
