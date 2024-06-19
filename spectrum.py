@@ -2027,7 +2027,7 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 
 	# Create the heatmap object
 	heatmap = go.Heatmap(
-    z=dfcomb_aucyr_dim_rd.fillna(0).values,  # Replace NaN with 0 for visualization purposes
+    z=dfcomb_aucyr_dim_rd.fillna("").values,  # Replace NaN with 0 for visualization purposes
     # z = text_values,
     y=dfcomb_aucyr_dim_rd.index,
     x=dfcomb_aucyr_dim_rd.columns,  # Use simplified column labels
