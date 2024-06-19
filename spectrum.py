@@ -1951,7 +1951,7 @@ if selected_dimension == "Auction Integrated":
 	"Provisionally Allocated Block(s) at end of Clock Round", "Provisional Winning Price at the end of Clock round", "Auction Year", "Band"]
 
 	dfcomb = pd.DataFrame()
-	dfcomb.columns = column_names
+	# dfcomb.columns = column_names
 	for sepectrumband in year_band:
 		sheet = Auction_Year_Band_Features[sepectrumband]["mainsheet"]
 		try:
