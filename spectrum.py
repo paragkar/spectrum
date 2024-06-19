@@ -1971,7 +1971,7 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	AuctionYears = sorted(list(set(df["Auction Year"])))
 	AuctionYear = st.sidebar.selectbox('Select an Auction Year', AuctionYears, 0) #default index 2012
 	#Filtering the dataframe with selected auction year
-	df_auc_yr = df[df["Auction Year"] == AuctionYear]
+	df = df[df["Auction Year"] == AuctionYear]
 
 
 # 	#Choosing the selected dimension
@@ -1979,27 +1979,25 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	"Rank End Rd","Blocks Selected", "Prov Alloc BLKs Start Rd","Prov Alloc BLKs End Rd"]
 
 	selected_dimension = st.sidebar.selectbox('Select a Dimension', dim_to_select, 0) #default index "Prov WinBid Start Rd"
-	df_auc_yr_dim = df_auc_yr[[ "Clock Round", "Bidder", "Service Area","Band", selected_dimension]]
+	df = df[[ "Clock Round", "Bidder", "Service Area","Band", selected_dimension]]
 
 	#Choose clock round numbers
-	clkrounds = sorted(list(set(df_auc_yr_dim["Clock Round"])))
+	clkrounds = sorted(list(set(df["Clock Round"])))
 	round_number = st.sidebar.number_input("Select Auction Round Number"+";Total Rounds= "+str(max(clkrounds)), min_value=min(clkrounds), max_value=max(clkrounds), value=1, step=1)
 
-	df_auc_yr_dim_rd = filt_round(df_auc_yr_dim, round_number)
-	df_auc_yr_dim_rd = df_auc_yr_dim_rd.replace("-", 0).replace("",0).replace(np.nan, 0)
-
-	st.write(df_auc_yr_dim_rd)
+	df = filt_round(df, round_number)
+	df = df.replace("-", 0).replace("",0).replace(np.nan, 0)
 
 	
-# 	# Create a combined column for bidder information
-# 	dfcomb_aucyr_dim_rd = dfcomb_aucyr_dim_rd.pivot_table(
-#     index='Service Area', 
-#     columns=['Bidder', 'Band'], 
-#     values= selected_dimension, 
-#     aggfunc='first'  # you can change this to 'sum' if that's more appropriate
-# 	)
+	# Create a combined column for bidder information
+	df = df.pivot_table(
+    index='Service Area', 
+    columns=['Bidder', 'Band'], 
+    values= selected_dimension, 
+    aggfunc='first'  # you can change this to 'sum' if that's more appropriate
+	)
 
-# 	# st.write(dfcomb_aucyr_dim_rd)
+	st.write(df)
 
 # 	dfcomb_aucyr_dim_rd = dfcomb_aucyr_dim_rd.sort_index(ascending = False)
 # 	# # dfcomb_aucyr_dim_rd.columns = sorted(list(dfcomb_aucyr_dim_rd.columns))
