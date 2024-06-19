@@ -2002,8 +2002,10 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 # 	dfcomb_aucyr_dim_rd = dfcomb_aucyr_dim_rd.sort_index(ascending = False)
 # 	# # dfcomb_aucyr_dim_rd.columns = sorted(list(dfcomb_aucyr_dim_rd.columns))
 
-# 	# # Simplify column names for display
-# 	# column_labels = [f"{col[1]} ({col[0]})" for col in dfcomb_aucyr_dim_rd.columns]
+	# Simplify column names for display
+	column_labels = [f"{col[1]} ({col[0]})" for col in df.columns]
+
+	st.write(column_labels)
 
 # 	# dfcomb_aucyr_dim_rd.columns = column_labels
 
