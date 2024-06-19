@@ -2002,7 +2002,7 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 
 	df.columns = column_labels
 
-	df = df.T.sort_index(ascending = False)
+	df = df.T.sort_index(ascending = True)
 
 	df = df.fillna("").replace(0,"")
 
