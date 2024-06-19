@@ -1965,47 +1965,41 @@ if selected_dimension == "Auction Integrated":
 
 	AuctionYears = sorted(list(set(dfcomb["Auction Year"])))
 	AuctionYear = st.sidebar.selectbox('Select an Auction Year', AuctionYears, 0) #default index 2012
-	dfcomb_auc_yr = dfcomb[dfcomb["Auction Year"] == AuctionYear]
+	dfcomb_aucyr = dfcomb[dfcomb["Auction Year"] == AuctionYear]
 
-	selected_dimension = st.sidebar.selectbox('Select a Dimension', column_names[3:-2], 0) #default index 2012
+	selected_dimension = st.sidebar.selectbox('Select a Dimension', column_names[3:-2], 0) #default index "Prov WinBid Start Rd"
+	dfcomb_aucyr_dim = dfcomb_aucyr[[ "Clock Round", "Bidder", "Service Area","Band", selected_dimension]]
 
-	dfcomb_auc_yr_rd = dfcomb_auc_yr_rd[[ "Clock Round", "Bidder", "Service Area","Band", selected_dimension]]
-
-	clkrounds = sorted(list(set(dfcomb_auc_yr["Clock Round"])))
-	
+	clkrounds = sorted(list(set(dfcomb_aucyr_dim["Clock Round"])))
 	round_number = st.sidebar.number_input("Select Auction Round Number"+";Total Rounds= "+str(max(clkrounds)), min_value=min(clkrounds), max_value=max(clkrounds), value=1, step=1)
-
-	dfcomb_auc_yr_rd = dfcomb_auc_yr[dfcomb_auc_yr["Clock Round"] == round_number]
-
-	
-	dfcomb_auc_yr_rd = dfcomb_auc_yr_rd.replace("-", np.nan)
+	dfcomb_aucyr_dim_rd = dfcomb_aucyr_dim[dfcomb_aucyr_dim["Clock Round"] == round_number]
+	dfcomb_aucyr_dim_rd = dfcomb_aucyr_dim_rd.replace("-", np.nan)
 
 	
 	# Create a combined column for bidder information
-	dfcomb_auc_yr_rd = dfcomb_auc_yr_rd.pivot_table(
+	dfcomb_aucyr_dim_rd = dfcomb_aucyr_dim_rd.pivot_table(
     index='Service Area', 
     columns=['Bidder', 'Band'], 
     values= selected_dimension, 
     aggfunc='first'  # you can change this to 'sum' if that's more appropriate
 	)
 
-	dfcomb_auc_yr_rd = dfcomb_auc_yr_rd.sort_index(ascending = False)
-
-	dfcomb_auc_yr_rd.columns = sorted(list(dfcomb_auc_yr_rd.columns))
+	dfcomb_aucyr_dim_rd = dfcomb_aucyr_dim_rd.sort_index(ascending = False)
+	dfcomb_aucyr_dim_rd.columns = sorted(list(dfcomb_aucyr_dim_rd.columns))
 
 	# Simplify column names for display
-	column_labels = [f"{col[0]} ({col[1]})" for col in dfcomb_auc_yr_rd.columns]
+	column_labels = [f"{col[0]} ({col[1]})" for col in dfcomb_aucyr_dim_rd.columns]
 
 	# Prepare text to embed in the heatmap itself
-	text_values = [[f"{value}" if pd.notna(value) else "" for value in row] for row in dfcomb_auc_yr_rd.values]
+	text_values = [[f"{value}" if pd.notna(value) else "" for value in row] for row in dfcomb_aucyr_dim_rd.values]
 
 	# Define a colorscale for the heatmap
 	colorscale = "YlGnBu"  # or any other color scale available in Plotly
 
 	# Create the heatmap object
 	heatmap = go.Heatmap(
-    z=dfcomb_auc_yr_rd.fillna(0).values,  # Replace NaN with 0 for visualization purposes
-    y=dfcomb_auc_yr_rd.index,
+    z=dfcomb_aucyr_dim_rd.fillna(0).values,  # Replace NaN with 0 for visualization purposes
+    y=dfcomb_aucyr_dim_rd.index,
     x=column_labels,  # Use simplified column labels
     xgap=1,  # Modify as needed
     ygap=1,
@@ -2035,8 +2029,6 @@ if selected_dimension == "Auction Integrated":
 	)
 
 	st.plotly_chart(fig, use_container_width=True)
-
-
 
 
 if selected_dimension == "Spectrum Bands":
