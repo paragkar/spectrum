@@ -2050,7 +2050,7 @@ if selected_dimension == "Auction Integrated":
 	fig.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
 	fig.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
 
-	st.plotly_chart(fig, use_container_width=True)
+	st.plotly_chart(fig, use_container_width=True, sharing='stream')
 
 
 if selected_dimension == "Spectrum Bands":
