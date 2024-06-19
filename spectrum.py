@@ -1953,10 +1953,8 @@ if selected_dimension == "Auction Integrated":
 	dfcomb = pd.DataFrame()
 	dfcomb.columns = column_names
 	for sepectrumband in year_band:
-
 		sheet = Auction_Year_Band_Features[sepectrumband]["mainsheet"]
 		try:
-
 			band = sheet.split("_")[2]
 			auctionyear = sheet.split("_")[0]
 
@@ -1964,7 +1962,7 @@ if selected_dimension == "Auction Integrated":
 			st.write(df)
 			df["Auction Year"] = auctionyear
 			df["Band"] = band
-			df.columns = column_names
+			# df.columns = column_names
 			dfcomb = pd.concat([dfcomb,df], axis =0)
 		except:
 			pass
