@@ -2018,7 +2018,8 @@ if selected_dimension == "Auction Integrated":
     texttemplate="%{text}",
     textfont={"size":text_embed_in_chart_size}, 
     colorscale=colorscale,
-    showscale=False
+    showscale=False,
+    reversescale=True
 	)
 
 	# Create the figure using the heatmap data
