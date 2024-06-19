@@ -2006,13 +2006,15 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 
 	df = df.fillna("").replace(0,"")
 
+	df = df.replace("", 0)
+
 	# Define a colorscale for the heatmap
 	colorscale = "Hot"  # or any other color scale available in Plotly
 
 
 	# Create the heatmap object
 	heatmap = go.Heatmap(
-    z=df.fillna("").values,  # Replace NaN with 0 for visualization purposes
+    z=df.values,  # Replace NaN with 0 for visualization purposes
     y=df.index,
     x=df.columns,  # Use simplified column labels
     xgap=1,  # Modify as needed
