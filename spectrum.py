@@ -2014,7 +2014,7 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 
 	# Create the heatmap object
 	heatmap = go.Heatmap(
-    z=df.round.values,  # Replace NaN with 0 for visualization purposes
+    z=df.values,  # Replace NaN with 0 for visualization purposes
     y=df.index,
     x=df.columns,  # Use simplified column labels
     xgap=1,  # Modify as needed
