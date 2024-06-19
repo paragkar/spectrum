@@ -2011,7 +2011,7 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	colorscale = "Hot"  # or any other color scale available in Plotly
 
 	# Extract band information more reliably
-	df['Band'] = df.index.str.extract(r'^(\d+)')[0]
+	df['Band'] = df.index.str.extract(r'(\d+)')[0]
 
 	st.write(df)
 
