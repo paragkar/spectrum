@@ -1981,14 +1981,14 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	selected_dimension = st.sidebar.selectbox('Select a Dimension', dim_to_select, 0) #default index "Prov WinBid Start Rd"
 	df_auc_yr_dim = df_auc_yr[[ "Clock Round", "Bidder", "Service Area","Band", selected_dimension]]
 
-	st.write(df_auc_yr_dim)
+	#Choose clock round numbers
+	clkrounds = sorted(list(set(df_auc_yr_dim["Clock Round"])))
+	round_number = st.sidebar.number_input("Select Auction Round Number"+";Total Rounds= "+str(max(clkrounds)), min_value=min(clkrounds), max_value=max(clkrounds), value=1, step=1)
 
-# 	#Choose clock round numbers
-# 	clkrounds = sorted(list(set(dfcomb_aucyr_dim["Clock Round"])))
-# 	round_number = st.sidebar.number_input("Select Auction Round Number"+";Total Rounds= "+str(max(clkrounds)), min_value=min(clkrounds), max_value=max(clkrounds), value=1, step=1)
+	df_auc_yr_dim_rd = filt_round(df_auc_yr_dim, round_number)
+	df_auc_yr_dim_rd = df_auc_yr_dim_rd.replace("-", 0).replace("",0).replace(np.nan, 0)
 
-# 	dfcomb_aucyr_dim_rd = filt_round(dfcomb_aucyr_dim, round_number)
-# 	dfcomb_aucyr_dim_rd = dfcomb_aucyr_dim_rd.replace("-", 0).replace("",0).replace(np.nan, 0)
+	st.write(df_auc_yr_dim_rd)
 
 	
 # 	# Create a combined column for bidder information
