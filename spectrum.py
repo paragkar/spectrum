@@ -2037,6 +2037,11 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 			    reversescale=True
 	        ),
 	        row=i, col=1
+
+	    #Drawning a black border around the heatmap chart 
+		fig.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
+		fig.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
+
 	    )
 
 	# Update layout if necessary
