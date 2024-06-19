@@ -1963,7 +1963,7 @@ if selected_dimension == "Auction Integrated":
 			df["Auction Year"] = auctionyear
 			df["Band"] = band
 			df.columns = column_names
-			dfcomb = pd.concat([dfcomb,df], axis =0)
+			dfcomb = pd.concat([dfcomb,df], axis =0, ignore_index = True)
 		except:
 			pass
 
