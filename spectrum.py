@@ -2013,7 +2013,7 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	# Extract band information more reliably
 	# df['Band'] = df.index.str.extract(r'(\d+)')[0]
 
-	st.write(df.index.str.extract(r'(\d+)').values)
+	df["Band"] = df.index.str.extract(r'(\d+)').values
 
 	st.write(df)
 
