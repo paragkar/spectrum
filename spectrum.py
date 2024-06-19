@@ -1964,6 +1964,9 @@ if selected_dimension == "Auction Integrated":
 	AuctionYears = sorted(list(set(dfcomb["Auction Year"])))
 	AuctionYear = st.sidebar.selectbox('Select an Auction Year', AuctionYears, 0) #default index 2012
 	dfcomb_auc_yr = dfcomb[dfcomb["Auction Year"] == AuctionYear]
+
+	st.write(dfcomb_auc_yr)
+	
 	clkrounds = sorted(list(set(dfcomb_auc_yr["Clock Round"])))
 	round_number = st.sidebar.number_input("Select Auction Round Number"+";Total Rounds= "+str(max(clkrounds)), min_value=min(clkrounds), max_value=max(clkrounds), value=1, step=1)
 
