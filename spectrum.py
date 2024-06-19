@@ -1984,7 +1984,7 @@ if selected_dimension == "Auction Integrated":
 	
 
 	# dfcomb_aucyr_dim_rd = dfcomb_aucyr_dim[dfcomb_aucyr_dim["Clock Round"] == round_number]
-	dfcomb_aucyr_dim_rd = filt_round(dfcomb_aucyr_dim_rd, round_number)
+	dfcomb_aucyr_dim_rd = filt_round(dfcomb_aucyr_dim, round_number)
 
 	dfcomb_aucyr_dim_rd = dfcomb_aucyr_dim_rd.replace("-", 0).replace("",0).replace(np.nan, 0)
 
