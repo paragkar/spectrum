@@ -154,6 +154,21 @@ def loadauctionbiddata():
 	df = pd.read_excel(excel_content, sheet_name=sheetauctiondata)
 	return df
 
+@st.cache_resource
+def loadauctionbiddatayearbandcomb():
+	password = st.secrets["db_password"]
+	excel_content = io.BytesIO()
+	with open("auctionbiddatayearbandcomb.xlsx", 'rb') as f:
+		excel = msoffcrypto.OfficeFile(f)
+		excel.load_key(password)
+		excel.decrypt(excel_content)
+
+	xl = pd.ExcelFile(excel_content)
+	sheetauctiondata = xl.sheet_names
+	df = pd.read_excel(excel_content, sheet_name=sheetauctiondata)
+	return df
+
+
 #--------Fuctions for loading File Ends--------------------
 
 
@@ -1922,7 +1937,7 @@ chart_data_flag = False #set this to true only if this chart exists.
 with st.sidebar:
 	selected_dimension = option_menu(
 		menu_title = "Select a Menu",
-		options = ["Spectrum Bands", "Auction YearWise", "Auction BandWise"], #Debug 14th June 2024
+		options = ["Spectrum Bands", "Auction YearWise", "Auction BandWise", "Auction Integrated"], #Debug 14th June 2024
 		icons = ["1-circle-fill", "2-circle-fill", "3-circle-fill", "4-circle-fill"],
 		menu_icon = "arrow-down-circle-fill",
 		default_index =0,
@@ -1941,15 +1956,19 @@ for index in dfrsrate.index:
 		auction_rsrate_dict[index.year] = dfrsrate.loc[index,:].values[0]
 
 
-# if selected_dimension == "Auction Integrated": #This is the new dimension that is being tested
+if selected_dimension == "Auction Integrated": #This is the new dimension that is being tested
 
-# 	#This function is used to filter the dataframe based on round numbers
-# 	@st.cache
-# 	def filt_round(df, round_number):
-# 	    # Filtering and processing logic
-# 	    return df[df['Clock Round'] == round_number]
+	#This function is used to filter the dataframe based on round numbers
+	@st.cache
+	def filt_round(df, round_number):
+	    # Filtering and processing logic
+	    return df[df['Clock Round'] == round_number]
 
-# 	currency_flag = "NA" #This is dummy variiable for this option done to preserve the current structure of the code 
+	currency_flag = "NA" #This is dummy variiable for this option done to preserve the current structure of the code 
+
+	df = loadauctionbiddatayearbandcomb()
+
+	st.write(df)
 
 # 	#columns names are used to rename the loaded dataframe
 # 	column_names = ["Clock Round", "Bidder", "Service Area", "Prov WinBid Start Rd","Rank Start Rd","Can BidPrice Increase Y/N","Bid decision","Prov WinBid End Rd",	
