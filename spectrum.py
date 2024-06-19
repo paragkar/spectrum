@@ -2018,7 +2018,6 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	# Dictionary to hold dataframes for each band
 	df_dict = {band: group.drop('Band', axis=1) for band, group in df.groupby('Band')}
 
-
 	# Create the figure with multiple subplots
 	fig = make_subplots(rows=len(df_dict), cols=1, vertical_spacing=0.01)
 
@@ -2039,13 +2038,16 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	        row=i, col=1
 	    )
 
-	    # Update axes for each subplot
+		     # Update axes to draw a black border around each heatmap, hide x-axis labels, and enable grid lines
 	    fig.update_xaxes(row=i, col=1, fixedrange=True, showline=True, linewidth=1.2, linecolor='black', mirror=True,
 	                     showticklabels=(i == 1),  # Only show tick labels for the top heatmap
 	                     side='top' if i == 1 else None,  # Place x-axis on top only for the first plot
-	                     tickfont=dict(size=text_embed_in_chart_size))
+	                     tickfont=dict(size=text_embed_in_chart_size),
+	                     showgrid=True, gridcolor='gray')  # Enable grid lines for x-axis
 	    fig.update_yaxes(row=i, col=1, fixedrange=True, showline=True, linewidth=1.2, linecolor='black', mirror=True,
-	                     tickfont=dict(size=text_embed_in_chart_size))
+	                     tickfont=dict(size=text_embed_in_chart_size),
+	                     showgrid=True, gridcolor='gray')  # Enable grid lines for y-axis
+
 
 	# Update the overall layout
 	fig.update_layout(
