@@ -1987,7 +1987,7 @@ if selected_dimension == "Auction Integrated":
 	dfcomb_auc_yr_rd = dfcomb_auc_yr_rd.sort_index(ascending = False)
 
 	# Simplify column names for display
-	column_labels = [f"{col[1]} ({col[0]})" for col in dfcomb_auc_yr_rd.columns]
+	column_labels = [f"{col[0]} ({col[1]})" for col in dfcomb_auc_yr_rd.columns]
 
 	# Prepare text to embed in the heatmap itself
 	text_values = [[f"{value}" if pd.notna(value) else "" for value in row] for row in dfcomb_auc_yr_rd.values]
