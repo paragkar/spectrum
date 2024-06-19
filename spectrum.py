@@ -2035,7 +2035,7 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	            texttemplate="%{z:.0f}",
 			    textfont={"size":text_embed_in_chart_size}, 
 			    showscale=False,
-			    reversescale=False
+			    reversescale=True
 	        ),
 	        row=i, col=1
 
@@ -2052,7 +2052,7 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	    width=heatmapwidth,
 	    height=heatmapheight*0.35*num_bands,  # Total height based on the number of subplots
 	    autosize=True,
-	    plot_bgcolor='#E2B47C',
+	    plot_bgcolor='#ADD8E6',
 	    paper_bgcolor='white',
 	    margin=dict(t=30, b=30, l=30, r=30, pad=4),
 	    xaxis=dict(
