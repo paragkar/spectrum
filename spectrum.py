@@ -1968,7 +1968,7 @@ if selected_dimension == "Auction Integrated":
 	dfcomb_aucyr = dfcomb[dfcomb["Auction Year"] == AuctionYear]
 
 
-	dim_to_select = ["Prov WinBid Start Rd","Rank Start Rd","Bid decision","Prov WinBid End Rd",	
+	dim_to_select = ["Prov WinBid Start Rd","Rank Start Rd","Prov WinBid End Rd",	
 	"Rank End Rd","Blocks Selected", "Prov Alloc BLKs Start Rd","Prov Alloc BLKs End Rd"]
 
 	selected_dimension = st.sidebar.selectbox('Select a Dimension', dim_to_select, 0) #default index "Prov WinBid Start Rd"
