@@ -1997,15 +1997,14 @@ if selected_dimension == "Auction Integrated":
 	dfcomb_aucyr_dim_rd = dfcomb_aucyr_dim_rd.fillna("")
 
 	# Prepare text to embed in the heatmap itself
-	text_values = [[f"{value}" if pd.notna(value) else "" for value in row] for row in dfcomb_aucyr_dim_rd.values]
+	text_values = [[f"{value:.2f}" if pd.notna(value) else "N/A" for value in row] for row in dfcomb_aucyr_dim_rd.values]
 
 	# Define a colorscale for the heatmap
 	colorscale = "YlGnBu"  # or any other color scale available in Plotly
 
 	# Create the heatmap object
 	heatmap = go.Heatmap(
-    # z=dfcomb_aucyr_dim_rd.fillna(0).values,  # Replace NaN with 0 for visualization purposes
-    z=dfcomb_aucyr_dim_rd,
+    z=dfcomb_aucyr_dim_rd.fillna(0).values,  # Replace NaN with 0 for visualization purposes
     y=dfcomb_aucyr_dim_rd.index,
     x=column_labels,  # Use simplified column labels
     xgap=1,  # Modify as needed
