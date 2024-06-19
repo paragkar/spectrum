@@ -1997,7 +1997,7 @@ if selected_dimension == "Auction Integrated":
 	dfcomb_aucyr_dim_rd = dfcomb_aucyr_dim_rd.fillna("")
 
 	# Prepare text to embed in the heatmap itself
-	text_values = [[f"{float(value):.0f}" if pd.notna(value) and isinstance(value, (int, float)) else "" for value in row] for row in dfcomb_aucyr_dim_rd.values]
+	text_values = [[f"{float(value):.0f}" if pd.notna(value) and isinstance(value, (int, float)) else "0" for value in row] for row in dfcomb_aucyr_dim_rd.values]
 
 	text_values = [["" if x=="0" else x for x in line] for line in text_values]
 
