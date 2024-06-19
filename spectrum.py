@@ -2044,9 +2044,25 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	    fig.update_xaxes(row=i, col=1, fixedrange=True, showline=True, linewidth=1.2, linecolor='black', mirror=True)
 	    fig.update_yaxes(row=i, col=1, fixedrange=True, showline=True, linewidth=1.2, linecolor='black', mirror=True)
 
+	 # Update layout with defined dimensions and titles
+	fig.update_layout(
+	    title='Heatmap of No. of Blocks Selected by Service Area and Band',
+	    xaxis=dict(
+	        # title='Bidders (Band)',
+	        side='top'  # Set x-axis labels to top
+	    ),
+	    # yaxis_title='Service Area',
+	    width=heatmapwidth,  # Specify width
+	    height=heatmapheight*0.3,  # Specify height
+	    autosize=True,
+	    plot_bgcolor='#E2B47C',  # Background color for the plot area light pink
+		paper_bgcolor='white',  # Background color for the entire figure
+		margin= dict(t=t,b=b,l=l,r=r,pad=pad),
+		)
+
 
 	# Update layout if necessary
-	fig.update_layout(height=300*num_bands, width=1000, title_text="Heatmaps for Each Band")
+	# fig.update_layout(height=300*num_bands, width=1000, title_text="Heatmaps for Each Band")
 	st.plotly_chart(fig, use_container_width=True, sharing='stream')
 
 	
