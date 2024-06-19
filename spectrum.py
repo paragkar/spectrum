@@ -2018,7 +2018,7 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	# Dictionary to hold dataframes for each band
 	df_dict = {band: group.drop('Band', axis=1) for band, group in df.groupby('Band')}
 
-	st.write(df_dict.keys)
+	st.write(df_dict.keys())
 
 
 	# # Create the heatmap object
