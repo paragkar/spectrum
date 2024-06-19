@@ -1945,6 +1945,8 @@ if selected_dimension == "Auction Integrated":
 
 	currency_flag = "NA" #This is dummy variiable for this option done to preserve the current structure of the code 
 
+
+
 	dfcomb = pd.DataFrame()
 	for sepectrumband in year_band:
 
@@ -1965,14 +1967,14 @@ if selected_dimension == "Auction Integrated":
 	AuctionYear = st.sidebar.selectbox('Select an Auction Year', AuctionYears, 0) #default index 2012
 	dfcomb_auc_yr = dfcomb[dfcomb["Auction Year"] == AuctionYear]
 
-	st.write(dfcomb_auc_yr.shape)
-
 	clkrounds = sorted(list(set(dfcomb_auc_yr["Clock Round"])))
 	round_number = st.sidebar.number_input("Select Auction Round Number"+";Total Rounds= "+str(max(clkrounds)), min_value=min(clkrounds), max_value=max(clkrounds), value=1, step=1)
 
 	dfcomb_auc_yr_rd = dfcomb_auc_yr[dfcomb_auc_yr["Clock Round"] == round_number]
 	dfcomb_auc_yr_rd = dfcomb_auc_yr_rd[[ "Bidder", "Service Area","Band" ,"No. of Blocks Selected", "Provisionally Allocated Blocks at end of Clock Round"]]
 	dfcomb_auc_yr_rd = dfcomb_auc_yr_rd.replace("-", 0)
+
+	st.write(dfcomb_auc_yr_rd)
 	# dfcomb_auc_yr_rd = dfcomb_auc_yr_rd.replace(0, np.nan).reset_index(drop = True)
 
 	
