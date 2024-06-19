@@ -1974,7 +1974,7 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	df = df[df["Auction Year"] == AuctionYear]
 
 
-# 	#Choosing the selected dimension
+	#Choosing the selected dimension
 	dim_to_select = ["Prov WinBid Start Rd","Rank Start Rd","Prov WinBid End Rd",	
 	"Rank End Rd","Blocks Selected", "Prov Alloc BLKs Start Rd","Prov Alloc BLKs End Rd"]
 
@@ -1997,7 +1997,7 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
     aggfunc='first'  # you can change this to 'sum' if that's more appropriate
 	)
 
-	st.write(df)
+	st.write(df.columns)
 
 # 	dfcomb_aucyr_dim_rd = dfcomb_aucyr_dim_rd.sort_index(ascending = False)
 # 	# # dfcomb_aucyr_dim_rd.columns = sorted(list(dfcomb_aucyr_dim_rd.columns))
