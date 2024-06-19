@@ -2037,7 +2037,7 @@ if selected_dimension == "Auction Integrated":
 	    width=heatmapwidth,  # Specify width
 	    height=heatmapheight,  # Specify height
 	    autosize=True,
-	    plot_bgcolor='#D2B47C',  # Background color for the plot area light pink
+	    plot_bgcolor='#E2B47C',  # Background color for the plot area light pink
 		paper_bgcolor='white',  # Background color for the entire figure
 		margin= dict(t=t,b=b,l=l,r=r,pad=pad),
 )
