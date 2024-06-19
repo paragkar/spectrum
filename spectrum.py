@@ -1966,9 +1966,9 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 
 	currency_flag = "NA" #This is dummy variiable for this option done to preserve the current structure of the code 
 
-	df = loadauctionbiddatayearbandcomb()
+	df = loadauctionbiddatayearbandcomb()["Sheet1"]
 
-	st.write(df)
+	st.write(df.columns)
 
 # 	#columns names are used to rename the loaded dataframe
 # 	column_names = ["Clock Round", "Bidder", "Service Area", "Prov WinBid Start Rd","Rank Start Rd","Can BidPrice Increase Y/N","Bid decision","Prov WinBid End Rd",	
