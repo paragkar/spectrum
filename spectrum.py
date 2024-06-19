@@ -1943,6 +1943,11 @@ for index in dfrsrate.index:
 
 if selected_dimension == "Auction Integrated":
 
+	@st.cache
+	def filt_round(df, round_number):
+	    # Filtering and processing logic
+	    return df[df['Clock Round'] == round_number]
+
 	currency_flag = "NA" #This is dummy variiable for this option done to preserve the current structure of the code 
 
 	column_names = ["Clock Round", "Bidder", "Service Area", "Prov WinBid Start Rd","Rank Start Rd","Can BidPrice Increase Y/N","Bid decision","Prov WinBid End Rd",	
@@ -1976,7 +1981,11 @@ if selected_dimension == "Auction Integrated":
 
 	clkrounds = sorted(list(set(dfcomb_aucyr_dim["Clock Round"])))
 	round_number = st.sidebar.number_input("Select Auction Round Number"+";Total Rounds= "+str(max(clkrounds)), min_value=min(clkrounds), max_value=max(clkrounds), value=1, step=1)
-	dfcomb_aucyr_dim_rd = dfcomb_aucyr_dim[dfcomb_aucyr_dim["Clock Round"] == round_number]
+	
+
+	# dfcomb_aucyr_dim_rd = dfcomb_aucyr_dim[dfcomb_aucyr_dim["Clock Round"] == round_number]
+	dfcomb_aucyr_dim_rd = filt_round(dfcomb_aucyr_dim_rd, round_number)
+
 	dfcomb_aucyr_dim_rd = dfcomb_aucyr_dim_rd.replace("-", 0).replace("",0).replace(np.nan, 0)
 
 	
