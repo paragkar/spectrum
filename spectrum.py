@@ -1977,7 +1977,7 @@ if selected_dimension == "Auction Integrated":
 	clkrounds = sorted(list(set(dfcomb_aucyr_dim["Clock Round"])))
 	round_number = st.sidebar.number_input("Select Auction Round Number"+";Total Rounds= "+str(max(clkrounds)), min_value=min(clkrounds), max_value=max(clkrounds), value=1, step=1)
 	dfcomb_aucyr_dim_rd = dfcomb_aucyr_dim[dfcomb_aucyr_dim["Clock Round"] == round_number]
-	dfcomb_aucyr_dim_rd = dfcomb_aucyr_dim_rd.replace("-", np.nan)
+	dfcomb_aucyr_dim_rd = dfcomb_aucyr_dim_rd.replace("-", 0).replace("",0).replace(np.nan, 0)
 
 	
 	# Create a combined column for bidder information
