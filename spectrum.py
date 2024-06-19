@@ -2015,6 +2015,8 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 
 	df["Band"] = df.index.str.extract(r'(\d+)')
 
+	st.write(df)
+
 	# # Dictionary to hold dataframes for each band
 	# df_dict = {band: group.drop('Band', axis=1) for band, group in df.groupby('Band')}
 
