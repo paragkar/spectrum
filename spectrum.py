@@ -2007,7 +2007,7 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 
 	df.columns = column_labels
 
-	st.write(df)
+	st.write(df.T)
 
 # 	# dfcomb_aucyr_dim_rd.columns = sorted(list(dfcomb_aucyr_dim_rd.columns))
 
