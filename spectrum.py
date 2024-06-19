@@ -2008,41 +2008,28 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 
 	st.write(df)
 
-# 	# # Prepare text to embed in the heatmap itself
-# 	# text_values = [[f"{float(value):.1f}" if pd.notna(value) and isinstance(value, (int, float)) else "0" for value in row] for row in dfcomb_aucyr_dim_rd.values]
+	# Define a colorscale for the heatmap
+	colorscale = "Hot"  # or any other color scale available in Plotly
 
-# 	# text_values = [["" if x=="0.0" else x for x in line] for line in text_values]
-# 	# text_values = [["" if x=="0" else x for x in line] for line in text_values]
 
-# 	# Define a colorscale for the heatmap
-# 	colorscale = "Hot"  # or any other color scale available in Plotly
+	# Create the heatmap object
+	heatmap = go.Heatmap(
+    z=df.fillna("").values,  # Replace NaN with 0 for visualization purposes
+    y=df.index,
+    x=df.columns,  # Use simplified column labels
+    xgap=1,  # Modify as needed
+    ygap=1,
+    # text=text_values,  # Embed values directly in the heatmap cells
+    # hoverinfo='text',  # Disable hover info if values are embedded in cells
+    texttemplate="%{z}",
+    textfont={"size":text_embed_in_chart_size}, 
+    colorscale=colorscale,
+    showscale=False,
+    reversescale=True
+	)
 
-# 	dfcomb_aucyr_dim_rd = dfcomb_aucyr_dim_rd.replace("", 0)
-# 	dfcomb_aucyr_dim_rd = dfcomb_aucyr_dim_rd.replace(np.nan, 0)
-# 	dfcomb_aucyr_dim_rd = dfcomb_aucyr_dim_rd.replace(0, "")
-
-# 	# Simplify column names for display
-# 	column_labels = [f"{col[1]} ({col[0]})" for col in dfcomb_aucyr_dim_rd.columns]
-
-# 	# Create the heatmap object
-# 	heatmap = go.Heatmap(
-#     z=dfcomb_aucyr_dim_rd.fillna("").values,  # Replace NaN with 0 for visualization purposes
-#     # z = text_values,
-#     y=dfcomb_aucyr_dim_rd.index,
-#     x=column_labels,  # Use simplified column labels
-#     xgap=1,  # Modify as needed
-#     ygap=1,
-#     # text=text_values,  # Embed values directly in the heatmap cells
-#     # hoverinfo='text',  # Disable hover info if values are embedded in cells
-#     texttemplate="%{z}",
-#     textfont={"size":text_embed_in_chart_size}, 
-#     colorscale=colorscale,
-#     showscale=False,
-#     reversescale=True
-# 	)
-
-# 	# Create the figure using the heatmap data
-# 	fig = go.Figure(data=[heatmap])
+	# Create the figure using the heatmap data
+	fig = go.Figure(data=[heatmap])
 
 	
 # 	# Update layout with defined dimensions and titles
