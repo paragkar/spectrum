@@ -5728,306 +5728,306 @@ if currency_flag == False: #USD
 					  "Total Purchase" : "MHz"}
 
 
-#-------This is a new Code---- for Auction Integrated Structure--Remove this if this does not work and change the indentation below align left on tab for all
-if currency_flag == "NA": #This option is for Auction Integrated so as ensure the current structure is preserved
-	pass
-else:
+# #-------This is a new Code---- for Auction Integrated Structure--Remove this if this does not work and change the indentation below align left on tab for all
+# if currency_flag == "NA": #This option is for Auction Integrated so as ensure the current structure is preserved
+# 	pass
+# else:
 
 
-	#---------Dimension = Spectrum Bands Starts -------------------
+#---------Dimension = Spectrum Bands Starts -------------------
 
-	if (SelectedFeature == "Spectrum Map") and (SelectedSubFeature == "Frequency Layout"):
+if (SelectedFeature == "Spectrum Map") and (SelectedSubFeature == "Frequency Layout"):
 
-		fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=text_embed_in_hover_size, color='white'))) #Debug 14th June 2024 (Chnaged from 12 to 16)
+	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=text_embed_in_hover_size, color='white'))) #Debug 14th June 2024 (Chnaged from 12 to 16)
 
-		xdtickangle = -90
-		xdtickval = xdtickfreq_dict[Band]
+	xdtickangle = -90
+	xdtickval = xdtickfreq_dict[Band]
 
-		unit = "Ch Size - "+str(channelsize_dict[Band])+" MHz"
+	unit = "Ch Size - "+str(channelsize_dict[Band])+" MHz"
 
-		if selected_operators == []:
+	if selected_operators == []:
+		selected_operators = ["All"]
+	else:
+		selected_operators = selected_operators
+		
+	subtitle = subtitle_freqlayout_dict[Band]+unit+"; Selected Operators - "+', '.join(selected_operators)+"; Source - DOT"
+
+	title = "Spectrum Frequency Layout for the "+str(Band)+" MHz Band"
+
+
+if (SelectedFeature == "Spectrum Map") and (SelectedSubFeature == "Operator Holdings"):
+
+	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=text_embed_in_hover_size, color='white'))) #Debug 14th June 2024 (Chnaged from 12 to 16)
+
+	xdtickangle = 0
+	xdtickval = 1
+
+
+	if (len(selected_category) == 0) or (len(selected_category) == 2):
+		selected_category = "All"
+	else:
+		selected_category = selected_category[0]
+	
+	if selected_operators == []:
+		selected_operators = ["All"]
+	else:
+		selected_operators = selected_operators
+	
+	unit = "MHz"
+	subtitle = "Unit - "+unit+"; "+"India Total - Sum of all LSAs "+"; Selected Operators - "+', '.join(selected_operators)+ ";\
+	Category - "+ selected_category+"; Source - DOT"
+
+	title = "Operator Holdings for the "+str(Band)+" MHz Band"
+
+
+if (SelectedFeature == "Spectrum Map") and (SelectedSubFeature == "Operator %Share"):
+
+	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=text_embed_in_hover_size, color='white'))) #Debug 14th June 2024 (Changed from 12 to 16)
+
+	xdtickangle = 0
+	xdtickval = 1
+
+	if (len(selected_category) == 0) or (len(selected_category) == 2):
+		selected_category = "All"
+	else:
+		selected_category = selected_category[0]
+	
+	if len(selected_operators) == 0: 
+		selected_operators = ["All"]
+	else:
+		selected_operators = selected_operators
+	
+	unit = '% of Total'
+	subtitle = "Unit - "+unit+ " ; Selected Operators - "+', '.join(selected_operators)+ "; Category - "+ selected_category+"; Source - DOT"
+
+	title = "Operator's Spectrum Market Share for the "+str(Band)+" MHz Band"
+
+
+	
+if (SelectedFeature == "Expiry Map") and (SelectedSubFeature == "Frequency Layout"):
+
+	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=text_embed_in_hover_size, color='white'))) #Debug 14th June 2024 (Changed from 12 to 16)
+
+	xdtickangle = -90
+	xdtickval = xdtickfreq_dict[Band]
+
+
+	unit = "Ch Size - "+str(channelsize_dict[Band])+" MHz"
+	if selected_operators == []:
+		selected_operators = ["All"]
+	else:
+		selected_operators = selected_operators
+		
+	subtitle = subtitle_freqlayout_dict[Band]+unit+"; Selected Operators - "+', '.join(selected_operators)+"; Source - DOT"
+
+	title = "Spectrum Expiry Layout for the "+str(Band)+" MHz Band"
+
+
+if (SelectedFeature == "Expiry Map") and (SelectedSubFeature == "Yearly Trends"):
+
+	hoverlabel_bgcolor = "#000000" #subdued black
+
+	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=text_embed_in_hover_size, color='white'))) #Debug 14th June 2024 (Changed from 12 to 16)
+
+	xdtickangle = 0
+	xdtickval = dtickauction_dict[Band]
+
+	unit = "MHz"
+	if selected_operator == "":
+		selected_operator = "All"
+	else:
+		selected_operator = selected_operator
+	subtitle = "Unit - "+unit+"; Selected Operators - "+selected_operator+ "; Summary Below - Sum of all LSAs"+"; Source - DOT"
+
+	title = "Spectrum Expiry Yearly Trends for the "+str(Band)+" MHz Band"
+
+
+if SelectedFeature == "Auction Map":
+
+	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=text_embed_in_hover_size, color='white'))) #Debug 14th June 2024 (Changed from 12 to 16)
+
+	parttitle = "Yearly Trend of "+SelectedSubFeature
+	xdtickangle=0
+	xdtickval = dtickauction_dict[Band]
+	unit = units_dict[SelectedSubFeature]
+	selected_operators = ["NA"]
+	
+	subtitle = "Unit - "+unit+"; Selected Operators - "+', '.join(selected_operators)+ " ; Summary Below - Sum of all LSAs"+"; Source - DOT"
+
+	title = parttitle+" for the "+str(Band)+" MHz Band"
+
+#---------Dimension = Spectrum Bands Ends -------------------
+
+
+#---------Dimension = Auction Years Starts ------------------
+
+if (SelectedFeature == "Band Details"):
+
+	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=text_embed_in_hover_size, color='white'))) #Debug 14th June 2024 (Changed from 12 to 16)
+	
+	xdtickangle =0
+	xdtickval =1
+
+	if (SelectedSubFeature =="Total Outflow") or (SelectedSubFeature == "Quantum Sold"):
+
+		if selected_operators==[]:
 			selected_operators = ["All"]
 		else:
 			selected_operators = selected_operators
-			
-		subtitle = subtitle_freqlayout_dict[Band]+unit+"; Selected Operators - "+', '.join(selected_operators)+"; Source - DOT"
-
-		title = "Spectrum Frequency Layout for the "+str(Band)+" MHz Band"
-
-
-	if (SelectedFeature == "Spectrum Map") and (SelectedSubFeature == "Operator Holdings"):
-
-		fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=text_embed_in_hover_size, color='white'))) #Debug 14th June 2024 (Chnaged from 12 to 16)
-
-		xdtickangle = 0
-		xdtickval = 1
-
-
-		if (len(selected_category) == 0) or (len(selected_category) == 2):
-			selected_category = "All"
-		else:
-			selected_category = selected_category[0]
-		
-		if selected_operators == []:
-			selected_operators = ["All"]
-		else:
-			selected_operators = selected_operators
-		
-		unit = "MHz"
-		subtitle = "Unit - "+unit+"; "+"India Total - Sum of all LSAs "+"; Selected Operators - "+', '.join(selected_operators)+ ";\
-		Category - "+ selected_category+"; Source - DOT"
-
-		title = "Operator Holdings for the "+str(Band)+" MHz Band"
-
-
-	if (SelectedFeature == "Spectrum Map") and (SelectedSubFeature == "Operator %Share"):
-
-		fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=text_embed_in_hover_size, color='white'))) #Debug 14th June 2024 (Changed from 12 to 16)
-
-		xdtickangle = 0
-		xdtickval = 1
-
-		if (len(selected_category) == 0) or (len(selected_category) == 2):
-			selected_category = "All"
-		else:
-			selected_category = selected_category[0]
-		
-		if len(selected_operators) == 0: 
-			selected_operators = ["All"]
-		else:
-			selected_operators = selected_operators
-		
-		unit = '% of Total'
-		subtitle = "Unit - "+unit+ " ; Selected Operators - "+', '.join(selected_operators)+ "; Category - "+ selected_category+"; Source - DOT"
-
-		title = "Operator's Spectrum Market Share for the "+str(Band)+" MHz Band"
-
-
-		
-	if (SelectedFeature == "Expiry Map") and (SelectedSubFeature == "Frequency Layout"):
-
-		fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=text_embed_in_hover_size, color='white'))) #Debug 14th June 2024 (Changed from 12 to 16)
-
-		xdtickangle = -90
-		xdtickval = xdtickfreq_dict[Band]
-
-
-		unit = "Ch Size - "+str(channelsize_dict[Band])+" MHz"
-		if selected_operators == []:
-			selected_operators = ["All"]
-		else:
-			selected_operators = selected_operators
-			
-		subtitle = subtitle_freqlayout_dict[Band]+unit+"; Selected Operators - "+', '.join(selected_operators)+"; Source - DOT"
-
-		title = "Spectrum Expiry Layout for the "+str(Band)+" MHz Band"
-
-
-	if (SelectedFeature == "Expiry Map") and (SelectedSubFeature == "Yearly Trends"):
-
-		hoverlabel_bgcolor = "#000000" #subdued black
-
-		fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=text_embed_in_hover_size, color='white'))) #Debug 14th June 2024 (Changed from 12 to 16)
-
-		xdtickangle = 0
-		xdtickval = dtickauction_dict[Band]
-
-		unit = "MHz"
-		if selected_operator == "":
-			selected_operator = "All"
-		else:
-			selected_operator = selected_operator
-		subtitle = "Unit - "+unit+"; Selected Operators - "+selected_operator+ "; Summary Below - Sum of all LSAs"+"; Source - DOT"
-
-		title = "Spectrum Expiry Yearly Trends for the "+str(Band)+" MHz Band"
-
-
-	if SelectedFeature == "Auction Map":
-
-		fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=text_embed_in_hover_size, color='white'))) #Debug 14th June 2024 (Changed from 12 to 16)
-
-		parttitle = "Yearly Trend of "+SelectedSubFeature
-		xdtickangle=0
-		xdtickval = dtickauction_dict[Band]
-		unit = units_dict[SelectedSubFeature]
+	else:
 		selected_operators = ["NA"]
 		
-		subtitle = "Unit - "+unit+"; Selected Operators - "+', '.join(selected_operators)+ " ; Summary Below - Sum of all LSAs"+"; Source - DOT"
+	title = "Band Wise Auction Summary for the Year "+str(Year)
+	
+	if SelectedSubFeature in ["Reserve Price", "Auction Price", "Quantum Offered", "Quantum Sold", "Quantum Unsold", "Total EMD", "Total Outflow"]:
+		partsubtitle = "; Summary Below - Sum of all LSAs"
+	else:
+		partsubtitle = ""
 
-		title = parttitle+" for the "+str(Band)+" MHz Band"
+	subtitle = SelectedSubFeature+"; Unit -"+units_dict[SelectedSubFeature]+"; "+ "Selected Operators -" + ', '.join(selected_operators)+ partsubtitle+"; Source - DOT"
 
-	#---------Dimension = Spectrum Bands Ends -------------------
+	
+if (SelectedFeature == "Bidder Details"):
 
+	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=text_embed_in_hover_size, color='white'))) #Debug 14th June 2024 (Changed from 12 to 16)
 
-	#---------Dimension = Auction Years Starts ------------------
+	xdtickangle =0
+	xdtickval =1
 
-	if (SelectedFeature == "Band Details"):
-
-		fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=text_embed_in_hover_size, color='white'))) #Debug 14th June 2024 (Changed from 12 to 16)
-		
-		xdtickangle =0
-		xdtickval =1
-
-		if (SelectedSubFeature =="Total Outflow") or (SelectedSubFeature == "Quantum Sold"):
-
-			if selected_operators==[]:
-				selected_operators = ["All"]
-			else:
-				selected_operators = selected_operators
+	if (SelectedSubFeature =="Total Outflow") or (SelectedSubFeature == "Total Purchase"):
+		if selectedbands==[]:
+			selectedbands = ["All"]
 		else:
-			selected_operators = ["NA"]
-			
-		title = "Band Wise Auction Summary for the Year "+str(Year)
-		
-		if SelectedSubFeature in ["Reserve Price", "Auction Price", "Quantum Offered", "Quantum Sold", "Quantum Unsold", "Total EMD", "Total Outflow"]:
-			partsubtitle = "; Summary Below - Sum of all LSAs"
+			selectedbands = selectedbands
+	else:
+		selectedbands = ["NA"]
+	selectedbands = [str(x) for x in selectedbands]	
+
+	title = "Operator Wise Summary for the Year "+str(Year)
+
+	subtitle = SelectedSubFeature + "; Unit -"+units_dict[SelectedSubFeature]+"; Selected Bands -"+ ', '.join(selectedbands) + \
+				"; Summary Below - Sum of all LSAs"+"; Source - DOT"
+
+
+#---------Dimension = Auction Years Ends ------------------
+
+
+if selected_dimension in ["Spectrum Bands", "Auction YearWise"]:
+
+	#layout for heatmaps 
+
+	fig.update_layout(
+	uniformtext_minsize=text_embed_in_chart_size, 
+	uniformtext_mode='hide', 
+	xaxis_title=None, 
+	yaxis_title=None, 
+	yaxis_autorange='reversed',
+	font=dict(size=text_embed_in_chart_size),
+	template='simple_white',
+	paper_bgcolor=None,
+	height=heatmapheight, #Changing this will adjust the height of all heat maps
+	width=heatmapwidth, #Changing this will adjust the witdth of all heat maps
+	margin= dict(t=t,b=b,l=l,r=r,pad=pad),
+	yaxis=dict(
+		tickmode='array',
+		tickfont=dict(size=text_embed_in_chart_size),
+		showgrid=True,  # Enable grid lines for y-axis
+		gridcolor='lightgrey',  # Set grid line color for y-axis
+		gridwidth=1  # Set grid line width for y-axis
+	),
+	xaxis=dict(
+		side='top',
+		tickmode='linear',
+		tickangle=xdtickangle,
+		dtick=xdtickval,
+		tickfont=dict(size=text_embed_in_chart_size),
+		showgrid=True,  # Enable grid lines for x-axis
+		gridcolor='lightgrey',  # Set grid line color for x-axis
+		gridwidth=1  # Set grid line width for x-axis
+	),
+	)
+
+	#Drawning a black border around the heatmap chart 
+	fig.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
+	fig.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
+
+
+	#Some last minute exceptions and changes in the plot
+
+	#converts x axis into category
+	if selected_dimension == "Business Data":
+		fig.update_layout(xaxis_type='category')
+	else:
+		pass
+
+	#removes tic labels if the date_range_list greater than a value
+	#This is done to prevent cluttering of xaxis labels when a large range is selected
+	if (selected_dimension == "Business Data") and (SelectedFeature == "Subscriber Trends"):
+		# fig.data[0].update(zmin=110, zmax=450) #setting the max and min value of the colorscale
+		if len(date_range_list) >= 30:
+			fig.update_xaxes(
+				tickmode='array',
+				ticktext=[''] * len(date_range_list),
+				tickvals=list(range(len(date_range_list)))
+			)
+
+
+	# Final plotting of various charts on the output page
+	style = "<style>h3 {text-align: left;}</style>"
+	with st.container():
+		#plotting the main chart
+		st.markdown(style, unsafe_allow_html=True)
+		st.header(title)
+		st.markdown(subtitle)
+
+		if chart_data_flag==True:
+			tab1, tab2 = st.tabs(["📈 Chart", "🗃 Data"]) #for listing the summary chart for freq layout
+			with tab1:
+				col1,col2 = st.columns([stcol1,stcol2]) #create collumns of uneven width
+				with col1:
+					st.plotly_chart(fig, use_container_width=True)
+					if SummaryFlag ==True:
+						col1.altair_chart(chart, use_container_width=True)
+				with col2:
+					# st.markdown(" ")
+					st.plotly_chart(figsumrows, use_container_width=True)
+			with tab2:
+				st.table(chartdata_df)
 		else:
-			partsubtitle = ""
-
-		subtitle = SelectedSubFeature+"; Unit -"+units_dict[SelectedSubFeature]+"; "+ "Selected Operators -" + ', '.join(selected_operators)+ partsubtitle+"; Source - DOT"
-
-		
-	if (SelectedFeature == "Bidder Details"):
-
-		fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=text_embed_in_hover_size, color='white'))) #Debug 14th June 2024 (Changed from 12 to 16)
-
-		xdtickangle =0
-		xdtickval =1
-
-		if (SelectedSubFeature =="Total Outflow") or (SelectedSubFeature == "Total Purchase"):
-			if selectedbands==[]:
-				selectedbands = ["All"]
-			else:
-				selectedbands = selectedbands
-		else:
-			selectedbands = ["NA"]
-		selectedbands = [str(x) for x in selectedbands]	
-
-		title = "Operator Wise Summary for the Year "+str(Year)
-
-		subtitle = SelectedSubFeature + "; Unit -"+units_dict[SelectedSubFeature]+"; Selected Bands -"+ ', '.join(selectedbands) + \
-					"; Summary Below - Sum of all LSAs"+"; Source - DOT"
+			st.plotly_chart(fig, use_container_width=True) # for heatmaps
+			if SummaryFlag ==True:
+				st.altair_chart(chart, use_container_width=True)
 
 
-	#---------Dimension = Auction Years Ends ------------------
+#--------The expander is used to add note for the user on reading the color codes for every chart -------
+
+	expander = st.expander("Click Here - To Learn About the Color Codes", expanded = False)
+
+	with expander:
+		if (SelectedFeature == "Spectrum Map") and (SelectedSubFeature=="Frequency Layout"):
+			st.info("Heatmap and Hoverbox's Background Color - Maps to the Specific Operator")
+
+		if (SelectedFeature == "Expiry Map") and (SelectedSubFeature=="Frequency Layout"):
+			st.info("Heatmap's Color Intensity - Directly Proportional to length of the expiry period in years")
+			st.info("Hoverbox's Background Color - Directly Maps to the Specific Operator of the 'Spectrum Map' Layout")
+
+		if (SelectedFeature == "Auction Map"):
+			st.info("Heatmap's Color Intensity - Directly Proportional to the Value of the Cell")
+			st.info("Hoverbox's Background Color = BLACK (Failed/No Auction)")
+			st.info("Hoverbox's Background Color = GREEN (Auction Price = Reserve Price)")
+			st.info("Hoverbox's Background Color = RED (Auction Price > Reserve Price)")
+
+		if (SelectedFeature == "Bidder Details"):
+			st.info("Heatmap's Color Intensity - Directly proportional to value on Color Bar on the left")
+			st.info("Hoverbox's Background Color = GREEN (Purchase Made)")
+			st.info("Hoverbox's Background Color = GREY (No Purchase Made)")
 
 
-	if selected_dimension in ["Spectrum Bands", "Auction YearWise"]:
-
-		#layout for heatmaps 
-
-		fig.update_layout(
-		uniformtext_minsize=text_embed_in_chart_size, 
-		uniformtext_mode='hide', 
-		xaxis_title=None, 
-		yaxis_title=None, 
-		yaxis_autorange='reversed',
-		font=dict(size=text_embed_in_chart_size),
-		template='simple_white',
-		paper_bgcolor=None,
-		height=heatmapheight, #Changing this will adjust the height of all heat maps
-		width=heatmapwidth, #Changing this will adjust the witdth of all heat maps
-		margin= dict(t=t,b=b,l=l,r=r,pad=pad),
-		yaxis=dict(
-			tickmode='array',
-			tickfont=dict(size=text_embed_in_chart_size),
-			showgrid=True,  # Enable grid lines for y-axis
-			gridcolor='lightgrey',  # Set grid line color for y-axis
-			gridwidth=1  # Set grid line width for y-axis
-		),
-		xaxis=dict(
-			side='top',
-			tickmode='linear',
-			tickangle=xdtickangle,
-			dtick=xdtickval,
-			tickfont=dict(size=text_embed_in_chart_size),
-			showgrid=True,  # Enable grid lines for x-axis
-			gridcolor='lightgrey',  # Set grid line color for x-axis
-			gridwidth=1  # Set grid line width for x-axis
-		),
-		)
-
-		#Drawning a black border around the heatmap chart 
-		fig.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
-		fig.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
-
-
-		#Some last minute exceptions and changes in the plot
-
-		#converts x axis into category
-		if selected_dimension == "Business Data":
-			fig.update_layout(xaxis_type='category')
-		else:
-			pass
-
-		#removes tic labels if the date_range_list greater than a value
-		#This is done to prevent cluttering of xaxis labels when a large range is selected
-		if (selected_dimension == "Business Data") and (SelectedFeature == "Subscriber Trends"):
-			# fig.data[0].update(zmin=110, zmax=450) #setting the max and min value of the colorscale
-			if len(date_range_list) >= 30:
-				fig.update_xaxes(
-					tickmode='array',
-					ticktext=[''] * len(date_range_list),
-					tickvals=list(range(len(date_range_list)))
-				)
-
-
-		# Final plotting of various charts on the output page
-		style = "<style>h3 {text-align: left;}</style>"
-		with st.container():
-			#plotting the main chart
-			st.markdown(style, unsafe_allow_html=True)
-			st.header(title)
-			st.markdown(subtitle)
-
-			if chart_data_flag==True:
-				tab1, tab2 = st.tabs(["📈 Chart", "🗃 Data"]) #for listing the summary chart for freq layout
-				with tab1:
-					col1,col2 = st.columns([stcol1,stcol2]) #create collumns of uneven width
-					with col1:
-						st.plotly_chart(fig, use_container_width=True)
-						if SummaryFlag ==True:
-							col1.altair_chart(chart, use_container_width=True)
-					with col2:
-						# st.markdown(" ")
-						st.plotly_chart(figsumrows, use_container_width=True)
-				with tab2:
-					st.table(chartdata_df)
-			else:
-				st.plotly_chart(fig, use_container_width=True) # for heatmaps
-				if SummaryFlag ==True:
-					st.altair_chart(chart, use_container_width=True)
-
-
-	#--------The expander is used to add note for the user on reading the color codes for every chart -------
-
-		expander = st.expander("Click Here - To Learn About the Color Codes", expanded = False)
-
-		with expander:
-			if (SelectedFeature == "Spectrum Map") and (SelectedSubFeature=="Frequency Layout"):
-				st.info("Heatmap and Hoverbox's Background Color - Maps to the Specific Operator")
-
-			if (SelectedFeature == "Expiry Map") and (SelectedSubFeature=="Frequency Layout"):
-				st.info("Heatmap's Color Intensity - Directly Proportional to length of the expiry period in years")
-				st.info("Hoverbox's Background Color - Directly Maps to the Specific Operator of the 'Spectrum Map' Layout")
-
-			if (SelectedFeature == "Auction Map"):
-				st.info("Heatmap's Color Intensity - Directly Proportional to the Value of the Cell")
-				st.info("Hoverbox's Background Color = BLACK (Failed/No Auction)")
-				st.info("Hoverbox's Background Color = GREEN (Auction Price = Reserve Price)")
-				st.info("Hoverbox's Background Color = RED (Auction Price > Reserve Price)")
-
-			if (SelectedFeature == "Bidder Details"):
-				st.info("Heatmap's Color Intensity - Directly proportional to value on Color Bar on the left")
-				st.info("Hoverbox's Background Color = GREEN (Purchase Made)")
-				st.info("Hoverbox's Background Color = GREY (No Purchase Made)")
-
-
-			if (SelectedFeature == "Band Details"):
-				st.info("Heatmap's Color Intensity - Directly Proportional to the Value of the Cell")
-				st.info("Hoverbox's Background Color = GREY (No Auction)")
-				st.info("Hoverbox's Background Color = BLACK (Failed Auction)")
-				st.info("Hoverbox's Background Color = GREEN (Auction Price = Reserve Price)")
-				st.info("Hoverbox's Background Color = RED (Auction Price > Reserve Price)")
+		if (SelectedFeature == "Band Details"):
+			st.info("Heatmap's Color Intensity - Directly Proportional to the Value of the Cell")
+			st.info("Hoverbox's Background Color = GREY (No Auction)")
+			st.info("Hoverbox's Background Color = BLACK (Failed Auction)")
+			st.info("Hoverbox's Background Color = GREEN (Auction Price = Reserve Price)")
+			st.info("Hoverbox's Background Color = RED (Auction Price > Reserve Price)")
 
 
