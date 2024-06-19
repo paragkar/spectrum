@@ -1941,142 +1941,142 @@ for index in dfrsrate.index:
 		auction_rsrate_dict[index.year] = dfrsrate.loc[index,:].values[0]
 
 
-if selected_dimension == "Auction Integrated": #This is the new dimension that is being tested
+# if selected_dimension == "Auction Integrated": #This is the new dimension that is being tested
 
-	#This function is used to filter the dataframe based on round numbers
-	@st.cache
-	def filt_round(df, round_number):
-	    # Filtering and processing logic
-	    return df[df['Clock Round'] == round_number]
+# 	#This function is used to filter the dataframe based on round numbers
+# 	@st.cache
+# 	def filt_round(df, round_number):
+# 	    # Filtering and processing logic
+# 	    return df[df['Clock Round'] == round_number]
 
-	currency_flag = "NA" #This is dummy variiable for this option done to preserve the current structure of the code 
+# 	currency_flag = "NA" #This is dummy variiable for this option done to preserve the current structure of the code 
 
-	#columns names are used to rename the loaded dataframe
-	column_names = ["Clock Round", "Bidder", "Service Area", "Prov WinBid Start Rd","Rank Start Rd","Can BidPrice Increase Y/N","Bid decision","Prov WinBid End Rd",	
-	"Rank End Rd","Blocks Selected", "Prov Alloc BLKs Start Rd","Prov Alloc BLKs End Rd", "Prov WinPrice End Rd", "Auction Year", "Band"]
+# 	#columns names are used to rename the loaded dataframe
+# 	column_names = ["Clock Round", "Bidder", "Service Area", "Prov WinBid Start Rd","Rank Start Rd","Can BidPrice Increase Y/N","Bid decision","Prov WinBid End Rd",	
+# 	"Rank End Rd","Blocks Selected", "Prov Alloc BLKs Start Rd","Prov Alloc BLKs End Rd", "Prov WinPrice End Rd", "Auction Year", "Band"]
 
-	#Initilise the dataframe to aggerate the excels tabs for auction years 
-	dfcomb = pd.DataFrame()
+# 	#Initilise the dataframe to aggerate the excels tabs for auction years 
+# 	dfcomb = pd.DataFrame()
 
-	#This is used to aggregrated all tabs in above initialized dataframe
-	for sepectrumband in year_band:
-		sheet = Auction_Year_Band_Features[sepectrumband]["mainsheet"]
-		try:
-			band = sheet.split("_")[2]
-			auctionyear = sheet.split("_")[0]
-			df = loadauctionbiddata()[sheet]
-			df["Auction Year"] = auctionyear
-			df["Band"] = band
-			df.columns = column_names
-			dfcomb = pd.concat([dfcomb,df], axis =0)
-		except:
-			pass
-
-
-	AuctionYears = sorted(list(set(dfcomb["Auction Year"])))
-	AuctionYear = st.sidebar.selectbox('Select an Auction Year', AuctionYears, 0) #default index 2012
-	#Filtering the dataframe with selected auction year
-	dfcomb_aucyr = dfcomb[dfcomb["Auction Year"] == AuctionYear]
+# 	#This is used to aggregrated all tabs in above initialized dataframe
+# 	for sepectrumband in year_band:
+# 		sheet = Auction_Year_Band_Features[sepectrumband]["mainsheet"]
+# 		try:
+# 			band = sheet.split("_")[2]
+# 			auctionyear = sheet.split("_")[0]
+# 			df = loadauctionbiddata()[sheet]
+# 			df["Auction Year"] = auctionyear
+# 			df["Band"] = band
+# 			df.columns = column_names
+# 			dfcomb = pd.concat([dfcomb,df], axis =0)
+# 		except:
+# 			pass
 
 
-	#Choosing the selected dimension
-	dim_to_select = ["Prov WinBid Start Rd","Rank Start Rd","Prov WinBid End Rd",	
-	"Rank End Rd","Blocks Selected", "Prov Alloc BLKs Start Rd","Prov Alloc BLKs End Rd"]
+# 	AuctionYears = sorted(list(set(dfcomb["Auction Year"])))
+# 	AuctionYear = st.sidebar.selectbox('Select an Auction Year', AuctionYears, 0) #default index 2012
+# 	#Filtering the dataframe with selected auction year
+# 	dfcomb_aucyr = dfcomb[dfcomb["Auction Year"] == AuctionYear]
 
-	selected_dimension = st.sidebar.selectbox('Select a Dimension', dim_to_select, 0) #default index "Prov WinBid Start Rd"
-	dfcomb_aucyr_dim = dfcomb_aucyr[[ "Clock Round", "Bidder", "Service Area","Band", selected_dimension]]
 
-	#Choose clock round numbers
-	clkrounds = sorted(list(set(dfcomb_aucyr_dim["Clock Round"])))
-	round_number = st.sidebar.number_input("Select Auction Round Number"+";Total Rounds= "+str(max(clkrounds)), min_value=min(clkrounds), max_value=max(clkrounds), value=1, step=1)
+# 	#Choosing the selected dimension
+# 	dim_to_select = ["Prov WinBid Start Rd","Rank Start Rd","Prov WinBid End Rd",	
+# 	"Rank End Rd","Blocks Selected", "Prov Alloc BLKs Start Rd","Prov Alloc BLKs End Rd"]
 
-	dfcomb_aucyr_dim_rd = filt_round(dfcomb_aucyr_dim, round_number)
-	dfcomb_aucyr_dim_rd = dfcomb_aucyr_dim_rd.replace("-", 0).replace("",0).replace(np.nan, 0)
+# 	selected_dimension = st.sidebar.selectbox('Select a Dimension', dim_to_select, 0) #default index "Prov WinBid Start Rd"
+# 	dfcomb_aucyr_dim = dfcomb_aucyr[[ "Clock Round", "Bidder", "Service Area","Band", selected_dimension]]
 
-	
-	# Create a combined column for bidder information
-	dfcomb_aucyr_dim_rd = dfcomb_aucyr_dim_rd.pivot_table(
-    index='Service Area', 
-    columns=['Bidder', 'Band'], 
-    values= selected_dimension, 
-    aggfunc='first'  # you can change this to 'sum' if that's more appropriate
-	)
+# 	#Choose clock round numbers
+# 	clkrounds = sorted(list(set(dfcomb_aucyr_dim["Clock Round"])))
+# 	round_number = st.sidebar.number_input("Select Auction Round Number"+";Total Rounds= "+str(max(clkrounds)), min_value=min(clkrounds), max_value=max(clkrounds), value=1, step=1)
 
-	# st.write(dfcomb_aucyr_dim_rd)
-
-	dfcomb_aucyr_dim_rd = dfcomb_aucyr_dim_rd.sort_index(ascending = False)
-	# # dfcomb_aucyr_dim_rd.columns = sorted(list(dfcomb_aucyr_dim_rd.columns))
-
-	# # Simplify column names for display
-	# column_labels = [f"{col[1]} ({col[0]})" for col in dfcomb_aucyr_dim_rd.columns]
-
-	# dfcomb_aucyr_dim_rd.columns = column_labels
-
-	# dfcomb_aucyr_dim_rd.columns = sorted(list(dfcomb_aucyr_dim_rd.columns))
-
-	# dfcomb_aucyr_dim_rd = dfcomb_aucyr_dim_rd.fillna("")
-
-	# # Prepare text to embed in the heatmap itself
-	# text_values = [[f"{float(value):.1f}" if pd.notna(value) and isinstance(value, (int, float)) else "0" for value in row] for row in dfcomb_aucyr_dim_rd.values]
-
-	# text_values = [["" if x=="0.0" else x for x in line] for line in text_values]
-	# text_values = [["" if x=="0" else x for x in line] for line in text_values]
-
-	# Define a colorscale for the heatmap
-	colorscale = "Hot"  # or any other color scale available in Plotly
-
-	dfcomb_aucyr_dim_rd = dfcomb_aucyr_dim_rd.replace("", 0)
-	dfcomb_aucyr_dim_rd = dfcomb_aucyr_dim_rd.replace(np.nan, 0)
-	dfcomb_aucyr_dim_rd = dfcomb_aucyr_dim_rd.replace(0, "")
-
-	# Simplify column names for display
-	column_labels = [f"{col[1]} ({col[0]})" for col in dfcomb_aucyr_dim_rd.columns]
-
-	# Create the heatmap object
-	heatmap = go.Heatmap(
-    z=dfcomb_aucyr_dim_rd.fillna("").values,  # Replace NaN with 0 for visualization purposes
-    # z = text_values,
-    y=dfcomb_aucyr_dim_rd.index,
-    x=column_labels,  # Use simplified column labels
-    xgap=1,  # Modify as needed
-    ygap=1,
-    # text=text_values,  # Embed values directly in the heatmap cells
-    # hoverinfo='text',  # Disable hover info if values are embedded in cells
-    texttemplate="%{z}",
-    textfont={"size":text_embed_in_chart_size}, 
-    colorscale=colorscale,
-    showscale=False,
-    reversescale=True
-	)
-
-	# Create the figure using the heatmap data
-	fig = go.Figure(data=[heatmap])
+# 	dfcomb_aucyr_dim_rd = filt_round(dfcomb_aucyr_dim, round_number)
+# 	dfcomb_aucyr_dim_rd = dfcomb_aucyr_dim_rd.replace("-", 0).replace("",0).replace(np.nan, 0)
 
 	
-	# Update layout with defined dimensions and titles
-	fig.update_layout(
-	    title='Heatmap of No. of Blocks Selected by Service Area and Band',
-	    xaxis=dict(
-	        # title='Bidders (Band)',
-	        side='top'  # Set x-axis labels to top
-	    ),
-	    # yaxis_title='Service Area',
-	    width=heatmapwidth,  # Specify width
-	    height=heatmapheight*1.2,  # Specify height
-	    autosize=True,
-	    plot_bgcolor='#E2B47C',  # Background color for the plot area light pink
-		paper_bgcolor='white',  # Background color for the entire figure
-		margin= dict(t=t,b=b,l=l,r=r,pad=pad),
-)
+# 	# Create a combined column for bidder information
+# 	dfcomb_aucyr_dim_rd = dfcomb_aucyr_dim_rd.pivot_table(
+#     index='Service Area', 
+#     columns=['Bidder', 'Band'], 
+#     values= selected_dimension, 
+#     aggfunc='first'  # you can change this to 'sum' if that's more appropriate
+# 	)
 
-	#Drawning a black border around the heatmap chart 
-	fig.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
-	fig.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
+# 	# st.write(dfcomb_aucyr_dim_rd)
 
-	# Create a placeholder for the heatmap
-	placeholder = st.empty()
+# 	dfcomb_aucyr_dim_rd = dfcomb_aucyr_dim_rd.sort_index(ascending = False)
+# 	# # dfcomb_aucyr_dim_rd.columns = sorted(list(dfcomb_aucyr_dim_rd.columns))
 
-	st.plotly_chart(fig, use_container_width=True, sharing='stream')
+# 	# # Simplify column names for display
+# 	# column_labels = [f"{col[1]} ({col[0]})" for col in dfcomb_aucyr_dim_rd.columns]
+
+# 	# dfcomb_aucyr_dim_rd.columns = column_labels
+
+# 	# dfcomb_aucyr_dim_rd.columns = sorted(list(dfcomb_aucyr_dim_rd.columns))
+
+# 	# dfcomb_aucyr_dim_rd = dfcomb_aucyr_dim_rd.fillna("")
+
+# 	# # Prepare text to embed in the heatmap itself
+# 	# text_values = [[f"{float(value):.1f}" if pd.notna(value) and isinstance(value, (int, float)) else "0" for value in row] for row in dfcomb_aucyr_dim_rd.values]
+
+# 	# text_values = [["" if x=="0.0" else x for x in line] for line in text_values]
+# 	# text_values = [["" if x=="0" else x for x in line] for line in text_values]
+
+# 	# Define a colorscale for the heatmap
+# 	colorscale = "Hot"  # or any other color scale available in Plotly
+
+# 	dfcomb_aucyr_dim_rd = dfcomb_aucyr_dim_rd.replace("", 0)
+# 	dfcomb_aucyr_dim_rd = dfcomb_aucyr_dim_rd.replace(np.nan, 0)
+# 	dfcomb_aucyr_dim_rd = dfcomb_aucyr_dim_rd.replace(0, "")
+
+# 	# Simplify column names for display
+# 	column_labels = [f"{col[1]} ({col[0]})" for col in dfcomb_aucyr_dim_rd.columns]
+
+# 	# Create the heatmap object
+# 	heatmap = go.Heatmap(
+#     z=dfcomb_aucyr_dim_rd.fillna("").values,  # Replace NaN with 0 for visualization purposes
+#     # z = text_values,
+#     y=dfcomb_aucyr_dim_rd.index,
+#     x=column_labels,  # Use simplified column labels
+#     xgap=1,  # Modify as needed
+#     ygap=1,
+#     # text=text_values,  # Embed values directly in the heatmap cells
+#     # hoverinfo='text',  # Disable hover info if values are embedded in cells
+#     texttemplate="%{z}",
+#     textfont={"size":text_embed_in_chart_size}, 
+#     colorscale=colorscale,
+#     showscale=False,
+#     reversescale=True
+# 	)
+
+# 	# Create the figure using the heatmap data
+# 	fig = go.Figure(data=[heatmap])
+
+	
+# 	# Update layout with defined dimensions and titles
+# 	fig.update_layout(
+# 	    title='Heatmap of No. of Blocks Selected by Service Area and Band',
+# 	    xaxis=dict(
+# 	        # title='Bidders (Band)',
+# 	        side='top'  # Set x-axis labels to top
+# 	    ),
+# 	    # yaxis_title='Service Area',
+# 	    width=heatmapwidth,  # Specify width
+# 	    height=heatmapheight*1.2,  # Specify height
+# 	    autosize=True,
+# 	    plot_bgcolor='#E2B47C',  # Background color for the plot area light pink
+# 		paper_bgcolor='white',  # Background color for the entire figure
+# 		margin= dict(t=t,b=b,l=l,r=r,pad=pad),
+# )
+
+# 	#Drawning a black border around the heatmap chart 
+# 	fig.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
+# 	fig.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
+
+# 	# Create a placeholder for the heatmap
+# 	placeholder = st.empty()
+
+# 	st.plotly_chart(fig, use_container_width=True, sharing='stream')
 
 
 if selected_dimension == "Spectrum Bands":
@@ -2679,7 +2679,7 @@ if selected_dimension == "Auction BandWise":
 	dfrp = dfrp.set_index("LSA").sort_index(ascending = True)
 	dfbid = loadauctionbiddata()[mainsheet].replace('-', np.nan, regex = True)
 
-	dfbid = dfbid.iloc[:,:-2] #New line added to temp which might change depending up Auction Integrated Workings Debug 19th June 2024
+	# dfbid = dfbid.iloc[:,:-2] #New line added to temp which might change depending up Auction Integrated Workings Debug 19th June 2024
 
 	dfbid.columns = ["Clk_Round", "Bidder","LSA","PWB_Start_ClkRd", "Rank_PWB_Start_ClkRd", 
 					"Possible_Raise_Bid_ClkRd", "Bid_Decision", "PWB_End_ClkRd", "Rank_PWB_End_ClkRd", 
