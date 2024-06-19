@@ -2021,7 +2021,7 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
     ygap=1,
     # text=text_values,  # Embed values directly in the heatmap cells
     # hoverinfo='text',  # Disable hover info if values are embedded in cells
-    texttemplate="%{z.0f}",
+    texttemplate="%{z:.0f}",
     textfont={"size":text_embed_in_chart_size}, 
     colorscale=colorscale,
     showscale=False,
