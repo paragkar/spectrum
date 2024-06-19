@@ -1988,7 +1988,6 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	df = filt_round(df, round_number)
 	df = df.replace("-", 0).replace("",0).replace(np.nan, 0)
 
-	
 	# Create a combined column for bidder information
 	df = df.pivot_table(
     index='Service Area', 
@@ -2011,65 +2010,71 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	# Define a colorscale for the heatmap
 	colorscale = "Hot"  # or any other color scale available in Plotly
 
+	# Extract band information
+	df['Band'] = df.index.str.extract(r'(\d+)')[0]
 
-	# Create the heatmap object
-	heatmap = go.Heatmap(
-    z=df.values,  # Replace NaN with 0 for visualization purposes
-    y=df.index,
-    x=df.columns,  # Use simplified column labels
-    xgap=1,  # Modify as needed
-    ygap=1,
-    # text=text_values,  # Embed values directly in the heatmap cells
-    # hoverinfo='text',  # Disable hover info if values are embedded in cells
-    texttemplate="%{z:.0f}",
-    textfont={"size":text_embed_in_chart_size}, 
-    colorscale=colorscale,
-    showscale=False,
-    reversescale=True
-	)
+	# Dictionary to hold dataframes for each band
+	df_dict = {band: group.drop('Band', axis=1) for band, group in df.groupby('Band')}
 
-	# Create the figure using the heatmap data
-	fig = go.Figure(data=[heatmap])
-
-	
-	# Update layout with defined dimensions and titles
-	fig.update_layout(
-	    title='Heatmap of No. of Blocks Selected by Service Area and Band',
-	    xaxis=dict(
-	        # title='Bidders (Band)',
-	        side='top'  # Set x-axis labels to top
-	    ),
-	    # yaxis_title='Service Area',
-	    width=heatmapwidth,  # Specify width
-	    height=heatmapheight*1.2,  # Specify height
-	    autosize=True,
-	    plot_bgcolor='#E2B47C',  # Background color for the plot area light pink
-		paper_bgcolor='white',  # Background color for the entire figure
-		margin= dict(t=t,b=b,l=l,r=r,pad=pad),
-		)
-
-	# Update layout for larger tick labels
-	fig.update_layout(
-	    xaxis=dict(
-	        # title="X-axis Label",
-	        tickfont=dict(size=text_embed_in_chart_size)  # Increase size of x-axis tick labels
-	    ),
-	    yaxis=dict(
-	        # title="Y-axis Label",
-	        tickfont=dict(size=text_embed_in_chart_size)  # Increase size of y-axis tick labels
-	    ),
-	    title="Your Heatmap Title"
-	)
+	st.write(df_dict)
 
 
-	#Drawning a black border around the heatmap chart 
-	fig.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
-	fig.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
+	# # Create the heatmap object
+	# heatmap = go.Heatmap(
+    # z=df.values,  # Replace NaN with 0 for visualization purposes
+    # y=df.index,
+    # x=df.columns,  # Use simplified column labels
+    # xgap=1,  # Modify as needed
+    # ygap=1,
+    # # text=text_values,  # Embed values directly in the heatmap cells
+    # # hoverinfo='text',  # Disable hover info if values are embedded in cells
+    # texttemplate="%{z:.0f}",
+    # textfont={"size":text_embed_in_chart_size}, 
+    # colorscale=colorscale,
+    # showscale=False,
+    # reversescale=True
+	# )
 
-	# Create a placeholder for the heatmap
-	placeholder = st.empty()
+	# # Create the figure using the heatmap data
+	# fig = go.Figure(data=[heatmap])
 
-	st.plotly_chart(fig, use_container_width=True, sharing='stream')
+	# # Update layout with defined dimensions and titles
+	# fig.update_layout(
+	#     title='Heatmap of No. of Blocks Selected by Service Area and Band',
+	#     xaxis=dict(
+	#         # title='Bidders (Band)',
+	#         side='top'  # Set x-axis labels to top
+	#     ),
+	#     # yaxis_title='Service Area',
+	#     width=heatmapwidth,  # Specify width
+	#     height=heatmapheight*1.2,  # Specify height
+	#     autosize=True,
+	#     plot_bgcolor='#E2B47C',  # Background color for the plot area light pink
+	# 	paper_bgcolor='white',  # Background color for the entire figure
+	# 	margin= dict(t=t,b=b,l=l,r=r,pad=pad),
+	# 	)
+
+	# # Update layout for larger tick labels
+	# fig.update_layout(
+	#     xaxis=dict(
+	#         # title="X-axis Label",
+	#         tickfont=dict(size=text_embed_in_chart_size)  # Increase size of x-axis tick labels
+	#     ),
+	#     yaxis=dict(
+	#         # title="Y-axis Label",
+	#         tickfont=dict(size=text_embed_in_chart_size)  # Increase size of y-axis tick labels
+	#     ),
+	#     title="Your Heatmap Title"
+	# )
+
+	# #Drawning a black border around the heatmap chart 
+	# fig.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
+	# fig.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
+
+	# # Create a placeholder for the heatmap
+	# placeholder = st.empty()
+
+	# st.plotly_chart(fig, use_container_width=True, sharing='stream')
 
 
 if selected_dimension == "Spectrum Bands":
