@@ -2679,7 +2679,7 @@ if selected_dimension == "Auction BandWise":
 	dfrp = dfrp.set_index("LSA").sort_index(ascending = True)
 	dfbid = loadauctionbiddata()[mainsheet].replace('-', np.nan, regex = True)
 
-	st.write(dfbid)
+	st.write(dfbid.iloc[:,:-2])
 
 	dfbid.columns = ["Clk_Round", "Bidder","LSA","PWB_Start_ClkRd", "Rank_PWB_Start_ClkRd", 
 					"Possible_Raise_Bid_ClkRd", "Bid_Decision", "PWB_End_ClkRd", "Rank_PWB_End_ClkRd", 
