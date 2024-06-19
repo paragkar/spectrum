@@ -1986,6 +1986,8 @@ if selected_dimension == "Auction Integrated":
 
 	dfcomb_auc_yr_rd = dfcomb_auc_yr_rd.sort_index(ascending = False)
 
+	dfcomb_auc_yr_rd.columns = sorted(list(dfcomb_auc_yr_rd.columns))
+
 	# Simplify column names for display
 	column_labels = [f"{col[0]} ({col[1]})" for col in dfcomb_auc_yr_rd.columns]
 
