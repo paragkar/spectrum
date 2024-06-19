@@ -2041,7 +2041,7 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	    width=heatmapwidth,  # Specify width
 	    height=heatmapheight*1.2,  # Specify height
 	    autosize=True,
-	    plot_bgcolor='#E2B47C',  # Background color for the plot area light pink
+	    # plot_bgcolor='#E2B47C',  # Background color for the plot area light pink
 		paper_bgcolor='white',  # Background color for the entire figure
 		margin= dict(t=t,b=b,l=l,r=r,pad=pad),
 )
