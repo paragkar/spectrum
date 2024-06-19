@@ -1945,12 +1945,13 @@ if selected_dimension == "Auction Integrated":
 
 	currency_flag = "NA" #This is dummy variiable for this option done to preserve the current structure of the code 
 
-	column_names = ["Clock Round", "Bidder", "Service Area", "Last bid submitted at the start of round (Rs. Crore)","Rank at start of Clock Round",	
-	"Possible to raise Bid in Clock Round","Bid decision","Last bid submitted at the end of round (Rs. Crore)"	
-	"Rank at end of Clock Round","No. of Blocks Selected", "Provisionally Allocated Block(s) at start of Clock Round (In No.)",	
-	"Provisionally Allocated Block(s) at end of Clock Round", "Provisional Winning Price at the end of Clock round (Per Block)(Rs.  In Crore)", "Auction Year", "Band"]
+	column_names = ["Clock Round", "Bidder", "Service Area", "Last bid submitted at the start of round","Rank at start of Clock Round",	
+	"Possible to raise Bid in Clock Round","Bid decision","Last bid submitted at the end of round"	
+	"Rank at end of Clock Round","No. of Blocks Selected", "Provisionally Allocated Block(s) at start of Clock Round",	
+	"Provisionally Allocated Block(s) at end of Clock Round", "Provisional Winning Price at the end of Clock round", "Auction Year", "Band"]
 
 	dfcomb = pd.DataFrame()
+	dfcomb.columns = column_names
 	for sepectrumband in year_band:
 
 		sheet = Auction_Year_Band_Features[sepectrumband]["mainsheet"]
@@ -1968,7 +1969,6 @@ if selected_dimension == "Auction Integrated":
 		except:
 			pass
 
-	st.write(dfcomb)
 
 	AuctionYears = sorted(list(set(dfcomb["Auction Year"])))
 	AuctionYear = st.sidebar.selectbox('Select an Auction Year', AuctionYears, 0) #default index 2012
@@ -1979,10 +1979,8 @@ if selected_dimension == "Auction Integrated":
 
 	dfcomb_auc_yr_rd = dfcomb_auc_yr[dfcomb_auc_yr["Clock Round"] == round_number]
 
-	
-	dfcomb_auc_yr_rd.columns = column_names
 
-	dfcomb_auc_yr_rd = dfcomb_auc_yr_rd[[ "Bidder", "Service Area","Band" ,"No. of Blocks Selected", "Provisionally Allocated Blocks at end of Clock Round"]]
+	dfcomb_auc_yr_rd = dfcomb_auc_yr_rd[[ "Bidder", "Service Area","Band","No. of Blocks Selected", "Provisional Winning Price at the end of Clock round"]]
 	dfcomb_auc_yr_rd = dfcomb_auc_yr_rd.replace("-", 0)
 
 	# dfcomb_auc_yr_rd = dfcomb_auc_yr_rd.replace(0, np.nan).reset_index(drop = True)
