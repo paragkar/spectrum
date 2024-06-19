@@ -1990,6 +1990,8 @@ if selected_dimension == "Auction Integrated":
 	# Simplify column names for display
 	column_labels = [f"{col[0]} ({col[1]})" for col in dfcomb_aucyr_dim_rd.columns]
 
+	dfcomb_aucyr_dim_rd = dfcomb_aucyr_dim_rd.fillna(0).values,
+
 	# Prepare text to embed in the heatmap itself
 	text_values = [[f"{value}" if pd.notna(value) else "" for value in row] for row in dfcomb_aucyr_dim_rd.values]
 
