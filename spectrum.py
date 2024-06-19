@@ -2011,7 +2011,7 @@ if selected_dimension == "Auction Integrated":
 	text_values = [[f"{value}" if pd.notna(value) else "" for value in row] for row in dfcomb_auc_yr_rd.values]
 
 	# Define a colorscale for the heatmap
-	colorscale = "Viridis"  # or any other color scale available in Plotly
+	colorscale = "YlGnBu"  # or any other color scale available in Plotly
 
 	# Create the heatmap object
 	heatmap = go.Heatmap(
