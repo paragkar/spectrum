@@ -2033,7 +2033,7 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	            y=df.index,
 	            colorscale='Hot',  # You can change the color scale as needed
 	            texttemplate="%{z:.0f}",
-			    # textfont={"size":text_embed_in_chart_size}, 
+			    textfont={"size":text_embed_in_chart_size}, 
 			    showscale=False,
 			    reversescale=True
 	        ),
