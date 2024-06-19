@@ -1999,8 +1999,8 @@ if selected_dimension == "Auction Integrated":
 	# Prepare text to embed in the heatmap itself
 	text_values = [[f"{float(value):.1f}" if pd.notna(value) and isinstance(value, (int, float)) else "0" for value in row] for row in dfcomb_aucyr_dim_rd.values]
 
-	text_values = [[np.nan if x=="0.0" else x for x in line] for line in text_values]
-	text_values = [[np.nan if x=="0" else x for x in line] for line in text_values]
+	text_values = [0 if x=="0.0" else x for x in line] for line in text_values]
+	text_values = [0 if x=="0" else x for x in line] for line in text_values]
 
 	# Define a colorscale for the heatmap
 	colorscale = "Hot"  # or any other color scale available in Plotly
