@@ -2014,14 +2014,14 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 
 	# Create the heatmap object
 	heatmap = go.Heatmap(
-    z=df.round(1).values,  # Replace NaN with 0 for visualization purposes
+    z=df.round.values,  # Replace NaN with 0 for visualization purposes
     y=df.index,
     x=df.columns,  # Use simplified column labels
     xgap=1,  # Modify as needed
     ygap=1,
     # text=text_values,  # Embed values directly in the heatmap cells
     # hoverinfo='text',  # Disable hover info if values are embedded in cells
-    texttemplate="%{z}",
+    texttemplate="%{z.0f}",
     textfont={"size":text_embed_in_chart_size}, 
     colorscale=colorscale,
     showscale=False,
