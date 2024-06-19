@@ -2036,8 +2036,11 @@ if selected_dimension == "Auction Integrated":
 	    # yaxis_title='Service Area',
 	    width=heatmapwidth,  # Specify width
 	    height=heatmapheight,  # Specify height
-	    autosize=True
-	)
+	    autosize=True,
+	    plot_bgcolor='#D2B48C',  # Background color for the plot area light pink
+		paper_bgcolor='white',  # Background color for the entire figure
+		margin= dict(t=t,b=b,l=l,r=r,pad=pad),
+)
 
 	#Drawning a black border around the heatmap chart 
 	fig.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
