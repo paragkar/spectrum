@@ -2018,10 +2018,10 @@ if selected_dimension == "Auction Integrated":
 	fig.update_layout(
 	    title='Heatmap of No. of Blocks Selected by Service Area and Band',
 	    xaxis=dict(
-	        title='Bidders (Band)',
+	        # title='Bidders (Band)',
 	        side='top'  # Set x-axis labels to top
 	    ),
-	    yaxis_title='Service Area',
+	    # yaxis_title='Service Area',
 	    width=heatmapwidth,  # Specify width
 	    height=heatmapheight,  # Specify height
 	    autosize=True
