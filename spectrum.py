@@ -2049,7 +2049,7 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	fig.update_layout(
 	    title='Heatmap of No. of Blocks Selected by Service Area and Band',
 	    width=heatmapwidth,
-	    height=heatmapheight*0.4*num_bands,  # Total height based on the number of subplots
+	    height=heatmapheight*0.35*num_bands,  # Total height based on the number of subplots
 	    autosize=True,
 	    plot_bgcolor='#E2B47C',
 	    paper_bgcolor='white',
