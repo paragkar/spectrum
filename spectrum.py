@@ -1972,7 +1972,9 @@ if selected_dimension == "Auction Integrated":
 
 	dfcomb_auc_yr_rd = dfcomb_auc_yr[dfcomb_auc_yr["Clock Round"] == round_number]
 
-	dfcomb_auc_yr_rd = dfcomb_auc_yr_rd[[ "Bidder", "Service Area","Band","Blocks Selected", "Prov Alloc BLKs End Rd"]]
+	selected_dimension = st.sidebar.selectbox('Select a Dimension', column_names[3:], 0) #default index 2012
+
+	dfcomb_auc_yr_rd = dfcomb_auc_yr_rd[[ "Bidder", "Service Area","Band", selected_dimension]]
 	dfcomb_auc_yr_rd = dfcomb_auc_yr_rd.replace("-", np.nan)
 
 	
@@ -1980,7 +1982,7 @@ if selected_dimension == "Auction Integrated":
 	dfcomb_auc_yr_rd = dfcomb_auc_yr_rd.pivot_table(
     index='Service Area', 
     columns=['Bidder', 'Band'], 
-    values='Prov Alloc BLKs End Rd', 
+    values= selected_dimension, 
     aggfunc='first'  # you can change this to 'sum' if that's more appropriate
 	)
 
