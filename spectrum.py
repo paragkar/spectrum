@@ -2003,7 +2003,7 @@ if selected_dimension == "Auction Integrated":
 	text_values = [["" if x==np.nan else x for x in line] for line in text_values]
 
 	# Define a colorscale for the heatmap
-	colorscale = "YlGnBu"  # or any other color scale available in Plotly
+	colorscale = "Hot"  # or any other color scale available in Plotly
 
 	# Create the heatmap object
 	heatmap = go.Heatmap(
