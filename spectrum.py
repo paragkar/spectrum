@@ -1946,7 +1946,7 @@ if selected_dimension == "Auction Integrated":
 	currency_flag = "NA" #This is dummy variiable for this option done to preserve the current structure of the code 
 
 	column_names = ["Clock Round", "Bidder", "Service Area", "Last bid submitted at the start of round","Rank at start of Clock Round",	
-	"Possible to raise Bid in Clock Round","Bid decision","Last bid submitted at the end of round"	
+	"Possible to raise Bid in Clock Round","Bid decision","Last bid submitted at the end of round",	
 	"Rank at end of Clock Round","No. of Blocks Selected", "Provisionally Allocated Block(s) at start of Clock Round",	
 	"Provisionally Allocated Block(s) at end of Clock Round", "Provisional Winning Price at the end of Clock round"]
 
@@ -1958,10 +1958,7 @@ if selected_dimension == "Auction Integrated":
 			band = sheet.split("_")[2]
 			auctionyear = sheet.split("_")[0]
 			df = loadauctionbiddata()[sheet]
-			st.write(column_names)
-
 			df.columns = column_names
-			st.write(df.shape)
 			df["Auction Year"] = auctionyear
 			df["Band"] = band
 
