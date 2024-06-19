@@ -2011,17 +2011,14 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	colorscale = "Hot"  # or any other color scale available in Plotly
 
 	# Extract band information more reliably
-	# df['Band'] = df.index.str.extract(r'(\d+)')[0]
 
-	df["Band"] = list(df.index.str.extract(r'(\d+)').values)
-
-	st.write(df)
+	df["Band"] = list(df.index.str.extract(r'(\d+)')[0])
 
 
 	# Dictionary to hold dataframes for each band
-	# df_dict = {band: group.drop('Band', axis=1) for band, group in df.groupby('Band')}
+	df_dict = {band: group.drop('Band', axis=1) for band, group in df.groupby('Band')}
 
-	# st.write(df_dict)
+	st.write(df_dict)
 
 
 	# # Create the heatmap object
