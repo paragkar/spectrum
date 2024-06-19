@@ -2038,15 +2038,11 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	        row=i, col=1
 	    )
 
-		     # Update axes to draw a black border around each heatmap, hide x-axis labels, and enable grid lines
-	    fig.update_xaxes(row=i, col=1, fixedrange=True, showline=True, linewidth=1.2, linecolor='black', mirror=True,
-	                     showticklabels=(i == 1),  # Only show tick labels for the top heatmap
-	                     side='top' if i == 1 else None,  # Place x-axis on top only for the first plot
-	                     tickfont=dict(size=text_embed_in_chart_size),
-	                     showgrid=False, gridcolor='gray')  # Enable grid lines for x-axis
-	    fig.update_yaxes(row=i, col=1, fixedrange=True, showline=True, linewidth=1.2, linecolor='black', mirror=True,
-	                     tickfont=dict(size=text_embed_in_chart_size),
-	                     showgrid=False, gridcolor='gray')  # Enable grid lines for y-axis
+		 # Adjust x and y axes for each heatmap
+	    fig.update_xaxes(row=i, col=1, tick0=0.5, dtick=1, tickvals=[j + 0.5 for j in range(len(df.columns))], ticktext=df.columns,
+	                     fixedrange=True, showline=True, linewidth=1.2, linecolor='black', mirror=True, showgrid=True, gridcolor='gray')
+	    fig.update_yaxes(row=i, col=1, tick0=0.5, dtick=1, tickvals=[j + 0.5 for j in range(len(df.index))], ticktext=df.index,
+	                     fixedrange=True, showline=True, linewidth=1.2, linecolor='black', mirror=True, showgrid=True, gridcolor='gray')
 
 
 	# Update the overall layout
@@ -2055,7 +2051,7 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	    width=heatmapwidth,
 	    height=heatmapheight * len(df_dict)*0.3,  # Total height based on the number of subplots
 	    autosize=True,
-	    # plot_bgcolor='#ADD8E6',
+	    plot_bgcolor='#ADD8E6',
 	    paper_bgcolor='white',
 	    margin=dict(t=30, b=30, l=30, r=30, pad=4)
 	)
