@@ -1997,11 +1997,6 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
     aggfunc='first'  # you can change this to 'sum' if that's more appropriate
 	)
 
-
-
-# 	dfcomb_aucyr_dim_rd = dfcomb_aucyr_dim_rd.sort_index(ascending = False)
-# 	# # dfcomb_aucyr_dim_rd.columns = sorted(list(dfcomb_aucyr_dim_rd.columns))
-
 	# Simplify column names for display
 	column_labels = [f"{col[1]} ({col[0]})" for col in df.columns]
 
@@ -2009,11 +2004,9 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 
 	df = df.T.sort_index()
 
+	df = df.fillna("")
+
 	st.write(df)
-
-# 	# dfcomb_aucyr_dim_rd.columns = sorted(list(dfcomb_aucyr_dim_rd.columns))
-
-# 	# dfcomb_aucyr_dim_rd = dfcomb_aucyr_dim_rd.fillna("")
 
 # 	# # Prepare text to embed in the heatmap itself
 # 	# text_values = [[f"{float(value):.1f}" if pd.notna(value) and isinstance(value, (int, float)) else "0" for value in row] for row in dfcomb_aucyr_dim_rd.values]
