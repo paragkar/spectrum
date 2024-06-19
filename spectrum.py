@@ -1989,7 +1989,7 @@ if selected_dimension == "Auction Integrated":
 	dfcomb_auc_yr_rd = dfcomb_auc_yr_rd.pivot_table(
     index='Service Area', 
     columns=['Band', 'Bidder'], 
-    values='Provisionally Allocated Blocks at end of Clock Round', 
+    values='Provisionally Allocated Block(s) at end of Clock Round', 
     aggfunc='first'  # you can change this to 'sum' if that's more appropriate
 	)
 
