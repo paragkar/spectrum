@@ -2021,13 +2021,8 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 
 	color_df = color_df.T
 
-	st.write(color_df)
-
-
 	df = df.T.sort_index(ascending = True)
-
 	df = df.fillna("").replace(0,"")
-
 	df = df.replace("", np.nan)
 
 
@@ -2035,15 +2030,11 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	colorscale = "Hot"  # or any other color scale available in Plotly
 
 	# Extract band information more reliably
-
 	df["Band"] = list(df.index.str.extract(r'(\d+)')[0])
-
+	
 	# Dictionary to hold dataframes for each band
 	df_dict = {band: group.drop('Band', axis=1) for band, group in df.groupby('Band')}
 
-
-	# Determine the number of non-empty dataframes
-	# non_empty_dfs = {band: df for band, df in df_dict.items() if not df.empty}
 
 	vertical_spacing_mul_dict = {2022:0.035, 2021:0.033, 2016:0.032, 2015 : 0.04, 2014 : 0.06, 2012 : 0.04}
 
@@ -2055,11 +2046,12 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 		# Create a heatmap for each band
 		fig.add_trace(
 			go.Heatmap(
-				z=df.values,
+				z=color_df.loc[df.index, df.columns].values,  # Colors based on bidders
 				x=df.columns,
 				y=df.index,
+				text = df.values,
 				colorscale='Hot',  # You can change the color scale as needed
-				texttemplate="%{z:.0f}",
+				texttemplate="%{text}",
 				textfont={"size": text_embed_in_chart_size}, 
 				showscale=False,
 				reversescale=True,
