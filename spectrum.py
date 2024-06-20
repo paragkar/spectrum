@@ -2028,6 +2028,8 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	    bidder = col.split('(')[1].split(')')[0]  # Extracting the bidder name from the column name
 	    color_df[col] = df[col].apply(lambda x: bidder_color_map[bidder] if pd.notna(x) and x != 0 else None)
 
+	st.write(df)
+
 	st.write(color_df)
 
 	# Map each unique color to an index
