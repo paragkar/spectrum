@@ -2025,7 +2025,7 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	color_df = color_df.T.sort_index(ascending=True)
 
 	# Transpose and prepare df for visualization
-	df = df.T.sort_index(ascending=True).replace(0, "").replace(np.nan,"")
+	df = df.T.sort_index(ascending=True).replace(0, "").replace("", np.nan)
 
 
 	# Extract band information more reliably
