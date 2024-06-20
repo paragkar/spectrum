@@ -2018,6 +2018,10 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	# Dictionary to hold dataframes for each band
 	df_dict = {band: group.drop('Band', axis=1) for band, group in df.groupby('Band')}
 
+	# Debugging: Print to check if dataframes are empty
+	for band, df in df_dict.items():
+	    st.write(f"{band}: Empty = {df.empty}")
+
 	# Determine the number of non-empty dataframes
 	non_empty_dfs = {band: df for band, df in df_dict.items() if not df.empty}
 
