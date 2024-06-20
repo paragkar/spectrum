@@ -2013,10 +2013,6 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	colors = sns.color_palette("hsv", len(all_bidders)).as_hex()
 	bidder_color_map = {bidder: color for bidder, color in zip(all_bidders, colors)}
 
-	# Transpose and prepare df for visualization
-	df = df.T.sort_index(ascending=True).replace(0, "").replace("", np.nan)
-
-
 	# Create color_df using the fixed bidder_color_map
 	color_df = pd.DataFrame(index=df.index, columns=df.columns)
 
@@ -2025,6 +2021,10 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	    # Ensure every column uses the global color mapping
 	    color_df[col] = df[col].apply(lambda x: bidder_color_map[bidder] if pd.notna(x) and x != 0 else 'rgba(0,0,0,0)')
 
+	# Transpose and prepare df for visualization
+	df = df.T.sort_index(ascending=True).replace(0, "").replace("", np.nan)
+
+	color_df = color_df.T.sort_index(ascending=True)
 
 	# Extract band information more reliably
 	df["Band"] = list(df.index.str.extract(r'(\d+)')[0])
