@@ -29,6 +29,7 @@ import streamlit_authenticator as stauth
 import yaml
 from yaml.loader import SafeLoader
 from deta import Deta
+import seaborn as sns
 
 pd.set_option('future.no_silent_downcasting', True)
 
@@ -1998,7 +1999,6 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 
 	# Simplify column names for display
 	column_labels = [f"{col[1]} ({col[0]})" for col in df.columns]
-
 	df.columns = column_labels
 
 	# Extract unique bidders from column labels
