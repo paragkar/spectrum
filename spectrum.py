@@ -2020,6 +2020,9 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	column_labels = [f"{col[1]} ({col[0]})" for col in df.columns]
 	df.columns = column_labels
 
+	# Assuming 'df' is your DataFrame with columns formatted as "Band (Bidder)"
+	color_df = pd.DataFrame(index=df.index, columns=df.columns)
+
 	# Assign color codes to 'color_df' based on 'bidder_color_map'
 	for col in df.columns:
 	    bidder = col.split('(')[1].split(')')[0]  # Extracting the bidder name from the column name
@@ -2032,8 +2035,6 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	# Convert colors in color_df to indices for Plotly
 	for col in color_df.columns:
 	    color_df[col] = color_df[col].map(color_index_map)
-
-	st.write(color_df)
 
 
 	# Transpose and prepare df and color_df for visualization
