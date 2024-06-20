@@ -2007,10 +2007,12 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 
 	df = df.replace("", np.nan)
 
-	# Extract bidder names from column labels and map them to a unique integer
-	unique_bidders = {col.split(' ')[1]: idx for idx, col in enumerate(df.columns.unique())}
-	# Create a new column for color mapping based on the bidder
-	df['Bidder_Color'] = df.apply(lambda x: unique_bidders[x.name.split(' ')[1]], axis=1)
+	st.write(df)
+
+	# # Extract bidder names from column labels and map them to a unique integer
+	# unique_bidders = {col.split(' ')[1]: idx for idx, col in enumerate(df.columns.unique())}
+	# # Create a new column for color mapping based on the bidder
+	# df['Bidder_Color'] = df.apply(lambda x: unique_bidders[x.name.split(' ')[1]], axis=1)
 
 
 	# Define a colorscale for the heatmap
