@@ -2036,8 +2036,6 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	for col in color_df.columns:
 	    color_df[col] = color_df[col].map(color_index_map)
 
-	st.write(color_df)
-
 
 	# Transpose and prepare df and color_df for visualization
 	df = df.T.sort_index(ascending=True).replace(0, "").replace("", np.nan)
@@ -2059,16 +2057,16 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	for i, (band, df_segment) in enumerate(df_dict.items(), start=1):
 
 		text_values = df_segment.replace(np.nan, '')
-		# aligned_color_df = color_df.loc[df_segment.index, df_segment.columns]
+		aligned_color_df = color_df.loc[df_segment.index, df_segment.columns]
 
 		# Create a heatmap for each band
 		fig.add_trace(
 			go.Heatmap(
-				z=color_df.values,
-				x=color_df.columns,
-				y=color_df.index,
+				z=aligned_color_df.values,
+				x=aligned_color_df.columns,
+				y=aligned_color_df.index,
 				text = text_values.values,
-				colorscale=[(i / len(unique_colors), color) for i, color in enumerate(unique_colors)],
+				# colorscale=[(i / len(unique_colors), color) for i, color in enumerate(unique_colors)],
 				texttemplate="%{text}",
 				textfont={"size": text_embed_in_chart_size}, 
 				showscale=False,
