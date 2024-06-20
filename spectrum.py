@@ -2008,7 +2008,7 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
     "Videocon": "#EE82EE",  # Violet
     "Vodafone": "#FFC0CB",  # Pink
     "Aircel": "#A52A2A",  # Brown
-    "RCOM": "#FFFF00",  # Yellow
+    "RCOM": "#FFD700",  # Yellow
     "RJIO": "#FF0000",  # Red
     "Tata": "#0000FF",  # Blue
     "VodaIdea": "#0000FF",  # Blue
