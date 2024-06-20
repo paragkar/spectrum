@@ -10,4 +10,5 @@ xlrd
 deta
 streamlit_lottie
 Pillow
+seaborn
 
