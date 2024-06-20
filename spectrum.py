@@ -2057,12 +2057,12 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 		# Create a heatmap for each band
 		fig.add_trace(
 			go.Heatmap(
-				z=aligned_color_df.values, # Colors based on bidders
+				z=df_segment.values, # Colors based on bidders
 				x=df_segment.columns,
 				y=df_segment.index,
 				text = df_segment.values,
 				colorscale='Hot',  # You can change the color scale as needed
-				texttemplate="%{text}",
+				texttemplate="%{z}",
 				textfont={"size": text_embed_in_chart_size}, 
 				showscale=False,
 				reversescale=True,
