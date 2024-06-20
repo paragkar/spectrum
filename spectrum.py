@@ -2021,13 +2021,12 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 
 	color_df = color_df.T
 
-	df = df.T.sort_index(ascending = True)
-	df = df.fillna("").replace(0,"")
-	df = df.replace("", np.nan)
+	# Transpose and prepare df for visualization
+	df = df.T.sort_index(ascending=True).replace(0, "").replace("", np.nan)
 
 
-	# Define a colorscale for the heatmap
-	colorscale = "Hot"  # or any other color scale available in Plotly
+	# # Define a colorscale for the heatmap
+	# colorscale = "Hot"  # or any other color scale available in Plotly
 
 	# Extract band information more reliably
 	df["Band"] = list(df.index.str.extract(r'(\d+)')[0])
@@ -2042,16 +2041,16 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	fig = make_subplots(rows=len(df_dict), cols=1, vertical_spacing=vertical_spacing_mul_dict[AuctionYear])
 
 	# Iterate through each band and its corresponding dataframe
-	for i, (band, df) in enumerate(df_dict.items(), start=1):
+	for i, (band, df_segment) in enumerate(df_dict.items(), start=1):
 		# Create a heatmap for each band
 		fig.add_trace(
 			go.Heatmap(
-				z=color_df.loc[df.index, df.columns].values,  # Colors based on bidders
-				x=df.columns,
-				y=df.index,
-				text = df.values,
+				z=color_df.loc[df_segment.index, df_segment.columns].values,  # Colors based on bidders
+				x=df_segment.columns,
+				y=df_segment.index,
+				text = df_segment.values,
 				colorscale='Hot',  # You can change the color scale as needed
-				texttemplate="%{text}",
+				texttemplate="%{text:.0f}",
 				textfont={"size": text_embed_in_chart_size}, 
 				showscale=False,
 				reversescale=True,
