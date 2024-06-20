@@ -2019,6 +2019,8 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	    bidder = col.split('(')[1].split(')')[0]
 	    color_df[col] = df[col].apply(lambda x: bidder_color_map[bidder] if pd.notna(x) and x != 0 else 'rgba(0,0,0,0)')
 
+	color_df = color_df.T
+
 	st.write(color_df)
 
 
