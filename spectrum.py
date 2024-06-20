@@ -1976,7 +1976,7 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 
 
 	#Choosing the selected dimension
-	dim_to_select = ["Bid Value","Prov WinBid Start Rd","Rank Start Rd","Prov WinBid End Rd",	
+	dim_to_select = ["Bid Value","Ratio PWPtoRP End Rd", "Prov WinBid Start Rd","Rank Start Rd","Prov WinBid End Rd",	
 	"Rank End Rd","Blocks Selected", "Prov Alloc BLKs Start Rd","Prov Alloc BLKs End Rd"]
 
 	selected_dimension = st.sidebar.selectbox('Select a Dimension', dim_to_select, 0) #default index "Prov WinBid Start Rd"
