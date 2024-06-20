@@ -2020,6 +2020,8 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	colorscale = [(i / (len(bidder_colors) - 1), color) for i, color in enumerate(bidder_colors.values())]
 	colorscale.append((1, list(bidder_colors.values())[-1]))  # Ensure the last color is included
 
+	st.write(colorscale)
+
 	# Create color_df using indices for the colorscale
 	color_index_map = {bidder: i / (len(bidder_colors) - 1) for i, bidder in enumerate(bidder_colors.keys())}
 
@@ -2032,14 +2034,6 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	for col in df.columns:
 	    bidder = col.split('(')[1].split(')')[0]
 	    color_df[col] = df[col].apply(lambda x: color_index_map[bidder] if pd.notna(x) and x != 0 else None)
-
-	# # Map each unique color to an index
-	# unique_colors = list(bidder_color_map.values())
-	# color_index_map = {color: i for i, color in enumerate(unique_colors)}
-
-	# # Convert colors in color_df to indices for Plotly
-	# for col in color_df.columns:
-	#     color_df[col] = color_df[col].map(color_index_map)
 
 
 	# Transpose and prepare df and color_df for visualization
