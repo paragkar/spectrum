@@ -2033,6 +2033,8 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	for col in color_df.columns:
 	    color_df[col] = color_df[col].map(color_index_map)
 
+	st.write(color_df)
+
 
 	# Transpose and prepare df and color_df for visualization
 	df = df.T.sort_index(ascending=True).replace(0, "").replace("", np.nan)
