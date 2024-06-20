@@ -2001,25 +2001,32 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	column_labels = [f"{col[1]} ({col[0]})" for col in df.columns]
 	df.columns = column_labels
 
-	# 1. Extract unique bidders and assign each a unique numeric index
-	# bidders = sorted(set(col.split('(')[1].split(')')[0] for col in df.columns))
-	# bidder_index = {bidder: i for i, bidder in enumerate(bidders)}
-
 
 	# List of all possible bidders (extend this list as new bidders are known)
 	all_bidders = ["Bharti", "Idea", "Telewings", "Videocon", "Vodafone", "Aircel", "RCOM", "RJIO","Tata", "VodaIdea", "Adani"]
+
+	# Create a discrete colorscale where each index maps to a specific color
+	colorscale = [(i / (len(all_bidders) - 1), color) for i, color in enumerate(colors)]
+	colorscale.append((1, colors[-1]))  # Ensure the last color is included
+
 
 	# Generate a fixed color palette
 	colors = sns.color_palette("hsv", len(all_bidders)).as_hex()
 	bidder_color_map = {bidder: color for bidder, color in zip(all_bidders, colors)}
 
+
+	# Generate a discrete numeric index for each color (already done in your setup)
+	color_index_map = {color: i for i, color in enumerate(colors)}
+
+
 	# Create color_df using the fixed bidder_color_map
 	color_df = pd.DataFrame(index=df.index, columns=df.columns)
 
+	# Adjust color_df to use numeric indices instead of hex color strings
 	for col in df.columns:
 	    bidder = col.split('(')[1].split(')')[0]
-	    # Ensure every column uses the global color mapping
-	    color_df[col] = df[col].apply(lambda x: bidder_color_map[bidder] if pd.notna(x) and x != 0 else 'rgba(0,0,0,0)')
+	    color_df[col] = df[col].apply(lambda x: color_index_map[bidder_color_map[bidder]] if pd.notna(x) and x != 0 else np.nan)
+
 
 	# Transpose and prepare df for visualization
 	df = df.T.sort_index(ascending=True).replace(0, "").replace("", np.nan)
@@ -2042,11 +2049,12 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	for i, (band, df_segment) in enumerate(df_dict.items(), start=1):
 
 		text_values = df_segment.replace(np.nan, '')
+		aligned_color_df = color_df.loc[df_segment.index, df_segment.columns]
 
 		# Create a heatmap for each band
 		fig.add_trace(
 			go.Heatmap(
-				z=color_df.loc[df_segment.index, df_segment.columns].values,
+				z=aligned_color_df.values,
 				x=df_segment.columns,
 				y=df_segment.index,
 				text = text_values.values,
