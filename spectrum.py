@@ -1997,40 +1997,32 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	aggfunc='first'  # you can change this to 'sum' if that's more appropriate
 	)
 
-	# Simplify column names for display
-	column_labels = [f"{col[1]} ({col[0]})" for col in df.columns]
-	df.columns = column_labels
-
-
-	# List of all possible bidders (extend this list as new bidders are known)
-	all_bidders = ["Bharti", "Idea", "Telewings", "Videocon", "Vodafone", "Aircel", "RCOM", "RJIO","Tata", "VodaIdea", "Adani"]
+	# Generate a fixed color palette first
+	all_bidders = ["Bharti", "Idea", "Telewings", "Videocon", "Vodafone", "Aircel", "RCOM", "RJIO", "Tata", "VodaIdea", "Adani"]
+	colors = sns.color_palette("hsv", len(all_bidders)).as_hex()
 
 	# Create a discrete colorscale where each index maps to a specific color
 	colorscale = [(i / (len(all_bidders) - 1), color) for i, color in enumerate(colors)]
 	colorscale.append((1, colors[-1]))  # Ensure the last color is included
 
-
-	# Generate a fixed color palette
-	colors = sns.color_palette("hsv", len(all_bidders)).as_hex()
+	# Map bidders to colors
 	bidder_color_map = {bidder: color for bidder, color in zip(all_bidders, colors)}
 
-
-	# Generate a discrete numeric index for each color (already done in your setup)
+	# Numeric indices for colors
 	color_index_map = {color: i for i, color in enumerate(colors)}
 
+	# Simplify column names for display
+	column_labels = [f"{col[1]} ({col[0]})" for col in df.columns]
+	df.columns = column_labels
 
-	# Create color_df using the fixed bidder_color_map
+	# Create color_df using the fixed bidder_color_map with numeric indices
 	color_df = pd.DataFrame(index=df.index, columns=df.columns)
-
-	# Adjust color_df to use numeric indices instead of hex color strings
 	for col in df.columns:
 	    bidder = col.split('(')[1].split(')')[0]
 	    color_df[col] = df[col].apply(lambda x: color_index_map[bidder_color_map[bidder]] if pd.notna(x) and x != 0 else np.nan)
 
-
-	# Transpose and prepare df for visualization
+	# Transpose and prepare df and color_df for visualization
 	df = df.T.sort_index(ascending=True).replace(0, "").replace("", np.nan)
-
 	color_df = color_df.T.sort_index(ascending=True)
 
 	# Extract band information more reliably
