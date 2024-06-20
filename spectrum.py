@@ -2001,10 +2001,19 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 
 	df.columns = column_labels
 
-	# # Extract bidder names from column labels and map them to a unique integer
-	unique_bidders = {col.split('(')[1].split(")")[0]: idx for idx, col in enumerate(df.columns.unique())}
-	# # Create a new column for color mapping based on the bidder
-	# df['Bidder_Color'] = df.apply(lambda x: unique_bidders[x.name], axis=1)
+	# Extract unique bidder names from column labels formatted as "Band (Bidder)"
+	unique_bidders = {col.split('(')[1].split(')')[0]: idx for idx, col in enumerate(df.columns.unique())}
+	
+	# # Assuming 'df' is transposed or needs row-wise application of the color mapping
+	# # Let's first understand your DataFrame structure. Assuming each row should be colored based on the bidder in that row:
+	# for col in df.columns:
+	#     # Split column name to get the bidder part
+	#     bidder = col.split('(')[1].split(')')[0]
+	#     # Apply the color mapping to each cell conditionally if it's not NaN
+	#     df[col] = df[col].apply(lambda x: unique_bidders[bidder] if pd.notna(x) else np.nan)
+
+	# Optionally, if you need a separate column specifically storing these color mappings:
+	df['Bidder_Color'] = df.apply(lambda x: unique_bidders[x.name.split('(')[1].split(')')[0]], axis=1)
 
 	st.write(unique_bidders)
 
