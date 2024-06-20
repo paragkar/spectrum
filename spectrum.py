@@ -2062,7 +2062,8 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 		# Create a heatmap for each band
 		fig.add_trace(
 			go.Heatmap(
-				 z=color_df.loc[df_segment.index, df_segment.columns].values,
+				 # z=color_df.loc[df_segment.index, df_segment.columns].values,
+				z = color_df.values,
 	            x=df_segment.columns,
 	            y=df_segment.index,
 	            colorscale=colorscale,
