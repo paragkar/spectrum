@@ -2042,6 +2042,10 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 		fig.update_xaxes(row=i, col=1, fixedrange=True, showline=True, linewidth=1.2, linecolor='black', mirror=True, showgrid=True, gridcolor='lightgray')
 		fig.update_yaxes(row=i, col=1, fixedrange=True, showline=True, linewidth=1.2, linecolor='black', mirror=True, showgrid=True, gridcolor='lightgray')
 
+		# Update axes for each subplot to set the tick font size
+	    fig.update_xaxes(row=i, col=1, tickfont=dict(size=text_embed_in_chart_size))
+	    fig.update_yaxes(row=i, col=1, tickfont=dict(size=text_embed_in_chart_size))
+
 	
 
 	# Update the overall layout
@@ -2061,14 +2065,14 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 		margin=dict(t=30, b=30, l=30, r=30, pad=4),
 	 	yaxis=dict(
 		  tickmode='array',
-		  tickfont=dict(size=text_embed_in_chart_size),
+		  # tickfont=dict(size=text_embed_in_chart_size),
 		  ),
 		  xaxis = dict(
 		  side = 'top',
 		  tickmode = 'linear',
 		  tickangle=0,
 		  dtick = 1,
-		  tickfont=dict(size=text_embed_in_chart_size),
+		  # tickfont=dict(size=text_embed_in_chart_size),
 		   ), 
 	)
 
