@@ -2020,8 +2020,6 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	colorscale = [(i / (len(bidder_colors) - 1), color) for i, color in enumerate(bidder_colors.values())]
 	colorscale.append((1, list(bidder_colors.values())[-1]))  # Ensure the last color is included
 
-	st.write(colorscale)
-
 	# Create color_df using indices for the colorscale
 	color_index_map = {bidder: i / (len(bidder_colors) - 1) for i, bidder in enumerate(bidder_colors.keys())}
 
@@ -2051,19 +2049,19 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	# Create the figure with multiple subplots
 	fig = make_subplots(rows=len(df_dict), cols=1, vertical_spacing=vertical_spacing_mul_dict[AuctionYear])
 
-	st.write(color_df)
 
 	# Iterate through each band and its corresponding dataframe
 	for i, (band, df_segment) in enumerate(df_dict.items(), start=1):
 
 		text_values = df_segment.replace(np.nan, '')
-		# aligned_color_df = color_df.loc[df_segment.index, df_segment.columns]
+		aligned_color_df = color_df.loc[df_segment.index, df_segment.columns]
+
+		st.write(aligned_color_df)
 
 		# Create a heatmap for each band
 		fig.add_trace(
 			go.Heatmap(
-				 # z=color_df.loc[df_segment.index, df_segment.columns].values,
-				z = color_df.values,
+				z=aligned_color_df.values,
 	            x=df_segment.columns,
 	            y=df_segment.index,
 	            colorscale=colorscale,
