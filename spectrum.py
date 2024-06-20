@@ -2024,7 +2024,7 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	non_empty_dfs = {band: df for band, df in df_dict.items() if not df.empty}
 
 	# Create the figure with multiple subplots
-	fig = make_subplots(rows=len(non_empty_dfs), cols=1, vertical_spacing=0.025)
+	fig = make_subplots(rows=len(non_empty_dfs), cols=1, vertical_spacing=0.03)
 
 	# Iterate through each band and its corresponding dataframe
 	for i, (band, df) in enumerate(non_empty_dfs.items(), start=1):
