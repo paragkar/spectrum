@@ -2046,15 +2046,15 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 
 		# Add shapes for grid simulation (manual and tedious process)
 		for i in range(1, len(df.columns)):
-		    for j in range(1, len(df.index)):
-		        fig.add_shape(type="line",
-		                      x0=i, y0=0, x1=i, y1=len(df.index),
-		                      line=dict(color="black", width=1),
-		                      xref='x' + str(i), yref='y' + str(i))
-		        fig.add_shape(type="line",
-		                      x0=0, y0=j, x1=len(df.columns), y1=j,
-		                      line=dict(color="black", width=1),
-		                      xref='x' + str(i), yref='y' + str(i))
+			for j in range(1, len(df.index)):
+			    fig.add_shape(type="line",
+			                  x0=i, y0=0, x1=i, y1=len(df.index),
+			                  line=dict(color="black", width=1),
+			                  xref='x' + str(i), yref='y' + str(i))
+			    fig.add_shape(type="line",
+			                  x0=0, y0=j, x1=len(df.columns), y1=j,
+			                  line=dict(color="black", width=1),
+		                  xref='x' + str(i), yref='y' + str(i))
 
 	# Update the overall layout
 	fig.update_layout(
