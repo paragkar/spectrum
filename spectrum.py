@@ -2056,7 +2056,7 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 						title_text="" if has_non_zero_values else str(band))  # Set the y-axis title here)
 
 	
-	height_mul_dict = {2022: }
+	# height_mul_dict = {2022: }
 
 	# Update the overall layout
 	fig.update_layout(uniformtext_minsize=text_embed_in_chart_size, 
