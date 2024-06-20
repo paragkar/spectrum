@@ -2026,7 +2026,7 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 		# Create a heatmap for each band
 		fig.add_trace(
 			go.Heatmap(
-				z=df.values,
+				z=df.values if not df.empty else [[None]],  # Use None to ensure axes are generated even if data is empty
 				x=df.columns,
 				y=df.index,
 				colorscale='Hot',  # You can change the color scale as needed
