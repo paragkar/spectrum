@@ -2010,7 +2010,7 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
     "Aircel": "#A52A2A",  # Brown
     "RCOM": "#FFFF00",  # Yellow
     "RJIO": "#FF0000",  # Red
-    "Tata": "#FFFDD0",  # Cream
+    "Tata": "#0000FF",  # Blue
     "VodaIdea": "#0000FF",  # Blue
     "Adani": "#B22222"   # Brick
 	}
