@@ -2093,8 +2093,8 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 		has_non_zero_values = df_segment.sum().sum() > 0  # This sums all values and checks if the total is greater than 0
 
 		# Update axes to their original settings
-		fig.update_xaxes(row=i, col=1, fixedrange=True, showline=True, linewidth=1.2, linecolor='black', mirror=True, showgrid=True, gridcolor='lightgrey')
-		fig.update_yaxes(row=i, col=1, fixedrange=True, showline=True, linewidth=1.2, linecolor='black', mirror=True, showgrid=False, gridcolor='lightgrey')
+		fig.update_xaxes(row=i, col=1, fixedrange=True, showline=True, linewidth=1.5, linecolor='black', mirror=True, showgrid=True, gridcolor='lightgrey')
+		fig.update_yaxes(row=i, col=1, fixedrange=True, showline=True, linewidth=1.5, linecolor='black', mirror=True, showgrid=False, gridcolor='lightgrey')
 
 		# Update axes for each subplot to set the tick font size
 		fig.update_xaxes(row=i, col=1, tickfont=dict(size=text_embed_in_chart_size*0.7))
