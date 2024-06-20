@@ -2002,17 +2002,17 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 
 	# Manually assign colors to each bidder
 	bidder_colors = {
-	    "Bharti": "#FF5733",  # Example hex color codes
-	    "Idea": "#33FFCE",
-	    "Telewings": "#337BFF",
-	    "Videocon": "#CE33FF",
-	    "Vodafone": "#FFC733",
-	    "Aircel": "#33FF57",
-	    "RCOM": "#5733FF",
-	    "RJIO": "#FF3333",
+	    "Bharti": "#00cc00",  # Example hex color codes
+	    "Idea": "#9900cc",
+	    "Telewings": "#bfbf40",
+	    "Videocon": "#fbbcec",
+	    "Vodafone": "#E8DAEF",
+	    "Aircel": "#cc3300",
+	    "RCOM": "#7F00FF",
+	    "RJIO": "#ff0000",
 	    "Tata": "#33FFF5",
 	    "VodaIdea": "#8333FF",
-	    "Adani": "#FF3380"
+	    "Adani": "#002855"
 	}
 
 
