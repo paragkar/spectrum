@@ -2049,7 +2049,7 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 
 		# Update axes for each subplot to set the tick font size
 		fig.update_xaxes(row=i, col=1, tickfont=dict(size=text_embed_in_chart_size*0.7))
-		fig.update_yaxes(row=i, col=1, tickfont=dict(size=text_embed_in_chart_size))
+		fig.update_yaxes(row=i, col=1, tickfont=dict(size=text_embed_in_chart_size)*0.7)
 
 	
 
