@@ -2045,15 +2045,33 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	
 
 	# Update the overall layout
-	fig.update_layout(
+	fig.update_layout(uniformtext_minsize=text_embed_in_chart_size, 
+		uniformtext_mode='hide', 
+		xaxis_title=None, 
+		yaxis_title=None, 
+		yaxis_autorange='reversed',
+		font=dict(size=text_embed_in_chart_size),#Debug 12th June 2024
+		template='simple_white',
 		# title='Heatmap of No. of Blocks Selected by Service Area and Band',
 		width=heatmapwidth,
 		height=heatmapheight * len(df_dict)*0.3,  # Total height based on the number of subplots
 		autosize=True,
-		plot_bgcolor='#ADD8E6',
-		paper_bgcolor='white',
-		margin=dict(t=30, b=30, l=30, r=30, pad=4)
+		# plot_bgcolor='#D3D3D3',  # Background color for the plot area light greay
+		paper_bgcolor=None,
+		margin=dict(t=30, b=30, l=30, r=30, pad=4),
+	 	yaxis=dict(
+		  tickmode='array',
+		  tickfont=dict(size=text_embed_in_chart_size),
+		  ),
+		  xaxis = dict(
+		  side = 'top',
+		  tickmode = 'linear',
+		  tickangle=0,
+		  dtick = 1,
+		  tickfont=dict(size=text_embed_in_chart_size),
+		   ), 
 	)
+
 
 	# Display the figure in Streamlit
 	placeholder = st.empty()
