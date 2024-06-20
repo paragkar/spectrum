@@ -2001,9 +2001,9 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	column_labels = [f"{col[1]} ({col[0]})" for col in df.columns]
 	df.columns = column_labels
 
-	# Extract unique bidders from column labels
-	bidders = set(col.split('(')[1].split(')')[0] for col in df.columns)
-	bidders = sorted(bidders)  # Sort to maintain consistent order
+	# 1. Extract unique bidders and assign each a unique numeric index
+	bidders = sorted(set(col.split('(')[1].split(')')[0] for col in df.columns))
+	bidder_index = {bidder: i for i, bidder in enumerate(bidders)}
 
 
 	# Dynamically generate a color palette with a unique color for each bidder
@@ -2011,13 +2011,15 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	bidder_color_map = {bidder: f"rgba({int(color[0]*255)}, {int(color[1]*255)}, {int(color[2]*255)}, 1)" for bidder, color in zip(bidders, colors)}
 
 
-	# Initialize color_df with the same structure as df
+	# Create a DataFrame for color indices
 	color_df = pd.DataFrame(index=df.index, columns=df.columns)
-
-	# Populate color_df with colors based on the bidders
 	for col in df.columns:
-		bidder = col.split('(')[1].split(')')[0]
-		color_df[col] = df[col].apply(lambda x: bidder_color_map[bidder] if pd.notna(x) and x != 0 else 'rgba(0,0,0,0)')
+	    bidder = col.split('(')[1].split(')')[0]
+	    color_df[col] = df[col].apply(lambda x: bidder_index[bidder] if pd.notna(x) and x != 0 else np.nan)
+
+	# Generate a colorscale dynamically based on the number of bidders
+	colors = sns.color_palette("hsv", len(bidders)).as_hex()
+	colorscale = [[i/len(bidders), color] for i, color in enumerate(colors)]
 
 	# After creating color_df and before plotting
 	color_df = color_df.T.sort_index(ascending=True)
@@ -2026,21 +2028,11 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	df = df.T.sort_index(ascending=True).replace(0, "").replace("", np.nan)
 
 
-	# # Define a colorscale for the heatmap
-	# colorscale = "Hot"  # or any other color scale available in Plotly
-
 	# Extract band information more reliably
 	df["Band"] = list(df.index.str.extract(r'(\d+)')[0])
 	
 	# Dictionary to hold dataframes for each band
 	df_dict = {band: group.drop('Band', axis=1) for band, group in df.groupby('Band')}
-
-
-	# Check if the indices and columns of df_segment match those in color_df just before plotting
-	# if not df_segment.index.isin(color_df.index).all():
-	#     print("Mismatch in Index!")
-	# if not df_segment.columns.isin(color_df.columns).all():
-	#     print("Mismatch in Columns!")
 
 
 	vertical_spacing_mul_dict = {2022:0.035, 2021:0.033, 2016:0.032, 2015 : 0.04, 2014 : 0.06, 2012 : 0.04}
@@ -2051,18 +2043,18 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	# Iterate through each band and its corresponding dataframe
 	for i, (band, df_segment) in enumerate(df_dict.items(), start=1):
 
-		# Check alignment
-		aligned_color_df = color_df.reindex_like(df_segment)
+		# # Check alignment
+		# aligned_color_df = color_df.reindex_like(df_segment)
 
 		# Create a heatmap for each band
 		fig.add_trace(
 			go.Heatmap(
-				z=df_segment.values, # Colors based on bidders
+				z=color_df.loc[df_segment.index, df_segment.columns].values,
 				x=df_segment.columns,
 				y=df_segment.index,
 				text = df_segment.values,
-				colorscale='Hot',  # You can change the color scale as needed
-				texttemplate="%{z}",
+				colorscale=colorscale,
+				texttemplate="%{text}",
 				textfont={"size": text_embed_in_chart_size}, 
 				showscale=False,
 				reversescale=True,
