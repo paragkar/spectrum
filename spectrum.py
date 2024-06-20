@@ -2043,6 +2043,9 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 			row=i, col=1
 		)
 
+		# Calculate whether the dataframe has any non-zero values
+    	has_non_zero_values = df.sum().sum() > 0  # This sums all values and checks if the total is greater than 0
+
 		# Update axes to their original settings
 		fig.update_xaxes(row=i, col=1, fixedrange=True, showline=True, linewidth=1.2, linecolor='black', mirror=True, showgrid=True, gridcolor='lightgrey')
 		fig.update_yaxes(row=i, col=1, fixedrange=True, showline=True, linewidth=1.2, linecolor='black', mirror=True, showgrid=True, gridcolor='lightgrey')
@@ -2050,7 +2053,7 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 		# Update axes for each subplot to set the tick font size
 		fig.update_xaxes(row=i, col=1, tickfont=dict(size=text_embed_in_chart_size*0.7))
 		fig.update_yaxes(row=i, col=1, tickfont=dict(size=text_embed_in_chart_size*0.7),
-						title_text=str(band))  # Set the y-axis title here)
+						title_text==str(band) if has_non_zero_values else "")  # Set the y-axis title here)
 
 	
 
