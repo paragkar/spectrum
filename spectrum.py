@@ -2071,7 +2071,7 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	            y=df_segment.index,
 	            colorscale=colorscale,
 	            text=text_values.values,  # Assuming 'df' contains the values you want to display
-				texttemplate="%{text:.0f}",
+				texttemplate="%{text:.1f}",
 				textfont={"size": text_embed_in_chart_size}, 
 				showscale=False,
 				reversescale=True,
