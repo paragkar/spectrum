@@ -2065,7 +2065,7 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 		width=heatmapwidth,
 		height=heatmapheight * len(non_empty_dfs)*0.15,  # Total height based on the number of subplots
 		autosize=True,
-		plot_bgcolor='white',  # Background color for the plot area light greay
+		plot_bgcolor='lightgrey',  # Background color for the plot area light greay
 		paper_bgcolor='white',
 		margin=dict(t=30, b=30, l=30, r=30, pad=4),
 		yaxis=dict(
