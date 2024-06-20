@@ -2043,8 +2043,7 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	# Iterate through each band and its corresponding dataframe
 	for i, (band, df_segment) in enumerate(df_dict.items(), start=1):
 
-		# # Check alignment
-		# aligned_color_df = color_df.reindex_like(df_segment)
+		text_values = df_segment.replace(np.nan, '')
 
 		# Create a heatmap for each band
 		fig.add_trace(
@@ -2052,7 +2051,7 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 				z=color_df.loc[df_segment.index, df_segment.columns].values,
 				x=df_segment.columns,
 				y=df_segment.index,
-				text = df_segment.values,
+				text = text_values.values,
 				colorscale=colorscale,
 				texttemplate="%{text}",
 				textfont={"size": text_embed_in_chart_size}, 
