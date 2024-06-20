@@ -2068,7 +2068,7 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 		  # tickfont=dict(size=text_embed_in_chart_size),
 		  ),
 		  xaxis = dict(
-		  side = 'top',
+		  side = 'bottom',
 		  tickmode = 'linear',
 		  tickangle=0,
 		  dtick = 1,
