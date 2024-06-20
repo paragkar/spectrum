@@ -2070,7 +2070,7 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 				texttemplate="%{text}",
 				textfont={"size": text_embed_in_chart_size}, 
 				showscale=False,
-				reversescale=False,
+				reversescale=True,
 			),
 			row=i, col=1
 		)
