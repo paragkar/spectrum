@@ -2010,7 +2010,16 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	colors = sns.color_palette("hsv", len(bidders))
 	bidder_color_map = {bidder: f"rgba({int(color[0]*255)}, {int(color[1]*255)}, {int(color[2]*255)}, 1)" for bidder, color in zip(bidders, colors)}
 
-	st.write(bidder_color_map)
+
+	# Initialize color_df with the same structure as df
+	color_df = pd.DataFrame(index=df.index, columns=df.columns)
+
+	# Populate color_df with colors based on the bidders
+	for col in df.columns:
+	    bidder = col.split('(')[1].split(')')[0]
+	    color_df[col] = df[col].apply(lambda x: bidder_color_map[bidder] if pd.notna(x) and x != 0 else 'rgba(0,0,0,0)')
+
+	st.write(color_df)
 
 
 	df = df.T.sort_index(ascending = True)
