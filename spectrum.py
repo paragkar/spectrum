@@ -2007,7 +2007,7 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 
 	df = df.replace("", np.nan)
 
-	df = df.dropna(axis=0, how='all')  # Ensure rows with all NaN are dropped
+	# df = df.dropna(axis=0, how='all')  # Ensure rows with all NaN are dropped
 
 	# Define a colorscale for the heatmap
 	colorscale = "Hot"  # or any other color scale available in Plotly
