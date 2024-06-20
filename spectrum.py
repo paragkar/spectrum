@@ -2005,11 +2005,12 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	bidders = set(col.split('(')[1].split(')')[0] for col in df.columns)
 	bidders = sorted(bidders)  # Sort to maintain consistent order
 
+	st.write(bidders)
+
 	# Dynamically generate a color palette with a unique color for each bidder
 	colors = sns.color_palette("hsv", len(bidders))
 	bidder_color_map = {bidder: f"rgba({int(color[0]*255)}, {int(color[1]*255)}, {int(color[2]*255)}, 1)" for bidder, color in zip(bidders, colors)}
 
-# Print the mapping to verify
 
 	df = df.T.sort_index(ascending = True)
 
