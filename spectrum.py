@@ -2004,9 +2004,9 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	# # Extract bidder names from column labels and map them to a unique integer
 	unique_bidders = {col.split('(')[1].split(")")[0]: idx for idx, col in enumerate(df.columns.unique())}
 	# # Create a new column for color mapping based on the bidder
-	df['Bidder_Color'] = df.apply(lambda x: unique_bidders[x.name], axis=1)
+	# df['Bidder_Color'] = df.apply(lambda x: unique_bidders[x.name], axis=1)
 
-	st.write(df)
+	st.write(unique_bidders)
 
 	df = df.T.sort_index(ascending = True)
 
