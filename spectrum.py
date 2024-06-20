@@ -2001,25 +2001,22 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	all_bidders = ["Bharti", "Idea", "Telewings", "Videocon", "Vodafone", "Aircel", "RCOM", "RJIO", "Tata", "VodaIdea", "Adani"]
 	colors = sns.color_palette("hsv", len(all_bidders)).as_hex()
 
-	# Create a discrete colorscale where each index maps to a specific color
+	# Map bidders to their corresponding index
+	bidder_index_map = {bidder: i for i, bidder in enumerate(all_bidders)}
+
+	# Generate a discrete colorscale where each index maps to a specific color
 	colorscale = [(i / (len(all_bidders) - 1), color) for i, color in enumerate(colors)]
 	colorscale.append((1, colors[-1]))  # Ensure the last color is included
-
-	# Map bidders to colors
-	bidder_color_map = {bidder: color for bidder, color in zip(all_bidders, colors)}
-
-	# Numeric indices for colors
-	color_index_map = {color: i for i, color in enumerate(colors)}
 
 	# Simplify column names for display
 	column_labels = [f"{col[1]} ({col[0]})" for col in df.columns]
 	df.columns = column_labels
 
-	# Create color_df using the fixed bidder_color_map with numeric indices
+	# Create color_df using the fixed bidder_index_map
 	color_df = pd.DataFrame(index=df.index, columns=df.columns)
 	for col in df.columns:
-	    bidder = col.split('(')[1].split(')')[0]
-	    color_df[col] = df[col].apply(lambda x: color_index_map[bidder_color_map[bidder]] if pd.notna(x) and x != 0 else np.nan)
+	    bidder = col.split('(')[1].split(')')[0]  # Assuming the bidder name is within parentheses
+	    color_df[col] = df[col].apply(lambda x: bidder_index_map[bidder] if pd.notna(x) and x != 0 else None)
 
 	# Transpose and prepare df and color_df for visualization
 	df = df.T.sort_index(ascending=True).replace(0, "").replace("", np.nan)
@@ -2030,7 +2027,6 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	
 	# Dictionary to hold dataframes for each band
 	df_dict = {band: group.drop('Band', axis=1) for band, group in df.groupby('Band')}
-
 
 	vertical_spacing_mul_dict = {2022:0.035, 2021:0.033, 2016:0.032, 2015 : 0.04, 2014 : 0.06, 2012 : 0.04}
 
