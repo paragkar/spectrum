@@ -2001,32 +2001,21 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 
 	df.columns = column_labels
 
-	# Extract unique bidder names from column labels formatted as "Band (Bidder)"
-	unique_bidders = {col.split('(')[1].split(')')[0]: idx for idx, col in enumerate(df.columns.unique())}
+	# Extract unique bidders from column labels
+	bidders = set(col.split('(')[1].split(')')[0] for col in df.columns)
+	bidders = sorted(bidders)  # Sort to maintain consistent order
 
-	st.write(unique_bidders)
+	# Dynamically generate a color palette with a unique color for each bidder
+	colors = sns.color_palette("hsv", len(bidders))
+	bidder_color_map = {bidder: f"rgba({int(color[0]*255)}, {int(color[1]*255)}, {int(color[2]*255)}, 1)" for bidder, color in zip(bidders, colors)}
 
-	# # Assuming 'df' is transposed or needs row-wise application of the color mapping
-	# # Let's first understand your DataFrame structure. Assuming each row should be colored based on the bidder in that row:
-	# for col in df.columns:
-	#     # Split column name to get the bidder part
-	#     bidder = col.split('(')[1].split(')')[0]
-	#     # Apply the color mapping to each cell conditionally if it's not NaN
-	#     df[col] = df[col].apply(lambda x: unique_bidders[bidder] if pd.notna(x) else np.nan)
-
-	# Optionally, if you need a separate column specifically storing these color mappings:
-	df['Bidder_Color'] = df.apply(lambda x: unique_bidders[x.name.split('(')[1].split(')')[0]], axis=1)
-
-	st.write(unique_bidders)
-
-	st.write(df)
+# Print the mapping to verify
 
 	df = df.T.sort_index(ascending = True)
 
 	df = df.fillna("").replace(0,"")
 
 	df = df.replace("", np.nan)
-
 
 
 	# Define a colorscale for the heatmap
