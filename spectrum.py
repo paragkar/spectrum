@@ -2016,8 +2016,8 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 
 	# Populate color_df with colors based on the bidders
 	for col in df.columns:
-	    bidder = col.split('(')[1].split(')')[0]
-	    color_df[col] = df[col].apply(lambda x: bidder_color_map[bidder] if pd.notna(x) and x != 0 else 'rgba(0,0,0,0)')
+		bidder = col.split('(')[1].split(')')[0]
+		color_df[col] = df[col].apply(lambda x: bidder_color_map[bidder] if pd.notna(x) and x != 0 else 'rgba(0,0,0,0)')
 
 	# After creating color_df and before plotting
 	color_df = color_df.T.sort_index(ascending=True)
@@ -2052,7 +2052,7 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	for i, (band, df_segment) in enumerate(df_dict.items(), start=1):
 
 		# Check alignment
-    	aligned_color_df = color_df.reindex_like(df_segment)
+		aligned_color_df = color_df.reindex_like(df_segment)
 
 		# Create a heatmap for each band
 		fig.add_trace(
