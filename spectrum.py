@@ -2054,7 +2054,7 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 		# Check alignment
 		aligned_color_df = color_df.reindex_like(df_segment)
 
-		st.write(aligned_color_df)
+		st.write(df_segment)
 
 		# Create a heatmap for each band
 		fig.add_trace(
