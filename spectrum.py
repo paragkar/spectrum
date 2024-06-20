@@ -2001,7 +2001,7 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	all_bidders = ["Bharti", "Idea", "Telewings", "Videocon", "Vodafone", "Aircel", "RCOM", "RJIO", "Tata", "VodaIdea", "Adani"]
 
 	# Manually assign colors to each bidder
-	bidder_color_map = {
+	bidder_colors = {
 	    "Bharti": "#FF5733",  # Example hex color codes
 	    "Idea": "#33FFCE",
 	    "Telewings": "#337BFF",
