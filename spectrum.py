@@ -2014,7 +2014,14 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	    "VodaIdea": "#8333FF",
 	    "Adani": "#FF3380"
 	}
-	
+
+
+	# Create a colorscale for Plotly, mapping indices to colors
+	colorscale = [(i / (len(bidder_colors) - 1), color) for i, color in enumerate(bidder_colors.values())]
+	colorscale.append((1, list(bidder_colors.values())[-1]))  # Ensure the last color is included
+
+	# Create color_df using indices for the colorscale
+	color_index_map = {bidder: i / (len(bidder_colors) - 1) for i, bidder in enumerate(bidder_colors.keys())}
 
 	# Simplify column names for display
 	column_labels = [f"{col[1]} ({col[0]})" for col in df.columns]
@@ -2022,19 +2029,17 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 
 	# Assuming 'df' is your DataFrame with columns formatted as "Band (Bidder)"
 	color_df = pd.DataFrame(index=df.index, columns=df.columns)
-
-	# Assign color codes to 'color_df' based on 'bidder_color_map'
 	for col in df.columns:
-	    bidder = col.split('(')[1].split(')')[0]  # Extracting the bidder name from the column name
-	    color_df[col] = df[col].apply(lambda x: bidder_color_map[bidder] if pd.notna(x) and x != 0 else None)
+	    bidder = col.split('(')[1].split(')')[0]
+	    color_df[col] = df[col].apply(lambda x: color_index_map[bidder] if pd.notna(x) and x != 0 else None)
 
-	# Map each unique color to an index
-	unique_colors = list(bidder_color_map.values())
-	color_index_map = {color: i for i, color in enumerate(unique_colors)}
+	# # Map each unique color to an index
+	# unique_colors = list(bidder_color_map.values())
+	# color_index_map = {color: i for i, color in enumerate(unique_colors)}
 
-	# Convert colors in color_df to indices for Plotly
-	for col in color_df.columns:
-	    color_df[col] = color_df[col].map(color_index_map)
+	# # Convert colors in color_df to indices for Plotly
+	# for col in color_df.columns:
+	#     color_df[col] = color_df[col].map(color_index_map)
 
 
 	# Transpose and prepare df and color_df for visualization
@@ -2057,16 +2062,16 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	for i, (band, df_segment) in enumerate(df_dict.items(), start=1):
 
 		text_values = df_segment.replace(np.nan, '')
-		aligned_color_df = color_df.loc[df_segment.index, df_segment.columns]
+		# aligned_color_df = color_df.loc[df_segment.index, df_segment.columns]
 
 		# Create a heatmap for each band
 		fig.add_trace(
 			go.Heatmap(
-				z=aligned_color_df.values,
-				x=aligned_color_df.columns,
-				y=aligned_color_df.index,
-				text = text_values.values,
-				colorscale=[(i / len(unique_colors), color) for i, color in enumerate(unique_colors)],
+				 z=color_df.loc[df_segment.index, df_segment.columns].values,
+	            x=df_segment.columns,
+	            y=df_segment.index,
+	            colorscale=colorscale,
+	            text=text_values.values,  # Assuming 'df' contains the values you want to display
 				texttemplate="%{text}",
 				textfont={"size": text_embed_in_chart_size}, 
 				showscale=False,
