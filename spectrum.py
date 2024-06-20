@@ -2044,7 +2044,7 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 		)
 
 		# Calculate whether the dataframe has any non-zero values
-    	has_non_zero_values = df.sum().sum() > 0  # This sums all values and checks if the total is greater than 0
+		has_non_zero_values = df.sum().sum() > 0  # This sums all values and checks if the total is greater than 0
 
 		# Update axes to their original settings
 		fig.update_xaxes(row=i, col=1, fixedrange=True, showline=True, linewidth=1.2, linecolor='black', mirror=True, showgrid=True, gridcolor='lightgrey')
