@@ -2021,13 +2021,13 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 
 
 	# Determine the number of non-empty dataframes
-	non_empty_dfs = {band: df for band, df in df_dict.items() if not df.empty}
+	# non_empty_dfs = {band: df for band, df in df_dict.items() if not df.empty}
 
 	# Create the figure with multiple subplots
-	fig = make_subplots(rows=len(non_empty_dfs), cols=1, vertical_spacing=0.04)
+	fig = make_subplots(rows=len(df_dict), cols=1, vertical_spacing=0.04)
 
 	# Iterate through each band and its corresponding dataframe
-	for i, (band, df) in enumerate(non_empty_dfs.items(), start=1):
+	for i, (band, df) in enumerate(df_dict.items(), start=1):
 		# Create a heatmap for each band
 		fig.add_trace(
 			go.Heatmap(
@@ -2068,7 +2068,7 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 		template='simple_white',
 		# title='Heatmap of No. of Blocks Selected by Service Area and Band',
 		width=heatmapwidth,
-		height=heatmapheight * len(non_empty_dfs)*height_mul_dict[AuctionYear],  # Total height based on the number of subplots
+		height=heatmapheight * len(df_dict)*height_mul_dict[AuctionYear],  # Total height based on the number of subplots
 		autosize=True,
 		plot_bgcolor='lightgrey',  # Background color for the plot area light greay
 		paper_bgcolor='white',
