@@ -2095,7 +2095,7 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 		uniformtext_mode='hide', 
 		xaxis_title=None, 
 		yaxis_title=None, 
-		yaxis_autorange='reversed',
+		# yaxis_autorange='reversed',
 		font=dict(size=text_embed_in_chart_size),#Debug 12th June 2024
 		template='simple_white',
 		# title='Heatmap of No. of Blocks Selected by Service Area and Band',
