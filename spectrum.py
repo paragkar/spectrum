@@ -2042,15 +2042,15 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	df["Band"] = list(df.index.str.extract(r'(\d+)')[0])
 
 	# Define the order of the bands
-	band_order = [700, 800, 900, 1800, 2100, 2300, 2500, 3500, 26000]
+	band_order = ["700", "800", "900", "1800", "2100", "2300", "2500", "3500", "26000"]
 	
 	# Dictionary to hold dataframes for each band
 	df_dict = {band: group.drop('Band', axis=1) for band, group in df.groupby('Band')}
 
-	st.write(df_dict)
 
 	# Organizing df_dict according to band_order
 	df_dict = {band: df_dict[band] for band in band_order if band in df_dict}
+
 
 	vertical_spacing_mul_dict = {2022:0.035, 2021:0.033, 2016:0.032, 2015 : 0.04, 2014 : 0.06, 2012 : 0.04}
 
