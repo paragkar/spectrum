@@ -2002,30 +2002,28 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	df.columns = column_labels
 
 	# 1. Extract unique bidders and assign each a unique numeric index
-	bidders = sorted(set(col.split('(')[1].split(')')[0] for col in df.columns))
-	bidder_index = {bidder: i for i, bidder in enumerate(bidders)}
+	# bidders = sorted(set(col.split('(')[1].split(')')[0] for col in df.columns))
+	# bidder_index = {bidder: i for i, bidder in enumerate(bidders)}
 
 
-	# Dynamically generate a color palette with a unique color for each bidder
-	colors = sns.color_palette("hsv", len(bidders))
-	bidder_color_map = {bidder: f"rgba({int(color[0]*255)}, {int(color[1]*255)}, {int(color[2]*255)}, 1)" for bidder, color in zip(bidders, colors)}
+	# List of all possible bidders (extend this list as new bidders are known)
+	all_bidders = ["Bharti", "Idea", "Telewings", "Videocon", "Vodafone", "Aircel", "RCOM", "RJIO","Tata", "VodaIdea", "Adani"]
 
-
-	# Create a DataFrame for color indices
-	color_df = pd.DataFrame(index=df.index, columns=df.columns)
-	for col in df.columns:
-	    bidder = col.split('(')[1].split(')')[0]
-	    color_df[col] = df[col].apply(lambda x: bidder_index[bidder] if pd.notna(x) and x != 0 else np.nan)
-
-	# Generate a colorscale dynamically based on the number of bidders
-	colors = sns.color_palette("hsv", len(bidders)).as_hex()
-	colorscale = [[i/len(bidders), color] for i, color in enumerate(colors)]
-
-	# After creating color_df and before plotting
-	color_df = color_df.T.sort_index(ascending=True)
+	# Generate a fixed color palette
+	colors = sns.color_palette("hsv", len(all_bidders)).as_hex()
+	bidder_color_map = {bidder: color for bidder, color in zip(all_bidders, colors)}
 
 	# Transpose and prepare df for visualization
 	df = df.T.sort_index(ascending=True).replace(0, "").replace("", np.nan)
+
+
+	# Create color_df using the fixed bidder_color_map
+	color_df = pd.DataFrame(index=df.index, columns=df.columns)
+
+	for col in df.columns:
+	    bidder = col.split('(')[1].split(')')[0]
+	    # Ensure every column uses the global color mapping
+	    color_df[col] = df[col].apply(lambda x: bidder_color_map[bidder] if pd.notna(x) and x != 0 else 'rgba(0,0,0,0)')
 
 
 	# Extract band information more reliably
