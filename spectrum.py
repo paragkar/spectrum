@@ -2066,7 +2066,7 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 				x=aligned_color_df.columns,
 				y=aligned_color_df.index,
 				text = text_values.values,
-				# colorscale=[(i / len(unique_colors), color) for i, color in enumerate(unique_colors)],
+				colorscale=[(i / len(unique_colors), color) for i, color in enumerate(unique_colors)],
 				texttemplate="%{text}",
 				textfont={"size": text_embed_in_chart_size}, 
 				showscale=False,
