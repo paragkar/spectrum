@@ -2028,10 +2028,6 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	    bidder = col.split('(')[1].split(')')[0]  # Extracting the bidder name from the column name
 	    color_df[col] = df[col].apply(lambda x: bidder_color_map[bidder] if pd.notna(x) and x != 0 else None)
 
-	st.write(df)
-
-	st.write(color_df)
-
 	# Map each unique color to an index
 	unique_colors = list(bidder_color_map.values())
 	color_index_map = {color: i for i, color in enumerate(unique_colors)}
@@ -2039,6 +2035,8 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	# Convert colors in color_df to indices for Plotly
 	for col in color_df.columns:
 	    color_df[col] = color_df[col].map(color_index_map)
+
+	st.write(color_df)
 
 
 	# Transpose and prepare df and color_df for visualization
