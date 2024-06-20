@@ -2054,10 +2054,6 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 		# Check alignment
 		aligned_color_df = color_df.reindex_like(df_segment)
 
-		st.write(df_segment)
-
-		st.write(aligned_color_df)
-
 		# Create a heatmap for each band
 		fig.add_trace(
 			go.Heatmap(
@@ -2075,7 +2071,7 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 		)
 
 		# Calculate whether the dataframe has any non-zero values
-		has_non_zero_values = df.sum().sum() > 0  # This sums all values and checks if the total is greater than 0
+		has_non_zero_values = df_segment.sum().sum() > 0  # This sums all values and checks if the total is greater than 0
 
 		# Update axes to their original settings
 		fig.update_xaxes(row=i, col=1, fixedrange=True, showline=True, linewidth=1.2, linecolor='black', mirror=True, showgrid=True, gridcolor='lightgrey')
