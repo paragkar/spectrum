@@ -2050,6 +2050,10 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	fig = make_subplots(rows=len(df_dict), cols=1, vertical_spacing=vertical_spacing_mul_dict[AuctionYear])
 
 
+	# Determine the range for z values - it should cover all indices used in your colorscale
+	zmin, zmax = 0, 1  # Since your colorscale is likely mapped from 0 to 1
+
+
 	# Iterate through each band and its corresponding dataframe
 	for i, (band, df_segment) in enumerate(df_dict.items(), start=1):
 
@@ -2067,10 +2071,12 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	            y=df_segment.index,
 	            colorscale=colorscale,
 	            text=text_values.values,  # Assuming 'df' contains the values you want to display
-				texttemplate="%{z}",
+				texttemplate="%{text}",
 				textfont={"size": text_embed_in_chart_size}, 
 				showscale=False,
 				reversescale=True,
+				zmin=zmin,  # Set minimum z value
+        		zmax=zmax,  # Set maximum z value
 			),
 			row=i, col=1
 		)
