@@ -2023,7 +2023,7 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	# Determine the number of non-empty dataframes
 	# non_empty_dfs = {band: df for band, df in df_dict.items() if not df.empty}
 
-	vertical_spacing_mul_dict = {2022:0.035, 2021:0.033, 2016:0.04, 2015 : 0.04, 2014 : 0.04, 2012 : 0.04}
+	vertical_spacing_mul_dict = {2022:0.035, 2021:0.033, 2016:0.033, 2015 : 0.04, 2014 : 0.04, 2012 : 0.04}
 
 	# Create the figure with multiple subplots
 	fig = make_subplots(rows=len(df_dict), cols=1, vertical_spacing=vertical_spacing_mul_dict[AuctionYear])
@@ -2058,7 +2058,7 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 						title_text="" if has_non_zero_values else str(band))  # Set the y-axis title here)
 
 	
-	height_mul_dict = {2022:0.18, 2021: 0.20, 2016:0.205, 2015 : 0.32, 2014 : 0.5, 2012 : 0.8}
+	height_mul_dict = {2022:0.18, 2021: 0.20, 2016:0.21, 2015 : 0.32, 2014 : 0.5, 2012 : 0.8}
 
 	# Update the overall layout
 	fig.update_layout(uniformtext_minsize=text_embed_in_chart_size, 
