@@ -2056,7 +2056,7 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 						title_text="" if has_non_zero_values else str(band))  # Set the y-axis title here)
 
 	
-	# height_mul_dict = {2022: }
+	height_mul_dict = {2022:0.17}
 
 	# Update the overall layout
 	fig.update_layout(uniformtext_minsize=text_embed_in_chart_size, 
@@ -2068,7 +2068,7 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 		template='simple_white',
 		# title='Heatmap of No. of Blocks Selected by Service Area and Band',
 		width=heatmapwidth,
-		height=heatmapheight * len(non_empty_dfs)*0.17,  # Total height based on the number of subplots
+		height=heatmapheight * len(non_empty_dfs)*height_mul_dict[AuctionYear],  # Total height based on the number of subplots
 		autosize=True,
 		plot_bgcolor='lightgrey',  # Background color for the plot area light greay
 		paper_bgcolor='white',
