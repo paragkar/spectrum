@@ -2038,11 +2038,9 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 			row=i, col=1
 		)
 
-		 # Adjust x and y axes for each heatmap
-		fig.update_xaxes(row=i, col=1, tick0=0.5, dtick=1, tickvals=[j + 0.5 for j in range(len(df.columns))], ticktext=df.columns,
-		                 fixedrange=True, showline=True, linewidth=1.2, linecolor='black', mirror=True, showgrid=True, gridcolor='gray')
-		fig.update_yaxes(row=i, col=1, tick0=0.5, dtick=1, tickvals=[j + 0.5 for j in range(len(df.index))], ticktext=df.index,
-		                 fixedrange=True, showline=True, linewidth=1.2, linecolor='black', mirror=True, showgrid=True, gridcolor='gray')
+		# Update axes to their original settings
+	    fig.update_xaxes(row=i, col=1, fixedrange=True, showline=True, linewidth=1.2, linecolor='black', mirror=True, showgrid=True, gridcolor='gray')
+	    fig.update_yaxes(row=i, col=1, fixedrange=True, showline=True, linewidth=1.2, linecolor='black', mirror=True, showgrid=True, gridcolor='gray')
 
 	
 
