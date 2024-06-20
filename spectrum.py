@@ -2008,6 +2008,8 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 
 	st.write(unique_bidders)
 
+	st.write(df)
+
 	df = df.T.sort_index(ascending = True)
 
 	df = df.fillna("").replace(0,"")
