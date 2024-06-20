@@ -2003,7 +2003,9 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 
 	# Extract unique bidder names from column labels formatted as "Band (Bidder)"
 	unique_bidders = {col.split('(')[1].split(')')[0]: idx for idx, col in enumerate(df.columns.unique())}
-	
+
+	st.write(unique_bidders)
+
 	# # Assuming 'df' is transposed or needs row-wise application of the color mapping
 	# # Let's first understand your DataFrame structure. Assuming each row should be colored based on the bidder in that row:
 	# for col in df.columns:
