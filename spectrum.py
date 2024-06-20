@@ -2039,7 +2039,7 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 		)
 
 		# Update axes to their original settings
-		fig.update_xaxes(row=i, col=1, fixedrange=True, showline=True, linewidth=1.2, linecolor='black', mirror=True, showgrid=True, gridcolor='white')
+		fig.update_xaxes(row=i, col=1, fixedrange=True, showline=True, linewidth=1.2, linecolor='black', mirror=True, showgrid=True, gridcolor='lightgreay')
 		fig.update_yaxes(row=i, col=1, fixedrange=True, showline=True, linewidth=1.2, linecolor='black', mirror=True, showgrid=True, gridcolor='white')
 
 		# Update axes for each subplot to set the tick font size
