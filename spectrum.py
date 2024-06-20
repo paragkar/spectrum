@@ -2039,11 +2039,22 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	    )
 
 		 # Adjust x and y axes for each heatmap
-	    fig.update_xaxes(row=i, col=1, tick0=0.5, dtick=1, tickvals=[j + 0.5 for j in range(len(df.columns))], ticktext=df.columns,
-	                     fixedrange=True, showline=True, linewidth=1.2, linecolor='black', mirror=True, showgrid=True, gridcolor='gray')
-	    fig.update_yaxes(row=i, col=1, tick0=0.5, dtick=1, tickvals=[j + 0.5 for j in range(len(df.index))], ticktext=df.index,
-	                     fixedrange=True, showline=True, linewidth=1.2, linecolor='black', mirror=True, showgrid=True, gridcolor='gray')
+	    # fig.update_xaxes(row=i, col=1, tick0=0.5, dtick=1, tickvals=[j + 0.5 for j in range(len(df.columns))], ticktext=df.columns,
+	    #                  fixedrange=True, showline=True, linewidth=1.2, linecolor='black', mirror=True, showgrid=True, gridcolor='gray')
+	    # fig.update_yaxes(row=i, col=1, tick0=0.5, dtick=1, tickvals=[j + 0.5 for j in range(len(df.index))], ticktext=df.index,
+	    #                  fixedrange=True, showline=True, linewidth=1.2, linecolor='black', mirror=True, showgrid=True, gridcolor='gray')
 
+		# Add shapes for grid simulation (manual and tedious process)
+		for i in range(1, len(df.columns)):
+		    for j in range(1, len(df.index)):
+		        fig.add_shape(type="line",
+		                      x0=i, y0=0, x1=i, y1=len(df.index),
+		                      line=dict(color="black", width=1),
+		                      xref='x' + str(i), yref='y' + str(i))
+		        fig.add_shape(type="line",
+		                      x0=0, y0=j, x1=len(df.columns), y1=j,
+		                      line=dict(color="black", width=1),
+		                      xref='x' + str(i), yref='y' + str(i))
 
 	# Update the overall layout
 	fig.update_layout(
