@@ -2036,6 +2036,13 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	df_dict = {band: group.drop('Band', axis=1) for band, group in df.groupby('Band')}
 
 
+	# Check if the indices and columns of df_segment match those in color_df just before plotting
+	# if not df_segment.index.isin(color_df.index).all():
+	#     print("Mismatch in Index!")
+	# if not df_segment.columns.isin(color_df.columns).all():
+	#     print("Mismatch in Columns!")
+
+
 	vertical_spacing_mul_dict = {2022:0.035, 2021:0.033, 2016:0.032, 2015 : 0.04, 2014 : 0.06, 2012 : 0.04}
 
 	# Create the figure with multiple subplots
@@ -2043,10 +2050,14 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 
 	# Iterate through each band and its corresponding dataframe
 	for i, (band, df_segment) in enumerate(df_dict.items(), start=1):
+
+		# Check alignment
+    	aligned_color_df = color_df.reindex_like(df_segment)
+
 		# Create a heatmap for each band
 		fig.add_trace(
 			go.Heatmap(
-				z=color_df.loc[df_segment.index, df_segment.columns].values,  # Colors based on bidders
+				z=aligned_color_df.values, # Colors based on bidders
 				x=df_segment.columns,
 				y=df_segment.index,
 				text = df_segment.values,
