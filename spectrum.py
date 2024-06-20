@@ -2008,6 +2008,8 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	colorscale = [(i / (len(all_bidders) - 1), color) for i, color in enumerate(colors)]
 	colorscale.append((1, colors[-1]))  # Ensure the last color is included
 
+	st.write(colorscale)
+
 	# Simplify column names for display
 	column_labels = [f"{col[1]} ({col[0]})" for col in df.columns]
 	df.columns = column_labels
