@@ -1961,8 +1961,8 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	#This function is used to filter the dataframe based on round numbers
 	@st.cache
 	def filt_round(df, round_number):
-	    # Filtering and processing logic
-	    return df[df['Clock Round'] == round_number]
+		# Filtering and processing logic
+		return df[df['Clock Round'] == round_number]
 
 	currency_flag = "NA" #This is dummy variiable for this option done to preserve the current structure of the code 
 
@@ -1990,10 +1990,10 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 
 	# Create a combined column for bidder information
 	df = df.pivot_table(
-    index='Service Area', 
-    columns=['Bidder', 'Band'], 
-    values= selected_dimension, 
-    aggfunc='first'  # you can change this to 'sum' if that's more appropriate
+	index='Service Area', 
+	columns=['Bidder', 'Band'], 
+	values= selected_dimension, 
+	aggfunc='first'  # you can change this to 'sum' if that's more appropriate
 	)
 
 	# Simplify column names for display
@@ -2023,48 +2023,48 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 
 	# Iterate through each band and its corresponding dataframe
 	for i, (band, df) in enumerate(df_dict.items(), start=1):
-	    # Create a heatmap for each band
-	    fig.add_trace(
-	        go.Heatmap(
-	            z=df.values,
-	            x=df.columns,
-	            y=df.index,
-	            colorscale='Hot',  # You can change the color scale as needed
-	            texttemplate="%{z:.0f}",
-	            textfont={"size": text_embed_in_chart_size}, 
-	            showscale=False,
-	            reversescale=True
-	        ),
-	        row=i, col=1
-	    )
+		# Create a heatmap for each band
+		fig.add_trace(
+			go.Heatmap(
+				z=df.values,
+				x=df.columns,
+				y=df.index,
+				colorscale='Hot',  # You can change the color scale as needed
+				texttemplate="%{z:.0f}",
+				textfont={"size": text_embed_in_chart_size}, 
+				showscale=False,
+				reversescale=True
+			),
+			row=i, col=1
+		)
 
 		 # Adjust x and y axes for each heatmap
-	    # fig.update_xaxes(row=i, col=1, tick0=0.5, dtick=1, tickvals=[j + 0.5 for j in range(len(df.columns))], ticktext=df.columns,
-	    #                  fixedrange=True, showline=True, linewidth=1.2, linecolor='black', mirror=True, showgrid=True, gridcolor='gray')
-	    # fig.update_yaxes(row=i, col=1, tick0=0.5, dtick=1, tickvals=[j + 0.5 for j in range(len(df.index))], ticktext=df.index,
-	    #                  fixedrange=True, showline=True, linewidth=1.2, linecolor='black', mirror=True, showgrid=True, gridcolor='gray')
+		# fig.update_xaxes(row=i, col=1, tick0=0.5, dtick=1, tickvals=[j + 0.5 for j in range(len(df.columns))], ticktext=df.columns,
+		#                  fixedrange=True, showline=True, linewidth=1.2, linecolor='black', mirror=True, showgrid=True, gridcolor='gray')
+		# fig.update_yaxes(row=i, col=1, tick0=0.5, dtick=1, tickvals=[j + 0.5 for j in range(len(df.index))], ticktext=df.index,
+		#                  fixedrange=True, showline=True, linewidth=1.2, linecolor='black', mirror=True, showgrid=True, gridcolor='gray')
 
 		# Add shapes for grid simulation (manual and tedious process)
 		for i in range(1, len(df.columns)):
 			for j in range(1, len(df.index)):
-			    fig.add_shape(type="line",
-			                  x0=i, y0=0, x1=i, y1=len(df.index),
-			                  line=dict(color="black", width=1),
-			                  xref='x' + str(i), yref='y' + str(i))
-			    fig.add_shape(type="line",
-			                  x0=0, y0=j, x1=len(df.columns), y1=j,
-			                  line=dict(color="black", width=1),
-		                  xref='x' + str(i), yref='y' + str(i))
+				fig.add_shape(type="line",
+							  x0=i, y0=0, x1=i, y1=len(df.index),
+							  line=dict(color="black", width=1),
+							  xref='x' + str(i), yref='y' + str(i))
+				fig.add_shape(type="line",
+							  x0=0, y0=j, x1=len(df.columns), y1=j,
+							  line=dict(color="black", width=1),
+						  xref='x' + str(i), yref='y' + str(i))
 
 	# Update the overall layout
 	fig.update_layout(
-	    # title='Heatmap of No. of Blocks Selected by Service Area and Band',
-	    width=heatmapwidth,
-	    height=heatmapheight * len(df_dict)*0.3,  # Total height based on the number of subplots
-	    autosize=True,
-	    plot_bgcolor='#ADD8E6',
-	    paper_bgcolor='white',
-	    margin=dict(t=30, b=30, l=30, r=30, pad=4)
+		# title='Heatmap of No. of Blocks Selected by Service Area and Band',
+		width=heatmapwidth,
+		height=heatmapheight * len(df_dict)*0.3,  # Total height based on the number of subplots
+		autosize=True,
+		plot_bgcolor='#ADD8E6',
+		paper_bgcolor='white',
+		margin=dict(t=30, b=30, l=30, r=30, pad=4)
 	)
 
 	# Display the figure in Streamlit
@@ -2076,18 +2076,18 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 
 	# # Create the heatmap object
 	# heatmap = go.Heatmap(
-    # z=df.values,  # Replace NaN with 0 for visualization purposes
-    # y=df.index,
-    # x=df.columns,  # Use simplified column labels
-    # xgap=1,  # Modify as needed
-    # ygap=1,
-    # # text=text_values,  # Embed values directly in the heatmap cells
-    # # hoverinfo='text',  # Disable hover info if values are embedded in cells
-    # texttemplate="%{z:.0f}",
-    # textfont={"size":text_embed_in_chart_size}, 
-    # colorscale=colorscale,
-    # showscale=False,
-    # reversescale=True
+	# z=df.values,  # Replace NaN with 0 for visualization purposes
+	# y=df.index,
+	# x=df.columns,  # Use simplified column labels
+	# xgap=1,  # Modify as needed
+	# ygap=1,
+	# # text=text_values,  # Embed values directly in the heatmap cells
+	# # hoverinfo='text',  # Disable hover info if values are embedded in cells
+	# texttemplate="%{z:.0f}",
+	# textfont={"size":text_embed_in_chart_size}, 
+	# colorscale=colorscale,
+	# showscale=False,
+	# reversescale=True
 	# )
 
 	# # Create the figure using the heatmap data
