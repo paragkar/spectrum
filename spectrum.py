@@ -2127,6 +2127,9 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	# Determine the range for z values - it should cover all indices used in your colorscale
 	zmin, zmax = 0, 1  # Since your colorscale is likely mapped from 0 to 1
 
+	# Maximum value for scaling text position
+	max_value = df['Total'].max()
+
 	# Iterate through each band and its corresponding dataframe
 	for i, (band, df_segment) in enumerate(df_dict.items(), start=1):
 
