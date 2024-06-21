@@ -1993,11 +1993,13 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	    df = df[df["Service Area"].isin(selected_areas)]
 
 
-
-
 	#Choosing the selected dimension
-	dim_to_select = ["Bid Value","Ratio PWPtoRP End Rd", "Prov WinBid Start Rd","Rank Start Rd","Prov WinBid End Rd",	
-	"Rank End Rd","Blocks Selected", "Prov Alloc BLKs Start Rd","Prov Alloc BLKs End Rd"]
+	# dim_to_select = ["Bid Value","Ratio PWPtoRP End Rd", "Prov WinBid Start Rd","Rank Start Rd","Prov WinBid End Rd",	
+	# "Rank End Rd","Blocks Selected", "Prov Alloc BLKs Start Rd","Prov Alloc BLKs End Rd"]
+
+	dim_to_select = ["Total Bid Value", "RatioPWPtoRP EndRd", "ProvWinBid StartRd","Rank StartRd","ProvWinBid EndRd", "Rank EndRd","Blocks Selected", 
+					"ProvAllocBLKs StartRd","ProvAllocBLKs EndRd"]
+
 
 	selected_dimension = st.sidebar.selectbox('Select a Dimension', dim_to_select, 0) #default index "Prov WinBid Start Rd"
 	df = df[[ "Clock Round", "Bidder", "Service Area","Band", selected_dimension]]
