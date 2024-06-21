@@ -2115,7 +2115,8 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 
 	# Adjusting subplot setup to include two columns, one for the heatmap and one for the bar chart
 	fig = make_subplots(rows=len(df_dict), cols=2, specs=[[{"type": "heatmap"}, {"type": "bar"}] for _ in range(len(df_dict))],
-					vertical_spacing=vertical_spacing_mul_dict[AuctionYear])
+	                    vertical_spacing=vertical_spacing_mul_dict[AuctionYear],
+	                    column_widths=[0.8, 0.2])  # Adjust the width of columns if necessary
 
 	# Determine the range for z values - it should cover all indices used in your colorscale
 	zmin, zmax = 0, 1  # Since your colorscale is likely mapped from 0 to 1
@@ -2164,14 +2165,15 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 				row=i, col=1
 			)
 
-		# Extract row totals for the current segment
-		segment_totals = row_totals[row_totals['BandBidder'].isin(df_segment.index)]
+		# Extract row totals for the current segment aligned with the bidders/bands
+    	segment_totals = row_totals[row_totals['BandBidder'].isin(df_segment.index)]
 
 		# Add bar chart trace
 		fig.add_trace(
 			go.Bar(
 				x=segment_totals['BandBidder'],
 				y=segment_totals['Total'],
+				orientation='h',  # Horizontal bar chart
 				marker_color='red',  # Bar color
 				text=segment_totals['Total'],  # To show the totals on the bars
 				textposition='auto',
