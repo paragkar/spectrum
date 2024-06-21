@@ -2174,6 +2174,10 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 		# Extract row totals for the current segment aligned with the bidders/bands
 		segment_totals = row_totals[row_totals['BandBidder'].isin(df_segment.index)]
 
+		# Calculate dynamic width if desired
+    	dynamic_bar_width = base_bar_width / len(segment_totals) if len(segment_totals) > 0 else base_bar_width
+
+
 		# Add bar chart trace
 		fig.add_trace(
 			go.Bar(
@@ -2183,6 +2187,8 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 				marker_color='red',  # Bar color
 				text=segment_totals['Total'],  # To show the totals on the bars
 				textfont={'size': text_embed_in_chart_size*0.8},  # Dynamic text size
+				showlegend = False,
+				width = dynamic_bar_width,
 				textposition='auto',
 			),
 			row=i, col=2
