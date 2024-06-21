@@ -2087,6 +2087,8 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 
 	row_totals.columns = ["BandBidder", "Total"]
 
+	row_totals["Total"] = row_totals["Total"].astype(float).round(0)
+
 
 	# Transpose and prepare color_df for visualization
 	def transpose_color_df(color_df):
