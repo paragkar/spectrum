@@ -1998,55 +1998,76 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	)
 
 	# Generate a fixed color palette first
-	all_bidders = ["Bharti", "Idea", "Telewings", "Videocon", "Vodafone", "Aircel", "RCOM", "RJIO", "Tata", "VodaIdea", "Adani"]
+	all_bidders = ['Adani', 'Aircel', 'Augere', 'Bharti', 'Etisalat', 'Idea', 'Infotel', 'Qualcomm', 'RCOM', 
+	'RJIO', 'Reliance', 'STel', 'Spice', 'Tata', 'Telewings', 'Tikona', 'Videocon', 'VodaIdea', 'Vodafone']
+	
+	# # Manually assign colors to each bidder
+	# bidder_colors = {
+	# "Bharti": "#00FF00",  # Green
+	# "Idea": "#FFA500",   # Orange
+	# "Telewings": "#FFD700",  # Gold
+	# "Videocon": "#EE82EE",  # Violet
+	# "Vodafone": "#FFC0CB",  # Pink
+	# "Aircel": "#A52A2A",  # Brown
+	# "RCOM": "#FFFF00",  # Yellow
+	# "RJIO": "#FF0000",  # Red
+	# "Tata": "#0000FF",  # Blue
+	# "VodaIdea": "#0000FF",  # Blue
+	# "Adani": "#B22222"   # Brick
+	# }
 
-	all_bidders_2010_3G = ["Aircel", "Bharti", "Etisalat", "Idea" "Reliance", "STel", "Tata", "Videocon", "Vodafone"]
+	# # Manually assign colors to each bidder
+	# bidder_colors_2010_3G = {
+	# "Bharti": "#00FF00",  # Green
+	# "Idea": "#FFA500",   # Orange
+	# # "Telewings": "#FFD700",  # Gold
+	# "Videocon": "#EE82EE",  # Violet
+	# "Vodafone": "#FFC0CB",  # Pink
+	# "Aircel": "#A52A2A",  # Brown
+	# "Reliance": "#FFFF00",  # Yellow
+	# "STel": "#FF0000",  # Red
+	# "Tata": "#0000FF",  # Blue
+	# # "STel": "#0000FF",  # Blue
+	# "Etisalat": "#B22222"   # Brick
+	# }
 
-	all_bidder_2010_BWA = ["Aircel", "Augere", "Bharti", "Idea", "Infotel", "Qualcomm", "Reliance", "Spice", "Tata", "Tikona", "Vodafone"]
+	# bidder_colors_2010_BWA = {
+	# "Bharti": "#00FF00",  # Green
+	# "Idea": "#FFA500",   # Orange
+	# "Augere": "#FFD700",  # Gold
+	# "Spice": "#EE82EE",  # Violet
+	# "Vodafone": "#FFC0CB",  # Pink
+	# "Aircel": "#A52A2A",  # Brown
+	# "Reliance": "#FFFF00",  # Yellow
+	# "Infotel": "#FF0000",  # Red
+	# "Qualcomm": "#0000FF",  # Blue
+	# "Tikona": "#0000LF",  # ?
+	# "Tata": "#B22222"   # Brick
+	# }
 
 	# Manually assign colors to each bidder
 	bidder_colors = {
-	"Bharti": "#00FF00",  # Green
-	"Idea": "#FFA500",   # Orange
-	"Telewings": "#FFD700",  # Gold
-	"Videocon": "#EE82EE",  # Violet
-	"Vodafone": "#FFC0CB",  # Pink
-	"Aircel": "#A52A2A",  # Brown
-	"RCOM": "#FFFF00",  # Yellow
-	"RJIO": "#FF0000",  # Red
-	"Tata": "#0000FF",  # Blue
-	"VodaIdea": "#0000FF",  # Blue
-	"Adani": "#B22222"   # Brick
+    "Adani": "#FF6347",      # Tomato
+    "Aircel": "#FF4500",     # OrangeRed
+    "Augere": "#FFD700",     # Gold
+    "Bharti": "#32CD32",     # LimeGreen
+    "Etisalat": "#4682B4",   # SteelBlue
+    "Idea": "#FFA500",       # Orange
+    "Infotel": "#DA70D6",    # Orchid
+    "Qualcomm": "#6495ED",   # CornflowerBlue
+    "RCOM": "#FFFF00",       # Yellow
+    "RJIO": "#FF0000",       # Red
+    "Reliance": "#6B8E23",   # OliveDrab
+    "STel": "#20B2AA",       # LightSeaGreen
+    "Spice": "#EE82EE",      # Violet
+    "Tata": "#0000FF",       # Blue
+    "Telewings": "#FFDAB9",  # PeachPuff
+    "Tikona": "#800080",     # Purple
+    "Videocon": "#40E0D0",   # Turquoise
+    "VodaIdea": "#BA55D3",   # MediumOrchid
+    "Vodafone": "#FFC0CB"    # Pink
 	}
 
-	# Manually assign colors to each bidder
-	bidder_colors_2010_3G = {
-	"Bharti": "#00FF00",  # Green
-	"Idea": "#FFA500",   # Orange
-	# "Telewings": "#FFD700",  # Gold
-	"Videocon": "#EE82EE",  # Violet
-	"Vodafone": "#FFC0CB",  # Pink
-	"Aircel": "#A52A2A",  # Brown
-	"Reliance": "#FFFF00",  # Yellow
-	"STel": "#FF0000",  # Red
-	"Tata": "#0000FF",  # Blue
-	# "STel": "#0000FF",  # Blue
-	"Etisalat": "#B22222"   # Brick
-	}
-
-	bidder_colors_2010_BWA = {
-	"Bharti": "#00FF00",  # Green
-	"Idea": "#FFA500",   # Orange
-	"Augere": "#FFD700",  # Gold
-	"Spice": "#EE82EE",  # Violet
-	"Vodafone": "#FFC0CB",  # Pink
-	"Aircel": "#A52A2A",  # Brown
-	"Reliance": "#FFFF00",  # Yellow
-	"Infotel": "#FF0000",  # Red
-	"Qualcomm": "#0000FF",  # Blue
-	"Tikona": "#0000LF",  # ?
-	"Tata": "#B22222"   # Brick
-	}
 
 
 	def colorscale_and_color_index_map(bidder_colors):
@@ -2062,25 +2083,33 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	colorscale, color_index_map = colorscale_and_color_index_map(bidder_colors)
 
 
-	colorscale_3G, color_index_map_3G = colorscale_and_color_index_map(bidder_colors_2010_3G)
-
-	colorscale_BWA, color_index_map_BWA = colorscale_and_color_index_map(bidder_colors_2010_BWA)
-
-
 	# Simplify column names for display
 	column_labels = [f"{col[1]} ({col[0]})" for col in df.columns]
 	df.columns = column_labels
 
-	# Assuming 'df' is your DataFrame with columns formatted as "Band (Bidder)"
-	color_df = pd.DataFrame(index=df.index, columns=df.columns)
-	for col in df.columns:
-		bidder = col.split('(')[1].split(')')[0]
-		color_df[col] = df[col].apply(lambda x: color_index_map[bidder] if pd.notna(x) and x != 0 else None)
+
+	def create_color_df(df, color_index_map):
+		# Assuming 'df' is your DataFrame with columns formatted as "Band (Bidder)"
+		color_df = pd.DataFrame(index=df.index, columns=df.columns)
+		for col in df.columns:
+			bidder = col.split('(')[1].split(')')[0]
+			color_df[col] = df[col].apply(lambda x: color_index_map[bidder] if pd.notna(x) and x != 0 else None)
+
+		return color_df
+
+	#Creating Color DataFrame for each of the instants
+	color_df = create_color_df(df, color_index_map)
 
 
-	# Transpose and prepare df and color_df for visualization
+	# Transpose and prepare df for visualization
 	df = df.T.sort_index(ascending=False).replace(0, "").replace("", np.nan)
-	color_df = color_df.T.sort_index(ascending=False)
+
+	# Transpose and prepare color_df for visualization
+	def transpose_color_df(color_df):
+		color_df = color_df.T.sort_index(ascending=False)
+		return color_df
+
+	color_df = transpose_color_df(color_df)
 
 	# Extract band information more reliably
 	df["Band"] = list(df.index.str.extract(r'(\d+)')[0])
@@ -2091,12 +2120,10 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	# Dictionary to hold dataframes for each band
 	df_dict = {band: group.drop('Band', axis=1) for band, group in df.groupby('Band')}
 
-
 	# Organizing df_dict according to band_order
 	df_dict = {band: df_dict[band] for band in band_order if band in df_dict}
 
-
-	vertical_spacing_mul_dict = {2022:0.035, 2021:0.033, 2016:0.032, 2015 : 0.04, 2014 : 0.06, 2012 : 0.04}
+	vertical_spacing_mul_dict = {2022:0.035, 2021:0.033, 2016:0.032, 2015 : 0.04, 2014 : 0.06, 2012 : 0.04, 2010 : 0.04}
 
 	# Create the figure with multiple subplots
 	fig = make_subplots(rows=len(df_dict), cols=1, vertical_spacing=vertical_spacing_mul_dict[AuctionYear])
@@ -2111,8 +2138,6 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 
 			text_values = df_segment.replace(np.nan, '')
 			aligned_color_df = color_df.loc[df_segment.index, df_segment.columns].replace(np.nan, "")
-
-
 			# Create a heatmap for each band
 			fig.add_trace(
 				go.Heatmap(
@@ -2132,7 +2157,6 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 			)
 
 		if selected_dimension in ["Ratio PWPtoRP End Rd"]:
-
 			# Create a heatmap for each band
 			fig.add_trace(
 				go.Heatmap(
@@ -2151,7 +2175,6 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 				row=i, col=1
 			)
 
-
 		# Calculate whether the dataframe has any non-zero values
 		has_non_zero_values = df_segment.sum().sum() > 0  # This sums all values and checks if the total is greater than 0
 
@@ -2165,7 +2188,7 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 						title_text="" if has_non_zero_values else str(band))  # Set the y-axis title here)
 
 	
-	height_mul_dict = {2022:0.18, 2021: 0.20, 2016:0.21, 2015 : 0.35, 2014 : 0.55, 2012 : 0.55}
+	height_mul_dict = {2022:0.18, 2021: 0.20, 2016:0.21, 2015 : 0.35, 2014 : 0.55, 2012 : 0.55, 2010: 0.55}
 
 	# Update the overall layout
 	fig.update_layout(uniformtext_minsize=text_embed_in_chart_size, 
