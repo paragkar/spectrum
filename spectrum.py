@@ -2049,7 +2049,6 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	}
 
 
-
 	def colorscale_and_color_index_map(bidder_colors):
 		# Create a colorscale for Plotly, mapping indices to colors
 		colorscale = [(i / (len(bidder_colors) - 1), color) for i, color in enumerate(bidder_colors.values())]
@@ -2062,6 +2061,10 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 
 	colorscale, color_index_map = colorscale_and_color_index_map(bidder_colors)
 
+
+	colorscale_3G, color_index_map_3G = colorscale_and_color_index_map(bidder_colors_2010_3G)
+
+	colorscale_BWA, color_index_map_BWA = colorscale_and_color_index_map(bidder_colors_2010_BWA)
 
 
 	# Simplify column names for display
