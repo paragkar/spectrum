@@ -2002,17 +2002,17 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 
 	# Manually assign colors to each bidder
 	bidder_colors = {
-    "Bharti": "#00FF00",  # Green
-    "Idea": "#FFA500",   # Orange
-    "Telewings": "#FFD700",  # Gold
-    "Videocon": "#EE82EE",  # Violet
-    "Vodafone": "#FFC0CB",  # Pink
-    "Aircel": "#A52A2A",  # Brown
-    "RCOM": "#FFFF00",  # Yellow
-    "RJIO": "#FF0000",  # Red
-    "Tata": "#0000FF",  # Blue
-    "VodaIdea": "#0000FF",  # Blue
-    "Adani": "#B22222"   # Brick
+	"Bharti": "#00FF00",  # Green
+	"Idea": "#FFA500",   # Orange
+	"Telewings": "#FFD700",  # Gold
+	"Videocon": "#EE82EE",  # Violet
+	"Vodafone": "#FFC0CB",  # Pink
+	"Aircel": "#A52A2A",  # Brown
+	"RCOM": "#FFFF00",  # Yellow
+	"RJIO": "#FF0000",  # Red
+	"Tata": "#0000FF",  # Blue
+	"VodaIdea": "#0000FF",  # Blue
+	"Adani": "#B22222"   # Brick
 	}
 
 
@@ -2030,8 +2030,8 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	# Assuming 'df' is your DataFrame with columns formatted as "Band (Bidder)"
 	color_df = pd.DataFrame(index=df.index, columns=df.columns)
 	for col in df.columns:
-	    bidder = col.split('(')[1].split(')')[0]
-	    color_df[col] = df[col].apply(lambda x: color_index_map[bidder] if pd.notna(x) and x != 0 else None)
+		bidder = col.split('(')[1].split(')')[0]
+		color_df[col] = df[col].apply(lambda x: color_index_map[bidder] if pd.notna(x) and x != 0 else None)
 
 
 	# Transpose and prepare df and color_df for visualization
@@ -2074,16 +2074,16 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 			fig.add_trace(
 				go.Heatmap(
 					z=aligned_color_df.values,
-		            x=df_segment.columns,
-		            y=df_segment.index,
-		            colorscale=colorscale,
-		            text=text_values.values,  # Assuming 'df' contains the values you want to display
+					x=df_segment.columns,
+					y=df_segment.index,
+					colorscale=colorscale,
+					text=text_values.values,  # Assuming 'df' contains the values you want to display
 					texttemplate="%{text:.1f}",
 					textfont={"size": text_embed_in_chart_size*0.8}, 
 					showscale=False,
 					# reversescale=True,
 					zmin=zmin,  # Set minimum z value
-	        		zmax=zmax,  # Set maximum z value
+					zmax=zmax,  # Set maximum z value
 				),
 				row=i, col=1
 			)
@@ -2096,16 +2096,16 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 			fig.add_trace(
 				go.Heatmap(
 					z=df_segment.values,
-		            x=df_segment.columns,
-		            y=df_segment.index,
-		            colorscale="Hot",
-		            # text=text_values.values,  # Assuming 'df' contains the values you want to display
+					x=df_segment.columns,
+					y=df_segment.index,
+					colorscale="Hot",
+					# text=text_values.values,  # Assuming 'df' contains the values you want to display
 					texttemplate="%{z:.1f}",
 					textfont={"size": text_embed_in_chart_size*0.8}, 
 					showscale=False,
 					reversescale=True,
 					# zmin=zmin,  # Set minimum z value
-	        		# zmax=zmax,  # Set maximum z value
+					# zmax=zmax,  # Set maximum z value
 				),
 				row=i, col=1
 			)
