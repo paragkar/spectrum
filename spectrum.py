@@ -1982,7 +1982,7 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 
 	# Further filter dataframe by selected bands if any
 	if selected_bands:
-	    df = df[df["Band"].isin(selected_bands)]
+		df = df[df["Band"].isin(selected_bands)]
 
 	# Choose service areas to view
 	available_areas = sorted(list(set(df["Service Area"])))
@@ -1990,7 +1990,7 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 
 	# Further filter dataframe by selected service areas
 	if selected_areas:
-	    df = df[df["Service Area"].isin(selected_areas)]
+		df = df[df["Service Area"].isin(selected_areas)]
 
 
 	#Choosing the selected dimension
@@ -2026,25 +2026,25 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 
 	# Manually assign colors to each bidder
 	bidder_colors = {
-    "Adani": "#FF6347",      # Tomato
-    "Aircel": "#FF4500",     # OrangeRed
-    "Augere": "#FFD700",     # Gold
-    "Bharti": "#32CD32",     # LimeGreen
-    "Etisalat": "#4682B4",   # SteelBlue
-    "Idea": "#FFA500",       # Orange
-    "Infotel": "#DA70D6",    # Orchid
-    "Qualcomm": "#6495ED",   # CornflowerBlue
-    "RCOM": "#FFFF00",       # Yellow
-    "RJIO": "#FF0000",       # Red
-    "Reliance": "#6B8E23",   # OliveDrab
-    "STel": "#20B2AA",       # LightSeaGreen
-    "Spice": "#EE82EE",      # Violet
-    "Tata": "#0000FF",       # Blue
-    "Telewings": "#FFDAB9",  # PeachPuff
-    "Tikona": "#800080",     # Purple
-    "Videocon": "#40E0D0",   # Turquoise
-    "VodaIdea": "#BA55D3",   # MediumOrchid
-    "Vodafone": "#FFC0CB"    # Pink
+	"Adani": "#FF6347",      # Tomato
+	"Aircel": "#FF4500",     # OrangeRed
+	"Augere": "#FFD700",     # Gold
+	"Bharti": "#32CD32",     # LimeGreen
+	"Etisalat": "#4682B4",   # SteelBlue
+	"Idea": "#FFA500",       # Orange
+	"Infotel": "#DA70D6",    # Orchid
+	"Qualcomm": "#6495ED",   # CornflowerBlue
+	"RCOM": "#FFFF00",       # Yellow
+	"RJIO": "#FF0000",       # Red
+	"Reliance": "#6B8E23",   # OliveDrab
+	"STel": "#20B2AA",       # LightSeaGreen
+	"Spice": "#EE82EE",      # Violet
+	"Tata": "#0000FF",       # Blue
+	"Telewings": "#FFDAB9",  # PeachPuff
+	"Tikona": "#800080",     # Purple
+	"Videocon": "#40E0D0",   # Turquoise
+	"VodaIdea": "#BA55D3",   # MediumOrchid
+	"Vodafone": "#FFC0CB"    # Pink
 	}
 
 
@@ -2112,7 +2112,7 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 
 	# Adjusting subplot setup to include two columns, one for the heatmap and one for the bar chart
 	fig = make_subplots(rows=len(df_dict), cols=2, specs=[[{"type": "heatmap"}, {"type": "bar"}] for _ in range(len(df_dict))],
-                    vertical_spacing=vertical_spacing_mul_dict[AuctionYear])
+					vertical_spacing=vertical_spacing_mul_dict[AuctionYear])
 
 	# Determine the range for z values - it should cover all indices used in your colorscale
 	zmin, zmax = 0, 1  # Since your colorscale is likely mapped from 0 to 1
@@ -2162,23 +2162,23 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 			)
 
 		# Extract row totals for the current segment
-	    segment_totals = row_totals[row_totals['Service Area'].isin(df_segment.index)]
+		segment_totals = row_totals[row_totals['Service Area'].isin(df_segment.index)]
 
-	    # Add bar chart trace
-	    fig.add_trace(
-	        go.Bar(
-	            x=segment_totals['Service Area'],
-	            y=segment_totals['Total'],
-	            marker_color='red',  # Bar color
-	            text=segment_totals['Total'],  # To show the totals on the bars
-	            textposition='auto',
-	        ),
-	        row=i, col=2
-	    )
+		# Add bar chart trace
+		fig.add_trace(
+			go.Bar(
+				x=segment_totals['Service Area'],
+				y=segment_totals['Total'],
+				marker_color='red',  # Bar color
+				text=segment_totals['Total'],  # To show the totals on the bars
+				textposition='auto',
+			),
+			row=i, col=2
+		)
 
-	    # Update axis settings if necessary
-	    fig.update_yaxes(title_text="Values", row=i, col=2)
-	    fig.update_xaxes(title_text="Service Area", row=i, col=2)
+		# Update axis settings if necessary
+		fig.update_yaxes(title_text="Values", row=i, col=2)
+		fig.update_xaxes(title_text="Service Area", row=i, col=2)
 
 		# Calculate whether the dataframe has any non-zero values
 		has_non_zero_values = df_segment.sum().sum() > 0  # This sums all values and checks if the total is greater than 0
