@@ -2061,17 +2061,14 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	# Determine the range for z values - it should cover all indices used in your colorscale
 	zmin, zmax = 0, 1  # Since your colorscale is likely mapped from 0 to 1
 
-
 	# Iterate through each band and its corresponding dataframe
 	for i, (band, df_segment) in enumerate(df_dict.items(), start=1):
+
+		if selected_dimension not in ["Ratio PWPtoRP End Rd"]:
 
 		text_values = df_segment.replace(np.nan, '')
 		aligned_color_df = color_df.loc[df_segment.index, df_segment.columns].replace(np.nan, "")
 
-		# st.write(aligned_color_df)
-		# st.write(colorscale)
-
-		if selected_dimension not in ["Ratio PWPtoRP End Rd"]:
 
 			# Create a heatmap for each band
 			fig.add_trace(
@@ -2092,6 +2089,9 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 			)
 
 		if selected_dimension in ["Ratio PWPtoRP End Rd"]:
+
+			st.write(df_segment)
+
 			# Create a heatmap for each band
 			fig.add_trace(
 				go.Heatmap(
