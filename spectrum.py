@@ -2225,7 +2225,7 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 		# plot_bgcolor='#B0C4DE',  # Background color for the plot area light greay
 		plot_bgcolor='white',  # Background color for the plot area light greay
 		paper_bgcolor='white',
-		margin=dict(t=30, b=30, l=30, r=30, pad=4),
+		margin=dict(t=50, b=10, l=10, r=10, pad=4),
 		yaxis=dict(
 		  tickmode='array',
 		  # tickfont=dict(size=text_embed_in_chart_size),
