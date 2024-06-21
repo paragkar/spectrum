@@ -2127,6 +2127,9 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	# Determine the range for z values - it should cover all indices used in your colorscale
 	zmin, zmax = 0, 1  # Since your colorscale is likely mapped from 0 to 1
 
+	# Assume a base bar width, or dynamically calculate it
+	base_bar_width = 0.3  # Example fixed width
+
 	# Iterate through each band and its corresponding dataframe
 	for i, (band, df_segment) in enumerate(df_dict.items(), start=1):
 
