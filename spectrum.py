@@ -1992,11 +1992,6 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	if selected_areas:
 		df = df[df["Service Area"].isin(selected_areas)]
 
-
-	#Choosing the selected dimension
-	# dim_to_select = ["Bid Value","Ratio PWPtoRP End Rd", "Prov WinBid Start Rd","Rank Start Rd","Prov WinBid End Rd",	
-	# "Rank End Rd","Blocks Selected", "Prov Alloc BLKs Start Rd","Prov Alloc BLKs End Rd"]
-
 	dim_to_select = ["Total Bid Value", "RatioPWPtoRP EndRd", "ProvWinBid StartRd","Rank StartRd","ProvWinBid EndRd", "Rank EndRd","Blocks Selected", 
 					"ProvAllocBLKs StartRd","ProvAllocBLKs EndRd"]
 
@@ -2114,9 +2109,6 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 
 	vertical_spacing_mul_dict = {2022:0.035, 2021:0.033, 2016:0.032, 2015 : 0.04, 2014 : 0.06, 2012 : 0.04, 2010 : 0.05}
 
-	# Create the figure with multiple subplots
-	# fig = make_subplots(rows=len(df_dict), cols=1, vertical_spacing=vertical_spacing_mul_dict[AuctionYear])
-
 
 	# Adjusting subplot setup to include two columns, one for the heatmap and one for the bar chart
 	fig = make_subplots(rows=len(df_dict), cols=2, specs=[[{"type": "heatmap"}, {"type": "bar"}] for _ in range(len(df_dict))],
@@ -2176,13 +2168,6 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 
 		# Extract row totals for the current segment aligned with the bidders/bands
 		segment_totals = row_totals[row_totals['BandBidder'].isin(df_segment.index)]
-
-		 # Prepare totals and segment data
-		# segment_totals = df['Total'].groupby(df['BandBidder']).sum().reset_index()
-
-		# Iterate through each segment to adjust text position dynamically
-		# text_positions = ['inside' if x > max_value * 0.05 else 'outside' for x in row_totals['Total']]
-
 
 		# Add bar chart trace
 		fig.add_trace(
