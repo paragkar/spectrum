@@ -2222,7 +2222,7 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 
 
 	# Update the overall layout
-	fig.update_layout(uniformtext_minsize=text_embed_in_chart_size*0.7, 
+	fig.update_layout(uniformtext_minsize=text_embed_in_chart_size*0.75, 
 		uniformtext_mode='hide', 
 		xaxis_title=None, 
 		yaxis_title=None, 
