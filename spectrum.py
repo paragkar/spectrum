@@ -2085,6 +2085,8 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	# Calculate row totals for each bidder across selected bands
 	row_totals = df.sum(axis=1).reset_index(name='Total')
 
+	st.write(row_totals)
+
 	# Transpose and prepare color_df for visualization
 	def transpose_color_df(color_df):
 		color_df = color_df.T.sort_index(ascending=False)
