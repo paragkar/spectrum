@@ -2000,6 +2000,10 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	# Generate a fixed color palette first
 	all_bidders = ["Bharti", "Idea", "Telewings", "Videocon", "Vodafone", "Aircel", "RCOM", "RJIO", "Tata", "VodaIdea", "Adani"]
 
+	all_bidders_2010_3G = ["Aircel", "Bharti", "Etisalat", "Idea" "Reliance", "STel", "Tata", "Videocon", "Vodafone"]
+
+	all_bidder_2010_BWA = ["Aircel", "Augere", "Bharti", "Idea", "Infotel", "Qualcomm", "Reliance", "Spice", "Tata", "Tikona", "Vodafone"]
+
 	# Manually assign colors to each bidder
 	bidder_colors = {
 	"Bharti": "#00FF00",  # Green
@@ -2015,13 +2019,50 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	"Adani": "#B22222"   # Brick
 	}
 
+	# Manually assign colors to each bidder
+	bidder_colors_2010_3G = {
+	"Bharti": "#00FF00",  # Green
+	"Idea": "#FFA500",   # Orange
+	# "Telewings": "#FFD700",  # Gold
+	"Videocon": "#EE82EE",  # Violet
+	"Vodafone": "#FFC0CB",  # Pink
+	"Aircel": "#A52A2A",  # Brown
+	"Reliance": "#FFFF00",  # Yellow
+	"STel": "#FF0000",  # Red
+	"Tata": "#0000FF",  # Blue
+	# "STel": "#0000FF",  # Blue
+	"Etisalat": "#B22222"   # Brick
+	}
 
-	# Create a colorscale for Plotly, mapping indices to colors
-	colorscale = [(i / (len(bidder_colors) - 1), color) for i, color in enumerate(bidder_colors.values())]
-	colorscale.append((1, list(bidder_colors.values())[-1]))  # Ensure the last color is included
+	bidder_colors_2010_BWA = {
+	"Bharti": "#00FF00",  # Green
+	"Idea": "#FFA500",   # Orange
+	"Augere": "#FFD700",  # Gold
+	"Spice": "#EE82EE",  # Violet
+	"Vodafone": "#FFC0CB",  # Pink
+	"Aircel": "#A52A2A",  # Brown
+	"Reliance": "#FFFF00",  # Yellow
+	"Infotel": "#FF0000",  # Red
+	"Qualcomm": "#0000FF",  # Blue
+	"Tikona": "#0000LF",  # ?
+	"Tata": "#B22222"   # Brick
+	}
 
-	# Create color_df using indices for the colorscale
-	color_index_map = {bidder: i / (len(bidder_colors) - 1) for i, bidder in enumerate(bidder_colors.keys())}
+
+
+	def colorscale_and_color_index_map(bidder_colors):
+		# Create a colorscale for Plotly, mapping indices to colors
+		colorscale = [(i / (len(bidder_colors) - 1), color) for i, color in enumerate(bidder_colors.values())]
+		colorscale.append((1, list(bidder_colors.values())[-1]))  # Ensure the last color is included
+
+		# Create color_df using indices for the colorscale
+		color_index_map = {bidder: i / (len(bidder_colors) - 1) for i, bidder in enumerate(bidder_colors.keys())}
+
+		return colorscale, color_index_map
+
+	colorscale, color_index_map = colorscale_and_color_index_map(bidder_colors)
+
+
 
 	# Simplify column names for display
 	column_labels = [f"{col[1]} ({col[0]})" for col in df.columns]
