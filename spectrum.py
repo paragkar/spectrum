@@ -2171,7 +2171,7 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 
 	bands_in_view = len(df_dict.keys())
 
-	height_mul_dict = {1:1, 2:0.9, 3:0.8, 4 :1 , 5 :1, 6 : 1, 7: 1}
+	height_mul_dict = {1:1, 2:0.9, 3:0.8, 4 :1.2 , 5 :1, 6 : 1, 7: 1}
 
 
 
