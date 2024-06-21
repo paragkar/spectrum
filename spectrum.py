@@ -2184,8 +2184,8 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 		)
 
 		 # Update axis settings to hide y-axis labels and fit tightly
-	    fig.update_yaxes(row=i, col=2, showticklabels=False)  # Hide y-axis tick labels
-	    fig.update_xaxes(row=i, col=2, showticklabels=False)   # Optionally adjust x-axis labels if necessary
+		fig.update_yaxes(row=i, col=2, showticklabels=False)  # Hide y-axis tick labels
+		fig.update_xaxes(row=i, col=2, showticklabels=False)   # Optionally adjust x-axis labels if necessary
 
 
 		# Calculate whether the dataframe has any non-zero values
