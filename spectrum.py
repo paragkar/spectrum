@@ -1984,6 +1984,16 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	if selected_bands:
 	    df = df[df["Band"].isin(selected_bands)]
 
+	# Choose service areas to view
+	available_areas = sorted(list(set(df["Service Area"])))
+	selected_areas = st.sidebar.multiselect('Select Service Areas to View', available_areas, default=available_areas)
+
+	# Further filter dataframe by selected service areas
+	if selected_areas:
+	    df = df[df["Service Area"].isin(selected_areas)]
+
+
+
 
 	#Choosing the selected dimension
 	dim_to_select = ["Bid Value","Ratio PWPtoRP End Rd", "Prov WinBid Start Rd","Rank Start Rd","Prov WinBid End Rd",	
@@ -2011,49 +2021,6 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	all_bidders = ['Adani', 'Aircel', 'Augere', 'Bharti', 'Etisalat', 'Idea', 'Infotel', 'Qualcomm', 'RCOM', 
 	'RJIO', 'Reliance', 'STel', 'Spice', 'Tata', 'Telewings', 'Tikona', 'Videocon', 'VodaIdea', 'Vodafone']
 	
-	# # Manually assign colors to each bidder
-	# bidder_colors = {
-	# "Bharti": "#00FF00",  # Green
-	# "Idea": "#FFA500",   # Orange
-	# "Telewings": "#FFD700",  # Gold
-	# "Videocon": "#EE82EE",  # Violet
-	# "Vodafone": "#FFC0CB",  # Pink
-	# "Aircel": "#A52A2A",  # Brown
-	# "RCOM": "#FFFF00",  # Yellow
-	# "RJIO": "#FF0000",  # Red
-	# "Tata": "#0000FF",  # Blue
-	# "VodaIdea": "#0000FF",  # Blue
-	# "Adani": "#B22222"   # Brick
-	# }
-
-	# # Manually assign colors to each bidder
-	# bidder_colors_2010_3G = {
-	# "Bharti": "#00FF00",  # Green
-	# "Idea": "#FFA500",   # Orange
-	# # "Telewings": "#FFD700",  # Gold
-	# "Videocon": "#EE82EE",  # Violet
-	# "Vodafone": "#FFC0CB",  # Pink
-	# "Aircel": "#A52A2A",  # Brown
-	# "Reliance": "#FFFF00",  # Yellow
-	# "STel": "#FF0000",  # Red
-	# "Tata": "#0000FF",  # Blue
-	# # "STel": "#0000FF",  # Blue
-	# "Etisalat": "#B22222"   # Brick
-	# }
-
-	# bidder_colors_2010_BWA = {
-	# "Bharti": "#00FF00",  # Green
-	# "Idea": "#FFA500",   # Orange
-	# "Augere": "#FFD700",  # Gold
-	# "Spice": "#EE82EE",  # Violet
-	# "Vodafone": "#FFC0CB",  # Pink
-	# "Aircel": "#A52A2A",  # Brown
-	# "Reliance": "#FFFF00",  # Yellow
-	# "Infotel": "#FF0000",  # Red
-	# "Qualcomm": "#0000FF",  # Blue
-	# "Tikona": "#0000LF",  # ?
-	# "Tata": "#B22222"   # Brick
-	# }
 
 	# Manually assign colors to each bidder
 	bidder_colors = {
@@ -2077,7 +2044,6 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
     "VodaIdea": "#BA55D3",   # MediumOrchid
     "Vodafone": "#FFC0CB"    # Pink
 	}
-
 
 
 	def colorscale_and_color_index_map(bidder_colors):
