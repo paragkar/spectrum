@@ -2085,6 +2085,9 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	# Calculate row totals for each bidder across selected bands
 	row_totals = df.sum(axis=1).reset_index(name='Total')
 
+	row_totals.columns = ["BandBidder", "Total"]
+
+
 	st.write(row_totals)
 
 	# Transpose and prepare color_df for visualization
@@ -2164,12 +2167,12 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 			)
 
 		# Extract row totals for the current segment
-		segment_totals = row_totals[row_totals['index'].isin(df_segment.index)].T
+		segment_totals = row_totals[row_totals['BandBidder'].isin(df_segment.index)]
 
 		# Add bar chart trace
 		fig.add_trace(
 			go.Bar(
-				x=segment_totals['index'],
+				x=segment_totals['BandBidder'],
 				y=segment_totals['Total'],
 				marker_color='red',  # Bar color
 				text=segment_totals['Total'],  # To show the totals on the bars
