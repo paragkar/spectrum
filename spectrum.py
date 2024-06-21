@@ -2104,8 +2104,8 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 					textfont={"size": text_embed_in_chart_size*0.8}, 
 					showscale=False,
 					# reversescale=True,
-					zmin=zmin,  # Set minimum z value
-	        		zmax=zmax,  # Set maximum z value
+					# zmin=zmin,  # Set minimum z value
+	        		# zmax=zmax,  # Set maximum z value
 				),
 				row=i, col=1
 			)
