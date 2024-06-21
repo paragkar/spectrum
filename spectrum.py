@@ -2181,7 +2181,7 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 		# segment_totals = df['Total'].groupby(df['BandBidder']).sum().reset_index()
 
 		# Iterate through each segment to adjust text position dynamically
-		text_positions = ['inside' if x > max_value * 0.05 else 'outside' for x in row_totals['Total']]
+		# text_positions = ['inside' if x > max_value * 0.05 else 'outside' for x in row_totals['Total']]
 
 
 		# Add bar chart trace
