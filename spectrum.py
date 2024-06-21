@@ -1977,7 +1977,8 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 
 	# Choose bands to view
 	available_bands = sorted(list(set(df["Band"])))
-	selected_bands = st.sidebar.multiselect('Select Bands to View', available_bands, default=available_bands[0])
+	# Default to selecting all bands initially
+	selected_bands = st.sidebar.multiselect('Select Bands to View', available_bands, default=available_bands)
 
 	# Further filter dataframe by selected bands if any
 	if selected_bands:
