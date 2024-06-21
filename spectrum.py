@@ -2190,10 +2190,6 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 		# Set the x-axis range for bar charts to be the same across all subplots
 		fig.update_xaxes(row=i, col=2, range=[0, max_total_value])
 
-		# # Remove axis lines for the bar chart
-		# fig.update_xaxes(row=i, col=2, showline=False, showticklabels=False, zeroline=False)
-		# fig.update_yaxes(row=i, col=2, showline=False, showticklabels=False, zeroline=False)
-
 		# Create a Retangular Block on Bar
 		fig.update_xaxes(row=i, col=2, fixedrange=True, showline=True, linewidth=2.5, linecolor='black', mirror=True, showgrid=True, gridcolor='lightgrey')
 		fig.update_yaxes(row=i, col=2, fixedrange=True, showline=True, linewidth=2.5, linecolor='black', mirror=True, showgrid=True, gridcolor='lightgrey')
@@ -2211,15 +2207,10 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 		fig.update_yaxes(row=i, col=1, tickfont=dict(size=text_embed_in_chart_size*0.7),
 						title_text="" if has_non_zero_values else str(band))  # Set the y-axis title here)
 
-	
-	# height_mul_dict = {2022:0.18, 2021: 0.20, 2016:0.21, 2015 : 0.35, 2014 : 0.55, 2012 : 0.55, 2010: 0.55}
-
 
 	bands_in_view = len(df_dict.keys())
 
 	height_mul_dict = {1:0.8, 2:1, 3: 1.2, 4 :1.2 , 5 :1.35, 6 : 1.45 , 7: 1.45, 8: 1.45, 9:1.45}
-
-
 
 	# Update the overall layout
 	fig.update_layout(uniformtext_minsize=text_embed_in_chart_size*0.75, 
@@ -2250,7 +2241,6 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 		  # tickfont=dict(size=text_embed_in_chart_size),
 		   ), 
 	)
-
 
 	# Display the figure in Streamlit
 	placeholder = st.empty()
