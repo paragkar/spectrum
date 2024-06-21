@@ -2164,7 +2164,7 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 			)
 
 		# Extract row totals for the current segment
-		segment_totals = row_totals[row_totals['Service Area'].isin(df_segment.index)]
+		segment_totals = row_totals[row_totals['index'].isin(df_segment.index)]
 
 		# Add bar chart trace
 		fig.add_trace(
