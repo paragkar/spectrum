@@ -2168,6 +2168,9 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	
 	height_mul_dict = {2022:0.18, 2021: 0.20, 2016:0.21, 2015 : 0.35, 2014 : 0.55, 2012 : 0.55, 2010: 0.55}
 
+
+	st.write(len(df_dict.keys()))
+
 	# Update the overall layout
 	fig.update_layout(uniformtext_minsize=text_embed_in_chart_size, 
 		uniformtext_mode='hide', 
