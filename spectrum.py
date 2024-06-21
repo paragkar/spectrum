@@ -2166,7 +2166,9 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 						title_text="" if has_non_zero_values else str(band))  # Set the y-axis title here)
 
 	
-	height_mul_dict = {2022:0.18, 2021: 0.20, 2016:0.21, 2015 : 0.35, 2014 : 0.55, 2012 : 0.55, 2010: 0.55}
+	# height_mul_dict = {2022:0.18, 2021: 0.20, 2016:0.21, 2015 : 0.35, 2014 : 0.55, 2012 : 0.55, 2010: 0.55}
+
+	height_mul_dict = {2022:0.55, 2021:0.55, 2016:0.55, 2015 :0.55, 2014 :0.55, 2012 : 0.55, 2010: 0.55}
 
 
 
