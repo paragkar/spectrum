@@ -2177,7 +2177,7 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 				orientation='h',  # Horizontal bar chart
 				marker_color='brown',  # Bar color
 				text=segment_totals['Total'],  # To show the totals on the bars
-				textfont=dict(color='Aqua', size = text_embed_in_chart_size*0.6),  # Dynamic text size
+				textfont=dict(color='skyblue', size = text_embed_in_chart_size*0.6),  # Dynamic text size
 				showlegend = False,
 				textposition="auto",
 			),
