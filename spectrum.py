@@ -1975,6 +1975,15 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	df = df[df["Auction Year"] == AuctionYear]
 
 
+	# Choose bands to view
+	available_bands = sorted(list(set(df["Band"])))
+	selected_bands = st.sidebar.multiselect('Select Bands to View', available_bands, default=available_bands[0])
+
+	# Further filter dataframe by selected bands if any
+	if selected_bands:
+	    df = df[df["Band"].isin(selected_bands)]
+
+
 	#Choosing the selected dimension
 	dim_to_select = ["Bid Value","Ratio PWPtoRP End Rd", "Prov WinBid Start Rd","Rank Start Rd","Prov WinBid End Rd",	
 	"Rank End Rd","Blocks Selected", "Prov Alloc BLKs Start Rd","Prov Alloc BLKs End Rd"]
