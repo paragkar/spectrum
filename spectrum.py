@@ -2185,20 +2185,20 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 		)
 
 
-		# Set the plot background color of the bar chart subplot to yellow
-		fig.add_layout_image(
-			dict(
-				source="",  # No image source, used for setting background color
-				xref="x domain", yref="y domain",
-				x=0, y=0, xanchor="left", yanchor="bottom",
-				sizex=1, sizey=1,
-				sizing="stretch",
-				opacity=1.0,
-				layer="below",
-				row=i, col=2,  # Specify the subplot to apply the background
-				fillcolor="yellow"  # Background color
-			)
-		)
+		# # Set the plot background color of the bar chart subplot to yellow
+		# fig.add_layout_image(
+		# 	dict(
+		# 		source="",  # No image source, used for setting background color
+		# 		xref="x domain", yref="y domain",
+		# 		x=0, y=0, xanchor="left", yanchor="bottom",
+		# 		sizex=1, sizey=1,
+		# 		sizing="stretch",
+		# 		opacity=1.0,
+		# 		layer="below",
+		# 		row=i, col=2,  # Specify the subplot to apply the background
+		# 		fillcolor="yellow"  # Background color
+		# 	)
+		# )
 
 		 # Update axis settings to hide y-axis labels and fit tightly
 		fig.update_yaxes(row=i, col=2, showticklabels=False)  # Hide y-axis tick labels
