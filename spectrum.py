@@ -2071,23 +2071,45 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 		# st.write(aligned_color_df)
 		# st.write(colorscale)
 
-		# Create a heatmap for each band
-		fig.add_trace(
-			go.Heatmap(
-				z=aligned_color_df.values,
-	            x=df_segment.columns,
-	            y=df_segment.index,
-	            colorscale=colorscale,
-	            text=text_values.values,  # Assuming 'df' contains the values you want to display
-				texttemplate="%{text:.1f}",
-				textfont={"size": text_embed_in_chart_size*0.8}, 
-				showscale=False,
-				# reversescale=True,
-				zmin=zmin,  # Set minimum z value
-        		zmax=zmax,  # Set maximum z value
-			),
-			row=i, col=1
-		)
+		if selected_dimension not in ["Ratio PWPtoRP End Rd"]:
+
+			# Create a heatmap for each band
+			fig.add_trace(
+				go.Heatmap(
+					z=aligned_color_df.values,
+		            x=df_segment.columns,
+		            y=df_segment.index,
+		            colorscale=colorscale,
+		            text=text_values.values,  # Assuming 'df' contains the values you want to display
+					texttemplate="%{text:.1f}",
+					textfont={"size": text_embed_in_chart_size*0.8}, 
+					showscale=False,
+					# reversescale=True,
+					zmin=zmin,  # Set minimum z value
+	        		zmax=zmax,  # Set maximum z value
+				),
+				row=i, col=1
+			)
+
+		if selected_dimension in ["Ratio PWPtoRP End Rd"]:
+			# Create a heatmap for each band
+			fig.add_trace(
+				go.Heatmap(
+					z=df_segment.values,
+		            x=df_segment.columns,
+		            y=df_segment.index,
+		            colorscale="Hot",
+		            text=text_values.values,  # Assuming 'df' contains the values you want to display
+					texttemplate="%{text:.1f}",
+					textfont={"size": text_embed_in_chart_size*0.8}, 
+					showscale=False,
+					# reversescale=True,
+					zmin=zmin,  # Set minimum z value
+	        		zmax=zmax,  # Set maximum z value
+				),
+				row=i, col=1
+			)
+
 
 		# Calculate whether the dataframe has any non-zero values
 		has_non_zero_values = df_segment.sum().sum() > 0  # This sums all values and checks if the total is greater than 0
