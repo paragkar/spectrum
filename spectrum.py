@@ -2179,7 +2179,7 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 				text=segment_totals['Total'],  # To show the totals on the bars
 				textfont=dict(color='white', size = text_embed_in_chart_size*0.6),  # Dynamic text size
 				showlegend = False,
-				textposition="inside",
+				textposition="auto",
 			),
 			row=i, col=2
 		)
@@ -2222,7 +2222,7 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 
 
 	# Update the overall layout
-	fig.update_layout(uniformtext_minsize=text_embed_in_chart_size, 
+	fig.update_layout(uniformtext_minsize=text_embed_in_chart_size*0.6, 
 		uniformtext_mode='hide', 
 		xaxis_title=None, 
 		yaxis_title=None, 
