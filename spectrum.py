@@ -2089,6 +2089,9 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 
 	row_totals["Total"] = row_totals["Total"].astype(float).round(0)
 
+	# Calculate the maximum total value to set a consistent x-axis range across all bar charts
+	max_total_value = row_totals['Total'].max()  # Assuming 'Total' holds the values you need
+
 
 	# Transpose and prepare color_df for visualization
 	def transpose_color_df(color_df):
@@ -2187,6 +2190,8 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 		 # Update axis settings to hide y-axis labels and fit tightly
 		fig.update_yaxes(row=i, col=2, showticklabels=False)  # Hide y-axis tick labels
 		fig.update_xaxes(row=i, col=2, showticklabels=False)   # Optionally adjust x-axis labels if necessary
+		# Set the x-axis range for bar charts to be the same across all subplots
+		fig.update_xaxes(row=i, col=2, range=[0, max_total_value])
 
 
 		# Calculate whether the dataframe has any non-zero values
