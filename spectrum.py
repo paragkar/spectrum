@@ -813,7 +813,7 @@ Auction_Year_Band_Features = {
 	},
 	"2010-Band2100": {
 		"totalrounds": 183,
-		"mainsheet": "2010_3G",
+		"mainsheet": "2010_3G_2100",
 		"mainoriflag": False,
 		"activitysheet": "2010_3G_Activity",
 		"demandsheet": "2010_3G_AD",
@@ -833,7 +833,7 @@ Auction_Year_Band_Features = {
 	},
 	"2010-Band2300": {
 		"totalrounds": 117,
-		"mainsheet": "2010_BWA",
+		"mainsheet": "2010_BWA_2300",
 		"mainoriflag": False,
 		"activitysheet": "2010_BWA_Activity",
 		"demandsheet": "2010_BWA_AD",
