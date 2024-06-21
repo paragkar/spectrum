@@ -2051,12 +2051,13 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	# Organizing df_dict according to band_order
 	df_dict = {band: df_dict[band] for band in band_order if band in df_dict}
 
+	st.write(df_dict)
+
 
 	vertical_spacing_mul_dict = {2022:0.035, 2021:0.033, 2016:0.032, 2015 : 0.04, 2014 : 0.06, 2012 : 0.04}
 
 	# Create the figure with multiple subplots
 	fig = make_subplots(rows=len(df_dict), cols=1, vertical_spacing=vertical_spacing_mul_dict[AuctionYear])
-
 
 	# Determine the range for z values - it should cover all indices used in your colorscale
 	zmin, zmax = 0, 1  # Since your colorscale is likely mapped from 0 to 1
