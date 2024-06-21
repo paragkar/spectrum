@@ -2207,7 +2207,7 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 		fig.update_xaxes(row=i, col=2, range=[0, max_total_value])
 
 		# Create a Retangular Block on Bar
-		fig.update_xaxes(row=i, col=2, fixedrange=True, showline=True, linewidth=2.5, linecolor='black', mirror=True, showgrid=True, gridcolor='lightgrey', title="Total", title_standoff=5)
+		fig.update_xaxes(row=i, col=2, fixedrange=True, showline=True, linewidth=2.5, linecolor='black', mirror=True, showgrid=True, gridcolor='lightgrey', title="Total", title_standoff=8)
 		fig.update_yaxes(row=i, col=2, fixedrange=True, showline=True, linewidth=2.5, linecolor='black', mirror=True, showgrid=True, gridcolor='lightgrey')
 
 
