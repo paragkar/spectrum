@@ -2184,6 +2184,22 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 			row=i, col=2
 		)
 
+
+		# Set the plot background color of the bar chart subplot to yellow
+		fig.add_layout_image(
+			dict(
+				source="",  # No image source, used for setting background color
+				xref="x domain", yref="y domain",
+				x=0, y=0, xanchor="left", yanchor="bottom",
+				sizex=1, sizey=1,
+				sizing="stretch",
+				opacity=1.0,
+				layer="below",
+				row=i, col=2,  # Specify the subplot to apply the background
+				fillcolor="yellow"  # Background color
+			)
+		)
+
 		 # Update axis settings to hide y-axis labels and fit tightly
 		fig.update_yaxes(row=i, col=2, showticklabels=False)  # Hide y-axis tick labels
 		fig.update_xaxes(row=i, col=2, showticklabels=False)   # Optionally adjust x-axis labels if necessary
@@ -2191,7 +2207,7 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 		fig.update_xaxes(row=i, col=2, range=[0, max_total_value])
 
 		# Create a Retangular Block on Bar
-		fig.update_xaxes(row=i, col=2, fixedrange=True, showline=True, linewidth=2.5, linecolor='black', mirror=True, showgrid=True, gridcolor='lightgrey', title="Total")
+		fig.update_xaxes(row=i, col=2, fixedrange=True, showline=True, linewidth=2.5, linecolor='black', mirror=True, showgrid=True, gridcolor='lightgrey', title="Total", title_standoff=5)
 		fig.update_yaxes(row=i, col=2, fixedrange=True, showline=True, linewidth=2.5, linecolor='black', mirror=True, showgrid=True, gridcolor='lightgrey')
 
 
