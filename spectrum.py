@@ -2169,7 +2169,7 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 		# Add bar chart trace
 		fig.add_trace(
 			go.Bar(
-				x=segment_totals['Service Area'],
+				x=segment_totals['index'],
 				y=segment_totals['Total'],
 				marker_color='red',  # Bar color
 				text=segment_totals['Total'],  # To show the totals on the bars
