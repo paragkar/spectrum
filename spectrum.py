@@ -2190,9 +2190,13 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 		# Set the x-axis range for bar charts to be the same across all subplots
 		fig.update_xaxes(row=i, col=2, range=[0, max_total_value])
 
-		# Remove axis lines for the bar chart
-		fig.update_xaxes(row=i, col=2, showline=False, showticklabels=True, zeroline=False)
-		fig.update_yaxes(row=i, col=2, showline=False, showticklabels=False, zeroline=False)
+		# # Remove axis lines for the bar chart
+		# fig.update_xaxes(row=i, col=2, showline=False, showticklabels=False, zeroline=False)
+		# fig.update_yaxes(row=i, col=2, showline=False, showticklabels=False, zeroline=False)
+
+		# Create a Retangular Block on Bar
+		fig.update_xaxes(row=i, col=2, fixedrange=True, showline=True, linewidth=1.5, linecolor='black', mirror=True, showgrid=True, gridcolor='lightgrey')
+		fig.update_yaxes(row=i, col=2, fixedrange=True, showline=True, linewidth=1.5, linecolor='black', mirror=True, showgrid=True, gridcolor='lightgrey')
 
 
 		# Calculate whether the dataframe has any non-zero values
