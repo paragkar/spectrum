@@ -2171,8 +2171,8 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 		# Add bar chart trace
 		fig.add_trace(
 			go.Bar(
-				x=segment_totals['BandBidder'],
-				y=segment_totals['Total'],
+				y=segment_totals['BandBidder'],
+				x=segment_totals['Total'],
 				orientation='h',  # Horizontal bar chart
 				marker_color='red',  # Bar color
 				text=segment_totals['Total'],  # To show the totals on the bars
