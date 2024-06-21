@@ -2090,8 +2090,6 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 
 		if selected_dimension in ["Ratio PWPtoRP End Rd"]:
 
-			st.write(df_segment)
-
 			# Create a heatmap for each band
 			fig.add_trace(
 				go.Heatmap(
