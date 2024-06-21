@@ -2066,8 +2066,8 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 
 		if selected_dimension not in ["Ratio PWPtoRP End Rd"]:
 
-		text_values = df_segment.replace(np.nan, '')
-		aligned_color_df = color_df.loc[df_segment.index, df_segment.columns].replace(np.nan, "")
+			text_values = df_segment.replace(np.nan, '')
+			aligned_color_df = color_df.loc[df_segment.index, df_segment.columns].replace(np.nan, "")
 
 
 			# Create a heatmap for each band
