@@ -2184,8 +2184,8 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 		)
 
 		# Update axis settings if necessary
-		fig.update_yaxes(title_text="Values", row=i, col=2)
-		fig.update_xaxes(title_text="Service Area", row=i, col=2)
+		# fig.update_yaxes(title_text="Values", row=i, col=2)
+		# fig.update_xaxes(title_text="Service Area", row=i, col=2)
 
 		# Calculate whether the dataframe has any non-zero values
 		has_non_zero_values = df_segment.sum().sum() > 0  # This sums all values and checks if the total is greater than 0
