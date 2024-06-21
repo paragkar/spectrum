@@ -2128,7 +2128,7 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	zmin, zmax = 0, 1  # Since your colorscale is likely mapped from 0 to 1
 
 	# Maximum value for scaling text position
-	max_value = df['Total'].max()
+	max_value = row_totals['Total'].max()
 
 	# Iterate through each band and its corresponding dataframe
 	for i, (band, df_segment) in enumerate(df_dict.items(), start=1):
@@ -2181,7 +2181,7 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 		# segment_totals = df['Total'].groupby(df['BandBidder']).sum().reset_index()
 
 		# Iterate through each segment to adjust text position dynamically
-		text_positions = ['inside' if x > max_value * 0.05 else 'outside' for x in segment_totals['Total']]
+		text_positions = ['inside' if x > max_value * 0.05 else 'outside' for x in row_totals['Total']]
 
 
 		# Add bar chart trace
