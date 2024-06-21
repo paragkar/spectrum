@@ -2101,7 +2101,7 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	# Organizing df_dict according to band_order
 	df_dict = {band: df_dict[band] for band in band_order if band in df_dict}
 
-	st.write(df_dict.keys())
+	st.write(len(df_dict.keys())
 
 	vertical_spacing_mul_dict = {2022:0.035, 2021:0.033, 2016:0.032, 2015 : 0.04, 2014 : 0.06, 2012 : 0.04, 2010 : 0.04}
 
