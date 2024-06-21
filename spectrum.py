@@ -2101,8 +2101,6 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	# Organizing df_dict according to band_order
 	df_dict = {band: df_dict[band] for band in band_order if band in df_dict}
 
-	st.write(len(df_dict.keys()))
-
 	vertical_spacing_mul_dict = {2022:0.035, 2021:0.033, 2016:0.032, 2015 : 0.04, 2014 : 0.06, 2012 : 0.04, 2010 : 0.04}
 
 	# Create the figure with multiple subplots
@@ -2114,7 +2112,7 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	# Iterate through each band and its corresponding dataframe
 	for i, (band, df_segment) in enumerate(df_dict.items(), start=1):
 
-		if selected_dimension not in ["Ratio PWPtoRP End Rd"]:
+		if selected_dimension not in ["RatioPWPtoRP EndRd"]:
 
 			text_values = df_segment.replace(np.nan, '')
 			aligned_color_df = color_df.loc[df_segment.index, df_segment.columns].replace(np.nan, "")
@@ -2136,7 +2134,7 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 				row=i, col=1
 			)
 
-		if selected_dimension in ["Ratio PWPtoRP End Rd"]:
+		if selected_dimension in ["RatioPWPtoRP EndRd"]:
 			# Create a heatmap for each band
 			fig.add_trace(
 				go.Heatmap(
@@ -2180,7 +2178,7 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 		template='simple_white',
 		# title='Heatmap of No. of Blocks Selected by Service Area and Band',
 		width=heatmapwidth,
-		height=heatmapheight * len(df_dict)*height_mul_dict[AuctionYear],  # Total height based on the number of subplots
+		height=heatmapheight * len(df_dict.keys())*height_mul_dict[AuctionYear],  # Total height based on the number of subplots
 		autosize=True,
 		# plot_bgcolor='#B0C4DE',  # Background color for the plot area light greay
 		plot_bgcolor='white',  # Background color for the plot area light greay
