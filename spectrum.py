@@ -2118,7 +2118,7 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	# Adjusting subplot setup to include two columns, one for the heatmap and one for the bar chart
 	fig = make_subplots(rows=len(df_dict), cols=2, specs=[[{"type": "heatmap"}, {"type": "bar"}] for _ in range(len(df_dict))],
 						vertical_spacing=vertical_spacing_mul_dict[AuctionYear],
-						column_widths=[0.8, 0.2])  # Adjust the width of columns if necessary
+						column_widths=[0.9, 0.1])  # Adjust the width of columns if necessary
 
 	# Determine the range for z values - it should cover all indices used in your colorscale
 	zmin, zmax = 0, 1  # Since your colorscale is likely mapped from 0 to 1
