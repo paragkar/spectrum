@@ -2088,8 +2088,6 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	row_totals.columns = ["BandBidder", "Total"]
 
 
-	st.write(row_totals)
-
 	# Transpose and prepare color_df for visualization
 	def transpose_color_df(color_df):
 		color_df = color_df.T.sort_index(ascending=False)
