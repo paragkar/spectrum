@@ -2191,8 +2191,8 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 		fig.update_xaxes(row=i, col=2, range=[0, max_total_value])
 
 		# Remove axis lines for the bar chart
-	    fig.update_xaxes(row=i, col=2, showline=False, showticklabels=True, zeroline=False)
-	    fig.update_yaxes(row=i, col=2, showline=False, showticklabels=False, zeroline=False)
+		fig.update_xaxes(row=i, col=2, showline=False, showticklabels=True, zeroline=False)
+		fig.update_yaxes(row=i, col=2, showline=False, showticklabels=False, zeroline=False)
 
 
 		# Calculate whether the dataframe has any non-zero values
