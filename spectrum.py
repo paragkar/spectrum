@@ -2043,8 +2043,6 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	dfcopy = dfcopy[[ "Clock Round", "Bidder", "Service Area","Band", selected_dimension_for_total]]
 	dfcopy = pivot_dataframe(dfcopy, selected_dimension_for_total)
 
-	st.write(dfcopy)
-
 	# Generate a fixed color palette first
 	all_bidders = ['Adani', 'Aircel', 'Augere', 'Bharti', 'Etisalat', 'Idea', 'Infotel', 'Qualcomm', 'RCOM', 
 	'RJIO', 'Reliance', 'STel', 'Spice', 'Tata', 'Telewings', 'Tikona', 'Videocon', 'VodaIdea', 'Vodafone']
@@ -2088,7 +2086,7 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	# Simplify column names for display
 	column_labels = [f"{col[1]} ({col[0]})" for col in df.columns]
 	df.columns = column_labels
-
+	dfcopy.columns = column_labels
 
 	def create_color_df(df, color_index_map):
 		# Assuming 'df' is your DataFrame with columns formatted as "Band (Bidder)"
@@ -2104,6 +2102,11 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 
 	# Transpose and prepare df for visualization
 	df = df.T.sort_index(ascending=False).replace(0, "").replace("", np.nan)
+
+	# Transpose and prepare dfcopy to align with df structure
+	dfcopy = dfcopy.T.sort_index(ascending=False).replace(0, "").replace("", np.nan)
+
+	st.write(dfcopy)
 
 	# Calculate row totals for each bidder across selected bands
 	row_totals = df.sum(axis=1).reset_index(name='Total')
