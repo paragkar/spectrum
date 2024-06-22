@@ -2009,13 +2009,6 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	df = filt_round(df, round_number)
 	df = df.replace("-", 0).replace("",0).replace(np.nan, 0)
 
-	#Filtering the Copy dataframe with round numbers
-	dfcopy = filt_round(dfcopy, round_number)
-	dfcopy = dfcopy.replace("-", 0).replace("",0).replace(np.nan, 0)
-
-	st.write(dfcopy)
-
-
 	# Function to Pivot Dataframe based on selected dimention
 	def pivot_dataframe(df, selected_dimension):
 		df = df.pivot_table(
@@ -2027,6 +2020,32 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 		return df
 
 	df = pivot_dataframe(df, selected_dimension)
+
+	#Filtering the Copy dataframe with round numbers
+	dfcopy = filt_round(dfcopy, round_number)
+	dfcopy = dfcopy.replace("-", 0).replace("",0).replace(np.nan, 0)
+
+
+	dim_to_select_for_total_dict = {
+		"Total Bid Value" : "Total Bid Value", 
+		"RatioPWPtoRP EndRd" : "Total Bid Value",
+		"ProvWinBid StartRd" : "ProvWinBid StartRd",
+		"Rank StartRd" : "ProvWinBid StartRd",
+		"ProvWinBid EndRd" : "ProvWinBid EndRd",
+		"Rank EndRd" : "ProvWinBid EndRd",
+		"Blocks Selected" : "Blocks Selected",
+		"MHz Selected" : "MHz Selected",
+		"ProvAllocBLKs StartRd" : "ProvAllocBLKs StartRd",
+		"ProvAllocMHz StartRd" : "ProvAllocMHz StartRd",
+		"ProvAllocBLKs EndRd" : "ProvAllocBLKs EndRd",
+		"ProvAllocMHz EndRd" : "ProvAllocMHz EndRd",
+		 }
+
+	selected_dimension_for_total = dim_to_select_for_total_dict[selected_dimension]
+
+	dfcopy = dfcopy[[ "Clock Round", "Bidder", "Service Area","Band", selected_dimension_for_total]]
+
+	st.write(dfcopy)
 
 	# Generate a fixed color palette first
 	all_bidders = ['Adani', 'Aircel', 'Augere', 'Bharti', 'Etisalat', 'Idea', 'Infotel', 'Qualcomm', 'RCOM', 
