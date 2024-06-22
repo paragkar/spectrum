@@ -2112,6 +2112,9 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	# Calculate the maximum total value to set a consistent x-axis range across all bar charts
 	max_total_value = row_totals['Total'].max()  # Assuming 'Total' holds the values you need
 
+	# Map the bidder names back to colors using the color_index_map
+	row_totals['color'] = row_totals['BandBidder'].apply(lambda x: bidder_colors[x.split('(')[1].split(')')[0]])
+
 	st.write(row_totals)
 
 	# Transpose and prepare color_df for visualization
