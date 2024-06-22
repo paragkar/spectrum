@@ -2024,7 +2024,6 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	dfcopy = filt_round(dfcopy, round_number)
 	dfcopy = dfcopy.replace("-", 0).replace("",0).replace(np.nan, 0)
 
-
 	dim_to_select_for_total_dict = {
 		"Total Bid Value" : "Total Bid Value", 
 		"RatioPWPtoRP EndRd" : "Total Bid Value",
@@ -2042,7 +2041,7 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 
 	selected_dimension_for_total = dim_to_select_for_total_dict[selected_dimension]
 	dfcopy = dfcopy[[ "Clock Round", "Bidder", "Service Area","Band", selected_dimension_for_total]]
-	dfcopy = pivot_dataframe(df, selected_dimension_for_total)
+	dfcopy = pivot_dataframe(dfcppy, selected_dimension_for_total)
 
 	st.write(dfcopy)
 
