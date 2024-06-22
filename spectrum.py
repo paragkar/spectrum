@@ -1974,7 +1974,6 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	#Filtering the dataframe with selected auction year
 	df = df[df["Auction Year"] == AuctionYear]
 
-
 	# Choose bands to view
 	available_bands = sorted(list(set(df["Band"])))
 	# Default to selecting all bands initially
@@ -2018,7 +2017,6 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	all_bidders = ['Adani', 'Aircel', 'Augere', 'Bharti', 'Etisalat', 'Idea', 'Infotel', 'Qualcomm', 'RCOM', 
 	'RJIO', 'Reliance', 'STel', 'Spice', 'Tata', 'Telewings', 'Tikona', 'Videocon', 'VodaIdea', 'Vodafone']
 	
-
 	# Manually assign colors to each bidder
 	bidder_colors = {
 	"Adani": "#FF6347",      # Tomato
@@ -2041,7 +2039,6 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	"VodaIdea": "#BA55D3",   # MediumOrchid
 	"Vodafone": "#FFC0CB"    # Pink
 	}
-
 
 	def colorscale_and_color_index_map(bidder_colors):
 		# Create a colorscale for Plotly, mapping indices to colors
@@ -2073,20 +2070,17 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	#Creating Color DataFrame for each of the instants
 	color_df = create_color_df(df, color_index_map)
 
-
 	# Transpose and prepare df for visualization
 	df = df.T.sort_index(ascending=False).replace(0, "").replace("", np.nan)
 
+	st.write(df)
+
 	# Calculate row totals for each bidder across selected bands
 	row_totals = df.sum(axis=1).reset_index(name='Total')
-
 	row_totals.columns = ["BandBidder", "Total"]
-
 	row_totals["Total"] = row_totals["Total"].astype(float).round(0)
-
 	# Calculate the maximum total value to set a consistent x-axis range across all bar charts
 	max_total_value = row_totals['Total'].max()  # Assuming 'Total' holds the values you need
-
 
 	# Transpose and prepare color_df for visualization
 	def transpose_color_df(color_df):
@@ -2108,7 +2102,6 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	df_dict = {band: df_dict[band] for band in band_order if band in df_dict}
 
 	vertical_spacing_mul_dict = {2022:0.035, 2021:0.04, 2016:0.04, 2015 : 0.04, 2014 : 0.06, 2012 : 0.04, 2010 : 0.05}
-
 
 	# Adjusting subplot setup to include two columns, one for the heatmap and one for the bar chart
 	fig = make_subplots(rows=len(df_dict), cols=2, specs=[[{"type": "heatmap"}, {"type": "bar"}] for _ in range(len(df_dict))],
@@ -2184,8 +2177,6 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 			row=i, col=2
 		)
 
-
-
 		 # Update axis settings to hide y-axis labels and fit tightly
 		fig.update_yaxes(row=i, col=2, showticklabels=False)  # Hide y-axis tick labels
 		fig.update_xaxes(row=i, col=2, showticklabels=False)   # Optionally adjust x-axis labels if necessary
@@ -2195,7 +2186,6 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 		# Create a Retangular Block on Bar
 		fig.update_xaxes(row=i, col=2, fixedrange=True, showline=True, linewidth=2.5, linecolor='black', mirror=True, showgrid=True, gridcolor='lightgrey', title="Total", title_standoff=8)
 		fig.update_yaxes(row=i, col=2, fixedrange=True, showline=True, linewidth=2.5, linecolor='black', mirror=True, showgrid=True, gridcolor='lightgrey')
-
 
 		# Calculate whether the dataframe has any non-zero values
 		has_non_zero_values = df_segment.sum().sum() > 0  # This sums all values and checks if the total is greater than 0
@@ -2208,7 +2198,6 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 		fig.update_xaxes(row=i, col=1, tickfont=dict(size=text_embed_in_chart_size*0.7))
 		fig.update_yaxes(row=i, col=1, tickfont=dict(size=text_embed_in_chart_size*0.7),
 						title_text="" if has_non_zero_values else str(band))  # Set the y-axis title here)
-
 
 	bands_in_view = len(df_dict.keys())
 
@@ -2266,7 +2255,6 @@ if selected_dimension == "Spectrum Bands":
 	spectrumall = "Spectrum_All"
 	spectrumofferedvssold = "Spectrum_Offered_vs_Sold"
 	masterall = "MasterAll-TDDValueConventional" #all auction related information 
-
 
 	#loading spectrum excel file
 	df = loadspectrumfile()
