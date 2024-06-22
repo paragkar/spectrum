@@ -1960,7 +1960,7 @@ for index in dfrsrate.index:
 if selected_dimension == "Auction Integrated": #This is the new dimension that is being tested
 
 	#This function is used to filter the dataframe based on round numbers
-	@st.cache
+	@st.cache_data
 	def filt_round(df, round_number):
 		# Filtering and processing logic
 		return df[df['Clock Round'] == round_number]
@@ -2246,7 +2246,7 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 
 	# Display the figure in Streamlit
 	placeholder = st.empty()
-	st.plotly_chart(fig, use_container_width=True, sharing='stream')
+	st.plotly_chart(fig, use_container_width=True)
 
 
 if selected_dimension == "Spectrum Bands":
