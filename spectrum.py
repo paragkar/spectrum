@@ -2003,7 +2003,18 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	# Choose bands to view
 	available_bands = sorted(list(set(df["Band"])))
 	# Default to selecting all bands initially
-	selected_bands = st.sidebar.multiselect('Select Bands to View', available_bands, default=available_bands)
+
+	# selected_bands = st.sidebar.multiselect('Select Bands to View', available_bands, default=available_bands)
+
+	# Adjust selection interface based on the auction year
+	if AuctionYear == 2010:
+	    # For the year 2010, provide a selectbox with default to 2100
+	    selected_bands = st.sidebar.selectbox('Select Band to View', available_bands, index=available_bands.index("2100") if "2100" in available_bands else 0)
+	    # Wrap the selection into a list since the rest of the code expects a list
+	    selected_bands = [selected_bands]
+	else:
+	    # For other years, use a multiselect with all bands selected by default
+	    selected_bands = st.sidebar.multiselect('Select Bands to View', available_bands, default=available_bands)
 
 	# Further filter dataframe by selected bands if any
 	if selected_bands:
