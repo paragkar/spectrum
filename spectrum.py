@@ -2115,8 +2115,6 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	# Map the bidder names back to colors using the color_index_map
 	row_totals['color'] = row_totals['BandBidder'].apply(lambda x: bidder_colors[x.split('(')[1].split(')')[0]])
 
-	st.write(row_totals)
-
 	# Transpose and prepare color_df for visualization
 	def transpose_color_df(color_df):
 		color_df = color_df.T.sort_index(ascending=False)
@@ -2200,7 +2198,8 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 				y=segment_totals['BandBidder'],
 				x=segment_totals['Total'],
 				orientation='h',  # Horizontal bar chart
-				marker_color='red',  # Bar color
+				# marker_color='red',  # Bar color
+				marker=dict(color=row_totals['color']),  
 				text=segment_totals['Total'],  # To show the totals on the bars
 				textfont=dict(color='white', size = text_embed_in_chart_size*0.6),  # Dynamic text size
 				showlegend = False,
