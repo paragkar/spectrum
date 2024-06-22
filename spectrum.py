@@ -2038,6 +2038,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	if selected_dimension == "Bid Value ActivePlusPWB":
 		dfpwbEndRd = df[[ "Clock Round", "Bidder", "Service Area","Band", "ProvWinBid EndRd"]]
 
+		st.write(dfpwbEndRd)
 
 	#Choose clock round numbers
 	clkrounds = sorted(list(set(df["Clock Round"])))
