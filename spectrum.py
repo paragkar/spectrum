@@ -1993,7 +1993,6 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 
 	df = loadauctionbiddatayearbandcomb()["Sheet1"] #Loading the auction bid year and band data 
 
-
 	AuctionYears = sorted(list(set(df["Auction Year"])))
 	AuctionYear = st.sidebar.selectbox('Select an Auction Year', AuctionYears, 0) #default index 2012
 	#Filtering the dataframe with selected auction year
@@ -2001,11 +2000,9 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 
 	df["Bid Decision"] = [1 if x =="Bid" else 0 for x in df["Bid Decision"]]
 
-
 	# Choose bands to view
 	available_bands = sorted(list(set(df["Band"])))
 	# Default to selecting all bands initially
-
 
 	# Adjust selection interface based on the auction year
 	if AuctionYear == 2010:
@@ -2029,7 +2026,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	if selected_areas:
 		df = df[df["Service Area"].isin(selected_areas)]
 
-	dim_to_select = ["Bid Decision", "Bid Value", "RatioPWPtoRP EndRd", "ProvWinBid StartRd","Rank StartRd","ProvWinBid EndRd", "Rank EndRd","Blocks Selected", "MHz Selected",
+	dim_to_select = ["Bid Decision", "Bid Value ProvWinners", "Bid Value ActiveBidders","RatioPWPtoRP EndRd", "ProvWinBid StartRd","Rank StartRd","ProvWinBid EndRd", "Rank EndRd","Blocks Selected", "MHz Selected",
 					"ProvAllocBLKs StartRd","ProvAllocMHz StartRd", "ProvAllocBLKs EndRd", "ProvAllocMHz EndRd"]
 
 	dfcopy = df.copy() #Create a copy of dataframe upto selected dimension
@@ -2063,8 +2060,9 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 
 	dim_to_select_for_total_dict = {
 		"Bid Decision" : "Bid Decision",
-		"Bid Value" : "Bid Value", 
-		"RatioPWPtoRP EndRd" : "Bid Value",
+		"Bid Value ProvWinners" : "Bid Value ProvWinners", 
+		"Bid Value ActiveBidders" : "Bid Value ActiveBidders",
+		"RatioPWPtoRP EndRd" : "Bid Value ProvWinners",
 		"ProvWinBid StartRd" : "ProvWinBid StartRd",
 		"Rank StartRd" : "ProvWinBid StartRd",
 		"ProvWinBid EndRd" : "ProvWinBid EndRd",
@@ -2308,7 +2306,6 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	placeholder = st.empty()
 	st.plotly_chart(fig, use_container_width=True)
 
-
 if selected_dimension == "Spectrum Bands":
 
 	#selecting a Spectrum band
@@ -2357,7 +2354,6 @@ if selected_dimension == "Spectrum Bands":
 	bandexpf = bandexpf.set_index("LSA")
 	masterdf = df[masterall]
 	
-
 	#processing "Spectrum_all" excel tab data of the file "spectrum map"
 	dff = df[spectrumall] #contains information of LSA wise mapping oldoperators with new operators
 	dffcopy = dff.copy() #make a copy for "Operator holdings" subfeature under the feature "Freq Layout"
