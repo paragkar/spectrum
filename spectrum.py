@@ -1953,7 +1953,7 @@ with st.sidebar:
 	selected_dimension = option_menu(
 		menu_title = "Select a Menu",
 		options = ["Spectrum Bands", "Auction YearWise", "Auction BandWise", "AuctionYear AllBands", "AuctionYear Activity"], #Debug 14th June 2024
-		icons = ["1-circle-fill", "2-circle-fill", "3-circle-fill", "4-circle-fill"],
+		icons = ["1-circle-fill", "2-circle-fill", "3-circle-fill", "4-circle-fill", "5-circle-fill"],
 		menu_icon = "arrow-down-circle-fill",
 		default_index =0,
 		)
