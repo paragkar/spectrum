@@ -1971,23 +1971,25 @@ for index in dfrsrate.index:
 		auction_rsrate_dict[index.year] = dfrsrate.loc[index,:].values[0]
 
 
+#This function is used to filter the dataframe based on round numbers for selected dimensions (AuctionYear Activity & AuctionYear AllBands)
+@st.cache_data
+def filt_round(df, round_number):
+	# Filtering and processing logic
+	return df[df['Clock Round'] == round_number]
+
+
 if selected_dimension == "AuctionYear Activity":
 
 	currency_flag = "NA" #This is dummy variiable for this option done to preserve the current structure of the code 
 
-	dfac = auctionbiddatayearactivitycomb()["Sheet1"] #Loading the auction bid year activity data 
+	df = auctionbiddatayearactivitycomb()["Sheet1"] #Loading the auction bid year activity data 
 
-	st.write(dfac)
+	st.write(df)
 
 
 if selected_dimension == "AuctionYear AllBands": #This is the new dimension Added on June 2024
 
 	currency_flag = "NA" #This is dummy variiable for this option done to preserve the current structure of the code 
-
-	@st.cache_data
-	def filt_round(df, round_number):
-		# Filtering and processing logic
-		return df[df['Clock Round'] == round_number]
 
 	df = loadauctionbiddatayearbandcomb()["Sheet1"] #Loading the auction bid year and band data 
 
