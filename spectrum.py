@@ -2031,14 +2031,13 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 
 	dfcopy = df.copy() #Create a copy of dataframe upto selected dimension
 
-	selected_dimension = st.sidebar.selectbox('Select a Dimension', dim_to_select, 0) #default index "Prov WinBid Start Rd"
-	df = df[[ "Clock Round", "Bidder", "Service Area","Band", selected_dimension]]
-
-
 	if selected_dimension == "Bid Value ActivePlusPWB":
 		dfpwbEndRd = df[[ "Clock Round", "Bidder", "Service Area","Band", "ProvWinBid EndRd"]]
 
-		st.write(dfpwbEndRd)
+
+	selected_dimension = st.sidebar.selectbox('Select a Dimension', dim_to_select, 0) #default index "Prov WinBid Start Rd"
+	df = df[[ "Clock Round", "Bidder", "Service Area","Band", selected_dimension]]
+
 
 	#Choose clock round numbers
 	clkrounds = sorted(list(set(df["Clock Round"])))
