@@ -1978,7 +1978,7 @@ def filt_round(df, round_number):
 	return df[df['Clock Round'] == round_number]
 
 
-if selected_dimension == "AuctionYear Activity":
+if selected_dimension == "AuctionYear Activity": #Incompete Still working this section
 
 	currency_flag = "NA" #This is dummy variiable for this option done to preserve the current structure of the code 
 
@@ -2025,6 +2025,8 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	# Further filter dataframe by selected service areas
 	if selected_areas:
 		df = df[df["Service Area"].isin(selected_areas)]
+
+	st.write(df)
 
 	dim_to_select = ["Bid Decision", "Bid Value ProvWinners", "Bid Value ActiveBidders","Bid Value ActivePlusPWB","RatioPWPtoRP EndRd", "ProvWinBid StartRd","Rank StartRd","ProvWinBid EndRd", "Rank EndRd","Blocks Selected", "MHz Selected",
 					"ProvAllocBLKs StartRd","ProvAllocMHz StartRd", "ProvAllocBLKs EndRd", "ProvAllocMHz EndRd"]
