@@ -2049,7 +2049,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 
 	if selected_dimension == "Bid Value ActivePlusPWB":
 		dfpwbEndRd = filt_round(dfpwbEndRd, round_number)
-		dfpwbEndRd = df.replace("-", 0).replace("",0).replace(np.nan, 0)
+		dfpwbEndRd = dfpwbEndRd.replace("-", 0).replace("",0).replace(np.nan, 0)
 
 	# Function to Pivot Dataframe based on selected dimention
 	def pivot_dataframe(df, selected_dimension):
