@@ -2041,7 +2041,7 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 
 	selected_dimension_for_total = dim_to_select_for_total_dict[selected_dimension]
 	dfcopy = dfcopy[[ "Clock Round", "Bidder", "Service Area","Band", selected_dimension_for_total]]
-	dfcopy = pivot_dataframe(dfcppy, selected_dimension_for_total)
+	dfcopy = pivot_dataframe(dfcopy, selected_dimension_for_total)
 
 	st.write(dfcopy)
 
