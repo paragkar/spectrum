@@ -2013,7 +2013,7 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	dfcopy = filt_round(dfcopy, round_number)
 	dfcopy = dfcopy.replace("-", 0).replace("",0).replace(np.nan, 0)
 
-	st,write(dfcopy)
+	st.write(dfcopy)
 
 
 	# Create a combined column for bidder information
