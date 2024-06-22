@@ -1999,12 +1999,13 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	#Filtering the dataframe with selected auction year
 	df = df[df["Auction Year"] == AuctionYear]
 
+	st.write(df)
+
 
 	# Choose bands to view
 	available_bands = sorted(list(set(df["Band"])))
 	# Default to selecting all bands initially
 
-	# selected_bands = st.sidebar.multiselect('Select Bands to View', available_bands, default=available_bands)
 
 	# Adjust selection interface based on the auction year
 	if AuctionYear == 2010:
