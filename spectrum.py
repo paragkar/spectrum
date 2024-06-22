@@ -1974,7 +1974,6 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	#Filtering the dataframe with selected auction year
 	df = df[df["Auction Year"] == AuctionYear]
 
-	dfcopy = df.copy() #For Totals 
 
 	# Choose bands to view
 	available_bands = sorted(list(set(df["Band"])))
@@ -1996,16 +1995,26 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	dim_to_select = ["Total Bid Value", "RatioPWPtoRP EndRd", "ProvWinBid StartRd","Rank StartRd","ProvWinBid EndRd", "Rank EndRd","Blocks Selected", "MHz Selected",
 					"ProvAllocBLKs StartRd","ProvAllocMHz StartRd", "ProvAllocBLKs EndRd", "ProvAllocMHz EndRd"]
 
+	dfcopy = df.copy() #Create a copy of dataframe upto selected dimension
 
 	selected_dimension = st.sidebar.selectbox('Select a Dimension', dim_to_select, 0) #default index "Prov WinBid Start Rd"
 	df = df[[ "Clock Round", "Bidder", "Service Area","Band", selected_dimension]]
+
 
 	#Choose clock round numbers
 	clkrounds = sorted(list(set(df["Clock Round"])))
 	round_number = st.sidebar.number_input("Select Auction Round Number"+";Total Rounds= "+str(max(clkrounds)), min_value=min(clkrounds), max_value=max(clkrounds), value=1, step=1)
 
+	#Filtering the main dataframe with round numbers
 	df = filt_round(df, round_number)
 	df = df.replace("-", 0).replace("",0).replace(np.nan, 0)
+
+	#Filtering the Copy dataframe with round numbers
+	dfcopy = filt_round(dfcopy, round_number)
+	dfcopy = dfcopy.replace("-", 0).replace("",0).replace(np.nan, 0)
+
+	st,write(dfcopy)
+
 
 	# Create a combined column for bidder information
 	df = df.pivot_table(
