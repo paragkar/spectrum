@@ -2016,13 +2016,17 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	st.write(dfcopy)
 
 
-	# Create a combined column for bidder information
-	df = df.pivot_table(
-	index='Service Area', 
-	columns=['Bidder', 'Band'], 
-	values= selected_dimension, 
-	aggfunc='first'  # you can change this to 'sum' if that's more appropriate
-	)
+	# Function to Pivot Dataframe based on selected dimention
+	def pivot_dataframe(df, selected_dimension):
+		df = df.pivot_table(
+		index='Service Area', 
+		columns=['Bidder', 'Band'], 
+		values= selected_dimension, 
+		aggfunc='first'  # you can change this to 'sum' if that's more appropriate
+		)
+		return df
+
+	df = pivot_dataframe(df, selected_dimension)
 
 	# Generate a fixed color palette first
 	all_bidders = ['Adani', 'Aircel', 'Augere', 'Bharti', 'Etisalat', 'Idea', 'Infotel', 'Qualcomm', 'RCOM', 
