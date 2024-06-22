@@ -2234,7 +2234,7 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 
 	bands_in_view = len(df_dict.keys())
 
-	height_mul_dict = {1:0.8, 2:1, 3: 1.2, 4 :1.35 , 5 :1.35, 6 : 1.45 , 7: 1.45, 8: 1.45, 9:1.45}
+	height_mul_dict = {1:0.8, 2:1, 3: 1.2, 4 :1.4 , 5 :1.4, 6 : 1.45 , 7: 1.45, 8: 1.45, 9:1.45}
 
 	# Update the overall layout
 	fig.update_layout(uniformtext_minsize=text_embed_in_chart_size*0.75, 
