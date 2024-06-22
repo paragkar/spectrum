@@ -170,6 +170,20 @@ def loadauctionbiddatayearbandcomb():
 	return df
 
 
+@st.cache_resource
+def auctionbiddatayearactivitycomb():
+	password = st.secrets["db_password"]
+	excel_content = io.BytesIO()
+	with open("auctionbiddatayearactivitycomb.xlsx", 'rb') as f:
+		excel = msoffcrypto.OfficeFile(f)
+		excel.load_key(password)
+		excel.decrypt(excel_content)
+
+	xl = pd.ExcelFile(excel_content)
+	sheetauctiondata = xl.sheet_names
+	df = pd.read_excel(excel_content, sheet_name=sheetauctiondata)
+	return df
+
 #--------Fuctions for loading File Ends--------------------
 
 
@@ -1957,7 +1971,7 @@ for index in dfrsrate.index:
 		auction_rsrate_dict[index.year] = dfrsrate.loc[index,:].values[0]
 
 
-if selected_dimension == "Auction Integrated": #This is the new dimension that is being tested
+if selected_dimension == "Auction Integrated": #This is the new dimension Added on June 2024
 
 	#This function is used to filter the dataframe based on round numbers
 	@st.cache_data
@@ -1967,7 +1981,11 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 
 	currency_flag = "NA" #This is dummy variiable for this option done to preserve the current structure of the code 
 
-	df = loadauctionbiddatayearbandcomb()["Sheet1"]
+	df = loadauctionbiddatayearbandcomb()["Sheet1"] #Loading the auction bid year and band data 
+
+	dfac = auctionbiddatayearactivitycomb()["Sheet1"] #Loading the auction bid year activity data 
+
+	st.write(dfac)
 
 	AuctionYears = sorted(list(set(df["Auction Year"])))
 	AuctionYear = st.sidebar.selectbox('Select an Auction Year', AuctionYears, 0) #default index 2012
