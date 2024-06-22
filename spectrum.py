@@ -3974,7 +3974,7 @@ if selected_dimension == "Auction BandWise":
 
 		#Reverse the order of the daraframe 
 
-		sumrows = sumrows.iloc[::-1].reset_index(drop=True) #Debug 10th June 2024
+		# sumrows = sumrows.iloc[::-1].reset_index(drop=True) #Debug 10th June 2024
 
 		sumcols = dftemp.sum(axis=0).reset_index()
 
