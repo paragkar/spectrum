@@ -1952,7 +1952,7 @@ chart_data_flag = False #set this to true only if this chart exists.
 with st.sidebar:
 	selected_dimension = option_menu(
 		menu_title = "Select a Menu",
-		options = ["Spectrum Bands", "Auction YearWise", "Auction BandWise", "AuctionBid AllBands"], #Debug 14th June 2024
+		options = ["Spectrum Bands", "Auction YearWise", "Auction BandWise", "AuctionYear AllBands", "AuctionYear Activity"], #Debug 14th June 2024
 		icons = ["1-circle-fill", "2-circle-fill", "3-circle-fill", "4-circle-fill"],
 		menu_icon = "arrow-down-circle-fill",
 		default_index =0,
@@ -1971,21 +1971,34 @@ for index in dfrsrate.index:
 		auction_rsrate_dict[index.year] = dfrsrate.loc[index,:].values[0]
 
 
-if selected_dimension == "AuctionBid AllBands": #This is the new dimension Added on June 2024
+#This function is used to filter the dataframe based on round numbers
+@st.cache_data
+def filt_round(df, round_number):
+	# Filtering and processing logic
+	return df[df['Clock Round'] == round_number]
 
-	#This function is used to filter the dataframe based on round numbers
-	@st.cache_data
-	def filt_round(df, round_number):
-		# Filtering and processing logic
-		return df[df['Clock Round'] == round_number]
+
+if selected_dimension == "AuctionYear Activity":
+
+	currency_flag = "NA" #This is dummy variiable for this option done to preserve the current structure of the code 
+
+	df = auctionbiddatayearactivitycomb()["Sheet1"] #Loading the auction bid year activity data 
+
+	st.write(df)
+
+
+if selected_dimension == "AuctionYear AllBands": #This is the new dimension Added on June 2024
+
+	# #This function is used to filter the dataframe based on round numbers
+	# @st.cache_data
+	# def filt_round(df, round_number):
+	# 	# Filtering and processing logic
+	# 	return df[df['Clock Round'] == round_number]
 
 	currency_flag = "NA" #This is dummy variiable for this option done to preserve the current structure of the code 
 
 	df = loadauctionbiddatayearbandcomb()["Sheet1"] #Loading the auction bid year and band data 
 
-	dfac = auctionbiddatayearactivitycomb()["Sheet1"] #Loading the auction bid year activity data 
-
-	st.write(dfac)
 
 	AuctionYears = sorted(list(set(df["Auction Year"])))
 	AuctionYear = st.sidebar.selectbox('Select an Auction Year', AuctionYears, 0) #default index 2012
