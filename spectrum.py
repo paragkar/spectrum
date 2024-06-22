@@ -2144,9 +2144,6 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	# Determine the range for z values - it should cover all indices used in your colorscale
 	zmin, zmax = 0, 1  # Since your colorscale is likely mapped from 0 to 1
 
-	# Maximum value for scaling text position
-	# max_value = row_totals['Total'].max()
-
 	# Iterate through each band and its corresponding dataframe
 	for i, (band, df_segment) in enumerate(df_dict.items(), start=1):
 
@@ -2215,8 +2212,10 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 		# Set the x-axis range for bar charts to be the same across all subplots
 		fig.update_xaxes(row=i, col=2, range=[0, max_total_value])
 
+		title = "Total " + selected_dimension_for_total #X axis title for Bar Chart
+
 		# Create a Retangular Block on Bar
-		fig.update_xaxes(row=i, col=2, fixedrange=True, showline=True, linewidth=2.5, linecolor='black', mirror=True, showgrid=True, gridcolor='lightgrey', title="Total", title_standoff=8)
+		fig.update_xaxes(row=i, col=2, fixedrange=True, showline=True, linewidth=2.5, linecolor='black', mirror=True, showgrid=True, gridcolor='lightgrey', title=title, title_standoff=8)
 		fig.update_yaxes(row=i, col=2, fixedrange=True, showline=True, linewidth=2.5, linecolor='black', mirror=True, showgrid=True, gridcolor='lightgrey')
 
 		# Calculate whether the dataframe has any non-zero values
