@@ -2000,7 +2000,6 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	selected_dimension = st.sidebar.selectbox('Select a Dimension', dim_to_select, 0) #default index "Prov WinBid Start Rd"
 	df = df[[ "Clock Round", "Bidder", "Service Area","Band", selected_dimension]]
 
-
 	#Choose clock round numbers
 	clkrounds = sorted(list(set(df["Clock Round"])))
 	round_number = st.sidebar.number_input("Select Auction Round Number"+";Total Rounds= "+str(max(clkrounds)), min_value=min(clkrounds), max_value=max(clkrounds), value=1, step=1)
@@ -2042,8 +2041,8 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 		 }
 
 	selected_dimension_for_total = dim_to_select_for_total_dict[selected_dimension]
-
 	dfcopy = dfcopy[[ "Clock Round", "Bidder", "Service Area","Band", selected_dimension_for_total]]
+	dfcopy = pivot_dataframe(df, selected_dimension_for_total)
 
 	st.write(dfcopy)
 
