@@ -2082,7 +2082,6 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 
 	colorscale, color_index_map = colorscale_and_color_index_map(bidder_colors)
 
-
 	# Simplify column names for display
 	column_labels = [f"{col[1]} ({col[0]})" for col in df.columns]
 	df.columns = column_labels
@@ -2106,13 +2105,14 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	# Transpose and prepare dfcopy to align with df structure
 	dfcopy = dfcopy.T.sort_index(ascending=False).replace(0, "").replace("", np.nan)
 
-
 	# Calculate row totals for each bidder across selected bands
 	row_totals = dfcopy.sum(axis=1).reset_index(name='Total')
 	row_totals.columns = ["BandBidder", "Total"]
 	row_totals["Total"] = row_totals["Total"].astype(float).round(0)
 	# Calculate the maximum total value to set a consistent x-axis range across all bar charts
 	max_total_value = row_totals['Total'].max()  # Assuming 'Total' holds the values you need
+
+	st.write(row_totals)
 
 	# Transpose and prepare color_df for visualization
 	def transpose_color_df(color_df):
