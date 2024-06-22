@@ -1992,7 +1992,7 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	if selected_areas:
 		df = df[df["Service Area"].isin(selected_areas)]
 
-	dim_to_select = ["Total Bid Value", "RatioPWPtoRP EndRd", "ProvWinBid StartRd","Rank StartRd","ProvWinBid EndRd", "Rank EndRd","Blocks Selected", "MHz Selected",
+	dim_to_select = ["Bid Value", "RatioPWPtoRP EndRd", "ProvWinBid StartRd","Rank StartRd","ProvWinBid EndRd", "Rank EndRd","Blocks Selected", "MHz Selected",
 					"ProvAllocBLKs StartRd","ProvAllocMHz StartRd", "ProvAllocBLKs EndRd", "ProvAllocMHz EndRd"]
 
 	dfcopy = df.copy() #Create a copy of dataframe upto selected dimension
@@ -2025,8 +2025,8 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	dfcopy = dfcopy.replace("-", 0).replace("",0).replace(np.nan, 0)
 
 	dim_to_select_for_total_dict = {
-		"Total Bid Value" : "Total Bid Value", 
-		"RatioPWPtoRP EndRd" : "Total Bid Value",
+		"Bid Value" : "Bid Value", 
+		"RatioPWPtoRP EndRd" : "Bid Value",
 		"ProvWinBid StartRd" : "ProvWinBid StartRd",
 		"Rank StartRd" : "ProvWinBid StartRd",
 		"ProvWinBid EndRd" : "ProvWinBid EndRd",
