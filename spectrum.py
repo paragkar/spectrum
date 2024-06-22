@@ -2026,7 +2026,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	if selected_areas:
 		df = df[df["Service Area"].isin(selected_areas)]
 
-	dim_to_select = ["Bid Decision", "Bid Value ProvWinners", "Bid Value ActiveBidders","RatioPWPtoRP EndRd", "ProvWinBid StartRd","Rank StartRd","ProvWinBid EndRd", "Rank EndRd","Blocks Selected", "MHz Selected",
+	dim_to_select = ["Bid Decision", "Bid Value ProvWinners", "Bid Value ActiveBidders","Bid Value ActivePlusPWB","RatioPWPtoRP EndRd", "ProvWinBid StartRd","Rank StartRd","ProvWinBid EndRd", "Rank EndRd","Blocks Selected", "MHz Selected",
 					"ProvAllocBLKs StartRd","ProvAllocMHz StartRd", "ProvAllocBLKs EndRd", "ProvAllocMHz EndRd"]
 
 	dfcopy = df.copy() #Create a copy of dataframe upto selected dimension
@@ -2062,6 +2062,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 		"Bid Decision" : "Bid Decision",
 		"Bid Value ProvWinners" : "Bid Value ProvWinners", 
 		"Bid Value ActiveBidders" : "Bid Value ActiveBidders",
+		"Bid Value ActivePlusPWB" : "Bid Value ActivePlusPWB",
 		"RatioPWPtoRP EndRd" : "Bid Value ProvWinners",
 		"ProvWinBid StartRd" : "ProvWinBid StartRd",
 		"Rank StartRd" : "ProvWinBid StartRd",
