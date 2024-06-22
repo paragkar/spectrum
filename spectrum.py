@@ -2160,6 +2160,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	df_dict = {band: df_dict[band] for band in band_order if band in df_dict}
 
 	st.write(df_dict)
+	st.write(row_totals)
 
 	vertical_spacing_mul_dict = {2022:0.035, 2021:0.04, 2016:0.04, 2015 : 0.04, 2014 : 0.06, 2012 : 0.04, 2010 : 0.05}
 
