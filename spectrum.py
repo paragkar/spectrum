@@ -1999,7 +1999,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	#Filtering the dataframe with selected auction year
 	df = df[df["Auction Year"] == AuctionYear]
 
-	st.write(df)
+	df["Bid Decision"] = [1 if x =="Bid" else 0 for x in df["Bid Decision"]]
 
 
 	# Choose bands to view
@@ -2029,7 +2029,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	if selected_areas:
 		df = df[df["Service Area"].isin(selected_areas)]
 
-	dim_to_select = ["Bid Value", "RatioPWPtoRP EndRd", "ProvWinBid StartRd","Rank StartRd","ProvWinBid EndRd", "Rank EndRd","Blocks Selected", "MHz Selected",
+	dim_to_select = ["Bid Decision", "Bid Value", "RatioPWPtoRP EndRd", "ProvWinBid StartRd","Rank StartRd","ProvWinBid EndRd", "Rank EndRd","Blocks Selected", "MHz Selected",
 					"ProvAllocBLKs StartRd","ProvAllocMHz StartRd", "ProvAllocBLKs EndRd", "ProvAllocMHz EndRd"]
 
 	dfcopy = df.copy() #Create a copy of dataframe upto selected dimension
@@ -2062,6 +2062,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	dfcopy = dfcopy.replace("-", 0).replace("",0).replace(np.nan, 0)
 
 	dim_to_select_for_total_dict = {
+		"Bid Decision" : "Bid Decision",
 		"Bid Value" : "Bid Value", 
 		"RatioPWPtoRP EndRd" : "Bid Value",
 		"ProvWinBid StartRd" : "ProvWinBid StartRd",
