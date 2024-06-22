@@ -1974,6 +1974,8 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	#Filtering the dataframe with selected auction year
 	df = df[df["Auction Year"] == AuctionYear]
 
+	dfcopy = df.copy() #For Totals 
+
 	# Choose bands to view
 	available_bands = sorted(list(set(df["Band"])))
 	# Default to selecting all bands initially
@@ -2073,7 +2075,7 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	# Transpose and prepare df for visualization
 	df = df.T.sort_index(ascending=False).replace(0, "").replace("", np.nan)
 
-	st.write(df)
+	st.write(dfcopy)
 
 	# Calculate row totals for each bidder across selected bands
 	row_totals = df.sum(axis=1).reset_index(name='Total')
