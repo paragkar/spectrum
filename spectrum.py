@@ -2106,10 +2106,9 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	# Transpose and prepare dfcopy to align with df structure
 	dfcopy = dfcopy.T.sort_index(ascending=False).replace(0, "").replace("", np.nan)
 
-	st.write(dfcopy)
 
 	# Calculate row totals for each bidder across selected bands
-	row_totals = df.sum(axis=1).reset_index(name='Total')
+	row_totals = dfcopy.sum(axis=1).reset_index(name='Total')
 	row_totals.columns = ["BandBidder", "Total"]
 	row_totals["Total"] = row_totals["Total"].astype(float).round(0)
 	# Calculate the maximum total value to set a consistent x-axis range across all bar charts
