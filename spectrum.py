@@ -1992,7 +1992,7 @@ if selected_dimension == "Auction Integrated": #This is the new dimension that i
 	if selected_areas:
 		df = df[df["Service Area"].isin(selected_areas)]
 
-	dim_to_select = ["Total Bid Value", "RatioPWPtoRP EndRd", "ProvWinBid StartRd","Rank StartRd","ProvWinBid EndRd", "Rank EndRd","Blocks Selected", "MHz Selected"
+	dim_to_select = ["Total Bid Value", "RatioPWPtoRP EndRd", "ProvWinBid StartRd","Rank StartRd","ProvWinBid EndRd", "Rank EndRd","Blocks Selected", "MHz Selected",
 					"ProvAllocBLKs StartRd","ProvAllocMHz StartRd", "ProvAllocBLKs EndRd", "ProvAllocMHz EndRd"]
 
 
