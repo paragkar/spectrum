@@ -2031,13 +2031,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 
 	dfcopy = df.copy() #Create a copy of dataframe upto selected dimension
 
-
-
 	selected_dimension = st.sidebar.selectbox('Select a Dimension', dim_to_select, 0) #default index "Prov WinBid Start Rd"
-
-	#Extrating Information for Winners End of Round to be Appended in Heatmap with "Bid Value ActivePlusPWB"
-	if selected_dimension == "Bid Value ActivePlusPWB":
-		dfpwbEndRd = df[[ "Clock Round", "Bidder", "Service Area","Band", "ProvWinBid EndRd"]]
 
 	df = df[[ "Clock Round", "Bidder", "Service Area","Band", selected_dimension]]
 
@@ -2065,10 +2059,6 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 		return df
 
 	df = pivot_dataframe(df, selected_dimension)
-
-	#Extrating Information for Winners End of Round to be Appended in Heatmap with "Bid Value ActivePlusPWB"
-	if selected_dimension == "Bid Value ActivePlusPWB":
-		dfpwbEndRd = pivot_dataframe(dfpwbEndRd, "ProvWinBid EndRd")
 
 	#Filtering the Copy dataframe with round numbers
 	dfcopy = filt_round(dfcopy, round_number)
@@ -2154,11 +2144,6 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 
 	# Transpose and prepare df for visualization
 	df = df.T.sort_index(ascending=False).replace(0, "").replace("", np.nan)
-
-	
-	#Extrating Information for Winners End of Round to be Appended in Heatmap with "Bid Value ActivePlusPWB"
-	if selected_dimension == "Bid Value ActivePlusPWB":
-		dfpwbEndRd = dfpwbEndRd.T.sort_index(ascending=False).replace(0, "").replace("", np.nan)
 
 
 	# Transpose and prepare dfcopy to align with df structure
