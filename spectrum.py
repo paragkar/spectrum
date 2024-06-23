@@ -2239,17 +2239,12 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 
 
 	lambda_function_dict = {
-	# "Bid Decision": lambda x: "Bid" if str(x) == "1" else ("No Bid" if pd.notna(x) and x != "" else ""),
 	"Bid Value ActiveBidders": lambda band: prepare_text_values(df_bid_value_activebidders_dict, result_df_active_bidders_dict, band),
 	"Bid Value ActivePlusPWB": lambda band: prepare_text_values(df_bid_value_activepluspwbbidders_dict, result_df_active_pluspwb_bidders_dict, band),
 	}
 
 	def text_values_heatmap(selected_dimension, df_segment, band):
-	    # if selected_dimension == "Bid Decision":
-	    #     # Apply the function directly to the DataFrame or its applicable part
-	    #     text_values = df_segment.map(lambda_function_dict[selected_dimension]).replace(np.nan, '')
 	    if selected_dimension in  lambda_function_dict:
-	        # For this case, use the band to get specific processing
 	        text_values = lambda_function_dict[selected_dimension](band).replace('nan', '')
 	    else:
 	        text_values = df_segment.astype(float).round(0).astype(str).replace('nan', '')
@@ -2260,8 +2255,8 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	# Iterate through each band and its corresponding dataframe
 	for i, (band, df_segment) in enumerate(df_dict.items(), start=1):
 
-		if selected_dimension not in ["RatioPWPtoRP EndRd"]:
-
+		if selected_dimension not in ["RatioPWPtoRP EndRd"]: #IF statatement for using a different colorscale for ratio
+			
 			text_values = text_values_heatmap(selected_dimension,df_segment,band)
 
 			aligned_color_df = color_df.loc[df_segment.index, df_segment.columns].replace(np.nan, "")
