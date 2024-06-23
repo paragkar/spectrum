@@ -2033,10 +2033,11 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 
     dfcopy = df.copy() #Create a copy of dataframe upto selected dimension
 
+    dftext = df.copy() #Created a copy of datframe before "select dimension" for working textvalues
+
     selected_dimension = st.sidebar.selectbox('Select a Dimension', dim_to_select, 0) #default index "Prov WinBid Start Rd"
 
     df = df[[ "Clock Round", "Bidder", "Service Area","Band", selected_dimension]]
-
 
     #Choose clock round numbers
     clkrounds = sorted(list(set(df["Clock Round"])))
@@ -2194,7 +2195,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
         "Bid Decision": lambda x: "Bid" if str(x) == "1" else ("No Bid" if pd.notna(x) else x)
     }
 
-    st.write(dfcopy)
+    st.write(dftext)
 
     # Iterate through each band and its corresponding dataframe
     for i, (band, df_segment) in enumerate(df_dict.items(), start=1):
