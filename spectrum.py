@@ -2204,12 +2204,15 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 		dftext = dftext.T.sort_index(ascending=False).replace(0, "").replace("", np.nan)
 		return dftext
 
-	#Extract the dataframe where the "Win" and "Loss" has to be appended
+	#1. Extract the dataframe where the "Win" and "Loss" has to be appended
 	df_bid_value_provwinners = selected_dimension_df_text(dftext, "Bid Value ProvWinners").round(0).fillna(0).astype('int') #This is the ref dataframe 
 	df_bid_value_activebidders = selected_dimension_df_text(dftext, "Bid Value ActiveBidders").round(0).fillna(0).astype('int')
 	df_bid_value_activepluspwbbidders = selected_dimension_df_text(dftext, "Bid Value ActivePlusPWB").round(0).fillna(0).astype('int')
+	
+	#1. Extract the dataframe where blocks of sales has to be appended
 	df_blocks_for_sale = selected_dimension_df_text(dftext, "Blocks ForSale").round(0).fillna(0).astype('int')
 	df_prov_alloc_blks_endround = selected_dimension_df_text(dftext, "ProvAllocBLKs EndRd").round(0).fillna(0).astype('int')
+	df_prov_alloc_blks_startround = selected_dimension_df_text(dftext, "ProvAllocBLKs StartRd").round(0).fillna(0).astype('int')
 	
 
 	def map_win_loss_provwinners(df_active, df_winners):
@@ -2237,18 +2240,23 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 					result_df.at[idx, col] = ''
 		return result_df
 
-	#Mapping allocated slots with those up for sale
+	#2. Mapping allocated slots with those up with blocks for sale
 	result_df_prov_alloc_blks_endround = map_alloc_slots_with_sale(df_prov_alloc_blks_endround, df_blocks_for_sale)
+	result_df_prov_alloc_blks_startround = map_alloc_slots_with_sale(df_prov_alloc_blks_startround, df_blocks_for_sale)
 
-	#Sorting and converting allocated slots dataframe into dict
+	#3. Sorting with band order and converting allocated slots dataframe into dict
 	result_df_prov_alloc_blks_endround_dict=sort_in_band_order(result_df_prov_alloc_blks_endround, band_order)
 	df_prov_alloc_blks_endround_dict=sort_in_band_order(df_prov_alloc_blks_endround, band_order)
+	df_prov_alloc_blks_startround_dict=sort_in_band_order(df_prov_alloc_blks_startround, band_order)
+	result_df_prov_alloc_blks_startround_dict=sort_in_band_order(result_df_prov_alloc_blks_startround, band_order)
 
-	#Mapping results for selected dataframe to map
+
+
+	#2.Mapping results for selected dataframe to map
 	result_df_active_bidders = map_win_loss_provwinners(df_bid_value_activebidders, df_bid_value_provwinners)
 	result_df_active_pluspwb_bidders = map_win_loss_provwinners(df_bid_value_activepluspwbbidders, df_bid_value_provwinners)
 
-	#Sorting and converting all mapped and result dataframe into dict
+	#2. Sorting and converting all mapped and result dataframe into dict
 	result_df_active_bidders_dict = sort_in_band_order(result_df_active_bidders, band_order)
 	result_df_active_pluspwb_bidders_dict = sort_in_band_order(result_df_active_pluspwb_bidders, band_order)
 	df_bid_value_activebidders_dict = sort_in_band_order(df_bid_value_activebidders, band_order)
@@ -2261,11 +2269,12 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 		combined_df = df + '\n' + result_df
 		return combined_df
 
-
+    #4. Finally add the selected_dimnsion in this fuctions as a final step
 	lambda_function_dict = {
 	"Bid Value ActiveBidders": lambda band: prepare_text_values(df_bid_value_activebidders_dict, result_df_active_bidders_dict, band),
 	"Bid Value ActivePlusPWB": lambda band: prepare_text_values(df_bid_value_activepluspwbbidders_dict, result_df_active_pluspwb_bidders_dict, band),
 	"ProvAllocBLKs EndRd": lambda band: prepare_text_values(df_prov_alloc_blks_endround_dict, result_df_prov_alloc_blks_endround_dict, band),
+	"ProvAllocBLKs StartRd": lambda band: prepare_text_values(df_prov_alloc_blks_endround_dict, result_df_prov_alloc_blks_startround_dict, band),
 	}
 
 	def text_values_heatmap(selected_dimension, df_segment, band):
