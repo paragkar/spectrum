@@ -2204,8 +2204,9 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 		return dftext
 
 	#Extract the dataframe where the "Win" and "Loss" has to be appended
-	df_bid_value_provwinners = selected_dimension_df_text(dftext, "Bid Value ProvWinners").round(0)
+	df_bid_value_provwinners = selected_dimension_df_text(dftext, "Bid Value ProvWinners").round(0) #This is the ref dataframe 
 	df_bid_value_activebidders = selected_dimension_df_text(dftext, "Bid Value ActiveBidders").round(0)
+	df_bid_value_activepluspwbbidders = selected_dimension_df_text(dftext, "Bid Value ActivePlusPWB").round(0)
 
 	def map_win_loss_provwinners(df_active, df_winners):
 		result_df = pd.DataFrame(index=df_active.index, columns=df_active.columns)
@@ -2219,11 +2220,15 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 					result_df.at[idx, col] = ''
 		return result_df
 
+	#Mapping results for selected dataframe to map
 	result_df_active_bidders = map_win_loss_provwinners(df_bid_value_activebidders, df_bid_value_provwinners)
+	result_df_active_pluspwb_bidders = map_win_loss_provwinners(df_bid_value_activepluspwbbidders, df_bid_value_provwinners)
 
-
+	#Sorting and converting all mapped and result dataframe into dict
 	result_df_active_bidders_dict = sort_in_band_order(result_df_active_bidders, band_order)
+	result_df_active_pluspwb_bidders_dict = sort_in_band_order(result_df_active_pluspwb_bidders, band_order)
 	df_bid_value_activebidders_dict = sort_in_band_order(df_bid_value_activebidders, band_order)
+	df_bid_value_activepluspwbbidders_dict = sort_in_band_order(df_bid_value_activepluspwbbidders, band_order)
 
 
 	def prepare_text_values(df_dict, result_df_dict, band):
@@ -2236,29 +2241,20 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	lambda_function_dict = {
 	# "Bid Decision": lambda x: "Bid" if str(x) == "1" else ("No Bid" if pd.notna(x) and x != "" else ""),
 	"Bid Value ActiveBidders": lambda band: prepare_text_values(df_bid_value_activebidders_dict, result_df_active_bidders_dict, band),
+	"Bid Value ActivePlusPWB": lambda band: prepare_text_values(df_bid_value_activepluspwbbidders_dict, result_df_active_pluspwb_bidders_dict, band),
 	}
 
 	def text_values_heatmap(selected_dimension, df_segment, band):
 	    # if selected_dimension == "Bid Decision":
 	    #     # Apply the function directly to the DataFrame or its applicable part
 	    #     text_values = df_segment.map(lambda_function_dict[selected_dimension]).replace(np.nan, '')
-	    if selected_dimension == "Bid Value ActiveBidders":
+	    if selected_dimension in  lambda_function_dict:
 	        # For this case, use the band to get specific processing
 	        text_values = lambda_function_dict[selected_dimension](band).replace('nan', '')
 	    else:
 	        text_values = df_segment.astype(float).round(0).astype(str).replace('nan', '')
 	    return text_values
 
-
-
-
-	# def text_values_heatmap(selected_dimension, df_segment, band):
-	# 	if selected_dimension in lambda_function_dict:
-	# 		text_values = df_segment.map(lambda_function_dict[selected_dimension](band)).replace('nan', '')
-	# 	else:
-	# 		# Default handling if no special processing is required
-	# 		text_values = df_segment.astype(float).round(0).astype(str).replace('nan', '')
-	# 	return text_values
 
 
 	# Iterate through each band and its corresponding dataframe
@@ -2276,8 +2272,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 					x=df_segment.columns,
 					y=df_segment.index,
 					colorscale=colorscale,
-					text=text_values.values,
-					# text=text_values,    
+					text=text_values.values,  
 					texttemplate="%{text}",
 					textfont={"size": text_embed_in_chart_size*0.8}, 
 					showscale=False,
