@@ -2285,8 +2285,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 		if selected_dimension not in ["RatioPWPtoRP EndRd"]: #IF statatement for using a different colorscale for ratio
 
 			text_values, texttemplate = text_values_heatmap(selected_dimension,df_segment,band)
-
-			st.write(text_values.replace("0","", regex = True))
+			text_values = text_values.replace("0","", regex = True))
 
 
 			aligned_color_df = color_df.loc[df_segment.index, df_segment.columns].replace(np.nan, "")
