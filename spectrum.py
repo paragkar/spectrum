@@ -2201,14 +2201,9 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 
             # Check if selected_dimension has a lambda function defined
             if selected_dimension in lambda_function_dict:
-                # Apply the lambda function to the relevant column
-
-                # st.write(df_segment)
 
                 # text_values = df_segment.apply(lambda_function_dict[selected_dimension]).replace(np.nan, '')
-                text_values = df_segment.map(lambda x: "Bid" if str(x) == "1" else ("No Bid" if pd.notna(x) else x))
-
-                st.write(text_values)
+                text_values = df_segment.map(lambda x: "Bid" if str(x) == "1" else ("No Bid" if pd.notna(x) else x)).replace(np.nan, '')
 
             else:
                 # If no special lambda function, just replace NaNs with empty string or another default action
