@@ -2206,42 +2206,27 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	df_bid_value_activebidders = selected_dimension_df_text(dftext, "Bid Value ActiveBidders")
 
 	def map_win_loss_provwinners(df_active, df_winners):
-		# Ensure alignment and identical shape
-		assert df_active.shape == df_winners.shape, "DataFrames must have the same shape"
+	    result_df = pd.DataFrame(index=df_active.index, columns=df_active.columns)
+	    for col in df_active.columns:
+	        for idx in df_active.index:
+	            active_value = df_active.at[idx, col]
+	            winner_value = df_winners.at[idx, col]
+	            if pd.notna(active_value) and active_value != 0:
+	                result_df.at[idx, col] = 'Win' if pd.notna(winner_value) and winner_value != 0 else 'Loss'
+	            else:
+	                result_df.at[idx, col] = ''
+	    return result_df
 
-		# Create an empty DataFrame with the same index and columns
-		result_df = pd.DataFrame(index=df_active.index, columns=df_active.columns)
-
-		# Iterate over each cell
-		for col in df_active.columns:
-			for idx in df_active.index:
-				active_value = df_active.at[idx, col]
-				winner_value = df_winners.at[idx, col]
-
-				# Check for non-null and non-zero values
-				if pd.notna(active_value) and active_value != 0:
-					# Determine win or loss based on whether values match
-					if pd.notna(winner_value) and winner_value != 0:
-						result_df.at[idx, col] = 'Win'
-					else:
-						result_df.at[idx, col] = 'Loss'
-				else:
-					result_df.at[idx, col] = ""  # Mark non-participants or inactive entries
-
-		return result_df
-
-	result_df = map_win_loss_provwinners(df_bid_value_activebidders,df_bid_value_provwinners)
+	result_df = map_win_loss_provwinners(df_bid_value_activebidders, df_bid_value_provwinners)
 
 	def prepare_text_values(df, result_df):
-		# Combine the original values and the result into one string
-		combined_df = df.astype(str) + '\n' + result_df.replace(np.nan, '')
-		return combined_df
+	    combined_df = df.astype(str).replace('0', '').replace('nan', '') + '\n' + result_df
+	    return combined_df
 
 
-	#Apply lambda function to text_values depending on selected_dimension 
 	lambda_function_dict = {
-		"Bid Decision": lambda x: "Bid" if str(x) == "1" else ("No Bid" if pd.notna(x) else x),
-		"Bid Value ActiveBidders": lambda df, result_df: prepare_text_values(df, result_df),
+    "Bid Decision": lambda x: "Bid" if x == "1" else ("No Bid" if pd.notna(x) and x != '' else ""),
+    "Bid Value ActiveBidders": lambda df, result_df: prepare_text_values(df, result_df),
 	}
 
 	#Prepare textvalues and texttemplete for heatmaps
