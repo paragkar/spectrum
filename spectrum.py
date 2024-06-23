@@ -2231,7 +2231,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 		return result_df
 
 
-	result_df = map_win_loss_provwinners(df_bid_value_provwinners,df_bid_value_activebidders)
+	result_df = map_win_loss_provwinners(df_bid_value_activebidders,df_bid_value_provwinners)
 
 	st.write(result_df)
 
