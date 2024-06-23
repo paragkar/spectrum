@@ -2208,7 +2208,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
             else:
                 # If no special lambda function, just replace NaNs with empty string or another default action
                 text_values = df_segment.replace(np.nan, '')
-                texttemplate = "%{text: .1f}"
+                texttemplate = "%{text:.1f}"
 
             # text_values = df_segment.replace(np.nan, '')
             aligned_color_df = color_df.loc[df_segment.index, df_segment.columns].replace(np.nan, "")
@@ -2219,7 +2219,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
                     x=df_segment.columns,
                     y=df_segment.index,
                     colorscale=colorscale,
-                    text=text_values.values,  # Assuming 'df' contains the values you want to display
+                    text=text_values.values,  
                     texttemplate=texttemplate,
                     textfont={"size": text_embed_in_chart_size*0.8}, 
                     showscale=False,
