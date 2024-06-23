@@ -2266,7 +2266,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 
 		if selected_dimension not in ["RatioPWPtoRP EndRd"]:
 
-			text_values = text_values_heatmap(df_segment, selected_dimension, band)
+			text_values = text_values_heatmap(selected_dimension, band)
 
 			aligned_color_df = color_df.loc[df_segment.index, df_segment.columns].replace(np.nan, "")
 			# Create a heatmap for each band
