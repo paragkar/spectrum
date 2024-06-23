@@ -2206,10 +2206,10 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 
 	#Extract the dataframe where the "Win" and "Loss" has to be appended
 	df_bid_value_provwinners = selected_dimension_df_text(dftext, "Bid Value ProvWinners").round(0).fillna(0).astype('int').replace(0,"") #This is the ref dataframe 
-	df_bid_value_activebidders = selected_dimension_df_text(dftext, "Bid Value ActiveBidders").round(0).fillna(0).astype('int')
-	df_bid_value_activepluspwbbidders = selected_dimension_df_text(dftext, "Bid Value ActivePlusPWB").round(0).fillna(0).astype('int')
-	df_blocks_for_sale = selected_dimension_df_text(dftext, "Blocks ForSale").round(0).fillna(0).astype('int')
-	df_prov_alloc_blks_endround = selected_dimension_df_text(dftext, "ProvAllocBLKs EndRd").round(0).fillna(0).astype('int')
+	df_bid_value_activebidders = selected_dimension_df_text(dftext, "Bid Value ActiveBidders").round(0).fillna(0).astype('int').replace(0,"")
+	df_bid_value_activepluspwbbidders = selected_dimension_df_text(dftext, "Bid Value ActivePlusPWB").round(0).fillna(0).astype('int').replace(0,"")
+	df_blocks_for_sale = selected_dimension_df_text(dftext, "Blocks ForSale").round(0).fillna(0).astype('int').replace(0,"")
+	df_prov_alloc_blks_endround = selected_dimension_df_text(dftext, "ProvAllocBLKs EndRd").round(0).fillna(0).astype('int').replace(0,"")
 	
 
 	def map_win_loss_provwinners(df_active, df_winners):
