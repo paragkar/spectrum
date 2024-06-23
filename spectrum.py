@@ -2202,34 +2202,36 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 		dftext = dftext.T.sort_index(ascending=False).replace(0, "").replace("", np.nan)
 		return dftext
 
-	df_bid_decision = selected_dimension_df_text(dftext, "Bid Decision")
+	df_bid_value_provwinners = selected_dimension_df_text(dftext, "Bid Value ProvWinners")
 	df_bid_value_activebidders = selected_dimension_df_text(dftext, "Bid Value ActiveBidders")
 
-	def map_win_loss(df_decision, df_active):
+	def map_win_loss_provwinners(df_active, df_winners):
 		# Ensure alignment and identical shape
-		assert df_decision.shape == df_active.shape, "DataFrames must have the same shape"
+		assert df_active.shape == df_winners.shape, "DataFrames must have the same shape"
 
 		# Create an empty DataFrame with the same index and columns
-		result_df = pd.DataFrame(index=df_decision.index, columns=df_decision.columns)
+		result_df = pd.DataFrame(index=df_active.index, columns=df_active.columns)
 
 		# Iterate over each cell
-		for col in df_decision.columns:
-			for idx in df_decision.index:
-				bid_decision = df_decision.at[idx, col]
+		for col in df_active.columns:
+			for idx in df_active.index:
 				active_value = df_active.at[idx, col]
+				winner_value = df_winners.at[idx, col]
 
-				# Determine if active and decision is a bid
+				# Check for non-null and non-zero values
 				if pd.notna(active_value) and active_value != 0:
-					if pd.notna(bid_decision) and bid_decision == 1:
+					# Determine win or loss based on whether values match
+					if pd.notna(winner_value) and winner_value != 0:
 						result_df.at[idx, col] = 'Win'
 					else:
 						result_df.at[idx, col] = 'Loss'
 				else:
-					result_df.at[idx, col] = np.nan  # Or any other value for non-participants or zero activity
+					result_df.at[idx, col] = np.nan  # Mark non-participants or inactive entries
 
 		return result_df
 
-	result_df = map_win_loss(df_bid_decision,df_bid_value_activebidders)
+
+	result_df = map_win_loss_provwinners(df_bid_value_provwinners,df_bid_value_activebidders)
 
 	st.write(result_df)
 
