@@ -2232,7 +2232,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 				alloc_value = df_alloc.at[idx, col]
 				sale_value = df_sale.at[idx, col]
 				if pd.notna(alloc_value) and alloc_value != 0:
-					result_df.at[idx, col] = df_sale.at[idx, col] if pd.notna(sale_value) and sale_value != 0 else ''
+					result_df.at[idx, col] = '('+df_sale.at[idx, col]+')' if pd.notna(sale_value) and sale_value != 0 else ''
 				else:
 					result_df.at[idx, col] = ''
 		return result_df
@@ -2243,7 +2243,6 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	#Sorting and converting allocated slots dataframe into dict
 	result_df_prov_alloc_blks_endround_dict=sort_in_band_order(result_df_prov_alloc_blks_endround, band_order)
 
-	st.write(result_df_prov_alloc_blks_endround_dict)
 
 
 	#Mapping results for selected dataframe to map
