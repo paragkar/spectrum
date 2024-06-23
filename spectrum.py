@@ -2199,9 +2199,15 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 
 		if selected_dimension not in ["RatioPWPtoRP EndRd"]:
 
-			
+			# Check if selected_dimension has a lambda function defined
+		    if selected_dimension in lambda_function_dict:
+		        # Apply the lambda function to the relevant column
+		        text_values = df_segment.apply(lambda_function_dict[selected_dimension]).replace(np.nan, '')
+		    else:
+		        # If no special lambda function, just replace NaNs with empty string or another default action
+		        text_values = df_segment.replace(np.nan, '')
 
-			text_values = df_segment.replace(np.nan, '')
+			# text_values = df_segment.replace(np.nan, '')
 			aligned_color_df = color_df.loc[df_segment.index, df_segment.columns].replace(np.nan, "")
 			# Create a heatmap for each band
 			fig.add_trace(
