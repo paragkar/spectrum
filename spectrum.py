@@ -2199,6 +2199,8 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
         "Bid Decision": lambda x: "Bid" if str(x) == "1" else ("No Bid" if pd.notna(x) else x)
     }
 
+    dftext = pivot_dataframe(dftext, "Bid Bid_Decision")
+    
     st.write(dftext)
 
     # Iterate through each band and its corresponding dataframe
