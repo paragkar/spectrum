@@ -2230,15 +2230,18 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 
 		return result_df
 
-
 	result_df = map_win_loss_provwinners(df_bid_value_activebidders,df_bid_value_provwinners)
 
-	st.write(result_df)
+	def prepare_text_values(df, result_df):
+	    # Combine the original values and the result into one string
+	    combined_df = df.astype(str) + '\n' + result_df.replace(np.nan, '')
+	    return combined_df
 
 
 	#Apply lambda function to text_values depending on selected_dimension 
 	lambda_function_dict = {
 		"Bid Decision": lambda x: "Bid" if str(x) == "1" else ("No Bid" if pd.notna(x) else x),
+		"Bid Value ActiveBidders": lambda df, result_df: prepare_text_values(df, result_df),
 	}
 
 	#Prepare textvalues and texttemplete for heatmaps
