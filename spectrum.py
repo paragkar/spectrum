@@ -2205,7 +2205,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	df_bid_value_provwinners = selected_dimension_df_text(dftext, "Bid Value ProvWinners").round(0)
 	df_bid_value_activebidders = selected_dimension_df_text(dftext, "Bid Value ActiveBidders").round(0)
 
-	st.write(df_bid_value_provwinners)
+	st.write(df_bid_value_activebidders)
 
 	def map_win_loss_provwinners(df_active, df_winners):
 		result_df = pd.DataFrame(index=df_active.index, columns=df_active.columns)
