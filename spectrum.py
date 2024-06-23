@@ -2188,14 +2188,28 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	# Determine the range for z values - it should cover all indices used in your colorscale
 	zmin, zmax = 0, 1  # Since your colorscale is likely mapped from 0 to 1
 
+
+	#Apply lambda function to text_values depending on selected_dimension 
+	lambda_function_dict = {
+	    "Bid Decision": lambda x: "Bid" if x == 1 else "No Bid"
+	}
+
 	# Iterate through each band and its corresponding dataframe
 	for i, (band, df_segment) in enumerate(df_dict.items(), start=1):
 
 		if selected_dimension not in ["RatioPWPtoRP EndRd"]:
 
-			text_values = df_segment.replace(np.nan, '')
+			# Check if selected_dimension has a lambda function defined
+		    if selected_dimension in lambda_function_dict:
+		        # Apply the lambda function to the relevant column
+		        text_values = df_segment[selected_dimension].apply(lambda_function_dict[selected_dimension]).replace(np.nan, "")
+		    else:
+		        # If no special lambda function, just replace NaNs with empty string or another default action
+		        text_values = df_segment[selected_dimension].replace(np.nan, '')
+
 
 			aligned_color_df = color_df.loc[df_segment.index, df_segment.columns].replace(np.nan, "")
+
 			# Create a heatmap for each band
 			fig.add_trace(
 				go.Heatmap(
