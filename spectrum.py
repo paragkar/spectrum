@@ -2245,7 +2245,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	        text_values = df_segment.apply(lambda_function_dict[selected_dimension]).replace(np.nan, '')
 	    elif selected_dimension == "Bid Value ActiveBidders":
 	        # For this case, use the band to get specific processing
-	        text_values = lambda_function_dict[selected_dimension](band).replace('nan', '').
+	        text_values = lambda_function_dict[selected_dimension](band).replace('nan', '')
 	    else:
 	        text_values = df_segment.astype(float).round(0).astype(str).replace('nan', '')
 	    return text_values
