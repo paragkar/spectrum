@@ -2171,16 +2171,29 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	color_df = transpose_color_df(color_df)
 
 	# Extract band information more reliably
-	df["Band"] = list(df.index.str.extract(r'(\d+)')[0])
+	# df["Band"] = list(df.index.str.extract(r'(\d+)')[0])
 
 	# Define the order of the bands
 	band_order = ["700", "800", "900", "1800", "2100", "2300", "2500", "3500", "26000"]
+
+	def sort_in_band_order(df, band_order):
+		# Extract band information more reliably
+		df["Band"] = list(df.index.str.extract(r'(\d+)')[0])
+		# Dictionary to hold dataframes for each band
+		df_dict = {band: group.drop('Band', axis=1) for band, group in df.groupby('Band')}
+		# Organizing df_dict according to band_order
+		df_dict = {band: df_dict[band] for band in band_order if band in df_dict}
+
+		return df_dict
+
+	df_dict = sort_in_band_order(df)
+
 	
 	# Dictionary to hold dataframes for each band
-	df_dict = {band: group.drop('Band', axis=1) for band, group in df.groupby('Band')}
+	# df_dict = {band: group.drop('Band', axis=1) for band, group in df.groupby('Band')}
 
 	# Organizing df_dict according to band_order
-	df_dict = {band: df_dict[band] for band in band_order if band in df_dict}
+	# df_dict = {band: df_dict[band] for band in band_order if band in df_dict}
 
 	vertical_spacing_mul_dict = {2022:0.035, 2021:0.04, 2016:0.04, 2015 : 0.04, 2014 : 0.06, 2012 : 0.04, 2010 : 0.05}
 
@@ -2220,7 +2233,10 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 
 	result_df = map_win_loss_provwinners(df_bid_value_activebidders, df_bid_value_provwinners)
 
-	st.write(result_df.sort_index(ascending = False))
+	# Extract band information more reliably
+	result_df["Band"] = list(result_df.index.str.extract(r'(\d+)')[0])
+
+
 
 	def prepare_text_values(df, result_df):
 		df = df.astype(float).round(0).astype(str)
