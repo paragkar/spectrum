@@ -2188,8 +2188,6 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 
 	df_dict = sort_in_band_order(df, band_order)
 
-	st.write(df_dict)
-
 	
 	# Dictionary to hold dataframes for each band
 	# df_dict = {band: group.drop('Band', axis=1) for band, group in df.groupby('Band')}
@@ -2235,9 +2233,9 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 
 	result_df = map_win_loss_provwinners(df_bid_value_activebidders, df_bid_value_provwinners)
 
-	# Extract band information more reliably
-	result_df["Band"] = list(result_df.index.str.extract(r'(\d+)')[0])
+	result_df_dict = sort_in_band_order(result_df, band_order)
 
+	st.write(result_df_dict)
 
 
 	def prepare_text_values(df, result_df):
