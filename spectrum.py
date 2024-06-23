@@ -2243,7 +2243,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 		else:
 			# If no special lambda function, just replace NaNs with empty string or another default action
 			text_values = df_segment.replace(np.nan, '')
-			texttemplate = "%{text:.1f}"
+			texttemplate = "%{text}"
 		return text_values, texttemplate
 
 
