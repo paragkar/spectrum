@@ -2200,6 +2200,8 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
     }
 
     dftext = pivot_dataframe(dftext, "Bid Decision")
+    # Extract band information more reliably
+    dftext["Band"] = list(dftext.index.str.extract(r'(\d+)')[0])
 
     st.write(dftext)
 
