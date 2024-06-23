@@ -2202,22 +2202,23 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	def text_values_heatmap(lambda_function_dict,selected_dimension):
 		# Check if selected_dimension has a lambda function defined
 		if selected_dimension in lambda_function_dict:
-
 			text_values = df_segment.map(lambda_function_dict[selected_dimension]).replace(np.nan, '')
 			texttemplate = "%{text}"
-
 		else:
 			# If no special lambda function, just replace NaNs with empty string or another default action
 			text_values = df_segment.replace(np.nan, '')
 			texttemplate = "%{text:.1f}"
 		return text_values, texttemplate
 
+	def selected_dimension_text(dftext,selected_dimension):
+		#Processing the dataframe which has been prapared for processing text values
+		dftext = pivot_dataframe(dftext, selected_dimension)
+		dftext.columns = column_labels
+		dftext = dftext.T.sort_index(ascending=False).replace(0, "").replace("", np.nan)
+		dftext = dftext.map(lambda_function_dict[selected_dimension])
+		return dftext
 
-	#Processing the dataframe which has been prapared for processing text values
-	dftext = pivot_dataframe(dftext, "Bid Decision")
-	dftext.columns = column_labels
-	dftext = dftext.T.sort_index(ascending=False).replace(0, "").replace("", np.nan)
-	st.write(dftext.map(lambda_function_dict["Bid Decision"]))
+	st.write(selected_dimension_text(dftext, "Bid Decision"))
 
 	# Iterate through each band and its corresponding dataframe
 	for i, (band, df_segment) in enumerate(df_dict.items(), start=1):
