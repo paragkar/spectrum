@@ -2084,7 +2084,8 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 		"ProvAllocMHz StartRd" : "ProvAllocMHz StartRd",
 		"ProvAllocBLKs EndRd" : "ProvAllocBLKs EndRd",
 		"ProvAllocMHz EndRd" : "ProvAllocMHz EndRd",
-		"Blocks ForSale" : "Blocks ForSale"
+		"Blocks ForSale" : "Blocks ForSale",
+		"MHz ForSale" : "MHz ForSale",
 		 }
 
 	selected_dimension_for_total = dim_to_select_for_total_dict[selected_dimension]
