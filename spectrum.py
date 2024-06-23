@@ -2271,8 +2271,10 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	def text_values_heatmap(selected_dimension, df_segment, band):
 	    if selected_dimension in  lambda_function_dict:
 	        text_values = lambda_function_dict[selected_dimension](band)
+	        texttemplate ="%{text}"
 	    else:
 	        text_values = df_segment.astype(float).round(0).astype(str).replace('nan',"")
+	        texttemplate ="%{text:.0f}"
 	    return text_values
 
 
@@ -2295,7 +2297,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 					y=df_segment.index,
 					colorscale=colorscale,
 					text=text_values.values,  
-					texttemplate="%{text}",
+					texttemplate=texttemplate,
 					textfont={"size": text_embed_in_chart_size*0.8}, 
 					showscale=False,
 					# reversescale=True,
