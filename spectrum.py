@@ -2208,6 +2208,9 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	df_bid_value_provwinners = selected_dimension_df_text(dftext, "Bid Value ProvWinners").round(0) #This is the ref dataframe 
 	df_bid_value_activebidders = selected_dimension_df_text(dftext, "Bid Value ActiveBidders").round(0)
 	df_bid_value_activepluspwbbidders = selected_dimension_df_text(dftext, "Bid Value ActivePlusPWB").round(0)
+	df_blocks_for_sale = selected_dimension_df_text(dftext, "Blocks ForSale").round(0)
+	df_prov_alloc_blks_endround = selected_dimension_df_text(dftext, "ProvAllocBLKs EndRd").round(0)
+	
 
 	def map_win_loss_provwinners(df_active, df_winners):
 		result_df = pd.DataFrame(index=df_active.index, columns=df_active.columns)
@@ -2216,10 +2219,28 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 				active_value = df_active.at[idx, col]
 				winner_value = df_winners.at[idx, col]
 				if pd.notna(active_value) and active_value != 0:
-					result_df.at[idx, col] = '(W)' if pd.notna(winner_value) and winner_value != 0 else '(L)'
+					result_df.at[idx, col] = 'W' if pd.notna(winner_value) and winner_value != 0 else 'L'
 				else:
 					result_df.at[idx, col] = ''
 		return result_df
+
+
+	def map_alloc_slots_with_sale(df_alloc, df_sale):
+		result_df = pd.DataFrame(index=df_alloc.index, columns=df_sale.columns)
+		for col in df_alloc.columns:
+			for idx in df_alloc.index:
+				alloc_value = df_alloc.at[idx, col]
+				sale_value = df_sale.at[idx, col]
+				if pd.notna(alloc_value) and alloc_value != 0:
+					result_df.at[idx, col] = df_sale.at[idx, col] if pd.notna(sale_value) and sale_value != 0 else ''
+				else:
+					result_df.at[idx, col] = ''
+		return result_df
+
+	#Mapping allocated slots with those up for sale
+	result_df_prov_alloc_blks_endround = map_alloc_slots_with_sale(df_prov_alloc_blks_endround, df_blocks_for_sale)
+	
+
 
 	#Mapping results for selected dataframe to map
 	result_df_active_bidders = map_win_loss_provwinners(df_bid_value_activebidders, df_bid_value_provwinners)
@@ -2235,7 +2256,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	def prepare_text_values(df_dict, result_df_dict, band):
 		df = df_dict[band].map(lambda x : round(x,0)).astype(str).replace('nan', '')
 		result_df = result_df_dict[band].astype(str)
-		combined_df = df + '\n' + result_df
+		combined_df = '('+df + '\n' + result_df+')'
 		return combined_df
 
 
