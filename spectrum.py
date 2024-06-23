@@ -2221,13 +2221,10 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 		return result_df
 
 	result_df_active_bidders = map_win_loss_provwinners(df_bid_value_activebidders, df_bid_value_provwinners)
-	result_df_activepluspwb = map_win_loss_provwinners(df_bid_value_activepluspwb, df_bid_value_provwinners)
 
 
 	result_df_active_bidders_dict = sort_in_band_order(result_df_active_bidders, band_order)
-	result_df_activepluspwb_dict = sort_in_band_order(result_df_activepluspwb, band_order)
 	df_bid_value_activebidders_dict = sort_in_band_order(df_bid_value_activebidders, band_order)
-	df_bid_value_activepluspwb_dict = sort_in_band_order(df_bid_value_activepluspwb, band_order)
 
 
 	def prepare_text_values(df_dict, result_df_dict, band):
@@ -2241,7 +2238,6 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	lambda_function_dict = {
 	# "Bid Decision": lambda x: "Bid" if str(x) == "1" else ("No Bid" if pd.notna(x) else ""),
 	"Bid Value ActiveBidders": lambda band: prepare_text_values(df_bid_value_activebidders_dict, result_df_active_bidders_dict, band),
-	"Bid Value ActivePlusPWB" : lambda band: prepare_text_values(df_bid_value_activepluspwb_dict, result_df_activepluspwb_dict, band),
 	}
 
 
