@@ -2201,7 +2201,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 
 			
 
-			# text_values = df_segment.replace(np.nan, '')
+			text_values = df_segment.replace(np.nan, '')
 			aligned_color_df = color_df.loc[df_segment.index, df_segment.columns].replace(np.nan, "")
 			# Create a heatmap for each band
 			fig.add_trace(
