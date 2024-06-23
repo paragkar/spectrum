@@ -2205,11 +2205,11 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 		return dftext
 
 	#Extract the dataframe where the "Win" and "Loss" has to be appended
-	df_bid_value_provwinners = selected_dimension_df_text(dftext, "Bid Value ProvWinners").fillna(0).astype('int').replace(0,"") #This is the ref dataframe 
-	df_bid_value_activebidders = selected_dimension_df_text(dftext, "Bid Value ActiveBidders").fillna(0).astype('int').replace(0,"")
-	df_bid_value_activepluspwbbidders = selected_dimension_df_text(dftext, "Bid Value ActivePlusPWB").fillna(0).astype('int').replace(0,"")
-	df_blocks_for_sale = selected_dimension_df_text(dftext, "Blocks ForSale").fillna(0).astype('int')
-	df_prov_alloc_blks_endround = selected_dimension_df_text(dftext, "ProvAllocBLKs EndRd").fillna(0).astype('int')
+	df_bid_value_provwinners = selected_dimension_df_text(dftext, "Bid Value ProvWinners").round(0).fillna(0).astype('int') #This is the ref dataframe 
+	df_bid_value_activebidders = selected_dimension_df_text(dftext, "Bid Value ActiveBidders").round(0).fillna(0).astype('int')
+	df_bid_value_activepluspwbbidders = selected_dimension_df_text(dftext, "Bid Value ActivePlusPWB").round(0).fillna(0).astype('int')
+	df_blocks_for_sale = selected_dimension_df_text(dftext, "Blocks ForSale").round(0).fillna(0).astype('int')
+	df_prov_alloc_blks_endround = selected_dimension_df_text(dftext, "ProvAllocBLKs EndRd").round(0).fillna(0).astype('int')
 	
 
 	def map_win_loss_provwinners(df_active, df_winners):
@@ -2256,9 +2256,9 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 
 
 	def prepare_text_values(df_dict, result_df_dict, band):
-		# df = df_dict[band].map(lambda x : x.replace('nan', ''))
+		df = df_dict[band].map(lambda x : round(x,0)).astype(str).replace('nan', '')
 		result_df = result_df_dict[band].astype(str)
-		combined_df = df.astype(str) + '\n' + result_df
+		combined_df = df + '\n' + result_df
 		return combined_df
 
 
@@ -2270,9 +2270,9 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 
 	def text_values_heatmap(selected_dimension, df_segment, band):
 	    if selected_dimension in  lambda_function_dict:
-	        text_values = lambda_function_dict[selected_dimension](band)
+	        text_values = lambda_function_dict[selected_dimension](band).replace('nan', '')
 	    else:
-	        text_values = df_segment.astype(float).round(0).astype(str)
+	        text_values = df_segment.astype(float).round(0).astype(str).replace('nan', '')
 	    return text_values
 
 
