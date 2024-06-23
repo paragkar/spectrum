@@ -2226,7 +2226,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 					else:
 						result_df.at[idx, col] = 'Loss'
 				else:
-					result_df.at[idx, col] = np.nan  # Mark non-participants or inactive entries
+					result_df.at[idx, col] = ""  # Mark non-participants or inactive entries
 
 		return result_df
 
