@@ -2239,6 +2239,8 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 
 	#Mapping allocated slots with those up for sale
 	result_df_prov_alloc_blks_endround = map_alloc_slots_with_sale(df_prov_alloc_blks_endround, df_blocks_for_sale)
+
+	st.write(result_df_prov_alloc_blks_endround)
 	
 
 
