@@ -2275,7 +2275,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	    else:
 	        text_values = df_segment.astype(float).round(0).astype(str).replace('nan',"")
 	        texttemplate ="%{text:.0f}"
-	    return text_values
+	    return text_values, texttemplate
 
 
 
@@ -2284,7 +2284,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 
 		if selected_dimension not in ["RatioPWPtoRP EndRd"]: #IF statatement for using a different colorscale for ratio
 
-			text_values = text_values_heatmap(selected_dimension,df_segment,band)
+			text_values, texttemplate = text_values_heatmap(selected_dimension,df_segment,band)
 
 
 
