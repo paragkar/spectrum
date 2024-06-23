@@ -2202,10 +2202,8 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
     dftext = pivot_dataframe(dftext, "Bid Decision")
     dftext.columns = column_labels
     dftext = dftext.T.sort_index(ascending=False).replace(0, "").replace("", np.nan)
-    # Extract band information more reliably
-    # dftext["Band"] = list(dftext.index.str.extract(r'(\d+)')[0])
 
-    st.write(dftext)
+    st.write(dftext.map(lambda_function_dict["Bid Decision"]))
 
     # Iterate through each band and its corresponding dataframe
     for i, (band, df_segment) in enumerate(df_dict.items(), start=1):
