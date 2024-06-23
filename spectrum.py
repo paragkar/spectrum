@@ -2215,7 +2215,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 				active_value = df_active.at[idx, col]
 				winner_value = df_winners.at[idx, col]
 				if pd.notna(active_value) and active_value != 0:
-					result_df.at[idx, col] = 'Won' if pd.notna(winner_value) and winner_value != 0 else 'Lost'
+					result_df.at[idx, col] = '(Won)' if pd.notna(winner_value) and winner_value != 0 else '(Lost)'
 				else:
 					result_df.at[idx, col] = ''
 		return result_df
