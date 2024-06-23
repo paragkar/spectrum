@@ -2219,7 +2219,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 				active_value = df_active.at[idx, col]
 				winner_value = df_winners.at[idx, col]
 				if pd.notna(active_value) and active_value != 0:
-					result_df.at[idx, col] = 'W' if pd.notna(winner_value) and winner_value != 0 else 'L'
+					result_df.at[idx, col] = '(W)' if pd.notna(winner_value) and winner_value != 0 else '(L)'
 				else:
 					result_df.at[idx, col] = ''
 		return result_df
@@ -2256,7 +2256,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	def prepare_text_values(df_dict, result_df_dict, band):
 		df = df_dict[band].map(lambda x : round(x,0)).astype(str).replace('nan', '')
 		result_df = result_df_dict[band].astype(str)
-		combined_df = '('+df + '\n' + result_df+')'
+		combined_df = df + '\n' + result_df
 		return combined_df
 
 
