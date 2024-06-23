@@ -2190,19 +2190,18 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 
 
 	#Apply lambda function to text_values depending on selected_dimension 
-
-	# # Define lambda functions directly in the dictionary
-	# lambda_function_dict = {
-	#     "Bid Decision": lambda x: "Bid" if x == 1 else "No Bid"
-	# }
+	lambda_function_dict = {
+	    "Bid Decision": lambda x: "Bid" if x == 1 else "No Bid"
+	}
 
 	# Iterate through each band and its corresponding dataframe
 	for i, (band, df_segment) in enumerate(df_dict.items(), start=1):
 
 		if selected_dimension not in ["RatioPWPtoRP EndRd"]:
 
-			text_values = df_segment.replace(np.nan, '')
+			
 
+			# text_values = df_segment.replace(np.nan, '')
 			aligned_color_df = color_df.loc[df_segment.index, df_segment.columns].replace(np.nan, "")
 			# Create a heatmap for each band
 			fig.add_trace(
