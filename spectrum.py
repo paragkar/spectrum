@@ -2202,7 +2202,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 		dftext = dftext.T.sort_index(ascending=False).replace(0, "").replace("", np.nan)
 		return dftext
 
-	df_bid_decesion = selected_dimension_df_text(dftext, "Bid Decision")
+	df_bid_decision = selected_dimension_df_text(dftext, "Bid Decision")
 	df_bid_value_activebidders = selected_dimension_df_text(dftext, "Bid Value ActiveBidders")
 
 	# Combine DataFrames for processing
