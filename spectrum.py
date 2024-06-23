@@ -2186,7 +2186,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 
 		return df_dict
 
-	df_dict = sort_in_band_order(df)
+	df_dict = sort_in_band_order(df, band_order)
 
 	
 	# Dictionary to hold dataframes for each band
