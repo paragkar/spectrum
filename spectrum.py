@@ -2220,7 +2220,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 
 	result_df = map_win_loss_provwinners(df_bid_value_activebidders, df_bid_value_provwinners)
 
-	st.write(result_df)
+	st.write(result_df.sort_index(ascending = False))
 
 	def prepare_text_values(df, result_df):
 		df = df.astype(float).round(0).astype(str)
