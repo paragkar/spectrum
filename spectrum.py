@@ -2235,8 +2235,8 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 
 
 	lambda_function_dict = {
-	# "Bid Decision": lambda x: "Bid" if str(x) == "1.0" else ("No Bid" if pd.notna(x) else ""),
-	"Bid Decision": lambda x: "Bid" if str(x) == "1.0" else "No Bid",
+	"Bid Decision": lambda x: "Bid" if str(x) == "1.0" else ("No Bid" if pd.notna(x) else ""),
+	# "Bid Decision": lambda x: "Bid" if str(x) == "1.0" else "No Bid",
 	"Bid Value ActiveBidders": lambda band: prepare_text_values(df_bid_value_activebidders_dict, result_df_active_bidders_dict, band),
 	}
 
