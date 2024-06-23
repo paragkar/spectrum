@@ -2271,7 +2271,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	def text_values_heatmap(selected_dimension, df_segment, band):
 	    if selected_dimension in  lambda_function_dict:
 	        text_values = lambda_function_dict[selected_dimension](band)
-	        texttemplate ="%{text}"
+	        texttemplate ="%{text:.0f}"
 	    else:
 	        text_values = df_segment.astype(float).round(0).astype(str).replace('nan',"")
 	        texttemplate ="%{text:.0f}"
@@ -2285,7 +2285,6 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 		if selected_dimension not in ["RatioPWPtoRP EndRd"]: #IF statatement for using a different colorscale for ratio
 
 			text_values, texttemplate = text_values_heatmap(selected_dimension,df_segment,band)
-
 
 
 			aligned_color_df = color_df.loc[df_segment.index, df_segment.columns].replace(np.nan, "")
