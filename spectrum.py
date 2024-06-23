@@ -2206,28 +2206,28 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	df_bid_value_activebidders = selected_dimension_df_text(dftext, "Bid Value ActiveBidders").round(1)
 
 	def map_win_loss_provwinners(df_active, df_winners):
-	    result_df = pd.DataFrame(index=df_active.index, columns=df_active.columns)
-	    for col in df_active.columns:
-	        for idx in df_active.index:
-	            active_value = df_active.at[idx, col]
-	            winner_value = df_winners.at[idx, col]
-	            if pd.notna(active_value) and active_value != 0:
-	                result_df.at[idx, col] = 'Win' if pd.notna(winner_value) and winner_value != 0 else 'Loss'
-	            else:
-	                result_df.at[idx, col] = ''
-	    return result_df
+		result_df = pd.DataFrame(index=df_active.index, columns=df_active.columns)
+		for col in df_active.columns:
+			for idx in df_active.index:
+				active_value = df_active.at[idx, col]
+				winner_value = df_winners.at[idx, col]
+				if pd.notna(active_value) and active_value != 0:
+					result_df.at[idx, col] = 'Win' if pd.notna(winner_value) and winner_value != 0 else 'Loss'
+				else:
+					result_df.at[idx, col] = ''
+		return result_df
 
 	result_df = map_win_loss_provwinners(df_bid_value_activebidders, df_bid_value_provwinners)
 
 	def prepare_text_values(df, result_df):
 		df = df.map(lambda x: x.astype(float).round(1))
-	    combined_df = df.astype(str).replace('0', '').replace('nan', '') + result_df
-	    return combined_df
+		combined_df = df.astype(str).replace('0', '').replace('nan', '') + result_df
+		return combined_df
 
 
 	lambda_function_dict = {
-    "Bid Decision": lambda x: "Bid" if x == "1" else ("No Bid" if pd.notna(x) and x != '' else ""),
-    "Bid Value ActiveBidders": lambda df, result_df: prepare_text_values(df, result_df),
+	"Bid Decision": lambda x: "Bid" if x == "1" else ("No Bid" if pd.notna(x) and x != '' else ""),
+	"Bid Value ActiveBidders": lambda df, result_df: prepare_text_values(df, result_df),
 	}
 
 	#Prepare textvalues and texttemplete for heatmaps
