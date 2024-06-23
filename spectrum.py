@@ -2203,7 +2203,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
     dftext.columns = column_labels
     dftext = dftext.T.sort_index(ascending=False).replace(0, "").replace("", np.nan)
     # Extract band information more reliably
-    dftext["Band"] = list(dftext.index.str.extract(r'(\d+)')[0])
+    # dftext["Band"] = list(dftext.index.str.extract(r'(\d+)')[0])
 
     st.write(dftext)
 
