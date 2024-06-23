@@ -2205,27 +2205,56 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	df_bid_decision = selected_dimension_df_text(dftext, "Bid Decision")
 	df_bid_value_activebidders = selected_dimension_df_text(dftext, "Bid Value ActiveBidders")
 
+	def map_win_loss(df_decision, df_active):
+	    # Ensure alignment and identical shape
+	    assert df_decision.shape == df_active.shape, "DataFrames must have the same shape"
+
+	    # Create an empty DataFrame with the same index and columns
+	    result_df = pd.DataFrame(index=df_decision.index, columns=df_decision.columns)
+
+	    # Iterate over each cell
+	    for col in df_decision.columns:
+	        for idx in df_decision.index:
+	            bid_decision = df_decision.at[idx, col]
+	            active_value = df_active.at[idx, col]
+
+	            # Determine if active and decision is a bid
+	            if pd.notna(active_value) and active_value != 0:
+	                if pd.notna(bid_decision) and bid_decision == 1:
+	                    result_df.at[idx, col] = 'Win'
+	                else:
+	                    result_df.at[idx, col] = 'Loss'
+	            else:
+	                result_df.at[idx, col] = np.nan  # Or any other value for non-participants or zero activity
+
+	    return result_df
+
+    result_df = map_win_loss(df_bid_decision,df_bid_value_activebidders)
+
+    st.write(result_df)
+
+
 	# Combine DataFrames for processing
 	combined_df = pd.concat([df_bid_decision, df_bid_value_activebidders], axis=1, keys=["Bid Decision", "Bid Value ActiveBidders"])
 
-		# Define the function to generate text values
-	def generate_text_values(row):
-	    bid_decision_text = "Bid" if row['Bid Decision'] == 1 else "No Bid"
-	    active_bidders_text = str(row['Bid Value ActiveBidders'])
+	# 	# Define the function to generate text values
+	# def generate_text_values(row):
+	#     bid_decision_text = "Bid" if row['Bid Decision'] == 1 else "No Bid"
+	#     active_bidders_text = str(row['Bid Value ActiveBidders'])
 	    
-	    # Append win or loss based on some logic
-	    if bid_decision_text != active_bidders_text:
-	        result_text = f"{active_bidders_text} (Mismatch!)"
-	    else:
-	        result_text = active_bidders_text
+	#     # Append win or loss based on some logic
+	#     if bid_decision_text != active_bidders_text:
+	#         result_text = f"{active_bidders_text} (Mismatch!)"
+	#     else:
+	#         result_text = active_bidders_text
 
-	    return result_text
+	#     return result_text
 
-	# Apply the function across rows
-	text_values = combined_df.apply(generate_text_values, axis=1)
+	# # Apply the function across rows
+	# text_values = combined_df.apply(generate_text_values, axis=1)
 
-	# Example output of text_values
-	print(text_values)
+	# # Example output of text_values
+	# print(text_values)
 
 
 
