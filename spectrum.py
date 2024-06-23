@@ -2188,6 +2188,8 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 
 	df_dict = sort_in_band_order(df, band_order)
 
+	st.write(df_dict)
+
 	
 	# Dictionary to hold dataframes for each band
 	# df_dict = {band: group.drop('Band', axis=1) for band, group in df.groupby('Band')}
