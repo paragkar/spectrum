@@ -2006,13 +2006,13 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 
 	# Adjust selection interface based on the auction year
 	if AuctionYear == 2010:
-		# For the year 2010, provide a selectbox with default to 2100
-		selected_bands = st.sidebar.selectbox('Select Band to View', available_bands, index=available_bands.index("2100") if "2100" in available_bands else 0)
-		# Wrap the selection into a list since the rest of the code expects a list
-		selected_bands = [selected_bands]
+	    # For the year 2010, provide a selectbox with default to 2100
+	    selected_bands = st.sidebar.selectbox('Select Band to View', available_bands, index=available_bands.index("2100") if "2100" in available_bands else 0)
+	    # Wrap the selection into a list since the rest of the code expects a list
+	    selected_bands = [selected_bands]
 	else:
-		# For other years, use a multiselect with all bands selected by default
-		selected_bands = st.sidebar.multiselect('Select Bands to View', available_bands, default=available_bands)
+	    # For other years, use a multiselect with all bands selected by default
+	    selected_bands = st.sidebar.multiselect('Select Bands to View', available_bands, default=available_bands)
 
 	# Further filter dataframe by selected bands if any
 	if selected_bands:
@@ -2189,9 +2189,11 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	zmin, zmax = 0, 1  # Since your colorscale is likely mapped from 0 to 1
 
 
-	# #Apply lambda function to text_values depending on selected_dimension 
+	#Apply lambda function to text_values depending on selected_dimension 
+
+	# # Define lambda functions directly in the dictionary
 	# lambda_function_dict = {
-	# 	"Bid Decision": lambda x: "Bid" if x == 1 else "No Bid"
+	#     "Bid Decision": lambda x: "Bid" if x == 1 else "No Bid"
 	# }
 
 	# Iterate through each band and its corresponding dataframe
@@ -2199,20 +2201,9 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 
 		if selected_dimension not in ["RatioPWPtoRP EndRd"]:
 
-			# st.write(selected_dimension)
+			text_values = df_segment.replace(np.nan, '')
 
-			# # Check if selected_dimension has a lambda function defined
-			# if selected_dimension in lambda_function_dict:
-			# 	# Apply the lambda function to the relevant column
-			# 	text_values = df_segment[selected_dimension].apply(lambda_function_dict[selected_dimension]).replace(np.nan, "")
-			# else:
-			# 	# If no special lambda function, just replace NaNs with empty string or another default action
-			# 	text_values = df_segment[selected_dimension].replace(np.nan, '')
-
-
-			text_values = df_segment[selected_dimension].replace(np.nan, '')
 			aligned_color_df = color_df.loc[df_segment.index, df_segment.columns].replace(np.nan, "")
-
 			# Create a heatmap for each band
 			fig.add_trace(
 				go.Heatmap(
