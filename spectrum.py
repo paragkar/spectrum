@@ -2229,29 +2229,29 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
     "Bid Value ActiveBidders": lambda df, result_df: prepare_text_values(df, result_df),
 	}
 
-	# #Prepare textvalues and texttemplete for heatmaps
-	# def text_values_heatmap(lambda_function_dict,selected_dimension, resultdf):
-	# 	# Check if selected_dimension has a lambda function defined
-	# 	if selected_dimension == "Bid Decision":
-	# 		text_values = df_segment.map(lambda_function_dict[selected_dimension]).replace(np.nan, '')
-	# 		texttemplate = "%{text}"
-	# 	elif selected_dimension == "Bid Value ActiveBidders":
-	# 		# Apply the lambda function if the selected dimension requires special handling
-	# 		text_values = lambda_function_dict[selected_dimension](df_bid_value_activebidders, result_df).replace('nan', '')
-	# 		texttemplate = "%{text}"
-	# 	else:
-	# 		# If no special lambda function, just replace NaNs with empty string or another default action
-	# 		text_values = df_segment.replace(np.nan, '')
-	# 		texttemplate = "%{text:.1f}"
-	# 	return text_values, texttemplate
+	#Prepare textvalues and texttemplete for heatmaps
+	def text_values_heatmap(lambda_function_dict,selected_dimension, resultdf):
+		# Check if selected_dimension has a lambda function defined
+		if selected_dimension == "Bid Decision":
+			text_values = df_segment.map(lambda_function_dict[selected_dimension]).replace(np.nan, '')
+			texttemplate = "%{text}"
+		elif selected_dimension == "Bid Value ActiveBidders":
+			# Apply the lambda function if the selected dimension requires special handling
+			text_values = lambda_function_dict[selected_dimension](df_bid_value_activebidders, result_df).replace('nan', '')
+			texttemplate = "%{text}"
+		else:
+			# If no special lambda function, just replace NaNs with empty string or another default action
+			text_values = df_segment.replace(np.nan, '')
+			texttemplate = "%{text:.1f}"
+		return text_values, texttemplate
 
-	def text_values_heatmap(df_segment, selected_dimension, lambda_function_dict, result_df):
-	    if selected_dimension in lambda_function_dict:
-	        text_values = lambda_function_dict[selected_dimension](df_segment, result_df)
-	    else:
-	        text_values = df_segment.astype(str).replace('nan', '').replace('0', '')
-	    texttemplate = "%{text}"
-	    return text_values, texttemplate
+	# def text_values_heatmap(df_segment, selected_dimension, lambda_function_dict, result_df):
+	#     if selected_dimension in lambda_function_dict:
+	#         text_values = lambda_function_dict[selected_dimension](df_segment, result_df)
+	#     else:
+	#         text_values = df_segment.astype(str).replace('nan', '').replace('0', '')
+	#     texttemplate = "%{text}"
+	#     return text_values, texttemplate
 
 
 
@@ -2260,8 +2260,8 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 
 		if selected_dimension not in ["RatioPWPtoRP EndRd"]:
 
-			# text_values, texttemplate = text_values_heatmap(lambda_function_dict,selected_dimension, result_df)
-			text_values, texttemplate = text_values_heatmap(df_bid_value_activebidders, selected_dimension, lambda_function_dict, result_df)
+			text_values, texttemplate = text_values_heatmap(lambda_function_dict,selected_dimension, result_df)
+			# text_values, texttemplate = text_values_heatmap(df_bid_value_activebidders, selected_dimension, lambda_function_dict, result_df)
 
 			aligned_color_df = color_df.loc[df_segment.index, df_segment.columns].replace(np.nan, "")
 			# Create a heatmap for each band
