@@ -2236,30 +2236,6 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	st.write(result_df)
 
 
-	# Combine DataFrames for processing
-	combined_df = pd.concat([df_bid_decision, df_bid_value_activebidders], axis=1, keys=["Bid Decision", "Bid Value ActiveBidders"])
-
-	# 	# Define the function to generate text values
-	# def generate_text_values(row):
-	#     bid_decision_text = "Bid" if row['Bid Decision'] == 1 else "No Bid"
-	#     active_bidders_text = str(row['Bid Value ActiveBidders'])
-		
-	#     # Append win or loss based on some logic
-	#     if bid_decision_text != active_bidders_text:
-	#         result_text = f"{active_bidders_text} (Mismatch!)"
-	#     else:
-	#         result_text = active_bidders_text
-
-	#     return result_text
-
-	# # Apply the function across rows
-	# text_values = combined_df.apply(generate_text_values, axis=1)
-
-	# # Example output of text_values
-	# print(text_values)
-
-
-
 	#Apply lambda function to text_values depending on selected_dimension 
 	lambda_function_dict = {
 		"Bid Decision": lambda x: "Bid" if str(x) == "1" else ("No Bid" if pd.notna(x) else x),
