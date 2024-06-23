@@ -2206,7 +2206,6 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	#Extract the dataframe where the "Win" and "Loss" has to be appended
 	df_bid_value_provwinners = selected_dimension_df_text(dftext, "Bid Value ProvWinners").round(0)
 	df_bid_value_activebidders = selected_dimension_df_text(dftext, "Bid Value ActiveBidders").round(0)
-	df_bid_value_activepluspwb = selected_dimension_df_text(dftext, "Bid Value ActivePlusPWB").round(0)
 
 	def map_win_loss_provwinners(df_active, df_winners):
 		result_df = pd.DataFrame(index=df_active.index, columns=df_active.columns)
@@ -2255,10 +2254,10 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 
 	def text_values_heatmap(df_segment, selected_dimension, band):
 		if selected_dimension in lambda_function_dict:
-			text_values = df_segment.apply(lambda_function_dict[selected_dimension](band)).replace('nan', '').values
+			text_values = df_segment.apply(lambda_function_dict[selected_dimension](band)).replace('nan', '')
 		else:
 			# Default handling if no special processing is required
-			text_values = df_segment.astype(float).round(0).astype(str).replace('nan', '').values
+			text_values = df_segment.astype(float).round(0).astype(str).replace('nan', '')
 		return text_values
 
 
