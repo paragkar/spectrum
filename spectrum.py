@@ -2232,7 +2232,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 				alloc_value = df_alloc.at[idx, col]
 				sale_value = df_sale.at[idx, col]
 				if pd.notna(alloc_value) and alloc_value != 0:
-					result_df.at[idx, col] = '('+df_sale.at[idx, col].astype(str)+')' if pd.notna(sale_value) and sale_value != 0 else ''
+					result_df.at[idx, col] = '('+df_sale.at[idx, col].round(0).astype(str)+')' if pd.notna(sale_value) and sale_value != 0 else ''
 				else:
 					result_df.at[idx, col] = ''
 		return result_df
