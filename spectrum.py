@@ -2205,8 +2205,11 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	df_bid_decesion = selected_dimension_df_text(dftext, "Bid Decision")
 	df_bid_value_activebidders = selected_dimension_df_text(dftext, "Bid Value ActiveBidders")
 
-	st.write(df_bid_decesion)
-	st.write(df_bid_value_activebidders)
+	# Combine DataFrames for processing
+	combined_df = pd.concat([df_bid_decision, df_bid_value_activebidders], axis=1, keys=["Bid Decision", "Bid Value ActiveBidders"])
+
+	st.write(combined_df)
+
 
 	#Apply lambda function to text_values depending on selected_dimension 
 	lambda_function_dict = {
