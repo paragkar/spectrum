@@ -2191,7 +2191,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 
 	#Apply lambda function to text_values depending on selected_dimension 
 	lambda_function_dict = {
-		"Bid Decision": lambda x: "Bid" if x == 1 else "No Bid"
+		"Bid Decision": lambda x: "Bid" if x == "1.0" else "No Bid"
 	}
 
 	# Iterate through each band and its corresponding dataframe
