@@ -2235,7 +2235,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 
 	result_df_dict = sort_in_band_order(result_df, band_order)
 
-	st.write(pd.DataFrame(result_df_dict))
+	st.write(result_df_dict.to_farme())
 
 
 	def prepare_text_values(df, result_df):
