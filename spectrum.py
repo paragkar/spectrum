@@ -2194,9 +2194,23 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	zmin, zmax = 0, 1  # Since your colorscale is likely mapped from 0 to 1
 
 
+	#Prepare dataframe to be used to process textvalues by making comparision
+	def selected_dimension_df_text(dftext,selected_dimension):
+		#Processing the dataframe which has been prapared for processing text values
+		dftext = pivot_dataframe(dftext, selected_dimension)
+		dftext.columns = column_labels
+		dftext = dftext.T.sort_index(ascending=False).replace(0, "").replace("", np.nan)
+		return dftext
+
+	df_bid_decesion = selected_dimension_df_text(dftext, "Bid Decision")
+	df_bid_value_activebidders = selected_dimension_df_text(dftext, "Bid Value ActiveBidders")
+
+	st.write(df_bid_decesion)
+	st.write(df_bid_value_activebidders)
+
 	#Apply lambda function to text_values depending on selected_dimension 
 	lambda_function_dict = {
-		"Bid Decision": lambda x: "Bid" if str(x) == "1" else ("No Bid" if pd.notna(x) else x)
+		"Bid Decision": lambda x: "Bid" if str(x) == "1" else ("No Bid" if pd.notna(x) else x),
 	}
 
 	#Prepare textvalues and texttemplete for heatmaps
@@ -2211,16 +2225,6 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 			texttemplate = "%{text:.1f}"
 		return text_values, texttemplate
 
-	#Prepare dataframe to be used to process textvalues by making comparision
-	def selected_dimension_text(dftext,selected_dimension):
-		#Processing the dataframe which has been prapared for processing text values
-		dftext = pivot_dataframe(dftext, selected_dimension)
-		dftext.columns = column_labels
-		dftext = dftext.T.sort_index(ascending=False).replace(0, "").replace("", np.nan)
-		# dftext = dftext.map(lambda_function_dict[selected_dimension])
-		return dftext
-
-	st.write(selected_dimension_text(dftext, "Bid Decision"))
 
 	# Iterate through each band and its corresponding dataframe
 	for i, (band, df_segment) in enumerate(df_dict.items(), start=1):
