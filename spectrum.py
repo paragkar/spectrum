@@ -2220,11 +2220,12 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 
 	result_df = map_win_loss_provwinners(df_bid_value_activebidders, df_bid_value_provwinners)
 
+	st.write(result_df)
+
 	def prepare_text_values(df, result_df):
 		df = df.astype(float).round(0).astype(str)
 		combined_df = df.astype(str).replace('0', '').replace('nan', '') + result_df
 		return combined_df
-
 
 	lambda_function_dict = {
 	"Bid Decision": lambda x: "No Bid" if str(x) == "1.0" else ("Bid" if pd.notna(x) and str(x) != '' else ""),
@@ -2237,7 +2238,6 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 		if selected_dimension == "Bid Decision":
 			text_values = df_segment.map(lambda_function_dict[selected_dimension]).replace(np.nan, '')
 		if selected_dimension == "Bid Value ActiveBidders":
-			# Apply the lambda function if the selected dimension requires special handling
 			text_values = lambda_function_dict[selected_dimension](df_bid_value_activebidders, result_df).replace('nan', '')
 		else:
 			# If no special lambda function, just replace NaNs with empty string or another default action
