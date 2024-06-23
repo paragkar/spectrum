@@ -2209,7 +2209,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	df_bid_value_activebidders = selected_dimension_df_text(dftext, "Bid Value ActiveBidders").astype(float).round(0)
 	df_bid_value_activepluspwbbidders = selected_dimension_df_text(dftext, "Bid Value ActivePlusPWB").astype(float).round(0)
 	df_blocks_for_sale = selected_dimension_df_text(dftext, "Blocks ForSale").astype(float).round(0)
-	df_prov_alloc_blks_endround = selected_dimension_df_text(dftext, "ProvAllocBLKs EndRd").atype(float).round(0)
+	df_prov_alloc_blks_endround = selected_dimension_df_text(dftext, "ProvAllocBLKs EndRd").astype(float).round(0)
 	
 
 	def map_win_loss_provwinners(df_active, df_winners):
