@@ -2243,7 +2243,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	#Sorting and converting allocated slots dataframe into dict
 	result_df_prov_alloc_blks_endround_dict=sort_in_band_order(result_df_prov_alloc_blks_endround, band_order)
 
-
+	st.write(result_df_prov_alloc_blks_endround_dict)
 
 	#Mapping results for selected dataframe to map
 	result_df_active_bidders = map_win_loss_provwinners(df_bid_value_activebidders, df_bid_value_provwinners)
