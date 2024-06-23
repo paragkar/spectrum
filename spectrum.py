@@ -2199,6 +2199,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 		"Bid Decision": lambda x: "Bid" if str(x) == "1" else ("No Bid" if pd.notna(x) else x)
 	}
 
+	#Prepare textvalues and texttemplete for heatmaps
 	def text_values_heatmap(lambda_function_dict,selected_dimension):
 		# Check if selected_dimension has a lambda function defined
 		if selected_dimension in lambda_function_dict:
@@ -2210,12 +2211,13 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 			texttemplate = "%{text:.1f}"
 		return text_values, texttemplate
 
+	#Prepare dataframe to be used to process textvalues by making comparision
 	def selected_dimension_text(dftext,selected_dimension):
 		#Processing the dataframe which has been prapared for processing text values
 		dftext = pivot_dataframe(dftext, selected_dimension)
 		dftext.columns = column_labels
 		dftext = dftext.T.sort_index(ascending=False).replace(0, "").replace("", np.nan)
-		dftext = dftext.map(lambda_function_dict[selected_dimension])
+		# dftext = dftext.map(lambda_function_dict[selected_dimension])
 		return dftext
 
 	st.write(selected_dimension_text(dftext, "Bid Decision"))
