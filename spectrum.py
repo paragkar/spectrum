@@ -2220,8 +2220,6 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 
 	result_df = map_win_loss_provwinners(df_bid_value_activebidders, df_bid_value_provwinners)
 
-	st.write(result_df)
-
 	def prepare_text_values(df, result_df):
 		df = df.astype(float).round(0)
 		combined_df = df.astype(str).replace('0', '').replace('nan', '') + result_df
@@ -2237,16 +2235,13 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	def text_values_heatmap(lambda_function_dict,selected_dimension, resultdf):
 		# Check if selected_dimension has a lambda function defined
 		if selected_dimension == "Bid Decision":
-			text_values = df_segment.map(lambda_function_dict[selected_dimension]).replace(np.nan, '')
-			texttemplate = "%{text}"
-		elif selected_dimension == "Bid Value ActiveBidders":
+			text_values = df_segment.map(lambda_function_dict["Bid Decision"]).replace(np.nan, '')
+		if selected_dimension == "Bid Value ActiveBidders":
 			# Apply the lambda function if the selected dimension requires special handling
-			text_values = lambda_function_dict[selected_dimension](df_bid_value_activebidders, result_df).replace('nan', '')
-			texttemplate = "%{text}"
+			text_values = lambda_function_dict["Bid Value ActiveBidders"](df_bid_value_activebidders, result_df).replace('nan', '')
 		else:
 			# If no special lambda function, just replace NaNs with empty string or another default action
 			text_values = df_segment.replace(np.nan, '')
-			texttemplate = "%{text}"
 		return text_values, texttemplate
 
 
@@ -2255,7 +2250,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 
 		if selected_dimension not in ["RatioPWPtoRP EndRd"]:
 
-			text_values, texttemplate = text_values_heatmap(lambda_function_dict,selected_dimension, result_df)
+			text_values, texttemplate = text_values_heatmap(lambda_function_dict,selected_dimension,result_df)
 
 			aligned_color_df = color_df.loc[df_segment.index, df_segment.columns].replace(np.nan, "")
 			# Create a heatmap for each band
@@ -2266,7 +2261,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 					y=df_segment.index,
 					colorscale=colorscale,
 					text=text_values.values,  
-					texttemplate=texttemplate,
+					texttemplate="%{text}",
 					textfont={"size": text_embed_in_chart_size*0.8}, 
 					showscale=False,
 					# reversescale=True,
