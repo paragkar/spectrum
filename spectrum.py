@@ -2228,7 +2228,6 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 
 
 	def prepare_text_values(df_dict, result_df_dict, band):
-		# df = df_dict[band].astype(float).round(0).astype(str).replace('0', '').replace('nan', '')
 		df = df_dict[band].map(lambda x : round(x,0)).astype(str).replace('nan', '')
 		result_df = result_df_dict[band].astype(str)
 		combined_df = df + '\n' + result_df
@@ -2247,7 +2246,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 			text_values = lambda_function_dict[selected_dimension](band).replace('nan', '')
 		else:
 			# Default handling if no special processing is required
-			text_values = df_segment.astype(float).round(0).astype(str).replace('nan', '')
+			text_values = df_segment.astype(float).round(0).astype(str).replace('nan', '').values
 		return text_values
 
 
@@ -2266,7 +2265,8 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 					x=df_segment.columns,
 					y=df_segment.index,
 					colorscale=colorscale,
-					text=text_values.values,  
+					# text=text_values.values,
+					text=text_values,    
 					texttemplate="%{text}",
 					textfont={"size": text_embed_in_chart_size*0.8}, 
 					showscale=False,
