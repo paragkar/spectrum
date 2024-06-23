@@ -2272,7 +2272,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	    if selected_dimension in  lambda_function_dict:
 	        text_values = lambda_function_dict[selected_dimension](band)
 	    else:
-	        text_values = df_segment.astype(float).round(0).astype(str)
+	        text_values = df_segment.astype(float).round(0).astype(str).replace('nan',"")
 	    return text_values
 
 
