@@ -2029,7 +2029,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	dfblksale = df[["Service Area", "Blocks ForSale", "Band"]].drop_duplicates()
 
 	dim_to_select = ["Bid Decision", "Bid Value ProvWinners", "Bid Value ActiveBidders","Bid Value ActivePlusPWB","RatioPWPtoRP EndRd", "ProvWinBid StartRd","Rank StartRd","ProvWinBid EndRd", "Rank EndRd","Blocks Selected", "MHz Selected",
-					"ProvAllocBLKs StartRd","ProvAllocMHz StartRd", "ProvAllocBLKs EndRd", "ProvAllocMHz EndRd"]
+					"ProvAllocBLKs StartRd","ProvAllocMHz StartRd", "ProvAllocBLKs EndRd", "ProvAllocMHz EndRd", "Blocks ForSale",]
 
 	dfcopy = df.copy() #Create a copy of dataframe upto selected dimension
 
@@ -2084,6 +2084,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 		"ProvAllocMHz StartRd" : "ProvAllocMHz StartRd",
 		"ProvAllocBLKs EndRd" : "ProvAllocBLKs EndRd",
 		"ProvAllocMHz EndRd" : "ProvAllocMHz EndRd",
+		"Blocks ForSale" : "Blocks ForSale"
 		 }
 
 	selected_dimension_for_total = dim_to_select_for_total_dict[selected_dimension]
@@ -2256,7 +2257,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	for i, (band, df_segment) in enumerate(df_dict.items(), start=1):
 
 		if selected_dimension not in ["RatioPWPtoRP EndRd"]: #IF statatement for using a different colorscale for ratio
-			
+
 			text_values = text_values_heatmap(selected_dimension,df_segment,band)
 
 			aligned_color_df = color_df.loc[df_segment.index, df_segment.columns].replace(np.nan, "")
