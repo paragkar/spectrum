@@ -2221,7 +2221,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	result_df = map_win_loss_provwinners(df_bid_value_activebidders, df_bid_value_provwinners)
 
 	def prepare_text_values(df, result_df):
-		df = df.astype(float).round(0)
+		df = df.astype(float).round(0).astype(str)
 		combined_df = df.astype(str).replace('0', '').replace('nan', '') + result_df
 		return combined_df
 
