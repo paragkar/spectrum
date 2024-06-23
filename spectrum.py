@@ -2256,7 +2256,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 
 
 	def prepare_text_values(df_dict, result_df_dict, band):
-		df = df_dict[band].map(lambda x : x.astype(str).replace('nan', ''))
+		df = df_dict[band].map(lambda x : x.replace('nan', ''))
 		result_df = result_df_dict[band].astype(str)
 		combined_df = df + '\n' + result_df
 		return combined_df
