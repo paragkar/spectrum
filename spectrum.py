@@ -2205,11 +2205,11 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 		return dftext
 
 	#Extract the dataframe where the "Win" and "Loss" has to be appended
-	df_bid_value_provwinners = selected_dimension_df_text(dftext, "Bid Value ProvWinners").round(0) #This is the ref dataframe 
-	df_bid_value_activebidders = selected_dimension_df_text(dftext, "Bid Value ActiveBidders").round(0)
-	df_bid_value_activepluspwbbidders = selected_dimension_df_text(dftext, "Bid Value ActivePlusPWB").round(0)
-	df_blocks_for_sale = selected_dimension_df_text(dftext, "Blocks ForSale").round(0)
-	df_prov_alloc_blks_endround = selected_dimension_df_text(dftext, "ProvAllocBLKs EndRd").round(0)
+	df_bid_value_provwinners = selected_dimension_df_text(dftext, "Bid Value ProvWinners").astype(float).round(0) #This is the ref dataframe 
+	df_bid_value_activebidders = selected_dimension_df_text(dftext, "Bid Value ActiveBidders").astype(float).round(0)
+	df_bid_value_activepluspwbbidders = selected_dimension_df_text(dftext, "Bid Value ActivePlusPWB").astype(float).round(0)
+	df_blocks_for_sale = selected_dimension_df_text(dftext, "Blocks ForSale").astype(float).round(0)
+	df_prov_alloc_blks_endround = selected_dimension_df_text(dftext, "ProvAllocBLKs EndRd").atype(float).round(0)
 	
 
 	def map_win_loss_provwinners(df_active, df_winners):
@@ -2232,7 +2232,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 				alloc_value = df_alloc.at[idx, col]
 				sale_value = df_sale.at[idx, col]
 				if pd.notna(alloc_value) and alloc_value != 0:
-					result_df.at[idx, col] = '('+df_sale.at[idx, col].astype(float).round(0).astype(str)+')' if pd.notna(sale_value) and sale_value != 0 else ''
+					result_df.at[idx, col] = '('+df_sale.at[idx, col].astype(str)+')' if pd.notna(sale_value) and sale_value != 0 else ''
 				else:
 					result_df.at[idx, col] = ''
 		return result_df
