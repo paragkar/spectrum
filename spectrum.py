@@ -2242,7 +2242,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	def text_values_heatmap(selected_dimension, df_segment, band=None):
 	    if selected_dimension == "Bid Decision":
 	        # Apply the function directly to the DataFrame or its applicable part
-	        text_values = df_segment.apply(lambda_function_dict[selected_dimension]).replace(np.nan, '')
+	        text_values = df_segment.map(lambda_function_dict[selected_dimension]).replace(np.nan, '')
 	    elif selected_dimension == "Bid Value ActiveBidders":
 	        # For this case, use the band to get specific processing
 	        text_values = lambda_function_dict[selected_dimension](band).replace('nan', '')
