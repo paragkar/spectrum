@@ -2252,7 +2252,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 			texttemplate = "%{text}"
 		elif selected_dimension == "Bid Value ActiveBidders":
 			# Apply the lambda function if the selected dimension requires special handling
-			text_values = lambda_function_dict[selected_dimension](df_bid_value_activebidders, result_df).replace(np.nan, '')
+			text_values = lambda_function_dict[selected_dimension](df_bid_value_activebidders, result_df).replace('nan', '')
 			texttemplate = "%{text}"
 		else:
 			# If no special lambda function, just replace NaNs with empty string or another default action
