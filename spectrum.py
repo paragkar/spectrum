@@ -2284,7 +2284,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	        texttemplate ="%{text}"
 	    else:
 	        text_values = df_segment.astype(float).round(0).astype(str).replace('nan',"")
-	        texttemplate ="%{text:.1f}"
+	        texttemplate ="%{text:.2f}"
 	    return text_values, texttemplate
 
 
