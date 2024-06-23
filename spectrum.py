@@ -2205,7 +2205,6 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	df_bid_value_provwinners = selected_dimension_df_text(dftext, "Bid Value ProvWinners").round(0)
 	df_bid_value_activebidders = selected_dimension_df_text(dftext, "Bid Value ActiveBidders").round(0)
 
-	st.write(df_bid_value_activebidders)
 
 	def map_win_loss_provwinners(df_active, df_winners):
 		result_df = pd.DataFrame(index=df_active.index, columns=df_active.columns)
@@ -2214,12 +2213,14 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 				active_value = df_active.at[idx, col]
 				winner_value = df_winners.at[idx, col]
 				if pd.notna(active_value) and active_value != 0:
-					result_df.at[idx, col] = 'Win' if pd.notna(winner_value) and winner_value != 0 else 'Loss'
+					result_df.at[idx, col] = 'Won' if pd.notna(winner_value) and winner_value != 0 else 'Lost'
 				else:
 					result_df.at[idx, col] = ''
 		return result_df
 
 	result_df = map_win_loss_provwinners(df_bid_value_activebidders, df_bid_value_provwinners)
+
+	st.write(result_df)
 
 	def prepare_text_values(df, result_df):
 		df = df.astype(float).round(0)
