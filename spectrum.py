@@ -2191,7 +2191,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 
     #Apply lambda function to text_values depending on selected_dimension 
     lambda_function_dict = {
-        "Bid Decision": lambda x: "Bid" if x == "1" else "No Bid"
+        "Bid Decision": lambda x: "Bid" if str(x) == "1" else ("No Bid" if pd.notna(x) else x)
     }
 
     # Iterate through each band and its corresponding dataframe
@@ -2203,7 +2203,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
             if selected_dimension in lambda_function_dict:
 
                 # text_values = df_segment.apply(lambda_function_dict[selected_dimension]).replace(np.nan, '')
-                text_values = df_segment.map(lambda x: "Bid" if str(x) == "1" else ("No Bid" if pd.notna(x) else x)).replace(np.nan, '')
+                text_values = df_segment.map(lambda_function_dict[selected_dimension]).replace(np.nan, '')
 
             else:
                 # If no special lambda function, just replace NaNs with empty string or another default action
