@@ -2220,7 +2220,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	result_df = map_win_loss_provwinners(df_bid_value_activebidders, df_bid_value_provwinners)
 
 	def prepare_text_values(df, result_df):
-	    combined_df = df.astype(str).replace('0', '').replace('nan', '') + '\n' + result_df
+	    combined_df = df.astype(str).replace('0', '').replace('nan', '') + '\n' + '\n' + result_df
 	    return combined_df
 
 
@@ -2245,15 +2245,6 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 			texttemplate = "%{text:.1f}"
 		return text_values, texttemplate
 
-	# def text_values_heatmap(df_segment, selected_dimension, lambda_function_dict, result_df):
-	#     if selected_dimension in lambda_function_dict:
-	#         text_values = lambda_function_dict[selected_dimension](df_segment, result_df)
-	#     else:
-	#         text_values = df_segment.astype(str).replace('nan', '').replace('0', '')
-	#     texttemplate = "%{text}"
-	#     return text_values, texttemplate
-
-
 
 	# Iterate through each band and its corresponding dataframe
 	for i, (band, df_segment) in enumerate(df_dict.items(), start=1):
@@ -2261,7 +2252,6 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 		if selected_dimension not in ["RatioPWPtoRP EndRd"]:
 
 			text_values, texttemplate = text_values_heatmap(lambda_function_dict,selected_dimension, result_df)
-			# text_values, texttemplate = text_values_heatmap(df_bid_value_activebidders, selected_dimension, lambda_function_dict, result_df)
 
 			aligned_color_df = color_df.loc[df_segment.index, df_segment.columns].replace(np.nan, "")
 			# Create a heatmap for each band
