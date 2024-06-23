@@ -2242,8 +2242,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 
 	#Sorting and converting allocated slots dataframe into dict
 	result_df_prov_alloc_blks_endround_dict=sort_in_band_order(result_df_prov_alloc_blks_endround, band_order)
-
-	st.write(result_df_prov_alloc_blks_endround_dict)
+	df_prov_alloc_blks_endround_dict=sort_in_band_order(df_prov_alloc_blks_endround, band_order)
 
 	#Mapping results for selected dataframe to map
 	result_df_active_bidders = map_win_loss_provwinners(df_bid_value_activebidders, df_bid_value_provwinners)
@@ -2266,6 +2265,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	lambda_function_dict = {
 	"Bid Value ActiveBidders": lambda band: prepare_text_values(df_bid_value_activebidders_dict, result_df_active_bidders_dict, band),
 	"Bid Value ActivePlusPWB": lambda band: prepare_text_values(df_bid_value_activepluspwbbidders_dict, result_df_active_pluspwb_bidders_dict, band),
+	"ProvAllocBLKs EndRd": lambda band: prepare_text_values(df_prov_alloc_blks_endround_dict, result_df_prov_alloc_blks_endround_dict, band),
 	}
 
 	def text_values_heatmap(selected_dimension, df_segment, band):
