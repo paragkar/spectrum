@@ -2199,6 +2199,8 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 
 		if selected_dimension not in ["RatioPWPtoRP EndRd"]:
 
+			st.write(selected_dimension)
+
 			# Check if selected_dimension has a lambda function defined
 			if selected_dimension in lambda_function_dict:
 				# Apply the lambda function to the relevant column
