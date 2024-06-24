@@ -2008,19 +2008,6 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 		# Filter the dataframe based on the round number
 		return df[df['Clock Round'] == round_number].replace(["-", ""], 0).fillna(0)
 
-
-		# Initialize session state variables
-	if 'selected_year' not in st.session_state:
-	    st.session_state.selected_year = None
-	if 'selected_bands' not in st.session_state:
-	    st.session_state.selected_bands = []
-	if 'selected_areas' not in st.session_state:
-	    st.session_state.selected_areas = []
-	if 'round_number' not in st.session_state:
-	    st.session_state.round_number = 1
-	if 'selected_dimension' not in st.session_state:
-	    st.session_state.selected_dimension = "Bid Decision"
-	
 	df = loadauctionbiddatayearbandcomb()["Sheet1"] #Loading the auction bid year and band data 
 
 	# Initialize session state
@@ -2044,15 +2031,23 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	# 	selected_bands = st.sidebar.multiselect('Select Bands to View', available_bands, default=available_bands, on_change=None)
 	# df = df[df['Band'].isin(selected_bands)]
 
-	# Select Bands
-	available_bands = sorted(df['Band'].unique())
-	if selected_year == 2010:
-	    selected_bands = [st.sidebar.selectbox('Select Band to View', available_bands, index=available_bands.index("2100") if "2100" in available_bands else 0)]
-	else:
-	    selected_bands = st.sidebar.multiselect('Select Bands to View', available_bands, default=available_bands, on_change=lambda: None if st.session_state.selected_bands else st.experimental_rerun())
+	df["Bid Decision"] = [1 if x =="Bid" else 0 for x in df["Bid Decision"]]
 
-	# Apply band filter if any are selected, otherwise use all
-	df = df[df['Band'].isin(selected_bands) if selected_bands else df['Band']]
+	# Choose bands to view
+	available_bands = sorted(list(set(df["Band"])))
+	# Adjust selection interface based on the auction year
+	if AuctionYear == 2010:
+		# For the year 2010, provide a selectbox with default to 2100
+		selected_bands = st.sidebar.selectbox('Select Band to View', available_bands, index=available_bands.index("2100") if "2100" in available_bands else 0)
+		# Wrap the selection into a list since the rest of the code expects a list
+		selected_bands = [selected_bands]
+	else:
+		# For other years, use a multiselect with all bands selected by default
+		selected_bands = st.sidebar.multiselect('Select Bands to View', available_bands, default=available_bands)
+
+	# Further filter dataframe by selected bands if any
+	if selected_bands:
+		df = df[df["Band"].isin(selected_bands)]
 
 	# Select Service Areas
 	available_areas = sorted(df['Service Area'].unique())
