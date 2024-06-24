@@ -2016,7 +2016,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	if 'selected_bands' not in st.session_state:
 		st.session_state.selected_bands = []
 	if 'selected_areas' not in st.session_state:
-	    st.session_state.selected_areas = []
+		st.session_state.selected_areas = []
 	if 'round_number' not in st.session_state:
 		st.session_state.round_number = 1
 	if 'selected_dimension' not in st.session_state:
@@ -2057,18 +2057,18 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	available_areas = sorted(df['Service Area'].unique())
 	# Use a unique key for multiselect to force reset when needed
 	selected_areas = st.sidebar.multiselect(
-	    'Select Service Areas to View', 
-	    available_areas, 
-	    default=available_areas, 
-	    key='service_area_select'
+		'Select Service Areas to View', 
+		available_areas, 
+		default=available_areas, 
+		key='service_area_select'
 	)
 
 	# Check if no service area is selected, and if so, reset to all areas
 	if not selected_areas:
-	    selected_areas = available_areas
-	    st.sidebar.warning('No service area selected. Resetting to all areas.')
-	    # Force the multiselect to reset by using a new key
-	    st.sidebar.multiselect('Select Service Areas to View', available_areas, default=available_areas, key='reset_service_area_select')
+		selected_areas = available_areas
+		st.sidebar.warning('No service area selected. Resetting to all areas.')
+		# Force the multiselect to reset by using a new key
+		st.sidebar.multiselect('Select Service Areas to View', available_areas, default=available_areas, key='reset_service_area_select')
 
 	# Apply the service area filter to the dataframe
 	df = df[df['Service Area'].isin(selected_areas)]
