@@ -2010,8 +2010,6 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	
 	df = loadauctionbiddatayearbandcomb()["Sheet1"] #Loading the auction bid year and band data 
 
-	st.write(df)
-
 	# Initialize session state
 	if 'round_number' not in st.session_state:
 		st.session_state.round_number = 1
