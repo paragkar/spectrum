@@ -2065,17 +2065,34 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 		return df[df['Clock Round'] == round_number].replace(["-", ""], 0).fillna(0)
 
 
+	# Main function to update and display data
+	def update_display(round_number):
+		df = filt_round(df, round_number)
+		dftext = filt_round(dftext, round_number)
+		dfcopy = filt_round(dfcopy, round_number)
+
+
 	#Filtering the main dataframe with round numbers
-	df = filt_round(df, round_number)
+	# df = filt_round(df, round_number)
 	# df = df.replace("-", 0).replace("",0).replace(np.nan, 0)
 
 	#Filtering dftext dataframe with round numbers
-	dftext = filt_round(dftext, round_number)
+	# dftext = filt_round(dftext, round_number)
 	# dftext = dftext.replace("-", 0).replace("",0).replace(np.nan, 0)
 
 	#Filtering the Copy dataframe with round numbers
-	dfcopy = filt_round(dfcopy, round_number)
+	# dfcopy = filt_round(dfcopy, round_number)
 	# dfcopy = dfcopy.replace("-", 0).replace("",0).replace(np.nan, 0)
+
+	# User input handling using st.form
+	with st.form("round_selection_form"):
+	    clkrounds = sorted(df["Clock Round"].unique())
+	    round_number = st.number_input("Select Auction Round Number; Total Rounds= {}".format(len(clkrounds)),
+	                                   min_value=min(clkrounds), max_value=max(clkrounds), value=1, step=1)
+	    submitted = st.form_submit_button("Submit")
+
+	if submitted:
+	    update_display(round_number)
 
 
 	# Function to Pivot Dataframe based on selected dimention
