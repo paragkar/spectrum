@@ -2056,10 +2056,14 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 			st.session_state.round_number = round_number
 
 	# Apply the round filter only when the submit button is pressed or automatically when other filters change
-	if submitted:
-		df = filt_round(df, st.session_state.round_number)
-		dftext = filt_round(dftext, st.session_state.round_number)
-		dfcopy = filt_round(dfcopy, st.session_state.round_number)
+	# if submitted:
+	# 	df = filt_round(df, st.session_state.round_number)
+	# 	dftext = filt_round(dftext, st.session_state.round_number)
+	# 	dfcopy = filt_round(dfcopy, st.session_state.round_number)
+
+	df = filt_round(df, st.session_state.round_number)
+	dftext = filt_round(dftext, st.session_state.round_number)
+	dfcopy = filt_round(dfcopy, st.session_state.round_number)
 
 
 	# Function to Pivot Dataframe based on selected dimention
