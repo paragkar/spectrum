@@ -2091,7 +2091,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	dftext = df.copy()
 
 	# Select Dimension
-	dimensions = ["Bid Decision", "Bid Value ProvWinners", "Bid Value ActiveBidders","Bid Value ActivePlusPWB","RatioPWPtoRP EndRd", "ProvWinBid StartRd","Rank StartRd","ProvWinBid EndRd", "Rank EndRd","Blocks Selected", "MHz Selected",
+	dimensions = ["Bid Value ProvWinners", "Bid Value ActiveBidders","Bid Value ActivePlusPWB","RatioPWPtoRP EndRd", "ProvWinBid StartRd","Rank StartRd","ProvWinBid EndRd", "Rank EndRd","Blocks Selected", "MHz Selected",
 					"ProvAllocBLKs StartRd","ProvAllocMHz StartRd", "ProvAllocBLKs EndRd", "ProvAllocMHz EndRd", "Blocks ForSale","MHz ForSale"]
 	selected_dimension = st.sidebar.selectbox('Select a Dimension', dimensions)
 
@@ -2124,7 +2124,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	df = pivot_dataframe(df, selected_dimension)
 
 	dim_to_select_for_total_dict = {
-		"Bid Decision" : "Bid Decision",
+		# "Bid Decision" : "Bid Decision",
 		"Bid Value ProvWinners" : "Bid Value ProvWinners", 
 		"Bid Value ActiveBidders" : "Bid Value ActiveBidders",
 		"Bid Value ActivePlusPWB" : "Bid Value ActivePlusPWB",
