@@ -2304,16 +2304,21 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	df_mhz_for_sale = selected_dimension_df_text(dftext, "MHz ForSale").round(1).fillna(0)
 	df_prov_alloc_mhz_endround = selected_dimension_df_text(dftext, "ProvAllocMHz EndRd").round(1).fillna(0)
 	df_prov_alloc_mhz_startround = selected_dimension_df_text(dftext, "ProvAllocMHz StartRd").round(1).fillna(0)
+	df_mhz_selected = selected_dimension_df_text(dftext, "MHz Selected").round(1).fillna(0)
 
 	#2. Mapping allocated mhz with those up with mhz for sale
 	result_df_prov_alloc_mhz_endround = map_alloc_slots_with_sale(df_prov_alloc_mhz_endround, df_mhz_for_sale)
 	result_df_prov_alloc_mhz_startround = map_alloc_slots_with_sale(df_prov_alloc_mhz_startround,df_mhz_for_sale)
+	result_df_mhz_selected = map_alloc_slots_with_sale(df_mhz_selected,df_mhz_for_sale)
 
 	#3. Sorting with band order and converting allocated mhz dataframe into dict
 	result_df_prov_alloc_mhz_endround_dict=sort_in_band_order(result_df_prov_alloc_mhz_endround, band_order)
 	df_prov_alloc_mhz_endround_dict=sort_in_band_order(df_prov_alloc_mhz_endround, band_order)
 	result_df_prov_alloc_mhz_startround_dict=sort_in_band_order(result_df_prov_alloc_mhz_startround, band_order)
 	df_prov_alloc_mhz_startround_dict=sort_in_band_order(df_prov_alloc_mhz_startround, band_order)
+	result_df_mhz_selected_dict=sort_in_band_order(result_df_mhz_selected, band_order)
+	df_mhz_selected_dict=sort_in_band_order(df_mhz_selected, band_order)
+
 
 	#1. Extract the dataframe where the "Win" and "Loss" has to be appended
 	df_bid_value_provwinners = selected_dimension_df_text(dftext, "Bid Value ProvWinners").round(0).fillna(0).astype('int') #This is the ref dataframe 
@@ -2346,6 +2351,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	"ProvAllocMHz EndRd": lambda band: prepare_text_values(df_prov_alloc_mhz_endround_dict, result_df_prov_alloc_mhz_endround_dict, band),
 	"ProvAllocMHz StartRd": lambda band: prepare_text_values(df_prov_alloc_mhz_startround_dict, result_df_prov_alloc_mhz_startround_dict, band),
 	"Blocks Selected": lambda band: prepare_text_values(df_blks_selected_dict, result_df_blks_selected_dict, band),
+	"MHz Selected" : lambda band: prepare_text_values(df_mhz_selected_dict, result_df_mhz_selected_dict, band),
 
 	}
 
