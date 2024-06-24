@@ -2073,6 +2073,8 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	dftext = filt_round(dftext, round_number)
 	dftext = dftext.replace("-", 0).replace("",0).replace(np.nan, 0)
 
+	st.write(dftext)
+
 
 	# Function to Pivot Dataframe based on selected dimention
 	def pivot_dataframe(df, selected_dimension):
