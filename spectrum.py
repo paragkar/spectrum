@@ -2010,9 +2010,21 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 
 	df = loadauctionbiddatayearbandcomb()["Sheet1"] #Loading the auction bid year and band data 
 
-	# Initialize session state
+	# Initialize session state variables
+	if 'selected_year' not in st.session_state:
+	    st.session_state.selected_year = None
+	if 'selected_bands' not in st.session_state:
+	    st.session_state.selected_bands = []
+	if 'selected_areas' not in st.session_state:
+	    st.session_state.selected_areas = []
 	if 'round_number' not in st.session_state:
-		st.session_state.round_number = 1
+	    st.session_state.round_number = 1
+	if 'selected_dimension' not in st.session_state:
+	    st.session_state.selected_dimension = "Bid Decision"
+
+	# # Initialize session state
+	# if 'round_number' not in st.session_state:
+	# 	st.session_state.round_number = 1
 
 	# Select Auction Year
 	AuctionYears = sorted(df['Auction Year'].unique())
@@ -2035,6 +2047,12 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	else:
 		# For other years, use a multiselect with all bands selected by default
 		selected_bands = st.sidebar.multiselect('Select Bands to View', available_bands, default=available_bands)
+
+	# Reset round number when bands change
+	if st.session_state.selected_bands != selected_bands:
+	    st.session_state.round_number = 1  # Reset round number to 1
+	st.session_state.selected_bands = selected_bands
+
 
 	# Further filter dataframe by selected bands if any
 	if selected_bands:
