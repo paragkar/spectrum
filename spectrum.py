@@ -2085,13 +2085,13 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	# # Apply the service area filter to the dataframe
 	# df = df[df['Service Area'].isin(selected_areas)]
 
-	# Choose service areas to view
-	available_areas = sorted(df['Service Area'].unique())
-	selected_areas = st.sidebar.multiselect(
-		'Select Service Areas to View', 
-		available_areas, 
-		default=st.session_state.selected_areas
-	)
+	# # Choose service areas to view
+	# available_areas = sorted(df['Service Area'].unique())
+	# selected_areas = st.sidebar.multiselect(
+	# 	'Select Service Areas to View', 
+	# 	available_areas, 
+	# 	default=st.session_state.selected_areas
+	# )
 
 	# Choose service areas to view
 	available_areas = sorted(df['Service Area'].unique())
