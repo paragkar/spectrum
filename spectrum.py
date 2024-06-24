@@ -2050,8 +2050,6 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 
 	dfblksale = df[["Service Area", "Blocks ForSale", "Band"]].drop_duplicates()
 
-	st.write(dfblksale)
-
 	dim_to_select = ["Bid Decision", "Bid Value ProvWinners", "Bid Value ActiveBidders","Bid Value ActivePlusPWB","RatioPWPtoRP EndRd", "ProvWinBid StartRd","Rank StartRd","ProvWinBid EndRd", "Rank EndRd","Blocks Selected", "MHz Selected",
 					"ProvAllocBLKs StartRd","ProvAllocMHz StartRd", "ProvAllocBLKs EndRd", "ProvAllocMHz EndRd", "Blocks ForSale","MHz ForSale"]
 
@@ -2089,7 +2087,6 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 
 	df = pivot_dataframe(df, selected_dimension)
 
-	# st.write(df)
 
 	#Filtering the Copy dataframe with round numbers
 	dfcopy = filt_round(dfcopy, round_number)
