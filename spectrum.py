@@ -2023,9 +2023,9 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 		st.session_state.selected_dimension = "Bid Value ActivePlusPWB"
 
 
-	# Initialize session state for service area selection
-	if 'selected_areas' not in st.session_state or not st.session_state.selected_areas:
-		st.session_state.selected_areas = sorted(df['Service Area'].unique())
+	# Initialize the session state if not already set
+	if 'selected_areas' not in st.session_state:
+	    st.session_state.selected_areas = df['Service Area'].unique()
 
 	# Select Auction Year
 	AuctionYears = sorted(df['Auction Year'].unique())
