@@ -2022,7 +2022,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	if 'round_number' not in st.session_state:
 	    st.session_state.round_number = 1
 	if 'selected_dimension' not in st.session_state:
-	    st.session_state.selected_dimension = "Bid Decision"
+	    st.session_state.selected_dimension = "Bid Value ActivePlusPWB"
 
 	# # Initialize session state
 	# if 'round_number' not in st.session_state:
