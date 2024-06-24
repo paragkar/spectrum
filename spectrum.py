@@ -2339,7 +2339,6 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 
 			text_values = text_values.map(lambda x: x.strip() if isinstance(x, str) else x).replace("0","", regex = False).replace("0.0", "",regex = False)
 
-
 			aligned_color_df = color_df.loc[df_segment.index, df_segment.columns].replace(np.nan, "")
 			# Create a heatmap for each band
 			fig.add_trace(
@@ -2456,8 +2455,9 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	)
 
 	# Display the figure in Streamlit
-	placeholder = st.empty()
-	st.plotly_chart(fig, use_container_width=True)
+	with st.spinner('Processing...'):
+		placeholder = st.empty()
+		st.plotly_chart(fig, use_container_width=True)
 
 if selected_dimension == "Spectrum Bands":
 
