@@ -2010,6 +2010,8 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	
 	df = loadauctionbiddatayearbandcomb()["Sheet1"] #Loading the auction bid year and band data 
 
+	st.write(df)
+
 	# Initialize session state
 	if 'round_number' not in st.session_state:
 		st.session_state.round_number = 1
@@ -2023,18 +2025,13 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	# df["Bid Decision"] = [1 if x =="Bid" else 0 for x in df["Bid Decision"]]
 
 
-	# Select Bands
-	available_bands = sorted(df['Band'].unique())
-	if selected_year == 2010:
-		selected_bands = [st.sidebar.selectbox('Select Band to View', available_bands, index=available_bands.index("2100") if "2100" in available_bands else 0)]
-	else:
-		selected_bands = st.sidebar.multiselect('Select Bands to View', available_bands, default=available_bands, on_change=None)
-	df = df[df['Band'].isin(selected_bands)]
-
-	# # Select Service Areas
-	# available_areas = sorted(df['Service Area'].unique())
-	# selected_areas = st.sidebar.multiselect('Select Service Areas to View', available_areas, default=available_areas, on_change=None)
-	# df = df[df['Service Area'].isin(selected_areas)]
+	# # Select Bands
+	# available_bands = sorted(df['Band'].unique())
+	# if selected_year == 2010:
+	# 	selected_bands = [st.sidebar.selectbox('Select Band to View', available_bands, index=available_bands.index("2100") if "2100" in available_bands else 0)]
+	# else:
+	# 	selected_bands = st.sidebar.multiselect('Select Bands to View', available_bands, default=available_bands, on_change=None)
+	# df = df[df['Band'].isin(selected_bands)]
 
 	# Select Bands
 	available_bands = sorted(df['Band'].unique())
@@ -2042,6 +2039,14 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	    selected_bands = [st.sidebar.selectbox('Select Band to View', available_bands, index=available_bands.index("2100") if "2100" in available_bands else 0)]
 	else:
 	    selected_bands = st.sidebar.multiselect('Select Bands to View', available_bands, default=available_bands, on_change=lambda: None if st.session_state.selected_bands else st.experimental_rerun())
+
+	# Apply band filter if any are selected, otherwise use all
+	df = df[df['Band'].isin(selected_bands) if selected_bands else df['Band']]
+
+	# Select Service Areas
+	available_areas = sorted(df['Service Area'].unique())
+	selected_areas = st.sidebar.multiselect('Select Service Areas to View', available_areas, default=available_areas, on_change=None)
+	df = df[df['Service Area'].isin(selected_areas)]
 
 	# Make copies of the dataframe before selecting dimension
 	dfcopy = df.copy()
