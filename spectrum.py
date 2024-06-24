@@ -2337,11 +2337,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 			text_values, texttemplate = text_values_heatmap(selected_dimension,df_segment,band)
 			# text_values = text_values.replace("0","", regex = True)
 
-			# Efficiently replace zeros in text format with empty strings
-			def replace_zeros(df):
-			    return df.where(~df.eq('0'), '')
-
-			st.write(replace_zeros(text_values.copy()))
+			st.write(text_values.replace("0",""))
 
 
 			aligned_color_df = color_df.loc[df_segment.index, df_segment.columns].replace(np.nan, "")
