@@ -2053,17 +2053,9 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	    st.session_state.round_number = 1  # Reset round number to 1
 	st.session_state.selected_bands = selected_bands
 
-
 	# Further filter dataframe by selected bands if any
 	if selected_bands:
 		df = df[df["Band"].isin(selected_bands)]
-
-	# # Choose service areas to view
-	# available_areas = sorted(list(set(df["Service Area"])))
-	# selected_areas = st.sidebar.multiselect('Select Service Areas to View', available_areas, default=available_areas)
-	# # Further filter dataframe by selected service areas
-	# if selected_areas:
-	# 	df = df[df["Service Area"].isin(selected_areas)]
 
 	# Choose service areas to view
 	available_areas = sorted(df['Service Area'].unique())
@@ -2291,16 +2283,21 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	df_blocks_for_sale = selected_dimension_df_text(dftext, "Blocks ForSale").round(0).fillna(0).astype('int')
 	df_prov_alloc_blks_endround = selected_dimension_df_text(dftext, "ProvAllocBLKs EndRd").round(0).fillna(0).astype('int')
 	df_prov_alloc_blks_startround = selected_dimension_df_text(dftext, "ProvAllocBLKs StartRd").round(0).fillna(0).astype('int')
+	df_blks_selected = selected_dimension_df_text(dftext, "Blocks Selected").round(0).fillna(0).astype('int')
 
 	#2. Mapping allocated slots with those up with blocks for sale
 	result_df_prov_alloc_blks_endround = map_alloc_slots_with_sale(df_prov_alloc_blks_endround, df_blocks_for_sale)
 	result_df_prov_alloc_blks_startround = map_alloc_slots_with_sale(df_prov_alloc_blks_startround, df_blocks_for_sale)
+	result_df_blks_selected = map_alloc_slots_with_sale(df_blks_selected, df_blocks_for_sale)
 
 	#3. Sorting with band order and converting allocated blocks dataframe into dict
 	result_df_prov_alloc_blks_endround_dict=sort_in_band_order(result_df_prov_alloc_blks_endround, band_order)
 	df_prov_alloc_blks_endround_dict=sort_in_band_order(df_prov_alloc_blks_endround, band_order)
 	result_df_prov_alloc_blks_startround_dict=sort_in_band_order(result_df_prov_alloc_blks_startround, band_order)
 	df_prov_alloc_blks_startround_dict=sort_in_band_order(df_prov_alloc_blks_startround, band_order)
+	result_df_blks_selected_dict=sort_in_band_order(result_df_blks_selected, band_order)
+	df_blks_selected_dict=sort_in_band_order(df_blks_selected, band_order)
+
 
 
 	#1. Extract the dataframe where MHz of sales has to be appended
@@ -2348,6 +2345,8 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	"ProvAllocBLKs StartRd": lambda band: prepare_text_values(df_prov_alloc_blks_startround_dict, result_df_prov_alloc_blks_startround_dict, band),
 	"ProvAllocMHz EndRd": lambda band: prepare_text_values(df_prov_alloc_mhz_endround_dict, result_df_prov_alloc_mhz_endround_dict, band),
 	"ProvAllocMHz StartRd": lambda band: prepare_text_values(df_prov_alloc_mhz_startround_dict, result_df_prov_alloc_mhz_startround_dict, band),
+	"Blocks Selected": lambda band: prepare_text_values(df_blks_selected_dict, result_df_blks_selected_dict, band),
+
 	}
 
 	def text_values_heatmap(selected_dimension, df_segment, band):
