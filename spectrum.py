@@ -2337,6 +2337,8 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 			text_values, texttemplate = text_values_heatmap(selected_dimension,df_segment,band)
 			# text_values = text_values.replace("0","", regex = True)
 
+			text_values = text_values.map(lambda x: x.strip() if isinstance(x, str) else x)
+
 			st.write(text_values.replace("0","", regex = False))
 
 
