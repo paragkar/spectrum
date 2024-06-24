@@ -296,7 +296,7 @@ list_of_circles_codes = ['AP','AS', 'BH', 'DL', 'GU', 'HA', 'HP', 'JK', 'KA', 'K
 #Debug 10th June 2024
 year_band =["2010-Band2100","2010-Band2300", "2012-Band1800","2014-Band1800","2014-Band900",
 									"2015-Band800", "2015-Band900","2015-Band1800", "2015-Band2100", "2016-Band800","2016-Band1800",
-									"2016-Band2100", "2016-Band2300", "2016-Band2500","2021-Band800","2021-Band900","2021-Band1800",
+									"2016-Band2100", "2016-Band2300", "2016-Band2500","2021-Band700","2021-Band800","2021-Band900","2021-Band1800",
 									"2021-Band2100","2021-Band2300","2022-Band700","2022-Band800","2022-Band900","2022-Band1800",
 									"2022-Band2100","2022-Band2500","2022-Band3500","2022-Band26000"]
 
@@ -2305,10 +2305,9 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	        text_values = lambda_function_dict[selected_dimension](band)
 	        texttemplate ="%{text}"
 	    else:
-	        text_values = df_segment.astype(float).round(0).astype(str).replace('nan',"")
+	        text_values = df_segment.astype(float).round(1).astype(str).replace('nan',"")
 	        texttemplate ="%{text:.1f}"
 	    return text_values, texttemplate
-
 
 
 	# Iterate through each band and its corresponding dataframe
@@ -2732,7 +2731,6 @@ if selected_dimension == "Spectrum Bands":
 
 			operators_to_process = list(dfffcopy.columns[:-1]) #new selected operators after category level filtering 
 			
-
 			lst =[]
 			dfffshare = pd.DataFrame()
 			for op in operators_to_process:
@@ -3307,7 +3305,6 @@ if selected_dimension == "Auction BandWise":
 		st.plotly_chart(figauc, use_container_width=True)
 		st.altair_chart(chart, use_container_width=True)
 
-
 	if SelectedSubFeature == "RanksCircleWise":
 
 		plottype = st.sidebar.selectbox("Select a Plot Type", ["RanksInRound", "RanksInRounds"])
@@ -3360,7 +3357,6 @@ if selected_dimension == "Auction BandWise":
 					return value
 
 			#------debug 31st March 2024
-
 
 			sort_flag = False
 
@@ -3437,9 +3433,7 @@ if selected_dimension == "Auction BandWise":
 
 			st.plotly_chart(figauc, use_container_width=True)
 
-
 		if plottype == "RanksInRounds":
-
 
 			# debug 30th Mar 2024
 			start_round, end_round = select_round_range(totalrounds)
@@ -3485,14 +3479,11 @@ if selected_dimension == "Auction BandWise":
 
 			dfbidsel = dfbidsel.set_index("LSA").reset_index()
 
-
 			dfbidsel["Rank_Bidder"] = dfbidsel[["RankNo", "Bidder"]].apply(lambda x: "-".join(map(str, x)), axis=1)
-
 
 			dfbidsel = dfbidsel.pivot(index="Rank_Bidder", columns='LSA', values="RankCount")
 
 			dfbidsel = dfbidsel.sort_index(ascending = False)
-
 
 			circle_list=[]
 
@@ -3513,7 +3504,6 @@ if selected_dimension == "Auction BandWise":
 
 			dfbidsel = dfbidsel.reset_index()
 
-
 			dfbidsel['Rank'] = dfbidsel['Rank_Bidder'].apply(lambda x: int(x.split('-')[0]))
 			dfbidsel['Company'] = dfbidsel['Rank_Bidder'].apply(lambda x: x.split('-')[1])
 
@@ -3525,11 +3515,9 @@ if selected_dimension == "Auction BandWise":
 			# If you only want to display the original combined values in the sorted order:
 			# dfbidsel = df_sorted[['Rank_Bidder']]
 
-
 			dfbidsel = dfbidsel.set_index("Rank_Bidder")
 
 			#--------------------------- degug 30th March 2024
-
 
 			# Define the heatmap with embedded text and customized hover information
 			data = [go.Heatmap(
@@ -3612,7 +3600,6 @@ if selected_dimension == "Auction BandWise":
 		dfpwb1strdend = df1strd.pivot(index="Bidder", columns='LSA', values="PWB_End_ClkRd").sort_index(ascending=False)
 
 		dfrp = dfrp.T #Preparing the dataframe for reserve proce per BLK
-
 
 		if pwbtype == "Start CLK Round":
 
@@ -3709,7 +3696,6 @@ if selected_dimension == "Auction BandWise":
 				  tickfont=dict(size=text_embed_in_chart_size),
 				   ), 
 				)
-
 
 				figauc.update_layout(
 					coloraxis=dict(
@@ -3827,7 +3813,6 @@ if selected_dimension == "Auction BandWise":
 				col1.altair_chart(chart, use_container_width=True)
 
 			#--------Ends----------------------------
-
 
 		if pwbtype == "End CLK Round":
 
