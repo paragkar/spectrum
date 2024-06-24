@@ -489,6 +489,28 @@ Auction_Year_Band_Features = {
 		"zmin_blk_sec": 0,
 		"zmax_blk_sec": 4
 	},
+	"2021-Band700": {
+		"totalrounds": 6,
+		"mainsheet": "2021_4G_700",
+		"mainsheetoriginal": "2021_4G_700_Original",
+		"mainoriflag": True,
+		"activitysheet": "2021_4G_Activity",
+		"demandsheet": "2021_4G_700_AD",
+		"titlesubpart": "700 MHz Auctions (CY-2021)",
+		"subtitlesubpartbidactivity": "; Combined for All Bands",
+		"year": 2021,
+		"band": 700,
+		"xdtick": 1,
+		"zmin": 1,
+		"zmax": 5,
+		"zmin_af": 0.5,
+		"zmax_af": 1,
+		"texttempbiddemandactivity": "%{z}",
+		"blocksize": 5,
+		"zmin_blk_sec": 0,
+		"zmax_blk_sec": 4
+		},
+
 	"2021-Band800": {
 		"totalrounds": 6,
 		"mainsheet": "2021_4G_800",
