@@ -2012,7 +2012,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 
 	# Initialize session state variables
 	if 'selected_year' not in st.session_state:
-		st.session_state.selected_year = None
+		st.session_state.selected_year = 2022
 	if 'selected_bands' not in st.session_state:
 		st.session_state.selected_bands = []
 	if 'selected_areas' not in st.session_state:
