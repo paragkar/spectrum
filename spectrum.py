@@ -2021,13 +2021,18 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 		st.session_state.round_number = 1
 	if 'selected_dimension' not in st.session_state:
 		st.session_state.selected_dimension = "Bid Value ActivePlusPWB"
+
+	# Define a function to reset selection if empty
+	def reset_selection_if_empty(selected_items, default_items):
+		if not selected_items:
+			st.sidebar.warning('No service area selected. Resetting to all areas.')
+			return default_items
+		return selected_items
+
 	# Initialize session state for service area selection
-	if 'selected_areas' not in st.session_state:
+	if 'selected_areas' not in st.session_state or not st.session_state.selected_areas:
 		st.session_state.selected_areas = sorted(df['Service Area'].unique())
 
-	# # Initialize session state
-	# if 'round_number' not in st.session_state:
-	# 	st.session_state.round_number = 1
 
 	# Select Auction Year
 	AuctionYears = sorted(df['Auction Year'].unique())
@@ -2088,13 +2093,17 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 		default=st.session_state.selected_areas
 	)
 
-	# Update the session state with the current selection
-	st.session_state.selected_areas = selected_areas
+	# Choose service areas to view
+	available_areas = sorted(df['Service Area'].unique())
+	selected_areas = st.sidebar.multiselect(
+		'Select Service Areas to View',
+		available_areas,
+		default=st.session_state.selected_areas,
+		key='service_area_selector'
+	)
 
-	# Check if no service area is selected, and if so, reset to all areas
-	if not selected_areas:
-		st.session_state.selected_areas = available_areas
-		st.sidebar.warning('No service area selected. Resetting to all areas.')
+	# Check if selection is empty and reset if necessary
+	st.session_state.selected_areas = reset_selection_if_empty(selected_areas, available_areas)
 
 	# Apply the service area filter to the dataframe
 	df = df[df['Service Area'].isin(st.session_state.selected_areas)]
