@@ -2021,7 +2021,6 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 
 	# Apply filter for Auction Year
 	df = df[df['Auction Year'] == selected_year]
-
 	df["Bid Decision"] = [1 if x =="Bid" else 0 for x in df["Bid Decision"]]
 
 	# Select Bands
@@ -2040,8 +2039,6 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	# Make copies of the dataframe before selecting dimension
 	dfcopy = df.copy()
 	dftext = df.copy()
-	#Make suitable conversions 
-	df["Bid Decision"] = [1 if x =="Bid" else 0 for x in df["Bid Decision"]]
 
 	# Select Dimension
 	dimensions = ["Bid Decision", "Bid Value ProvWinners", "Bid Value ActiveBidders","Bid Value ActivePlusPWB","RatioPWPtoRP EndRd", "ProvWinBid StartRd","Rank StartRd","ProvWinBid EndRd", "Rank EndRd","Blocks Selected", "MHz Selected",
