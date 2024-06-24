@@ -2014,7 +2014,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 		'selected_bands': [],
 		'selected_areas': [],
 		'round_number': 1,
-		'selected_dimension': "Bid Value"
+		'selected_dimension': "Bid Decision"
 	}
 	for key, default in session_defaults.items():
 		if key not in st.session_state:
