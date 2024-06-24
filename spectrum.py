@@ -2435,7 +2435,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 		margin=dict(t=50, b=10, l=10, r=10, pad=4),
 		yaxis=dict(
 		  tickmode='array',
-		  tickfont=dict(size=text_embed_in_chart_size*0.8),
+		  tickfont=dict(size=text_embed_in_chart_size*0.6),
 		  ),
 		  xaxis = dict(
 		  side = 'bottom',
