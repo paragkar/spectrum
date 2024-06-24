@@ -1999,8 +1999,6 @@ if selected_dimension == "AuctionYear Activity": #Incompete Still working this s
 
 	df = auctionbiddatayearactivitycomb()["Sheet1"] #Loading the auction bid year activity data 
 
-	st.write(df)
-
 
 if selected_dimension == "AuctionYear AllBands": #This is the new dimension Added on June 2024
 
