@@ -2013,7 +2013,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 		return df[df['Clock Round'] == round_number].replace(["-", ""], 0).fillna(0)
 
 	# Load data
-	df = loadauctionbiddatayearbandcomb()["Sheet1"]
+	df = loadauctionbiddatayearbandcomb()
 
 	st.write(df)
 
