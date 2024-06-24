@@ -2010,15 +2010,15 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 
 	# Initialize session state variables
 	session_defaults = {
-	    'selected_year': df['Auction Year'].min(),
-	    'selected_bands': [],
-	    'selected_areas': [],
-	    'round_number': 1,
-	    'selected_dimension': "Bid Value"
+		'selected_year': df['Auction Year'].min(),
+		'selected_bands': [],
+		'selected_areas': [],
+		'round_number': 1,
+		'selected_dimension': "Bid Value"
 	}
 	for key, default in session_defaults.items():
-	    if key not in st.session_state:
-	        st.session_state[key] = default
+		if key not in st.session_state:
+			st.session_state[key] = default
 
 
 	# Sidebar for selecting auction year
@@ -2057,9 +2057,9 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	dftext = df.copy() #Created a copy of datframe before "select dimension" for working textvalues
 
 	if selected_dimension in df.columns:
-    	df = df[["Clock Round", "Bidder", "Service Area", "Band", selected_dimension]]
+		df = df[["Clock Round", "Bidder", "Service Area", "Band", selected_dimension]]
 
-    #Define filter function with caching
+	#Define filter function with caching
 	@st.cache_data
 	def filt_round(df, round_number):
 		# Filtering and processing logic
@@ -2067,16 +2067,16 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 
 	# Sidebar Form: Clock Round Number
 	with st.sidebar.form(key='round_selection_form'):
-	    clkrounds = sorted(df["Clock Round"].unique())
-	    round_number = st.number_input("Select Auction Round Number; Total Rounds= "+str(max(clkrounds)), min_value=min(clkrounds), max_value=max(clkrounds), value=st.session_state.round_number, step=1)
-	    submit_button = st.form_submit_button('Apply Round Number')
+		clkrounds = sorted(df["Clock Round"].unique())
+		round_number = st.number_input("Select Auction Round Number; Total Rounds= "+str(max(clkrounds)), min_value=min(clkrounds), max_value=max(clkrounds), value=st.session_state.round_number, step=1)
+		submit_button = st.form_submit_button('Apply Round Number')
 
 	if submit_button:
-	    st.session_state.round_number = round_number
-	    df = filt_round(df, round_number)  # Apply round number filter and other necessary filters
-	    dftext = filt_round(dftext, round_number)
-	    dfcopy = filt_round(dfcopy, round_number)
-	    st.experimental_rerun()  # Rerun the app to update the display
+		st.session_state.round_number = round_number
+		df = filt_round(df, round_number)  # Apply round number filter and other necessary filters
+		dftext = filt_round(dftext, round_number)
+		dfcopy = filt_round(dfcopy, round_number)
+		st.experimental_rerun()  # Rerun the app to update the display
 
 	# Function to Pivot Dataframe based on selected dimention
 	def pivot_dataframe(df, selected_dimension):
