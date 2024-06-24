@@ -2021,34 +2021,30 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	        st.session_state[key] = default
 
 
-	try:
-		AuctionYears = sorted(list(set(df["Auction Year"])))
-		AuctionYear = st.sidebar.selectbox('Select an Auction Year', AuctionYears, 0) #default index 2012
-		#Filtering the dataframe with selected auction year
-		df = df[df["Auction Year"] == AuctionYear]
-	except:
-		st.write("Press Apply Round Number Button")
+	AuctionYears = sorted(list(set(df["Auction Year"])))
+	AuctionYear = st.sidebar.selectbox('Select an Auction Year', AuctionYears, 0) #default index 2012
+	#Filtering the dataframe with selected auction year
+	df = df[df["Auction Year"] == AuctionYear]
+
 
 	df["Bid Decision"] = [1 if x =="Bid" else 0 for x in df["Bid Decision"]]
 
-	try:
-		# Choose bands to view
-		available_bands = sorted(list(set(df["Band"])))
-		# Adjust selection interface based on the auction year
-		if AuctionYear == 2010:
-			# For the year 2010, provide a selectbox with default to 2100
-			selected_bands = st.sidebar.selectbox('Select Band to View', available_bands, index=available_bands.index("2100") if "2100" in available_bands else 0)
-			# Wrap the selection into a list since the rest of the code expects a list
-			selected_bands = [selected_bands]
-		else:
-			# For other years, use a multiselect with all bands selected by default
-			selected_bands = st.sidebar.multiselect('Select Bands to View', available_bands, default=available_bands)
+	# Choose bands to view
+	available_bands = sorted(list(set(df["Band"])))
+	# Adjust selection interface based on the auction year
+	if AuctionYear == 2010:
+		# For the year 2010, provide a selectbox with default to 2100
+		selected_bands = st.sidebar.selectbox('Select Band to View', available_bands, index=available_bands.index("2100") if "2100" in available_bands else 0)
+		# Wrap the selection into a list since the rest of the code expects a list
+		selected_bands = [selected_bands]
+	else:
+		# For other years, use a multiselect with all bands selected by default
+		selected_bands = st.sidebar.multiselect('Select Bands to View', available_bands, default=available_bands)
 
-		# Further filter dataframe by selected bands if any
-		if selected_bands:
-			df = df[df["Band"].isin(selected_bands)]
-	except:
-		st.write("Press Apply Round Number Button")
+	# Further filter dataframe by selected bands if any
+	if selected_bands:
+		df = df[df["Band"].isin(selected_bands)]
+
 
 	# Choose service areas to view
 	available_areas = sorted(list(set(df["Service Area"])))
@@ -2061,14 +2057,10 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	dfcopy = df.copy() #Create a copy of dataframe upto selected dimension
 	dftext = df.copy() #Created a copy of datframe before "select dimension" for working textvalues
 
-	try:
-
-		dim_to_select = ["Bid Decision", "Bid Value ProvWinners", "Bid Value ActiveBidders","Bid Value ActivePlusPWB","RatioPWPtoRP EndRd", "ProvWinBid StartRd","Rank StartRd","ProvWinBid EndRd", "Rank EndRd","Blocks Selected", "MHz Selected",
-						"ProvAllocBLKs StartRd","ProvAllocMHz StartRd", "ProvAllocBLKs EndRd", "ProvAllocMHz EndRd", "Blocks ForSale","MHz ForSale"]
-		selected_dimension = st.sidebar.selectbox('Select a Dimension', dim_to_select, 0) #default index "Prov WinBid Start Rd"
-		df = df[[ "Clock Round", "Bidder", "Service Area", "Band", selected_dimension]]
-	except:
-		st.write("Press Apply Round Number Button")
+	dim_to_select = ["Bid Decision", "Bid Value ProvWinners", "Bid Value ActiveBidders","Bid Value ActivePlusPWB","RatioPWPtoRP EndRd", "ProvWinBid StartRd","Rank StartRd","ProvWinBid EndRd", "Rank EndRd","Blocks Selected", "MHz Selected",
+					"ProvAllocBLKs StartRd","ProvAllocMHz StartRd", "ProvAllocBLKs EndRd", "ProvAllocMHz EndRd", "Blocks ForSale","MHz ForSale"]
+	selected_dimension = st.sidebar.selectbox('Select a Dimension', dim_to_select, 0) #default index "Prov WinBid Start Rd"
+	df = df[[ "Clock Round", "Bidder", "Service Area", "Band", selected_dimension]]
 
 	# #Choose clock round numbers
 	# clkrounds = sorted(list(set(df["Clock Round"])))
@@ -2101,7 +2093,6 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 		dftext = filt_round(dftext, round_number)
 		#Filtering the Copy dataframe with round numbers
 		dfcopy = filt_round(dfcopy, round_number)
-
 
 
 	# Function to Pivot Dataframe based on selected dimention
