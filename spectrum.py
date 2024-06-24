@@ -2273,9 +2273,9 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 
 
 	#1. Extract the dataframe where MHz of sales has to be appended
-	df_mhz_for_sale = selected_dimension_df_text(dftext, "MHz ForSale").round(1).fillna(0).astype('int')
-	df_prov_alloc_mhz_endround = selected_dimension_df_text(dftext, "ProvAllocMHz EndRd").round(1).fillna(0).astype('int')
-	df_prov_alloc_mhz_startround = selected_dimension_df_text(dftext, "ProvAllocMHz StartRd").round(1).fillna(0).astype('int')
+	df_mhz_for_sale = selected_dimension_df_text(dftext, "MHz ForSale").round(1).fillna(0)
+	df_prov_alloc_mhz_endround = selected_dimension_df_text(dftext, "ProvAllocMHz EndRd").round(1).fillna(0)
+	df_prov_alloc_mhz_startround = selected_dimension_df_text(dftext, "ProvAllocMHz StartRd").round(1).fillna(0)
 
 	#2. Mapping allocated mhz with those up with mhz for sale
 	result_df_prov_alloc_mhz_endround = map_alloc_slots_with_sale(df_prov_alloc_mhz_endround, df_mhz_for_sale)
@@ -2286,7 +2286,6 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	df_prov_alloc_mhz_endround_dict=sort_in_band_order(df_prov_alloc_mhz_endround, band_order)
 	result_df_prov_alloc_mhz_startround_dict=sort_in_band_order(result_df_prov_alloc_mhz_startround, band_order)
 	df_prov_alloc_mhz_startround_dict=sort_in_band_order(df_prov_alloc_mhz_startround, band_order)
-
 
 	#1. Extract the dataframe where the "Win" and "Loss" has to be appended
 	df_bid_value_provwinners = selected_dimension_df_text(dftext, "Bid Value ProvWinners").round(0).fillna(0).astype('int') #This is the ref dataframe 
