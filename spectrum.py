@@ -2074,8 +2074,6 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	df = df[df['Service Area'].isin(selected_areas)]
 
 
-
-
 	# Make copies of the dataframe before selecting dimension
 	dfcopy = df.copy()
 	dftext = df.copy()
@@ -2121,7 +2119,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 		"RatioPWPtoRP EndRd" : "Bid Value ProvWinners",
 		"ProvWinBid StartRd" : "ProvWinBid StartRd",
 		"Rank StartRd" : "ProvWinBid StartRd",
-		"ProvWinBid EndRd" : "ProvWinBid EndRd",
+		"ProvWinBid EndRd" : "Bid Value ProvWinners",
 		"Rank EndRd" : "ProvWinBid EndRd",
 		"Blocks Selected" : "Blocks Selected",
 		"MHz Selected" : "MHz Selected",
