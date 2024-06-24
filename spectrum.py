@@ -2006,7 +2006,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 
 	def loadauctionbiddatayearbandcomb():
 	# Placeholder function to simulate loading data
-	return {"Sheet1": pd.DataFrame()}  # Replace with actual data loading logic
+		return {"Sheet1": pd.DataFrame()}  # Replace with actual data loading logic
 
 	def filt_round(df, round_number):
 		# Filter the dataframe based on the round number
