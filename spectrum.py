@@ -2053,7 +2053,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	# Clock Round selection
 	clkrounds = sorted(df['Clock Round'].unique())
 	with st.sidebar.form("round_form"):
-		round_number = st.number_input('Select Clock Round', min_value=min(clkrounds), max_value=max(clkrounds), value=st.session_state.round_number)
+		round_number = st.number_input("Select Auction Round Number"+";Total Rounds= "+str(max(clkrounds)), min_value=min(clkrounds), max_value=max(clkrounds), value=st.session_state.round_number)
 		submitted = st.form_submit_button('Apply Round Number')
 		if submitted:
 			st.session_state.round_number = round_number
