@@ -2010,6 +2010,8 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	
 	df = loadauctionbiddatayearbandcomb()["Sheet1"] #Loading the auction bid year and band data 
 
+	st.write(df)
+
 	# Initialize session state
 	if 'round_number' not in st.session_state:
 		st.session_state.round_number = 1
@@ -2022,7 +2024,6 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	df = df[df['Auction Year'] == selected_year]
 	# df["Bid Decision"] = [1 if x =="Bid" else 0 for x in df["Bid Decision"]]
 
-	st.write(df)
 
 	# Select Bands
 	available_bands = sorted(df['Band'].unique())
