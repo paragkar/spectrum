@@ -2063,7 +2063,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 		# Fetch the range of available clock rounds
 		clkrounds = sorted(list(set(df["Clock Round"])))
 		# Create a number input for selecting the round number
-		round_number = st.number_input("Select Auction Round Number",
+		round_number = st.number_input("Select Auction Round Number"+";Total Rounds= "+str(max(clkrounds)),
 									   min_value=min(clkrounds),
 									   max_value=max(clkrounds),
 									   value=1,
