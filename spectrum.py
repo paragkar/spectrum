@@ -2022,17 +2022,10 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	if 'selected_dimension' not in st.session_state:
 		st.session_state.selected_dimension = "Bid Value ActivePlusPWB"
 
-	# # Define a function to reset selection if empty
-	# def reset_selection_if_empty(selected_items, default_items):
-	# 	if not selected_items:
-	# 		st.sidebar.warning('No service area selected. Resetting to all areas.')
-	# 		return default_items
-	# 	return selected_items
 
 	# Initialize session state for service area selection
 	if 'selected_areas' not in st.session_state or not st.session_state.selected_areas:
 		st.session_state.selected_areas = sorted(df['Service Area'].unique())
-
 
 	# Select Auction Year
 	AuctionYears = sorted(df['Auction Year'].unique())
@@ -2093,25 +2086,28 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	# 	default=st.session_state.selected_areas
 	# )
 
-	# Define a function to handle the selection update
-	def handle_area_selection():
+		# Function to update selection state
+	def update_selection():
 		selected_areas = st.sidebar.multiselect(
 			'Select Service Areas to View',
 			options=df['Service Area'].unique(),
-			default=st.session_state.selected_areas
+			default=st.session_state.selected_areas,
+			key='area_select'
 		)
-		
+
 		if not selected_areas:
 			st.sidebar.warning('No service area selected. Resetting to all areas.')
-			selected_areas = df['Service Area'].unique()
-			st.experimental_rerun()
+			# Reset to all areas
+			st.session_state.selected_areas = df['Service Area'].unique()
+			st.experimental_rerun()  # Rerun the app to reflect changes
+		else:
+			st.session_state.selected_areas = selected_areas
 
-		st.session_state.selected_areas = selected_areas
-		
-	handle_area_selection()
+	# Call the function to manage selection
+	update_selection()
 
 	# Filter dataframe based on selected service areas
-	df = df[df['Service Area'].isin(st.session_state.selected_areas)]
+	df= df[df['Service Area'].isin(st.session_state.selected_areas)]
 
 
 
