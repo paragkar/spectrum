@@ -2488,7 +2488,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 
 	# Display the title above the heatmap with a smaller font size and reduced margin
 	title_text = f"Auction Year: {selected_year}, Dimension: {selected_dimension}, Round: {round_number}"
-	st.markdown(f"<h1 style='font-size:50px; margin-top: -60px;'>{title_text}</h1>", unsafe_allow_html=True)
+	st.markdown(f"<h1 style='font-size:40px; margin-top: -60px;'>{title_text}</h1>", unsafe_allow_html=True)
 
 	# Display the figure in Streamlit
 	with st.spinner('Processing...'):
