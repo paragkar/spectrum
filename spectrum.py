@@ -2486,6 +2486,10 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 		   ), 
 	)
 
+	# Display the title above the heatmap
+	title_text = f"Auction Year: {AuctionYear}, Dimension: {selected_dimension}, Round: {round_number}"
+	st.title(title_text)
+
 	# Display the figure in Streamlit
 	with st.spinner('Processing...'):
 		placeholder = st.empty()
