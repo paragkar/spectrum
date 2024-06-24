@@ -2065,6 +2065,14 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	if selected_areas:
 		df = df[df["Service Area"].isin(selected_areas)]
 
+	# Check if no service area is selected, and if so, reset to all areas
+	if not selected_areas:
+	    selected_areas = available_areas
+	    st.sidebar.warning('No service area selected. Resetting to all areas.')
+	    # This line ensures the reset is shown in the interface
+	    st.sidebar.multiselect('Select Service Areas to View', available_areas, default=available_areas, key='reset')
+
+
 	# Make copies of the dataframe before selecting dimension
 	dfcopy = df.copy()
 	dftext = df.copy()
