@@ -2022,12 +2022,12 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	if 'selected_dimension' not in st.session_state:
 		st.session_state.selected_dimension = "Bid Value ActivePlusPWB"
 
-	# Define a function to reset selection if empty
-	def reset_selection_if_empty(selected_items, default_items):
-		if not selected_items:
-			st.sidebar.warning('No service area selected. Resetting to all areas.')
-			return default_items
-		return selected_items
+	# # Define a function to reset selection if empty
+	# def reset_selection_if_empty(selected_items, default_items):
+	# 	if not selected_items:
+	# 		st.sidebar.warning('No service area selected. Resetting to all areas.')
+	# 		return default_items
+	# 	return selected_items
 
 	# Initialize session state for service area selection
 	if 'selected_areas' not in st.session_state or not st.session_state.selected_areas:
@@ -2093,20 +2093,26 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	# 	default=st.session_state.selected_areas
 	# )
 
-	# Choose service areas to view
-	available_areas = sorted(df['Service Area'].unique())
-	selected_areas = st.sidebar.multiselect(
-		'Select Service Areas to View',
-		available_areas,
-		default=st.session_state.selected_areas,
-		key='service_area_selector'
-	)
+	# Define a function to handle the selection update
+	def handle_area_selection():
+		selected_areas = st.sidebar.multiselect(
+			'Select Service Areas to View',
+			options=df['Service Area'].unique(),
+			default=st.session_state.selected_areas
+		)
+		
+		if not selected_areas:
+			st.sidebar.warning('No service area selected. Resetting to all areas.')
+			selected_areas = df['Service Area'].unique()
+			st.experimental_rerun()
 
-	# Check if selection is empty and reset if necessary
-	st.session_state.selected_areas = reset_selection_if_empty(selected_areas, available_areas)
+		st.session_state.selected_areas = selected_areas
+		
+	handle_area_selection()
 
-	# Apply the service area filter to the dataframe
+	# Filter dataframe based on selected service areas
 	df = df[df['Service Area'].isin(st.session_state.selected_areas)]
+
 
 
 	# Make copies of the dataframe before selecting dimension
