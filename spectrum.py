@@ -2048,7 +2048,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	if selected_areas:
 		df = df[df["Service Area"].isin(selected_areas)]
 
-	dfblksale = df[["Service Area", "Blocks ForSale", "Band"]].drop_duplicates()
+	# dfblksale = df[["Service Area", "Blocks ForSale", "Band"]].drop_duplicates()
 
 	dim_to_select = ["Bid Decision", "Bid Value ProvWinners", "Bid Value ActiveBidders","Bid Value ActivePlusPWB","RatioPWPtoRP EndRd", "ProvWinBid StartRd","Rank StartRd","ProvWinBid EndRd", "Rank EndRd","Blocks Selected", "MHz Selected",
 					"ProvAllocBLKs StartRd","ProvAllocMHz StartRd", "ProvAllocBLKs EndRd", "ProvAllocMHz EndRd", "Blocks ForSale","MHz ForSale"]
