@@ -2062,20 +2062,20 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	@st.cache_data
 	def filt_round(df, round_number):
 		# Filtering and processing logic
-		return df[df['Clock Round'] == round_number]
+		return df[df['Clock Round'] == round_number].replace(["-", ""], 0).fillna(0)
 
 
 	#Filtering the main dataframe with round numbers
 	df = filt_round(df, round_number)
-	df = df.replace("-", 0).replace("",0).replace(np.nan, 0)
+	# df = df.replace("-", 0).replace("",0).replace(np.nan, 0)
 
 	#Filtering dftext dataframe with round numbers
 	dftext = filt_round(dftext, round_number)
-	dftext = dftext.replace("-", 0).replace("",0).replace(np.nan, 0)
+	# dftext = dftext.replace("-", 0).replace("",0).replace(np.nan, 0)
 
 	#Filtering the Copy dataframe with round numbers
 	dfcopy = filt_round(dfcopy, round_number)
-	dfcopy = dfcopy.replace("-", 0).replace("",0).replace(np.nan, 0)
+	# dfcopy = dfcopy.replace("-", 0).replace("",0).replace(np.nan, 0)
 
 
 	# Function to Pivot Dataframe based on selected dimention
