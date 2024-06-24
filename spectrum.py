@@ -2417,7 +2417,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	height_mul_dict = {1:0.8, 2:1, 3: 1.2, 4 :1.4 , 5 :1.4, 6 : 1.45 , 7: 1.45, 8: 1.45, 9:1.45}
 
 	# Update the overall layout
-	fig.update_layout(uniformtext_minsize=text_embed_in_chart_size*0.75, 
+	fig.update_layout(uniformtext_minsize=text_embed_in_chart_size*0.6, 
 		uniformtext_mode='hide', 
 		xaxis_title=None, 
 		yaxis_title=None, 
