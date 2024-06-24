@@ -2015,17 +2015,12 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 		st.session_state.selected_year = None
 	if 'selected_bands' not in st.session_state:
 		st.session_state.selected_bands = []
-	# if 'selected_areas' not in st.session_state:
-	#     st.session_state.selected_areas = []
+	if 'selected_areas' not in st.session_state:
+	    st.session_state.selected_areas = []
 	if 'round_number' not in st.session_state:
 		st.session_state.round_number = 1
 	if 'selected_dimension' not in st.session_state:
 		st.session_state.selected_dimension = "Bid Value ActivePlusPWB"
-
-
-	# Initialize the session state if not already set
-	if 'selected_areas' not in st.session_state:
-	    st.session_state.selected_areas = df['Service Area'].unique()
 
 	# Select Auction Year
 	AuctionYears = sorted(df['Auction Year'].unique())
@@ -2058,56 +2053,26 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	if selected_bands:
 		df = df[df["Band"].isin(selected_bands)]
 
-	# # Choose service areas to view
-	# available_areas = sorted(df['Service Area'].unique())
-	# # Use a unique key for multiselect to force reset when needed
-	# selected_areas = st.sidebar.multiselect(
-	#     'Select Service Areas to View', 
-	#     available_areas, 
-	#     default=available_areas, 
-	#     key='service_area_select'
-	# )
+	# Choose service areas to view
+	available_areas = sorted(df['Service Area'].unique())
+	# Use a unique key for multiselect to force reset when needed
+	selected_areas = st.sidebar.multiselect(
+	    'Select Service Areas to View', 
+	    available_areas, 
+	    default=available_areas, 
+	    key='service_area_select'
+	)
 
-	# # Check if no service area is selected, and if so, reset to all areas
-	# if not selected_areas:
-	#     selected_areas = available_areas
-	#     st.sidebar.warning('No service area selected. Resetting to all areas.')
-	#     # Force the multiselect to reset by using a new key
-	#     st.sidebar.multiselect('Select Service Areas to View', available_areas, default=available_areas, key='reset_service_area_select')
+	# Check if no service area is selected, and if so, reset to all areas
+	if not selected_areas:
+	    selected_areas = available_areas
+	    st.sidebar.warning('No service area selected. Resetting to all areas.')
+	    # Force the multiselect to reset by using a new key
+	    st.sidebar.multiselect('Select Service Areas to View', available_areas, default=available_areas, key='reset_service_area_select')
 
-	# # Apply the service area filter to the dataframe
-	# df = df[df['Service Area'].isin(selected_areas)]
+	# Apply the service area filter to the dataframe
+	df = df[df['Service Area'].isin(selected_areas)]
 
-	# # Choose service areas to view
-	# available_areas = sorted(df['Service Area'].unique())
-	# selected_areas = st.sidebar.multiselect(
-	# 	'Select Service Areas to View', 
-	# 	available_areas, 
-	# 	default=st.session_state.selected_areas
-	# )
-
-		# Function to update selection state
-	def update_selection():
-		selected_areas = st.sidebar.multiselect(
-			'Select Service Areas to View',
-			options=df['Service Area'].unique(),
-			default=st.session_state.selected_areas,
-			key='area_select'
-		)
-
-		if not selected_areas:
-			st.sidebar.warning('No service area selected. Resetting to all areas.')
-			# Reset to all areas
-			st.session_state.selected_areas = df['Service Area'].unique()
-			st.experimental_rerun()  # Rerun the app to reflect changes
-		else:
-			st.session_state.selected_areas = selected_areas
-
-	# Call the function to manage selection
-	update_selection()
-
-	# Filter dataframe based on selected service areas
-	df= df[df['Service Area'].isin(st.session_state.selected_areas)]
 
 
 
