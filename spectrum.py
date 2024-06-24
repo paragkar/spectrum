@@ -2050,6 +2050,8 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 
 	dfblksale = df[["Service Area", "Blocks ForSale", "Band"]].drop_duplicates()
 
+	st.write(dfblksale)
+
 	dim_to_select = ["Bid Decision", "Bid Value ProvWinners", "Bid Value ActiveBidders","Bid Value ActivePlusPWB","RatioPWPtoRP EndRd", "ProvWinBid StartRd","Rank StartRd","ProvWinBid EndRd", "Rank EndRd","Blocks Selected", "MHz Selected",
 					"ProvAllocBLKs StartRd","ProvAllocMHz StartRd", "ProvAllocBLKs EndRd", "ProvAllocMHz EndRd", "Blocks ForSale","MHz ForSale"]
 
@@ -2060,8 +2062,6 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	selected_dimension = st.sidebar.selectbox('Select a Dimension', dim_to_select, 0) #default index "Prov WinBid Start Rd"
 
 	df = df[[ "Clock Round", "Bidder", "Service Area","Band", selected_dimension]]
-
-	st.write(df)
 
 	#Choose clock round numbers
 	clkrounds = sorted(list(set(df["Clock Round"])))
