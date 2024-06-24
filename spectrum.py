@@ -2086,6 +2086,8 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 
 	df = pivot_dataframe(df, selected_dimension)
 
+	st.write(df)
+
 	#Filtering the Copy dataframe with round numbers
 	dfcopy = filt_round(dfcopy, round_number)
 	dfcopy = dfcopy.replace("-", 0).replace("",0).replace(np.nan, 0)
