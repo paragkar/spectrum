@@ -2004,18 +2004,12 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 
 	currency_flag = "NA" #This is dummy variiable for this option done to preserve the current structure of the code 
 
-	def loadauctionbiddatayearbandcomb():
-	# Placeholder function to simulate loading data
-		return {"Sheet1": pd.DataFrame()}  # Replace with actual data loading logic
-
 	def filt_round(df, round_number):
 		# Filter the dataframe based on the round number
 		return df[df['Clock Round'] == round_number].replace(["-", ""], 0).fillna(0)
 
-	# Load data
-	df = loadauctionbiddatayearbandcomb()
-
-	st.write(df)
+	
+	df = loadauctionbiddatayearbandcomb()["Sheet1"] #Loading the auction bid year and band data 
 
 	# Initialize session state
 	if 'round_number' not in st.session_state:
