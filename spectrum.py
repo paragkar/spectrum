@@ -2458,7 +2458,6 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 
 	# Update the overall layout
 	fig.update_layout(uniformtext_minsize=text_embed_in_chart_size*0.7,
-		title=f"Auction Year: {selected_year}, Dimension: {selected_dimension}, Round: {round_number}"),
 		uniformtext_mode='hide', 
 		xaxis_title=None, 
 		yaxis_title=None, 
