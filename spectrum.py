@@ -2008,6 +2008,17 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 
 	df = loadauctionbiddatayearbandcomb()["Sheet1"] #Loading the auction bid year and band data 
 
+	session_defaults = {
+    # 'selected_year': df['Auction Year'].min(),
+    # 'selected_bands': [],
+    # 'selected_areas': [],
+    'round_number': 1,
+    # 'selected_dimension': "Bid Value"
+	}
+	for key, default in session_defaults.items():
+	    if key not in st.session_state:
+	        st.session_state[key] = default
+
 	AuctionYears = sorted(list(set(df["Auction Year"])))
 	AuctionYear = st.sidebar.selectbox('Select an Auction Year', AuctionYears, 0) #default index 2012
 	#Filtering the dataframe with selected auction year
@@ -2066,7 +2077,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 		round_number = st.number_input("Select Auction Round Number"+";Total Rounds= "+str(max(clkrounds)),
 									   min_value=min(clkrounds),
 									   max_value=max(clkrounds),
-									   value=1,
+									   value=st.session_state.round_number,
 									   step=1)
 		# Submit button in the sidebar form
 		submit_button = st.form_submit_button('Apply Round Number')
