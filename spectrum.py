@@ -2337,7 +2337,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 			text_values, texttemplate = text_values_heatmap(selected_dimension,df_segment,band)
 			# text_values = text_values.replace("0","", regex = True)
 
-			st.write(text_values.replace("0",""))
+			st.write(text_values.replace("0.0",""))
 
 
 			aligned_color_df = color_df.loc[df_segment.index, df_segment.columns].replace(np.nan, "")
