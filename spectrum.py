@@ -2339,7 +2339,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 
 			# Efficiently replace zeros in text format with empty strings
 			def replace_zeros(df):
-			    return df.where(~df.eq(0), '')
+			    return df.where(~df.eq('0'), '')
 
 			st.write(replace_zeros(text_values.copy()))
 
