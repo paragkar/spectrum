@@ -2273,9 +2273,9 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 
 
 	#1. Extract the dataframe where MHz of sales has to be appended
-	df_mhz_for_sale = selected_dimension_df_text(dftext, "MHz ForSale").round(2).fillna(0)
-	df_prov_alloc_mhz_endround = selected_dimension_df_text(dftext, "ProvAllocMHz EndRd").round(2).fillna(0)
-	df_prov_alloc_mhz_startround = selected_dimension_df_text(dftext, "ProvAllocMHz StartRd").round(2).fillna(0)
+	df_mhz_for_sale = selected_dimension_df_text(dftext, "MHz ForSale").round(1).fillna(0)
+	df_prov_alloc_mhz_endround = selected_dimension_df_text(dftext, "ProvAllocMHz EndRd").round(1).fillna(0)
+	df_prov_alloc_mhz_startround = selected_dimension_df_text(dftext, "ProvAllocMHz StartRd").round(1).fillna(0)
 
 	#2. Mapping allocated mhz with those up with mhz for sale
 	result_df_prov_alloc_mhz_endround = map_alloc_slots_with_sale(df_prov_alloc_mhz_endround, df_mhz_for_sale)
@@ -2324,7 +2324,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	        text_values = lambda_function_dict[selected_dimension](band)
 	        texttemplate ="%{text}"
 	    else:
-	        text_values = df_segment.astype(float).round(1).astype(str).replace('nan',"")
+	        text_values = df_segment.astype(float).round(2).astype(str).replace('nan',"")
 	        texttemplate ="%{text:.1f}"
 	    return text_values, texttemplate
 
