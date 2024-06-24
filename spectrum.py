@@ -2033,9 +2033,8 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 		# Filtering and processing logic
 		return df[df['Clock Round'] == round_number].replace(["-", ""], 0).fillna(0)
 
-	# Main app function
-	def main():
-		df = load_data()  # Load initial data
+
+	df = load_data()  # Load initial data
 
 
 	# Initialize session state for filters and selections
