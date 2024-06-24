@@ -2036,10 +2036,10 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 
 	df = load_data()  # Load initial data
 	 # Check and initialize all necessary session state variables
-    if 'dftext' not in st.session_state:
-        st.session_state.dftext = df.copy()  # Assuming you want to initialize with a copy of df
-    if 'dfcopy' not in st.session_state:
-        st.session_state.dfcopy = df.copy()
+	if 'dftext' not in st.session_state:
+		st.session_state.dftext = df.copy()  # Assuming you want to initialize with a copy of df
+	if 'dfcopy' not in st.session_state:
+		st.session_state.dfcopy = df.copy()
 
 
 	# Initialize session state for filters and selections
