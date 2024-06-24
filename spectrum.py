@@ -2278,8 +2278,8 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	df_prov_alloc_mhz_startround = selected_dimension_df_text(dftext, "ProvAllocMHz StartRd").round(0).fillna(0).astype('int')
 
 	#2. Mapping allocated mhz with those up with mhz for sale
-	result_df_prov_alloc_mhz_endround = map_alloc_slots_with_sale(df_prov_alloc_mhz_endround, df_blocks_for_sale)
-	result_df_prov_alloc_mhz_startround = map_alloc_slots_with_sale(df_prov_alloc_mhz_startround, df_blocks_for_sale)
+	result_df_prov_alloc_mhz_endround = map_alloc_slots_with_sale(df_prov_alloc_mhz_endround, df_mhz_for_sale)
+	result_df_prov_alloc_mhz_startround = map_alloc_slots_with_sale(df_prov_alloc_mhz_startround,df_mhz_for_sale)
 
 	#3. Sorting with band order and converting allocated mhz dataframe into dict
 	result_df_prov_alloc_mhz_endround_dict=sort_in_band_order(result_df_prov_alloc_mhz_endround, band_order)
@@ -2338,7 +2338,6 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 			text_values, texttemplate = text_values_heatmap(selected_dimension,df_segment,band)
 			# text_values = text_values.replace("0","", regex = True)
 	
-
 
 			aligned_color_df = color_df.loc[df_segment.index, df_segment.columns].replace(np.nan, "")
 			# Create a heatmap for each band
