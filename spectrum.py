@@ -2007,6 +2007,19 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	def filt_round(df, round_number):
 		# Filter the dataframe based on the round number
 		return df[df['Clock Round'] == round_number].replace(["-", ""], 0).fillna(0)
+
+
+		# Initialize session state variables
+	if 'selected_year' not in st.session_state:
+	    st.session_state.selected_year = None
+	if 'selected_bands' not in st.session_state:
+	    st.session_state.selected_bands = []
+	if 'selected_areas' not in st.session_state:
+	    st.session_state.selected_areas = []
+	if 'round_number' not in st.session_state:
+	    st.session_state.round_number = 1
+	if 'selected_dimension' not in st.session_state:
+	    st.session_state.selected_dimension = "Bid Decision"
 	
 	df = loadauctionbiddatayearbandcomb()["Sheet1"] #Loading the auction bid year and band data 
 
