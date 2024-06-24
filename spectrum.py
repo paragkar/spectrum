@@ -2273,9 +2273,9 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 
 
 	#1. Extract the dataframe where MHz of sales has to be appended
-	df_mhz_for_sale = selected_dimension_df_text(dftext, "MHz ForSale").round(0).fillna(0).astype('int')
-	df_prov_alloc_mhz_endround = selected_dimension_df_text(dftext, "ProvAllocMHz EndRd").round(0).fillna(0).astype('int')
-	df_prov_alloc_mhz_startround = selected_dimension_df_text(dftext, "ProvAllocMHz StartRd").round(0).fillna(0).astype('int')
+	df_mhz_for_sale = selected_dimension_df_text(dftext, "MHz ForSale").round(1).fillna(0).astype('int')
+	df_prov_alloc_mhz_endround = selected_dimension_df_text(dftext, "ProvAllocMHz EndRd").round(1).fillna(0).astype('int')
+	df_prov_alloc_mhz_startround = selected_dimension_df_text(dftext, "ProvAllocMHz StartRd").round(1).fillna(0).astype('int')
 
 	#2. Mapping allocated mhz with those up with mhz for sale
 	result_df_prov_alloc_mhz_endround = map_alloc_slots_with_sale(df_prov_alloc_mhz_endround, df_mhz_for_sale)
@@ -2337,7 +2337,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 
 			text_values, texttemplate = text_values_heatmap(selected_dimension,df_segment,band)
 			# text_values = text_values.replace("0","", regex = True)
-	
+
 
 			aligned_color_df = color_df.loc[df_segment.index, df_segment.columns].replace(np.nan, "")
 			# Create a heatmap for each band
