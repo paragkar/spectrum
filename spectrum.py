@@ -2059,7 +2059,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 
 	selected_dimension = st.sidebar.selectbox('Select a Dimension', dim_to_select, 0) #default index "Prov WinBid Start Rd"
 
-	df = df[[ "Clock Round", "Bidder", "Service Area","Band", selected_dimension]]
+	df = df[[ "Clock Round", "Bidder", "Service Area", "Band", selected_dimension]]
 
 	#Choose clock round numbers
 	clkrounds = sorted(list(set(df["Clock Round"])))
@@ -2336,7 +2336,8 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 		if selected_dimension not in ["RatioPWPtoRP EndRd"]: #IF statatement for using a different colorscale for ratio
 
 			text_values, texttemplate = text_values_heatmap(selected_dimension,df_segment,band)
-			text_values = text_values.replace("0","", regex = True)
+			# text_values = text_values.replace("0","", regex = True)
+	
 
 
 			aligned_color_df = color_df.loc[df_segment.index, df_segment.columns].replace(np.nan, "")
