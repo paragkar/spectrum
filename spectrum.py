@@ -2044,7 +2044,8 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	df["Bid Decision"] = [1 if x =="Bid" else 0 for x in df["Bid Decision"]]
 
 	# Select Dimension
-	dimensions = ["Bid Decision", "Bid Value ProvWinners", "Bid Value ActiveBidders", "RatioPWPtoRP EndRd", "ProvWinBid StartRd"]
+	dimensions = ["Bid Decision", "Bid Value ProvWinners", "Bid Value ActiveBidders","Bid Value ActivePlusPWB","RatioPWPtoRP EndRd", "ProvWinBid StartRd","Rank StartRd","ProvWinBid EndRd", "Rank EndRd","Blocks Selected", "MHz Selected",
+					"ProvAllocBLKs StartRd","ProvAllocMHz StartRd", "ProvAllocBLKs EndRd", "ProvAllocMHz EndRd", "Blocks ForSale","MHz ForSale"]
 	selected_dimension = st.sidebar.selectbox('Select a Dimension', dimensions)
 
 	# Apply dimension filter
