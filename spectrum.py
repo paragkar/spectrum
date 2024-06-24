@@ -1993,13 +1993,6 @@ for index in dfrsrate.index:
 		auction_rsrate_dict[index.year] = dfrsrate.loc[index,:].values[0]
 
 
-#This function is used to filter the dataframe based on round numbers for selected dimensions (AuctionYear Activity & AuctionYear AllBands)
-@st.cache_data
-def filt_round(df, round_number):
-	# Filtering and processing logic
-	return df[df['Clock Round'] == round_number]
-
-
 if selected_dimension == "AuctionYear Activity": #Incompete Still working this section
 
 	currency_flag = "NA" #This is dummy variiable for this option done to preserve the current structure of the code 
@@ -2065,6 +2058,13 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	clkrounds = sorted(list(set(df["Clock Round"])))
 	round_number = st.sidebar.number_input("Select Auction Round Number"+";Total Rounds= "+str(max(clkrounds)), min_value=min(clkrounds), max_value=max(clkrounds), value=1, step=1)
 
+	#This function is used to filter the dataframe based on round numbers for selected dimensions (AuctionYear Activity & AuctionYear AllBands)
+	@st.cache_data
+	def filt_round(df, round_number):
+		# Filtering and processing logic
+		return df[df['Clock Round'] == round_number]
+
+
 	#Filtering the main dataframe with round numbers
 	df = filt_round(df, round_number)
 	df = df.replace("-", 0).replace("",0).replace(np.nan, 0)
@@ -2072,6 +2072,10 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	#Filtering dftext dataframe with round numbers
 	dftext = filt_round(dftext, round_number)
 	dftext = dftext.replace("-", 0).replace("",0).replace(np.nan, 0)
+
+	#Filtering the Copy dataframe with round numbers
+	dfcopy = filt_round(dfcopy, round_number)
+	dfcopy = dfcopy.replace("-", 0).replace("",0).replace(np.nan, 0)
 
 
 	# Function to Pivot Dataframe based on selected dimention
@@ -2086,11 +2090,6 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 		return df
 
 	df = pivot_dataframe(df, selected_dimension)
-
-
-	#Filtering the Copy dataframe with round numbers
-	dfcopy = filt_round(dfcopy, round_number)
-	dfcopy = dfcopy.replace("-", 0).replace("",0).replace(np.nan, 0)
 
 	dim_to_select_for_total_dict = {
 		"Bid Decision" : "Bid Decision",
@@ -3337,9 +3336,6 @@ if selected_dimension == "Auction BandWise":
 			round_numbers = list(range(1, totalrounds + 1))
 
 			# Create a select box for round numbers
-
-			#debug 9th June 2024
-			# round_number = st.sidebar.selectbox("Select Auction Round Number", round_numbers)
 
 			round_number = st.sidebar.number_input("Select Auction Round Number"+";Total Rounds= "+str(max(round_numbers)), min_value=min(round_numbers), max_value=max(round_numbers), value=1, step=1)
 
