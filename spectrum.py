@@ -2054,9 +2054,23 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 
 	df = df[[ "Clock Round", "Bidder", "Service Area", "Band", selected_dimension]]
 
-	#Choose clock round numbers
-	clkrounds = sorted(list(set(df["Clock Round"])))
-	round_number = st.sidebar.number_input("Select Auction Round Number"+";Total Rounds= "+str(max(clkrounds)), min_value=min(clkrounds), max_value=max(clkrounds), value=1, step=1)
+	# #Choose clock round numbers
+	# clkrounds = sorted(list(set(df["Clock Round"])))
+	# round_number = st.sidebar.number_input("Select Auction Round Number"+";Total Rounds= "+str(max(clkrounds)), min_value=min(clkrounds), max_value=max(clkrounds), value=1, step=1)
+
+	# Use a form in the sidebar to capture input and provide a submit button
+	with st.sidebar.form(key='round_selection_form'):
+		# Fetch the range of available clock rounds
+		clkrounds = sorted(list(set(df["Clock Round"])))
+		# Create a number input for selecting the round number
+		round_number = st.number_input("Select Auction Round Number",
+									   min_value=min(clkrounds),
+									   max_value=max(clkrounds),
+									   value=1,
+									   step=1)
+		# Submit button in the sidebar form
+		submit_button = st.form_submit_button('Apply Round Number')
+
 
 	#This function is used to filter the dataframe based on round numbers for selected dimensions (AuctionYear Activity & AuctionYear AllBands)
 	@st.cache_data
@@ -2066,17 +2080,31 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 
 
 	#Filtering the main dataframe with round numbers
-	df = filt_round(df, round_number)
+	# df = filt_round(df, round_number)
 	# df = df.replace("-", 0).replace("",0).replace(np.nan, 0)
 
 	#Filtering dftext dataframe with round numbers
-	dftext = filt_round(dftext, round_number)
+	# dftext = filt_round(dftext, round_number)
 	# dftext = dftext.replace("-", 0).replace("",0).replace(np.nan, 0)
 
 	#Filtering the Copy dataframe with round numbers
-	dfcopy = filt_round(dfcopy, round_number)
+	# dfcopy = filt_round(dfcopy, round_number)
 	# dfcopy = dfcopy.replace("-", 0).replace("",0).replace(np.nan, 0)
 
+
+	# When the submit button is pressed, filter data and perform operations
+	if submit_button:
+		# Filter the main dataframe by the selected round number
+		df = filt_round(df, round_number)
+		# df = df.replace("-", 0).replace("",0).replace(np.nan, 0)
+
+		# Repeat filtering for any additional dataframes
+		dftext = filt_round(dftext, round_number)
+		# dftext = dftext.replace("-", 0).replace("",0).replace(np.nan, 0)
+
+		#Filtering the Copy dataframe with round numbers
+		dfcopy = filt_round(dfcopy, round_number)
+		# dfcopy = dfcopy.replace("-", 0).replace("",0).replace(np.nan, 0)
 
 
 	# Function to Pivot Dataframe based on selected dimention
@@ -2309,7 +2337,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 		combined_df = df + '\n' + result_df
 		return combined_df
 
-    #4. Finally add the selected_dimnsion in this fuctions as a final step
+	#4. Finally add the selected_dimnsion in this fuctions as a final step
 	lambda_function_dict = {
 	"Bid Value ActiveBidders": lambda band: prepare_text_values(df_bid_value_activebidders_dict, result_df_active_bidders_dict, band),
 	"Bid Value ActivePlusPWB": lambda band: prepare_text_values(df_bid_value_activepluspwbbidders_dict, result_df_active_pluspwb_bidders_dict, band),
@@ -2320,13 +2348,13 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	}
 
 	def text_values_heatmap(selected_dimension, df_segment, band):
-	    if selected_dimension in  lambda_function_dict:
-	        text_values = lambda_function_dict[selected_dimension](band)
-	        texttemplate ="%{text}"
-	    else:
-	        text_values = df_segment.astype(float).round(1).astype(str).replace('nan',"")
-	        texttemplate ="%{text:.1f}"
-	    return text_values, texttemplate
+		if selected_dimension in  lambda_function_dict:
+			text_values = lambda_function_dict[selected_dimension](band)
+			texttemplate ="%{text}"
+		else:
+			text_values = df_segment.astype(float).round(1).astype(str).replace('nan',"")
+			texttemplate ="%{text:.1f}"
+		return text_values, texttemplate
 
 
 	# Iterate through each band and its corresponding dataframe
