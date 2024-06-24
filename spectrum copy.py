@@ -2026,6 +2026,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	#Filtering the dataframe with selected auction year
 	df = df[df["Auction Year"] == AuctionYear]
 
+
 	df["Bid Decision"] = [1 if x =="Bid" else 0 for x in df["Bid Decision"]]
 
 	# Choose bands to view
