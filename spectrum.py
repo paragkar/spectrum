@@ -2061,6 +2061,8 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 
 	df = df[[ "Clock Round", "Bidder", "Service Area","Band", selected_dimension]]
 
+	st.write(df)
+
 	#Choose clock round numbers
 	clkrounds = sorted(list(set(df["Clock Round"])))
 	round_number = st.sidebar.number_input("Select Auction Round Number"+";Total Rounds= "+str(max(clkrounds)), min_value=min(clkrounds), max_value=max(clkrounds), value=1, step=1)
@@ -2068,8 +2070,6 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	#Filtering the main dataframe with round numbers
 	df = filt_round(df, round_number)
 	df = df.replace("-", 0).replace("",0).replace(np.nan, 0)
-
-	st.write(df)
 
 	#Filtering dftext dataframe with round numbers
 	dftext = filt_round(dftext, round_number)
