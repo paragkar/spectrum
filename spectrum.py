@@ -2069,7 +2069,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 		columns=['Bidder', 'Band'], 
 		values= selected_dimension, 
 		# aggfunc='first'  # you can change this to 'sum' if that's more appropriate
-		aggfunc='sum'  # you can change this to 'sum' if that's more appropriate
+		aggfunc='first'  # you can change this to 'sum' if that's more appropriate
 		)
 		return df
 
