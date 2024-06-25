@@ -2235,7 +2235,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	# Calculate the maximum total value to set a consistent x-axis range across all bar charts
 	max_total_value = row_totals['Total'].max()  # Assuming 'Total' holds the values you need
 
-	st.write(row_totals["Total"].sum(axis=1))
+	st.write(row_totals["Total"])
 
 	# Map the bidder names back to colors using the color_index_map
 	row_totals['color'] = row_totals['BandBidder'].apply(lambda x: bidder_colors[x.split('(')[1].split(')')[0]])
