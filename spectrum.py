@@ -2008,8 +2008,12 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 		# Filter the dataframe based on the round number
 		return df[df['Clock Round'] == round_number].replace(["-", ""], 0).fillna(0)
 
-	df = loadauctionbiddatayearbandcomb()["Sheet1"] #Loading the auction bid year and band data 
-	dfactvity = auctionbiddatayearactivitycomb()["Sheet1"] #Loading the auction bid year activity data 
+	#Loading the auction bid year and band data 
+	df = loadauctionbiddatayearbandcomb()["Sheet1"]
+	#Loading the auction bid year activity data 
+	dfactvity = auctionbiddatayearactivitycomb()["Sheet1"] [["Clock Round", "Auction Year", "Activity Factor"]]
+
+	# df = pd.merge(df,dfactvity, on = ["Clock Round"])
 
 	st.write(dfactvity)
 
