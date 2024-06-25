@@ -2235,7 +2235,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	# Calculate the maximum total value to set a consistent x-axis range across all bar charts
 	max_total_value = row_totals['Total'].max()  # Assuming 'Total' holds the values you need
 
-	st.write(row_totals["Total"].astype(float).sum(axis=0))
+	total_value_all_bands = row_totals["Total"].astype(float).sum(axis=0) #This is to be used in title text
 
 	# Map the bidder names back to colors using the color_index_map
 	row_totals['color'] = row_totals['BandBidder'].apply(lambda x: bidder_colors[x.split('(')[1].split(')')[0]])
@@ -2526,7 +2526,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 
 	title_text = f"""
 	<span style='color: #FF5733;'>Auction Year: {selected_year}</span>, 
-	<span style='color: #00008B;'>Dimension: {selected_dimension}</span>, 
+	<span style='color: #00008B;'>Dimension: {selected_dimension} - {total_value_all_bands}</span>, 
 	<span style='color: #3357FF;'>Round: {round_number}</span>, 
 	<span style='color: #FF33F6;'>Activity Factor: {activity_factor_for_selected_round:.1f}</span>
 	"""
