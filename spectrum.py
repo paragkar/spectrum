@@ -2434,7 +2434,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 				textfont=dict(color='white', size = text_embed_in_chart_size*0.6),  # Dynamic text size
 				showlegend = False,
 				textposition="auto",
-				width=0.8,  # Adjust bar width, closer to 1 means wider
+				width=1,  # Adjust bar width, closer to 1 means wider
 			),
 			row=i, col=2
 		)
