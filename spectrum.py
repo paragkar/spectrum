@@ -2009,6 +2009,9 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 		return df[df['Clock Round'] == round_number].replace(["-", ""], 0).fillna(0)
 
 	df = loadauctionbiddatayearbandcomb()["Sheet1"] #Loading the auction bid year and band data 
+	dfactvity = auctionbiddatayearactivitycomb()["Sheet1"] #Loading the auction bid year activity data 
+
+	st.write(dfactvity)
 
 	# Initialize session state variables
 	if 'selected_year' not in st.session_state:
