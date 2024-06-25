@@ -2011,9 +2011,9 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	#Loading the auction bid year and band data 
 	df = loadauctionbiddatayearbandcomb()["Sheet1"]
 	#Loading the auction bid year activity data 
-	dfactvity = auctionbiddatayearactivitycomb()["Sheet1"] [["Clock Round", "Auction Year", "Activity Factor"]]
+	# dfactvity = auctionbiddatayearactivitycomb()["Sheet1"] [["Clock Round", "Auction Year", "Activity Factor"]]
 
-	df = pd.merge(df,dfactvity, on = ["Clock Round", "Auction Year"], how = 'left').reset_index()
+	# df = pd.merge(df,dfactvity, on = ["Clock Round", "Auction Year"], how = 'left').reset_index()
 
 	st.write(df)
 
