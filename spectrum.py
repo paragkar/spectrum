@@ -2099,6 +2099,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 		submitted = st.form_submit_button('Apply Round Number')
 		if submitted:
 			st.session_state.round_number = round_number
+			st.experimental_rerun() 
 
 	df = filt_round(df, st.session_state.round_number)
 	dftext = filt_round(dftext, st.session_state.round_number)
