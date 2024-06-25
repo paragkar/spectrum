@@ -2022,8 +2022,8 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 		st.session_state.selected_bands = []
 	if 'selected_areas' not in st.session_state:
 		st.session_state.selected_areas = []
-	if 'round_number' not in st.session_state:
-		st.session_state.round_number = 1
+	# if 'round_number' not in st.session_state:
+	# 	st.session_state.round_number = 1
 	if 'selected_dimension' not in st.session_state:
 		st.session_state.selected_dimension = "Bid Value ActivePlusPWB"
 
@@ -2109,25 +2109,23 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 
 	# Clock Round selection
 	clkrounds = sorted(df['Clock Round'].unique())
+	# Set default round number to 1 or the minimum available round if 1 is not available
+	default_round_number = 1 if 1 in clkrounds else min(clkrounds)
+
 	# Use number_input directly for interactive updates
 	round_number = st.sidebar.number_input(
-		"Select Auction Round Number; Total Rounds= " + str(max(clkrounds)),
-		min_value=min(clkrounds),
-		max_value=max(clkrounds),
-		value=st.session_state.round_number,
-		key='round_number'  # Ensure unique key in session state
+	    "Select Auction Round Number; Total Rounds= " + str(max(clkrounds)),
+	    min_value=min(clkrounds),
+	    max_value=max(clkrounds),
+	    value=default_round_number
 	)
 
-	# Check if the round_number has changed and update session state
-	if st.session_state.round_number != round_number:
-		st.session_state.round_number = round_number
-		st.experimental_rerun()  # Optional: Force rerun to update all dependent components
+	# Filter data based on the selected round number
+	df = filt_round(df, round_number)
+	dftext = filt_round(dftext, round_number)
+	dfcopy = filt_round(dfcopy, round_number)
+	dfactvity = filt_round(dfactvity, round_number)
 
-	# Filter data based on the currently selected round number
-	df = filt_round(df, st.session_state.round_number)
-	dftext = filt_round(dftext, st.session_state.round_number)
-	dfcopy = filt_round(dfcopy, st.session_state.round_number)
-	dfactvity = filt_round(dfactvity, st.session_state.round_number)
 
 	activity_factor_for_selected_round = dfactvity.drop_duplicates()["Activity Factor"].values[0] #Note this will be used in the title 
 
