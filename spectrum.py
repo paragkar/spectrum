@@ -2480,8 +2480,8 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 		fig.update_yaxes(row=i, col=1, fixedrange=True, showline=True, linewidth=2.5, linecolor='black', mirror=True, showgrid=True, gridcolor='lightgrey')
 
 		# Update axes for each subplot to set the tick font size
-		fig.update_xaxes(row=i, col=1, tickfont=dict(size=text_embed_in_chart_size*0.7))
-		fig.update_yaxes(row=i, col=1, tickfont=dict(size=text_embed_in_chart_size*0.7),
+		fig.update_xaxes(row=i, col=1, tickfont=dict(size=text_embed_in_chart_size*0.8))
+		fig.update_yaxes(row=i, col=1, tickfont=dict(size=text_embed_in_chart_size*0.8),
 						title_text="" if has_non_zero_values else str(band))  # Set the y-axis title here)
 
 	bands_in_view = len(df_dict.keys())
