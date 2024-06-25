@@ -2527,7 +2527,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	title_text = f"""
 	<span style='color: #FF5733;'>Auction Year: {selected_year}</span>, 
 	<span style='color: #00008B;'>Dimension: {selected_dimension}</span>, 
-	<span style='color: #3357FF;'>Round: {st.session_state.round_number}</span>, 
+	<span style='color: #3357FF;'>Round: {round_number}</span>, 
 	<span style='color: #FF33F6;'>Activity Factor: {activity_factor_for_selected_round:.1f}</span>
 	"""
 
