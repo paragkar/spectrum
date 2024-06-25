@@ -2107,7 +2107,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	# dfactvity = filt_round(dfactvity, st.session_state.round_number)
 
 
-	Clock Round selection
+	#Clock Round selection
 	clkrounds = sorted(df['Clock Round'].unique())
 	with st.sidebar.form("round_form"):
 		round_number = st.number_input("Select Auction Round Number"+";Total Rounds= "+str(max(clkrounds)), min_value=min(clkrounds), max_value=max(clkrounds), value=1)
