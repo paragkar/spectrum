@@ -2412,7 +2412,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 					colorscale=colorscale,
 					text=text_values.values,  
 					texttemplate=texttemplate,
-					textfont={"size": text_embed_in_chart_size*0.8}, 
+					textfont={"size": text_embed_in_chart_size*0.9}, 
 					showscale=False,
 					# reversescale=True,
 					zmin=zmin,  # Set minimum z value
@@ -2431,7 +2431,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 					colorscale="YlGnBu",
 					# text=text_values.values,  # Assuming 'df' contains the values you want to display
 					texttemplate="%{z:.1f}",
-					textfont={"size": text_embed_in_chart_size*0.8}, 
+					textfont={"size": text_embed_in_chart_size*0.9}, 
 					showscale=False,
 					# reversescale=True,
 					# zmin=zmin,  # Set minimum z value
@@ -2452,7 +2452,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 				# marker_color='red',  # Bar color
 				marker=dict(color=row_totals['color']),  
 				text=segment_totals['Total'],  # To show the totals on the bars
-				textfont=dict(color='white', size = text_embed_in_chart_size*0.6),  # Dynamic text size
+				textfont=dict(color='white', size = text_embed_in_chart_size*0.8),  # Dynamic text size
 				showlegend = False,
 				textposition="auto",
 				width=1,  # Adjust bar width, closer to 1 means wider
@@ -2489,7 +2489,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	height_mul_dict = {1:0.8, 2:1, 3: 1.2, 4 :1.4 , 5 :1.4, 6 : 1.45 , 7: 1.45, 8: 1.45, 9:1.45}
 
 	# Update the overall layout
-	fig.update_layout(uniformtext_minsize=text_embed_in_chart_size*0.7,
+	fig.update_layout(uniformtext_minsize=text_embed_in_chart_size*0.75,
 		uniformtext_mode='hide', 
 		xaxis_title=None, 
 		yaxis_title=None, 
@@ -2507,7 +2507,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 		margin=dict(t=10, b=10, l=10, r=10, pad=4),
 		yaxis=dict(
 		  tickmode='array',
-		  tickfont=dict(size=text_embed_in_chart_size*0.7),
+		  tickfont=dict(size=text_embed_in_chart_size*0.75),
 		  ),
 		  xaxis = dict(
 		  side = 'bottom',
