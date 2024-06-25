@@ -2105,7 +2105,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	dfcopy = filt_round(dfcopy, st.session_state.round_number)
 	dfactvity = filt_round(dfactvity, st.session_state.round_number)
 
-	activity_factor_for_selected_round = dfactvity.astype(float).round(1).drop_duplicates()["Activity Factor"].values #Note this will be used in the title 
+	activity_factor_for_selected_round = dfactvity.astype(float).round(2).drop_duplicates()["Activity Factor"].values #Note this will be used in the title 
 
 	st.write(activity_factor_for_selected_round)
 
