@@ -2093,18 +2093,29 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	df = df[['Clock Round', 'Bidder', 'Service Area', 'Band', selected_dimension]]
 
 	# Clock Round selection
+	# clkrounds = sorted(df['Clock Round'].unique())
+	# with st.sidebar.form("round_form"):
+	# 	round_number = st.number_input("Select Auction Round Number"+";Total Rounds= "+str(max(clkrounds)), min_value=min(clkrounds), max_value=max(clkrounds), value=st.session_state.round_number)
+	# 	submitted = st.form_submit_button('Apply Round Number')
+	# 	if submitted:
+	# 		st.session_state.round_number = round_number
+	# 		# st.experimental_rerun() 
+
+	# df = filt_round(df, st.session_state.round_number)
+	# dftext = filt_round(dftext, st.session_state.round_number)
+	# dfcopy = filt_round(dfcopy, st.session_state.round_number)
+	# dfactvity = filt_round(dfactvity, st.session_state.round_number)
+
+
+	Clock Round selection
 	clkrounds = sorted(df['Clock Round'].unique())
 	with st.sidebar.form("round_form"):
-		round_number = st.number_input("Select Auction Round Number"+";Total Rounds= "+str(max(clkrounds)), min_value=min(clkrounds), max_value=max(clkrounds), value=st.session_state.round_number)
-		submitted = st.form_submit_button('Apply Round Number')
-		if submitted:
-			st.session_state.round_number = round_number
-			# st.experimental_rerun() 
+		round_number = st.number_input("Select Auction Round Number"+";Total Rounds= "+str(max(clkrounds)), min_value=min(clkrounds), max_value=max(clkrounds), value=1)
 
-	df = filt_round(df, st.session_state.round_number)
-	dftext = filt_round(dftext, st.session_state.round_number)
-	dfcopy = filt_round(dfcopy, st.session_state.round_number)
-	dfactvity = filt_round(dfactvity, st.session_state.round_number)
+	df = filt_round(df, round_number)
+	dftext = filt_round(dftext, round_number)
+	dfcopy = filt_round(dfcopy, round_number)
+	dfactvity = filt_round(dfactvity,round_number)
 
 	activity_factor_for_selected_round = dfactvity.drop_duplicates()["Activity Factor"].values[0] #Note this will be used in the title 
 
