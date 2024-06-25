@@ -2504,7 +2504,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	<span style='color: #FF5733;'>Auction Year: {selected_year}</span>, 
 	<span style='color: #33FF57;'>Dimension: {selected_dimension}</span>, 
 	<span style='color: #3357FF;'>Round: {round_number}</span>, 
-	<span style='color: #FF33F6;'>Activity Factor: {activity_factor_for_selected_round:.1f}</span>
+	<span style='color: #FF33F6;'>Activity Factor: {activity_factor_for_selected_round[0]:.1f}</span>
 	"""
 
 	st.markdown(f"<h1 style='font-size:40px; margin-top: -30px;'>{title_text}</h1>", unsafe_allow_html=True)
