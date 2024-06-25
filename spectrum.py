@@ -2035,10 +2035,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	df = df[df['Auction Year'] == selected_year]
 	dfactvity = dfactvity[dfactvity['Auction Year'] == selected_year]
 
-	st.write(dfactvity)
 
-
-	# df["Bid Decision"] = [1 if x =="Bid" else 0 for x in df["Bid Decision"]]
 
 	# Choose bands to view
 	available_bands = sorted(list(set(df["Band"])))
@@ -2060,6 +2057,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	# Further filter dataframe by selected bands if any
 	if selected_bands:
 		df = df[df["Band"].isin(selected_bands)]
+
 
 	# Choose service areas to view
 	available_areas = sorted(df['Service Area'].unique())
@@ -2105,6 +2103,9 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	df = filt_round(df, st.session_state.round_number)
 	dftext = filt_round(dftext, st.session_state.round_number)
 	dfcopy = filt_round(dfcopy, st.session_state.round_number)
+	dfactvity = filt_round(dfactvity, st.session_state.round_number)
+
+	st.write(dfactvity)
 
 	# Function to Pivot Dataframe based on selected dimention
 	def pivot_dataframe(df, selected_dimension):
