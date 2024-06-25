@@ -2105,7 +2105,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	dfcopy = filt_round(dfcopy, st.session_state.round_number)
 	dfactvity = filt_round(dfactvity, st.session_state.round_number)
 
-	st.write(dfactvity)
+	st.write(dfactvity.drop_duplicates())
 
 	# Function to Pivot Dataframe based on selected dimention
 	def pivot_dataframe(df, selected_dimension):
