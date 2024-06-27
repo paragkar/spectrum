@@ -2592,8 +2592,6 @@ if selected_dimension == "Spectrum Bands":
 	#processing "Spectrum_all" excel tab data of the file "spectrum map"
 	dff = df[spectrumall] #contains information of LSA wise mapping oldoperators with new operators
 
-	st.write(dff)
-	
 	dffcopy = dff.copy() #make a copy for "Operator holdings" subfeature under the feature "Freq Layout"
 	dff = cal_bw_mapped_to_operators_auctionmap(dff)
 	dff = coltostr(dff)
@@ -2629,6 +2627,9 @@ if selected_dimension == "Spectrum Bands":
 	auctionprice = pricemaster[(pricemaster["Band"] == Band) & (pricemaster["Year"] != 2018)]
 	auctionprice = auctionprice.pivot(index=["LSA"], columns='Year', values="Auction Price").fillna("NA")
 	auctionprice = auctionprice.loc[:, (auctionprice != 0).any(axis=0)]
+
+	st.write(auctionprice)
+	
 	auctionprice = auctionprice.map(lambda x: round(x,2))
 	auctionprice = coltostr(auctionprice) #convert columns data type to string
 	auctionprice = adddummycols(auctionprice,auctionfailyears_dict[Band])
