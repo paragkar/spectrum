@@ -2591,6 +2591,9 @@ if selected_dimension == "Spectrum Bands":
 	
 	#processing "Spectrum_all" excel tab data of the file "spectrum map"
 	dff = df[spectrumall] #contains information of LSA wise mapping oldoperators with new operators
+
+	st.write(dff)
+	
 	dffcopy = dff.copy() #make a copy for "Operator holdings" subfeature under the feature "Freq Layout"
 	dff = cal_bw_mapped_to_operators_auctionmap(dff)
 	dff = coltostr(dff)
