@@ -2921,7 +2921,7 @@ if selected_dimension == "Spectrum Bands":
 				  colorscale ='YlGnBu', #Debug 27 June 2024
 				  showscale = False,
 				  texttemplate=text, 
-				  reversescale=True,
+				  # reversescale=True,
 				)
 				  ]
 
