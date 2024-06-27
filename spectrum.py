@@ -2639,6 +2639,9 @@ if selected_dimension == "Spectrum Bands":
 	reserveprice = pricemaster[(pricemaster["Band"] == Band) & (pricemaster["Year"] != 2018)]
 	reserveprice = reserveprice.pivot(index=["LSA"], columns='Year', values="Reserve Price").fillna("NA")
 	reserveprice = reserveprice.loc[:, (reserveprice != 0).any(axis=0)]
+
+	reserveprice = reserveprice.replace("NA",0).astype(float)
+
 	reserveprice = reserveprice.map(lambda x: round(x,2))
 	reserveprice = coltostr(reserveprice) #convert columns data type to string
 	reserveprice = reserveprice.replace(0,"NA")
