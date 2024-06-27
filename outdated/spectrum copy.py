@@ -29,6 +29,7 @@ import streamlit_authenticator as stauth
 import yaml
 from yaml.loader import SafeLoader
 from deta import Deta
+import seaborn as sns
 
 pd.set_option('future.no_silent_downcasting', True)
 
@@ -47,8 +48,8 @@ st.set_page_config(layout="wide")
 
 # def fetch_all_users():
 	#"Returns a dict of all users"
-# 	res = db.fetch()
-# 	return res.items
+#   res = db.fetch()
+#   return res.items
 # users = fetch_all_users()
 # st.write(pd.DataFrame(users))
 # usernames = [user["key"] for user in users]
@@ -59,9 +60,9 @@ st.set_page_config(layout="wide")
 #     "telecommapp", "abcdef", 30)
 
 # authenticator = stauth.Authenticate(
-# 	users,
-# 	'name',
-# 	'abcde')
+#   users,
+#   'name',
+#   'abcde')
 
 # def convert_dict_to_yaml_text(data):
 #     yaml_text = yaml.dump(data, sort_keys=False)
@@ -77,21 +78,21 @@ st.set_page_config(layout="wide")
 #     config = yaml.load(file, Loader=SafeLoader)
 
 # authenticator = stauth.Authenticate(
-# 	config['credentials'], 
-# 	config['cookie']['name'],
-# 	config['cookie']['key'],
-# 	config['cookie']['expiry_days']
-# 	)
+#   config['credentials'], 
+#   config['cookie']['name'],
+#   config['cookie']['key'],
+#   config['cookie']['expiry_days']
+#   )
 
 # st.write(authenticator)
 
 # name, authentication_status, username = authenticator.login("Login", "main")
 
 # if authentication_status == False:
-# 	st.error("Username/password is incorrect")
+#   st.error("Username/password is incorrect")
 
 # if authentication_status == None:
-# 	st.warning("Please enter your username and password")
+#   st.warning("Please enter your username and password")
 
 
 #--------User Authentication Ends-------
@@ -145,6 +146,35 @@ def loadauctionbiddata():
 	password = st.secrets["db_password"]
 	excel_content = io.BytesIO()
 	with open("auctionbiddata.xlsx", 'rb') as f:
+		excel = msoffcrypto.OfficeFile(f)
+		excel.load_key(password)
+		excel.decrypt(excel_content)
+
+	xl = pd.ExcelFile(excel_content)
+	sheetauctiondata = xl.sheet_names
+	df = pd.read_excel(excel_content, sheet_name=sheetauctiondata)
+	return df
+
+@st.cache_resource
+def loadauctionbiddatayearbandcomb():
+	password = st.secrets["db_password"]
+	excel_content = io.BytesIO()
+	with open("auctionbiddatayearbandcomb.xlsx", 'rb') as f:
+		excel = msoffcrypto.OfficeFile(f)
+		excel.load_key(password)
+		excel.decrypt(excel_content)
+
+	xl = pd.ExcelFile(excel_content)
+	sheetauctiondata = xl.sheet_names
+	df = pd.read_excel(excel_content, sheet_name=sheetauctiondata)
+	return df
+
+
+@st.cache_resource
+def auctionbiddatayearactivitycomb():
+	password = st.secrets["db_password"]
+	excel_content = io.BytesIO()
+	with open("auctionbiddatayearactivitycomb.xlsx", 'rb') as f:
 		excel = msoffcrypto.OfficeFile(f)
 		excel.load_key(password)
 		excel.decrypt(excel_content)
@@ -266,7 +296,7 @@ list_of_circles_codes = ['AP','AS', 'BH', 'DL', 'GU', 'HA', 'HP', 'JK', 'KA', 'K
 #Debug 10th June 2024
 year_band =["2010-Band2100","2010-Band2300", "2012-Band1800","2014-Band1800","2014-Band900",
 									"2015-Band800", "2015-Band900","2015-Band1800", "2015-Band2100", "2016-Band800","2016-Band1800",
-									"2016-Band2100", "2016-Band2300", "2016-Band2500","2021-Band800","2021-Band900","2021-Band1800",
+									"2016-Band2100", "2016-Band2300", "2016-Band2500","2021-Band700","2021-Band800","2021-Band900","2021-Band1800",
 									"2021-Band2100","2021-Band2300","2022-Band700","2022-Band800","2022-Band900","2022-Band1800",
 									"2022-Band2100","2022-Band2500","2022-Band3500","2022-Band26000"]
 
@@ -459,6 +489,28 @@ Auction_Year_Band_Features = {
 		"zmin_blk_sec": 0,
 		"zmax_blk_sec": 4
 	},
+	"2021-Band700": {
+		"totalrounds": 6,
+		"mainsheet": "2021_4G_700",
+		"mainsheetoriginal": "2021_4G_700_Original",
+		"mainoriflag": True,
+		"activitysheet": "2021_4G_Activity",
+		"demandsheet": "2021_4G_700_AD",
+		"titlesubpart": "700 MHz Auctions (CY-2021)",
+		"subtitlesubpartbidactivity": "; Combined for All Bands",
+		"year": 2021,
+		"band": 700,
+		"xdtick": 1,
+		"zmin": 1,
+		"zmax": 5,
+		"zmin_af": 0.5,
+		"zmax_af": 1,
+		"texttempbiddemandactivity": "%{z}",
+		"blocksize": 5,
+		"zmin_blk_sec": 0,
+		"zmax_blk_sec": 4
+		},
+
 	"2021-Band800": {
 		"totalrounds": 6,
 		"mainsheet": "2021_4G_800",
@@ -797,10 +849,10 @@ Auction_Year_Band_Features = {
 	},
 	"2010-Band2100": {
 		"totalrounds": 183,
-		"mainsheet": "2010_3G",
+		"mainsheet": "2010_3G_2100",
 		"mainoriflag": False,
-		"activitysheet": "2010_3G_Activity",
-		"demandsheet": "2010_3G_AD",
+		"activitysheet": "2010_3G_2100_Activity",
+		"demandsheet": "2010_3G_2100_AD",
 		"titlesubpart": "2100 MHz Auctions (CY-2010)",
 		"subtitlesubpartbidactivity": "",
 		"year": 2010,
@@ -817,10 +869,10 @@ Auction_Year_Band_Features = {
 	},
 	"2010-Band2300": {
 		"totalrounds": 117,
-		"mainsheet": "2010_BWA",
+		"mainsheet": "2010_BWA_2300",
 		"mainoriflag": False,
-		"activitysheet": "2010_BWA_Activity",
-		"demandsheet": "2010_BWA_AD",
+		"activitysheet": "2010_BWA_2300_Activity",
+		"demandsheet": "2010_BWA_2300_AD",
 		"titlesubpart": "2300 MHz Auctions (CY-2010)",
 		"subtitlesubpartbidactivity": "",
 		"year": 2010,
@@ -875,7 +927,7 @@ def get_value(feature_dict, feature_key, var_name):
 
 
 #function to count number of items in a list and outputs the result as dictionary
-#Used to extract data table for Spectrum Layout Dimension when it is filtered by Operators      	   
+#Used to extract data table for Spectrum Layout Dimension when it is filtered by Operators             
 def count_items_in_dataframe(df):
 	counts = {}
 
@@ -1313,7 +1365,7 @@ def htext_colmatrix_auction_year_band_metric(df1):
 
 #processing for hovertext and colormatrix for Auction Year, Operator Metric, SubFeatures - Total Outflow, Total Purchase
 @st.cache_resource
-def htext_colmatrix_auction_year_operator_metric(df1, selectedbands, SelectedSubFeature, df_subfeature):	
+def htext_colmatrix_auction_year_operator_metric(df1, selectedbands, SelectedSubFeature, df_subfeature):    
 	temp1 = pd.DataFrame()
 	if selectedbands != []:
 		for band in selectedbands:
@@ -1413,7 +1465,7 @@ def htext_businessdata_FinancialSPWise(df_finmetric,df_finmetric_prec,df_finmetr
 
 	return hovertext
 
-#---------------Hovertest for BlocksAllocated Ends---------------------	
+#---------------Hovertest for BlocksAllocated Ends--------------------- 
 
 #processing hovertext for auction data 
 
@@ -1922,8 +1974,8 @@ chart_data_flag = False #set this to true only if this chart exists.
 with st.sidebar:
 	selected_dimension = option_menu(
 		menu_title = "Select a Menu",
-		options = ["Spectrum Bands", "Auction YearWise", "Auction BandWise"], #Debug 14th June 2024
-		icons = ["1-circle-fill", "2-circle-fill", "3-circle-fill", "4-circle-fill"],
+		options = ["Spectrum Bands", "Auction YearWise", "Auction BandWise", "AuctionYear AllBands", "AuctionYear Activity"], #Debug 14th June 2024
+		icons = ["1-circle-fill", "2-circle-fill", "3-circle-fill", "4-circle-fill", "5-circle-fill"],
 		menu_icon = "arrow-down-circle-fill",
 		default_index =0,
 		)
@@ -1941,143 +1993,487 @@ for index in dfrsrate.index:
 		auction_rsrate_dict[index.year] = dfrsrate.loc[index,:].values[0]
 
 
-# if selected_dimension == "Auction Integrated": #This is the new dimension that is being tested
+if selected_dimension == "AuctionYear Activity": #Incompete Still working this section
 
-# 	#This function is used to filter the dataframe based on round numbers
-# 	@st.cache
-# 	def filt_round(df, round_number):
-# 	    # Filtering and processing logic
-# 	    return df[df['Clock Round'] == round_number]
+	currency_flag = "NA" #This is dummy variiable for this option done to preserve the current structure of the code 
 
-# 	currency_flag = "NA" #This is dummy variiable for this option done to preserve the current structure of the code 
+	df = auctionbiddatayearactivitycomb()["Sheet1"] #Loading the auction bid year activity data 
 
-# 	#columns names are used to rename the loaded dataframe
-# 	column_names = ["Clock Round", "Bidder", "Service Area", "Prov WinBid Start Rd","Rank Start Rd","Can BidPrice Increase Y/N","Bid decision","Prov WinBid End Rd",	
-# 	"Rank End Rd","Blocks Selected", "Prov Alloc BLKs Start Rd","Prov Alloc BLKs End Rd", "Prov WinPrice End Rd", "Auction Year", "Band"]
-
-# 	#Initilise the dataframe to aggerate the excels tabs for auction years 
-# 	dfcomb = pd.DataFrame()
-
-# 	#This is used to aggregrated all tabs in above initialized dataframe
-# 	for sepectrumband in year_band:
-# 		sheet = Auction_Year_Band_Features[sepectrumband]["mainsheet"]
-# 		try:
-# 			band = sheet.split("_")[2]
-# 			auctionyear = sheet.split("_")[0]
-# 			df = loadauctionbiddata()[sheet]
-# 			df["Auction Year"] = auctionyear
-# 			df["Band"] = band
-# 			df.columns = column_names
-# 			dfcomb = pd.concat([dfcomb,df], axis =0)
-# 		except:
-# 			pass
+	st.write(df)
 
 
-# 	AuctionYears = sorted(list(set(dfcomb["Auction Year"])))
-# 	AuctionYear = st.sidebar.selectbox('Select an Auction Year', AuctionYears, 0) #default index 2012
-# 	#Filtering the dataframe with selected auction year
-# 	dfcomb_aucyr = dfcomb[dfcomb["Auction Year"] == AuctionYear]
+if selected_dimension == "AuctionYear AllBands": #This is the new dimension Added on June 2024
+
+	currency_flag = "NA" #This is dummy variiable for this option done to preserve the current structure of the code 
+
+	df = loadauctionbiddatayearbandcomb()["Sheet1"] #Loading the auction bid year and band data 
+
+	#define initial values of session state as needed
+	session_defaults = {
+    # 'selected_year': df['Auction Year'].min(),
+    # 'selected_bands': [],
+    # 'selected_areas': [],
+    'round_number': 1,
+    # 'selected_dimension': "Bid Value"
+	}
+	for key, default in session_defaults.items():
+	    if key not in st.session_state:
+	        st.session_state[key] = default
 
 
-# 	#Choosing the selected dimension
-# 	dim_to_select = ["Prov WinBid Start Rd","Rank Start Rd","Prov WinBid End Rd",	
-# 	"Rank End Rd","Blocks Selected", "Prov Alloc BLKs Start Rd","Prov Alloc BLKs End Rd"]
+	AuctionYears = sorted(list(set(df["Auction Year"])))
+	AuctionYear = st.sidebar.selectbox('Select an Auction Year', AuctionYears, 0) #default index 2012
+	#Filtering the dataframe with selected auction year
+	df = df[df["Auction Year"] == AuctionYear]
 
-# 	selected_dimension = st.sidebar.selectbox('Select a Dimension', dim_to_select, 0) #default index "Prov WinBid Start Rd"
-# 	dfcomb_aucyr_dim = dfcomb_aucyr[[ "Clock Round", "Bidder", "Service Area","Band", selected_dimension]]
 
-# 	#Choose clock round numbers
-# 	clkrounds = sorted(list(set(dfcomb_aucyr_dim["Clock Round"])))
-# 	round_number = st.sidebar.number_input("Select Auction Round Number"+";Total Rounds= "+str(max(clkrounds)), min_value=min(clkrounds), max_value=max(clkrounds), value=1, step=1)
+	df["Bid Decision"] = [1 if x =="Bid" else 0 for x in df["Bid Decision"]]
 
-# 	dfcomb_aucyr_dim_rd = filt_round(dfcomb_aucyr_dim, round_number)
-# 	dfcomb_aucyr_dim_rd = dfcomb_aucyr_dim_rd.replace("-", 0).replace("",0).replace(np.nan, 0)
+	# Choose bands to view
+	available_bands = sorted(list(set(df["Band"])))
+	# Adjust selection interface based on the auction year
+	if AuctionYear == 2010:
+		# For the year 2010, provide a selectbox with default to 2100
+		selected_bands = st.sidebar.selectbox('Select Band to View', available_bands, index=available_bands.index("2100") if "2100" in available_bands else 0)
+		# Wrap the selection into a list since the rest of the code expects a list
+		selected_bands = [selected_bands]
+	else:
+		# For other years, use a multiselect with all bands selected by default
+		selected_bands = st.sidebar.multiselect('Select Bands to View', available_bands, default=available_bands)
+
+	# Further filter dataframe by selected bands if any
+	if selected_bands:
+		df = df[df["Band"].isin(selected_bands)]
+
+
+	# Choose service areas to view
+	available_areas = sorted(list(set(df["Service Area"])))
+	selected_areas = st.sidebar.multiselect('Select Service Areas to View', available_areas, default=available_areas)
+	# Further filter dataframe by selected service areas
+	if selected_areas:
+		df = df[df["Service Area"].isin(selected_areas)]
+
+
+	dfcopy = df.copy() #Create a copy of dataframe upto selected dimension
+	dftext = df.copy() #Created a copy of datframe before "select dimension" for working textvalues
+
+	dim_to_select = ["Bid Decision", "Bid Value ProvWinners", "Bid Value ActiveBidders","Bid Value ActivePlusPWB","RatioPWPtoRP EndRd", "ProvWinBid StartRd","Rank StartRd","ProvWinBid EndRd", "Rank EndRd","Blocks Selected", "MHz Selected",
+					"ProvAllocBLKs StartRd","ProvAllocMHz StartRd", "ProvAllocBLKs EndRd", "ProvAllocMHz EndRd", "Blocks ForSale","MHz ForSale"]
+	selected_dimension = st.sidebar.selectbox('Select a Dimension', dim_to_select, 0) #default index "Prov WinBid Start Rd"
+	df = df[[ "Clock Round", "Bidder", "Service Area", "Band", selected_dimension]]
+
+	# #Choose clock round numbers
+	# clkrounds = sorted(list(set(df["Clock Round"])))
+	# round_number = st.sidebar.number_input("Select Auction Round Number"+";Total Rounds= "+str(max(clkrounds)), min_value=min(clkrounds), max_value=max(clkrounds), value=1, step=1)
+
+	# Use a form in the sidebar to capture input and provide a submit button
+	with st.sidebar.form(key='round_selection_form'):
+		# Fetch the range of available clock rounds
+		clkrounds = sorted(list(set(df["Clock Round"])))
+		# Create a number input for selecting the round number
+		round_number = st.number_input("Select Auction Round Number"+";Total Rounds= "+str(max(clkrounds)),
+									   min_value=min(clkrounds),
+									   max_value=max(clkrounds),
+									   value=st.session_state.round_number,
+									   step=1)
+		# Submit button in the sidebar form
+		submit_button = st.form_submit_button('Apply Round Number')
+
+	#This function is used to filter the dataframe based on round numbers for selected dimensions (AuctionYear Activity & AuctionYear AllBands)
+	@st.cache_data
+	def filt_round(df, round_number):
+		# Filtering and processing logic
+		return df[df['Clock Round'] == round_number].replace(["-", ""], 0).fillna(0)
+
+	# When the submit button is pressed, filter data and perform operations
+	if submit_button:
+		# Filter the main dataframe by the selected round number
+		df = filt_round(df, round_number)
+		# Repeat filtering for any additional dataframes
+		dftext = filt_round(dftext, round_number)
+		#Filtering the Copy dataframe with round numbers
+		dfcopy = filt_round(dfcopy, round_number)
+
+
+	# Function to Pivot Dataframe based on selected dimention
+	def pivot_dataframe(df, selected_dimension):
+		df = df.pivot_table(
+		index='Service Area', 
+		columns=['Bidder', 'Band'], 
+		values= selected_dimension, 
+		# aggfunc='first'  # you can change this to 'sum' if that's more appropriate
+		aggfunc='sum'  # you can change this to 'sum' if that's more appropriate
+		)
+		return df
+
+	df = pivot_dataframe(df, selected_dimension)
+
+	dim_to_select_for_total_dict = {
+		"Bid Decision" : "Bid Decision",
+		"Bid Value ProvWinners" : "Bid Value ProvWinners", 
+		"Bid Value ActiveBidders" : "Bid Value ActiveBidders",
+		"Bid Value ActivePlusPWB" : "Bid Value ActivePlusPWB",
+		"RatioPWPtoRP EndRd" : "Bid Value ProvWinners",
+		"ProvWinBid StartRd" : "ProvWinBid StartRd",
+		"Rank StartRd" : "ProvWinBid StartRd",
+		"ProvWinBid EndRd" : "ProvWinBid EndRd",
+		"Rank EndRd" : "ProvWinBid EndRd",
+		"Blocks Selected" : "Blocks Selected",
+		"MHz Selected" : "MHz Selected",
+		"ProvAllocBLKs StartRd" : "ProvAllocBLKs StartRd",
+		"ProvAllocMHz StartRd" : "ProvAllocMHz StartRd",
+		"ProvAllocBLKs EndRd" : "ProvAllocBLKs EndRd",
+		"ProvAllocMHz EndRd" : "ProvAllocMHz EndRd",
+		"Blocks ForSale" : "Blocks ForSale",
+		"MHz ForSale" : "MHz ForSale",
+		 }
+
+	selected_dimension_for_total = dim_to_select_for_total_dict[selected_dimension]
+	dfcopy = dfcopy[[ "Clock Round", "Bidder", "Service Area","Band", selected_dimension_for_total]]
+	dfcopy = pivot_dataframe(dfcopy, selected_dimension_for_total)
+
+	# Generate a fixed color palette first
+	all_bidders = ['Adani', 'Aircel', 'Augere', 'Bharti', 'Etisalat', 'Idea', 'Infotel', 'Qualcomm', 'RCOM', 
+	'RJIO', 'Reliance', 'STel', 'Spice', 'Tata', 'Telewings', 'Tikona', 'Videocon', 'VodaIdea', 'Vodafone']
+	
+	# Manually assign colors to each bidder
+	bidder_colors = {
+	"Adani": "#FF6347",      # Tomato
+	"Aircel": "#FF4500",     # OrangeRed
+	"Augere": "#FFD700",     # Gold
+	"Bharti": "#32CD32",     # LimeGreen
+	"Etisalat": "#4682B4",   # SteelBlue
+	"Idea": "#FFA500",       # Orange
+	"Infotel": "#DA70D6",    # Orchid
+	"Qualcomm": "#6495ED",   # CornflowerBlue
+	"RCOM": "#FFFF00",       # Yellow
+	"RJIO": "#FF0000",       # Red
+	"Reliance": "#6B8E23",   # OliveDrab
+	"STel": "#20B2AA",       # LightSeaGreen
+	"Spice": "#EE82EE",      # Violet
+	"Tata": "#0000FF",       # Blue
+	"Telewings": "#FFDAB9",  # PeachPuff
+	"Tikona": "#800080",     # Purple
+	"Videocon": "#40E0D0",   # Turquoise
+	"VodaIdea": "#BA55D3",   # MediumOrchid
+	"Vodafone": "#FFC0CB"    # Pink
+	}
+
+	def colorscale_and_color_index_map(bidder_colors):
+		# Create a colorscale for Plotly, mapping indices to colors
+		colorscale = [(i / (len(bidder_colors) - 1), color) for i, color in enumerate(bidder_colors.values())]
+		colorscale.append((1, list(bidder_colors.values())[-1]))  # Ensure the last color is included
+
+		# Create color_df using indices for the colorscale
+		color_index_map = {bidder: i / (len(bidder_colors) - 1) for i, bidder in enumerate(bidder_colors.keys())}
+
+		return colorscale, color_index_map
+
+	colorscale, color_index_map = colorscale_and_color_index_map(bidder_colors)
+
+	# Simplify column names for display
+	column_labels = [f"{col[1]} ({col[0]})" for col in df.columns]
+	df.columns = column_labels
+	dfcopy.columns = column_labels
+
+	def create_color_df(df, color_index_map):
+		# Assuming 'df' is your DataFrame with columns formatted as "Band (Bidder)"
+		color_df = pd.DataFrame(index=df.index, columns=df.columns)
+		for col in df.columns:
+			bidder = col.split('(')[1].split(')')[0]
+			color_df[col] = df[col].apply(lambda x: color_index_map[bidder] if pd.notna(x) and x != 0 else None)
+
+		return color_df
+
+	#Creating Color DataFrame for each of the instants
+	color_df = create_color_df(df, color_index_map)
+
+	# Transpose and prepare df for visualization
+	df = df.T.sort_index(ascending=False).replace(0, "").replace("", np.nan)
+
+	# Transpose and prepare dfcopy to align with df structure
+	dfcopy = dfcopy.T.sort_index(ascending=False).replace(0, "").replace("", np.nan)
+
+	# Calculate row totals for each bidder across selected bands
+	row_totals = dfcopy.sum(axis=1).reset_index(name='Total')
+	row_totals.columns = ["BandBidder", "Total"]
+	row_totals["Total"] = row_totals["Total"].astype(float).round(0)
+	# Calculate the maximum total value to set a consistent x-axis range across all bar charts
+	max_total_value = row_totals['Total'].max()  # Assuming 'Total' holds the values you need
+
+	# Map the bidder names back to colors using the color_index_map
+	row_totals['color'] = row_totals['BandBidder'].apply(lambda x: bidder_colors[x.split('(')[1].split(')')[0]])
+
+	# Transpose and prepare color_df for visualization
+	def transpose_color_df(color_df):
+		color_df = color_df.T.sort_index(ascending=False)
+		return color_df
+
+	color_df = transpose_color_df(color_df)
+
+	# Define the order of the bands
+	band_order = ["700", "800", "900", "1800", "2100", "2300", "2500", "3500", "26000"]
+
+	def sort_in_band_order(df, band_order):
+		# Extract band information more reliably
+		df["Band"] = list(df.index.str.extract(r'(\d+)')[0])
+		# Dictionary to hold dataframes for each band
+		df_dict = {band: group.drop('Band', axis=1) for band, group in df.groupby('Band')}
+		# Organizing df_dict according to band_order
+		df_dict = {band: df_dict[band] for band in band_order if band in df_dict}
+
+		return df_dict
+
+	df_dict = sort_in_band_order(df, band_order)
+
+	vertical_spacing_mul_dict = {2022:0.035, 2021:0.04, 2016:0.04, 2015 : 0.04, 2014 : 0.06, 2012 : 0.04, 2010 : 0.05}
+
+	# Adjusting subplot setup to include two columns, one for the heatmap and one for the bar chart
+	fig = make_subplots(rows=len(df_dict), cols=2, specs=[[{"type": "heatmap"}, {"type": "bar"}] for _ in range(len(df_dict))],
+						vertical_spacing=vertical_spacing_mul_dict[AuctionYear],
+						horizontal_spacing=0.01,  # Set minimal horizontal spacing between columns
+						column_widths=[0.9, 0.10])  # Adjust the width of columns if necessary
+
+	# Determine the range for z values - it should cover all indices used in your colorscale
+	zmin, zmax = 0, 1  # Since your colorscale is likely mapped from 0 to 1
+
+	#Prepare dataframe to be used to process textvalues by making comparision
+	def selected_dimension_df_text(dftext,selected_dimension):
+		#Processing the dataframe which has been prapared for processing text values
+		dftext = pivot_dataframe(dftext, selected_dimension)
+		dftext.columns = column_labels
+		dftext = dftext.T.sort_index(ascending=False).replace(0, "").replace("", np.nan)
+		return dftext
+	
+
+	def map_win_loss_provwinners(df_active, df_winners):
+		result_df = pd.DataFrame(index=df_active.index, columns=df_active.columns)
+		for col in df_active.columns:
+			for idx in df_active.index:
+				active_value = df_active.at[idx, col]
+				winner_value = df_winners.at[idx, col]
+				if pd.notna(active_value) and active_value != 0:
+					result_df.at[idx, col] = '(W)' if pd.notna(winner_value) and winner_value != 0 else '(L)'
+				else:
+					result_df.at[idx, col] = ''
+		return result_df
+
+
+	def map_alloc_slots_with_sale(df_alloc, df_sale):
+		result_df = pd.DataFrame(index=df_alloc.index, columns=df_sale.columns)
+		for col in df_alloc.columns:
+			for idx in df_alloc.index:
+				alloc_value = df_alloc.at[idx, col]
+				sale_value = df_sale.at[idx, col]
+				if pd.notna(alloc_value) and alloc_value != 0:
+					result_df.at[idx, col] = '('+df_sale.at[idx, col].astype(str)+')' if pd.notna(sale_value) and sale_value != 0 else ''
+				else:
+					result_df.at[idx, col] = ''
+		return result_df
 
 	
-# 	# Create a combined column for bidder information
-# 	dfcomb_aucyr_dim_rd = dfcomb_aucyr_dim_rd.pivot_table(
-#     index='Service Area', 
-#     columns=['Bidder', 'Band'], 
-#     values= selected_dimension, 
-#     aggfunc='first'  # you can change this to 'sum' if that's more appropriate
-# 	)
+	#1. Extract the dataframe where blocks of sales has to be appended
+	df_blocks_for_sale = selected_dimension_df_text(dftext, "Blocks ForSale").round(0).fillna(0).astype('int')
+	df_prov_alloc_blks_endround = selected_dimension_df_text(dftext, "ProvAllocBLKs EndRd").round(0).fillna(0).astype('int')
+	df_prov_alloc_blks_startround = selected_dimension_df_text(dftext, "ProvAllocBLKs StartRd").round(0).fillna(0).astype('int')
 
-# 	# st.write(dfcomb_aucyr_dim_rd)
+	#2. Mapping allocated slots with those up with blocks for sale
+	result_df_prov_alloc_blks_endround = map_alloc_slots_with_sale(df_prov_alloc_blks_endround, df_blocks_for_sale)
+	result_df_prov_alloc_blks_startround = map_alloc_slots_with_sale(df_prov_alloc_blks_startround, df_blocks_for_sale)
 
-# 	dfcomb_aucyr_dim_rd = dfcomb_aucyr_dim_rd.sort_index(ascending = False)
-# 	# # dfcomb_aucyr_dim_rd.columns = sorted(list(dfcomb_aucyr_dim_rd.columns))
+	#3. Sorting with band order and converting allocated blocks dataframe into dict
+	result_df_prov_alloc_blks_endround_dict=sort_in_band_order(result_df_prov_alloc_blks_endround, band_order)
+	df_prov_alloc_blks_endround_dict=sort_in_band_order(df_prov_alloc_blks_endround, band_order)
+	result_df_prov_alloc_blks_startround_dict=sort_in_band_order(result_df_prov_alloc_blks_startround, band_order)
+	df_prov_alloc_blks_startround_dict=sort_in_band_order(df_prov_alloc_blks_startround, band_order)
 
-# 	# # Simplify column names for display
-# 	# column_labels = [f"{col[1]} ({col[0]})" for col in dfcomb_aucyr_dim_rd.columns]
 
-# 	# dfcomb_aucyr_dim_rd.columns = column_labels
+	#1. Extract the dataframe where MHz of sales has to be appended
+	df_mhz_for_sale = selected_dimension_df_text(dftext, "MHz ForSale").round(1).fillna(0)
+	df_prov_alloc_mhz_endround = selected_dimension_df_text(dftext, "ProvAllocMHz EndRd").round(1).fillna(0)
+	df_prov_alloc_mhz_startround = selected_dimension_df_text(dftext, "ProvAllocMHz StartRd").round(1).fillna(0)
 
-# 	# dfcomb_aucyr_dim_rd.columns = sorted(list(dfcomb_aucyr_dim_rd.columns))
+	#2. Mapping allocated mhz with those up with mhz for sale
+	result_df_prov_alloc_mhz_endround = map_alloc_slots_with_sale(df_prov_alloc_mhz_endround, df_mhz_for_sale)
+	result_df_prov_alloc_mhz_startround = map_alloc_slots_with_sale(df_prov_alloc_mhz_startround,df_mhz_for_sale)
 
-# 	# dfcomb_aucyr_dim_rd = dfcomb_aucyr_dim_rd.fillna("")
+	#3. Sorting with band order and converting allocated mhz dataframe into dict
+	result_df_prov_alloc_mhz_endround_dict=sort_in_band_order(result_df_prov_alloc_mhz_endround, band_order)
+	df_prov_alloc_mhz_endround_dict=sort_in_band_order(df_prov_alloc_mhz_endround, band_order)
+	result_df_prov_alloc_mhz_startround_dict=sort_in_band_order(result_df_prov_alloc_mhz_startround, band_order)
+	df_prov_alloc_mhz_startround_dict=sort_in_band_order(df_prov_alloc_mhz_startround, band_order)
 
-# 	# # Prepare text to embed in the heatmap itself
-# 	# text_values = [[f"{float(value):.1f}" if pd.notna(value) and isinstance(value, (int, float)) else "0" for value in row] for row in dfcomb_aucyr_dim_rd.values]
+	#1. Extract the dataframe where the "Win" and "Loss" has to be appended
+	df_bid_value_provwinners = selected_dimension_df_text(dftext, "Bid Value ProvWinners").round(0).fillna(0).astype('int') #This is the ref dataframe 
+	df_bid_value_activebidders = selected_dimension_df_text(dftext, "Bid Value ActiveBidders").round(0).fillna(0).astype('int')
+	df_bid_value_activepluspwbbidders = selected_dimension_df_text(dftext, "Bid Value ActivePlusPWB").round(0).fillna(0).astype('int')
 
-# 	# text_values = [["" if x=="0.0" else x for x in line] for line in text_values]
-# 	# text_values = [["" if x=="0" else x for x in line] for line in text_values]
+	#2. Mapping results for selected dataframe to map
+	result_df_active_bidders = map_win_loss_provwinners(df_bid_value_activebidders, df_bid_value_provwinners)
+	result_df_active_pluspwb_bidders = map_win_loss_provwinners(df_bid_value_activepluspwbbidders, df_bid_value_provwinners)
 
-# 	# Define a colorscale for the heatmap
-# 	colorscale = "Hot"  # or any other color scale available in Plotly
+	#3. Sorting and converting all mapped and result dataframe into dict
+	result_df_active_bidders_dict = sort_in_band_order(result_df_active_bidders, band_order)
+	df_bid_value_activebidders_dict = sort_in_band_order(df_bid_value_activebidders, band_order)
+	result_df_active_pluspwb_bidders_dict = sort_in_band_order(result_df_active_pluspwb_bidders, band_order)
+	df_bid_value_activepluspwbbidders_dict = sort_in_band_order(df_bid_value_activepluspwbbidders, band_order)
 
-# 	dfcomb_aucyr_dim_rd = dfcomb_aucyr_dim_rd.replace("", 0)
-# 	dfcomb_aucyr_dim_rd = dfcomb_aucyr_dim_rd.replace(np.nan, 0)
-# 	dfcomb_aucyr_dim_rd = dfcomb_aucyr_dim_rd.replace(0, "")
 
-# 	# Simplify column names for display
-# 	column_labels = [f"{col[1]} ({col[0]})" for col in dfcomb_aucyr_dim_rd.columns]
+	def prepare_text_values(df_dict, result_df_dict, band):
+		df = df_dict[band].map(lambda x : round(x,1)).astype(str).replace('nan', '')
+		result_df = result_df_dict[band].astype(str)
+		combined_df = df + '\n' + result_df
+		return combined_df
 
-# 	# Create the heatmap object
-# 	heatmap = go.Heatmap(
-#     z=dfcomb_aucyr_dim_rd.fillna("").values,  # Replace NaN with 0 for visualization purposes
-#     # z = text_values,
-#     y=dfcomb_aucyr_dim_rd.index,
-#     x=column_labels,  # Use simplified column labels
-#     xgap=1,  # Modify as needed
-#     ygap=1,
-#     # text=text_values,  # Embed values directly in the heatmap cells
-#     # hoverinfo='text',  # Disable hover info if values are embedded in cells
-#     texttemplate="%{z}",
-#     textfont={"size":text_embed_in_chart_size}, 
-#     colorscale=colorscale,
-#     showscale=False,
-#     reversescale=True
-# 	)
+	#4. Finally add the selected_dimnsion in this fuctions as a final step
+	lambda_function_dict = {
+	"Bid Value ActiveBidders": lambda band: prepare_text_values(df_bid_value_activebidders_dict, result_df_active_bidders_dict, band),
+	"Bid Value ActivePlusPWB": lambda band: prepare_text_values(df_bid_value_activepluspwbbidders_dict, result_df_active_pluspwb_bidders_dict, band),
+	"ProvAllocBLKs EndRd": lambda band: prepare_text_values(df_prov_alloc_blks_endround_dict, result_df_prov_alloc_blks_endround_dict, band),
+	"ProvAllocBLKs StartRd": lambda band: prepare_text_values(df_prov_alloc_blks_startround_dict, result_df_prov_alloc_blks_startround_dict, band),
+	"ProvAllocMHz EndRd": lambda band: prepare_text_values(df_prov_alloc_mhz_endround_dict, result_df_prov_alloc_mhz_endround_dict, band),
+	"ProvAllocMHz StartRd": lambda band: prepare_text_values(df_prov_alloc_mhz_startround_dict, result_df_prov_alloc_mhz_startround_dict, band),
+	}
 
-# 	# Create the figure using the heatmap data
-# 	fig = go.Figure(data=[heatmap])
+	def text_values_heatmap(selected_dimension, df_segment, band):
+		if selected_dimension in  lambda_function_dict:
+			text_values = lambda_function_dict[selected_dimension](band)
+			texttemplate ="%{text}"
+		else:
+			text_values = df_segment.astype(float).round(1).astype(str).replace('nan',"")
+			texttemplate ="%{text:.1f}"
+		return text_values, texttemplate
 
-	
-# 	# Update layout with defined dimensions and titles
-# 	fig.update_layout(
-# 	    title='Heatmap of No. of Blocks Selected by Service Area and Band',
-# 	    xaxis=dict(
-# 	        # title='Bidders (Band)',
-# 	        side='top'  # Set x-axis labels to top
-# 	    ),
-# 	    # yaxis_title='Service Area',
-# 	    width=heatmapwidth,  # Specify width
-# 	    height=heatmapheight*1.2,  # Specify height
-# 	    autosize=True,
-# 	    plot_bgcolor='#E2B47C',  # Background color for the plot area light pink
-# 		paper_bgcolor='white',  # Background color for the entire figure
-# 		margin= dict(t=t,b=b,l=l,r=r,pad=pad),
-# )
 
-# 	#Drawning a black border around the heatmap chart 
-# 	fig.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
-# 	fig.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
+	# Iterate through each band and its corresponding dataframe
+	for i, (band, df_segment) in enumerate(df_dict.items(), start=1):
 
-# 	# Create a placeholder for the heatmap
-# 	placeholder = st.empty()
+		if selected_dimension not in ["RatioPWPtoRP EndRd"]: #IF statatement for using a different colorscale for ratio
 
-# 	st.plotly_chart(fig, use_container_width=True, sharing='stream')
+			text_values, texttemplate = text_values_heatmap(selected_dimension,df_segment,band)
+			# text_values = text_values.replace("0","", regex = True)
 
+			text_values = text_values.map(lambda x: x.strip() if isinstance(x, str) else x).replace("0","", regex = False).replace("0.0", "",regex = False)
+
+			aligned_color_df = color_df.loc[df_segment.index, df_segment.columns].replace(np.nan, "")
+			# Create a heatmap for each band
+			fig.add_trace(
+				go.Heatmap(
+					z=aligned_color_df.values,
+					x=df_segment.columns,
+					y=df_segment.index,
+					colorscale=colorscale,
+					text=text_values.values,  
+					texttemplate=texttemplate,
+					textfont={"size": text_embed_in_chart_size*0.8}, 
+					showscale=False,
+					# reversescale=True,
+					zmin=zmin,  # Set minimum z value
+					zmax=zmax,  # Set maximum z value
+				),
+				row=i, col=1
+			)
+
+		if selected_dimension in ["RatioPWPtoRP EndRd"]: #IF statatement for using a different colorscale for ratio
+			# Create a heatmap for each band
+			fig.add_trace(
+				go.Heatmap(
+					z=df_segment.values,
+					x=df_segment.columns,
+					y=df_segment.index,
+					colorscale="YlGnBu",
+					# text=text_values.values,  # Assuming 'df' contains the values you want to display
+					texttemplate="%{z:.1f}",
+					textfont={"size": text_embed_in_chart_size*0.8}, 
+					showscale=False,
+					# reversescale=True,
+					# zmin=zmin,  # Set minimum z value
+					# zmax=zmax,  # Set maximum z value
+				),
+				row=i, col=1
+			)
+
+		# Extract row totals for the current segment aligned with the bidders/bands
+		segment_totals = row_totals[row_totals['BandBidder'].isin(df_segment.index)]
+
+		# Add bar chart trace
+		fig.add_trace(
+			go.Bar(
+				y=segment_totals['BandBidder'],
+				x=segment_totals['Total'],
+				orientation='h',  # Horizontal bar chart
+				# marker_color='red',  # Bar color
+				marker=dict(color=row_totals['color']),  
+				text=segment_totals['Total'],  # To show the totals on the bars
+				textfont=dict(color='white', size = text_embed_in_chart_size*0.6),  # Dynamic text size
+				showlegend = False,
+				textposition="auto",
+			),
+			row=i, col=2
+		)
+
+		 # Update axis settings to hide y-axis labels and fit tightly
+		fig.update_yaxes(row=i, col=2, showticklabels=False)  # Hide y-axis tick labels
+		fig.update_xaxes(row=i, col=2, showticklabels=False)   # Optionally adjust x-axis labels if necessary
+		# Set the x-axis range for bar charts to be the same across all subplots
+		fig.update_xaxes(row=i, col=2, range=[0, max_total_value])
+
+		title = "Total " + selected_dimension_for_total #X axis title for Bar Chart
+
+		# Create a Retangular Block on Bar
+		fig.update_xaxes(row=i, col=2, fixedrange=True, showline=True, linewidth=2.5, linecolor='black', mirror=True, showgrid=True, gridcolor='lightgrey', title=title, title_standoff=8)
+		fig.update_yaxes(row=i, col=2, fixedrange=True, showline=True, linewidth=2.5, linecolor='black', mirror=True, showgrid=True, gridcolor='lightgrey')
+
+		# Calculate whether the dataframe has any non-zero values
+		has_non_zero_values = df_segment.sum().sum() > 0  # This sums all values and checks if the total is greater than 0
+
+		# Update axes to their original settings
+		fig.update_xaxes(row=i, col=1, fixedrange=True, showline=True, linewidth=2.5, linecolor='black', mirror=True, showgrid=True, gridcolor='lightgrey')
+		fig.update_yaxes(row=i, col=1, fixedrange=True, showline=True, linewidth=2.5, linecolor='black', mirror=True, showgrid=True, gridcolor='lightgrey')
+
+		# Update axes for each subplot to set the tick font size
+		fig.update_xaxes(row=i, col=1, tickfont=dict(size=text_embed_in_chart_size*0.7))
+		fig.update_yaxes(row=i, col=1, tickfont=dict(size=text_embed_in_chart_size*0.7),
+						title_text="" if has_non_zero_values else str(band))  # Set the y-axis title here)
+
+	bands_in_view = len(df_dict.keys())
+
+	height_mul_dict = {1:0.8, 2:1, 3: 1.2, 4 :1.4 , 5 :1.4, 6 : 1.45 , 7: 1.45, 8: 1.45, 9:1.45}
+
+	# Update the overall layout
+	fig.update_layout(uniformtext_minsize=text_embed_in_chart_size*0.75, 
+		uniformtext_mode='hide', 
+		xaxis_title=None, 
+		yaxis_title=None, 
+		showlegend=False,  # Ensure legend is not shown
+		# yaxis_autorange='reversed',
+		font=dict(size=text_embed_in_chart_size),#Debug 12th June 2024
+		template='simple_white',
+		# title='Heatmap of No. of Blocks Selected by Service Area and Band',
+		width=heatmapwidth,
+		height=heatmapheight*height_mul_dict[bands_in_view],  # Total height based on the number of subplots
+		autosize=True,
+		# plot_bgcolor='#B0C4DE',  # Background color for the plot area light greay
+		plot_bgcolor='white',  # Background color for the plot area light greay
+		paper_bgcolor='white',
+		margin=dict(t=50, b=10, l=10, r=10, pad=4),
+		yaxis=dict(
+		  tickmode='array',
+		  tickfont=dict(size=text_embed_in_chart_size*0.8),
+		  ),
+		  xaxis = dict(
+		  side = 'bottom',
+		  tickmode = 'linear',
+		  tickangle=0,
+		  dtick = 1,
+		  # tickfont=dict(size=text_embed_in_chart_size),
+		   ), 
+	)
+
+	# Display the figure in Streamlit
+	with st.spinner('Processing...'):
+		placeholder = st.empty()
+		st.plotly_chart(fig, use_container_width=True)
 
 if selected_dimension == "Spectrum Bands":
 
@@ -2096,7 +2492,6 @@ if selected_dimension == "Spectrum Bands":
 	spectrumall = "Spectrum_All"
 	spectrumofferedvssold = "Spectrum_Offered_vs_Sold"
 	masterall = "MasterAll-TDDValueConventional" #all auction related information 
-
 
 	#loading spectrum excel file
 	df = loadspectrumfile()
@@ -2128,7 +2523,6 @@ if selected_dimension == "Spectrum Bands":
 	bandexpf = bandexpf.set_index("LSA")
 	masterdf = df[masterall]
 	
-
 	#processing "Spectrum_all" excel tab data of the file "spectrum map"
 	dff = df[spectrumall] #contains information of LSA wise mapping oldoperators with new operators
 	dffcopy = dff.copy() #make a copy for "Operator holdings" subfeature under the feature "Freq Layout"
@@ -2208,7 +2602,7 @@ if selected_dimension == "Spectrum Bands":
 					selected_op_dict.update({op : i})
 				colorscale = colscalefreqlayout(selected_op_dict, colcodes)
 				tickvals = list(selected_op_dict.values())
-				ticktext = list(selected_op_dict.keys())	
+				ticktext = list(selected_op_dict.keys())    
 
 			#processing for hovertext
 			hovertext = htext_specmap_freq_layout(hf)
@@ -2259,10 +2653,10 @@ if selected_dimension == "Spectrum Bands":
 				  text = hovertext,
 				  colorscale=colorscale,
 				  showscale = False,
-		# 	      reversescale=True,
+		#         reversescale=True,
 				  colorbar=dict(
-		# 	      tickcolor ="black",
-		# 	      tickwidth =1,
+		#         tickcolor ="black",
+		#         tickwidth =1,
 				  tickvals = tickvals,
 				  ticktext = ticktext,
 				  dtick=1, tickmode="array"),
@@ -2374,7 +2768,6 @@ if selected_dimension == "Spectrum Bands":
 
 			operators_to_process = list(dfffcopy.columns[:-1]) #new selected operators after category level filtering 
 			
-
 			lst =[]
 			dfffshare = pd.DataFrame()
 			for op in operators_to_process:
@@ -2949,7 +3342,6 @@ if selected_dimension == "Auction BandWise":
 		st.plotly_chart(figauc, use_container_width=True)
 		st.altair_chart(chart, use_container_width=True)
 
-
 	if SelectedSubFeature == "RanksCircleWise":
 
 		plottype = st.sidebar.selectbox("Select a Plot Type", ["RanksInRound", "RanksInRounds"])
@@ -2961,9 +3353,6 @@ if selected_dimension == "Auction BandWise":
 			round_numbers = list(range(1, totalrounds + 1))
 
 			# Create a select box for round numbers
-
-			#debug 9th June 2024
-			# round_number = st.sidebar.selectbox("Select Auction Round Number", round_numbers)
 
 			round_number = st.sidebar.number_input("Select Auction Round Number"+";Total Rounds= "+str(max(round_numbers)), min_value=min(round_numbers), max_value=max(round_numbers), value=1, step=1)
 
@@ -3002,7 +3391,6 @@ if selected_dimension == "Auction BandWise":
 					return value
 
 			#------debug 31st March 2024
-
 
 			sort_flag = False
 
@@ -3079,9 +3467,7 @@ if selected_dimension == "Auction BandWise":
 
 			st.plotly_chart(figauc, use_container_width=True)
 
-
 		if plottype == "RanksInRounds":
-
 
 			# debug 30th Mar 2024
 			start_round, end_round = select_round_range(totalrounds)
@@ -3127,14 +3513,11 @@ if selected_dimension == "Auction BandWise":
 
 			dfbidsel = dfbidsel.set_index("LSA").reset_index()
 
-
 			dfbidsel["Rank_Bidder"] = dfbidsel[["RankNo", "Bidder"]].apply(lambda x: "-".join(map(str, x)), axis=1)
-
 
 			dfbidsel = dfbidsel.pivot(index="Rank_Bidder", columns='LSA', values="RankCount")
 
 			dfbidsel = dfbidsel.sort_index(ascending = False)
-
 
 			circle_list=[]
 
@@ -3155,7 +3538,6 @@ if selected_dimension == "Auction BandWise":
 
 			dfbidsel = dfbidsel.reset_index()
 
-
 			dfbidsel['Rank'] = dfbidsel['Rank_Bidder'].apply(lambda x: int(x.split('-')[0]))
 			dfbidsel['Company'] = dfbidsel['Rank_Bidder'].apply(lambda x: x.split('-')[1])
 
@@ -3167,11 +3549,9 @@ if selected_dimension == "Auction BandWise":
 			# If you only want to display the original combined values in the sorted order:
 			# dfbidsel = df_sorted[['Rank_Bidder']]
 
-
 			dfbidsel = dfbidsel.set_index("Rank_Bidder")
 
 			#--------------------------- degug 30th March 2024
-
 
 			# Define the heatmap with embedded text and customized hover information
 			data = [go.Heatmap(
@@ -3254,7 +3634,6 @@ if selected_dimension == "Auction BandWise":
 		dfpwb1strdend = df1strd.pivot(index="Bidder", columns='LSA', values="PWB_End_ClkRd").sort_index(ascending=False)
 
 		dfrp = dfrp.T #Preparing the dataframe for reserve proce per BLK
-
 
 		if pwbtype == "Start CLK Round":
 
@@ -3351,7 +3730,6 @@ if selected_dimension == "Auction BandWise":
 				  tickfont=dict(size=text_embed_in_chart_size),
 				   ), 
 				)
-
 
 				figauc.update_layout(
 					coloraxis=dict(
@@ -3469,7 +3847,6 @@ if selected_dimension == "Auction BandWise":
 				col1.altair_chart(chart, use_container_width=True)
 
 			#--------Ends----------------------------
-
 
 		if pwbtype == "End CLK Round":
 
@@ -3747,7 +4124,7 @@ if selected_dimension == "Auction BandWise":
 
 		#Reverse the order of the daraframe 
 
-		sumrows = sumrows.iloc[::-1].reset_index(drop=True) #Debug 10th June 2024
+		# sumrows = sumrows.iloc[::-1].reset_index(drop=True) #Debug 10th June 2024
 
 		sumcols = dftemp.sum(axis=0).reset_index()
 
@@ -3766,6 +4143,7 @@ if selected_dimension == "Auction BandWise":
 
 		figsumrows.update_layout(height = heatmapheight)
 
+		dftemp = dftemp.sort_index(ascending=True)
 		dftemp = dftemp.replace(0, np.nan)
 
 		#----------End-------------
@@ -5069,7 +5447,7 @@ if selected_dimension == "Auction BandWise":
 							texttemplate="%{text}", 
 							textfont={"size":text_embed_in_chart_size},
 							# reversescale=True,
-							)]			
+							)]          
 
 			figauc1 = go.Figure(data=data1)
 			figauc2 = go.Figure(data=data2)
@@ -5261,15 +5639,15 @@ if selected_dimension == "Auction BandWise":
 
 			# lst2=[]
 			# for index in mask2.index:
-			# 	lst1=[]
-			# 	for col in mask2.columns:
-			# 		mask1val = mask1.loc[index,col]
-			# 		mask2val = mask2.loc[index,col]
-			# 		if mask1val == mask2val:
-			# 			lst1.append(1)
-			# 		else:
-			# 			lst1.append(2)
-			# 	lst2.append(lst1)
+			#   lst1=[]
+			#   for col in mask2.columns:
+			#       mask1val = mask1.loc[index,col]
+			#       mask2val = mask2.loc[index,col]
+			#       if mask1val == mask2val:
+			#           lst1.append(1)
+			#       else:
+			#           lst1.append(2)
+			#   lst2.append(lst1)
 
 			# mask2 = pd.DataFrame(lst2)
 
@@ -5342,7 +5720,7 @@ if selected_dimension == "Auction BandWise":
 							texttemplate="%{text}", 
 							textfont={"size":text_embed_in_chart_size},
 							reversescale=True,
-							)]			
+							)]          
 
 			figauc1 = go.Figure(data=data1)
 			figauc2 = go.Figure(data=data2)
@@ -5503,7 +5881,7 @@ if selected_dimension == "Auction YearWise":
 					df1_temp1 = df1_temp1.pivot(index="Circle", columns='Band', values=subfeature_dict[SelectedSubFeature])
 				else:
 					df1_temp1["OperatorTotal"] = df1_temp1[selected_operators].sum(axis=1)
-					df1_temp1 = df1_temp1.pivot(index="Circle", columns='Band', values='OperatorTotal')	
+					df1_temp1 = df1_temp1.pivot(index="Circle", columns='Band', values='OperatorTotal') 
 			else:
 				df1_temp1 = df1_temp1.pivot(index="Circle", columns='Band', values=subfeature_dict[SelectedSubFeature])
 			df1_temp1.columns = [str(x) for x in sorted(df1_temp1.columns)]
@@ -5728,306 +6106,308 @@ if currency_flag == False: #USD
 					  "Total Purchase" : "MHz"}
 
 
-# #-------This is a new Code---- for Auction Integrated Structure--Remove this if this does not work and change the indentation below align left on tab for all
-# if currency_flag == "NA": #This option is for Auction Integrated so as ensure the current structure is preserved
-# 	pass
-# else:
+#-------This is a new Code---- for Auction Integrated Structure--Remove this if this does not work and change the indentation below align left on tab for all
+if currency_flag == "NA": #This option is for Auction Integrated so as ensure the current structure is preserved
+	pass
 
 
-#---------Dimension = Spectrum Bands Starts -------------------
-
-if (SelectedFeature == "Spectrum Map") and (SelectedSubFeature == "Frequency Layout"):
-
-	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=text_embed_in_hover_size, color='white'))) #Debug 14th June 2024 (Chnaged from 12 to 16)
-
-	xdtickangle = -90
-	xdtickval = xdtickfreq_dict[Band]
-
-	unit = "Ch Size - "+str(channelsize_dict[Band])+" MHz"
-
-	if selected_operators == []:
-		selected_operators = ["All"]
-	else:
-		selected_operators = selected_operators
-		
-	subtitle = subtitle_freqlayout_dict[Band]+unit+"; Selected Operators - "+', '.join(selected_operators)+"; Source - DOT"
-
-	title = "Spectrum Frequency Layout for the "+str(Band)+" MHz Band"
+else:
 
 
-if (SelectedFeature == "Spectrum Map") and (SelectedSubFeature == "Operator Holdings"):
+	#---------Dimension = Spectrum Bands Starts -------------------
 
-	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=text_embed_in_hover_size, color='white'))) #Debug 14th June 2024 (Chnaged from 12 to 16)
+	if (SelectedFeature == "Spectrum Map") and (SelectedSubFeature == "Frequency Layout"):
 
-	xdtickangle = 0
-	xdtickval = 1
+		fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=text_embed_in_hover_size, color='white'))) #Debug 14th June 2024 (Chnaged from 12 to 16)
 
+		xdtickangle = -90
+		xdtickval = xdtickfreq_dict[Band]
 
-	if (len(selected_category) == 0) or (len(selected_category) == 2):
-		selected_category = "All"
-	else:
-		selected_category = selected_category[0]
-	
-	if selected_operators == []:
-		selected_operators = ["All"]
-	else:
-		selected_operators = selected_operators
-	
-	unit = "MHz"
-	subtitle = "Unit - "+unit+"; "+"India Total - Sum of all LSAs "+"; Selected Operators - "+', '.join(selected_operators)+ ";\
-	Category - "+ selected_category+"; Source - DOT"
+		unit = "Ch Size - "+str(channelsize_dict[Band])+" MHz"
 
-	title = "Operator Holdings for the "+str(Band)+" MHz Band"
-
-
-if (SelectedFeature == "Spectrum Map") and (SelectedSubFeature == "Operator %Share"):
-
-	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=text_embed_in_hover_size, color='white'))) #Debug 14th June 2024 (Changed from 12 to 16)
-
-	xdtickangle = 0
-	xdtickval = 1
-
-	if (len(selected_category) == 0) or (len(selected_category) == 2):
-		selected_category = "All"
-	else:
-		selected_category = selected_category[0]
-	
-	if len(selected_operators) == 0: 
-		selected_operators = ["All"]
-	else:
-		selected_operators = selected_operators
-	
-	unit = '% of Total'
-	subtitle = "Unit - "+unit+ " ; Selected Operators - "+', '.join(selected_operators)+ "; Category - "+ selected_category+"; Source - DOT"
-
-	title = "Operator's Spectrum Market Share for the "+str(Band)+" MHz Band"
-
-
-	
-if (SelectedFeature == "Expiry Map") and (SelectedSubFeature == "Frequency Layout"):
-
-	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=text_embed_in_hover_size, color='white'))) #Debug 14th June 2024 (Changed from 12 to 16)
-
-	xdtickangle = -90
-	xdtickval = xdtickfreq_dict[Band]
-
-
-	unit = "Ch Size - "+str(channelsize_dict[Band])+" MHz"
-	if selected_operators == []:
-		selected_operators = ["All"]
-	else:
-		selected_operators = selected_operators
-		
-	subtitle = subtitle_freqlayout_dict[Band]+unit+"; Selected Operators - "+', '.join(selected_operators)+"; Source - DOT"
-
-	title = "Spectrum Expiry Layout for the "+str(Band)+" MHz Band"
-
-
-if (SelectedFeature == "Expiry Map") and (SelectedSubFeature == "Yearly Trends"):
-
-	hoverlabel_bgcolor = "#000000" #subdued black
-
-	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=text_embed_in_hover_size, color='white'))) #Debug 14th June 2024 (Changed from 12 to 16)
-
-	xdtickangle = 0
-	xdtickval = dtickauction_dict[Band]
-
-	unit = "MHz"
-	if selected_operator == "":
-		selected_operator = "All"
-	else:
-		selected_operator = selected_operator
-	subtitle = "Unit - "+unit+"; Selected Operators - "+selected_operator+ "; Summary Below - Sum of all LSAs"+"; Source - DOT"
-
-	title = "Spectrum Expiry Yearly Trends for the "+str(Band)+" MHz Band"
-
-
-if SelectedFeature == "Auction Map":
-
-	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=text_embed_in_hover_size, color='white'))) #Debug 14th June 2024 (Changed from 12 to 16)
-
-	parttitle = "Yearly Trend of "+SelectedSubFeature
-	xdtickangle=0
-	xdtickval = dtickauction_dict[Band]
-	unit = units_dict[SelectedSubFeature]
-	selected_operators = ["NA"]
-	
-	subtitle = "Unit - "+unit+"; Selected Operators - "+', '.join(selected_operators)+ " ; Summary Below - Sum of all LSAs"+"; Source - DOT"
-
-	title = parttitle+" for the "+str(Band)+" MHz Band"
-
-#---------Dimension = Spectrum Bands Ends -------------------
-
-
-#---------Dimension = Auction Years Starts ------------------
-
-if (SelectedFeature == "Band Details"):
-
-	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=text_embed_in_hover_size, color='white'))) #Debug 14th June 2024 (Changed from 12 to 16)
-	
-	xdtickangle =0
-	xdtickval =1
-
-	if (SelectedSubFeature =="Total Outflow") or (SelectedSubFeature == "Quantum Sold"):
-
-		if selected_operators==[]:
+		if selected_operators == []:
 			selected_operators = ["All"]
 		else:
 			selected_operators = selected_operators
-	else:
+			
+		subtitle = subtitle_freqlayout_dict[Band]+unit+"; Selected Operators - "+', '.join(selected_operators)+"; Source - DOT"
+
+		title = "Spectrum Frequency Layout for the "+str(Band)+" MHz Band"
+
+
+	if (SelectedFeature == "Spectrum Map") and (SelectedSubFeature == "Operator Holdings"):
+
+		fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=text_embed_in_hover_size, color='white'))) #Debug 14th June 2024 (Chnaged from 12 to 16)
+
+		xdtickangle = 0
+		xdtickval = 1
+
+
+		if (len(selected_category) == 0) or (len(selected_category) == 2):
+			selected_category = "All"
+		else:
+			selected_category = selected_category[0]
+		
+		if selected_operators == []:
+			selected_operators = ["All"]
+		else:
+			selected_operators = selected_operators
+		
+		unit = "MHz"
+		subtitle = "Unit - "+unit+"; "+"India Total - Sum of all LSAs "+"; Selected Operators - "+', '.join(selected_operators)+ ";\
+		Category - "+ selected_category+"; Source - DOT"
+
+		title = "Operator Holdings for the "+str(Band)+" MHz Band"
+
+
+	if (SelectedFeature == "Spectrum Map") and (SelectedSubFeature == "Operator %Share"):
+
+		fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=text_embed_in_hover_size, color='white'))) #Debug 14th June 2024 (Changed from 12 to 16)
+
+		xdtickangle = 0
+		xdtickval = 1
+
+		if (len(selected_category) == 0) or (len(selected_category) == 2):
+			selected_category = "All"
+		else:
+			selected_category = selected_category[0]
+		
+		if len(selected_operators) == 0: 
+			selected_operators = ["All"]
+		else:
+			selected_operators = selected_operators
+		
+		unit = '% of Total'
+		subtitle = "Unit - "+unit+ " ; Selected Operators - "+', '.join(selected_operators)+ "; Category - "+ selected_category+"; Source - DOT"
+
+		title = "Operator's Spectrum Market Share for the "+str(Band)+" MHz Band"
+
+
+		
+	if (SelectedFeature == "Expiry Map") and (SelectedSubFeature == "Frequency Layout"):
+
+		fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=text_embed_in_hover_size, color='white'))) #Debug 14th June 2024 (Changed from 12 to 16)
+
+		xdtickangle = -90
+		xdtickval = xdtickfreq_dict[Band]
+
+
+		unit = "Ch Size - "+str(channelsize_dict[Band])+" MHz"
+		if selected_operators == []:
+			selected_operators = ["All"]
+		else:
+			selected_operators = selected_operators
+			
+		subtitle = subtitle_freqlayout_dict[Band]+unit+"; Selected Operators - "+', '.join(selected_operators)+"; Source - DOT"
+
+		title = "Spectrum Expiry Layout for the "+str(Band)+" MHz Band"
+
+
+	if (SelectedFeature == "Expiry Map") and (SelectedSubFeature == "Yearly Trends"):
+
+		hoverlabel_bgcolor = "#000000" #subdued black
+
+		fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=text_embed_in_hover_size, color='white'))) #Debug 14th June 2024 (Changed from 12 to 16)
+
+		xdtickangle = 0
+		xdtickval = dtickauction_dict[Band]
+
+		unit = "MHz"
+		if selected_operator == "":
+			selected_operator = "All"
+		else:
+			selected_operator = selected_operator
+		subtitle = "Unit - "+unit+"; Selected Operators - "+selected_operator+ "; Summary Below - Sum of all LSAs"+"; Source - DOT"
+
+		title = "Spectrum Expiry Yearly Trends for the "+str(Band)+" MHz Band"
+
+
+	if SelectedFeature == "Auction Map":
+
+		fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=text_embed_in_hover_size, color='white'))) #Debug 14th June 2024 (Changed from 12 to 16)
+
+		parttitle = "Yearly Trend of "+SelectedSubFeature
+		xdtickangle=0
+		xdtickval = dtickauction_dict[Band]
+		unit = units_dict[SelectedSubFeature]
 		selected_operators = ["NA"]
 		
-	title = "Band Wise Auction Summary for the Year "+str(Year)
-	
-	if SelectedSubFeature in ["Reserve Price", "Auction Price", "Quantum Offered", "Quantum Sold", "Quantum Unsold", "Total EMD", "Total Outflow"]:
-		partsubtitle = "; Summary Below - Sum of all LSAs"
-	else:
-		partsubtitle = ""
+		subtitle = "Unit - "+unit+"; Selected Operators - "+', '.join(selected_operators)+ " ; Summary Below - Sum of all LSAs"+"; Source - DOT"
 
-	subtitle = SelectedSubFeature+"; Unit -"+units_dict[SelectedSubFeature]+"; "+ "Selected Operators -" + ', '.join(selected_operators)+ partsubtitle+"; Source - DOT"
+		title = parttitle+" for the "+str(Band)+" MHz Band"
 
-	
-if (SelectedFeature == "Bidder Details"):
+	#---------Dimension = Spectrum Bands Ends -------------------
 
-	fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=text_embed_in_hover_size, color='white'))) #Debug 14th June 2024 (Changed from 12 to 16)
 
-	xdtickangle =0
-	xdtickval =1
+	#---------Dimension = Auction Years Starts ------------------
 
-	if (SelectedSubFeature =="Total Outflow") or (SelectedSubFeature == "Total Purchase"):
-		if selectedbands==[]:
-			selectedbands = ["All"]
+	if (SelectedFeature == "Band Details"):
+
+		fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=text_embed_in_hover_size, color='white'))) #Debug 14th June 2024 (Changed from 12 to 16)
+		
+		xdtickangle =0
+		xdtickval =1
+
+		if (SelectedSubFeature =="Total Outflow") or (SelectedSubFeature == "Quantum Sold"):
+
+			if selected_operators==[]:
+				selected_operators = ["All"]
+			else:
+				selected_operators = selected_operators
 		else:
-			selectedbands = selectedbands
-	else:
-		selectedbands = ["NA"]
-	selectedbands = [str(x) for x in selectedbands]	
-
-	title = "Operator Wise Summary for the Year "+str(Year)
-
-	subtitle = SelectedSubFeature + "; Unit -"+units_dict[SelectedSubFeature]+"; Selected Bands -"+ ', '.join(selectedbands) + \
-				"; Summary Below - Sum of all LSAs"+"; Source - DOT"
-
-
-#---------Dimension = Auction Years Ends ------------------
-
-
-if selected_dimension in ["Spectrum Bands", "Auction YearWise"]:
-
-	#layout for heatmaps 
-
-	fig.update_layout(
-	uniformtext_minsize=text_embed_in_chart_size, 
-	uniformtext_mode='hide', 
-	xaxis_title=None, 
-	yaxis_title=None, 
-	yaxis_autorange='reversed',
-	font=dict(size=text_embed_in_chart_size),
-	template='simple_white',
-	paper_bgcolor=None,
-	height=heatmapheight, #Changing this will adjust the height of all heat maps
-	width=heatmapwidth, #Changing this will adjust the witdth of all heat maps
-	margin= dict(t=t,b=b,l=l,r=r,pad=pad),
-	yaxis=dict(
-		tickmode='array',
-		tickfont=dict(size=text_embed_in_chart_size),
-		showgrid=True,  # Enable grid lines for y-axis
-		gridcolor='lightgrey',  # Set grid line color for y-axis
-		gridwidth=1  # Set grid line width for y-axis
-	),
-	xaxis=dict(
-		side='top',
-		tickmode='linear',
-		tickangle=xdtickangle,
-		dtick=xdtickval,
-		tickfont=dict(size=text_embed_in_chart_size),
-		showgrid=True,  # Enable grid lines for x-axis
-		gridcolor='lightgrey',  # Set grid line color for x-axis
-		gridwidth=1  # Set grid line width for x-axis
-	),
-	)
-
-	#Drawning a black border around the heatmap chart 
-	fig.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
-	fig.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
-
-
-	#Some last minute exceptions and changes in the plot
-
-	#converts x axis into category
-	if selected_dimension == "Business Data":
-		fig.update_layout(xaxis_type='category')
-	else:
-		pass
-
-	#removes tic labels if the date_range_list greater than a value
-	#This is done to prevent cluttering of xaxis labels when a large range is selected
-	if (selected_dimension == "Business Data") and (SelectedFeature == "Subscriber Trends"):
-		# fig.data[0].update(zmin=110, zmax=450) #setting the max and min value of the colorscale
-		if len(date_range_list) >= 30:
-			fig.update_xaxes(
-				tickmode='array',
-				ticktext=[''] * len(date_range_list),
-				tickvals=list(range(len(date_range_list)))
-			)
-
-
-	# Final plotting of various charts on the output page
-	style = "<style>h3 {text-align: left;}</style>"
-	with st.container():
-		#plotting the main chart
-		st.markdown(style, unsafe_allow_html=True)
-		st.header(title)
-		st.markdown(subtitle)
-
-		if chart_data_flag==True:
-			tab1, tab2 = st.tabs(["📈 Chart", "🗃 Data"]) #for listing the summary chart for freq layout
-			with tab1:
-				col1,col2 = st.columns([stcol1,stcol2]) #create collumns of uneven width
-				with col1:
-					st.plotly_chart(fig, use_container_width=True)
-					if SummaryFlag ==True:
-						col1.altair_chart(chart, use_container_width=True)
-				with col2:
-					# st.markdown(" ")
-					st.plotly_chart(figsumrows, use_container_width=True)
-			with tab2:
-				st.table(chartdata_df)
+			selected_operators = ["NA"]
+			
+		title = "Band Wise Auction Summary for the Year "+str(Year)
+		
+		if SelectedSubFeature in ["Reserve Price", "Auction Price", "Quantum Offered", "Quantum Sold", "Quantum Unsold", "Total EMD", "Total Outflow"]:
+			partsubtitle = "; Summary Below - Sum of all LSAs"
 		else:
-			st.plotly_chart(fig, use_container_width=True) # for heatmaps
-			if SummaryFlag ==True:
-				st.altair_chart(chart, use_container_width=True)
+			partsubtitle = ""
+
+		subtitle = SelectedSubFeature+"; Unit -"+units_dict[SelectedSubFeature]+"; "+ "Selected Operators -" + ', '.join(selected_operators)+ partsubtitle+"; Source - DOT"
+
+		
+	if (SelectedFeature == "Bidder Details"):
+
+		fig.update_traces(hoverlabel=dict(bgcolor=hoverlabel_bgcolor,font=dict(size=text_embed_in_hover_size, color='white'))) #Debug 14th June 2024 (Changed from 12 to 16)
+
+		xdtickangle =0
+		xdtickval =1
+
+		if (SelectedSubFeature =="Total Outflow") or (SelectedSubFeature == "Total Purchase"):
+			if selectedbands==[]:
+				selectedbands = ["All"]
+			else:
+				selectedbands = selectedbands
+		else:
+			selectedbands = ["NA"]
+		selectedbands = [str(x) for x in selectedbands] 
+
+		title = "Operator Wise Summary for the Year "+str(Year)
+
+		subtitle = SelectedSubFeature + "; Unit -"+units_dict[SelectedSubFeature]+"; Selected Bands -"+ ', '.join(selectedbands) + \
+					"; Summary Below - Sum of all LSAs"+"; Source - DOT"
 
 
-#--------The expander is used to add note for the user on reading the color codes for every chart -------
-
-	expander = st.expander("Click Here - To Learn About the Color Codes", expanded = False)
-
-	with expander:
-		if (SelectedFeature == "Spectrum Map") and (SelectedSubFeature=="Frequency Layout"):
-			st.info("Heatmap and Hoverbox's Background Color - Maps to the Specific Operator")
-
-		if (SelectedFeature == "Expiry Map") and (SelectedSubFeature=="Frequency Layout"):
-			st.info("Heatmap's Color Intensity - Directly Proportional to length of the expiry period in years")
-			st.info("Hoverbox's Background Color - Directly Maps to the Specific Operator of the 'Spectrum Map' Layout")
-
-		if (SelectedFeature == "Auction Map"):
-			st.info("Heatmap's Color Intensity - Directly Proportional to the Value of the Cell")
-			st.info("Hoverbox's Background Color = BLACK (Failed/No Auction)")
-			st.info("Hoverbox's Background Color = GREEN (Auction Price = Reserve Price)")
-			st.info("Hoverbox's Background Color = RED (Auction Price > Reserve Price)")
-
-		if (SelectedFeature == "Bidder Details"):
-			st.info("Heatmap's Color Intensity - Directly proportional to value on Color Bar on the left")
-			st.info("Hoverbox's Background Color = GREEN (Purchase Made)")
-			st.info("Hoverbox's Background Color = GREY (No Purchase Made)")
+	#---------Dimension = Auction Years Ends ------------------
 
 
-		if (SelectedFeature == "Band Details"):
-			st.info("Heatmap's Color Intensity - Directly Proportional to the Value of the Cell")
-			st.info("Hoverbox's Background Color = GREY (No Auction)")
-			st.info("Hoverbox's Background Color = BLACK (Failed Auction)")
-			st.info("Hoverbox's Background Color = GREEN (Auction Price = Reserve Price)")
-			st.info("Hoverbox's Background Color = RED (Auction Price > Reserve Price)")
+	if selected_dimension in ["Spectrum Bands", "Auction YearWise"]:
+
+		#layout for heatmaps 
+
+		fig.update_layout(
+		uniformtext_minsize=text_embed_in_chart_size, 
+		uniformtext_mode='hide', 
+		xaxis_title=None, 
+		yaxis_title=None, 
+		yaxis_autorange='reversed',
+		font=dict(size=text_embed_in_chart_size),
+		template='simple_white',
+		paper_bgcolor=None,
+		height=heatmapheight, #Changing this will adjust the height of all heat maps
+		width=heatmapwidth, #Changing this will adjust the witdth of all heat maps
+		margin= dict(t=t,b=b,l=l,r=r,pad=pad),
+		yaxis=dict(
+			tickmode='array',
+			tickfont=dict(size=text_embed_in_chart_size),
+			showgrid=True,  # Enable grid lines for y-axis
+			gridcolor='lightgrey',  # Set grid line color for y-axis
+			gridwidth=1  # Set grid line width for y-axis
+		),
+		xaxis=dict(
+			side='top',
+			tickmode='linear',
+			tickangle=xdtickangle,
+			dtick=xdtickval,
+			tickfont=dict(size=text_embed_in_chart_size),
+			showgrid=True,  # Enable grid lines for x-axis
+			gridcolor='lightgrey',  # Set grid line color for x-axis
+			gridwidth=1  # Set grid line width for x-axis
+		),
+		)
+
+		#Drawning a black border around the heatmap chart 
+		fig.update_xaxes(fixedrange=True,showline=True,linewidth=1.2,linecolor='black', mirror=True)
+		fig.update_yaxes(fixedrange=True,showline=True, linewidth=1.2, linecolor='black', mirror=True)
+
+
+		#Some last minute exceptions and changes in the plot
+
+		#converts x axis into category
+		if selected_dimension == "Business Data":
+			fig.update_layout(xaxis_type='category')
+		else:
+			pass
+
+		#removes tic labels if the date_range_list greater than a value
+		#This is done to prevent cluttering of xaxis labels when a large range is selected
+		if (selected_dimension == "Business Data") and (SelectedFeature == "Subscriber Trends"):
+			# fig.data[0].update(zmin=110, zmax=450) #setting the max and min value of the colorscale
+			if len(date_range_list) >= 30:
+				fig.update_xaxes(
+					tickmode='array',
+					ticktext=[''] * len(date_range_list),
+					tickvals=list(range(len(date_range_list)))
+				)
+
+
+		# Final plotting of various charts on the output page
+		style = "<style>h3 {text-align: left;}</style>"
+		with st.container():
+			#plotting the main chart
+			st.markdown(style, unsafe_allow_html=True)
+			st.header(title)
+			st.markdown(subtitle)
+
+			if chart_data_flag==True:
+				tab1, tab2 = st.tabs(["📈 Chart", "🗃 Data"]) #for listing the summary chart for freq layout
+				with tab1:
+					col1,col2 = st.columns([stcol1,stcol2]) #create collumns of uneven width
+					with col1:
+						st.plotly_chart(fig, use_container_width=True)
+						if SummaryFlag ==True:
+							col1.altair_chart(chart, use_container_width=True)
+					with col2:
+						# st.markdown(" ")
+						st.plotly_chart(figsumrows, use_container_width=True)
+				with tab2:
+					st.table(chartdata_df)
+			else:
+				st.plotly_chart(fig, use_container_width=True) # for heatmaps
+				if SummaryFlag ==True:
+					st.altair_chart(chart, use_container_width=True)
+
+
+	#--------The expander is used to add note for the user on reading the color codes for every chart -------
+
+		expander = st.expander("Click Here - To Learn About the Color Codes", expanded = False)
+
+		with expander:
+			if (SelectedFeature == "Spectrum Map") and (SelectedSubFeature=="Frequency Layout"):
+				st.info("Heatmap and Hoverbox's Background Color - Maps to the Specific Operator")
+
+			if (SelectedFeature == "Expiry Map") and (SelectedSubFeature=="Frequency Layout"):
+				st.info("Heatmap's Color Intensity - Directly Proportional to length of the expiry period in years")
+				st.info("Hoverbox's Background Color - Directly Maps to the Specific Operator of the 'Spectrum Map' Layout")
+
+			if (SelectedFeature == "Auction Map"):
+				st.info("Heatmap's Color Intensity - Directly Proportional to the Value of the Cell")
+				st.info("Hoverbox's Background Color = BLACK (Failed/No Auction)")
+				st.info("Hoverbox's Background Color = GREEN (Auction Price = Reserve Price)")
+				st.info("Hoverbox's Background Color = RED (Auction Price > Reserve Price)")
+
+			if (SelectedFeature == "Bidder Details"):
+				st.info("Heatmap's Color Intensity - Directly proportional to value on Color Bar on the left")
+				st.info("Hoverbox's Background Color = GREEN (Purchase Made)")
+				st.info("Hoverbox's Background Color = GREY (No Purchase Made)")
+
+
+			if (SelectedFeature == "Band Details"):
+				st.info("Heatmap's Color Intensity - Directly Proportional to the Value of the Cell")
+				st.info("Hoverbox's Background Color = GREY (No Auction)")
+				st.info("Hoverbox's Background Color = BLACK (Failed Auction)")
+				st.info("Hoverbox's Background Color = GREEN (Auction Price = Reserve Price)")
+				st.info("Hoverbox's Background Color = RED (Auction Price > Reserve Price)")
 
 

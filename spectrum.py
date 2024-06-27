@@ -228,7 +228,8 @@ oldoperators_dict = {2010 : ["Bharti", "QCOM", "Augere", "Vodafone", "Idea", "RJ
 			2015 : ["Bharti", "Vodafone", "Idea", "RJIO", "RCOM", "Tata", "Aircel"],
 			2016 : ["Bharti", "Vodafone", "Idea", "RJIO", "RCOM", "Tata", "Aircel"],
 			2021 : ["Bharti", "RJIO", "VodaIdea"],
-			2022 : ["Bharti", "RJIO", "VodaIdea", "Adani"] }
+			2022 : ["Bharti", "RJIO", "VodaIdea", "Adani"],
+			2024 : ["Bharti", "RJIO", "VodaIdea"]}
 
 #Spectrum Bands Auctioned in that Calender Year
 bands_auctioned_dict = {2010 : [2100, 2300],
@@ -238,7 +239,8 @@ bands_auctioned_dict = {2010 : [2100, 2300],
 		   2015 : [800, 900, 1800, 2100],
 		   2016 : [700, 800, 900, 1800, 2100, 2300, 2500],
 		   2021 : [700, 800, 900, 1800, 2100, 2300, 2500],
-		   2022 : [600, 700, 800, 900, 1800, 2100, 2300, 2500, 3500, 26000]}
+		   2022 : [600, 700, 800, 900, 1800, 2100, 2300, 2500, 3500, 26000],
+		   2024 : [800, 900, 1800, 2100, 2300, 2500, 3500, 26000]}
 			
 
 #if "1" the expiry tab in spectrum_map file is present and if "0" then not present
@@ -266,23 +268,24 @@ bandtype_dict = {700:"FDD", 800:"FDD", 900:"FDD", 1800:"FDD", 2100:"FDD", 2300:"
 
 #auctionfailyears when the auction prices for all LSAs were zero and there are no takers 
 auctionfailyears_dict = {700:["2016","2021"], 800:["2012"], 900:["2013","2016"], 1800:["2013"], 
-		2100:[], 2300:["2022"], 2500:["2021"], 3500:[], 26000:[]}
+		2100:[], 2300:["2022", "2024"], 2500:["2021"], 3500:["2024"], 26000:["2024"]}
 
 #auction sucess years are years where at least in one of the LASs there was a winner
 auctionsucessyears_dict = {700:[2022], 
-		800:[2013, 2015, 2016, 2021, 2022], 
-		900:[2014, 2015, 2021, 2022], 
-		1800:[2012, 2014, 2015, 2016, 2021, 2022], 
-		2100:[2010, 2015, 2016, 2021, 2022], 
+		800:[2013, 2015, 2016, 2021, 2022, 2024], 
+		900:[2014, 2015, 2021, 2022, 2024], 
+		1800:[2012, 2014, 2015, 2016, 2021, 2022, 2024], 
+		2100:[2010, 2015, 2016, 2021, 2022, 2024], 
 		2300:[2010, 2016, 2021, 2022],  #added 2022 an as exception (due to error) need to revist the logic of succes and failure
-		2500:[2010, 2016, 2022], 
+		2500:[2010, 2016, 2022, 2024], 
 		3500:[2022], 
 		26000:[2022]}
 
 #end of month auction completion dates dictionary for the purpose of evaluting rs-usd rates 
 
 auction_eom_dates_dict = {2010 : datetime(2010,6,30), 2012: datetime(2012,11,30),2013: datetime(2013,3,31), 2014: datetime(2014,2,28),
-					2015 : datetime(2015,3,31), 2016 : datetime(2016,10,31), 2021: datetime(2021,3,31), 2022: datetime(2022,8,31)}
+					2015 : datetime(2015,3,31), 2016 : datetime(2016,10,31), 2021: datetime(2021,3,31), 2022: datetime(2022,8,31),
+					2024 : datetime(2024,6,3)}
 
 #Error dicts defines the window width = difference between the auction closing date and the auction freq assignment dates
 #This values is used to map expiry year of a particular freq spot to the operator owning that spot

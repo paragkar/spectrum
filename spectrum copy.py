@@ -1974,8 +1974,8 @@ chart_data_flag = False #set this to true only if this chart exists.
 with st.sidebar:
 	selected_dimension = option_menu(
 		menu_title = "Select a Menu",
-		options = ["Spectrum Bands", "Auction YearWise", "Auction BandWise", "AuctionYear AllBands", "AuctionYear Activity"], #Debug 14th June 2024
-		icons = ["1-circle-fill", "2-circle-fill", "3-circle-fill", "4-circle-fill", "5-circle-fill"],
+		options = ["Spectrum Bands", "Auction YearWise", "Auction BandWise", "AuctionYear AllBands"], #Debug 14th June 2024
+		icons = ["1-circle-fill", "2-circle-fill", "3-circle-fill", "4-circle-fill"],
 		menu_icon = "arrow-down-circle-fill",
 		default_index =0,
 		)
@@ -1993,46 +1993,56 @@ for index in dfrsrate.index:
 		auction_rsrate_dict[index.year] = dfrsrate.loc[index,:].values[0]
 
 
-if selected_dimension == "AuctionYear Activity": #Incompete Still working this section
+# if selected_dimension == "AuctionYear Activity": #Incompete Still working this section
 
-	currency_flag = "NA" #This is dummy variiable for this option done to preserve the current structure of the code 
+# 	currency_flag = "NA" #This is dummy variiable for this option done to preserve the current structure of the code 
 
-	df = auctionbiddatayearactivitycomb()["Sheet1"] #Loading the auction bid year activity data 
+# 	df = auctionbiddatayearactivitycomb()["Sheet1"] #Loading the auction bid year activity data
 
-	st.write(df)
+# 	st.write(df)
 
 
 if selected_dimension == "AuctionYear AllBands": #This is the new dimension Added on June 2024
 
 	currency_flag = "NA" #This is dummy variiable for this option done to preserve the current structure of the code 
 
-	df = loadauctionbiddatayearbandcomb()["Sheet1"] #Loading the auction bid year and band data 
+	def filt_round(df, round_number):
+		# Filter the dataframe based on the round number
+		return df[df['Clock Round'] == round_number].replace(["-", ""], 0).fillna(0)
 
-	#define initial values of session state as needed
-	session_defaults = {
-    # 'selected_year': df['Auction Year'].min(),
-    # 'selected_bands': [],
-    # 'selected_areas': [],
-    'round_number': 1,
-    # 'selected_dimension': "Bid Value"
-	}
-	for key, default in session_defaults.items():
-	    if key not in st.session_state:
-	        st.session_state[key] = default
+	#Loading the auction bid year and band data 
+	df = loadauctionbiddatayearbandcomb()["Sheet1"]
+
+	#Loading the auction bid year activity data 
+	dfactvity = auctionbiddatayearactivitycomb()["Sheet1"] [["Clock Round", "Auction Year", "Activity Factor"]]
 
 
-	AuctionYears = sorted(list(set(df["Auction Year"])))
-	AuctionYear = st.sidebar.selectbox('Select an Auction Year', AuctionYears, 0) #default index 2012
-	#Filtering the dataframe with selected auction year
-	df = df[df["Auction Year"] == AuctionYear]
+	# Initialize session state variables
+	if 'selected_year' not in st.session_state:
+		st.session_state.selected_year = 2022
+	if 'selected_bands' not in st.session_state:
+		st.session_state.selected_bands = []
+	if 'selected_areas' not in st.session_state:
+		st.session_state.selected_areas = []
+	# if 'round_number' not in st.session_state:
+	# 	st.session_state.round_number = 1
+	if 'selected_dimension' not in st.session_state:
+		st.session_state.selected_dimension = "Bid Value ActivePlusPWB"
+
+	# Select Auction Year
+	AuctionYears = sorted(df['Auction Year'].unique())
+	selected_year = st.sidebar.selectbox('Select an Auction Year', AuctionYears, on_change=None)
+
+	# Apply filter for Auction Year
+	df = df[df['Auction Year'] == selected_year]
+	dfactvity = dfactvity[dfactvity['Auction Year'] == selected_year]
 
 
-	df["Bid Decision"] = [1 if x =="Bid" else 0 for x in df["Bid Decision"]]
 
 	# Choose bands to view
 	available_bands = sorted(list(set(df["Band"])))
 	# Adjust selection interface based on the auction year
-	if AuctionYear == 2010:
+	if selected_year == 2010:
 		# For the year 2010, provide a selectbox with default to 2100
 		selected_bands = st.sidebar.selectbox('Select Band to View', available_bands, index=available_bands.index("2100") if "2100" in available_bands else 0)
 		# Wrap the selection into a list since the rest of the code expects a list
@@ -2041,59 +2051,85 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 		# For other years, use a multiselect with all bands selected by default
 		selected_bands = st.sidebar.multiselect('Select Bands to View', available_bands, default=available_bands)
 
+	# Reset round number when bands change
+	if st.session_state.selected_bands != selected_bands:
+		st.session_state.round_number = 1  # Reset round number to 1
+	st.session_state.selected_bands = selected_bands
+
 	# Further filter dataframe by selected bands if any
 	if selected_bands:
 		df = df[df["Band"].isin(selected_bands)]
 
 
 	# Choose service areas to view
-	available_areas = sorted(list(set(df["Service Area"])))
-	selected_areas = st.sidebar.multiselect('Select Service Areas to View', available_areas, default=available_areas)
-	# Further filter dataframe by selected service areas
-	if selected_areas:
-		df = df[df["Service Area"].isin(selected_areas)]
+	available_areas = sorted(df['Service Area'].unique())
+	# Use a unique key for multiselect to force reset when needed
+	selected_areas = st.sidebar.multiselect(
+		'Select Service Areas to View', 
+		available_areas, 
+		default=available_areas, 
+		key='service_area_select'
+	)
+
+	# Check if no service area is selected, and if so, reset to all areas
+	if not selected_areas:
+		selected_areas = available_areas
+		st.sidebar.warning('No service area selected. Resetting to all areas.')
+		# Force the multiselect to reset by using a new key
+		st.sidebar.multiselect('Select Service Areas to View', available_areas, default=available_areas, key='reset_service_area_select')
+
+	# Apply the service area filter to the dataframe
+	df = df[df['Service Area'].isin(selected_areas)]
 
 
-	dfcopy = df.copy() #Create a copy of dataframe upto selected dimension
-	dftext = df.copy() #Created a copy of datframe before "select dimension" for working textvalues
+	# Make copies of the dataframe before selecting dimension
+	dfcopy = df.copy()
+	dftext = df.copy()
 
-	dim_to_select = ["Bid Decision", "Bid Value ProvWinners", "Bid Value ActiveBidders","Bid Value ActivePlusPWB","RatioPWPtoRP EndRd", "ProvWinBid StartRd","Rank StartRd","ProvWinBid EndRd", "Rank EndRd","Blocks Selected", "MHz Selected",
+	# Select Dimension
+	dimensions = ["Bid Value ProvWinners", "Bid Value ActiveBidders","Bid Value ActivePlusPWB","RatioPWPtoRP EndRd", "ProvWinBid StartRd","Rank StartRd","ProvWinBid EndRd", "Rank EndRd","Blocks Selected", "MHz Selected",
 					"ProvAllocBLKs StartRd","ProvAllocMHz StartRd", "ProvAllocBLKs EndRd", "ProvAllocMHz EndRd", "Blocks ForSale","MHz ForSale"]
-	selected_dimension = st.sidebar.selectbox('Select a Dimension', dim_to_select, 0) #default index "Prov WinBid Start Rd"
-	df = df[[ "Clock Round", "Bidder", "Service Area", "Band", selected_dimension]]
+	selected_dimension = st.sidebar.selectbox('Select a Dimension', dimensions)
 
-	# #Choose clock round numbers
-	# clkrounds = sorted(list(set(df["Clock Round"])))
-	# round_number = st.sidebar.number_input("Select Auction Round Number"+";Total Rounds= "+str(max(clkrounds)), min_value=min(clkrounds), max_value=max(clkrounds), value=1, step=1)
+	# Apply dimension filter
+	df = df[['Clock Round', 'Bidder', 'Service Area', 'Band', selected_dimension]]
 
-	# Use a form in the sidebar to capture input and provide a submit button
-	with st.sidebar.form(key='round_selection_form'):
-		# Fetch the range of available clock rounds
-		clkrounds = sorted(list(set(df["Clock Round"])))
-		# Create a number input for selecting the round number
-		round_number = st.number_input("Select Auction Round Number"+";Total Rounds= "+str(max(clkrounds)),
-									   min_value=min(clkrounds),
-									   max_value=max(clkrounds),
-									   value=st.session_state.round_number,
-									   step=1)
-		# Submit button in the sidebar form
-		submit_button = st.form_submit_button('Apply Round Number')
+	# Clock Round selection
+	# clkrounds = sorted(df['Clock Round'].unique())
+	# with st.sidebar.form("round_form"):
+	# 	round_number = st.number_input("Select Auction Round Number"+";Total Rounds= "+str(max(clkrounds)), min_value=min(clkrounds), max_value=max(clkrounds), value=st.session_state.round_number)
+	# 	submitted = st.form_submit_button('Apply Round Number')
+	# 	if submitted:
+	# 		st.session_state.round_number = round_number
+	# 		# st.experimental_rerun() 
 
-	#This function is used to filter the dataframe based on round numbers for selected dimensions (AuctionYear Activity & AuctionYear AllBands)
-	@st.cache_data
-	def filt_round(df, round_number):
-		# Filtering and processing logic
-		return df[df['Clock Round'] == round_number].replace(["-", ""], 0).fillna(0)
+	# df = filt_round(df, st.session_state.round_number)
+	# dftext = filt_round(dftext, st.session_state.round_number)
+	# dfcopy = filt_round(dfcopy, st.session_state.round_number)
+	# dfactvity = filt_round(dfactvity, st.session_state.round_number)
 
-	# When the submit button is pressed, filter data and perform operations
-	if submit_button:
-		# Filter the main dataframe by the selected round number
-		df = filt_round(df, round_number)
-		# Repeat filtering for any additional dataframes
-		dftext = filt_round(dftext, round_number)
-		#Filtering the Copy dataframe with round numbers
-		dfcopy = filt_round(dfcopy, round_number)
 
+	# Clock Round selection
+	clkrounds = sorted(df['Clock Round'].unique())
+	# Set default round number to 1 or the minimum available round if 1 is not available
+	default_round_number = 1 if 1 in clkrounds else min(clkrounds)
+
+	# Use number_input directly for interactive updates
+	round_number = st.sidebar.number_input(
+	    "Select Auction Round Number; Total Rounds= " + str(max(clkrounds)),
+	    min_value=min(clkrounds),
+	    max_value=max(clkrounds),
+	    value=default_round_number
+	)
+
+	# Filter data based on the selected round number
+	df = filt_round(df, round_number)
+	dftext = filt_round(dftext, round_number)
+	dfcopy = filt_round(dfcopy, round_number)
+	dfactvity = filt_round(dfactvity, round_number)
+
+
+	activity_factor_for_selected_round = dfactvity.drop_duplicates()["Activity Factor"].values[0] #Note this will be used in the title 
 
 	# Function to Pivot Dataframe based on selected dimention
 	def pivot_dataframe(df, selected_dimension):
@@ -2109,14 +2145,14 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	df = pivot_dataframe(df, selected_dimension)
 
 	dim_to_select_for_total_dict = {
-		"Bid Decision" : "Bid Decision",
+		# "Bid Decision" : "Bid Decision",
 		"Bid Value ProvWinners" : "Bid Value ProvWinners", 
 		"Bid Value ActiveBidders" : "Bid Value ActiveBidders",
 		"Bid Value ActivePlusPWB" : "Bid Value ActivePlusPWB",
 		"RatioPWPtoRP EndRd" : "Bid Value ProvWinners",
 		"ProvWinBid StartRd" : "ProvWinBid StartRd",
 		"Rank StartRd" : "ProvWinBid StartRd",
-		"ProvWinBid EndRd" : "ProvWinBid EndRd",
+		"ProvWinBid EndRd" : "Bid Value ProvWinners",
 		"Rank EndRd" : "ProvWinBid EndRd",
 		"Blocks Selected" : "Blocks Selected",
 		"MHz Selected" : "MHz Selected",
@@ -2201,6 +2237,8 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	# Calculate the maximum total value to set a consistent x-axis range across all bar charts
 	max_total_value = row_totals['Total'].max()  # Assuming 'Total' holds the values you need
 
+	total_value_all_bands = row_totals["Total"].astype(float).sum(axis=0) #This is to be used in title text
+
 	# Map the bidder names back to colors using the color_index_map
 	row_totals['color'] = row_totals['BandBidder'].apply(lambda x: bidder_colors[x.split('(')[1].split(')')[0]])
 
@@ -2230,7 +2268,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 
 	# Adjusting subplot setup to include two columns, one for the heatmap and one for the bar chart
 	fig = make_subplots(rows=len(df_dict), cols=2, specs=[[{"type": "heatmap"}, {"type": "bar"}] for _ in range(len(df_dict))],
-						vertical_spacing=vertical_spacing_mul_dict[AuctionYear],
+						vertical_spacing=vertical_spacing_mul_dict[selected_year],
 						horizontal_spacing=0.01,  # Set minimal horizontal spacing between columns
 						column_widths=[0.9, 0.10])  # Adjust the width of columns if necessary
 
@@ -2276,32 +2314,42 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	df_blocks_for_sale = selected_dimension_df_text(dftext, "Blocks ForSale").round(0).fillna(0).astype('int')
 	df_prov_alloc_blks_endround = selected_dimension_df_text(dftext, "ProvAllocBLKs EndRd").round(0).fillna(0).astype('int')
 	df_prov_alloc_blks_startround = selected_dimension_df_text(dftext, "ProvAllocBLKs StartRd").round(0).fillna(0).astype('int')
+	df_blks_selected = selected_dimension_df_text(dftext, "Blocks Selected").round(0).fillna(0).astype('int')
 
 	#2. Mapping allocated slots with those up with blocks for sale
 	result_df_prov_alloc_blks_endround = map_alloc_slots_with_sale(df_prov_alloc_blks_endround, df_blocks_for_sale)
 	result_df_prov_alloc_blks_startround = map_alloc_slots_with_sale(df_prov_alloc_blks_startround, df_blocks_for_sale)
+	result_df_blks_selected = map_alloc_slots_with_sale(df_blks_selected, df_blocks_for_sale)
 
 	#3. Sorting with band order and converting allocated blocks dataframe into dict
 	result_df_prov_alloc_blks_endround_dict=sort_in_band_order(result_df_prov_alloc_blks_endround, band_order)
 	df_prov_alloc_blks_endround_dict=sort_in_band_order(df_prov_alloc_blks_endround, band_order)
 	result_df_prov_alloc_blks_startround_dict=sort_in_band_order(result_df_prov_alloc_blks_startround, band_order)
 	df_prov_alloc_blks_startround_dict=sort_in_band_order(df_prov_alloc_blks_startround, band_order)
+	result_df_blks_selected_dict=sort_in_band_order(result_df_blks_selected, band_order)
+	df_blks_selected_dict=sort_in_band_order(df_blks_selected, band_order)
+
 
 
 	#1. Extract the dataframe where MHz of sales has to be appended
 	df_mhz_for_sale = selected_dimension_df_text(dftext, "MHz ForSale").round(1).fillna(0)
 	df_prov_alloc_mhz_endround = selected_dimension_df_text(dftext, "ProvAllocMHz EndRd").round(1).fillna(0)
 	df_prov_alloc_mhz_startround = selected_dimension_df_text(dftext, "ProvAllocMHz StartRd").round(1).fillna(0)
+	df_mhz_selected = selected_dimension_df_text(dftext, "MHz Selected").round(1).fillna(0)
 
 	#2. Mapping allocated mhz with those up with mhz for sale
 	result_df_prov_alloc_mhz_endround = map_alloc_slots_with_sale(df_prov_alloc_mhz_endround, df_mhz_for_sale)
 	result_df_prov_alloc_mhz_startround = map_alloc_slots_with_sale(df_prov_alloc_mhz_startround,df_mhz_for_sale)
+	result_df_mhz_selected = map_alloc_slots_with_sale(df_mhz_selected,df_mhz_for_sale)
 
 	#3. Sorting with band order and converting allocated mhz dataframe into dict
 	result_df_prov_alloc_mhz_endround_dict=sort_in_band_order(result_df_prov_alloc_mhz_endround, band_order)
 	df_prov_alloc_mhz_endround_dict=sort_in_band_order(df_prov_alloc_mhz_endround, band_order)
 	result_df_prov_alloc_mhz_startround_dict=sort_in_band_order(result_df_prov_alloc_mhz_startround, band_order)
 	df_prov_alloc_mhz_startround_dict=sort_in_band_order(df_prov_alloc_mhz_startround, band_order)
+	result_df_mhz_selected_dict=sort_in_band_order(result_df_mhz_selected, band_order)
+	df_mhz_selected_dict=sort_in_band_order(df_mhz_selected, band_order)
+
 
 	#1. Extract the dataframe where the "Win" and "Loss" has to be appended
 	df_bid_value_provwinners = selected_dimension_df_text(dftext, "Bid Value ProvWinners").round(0).fillna(0).astype('int') #This is the ref dataframe 
@@ -2333,6 +2381,9 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	"ProvAllocBLKs StartRd": lambda band: prepare_text_values(df_prov_alloc_blks_startround_dict, result_df_prov_alloc_blks_startround_dict, band),
 	"ProvAllocMHz EndRd": lambda band: prepare_text_values(df_prov_alloc_mhz_endround_dict, result_df_prov_alloc_mhz_endround_dict, band),
 	"ProvAllocMHz StartRd": lambda band: prepare_text_values(df_prov_alloc_mhz_startround_dict, result_df_prov_alloc_mhz_startround_dict, band),
+	"Blocks Selected": lambda band: prepare_text_values(df_blks_selected_dict, result_df_blks_selected_dict, band),
+	"MHz Selected" : lambda band: prepare_text_values(df_mhz_selected_dict, result_df_mhz_selected_dict, band),
+
 	}
 
 	def text_values_heatmap(selected_dimension, df_segment, band):
@@ -2365,7 +2416,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 					colorscale=colorscale,
 					text=text_values.values,  
 					texttemplate=texttemplate,
-					textfont={"size": text_embed_in_chart_size*0.8}, 
+					textfont={"size": text_embed_in_chart_size*0.9}, 
 					showscale=False,
 					# reversescale=True,
 					zmin=zmin,  # Set minimum z value
@@ -2384,7 +2435,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 					colorscale="YlGnBu",
 					# text=text_values.values,  # Assuming 'df' contains the values you want to display
 					texttemplate="%{z:.1f}",
-					textfont={"size": text_embed_in_chart_size*0.8}, 
+					textfont={"size": text_embed_in_chart_size*0.9}, 
 					showscale=False,
 					# reversescale=True,
 					# zmin=zmin,  # Set minimum z value
@@ -2405,9 +2456,10 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 				# marker_color='red',  # Bar color
 				marker=dict(color=row_totals['color']),  
 				text=segment_totals['Total'],  # To show the totals on the bars
-				textfont=dict(color='white', size = text_embed_in_chart_size*0.6),  # Dynamic text size
+				textfont=dict(color='white', size = text_embed_in_chart_size*0.8),  # Dynamic text size
 				showlegend = False,
 				textposition="auto",
+				width=1,  # Adjust bar width, closer to 1 means wider
 			),
 			row=i, col=2
 		)
@@ -2432,8 +2484,8 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 		fig.update_yaxes(row=i, col=1, fixedrange=True, showline=True, linewidth=2.5, linecolor='black', mirror=True, showgrid=True, gridcolor='lightgrey')
 
 		# Update axes for each subplot to set the tick font size
-		fig.update_xaxes(row=i, col=1, tickfont=dict(size=text_embed_in_chart_size*0.7))
-		fig.update_yaxes(row=i, col=1, tickfont=dict(size=text_embed_in_chart_size*0.7),
+		fig.update_xaxes(row=i, col=1, tickfont=dict(size=text_embed_in_chart_size*0.8))
+		fig.update_yaxes(row=i, col=1, tickfont=dict(size=text_embed_in_chart_size*0.8),
 						title_text="" if has_non_zero_values else str(band))  # Set the y-axis title here)
 
 	bands_in_view = len(df_dict.keys())
@@ -2441,7 +2493,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 	height_mul_dict = {1:0.8, 2:1, 3: 1.2, 4 :1.4 , 5 :1.4, 6 : 1.45 , 7: 1.45, 8: 1.45, 9:1.45}
 
 	# Update the overall layout
-	fig.update_layout(uniformtext_minsize=text_embed_in_chart_size*0.75, 
+	fig.update_layout(uniformtext_minsize=text_embed_in_chart_size*0.75,
 		uniformtext_mode='hide', 
 		xaxis_title=None, 
 		yaxis_title=None, 
@@ -2456,10 +2508,10 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 		# plot_bgcolor='#B0C4DE',  # Background color for the plot area light greay
 		plot_bgcolor='white',  # Background color for the plot area light greay
 		paper_bgcolor='white',
-		margin=dict(t=50, b=10, l=10, r=10, pad=4),
+		margin=dict(t=10, b=10, l=10, r=10, pad=4),
 		yaxis=dict(
 		  tickmode='array',
-		  tickfont=dict(size=text_embed_in_chart_size*0.8),
+		  tickfont=dict(size=text_embed_in_chart_size*0.75),
 		  ),
 		  xaxis = dict(
 		  side = 'bottom',
@@ -2469,6 +2521,17 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 		  # tickfont=dict(size=text_embed_in_chart_size),
 		   ), 
 	)
+
+
+	title_text = f"""
+	<span style='color: #8B0000;'>Auction Year: {selected_year}</span>, 
+	<span style='color: #00008B;'>Dimension: {dim_to_select_for_total_dict[selected_dimension]} - {total_value_all_bands}</span>, 
+	<span style='color: #3357FF;'>Round: {round_number}</span>, 
+	<span style='color: #FF33F6;'>Activity Factor: {activity_factor_for_selected_round:.1f}</span>
+	"""
+
+	st.markdown(f"<h1 style='font-size:40px; margin-top: -40px;'>{title_text}</h1>", unsafe_allow_html=True)
+
 
 	# Display the figure in Streamlit
 	with st.spinner('Processing...'):
