@@ -1017,7 +1017,6 @@ def bw_exp_cal_yearly_trends(sff,ef):
 # @st.cache_resource
 def cal_bw_mapped_to_operators_auctionmap(dff):
 	dff = dff.replace(0,np.nan).fillna(0)
-	dff = dff.replace("NA",0) #debug 27th June 2024
 	dff = dff.map(lambda x: round(x,2) if type(x)!=str else x)
 	dff = dff[(dff["Band"]==Band) & (dff["Cat"]=="L") & (dff["OperatorOld"] != "Free") & (dff["Year"] >= 2010)]
 	dff = dff.drop(['OperatorNew', 'Band','Cat'], axis = 1)
