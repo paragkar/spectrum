@@ -12,4 +12,5 @@ streamlit_lottie
 Pillow
 seaborn
 st_paywall
+add_auth
 
