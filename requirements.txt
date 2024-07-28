@@ -11,4 +11,5 @@ deta
 streamlit_lottie
 Pillow
 seaborn
+st_paywall
 
