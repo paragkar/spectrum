@@ -31,6 +31,8 @@ from yaml.loader import SafeLoader
 from deta import Deta
 import seaborn as sns
 
+from st_paywall import add_auth
+
 pd.set_option('future.no_silent_downcasting', True)
 
 
