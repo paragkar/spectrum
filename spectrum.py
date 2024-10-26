@@ -2608,6 +2608,9 @@ if selected_dimension == "Spectrum Bands":
 	offeredvssold = offeredvssold.drop(columns =["Band"]).reset_index(drop=True)
 	offeredspectrum = offeredvssold.pivot(index=["LSA"], columns='Year', values="Offered").fillna("NA")
 	offeredspectrum = coltostr(offeredspectrum) #convert columns data type to string
+
+	st.write(offeredspectrum) #debug 26th Oct 24
+
 	soldspectrum = offeredvssold.pivot(index=["LSA"], columns='Year', values="Sold").fillna("NA")
 	soldspectrum = coltostr(soldspectrum) #convert columns data type to string
 	percentsold = offeredvssold.pivot(index=["LSA"], columns='Year', values="%Sold")
