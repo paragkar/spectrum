@@ -2609,8 +2609,6 @@ if selected_dimension == "Spectrum Bands":
 	offeredspectrum = offeredvssold.pivot(index=["LSA"], columns='Year', values="Offered").fillna("NA")
 	offeredspectrum = coltostr(offeredspectrum) #convert columns data type to string
 
-	st.write(offeredspectrum) #debug 26th Oct 24
-
 	soldspectrum = offeredvssold.pivot(index=["LSA"], columns='Year', values="Sold").fillna("NA")
 	soldspectrum = coltostr(soldspectrum) #convert columns data type to string
 	percentsold = offeredvssold.pivot(index=["LSA"], columns='Year', values="%Sold")
@@ -3012,7 +3010,7 @@ if selected_dimension == "Spectrum Bands":
 
 		typedf = type_dict[SelectedSubFeature].copy()
 
-		hovertext = htext_auctionmap(dff)
+		#hovertext = htext_auctionmap(dff) #Debug 24th Oct 2024
 
 		if SelectedSubFeature in ["Auction Price", "Reserve Price"]:
 			curr_list=[]
