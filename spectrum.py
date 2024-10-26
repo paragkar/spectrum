@@ -1233,7 +1233,7 @@ def htext_auctionmap(dff):
 			winners = dff.values[yi][xi][:-2] #removing comma in the end
 			resprice = reserveprice.values[yi][xi]
 			aucprice = auctionprice.values[yi][xi]
-			offmhz = offeredspectrum.values[yi][xi]
+			#offmhz = offeredspectrum.values[yi][xi] #Debug 24th Oct 2024
 			soldmhz = soldspectrum.values[yi][xi]
 			unsoldmhz = unsoldspectrum.values[yi][xi]
 
@@ -3010,7 +3010,7 @@ if selected_dimension == "Spectrum Bands":
 
 		typedf = type_dict[SelectedSubFeature].copy()
 
-		#hovertext = htext_auctionmap(dff) #Debug 24th Oct 2024
+		hovertext = htext_auctionmap(dff)
 
 		if SelectedSubFeature in ["Auction Price", "Reserve Price"]:
 			curr_list=[]
