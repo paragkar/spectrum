@@ -1248,7 +1248,7 @@ def htext_auctionmap(dff):
 						xx,
 						resprice,
 						aucprice,
-						round(offmhz,2),
+						#round(offmhz,2), #Debug 24th Oct 2024
 						round(soldmhz,2),
 						round(unsoldmhz,2),
 						winners,
