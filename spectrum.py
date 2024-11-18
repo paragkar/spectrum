@@ -1233,7 +1233,7 @@ def htext_auctionmap(dff):
 			winners = dff.values[yi][xi][:-2] #removing comma in the end
 			resprice = reserveprice.values[yi][xi]
 			aucprice = auctionprice.values[yi][xi]
-			offmhz = offeredspectrum.values[yi][xi]
+			offmhz = offeredspectrum.values[yi][xi] 
 			soldmhz = soldspectrum.values[yi][xi]
 			unsoldmhz = unsoldspectrum.values[yi][xi]
 
@@ -1248,7 +1248,7 @@ def htext_auctionmap(dff):
 						xx,
 						resprice,
 						aucprice,
-						round(offmhz,2),
+						round(offmhz,2), 
 						round(soldmhz,2),
 						round(unsoldmhz,2),
 						winners,
@@ -2608,6 +2608,7 @@ if selected_dimension == "Spectrum Bands":
 	offeredvssold = offeredvssold.drop(columns =["Band"]).reset_index(drop=True)
 	offeredspectrum = offeredvssold.pivot(index=["LSA"], columns='Year', values="Offered").fillna("NA")
 	offeredspectrum = coltostr(offeredspectrum) #convert columns data type to string
+
 	soldspectrum = offeredvssold.pivot(index=["LSA"], columns='Year', values="Sold").fillna("NA")
 	soldspectrum = coltostr(soldspectrum) #convert columns data type to string
 	percentsold = offeredvssold.pivot(index=["LSA"], columns='Year', values="%Sold")
