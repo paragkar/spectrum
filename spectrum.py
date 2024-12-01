@@ -2267,7 +2267,7 @@ if selected_dimension == "AuctionYear AllBands": #This is the new dimension Adde
 
 	df_dict = sort_in_band_order(df, band_order)
 
-	vertical_spacing_mul_dict = {2022:0.035, 2021:0.04, 2016:0.04, 2015 : 0.04, 2014 : 0.06, 2012 : 0.04, 2010 : 0.05}
+	vertical_spacing_mul_dict = {2024:0.035, 2022:0.035, 2021:0.04, 2016:0.04, 2015 : 0.04, 2014 : 0.06, 2012 : 0.04, 2010 : 0.05}
 
 	# Adjusting subplot setup to include two columns, one for the heatmap and one for the bar chart
 	fig = make_subplots(rows=len(df_dict), cols=2, specs=[[{"type": "heatmap"}, {"type": "bar"}] for _ in range(len(df_dict))],
