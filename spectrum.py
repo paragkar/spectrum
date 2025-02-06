@@ -2153,9 +2153,11 @@ with st.sidebar:
 #loading file rupee to USD and finding the exchange rate in the auction eom
 auction_eom_list = [x.date() for x in list(auction_eom_dates_dict.values())]
 
+st.write(auction_eom_list) #debug 6th Feb 2025
+
 dfrsrate = loadrstousd()
 
-# st.write(dfrsrate) #debug 6th Feb 2024
+# st.write(dfrsrate) #debug 6th Feb 2025
 
 auction_rsrate_dict ={} #the dictionary which stores all the values of the rupee usd rates
 dfrsrate["Date"] = pd.to_datetime(dfrsrate["Date"])
