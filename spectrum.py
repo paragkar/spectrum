@@ -1234,7 +1234,8 @@ def htext_auctionmap(dff):
 			resprice = reserveprice.values[yi][xi]
 			aucprice = auctionprice.values[yi][xi]
 
-			st.write(yi,xi) #debug 2th Feb 2025
+			st.write(yi,xi) #debug 2nd Feb 2025
+			st.write(offeredspectrum.values[yi][xi]) #debug 2nd Feb 2025
 
 			offmhz = offeredspectrum.values[yi][xi] 
 			soldmhz = soldspectrum.values[yi][xi]
