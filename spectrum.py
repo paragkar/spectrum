@@ -2166,6 +2166,8 @@ for index in dfrsrate.index:
 	if index.date() in auction_eom_list:
 		auction_rsrate_dict[index.year] = dfrsrate.loc[index,:].values[0]
 
+st.write(auction_rsrate_dict) #debug 6th Feb 2025
+
 
 # if selected_dimension == "AuctionYear Activity": #Incompete Still working this section
 
