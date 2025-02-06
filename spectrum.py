@@ -3010,7 +3010,7 @@ if selected_dimension == "Spectrum Bands":
 
 		typedf = type_dict[SelectedSubFeature].copy()
 
-		st.write(dff) #debug 6th Feb 2025
+		st.write(offeredspectrum) #debug 6th Feb 2025
 
 		hovertext = htext_auctionmap(dff)
 
