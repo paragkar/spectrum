@@ -2160,13 +2160,13 @@ auction_rsrate_dict ={} #the dictionary which stores all the values of the rupee
 dfrsrate["Date"] = pd.to_datetime(dfrsrate["Date"])
 dfrsrate = dfrsrate.set_index("Date").asfreq("ME")
 
-st.write(dfrsrate) #debug 6th Feb 2025
+st.write(dfrsrate.index) #debug 6th Feb 2025
 
 for index in dfrsrate.index:
 	if index.date() in auction_eom_list:
 		auction_rsrate_dict[index.year] = dfrsrate.loc[index,:].values[0]
 
-st.write(auction_rsrate_dict) #debug 6th Feb 2025
+# st.write(auction_rsrate_dict) #debug 6th Feb 2025
 
 
 # if selected_dimension == "AuctionYear Activity": #Incompete Still working this section
