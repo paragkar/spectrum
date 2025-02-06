@@ -324,6 +324,8 @@ stcol2 = 1 #No of Columns for row total chart to Fit
 
 #Dictionary to Aggregrated Choosen year_band features 
 Auction_Year_Band_Features = {
+
+
 	"2022-Band26000": {
 		"totalrounds": 40,
 		"mainsheet": "2022_5G_26000",
