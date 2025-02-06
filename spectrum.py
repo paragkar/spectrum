@@ -285,7 +285,7 @@ auctionsucessyears_dict = {700:[2022],
 
 auction_eom_dates_dict = {2010 : datetime(2010,6,30), 2012: datetime(2012,11,30),2013: datetime(2013,3,31), 2014: datetime(2014,2,28),
 					2015 : datetime(2015,3,31), 2016 : datetime(2016,10,31), 2021: datetime(2021,3,31), 2022: datetime(2022,8,31),
-					2024 : datetime(2024,6,3)}
+					2024 : datetime(2024,6,30)}
 
 #Error dicts defines the window width = difference between the auction closing date and the auction freq assignment dates
 #This values is used to map expiry year of a particular freq spot to the operator owning that spot
@@ -2160,7 +2160,7 @@ auction_rsrate_dict ={} #the dictionary which stores all the values of the rupee
 dfrsrate["Date"] = pd.to_datetime(dfrsrate["Date"])
 dfrsrate = dfrsrate.set_index("Date").asfreq("ME")
 
-st.write(dfrsrate.index) #debug 6th Feb 2025
+# st.write(dfrsrate.index) #debug 6th Feb 2025
 
 for index in dfrsrate.index:
 	if index.date() in auction_eom_list:
@@ -3183,7 +3183,7 @@ if selected_dimension == "Spectrum Bands":
 
 		typedf = type_dict[SelectedSubFeature].copy()
 
-		st.write(auction_rsrate_dict) #debug 6th Feb 2025
+		# st.write(auction_rsrate_dict) #debug 6th Feb 2025
 
 		hovertext = htext_auctionmap(dff)
 
