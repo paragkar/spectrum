@@ -2155,7 +2155,7 @@ auction_eom_list = [x.date() for x in list(auction_eom_dates_dict.values())]
 
 dfrsrate = loadrstousd()
 
-st.write(dfrsrate) #debug 6th Feb 2024
+# st.write(dfrsrate) #debug 6th Feb 2024
 
 auction_rsrate_dict ={} #the dictionary which stores all the values of the rupee usd rates
 dfrsrate["Date"] = pd.to_datetime(dfrsrate["Date"])
