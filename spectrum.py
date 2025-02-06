@@ -1387,7 +1387,7 @@ def htext_expmap_yearly_trends_with_op_select(eff):
 @st.cache_resource
 def htext_auctionmap(dff): 
 
-	st.write(offeredspectrum) #debug 2nd Feb 2025
+	# st.write(offeredspectrum) #debug 6th Feb 2025
 
 	hovertext=[]
 	for yi, yy in enumerate(dff.index):
@@ -1397,8 +1397,8 @@ def htext_auctionmap(dff):
 			resprice = reserveprice.values[yi][xi]
 			aucprice = auctionprice.values[yi][xi]
 
-			st.write(yi,xi) #debug 2nd Feb 2025
-			st.write(offeredspectrum.values[yi][xi]) #debug 2nd Feb 2025
+			# st.write(yi,xi) #debug 6th Feb 2025
+			# st.write(offeredspectrum.values[yi][xi]) #debug 6th Feb 2025
 
 			offmhz = offeredspectrum.values[yi][xi] 
 			soldmhz = soldspectrum.values[yi][xi]
