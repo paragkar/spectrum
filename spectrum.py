@@ -109,14 +109,24 @@ SummaryFlag = False # Code below will toggle to True to show summary chart
 
 #--------hide streamlit style and buttons--------------
 
+#Edite - 23rd Jan 2025
+
 hide_st_style = '''
-				<style>
-				#MainMenu {visibility : hidden;}
-				footer {visibility : hidder;}
-				header {visibility :hidden;}
-				<style>
-				'''
-st.markdown(hide_st_style, unsafe_allow_html =True)
+	<style>
+	footer {visibility: hidden;}
+	header {visibility: hidden;}
+	</style>
+	'''
+st.markdown(hide_st_style, unsafe_allow_html=True)
+
+# hide_st_style = '''
+# 				<style>
+# 				#MainMenu {visibility : hidden;}
+# 				footer {visibility : hidder;}
+# 				header {visibility :hidden;}
+# 				<style>
+# 				'''
+# st.markdown(hide_st_style, unsafe_allow_html =True)
 
 #--------Functions for loading File Starts---------------------
 
