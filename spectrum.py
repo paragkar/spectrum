@@ -3388,6 +3388,8 @@ if selected_dimension == "Auction BandWise":
 		dftemp['Bid_Decision_Perc'] = (dftemp['Bid_Decision'] / dftemp['Bid_Decision_summary']) * 100
 
 		# Now rounding the result after ensuring there is no division by zero
+		dftemp['Bid_Decision_Perc'] = dftemp['Bid_Decision_Perc'].astype(float) #Debog 3rd Sept 2025
+
 		dftemp['Bid_Decision_Perc'] = dftemp['Bid_Decision_Perc'].round(1)
 		# If needed, drop the 'Bid_Decision_summary' column
 		dftemp.drop('Bid_Decision_summary', axis=1, inplace=True)
