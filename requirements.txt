@@ -7,7 +7,6 @@ streamlit_option_menu
 msoffcrypto-tool
 streamlit_authenticator
 xlrd
-deta
 streamlit_lottie
 Pillow
 seaborn
