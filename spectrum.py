@@ -11,7 +11,7 @@ import pandas as pd
 import plotly.figure_factory as ff
 import streamlit as st
 import matplotlib.pyplot as plt
-#import altair as alt
+import altair as alt
 from datetime import datetime
 import datetime as dt 
 import calendar
@@ -22,10 +22,10 @@ import re
 from collections import defaultdict
 from dateutil.relativedelta import relativedelta
 import io
-#import msoffcrypto
+import msoffcrypto
 import pickle
 from pathlib import Path
-#import streamlit_authenticator as stauth
+import streamlit_authenticator as stauth
 import yaml
 from yaml.loader import SafeLoader
 # from deta import Deta
