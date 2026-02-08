@@ -32,9 +32,6 @@ from yaml.loader import SafeLoader
 import seaborn as sns
 
 
-
-
-
 pd.set_option('future.no_silent_downcasting', True)
 
 
