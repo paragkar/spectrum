@@ -1128,7 +1128,8 @@ def colscalefreqlayout(operators, colcodes):
 	colorscale =[]
 	for i, op in enumerate(operator_names):
 		if op in colcodes.index:
-			colorscale.append([scale[i],colcodes.loc[op,:][0]])
+			# colorscale.append([scale[i],colcodes.loc[op,:][0]])
+			colorscale.append([scale[i], colcodes.at[op, colcodes.columns[0]]]) #Edit 15th April 2026
 	colorscale.append([1, np.nan])
 	col= pd.DataFrame(colorscale)
 	col.columns =["colscale", "colors"]
