@@ -3367,8 +3367,17 @@ if selected_dimension == "Auction BandWise":
 		filt  =(dfbidcirclwise["Clk_Round"] >= start_round) & (dfbidcirclwise["Clk_Round"] <= end_round)
 
 		dfbidcirclwise = dfbidcirclwise[filt]
-		dftemp = dfbidcirclwise.drop(columns=["Possible_Raise_Bid_ClkRd", "Rank_PWB_Start_ClkRd", "Rank_PWB_End_ClkRd",
-									"PWB_End_ClkRd","Clk_Round", "PWB_Start_ClkRd"], axis=1)
+		# dftemp = dfbidcirclwise.drop(columns=["Possible_Raise_Bid_ClkRd", "Rank_PWB_Start_ClkRd", "Rank_PWB_End_ClkRd",
+		# 							"PWB_End_ClkRd","Clk_Round", "PWB_Start_ClkRd"], axis=1)
+
+		dftemp = dfbidcirclwise.drop(columns=[
+	    "Possible_Raise_Bid_ClkRd",
+	    "Rank_PWB_Start_ClkRd",
+	    "Rank_PWB_End_ClkRd",
+	    "PWB_End_ClkRd",
+	    "Clk_Round",
+	    "PWB_Start_ClkRd"
+							]) # Debug 15th April 2026
 
 		dftemp = dftemp.groupby(["LSA", "Bidder"]).sum().reset_index()
 		summarydf = dftemp.groupby(["LSA"]).sum().reset_index().drop(columns = "Bidder", axis =1)
