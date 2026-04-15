@@ -3380,7 +3380,7 @@ if selected_dimension == "Auction BandWise":
 							]) # Debug 15th April 2026
 
 		dftemp = dftemp.groupby(["LSA", "Bidder"]).sum().reset_index()
-		summarydf = dftemp.groupby(["LSA"]).sum().reset_index().drop(columns = "Bidder", axis =1)
+		summarydf = dftemp.groupby(["LSA"]).sum().reset_index().drop(columns = "Bidder")
 		summarydf = summarydf.set_index("LSA")
 		dftemp = dftemp.set_index("LSA")
 
