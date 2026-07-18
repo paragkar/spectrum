@@ -2018,8 +2018,13 @@ def transform_colscale_for_spec_exp_maps(colorscale, sf):
 def transform_colscale_for_hbox_auction_map(dff,reserveprice, auctionprice): 
 	lst =[]
 	for yi, yy in enumerate(dff.index):
-		reserveprice = reserveprice.replace("NA\s*", np.nan, regex = True)
-		auctionprice = auctionprice.replace("NA\s*", np.nan, regex = True)
+		reserveprice = reserveprice.replace("NA\s*", np.nan, regex = True) 
+		auctionprice = auctionprice.replace("NA\s*", np.nan, regex = True) 
+
+		# convert to numeric so subtraction works
+		reserveprice = reserveprice.apply(pd.to_numeric, errors="coerce") #Debug 18th July 2026
+		auctionprice = auctionprice.apply(pd.to_numeric, errors="coerce") #Debug 18th July 2026
+
 		delta = auctionprice-reserveprice
 		delta = delta.replace(np.nan, "NA")
 		for xi, xx in enumerate(dff.columns):
